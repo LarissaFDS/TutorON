@@ -40,30 +40,33 @@ def prompt_student_question() -> str:
             return question
         print("[Aviso] A pergunta não pode estar vazia. Tente novamente.\n")
 
-def prompt_optional_context() -> Optional[str]:
+def prompt_optional_context() -> str | None:
     """
-    Solicita o contexto opcional (como trechos de código).
-    Se o usuário pressionar apenas Enter, retorna None.
+    Solicita código ou contexto adicional opcional ao estudante.
 
-    Args:
-        Nenhum.
+    O usuário pode pressionar Enter imediatamente para pular essa etapa.
+    Caso forneça conteúdo, múltiplas linhas são aceitas até que uma linha vazia
+    seja informada.
 
     Returns:
-        str | None: O contexto preenchido ou None caso tenha sido deixado em branco.
+        str | None: O contexto fornecido pelo estudante ou None quando nenhum
+        contexto foi informado.
     """
     print("\nDigite código ou contexto adicional (opcional, pressione Enter para pular):")
-    
-    # Permite múltiplas linhas para o contexto (o usuário digita 'FIM' para concluir a inserção)
-    print("(Digite 'FIM' em uma linha vazia para concluir)")
     
     lines = []
     while True:
         line = input("> ")
-        if line.strip().upper() == "FIM":
+        
+        if not lines and not line.strip():
+            return None
+            
+        if lines and not line.strip():
             break
+            
         lines.append(line)
         
-    context = "\n".join(lines).strip()
+    context = "\n".join(lines).rstrip()
     return context if context else None
 
 def display_ai_response(response_data: dict) -> None:
