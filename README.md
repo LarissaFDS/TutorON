@@ -50,3 +50,4 @@ Per-issue technical documentation lives in [`docs/`](docs/):
 | Issue | Title |
 |-------|-------|
 | [#3](docs/issue-3-backend-ai-service.md) | Backend core and AI Service adapter |
+| [#5](docs/issue-5-frontend-cli.md) | Frontend CLI |
