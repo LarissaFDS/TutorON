@@ -20,7 +20,7 @@ from __future__ import annotations
 import pytest
 from fastapi.testclient import TestClient
 
-from backend.ai_service import AIRequest, AIResponse, AIService, AIServiceError
+from backend.ai_service import AIRequest, AIResponse, AIService, AIServiceError, MockAIService
 from backend.main import create_app
 
 
@@ -55,6 +55,30 @@ class AlwaysCrashAIService(AIService):
         raise RuntimeError("Unexpected internal error")
 
 
+class SimulatedRealAIService(AIService):
+    """
+    Stub that simulates a successful response from the RealAIService.
+    """
+
+    def ask(self, request: AIRequest) -> AIResponse:
+        """Return a simulated real response with a source other than 'mock'."""
+        return AIResponse(
+            answer="This is a simulated answer from a real provider.",
+            source="claude-3-haiku-20240307",
+            metadata={"model": "claude-3-haiku-20240307", "latency_ms": 150.0}
+        )
+
+
+class SimulatedRealFailAIService(AIService):
+    """
+    Stub that simulates a failure (e.g. timeout) from the RealAIService.
+    """
+
+    def ask(self, request: AIRequest) -> AIResponse:
+        """Raise an AIServiceError mimicking an HTTP/Timeout failure."""
+        raise AIServiceError("Tempo de requisição esgotado ao contatar a API do LLM.")
+
+
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
@@ -68,7 +92,7 @@ def client() -> TestClient:
     Using ``create_app()`` (the factory) rather than importing the module-level
     ``app`` instance ensures each test starts with a clean application state.
     """
-    return TestClient(create_app(), raise_server_exceptions=False)
+    return TestClient(create_app(ai_service_override=MockAIService()), raise_server_exceptions=False)
 
 
 @pytest.fixture()
@@ -81,6 +105,18 @@ def failing_client() -> TestClient:
 def crashing_client() -> TestClient:
     """Return a test client whose AI service always raises RuntimeError."""
     return TestClient(create_app(ai_service_override=AlwaysCrashAIService()), raise_server_exceptions=False)
+
+
+@pytest.fixture()
+def real_success_client() -> TestClient:
+    """Return a test client whose AI service simulates a successful real provider."""
+    return TestClient(create_app(ai_service_override=SimulatedRealAIService()), raise_server_exceptions=False)
+
+
+@pytest.fixture()
+def real_fail_client() -> TestClient:
+    """Return a test client whose AI service simulates a real provider failure."""
+    return TestClient(create_app(ai_service_override=SimulatedRealFailAIService()), raise_server_exceptions=False)
 
 
 # ---------------------------------------------------------------------------
@@ -133,6 +169,19 @@ class TestAskQuestion:
         body = response.json()
         assert set(body.keys()) >= {"answer", "source", "metadata"}
         assert isinstance(body["metadata"], dict)
+
+    def test_real_ai_service_success_returns_200_and_source(self, real_success_client: TestClient) -> None:
+        """A successful simulated real AI response must return HTTP 200 with its specific source."""
+        response = real_success_client.post(
+            "/api/v1/questions",
+            json={"question": "What is a binary search tree?"},
+        )
+
+        assert response.status_code == 200
+        body = response.json()
+        assert body["source"] == "claude-3-haiku-20240307"
+        assert body["source"] != "mock"
+        assert "simulated answer from a real provider" in body["answer"]
 
 
 # ---------------------------------------------------------------------------
@@ -214,6 +263,19 @@ class TestErrorHandling:
         body = response.json()
         assert "error" in body
         assert body["error"]["code"] == "INTERNAL_ERROR"
+        assert "Traceback" not in body["error"]["message"]
+
+    def test_real_ai_service_failure_returns_502(self, real_fail_client: TestClient) -> None:
+        """A simulated real provider failure (e.g., timeout) must return HTTP 502 with AI_SERVICE_ERROR."""
+        response = real_fail_client.post(
+            "/api/v1/questions",
+            json={"question": "What is a timeout?"},
+        )
+
+        assert response.status_code == 502
+        body = response.json()
+        assert "error" in body
+        assert body["error"]["code"] == "AI_SERVICE_ERROR"
         assert "Traceback" not in body["error"]["message"]
 
 

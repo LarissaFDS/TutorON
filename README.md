@@ -35,6 +35,13 @@ uvicorn backend.main:app --reload --port 8000
 - API base URL: http://localhost:8000
 - Interactive docs (Swagger UI): http://localhost:8000/docs
 
+### Configuração da IA
+
+Para usar o serviço de IA real (Google Gemini):
+1. Copie o arquivo `.env.example` para `.env`.
+2. Preencha a variável `TUTORON_LLM_API_KEY` com a sua chave. Você pode obter uma chave gratuita acessando o [Google AI Studio](https://aistudio.google.com/) (basta fazer login com sua conta Google, sem necessidade de cartão de crédito). (**Aviso:** a chave real nunca deve ser commitada no repositório).
+3. Para rodar a aplicação ou a suíte de testes sem uma chave de API (útil para desenvolvimento local e CI), configure a variável `TUTORON_AI_PROVIDER=mock`.
+
 ### Run the tests
 
 ```bash
