@@ -156,15 +156,15 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
         request: Request, exc: AIServiceError
     ) -> JSONResponse:
         """
-        Convert an :class:`AIServiceError` into a clean 502 response.
+        Convert an :class:`AIServiceError` into a clean 503 response.
 
         The AI service is a downstream dependency; its failure should surface
-        as a 502 (Bad Gateway) rather than a 500, making it easier to
+        as a 503 (Service Unavailable) rather than a 500, making it easier to
         distinguish provider outages from application bugs.
         """
         logger.error("AI service error: %s", exc, exc_info=True)
         return JSONResponse(
-            status_code=502,
+            status_code=503,
             content=ErrorResponse(
                 error=ErrorDetail(
                     code="AI_SERVICE_ERROR",
@@ -494,7 +494,7 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
         tags=["questions"],
         responses={
             422: {"model": ErrorResponse, "description": "Validation error"},
-            502: {"model": ErrorResponse, "description": "AI service failure"},
+            503: {"model": ErrorResponse, "description": "AI service failure"},
             500: {"model": ErrorResponse, "description": "Unexpected server error"},
         },
     )
@@ -518,7 +518,7 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
 
         Raises:
             AIServiceError: Propagated from the service; caught by the global
-                            exception handler and returned as a 502.
+                            exception handler and returned as a 503.
         """
         ai_request = AIRequest(
             question=payload.question,

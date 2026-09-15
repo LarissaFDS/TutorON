@@ -164,25 +164,11 @@ class RealAIService(AIService):
         if not self.api_key:
             raise ValueError("A chave de API TUTORON_LLM_API_KEY deve ser configurada nas variáveis de ambiente.")
         self.model = model or os.environ.get("TUTORON_LLM_MODEL") or "gemini-3.1-flash-lite"
-        self.url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.model}:generateContent"
+        self.fallback_model = os.environ.get("TUTORON_LLM_FALLBACK_MODEL") or "gemini-3.5-flash-lite"
 
-    def ask(self, request: AIRequest) -> AIResponse:
-        """
-        Envia a pergunta do aluno para a API do Google Gemini e retorna a resposta formatada.
-
-        Args:
-            request: O objeto contendo a pergunta e o contexto opcional.
-
-        Returns:
-            Um :class:`AIResponse` com a resposta do modelo, a fonte
-            e metadados da requisição (latência e modelo utilizado).
-
-        Raises:
-            AIServiceError: Se houver falha de rede (Timeout/ConnectError),
-                            a API retornar um erro (HTTP não-2xx) ou formato inesperado.
-        """
-        start = time.perf_counter()
-
+    def _attempt_ask(self, request: AIRequest, model_name: str, start_time: float) -> AIResponse:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
+        
         system_prompt = (
             "Você deve agir como um tutor acadêmico para estudantes universitários, "
             "focado nas áreas de programação, lógica, matemática e exatas. "
@@ -205,34 +191,94 @@ class RealAIService(AIService):
             ]
         }
 
+        with httpx.Client(timeout=30.0) as client:
+            response = client.post(
+                url,
+                headers={"x-goog-api-key": self.api_key},
+                json=payload
+            )
+            response.raise_for_status()
+            data = response.json()
+
+            answer = data["candidates"][0]["content"]["parts"][0]["text"]
+
+            elapsed_ms = round((time.perf_counter() - start_time) * 1000, 2)
+
+            return AIResponse(
+                answer=answer,
+                source=model_name,
+                metadata={
+                    "model": model_name,
+                    "latency_ms": elapsed_ms,
+                }
+            )
+
+    def ask(self, request: AIRequest) -> AIResponse:
+        """
+        Envia a pergunta do aluno para a API do Google Gemini e retorna a resposta formatada.
+
+        Args:
+            request: O objeto contendo a pergunta e o contexto opcional.
+
+        Returns:
+            Um :class:`AIResponse` com a resposta do modelo, a fonte
+            e metadados da requisição (latência e modelo utilizado).
+
+        Raises:
+            AIServiceError: Se houver falha de rede (Timeout/ConnectError),
+                            a API retornar um erro (HTTP não-2xx) ou formato inesperado.
+        """
+        start = time.perf_counter()
+
+        def is_fatal(e: Exception) -> bool:
+            if isinstance(e, httpx.HTTPStatusError) and e.response.status_code in (400, 401, 403):
+                return True
+            if isinstance(e, (KeyError, IndexError, TypeError)):
+                return True
+            return False
+
+        def is_transient(e: Exception) -> bool:
+            if isinstance(e, (httpx.TimeoutException, httpx.ConnectError)):
+                return True
+            if isinstance(e, httpx.HTTPStatusError) and e.response.status_code in (429, 500, 502, 503, 504):
+                return True
+            return False
+
+        max_primary_retries = 2
+        backoff = 1.0
+        
+        last_error = None
+        
+        for attempt in range(max_primary_retries + 1):
+            try:
+                return self._attempt_ask(request, self.model, start)
+            except Exception as e:
+                if is_fatal(e):
+                    if isinstance(e, httpx.HTTPStatusError):
+                        raise AIServiceError(f"A API do LLM retornou erro HTTP {e.response.status_code}.") from e
+                    raise AIServiceError("Resposta inesperada ou campo de texto ausente no JSON da API do LLM.") from e
+                
+                if is_transient(e):
+                    last_error = e
+                    if attempt < max_primary_retries:
+                        time.sleep(backoff)
+                        backoff *= 2.0
+                    continue
+                
+                # Outros erros HTTP
+                if isinstance(e, httpx.HTTPStatusError):
+                    raise AIServiceError(f"A API do LLM retornou erro HTTP {e.response.status_code}.") from e
+                raise AIServiceError("Erro inesperado ao contatar a API do LLM.") from e
+                
+        # Fallback
         try:
-            with httpx.Client(timeout=30.0) as client:
-                response = client.post(
-                    self.url,
-                    headers={"x-goog-api-key": self.api_key},
-                    json=payload
-                )
-                response.raise_for_status()
-                data = response.json()
-
-                answer = data["candidates"][0]["content"]["parts"][0]["text"]
-
-                elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
-
-                return AIResponse(
-                    answer=answer,
-                    source=self.model,
-                    metadata={
-                        "model": self.model,
-                        "latency_ms": elapsed_ms,
-                    }
-                )
-        except httpx.TimeoutException as e:
-            raise AIServiceError("Tempo de requisição esgotado ao contatar a API do LLM.") from e
-        except httpx.ConnectError as e:
-            raise AIServiceError("Falha de conexão ao tentar contatar a API do LLM.") from e
-        except httpx.HTTPStatusError as e:
-            raise AIServiceError(f"A API do LLM retornou erro HTTP {e.response.status_code}.") from e
-        except (KeyError, IndexError, TypeError) as e:
-            raise AIServiceError("Resposta inesperada ou campo de texto ausente no JSON da API do LLM.") from e
+            return self._attempt_ask(request, self.fallback_model, start)
+        except Exception as e:
+            if isinstance(e, httpx.HTTPStatusError):
+                raise AIServiceError(f"A API do LLM retornou erro HTTP {e.response.status_code}.") from e
+            if isinstance(e, (KeyError, IndexError, TypeError)):
+                raise AIServiceError("Resposta inesperada ou campo de texto ausente no JSON da API do LLM.") from e
+            if isinstance(e, (httpx.TimeoutException, httpx.ConnectError)):
+                raise AIServiceError("Falha de rede ao tentar contatar o modelo de fallback.") from e
+            raise AIServiceError("Erro inesperado ao contatar o modelo de fallback.") from e
 
