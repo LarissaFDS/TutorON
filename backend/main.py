@@ -19,7 +19,7 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field, field_validator
 
-from .ai_service import AIRequest, AIResponse, AIService, AIServiceError, MockAIService
+from .ai_service import AIRequest, AIResponse, AIService, AIServiceError, GeminiAIService
 
 logger = logging.getLogger("tutoron.backend")
 
@@ -106,7 +106,7 @@ def get_ai_service() -> AIService:
     Returns:
         An instance of the currently active :class:`AIService` implementation.
     """
-    return MockAIService()
+    return GeminiAIService()
 
 
 # ---------------------------------------------------------------------------

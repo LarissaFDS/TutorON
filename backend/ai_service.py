@@ -1,138 +1,188 @@
-"""
-AI Service interface and concrete implementations.
-
-This module defines the provider-agnostic contract (AIService) that every
-AI backend must satisfy. The route layer only ever depends on this interface,
-so swapping in a real model later requires adding a new class here and
-updating the dependency-injection wiring in main.py — nothing else changes.
-"""
-
 from __future__ import annotations
 
+import os
 import time
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
+from dotenv import load_dotenv
+from google import genai
+
+from .rag import search_context
+
+
+load_dotenv()
+
+
+# =========================================================
+# Request / Response
+# =========================================================
 
 @dataclass
 class AIRequest:
-    """
-    Normalised input passed to any AIService implementation.
-
-    Attributes:
-        question: The academic question the student needs help with.
-        context:  Optional code snippet or surrounding context that may help
-                  the model produce a more accurate answer.
-    """
 
     question: str
+
     context: str | None = None
 
 
 @dataclass
 class AIResponse:
-    """
-    Normalised output returned by any AIService implementation.
-
-    Attributes:
-        answer:    The textual answer produced by the service.
-        source:    Identifier for which backend produced the answer
-                   (e.g. ``"mock"``, ``"openai"``, ``"gemini"``).
-        metadata:  Arbitrary key/value bag for provider-specific extras
-                   (latency, token counts, model version, …).  Consumers
-                   should treat unknown keys as informational only.
-    """
 
     answer: str
+
     source: str
+
     metadata: dict = field(default_factory=dict)
 
 
-class AIService(ABC):
-    """
-    Abstract base class defining the contract every AI backend must implement.
+# =========================================================
+# Interface
+# =========================================================
 
-    Implementing classes must override :meth:`ask` and return an
-    :class:`AIResponse`.  They must *not* raise generic exceptions — any
-    provider-specific error should be wrapped in a :class:`AIServiceError`
-    so the route layer can catch a single, predictable exception type.
-    """
+class AIService(ABC):
 
     @abstractmethod
-    def ask(self, request: AIRequest) -> AIResponse:
-        """
-        Submit a question to the AI backend and return a normalised response.
+    def ask(
+        self,
+        request: AIRequest
+    ) -> AIResponse:
 
-        Args:
-            request: The normalised input containing the question and optional
-                     context.
+        raise NotImplementedError
 
-        Returns:
-            An :class:`AIResponse` with the answer, source tag, and metadata.
 
-        Raises:
-            AIServiceError: If the underlying provider call fails for any reason.
-        """
-
+# =========================================================
+# Errors
+# =========================================================
 
 class AIServiceError(Exception):
-    """
-    Raised by :class:`AIService` implementations when the provider call fails.
-
-    Wrapping provider-specific exceptions in this type lets the route layer
-    catch a single, predictable error instead of every possible SDK exception.
-    """
+    pass
 
 
-class MockAIService(AIService):
-    """
-    Deterministic stub implementation of :class:`AIService` for development
-    and testing.
+# =========================================================
+# Gemini + RAG
+# =========================================================
 
-    Returns a clearly-labelled placeholder answer so it is always obvious
-    when a response comes from the mock rather than a real AI provider.
-    No network calls are made; the response is instantaneous and predictable.
-    """
+class GeminiAIService(AIService):
 
-    # Prefix added to every answer so callers can tell at a glance this is
-    # not a real model response.
-    MOCK_ANSWER_PREFIX = "[MOCK RESPONSE — real AI provider not yet connected]"
+    def __init__(self):
 
-    def ask(self, request: AIRequest) -> AIResponse:
-        """
-        Return a deterministic placeholder answer without calling any external
-        service.
+        self.client = genai.Client(
+            api_key=os.getenv("GEMINI_API_KEY")
+        )
 
-        Args:
-            request: The normalised input (question text and optional context).
+    def ask(
+        self,
+        request: AIRequest
+    ) -> AIResponse:
 
-        Returns:
-            An :class:`AIResponse` whose ``source`` is ``"mock"`` and whose
-            ``answer`` echoes the question so it is easy to verify round-trips
-            in tests and demos.
-        """
         start = time.perf_counter()
 
-        context_note = (
-            f" (context provided: {len(request.context)} chars)"
-            if request.context
-            else ""
-        )
-        answer = (
-            f"{self.MOCK_ANSWER_PREFIX}\n\n"
-            f"You asked: \"{request.question}\"{context_note}\n\n"
-            "This is a placeholder. Once the AI strategy (Issue #1) is "
-            "finalised, a real provider implementation will replace this mock "
-            "without any changes to the route layer."
-        )
+        try:
 
-        elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
+            # ---------------------------------------------
+            # 1. Buscar contexto no Supabase
+            # ---------------------------------------------
 
-        return AIResponse(
-            answer=answer,
-            source="mock",
-            metadata={
-                "provider": "MockAIService",
-                "latency_ms": elapsed_ms,
-            },
-        )
+            chunks = search_context(
+                request.question,
+                limit=3
+            )
+
+            # ---------------------------------------------
+            # 2. Montar contexto
+            # ---------------------------------------------
+
+            context_parts = []
+
+            for chunk in chunks:
+
+                page = chunk.get(
+                    "page_number"
+                )
+
+                content = chunk.get(
+                    "content",
+                    ""
+                )
+
+                context_parts.append(
+                    f"[Página {page}]\n{content}"
+                )
+
+            context = "\n\n".join(
+                context_parts
+            )
+
+            # ---------------------------------------------
+            # 3. Prompt
+            # ---------------------------------------------
+
+            prompt = f"""
+Você é um tutor universitário.
+
+Sua função é ajudar o aluno a compreender
+o conteúdo da disciplina.
+
+Use prioritariamente o material fornecido
+abaixo para responder.
+
+Não invente informações que não estejam
+no material.
+
+Se a pergunta não puder ser respondida
+com base no material fornecido, diga
+claramente:
+
+"Não encontrei essa informação no
+material da disciplina."
+
+Material da disciplina:
+
+-------------------------
+{context}
+-------------------------
+
+Pergunta do aluno:
+
+{request.question}
+"""
+
+            # ---------------------------------------------
+            # 4. Gemini
+            # ---------------------------------------------
+
+            response = self.client.models.generate_content(
+                model="gemini-3.8-flash",
+                contents=prompt,
+            )
+
+            if response.text is None:
+                raise AIServiceError(
+                    "Gemini returned an empty response"
+                )
+
+            elapsed_ms = round(
+                (time.perf_counter() - start) * 1000,
+                2
+            )
+
+            # ---------------------------------------------
+            # 5. Resposta
+            # ---------------------------------------------
+
+            return AIResponse(
+                answer=response.text,
+                source="gemini-rag",
+                metadata={
+                    "chunks_used": len(chunks),
+                    "latency_ms": elapsed_ms,
+                },
+            )
+
+        except Exception as exc:
+
+            raise AIServiceError(
+                f"Gemini/RAG error: {exc}"
+            ) from exc
