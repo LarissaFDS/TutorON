@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from google import genai
@@ -7,7 +8,7 @@ from pypdf import PdfReader
 from supabase import create_client
 
 
-load_dotenv()
+load_dotenv(Path(__file__).resolve().parents[1] / ".env", override=False)
 
 
 # ---------------------------------------------------------

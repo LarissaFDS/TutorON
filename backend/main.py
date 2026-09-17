@@ -100,8 +100,7 @@ def get_ai_service() -> AIService:
     """
     FastAPI dependency that provides the active AIService implementation.
 
-    Swap out ``MockAIService()`` for any other :class:`AIService` subclass to
-    wire in a real provider — the route handler below never needs to change.
+    Returns the Gemini RAG implementation; tests can override this dependency.
 
     Returns:
         An instance of the currently active :class:`AIService` implementation.
@@ -152,19 +151,16 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
         request: Request, exc: AIServiceError
     ) -> JSONResponse:
         """
-        Convert an :class:`AIServiceError` into a clean 502 response.
-
-        The AI service is a downstream dependency; its failure should surface
-        as a 502 (Bad Gateway) rather than a 500, making it easier to
-        distinguish provider outages from application bugs.
+        Preserve the distinction between outages, rejected requests and RAG errors.
         """
         logger.error("AI service error: %s", exc, exc_info=True)
         return JSONResponse(
-            status_code=502,
+            status_code=exc.status_code,
+            headers={"Retry-After": "5"} if exc.status_code == 503 else None,
             content=ErrorResponse(
                 error=ErrorDetail(
-                    code="AI_SERVICE_ERROR",
-                    message="The AI service failed to process the request. Please try again.",
+                    code=exc.code,
+                    message=exc.public_message,
                 )
             ).model_dump(),
         )
@@ -209,10 +205,11 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
         responses={
             422: {"model": ErrorResponse, "description": "Validation error"},
             502: {"model": ErrorResponse, "description": "AI service failure"},
+            503: {"model": ErrorResponse, "description": "Temporary Gemini unavailability"},
             500: {"model": ErrorResponse, "description": "Unexpected server error"},
         },
     )
-    async def ask_question(
+    def ask_question(
         payload: QuestionRequest,
         ai_service: AIService = Depends(get_ai_service),
     ) -> QuestionResponse:
@@ -231,8 +228,7 @@ def create_app(ai_service_override: AIService | None = None) -> FastAPI:
             provider metadata.
 
         Raises:
-            AIServiceError: Propagated from the service; caught by the global
-                            exception handler and returned as a 502.
+            AIServiceError: Propagated to the typed dependency-error handler.
         """
         ai_request = AIRequest(
             question=payload.question,

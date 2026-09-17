@@ -1,18 +1,19 @@
 from __future__ import annotations
 
-import os
+import logging
 import time
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 
-from dotenv import load_dotenv
-from google import genai
+from .config import generation_models
+from .errors import AIServiceError, GeminiUnavailableError
+from .gemini import call_gemini, get_gemini_client
 
 from .rag import search_context
 
 
-load_dotenv()
+logger = logging.getLogger("tutoron.backend")
 
 
 # =========================================================
@@ -53,14 +54,6 @@ class AIService(ABC):
 
 
 # =========================================================
-# Errors
-# =========================================================
-
-class AIServiceError(Exception):
-    pass
-
-
-# =========================================================
 # Gemini + RAG
 # =========================================================
 
@@ -68,9 +61,8 @@ class GeminiAIService(AIService):
 
     def __init__(self):
 
-        self.client = genai.Client(
-            api_key=os.getenv("GEMINI_API_KEY")
-        )
+        self.models = generation_models()
+        self.client = get_gemini_client()
 
     def ask(
         self,
@@ -79,47 +71,45 @@ class GeminiAIService(AIService):
 
         start = time.perf_counter()
 
-        try:
+        # ---------------------------------------------
+        # 1. Buscar contexto no Supabase
+        # ---------------------------------------------
 
-            # ---------------------------------------------
-            # 1. Buscar contexto no Supabase
-            # ---------------------------------------------
+        chunks = search_context(
+            request.question,
+            limit=3
+        )
 
-            chunks = search_context(
-                request.question,
-                limit=3
+        # ---------------------------------------------
+        # 2. Montar contexto
+        # ---------------------------------------------
+
+        context_parts = []
+
+        for chunk in chunks:
+
+            page = chunk.get(
+                "page_number"
             )
 
-            # ---------------------------------------------
-            # 2. Montar contexto
-            # ---------------------------------------------
-
-            context_parts = []
-
-            for chunk in chunks:
-
-                page = chunk.get(
-                    "page_number"
-                )
-
-                content = chunk.get(
-                    "content",
-                    ""
-                )
-
-                context_parts.append(
-                    f"[Página {page}]\n{content}"
-                )
-
-            context = "\n\n".join(
-                context_parts
+            content = chunk.get(
+                "content",
+                ""
             )
 
-            # ---------------------------------------------
-            # 3. Prompt
-            # ---------------------------------------------
+            context_parts.append(
+                f"[Página {page}]\n{content}"
+            )
 
-            prompt = f"""
+        context = "\n\n".join(
+            context_parts
+        )
+
+        # ---------------------------------------------
+        # 3. Prompt
+        # ---------------------------------------------
+
+        prompt = f"""
 Você é um tutor universitário.
 
 Sua função é ajudar o aluno a compreender
@@ -147,42 +137,51 @@ Material da disciplina:
 Pergunta do aluno:
 
 {request.question}
+
+Contexto adicional do aluno (não substitui o material da disciplina):
+{request.context or "Não fornecido."}
 """
 
-            # ---------------------------------------------
-            # 4. Gemini
-            # ---------------------------------------------
+        # ---------------------------------------------
+        # 4. Gemini
+        # ---------------------------------------------
 
-            response = self.client.models.generate_content(
-                model="gemini-3.8-flash",
-                contents=prompt,
-            )
-
-            if response.text is None:
-                raise AIServiceError(
-                    "Gemini returned an empty response"
+        for index, model in enumerate(self.models):
+            try:
+                response = call_gemini(
+                    lambda: self.client.models.generate_content(
+                        model=model, contents=prompt,
+                    ),
+                    stage="generation", model=model,
                 )
+                break
+            except GeminiUnavailableError:
+                if index == len(self.models) - 1:
+                    raise
+                logger.warning("Gemini generation exhausted retries; switching from %s to %s",
+                               model, self.models[index + 1])
 
-            elapsed_ms = round(
-                (time.perf_counter() - start) * 1000,
-                2
-            )
-
-            # ---------------------------------------------
-            # 5. Resposta
-            # ---------------------------------------------
-
-            return AIResponse(
-                answer=response.text,
-                source="gemini-rag",
-                metadata={
-                    "chunks_used": len(chunks),
-                    "latency_ms": elapsed_ms,
-                },
-            )
-
-        except Exception as exc:
-
+        if not response.text or not response.text.strip():
             raise AIServiceError(
-                f"Gemini/RAG error: {exc}"
-            ) from exc
+                "Gemini returned an empty response"
+            )
+
+        elapsed_ms = round(
+            (time.perf_counter() - start) * 1000,
+            2
+        )
+
+        # ---------------------------------------------
+        # 5. Resposta
+        # ---------------------------------------------
+
+        return AIResponse(
+            answer=response.text,
+            source="gemini-rag",
+            metadata={
+                "chunks_used": len(chunks),
+                "model": model,
+                "fallback_used": index > 0,
+                "latency_ms": elapsed_ms,
+            },
+        )

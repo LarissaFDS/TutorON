@@ -29,6 +29,14 @@ from backend.main import create_app
 # ---------------------------------------------------------------------------
 
 
+class StubAIService(AIService):
+    """Offline contract fixture; never used by the production application."""
+
+    def ask(self, request: AIRequest) -> AIResponse:
+        context = " context provided" if request.context else ""
+        return AIResponse(answer=f"[MOCK RESPONSE] {request.question}{context}", source="mock")
+
+
 class AlwaysFailAIService(AIService):
     """
     Stub that always raises :class:`AIServiceError`.
@@ -68,7 +76,7 @@ def client() -> TestClient:
     Using ``create_app()`` (the factory) rather than importing the module-level
     ``app`` instance ensures each test starts with a clean application state.
     """
-    return TestClient(create_app(), raise_server_exceptions=False)
+    return TestClient(create_app(ai_service_override=StubAIService()), raise_server_exceptions=False)
 
 
 @pytest.fixture()
