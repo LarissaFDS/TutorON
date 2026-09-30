@@ -1,0 +1,204 @@
+{
+  "id": "ef6d051e4b8c",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L2.pdf",
+  "copia": "00-originais\\ingestao\\f241b13bb5b93049a8ee6a27df949c81e87befbfac6685b5b9bdf10ca0c9e41f\\PAA_L2.pdf",
+  "sha256": "f241b13bb5b93049a8ee6a27df949c81e87befbfac6685b5b9bdf10ca0c9e41f",
+  "tipo": ".pdf",
+  "paginas": 12,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-01-corretude-complexidade",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 2\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 2 - Complexidade de Algoritmos\n\n1. Encontre o n´umero de maneiras diferentes de subir uma escada com n degraus\nse cada passo pode ter um ou dois degraus. Por exemplo, uma escada de trˆes\ndegraus pode ser escalada de trˆes maneiras: 1–1–1, 1–2 e 2–1.\n\nSolu¸c˜ao: Considerando n o n´umero de degraus da escada, temos que:\n\nPara n=1:\n\n´E necess´ario dar apenas um passo, logo:\n- 1 degrau\n⇒Degrau(1) = 1 maneira.\n\nPara n=2:\nPodemos subir a escada de duas maneiras:\n- 1 degrau\n- 2 degraus\n⇒Degrau(2) = 2 maneiras.\n\nPara n=3:\nPodemos subir a escada de trˆes maneiras:\n- 1 + 1 + 1 degraus\n- 1 + 2 degraus\n- 2 + 1 degraus\n⇒Degrau(3) = 3 maneiras.\n\nPara n=4:\nPodemos subir a escada de cinco maneiras:\n- 1 + 1 + 1 + 1 degraus",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p1-fig1.png",
+        "01-extraido\\figuras\\ef6d051e4b8c\\p1-fig2.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "- 1 + 1 + 2 degraus\n- 2 + 2 degraus\n- 2 + 1 + 1 degraus\n- 2 + 2 + 1 degraus\n⇒Degrau(4) = 5 maneiras.\n\nPara n=5\nPodemos subir a escada de cinco maneiras:\n- 1 + 1 + 1 + 1 +1 degraus\n- 1 + 1 + 1 + 2 degraus\n- 1 + 1 + 2 + 1 degraus\n- 1 + 2 + 1 + 1 degraus\n- 1 + 2 + 2 degraus\n- 2 + 1 + 1 + 1 degraus\n- 2 + 1 + 2 degraus\n- 2 + 2 + 1 degraus\n- 2 + 2 + 1 degraus\n⇒Degrau(5) = 8 maneiras.\n\nEm resumo, obtemos as seguintes rela¸c˜oes:\n\nDegrau(1) = 1\nDegrau(2) = 2\nDegrau(3) = 3\nDegrau(4) = 5\nDegrau(5) = 8\n\nPortanto, ´e poss´ıvel notar que a fun¸c˜ao Degrau se assimila `a sequˆencia de Fibonacci\n\n\n\n\n\n⇒Desse modo, a fun¸c˜ao Degrau(n) =\n\n1,\nse\nn = 1\n2,\nse\nn = 2\nDegrau(n −1) + Degrau(n −2), se\nn ≥3\n\n\n\n\n2. Na linguagem de sua escolha, implemente dois algoritmos para calcular o\nen´esimo n´umero de Fibonacci: (a) o algoritmo baseado na defini¸c˜ao recursiva\ne (b) o algoritmo iterativo.\nPlote um gr´afico com o tempo de ambos os\nalgoritmos para cada valor de n = 1, . . . , nmax. Em que nmax ´e o maior valor\nde n para o qual ambos programas executam em menos de 1 minuto em seu\ncomputador\n\nPage ii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p2.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "Solu¸c˜ao:\n\n(a) Fibonacci Recursivo:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nlongfib_recursivo(longn){\nif(n==0)\nreturn\n0\nif(n==1)\nreturn\n[incerto] 1;\nreturn\nfib_recursivo(n-1)+fib_recursivo(n-2);\n\n\n(b) Fibonacci Iterativo:\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\nlongfib_iterativo(long n){\n1ong a=0,b=1,c;\nfor(inti=1;i<=n;i++)\nC=a+b;\na\nb;\nb\n=C；\nreturna;\n\n\nGr´afico Tempo x Entrada\n\n\n[OCR parcial do recorte p3-fig3.png; conferir símbolos na imagem]\nFibonacciRecursivoFibonacciIterativo\n60\nCustodeTempo(s)\n40\n20\n0?680\nEntradaN\n\n\nPage iii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig1.png",
+        "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig2.png",
+        "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "3. Qual a prov´avel complexidade de um algoritmo que possui as seguintes ob-\nserva¸c˜oes emp´ıricas da contagem de sua opera¸c˜ao b´asica:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nsize\ncount\n1000\n11.966\n2000\n24.303\n3000\n39.992\n4000\n53.010\n5000\n67.272\n6000\n78.692\n7000\n91.274\n8000\n113.063\n0006\n129.799\n10000\n140.538\n\n\nSolu¸c˜ao: A prov´avel complexidade para esse algoritmo ´e linear, pois ´e poss´ıvel ob-\nservar que, de uma certa forma, os n´umeros de opera¸c˜oes crescem linearmente com\no aumento tamb´em linear do tamanho da entrada, como ´e poss´ıvel ver no gr´afico\nabaixo:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\n150.000\n100.000\nOperacoes\n50.000\n2000\n4000\n6000\n8000\n10000\nN°Entradas\n\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
+        "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n(neste caso f(n) = Θ(g(n))):\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nf(n)\ng(n)\n(1)\nn-10\nn-200\n(2)\nn1/2\nn2/3\n(3)\n100n+logn\nn+(logn)²\n(4)\nlog2n\nlog3n\n(5)\n10logn\nlog(n\")\n(6)\nn1,01\nnlog² n\n(7)\nn²/logn\nn(logn)2\n(8)\nn01\n(logn) 0\n(9)\n(log n)logn\nn/logn\n(O1)\n[incerto] √n\n(log n)3\n(11)\nn1/2\n5l0g2 n\n(12)\nn2n\n3\n(13)\n[incerto] 2n\n2n+1\n(14)\nn!\n[incerto] 2n\n(ST)\n(log n)logn\n2(log2 n)2\n(91)\n∑ik\nnk+1\ni=1\n\n\nSolu¸c˜ao:\n\n1. f(n) = Θ(g(n))\n\n2. f(n) = O(g(n))\n\n3. f(n) = Θ(g(n))\n\n4. f(n) = O(g(n))\n\n5. f(n) = Θ(g(n))\n\n6. f(n) = O(g(n))\n\n7. f(n) = Ω(g(n))\n\n8. f(n) = Ω(g(n))\n\n9. f(n) = O(g(n))\n\n10. f(n) = Ω(g(n))\n\n11. f(n) = O(g(n))\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "12. f(n) = O(g(n))\n\n13. f(n) = Θ(g(n))\n\n14. f(n) = Ω(g(n))\n\n15. f(n) = O(g(n))\n\n16. f(n) = O(g(n))\n\n5. Resolva a recorrˆencia:\n\n(\n\nT(n) =\n\n2, se n = 2\n2 · T(n\n2) + n, se n = 2k, para k > 1\n\nSolu¸c˜ao:\n\nDesenvolvendo a recorrˆencia obtemos as seguintes fun¸c˜oes:\n\nT(n) = 2 · T(n\n\n2) + n\n(1)\n\nT(n/2) = 2 · T(n\n\n4) + n/2\n(2)\n\nT(n/4) = 2 · T(n\n\n8) + n/4\n(3)\n\nSabendo disso, temos que a partir de (1) e (2):\n\nT(n) = 2 · T(n\n\n2) + n\n\n\u0000\n\nT(n) = 2 ·\n\n+ n\n\n2 · T(n\n4) + n\n2\n\u0001\n\nT(n) = 22 · T(n\n\n4) + 2n\n(4)\n\nDe (3) e (4):\n\nT(n) = 22 · T(n\n\n4) + 2n\n\n\u0000\n\nT(n) = 22 ·\n\n+ 2n\n\n2 · T(n\n8) + n\n4\n\u0001\n\nT(n) = 23 · T(n\n\n8) + 3n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n⇒T(n) = 2k · T( n\n\n2k ) + kn\n\nA recorrˆencia encerra, desse modo, quando:\n\nn\n2k = 2 ⇒2k+1 = n ⇒k + 1 = log2(n) ⇒k = log2(n) −1\n\n⇒k = log2(n) −log2(2) ⇒k = log2(n\n\n2)\n\n⇒\nT(n) = n\n\n2 · T(2) + log2(n\n2) · n\n\nPage vi",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p6.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "\u0000 n\n\n· n ⇒\nT(n) = n + (log2(n) −log2(2)) · n\n\n⇒\nT(n) = n + log2\n\n2\n\u0001\n\n⇒\nT(n) = n −n + n · log2(n)\n∴\nT(n) = n · log2(n)\n\n6. Descreva um algoritmo de tempo Θ(n lg n) que, dado um conjunto S de n\ninteiros e um outro inteiro x, determine se existe ou n˜ao dois elementos em\nS cuja soma seja exatamente x.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nint verifySum(int x,int *S){\nmergeSort(s):\nint i=0;\nint j =size(S)-1;\nwhile(i<j){\nif(s[i]+S[j]>x)\nj--;\nelse\nf(S[i]+S[]<x)\ni++;\nelsereturn1;\nreturn o;\n\n\nNesse algoritmo, podemos observar a fun¸c˜ao verifySum, que recebe como parˆametros\no inteiro x e o conjunto S de inteiros. Inicialmente, ordenamos o conjunto S atrav´es\ndo algoritmo Merge Sort, cuja complexidade ´e Θ(n lg n). Em seguida, presumimos\nque size(S) retorna n, visto que ´e o tamanho de S, e percorremos o conjunto em busca\nde dois inteiros nele que somando resulte no valor de x. As opera¸c˜oes que sucedem\no Merge Sort tem complexidade Θ(n). Portanto, conclui-se que o algoritmo acima\npossui complexidade dominante Θ(n lg n).\n\n7. Resolva a recorrˆencia: an = a0 + a1+ ··· + an1, em que a0 = 1.\n\nSolu¸c˜ao: Para resolvermos a recorrˆencia e encontrarmos sua f´ormula fechada, deve-\nmos expandi-la de forma a encontrarmos um padr˜ao. Dessa forma:\n\nSe n = 0, a0 = 1;\nSe n = 1, a1 = a0 = 1 = 20;\nSe n = 2, a2 = a0 + a1 = 1 + 1 = 2 = 21\n\nSe n = 3, a3 = a0 + a1 + a2 = 1 + 1 + 2 = 4 = 22\n\nPage vii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p7-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p7-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "Se n = 4, a4 = a0 + a1 + a2 + a3 = 1 + 1 + 2 + 4 = 8 = 23\n\nSe n = 5, a5 = a0 + a1 + a2 + a3 + a4 = 1 + 1 + 2 + 4 + 8 = 16 = 24\n...\n...\n...\n...\n...\n...\n...\n...\nPortanto, se n = i, ai = a0 + a1 + a2 + a3 + a4+ ...ai−1 = 2i−1\n\nSendo assim, conclui-se atrav´es do padr˜ao observado que para i = n:\n\nan = a0 + a1 + a2 + a3 + a4+ ...+an−1 = 2n−1\n\nLogo, a solu¸c˜ao da recorrˆencia ´e 2n−1.\n\n8. Considere o seguinte trecho de c´odigo:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n1: procedure PRoG1(inteiro positivo k)\n2:\nifk==lthen\n3:\nPrint(\"Oi\")return\n4:\nelse\n5:\nfor i←1 →k do\n6:\nPrint(\"Oi\")\n7:\nendfor\n8:\nProgl(k-1)\n9:\nendif\n10:endprocedure\n\n\nSeja T (n) o n´umero de vezes que a palavra OI ´e impressa quando Prog1 ´e\nchamado com parˆametro n. Calcule T (1) e determine uma rela¸c˜ao entre T (n)\ne T (n −1) para n > 1. Com base na rela¸c˜ao encontrada, utilize indu¸c˜ao para\nmostrar que T (n) ≤n2, para todo n maior ou igual a 1.\n\nSolu¸c˜ao:\n\nPara n = 1, a palavra “OI” ´e impressa apenas uma vez, portanto, T(1) = 1.\n\nPara n > 1, a palavra “OI” ´e inicialmente impressa n vezes, atrav´es do loop for. Em\nseguida, ela ´e impressa T(n-1) vezes. Portanto, T(n) = n + T(n-1).\n\nSendo assim,\n\n(\n\nT(n) =\n\n1, se n = 1\nn + T(n −1), se n > 1\n\nDando continuidade, devemos mostrar que T(n) ≤n2, para todo n maior ou igual a\n1. Por indu¸c˜ao, temos:\n\nPage viii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "Passo base (k = 1):\n\nNeste caso, T(1) = 1 ≤12.\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k > 1):\n\nT(k) ≤k2, para k > 1.\n\nPasso Indutivo:\n\nNo passo indutivo, aceitamos a hip´otese de indu¸c˜ao P(k), para k > 1 e, portanto,\nprecisamos provar por indu¸c˜ao que se P(k + 1) ´e verdadeiro, P(k) tamb´em ´e.\n\nT(k + 1) = k + 1 + T(k).\n\nComo a hip´otese P(k) garante que T(k) ≤k2:\n\nT(k + 1) ≤k + 1+k2 < (k + 1)2\n\n∴P(k + 1) ´e verdadeiro. ⇒P(k) ´e verdadeiro.\n\n■\n\n9. Considere o seguinte algoritmo recursivo, cujo argumento n ´e um inteiro\npositivo.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1:procedure AsTERISCO(n)\n2:\nifn>0then\n3:\nASTERISCO（n-1)\n4:\nfori-1→ndo\n5:\nimprima\n6:\nendfor\n7:\nASTERISCO(n-1)\n8:\nendif\n9:endprocedure\n\n\nPara um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada\nde ASTERISCO(n)?\n\nSolu¸c˜ao:\n\nConsiderando A(n) como a quantidade de asteriscos impressos dado um valor n, temos\nque:\n\n(\n\nA(n) =\n\n0, se n = 0\n2n+1 −(n + 2), se n ≥1\n\nComo exemplo, temos:\n\nPage ix",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9.png",
+      "figuras": [
+        "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "Para n = 1, 22 (1+2) = 4 - 3 = 1 asterisco impresso;\nPara n = 2, 23 - (2+2) = 8 - 4 = 4 asteriscos impressos;\nPara n = 3, 24 - (3+2) = 16 - 5 = 11 asteriscos impressos;\nPara n = 4, 25 - (4+2) = 32 - 6 = 26 asteriscos impressos;\n\n...\n...\n...\n...\n...\n...\n...\n...\nPara n = i, 2i+1 - (i+2) asteriscos impressos.\n\n10. Mostre que:\n\n(a) A solu¸c˜ao de T (n) = T (n −1) + n; T (1) = 1 ´e O(n2).\n\n(b) A solu¸c˜ao de T (n) = T (⌈n/2⌉) + 1; T (1) = 1 ´e O(lgn).\n\n(c) A solu¸c˜ao de 2T (⌊n/2⌋) + n; T (1) = 1 ´e O(n · lgn).\n\nSolu¸c˜ao:\n\n(a) Solu¸c˜ao: Desenvolvendo a recorrˆencia, temos que:\n\nT(n) = T(n −1) + n\n(1)\n\nT(n −1) = T(n −2) + n −1\n(2)\n\nT(n −2) = T(n −3) + n −2\n(3)\n\nDe (1) e (2):\n\nT(n) = T(n −2) + (n −1) + n\n(4)\n\nDe (3) e (4):\n\nT(n) = T(n −3) + (n −2) + (n −1) + n\n(4)\n...\n...\n...\n...\n...\n...\n...\n\nT(n) = T(n −k) + (n −k + 1) + (n −k + 2) + ... + (n −2) + (n −1) + n\n\nNeste caso, o algoritmo encerra quando n −k = 1 ⇒k = n −1\n\nT(n) = T(n−(n−1))+(n−(n−1)+1)+(n−(n−1)+2)+ ... +(n−2)+(n−1)+n\n\nT(n) = T(1) + (2) + (3) + ... + (n −2) + (n −1) + n\n\nT(n) = 1 + (2) + (3) + ... + (n −2) + (n −1) + n\n\n⇒\nT(n) = n · (n + 1)\n\n2\n\nPara mostrar que T(n) ´e O(n2) basta definir f(n) = n·(n+1)\n\n2\ne g(n) = n2, sendo\nassim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0, neste sentido,\nbasta tomar n0 = 1 e c = 3, por exemplo. Neste caso, vemos que T(n) = O(n2).\n\nPage x",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p10.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 11,
+      "texto": "(b) Solu¸c˜ao: Supondo que n ´e uma potˆencia de 2, ou seja n = 2k, segue-se que\n\ndesenvolvendo a recorrˆencia:\n\nT(n) = T(n/2) + 1\n(1)\n\nT(n/2) = T(n/4) + 1\n(2)\n\nT(n/4) = T(n/8) + 1\n(3)\n\nSabendo disso, temos que a partir de (1) e (2): T(n) = T(n/2) + 1\n\nT(n) = T(n/4) + 1 + 1\n\nT(n) = T(n/4) + 2\n(4)\n\nDe (3) e (4): T(n) = T(n/4) + 2\n\nT(n) = T(n/8) + 1 + 2\n\nT(n) = T(n/8) + 3\n...\n...\n...\n...\n...\n...\n...\n...\n\nT(n) = T(n/2k) + k\n\nA recorrˆencia encerra, desse modo, quando:\n\nn\n2k = 1 ⇒2k = n ⇒k = log2(n)\n\n⇒\nT(n) = T(1) + log2 n\n\n⇒\nT(n) = 1 + log2(n)\n\nPara mostrar que T(n) ´e O(log n) basta definir f(n) = 1 + log(n) e g(n) = log n\ne encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0. Sendo assim, tomamos\nn0 = 2 e c = 3 e provamos que T(n) = O(log2 n).\n\n(c) Solu¸c˜ao: Supondo que n ´e uma potˆencia de 2, ou seja n = 2k, segue-se que:\n\nT(n) = 2 · T(n\n\n2) + n\n(1)\n\nT(n/2) = 2 · T(n\n\n4) + n/2\n(2)\n\nT(n/4) = 2 · T(n\n\n8) + n/4\n(3)\n\nSabendo disso, temos que a partir de (1) e (2):\n\nT(n) = 2 · T(n\n\n2) + n\n\n\u0000\n\nT(n) = 2 ·\n\n+ n\n\n2 · T(n\n4) + n\n2\n\u0001\n\nT(n) = 22 · T(n\n\n4) + 2n\n(4)\n\nDe (3) e (4):\n\nPage xi",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p11.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 12,
+      "texto": "T(n) = 22 · T(n\n\n4) + 2n\n\n\u0000\n\nT(n) = 22 ·\n\n+ 2n\n\n2 · T(n\n8) + n\n4\n\u0001\n\nT(n) = 23 · T(n\n\n8) + 3n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n⇒T(n) = 2k · T( n\n\n2k ) + kn\n\nA recorrˆencia encerra, desse modo, quando:\n\nn\n2k = 1 ⇒2k = n ⇒k = log2(n)\n\n⇒\nT(n) = n · T(1) + log2 n · n\n\n⇒\nT(n) = n + n · log2(n)\n\nPara mostrar que T(n) ´e O(n·log2 n) basta definir f(n) = n+n·log2 n e g(n) =\nn · log2 n, sendo assim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0,\nneste sentido, basta tomar n0 = 2 e c = 3, por exemplo. Neste caso, ´e poss´ıvel\nnotar que T(n) = O(n · log2 n).\n\nPage xii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p12.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

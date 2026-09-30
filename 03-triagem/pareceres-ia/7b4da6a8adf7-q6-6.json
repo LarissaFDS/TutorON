@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta uma prova clara e lógica do algoritmo de Horner, com invariante de laço bem definido e justificado. Os passos da execução do algoritmo são detalhados e a conclusão é correta.",
+  "decisao": "sem_erro_detectado",
+  "sha256": "89ebf880417fdb86a0a3ca7452aca0650fd9538ceee8097b877c2edbdea4680a"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "f802639909c5",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.40.55.webp",
+  "copia": "00-originais\\ingestao\\b6ecdc75a88025a5ae6fb5851a94fe6654032878daceb8aa4788406d99be577e\\WhatsApp_Image_2025-01-12_at_13.40.55.webp",
+  "sha256": "b6ecdc75a88025a5ae6fb5851a94fe6654032878daceb8aa4788406d99be577e",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Universidade Federal de Alagoas-UFAL\nInstituto de Computacio\nProjetoeAnalisedeAlgoritmos\nProva Final\nProf.Rian Gabriel Pinheiro\n04deabrilde2024\nQuostao-1-(2-pontos)\nConsidere o seguinte algoritmo.Diga o que cle faz e prove sua corretude.\n2:\nif inicio=fm then\n3:\nreturn A[inicio]\n4:\nendif\n5:\nmeioinicio+（fim-incio）/2\n6:\na（-X（A,inicio,meio）\n7:\nb-X（A,meio+1,fim）\n:8\nifa<bthen\n9:\nreturnb\n10:\nelse\n11:\nreturna\n12:\nendif\n13:end procedure\nQuestao2[2pontos]:\nCalcule a complexidade de tempo do seguinte algoritimo.Considere que n é da forma 22*\npara un inteiro positivok.\n1:procedure FuNc(inteiro n)\n2:\nc←0\n3:\nfori←1→ndo\n4:\nj←2\n5:\nwhilej<ndo\n[incerto] j←j2\nc←c+1\n8:\nendwhile\n9:\nreturnc\n10:\nendfor\n1l:end procedure\nQuestao3[1ponto]:\nEscreva um algoritmo de divisao-e-conquista O(logn) para computar a em que n éum inteiro positivo.\nQuestao4[1ponto]:\nDado um vetor A com n valores binarios (zero ou um). Mostre um algoritmo O(n) para ordena-lo.\nQuestao5[2pontos]:\nisso ein tempo O（mn)\nQuestao6[2pontos]:\nConsidere o seguinte algoritino forca bruta para resolver o problema do numero CoMposro:Verifique inteiros suces-\nsivos de2a[n2」como possfveisdivisores den.Seumdels dividenretrna IMou sejanmero comost）;\nse nenhum deles o fizer,retorne NAO.Por que esse algoritmo nao é considerado polinomial?\nQuestao 7[2pontos]:\nAGENDAMENTOMULTIPROCESSADOR\nEntrada:Um conjunto finito A de “tarefas” com tamanho l(a) E Z+ para cada a E A,um nimero m E Z+ de\nprocessadores,eum deadlineD∈Z+\nQuestao:Existe una particao de A = A U A2U..U Am em m conjuntos disjuntos tal que\nmax\n[incerto] ∑(a)\n<D\n[incerto] 1<iSm\naEA\nProve que o problema é NP-completo.Dica: Faca uma transformacao polinomial de PARTICAo.\nQuestao 8[2 pontos]:\nElabore um algoritmo Backtracking para resolver o problema do Sudoku. Considere que a entrada é uma matriz 9x 9\ncomo os valores ja preenchidos. Considere que o valor O indica que a celula esta vazia.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f802639909c5\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

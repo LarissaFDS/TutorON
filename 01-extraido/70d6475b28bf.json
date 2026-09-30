@@ -1,0 +1,316 @@
+{
+  "id": "70d6475b28bf",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L8.pdf",
+  "copia": "00-originais\\ingestao\\3942435c025c9c19e03ad3dfedb1d39c4c683b1d736babfb0a5214b158cb2f14\\PAA_L8.pdf",
+  "sha256": "3942435c025c9c19e03ad3dfedb1d39c4c683b1d736babfb0a5214b158cb2f14",
+  "tipo": ".pdf",
+  "paginas": 15,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-07-lidando-com-np-completude",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 8\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 8 - Lidando com NP-Completude\n\n1. Um quadrado m´agico de ordem 3 ´e uma tabela 3 × 3 preenchida com nove\nn´umeros inteiros distintos de 1 a 9, de modo que a soma dos n´umeros em cada\nlinha, coluna e duas diagonais de ponta a ponta seja a mesma. Implemente\num algoritmo backtracking e encontre todos os quadrados m´agicos de ordem\n3.\n\nSolu¸c˜ao:",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p1-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p1-fig2.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nintis_solution(int*matriz){\nint sum_1[3]={0},sum_c[3]={θ};sum_pd=0,sum_sd=θ;\nfor(inti≈0;i< 9;i++)\nint j = i%3;\nif(i==j） sum_pd += matriz[i];\nif(i+j==2） sum_sd+=matriz[i];\nsum_l[i] += matriz[i];\nsum_c[j] += matriz[i];\nif(sum_1[0]==sum_1[1] && sum_1{1]==sum_1[2] && sum_c[0]==sum_c[1]\n&& sum_c[1]==sum_c[2] && sum_c[2]== sum_pd && sum_pd == sum_sd)\nreturn 1;\nreturn 0;\nvoid generate(int matriz[9],int i,int element){\nif(i==9) return;\nif(element==9） return;\nfor(int j =1; j<=9;j++)\nmatriz[i]=j\nif(is_solution(matriz)){\nprint_mat(matriz);\ngenerate(matriz,i+1,j);\nint main(){\nint matriz[9]={1};\nint element=1;\ngenerate(matriz,0,element);\n\n\n2. Projete um algoritmo para o PROBLEMA DO CAMINHO HAMILTONI-\nANO de um v´ertice fixo s.\n\nSolu¸c˜ao: O problema do caminho hamiltoniano pode ser resolvido atrav´es de back-\ntracking, que divide o problema total em subproblemas a fim de facilitar a sua re-\nsolu¸c˜ao - pois solucionaremos pequenos problemas que resultar˜ao na resolu¸c˜ao de\nnosso principal objetivo.\nCom a divis˜ao do problema do caminho hamiltoniano em subproblemas teremos uma\nnova instˆancia dele, no qual teremos um subgrafo do original que come¸ca em um dado\nv´ertice v ∈V. Esse subgrafo nos permitir´a construir progressivamente um caminho\nao removermos v´ertices que j´a foram visitados.\nDevemos definir os sub problemas nos pequenos grafos e, atrav´es deles, escolher\nos v´ertices que ser˜ao avaliados primeiro. Isso reduzir´a a complexidade de espa¸co do\nalgoritmo, visto que um ´unico caminho ativo deve ser mantido na ´arvore dos poss´ıveis\n\nPage ii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "caminhos hamiltonianos. Para expandir o sub problema do caminho hamiltoniano\ncome¸cando em ’s’ em um grafo G, devemos quebr´a-lo em subproblemas onde o i-´esimo\nsubproblema ser´a uma instˆancia desse problema come¸cando no i-´esimo vizinho de ’s’\nem G.\n\n3. Escolha um problema de otimiza¸c˜ao e dˆe um exemplo de uma execu¸c˜ao de\num algoritmo branch-and-bound sobre o problema escolhido.\nEscolha um\ninstˆancia pequena. Isso implica decidir:\na) Como calcular um limitante para o problema?\nb) Como vocˆe expandir um n´o em subproblemas?\nc) Qual subproblema escolher?\n\nSolu¸c˜ao: O problema escolhido ser´a o TSP. O limitante pode ser calculado a partir\nda redu¸c˜ao das linhas e colunas da matriz de adjacˆencia e ter´a um custo de pelo menos\no custo acumulado para reduzir tanto as linhas, quanto as colunas. O processo de\nredu¸c˜ao ´e simplesmente calcular o valor m´ınimo de cada linha e subtrair de cada\nelemento, bem como calcular o valor m´ınimo de cada coluna e subtrair dos mesmos.\nO custo acumulado de cada linha e cada coluna ´e o limitante inferior para o custo\ndo caminho do caixeiro viajante.\nJ´a o limitante superior ´e inicialmente infinito.\nO crit´erio de escolha dos subproblemas ser´a o custo acumulado do caminho, at´e o\nsubproblema em quest˜ao da ´arvore gerada no problema do TSP. O subproblema a se\nescolher ´e, portanto, aquele que minimiza o custo da viagem do caixeiro. Considere\na seguinte instˆancia do TSP:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n1\n3\n4\n2\n5\n3\n\n\nPara estimar o custo inicial do tour, temos que:\n\nPage iii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\n3\n4\n2\n2\n2\n3\nINF\n1\n5\n1\n3\n4\n1\nINF\n4\n1\n4\n2\n5\n4\nINF\n2\nMIN\n<-CUSTO\n1\n2\n3\n4\nMIN\n1\nINF\n1\n2\n0\n2\n2\n2\nINF\n0\n4\n1\n3\n3\n0\nINF\n3\n1\n4\n0\n3\n2\nINF\n2\nMIN\n0\n0\n0\n0\n9=0+9\n<-CUSTO\n\n\nCUSTO DA REDUC¸ ˜AO = 6 (LIMITE INFERIOR)\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nC1\nUPPER:INF\n1\nC2\nC:6\n100\nC3\nC4\n2\n3\n\n\nCalcule agora o custo do pr´oximo n´o, que ´e o custo para ir do seu predecessor at´e\nele mais o custo das redu¸c˜oes de linha e coluna anteriores, mais o custo da redu¸c˜ao\nde linha e coluna do caminho atual. Para cada n´o j sucessor de 1, fa¸ca a linha 1 do\nsucessor j ser toda infinita a partir da matriz reduzida do n´o 1, bem como a coluna\n2 tamb´em e assim sucessivamente para todos os n´os vizinhos.\n\n\n[OCR parcial do recorte p4-fig3.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\n[incerto] T\nR =6\nC3\nC(1,4) +R + R'\nC4\nC(1,2)+R+R\nC(1,3)+R+R\n2\n3\n\n\nPara o n´o 2 temos:\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p4-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p4-fig2.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p4-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n2\nINF\n0\n4\n0\n3\n[incerto] D\nINF\nINF\n0\n3\n4\n0\nINF\n2\nINF\n0\nMIN\n0\n0\n[incerto] 0\n3\n<-CUSTO\n\n\nC(C1, C2) + R + R′ = 1 + 6 + 3 = 10\n\nPara o n´o 3 temos:\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n0\nINF\nINF\n0\n0\n3\n3\n0\nINF\n3\n0\n4\n0\n3\nINF\nINF\n0\nMIN\n2\n2\n<-CUSTO\n\n\nC(C1, C3) + R + R′ = 2 + 6 + 2 = 10\n\nPara o n´o 4 temos:\n\n\n[OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n2\nINF\n0\nINF\n0\n3\n3\n0\nINF\nINF\n0\n4\n0\n3\n2\nINF\n0\nMIN\n0\n[incerto] 0\n[incerto] 0\n0\n<-CUSTO\n\n\nC(C1, C4) + R + R′ = 0 + 6 + 0 = 6\n\nComo a estrat´egia adotada ´e do Least Cost Branch and Bound, o n´o a ser escolhido\nser´a o n´o 4. Repetindo as estrat´egias citadas anteriormente e gerando os sucessores.\nAl´em disso, os passos anteriores de redu¸c˜ao e c´alculo de custo se repetem, agora, a\npartir do n´o 4.\n\n\n[OCR parcial do recorte p5-fig4.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\n1\nR=6\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nC(4,5) + R + R'\nC(4,6) + R + R'\n5\n6\n\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p5-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p5-fig2.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p5-fig3.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p5-fig4.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig4.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "Para o n´o 5, temos que:\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\nINF\nINF\n0\nINF\n0\n3\n0\nINF\nINF\nINF\n3\n4\nINF\nINF\nINF\nINF\n0\nMIN\n[incerto] 0\n3\n<-CUSTO\n\n\nC(C4, C2) + R + R′ = 3 + 6 + 3 = 12\n\nPara o n´o 6, temos que:\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n0\nINF\nINF\nINF\n2\n3\n0\n0\nINF\nINF\n3\n4\nINF\nINF\nINF\nINF\n0\nMIN\n0\n[incerto] 0\n[incerto] 0\n5\n<-CUSTO\n\n\nC(C4, C3) + R + R′ = 2 + 6 + 5 = 13\n\nTemos a seguinte situa¸c˜ao:\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\nR =6\n1\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nR=12\nR=13\n5\n6\n\n\nA t´ıtulo de simplifica¸c˜ao, ocultaremos os pr´oximos passos que s˜ao an´alogos e obtemos o\nseguinte resultado:.\n\nPage vi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p6-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p6-fig2.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p6-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nC1\nUPPER:10\nC2\n1\nR=6\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nR=12\nR=10\nR=16\n>=UPPER\nR=13\n5\n6\n8\n>UPPER\nR=10\n>UPPER\n>UPPER\n->UPPER\n\n\n´E poss´ıvel verificar que ao obter uma solu¸c˜ao candidata todas as outras ramifica¸c˜oes que\nexistiam anteriormente possu´ıam custos maiores ou iguais `a solu¸c˜ao encontrada, logo elas\nforam descartadas por meio da poda.\n\n4. De forma similar `a quest˜ao anterior (responda as perguntas!), projete um\nalgoritmo branch-and-bound para o problema da COBERTURA DE CON-\nJUNTO.\n\nSolu¸c˜ao: Considere o grafo G=(V,E). O algoritmo pode ser pensado como uma\nbusca em profundidade em uma ´arvore, na qual o mesmo busca pela solu¸c˜ao ´otima\nrecursivamente criando os galhos para um v´ertice e a partir do mesmo criando dois\nv´ertices at´e que n˜ao haja mais v´ertices em G. Ou seja, quando o algoritmo ramifica\num v´ertice, ele divide o espa¸co das solu¸c˜oes em um conjunto de subconjuntos menores\ncalculando assim os limitantes superiores e inferiores relativos para cada n´o, reduzindo\nassim o espa¸co de busca.\nA entrada para o algoritmo ´e um grafo G, um limitante superior UpperB e uma\nsolu¸c˜ao candidata S que representa uma cobertura de v´ertices parcial em constru¸c˜ao.\nO limitante superior ´e uma superestima¸c˜ao do tamanho da cobertura m´ınima de\nv´ertices do subgrafo e pode ser obtido calculando o tamanho da cobertura m´ınima\nde v´ertices encontrada at´e o momento.\nQuando o tamanho de S (solu¸c˜ao candidata atual da cobertura de v´ertices) somado\nao limitante inferior do subgrafo se tornar maior ou igual ao limitante superior, a\npoda ´e ent˜ao realizada na ´arvore de busca e o limitante superior UpperB que ´e o\ntamanho da cobertura m´ınima de v´ertices ´e retornado.\nPara calcular o limitante inferior 3 m´etodos podem ser utilizados clique bound, de-\ngree bound, sat bound.\n\nPage vii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p7-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p7-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "• clique bound: Faz uma decomposi¸c˜ao do grafo em um conjunto de cliques dis-\njuntas C1, C2, ..., Cr e soma os tamanhos das cliques, de modo que o limitante\ninferior ´e:\n\ni=r\nX\n\n(|Ci| −1)\n\ncliquebound =\n\ni=1\n\n• degree bound: Seleciona o v´ertice com maior grau, nomeando-o v′\n1 e atualiza o\ngrau dos outros v´ertices, seleciona agora o v´ertice de maior grau e o nomeia v′\n\n2\ne assim sucessivamente. Busca-se ent˜ao um v´ertice v′\n\ni tal que\n\nd(v′\n\n1) + d(v′\n2) + · · · + d(v′\ni) ≥|E|\n\nd(v′\n\n1) + d(v′\n2) + · · · + d(v′\ni−1) < |E|\n\nAssim o limitante inferior pode ser dado por:\n\ni+1 ∈H\n\ndegreebound = ⌊i +\n|E′|\nd(v′\n\ni + 1)⌋,\nv′\n\nonde G\\{v′\n\n1, v′\n2, ..., v′\ni} = (V ′, E′)\n\n• sat bound: Reduz o grafo G = (V,E) a uma instˆancia MaxSAT e se G pode ser\nparticionado em k cliques disjuntas e existem s subconjuntos inconsistentes na\ninstˆancia MaxSAT, ent˜ao o limitante inferior ´e dado por:\n\nsatbound = |V | + k + s\n\nAssim, o algoritmo pode ser dado por:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\ndefminimun_vertex_cover_b_bound(G,UpperB,S);\nif len(S)+max(degree_bound(G)，clique_bound(G),sat_bound(G))>=UpperB：\nreturnUpperB\nif len(G)\n==0：\nreturn len(S)\nV=select_max_dg_vert(G)\nsol1=minimun_vertex_cover_b_bound(remove(G,Neighbourhood(v)),UpperB,S.append(Neighbourhood(v)))\nsol2=minimun_vertex_cover_b_bound（remove（G,v),UpperB,S.append(v))\nreturn min(sol1,so12)\n\n\nPage viii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p8-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p8-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "5. No problema da ´ARVORE DE STEINER M´INIMA, a entrada consiste em:\num grafo completo G = (V, E ) com distˆancias duv entre todos os pares de\nn´os; e um determinado conjunto de v´ertices terminais V ⊆V . O objetivo ´e\nencontrar uma ´arvore de custo m´ınimo que inclua os v´ertices V . Essa ´arvore\npode ou n˜ao incluir n´os em V \\V ′ . Sabe-se que este problema ´e NP-dif´ıcil,\nproponha uma heur´ıstica construtiva para gerar uma solu¸c˜ao vi´avel para o\nproblema (note que a solu¸c˜ao pode n˜ao ser ´otima).\n\nSolu¸c˜ao: Iremos supor que a distˆancia entre as entradas atende `as defini¸c˜oes de\nm´etrica e, com isso, provaremos que uma solu¸c˜ao para a ´arvore de steiner m´ınima\npode ser obtida atrav´es de um algoritmo de aproxima¸c˜ao ao ignorarmos os n´os n˜ao\nterminais e retornarmos a ´arvore geradora m´ınima em V’.\n\nPara isso, consideremos T como a ´Arvore Steiner M´ınima possuindo custo C e, com\nisso, podemos moldar a ´arvore steiner para obter custo 2C ao passar por todos os\nv´ertices. Sendo i, j e j v´ertices adjacentes no caminho, usamos a desigualdade trian-\ngular dik ≤dij + djk.\n\nCom isso, n´os podemos desviar de um v´ertice intermediario ’j’ e conectar ’i’ e ’k’\ndiretamente, sem aumentar o custo. Com essa t´ecnica, podemos desviar de todos os\nv´ertices que n˜ao est˜ao em V’ e est˜ao presentes no caminho, e de todos os v´ertices de\nV’ que j´a foram visitados duas vezes. Isso resulta em um caminho de custo de no\nm´aximo 2C, passando por todos os v´ertices de V’ exatamente uma vez.\n\nPortanto, esse caminho ´e uma ´arvore geradora para V’ de custo 2C, o que implica\nque o custo da ´Arvore de Steiner M´ınima ser´a menor ou igual a 2C, assim nos dando\na prova da aproxima¸c˜ao desejada.\n\n6. Implemente um algoritmo backtracking para o PROBLEMA DO PASSEIO\nDO CAVALO, iniciando de uma das quinas. Informe o tempo em segundos e\napresente a solu¸c˜ao.\n\nSolu¸c˜ao:\n\nPage ix",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p9.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]\ndefprint_solution_kt(board):\nfor i in range(8):\nfor j in range(8):\nprint(board[ij[j], end=′')\nprint()\ndef is_valid_move(board, x, y):\n# verifica se a posicao eh valida de acordo com as limitacoes\nif(x >=θ and y >= θ and x< 8 and y < 8 and board[xJ[y] ==-1):\nreturn true\nreturn False\ndefsolve_kt_bt(board,curr_x,curr_y;next_x,next_y,pos):\nif pos x= 64:\nreturn True\n# tenta todas as coordenadas atraves de backtracking\nfor i in range(8):\nx=curr_x+next_x[i]\ny=curr_y+next_y[i]\niF(is_valid_move(board,x,y)):\nboard[x][y]=pos\nif(solve_kt_bt(board，x,y,next_x,next_y,pos+1)):\nreturn True\nboard[x][y]=-1\nreturn False\ndef knights_tour_bt():\nboard = [[-1 for i in range(8)] for i in range(8)]\nboard[e][e] =θ #inicializa 0 cavala na quina do primeiro bloco\n#prox coordenadas\nnext_x=[2，1，~1,\nnexty=[1,2,2,1,-1,~2,-2-1}\n-2\n-2-2,1,2}\npos = 1\n#chama afuncao que vai executar o backtracking\nif solve_kt_bt(board,0,θ,next_x, next_y, pos):\nprint_solution_kt(board)\nelsey\nprint(\"There's no solution for this problem.\")\nknights_tour_bt()\n\n\n\n[OCR parcial do recorte p10-fig2.png; conferir símbolos na imagem]\nConsiderandoacoordenadadoprimeiromoyimento,asolucaosedaaseguir:\n037583542475651\n593414857504346\n383136412455255\n336039264954344\n3093261402522.53\n176227102320134\n82918156112421\n63167281914512\n\n\nO tempo em segundos decorrido para encontrar a solu¸c˜ao foi: 41.19298219680786s.\nImportante observar que o tempo decorrido varia de acordo com o caminho que se\npercorre, caso invertˆessemos a ordem entre next x e next y ter´ıamos encontrado uma\n\nPage x",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p10.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p10-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p10-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p10-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p10-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 11,
+      "texto": "solu¸c˜ao em 37.05153942108154s. Al´em disso, a complexidade para esse algoritmo ´e\nO(8N2).\n\n7. Apresente o algoritmo de busca local 2-opt para o TSP, dˆe um exemplo de\nexecu¸c˜ao e mostre que ele n˜ao ´e exato.\n\nSolu¸c˜ao: Supondo que o DFS escolha arbitrariamente um v´ertice inicial para cons-\ntruir o caminho em pr´e-ordem e simultaneamente em ordem. Temos o seguinte algo-\nritmo:\n\n\n[OCR parcial do recorte p11-fig1.png; conferir símbolos na imagem]\ndeftwo_opt_tsp(complete_graph):\nmst_pre_solution=prim(complete_graph)\nconstructed_solution=dfs(mst_pre_solution)\nsoIution =delete_duplicate_from_tour（constructed_solution)\nreturnsolution\n\n\nO algoritmo ´e 2-OPT pois o custo para achar um caminho que visita todos os v´ertices\nexatamente uma vez, no pior dos casos, ´e o custo de executar o DFS em cada v´ertice\nda MST. Neste sentido, cada aresta da MST ´e verificada 2 vezes. Assim, o custo ´e\ndado por:\n\nOPT >= MST\n\nMSTtrilha ≤2MST\n\n∴\nMSTTrilha ≤2 · OPT\n\nEle n˜ao ´e exato pois depende da escolha e constru¸c˜ao da MST e da elimina¸c˜ao dos\nv´ertices duplicados. Nem sempre escolhe o ´otimo global, dado que a troca de v´ertices\nconstr´oi um ´otimo local favor´avel `a MST.\n\nExemplo:\n\n\n[OCR parcial do recorte p11-fig2.png; conferir símbolos na imagem]\na\n1\n2\n3\n6\n4\nS\n5\n8\n10\n7\nb\nd\n9\n\n\nPage xi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p11.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p11-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p11-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p11-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p11-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 12,
+      "texto": "MST : (s →a), (a →c), (s →d), (a →b)\n\n\n[OCR parcial do recorte p12-fig1.png; conferir símbolos na imagem]\nS\nd\na\nb\n\n\nDFS (Pr´e/Em Ordem): s →a →c →a →b →s →d →s\n\nRemovendo duplicatas: s →a →c →a →b →s →d →s\n\nSolu¸c˜ao Caixeiro[2-OPT]: s →a →c →b →d →s\nCUSTO: 25\nSolu¸c˜ao Caixeiro[´Otimo]: s →c →a →b →d →s\nCUSTO: 23\n\n8.\nEscolha um problema de otimiza¸c˜ao NP-dif´ıcil e apresente um estrutura de\nvizinhan¸ca para tal problema\n\nSolu¸c˜ao: O problema escolhido ´e conhecido por ”Parti¸c˜ao de Grafos”e consiste em\nretornar uma parti¸c˜ao dos v´ertices em dois grupos A e B de acordo com a entrada que\nconsiste em um grafo e um n´umero. Esse ´e um problema NP-dif´ıcil e para estruturar\na sua vizinhan¸ca, podemos seguir com a op¸c˜ao (A, B), sendo |A| = |B|. Os vizinhos\nser˜ao todas as solu¸c˜oes obtidas ao trocarmos um par de v´ertices atrav´es dos cortes,\nou seja, a vizinhan¸ca ´e composta por solu¸c˜oes da forma (A - a + b, B - b + a), onde\na ∈A e b ∈B. Um exemplo desse movimento ´e:\n\n\n[OCR parcial do recorte p12-fig2.png; conferir símbolos na imagem]\n→\n\n\nNo entanto, ´e poss´ıvel observar que essa solu¸c˜ao n˜ao ´e ´otima e uma melhoria que\npode ser feita ´e a expans˜ao do tamanho da sua vizinhan¸ca a fim de permitir duas\ntrocas por vez.\n\n9.\nEscolha 5 meta-heur´ıstias do livro “Handbook of Metaheuristics”\n\nPage xii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p12.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p12-fig1.png",
+        "01-extraido\\figuras\\70d6475b28bf\\p12-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p12-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p12-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 13,
+      "texto": "( https:// www.springer.com/gp/book/9783319910857, cada cap´ıtulo fala de\numa meta-heur´ıstica ). Para cada uma das 5, descreva o algoritmo e explique\nquais os mecanismos de intensifica¸c˜ao e diversifica¸c˜ao da busca.\n\nSolu¸c˜ao:\n\n• Tˆempera Simulada (Simulated Annealing):\nImportante ressaltar a analogia do comportamento do algoritmo ao seu nome,\nque reprenta uma forma de ”abaixar a temperatura”gradualmente at´e que um\nl´ıquido se solidifique. No nosso caso, a temperatura serve como m´etrica para\nintensifica¸c˜ao e diversifica¸c˜ao, e representa uma probabilidade de escolher alea-\ntoriamente que varia com o tempo, em outras palavras, ´e uma forma de deixar\na escolha da probabilidade de forma dinˆamica e gradual. ´E no contexto ini-\ncial desse algoritmo que ocorre a maior quantidade de diversifica¸c˜ao, isto ´e,\nexplora¸c˜ao a fim de conhecer as possibilidades e evitar cen´arios como m´aximos\nlocais, plan´ıcies e encostas. Em seguida, ocorre a intensifica¸c˜ao, passo que busca\notimizar certo resultado.\n\n• Busca Tabu (Tabu Search):\n´E um algoritmo de busca por vizinhan¸ca que implementa o conceito de mem´oria\npara o seu funcionamento. Com a mem´oria, ele permite que haja maior diver-\nsifica¸c˜ao das solu¸c˜oes no espa¸co de busca ao evitar que haja repeti¸c˜ao `a curto\nprazo de movimentos realizados recentemente e obrigando a procura de novas\nsolu¸c˜ao ao sair do espa¸co de vizinhan¸ca. Esse algoritmo foi criado pois apesar\ndo fator de aleatoriedade ser crucial para fugir de cen´arios como m´aximos lo-\ncais, plan´ıcies e encostas, isso pode fazer com que haja uma taxa significativa\nde visita em solu¸c˜oes repetivas. Ele funciona partindo de uma solu¸c˜ao inicial e\nse movendo, a cada itera¸c˜ao, para a melhor solu¸c˜ao na vizinhan¸ca sem ir para\nsolu¸c˜oes que est˜ao na lista tabu, dessa forma, intensificando e diversificando as\nsolu¸c˜oes.\n\n• Variable Neighborhood Search:\n´E um algoritmo que possui mais de uma vizinhan¸ca auxiliando na fuga de um\nm´aximo local. Inicialmente, uma solu¸c˜ao ´e gerada automaticamente. Ap´os isso,\nela ´e intensificada atrav´es do VND e verificada se ´e a melhor solu¸c˜ao que j´a foi\nencontrada. Caso seja, ela explora a vizinhan¸ca em quest˜ao, caso n˜ao seja, ela\nexplora outra (realizando uma visita aleat´oria tamb´em). Isso garante que haja\ndiversifica¸c˜ao e intensifica¸c˜ao da busca. Uma caracter´ıstica importante ´e que\ndeve haver diferen¸ca significativa entre as vizinhan¸cas.\n\n• Algoritmo Gen´etico (Genetic Algorithms):\n´E um algoritmo de otimiza¸c˜ao baseado em evolu¸c˜ao natural. Para que a solu¸c˜ao\n”´otima”seja encontrada, ´e necess´ario que se tenha v´arias ”gera¸c˜oes”, assim\ncomo ocorre na vida real. H´a dois processos important´ıssimos nesse algoritmo,\n\nPage xiii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p13.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 14,
+      "texto": "sendo eles: cross-over e muta¸c˜ao. O primeiro ´e respons´avel por misturar as in-\nforma¸c˜oes de maneira aleat´oria a fim de criar novas solu¸c˜oes que s˜ao a mistura\nde solu¸c˜oes j´a existentes, essa seria a etapa de diversifica¸c˜ao. J´a a muta¸c˜ao ´e\nrespons´avel por adicionar variedade `as solu¸c˜oes existentes, adicionando peque-\nnas mudan¸cas, essa sendo a intensifica¸c˜ao. A muta¸c˜ao tamb´em ´e respons´avel\npor casos onde s˜ao criadas caracter´ısticas que caracterizam um melhor usu´ario.\n\n• Colˆonia de formigas (Ant Colony Optimization):\nEsse algoritmo inspirado na comunica¸c˜ao baseada em feromˆoneos realizada pe-\nlas formigas ´e geralmente utilizado para encontrar o melhor caminho, visto que\na analogia procede da grande habilidade do inseto em se guiar em busca de co-\nmida atrav´es da coopera¸c˜ao entre a colˆonia. O algoritmo funciona baseado na\ncomunica¸c˜ao dentro de uma colˆonia de formingas artificiais, usando o caminho\nartificial de feromˆoneos deixados por elas. Esse caminho ´e usado de maneira\nnum´erica para probabilisticamente construir solu¸c˜oes e, em seguida, adaptar\nas solu¸c˜oes existentes de acordo com a experiˆencia adquirida. Inicialmente sem\nmuita experiˆencia, as formigas procuram diversificar seus caminhos, explorando\nas possibilidades e `a medida que a experiˆencia de formigas anteriores ´e adqui-\nrida, a colˆonia recebe conhecimento e consegue se guiar para, baseada nele,\nintensificar e encontrar a melhor solu¸c˜ao poss´ıvel.\n\n10.\nNo problema do BIN PACKING, a entrada consiste em: n itens com tama-\nnhos s1, s2, ..., sn em que si ∈[0, 1]. O objetivo ´e encontrar o menor n´umero de\n“bins” (caixas) unit´arias para armazenar os n itens. O algoritmo First Fit\nconsiste em:\n\n\n[OCR parcial do recorte p14-fig1.png; conferir símbolos na imagem]\n1: procedure ALGORITMo FIRsT FrT(vetor s[1,.., n])\n2:\nfori+1-ndo\n3:\nColoque o item i no bin de menor indice que tenha espaco\ndis\nponivel ≥ s;\nend for\n5:endprocedure\n\n\nMostre que o algoritmo ´e 2-aproximado. Dica: O FF n˜ao deixa, ao final, dois\nbins com espa¸co utilizado ≤0, 5\n\nSolu¸c˜ao:\n\nSuponha que o algoritmo First-Fit utilize m caixas com m = {W1, W2, ..., Wm}.\nEnt˜ao, ao menos (m −1) caixas est˜ao mais do que meio cheias. Isto ´e f´acil ver, pois\nse h´a 2 caixas cuja capacidade Wi <\nWimax\n\n2\ne\nWj <\nWjmax\n\n2\n, n˜ao supera metade\n\nPage xiv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p14.png",
+      "figuras": [
+        "01-extraido\\figuras\\70d6475b28bf\\p14-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\70d6475b28bf\\p14-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 15,
+      "texto": "da capacidade m´axima das caixas correspondentes, ent˜ao, pelo algoritmo First-Fit,\ncomo Wimax = Wjmax, os itens poderiam ser tirados da segunda caixa e colocados\nna primeira utilizando o First-Fit pois haveria capacidade, restando apenas 1 caixa\n(”m −1”) cuja capacidade alocada ´e, agora, maior que a metade da capacidade\nm´axima.\nSendo assim, supondo que o algoritmo First-Fit utiliza m caixas, ent˜ao no m´ınimo\nm −1 caixas utilizam mais do que metade da capacidade m´axima. Portanto:\n\ni=n\nX\n\nOPT ≥\n\nsi > m −1\n\n2\n\ni=1\n\nOPT ≥m −1\n\n2\n2 · OPT ≥m −1\n\n∴2 · OPT ≥m\n\nAssim, o bin-packing com estrat´egia First-Fit ´e dito 2-aproximado, pois no pior dos\ncasos, o custo para construir a solu¸c˜ao ´e 2 vezes o custo da solu¸c˜ao ´otima.\n\nPage xv",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p15.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

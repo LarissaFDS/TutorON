@@ -1,0 +1,29 @@
+{
+  "id": "b7f0e057578a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.41.34.webp",
+  "copia": "00-originais\\ingestao\\b551e952102d8d16db8916c0212e564396d20a26c7c3c550dfcd8ad5bae96e9f\\WhatsApp_Image_2025-01-12_at_13.41.34.webp",
+  "sha256": "b551e952102d8d16db8916c0212e564396d20a26c7c3c550dfcd8ad5bae96e9f",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Questao7[1 ponto]:\nProveque seNPco-NP,cntao PNP.Dica:use teoria dos conjuntos eo fato deque II∈NPi∈co-NP\nem queIi éoproblema complementar de.\nQuestao 8[2 pontos]:\nOproblema PARTICAo DE CoNJUNTOs toma como entrada um conjunto S de numeros.A questao ese os ntimeros\npodem serparticionados em dois conjuntos AeA=S-A taisquezeAz=reAz.JaoSosA DE SuBcoNUNTos\ntem como entrada um conjuntoSem um inteiro k.A questaoe se existe um subconjuntoSS talqek=resz.\nMostre que PARTICAO DE CONJUNTOSαSOMA DESUBCONJUNTOS.\nQuestao9[2pontos:\nque vertices adjacentes nao tenham a mesma cor,utilizando nomaximok cores.\nQuestao10[1ponto]:\nPROGRACAoLINEAReum problema pertencentea P,diferentemente do problema NP-completo PROGRACAoLi-\nNEARINTEIRA no qual varios problemas classcos NP-completos podem sermodelados.Oprimeiro algoritmo para\nPROGRACAo LINEARem tempo polinomial no pior caso foi proposto porLeonid Khachiyanem1979,desbancando\ne enganos do Sr.Browne.\nAn Approach to Difficult Problems\nanycaseit isan important theoretical accomplishment.\nnecity twice.\nthe compexitybecomessogreat that a computerwould require billions ofyearstofinda solution.\nsity.\nwill be solubleinagivennumber ofsteps.\nmplexmethod.\nMALCOL",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b7f0e057578a\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

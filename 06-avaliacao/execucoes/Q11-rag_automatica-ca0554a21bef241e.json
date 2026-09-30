@@ -1,0 +1,55 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "f38bb8142136-q2-2",
+    "c07",
+    "7b4da6a8adf7-q7-7"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0.0929999999998472,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A confusão pode surgir devido à diferença entre a complexidade em termos do valor do número \\( n \\) e a complexidade em termos do tamanho do número \\( n \\) representado em binário.\n\n### Complexidade em Termos do Valor de \\( n \\)\nSe \\( n \\) é um número inteiro, o algoritmo de força bruta para verificar se \\( n \\) é composto testa divisores de 2 a \\( \\lfloor n/2 \\rfloor \\). Isso implica \\( O(n) \\) testes, pois há aproximadamente \\( n/2 \\) divisores a serem testados.\n\n### Complexidade em Termos do Tamanho de \\( n \\) (em Binário)\nNo entanto, a complexidade do algoritmo é mais corretamente medida em termos do tamanho do número \\( n \\) representado em binário. Se \\( n \\) é representado por \\( b \\) bits, então \\( n \\) pode ser escrito como \\( n = 2^b \\). A complexidade do algoritmo em termos de \\( b \\) é \\( O(b^2) \\), pois:\n\n1. **Verificação de divisores**: Para cada número de 2 a \\( \\lfloor n/2 \\rfloor \\), o algoritmo realiza uma divisão, que é \\( O(b) \\) operações.\n2. **Número de divisores a serem testados**: O número de divisores a serem testados é \\( \\lfloor n/2 \\rfloor \\approx 2^{b-1} \\).\n\nPortanto, a complexidade total é \\( O(2^{b-1} \\cdot b) \\), que é \\( O(b \\cdot 2^b) \\). Como \\( 2^b \\) cresce exponencialmente com \\( b \\), a complexidade é pseudo-polinomial, não polinomial.\n\n### Por que o Algoritmo Não é Polinomial\nO algoritmo é considerado pseudo-polinomial porque a complexidade depende do valor do número \\( n \\) (que é \\( 2^b \\)), não do tamanho \\( b \\) do número em binário. Para um número grande, a complexidade pode ser muito alta, mesmo se \\( b \\) for pequeno.\n\n### Resumo\n- **Complexidade em termos do valor de \\( n \\)**: \\( O(n) \\).\n- **Complexidade em termos do tamanho de \\( n \\) (em binário)**: \\( O(b \\cdot 2^b) \\), que é exponencial em \\( b \\).\n\nPortanto, o algoritmo não é polinomial em termos do tamanho do número em binário, mas sim pseudo-polinomial.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 13.04700000000048,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

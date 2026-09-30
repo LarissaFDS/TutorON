@@ -1,0 +1,22 @@
+{
+  "id": "260cd3c33c2e",
+  "arquivo": "materiais\\c01_prova1_2023-03_q2_algoritmo_x.md",
+  "copia": "00-originais\\ingestao\\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\\c01_prova1_2023-03_q2_algoritmo_x.md",
+  "sha256": "500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-02-divisao-e-conquista",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c01\nfonte: \"1ª Prova — PAA, Prof. Rian Gabriel Pinheiro, 02/03/2023 (Questão 2, 2 pontos)\"\ntipo: prova\ntopico: corretude, indução, divisão e conquista\n---\nQuestão 2 [2 pontos]: Considere o seguinte algoritmo:\n\n1: procedure ALGORITMO X(vetor A[1, ..., n], inicio, fim)\n2:   if inicio = fim then\n3:     return A[inicio]\n4:   end if\n5:   meio ← inicio + (fim − inicio)/2\n6:   a ← X(A, inicio, meio)\n7:   b ← X(A, meio + 1, fim)\n8:   if a < b then\n9:     return b\n10:  else\n11:    return a\n12:  end if\n13: end procedure\n\nExplique o que ele faz e prove sua corretude.\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

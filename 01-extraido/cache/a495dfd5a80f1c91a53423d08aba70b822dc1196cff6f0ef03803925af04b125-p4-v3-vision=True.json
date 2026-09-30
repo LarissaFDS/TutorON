@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "3. Escreva um algoritmo de divis˜ao-e-conquista (n log n) para computar an em\n  que n ´e um inteiro positivo.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n4. S˜ao dadas duas listas ordenadas de tamanho m e n.  Dˆe um algoritmo de\n  tempo O(log m + log n) para computar o k-´esimo menor elemento da uni˜ao\n  das duas listas.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                  Page iv\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p4-fig1.png",
+    "01-extraido\\figuras\\d455baef2cdf\\p4-fig2.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

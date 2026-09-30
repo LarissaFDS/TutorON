@@ -1,0 +1,29 @@
+{
+  "id": "fc6f103e4d15",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\IMG-20231017-WA0086.webp",
+  "copia": "00-originais\\ingestao\\4f0980b843f630fbd36bfee3fe44493956ac25e7bd86b48d9297ac6f036368e6\\IMG-20231017-WA0086.webp",
+  "sha256": "4f0980b843f630fbd36bfee3fe44493956ac25e7bd86b48d9297ac6f036368e6",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "品\nP.Rom\nUniversidade Federal de Alagoas-UFAL\nInstituio de Computacao\nProjeto e Analise de Algoritmos\n1aProva\nProf.Rian Gabricl Pinheiro\n31 de julho de 2023\nQuestao1[2 pontos]:\n[incerto] as listas[12,3,56,7,9e0,35,7]a saida deve ser[1,2,6,9]Prove acorretue doseu algorito.\nQuestao 2 [2 pontos]:\nConsidere o seguinte algoritmo:\n1:procedure ALGoRITMo X（vetor A[1,...,n],inicio,fim）\n2:\nifinicio =fim then\nreturn Alinicio]\n4\nendif\n5:\nif inicio> fim then\n6:\nreturn0\n7:\nendif\n8:\nmeio←inicio+（fim-incio）/2\n9:\naX（A,inicio,meio）\n10:\nb\nX（A,meio+1,fim）\n11:\nreturna+b\n12:end procedure\nExpljque oque ele fazeprove sua corretude.\nQuestao3[2pontos]:\nSeja f(n)una funcao dos inteiros nos reais.Justifique:\n[incerto] 1.Qial a defnicno formal deO(f（n)O(1(al)=g(m)/3c,m∈R+/ 0≤g(m）≤C(a)Vm>m3\n2.Everdadeque20n3+10nlgn+5éO（n3）？\n3.Everdade que n²éO（n）？\n[incerto] 14.Qaladenicaoformal de（f（n）→θ（4a)=g（mcmR0<gm≤o0≤2≤g（a）\n[incerto] m≥mo3\nQuestao 4[2pontos]:\noperacagbasica,e(i) a contagem da operacao basica em funcao do tamanho da entrada:\n1.calculando a soma de nnumeros;\n2.coinputacao de nl\n3.encontrando o maior elemento em uma lista de nntmeros;\n4.algoritimo de lapis e papel para multiplicar dois inteiros decimais de n digitos.\nQuestao5[1ponto]:\nResolvaa recorrencia:\nT(n）=\n1,\nsn=1\n{2T（n/2)+cn,sen>1.\nQuestao 6[1ponto]:\nSuponhdquevocequeiraencontrar o maior e omenor elemento em um conjunto de elementos inteiros S.Para cada\nrepresentacao de S fornecida abaixo,descreva em resumidamente（em uma linha)o algoritmo para encontrar o maior\ne menorelemento e indique as classes de eficiencia de tempo desses algoritmos usando a notacio mais apropriada (O\n[incerto] (unoθ\n1.Uma matriz nao ordenada.\n2.Una matriz ordenada.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\fc6f103e4d15\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

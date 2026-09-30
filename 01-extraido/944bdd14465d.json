@@ -1,0 +1,29 @@
+{
+  "id": "944bdd14465d",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\IMG-20231017-WA0076.webp",
+  "copia": "00-originais\\ingestao\\6b4cc23c9cfb20bdde5130c007b3bea2222deb5fea9cee050e803aa4eb6d040c\\IMG-20231017-WA0076.webp",
+  "sha256": "6b4cc23c9cfb20bdde5130c007b3bea2222deb5fea9cee050e803aa4eb6d040c",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] Sira Satn\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computacio\nProjetoe Analise de Algoritmos\n1aProva\nProf.Rian Gabriel Pinheiro\n02de marco de 2023\nQuestao 1[2 pontos]:\num vetor A|1nlcontendovalores inteiros{1.\nvotos ou nio.Prove a corretude de seu algoritno\ndinpleente um algoritmo que decida se houve uma maioria de\nQuestao 2[2pontos]:\nConsidere o segunte algoritmo:\nprocedureAtcnrro X（vetor A|1.\nifnicio=fm thon\nn]inicio.fim)\n3:\nreturn Auniciol\nendif.\n[incerto] -X（4.io.mlo）\nmeio\n[incerto] itn+（fm-incio）/2\n6:\nbX（A.o+1.fm）\nifa<bthen\n[incerto] 6\n10:\nreturnb\nolse\n11\nreturnu\n12:\nend if\n13:end procedure\nExplique o que ele faz e prove sua corretude.\n[incerto] oosn\nSeja f(n） umn funcao dos inteiros nos reais.Justifque\n1.Qual a definigao forinal de O(f(n)?\n2.Everdade que 20n+10nlgn+5éO（n²）？\n3.Everdadequen²O（n）？\n4.Qual  definicio formnl de O(f（n))？\nQuestao 4[1ponto]:\nResolva a recorrencia:\nT(n)\n2,\ns0n=2\n2T（n/2）+n.\nsen=2k,parak>1.\nQuestao5[1 ponto]:\nCaleule a complexidade de tenpo do seguinte algoritmo:\n[incerto] 1：\nprocedure FuNc(matizAxw.inteiron)\n2:\n[incerto] j-1\nwhile)<ndo\n4\n[incerto] ←2\n[incerto] 5\nwhilek<ndo\n6\n[incerto] S+a]-]\n7\n[incerto] k-k\nend while:\n9.\n1+f-f\n10:\nondwhile\n11.end procedure",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\944bdd14465d\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

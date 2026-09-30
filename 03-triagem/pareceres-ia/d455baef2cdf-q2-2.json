@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta problemas de ortografia (por exemplo, 'i1' em vez de 'int', 'equipe' em vez de 'equipes'), uso incorreto de símbolos (por exemplo, '《' em vez de '<') e estrutura de loop incorreta ('while(--aux){' em vez de 'while (aux > 0) {'). Há também um erro na contagem de combinações de jogos possíveis.",
+  "decisao": "suspeita",
+  "sha256": "130978a915ad57243c4faa0da19181a582fffe4152087ad4ea15d420a22cf8e0"
+}

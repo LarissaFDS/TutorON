@@ -1,0 +1,11 @@
+{
+  "pagina": 5,
+  "texto": "6. Uma certa linguagem de processamento e strings oferece uma opera¸c˜ao pri-\n  mitiva que divide uma string em dois peda¸cos. Como essa opera¸c˜ao envolve\n  copiar a string original, ela toma n unidades de tempo para uma string de\n  tamanho n, n˜ao importa a posi¸c˜ao do corte. Suponha, agora, que vocˆe queira\n  quebrar a string em muitos peda¸cos. A ordem na qual os cortes s˜ao feitos\n  pode afetar o tempo de execu¸c˜ao total.  Por exemplo, se vocˆe quiser cor-\n   tar uma string de 20 caracteres nas posi¸c˜oes 3 e 10, fazer o primeiro corte\n  na posi¸c˜ao 3 incorrer´a em um custo total de 20+17 = 37, enquanto fazer a\n   posi¸c˜ao 10 primeiro ter´a um custo melhor de 20 + 10 = 30. Forne¸ca um algo-\n  ritmo de programa¸c˜ao dinˆamica que, dadas as posi¸c˜oes de m cortes em uma\n   string de comprimento n, encontre o custo m´ınimo de dividir a string nos m\n + 1 peda¸cos.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                   Page v\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p5-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

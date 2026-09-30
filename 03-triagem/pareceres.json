@@ -1,0 +1,2257 @@
+[
+  {
+    "id": "1a81ca283132-q1-1",
+    "sha256": "6ee5bb3815e9958ce3ad3354ab49387ad2d090eef9a38eb76f493f38d9fddeea",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há símbolos ilegíveis (θ) e erros matemáticos (triang[ij[j] inválido).",
+      "decisao": "suspeita",
+      "sha256": "6ee5bb3815e9958ce3ad3354ab49387ad2d090eef9a38eb76f493f38d9fddeea"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q2-2",
+    "sha256": "b7039af054359f831097f9021cabd39931991b4d0831640efb721bb6e51b71ae",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código contém erros de digitação, como 'cots' em vez de 'cols', 'robotpath' em vez de 'robotPath', e 'co1s' em vez de 'cols'. Além disso, a matriz `matrix` não está sendo inicializada corretamente, o que pode levar a resultados incorretos.",
+      "decisao": "suspeita",
+      "sha256": "b7039af054359f831097f9021cabd39931991b4d0831640efb721bb6e51b71ae"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q3-3",
+    "sha256": "bf135f30c9e0baf8e9c22b3cd869306da49d7a206c090612852aba4360c4c676",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há alguns erros de digitação e uma função incompleta. A função `dfs` não está retornando corretamente o comprimento do caminho mais longo, e a variável `maxLength` não está inicializada. Além disso, há um erro de digitação na chamada da função `lengthlongestPath`.",
+      "decisao": "suspeita",
+      "sha256": "bf135f30c9e0baf8e9c22b3cd869306da49d7a206c090612852aba4360c4c676"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q4-4",
+    "sha256": "3066a6606a9d0c18a819a617f4665ac7fcd6954375acd513aa147da5947758bf",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código contém símbolos ilegíveis (θ, -inf) e erros matemáticos (len(S) inválido, i in len(S) inválido). A lógica de reinicialização do max_local também está incorreta.",
+      "decisao": "suspeita",
+      "sha256": "3066a6606a9d0c18a819a617f4665ac7fcd6954375acd513aa147da5947758bf"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q5-5",
+    "sha256": "c36ceaf76b59991f43ffbe44a532dc838a9adf3dfe7f78a09875e7521919d366",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há ilegibilidade no código, como na linha `suff[i][j]=suff[i-1][j-1]+ 1;` onde há um erro de digitação (`max_len = max(max_len,suff[ij[j]);`). Além disso, a inicialização `suff[i][j]=0；` é incompleta e pode ser confusa.",
+      "decisao": "suspeita",
+      "sha256": "c36ceaf76b59991f43ffbe44a532dc838a9adf3dfe7f78a09875e7521919d366"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q6-6",
+    "sha256": "00b4ee0b883cf73a92dab731ed0223ed54eb6064b4e268a7e06b6af804ef7c28",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta vários erros de sintaxe e lógica, como a falta de vírgulas em `scanf` e `for` loops, uso incorreto de `memset`, falta de fechamento de chaves, entre outros. Há também um OCR parcial que dificulta a leitura, mas não há erros matemáticos aparentes.",
+      "decisao": "suspeita",
+      "sha256": "00b4ee0b883cf73a92dab731ed0223ed54eb6064b4e268a7e06b6af804ef7c28"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q7-7",
+    "sha256": "a0c5b458c4ab06a055a7dbe3c503f3356c4917c715e7eea61f4e84fcacc1e19d",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta alguns problemas de formatação e sintaxe, como a presença de 'j' e 't' a mais em algumas linhas, além de erros de digitação como 'statit' em vez de 'static'. Há também a utilização de símbolos não reconhecidos como 'θ' e a função `min` está incompleta. Esses erros podem indicar que a resolução foi copiada de uma imagem e não corrigida, mas não são erros matemáticos.",
+      "decisao": "suspeita",
+      "sha256": "a0c5b458c4ab06a055a7dbe3c503f3356c4917c715e7eea61f4e84fcacc1e19d"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q8-8",
+    "sha256": "2ac8a0c317221fc94d8b02bf27f9008b4b7397ca6bdfb4fc711c6c541c534208",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Existem símbolos ilegíveis na imagem, como no trecho `subset[i][j[j] =subset[i -1][j-A[i -1]];`. Além disso, há um erro na inicialização do loop `for(intj=0j<=t;j++)` que deve ser `for(intj=0;j<=t;j++)`. Estes problemas podem indicar que a resolução contém erros, mas sem a imagem completa, a suspeita é maior.",
+      "decisao": "suspeita",
+      "sha256": "2ac8a0c317221fc94d8b02bf27f9008b4b7397ca6bdfb4fc711c6c541c534208"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q9-9",
+    "sha256": "9a537bf60988fdb031efc0302ba1708db521a93ac653e18e0db55e7c64621bf2",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta várias inconsistências e erros, como a função `topo_sort` retornando prematuramente, a inicialização incorreta do array `estados_anteriores`, e a falta de definição de `grafo_inicial`. Além disso, há um possível erro de indexação na última linha.",
+      "decisao": "suspeita",
+      "sha256": "9a537bf60988fdb031efc0302ba1708db521a93ac653e18e0db55e7c64621bf2"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "1a81ca283132-q10-10",
+    "sha256": "1c8aa7f0b42281d35d4f9798ed8c188f6d1c38cbd9028940f3093b2862cd62e0",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta um algoritmo corretamente implementado com base no Floyd-Warshall, com complexidades de tempo e memória corretamente identificadas. O código é legível e não há erros matemáticos ou ilegibilidades aparentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "1c8aa7f0b42281d35d4f9798ed8c188f6d1c38cbd9028940f3093b2862cd62e0"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "23950cced864-q1-1",
+    "sha256": "c9204b8bbf520540fd64729e31c252e507d48f47f6f6c8afd880d06eb630efa7",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "23950cced864-q2-2",
+    "sha256": "3b0b1f2a050d9a0b4109cecdf7a30e9e31cddb59a8a11dd6f41392c17b18b13b",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "23950cced864-q4-3",
+    "sha256": "0b3495ca3ef8f82166336761ea0dbaab5514920616e71f180655cefaf6f322b1",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "23950cced864-q5-4",
+    "sha256": "90eabc3db3df468028fd9687cf9c3404ba30f17a3cb5686de60ab00d47f12f6b",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há um erro de digitação na linha 1, onde 'algoritmogulososparaoCAIxEIRoVIAJANTE' deve ser 'algoritmo guloso para CAIXEIRO VIAJANTE'. Além disso, na linha 3, há um erro de digitação '6' em vez de '6' (provavelmente um erro de digitação de '6' para '6' em vez de '6').",
+      "decisao": "suspeita",
+      "sha256": "90eabc3db3df468028fd9687cf9c3404ba30f17a3cb5686de60ab00d47f12f6b"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "23950cced864-q6-5",
+    "sha256": "aa3f6db01d61e0bd498d370333937e05986f82c326890ea005506c9c6245b003",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresentado contém muitos erros de digitação e símbolos ilegíveis, dificultando a compreensão do algoritmo. Além disso, há partes do código que parecem estar faltando, como a função `greedy_knapsack_fractional` e `greedy_knapsack_binary`. A justificativa para a otimalidade do algoritmo guloso para o problema da mochila fracionada também não está clara.",
+      "decisao": "suspeita",
+      "sha256": "aa3f6db01d61e0bd498d370333937e05986f82c326890ea005506c9c6245b003"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "25264d122fc0-qincerta-1",
+    "sha256": "ab34331ccd0f48ff6f5c6d319f72cd3b6bc4e130fd087aa0b1c9efa0508a3295",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c01",
+    "sha256": "95fff06c742eb5ed38f3af283cc621f7933debf9981a1287b8e6ed670990d590",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "26523f2185f4-qincerta-1",
+    "sha256": "2dc466e55f0a01059fc4c83949be453732ba3d155fa2274c97108991014990ce",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "299d863129c5-q1-1",
+    "sha256": "bba89323a03d69cdac79dfedf392812a1377022efd6e137c979659a443a318e9",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O documento não apresenta resolução de problemas, apenas descrições de questões. Não há ilegalidades ou erros matemáticos identificáveis.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "bba89323a03d69cdac79dfedf392812a1377022efd6e137c979659a443a318e9"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "299d863129c5-q6-2",
+    "sha256": "151d3c4555e49fe4ed94119612c08e158237c510f318e99ee6bbdcb1c6c1b32a",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O texto é claro e não apresenta erros matemáticos ou ilegibilidade. As descrições dos problemas (Mochila Fracionada e Mochila Binária) estão bem detalhadas e as perguntas são bem formuladas.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "151d3c4555e49fe4ed94119612c08e158237c510f318e99ee6bbdcb1c6c1b32a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q1-1",
+    "sha256": "18d2d27da882416abf972df4e4de18dfbb372e660d1de86211ba74ae93d188cd",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q3-2",
+    "sha256": "4d0482f1c0eada1fa7b8cdf7158715db75a05bbbf309c741ec674b78a7b69bc2",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q4-3",
+    "sha256": "dc184780b505c37d5b3546c8ead6a897636183f3b05f8d41d66799f70d1b5f38",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q1-4",
+    "sha256": "df0f7688b1f59e521e9fbac5e942d9651edb24132b2a2dbf384cff9f2b7dc0b0",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q2-5",
+    "sha256": "a9c20957d42c6059f1b719ef47230e2e5abc806f8895188a4253fe2bfd1d20a9",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q3-6",
+    "sha256": "7a208f5e7335f186bd2be03ebc998045be519df9530aa886a835b2db731554e1",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "2df6e1818523-q4-7",
+    "sha256": "eb21c46c5bdd6939f82f5cea0cc4865ad1a5b4f6f5e9a9d839541ba9a89306db",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c07",
+    "sha256": "c6aa82b2ee45f26dae17f5d8f3ba5623fc96506c084718aea07c594cb5633d46",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q12-1",
+    "sha256": "0b99d85a36324a88c8818fdbe2f7acfeabc2213c843b6c6197338ea8c3b17e05",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q2-2",
+    "sha256": "21b93162f2bb1e6d1eeb31eb5f828dd11916416e91e39c1e1515b6e788643c68",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q4-3",
+    "sha256": "8380fd6f93ae794ae8715f8a91ad8761a543bf910a40c5cb8fe137c16740eca9",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q6-4",
+    "sha256": "21ac566e8ad969dad0924b54ea0f30d246d755320c7ad66656ea222c131f442b",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q7-5",
+    "sha256": "3d43f88cfd8518a3a7eb4866dd7c5b7f6824154f6beaa95fee38e47b42ba6571",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "320662691e44-q8-6",
+    "sha256": "6e4532833f22e5a578213b77ec4123b0ad01a1dfcf38e8b7984b60eabed97c39",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "3a0ef8722268-q4-1",
+    "sha256": "dd1a7535f9a19b6cd67eeef72ac7b3da3fefc1c1b91aa6876f8fa34b26184c6d",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "3ac1cffa14d8-q4-1",
+    "sha256": "52a1e9583a58d8c9398c256e111fe658f9c30c3f37602b253081ef603c05ad43",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "3ac1cffa14d8-q6-2",
+    "sha256": "f4b285ba4574dd417b5a921446f61f7f638062cd7f1db03554a254109a34e729",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "3ce8a5917d50-qincerta-1",
+    "sha256": "bf0bbb81017c0eeed808e52f3da323a0521292f4fd8ef80f8d8d329ae1983eee",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "3e662496e5b2-q8-1",
+    "sha256": "062866a55625e7d54523d918341700f73e6bdce6e636f22352fdcfd3b0f8f491",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "4010e9ca4f5a-q5-1",
+    "sha256": "ea63561d5e8139747392e2e17846b41d57266d6e137ea13f7fe27708a17aebf7",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c06",
+    "sha256": "f0ab5240d45bb64978c5a1f95d54db4eddfe40ba626d3375c27549c2626eeaab",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há um erro matemático na conclusão. A soma 1 + 2 + ... + n é O(n²), mas a expressão correta é T(n) = n(n+1)/2, que é O(n²). A prova de que T(n) = O(n²) está correta, mas a conclusão sobre a soma deve ser ajustada.",
+      "decisao": "suspeita",
+      "sha256": "f0ab5240d45bb64978c5a1f95d54db4eddfe40ba626d3375c27549c2626eeaab"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "c10-q1-1",
+    "sha256": "8ff180a34fb687ce6b442e4d5f78dda07cf727c9b51dde8ba08943adf3f3cb0e",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c10-q2-2",
+    "sha256": "f282c2049c1a0e89780e7af4001826f13c63f0fb49deffa6de3480a4585a3791",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "5752b04a5dca-q6-1",
+    "sha256": "1a24b667bd97522f4af8db68231a6aca1ea38fbadd5bfe20ad9b01dd5a1618ed",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "5752b04a5dca-q7-2",
+    "sha256": "21d382c58c70ae67a6e4e0e985005e2a206a1e464953cde498d59a6228e15f2a",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "5ee2f9c93b11-qincerta-1",
+    "sha256": "4c2102f1ab78f267aa71e0b4685504848739d0443d1fac915c51295e4d91a09c",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q1-1",
+    "sha256": "b23829988fdac707d59a397343e58a6d8b0f74c64c0910d2ff419dd61c5eec05",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q2-2",
+    "sha256": "1dea6a766e433c41692bb62724e4a595b53b24ce7ecc49cf96add8188e3fd007",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q3-3",
+    "sha256": "deffc7d4e9306ae6dbc0eee1f64e47ddd50622067988fa0b46e55e79d00fa6eb",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q4-4",
+    "sha256": "113b11afe46557ed149c2537cd273f944445cdc24f636a9d4de6a66e0290836d",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q5-5",
+    "sha256": "d879f88d33a2e302caadf36fc9bfea36f37e77f2b51ac6377eb7856edf6c1375",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q1-6",
+    "sha256": "b1632b1eeee78f38c2095868466922d459ae60efa710e9cfad83bfc70ed2d8b0",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q2-7",
+    "sha256": "39a382f68ea897636bc01425180edf0750f6d3b2277e9b76ccd0fcdffc529951",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q5-8",
+    "sha256": "6f7928de0d46fa7365f16720202133256c71f641ee7a3b00cb178a56f659ec32",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q6-9",
+    "sha256": "c701d546e3a32a0cc827a1369280add448dd687ecb21747296af1b25ce21a02e",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6301b3b327fc-q7-10",
+    "sha256": "09bd3762b1233d7d0ce73b4d1eb5dbe74cd103d34f5cf4b6b47927f052937f8b",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "6c537b45fd2a-qincerta-1",
+    "sha256": "4d1f8aa87e5373df6a7ff940c9cd5d0d5373b3abed4b51b54beeea43431f9feb",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "70d6475b28bf-q1-1",
+    "sha256": "e0b89c4012182e00ee8c2f51ceee2390c63062a3b214f8bcc186e97201a65db1",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta várias ilegalidades, como símbolos estranhos (θ), uso incorreto de símbolos matemáticos (≈, ）), e erros de sintaxe (falta de vírgulas, parênteses incorretos). Há também uma lógica inconsistente na verificação dos quadrados mágicos.",
+      "decisao": "suspeita",
+      "sha256": "e0b89c4012182e00ee8c2f51ceee2390c63062a3b214f8bcc186e97201a65db1"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "70d6475b28bf-q2-2",
+    "sha256": "8867cd1ee378a0f76fd0717266269391164e592774ca2831bc2457122d10a699",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresentada é clara e não contém erros matemáticos ou ilegibilidades. Embora possa haver um pequeno aprimoramento na estrutura da linguagem, o conteúdo é compreensível e segue o raciocínio correto para o problema do caminho hamiltoniano por backtracking.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "8867cd1ee378a0f76fd0717266269391164e592774ca2831bc2457122d10a699"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "70d6475b28bf-q3-3",
+    "sha256": "0499c8f11f6d1e9bd3f2a1be50052580e68054951e3b5fd6c3b39ab61be8a04f",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta um exemplo claro e detalhado do algoritmo branch-and-bound aplicado ao TSP. As etapas de cálculo do limitante, expansão dos nós e escolha dos subproblemas são bem explicadas, embora alguns símbolos sejam incertos devido ao OCR. No entanto, a lógica e os cálculos são coerentes e não apresentam erros matemáticos ou ilegibilidade.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "0499c8f11f6d1e9bd3f2a1be50052580e68054951e3b5fd6c3b39ab61be8a04f"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "70d6475b28bf-q4-4",
+    "sha256": "3bdd64142ca771fd148821280962b1f8f4955c9140b759065522be0039a1ae0a",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código-fonte apresenta erros de formatação e legibilidade, como a função `defminimun_vertex_cover_b_bound` que contém símbolos ilegíveis e a chamada de função `remove` sem parênteses. Além disso, há inconsistências na terminologia e na estrutura do algoritmo, como a falta de definição clara para `Neighbourhood(v)` e a repetição do nome `sol1` e `sol2` sem correção.",
+      "decisao": "suspeita",
+      "sha256": "3bdd64142ca771fd148821280962b1f8f4955c9140b759065522be0039a1ae0a"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "70d6475b28bf-q5-5",
+    "sha256": "cadcf595b7bade8e3bd84b308208f74f3326db1d851c126c6be8009c1e83c485",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução contém erros matemáticos. A afirmação de que a técnica de desvio pode resultar em um caminho de custo no máximo 2C é incorreta, pois a desigualdade triangular não garante que o custo não aumente. Além disso, a afirmação de que a solução resultante é uma árvore geradora para V' é questionável, pois a técnica descrita não garante que todas as arestas sejam incluídas.",
+      "decisao": "suspeita",
+      "sha256": "cadcf595b7bade8e3bd84b308208f74f3326db1d851c126c6be8009c1e83c485"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "70d6475b28bf-q6-6",
+    "sha256": "c98ee6f6dfd6950033e971c9c3f4c57948f607ccbb5cce54befb3e87f3b37037",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta alguns símbolos estranhos e uma formatação irregular, mas não há erros matemáticos ou lógicos evidentes. As funções estão bem definidas e o fluxo do algoritmo parece correto. No entanto, há uma confusão nos símbolos θ e os valores -1 e 0 na inicialização do tabuleiro devem ser consistentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "c98ee6f6dfd6950033e971c9c3f4c57948f607ccbb5cce54befb3e87f3b37037"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "70d6475b28bf-q7-7",
+    "sha256": "79e00ef17c35db235d44c5612d68a84773755ecbcd575835d4236a2edf336b3f",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há incoerências na descrição do algoritmo 2-opt, como a mistura de DFS com MST e a falta de explanação detalhada do 2-opt. O exemplo não ilustra corretamente o algoritmo 2-opt.",
+      "decisao": "suspeita",
+      "sha256": "79e00ef17c35db235d44c5612d68a84773755ecbcd575835d4236a2edf336b3f"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "70d6475b28bf-q8-8",
+    "sha256": "95c40846b60999db401d6e3a9244725cf258fc6d1ca76a9b73612253fcd6e984",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta clareza na descrição do problema de partição de grafos e na estruturação da vizinhança. A justificativa para a melhoria sugerida também é coerente.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "95c40846b60999db401d6e3a9244725cf258fc6d1ca76a9b73612253fcd6e984"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "70d6475b28bf-q9-9",
+    "sha256": "ad49afcdb0346e7c674db5e3b19baf0084c35d6da15aed46d29a0505d46fa9f0",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há alguns erros gramaticais e de concordância, como 'reprenta' em vez de 'representa', 'm´etrica' em vez de 'métrica', e 'm´aximos' em vez de 'máximos'. Além disso, a descrição do Algoritmo Genético contém um erro na justificativa da mutação, onde 'melhor usu´ario' deve ser 'melhor solução'.",
+      "decisao": "suspeita",
+      "sha256": "ad49afcdb0346e7c674db5e3b19baf0084c35d6da15aed46d29a0505d46fa9f0"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "70d6475b28bf-q10-10",
+    "sha256": "a4e22a263c29cc91b5d2532dda8ab04cbd94a80ee90b9e964bfc9ae4b9fcc65a",
+    "assunto": "b2-07-lidando-com-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta clareza e lógica na demonstração. Os termos técnicos estão corretos e a justificativa para o algoritmo First-Fit ser 2-aproximado é bem elaborada, sem sinais de ilegibilidade ou erros matemáticos.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "a4e22a263c29cc91b5d2532dda8ab04cbd94a80ee90b9e964bfc9ae4b9fcc65a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c03",
+    "sha256": "f739ccba01e13938f222037fcf0db48c8e294cbb3540952bd33b2efde18eb185",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q1-1",
+    "sha256": "35c4571409fec09fdd51df91b0141ee575cf1961478f24c1408db5463c24d3f0",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q2-2",
+    "sha256": "92f7b0e3a8c5c47d4f5ee436a95b36bc4602daa13c5e025fa69dd47d7a87f206",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q3-3",
+    "sha256": "b2061e96f9ff208cc319455e1d30251fc2ac905c3d4ca8ad4c835cdfe14e5d59",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q4-4",
+    "sha256": "8b3b4e5d5a2bd974b87665a8ae8ef5b285744772c864e303690993d3d41bd7ee",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q5-5",
+    "sha256": "fe49b2d6963591c88319d96ee5c3e7d554d381d9790bad2aedc1fc6cc4d49c32",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução descreve corretamente os dois algoritmos gulosos para o problema do caixeiro viajante e justifica corretamente que ambos não garantem a solução ótima.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "fe49b2d6963591c88319d96ee5c3e7d554d381d9790bad2aedc1fc6cc4d49c32"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q6-6",
+    "sha256": "0c3f8ef8fc5687a60cb5f7b093ea3b3cf9680d098b7d56f32ca9b85cc71fea70",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q1-7",
+    "sha256": "7fd8349ab0576b2733c499f9f1c72e5c2e30c31490c946ed6cbd6a7a8ff8acd6",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q2-8",
+    "sha256": "9da7c369865543bd88db436663daf5f2c52bc9940d6838f63026f203894843db",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q3-9",
+    "sha256": "772acd11b68bf0c6bb109846061218920f6226999d98abc6cc848d8790ac0a51",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q4-10",
+    "sha256": "d778f277dc9bc751602b541686dd48c4ee43bfcfe643b32242506165f6a8e79e",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7498903a641d-q5-11",
+    "sha256": "dabd55e7087f89924dd1f2db6f4e597c72bc60e41cdf7d6c2ef553754a40a5b6",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há erros gramaticais e ortográficos, como 'garantemretornarasolucao6tima' e '6tima', além de uma possível confusão entre '6' e 'ó' em 'ótima'. Não há erros matemáticos, mas a legibilidade é comprometida.",
+      "decisao": "suspeita",
+      "sha256": "dabd55e7087f89924dd1f2db6f4e597c72bc60e41cdf7d6c2ef553754a40a5b6"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "c04",
+    "sha256": "e3e3c4adb84f6a4ab2c86aced7d9404f2c182d786bf9881af0bd642cc88f0957",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução não fornece a recorrência ou a solução assintótica pedida na variante da questão. A análise do algoritmo está incompleta.",
+      "decisao": "suspeita",
+      "sha256": "e3e3c4adb84f6a4ab2c86aced7d9404f2c182d786bf9881af0bd642cc88f0957"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "7b4da6a8adf7-q1-1",
+    "sha256": "afc5511608d238c3eb23714da6571529668e7e7e2f501886a01d079528477e61",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e contém informações relevantes sobre al-Khwarizmi e a origem das palavras 'algoritmo' e 'álgebra'. Não há erros matemáticos ou ilegibilidades.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "afc5511608d238c3eb23714da6571529668e7e7e2f501886a01d079528477e61"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q2-2",
+    "sha256": "b2c9f1f8cc87a3d74a1c80c0f7a09791c3dce1925c13ee553b4dec75f0651938",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Existem erros matemáticos e de lógica no passo indutivo de (b) e (c). Em (b), a equação final não se simplifica corretamente. Em (c), há um erro na simplificação final, onde (k+1)2((k+1)+1)2/4 não é equivalente a k2(k+1)2/4 + (k+1)3. Além disso, há uma confusão na notação de exponenciação, com uso de ^ e 4, o que pode causar confusão.",
+      "decisao": "suspeita",
+      "sha256": "b2c9f1f8cc87a3d74a1c80c0f7a09791c3dce1925c13ee553b4dec75f0651938"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "7b4da6a8adf7-q3-3",
+    "sha256": "dfc8e00ba0a6d1dec35e52b101b3b5b014cd456b050b9884a7fa9ed5b175158b",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta argumentos lógicos corretos e segue o processo de prova por indução, contra-posição e direta. As notações matemáticas estão claras e as conclusões são válidas.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "dfc8e00ba0a6d1dec35e52b101b3b5b014cd456b050b9884a7fa9ed5b175158b"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q4-4",
+    "sha256": "06c102f1c96b92fb4c59f2bcc6928713bb5de789413dca104bb1183cef5d3e69",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta um raciocínio lógico válido para o problema do hexágono regular e suas cores. Embora haja algumas ilegitilidades na legibilidade das imagens, o texto é claro e o argumento é correto. A troca de cor do enunciado (branca para vermelha) não afeta a lógica da prova.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "06c102f1c96b92fb4c59f2bcc6928713bb5de789413dca104bb1183cef5d3e69"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q5-5",
+    "sha256": "c299eca52bb8cf648453d99215d85aa728698478395e450ad23c601af94a4ce6",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta uma análise correta e detalhada dos invariáveis do algoritmo Bubblesort, utilizando indução matemática para provar a corretude do algoritmo. Os invariáveis do laço interno e externo são bem definidos e a prova é bem estruturada, sem erros matemáticos ou ilegibilidades aparentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "c299eca52bb8cf648453d99215d85aa728698478395e450ad23c601af94a4ce6"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q6-6",
+    "sha256": "89ebf880417fdb86a0a3ca7452aca0650fd9538ceee8097b877c2edbdea4680a",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta uma prova clara e lógica do algoritmo de Horner, com invariante de laço bem definido e justificado. Os passos da execução do algoritmo são detalhados e a conclusão é correta.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "89ebf880417fdb86a0a3ca7452aca0650fd9538ceee8097b877c2edbdea4680a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q7-7",
+    "sha256": "47a92d12d93e14686b77b5e51f6067e692a799fdf37552f8ab5b74a39c9ec88a",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta um algoritmo bem estruturado e uma prova de corretude válida, utilizando invariante de laço. Os símbolos e notações matemáticas estão corretos, sem ilegibilidades aparentes. O teorema e a prova são consistentes e bem elaborados.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "47a92d12d93e14686b77b5e51f6067e692a799fdf37552f8ab5b74a39c9ec88a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q8-8",
+    "sha256": "2bb4548520c7f3d6169cf26def35a97bd4983a0688d08075b33b0a2862f29847",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta clareza e coerência na demonstração por indução da propriedade da matriz de Fibonacci. Os símbolos e notações são consistentes e não há ilegalidades matemáticas ou visuais aparentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "2bb4548520c7f3d6169cf26def35a97bd4983a0688d08075b33b0a2862f29847"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q9-9",
+    "sha256": "96a2de681b534ca0f5da7031e9be8f702c9a599a3e835e325ca5c4ea01ea61f7",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta contraexemplos corretos para cada algoritmo, mostrando que eles não encontram a solução ótima. Os casos de entrada e as saídas são claramente definidos e os resultados otimizados são apresentados de forma lógica.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "96a2de681b534ca0f5da7031e9be8f702c9a599a3e835e325ca5c4ea01ea61f7"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "7b4da6a8adf7-q10-10",
+    "sha256": "de8e406e0ad6681931b73649a60e67febd9e52321f637dd7b55f0ccdf72779fd",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Existem erros de digitação e símbolos incorretos, como na linha 8 do pseudocódigo onde faltou um 'i' em 'end if', e na linha 11 do código C onde há um erro na função `scanf` com a vírgula extra. Além disso, a descrição do pseudocódigo não corresponde exatamente ao código C, sugerindo inconsistências.",
+      "decisao": "suspeita",
+      "sha256": "de8e406e0ad6681931b73649a60e67febd9e52321f637dd7b55f0ccdf72779fd"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "944bdd14465d-q1-1",
+    "sha256": "a7afa8a2010e44bead2f127322c9fc1bddc3856523d778e64020581066308a18",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "944bdd14465d-q2-2",
+    "sha256": "aea5425106283d356dcb3dc13a3f2ef105db086a0b57774080e0d4566ea91017",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "944bdd14465d-q4-3",
+    "sha256": "c051a35e4ab697fd4eb439ef35cb4d1162e653397bb61d8cf22f57b3253bc608",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "97254bb4a1b8-q1-1",
+    "sha256": "f05bd833efdf9dc0dd15c8c1a416ceb33bc37153d0a157467ea6a4f1df278e7f",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta vários erros, como a falta de operador de multiplicação entre n e (n+1)/2, uso incorreto de ponto-e-vírgula e falta de fechamento de parênteses. A lógica do algoritmo também não corresponde ao problema proposto.",
+      "decisao": "suspeita",
+      "sha256": "f05bd833efdf9dc0dd15c8c1a416ceb33bc37153d0a157467ea6a4f1df278e7f"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q2-2",
+    "sha256": "5e1e706b225e890a835ea283142ec8b2506c963b85000bcda1410f99859d91eb",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [
+      {
+        "regra": "sentido-reducao",
+        "motivo": "Conferir o sentido da redução: reduzir o problema a um NP-completo não basta para provar NP-dificuldade.",
+        "nivel": "baixa"
+      }
+    ],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução confunde o problema do Ciclo Hamiltoniano com o problema do Cobre de Conjuntos, que é mais apropriado para este cenário. O Ciclo Hamiltoniano busca um caminho que passa por cada vértice exatamente uma vez, o que não se aplica à situação de Arthur. Além disso, a afirmação sobre a redução ao NP-Completo é correta, mas não é relevante para o modelo adequado do problema.",
+      "decisao": "suspeita",
+      "sha256": "5e1e706b225e890a835ea283142ec8b2506c963b85000bcda1410f99859d91eb"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q3-3",
+    "sha256": "7e856e23f90aa3ef6a14888b874b231ddbbf7bf88707b6e9baad3b4168e31207",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há ilegalidade na definição do conjunto de vértices V, que inclui 'cj' em vez de 'vj'. Além disso, a descrição da capacidade c(ui, vj) = 1 é ambígua, pois não está claro se 'vj' deve ser 'v1' a 'vq'.",
+      "decisao": "suspeita",
+      "sha256": "7e856e23f90aa3ef6a14888b874b231ddbbf7bf88707b6e9baad3b4168e31207"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q4-4",
+    "sha256": "a7942706acbde20dccfba0916e2f4a489ea712e01648fb43bdb3b2edf312f02f",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e não apresenta erros matemáticos ou ilegibilidade. Explica corretamente a redução do problema de coloração de arestas para o problema de coloração de vértices.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "a7942706acbde20dccfba0916e2f4a489ea712e01648fb43bdb3b2edf312f02f"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "97254bb4a1b8-q5-5",
+    "sha256": "e29d697531041cddd177ce184f0f8c97451b478c86fe1232d339c7267a423c24",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A função objetivo está incorreta, com termos duplicados e sinal errado. A restrição V + 2S ≤ 240000 está escrita de forma incomum. Além disso, a notação matemática é inconsistente, como no cálculo do lucro máximo. As coordenadas dos vértices também parecem estar incorretas.",
+      "decisao": "suspeita",
+      "sha256": "e29d697531041cddd177ce184f0f8c97451b478c86fe1232d339c7267a423c24"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q6-6",
+    "sha256": "c718d2863d7d0daa7f4a07a25dc9b6c38f77feecc660724a14d9c79be7bc40b7",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta alguns erros matemáticos e de formatação. A equação (1) não está corretamente definida, e a restrição (2) contém um erro na notação. Além disso, há uma redundância na restrição (2) e a notação de somatório não está clara.",
+      "decisao": "suspeita",
+      "sha256": "c718d2863d7d0daa7f4a07a25dc9b6c38f77feecc660724a14d9c79be7bc40b7"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q7-7",
+    "sha256": "c913e7fcd31381c734c3e544423f4c066f6c18ee7ade7fb8d42c5e46a2706452",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta alguns erros matemáticos e de modelagem. A restrição de que os elementos de K' devem ser diferentes entre si não é necessária, pois já é implícita na natureza do problema. Além disso, a restrição de soma é redundante, pois a soma já é garantida pela definição de P. O modelo deveria focar em garantir que cada linha e coluna atenda às dicas de soma sem repetição de números.",
+      "decisao": "suspeita",
+      "sha256": "c913e7fcd31381c734c3e544423f4c066f6c18ee7ade7fb8d42c5e46a2706452"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q8-8",
+    "sha256": "2aead388f0beafe11646843ae981f580e0a1ae281ee8dc2a0ae12f9304f00a7f",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A restrição `A[i]̸ = A[j]` não garante que haverá apenas uma dama em cada coluna, pois apenas impede que duas damas ocupem a mesma coluna. As restrições de diagonais estão corretas, mas a restrição de colunas é redundante com a definição das variáveis.",
+      "decisao": "suspeita",
+      "sha256": "2aead388f0beafe11646843ae981f580e0a1ae281ee8dc2a0ae12f9304f00a7f"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "97254bb4a1b8-q9-9",
+    "sha256": "993fefbfe437fbed72d482245045e7231138f1185ad7c39c43d6ec6b10c5a934",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresentada está correta e clara, sem erros matemáticos ou ilegibilidades. As variáveis e a função objetivo estão bem definidas, assim como as restrições.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "993fefbfe437fbed72d482245045e7231138f1185ad7c39c43d6ec6b10c5a934"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "97254bb4a1b8-q10-10",
+    "sha256": "694562f74893e510581264d50f19a8619648a0ffbffc63579aa2bcd43a47c1f0",
+    "assunto": "b2-05-transformacao-de-problemas",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta alguns erros matemáticos, como a definição incorreta de hj e a equação final do problema linear. Além disso, há um erro de digitação (NVj = 0) que deve ser corrigido para NVj = ∅. A estrutura geral parece correta, mas precisa de ajustes.",
+      "decisao": "suspeita",
+      "sha256": "694562f74893e510581264d50f19a8619648a0ffbffc63579aa2bcd43a47c1f0"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "c05",
+    "sha256": "00cd438ca3bb7f5699fd7d3d51f5882a260b658b3f173e3945bf367adef813c6",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta uma fórmula correta para A(n) e exemplos consistentes que ilustram corretamente a fórmula.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "00cd438ca3bb7f5699fd7d3d51f5882a260b658b3f173e3945bf367adef813c6"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "a177bf5bc3c7-q1-1",
+    "sha256": "0a7955e0336d3b654e6cd192809299e0ca4753535bc848251309b745714e9a27",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [
+      {
+        "regra": "agm-incremento",
+        "motivo": "Cada árvore geradora tem n−1 arestas; somar 1 a cada aresta aumenta seu custo em n−1, não em 1.",
+        "nivel": "baixa"
+      }
+    ],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e coerente. O exemplo fornecido para a parte (b) ilustra bem como os caminhos mínimos podem mudar devido ao aumento uniforme dos pesos. Não há ilegalidades visíveis e a justificativa para a parte (a) é lógica.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "0a7955e0336d3b654e6cd192809299e0ca4753535bc848251309b745714e9a27"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q2-2",
+    "sha256": "00def19c291a56826b74693e3ce89a2914d12883f2a56d66addd80b67b11d9de",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e segue um raciocínio lógico para provar a unicidade da Árvore Geradora Mínima. O argumento por contradição é bem construído e as notações matemáticas estão corretas.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "00def19c291a56826b74693e3ce89a2914d12883f2a56d66addd80b67b11d9de"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "a177bf5bc3c7-q3-3",
+    "sha256": "8a9cc8355fd012fc334694467b4f41a06c94eec689b6410bc5cfa018a797d028",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta ilegibilidade na linha `foriin range(1,len(tasks)):` onde deve ser `for i in range(len(tasks)):`. Além disso, a função `endEventTime` retorna `task.end`, mas não está definida anteriormente, o que pode ser um erro matemático ou de implementação.",
+      "decisao": "suspeita",
+      "sha256": "8a9cc8355fd012fc334694467b4f41a06c94eec689b6410bc5cfa018a797d028"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q4-4",
+    "sha256": "cc2d6c20f26a7ef8f196a34032cc56454abda3b0571307ff61978962f404f694",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há um erro de símbolo na linha 2, onde a função `input()` está incompleta, faltando um parêntese. Além disso, há um erro de digitação na linha 10, onde 'D(m)' e 'D（n)' são escritos de forma incorreta, o que pode indicar problemas de legibilidade ou digitação.",
+      "decisao": "suspeita",
+      "sha256": "cc2d6c20f26a7ef8f196a34032cc56454abda3b0571307ff61978962f404f694"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q5-5",
+    "sha256": "1f927f919e06104b3012bb9d2ff8371242b4db8d2b59d3e2547b64f708fa45f9",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta vários erros de sintaxe e lógica, além de incoerências na codificação (mistura de C++ e pseudocódigo). A lógica do algoritmo também não está clara, especialmente no tratamento dos requisitos de convidados. O tempo de execução O(n²) é suspeito, pois o código não reflete essa complexidade.",
+      "decisao": "suspeita",
+      "sha256": "1f927f919e06104b3012bb9d2ff8371242b4db8d2b59d3e2547b64f708fa45f9"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q6-6",
+    "sha256": "68827fe8d9e357f259a09ce28dac2ddb357a95800a44c635a17938f47f7a6c78",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta ilegibilidade na função `getCPUTime` (linhas 1-3) e na chamada da função `execute` (última linha), além de um erro matemático na fórmula do tempo total de espera (T). A função `getCPURime` deve ser `getCPURime` e não `getCPUTime`, e a chamada `server.execute(user.task)` não está relacionada à solução do problema proposto.",
+      "decisao": "suspeita",
+      "sha256": "68827fe8d9e357f259a09ce28dac2ddb357a95800a44c635a17938f47f7a6c78"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q7-7",
+    "sha256": "d967611578d2b2ecb5edce11d2728142a9ccb87232f48d9d4a504c5ee6beaec4",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O pseudocódigo apresentado não corresponde exatamente à solução descrita no texto. A solução textual sugere um algoritmo que remove os vértices de U do grafo original, enquanto o pseudocódigo mantém os vértices de U. Além disso, a descrição do pseudocódigo é incompleta e pode ser confusa.",
+      "decisao": "suspeita",
+      "sha256": "d967611578d2b2ecb5edce11d2728142a9ccb87232f48d9d4a504c5ee6beaec4"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q8-8",
+    "sha256": "61ca37150753250922b7a998e464c65e3f0f908f0950cd9a7544c156cb920529",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há erros gramaticais e de codificação que podem indicar uma leitura incorreta da imagem. Por exemplo, 'solution=E' inicializa a solução com todas as arestas, o que não faz sentido. Além disso, a linha 'edge.weight=-edge.weight' não faz sentido no contexto do problema.",
+      "decisao": "suspeita",
+      "sha256": "61ca37150753250922b7a998e464c65e3f0f908f0950cd9a7544c156cb920529"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q9-9",
+    "sha256": "518baf6d43468a139cecf67dafb9e9c5c23f35353c1f204b62841272a30f4cd1",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código contém erros de sintaxe e lógica. A função `Ien(V)` não é uma função válida em Python. Além disso, a lógica para encontrar folhas e remover arestas e vértices não está corretamente implementada. A função `select_leaf(v,E)` e `get_parent(leaf,E)` também não são definidas no código.",
+      "decisao": "suspeita",
+      "sha256": "518baf6d43468a139cecf67dafb9e9c5c23f35353c1f204b62841272a30f4cd1"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a177bf5bc3c7-q10-10",
+    "sha256": "60e523fc4fe1e96a4f5176fea428263220481cac8749cf05121e640306ffffc5",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta erros matemáticos, como a afirmação de que a complexidade é linear-logarítmica, o que não é correto. Além disso, a função `greedy_knapsack` não está corretamente implementada, pois `capacity` não é decrementado corretamente. A justificativa matemática também é confusa e não bem fundamentada.",
+      "decisao": "suspeita",
+      "sha256": "60e523fc4fe1e96a4f5176fea428263220481cac8749cf05121e640306ffffc5"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "a38cdcf2222d-qincerta-1",
+    "sha256": "fc3900fc7e578bed2bf9333dcdfba08c98ecf21d13dee1f16f0a9cd650974dcd",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "abfdf1a3da4e-q1-1",
+    "sha256": "caa478366bbe44980b5b23d5ed4f959f4f9d6d474094dd83ce06806a9c0e8816",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "abfdf1a3da4e-q2-2",
+    "sha256": "70b0768b78f3b79dec865f469713fd8f7e361c51c79c6c22cd83274b2240575e",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "abfdf1a3da4e-q4-3",
+    "sha256": "cca08449027b058c36fe18c79e7a9719bc653c8af01d0aedc8c34077163e2f2e",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "b3ad6bc7faa9-q2-1",
+    "sha256": "4445290793fb5bfc9bcd99a63db299a3c58152511583a98bcd01d44161784b98",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "b3ad6bc7faa9-q3-2",
+    "sha256": "ff288eb9dd835adf84a44bf9f3e29455007e80f8005ca166102d8fcaeead6bf1",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "b7f0e057578a-q8-1",
+    "sha256": "abfb9eb6278a057478ebbf2c32dcd6ec24b9250d5f4b8f62886badfaf24ef4c2",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "bb377af634ea-q1-1",
+    "sha256": "cd8fe54120cf2425a44bc7e198856b95b27c995f26a7002d908d5ff68e7e5582",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "bb377af634ea-q4-2",
+    "sha256": "949b2ade7651ab9f0ea37ba123b60463a48b8220450e6fed66f89fd9344e169d",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "bfca39234401-q1-1",
+    "sha256": "e89edefcbbccb1af2b0e00544f9d18312b52b78ff71f2d3e96201e4f18d798e6",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c461856d5688-q1-1",
+    "sha256": "442ef29a0feb3e2e81783d8e3b248eb7684169ecb9f9eaaf01f54d5622b09718",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c461856d5688-q2-2",
+    "sha256": "668a4a49f0bd36cd259e04cf4a2cfe124ee1a814a020770f16c007cce677683a",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c461856d5688-q3-3",
+    "sha256": "2653e5972d974c178e7b64f3a4b60e3c435acf48db3405ad11dc7ae8700f896b",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c461856d5688-q4-4",
+    "sha256": "127d92715e07d6081710e697f39b7a943c1726d739625feb75485ec3592e857e",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c461856d5688-q7-5",
+    "sha256": "ab42878d476169fecb5ab149506edda2f57e08bafffd9c8eac5ba46ce66d8de7",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c616f5b14d1a-q1-1",
+    "sha256": "5ca3135da6a2df1f68d3972e9c568911d97af4dbb5828c1f07be4e135b8727fd",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c616f5b14d1a-q2-2",
+    "sha256": "1f3b14bd56576be71eeec55009d285e1606241bbeb9987552b31c6c6ae754651",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c616f5b14d1a-q3-3",
+    "sha256": "1720c62a79673c0a9703bb0780dcbf2c67023f16034791c0a9d58dc1edc131b1",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c616f5b14d1a-q4-4",
+    "sha256": "e0a4d0b303a68ab1090aa7ac48295b7ba300b67d610a30c50ad83395231fbec9",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c616f5b14d1a-q5-5",
+    "sha256": "3e1c50c2067927be0b8d24ab297f4c636ef3643a975874c441928ab2bd0742c9",
+    "assunto": "b1-03-algoritmos-gulosos",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O documento apresenta vários erros de digitação e legibilidade, além de símbolos incorretos e faltas de pontuação. Embora seja possível identificar os algoritmos, a resolução está muito confusa e incompleta, o que dificulta a verificação da corretude matemática e lógica. ",
+      "decisao": "suspeita",
+      "sha256": "3e1c50c2067927be0b8d24ab297f4c636ef3643a975874c441928ab2bd0742c9"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "cf6ed839736d-q8-1",
+    "sha256": "48865cbe28cf8e09de855159efc9f6e1efa881c4e27b3350ebd06bee81fe238e",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "d455baef2cdf-q1-1",
+    "sha256": "1db26b7b6278e014a633ead202161a7f8ca502c55733e3554055e4c929c14105",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta ilegibilidade significativa, com caracteres distorcidos e faltas de pontuação. Há também erros matemáticos, como a declaração da função `flipPancakes` que não está corretamente formada e a função `biggerPancake` que não está totalmente implementada. A lógica do algoritmo também não está clara devido à qualidade do OCR.",
+      "decisao": "suspeita",
+      "sha256": "1db26b7b6278e014a633ead202161a7f8ca502c55733e3554055e4c929c14105"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q2-2",
+    "sha256": "130978a915ad57243c4faa0da19181a582fffe4152087ad4ea15d420a22cf8e0",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta problemas de ortografia (por exemplo, 'i1' em vez de 'int', 'equipe' em vez de 'equipes'), uso incorreto de símbolos (por exemplo, '《' em vez de '<') e estrutura de loop incorreta ('while(--aux){' em vez de 'while (aux > 0) {'). Há também um erro na contagem de combinações de jogos possíveis.",
+      "decisao": "suspeita",
+      "sha256": "130978a915ad57243c4faa0da19181a582fffe4152087ad4ea15d420a22cf8e0"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q3-3",
+    "sha256": "52aa0eb50f4ccc42ef7cac47390dd5d8debe0db4dc9d5dd146ed91328b0c6fd6",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código contém alguns erros matemáticos e de sintaxe. A condição de retorno no caso base está incorreta (deve ser `b == 0` ao invés de `b == θ`). Além disso, a operação `result *= result` não está corretamente computando a potência. O símbolo `θ` deve ser `0` e a lógica de expoente impar precisa ser ajustada.",
+      "decisao": "suspeita",
+      "sha256": "52aa0eb50f4ccc42ef7cac47390dd5d8debe0db4dc9d5dd146ed91328b0c6fd6"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q4-4",
+    "sha256": "57641106ed18b6e7abc40f802d37760cba5c211e322bfe6e82b7451ddd43076c",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta vários problemas, incluindo erros de sintaxe, nomes de funções inconsistentes e uma possível interrupção no texto. Há também uma linha incompleta no final, o que dificulta a compreensão do algoritmo.",
+      "decisao": "suspeita",
+      "sha256": "57641106ed18b6e7abc40f802d37760cba5c211e322bfe6e82b7451ddd43076c"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q5-5",
+    "sha256": "bb970f37614f2fce313b9fe445047b4875105608510155f15fa21b1270b02bae",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há erros matemáticos na solução. Para Algoritmo A, o Teorema Mestre não se aplica corretamente, pois 5 não é uma potência de 2. Para Algoritmo B, a solução O(2^n) é incorreta, pois a combinação é constante. Para Algoritmo C, a solução O(n^2 log2(n)) está incorreta, pois deve ser O(n^2 log n).",
+      "decisao": "suspeita",
+      "sha256": "bb970f37614f2fce313b9fe445047b4875105608510155f15fa21b1270b02bae"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q6-6",
+    "sha256": "f8aca78310f527224fc3614fd194778da2c87aeeabc552a3b0e3c5578869fbfe",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há problemas de legibilidade e erros matemáticos. O `middle` não está declarado, e os comentários estão em português, o que pode confundir. Além disso, a condição `else if (middle < A[middle])` não faz sentido matematicamente, pois `middle` é um índice, não um valor a ser comparado diretamente com `A[middle]`.",
+      "decisao": "suspeita",
+      "sha256": "f8aca78310f527224fc3614fd194778da2c87aeeabc552a3b0e3c5578869fbfe"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q7-7",
+    "sha256": "3f78ed477192210e86f28283e5bd84efa3eaf04ed3b1de76974c3cea74a97a50",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresenta símbolos ilegíveis e há um erro matemático na expansão da função de recorrência. A fórmula final não corresponde corretamente ao problema.",
+      "decisao": "suspeita",
+      "sha256": "3f78ed477192210e86f28283e5bd84efa3eaf04ed3b1de76974c3cea74a97a50"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q8-8",
+    "sha256": "1c4e191a38c6dfadf00ff842d9ea252224c75eb7f4eefc69205b12117932d3da",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e não apresenta erros matemáticos ou ilegibilidade. Explica corretamente a paralelização de algoritmos de divisão-e-conquista.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "1c4e191a38c6dfadf00ff842d9ea252224c75eb7f4eefc69205b12117932d3da"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "d455baef2cdf-q9-9",
+    "sha256": "dc149d5af99635bad4ce2dabcc2ed8a46db44fa3c29b389b71128a40a2b61f5e",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há um possível erro de símbolo na linha 7, onde o operador de condição parece estar incorreto (？). Além disso, a função `find_num` retorna -1 sem ter encontrado o máximo, o que pode indicar um erro lógico.",
+      "decisao": "suspeita",
+      "sha256": "dc149d5af99635bad4ce2dabcc2ed8a46db44fa3c29b389b71128a40a2b61f5e"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "d455baef2cdf-q10-10",
+    "sha256": "c9009ce3e7b6822f49c48747979cdba8b04d2dead4a6673e2f4864f0c6463ec2",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código contém erros de digitação, como a ausência de vírgulas em chamadas de função e a utilização de símbolos estranhos (θ, 5). Há também uma possível confusão na definição das funções, especialmente na função `achar_array_intermed_max`, onde a variável `max_ind_dir` não foi inicializada e a variável `soma_arr_dir` não está sendo usada corretamente. A função `achar_array_max_gerat` também apresenta erros de digitação e lógica, como a comparação `soma_esquerdo >= soma_direito and soma_esquerdo>= soma_intermediario` que não faz sentido na estrutura recursiva proposta.",
+      "decisao": "suspeita",
+      "sha256": "c9009ce3e7b6822f49c48747979cdba8b04d2dead4a6673e2f4864f0c6463ec2"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "df28041e3b02-q5-1",
+    "sha256": "c23f0e379ef274739d87cefa6cddc8e5d24225e6e74b227290dad47fe0b18995",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c08",
+    "sha256": "98992c34d0d2690c60cf3b160b7143a1bbc3b24e2c2c62cca3eb9c12eea898a1",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e correta, justificando corretamente que o algoritmo é pseudo-polinomial devido à dependência da complexidade com o número de bits da entrada.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "98992c34d0d2690c60cf3b160b7143a1bbc3b24e2c2c62cca3eb9c12eea898a1"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "e8d9e99bbf26-q1-1",
+    "sha256": "c8b30d482970fc9e46616824c9376d323ed87cd37f5cc949fd37ba2fd54ca67b",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ea17161d3bfb-q1-1",
+    "sha256": "f18b03a5168d252617e6634aeadf87e0c18f066bae241ac91f8d4e9010c333af",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ea17161d3bfb-q2-2",
+    "sha256": "7a2561f25453d14b6d174828945acf890dc0f665301c1a7a3ad462761551ce8e",
+    "assunto": "b2-04-programacao-dinamica",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ea17161d3bfb-q6-3",
+    "sha256": "244f2d9808b5ef0c7648596c72707e02824e9ca1f31fd31ce1ec1de01491cd38",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ea17161d3bfb-q7-4",
+    "sha256": "231a7ce18f90a348a6ad4ecff60e9fde84c218eaf5ff39de8e0beb033408a5ed",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c02",
+    "sha256": "f975aafbe28e28a84aa69a50fb029c1f4aad504d6b2d90ee483ef52b9d5c3a98",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta um raciocínio lógico coerente e segue os passos da indução forte corretamente. Não há ilegalidades ou erros matemáticos aparentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "f975aafbe28e28a84aa69a50fb029c1f4aad504d6b2d90ee483ef52b9d5c3a98"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "c09",
+    "sha256": "2a09f636707a57aa59a98d873595d5c557a4498c2eadfa231eebd4c72107da34",
+    "assunto": "b2-06-np-completude",
+    "regras": [
+      {
+        "regra": "np-definicao",
+        "motivo": "NP é definida por certificados verificáveis em tempo polinomial; desconhecimento sobre algoritmos polinomiais não define a classe.",
+        "nivel": "baixa"
+      }
+    ],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresentada é clara e contém definições precisas dos conceitos solicitados, sem erros matemáticos ou ilegibilidades.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "2a09f636707a57aa59a98d873595d5c557a4498c2eadfa231eebd4c72107da34"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "eed922118383-q7-1",
+    "sha256": "d838a1d2583465359010257006bb827540a21bd927d6b779804e2ab9ebd69a02",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução está clara e aborda os pontos solicitados sem erros óbvios de legibilidade ou matemáticos. Apresenta uma discussão adequada sobre algoritmos exatos e aproximados em termos de eficiência, qualidade da solução, exploração do espaço de solução e aplicações práticas.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "d838a1d2583465359010257006bb827540a21bd927d6b779804e2ab9ebd69a02"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef40cf393fd2-q2-1",
+    "sha256": "be0a0a9a01850764857d88ab8066294c32e57bd94911893a4522849407fb01de",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q1-1",
+    "sha256": "d405519cefd8fbcfaf820aee7ac0d4600ee09c93d2be299043a9921c80723902",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [
+      {
+        "regra": "escada-soma",
+        "motivo": "O exemplo 2+2+1 soma 5, não 4; conferir enumerações e duplicatas.",
+        "nivel": "baixa"
+      }
+    ],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e contém apenas um pequeno duplicado no cálculo de Degrau(5), onde a última linha é repetida. No entanto, isso não afeta a compreensão geral da solução.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "d405519cefd8fbcfaf820aee7ac0d4600ee09c93d2be299043a9921c80723902"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "ef6d051e4b8c-q2-2",
+    "sha256": "a6f32da63af03800c40d3cd4dd32efe56a7a87e099e7aa28e07d0188b950ac82",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Existem erros matemáticos e de sintaxe nos algoritmos. No algoritmo recursivo, faltam retornos para os casos base. No algoritmo iterativo, há problemas de atribuição de variáveis e falta um retorno. A legibilidade também é prejudicada por caracteres ilegíveis na imagem OCR.",
+      "decisao": "suspeita",
+      "sha256": "a6f32da63af03800c40d3cd4dd32efe56a7a87e099e7aa28e07d0188b950ac82"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "ef6d051e4b8c-q3-3",
+    "sha256": "6ed2e04aabfb167a9ffce5b4221f6c074ea06e98da7c3cdc970cc5157b7cff9a",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é coerente com o gráfico apresentado, que mostra uma relação linear entre o tamanho da entrada e o número de operações. A descrição da complexidade linear é correta e bem fundamentada.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "6ed2e04aabfb167a9ffce5b4221f6c074ea06e98da7c3cdc970cc5157b7cff9a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q4-4",
+    "sha256": "4e477d8f9bc4b820cb5783d461850b3a40aea438c9db3d5031e90bb997b6ee95",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta as classificações corretas para cada caso, sem erros matemáticos ou ilegibilidades aparentes.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "4e477d8f9bc4b820cb5783d461850b3a40aea438c9db3d5031e90bb997b6ee95"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q5-5",
+    "sha256": "800994f0e62c6578878d4ae497c0b319aded08ff3b563003514d3e128165a962",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O documento apresenta uma resolução clara da recorrência, embora haja alguns espaços em branco e caracteres errados (como '2k' em vez de '2^k'), que não afetam a compreensão geral. Não foram identificados erros matemáticos significativos ou ilegibilidade.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "800994f0e62c6578878d4ae497c0b319aded08ff3b563003514d3e128165a962"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q6-6",
+    "sha256": "b2f7eda2454f6bb1df0e851bf28dab68a900a70c557c6ef281eda26af54140ba",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "O código apresentado não contém erros matemáticos ou ilegibilidades. A lógica do algoritmo parece correta e a complexidade Θ(n lg n) está corretamente justificada.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "b2f7eda2454f6bb1df0e851bf28dab68a900a70c557c6ef281eda26af54140ba"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q7-7",
+    "sha256": "abc1915256587cf6db81244e9427b685ad0cfea56c131678b05708aa39d9d426",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta clareza e coerência. Os cálculos são corretos e o padrão é bem estabelecido. A fórmula final 2^(n-1) também está correta.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "abc1915256587cf6db81244e9427b685ad0cfea56c131678b05708aa39d9d426"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q8-8",
+    "sha256": "02480a6480d8ec06b65b557b871907bc93880d601aca55ace78fa0f08ffaf57e",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresentada é clara e coerente, sem erros matemáticos ou ilegibilidades. A relação entre T(n) e T(n-1) foi corretamente estabelecida e a indução foi aplicada de forma lógica.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "02480a6480d8ec06b65b557b871907bc93880d601aca55ace78fa0f08ffaf57e"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "ef6d051e4b8c-q9-9",
+    "sha256": "25fae87d8d4c1ae52c0d8d0ff2a56bdf5e1fcf73c228d04e15cb02a00f8314a3",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A fórmula apresentada (2n+1 - (n + 2)) não corresponde à execução do algoritmo. O algoritmo imprime n asteriscos em cada chamada recursiva, resultando em n * 2 chamadas recursivas, totalizando n * n = n² asteriscos.",
+      "decisao": "suspeita",
+      "sha256": "25fae87d8d4c1ae52c0d8d0ff2a56bdf5e1fcf73c228d04e15cb02a00f8314a3"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "ef6d051e4b8c-q10-10",
+    "sha256": "fbad12512938526d313bee56b27ea48ba45e49e5f99414561d29a5130f4d5bc8",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há várias equações e símbolos quebrados ou mal formatados, o que pode indicar ilegibilidade. Além disso, há alguns erros matemáticos, como na solução (c) onde f(n) e g(n) são definidos incorretamente, e faltam passos importantes na resolução.",
+      "decisao": "suspeita",
+      "sha256": "fbad12512938526d313bee56b27ea48ba45e49e5f99414561d29a5130f4d5bc8"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f00a2397e216-q1-1",
+    "sha256": "ca90981e0e726b93ced1509da6ec58562d7744a4e087e3edbe7eb331f8a06fdd",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f00a2397e216-q5-2",
+    "sha256": "3d61586169cb6e865aa541562ff9c3edf85088d85e6d639fd314addac8a1760e",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f00a2397e216-q6-3",
+    "sha256": "6ccd52691f7b49adc121872556c8014ba477013fcc842689ed69339456d6f8c6",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f00a2397e216-q7-4",
+    "sha256": "810ec92f1b55c4384b249f7eadac824153e7976a3516415402f893132ed48aa7",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f00a2397e216-q8-5",
+    "sha256": "756bb63d46679bb5f49212ee443aeae6b06dc5cf6b06c6231c2a0d30315fb2e8",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f31afeb0f44f-q1-1",
+    "sha256": "bf14d3f16d0f5538e29398f6e799d1d7a196db4009079cec98af757be8c440ae",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f31afeb0f44f-q3-2",
+    "sha256": "4aa8ae55e2f5919dee7a3d7a373052d3141500f3b262d6c854651a927cfd0398",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f31afeb0f44f-q4-3",
+    "sha256": "da38b963d428114c77079085183849d7f431ed0782a7c037a8688f9fd07ab9bb",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f31afeb0f44f-q6-4",
+    "sha256": "e1f8ebbb1cb63ad1d44d6b1335a8ab4154c33bc9a788c51ed2a19dfbed14cd8b",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f31fd59937d3-q6-1",
+    "sha256": "03efb858d294fd0237622a2ec0ba65d122b2a6f2846295b81c004d566ecfbaeb",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta erros gramaticais e de formatação, como a falta de espaços e a mistura de português e inglês. Há também uma questão sem resposta, o que sugere falta de atenção na redação.",
+      "decisao": "suspeita",
+      "sha256": "03efb858d294fd0237622a2ec0ba65d122b2a6f2846295b81c004d566ecfbaeb"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f38bb8142136-q1-1",
+    "sha256": "6afd7e7323c4debf3c3d6b23b4de4bd4617c7af3bd29fb0345749716e5becb3b",
+    "assunto": "b2-06-np-completude",
+    "regras": [
+      {
+        "regra": "np-definicao",
+        "motivo": "NP é definida por certificados verificáveis em tempo polinomial; desconhecimento sobre algoritmos polinomiais não define a classe.",
+        "nivel": "baixa"
+      }
+    ],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução contém erros matemáticos, como a afirmação de que P ∩ NP = ∅, que é incorreta (P ⊆ NP). Além disso, a definição de NP-completo é confusa e não está totalmente clara. As justificativas são vagas e podem ser melhoradas.",
+      "decisao": "suspeita",
+      "sha256": "6afd7e7323c4debf3c3d6b23b4de4bd4617c7af3bd29fb0345749716e5becb3b"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f38bb8142136-q2-2",
+    "sha256": "8cdbcab998bd205d35dee32b604c89f3f8b4442ee9442cf751166737f172f5ca",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e correta, explicando corretamente que o algoritmo é pseudo-polinomial devido à dependência da complexidade com o número de bits da entrada.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "8cdbcab998bd205d35dee32b604c89f3f8b4442ee9442cf751166737f172f5ca"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f38bb8142136-q3-3",
+    "sha256": "4f9a4646b7770ab3653ec8cc04a70cf4ccdf87aef8eb92c457df4ed99645aecd",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução contém erros conceituais e gramaticais. No primeiro item, a afirmação sobre a classe de polinômios é incorreta. No segundo item, a resposta é confusa e contradiz a definição de NP-completude. No terceiro item, a explicação sobre NP-completude é incompleta. No quarto item, a conclusão sobre P = NP é precipitada. A imagem também não foi integrada corretamente.",
+      "decisao": "suspeita",
+      "sha256": "4f9a4646b7770ab3653ec8cc04a70cf4ccdf87aef8eb92c457df4ed99645aecd"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f38bb8142136-q4-4",
+    "sha256": "4a7faaa10e8ca9ef7edad85af0ede07b71c7df30d761fed51d1113de74f384df",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Existem partes ilegíveis e erros na formatação, como na descrição do Problema do Grafo 3-Colorável, onde a entrada e a solução são incompletas. Além disso, há problemas na formatação das instâncias e soluções, como no Problema da Árvore de Steiner em Grafos e no Problema do Caminho com Pares Proibidos.",
+      "decisao": "suspeita",
+      "sha256": "4a7faaa10e8ca9ef7edad85af0ede07b71c7df30d761fed51d1113de74f384df"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f38bb8142136-q5-5",
+    "sha256": "abf6ccee2657c2c8f99e420f52f2311f8d12504135c4c104bb5a65f7364de0d1",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "Há confusão na nomenclatura entre 'PARTIC¸ÃO' e '3-PARTIC¸ÃO' ao longo do texto, o que pode indicar confusão conceitual. Além disso, as reduções propostas não estão bem fundamentadas e contêm erros matemáticos, como a suposição de que a adição de um novo elemento resolve a questão.",
+      "decisao": "suspeita",
+      "sha256": "abf6ccee2657c2c8f99e420f52f2311f8d12504135c4c104bb5a65f7364de0d1"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f38bb8142136-q6-6",
+    "sha256": "8d7464cb75bb1af15754d043ad7d931535f798524b1341af0bf4587c3434baee",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e não apresenta erros matemáticos ou ilegibilidades. A explicação segue corretamente o raciocínio para provar a NP-dificuldade do problema.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "8d7464cb75bb1af15754d043ad7d931535f798524b1341af0bf4587c3434baee"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f38bb8142136-q7-7",
+    "sha256": "0f166aaf945ac57133e63a359d09f65469ee856980a895d632c83336b3ff825a",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução é clara e segue o formato correto para uma prova de redução. Não há ilegalidades visíveis e o raciocínio é lógico e coerente.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "0f166aaf945ac57133e63a359d09f65469ee856980a895d632c83336b3ff825a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f38bb8142136-q8-8",
+    "sha256": "f219a0b5c27d882a0b0f65929d0ac1944159d5d474141ef4ebd71799f00a062a",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresentada é clara e contém argumentos válidos para provar que o problema do conjunto incidente é NP-completo. Os conceitos de NP e NP-difícil são corretamente aplicados, e a redução do problema de cobertura de vértices é adequadamente explicada.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "f219a0b5c27d882a0b0f65929d0ac1944159d5d474141ef4ebd71799f00a062a"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f38bb8142136-q9-9",
+    "sha256": "4b8b85c6ebdf35871542cfcf74ec8b7c1ffb41ef24094f6c1a76a0a18df6449c",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta uma argumentação lógica e coerente para provar que o problema de isomorfismo de subgrafo é NP-completo. Os passos necessários são bem detalhados e a justificativa para a verificabilidade em tempo polinomial e a redução polinomial do problema da clique são bem explicadas.",
+      "decisao": "sem_erro_detectado",
+      "sha256": "4b8b85c6ebdf35871542cfcf74ec8b7c1ffb41ef24094f6c1a76a0a18df6449c"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f38bb8142136-q10-10",
+    "sha256": "de762ae3c34310779b46e134308ba570e4f79f53ba3d0397b9c70518910796cf",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "executado",
+      "parecer": "A resolução apresenta ilegibilidade na notação (ex: 'G(G, k, y)', 'F' não definido) e falta de clareza na explicação da redução. No entanto, os conceitos básicos estão presentes, então não há erro matemático evidente.",
+      "decisao": "suspeita",
+      "sha256": "de762ae3c34310779b46e134308ba570e4f79f53ba3d0397b9c70518910796cf"
+    },
+    "confiabilidade": "baixa"
+  },
+  {
+    "id": "f52f437d0e2f-qincerta-1",
+    "sha256": "baffe03c6f62d38931fa4042f0b7e584b2292d511a7cdd35baeefb024fae3ffe",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f802639909c5-q7-1",
+    "sha256": "d10145ad894d13c5f109c10881196bb1b3d6533ea90f847b8f5d41ba3f18b15e",
+    "assunto": "b2-06-np-completude",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "f802639909c5-q8-2",
+    "sha256": "e6d5185062f42ebf5b1d325c062ae9218d92383d936625c39b6dbe5badca0dac",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "fb361b787fc6-q6-1",
+    "sha256": "2c2cf3086e02febba7bb58192c421cf9aa0724d9a5ff35dd8cd27222723e3d51",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "fb361b787fc6-q8-2",
+    "sha256": "34c9a60c7cbfdcd0ad01d099319f9178e30682792b652112841a5c6891ce6da1",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "fc6f103e4d15-q2-1",
+    "sha256": "7f84fb319ccdb63105216930607bceb32d5bde9a7ed4084d8848f4a21bc19e14",
+    "assunto": "b1-02-divisao-e-conquista",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "fc6f103e4d15-q4-2",
+    "sha256": "d92390e34ce4ef9f6b18d4f750b2f693c905923589f42d5bde48530fe7001165",
+    "assunto": "b1-01-corretude-complexidade",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  },
+  {
+    "id": "fc6f103e4d15-q6-3",
+    "sha256": "96fd814fcccb7d19e74f51095b61c3ae9701f758f05c605c3187e82111bc9167",
+    "assunto": "assunto_incerto",
+    "regras": [],
+    "parecer_ia": {
+      "status": "nao_executado"
+    },
+    "confiabilidade": "nao_verificada"
+  }
+]

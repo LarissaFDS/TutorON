@@ -1,0 +1,9 @@
+{
+  "pagina": 6,
+  "texto": "12. f(n) = O(g(n))\n\n       13. f(n) = Θ(g(n))\n\n       14. f(n) = Ω(g(n))\n\n       15. f(n) = O(g(n))\n\n       16. f(n) = O(g(n))\n\n\n5. Resolva a recorrˆencia:\n\n\n                (                                     2, se n = 2\n                   T(n) =\n                            2 · T(n2) + n, se n = 2k, para k > 1\n\n\n     Solu¸c˜ao:\n\n    Desenvolvendo a recorrˆencia obtemos as seguintes fun¸c˜oes:\n    T(n) = 2 · T(n2) + n  (1)\n    T(n/2) = 2 · T(n4) + n/2  (2)\n    T(n/4) = 2 · T(n8) + n/4  (3)\n    Sabendo disso, temos que a partir de (1) e (2):\n    T(n) = 2 · T(n2) + n\n    T(n) = 2 · 2 · T(n4) + n2 + n\n    T(n) = 22 · T(n4) + 2n  (4)\n\n   De (3) e (4):\n    T(n) = 22 · T(n4) + 2n\n    T(n) = 22 · 2 · T(n8) + n4 + 2n\n    T(n) = 23 · T(n8) + 3n\n                      ...                      ...                      ...                      ...                      ...                      ...                      ...                      ...\n   ⇒T(n) = 2k · T( n ) + kn                            2k\n\n   A recorrˆencia encerra, desse modo, quando:\n     n = 2 ⇒2k+1 = n ⇒k + 1 = log2(n) ⇒k = log2(n) −1      2k\n  ⇒k = log2(n) −log2(2) ⇒k = log2(n2)\n\n  ⇒  T(n) = n                      2                               · T(2) + log2(n2) · n\n\n\n\n                                  Page vi",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p6.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

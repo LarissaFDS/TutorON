@@ -1,0 +1,186 @@
+{
+  "id": "f38bb8142136",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L7.pdf",
+  "copia": "00-originais\\ingestao\\f588d1d982713de54c4bed5dc0516d0a5c52f6afeee19b635d1e87ef514c0f14\\PAA_L7.pdf",
+  "sha256": "f588d1d982713de54c4bed5dc0516d0a5c52f6afeee19b635d1e87ef514c0f14",
+  "tipo": ".pdf",
+  "paginas": 12,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-06-np-completude",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 7\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 7 - NP-Completude\n\n1. Responda cada um dos itens abaixo e dˆe uma justificativa para as respostas.\n\n• O que significa dizer que um problema Π pode ser polinomialmente reduzido a um\nproblema Π′?\n\n• Defina as classes P, NP e problema NP-completo.\n\n• P ∩NP = ∅;\n\nSolu¸c˜ao:\n\n• Ao dizer que um problema Π pode ser polinomialmente reduzido a um problema\nΠ′, estamos afirmando que existe um algoritmo polinomial X que transforma\nqualquer instˆancia Y de Π em uma instˆancia X(Y) de Π′ de tal forma que X(Y)\ntem solu¸c˜ao se e somente se Y tem solu¸c˜ao.\n\n• Defina as classes P, NP e problema NP-completo.:\nInicialmente podemos definir um problema computacional como polinomial\nse h´a um algoritmo cujo consumo de tempo, em seu pior caso, limita o problema\nem uma fun¸c˜ao polinomial. Isto ´e, problemas que conseguem ser resolvidos por\nm´aquinas em tempo aceit´avel. Esse tipo de problema ´e o que caracteriza a\nclasse P. Alguns exemplos dessa classe s˜ao: o problema do caminho curto, o\nproblema do divisor comum grande e o problema da equa¸c˜ao inteira do segundo\ngrau.\n\nJ´a a classe NP ´e caracterizada pelos problemas de decis˜oes nos quais a sua\nsolu¸c˜ao ´e dada por um algoritmo n˜ao determin´ıstico. Essa classe abrange to-\ndos os problemas P mas tamb´em alguns outros que se comportam de maneira",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\f38bb8142136\\p1-fig1.png",
+        "01-extraido\\figuras\\f38bb8142136\\p1-fig2.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "diferenciada.\nEm outras palavras, a classe NP inclui os problemas em que\nningu´em conseguiu at´e hoje comprovar se s˜ao polinomiais ou intrat´aveis, pois\nseus algoritmos conhecidos resolvem em tempo parecido aos intrat´aveis mas n˜ao\nh´a comprova¸c˜ao de que eles n˜ao possam ser resolvidos em tempo polinomial.\nTamb´em ´e dito que, para os problemas em NP, o certificado para o SIM pode\nser dito em tempo polinomial .Exemplos de NP s˜ao: Bin packing e Knapsack.\n\nOs problemas NP-completos s˜ao definidos como uma subclasse da classe NP\nque inclui os problemas mais dif´ıceis da classe NP. Se for encontrado um algo-\nritmo polinomial que resolva qualquer um dos problemas NP-completos, ent˜ao\n´e poss´ıvel encontrar um algoritmo polinomial para todos os outros problemas e\npoder´ıamos comprovar a igualdade N=NP, rebaixando a classe NP a P. Al´em\ndisso, o oposto tamb´em ´e verdade e se um problema NP-completo ´e intrat´avel,\nent˜ao todos os outros tamb´em s˜ao e a desigualdade P̸ = NP ´e confirmada.\n\n• P ∩NP = ∅?\nN˜ao.\nNa verdade P ⊆NP, pois qualquer algoritmo polinomial que solu-\nciona problemas de decis˜ao em P pode ser considerado um algoritmo n˜ao-\ndetermin´ıstico com fase inicial vazia. Al´em disso, tamb´em podemos considerar\nque P ´e apenas uma parte de NP. A menos que P = NP, quest˜ao sem resposta\nat´e os dias de hoje.\n\n2. Considere o seguinte algoritmo for¸ca bruta para resolver o problema do\nn´umero COMPOSTO: Verifique inteiros sucessivos de 2 a ⌊n/2⌋como poss´ıveis\ndivisores de n. Se um deles divide n , retorna SIM (ou seja, o n´umero ´e com-\nposto); se nenhum deles o fizer, retorne N˜AO. Por que esse algoritmo n˜ao\ncoloca o problema na classe P?\n\nSolu¸c˜ao: Este algoritmo n˜ao ´e polinomial e sim pseudo-polinomial, uma vez que\na complexidade de tempo depende do valor inserido na entrada e n˜ao do tamanho\nda mesma. Sendo assim, dada uma entrada n qualquer e considerando-a um vetor\nbin´ario de b bits, tem-se que:\n\nb = log2(n)\n\n2b = 2log2(n)\n\nn = 2b\n\nLogo, ´e poss´ıvel notar que complexidade n˜ao pode ser polinomial, pois depende da\nquantidade de bits do valor informado na entrada, sendo assim a complexidade au-\nmenta exponencialmente com o n´umero de bits da entrada e portanto o algoritmo ´e\npseudo-polinomial.\n\n3. Responda cada um dos itens abaixo e dˆe uma justificativa para as respostas\n\nPage ii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p2.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ est´a\nem P ent˜ao Π est´a em P?\n\n• Se um problema Π pode ser polinomialmente reduzido a Π′ e Π′ ´e NP-completo\nent˜ao Π ´e NP-completo?\n\n• H´a problemas em NP que n˜ao s˜ao NP-completos?\n\n• Existem problemas NP-completos em P?\n\nSolu¸c˜ao:\n\n• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′\n\nest´a em P ent˜ao Π est´a em P?\nSim, em termos formais podemos dizer que se Π̸ ∈Π′ e Π ´e polinomialmente\nredut´ıvel a Π′, ent˜ao Π′̸ ∈P. Isso acontece pois a classe de todos os polinˆomios ´e\nfechada sob composi¸c˜ao, o que permite a combina¸c˜ao de algoritmos polinomais\nde diversos jeitos sem que altere seu custo de tempo.\n\n• Se um problema Π pode ser polinomialmente reduzido a Π′ e Π′ ´e NP-completo\nent˜ao Π ´e NP-completo?\nN˜ao ´e poss´ıvel dar essa garantia. No entanto, se tivermos o cen´ario no qual\nΠ pode ser polinomialmente reduzido a Π′ e Π ´e NP-completo ent˜ao podemos\ngarantir que Π′ tamb´em ´e NP-completo.\n\n• H´a problemas em NP que n˜ao s˜ao NP-completos?\nSim. Os problemas NP-completos consistem em apenas uma parcela da classe\nNP que abrange os problemas mais dif´ıceis dela. Al´em disso, um problema em\nNP s´o est´a tamb´em em NP-Completo se e somente se todos os outros problemas\nem NP puderem ser transformados em tempo polinomial.\n\n• Existem problemas NP-completos em P?\nAinda n˜ao se sabe pois isso implicaria que problemas que podem ser verificados\nem tempo polinomial tamb´em podem ser resolvidos em tempo polinomial. Al´em\ndisso, devemos considerar que se um problema NPC puder ser resolvido por um\nalgoritmo polinomial, ent˜ao todos os outros problemas NPC tamb´em poder˜ao,\no que implicaria que P = NP.\nUma imagem que facilita a compreens˜ao das classes est´a a seguir:\n\nPage iii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p3.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNP-Hard\nNP-Hard\nNP-Complete\nP =NP\nNP\nNP-Complete\nComplexity\nP\nP ≠ NP\nP = NP\n\n\n4. Encontre 5 problemas NP-completos n˜ao estudados na disciplina (aula e lista).\nPara cada um deles, descreva-o formalmente (entrada e quest˜ao) e apresente\numa ilustra¸c˜ao de uma instˆancia e uma solu¸c˜ao.\n\nSolu¸c˜ao:\n\n• Problema da Divis˜ao de Conjuntos\nEntrada: Uma lista de conjuntos C de subconjuntos de S.\nSa´ıda: Existe uma parti¸c˜ao de S em dois subconjuntos S1 e S2 tais que nenhum\nsubconjunto da lista C estejam inteiramente contidos em S1 e S2 ?.\n\ne.g.:\nEntrada: S = {1, 2, 3}, C1 = {1, 2}, C2 = {2, 3}\nSa´ıda: SIM , S1 = {1, 3}, S2 = {2}\n\n• D´ıgrafo M´ınimo Equivalente\nEntrada: Um grafo direcionado G = (V,A) e um inteiro positivo K. Sa´ıda:\nExiste um conjunto A′ ⊆A cujo |A′| ≤K tal que ∀u, v ∈V , G’=(V,A’)\ncont´em um caminho de u para v se somente se G possui?\n\ne.g.:\nEntrada: G=({a,b,c}, {(a,b), (b,c), (a,c)}), K=2\nSa´ıda: SIM, G=({a,b,c},{(a,b), (b,c)})\n\n• Problema do Grafo 3-Color´ıvel\nEntrada: Um grafo G=(V,E)\nSa´ıda: O grafo G ´e 3-color´ıvel, isto ´e, existe uma fun¸c˜ao f : V →1, 2, 3 tal que\nf(u)̸ = f(v) sempre que u, v ∈E?\n\ne.g.:\nEntrada:\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\f38bb8142136\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nSa´ıda: SIM\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n• Problema da ´Arvore de Steiner em Grafos\nEntrada: Um grafo G=(V,E), um subconjunto R ⊆V , um inteiro positivo\nK ≤|V | −1\nSa´ıda: Existe uma sub´arvore de G que inclui todos os v´ertices de R e cont´em\nn˜ao mais que K arestas?\n\ne.g.:\nEntrada: Considere o grafo G = (V,E)\n\n\n[OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]\n1\n2\n3\n4\n\n\nAl´em disso R = 1,2,3,4, K=3.\nSa´ıda: SIM, solu¸c˜ao:\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\f38bb8142136\\p5-fig1.png",
+        "01-extraido\\figuras\\f38bb8142136\\p5-fig2.png",
+        "01-extraido\\figuras\\f38bb8142136\\p5-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p5-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p5-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n2\n5\n3\n4\n\n\n• Problema do Caminho com Pares Proibidos\nEntrada: Um grafo direcionado G=(V,A), v´ertices s, t ∈V , uma lista de pares\nC = {(a1, b1), (a2, b2), ..., (an, bn)} de v´ertices\nSa´ıda: Existe um caminho direcionado de s para t em G tal que contenha no\nm´aximo um dos v´ertices para cada par de C.\n\ne.g.:\nEntrada: Um grafo direcionado G=(V,A)\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\n1\n2\n3\n4\n5\n\n\nOs v´ertices s=1,t=4, a lista de pares C = {(1,2), (2,3),(3,5),(1,4)}\n\nSa´ıda: SIM, Solu¸c˜ao: (1,2), (2,3),(3,5),(5,2),(1,4)\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\n[incerto] 2\n3\n[incerto] ④\n5\n\n\n5. Considere os problemas a seguir.\nPROBLEMA PARTIC¸ ˜AO(A,n):\nDado um vetor A[1,...,n] de n´umeros inteiros positivos, decidir se existe um\nsubconjunto I de 1,...,n tal que\n\nX\n\nX\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni /∈I\n\nPROBLEMA TRI-PARTIC¸ ˜AO(A,n):\n\nPage vi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\f38bb8142136\\p6-fig1.png",
+        "01-extraido\\figuras\\f38bb8142136\\p6-fig2.png",
+        "01-extraido\\figuras\\f38bb8142136\\p6-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p6-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\f38bb8142136\\p6-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "Dado um vetor A[1,...,n] de n´umeros inteiros positivos, decidir se existem\nsubconjuntos disjuntos I e J de 1,...,n tais que:\n\nX\n\nX\n\nX\n\nA[i] =\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni ∈J\n\ni /∈I∩J\n\nSabe-se que o PROBLEMA PARTIC¸ ˜AO ´e NP-completo.\nUm aluno alega\nque o PROBLEMA TRI-PARTIC¸ ˜AO tamb´em ´e NP-completo. O aluno est´a\ncerto? Justifique cuidadosamente a sua resposta\n\nSolu¸c˜ao: Para efetuarmos a prova de que o problema tri-parti¸c˜ao tamb´em ´e NP-\ncompleto, devemos divid´ı-la em dois segmentos:\n\nA primeira prova se d´a na redu¸c˜ao PARTIC¸ ˜AO→3-PARTIC¸ ˜AO e a segunda na\nredu¸c˜ao inversa.\n\n• Redu¸c˜ao PARTIC¸ ˜AO→3-PARTIC¸ ˜AO\n\nInicialmente, temos um vetor A[1,... n - 1] e um subconjunto I de 1, ..., n - 1\ntal que\nX\n\nX\n\nX\n\nA[i] =\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni ∈J\n\ni /∈I∩J\n\nPodemos considerar que se isso existir, necessitaremos dividir o vetor A em dois\nsubconjuntos I e I’ a fim de encontrar uma solu¸c˜ao que satisfa¸ca o somat´orio\nacima. A partir disso, teremos que P\n\ni ∈I A[i] = P\n\ni ∈I′ A[i]. Em seguida,\nvamos adicionar um novo elemento n ao vetor e ele ter´a valor = [P\n\ni ∈I A[i] =\nP\n\ni ∈I′ A[i]]/2 e formato A[1,..., n]. No entanto, sabemos que as somas de I e\nI” s˜ao iguais e portanto, podemos observar que o valor de n ser´a igual ao valor\nde qualquer uma das somas citadas acima. Logo: P\n\ni ∈I A[i] = P\n\ni ∈I′ A[i] =\nn. Com isso, conclu´ımos a redu¸c˜ao PARTIC¸ ˜AO→3-PARTIC¸ ˜AO.\n\n• Redu¸c˜ao 3-PARTIC¸ ˜AO→PARTIC¸ ˜AO\n\nSendo assim, para um dado vetor A[1, 2, ..., n] e I,J ∈1, 2, ..., n de modo que:\n\nX\n\nX\n\nX\n\nA[i] =\n\nA[i] =\n\nA[i]\n\ni ∈J\n\ni ∈I\n\ni /∈I∩J\n\nAl´em disso, caso exista determinada parti¸c˜ao, ´e necess´ario satisfazer as 3 condi¸c˜oes\ndadas.\nUm artif´ıcio que pode ser utilizado para reduzir o problema da tri-\nparti¸c˜ao ao problema da parti¸c˜ao ´e remover do vetor de entrada A[1, 2, ..., n] os\nelementos que n˜ao fazem parte do conjunto I ∪J e assim resultando no vetor\nde entrada A[1, 2, ..., K] onde k ´e o novo tamanho do vetor uma vez retirados\nesses elementos (k= |I ∪J|. Assim, ap´os a remo¸c˜ao desses elementos, temos\nque:\nX\n\nX\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni ∈J\n\nPage vii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p7.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "Fazendo mais uma remo¸c˜ao, dessa vez tornando a interse¸c˜ao de I e J vazia. Ou\nseja, I ∩J = ∅temos que J se torna I’:\n\nX\n\nX\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni ∈I′\n\nPortanto, podemos concluir que o problema 3-PARTIC¸ ˜AO ´e NP-completo uma vez\nque a transforma¸c˜ao de 3-PARTIC¸ ˜AO para PARTIC¸ ˜AO e vice-versa pode ser efe-\ntuada. Logo, o aluno est´a correto ao afirmar que o problema da 3-PARTIC¸ ˜AO ´e\nNP-Completo.\n■\n\n6. O PROBLEMA DA ´ARVORE GERADORA COM RESTRIC¸ ˜AO DE GRAU\n´e o seguinte.\nEntrada: Um grafo n˜ao-direcionado G(V,E).\nSa´ıda: Uma ´arvore geradora de G na qual cada n´o tem grau ≤k, se uma\n´arvore desse tipo existe. Mostre que para todo k ≥2 o problema ´e NP-dif´ıcil.\n\nSolu¸c˜ao: Considerando o problema da ´arvore geradora com restri¸c˜ao de grau 2, n´os\ndevemos encontrar uma ´arvore cujos v´ertices possuam no m´aximo grau 2. No entanto,\numa ´arvore desse modo deve ser um caminho, j´a que criar uma ramifica¸c˜ao em todos\nos v´ertices faria com que o grau daquele v´ertice fosse 3. Al´em disso, se a ´arvore\nestende o grafo, ela deve ser um caminho hamiltoniano. Portanto, esse problema ´e o\nmesmo que o problema do caminho hamiltoniano, que ´e NP-completo.\n\nDando continuidade, devemos reduzir a ´arvore geradora. Dado um grafo G(V,E),\nno qual cada v´ertice v ∈V, n´os adicionaremos k - 1 v´ertices que se conectam somente\na v. Al´em disso, adicionamos um outro conjunto de v´ertices para cara v´ertice original\nno grafo. Esse novo grafo pode ser denominado G’. Com isso, podemos perceber que\numa ´arvore geradora com grau k deve conter todas os v´ertices rec´em adicionados\ncomo folhas, visto que eles possuem grau 1. Os removendo, possu´ımos uma ´arvore\ngeradora de grau 2. Da mesma forma, ao adicionarmos k - 2 folhas para cada v´ertice\nem uma ´arvore geradora de grau 2 de G, n´os teremos uma ´arvore geradora de grau k\nde G’. Portanto, podemos concluir que o problema da ´arvore geradora com restri¸c˜ao\nde grau ´e NP-completo para todo k ≥2.\n\nTendo em vista pela hierarquia das classes que se um problema ´e NP-completo,\nele tamb´em ´e NP-dificil, visto que esse ´ultimo abrange os problemas dessa classe e\noutros. Com isso, conclu´ımos a nossa prova.\n\n■\n\n7. Uma pipa ´e um grafo sobre um n´umero par de v´ertices, digamos 2n, nos quais\nn dos v´ertices formam uma clique e os restantes n v´ertices s˜ao conectados\nem um “rabo” que consiste em um caminho incidente a um dos v´ertices da\n\nPage viii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p8.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "clique. Dado um grafo e um objetivo g, o PROBLEMA DA PIPA pede que\nse encontre um subgrafo que seja uma pipa e que contenha 2g n´os. Prove que\nPIPA ´e NP-completo.\n\nSolu¸c˜ao: Provaremos que o problema da pipa ´e NP-completo ao mostrar uma redu¸c˜ao\npolinomial do problema do clique que, por sua vez, ´e NP-completo. Dado um grafo\nG(V,E) e um objetivo g, n´os desejamos determinar se G cont´em um clique de ta-\nmanho g. Para isso, criaremos um grafo auxiliar G’(V’,E’) que deve conter todos os\nv´ertices e arestas de G e uma ”cauda”de tamanho g para cada v´ertice em G. Assim,\nconsiderando que a cauda adicionada se configura apenas como caminhos e n˜ao con-\ntribuem realmente para um clique, G’ possui um subgrafo de pipa com 2g n´os se e\nsomente se existe um clique de tamanho g em G, sendo assim:\n\n1) Se existe um clique de tamanho g em G, ent˜ao G’ forma um subgrafo que seja\numa pipa e que cont´em 2g.\n2) Para que exista um subgrafo G’ com um subgrafo de pipa de 2g n´os, ´e necess´ario\nque G tenha um grupo de tamanho g.\n\nCom isso, provamos que o problema da pipa ´e NP-completo.\n\n■\n\n8. No PROBLEMA CONJUNTO INCIDENTE, ´e dada uma fam´ılia de con-\njuntos S1,S2,...,Sn e um inteiro b, e desejamos encontrar um conjunto H de\ntamanho ≤b que intercepte todos os Si, se um tal H existir.\nEm outras\npalavras, queremos H ∩Si̸ = ∅para todo i. Mostre que Conjunto Incidente\n´e NP-completo. Quais dessas afirmativas s˜ao verdadeiras ou falsas com cer-\nteza? Se o problema P = NP for resolvido, no que isso afeta a resposta `a\npergunta anterior?\n\nSolu¸c˜ao: Se um problema ´e NP-completo, ent˜ao ele ser´a NP e NP-dif´ıcil.\nPara\nprovarmos que o problema do conjunto incidente ´e NP-completo, precisamos provar\nessas 2 proposi¸c˜oes:\n\n1. O problema do conjunto incidente ´e NP:\n\nPara isso, teremos como entrada um conjunto A de n elementos, uma cole¸c˜ao\nB de subconjuntos de A, um inteiro positivo k e um conjunto finito H como\ncertificado.\nConsideramos que um conjunto A que ´e subconjunto de H ´e um conjunto inci-\ndente para o de B se cont´em ao menos um elemento para cada Bi, isto ´e, se H ´e\num subconjunto de Bi, para cada i. Para a demonstra¸c˜ao que o problema est´a\nem NP, temos: A est´a est´a no problema do conjunto incidente se e somente\n\nPage ix",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p9.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "se um conjunto incidente existe, ent˜ao um certificado pode ser definido como\num conjunto incidente, uma lista de k elementos de A. Em seguida, aceitamos\no certificado se tem tamanho k e cont´em ao menos um elemento de cada Bi.\nEsse processo leva tempo ckm, mas como c e k s˜ao aproximadamente n, temos\nO(mn2), que ´e polinomial. Com isso, conclu´ımos a primeira prova.\n\n2. O problema do conjunto incidente ´e NP-dif´ıcil:\n\nPara essa prova, sabemos que o problema do conjunto incidente ser´a NP-dif´ıcil\nse o problema da cobertura de v´ertices (que ´e NP-completo) puder ser reduzido\na ele.\nCom isso, temos um grafo G de n n´os, m arestas e um parˆametro k e devemos\ndefinir A para ser o conjunto de n´os em G e Bi para ser o conjunto de dois\nterminais da aresta ei. G ter´a uma cobertura de v´ertice se tamanho k se e\nsomente se A tiver um conjunto incidente de tamanho para os B’s, pois um\nconjunto de n´os em G ´e uma cobertura de v´ertices se e somente se atinge cada\numa das arestas.\nVisto que essa redu¸c˜ao acontece, e em tempo polinomial, o problema do con-\njunto incidente ´e NP-dif´ıcil.\n\nSendo assim, como o problema se prova ser NP e NP-dif´ıcil, conclu´ımos que o pro-\nblema ´e NP-completo.\n■\n\n9.\nISOMORFISMO DE SUBGRAFO: dados como entrada dois grafos n˜ao-\ndirecionados G e H, determine se G ´e um subgrafo de H. Prove que o problema\n´e NP-completo.\n\nSolu¸c˜ao: Para mostrar que o problema de isomorfismo de grafo ´e NP-Completo ´e\nnecess´ario provar 2 proposi¸c˜oes:\n\n• O problema de Isomorfismo de Subgrafo ´e NP\n\n• O problema de Isomorfismo de Subgrafo ´e NP-dif´ıcil\n\nSendo assim, temos os seguintes passos:\n\n1) O problema de Isomorfismo de Subgrafo ´e NP e para isto ele deve ser capaz de\nverificar para o sim um certificado em tempo polinomial.\n\nProva:\n\nCertificado: Seja G’ o subgrafo de G e K o mapeamento entre v´ertices de H e G’.\nVerifica¸c˜ao: Basta checar se o mapeamento K ´e uma bije¸c˜ao e se para cada aresta\n(u,v) de H existe uma aresta (f(u), f(v)) contida em G’. Al´em disso, ´e poss´ıvel notar\nque isto pode ser verificado em tempo polinomial.\n\nPage x",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p10.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 11,
+      "texto": "Portanto, o problema do Isomorfismo de Grafo possui verificabilidade em tempo\npolinomial e assim pertence `a classe dos problemas NP.\n\n■\n2) O problema de Isomorfismo de Grafo ´e NP-Dif´ıcil se for poss´ıvel efetuar a redu¸c˜ao\nem tempo polioOial de algum problema NP-Dif´ıcil para uma instˆancia do problema\nde Isomorfismo de Grafo. Assim, o problema escolhido ´e o problema de decis˜ao da\nClique. Para provar que o problema da Clique pode ser reduzido polinomialmente\npara uma instˆancia do Isomorfismo de Subgrafo, podemos fazer da seguinte forma:\nProva:\n\nSeja a entrada para o Problema da Decis˜ao Clique = (G’, L). Sabe-se que a sa´ıda\n´e verdadeira se o grafo G’ conter uma Clique de tamanho L, j´a que uma clique de\ntamanho L ´e um subgrafo de G’. Al´em disso, seja H um grafo completo de L v´ertices\ne seja G ⊆G′, onde H, G s˜ao entradas para o Problema de Isomorfismo do Subgrafo\ne seja tamb´em N o n´umero de v´ertices em G’. Sendo assim, ´e poss´ıvel observar que\nL ≤N. Pois, se L > N, ent˜ao uma Clique de tamanho L n˜ao pode ser um subgrafo\nde G’.\nAssim, o tempo necess´ario para criar H ´e O(L2) = O(N 2) (L ≤N). J´a que o n´umero\nde arestas num grafo completo de tamanho L = LC2 = L·L−1\n\n2\n. Desse modo, G’ tem\numa Clique de tamanho L, se e somente se H for um subgrafo de G (uma vez que H\nem si ´e um subgrafo de G e cada grafo ´e isom´orfico a si mesmo), logo o resultado do\nproblema do Isomorfismo de Subgrafo ´e verdadeiro.\nAssim, H ´e isomorfo do subgrafo G. Portanto, se o Problema da Decis˜ao Clique for\nverdadeiro, o Problema do Isomorfismo de Subgrafo tamb´em ´e verdadeiro e vice-versa.\nLogo, o Problema da Decis˜ao Clique pode ser reduzido ao Problema do Isomorfismo\ndo Subgr´afico em tempo polinomial para uma determinada instˆancia\n\n■\n\nAssim, como o problema do Isomorfismo de Grafo ´e NP e NP-Dif´ıcil, conclui-se que\no problema do Isomorfismo de Grafo ´e NP-Completo.\n\n■\n\n10. SUBGRAFO DENSO: dados um grafo G e dois inteiros a e b, encontre um\nconjunto de a v´ertices de G tal que exista pelo menos b arestas entre eles.\nProve que o problema ´e NP-completo.\n\nSolu¸c˜ao: Para provarmos que o problema do subgrafo denso ´e NP-completo, deve-\nmos efetuar duas provas:\n\n1. Devemos provar que o problema do subgrafo denso ´e NP: Para isso, teremos\num verificador de tempo polinomial que ir´a pegar G(G, k, y) e H = (V’, E’)\ncomo certificados e ent˜ao verificar se H ´e um subgrafo de F, |V ′| = k, |E′| ≥y.\n\nPage xi",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p11.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 12,
+      "texto": "2. Devemos provar que existe um problema NP-completo conhecido que pode ser\npolinomialmente reduzido a A: Para isso, sabemos que esse problema ´e uma\ngeneraliza¸c˜ao do problema do clique. Sendo assim, dado uma instˆancia (G, k)\nconsideramos a = k, b = k(k-1)/2. Dessa forma, qualquer subgrafo de G com k\nv´ertices e contendo k(k-1)/2 arestas deve ter uma aresta entre cada par poss´ıvel\ndesses k v´ertices e, portanto, deve ser um clique. Similarmente, um clique com\nk v´ertices deve conter k(k-1)/2 arestas.\n\n■\n\nPage xii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f38bb8142136\\p12.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

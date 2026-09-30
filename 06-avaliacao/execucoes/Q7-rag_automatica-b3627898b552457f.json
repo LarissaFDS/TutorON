@@ -1,0 +1,56 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "2df6e1818523-q3-6",
+    "2df6e1818523-q4-3",
+    "23950cced864-q2-2",
+    "c08"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0.06199999999989814,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante entre 1 e n, dado que Maria ouve n-1 números distintos, podemos usar uma técnica que opera em O(1) de memória. Vamos detalhar o processo passo a passo:\n\n### Passo a Passo\n\n1. **Cálculo da Soma Esperada**:\n   - A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n     \\[\n     S = \\frac{n(n+1)}{2}\n     \\]\n   - Esta é a soma esperada se todos os números de 1 a n estivessem presentes.\n\n2. **Cálculo da Soma dos Números Dados**:\n   - Somamos todos os n-1 números dados.\n\n3. **Encontrar o Número Faltante**:\n   - O número faltante é a diferença entre a soma esperada e a soma dos números dados:\n     \\[\n     \\text{Faltante} = S - \\text{Soma dos Números Dados}\n     \\]\n\n### Complexidade de Tempo e Espaço\n\n- **Tempo**: O(1) - pois envolve apenas operações aritméticas básicas.\n- **Espaço**: O(1) - pois não requer nenhuma estrutura de dados adicional além das variáveis de armazenamento temporário.\n\n### Possíveis Problemas de Overflow\n\n- **Overflow**: Se n for muito grande, a soma \\(\\frac{n(n+1)}{2}\\) pode causar overflow em alguns sistemas de representação de números inteiros. No entanto, se n for até 65536 (2^16 - 1), a soma pode ser calculada sem problemas em sistemas de 32 bits. Para valores maiores, seria necessário usar aritmética de precisão arbitrária ou um sistema de 64 bits.\n\n### Resumo\n\nPara encontrar o número faltante em O(1) de memória, calcule a soma dos números de 1 a n usando a fórmula \\(\\frac{n(n+1)}{2}\\), some os n-1 números dados, e subtraia a soma dos números dados da soma esperada. Isso dará o número faltante. No entanto, tenha cuidado com overflow se n for muito grande.\n\n### Nota\n\nEste método é eficiente e não requer nenhuma estrutura de dados adicional além das variáveis de armazenamento temporário.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 11.438000000000102,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

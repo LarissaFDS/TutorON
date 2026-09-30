@@ -1,0 +1,22 @@
+{
+  "id": "26523f2185f4",
+  "arquivo": "materiais\\Curadoria\\Leia me.txt",
+  "copia": "00-originais\\ingestao\\e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\\Leia me.txt",
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "tipo": ".txt",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "[ilegivel] Arquivo vazio.",
+      "metodo": "texto_original",
+      "qualidade": "ilegivel",
+      "figuras": []
+    }
+  ]
+}

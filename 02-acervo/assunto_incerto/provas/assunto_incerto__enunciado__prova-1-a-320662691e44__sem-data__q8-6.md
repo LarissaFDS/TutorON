@@ -1,0 +1,121 @@
+# 320662691e44-q8-6
+
+Fonte: materiais\Disponiveis\RAG PAA\prova_1_A.pdf | página(s): 2, 3, 4, 5, 6
+
+Questao 8 [2 pontosj:
+Seam f（n）e g(n） fangoes nsintoticamente nio negativas. Usando a defnio basea da notagao O,prove que
+[incerto] max（f（n)g(n))=θ(f（n)+g(n)).
+[incerto] C
+qve
+[incerto] yrcdedepois
+[incerto] （≥（）
+[incerto] 6=1
+[incerto] max(51ga)c15+g（n)
+[incerto] PC=
+[incerto] （5（1，9（1）25）+9m）
+[incerto] istedsb
+poiy
+[incerto] 1
+[incerto] Prtdufo
+X[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
+[incerto] AEs...S
+[incerto] Votos
+[incerto] onclus.
+[incerto] As.
+[incerto] Velovdeava lqvefvetorAs
+0maiov
+ultimelemento
+[incerto] primeis
+[incerto] VoVa
+[incerto] Bose:pa
+[incerto] AEs,...
+[incerto] 00151inh
+[incerto] 2eexoevledo
+[incerto] deA
+val
+[incerto] retornALinovSaAspasmiae
+[incerto] lGoritmg
+fode
+[incerto] smpleAEs3
+Hipolese.
+[incerto] #1
+[incerto] Yetmi
+[incerto] velordemanhaK，K<n
+[incerto] qv2igvev
+[incerto] Passo:BqalgeveoA
+[incerto] Cwanhon>L
+[incerto] ix
+156
+[incerto] 2y）
+portantocles
+[incerto] SeGviy
+linha5ond
+[incerto] idConte
+[incerto] da
+posican
+rentedeAc
+dexmaisdst
+[incerto] Vessspa
+[incerto] roms
+igymento
+[incerto] ASnici..m+]
+[incerto] <ne,pela hipotes
+[incerto] DM210k[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
+pectiemente
+[incerto] paasasariatsebondesefcopady
+es
+[incerto] elementodgvalqvev
+[incerto] A[s...]
+[incerto] -Dadvme
+[incerto] pequ
+3
+[incerto] Sunso5cn),eu
+[incerto] Sungi
+[incerto] Dosibns
+[incerto] 250013
+[incerto] Cens,ron
+[incerto] UOKgCn1≤c.5),n2no
+[incerto] 2-
+[incerto] Cim
+[incerto] 2on²+5on65n+5
+[incerto] Sone
+[incerto] Con²+omen+5e（n)qemp
+70
+[incerto] TeConSonlgn+5O（n).Porotoe(dade.
+[incerto] 3—
+075
+[incerto] 37r3u
+[incerto] Y-DdUSuncan
+[incerto] 5m),ev
+[incerto] gms0lsa)gc）cenosttssitistaisge
+[incerto] n#no[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
+temes
+tye
+[incerto] Usondo
+Teolemames
+[incerto] 2=P
+[incerto] g2
+T（n)=2T（h)+n
+[incerto] 2（2t(na)+）+n
+[incerto] （2)++
+[incerto] ..+h
+K-S
+K+K=n-S[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
+[incerto] qodemoi
+[incerto] ond(6）p（n)
+[incerto] o'e
+[incerto] Pe（k)
+[incerto] 2-paodems
+[incerto] Cim
+[incerto] 2
+[incerto] Sonha
+[incerto] <b
+2
+[incerto] 6t
+[incerto] bSvai
+[incerto] m7q<pyns
+[incerto] Roitoutanae
+[incerto] (（6）
+[incerto] loglsntegkpdre
+[incerto] d.teld
+[incerto] 204

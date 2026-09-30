@@ -1,0 +1,26 @@
+# bfca39234401-q1-1
+
+Fonte: materiais\Disponiveis\RAG PAA\WhatsApp_Image_2025-01-12_at_13.13.32_(1).webp | página(s): 1
+
+Questao 1[2pontos]:
+Dado um vetor A com n entradas, com cada entrada um ntimero distinto. Sabe-se que a sequencia de valores
+A[1jA[2]..An] éunimodal:ou seja,existe indice p entre 1 en,osvaloresnas entradas dovetor aunentam atea
+posicao p e,em seguida,reduzem,o resto do caminho,ate que a posicaon.Deseja-se encontrar oponto demaximo
+p.Mostre como encontrar p atraves deum algoritmo O(logn)
+Questao2[2pontos]:
+Suponha que voce tenha k arrays ordenados A1,A2,...,Ak, cada un com n elementos.Voce deseja combina-los em
+um uinico array ordenado de tamanho kn.Uma maneira de fazer isso seria usar a operacao de intercalacao(merge).
+Sabendoque a intercalacao de doisarrayXeYprecisa de|X|+|Y|passos.
+1.Calcule quantos passos oalgoritmo a seguir leva:Primeiro intercale os arrays A,A2, depois intercale o resultado
+comAeassim pordiante
+2.Projete um algoritmo melhor para este problema.
+Questao3[2pontos]:
+Dado um conjunto S de strings,encontre de forma eficiente o prefixo comum mais longo.Exemplos:
+Entrada:S={“instituto”,“instigar”,“instavel"，“instaurar”}，Saida:“inst”
+Entrada:S={“portuguese”,“portugues",“portugal"},Saida:“portug”
+Questao4[1ponto]:
+Considere o problema do caminho de custo minimo em um grafo G direcionado.Assuma que todos os pesos das arestas
+de G sao positivos e distintos.Seja P um caminho de custominimo entre os vertices s e t de G.Agora suponha que
+todos os pesos cdas arestas de G sejam trocados pelo quadrado do seu valor,ou seja,por cedando origem a uma
+nova instancia do problema no mesmo grafo,mas com pesos diferentes.Determine se o caminho P ira continuar a ser
+um caminho de custo minimo entre s e t nesta nova instancia. Caso negativo,de um contra-exemplo

@@ -1,0 +1,11 @@
+{
+  "pagina": 7,
+  "texto": "Solu¸c˜ao:\n\n\n\n\n\n7. Considere o seguinte problema.\n  Entrada: Grafo n˜ao direcionado G = (V, E ); pesos de arestas we ; subconjunto\n  de v´ertices U ⊂V.\n   Sa´ıda: A ´Arvore Geradora mais leve na qual os n´os de U s˜ao folhas (pode\n  haver outras folhas na ´arvore tamb´em)\n\n\n     Solu¸c˜ao: Para encontrar a sa´ıda desejada, ou seja, a ´arvore geradora mais leve na\n    qual os n´os de U s˜ao folhas, necessitamos fazer alguns passos, descritos a seguir:\n\n   O primeiro ´e a construir¸c˜ao Grafo G′ = (V ′, E′), onde\n\n               V ′ = V −U e E′ = {(u, v) | u, v ∈V −U ∧(u, v) ∈E}\n\n     Ap´os isso, deve-se aplicar o algoritmo de Kruskal a fim de encontrar a ´arvore geradora\n    m´ınima de G′, que  ´e T ′. Caso T ′ n˜ao exista, ent˜ao a ´arvore geradora mais leve  ´e\n     impratic´avel e n˜ao podemos encontrar uma solu¸c˜ao. Isso ´e explicado pois assumindo\n    que h´a duas ´arvores na floresta geradora para o grafo G′, dever´a haver um n´o u ∈U\n    que conecte as duas ´arvores na floresta, mas isso far´a com que u deixe de ser uma\n     folha, resultando em uma contradi¸c˜ao.\n\n   No entanto, caso T ′ exista, prosseguimos para a constru¸c˜ao de um conjunto de arestas\n     E’, onde:\n\n                           E′ : ∀(u, v) ∈E′ | u ∈U ∧v /∈U\n\n   E o pseudo-c´odigo ´e dado a seguir:\n\n        for each u in U:\n            generateSet(u) # filtra as arestas pelo seu peso\n        for all edges u,v in E # por ordem de peso\n            if encontrar(u) != encontrar(v):\n                add edge u,v to T'\n                union(u,v)\n        return T'\n\n\n\n\n                                  Page vii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p7-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

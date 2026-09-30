@@ -1,0 +1,18 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n[incerto] follox\n[incerto] Joi- pedide ra\n[incerto] dem\napontndegui\n[incerto] neroanDupliredo (Veton):\n[incerto] VetnQnderol=Ondenoeo (Vetn)\n[incerto] #0ndeoo d。 Vatn en O(m. logm)1Nerygal)\n[incerto] tod=[]\n[incerto] aux=Vetn Qderodo]\n[incerto] VetnOdb::\n[incerto] 38#\n()0\n!= aux:\nnesultode.apped(c)\n[incerto] =3\n[incerto] elumreultede\n[incerto] Logeat\n[incerto] tode&dapdda\nQueLoo 02.\n[incerto] Dodeθgu\n[incerto] de\nvmacima (Velon,(n):\n[incerto] ==M：\n[incerto] C==M-j:\n[incerto] Vton[]>=VetnCn]:\n=(x+~) /2\n[incerto] Vetn[m] > Veton -s od Vtn [J>Veln [m+]:\n[incerto] VatenCm了>Velon [3]adVelon[]<Vn[-s]:\n[incerto] seun maria (vder ,i-s)\n[incerto] aximo(Vm,m)",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\23950cced864\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\23950cced864\\p2-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\23950cced864\\p2-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

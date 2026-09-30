@@ -1,0 +1,51 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "7b4da6a8adf7-q4-4",
+    "c05",
+    "c02",
+    "299d863129c5-q6-2"
+  ],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0.11000000000058208,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A confusão parece estar na interpretação do algoritmo ASTERISCO(n) e na contagem de asteriscos impressos. Vamos analisar o algoritmo e calcular o número de asteriscos impressos para n = 3.\n\n### Algoritmo ASTERISCO(n)\nA função `ASTERISCO(n)` é definida como:\n\\[ A(n) = \\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2^{n+1} - (n + 2) & \\text{se } n \\geq 1 \n\\end{cases} \\]\n\n### Cálculo para n = 3\n1. **Para n = 3:**\n   \\[ A(3) = 2^{3+1} - (3 + 2) = 2^4 - 5 = 16 - 5 = 11 \\]\n\n   Vamos verificar passo a passo:\n   - **Chamada inicial:** `ASTERISCO(3)`\n   - **Chamada recursiva 1:** `ASTERISCO(2)`\n   - **Chamada recursiva 2:** `ASTERISCO(1)`\n\n2. **Chamada `ASTERISCO(1):**\n   \\[ A(1) = 2^{1+1} - (1 + 2) = 2^2 - 3 = 4 - 3 = 1 \\]\n\n3. **Chamada `ASTERISCO(2):**\n   \\[ A(2) = 2^{2+1} - (2 + 2) = 2^3 - 4 = 8 - 4 = 4 \\]\n\n4. **Chamada `ASTERISCO(3):**\n   \\[ A(3) = 2^{3+1} - (3 + 2) = 2^4 - 5 = 16 - 5 = 11 \\]\n\n### Contagem de Asteriscos\n- **Chamada `ASTERISCO(3):**\n  - Chama `ASTERISCO(2)`\n  - Chama `ASTERISCO(1)`\n  - Imprime 1 asterisco (porque `n = 3`)\n\n- **Chamada `ASTERISCO(2):**\n  - Chama `ASTERISCO(1)`\n  - Imprime 2 asteriscos (porque `n = 2`)\n\n- **Chamada `ASTERISCO(1):**\n  - Imprime 1 asterisco (porque `n = 1`)\n\n### Total de Asteriscos\n- `ASTERISCO(3)` imprime 1 asterisco\n- `ASTERISCO(2)` imprime 2 asteriscos\n- `ASTERISCO(1)` imprime 1 asterisco\n\nTotal: \\( 1 + 2 + 1 = 4 \\) asteriscos\n\n### Por que não é n vezes?\nA função `ASTERISCO(n)` não imprime n asteriscos diretamente. Ela imprime um número específico de asteriscos baseado na fórmula \\(2^{n+1} - (n + 2)\\). A contagem de asteriscos é determinada pela recursão, não por uma simples impressão de n asteriscos.\n\n### Resposta para n = 3\nPara n = 3, o número de asteriscos impressos é 4, conforme calculado acima.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 15.75,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

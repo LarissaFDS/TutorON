@@ -1,0 +1,51 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c05",
+    "fb361b787fc6-q6-1",
+    "abfdf1a3da4e-q2-2",
+    "3e662496e5b2-q8-1"
+  ],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 3.672000000002299,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Vamos analisar o algoritmo `ASTERISCO(n)` e montar a conta para entender por que a quantidade de asteriscos impressos não é simplesmente `n` vezes.\n\n### Algoritmo `ASTERISCO(n)`\n```plaintext\nprocedure ASTERISCO(n)\n1: if n > 0 then\n2:   ASTERISCO(n-1)\n3:   for i from 1 to n\n4:     imprima *\n5:   end for\n6:   ASTERISCO(n-1)\n7: endif\n8: end procedure\n```\n\n### Análise da Conta\n\n1. **Chamada `ASTERISCO(n-1)` antes do laço:**\n   - Isso significa que, antes de entrar no laço, o algoritmo chama `ASTERISCO(n-1)`, que imprimirá `n-1` asteriscos.\n\n2. **Laço `for i from 1 to n`:**\n   - Dentro do laço, o algoritmo imprime um asterisco para cada iteração de `i` de 1 a `n`. Isso significa que o laço imprimirá `n` asteriscos.\n\n3. **Chamada `ASTERISCO(n-1)` depois do laço:**\n   - Após o laço, o algoritmo chama `ASTERISCO(n-1)` novamente, que imprimirá `n-1` asteriscos.\n\n### Contagem Total de Asteriscos\n\nPara `n = 3`:\n- **Primeira chamada `ASTERISCO(3-1) = ASTERISCO(2)`:**\n  - `ASTERISCO(2)` chama `ASTERISCO(1)`.\n  - `ASTERISCO(1)` chama `ASTERISCO(0)`, que não imprime nada (pois `n = 0`).\n  - `ASTERISCO(1)` imprime 1 asterisco.\n  - `ASTERISCO(2)` imprime 2 asteriscos (de `ASTERISCO(1)`) + 2 asteriscos (do laço) + 2 asteriscos (de `ASTERISCO(1)`).\n\n- **Segunda chamada `ASTERISCO(3-1) = ASTERISCO(2)`:**\n  - `ASTERISCO(2)` chama `ASTERISCO(1)`.\n  - `ASTERISCO(1)` chama `ASTERISCO(0)`, que não imprime nada.\n  - `ASTERISCO(1)` imprime 1 asterisco.\n  - `ASTERISCO(2)` imprime 2 asteriscos (de `ASTERISCO(1)`) + 2 asteriscos (do laço) + 2 asteriscos (de `ASTERISCO(1)`).\n\n### Contagem Total para `n = 3`:\n- **Primeira chamada `ASTERISCO(2)`:**\n  - 2 (de `ASTERISCO(1)`) + 2 (do laço) + 2 (de `ASTERISCO(1)`) = 6 asteriscos.\n\n- **Segunda chamada `ASTERISCO(2)`:**\n  - 2 (de `ASTERISCO(1)`) + 2 (do laço) + 2 (de `ASTERISCO(1)`) = 6 asteriscos.\n\n- **Total:**\n  - 6 (primeira chamada) + 6 (segunda chamada) = 12 asteriscos.\n\n### Recorrência\n\nA recorrência para a quantidade de asteriscos impressos `A(n)` pode ser definida como:\n\\[ A(n) = \\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2A(n-1) + n & \\text{se } n \\geq 1 \n\\end{cases} \\]\n\n### Resposta\n\nPara `n = 3`, a quantidade de asteriscos impressos é 12. A recorrência é:\n\\[ A(n) = 2A(n-1) + n \\]\n\nIsso explica por que a quantidade de asteriscos não é simplesmente `n` vezes, pois há chamadas recursivas que duplicam a quantidade de asteriscos impressos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 24.625,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 1,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,37 @@
+# bb377af634ea-q1-1
+
+Fonte: materiais\Disponiveis\RAG PAA\paaprova.webp | página(s): 1
+
+Questao 1 [2 pontos}:
+[incerto] nidyBnutoeCic
+votos ounno.Prove a corretude de se algoritmo.
+Questio 2 [2 pontos]:
+Considere o seguinte algoritmo:
+procedure ALGoRiTMoX（vetor A[1n],inleio,fim)
+2:
+3
+Ifinicio =fim then
+return Alinicio]
+[incerto] 4
+melo+-inicio+（fm-Incio）/2
+end if
+[incerto] aX（A，inicio,meio)
+bX（A.meio+1、fm）
+[incerto] 8:
+9:
+returnb
+OT
+olse
+11:
+returna
+13:end procedure
+12:
+endif
+Explique o que ole faz e prove sua corretude
+Questao3[2pontos]:
+Sejam T（n)e f（n)funcoes dos inteiros nos reais. Justifique;
+1.0que significa “T(n)é O（f(n)）)"？
+2.Everdade que 20n+10ngn+5é0（n²）)？）
+3.Everdade que n²éO（n)？
+4.0que significa T（n)eΩ（f(n))？
+5.0que signifiea“T（n）=n+Ω（nlgn)？

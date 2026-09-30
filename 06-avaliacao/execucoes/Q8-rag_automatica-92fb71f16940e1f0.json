@@ -1,0 +1,62 @@
+{
+  "questao": "Q8",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "70d6475b28bf-q6-6",
+    "2df6e1818523-q4-3",
+    "7b4da6a8adf7-q9-9",
+    "299d863129c5-q1-1"
+  ],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "70d6475b28bf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 3.3290000000015425,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O problema do quadrado mágico de ordem 3 com números distintos de 1 a 9 é um problema de backtracking, mas não é o problema do passeio do cavalo. Vamos abordar o problema do quadrado mágico de forma a usar backtracking.\n\n### Definição do Problema\nUm quadrado mágico de ordem 3 é um quadrado 3x3 preenchido com os números 1 a 9 de forma que a soma de cada linha, coluna e diagonal seja igual a 15.\n\n### Algoritmo Backtracking\n1. **Inicialização**: Crie uma matriz 3x3 preenchida com zeros.\n2. **Preenchimento**: Tente preencher a matriz com os números 1 a 9.\n3. **Verificação**: Verifique se o número atual pode ser colocado na posição atual sem violar as regras do quadrado mágico.\n4. **Recursão**: Se a verificação passar, continue preenchendo a matriz recursivamente.\n5. **Poda**: Se a verificação falhar, reverta a última colocação e tente outra opção.\n6. **Condição de Parada**: Se a matriz estiver preenchida corretamente, imprima a solução.\n\n### Implementação em Python\n\n```python\ndef is_valid(board, row, col, num):\n    # Verifica se o número já está na linha\n    for i in range(3):\n        if board[row][i] == num:\n            return False\n    \n    # Verifica se o número já está na coluna\n    for i in range(3):\n        if board[i][col] == num:\n            return False\n    \n    # Verifica se o número já está na diagonal\n    if row == col:\n        for i in range(3):\n            if board[i][i] == num:\n                return False\n    \n    # Verifica se o número já está na submatriz 3x3\n    start_row, start_col = 3 * (row // 3), 3 * (col // 3)\n    for i in range(start_row, start_row + 3):\n        for j in range(start_col, start_col + 3):\n            if board[i][j] == num:\n                return False\n    \n    return True\n\ndef solve_sudoku(board, row=0, col=0):\n    if row == 3:\n        # Se chegou ao final da matriz, imprime a solução\n        for i in range(3):\n            for j in range(3):\n                print(board[i][j], end=\" \")\n            print()\n        return True\n    \n    next_row, next_col = (row + 1, 0) if col == 2 else (row, col + 1)\n    \n    for num in range(1, 10):\n        if is_valid(board, row, col, num):\n            board[row][col] = num\n            if solve_sudoku(board, next_row, next_col):\n                return True\n            board[row][col] = 0  # Poda: reverter a última colocação\n    \n    return False\n\n# Inicializa a matriz 3x3\nboard = [[0 for _ in range(3)] for _ in range(3)]\n\n# Resolve o problema\nsolve_sudoku(board)\n```\n\n### Explicação\n1. **is_valid**: Verifica se um número pode ser colocado em uma posição sem violar as regras do quadrado mágico.\n2. **solve_sudoku**: Função recursiva que preenche a matriz. Se a matriz estiver preenchida corretamente, imprime a solução. Caso contrário, tenta preencher a próxima posição.\n3. **Poda**: Se um número não pode ser colocado em uma posição, a função reverte a última colocação e tenta outra opção.\n\n### Complexidade\nA complexidade do algoritmo de backtracking para resolver o quadrado mágico é \\(O(n!)\\), onde \\(n\\) é o número de posições a serem preenchidas (no caso, 9).",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 26.14099999999962,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

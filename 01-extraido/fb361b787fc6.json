@@ -1,0 +1,29 @@
+{
+  "id": "fb361b787fc6",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31_(1).webp",
+  "copia": "00-originais\\ingestao\\fd9e6e814d6ee1c1138945031c939c5019db6538f377abc66059229e66459afd\\WhatsApp_Image_2025-01-12_at_13.13.31_(1).webp",
+  "sha256": "fd9e6e814d6ee1c1138945031c939c5019db6538f377abc66059229e66459afd",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Questao 6[2 pontos]:\nProve que\nQuestao7[1ponto]:\n1:procedureAsTERisco(n)\n2:\nifn>0then\n3:\nASTERISCO(n-1)\n4:\nfori-I→ndo\n5:\nimprima*\n6:\nend for\n7:\nASTERISCO(n-1)\n8:\nendif\n9:end procedure\nPara um dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco(n)? Mostra a\nrecorrencia.\nQuestao 8[2pontos]:\nSejam f（n)e g(n) funcoes assintoticamente nao negativas. Usando a definicao basica\nda notacao ,prove que\nmax(f(n).g(n))=θ（f（n)+g(n)).",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\fb361b787fc6\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

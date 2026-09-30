@@ -1,0 +1,58 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "6301b3b327fc-q4-4",
+    "e8d9e99bbf26-q1-1",
+    "2df6e1818523-q3-6",
+    "fc6f103e4d15-q4-2"
+  ],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 0.07799999999951979,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, podemos usar o Algoritmo de Kadane. Vamos seguir a convenção da Lista 5 e mostrar a recorrência e os resultados para os dois casos fornecidos.\n\n### Recorrência\nA recorrência para o problema da subsequência contígua de soma máxima pode ser definida da seguinte forma:\n\n\\[ \\text{max\\_sum}(i) = \\max(\\text{max\\_sum}(i-1) + \\text{A}[i], \\text{A}[i]) \\]\n\nOnde:\n- \\(\\text{max\\_sum}(i)\\) é a soma máxima até o índice \\(i\\).\n- \\(\\text{A}[i]\\) é o valor do elemento no índice \\(i\\).\n\nA recorrência pode ser resumida em duas condições:\n1. Adicionar o valor atual ao máximo até o índice anterior.\n2. Começar uma nova subsequência com o valor atual.\n\n### Algoritmo de Kadane\nO algoritmo de Kadane pode ser implementado da seguinte forma:\n\n1. Inicialize duas variáveis: `max_atual` e `max_global`.\n2. Percorra a lista de elementos.\n3. Atualize `max_atual` como o máximo entre `max_atual + elemento` e `elemento`.\n4. Atualize `max_global` se `max_atual` for maior que `max_global`.\n5. Retorne `max_global` como a resposta.\n\n### Implementação\nAqui está a implementação em pseudocódigo:\n\n```pseudocode\ndef kadane(A):\n    max_atual = A[0]\n    max_global = A[0]\n    \n    for i in range(1, len(A)):\n        max_atual = max(A[i], max_atual + A[i])\n        if max_atual > max_global:\n            max_global = max_atual\n    \n    return max_global\n```\n\n### Resultados\nVamos aplicar o algoritmo para os dois casos fornecidos:\n\n1. **Para a lista [5, 15, -30, 10, -5, 40, 10]:**\n   - Inicialmente, `max_atual = 5` e `max_global = 5`.\n   - Passo 1: `max_atual = max(15, 5 + 15) = 15`, `max_global = 15`.\n   - Passo 2: `max_atual = max(-30, 15 - 30) = -30`, `max_global = 15`.\n   - Passo 3: `max_atual = max(10, -30 + 10) = 10`, `max_global = 15`.\n   - Passo 4: `max_atual = max(-5, 10 - 5) = 5`, `max_global = 15`.\n   - Passo 5: `max_atual = max(40, 5 + 40) = 45`, `max_global = 45`.\n   - Passo 6: `max_atual = max(10, 45 + 10) = 55`, `max_global = 55`.\n   \n   Portanto, a subsequência contígua de soma máxima é 55.\n\n2. **Para a lista [-5, -2, -8]:**\n   - Inicialmente, `max_atual = -5` e `max_global = -5`.\n   - Passo 1: `max_atual = max(-2, -5 - 2) = -2`, `max_global = -2`.\n   - Passo 2: `max_atual = max(-8, -2 - 8) = -2`, `max_global = -2`.\n   \n   Portanto, a subsequência contígua de soma máxima é -2.\n\n### Conclusão\nO algoritmo de Kadane resolve o problema da subsequência contígua de soma máxima em tempo linear \\(O(n)\\), onde \\(n\\) é o tamanho da lista.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 18.01599999999962,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,29 @@
+{
+  "id": "5ee2f9c93b11",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\gabaritoprova.webp",
+  "copia": "00-originais\\ingestao\\abb2bd26a00a565defabed587dffaf3d36769cd5cc0543a26278e4bb9b1542fb\\gabaritoprova.webp",
+  "sha256": "abb2bd26a00a565defabed587dffaf3d36769cd5cc0543a26278e4bb9b1542fb",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] eemertoclum\n[incerto] uetor\n[incerto] demcotondetamanhaksn\n[incerto] Putouncludtieg\n[incerto] PanaumaetondedamanhoK+l\nalgoutmoduaide-Rnduabpastis\n[incerto] A+（-）/2]Amo（fmn）/）n],qup\n[incerto] menoresdloquKAotimportcnto,gundoqhupolebe demoluceab\n[incerto] damadabauiaaxpumunataeoeamenteginha8aleutm\n[incerto] netonavamaudntedoualooetoncdeemab\n[incerto] Albim,bta poocac@\n20\n[incerto] QusuL3\n[incerto] 3.squnoa demucome,T（n）O（f（n)),endoT（n)f（n）fun\n[incerto] domeenexismonticnopenenoao\n[incerto] aque\n[incerto] O（f（n）)={T（n)<cf（n）1n≥no\nquandop/qucllquen\n[incerto] Poatanto,Um qunaT(n)portenc aoonuntoO(f(n)\n(ouiguae)",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\5ee2f9c93b11\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "incerto_revisao_humana",
+          "texto": "```markdown\n# Questão 2\nO algoritmo X apresenta o maior elemento em um vetor. Fazemos a prova de sua raciocínio utilizando indução forte no tamanho do vetor (n).\n\nTeorema: O algoritmo X determina corretamente o maior elemento de um vetor.\n\nCaso base: Se tivermos um vetor de tamanho n = 1, então início = fim e o algoritmo entra na linha 3, ordenando o 1º e único elemento de A.\n\nHipótese de indução: O algoritmo X determina corretamente o maior elemento de um vetor de tamanho k ≤ n.\n\nPasso analítico: Prova que X funciona para um vetor de tamanho k + 1. Para um vetor de tamanho k + 1, o algoritmo divide-o em duas partes a partir do cálculo do seu índice médio, não variável mais. Sendo assim, as duas partes do vetor são unidas em duas chamadas recursivas à X. Daí, X calcula o maior valor em cada um dos subvetores A[1... início + (fim - início) / 2] e A[(início + (fim - início) / 2) + 1... n], que são, portanto, menores que k. Assim, portanto, segundo a hipótese de indução, as chamadas recursivas à X funcionam corretamente. Na linha 8, o algoritmo retornará o maior dentre os dois valores retornados em a e b.\n\nAfirm, está provado.\n\n# Questão 3\nSegundo a definição formal, T(n) é O(f(n)), sendo T(n) e f(n) funções dos inteiros nos reais, se existem constantes c e no, pertencentes aos reais, tal que,\n\\[ O(f(n)) = \\{T(n) \\leq c \\cdot f(n) \\mid n \\geq no \\} \\]\n\nPortanto, uma função T(n) pertence ao conjunto O(f(n)) quando p/ qualquer valor real de n maior que no, T(n) é no máximo igual a c \\cdot f(n).\n\n```"
+        }
+      ]
+    }
+  ]
+}

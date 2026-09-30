@@ -1,0 +1,12 @@
+{
+  "pagina": 7,
+  "texto": "[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nC1\nUPPER:10\nC2\n1\nR=6\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nR=12\nR=10\nR=16\n>=UPPER\nR=13\n5\n6\n8\n>UPPER\nR=10\n>UPPER\n>UPPER\n->UPPER\n\n\n´E poss´ıvel verificar que ao obter uma solu¸c˜ao candidata todas as outras ramifica¸c˜oes que\nexistiam anteriormente possu´ıam custos maiores ou iguais `a solu¸c˜ao encontrada, logo elas\nforam descartadas por meio da poda.\n\n4. De forma similar `a quest˜ao anterior (responda as perguntas!), projete um\nalgoritmo branch-and-bound para o problema da COBERTURA DE CON-\nJUNTO.\n\nSolu¸c˜ao: Considere o grafo G=(V,E). O algoritmo pode ser pensado como uma\nbusca em profundidade em uma ´arvore, na qual o mesmo busca pela solu¸c˜ao ´otima\nrecursivamente criando os galhos para um v´ertice e a partir do mesmo criando dois\nv´ertices at´e que n˜ao haja mais v´ertices em G. Ou seja, quando o algoritmo ramifica\num v´ertice, ele divide o espa¸co das solu¸c˜oes em um conjunto de subconjuntos menores\ncalculando assim os limitantes superiores e inferiores relativos para cada n´o, reduzindo\nassim o espa¸co de busca.\nA entrada para o algoritmo ´e um grafo G, um limitante superior UpperB e uma\nsolu¸c˜ao candidata S que representa uma cobertura de v´ertices parcial em constru¸c˜ao.\nO limitante superior ´e uma superestima¸c˜ao do tamanho da cobertura m´ınima de\nv´ertices do subgrafo e pode ser obtido calculando o tamanho da cobertura m´ınima\nde v´ertices encontrada at´e o momento.\nQuando o tamanho de S (solu¸c˜ao candidata atual da cobertura de v´ertices) somado\nao limitante inferior do subgrafo se tornar maior ou igual ao limitante superior, a\npoda ´e ent˜ao realizada na ´arvore de busca e o limitante superior UpperB que ´e o\ntamanho da cobertura m´ınima de v´ertices ´e retornado.\nPara calcular o limitante inferior 3 m´etodos podem ser utilizados clique bound, de-\ngree bound, sat bound.\n\nPage vii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p7-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

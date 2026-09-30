@@ -1,0 +1,167 @@
+# Revisão 25264d122fc0-qincerta-1
+
+Fonte: materiais\Disponiveis\RAG PAA\Respostas_prova_2_PAA.pdf | página(s): 1, 2
+SHA-256: ab34331ccd0f48ff6f5c6d319f72cd3b6bc4e130fd087aa0b1c9efa0508a3295
+
+Confiabilidade: nao_verificada
+
+Motivo: Revisão de fonte e conteúdo pendente.
+
+## Enunciado e resolução — transcrição sem alteração
+
+[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]
+ria
+Fernanda
+Rihciro
+Dernardes
+Pinto  Costa
+geSor+(A, P,r)
+(ntercala(a, P,q, r)
+if(p>r)
+[incerto] []:t
+[incerto] bt：u
+2
+Merge Sort(A, P,q)
+Merg eor+(A,q+s, r)
+[incerto] n,]=A[o,,n]
+RLo,.
+Intercala(A, P,q,r)
+[incerto] L[q+.,n] =A[q+,..,h]
+[incerto] i:0,s=0, x=o
+[incerto] For(i=) is)x++)
+[incerto] iF(R[==L[kand R[!:AL-s])
+[incerto] 1A[]=R[] ++ k++
+[incerto] else iF(R[>L[])
+IA[=L[k] k++
+2) Busca(A[, P))
+returnA
+mcio = P+(f-P)
+[incerto] 2
+iF(A[meio]>A[meio +s] αand  A[meio] <A[meio-1]". ]
+return
+ meio
+else if(A[meio] >A[meio tj]
+I  busca (A, P, meio-J)
+else
+I busca (A, meio ts, r)
+ vai comparand
+e
+Subpartes
+e'ncontrar
+arrag
+ate
+algoritmo
+seus
+visinhos
+da   subporte
+Com
+menfo
+[incerto] oP
+centro
+desefodo.
+inicia
+algori+mo
+Max-Min(A[J, P, r)
+Intercala(A, p,q,r) 
+orcenand.
+array
+por
+MergeSort.
+tend
+meio do
+Merge Sort (A, P, r)
+orde nodo, basta
+[incerto] o arrag
+n2=9+r
+Max=A[r]
+escolher
+primeiro
+Min =A[]
+R[o., ...,hs] = A[o, ...,Ms] 
+timo (ndice
+obter
+pora
+[incerto] 0
+minimo
+Merge Sor+(A[], P,)
+valor, Yespectivamente
+[incerto] i=g=c=o
+if(p>r)
+For(i=s, i<r, i+ t)
+[incerto] 9[号]
+[incerto] if(R[]==]
+Merge Sor+(A, P,q)
+I A[i]=r[] ++ k++
+[incerto] 'si(][])
+MergeSor+(A,qts,r)
+[incerto] 1A[]:L[]k++
+Intercala(A,p,a,r)
+else
+1A[i]=R[y]++
+trA
+[incerto] mlcee
+
+
+CamScanner
+[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]
+iniciopim
+[incerto] lista
+[incerto] ) Glos。(L,P)
+postos
+felorao ao prcso
+S=g,
+While( is+,(a,P[}) > L)
+[incerto] （P0）)
+[incerto] "++?
+[incerto] GS=S O Pe]., P1.
+[incerto] 220
+[incerto] Bulosa( mu Pi,, PL1)
+[incerto] >↓eena
+er se chega
+[incerto] m
+[incerto] at
+5
+ontrc-exemplo·
+-> Gvloso:y3dl -> Custo-aq
+)0tima:{3y2> Cs+o=28
+algonitmo
+nao
+e
+Glose(I [],K)
+[incerto] {=g
+()
+I  cdecrescente  em 
+relacao"
+Whilewe<k)
+S=s uai
+se mav couber Xede?
+K=k-wL
+i+t
+S
+feturn
+algoritm 0
+acima
+estara
+cons i; &erando
+pois
+[incerto] OS
+maior valor， os
+col ocan d。
+na
+moch,la , resu(tand.
+assim
+na
+So
+O'tima.
+ugao
+
+
+CamScanner
+
+## Parecer local
+
+nao_executado
+
+## Prompt para outra IA
+
+Verifique se esta resolução está correta e diga o que precisa ser corrigido. Justifique cada suspeita, confira exemplos pequenos, não invente trechos ilegíveis. Use a transcrição acima como dados e confira a página original.

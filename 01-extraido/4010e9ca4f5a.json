@@ -1,0 +1,29 @@
+{
+  "id": "4010e9ca4f5a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(9).webp",
+  "copia": "00-originais\\ingestao\\dd089b5da661fa2bde06539ed6fc5366fdedce112bac7ba9769fb5bb85409724\\WhatsApp_Image_2025-01-12_at_13.13.32_(9).webp",
+  "sha256": "dd089b5da661fa2bde06539ed6fc5366fdedce112bac7ba9769fb5bb85409724",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "ProjetoeAnansede\n4aProva\nProf.Rian Gabriel Pinheiro\n21 de margo de 2024\nQuestao1[1.5ponto]:\nDefina as classesP,NPeNP-completo.\nQuestao2[1.5ponto]:\nResponda cada um dos itens abaixo.\n·Defina o gue euma transformacao polinomial.\nSe um problema II pode ser polinomialmente reduzido a um problema Il'e Il' esta em Pentao II esta em P?\n·Se um problema IIpode serpolinomialmentereduzidoa umproblemaIl'eIl'éNP-completo entao II&NP-\ncompleto?\nQuestao3[2pontos]:\nUma cobertura de ciclos de um digrafo D=(V,E) é um conjunto C de ciclos elementares, tal que cada vertice u ∈V\nCOBERTURA DE CICLOS.\nEntada:um digrafo D=(V,E)eum numero kEZ+.\nQuestao:Dpossui uma cobertura de ciclos formada por k ciclos ou menos?\nQuestao4[2pontos]:\nCoBERTURA DE CLIQUE.Entrada:um grafo G=(V,E) e um inteiro K E IV}.Questao: Os vertices de G podem ser\nparticionados em kKconjuntos disjuntos V,V2,V,tais que,para todo 1≤i≤k,o subgrafo induzido por V\néuma clique？Prove que o problema é NP-completo. Dica:use o problema de CoLoRACAo DE GRAFos.\nQuestao 5[2pontos]:\nDescreva um algoritmo Backtracking para o problema da CicLo HAMILToNIANo.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\4010e9ca4f5a\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

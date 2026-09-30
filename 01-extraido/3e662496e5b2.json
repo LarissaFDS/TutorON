@@ -1,0 +1,29 @@
+{
+  "id": "3e662496e5b2",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31_(3).webp",
+  "copia": "00-originais\\ingestao\\7c7fd4764842a2e69445ac2df8b58b82bfaddeac9373c9b2316bdd885e9e5ff9\\WhatsApp_Image_2025-01-12_at_13.13.31_(3).webp",
+  "sha256": "7c7fd4764842a2e69445ac2df8b58b82bfaddeac9373c9b2316bdd885e9e5ff9",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] or11ndo\nwbilej<ndo\n[incerto] +1\nendwhile\n[incerto] 9\nrerurhr\n10\nend for\nendprocedure\nConsidere que m eda lorma 2pata m itero positivok\n[incerto] od1os\nCalcnie exatamente qoantas operagoeso algoritmo fz,\n[incerto] procobureGE[msttiAnxn\n2:\n[incerto] opx120\n4\nOporngio\nendfor\nendfor\nendprocedure\nQuestao 8[1 ponto]:\nConsidereseguitealgoritnorecursivo,cnjo argumentonum inteiro positivo.\nI:procedureAsTERuscg(a)\n2:\nifn>Othen\n[incerto] fori-1→ndo\n4\nimprima\nendfor\n6:\nASTEHIsco([n/2])\n7\nendif\n8:endprocedure\nPara un dadovalor dequantos asteriscos serao inpressosn uma chaunda deAsEriscon)？Mostrea\nrecorrencia e escreva a solugao usando notacao assintotioa.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\3e662496e5b2\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

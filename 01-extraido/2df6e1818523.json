@@ -1,0 +1,87 @@
+{
+  "id": "2df6e1818523",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\provaoaa.pdf",
+  "copia": "00-originais\\ingestao\\f8721b8a3b10f9c650b5fb5c8c391bfed1776aabac56bce59a120b278139106f\\provaoaa.pdf",
+  "sha256": "f8721b8a3b10f9c650b5fb5c8c391bfed1776aabac56bce59a120b278139106f",
+  "tipo": ".pdf",
+  "paginas": 4,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-02-divisao-e-conquista",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "-~ \nUniver dade Federal de Alagoas - UFAL \n~itu de Computação \n\nProjet e Análise de Algoritmos \n\n--- 1 t \n\nlª Pro \nProf. l.Uan Gabriel Pinheiro \n31 de j~lho de 2023 \n,. \nQuestã~ 1 (2 pontos]: \nProjete \\un algoritmo para determinar a subtração de duas listas ordenadas de números inteiros. Por exemplo, para \nas listasi[l, 2, 3, 5, 6, 7, 9] e [O, 3, 5, 7], a saída deve ser [1, 2, 6, 9] . Prove a corretude do seu algoritmo. \n\nQuestã~ 2 (2 pontos]: \nConsider o seguinte algoritmo: \n\n1: proc dure ALGORITMO X(vetor A(l, .. . , n], inicio, fim) \n2: \nif , nicio = fim then \n3: \n:j return A(inicio] \n4: \nen:ct lf \n5: \nlf~icio > fim then \n6: \nreturn O \n7: \ne \nif \n8: \nm1io +- inicio+ (fim - incio)/2 \n9: \na r X(A, inicio, meio) \n10: \nb 1+- X(A, meio +l, fim) \n11: \nr1urn a+ b \n12: end l?rocedure \nt \nExp~que o que ele faz e prove sua corretude. \n\nQuestã~ 3 [2 pontos): \nSeja /(1) uma função dos inteiros nos reais. Justifique: \n\n1. Qtjal a definição formal de O(f(n))? \n\n2. \nierdade que 20n3 + lOnlgn + 5 é O(n3)? \n\n3. E terdade que ½n2 é O(n)? \n\n4. Q4al a definição formal de 0(f(n))? \n\nQuestãl 4 [2 pontos): \nPara c4a um dos seguintes algoritmos, indique (i) uma métrica de tamanho natural para sua entradas, (ii} sua \noperaçãq básica, e (iii) a contagem da operação básica em função do tamanho da entrada: \n\n1. calculando a soma de n números; \n\n2. cofnputação de n!; \n1 \n3. enfontrando o maior elemento em uma lista de n números; \n\n4. al1oritmo de lápis e papel para multiplicar dois inteiros decimais de n dígitos. \n\n1 \nQuestãi 5 [l ponto]: \nResolva 1 \nrecorrência: \n\nT(n) = { ~~(n/2) + cn, \n\nse n = 1 \nse n > 1. \n\n1 \nj \n\nQuestãb 6 [1 ponto]: \nSupouh~ que você queira encontrar o maior e o menor elemento em um conjunto de elementos inteiros S. Para cada \nrepresenf;ação de S fornecida abaixo, descreva em resumidamente (em uma linha} o algoritmo para encontrar o maior \ne menor !elemento e indique as classes de eficiência de tempo desses algoritmos usando a notação mais apropriada (O. \n0 ou f!}i \n1 \n1. U1fa matriz não ordenada. \n\n2. Utjia matriz ordenada. \nl \n\n\n[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidade Federal de Alagoas -UFAL\n[incerto] Tanel\nInstitutodeComputacao\nProjetqe Analise deAlgoritmos\n1Prova\nProf.Rian GabrielPinheiro\n31 de julhode2023\nQuestao 1 [2 pontos]:\nas listas[1, 2, 3, 5, 6, 7, 9] e [0, 3, 5, 7], a saida deve ser [1, 2, 6, 9]. Prove a corretude do seu algoritmo.\nQuestap 2 [2 pontos]:\nConsidereoseguintealgoritmo:\n1:procedure ALGORITMoX（vetor A[1,..,n]，,inicio,fm)\n2:\nifnicio=fim then\n3:\nreturn A[inicio]\n4:\nendif\n5:\nifinicio>fimthen\n6:\nreturn0\n7:\nendif\n8:\nmqio←inicio+（fm-incio）/2\n[incerto] :6\naX（A,inicio,meio)\n10:\nbx（A,meio+1,fim)\n11:\nreturna+b\n12: end procedure\nExpljque oqueelefazeprove sua corretude.\nQuestao3[2pontos]:\nSeja f(n) uma funcao dos inteiros nos reais. Justifique:\n1. Qujal a definicao formal de O(f(n))?\n2. E yerdade que 20n3 + 10n lg n + 5 é O(n3)?\n3. E yerdade que n² é O(n)?\n4.Qual a definicao formal deO(f(n))?\nQuestab4[2 pontos]:\nPara cada um dos seguintes algoritinos, indique (i) uma metrica de tamanho natural para sua entradas, (i) sua\n1.cafculando a soma de n numeros;\n2.cofnputacao de n!;\n3.entontrandoomaiorelementoemumalistadennumeros;\n4. algoritmo de lapis e papel para multiplicar dois inteiros decimais de n digitos.\nQuesta5[1ponto]:\nResolva h recorrencia:\n= (u)L\n[1,\nsen=1\n[2T(n/2) + cn, se n > 1.\nQuestab 6 [1 ponto]:\nSuponha que voce queira encontrar o maior e o menor elemento em um conjunto de elementos inteiros S.Para cada\ne menorelemento e indique as classes de eficiencia de tempo desses algoritmos usando a notacao mais apropriada (O,\nθou S)\n1.Urma matriz nao ordenada.\n2. Urha matriz ordenada.\n\n\n1 \n1",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b582b17177a0\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\b582b17177a0\\p1-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\b582b17177a0\\p1-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "' \n\n_' i 11a lista encadeada. \n\n' \n' \nd b \nb' ' . \n4. U111a arvore e usca mana. \n\n1 \n! \n_ Questãb 7 [1 ponto): \n\nCalcule batamente quantas operações o algoritmo faz. \n\n1: procédure GE(matriz Anxn) \n2: \nro} i +- 1 -+ n do \n3: \n1 for j +- i + 1 -+ n - 1 do \n4: \nÍ \nOperação \n5: \n/ end for \n6: \nerid for \n7: end ~rocedure \n! \nl \nQuestã~ 8 [1 ponto): \nConsid~ o seguinte algoritmo recursivo, cujo argumento n é um inteiro positivo. \n\nf \n\nl: proc dure ASTERISCO(n} \n2: \nlf \n> O then \n3: \nfor i +- 1 -+ n do \n4: \nimprima \"*\" \n5: \nend for \n6: \nASTERISCO(ln/2J) \n7: \nend lf \n8: end rlrocedure \n\ni \nPa~al \ndado valor de n, quantos asteriscos serão impressos em uma chamada de ASTERISco(n)? Mostra a \nrecorrenra. \n\nCL+® \n\nL1l..:)<ltlp \n\n1 \n' \nJ . .}J~ \n.:{ \n..1-\nl ! e. \\ 1 < l1-q 1 , ,_ \n..:: \n;. 1 \na \nf>\",;I>-~ \nu. \n5: }J .. r_~ ,; \ntL L'? . \n\nÁo .w..-\nI v~ \n'\\-\" \nO \ne)&, \n,SI.._ \n1 \n4-~ \nC>. \n\n0./4 \n\nL~ \nL::i \n\nr . \nt \n_ \n· -\nr A-. \nf'9\" \ni \nc.e- r , li--, \n~-\n~ l \n,..R---. l \n\nLJ \n\nL \n= \nd..,,,_ L 1 \nL \n\n4 \n-\nr \n, \n\n.a,,;1,.:j \n·½, \n,,._ \nah L.1 - LJ. \ni \n\n. \n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nmalistaencadeada.\n4.Umaarvoredebuscabinaria.\nQuestab 7 [1 ponto]:\nCalculeexatamente quantasoperacoes oalgoritmofaz.\n1:procedure GE（matriz Anxn)\n2:\nfori←1→ndo\n3:\nforj←i+1→n-1do\n4:\nOperacao\n5:\nendfor\n6:\nendfor\n7:endprocedure\nQuestap 8[1 ponto]:\nConsideteoseguintealgoritmorecursivo,cujoargumentonéuminteiropositivo.\n1:procqdure AsTERIsco（n)\n2:\nifn>0then\n3:\nfori←1→ndo\n4:\nimprimau*n\n5:\nendfor\n6:\nASTERISCO（[n/2])\n7:\nendif\n8:endprocedure\nParalum dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco(n)? Mostra a\nrecorrencia.\n[incerto] Quef\n[incerto] eledeLs.\n[incerto] 3.Noego\n[incerto] L]<L[j]MPP\n[incerto] LeteleL?.\n[incerto] A，Voamdip\n[incerto] p\n=L.a\noj>=L2.ta\n[incerto] Com\n[incerto] imo，fen\n[incerto] lgre\n[incerto] ↓LLp。.Ac\n[incerto] nmp\n[incerto] （？‘\n[incerto] csle.Dema Ferna\n[incerto] ef\ng\n[incerto] eCmt.oonraopdLs-L2cnomnt.",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b582b17177a0\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\b582b17177a0\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\b582b17177a0\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "}r ·1> L-4 \n\n9 \n,_ \n' \n\n11 \n11 \n_11 \n'.) ' \n\n3 t~ \nr \nt \n! \n\\' \n\"f f f 1 ~5; \n\nLR-} \nf \n\n1 \nr r 1_ f r r-\nr: \" -r :., D \n_t_ \n11 \nlt<\\ \n- \\ \n-\n\" \n1\\ \nr ~Ê \nt i\\\nr \n.. \n\\\nr \nr t \n\n-\n1 \n• \n\n1 \n1 \nb \np \n_ l \n5 \\ \n-\ni ~-\ni \n.:: d· ! \"· \nF \n·\n\n°' r \n.g \n~, \n\n._ \n. \nl/1 t . . \nd f \n. \n'. \ni \n,-- .... r \n~ . \n-1-\n• \nr- \" \nr-\n' \n1T' \n~-\n, 1 .. f L t. 1 l ®{ \nt . D º \nr-\n> - ..... -(\"' \n. \n\n. \n..,_ \n1·<:\"- .. \n>· \n°' \n• \nr-+' \n:s \n-\nJ:'T\"I' \n-\n,. \n, • \n.... \n-\n. \nÍ' . \n.j \nti \n} • \nQ,o, \n1.-4 \n-\nt \n1 '. l t r t -f , \n.[ ! f. . f ~- r \n\\ \n:-\n• . \nt \n\nr f r i \n1 \nr f f \n~n f 1 \ni-\n: \n•· \nr \n· • ~,,. \nf \nt. \n{ \ni \n! lr-rl.l \n.. f , ,, \n~r t t_r-: l- ~1 \n~:;~í \nr ~t t?. \n\n} x - J · + f r , h \n, s \n-Q J\" f d \nt r::: + : r f E \nE } \n'\\. \nl \\: li l- ,.. f \nr. r i,- ;;, r \"' \n:.., \n.. ~;:, i ~-!- d \nt : r \n::- . \n\\ \n\ne-~ i \ni r : \n9 \nf. . r . \nr ---- l: '.- r. r~r F ----=-------~----t r P \n· \nf º \n0 V r.. l \nº \nE\" ...... ,-\ns \n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n3510412023\nCopdopo\n[incerto] L了[]\n[incerto] moc\nmd\n[incerto] 1\nelemetes,ceomum.\n[incerto] pesuem\n[incerto] m9\n[incerto] lgriteS\n[incerto] Vamn Leθ\n[incerto] Sulbocjo :\n[incerto] Ols:\nSul女oo (Ls, L2):\n[incerto] Copd\n[incerto] =,pl\nL=L1\n[incerto] xi dUL2,\n[incerto] i=0\n[incerto] imL,alt\n[incerto] =0\n[incerto] Whk:le (i <LJ.tan  && j < L2. a~)\n[incerto] (L[) =: L2[j])\nL,ea (i)\nM Revoue ili.. nepdide da copio\n& L 1\ni ++\n[incerto] 4++\n[incerto] a4 (L1 [i] <L2[j])\n[incerto] Jmeuuen\ni++\n[incerto] netuuL\n.Dde\n[incerto] mo, Vama Peuo\n[incerto] cntdepn iwoiotlloye:\n[incerto] Atndeloe:Dadeneloei\n[incerto] mtdomiudnuniieei\n[incerto] L1,1ldoej.Tmo\n[incerto] pifetridmeuma\n[incerto] mtai.ep，mimotcll\ndL\n[incerto] da lore: No iniio d lorg, Lamn gr\n[incerto] LlualiaJetedecon\n[incerto] Monderepo\n[incerto] dih\n[incerto] Colpo de L. Patil de 3 MLocpe:\n[incerto] !CMPY\n[incerto] (Cmiwolq...) Fea  d pee \n[incerto] Queto\n02\n[incerto] dgnt。Xlui\n[incerto] adedd\n1\n[incerto] leeten\n[incerto] ieul。ilflnteet\nJote.Saja\nP(m):\"0\n[incerto] ag.Xnetena\n[incerto] deeretl\n[incerto] dte\n[incerto] 3\nBoe: Dde\n[incerto] uetn\n[incerto] P(1),θg.it\n小dli2\n[incerto] dldeQun\n[incerto] MlndLook\n[incerto] agutnn\n[incerto] smtt\nHipitne: Supeba\n[incerto] Yrdode\n[incerto] s&-Ss（s?56g\nXodo k <n.\n[incerto] cdm，em\nLen\n[incerto] .i 。l &a ops\nPrecea: Saja A\n[incerto] ymθ\nalg\n[incerto] J  jo . Elo ; pela Mipotese θ olg. ino nenn\n[incerto] Po\n3\n[incerto] I[ia\n[incerto] [+·]\nieie + nie)≤m\n[incerto] ti+s+k\n[incerto] a。lo.Pnfi1\n[incerto] Aloae\n[incerto] θcaln d a+l . Dena Femr) pedes \n[incerto] lil。小小 instn \n[incerto] tncmibualieifcnetot.",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b582b17177a0\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\b582b17177a0\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\b582b17177a0\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "1.- ~ ' 1.:.-\n\"\"'~°' J, ... , \n,......,. \n\nt,,,,r~ .~•••o·---f'.1~ \nc.,.i<-•'S i'•' < t,-J••> ,.,.-. j;.l,, --.=, \n\n~® \n\nj , \n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n[incerto] ual\n[incerto] Lodo\n1. Dode\n[incerto] u\n[incerto] mr\n[incerto] Cm。.Taq\n[incerto] g(n)  C.cm) ipa\n[incerto] petius\n++=\n[incerto] npelooplinu de lilo:\n[incerto] liboge\n[incerto] 2.<a1s\n[incerto] 20m1+\n[incerto] 20m3 4J0.m.logn +S = Dc\n[incerto] cedodeie\n[incerto] f(~)\n~3\n[incerto] ArC\n[incerto] m3\nLaa\n20ns ±i0n. lgn +s α O (ns).\n[incerto] aplicoce dlif:\n3. Vaa Je pelo a\n[incerto] Li\n[incerto] = o. Dodo。 ualn & o, Cnlio\n[incerto] ~?\n[incerto] (m)6\n[incerto] SlHS\n[incerto] M\n[incerto] f(m1\nO(m) .\n2\n[incerto] Cs·s)≤ g( < (2·Sm), Poa ad\n4. Dode\nQuetoo @\n1.\n[incerto] Dabht) Dode u (elon da 4 aleas V= m1m2~s,muI .\n()(一\n[incerto] (ii) Operor\n[incerto] gniua\nfo(i=0, x≤V.la-,i++)\n[incerto] =V+；\n[incerto] (iia)\n[incerto] coogem x dodo pel。 mg-Joie [m= V.fa- ]\n[incerto] V=[I. M2.~s,~]\n[incerto] 3(i)Dode u-veton \n[incerto] d4leo\n[incerto] ()\n[incerto] Dsico\n[incerto] m=-i\n[incerto] fo (a], isV. to (i++)\n(<)\nOpe\nm =V[]\n[incerto] =+-1Mog,mcep、Colg=4.\n\n\n-",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b582b17177a0\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\b582b17177a0\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\b582b17177a0\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

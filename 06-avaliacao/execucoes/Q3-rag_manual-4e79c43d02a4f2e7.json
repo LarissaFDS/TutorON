@@ -1,0 +1,65 @@
+{
+  "questao": "Q3",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c07",
+    "c08"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo de força bruta para verificar se um número \\( n \\) é composto, que testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\), não é considerado polinomial porque a complexidade de tempo não é proporcional apenas à ordem do tamanho do número \\( n \\), mas sim ao valor do próprio número \\( n \\).\n\nA complexidade de tempo desse algoritmo é \\( O(n) \\), mas isso se refere ao número de divisões, não à complexidade em função do tamanho do número \\( n \\). O tamanho do número \\( n \\) é geralmente medido pelo número de bits necessário para representá-lo, que é \\( \\log_2(n) \\).\n\nPara entender por que ele não é polinomial, vamos analisar a complexidade em termos do tamanho do número \\( n \\):\n\n1. **Tamanho do Número \\( n \\)**: Se \\( n \\) é representado por \\( b \\) bits, então \\( n \\) pode ser expresso como \\( n = 2^b \\).\n\n2. **Número de Divisões**: O algoritmo testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\). O número de divisões é \\( \\lfloor n/2 \\rfloor - 2 + 1 = \\lfloor n/2 \\rfloor - 1 \\).\n\n3. **Expressão em Termos de \\( b \\)**: Como \\( n = 2^b \\), temos:\n   \\[\n   \\lfloor n/2 \\rfloor \\approx \\lfloor 2^b / 2 \\rfloor = 2^{b-1}\n   \\]\n   Portanto, o número de divisões é aproximadamente \\( 2^{b-1} \\).\n\n4. **Complexidade em Termos de \\( b \\)**: A complexidade de tempo do algoritmo, em termos do tamanho \\( b \\), é \\( O(2^b) \\), que é exponencial em \\( b \\).\n\n5. **Classe P**: Um algoritmo é considerado polinomial se sua complexidade de tempo é \\( O(n^k) \\) para algum \\( k \\). No caso do algoritmo em questão, a complexidade é exponencial em \\( b \\), não polinomial.\n\nPortanto, apesar de fazer \\( O(n) \\) divisões, a complexidade do algoritmo é exponencial em termos do tamanho do número \\( n \\), o que o torna pseudo-polinomial, não polinomial.\n\nEm resumo, o algoritmo não é polinomial porque a complexidade de tempo depende exponencialmente do número de bits do número \\( n \\), não do tamanho do número \\( n \\) em si.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.32800000000043,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

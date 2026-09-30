@@ -1,0 +1,209 @@
+{
+  "id": "1a81ca283132",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf",
+  "copia": "00-originais\\ingestao\\21aaf6a4f2ab267dc973ce357af1dfcd2ce97006c21da090fc61233ae02e73ed\\PAA_L5.pdf",
+  "sha256": "21aaf6a4f2ab267dc973ce357af1dfcd2ce97006c21da090fc61233ae02e73ed",
+  "tipo": ".pdf",
+  "paginas": 10,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-04-programacao-dinamica",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 5\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 5 - Programa¸c˜ao Dinˆamica\n\n1. Inteiros positivos s˜ao arranjados em um triˆangulo equil´atero com n n´umeros\nem sua base, como o mostrado na figura abaixo para n = 4.\nO problema\n´e encontrar a menor soma em uma descida do ´apice do triˆangulo at´e sua\nbase por meio de uma sequˆencia de n´umeros adjacentes (mostrados na figura\npelos c´ırculos).\nProjete um algoritmo de programa¸c˜ao dinˆamico para este\nproblema.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]\nint min_tri_sum(vector<vector<int>>&triang){\nint n = triang.size();\nvector<int>state(n,θ);\nvector<int>new_state(n+1,0);\nstate[e]=triang[o][o];\nfor(int i=1;i<n;i++){\nfor(int j=θ;j<triang[i].size();j++){\nif(j==0){\nnew_state[j]=triang[i][j]+state[i];\nelse if(j == triang[i].size()-1){\nnew_state[j]=triang[ij[j]+state[j-1];\nelse{\nnew_state[j]=triang[i][j]+ min(state[j-1], state[j]);\nstate =new_state\nint min_path = INT_MAX;\nfor(int i=0;i<n;i++){\nmin_path = min(min_path, state[i]);\nreturn min_path;",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p1-fig1.png",
+        "01-extraido\\figuras\\1a81ca283132\\p1-fig2.png",
+        "01-extraido\\figuras\\1a81ca283132\\p1-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p1-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "2. Algumas moedas s˜ao espalhadas nas c´elulas de um tabuleiro n × m, uma mo-\neda por c´elula. Um robˆo, localizado na c´elula superior esquerda do tabuleiro,\nprecisa coletar o m´aximo de moedas poss´ıvel e trazˆe-las para a c´elula inferior\ndireita. Em cada etapa, o robˆo pode mover uma c´elula para a direita ou uma\nc´elula para baixo de sua localiza¸c˜ao atual. Quando o robˆo visita uma c´elula\ncom uma moeda, ele pega a moeda. Elabore um algoritmo para encontrar o\nn´umero m´aximo de moedas que o robˆo pode coletar e um caminho que ele\nprecisa seguir para fazer isso.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\ndef robotPath(rows,cots,matrix):\n# matriz tem rows+1 linhas e cols+1 colunas\nrobotPath =[[e]*(rows+1) for _in range(cols+1)]\nfor i in range(1, rows+1):\nfor j in range(1, cols+1):\n# encontra o numero maximo e adc 1 se contem uma moeda\nrobotPath[i][j]= max(\nrobotpath[i-1][j],robotPath[i][j-1])+matrix[i-1][j-1]\nprint('As moedas coletadas pelo robo em cada nivel sao:\\n',np.matrix(robotPath))\nprint('Quantidade maxima de moedas coletadas:',robotPath[rows][cols])\n#imprime 0 caminho e o numero maximo\n# define uma matriz de exemplo\nrows=3\nco1s=3\nmatrix = [{o]*rows for _ in range(cols)]\nmatrix =[{1,1,1]\n[1,0,1],\n[1,1,1]]\n#envocaafuncaodorobo\nrobotPath(rows,cols,matrix)\n\n\n3. Projete um algoritmo eficiente para encontrar o comprimento do caminho\nmais longo em um DAG. (Este problema ´e importante como um prot´otipo de\nmuitos outros aplicativos de programa¸c˜ao dinˆamica, pois determina o tempo\nm´ınimo necess´ario para concluir um projeto que compreende tarefas de pre-\ncedˆencia restrita.)\n\nSolu¸c˜ao:\n\nPage ii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\ndef addEdge(adj,u，v):\nadj[u].append(v)\ndef dfs(node,adj，arr,visited):\nvisitedfnode]=True\nfor i in range(0,len(adj{node])):\nif not visited[adj[node][i]]:\ndfs(adj[node][i],adj,arr,visited)\narr[node] = max(arr[node], 1 + arr[adj[node][i]])\n\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\ndef lengthLongestPath(adj，k):\narr=[0] *(k+1)\nvisited =[False] *(k + 1)\nfor i in range(1,k + 1):\nif not visited[i];\ndfs(i,adj，arr,visited)\nmaxLength = θ\nfor i in range(1, k + 1):\nmaxlength = max(maxlength, arr[i])\nreturn maxLength\n# Main Code\nk=5\nadj = [[] for i in range(k + 1)]\n#Exempl0\naddEdge(adj,2,3)\naddEdge(adj,2，4)\naddEdge(adj,4,3)\naddEdge(adj,3,5)\naddEdge(adj,4，5)\nprint(lengthlongestPath(adj, k))\n\n\nPage iii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p3-fig1.png",
+        "01-extraido\\figuras\\1a81ca283132\\p3-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p3-fig1.png",
+          "status": "incerto_revisao_humana",
+          "texto": "```python\ndef addEdge(adj, u, v):\n    adj[u].append(v)\n\ndef dfs(node, adj, arr, visited):\n    visited[node] = True\n\n    for i in range(0, len(adj[node])):\n        if not visited[adj[node][i]]:\n            dfs(adj[node][i], adj, arr, visited)\n\n    arr[node] = max(arr[node], 1 + arr[adj[node][i]])\n```"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p3-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "4.\nUma subsequˆencia cont´ıgua de uma lista S ´e uma subsequˆencia feita de\nelementos consecutivos de S. Por exemplo, se S ´e\n\n5, 15, −30, 10, −5, 40, 10,\n\nent˜ao, 15, -30, 10 ´e uma subsequˆencia cont´ıgua, mas 5, 15, 40 n˜ao ´e. Forne¸ca\num algoritmo de tempo linear para a seguinte tarefa:\n\nEntrada: Uma lista de n´umeros a1, a2, ..., an .\n\nSa´ıda: A subsequˆencia cont´ıgua de soma m´axima (a subsequˆencia de tamanho\nzero tem soma zero).\n\nPara o exemplo anterior, a resposta seria 10, -5, 40, 10, com uma soma de 55.\n(Dica: Para cada j ∈1, 2, ..., n considere subsequˆencias cont´ıguas terminando\nexatamente na posi¸c˜ao j .\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\ndef max_contiguous_sum(S):\ncur_max=-inf\nmax_local =0\nstart_max =0\nend_max = θ\nstart=θ\nfor i in len(S):\nmax_local += S[i]\nifmax_local>cur_max:\ncur_max =max_local\nstart_max = start\nend_max = i\nif max_local<0:\nmax_local = 0\nstart_max = i+1\nfor i in range(start_max,end_max):print(S[i]+\"\")\n\n\n5. Dadas duas strings x = x1x2xney = y1y2ym, desejamos encontrar o comprimento\nda maior substring comum delas, isto ´e, o maior k para o qual existem ´ındices\ni e j com xi xi+1 xi+k1 = yj yj+1 yj+k1. Mostre como fazer isso em tempo O(mn)\n\nSolu¸c˜ao:\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nint longest_common_substr(char *str1, char *str2, int size1, int size2){\nint suff[sizel+1][size2+1];\nint max_len=0;\nfor(int i=0;i<sizel;i++)\nfor(int j=0;j<size2;j++)\nif(i==0l1j==0)suff[i][j]=0；\nelse if(str1[i-1]== str2[j-1]){\nsuff[i][j]=suff[i-1][j-1]+ 1;\nmax_len = max(max_len,suff[ij[j]);\nelse\nsuff[i]ti]=0;\nreturn max_len;\n\n\n6.\nUma certa linguagem de processamento e strings oferece uma opera¸c˜ao pri-\nmitiva que divide uma string em dois peda¸cos. Como essa opera¸c˜ao envolve\ncopiar a string original, ela toma n unidades de tempo para uma string de\ntamanho n, n˜ao importa a posi¸c˜ao do corte. Suponha, agora, que vocˆe queira\nquebrar a string em muitos peda¸cos. A ordem na qual os cortes s˜ao feitos\npode afetar o tempo de execu¸c˜ao total.\nPor exemplo, se vocˆe quiser cor-\ntar uma string de 20 caracteres nas posi¸c˜oes 3 e 10, fazer o primeiro corte\nna posi¸c˜ao 3 incorrer´a em um custo total de 20+17 = 37, enquanto fazer a\nposi¸c˜ao 10 primeiro ter´a um custo melhor de 20 + 10 = 30. Forne¸ca um algo-\nritmo de programa¸c˜ao dinˆamica que, dadas as posi¸c˜oes de m cortes em uma\nstring de comprimento n, encontre o custo m´ınimo de dividir a string nos m\n+ 1 peda¸cos.\n\nSolu¸c˜ao:\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p5-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n#include <iostream>\n#include <string.h>\n#include <stdio.h>\n#include <Iimits.h>\nusing namespace std;\nint main()\nint cuts, length, k, split;\nwhile(scanf(\"%d%d\"， &length，&cuts){= EOF)\nint arr[length +1][length+1];\nint cut[cuts];\nint i j\nmemset(arr,0, sizeof(arr));\nfor(i=θ;i<cuts; i++)\ncin >> cut[i];\nfor\n(split=1;split<=length}split++)\nfor (i=0,j=i+split; }<=Iength;j++,i++)\nif (split ==1)\narr[i][j】] =0;\nelse\nint min = INT_MAX;\nfor (k =θ; k<cuts; k++)\nif (cut[k]<j andcut[k]>i)\nint cost=（j -i) +arr[ij[cut[k]] + arr[cut[k]][j];\nif(cost<min)\nmin  costj\nif (min >= INT_MAX)\narr[i[j] =θ;\nelse\n[incerto] uw={]t]e\ncout<<arr[e][length]<<endl;\nreturn o;\n\n\n7. Uma cobertura de v´ertices de um grafo G = (V, E ) ´e um subconjunto de\nv´ertices S ⊇V que inclui ao menos uma extremidade de cada aresta de E .\nForne¸ca um algoritmo de tempo linear para a seguinte tarefa.\n\nEntrada: Uma ´arvore n˜ao-direcionada T = (V, E).\nSa´ıda: O tamanho da menor cobertura de v´ertices de T.\nPor exemplo, na ´arvore abaixo, as poss´ıveis coberturas de v´ertice incluem\n{A, B, C, D, E, F, G} e {A, C, D, F}, mas n˜ao {C, E, F}. A menor cobertura de\nv´ertice tem tamanho 3: B, E, G\n\nPage vi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p6-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nA\nD\nB\nE\nG\nC\nF\n\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig2.png; conferir símbolos na imagem]\nclass vertex-cover\nstatic int min(int x, int y){\nreturn (x<y)？x：y\nclass node\npublic int dataj\npublic int vertexcover;\npublic node left,right;\nstatic node createNode(int data)\nnode el = new nodet);\nel.vertexcover=θ;\nel.left =el.right =null;\nel,data = data}\nreturn el;\nstatitint vCover(noderoot){\nif (root = null)\nreturn θ\nif{root.left ==null &&\nroot.right == nul1)\nreturn B;\nif（root.vertexcover=8)\nreturn root.vertexcover!\nintsizeWithRoot=1+vCover(root.left)+\nvCaver(root.right);\nint sizeNoRoot=θ;\nif(root,left 1=nul1)\nsizeNoRoot+=1+vCover(root.left,left)+\nvCover(roat.left.right);\nif{root.right =null)\nsizeNoRoot+=1+vCover(root.rightleft)+\nvCover(root.right.right);\nroot.vertexcover=Math.Min(sizeWithRoot,sizeNoRoot);\nConsale,Write(\"0 tamanho da menor cobertura de vertice é {0}\";root.vertexcover);\nreturn root.vertexcover;\n\n\n8. Forne¸ca um algoritmo de programa¸c˜ao dinˆamica (note que ser´a pseudo-polinomial)\npara o problema SUBSET SUM.\n\nPage vii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p7-fig1.png",
+        "01-extraido\\figuras\\1a81ca283132\\p7-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p7-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p7-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "Entrada: Um conjunto A com valores inteiros positivos, e um inteiro t.\nQuest˜ao: Existe um subconjunto A ⊆A cuja soma dos valores seja exatamente\nt?\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\nboot isSubsetSum(int A[], int t,int k)\nbool subset[k+1][t+1];\nfor(int i=1;i<=t;i++)\nsubset[o][i]=false;\nfor（inti=0；i<=k;i++)\nsubset[i][o]=true;\nfor(inti=1i<=k;i++)\nfor（intj=1;j<=t;j++)\nif(j<A[i-1])\nsubset[i][j]=subset[i -1][j];\nif(j>=A[i-1])\nsubset[ij[j] =subset[i -1]tj] l| subset[i-1][j-A[i -1]];\nfor（int i=0;i<=ki++)\nfor(intj=0j<=t;j++)\nprintf(\"%4d\",subset[i][i]);\ncout<<\"\\n\";\nreturn subset[k][t];\nint main()\nintA[]={3,344,12,5,2}\nintt=9；\nintk=sizeof(A)/ sizeof(A[o]);\nif (isSubsetSum(A,t,k) == true)\ncout << \"Foi encontrado um subconjunto cuja soma dos valores é exatamente igual a “t'.\";\nelse\ncout << \"Nao ha subconjunto com soma\nreturn 0;\n\n\nPage viii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p8-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p8-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "9. Dado um grafo simples G(V, E ) e dois v´ertices s, t ∈V , projete um algoritmo\nde programa¸c˜ao dinˆamica que encontre a quantidade de caminhos simples\ndistintos entre s e t\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nvector<int> topo_sort(int freq[], int graph_size)\nqueue<int> fila;\nfor (int i = 0;i< n; i++){\nif (!freq[i]) fila.push(i);\nvector<int> grafo_ordenado;\nwhile (!fila.empty()){\nint u = fila.front();\nfila.pop();\ngrafo_ordenado.push_back(u);\nfor(int i =0; i< grafo_inicial[u].size(); i++) {\nfreq[grafo_inicial[u][i]]--;\nif (freq[grafo_inicial[u][i]]==0)\nfila.push(grafo_inicial[u][i]);\nreturn grafo_ordenado;\nint caminhos_distintos(int destino, int n, int freq[])\nvector<int> grafo_ordenado = topo_sort(freq, n);\nint estados_anteriores[n]={ θ };\nestados_anteriores[destino] =1;\nfor (int i = grafo_ordenado.size() -1;i >= 0; i--){\npos = grafo_ordenado[i];\nfor(intj=0;j<grafo_inicial[pos].size();j++){\nestados_anteriores[pos] += estados_anteriores[grafo_inicial[pos][j]];\nreturn estados_anteriores[o];\n\n\nPage ix",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p9.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "10. Mostre uma algoritmo de programa¸c˜ao dinˆamica para o problema do CAMI-\nNHO M´AXIMO entre dois v´ertices s e t (caminho simples). Qual a comple-\nxidade do algoritmo (tempo e mem´oria)?\n\nSolu¸c˜ao: Um poss´ıvel algoritmo para resolver tal tarefa ´e o algoritmo de Floyd-\nWarshall com uma pequena modifica¸c˜ao (o algoritmo original foi feito para computar\no caminho m´ınimo entre dois v´ertices), assim, o algoritmo ficaria:\n\n\n[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]\ndef floyd_warshal(adj_dist_matrix):\nn=len(adj_dist_matrix[o])\nmax_dist=adj_dist_matrix\nfork in range(1,n+1):\nfor i in range(1,n+1):\nfor j in range(1,n+1):\nmax_dist[i][j] =max(max_dist[i][j],max_dist[i][k]+ max_dist{kj[j])\nreturn max_dist\n\n\nComplexidade de Tempo: O(n3)\nComplexidade de Mem´oria: O(n2)\n\nOutros algoritmos mais eficientes para fontes ´unicas, como o algoritmo de Bellman-\nFord ou Djikstra, tamb´em poderiam funcionar, a abordagem, neste caso, seria a\nmesma, maximizar o caminho ao v´ertice destino.\n\nPage x",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p10.png",
+      "figuras": [
+        "01-extraido\\figuras\\1a81ca283132\\p10-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\1a81ca283132\\p10-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

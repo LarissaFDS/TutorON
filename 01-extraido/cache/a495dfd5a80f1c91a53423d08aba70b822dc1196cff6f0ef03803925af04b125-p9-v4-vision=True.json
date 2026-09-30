@@ -1,0 +1,18 @@
+{
+  "pagina": 9,
+  "texto": "[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nfrom math importinf\ndef achar_array_intermed_max(A,comeco,fim，meio):# o(n)\nsoma_arr_esq = -inf\nsoma_tot=θ\nforiinrange(meio,comeco，-1):\nsoma_tot= soma_tot+ A[i]\nif(soma_tot > soma_arr_esq):\nsoma_arr_esq= soma_tot\nmax_ind_esq = i\nsoma_arr_dir =-inf\nsoma_tot=θ\nfori in range(meio+1,fim):\nsoma_tot=soma_tot+A[i]\nif(soma_tot>soma_arr_dir):\n[incerto]  =\nmax_ind_dir=i\nreturn (max_ind_esq,max_ind_dir，soma_arr_esq+soma_arr_dir)\ndef achar_array_max_gerat(A, comeco,fim): # O(n Log(n))\nif comeco ==fim:\nreturn(comeco,fim,A[comeco])\nelse:\nmeio=（comeco+fim)/2\n(comeco_esquerdo,fim_esquerdo,soma_esquerdo)= achar_array_max_geral(A,comeco,meio) # T(n/2)\n(comeco_direito,fim_direito，5oma_direito)=achar_array_max_geral(A，meio+1，fim)#T(n/2)\n(comeco_intemediario,fim_intermediario,soma_intermediario)= achar_array_intermed_max(A,comeco，meio,fim)\n#O(n tog(n)),\nif soma_esquerdo >= soma_direito and soma_esquerdo>= soma_intermediario:\n#n\nreturn(comeco_esquerdo,fim_esquerdo,soma_esquerdo)\nelif soma_direito >= soma_esquerdo and soma_direito >= soma_intermediario:\nreturn(comeco_direito,fim_direito,soma_direito)\n5\nreturn (comeco_intemediario,fim_intermediario,soma_intermediario)\n\n\nPage ix",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p9-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p9-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,18 @@
+{
+  "pagina": 8,
+  "texto": "Com isso, encontramos e retornamos T ′, que ´e ´arvore geradora mais leve na qual os\nn´os de U s˜ao folhas.\n\n8. Um conjunto feedback de arestas de um grafo n˜ao-direcionado G = (V, E )\n´e um subconjunto de arestas E\n\n′ ⊆E que intercepta todos os ciclos do grafo.\nAssim, remover as arestas E tornar´a o grafo ac´ıclico. Forne¸ca um algoritmo\neficiente para o seguinte problema:\n\nEntrada: Grafo n˜ao-direcionado G = (V, E) com pesos de aresta positivos\nwe.\nSa´ıda: Um conjunto feedback de arestas definida E ⊆E de peso total m´ınimo\nP\n\ne∈E’ we.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\ndefminimun_weight_feedback_edge_set(V,E):\nforedgeinE:\nedge.weight=-edge.weight\nminSpanTree =kruskal(v,E)#Kruskal vai utilizar as arestas de menor peso que,por serem\n#previamente negadas，construirauma MsT cujos pesos das arestas\nsolution=E\n#sao os maiores pesos reais\n#Conjuntosolucaoinicializadocomtodasasarestas\nfor edge in minSpanTree:\nsolution.remove(edge)#Remove dasolucaoas arestascontidasnaarvoredeexpansao minima\nreturn solution # Retornao conjunto feedback de peso minimo (complemento da MsT,cujos pesos\n#das arestas sao os maximos)\n\n\n9. Forne¸ca um algoritmo de tempo linear que tome como entrada uma ´arvore e\ndetermine se ela tem um emparelhamento perfeito: um conjunto de arestas\nque tocam cada v´ertice exatamente uma vez.\n\nSolu¸c˜ao:\n\nPage viii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p8-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p8-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "6c537b45fd2a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\correcaoprof.webp",
+  "copia": "00-originais\\ingestao\\8075cf629a1722cf7f0be56fd08301f7ae4685928148724310fb0f2bd55283e5\\correcaoprof.webp",
+  "sha256": "8075cf629a1722cf7f0be56fd08301f7ae4685928148724310fb0f2bd55283e5",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] Pdomoveugicanp\n20n²+0ngn+5\n[incerto] 60n+10gn\n[incerto] Lim\n&[20n²+10negn+5]\n[incerto] 8u\n[]\n[incerto] 3n2\n[incerto] [④n²+J0gn\n120n+\n[incerto] 袋[3n2]\nan\n12\nExpliq\nQuestao3\nSejam T(n)\nLOgues\n2.Everdad\nEverdade\n[incerto] 33Rodemisnaigicaurpon\nOque signl\nque signin\n[incerto] Qim\n2\n[incerto] 00\n[incerto] （n)\n4[1pon\n邓\nrecorrencn\n[incerto] Obtenesqu\n1pontoj:\n[incerto] T.\nplexidade\n[incerto] npadontonnaopodelOn）\n[incerto] aatonlqi\n2\n[incerto] pouxuiacortiaditcuncomadeiucodandapo0\ndo\n[incerto] Ddo\n[incerto] 3SuacoomaT（n）（（n）)ndT（n）（n）pun\n[incerto] n（f（n）={T（n）≥cp（n）1n≥no7\n[incerto] PotantomapunoT（npxereaoeonjunto（f（n))quanplquaqu",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\6c537b45fd2a\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "incerto_revisao_humana",
+          "texto": "```markdown\n# Problema 3.3\n\n**Pedimos verificar por:**\n\n\\[\n\\lim_{n \\rightarrow \\infty} \\frac{20 n^{2} + 10 n \\lg n + 5}{n^{3}} = \\frac{\\frac{d}{dx}\\left[20 n^{2} + 10 n \\lg n + 5\\right]}{\\frac{d}{dx}\\left[n^{3}\\right]} = \\frac{60 n^{2} + 10 n \\lg n \\frac{1}{n^{3/2}}}{3 n^{2}}\n\\]\n\n\\[\n\\frac{\\frac{d}{dx}\\left[3 n^{2}\\right]}{\\frac{d}{dx}\\left[3 n^{2}\\right]} = \\frac{120 n + p}{q n}\n\\]\n\n\\[\n\\Delta = 5\n\\]\n\n**Explain**\n\n**Questão 3**\n\n**Seja T(n)**\n\n1. O que significa T(n)?\n2. É verdade que T(n) é uma função polinomial?\n3. É verdade que T(n) é uma função polinomial?\n4. [1 ponto]\n5. [1 ponto]\n6. [1 ponto]\n7. [1 ponto]\n8. [1 ponto]\n9. [1 ponto]\n10. [1 ponto]\n11. [1 ponto]\n12. [1 ponto]\n13. [1 ponto]\n\n**Recorrência**\n\n**O que significa T(n)?**\n\n\\[\n\\lim_{n \\rightarrow \\infty} \\frac{\\frac{1}{2} n^{2}}{n} = \\frac{\\frac{1}{2} \\frac{d}{dx}\\left[n^{2}\\right]}{\\frac{d}{dx}\\left(n\\right)} = \\frac{1}{2} \\cdot \\frac{2n}{1} = n = \\infty\n\\]\n\n**Obtemos que \\(\\frac{1}{2} n^{2}\\) é de ordem infinita quando n tende a infinito, o que nos leva a concluir que \\(\\frac{1}{2} n^{2} \\geq n\\). Portanto, \\(\\frac{1}{2} n^{2}\\) não pode ser O(n), para ser contraditório com a definição da notação O.**\n\n**3.4 Seguindo a definição formal, T(n) é O(f(n)), sendo T(n) e f(n) funções de números reais, se tiverem constantes e se no pertencer aos reais, tal que**\n\n\\[\nO(f(n)) = \\left\\{T(n) \\geq c f(n) \\mid n \\geq n_{0}\\right\\}\n\\]\n\n**Portanto, uma função T(n) pertence ao conjunto O(f(n)) quando p1 qualquer valor real de n menor ou igual que n0, T(n) é maior ou igual a c f(n).**\n\n```"
+        }
+      ]
+    }
+  ]
+}

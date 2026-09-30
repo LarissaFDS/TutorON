@@ -1,0 +1,24 @@
+{
+  "pagina": 3,
+  "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\ndef addEdge(adj,u，v):\nadj[u].append(v)\ndef dfs(node,adj，arr,visited):\nvisitedfnode]=True\nfor i in range(0,len(adj{node])):\nif not visited[adj[node][i]]:\ndfs(adj[node][i],adj,arr,visited)\narr[node] = max(arr[node], 1 + arr[adj[node][i]])\n\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\ndef lengthLongestPath(adj，k):\narr=[0] *(k+1)\nvisited =[False] *(k + 1)\nfor i in range(1,k + 1):\nif not visited[i];\ndfs(i,adj，arr,visited)\nmaxLength = θ\nfor i in range(1, k + 1):\nmaxlength = max(maxlength, arr[i])\nreturn maxLength\n# Main Code\nk=5\nadj = [[] for i in range(k + 1)]\n#Exempl0\naddEdge(adj,2,3)\naddEdge(adj,2，4)\naddEdge(adj,4,3)\naddEdge(adj,3,5)\naddEdge(adj,4，5)\nprint(lengthlongestPath(adj, k))\n\n\nPage iii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p3-fig1.png",
+    "01-extraido\\figuras\\1a81ca283132\\p3-fig2.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p3-fig1.png",
+      "status": "incerto_revisao_humana",
+      "texto": "```python\ndef addEdge(adj, u, v):\n    adj[u].append(v)\n\ndef dfs(node, adj, arr, visited):\n    visited[node] = True\n\n    for i in range(0, len(adj[node])):\n        if not visited[adj[node][i]]:\n            dfs(adj[node][i], adj, arr, visited)\n\n    arr[node] = max(arr[node], 1 + arr[adj[node][i]])\n```"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p3-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

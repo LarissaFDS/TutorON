@@ -1,0 +1,22 @@
+{
+  "id": "ebd32d24085d",
+  "arquivo": "materiais\\c02_gabarito_algoritmo_x_nota_2.md",
+  "copia": "00-originais\\ingestao\\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\\c02_gabarito_algoritmo_x_nota_2.md",
+  "sha256": "267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-02-divisao-e-conquista",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c02\nfonte: \"Resolução de aluno da Questão 2 (1ª Prova), corrigida pelo professor com nota 2,0/2,0 — transcrição do manuscrito\"\ntipo: resolucao_corrigida\ntopico: corretude, indução forte\n---\nQuestão 2. O algoritmo X encontra o maior elemento em um vetor. Faremos a prova de sua\ncorretude utilizando indução forte no tamanho do vetor (n).\n\nTeorema: O algoritmo X retorna corretamente o maior elemento de um vetor.\n\nCaso base: se tivermos um vetor de tamanho n = 1, então inicio = fim e o algoritmo entra\nna linha 3, retornando o 1º e único elemento de A.\n\nHipótese de indução: O algoritmo X determina corretamente o maior elemento de um vetor\nde tamanho k ≤ n.\n\nPasso indutivo: Provaremos que X funciona para um vetor de tamanho n + 1.\nPara um vetor de tamanho n + 1, o algoritmo divide-o em duas partes a partir do cálculo do\nseu índice médio na variável meio. Sendo assim, as duas partes do vetor são inseridas em\nduas chamadas recursivas a X. Dessa forma, X calcula o maior valor em cada um dos\nsubarranjos A[1 .. inicio + (fim − inicio)/2] e A[(inicio + (fim − inicio)/2) + 1 .. n], que são,\nportanto, menores do que k.\nAssim, segundo a hipótese de indução, as chamadas recursivas a X funcionarão corretamente\ne, na linha 8, o algoritmo retornará o maior dentre os dois valores retornados em a e b.\nAssim, está provado.\n\n[Correção do professor: ✓ — 2,0]\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

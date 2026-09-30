@@ -1,0 +1,22 @@
+{
+  "id": "a16243942b3d",
+  "arquivo": "materiais\\c05_lista2_q9_asterisco_resolucao.md",
+  "copia": "00-originais\\ingestao\\b51d09f8cabe6e490d8f50b3bf0b49948c77f6c1ede7201dac3dcfe88ecaccb9\\c05_lista2_q9_asterisco_resolucao.md",
+  "sha256": "b51d09f8cabe6e490d8f50b3bf0b49948c77f6c1ede7201dac3dcfe88ecaccb9",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-01-corretude-complexidade",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c05\nfonte: \"Lista de Exercícios 2 (Cap. 2 — Complexidade de Algoritmos), questão 9 — resolução de alunos\"\ntipo: resolucao_lista\ntopico: recorrências, contagem\n---\n9. Considere o algoritmo recursivo ASTERISCO(n). Para um dado valor de n, quantos asteriscos\nserão impressos em uma chamada de ASTERISCO(n)?\n\nSolução: Considerando A(n) como a quantidade de asteriscos impressos dado um valor n, temos que:\n\n  A(n) = 0,                se n = 0\n  A(n) = 2^(n+1) − (n + 2), se n ≥ 1\n\nComo exemplo, temos:\n  Para n = 1, 2^2 − (1+2) = 4 − 3 = 1 asterisco impresso;\n  Para n = 2, 2^3 − (2+2) = 8 − 4 = 4 asteriscos impressos;\n  Para n = 3, 2^4 − (3+2) = 16 − 5 = 11 asteriscos impressos;\n  Para n = 4, 2^5 − (4+2) = 32 − 6 = 26 asteriscos impressos;\n  ...\n  Para n = i, 2^(i+1) − (i+2) asteriscos impressos.\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

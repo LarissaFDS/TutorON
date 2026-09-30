@@ -19,3 +19,14 @@ env/
 *.DS_Store
 
 .env
+
+# Pipeline local: originais, modelos, dados de alunos e ambientes não vão ao Git.
+.venv-acervo/
+.tools/
+00-originais/
+01-extraido/figuras/
+07-validacao-alunos/respostas.csv
+07-validacao-alunos/sessoes.json
+07-validacao-alunos/resumo.json
+07-validacao-alunos/resumo.csv
+tmp/

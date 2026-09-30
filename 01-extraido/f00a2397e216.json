@@ -1,0 +1,29 @@
+{
+  "id": "f00a2397e216",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\Imagem_do_WhatsApp_de_2023-09-28_(s)_23.48.33_58a20ced.webp",
+  "copia": "00-originais\\ingestao\\63cc32ccf4ffa08e3947b51ee24a5e7111b16cc8ccb71a08a0851cadd0e3f164\\Imagem_do_WhatsApp_de_2023-09-28_(s)_23.48.33_58a20ced.webp",
+  "sha256": "63cc32ccf4ffa08e3947b51ee24a5e7111b16cc8ccb71a08a0851cadd0e3f164",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] UnveridndeFeernd aeA\n[incerto] butitnto deCoopaac\n[incerto] ProjetoAnlldeAl\n[incerto] 4sProva\nProt.Rian Gabriel Piohciro\n25 de mnlo de202a\nQuestao 1  ponto]\n[incerto] Dctna (k cn\n[incerto] NPeNPooptu\nQuestao2 [1 ponto]\n[incerto] SeaAnt prblmaVPconplitoe\n[incerto] queBpobnt\n[incerto] terdadeoos ou bio\n[incerto] 1CAPpl\n2.BNP-hard7\n[incerto] 3.CeAPdifcil\nQuestio 3[2pontos]:\nUma cobertura deciclos de um dgato D(V.E）um conjnto Cdcielos elemeita\n[incerto] pertenc a exstanteum cicodeCPro quu oguinte roblema NPcompleto\nCOUERTURA DE CICLOS\nEntada:um digrafo D=（F.E）eum nimero kZ\nQuestao:Dpossu uma cobertura de ciclos formada por k ciclos ou menios?\nQuestao4[2pontos]:\nOproblemaCAMtINHO CoNDIcIoNADOassim defirido\nQuestaocxiste um camiuho Pntre em Gtal qe Pcontim todo os vertio de V\nProvar que ess problema.eAP-completo\nQuestao 5[1 ponto]:\nEscreva um algoritno para gerar todas as permintacoes do conjinto (1.2\nQuestao 6[2pontos]:\nOproblemak-CoLORACAoeassim definido\nEntradnum grafo G=(V.E)eum inteiro positivo k\nQuestao:o grnto Gek-colorivel?\nElabore um algoritmo Backtracking para esse problema\nQuestao 7[2pontos]:\nDescreva um algoritmo Branch-and-Bound para o problema da MocHILA Moste (i coo calcilat uin limitante\nparaoproblema.(ii)como expandir um no em subproblemns e （ii）como escolher um subproblemn\nQuestao 8[1 ponto]:\nQual a diferenca entre um adgoritno exato e un aproximalo? Qunndo usar um algoritmo ou outro De exenplos",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f00a2397e216\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "incerto_revisao_humana",
+          "texto": "```markdown\n# Universidade Federal de Alagoas - UFAL\nInstituto de Computação\nProjeto e Análise de Algoritmos\n4ª Prova\nProf. Rian Gabriel Pinheiro\n25 de maio de 2023\n\n## Questão 1 [1 ponto]\nDefina as classes P, NP e NP-completo.\n\n## Questão 2 [1 ponto]\nSeja A um problema NP-completo e sejam B e C quaisquer outros problemas (poderiam ser NP-ou não NP). Suponha que B é polinomialmente reduzível a A e A é polinomialmente reduzível a C. Prove ou refute as seguintes afirmações:\n1. C é NP-completo?\n2. B é NP-hard?\n3. C é NP-difícil?\n\n## Questão 3 [2 pontos]\nUma cobertura de ciclos de um grafo D = (V, E) é um conjunto C de ciclos elementares, tal que cada vértice v ∈ V pertence a exatamente um ciclo de C. Prove que o seguinte problema é NP-completo:\n**Cobertura de Ciclos**\n\nEntão: um grafo D = (V, E) e um número k ∈ Z+. Questão: D possui uma cobertura de ciclos formada por k ciclos ou menos?\n\n## Questão 4 [2 pontos]\nO problema CAMINHO CONDICIONADO é assim definido:\nEntrada: um grafo G = (V, E), vértices s, t ∈ V e um subconjunto V′ ⊆ V\nQuestão: existe um caminho P entre s e t em G, tal que P contém todos os vértices de V′?\nProvar que esse problema é NP-completo.\n\n## Questão 5 [1 ponto]\nEscreva um algoritmo para gerar todas as permutações do conjunto {1, 2, ..., n}.\n\n## Questão 6 [2 pontos]\nO problema k-COLORAÇÃO é assim definido:\nEntrada: um grafo G = (V, E) e um inteiro positivo k\nQuestão: o grafo G é k-colorível?\nElabore um algoritmo Backtracking para esse problema.\n\n## Questão 7 [2 pontos]\nDescreva um algoritmo Branch-and-Bound para o problema da MÓCHILA. Mostre: (i) como calcular um limite para o problema, (ii) como expandir um nó em subproblemas e (iii) como escolher um subproblema.\n\n## Questão 8 [1 ponto]\nQual a diferença entre um algoritmo exato e um aproximado? Quanto usar um algoritmo ou outro? De exemplos\n```"
+        }
+      ]
+    }
+  ]
+}

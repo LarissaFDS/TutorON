@@ -1,0 +1,29 @@
+{
+  "id": "3ce8a5917d50",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.30.09.webp",
+  "copia": "00-originais\\ingestao\\d9755f808a940a9245696aa5b78449170950215e39c77170e856fd71f5682414\\WhatsApp_Image_2025-01-12_at_13.30.09.webp",
+  "sha256": "d9755f808a940a9245696aa5b78449170950215e39c77170e856fd71f5682414",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "13:21\nPAAProva2.pdf\nInstituto de Computacio\nUniversidade Federal de Alngoas-UFAL\n2#Prova\nProjetoe Anilise de Algoritmos\nProf.Rian Gabriel Pinheiro\n24de agosto de 2023\n[incerto] BoHntieS.doAled\nQuestho 1[2 pontos]:\nMostre como remover todos os lementos duplicados de um vetor em O(nlogn), adnptando o algoritmo Mergesort.\nQuestio2[2pontos]:\nDado um vetorAcomnentradas,com cads entrads um nimero distinto.Sabe-se queasequencin de vlores\n[incerto] A[1]A[,iodaucxstediccptre1nalrsantrddoetrumnamat\n[incerto] piomidmrdtqsnDsjarptdxi\np.Mostre como encontrar p atraves de um algoritmo O(logn）\nQuestio3[2pontos]:\n[incerto] Vo tqcadrinirdesjnarlmioprtsq\n[incerto] ProjtumalgoritcietedeivisCoquistaaranntarssdoislresxlicandoco subod\ngem funciona e analisando sua complexidade.\nUm aluno dePAA est plaejndo fzer uma vingen de carro e tem um tanque de gasolinn com capacidade para\nQuestao4[2pontos]:\nsmposiioatual eum prego por litro.Projete um igorimo guloso para determinar a rota que minimize o custo\ntotal da viagem.\n[incerto] Cidqs\n[incerto] [ood z]sogson\nretornar a solucio 6tima.Para isso use um contra-cxemplo.\nAlgoritmoI (Algoritmo do vizinbo mnis pe6ximo)\n1. lnicialize todos os virtioes coo lo visitados.\n[incerto] 2.Selcioe rti abitiriodf cm  rtiatl Maq  cm vitado\n[incerto] 3.Descr a aresta mis curta coctando rtice atlumvertice no vitado \n4.Defins  coo o virtice atual u.Marqoe  como visitado.\n[incerto] 5.Se todo s rtis do domio for viitadsetio termeCaso ctiriovpas o pao 3.\n[incerto] Umlaoentra ma lojaeeumcnjuntodenitens/=[}.Cadaitem temum peso sindo\nQuestio6[2pontos]:\nmvaor.Idealeteoladro gostarinderoubar tdoparaobtermxm beeicio.Nontantohmit\n[incerto] que ele poecrregar.Oladrio temummochil com caacdadeK.Olarioagora temquedetermin quisitens\n[incerto] 1.Supnqusie eamisquumafrademitposseretidsjaladodea\n[incerto] alguna partedeumitem (porxemlo,04dea）deixaraparterestante.Ischdod Probles\ndaMochila FracionadaSejaAIo subconjunto de itens quoladro rouba.Elabore umalgoritmo guloso\n[incerto] O（nlogn）para encontraro subconjuntoAtalqaAu<KeaA6mximo.\n[incerto] 2.Sunaquitns6amsretradocomoumtdosjaladrpodegaroudxarumit\nele no pode pegnr umn frnho de um item Io chnmado deProblema da Mochila Binria (ou Mochila 0-1）.\nGtima?Justifique sun resposta.\nScannedwithCamScanner",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\3ce8a5917d50\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "3166437dde3c",
+  "arquivo": "materiais\\c07_provafinal_2024_q6_composto.md",
+  "copia": "00-originais\\ingestao\\e56aa9838c007c2fd0ab7a7b0463d1f358ee3e82ed38045e5f07c44d6965008d\\c07_provafinal_2024_q6_composto.md",
+  "sha256": "e56aa9838c007c2fd0ab7a7b0463d1f358ee3e82ed38045e5f07c44d6965008d",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-06-np-completude",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c07\nfonte: \"Prova Final — PAA, Prof. Rian Gabriel Pinheiro, 04/04/2024 (Questão 6, 2 pontos)\"\ntipo: prova\ntopico: NP-completude, tamanho da entrada, pseudo-polinomial\n---\nQuestão 6 [2 pontos]: Considere o seguinte algoritmo força bruta para resolver o problema do\nnúmero COMPOSTO: Verifique inteiros sucessivos de 2 a ⌊n/2⌋ como possíveis divisores de n.\nSe um deles divide n, retorna SIM (ou seja, o número é composto); se nenhum deles o fizer,\nretorne NÃO. Por que esse algoritmo não é considerado polinomial?\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

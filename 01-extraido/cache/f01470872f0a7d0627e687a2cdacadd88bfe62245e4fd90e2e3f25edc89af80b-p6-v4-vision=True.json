@@ -1,0 +1,12 @@
+{
+  "pagina": 6,
+  "texto": "O material ajuda, mas não faz milagre\n\nMaterial com erro contamina a resposta\n\nUma resolução de aluno com definição imprecisa de NP foi repetida pela IA.\n\nSe a IA já acerta, o material só alonga\n\nNa questão de grafos (Gemini), a resposta genérica já estava certa.\n\nO acervo precisa ser preparado\n\nProvas escaneadas e gabaritos à mão não têm texto legível: sem OCR, a IA não os enxerga.\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nO material ajuda, mas nao faz milagre\nMaterial com erro contamina a resposta\nUma resolucao de aluno com definicao imprecisa de NP foi repetida pela IA.\nSe a IA ja acerta, o material so alonga\nNa questao de grafos (Gemini), a resposta genérica ja estava certa.\nO acervo precisa ser preparado\nProvas escaneadas e gabaritos a mao nao tem texto legivel: sem OcR, a IA nao os enxerga.",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p6-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

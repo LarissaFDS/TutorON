@@ -1,0 +1,30 @@
+{
+  "pagina": 4,
+  "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\n3\n4\n2\n2\n2\n3\nINF\n1\n5\n1\n3\n4\n1\nINF\n4\n1\n4\n2\n5\n4\nINF\n2\nMIN\n<-CUSTO\n1\n2\n3\n4\nMIN\n1\nINF\n1\n2\n0\n2\n2\n2\nINF\n0\n4\n1\n3\n3\n0\nINF\n3\n1\n4\n0\n3\n2\nINF\n2\nMIN\n0\n0\n0\n0\n9=0+9\n<-CUSTO\n\n\nCUSTO DA REDUC¸ ˜AO = 6 (LIMITE INFERIOR)\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nC1\nUPPER:INF\n1\nC2\nC:6\n100\nC3\nC4\n2\n3\n\n\nCalcule agora o custo do pr´oximo n´o, que ´e o custo para ir do seu predecessor at´e\nele mais o custo das redu¸c˜oes de linha e coluna anteriores, mais o custo da redu¸c˜ao\nde linha e coluna do caminho atual. Para cada n´o j sucessor de 1, fa¸ca a linha 1 do\nsucessor j ser toda infinita a partir da matriz reduzida do n´o 1, bem como a coluna\n2 tamb´em e assim sucessivamente para todos os n´os vizinhos.\n\n\n[OCR parcial do recorte p4-fig3.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\n[incerto] T\nR =6\nC3\nC(1,4) +R + R'\nC4\nC(1,2)+R+R\nC(1,3)+R+R\n2\n3\n\n\nPara o n´o 2 temos:\n\nPage iv",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig2.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig3.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4-fig3.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "f31fd59937d3",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(2).webp",
+  "copia": "00-originais\\ingestao\\a0e6975e2e43e8984b38b035926fcfe95667234ff0fc7be1a2e255ace0ef97bb\\WhatsApp_Image_2025-01-12_at_13.13.32_(2).webp",
+  "sha256": "a0e6975e2e43e8984b38b035926fcfe95667234ff0fc7be1a2e255ace0ef97bb",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Entrada：S={imsuu\nmstamar,Saida:\n[incerto] amst\nEntrada:S={“portuguese”,“portugues\",“portugal\"},Saida:“portug”\nQuestao4[1ponto]:\nConsidere o problema do caminho de custo minimo em um grafo G direcionado.Assuma que todos os pesos das arestas\nde G sao positivos e distintos. Seja Pum caminho de custominimo entre os vertices s e t de G.Agora suponha que\ntodos os pesos c das arestas de G sejam trocados pelo quadrado do seu valor,ou seja,por ce²,dando origem a uma\num caminho de custo minimo entre se tnesta nova instancia.Caso negativo,de um contra-exemplo\nQuestao5[2pontos]:\nUma empresa de Maceio possui um conjunto decarros numerados de1 an.A empresa possui um estacionamento com\nvagas padronizadas que cabem ate dois carros.Suponha que cada carro ipossui um comprimento plilno intervalo\naberto(0,1) indicando oquanto que ocarro ocupa avaga.Queremos acondicionar os carrosno menornumero possivel\nEscreva um algoritmo queresolva oproblema.\nQuestao 6[1ponto]:\nOalgoritmo da questao anterior é 6timo？Prove.\nQuestao7[2pontos]:\nobjetivo é encontrar o menor numero de“bins”(caixas)unitarias para armazenar osn itens.Dado o algoritmos a\nseguir,mostre que cles nao encontrain a solucao 6tima do problema,ou seja,encontre contraexemplos para cada un\ndos seguinte algoritmos para o problema.\n·Coloque na bin mais livre o maior clemento;\n·Coloque o menor elemento na bin mais livre.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f31fd59937d3\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução descreve corretamente os dois algoritmos gulosos para o problema do caixeiro viajante e justifica corretamente que ambos não garantem a solução ótima.",
+  "decisao": "sem_erro_detectado",
+  "sha256": "fe49b2d6963591c88319d96ee5c3e7d554d381d9790bad2aedc1fc6cc4d49c32"
+}

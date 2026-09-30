@@ -1,0 +1,29 @@
+{
+  "id": "abfdf1a3da4e",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.41.33.webp",
+  "copia": "00-originais\\ingestao\\0c956a9015e6940309e921c4139ca1f4409deebf97aff39f668fc887859c35c9\\WhatsApp_Image_2025-01-12_at_13.41.33.webp",
+  "sha256": "0c956a9015e6940309e921c4139ca1f4409deebf97aff39f668fc887859c35c9",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Universidade Federal de Alagoas-UFAL\nInstituto de Computacao\nProjetoe Analise deAlgoritmos\nReavaliacao\nProf. Rian Gabriel Pinheiro\n28 de marco de 2024\nQuestao 1[2pontos]:\nConsidere o seguinte algoritmo:\n1:procedure ALGORITMoX（vetor A[...n]，i)\n2:\nifi<fthen\n3:\n4:\nAA\n5:\n6:\nX（A,i+1,-1)\n7:\n!pua\n8:end procedure\nExplique oque cle faz e prove sua corretude.\nQuestao 2[1 ponto]:\nConsidere o seguinte algoritmo recursivo,cujo argumentonéum inteiro positivo.\nprocedure AsTERIsco(n)\n2:\nifn>0then\n3:\nASTERISCO(n-1)\n4:\nfori1→ndo\n5:\nimprima\"*\n6:\nend for\n7:\n8:\nendif\n9:end procedure\nPara um dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco（n)？ Mostre a\nrecorrencia.\nQuestao3[1 ponto]:\nSuponhaquevocetenhaosresultadosdeumtorneioconcluidonoqualnequpesjogaramentre siumavezAssmindo\ncom o tine listado inediatamente apos?\nQuestao 4[1ponto]:\ncomputou uma arvore geradora minima de Ge que tambem computou os caminhos minimos para todos os nos\npartindo de um particular n6 s EV.Agora suponha que cada peso de aresta seja aumentado em uma unidade:os\nnovos pesos sao w=we+1.\nmudar.\n2.Sera que os caminhosminimos mudam？Deun exemplo para oqual eles mudam ou prove que isso nao pode\nocorrer.\nQuestao5[2pontos]:\ntotaldetriangulaoespossiveisdesse poligono.Porexemploparaupoligonode3lados（untriangul)nmero\ntriangulacoes  1;para um poligono de 4 lados (um quadrilatero),o numero de triangulacoes é2;e para um poligono\nde5lados（umpentagono),onimerode triangulacoes5.Comece defnindoumafuncaoderecorrencia querepresente\nQuestao6[1ponto]:",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\abfdf1a3da4e\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

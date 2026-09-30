@@ -1,0 +1,76 @@
+{
+  "questao": "Q8",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "70d6475b28bf-q6-6",
+    "23950cced864-q2-2",
+    "2df6e1818523-q4-3",
+    "299d863129c5-q1-1"
+  ],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "70d6475b28bf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0.06300000000010186,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O problema do passeio do cavalo e a busca por quadrados mágicos são problemas diferentes e não diretamente relacionados. Vamos abordar o problema do passeio do cavalo primeiro, e depois discutiremos a busca por quadrados mágicos de ordem 3.\n\n### Problema do Passeio do Cavalo\n\nO algoritmo backtracking fornecido no contexto é adequado para resolver o problema do passeio do cavalo. No entanto, ele não busca todas as soluções possíveis, mas sim uma solução específica. Para encontrar todas as soluções, precisamos modificar o algoritmo para armazenar todas as soluções encontradas.\n\n#### Algoritmo Modificado para Encontrar Todas as Soluções\n\n```python\ndef print_solution_kt(board):\n    for i in range(8):\n        for j in range(8):\n            print(board[i][j], end=' ')\n        print()\n\ndef is_valid_move(board, x, y):\n    if (x >= 0 and y >= 0 and x < 8 and y < 8 and board[x][y] == -1):\n        return True\n    return False\n\ndef solve_kt_bt(board, curr_x, curr_y, next_x, next_y, pos, solutions):\n    if pos == 64:\n        solutions.append([board[i][:] for i in range(8)])\n        return True\n    for i in range(8):\n        x = curr_x + next_x[i]\n        y = curr_y + next_y[i]\n        if is_valid_move(board, x, y):\n            board[x][y] = pos\n            if solve_kt_bt(board, x, y, next_x, next_y, pos + 1, solutions):\n                return True\n            board[x][y] = -1\n    return False\n\ndef knights_tour_bt():\n    board = [[-1 for i in range(8)] for i in range(8)]\n    board[0][0] = 0  # Inicializa o cavalo na quina do primeiro bloco\n    next_x = [2, 1, -1, -2, -2, -1, 1, 2]\n    next_y = [1, 2, 2, 1, -1, -2, -2, -1]\n    pos = 1\n    solutions = []\n    if solve_kt_bt(board, 0, 0, next_x, next_y, pos, solutions):\n        for sol in solutions:\n            print_solution_kt(sol)\n    else:\n        print(\"There's no solution for this problem.\")\nknights_tour_bt()\n```\n\n### Busca por Quadrados Mágicos de Ordem 3\n\nUm quadrado mágico de ordem 3 é um quadrado 3x3 preenchido com os números 1 a 9 de forma que a soma de cada linha, coluna e diagonal seja igual a 15.\n\n#### Algoritmo de Backtracking para Quadrados Mágicos de Ordem 3\n\n```python\ndef is_valid(board, row, col, num):\n    for i in range(3):\n        if board[row][i] == num or board[i][col] == num:\n            return False\n    start_row, start_col = 3 * (row // 3), 3 * (col // 3)\n    for i in range(start_row, start_row + 3):\n        for j in range(start_col, start_col + 3):\n            if board[i][j] == num:\n                return False\n    return True\n\ndef solve_magic_square(board, row, col):\n    if row == 3:\n        return True\n    if col == 3:\n        return solve_magic_square(board, row + 1, 0)\n    for num in range(1, 10):\n        if is_valid(board, row, col, num):\n            board[row][col] = num\n            if solve_magic_square(board, row, col + 1):\n                return True\n            board[row][col] = 0\n    return False\n\ndef print_magic_square(board):\n    for row in board:\n        print(' '.join(map(str, row)))\n\nboard = [[0 for _ in range(3)] for _ in range(3)]\nif solve_magic_square(board, 0, 0):\n    print_magic_square(board)\nelse:\n    print(\"No solution exists for the magic square.\")\n```\n\n### Testes e Podas\n\n- **Testes**: Para o passeio do cavalo, testamos a solução com diferentes posições iniciais e verificamos se todas as soluções possíveis são encontradas. Para o quadrado mágico, testamos se a solução encontrada é válida e se a soma de todas as linhas, colunas e diagonais é igual a 15.\n- **Podas**: Podemos usar técnicas de poda para evitar a exploração de caminhos que não levam a uma solução válida. Por exemplo, se uma posição já contém um número, podemos pular essa posição. Além disso, podemos usar a validação de cada número inserido para garantir que a solução seja válida.\n\nEssas são as abordagens para resolver os dois problemas usando backtracking.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 23.609999999999673,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "row",
+    "col",
+    "row",
+    "col",
+    "row",
+    "col"
+  ],
+  "citacoes_ids_invalidos": [
+    "row",
+    "col",
+    "row",
+    "col",
+    "row",
+    "col"
+  ]
+}

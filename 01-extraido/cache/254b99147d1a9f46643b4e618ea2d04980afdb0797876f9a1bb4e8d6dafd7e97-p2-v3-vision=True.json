@@ -1,0 +1,9 @@
+{
+  "pagina": 2,
+  "texto": "2. Prove por indu¸c˜ao que:\n  •  Pn   i = n(n+1) , para n ≥1          i=1        2\n  •  Pn   i2 = n(n+1)(2n+1) , para n ≥1          i=1             6\n  •  Pn   i3 = n2(n+1)2 , para n ≥1          i=1          4\n\n\n\n     Solu¸c˜ao:\n\n      (a) Desejamos provar que:\n                               1 + 2 + 3 + ... + n = n(n+1)                                                                        2\n        Para isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\n       Passo base (k = 1):\n         Neste caso,  Pi=ki=1 i = 1(1+1)2  = 1  ∴   P(1) ´e verdadeiro\n\n         Hip´otese de Indu¸c˜ao (k ≤n):\n        Supondo por hip´otese de indu¸c˜ao que: Pi=ki=1 i = k(k+1)2    , ∀k ≤n\n\n       Passo indutivo:\n\n         Segue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\n        k ≤n, provaremos que se P(k+1)  ´e verdadeiro, ent˜ao P(k) tamb´em  ´e, por\n           indu¸c˜ao. Logo:\n                 Pi=k+1i=1   i = 1 + 2 + 3 + ... + k + (k + 1) = k(k+1)2  + (k + 1)\n                    = k(k+1)+2(k+1) = (k+1)(k+2)                                                     2                2\n                ∴  P(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n                                                ■\n\n     (b) Desejamos provar que:\n                            1 + 22 + 32 + ... + n2 = n(n+1)(2n+1)                                                                         6\n        Para isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\n       Passo base (k = 1):\n         Neste caso,  Pi=ki=1 i2 = 1(1+1)(2.1+1)6   = 66 = 1  ∴  V erdadeiro\n\n\n\n\n\n                                   Page ii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p2.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

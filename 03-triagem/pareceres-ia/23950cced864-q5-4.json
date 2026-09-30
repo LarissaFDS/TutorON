@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há um erro de digitação na linha 1, onde 'algoritmogulososparaoCAIxEIRoVIAJANTE' deve ser 'algoritmo guloso para CAIXEIRO VIAJANTE'. Além disso, na linha 3, há um erro de digitação '6' em vez de '6' (provavelmente um erro de digitação de '6' para '6' em vez de '6').",
+  "decisao": "suspeita",
+  "sha256": "90eabc3db3df468028fd9687cf9c3404ba30f17a3cb5686de60ab00d47f12f6b"
+}

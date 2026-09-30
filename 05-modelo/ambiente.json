@@ -1,0 +1,127 @@
+{
+  "ram_bytes": 17014046720,
+  "gpu": "NVIDIA GeForce RTX 4060",
+  "vram_mib": 8188,
+  "contexto_configurado": 8192,
+  "ollama": {
+    "version": "0.34.4"
+  },
+  "modelos": {
+    "models": [
+      {
+        "name": "tutoron-paa:latest",
+        "model": "tutoron-paa:latest",
+        "modified_at": "2026-09-29T18:34:10.935035-03:00",
+        "size": 4683087417,
+        "digest": "dc4d8b7c6d8397997db2a4e3181978802fa53da9e4c3c95a32f6705e81bb877f",
+        "details": {
+          "parent_model": "qwen2.5:7b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "gemma3:4b",
+        "model": "gemma3:4b",
+        "modified_at": "2026-09-29T18:31:35.1689332-03:00",
+        "size": 3338801804,
+        "digest": "a2af6cc3eb7fa8be8504abaf9b04e88f17a119ec3f04a3addf55f92841195f5a",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma3",
+          "families": [
+            "gemma3"
+          ],
+          "parameter_size": "4.3B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 131072,
+          "embedding_length": 2560
+        },
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      },
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "modified_at": "2026-09-29T18:23:23.936078-03:00",
+        "size": 1157672605,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16",
+          "context_length": 8192,
+          "embedding_length": 1024
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      {
+        "name": "qwen2.5vl:3b",
+        "model": "qwen2.5vl:3b",
+        "modified_at": "2026-09-29T18:23:02.1028694-03:00",
+        "size": 3200627168,
+        "digest": "fb90415cde1ef08aa669ae74b082d49b158729b6db1ab183c941417d507e71a1",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen25vl",
+          "families": [
+            "qwen25vl"
+          ],
+          "parameter_size": "3.8B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 128000,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      },
+      {
+        "name": "qwen2.5:7b",
+        "model": "qwen2.5:7b",
+        "modified_at": "2026-09-29T18:22:13.686427-03:00",
+        "size": 4683087332,
+        "digest": "845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      }
+    ]
+  }
+}

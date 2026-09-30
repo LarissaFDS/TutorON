@@ -1,0 +1,80 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c01",
+    "fc6f103e4d15-q2-1",
+    "320662691e44-q2-2",
+    "abfdf1a3da4e-q1-1"
+  ],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 2.125,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "### Explicação do Algoritmo\n\nO algoritmo `ALGORITMO X` é um algoritmo recursivo que encontra o maior elemento em um subvetor de `A`. Vamos detalhar o que ele faz:\n\n1. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna o único elemento do subvetor, que é `A[inicio]`.\n\n2. **Divisão do Problema**: Se `inicio` for diferente de `fim`, o algoritmo divide o subvetor em duas partes:\n   - A primeira parte vai do `inicio` até o `meio` (inclusive).\n   - A segunda parte vai do `meio + 1` até `fim`.\n\n3. **Chamadas Recursivas**: O algoritmo chama `ALGORITMO X` recursivamente para cada uma das duas partes:\n   - `a` é o maior elemento da primeira parte.\n   - `b` é o maior elemento da segunda parte.\n\n4. **Retorno**: O algoritmo retorna o maior entre `a` e `b`.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, vamos considerar o seguinte:\n\n1. **Caso Base**: Se `inicio = fim`, o subvetor contém apenas um elemento, que é `A[inicio]`. Portanto, retornar `A[inicio]` é a solução correta.\n\n2. **Divisão e Conquista**: O algoritmo divide o problema em duas partes menores e resolve cada parte recursivamente. A solução do problema original é o maior elemento entre a solução das duas partes.\n\n3. **Correção das Chamadas Recursivas**:\n   - `a` é o maior elemento do subvetor `[inicio, meio]`.\n   - `b` é o maior elemento do subvetor `[meio + 1, fim]`.\n\n4. **Retorno Correto**: O algoritmo retorna o maior entre `a` e `b`, garantindo que o maior elemento do subvetor `[inicio, fim]` é retornado.\n\n### Resumo\n\n- **O que o Algoritmo Faz**: Encontra o maior elemento em um subvetor de `A` usando uma abordagem de divisão e conquista.\n- **Prova de Corretude**: O algoritmo resolve corretamente o problema ao dividir o subvetor em duas partes, resolver recursivamente cada parte e retornar o maior elemento entre as soluções das partes.\n\n### Complexidade\n\nO algoritmo tem complexidade de tempo `O(n)`, pois cada chamada recursiva divide o subvetor em duas partes, e o processo é repetido até que o subvetor tenha tamanho 1. No entanto, a análise de complexidade detalhada não é solicitada na pergunta.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.889999999999418,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

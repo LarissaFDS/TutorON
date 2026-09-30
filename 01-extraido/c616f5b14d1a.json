@@ -1,0 +1,123 @@
+{
+  "id": "c616f5b14d1a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\prova_2_A.pdf",
+  "copia": "00-originais\\ingestao\\64f6b97e3a85356aab957667974db6036a37cf7b39754fa28af3fbb3c3ea15ec\\prova_2_A.pdf",
+  "sha256": "64f6b97e3a85356aab957667974db6036a37cf7b39754fa28af3fbb3c3ea15ec",
+  "tipo": ".pdf",
+  "paginas": 6,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computacao\nProjeto e Analise de Algoritmos\n2Prova\nProf. Rian Gabriel Pinheiro\n30 de marco de 2023\nQuestao 1[2pontos]:\nk-esimo menor clemento da uniao das duas listas.\nQuestao 2[2pontos]:\num inico array ordenado de tamanho kn.Uma maneira de fazer iso seria usar a operacao de intercalagao (merge).\nSabendo que a interealacao de dois array Xe Y precisa de |X|+|Y| pasos.\n1.Calculequantospassosoalgoritmoa seguirlevaPrmeirointercaleosarraysAA,depoisintercaleresultado\ncom Ay e assim por diante.\n2.Projete um algoritmo melhor para este problema.\nQuestao 3[2pontos]:\nDado um conjunto S de strings,encontre de forma eficiente o prefixo comum mais longo. Exemplos:\nEntrada:S={“instituto”,“instigar”，“instavel\",“instaurar”},Saida:“inst”\nEntrada:S=[“portuguese”,“portugues”,“portugal”},Saida:“portug”\nQuestao 4[2ponto]:\nConsidere o seguinte problema.\nEntrada: Grafo nao direcionado G=(V,E); pesos de arestas we: subconjunto de vertices U CV.\nSaida:A Arvore Geradoramais leve na qual os nos de U sao folhas (pode haver outras folhas na arvore tambem）.\nQuestao 5[2ponto]:\nConsidere os dois algoritmos gulosos para o CAIxEIRo VIAJANTE. Mostre que ambos nao sao exatos, isto e,nao\ngarantem retornar a solucao 6tima.\nAlgoritmo 1 (Algoritmo do vizinho mais proximo)\n1.Inicialize todos os vertices como nao visitados\n2.Selecione um vertice arbitrario, defina-o como o vertice atual u,Marque u como visitado\n3.Descubra a aresta mais curta conectando o vertice atual u e um vertice nao visitado u\n4.Defina v como o vertice atual u.Marque v como visitado.\n5/Se todos os vertices do dominio forem visitados,entao termine, Caso contrario,va para o passo 3\nAlgoritmo 2 (Alguritmo da insercao mais barata)\n1.Crie um cico C oom tres vertices quaisquer\n2.Esolha um wertice k qualquer fora de C\n3.Encontre ums asta （i.） eCtalque d+dy-dye minimo\n[incerto] 4Adici ka C,va resta (ij）e adicione as aestas （i,k） e （k,j）.\nS.Se Cotiver todo o ns.pe. Caso contrio,v paa 2\nQuestio 6[2pontos]:\nUm ario entra em um lojaeve um conjunto / den itens.I={a.agn]. Cada item tem um peso associalo\n[incerto] Soponhs que c itens #op\n[incerto] Oeima? Juetitinot",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p1-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p1-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nMg(A,B,K)\n[incerto] encenacemrpoa\n[incerto] mrios=A.1\n[incerto] meioimtio.comk\n[incerto] mcio=B.lem/\n[incerto] ALuio3comBLd\n[incerto] Elemmfomegmtiostmei0z\n[incerto] eAE]<BEAB\n[incerto] 污（m之K\n[incerto] AgABH)\n[incerto] retomAlg(AEmeingsts3BE3,k)\n[incerto] 20\n[incerto] i5（meio<k)\n[incerto] relomAlgCAE3,BLmeiozt,k)\nclse\n[incerto] retnA（A,om)\n[incerto] Veton-s\n[incerto] 21\n[incerto] 0lgontmlerer\n[incerto] .BL\n[incerto] -1As+A1+B-1\n2termosantecessoYes",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nSoautPara melhor\n[incerto] peahend\n[incerto] nosZplimeilosattoys\n10\n[incerto] tonhaSilomevge\n2utimoscmtinveetegue\n[incerto] tooososa1noys22\n[incerto] Ganreys\n[incerto] As...A\n[incerto] Com\n[incerto] mevg（CAs，Ae)cmevge(AsAe)\n[incerto] mange(AsAn)\n[incerto] paSso5=\nn.K\n[incerto] maicSiciente\n[incerto] alor/orsobtleossepate@mSngoscotesgondentes\n[incerto] （800\n[incerto] sulosd\n[incerto] pimenementeositecon\n[incerto] pegonds\n[incerto] mdiovvaloypoipeso.ate\n[incerto] quenaaameiscspaqonmochile\n[incerto] dissm（istoserebasicmenteordemeinOngn)\n[incerto] Prseudo-ceciygo\n[incerto] 0个",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nmochilaCitens,k,mochila\n[incerto] Sortl.tens)\n[incerto] oreCo\n[incerto] petz\n[incerto] possapdd\nEnquuto\niCem=items.0o0\nG.a\n[incerto] Se（K-itemlposo）>0\n1mochila.add（item)\nretutn mochilo\nelaortmo\n0\n[incerto] DtmaiPodemnswostessopocn.tid\n[incerto] etnevume\nSolvcs\nK=4\n[incerto] Umamoch.l\n[incerto] Svpanha\n[incerto] qveoladrsoCenn\n[incerto] escolherovbayenleositonsis(sloxpeo)\n[incerto] 72\npode\n[incerto] 20\n[incerto] is=（5012),i2=（8,3)\nSeclenequder\n[incerto] pesdr\n[incerto] 1#025066\nopenas\n[incerto] Ye\nCommochie\n[incerto] ytend\n[incerto] 21092\n[incerto] 2\n[incerto] podevieacrescent-y\n[incerto] Secioner\n[incerto] Lerie\n[incerto] 1se2.dei\nYovbari2\n[incerto] VmZol1e\n[incerto] 9=+09\n[incerto] ousnobyo\n[incerto] aiima\n[incerto] 0",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[incerto] Pes=（\n[incerto] 01.dS1\n[incerto] K=5c13.si2e\n[incerto] 501<K110/K）\n[incerto] 5Cigals,Scsi）llScsitadesideSts3\n[incerto] （0\n[incerto] Pe5=Pe5+SEs3E13\n[incerto] mluuen\nK,5\n[incerto] Cager\nPetena\n[incerto] gud(Schacnti)\n[incerto] O/kn\n[incerto] Paecsasie(5-{st33)11Oa-s)em\n[incerto] 155:13!=6\ncetotnsslsc\n[incerto] K-（n-s)\nT(n)=\n[incerto] 0（40\n[incerto] xetoinZrue\nA6M\n[incerto] Jv\n[incerto] peutoncentesdo\n[incerto] (om2A6Me61g\n[incerto] osvrvtecs\n[incerto] pelsdrest\n[incerto] Solmdquelig\n[incerto] treA6Me\n[incerto] Gve\nCemo?\n[incerto] Gulose\nJ0\n[incerto] Pserd-ccidigc",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p5-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n[incerto] 10\n[incerto] Suponha\n[incerto] Uw\n[incerto] MaitmoSobcens\n[incerto] ekemgleysonperddrgeeleldoe\n[incerto] 3345-\n[incerto] Polem\n[incerto] AleL.\n[incerto] exenplaCeonos\n[incerto] Um.\n[incerto] 850\n[incerto] OR SIO\n[incerto] (.（43），（3)\n[incerto] @crisnto\n[incerto] oessivriew\n[incerto] （S3）:\n[incerto] √s+d4s-ss=4+1-2=3\n[incerto] Creaos4dogon\n[incerto] Peso=1\n[incerto] gelem.sob\n[incerto] 9=0500\n05\n[incerto] 001237\n[incerto] lnmmnco\ndua+d43-d3\n=a+1-3=",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

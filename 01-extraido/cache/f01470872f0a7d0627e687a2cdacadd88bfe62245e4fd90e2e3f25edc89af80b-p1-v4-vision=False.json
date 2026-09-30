@@ -1,0 +1,12 @@
+{
+  "pagina": 1,
+  "texto": "Empreendedorismo\n\nUniversidade Federal de Alagoas\n\nTutorON\n\nMini-PoC: o material da disciplina melhora a resposta da IA?\n\nMatheus · Otávio · Cleversson · Larissa\n\n\n[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nEMPREENDEDORISMO\nUniversidade Federal de Alagoas\nUNIVERSIDADEFEDERAL\nDEALAGOAS\nTutorON\nMini-PoC: o material da disciplina melhora a resposta da IA?\nMATHEUS · OTAVIO · CLEVERSSON · LARISSA",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p1-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

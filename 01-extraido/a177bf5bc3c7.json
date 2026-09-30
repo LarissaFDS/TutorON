@@ -1,0 +1,200 @@
+{
+  "id": "a177bf5bc3c7",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L4.pdf",
+  "copia": "00-originais\\ingestao\\4a83c2298f49517061e83f53aef12678ce5bd3bcd8aa7ffacbdf18b64e7e99f5\\PAA_L4.pdf",
+  "sha256": "4a83c2298f49517061e83f53aef12678ce5bd3bcd8aa7ffacbdf18b64e7e99f5",
+  "tipo": ".pdf",
+  "paginas": 10,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-03-algoritmos-gulosos",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 3\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 4 - Algoritmos Gulosos\n\n1. Considere um grafo n˜ao-direcionado G = (V, E) com pesos de aresta n˜ao-\nnegativos we ≥0. Suponha que vocˆe computou uma ´arvore geradora m´ınima\nde G e que tamb´em computou os caminhos m´ınimos para todos os n´os par-\ntindo de um particular n´o s ∈V . Agora suponha que cada peso de aresta seja\naumentado em uma unidade: os novos pesos s˜ao w\n\n′\ne = we + 1.\n\na) Ser´a que a ´arvore geradora m´ınima muda? Dˆe um exemplo para o qual ela\nmuda ou prove que ela n˜ao pode mudar.\n\nb)Ser´a que os caminhos m´ınimos mudam? Dˆe um exemplo para o qual eles\nmudam ou prove que isso n˜ao pode ocorrer.\n\nSolu¸c˜ao:\n\n(a) N˜ao, a ´arvore geradora m´ınima permanece a mesma. Por exemplo, se G tem n\n\nv´ertices, ent˜ao qualquer ´arvore geradora tem n - 1 arestas. Portanto, ao incre-\nmentar cada peso de aresta em uma unidade, aumenta-se o custo de cada ´arvore\ngerada tamb´em por uma unidade. Dessa forma, todas as ´arvores geradoras que\npossu´ıam custo m´ınimo no grafo original continuam a possuir custo m´ınimo com\nessa altera¸c˜ao, visto que a altera¸c˜ao foi igual para todas e, com isso, podemos\nconcluir que a ´arvore geradora m´ınima n˜ao ´e alterada.\n\n(b) Sim, os caminhos m´ınimos podem mudar. Um exemplo com intuito de demons-\n\ntra¸c˜ao se d´a a seguir:",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p1-fig1.png",
+        "01-extraido\\figuras\\a177bf5bc3c7\\p1-fig2.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "Ao supormos um grafo G, que originalmente possui arestas indo de s at´e x, de x\nat´e y e de y at´e t com custo 0, e uma aresta de s at´e t com custo 1, assim como\nilustrado na figura 1, podemos notar que o melhor caminho se d´a por s →x →\ny →t, totalizando um custo 0.\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nX\n[incerto] S\n\n\nFigura 1. Grafo original.\n\n\n[OCR parcial do recorte p2-fig2.png; conferir símbolos na imagem]\n[incerto] X\nS\n2\n\n\nFigura 2. Grafo incrementado.\n\nNo entanto, ap´os as altera¸c˜oes feitas no grafo G, como ilustra a figura 2, o\ncaminho s →x →y →t passa a ser mais custoso, com um valor de 3. Por sua\nvez, o caminho s →t que antes possu´ıa desvantagem agora possui custo 2 e ´e\nmais ben´efico e, portanto, se torna o novo melhor caminho, provando assim que\nos camihos m´ınimos podem mudar.\n\nPage ii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig1.png",
+        "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "2. Seja G um grafo n˜ao-direcionado. Prove que se todas as arestas s˜ao distintas,\nent˜ao ele tem uma ´unica ´arvore geradora m´ınima.\n\nSolu¸c˜ao: Considerando o enunciado, possu´ımos um grafo n˜ao-direcionado G e dese-\njamos provar que se todas as arestas s˜ao distintas, ent˜ao ele tem uma ´unica ´arvore\ngeradora m´ınima. Para provar isso, assumiremos que este grafo possui no m´ınimo\nduas ´arvores geradoras, T0 e T1, e, em seguida, provaremos que pelo menos um par\nde arestas em G possui peso igual entre si, efetuando, ent˜ao, a prova por contradi¸c˜ao.\n\nProsseguindo, tanto T0 quanto T1 dever˜ao conter uma aresta que a outra n˜ao possui,\nagregando diferen¸ca entre si. Sendo e0 a aresta de peso m´ınimo em T0/T1 e e1 a\naresta de peso m´ınimo em T1 /T0, supomos que o peso de e0 ´e menor ou igual ao peso\nde e1. Dessa forma, teremos um novo sub-grafo T1 ∪e0 que possui um ciclo e uma\naresta e2 que n˜ao est´a em T0. Como e0 ∈T0, temos que e2̸ = e0 e portanto e2 ∈T1\n/T0, sendo assim, w(e2) > w(e1) > w(e0). Agora consideramos a ´arvore geradora T2\n= T1 + e - e2, onde w(T2) = w(T1 ) + w(e0) - w(e2) ≤w(T1 ). Mas T1 ´e uma ´arvore\ngeradora m´ınima, ent˜ao w(T1 ) = w(T2), resultando que T2 tamb´em ´e uma ´arvore\ngeradora m´ınima. Com isso, conclu´ımos por contradi¸c˜ao que se todas as arestas s˜ao\ndistintas, ent˜ao ele tem uma ´unica ´arvore geradora m´ınima.\n\n3. Considere o problema de agendamento de intervalos. N´os temos um conjunto\nde atividades 1, 2, ..., n; cada atividade i possui um intervalo de tempo a partir\nde si e termina em fi .\nUm agendamento — conjunto de atividades — ´e\ndito compat´ıvel, se nenhuma atividade se sobrep˜oem no tempo. O objetivo\n´e determinar um agendamento compat´ıvel com o maior n´umero poss´ıvel de\natividades. Projete um algoritmo para este problema.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\ndef endEventTime(task):\nreturn task.end\ndef scheduler(tasks):\ntasks.sort(key = endEventTime) # Ordena a lista pelo tempo de termino das atividades\nschedule=[]\nprevEndTime =-inf #Inicializa o tempo de término parao algoritmoguloso\nforiin range(1,len(tasks)):\niftasks[i].begin>prevEndTime:#Encaixa as atividades de acordo com a disponibilidade,\n#ou seja,como as atividades estao ordenadas pelo tempo\nschedule.append(tasks[i])\nprevEndTime =tasks[i].end # de termino,a preferencia sera pelas que comecam logo\n#aposoterminodamenoratividadeateomomento\nreturn schedule\nforiin scheduler(tasks):\nprint(i)\n\n\nPage iii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "4. Este ´e um problema que ocorre em an´alise autom´atica de programas. Para\num conjunto de vari´aveis x1, ..., xn, s˜ao dadas algumas restri¸c˜oes de igualdade,\nda forma “xi = xj”e algumas restri¸c˜oes de desigualdade, da forma xi̸ = xj.\nSer´a que ´e poss´ıvel satisfazer todas elas? Por exemplo, as restri¸c˜oes\n\nx1 = x2, x2 = x3, x3 = x4, x1̸ = x4\n\nn˜ao podem ser satisfeitas.\nForne¸ca um algoritmo eficiente que tome como\nentrada m restri¸c˜oes sobre n vari´aveis e decida se as restri¸c˜oes podem ser\nsatisfeitas.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\ndef main():\nm =int(input())\nn=int(input(）)\ncondicoes = []\nfor i in range(m):\ncondicoes.append(input())\nigualdades,desigualdades= ler_condicoes(condicoes) # Le e separa as condicoes de igualdade e desigualdade D(m)\nsubset=[]\nfor u in range(n):\nsubset.append(Subset(u,0)) # Constroi lista de dependencia do Grafo,\n#com as componentes conexas D（n)\n#Para cada igualdade,constroi as componentes conexas\nfor igualdadein igualdades:\nunion(subset, igualdade[0], igualdade[1]) # Em formato de estrutura de conjuntos disjuntos (unian-find)\nflag=1\n#Para cada desigualdade, verifica os pais das componentes conexas\nfor desigualdadein desiguaidades:\nparent1 = find(subset, desigualdade[O]) #Se todos os vertices na componente conexa representam a mesma igualdade\nparent2 = find(subset, desiguaidade[1]) # e portanto tem o mesmo pai. Entao basta achar  pai da componente conexa que é aproximadamente O(1)\nif parent1 == parent2: # Se possuem Q mesmo pai, sao iguais e, portanto a desigualdade é invalida e consequentemente a lista de condicoes、\nflag=0\nprint(\"Nao évalido\")\nbreak\nif flag:print(\"E valido\") #5e todas as desigualdades sao validas, entao o programa é valido\n\n\n5. Alice quer dar uma festa e est´a decidindo quem chamar. Ela tem n pessoas\nas quais escolher, e ela fez uma lista de quais pares dessas pessoas conhecem\numa a outra. Ela quer selecionar o maior n´umero de pessoas poss´ıvel, sujeito\na duas restri¸c˜oes: na festa, cada pessoa deve ter pelo menos outras cinco\npessoas que ela conhece e outras cinco pessoas que ela n˜ao conhece. Forne¸ca\num algoritmo eficiente que tome como entrada a lista das n pessoas e a lista\nde pares de quem conhece quem e calcule a melhor escolha de convidados\npara a festa. Dˆe o tempo de execu¸c˜ao em termos de n.\n\nSolu¸c˜ao:\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nvoid aliceAlgoritm(int n)\nGraphG(n);\nbool convidados[n];\nqueue<int>rejeitados;\nint entry,aceitos=0；\n//Recebe os dados do grafo\nfor(inti=θ;i<n;i++)\n[incerto] do\ncout 《<\"Person #:\";\ncin >>entry;\n//Adicionar relacaoa matriz\nif(entry>θ&&entry<=n&entry!=i+1)\nif (G.isEdge(i,entry -1))\n[incerto] a>>oxaomnsof>ua>>opepa>>+>>opp>>ao\nelse\nG.addedge(i,entry - 1);\nelse if (entry ==i + 1)\ncout<<\"Essaentradanaoévalida!\"<<endl;\nelse if (entry == -1)\n[incerto] >>x>>（>>>>+>>>\nelse\ncout<<\"Entradainvalida,tentenovamente!“;\n}while (entry !=-1);\n\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\nfor(int i=0；i<n;i++)\nconvidados[i]=1;//convidatodomundo\nconnections=G.getDegree(i);\nif(connections<5lln-connections<5）//verifica os requisitos\nrejeitados.push(i);// coloca na lista de rejeitados\nconvidados[i] = 0; // tira da lista de convidados\n//Verifica os requisitos\nwhile(!rejeitados.empty())\nintj=rejeitados.front();\nrejeitados.pop();\nfor (int i=θ;i<n;i++)\n6.removeEdge(i,j);\n[incerto] S   p eti / ( ==sop  (s > sua -u ! s > ()au)) \nrejeitados.push(i);\nconvidados[i]=0;\n\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig1.png",
+        "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n//Contagemdeconvidados\ncout<<endl;\nfor（int i=0;i<n;i++)\nif (convidados[i]==1)\naceitos++;\nI/Resultadodoalgoritmo\nif (aceitos == n)\nelse if (aceitos == 0)\ncout <<\"Ninguem atende aos requisitos,entao naoé possivel Alice dar uma festa.\\n\";\nelse\n[incerto] sd od>> sa>>，osad>>u>>s>>\nint main()\nintn;//numerodepessoas\ncin >> n;\ncout<< endl;\naliceAlgoritm(n);\ncout<<endl;\nreturn 0；\n\n\nO tempo de execu¸c˜ao em termos de n ´e O(n2). Isso se d´a pois no loop for em que se\nrecebe e insere as conex˜oes no grafo, ocorre n itera¸c˜oes, a fim de encontrar todas as\nconex˜oes de todos os poss´ıveis convidados, onde cada um pode ter no m´aximo n - 1\nconex˜oes. Al´em disso, h´a outro loop for que verifica se os requisitos (conhecer mais\nde 5 pessoas, e n˜ao conhecer no m´ınimo 5 pessoas) est˜ao sendo cumpridos. Em seu\npior caso, todos os poss´ıveis convidados foram rejeitados, ent˜ao para cada um deles\nhaver´a n itera¸c˜oes para remover da lista de convidados e de todas as suas conex˜oes.\nSendo assim, justifica-se o tempo polinomial O(n2).\n\n6. Um servidor tem n usu´arios esperando para serem servidos.\nO tempo de\nservi¸co requerido por usu´ario ´e conhecido previamente: ´e ti minutos para\no usu´ario i . Portanto se, por exemplo, os usu´arios s˜ao servidos em ordem\ncrescente de i , ent˜ao o i-´esimo usu´ario tem de esperar a Pi\n\nj=1 tj minutos.\nQueremos minimizar o tempo total de espera\n\nn\nX\n\nT =\n\n(tempo gasto pelo usu´ario i na espera).\n\nn=1\n\nForne¸ca um algoritmo eficiente para computar a ordem ´otima na qual pro-\ncessar os usu´arios.\n\nPage vi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p6-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "Solu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\n1\ndef\ngetCPUTime(user):\n2３4567\nreturnuser.cpurime\ndef server_sched(users_array):\nusers_array.sort(key=getcpurime) # Ordena de maneira ascendente ém n log(n)\n#pelotempo deservico、Tempos de servico menor，\n#reduzemo tempo de esperaentre astarefas\nforuserinusers_array:\nserver.execute(user.task)\n#Paracadausuarioo(n)noarraydeusuarios\n#Executaataskfornecidapelousuario O(1)\n\n\n7. Considere o seguinte problema.\nEntrada: Grafo n˜ao direcionado G = (V, E ); pesos de arestas we ; subconjunto\nde v´ertices U ⊂V.\nSa´ıda: A ´Arvore Geradora mais leve na qual os n´os de U s˜ao folhas (pode\nhaver outras folhas na ´arvore tamb´em)\n\nSolu¸c˜ao: Para encontrar a sa´ıda desejada, ou seja, a ´arvore geradora mais leve na\nqual os n´os de U s˜ao folhas, necessitamos fazer alguns passos, descritos a seguir:\n\nO primeiro ´e a construir¸c˜ao Grafo G′ = (V ′, E′), onde\n\nV ′ = V −U e E′ = {(u, v) | u, v ∈V −U ∧(u, v) ∈E}\n\nAp´os isso, deve-se aplicar o algoritmo de Kruskal a fim de encontrar a ´arvore geradora\nm´ınima de G′, que ´e T ′. Caso T ′ n˜ao exista, ent˜ao a ´arvore geradora mais leve ´e\nimpratic´avel e n˜ao podemos encontrar uma solu¸c˜ao. Isso ´e explicado pois assumindo\nque h´a duas ´arvores na floresta geradora para o grafo G′, dever´a haver um n´o u ∈U\nque conecte as duas ´arvores na floresta, mas isso far´a com que u deixe de ser uma\nfolha, resultando em uma contradi¸c˜ao.\n\nNo entanto, caso T ′ exista, prosseguimos para a constru¸c˜ao de um conjunto de arestas\nE’, onde:\n\nE′ : ∀(u, v) ∈E′ | u ∈U ∧v /∈U\n\nE o pseudo-c´odigo ´e dado a seguir:\n\nfor each u in U:\n\ngenerateSet(u) # filtra as arestas pelo seu peso\nfor all edges u,v in E # por ordem de peso\n\nif encontrar(u) != encontrar(v):\n\nadd edge u,v to T'\nunion(u,v)\nreturn T'\n\nPage vii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p7-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p7-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "Com isso, encontramos e retornamos T ′, que ´e ´arvore geradora mais leve na qual os\nn´os de U s˜ao folhas.\n\n8. Um conjunto feedback de arestas de um grafo n˜ao-direcionado G = (V, E )\n´e um subconjunto de arestas E\n\n′ ⊆E que intercepta todos os ciclos do grafo.\nAssim, remover as arestas E tornar´a o grafo ac´ıclico. Forne¸ca um algoritmo\neficiente para o seguinte problema:\n\nEntrada: Grafo n˜ao-direcionado G = (V, E) com pesos de aresta positivos\nwe.\nSa´ıda: Um conjunto feedback de arestas definida E ⊆E de peso total m´ınimo\nP\n\ne∈E’ we.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\ndefminimun_weight_feedback_edge_set(V,E):\nforedgeinE:\nedge.weight=-edge.weight\nminSpanTree =kruskal(v,E)#Kruskal vai utilizar as arestas de menor peso que,por serem\n#previamente negadas，construirauma MsT cujos pesos das arestas\nsolution=E\n#sao os maiores pesos reais\n#Conjuntosolucaoinicializadocomtodasasarestas\nfor edge in minSpanTree:\nsolution.remove(edge)#Remove dasolucaoas arestascontidasnaarvoredeexpansao minima\nreturn solution # Retornao conjunto feedback de peso minimo (complemento da MsT,cujos pesos\n#das arestas sao os maximos)\n\n\n9. Forne¸ca um algoritmo de tempo linear que tome como entrada uma ´arvore e\ndetermine se ela tem um emparelhamento perfeito: um conjunto de arestas\nque tocam cada v´ertice exatamente uma vez.\n\nSolu¸c˜ao:\n\nPage viii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p8-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p8-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\ndef perf_match_tree(V,E):\nif len(V)%2==1:return False\nelse:\nwhile Ien(V);\nif not len(E):\nreturn False\nleaf=select_leaf(v,E)\nparent=get_parent(leaf,E)\nforedge in get_edges(parent,V,E):\nE.remove(edge)\nV.remove(leaf)\nV.remove(parent)\nreturnTrue\n\n\n10. Prove que o problema da mochila pode ser resolvido em tempo polinomial\npor um algoritmo guloso, se o peso wi de cada item i for unit´ario.\n\nSolu¸c˜ao: Nesse problema, temos uma mochila com capacidade de aguentar certo\npeso W e i itens de peso unit´ario wi, mas com valores distintos - sendo alguns mais\nvaliosos que outros. Seu objetivo ´e escolher os itens que resultar˜ao em um maior lucro\npara o dono na mochila, caso este deseje vender. Uma maneira de resolvˆe-lo (por´em\nnem sempre t˜ao eficiente) ´e atrav´es de um algoritmo guloso, que ´e caracterizado\npor tomar a decis˜ao com a vantagem imediata mais ´obvia. Nesse caso, podemos\nver ent˜ao que essa vantagem ´e a escolha dos itens que possuem maior valor, sem\nlevar em considera¸c˜ao o seu peso, visto que todos possuem o mesmo. Sendo assim,\nnecessitamos inicialmente ordenar de maneira decrescente os itens com base em seu\nvalor e em seguida pegar os primeiros W itens, de forma a encher a mochila at´e seu\nm´aximo e, assim, obter m´aximo lucro.\n\n\n[OCR parcial do recorte p9-fig2.png; conferir símbolos na imagem]\ndefgreedy_knapsack(values,capacity):\nprofit=θ\nvalues.sort(reverse=True)#Ordena os itens pelo seu valorem ordem decrescente T(n.lg(n))\nwhilecapacityandvalues:#Enquantohouvercapacidadeesupondoqueositens\nprofit +=int(values.pop(o)) # sao limitados,deposita os itens de maior valor O(n)\ncapacity-=1\nprint(profit)#Imprimeolucromaximoparaocasoondetodasos objetostemomesmopeso\nvalues =[int(x)for x in input().split('')]\ncapacity=int(input())\ngreedy_knapsack(values,capacity)\n\n\nDesse modo, como o algoritmo acima envolve uma ordena¸c˜ao O(n log(n)) e uma\nverifica¸c˜ao O(n) temos que a complexidade final ´e O(n log (n)). Al´em disso, como\nO(n) < O(n log (n)) < O(n2), ´e poss´ıvel concluir que a complexidade ´e limitada de\nmodo inferior e superior por duas fun¸c˜oes polinomiais (linear e quadr´atica). Logo,\n\nPage ix",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p9.png",
+      "figuras": [
+        "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig1.png",
+        "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "a complexidade linear-logar´ıtimica ´e melhor que quadr´atica e pior que linear (estas\nsendo fun¸c˜oes polinomiais).\n\nPage x",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p10.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

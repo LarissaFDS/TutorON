@@ -1,0 +1,13 @@
+{
+  "pagina": 7,
+  "texto": "[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nA\nD\nB\nE\nG\nC\nF\n\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig2.png; conferir símbolos na imagem]\nclass vertex-cover\nstatic int min(int x, int y){\nreturn (x<y)？x：y\nclass node\npublic int dataj\npublic int vertexcover;\npublic node left,right;\nstatic node createNode(int data)\nnode el = new nodet);\nel.vertexcover=θ;\nel.left =el.right =null;\nel,data = data}\nreturn el;\nstatitint vCover(noderoot){\nif (root = null)\nreturn θ\nif{root.left ==null &&\nroot.right == nul1)\nreturn B;\nif（root.vertexcover=8)\nreturn root.vertexcover!\nintsizeWithRoot=1+vCover(root.left)+\nvCaver(root.right);\nint sizeNoRoot=θ;\nif(root,left 1=nul1)\nsizeNoRoot+=1+vCover(root.left,left)+\nvCover(roat.left.right);\nif{root.right =null)\nsizeNoRoot+=1+vCover(root.rightleft)+\nvCover(root.right.right);\nroot.vertexcover=Math.Min(sizeWithRoot,sizeNoRoot);\nConsale,Write(\"0 tamanho da menor cobertura de vertice é {0}\";root.vertexcover);\nreturn root.vertexcover;\n\n\n8. Forne¸ca um algoritmo de programa¸c˜ao dinˆamica (note que ser´a pseudo-polinomial)\npara o problema SUBSET SUM.\n\nPage vii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p7-fig1.png",
+    "01-extraido\\figuras\\1a81ca283132\\p7-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

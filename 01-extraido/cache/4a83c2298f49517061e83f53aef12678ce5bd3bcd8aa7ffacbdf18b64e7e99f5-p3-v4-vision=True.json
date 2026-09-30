@@ -1,0 +1,18 @@
+{
+  "pagina": 3,
+  "texto": "2. Seja G um grafo n˜ao-direcionado. Prove que se todas as arestas s˜ao distintas,\nent˜ao ele tem uma ´unica ´arvore geradora m´ınima.\n\nSolu¸c˜ao: Considerando o enunciado, possu´ımos um grafo n˜ao-direcionado G e dese-\njamos provar que se todas as arestas s˜ao distintas, ent˜ao ele tem uma ´unica ´arvore\ngeradora m´ınima. Para provar isso, assumiremos que este grafo possui no m´ınimo\nduas ´arvores geradoras, T0 e T1, e, em seguida, provaremos que pelo menos um par\nde arestas em G possui peso igual entre si, efetuando, ent˜ao, a prova por contradi¸c˜ao.\n\nProsseguindo, tanto T0 quanto T1 dever˜ao conter uma aresta que a outra n˜ao possui,\nagregando diferen¸ca entre si. Sendo e0 a aresta de peso m´ınimo em T0/T1 e e1 a\naresta de peso m´ınimo em T1 /T0, supomos que o peso de e0 ´e menor ou igual ao peso\nde e1. Dessa forma, teremos um novo sub-grafo T1 ∪e0 que possui um ciclo e uma\naresta e2 que n˜ao est´a em T0. Como e0 ∈T0, temos que e2̸ = e0 e portanto e2 ∈T1\n/T0, sendo assim, w(e2) > w(e1) > w(e0). Agora consideramos a ´arvore geradora T2\n= T1 + e - e2, onde w(T2) = w(T1 ) + w(e0) - w(e2) ≤w(T1 ). Mas T1 ´e uma ´arvore\ngeradora m´ınima, ent˜ao w(T1 ) = w(T2), resultando que T2 tamb´em ´e uma ´arvore\ngeradora m´ınima. Com isso, conclu´ımos por contradi¸c˜ao que se todas as arestas s˜ao\ndistintas, ent˜ao ele tem uma ´unica ´arvore geradora m´ınima.\n\n3. Considere o problema de agendamento de intervalos. N´os temos um conjunto\nde atividades 1, 2, ..., n; cada atividade i possui um intervalo de tempo a partir\nde si e termina em fi .\nUm agendamento — conjunto de atividades — ´e\ndito compat´ıvel, se nenhuma atividade se sobrep˜oem no tempo. O objetivo\n´e determinar um agendamento compat´ıvel com o maior n´umero poss´ıvel de\natividades. Projete um algoritmo para este problema.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\ndef endEventTime(task):\nreturn task.end\ndef scheduler(tasks):\ntasks.sort(key = endEventTime) # Ordena a lista pelo tempo de termino das atividades\nschedule=[]\nprevEndTime =-inf #Inicializa o tempo de término parao algoritmoguloso\nforiin range(1,len(tasks)):\niftasks[i].begin>prevEndTime:#Encaixa as atividades de acordo com a disponibilidade,\n#ou seja,como as atividades estao ordenadas pelo tempo\nschedule.append(tasks[i])\nprevEndTime =tasks[i].end # de termino,a preferencia sera pelas que comecam logo\n#aposoterminodamenoratividadeateomomento\nreturn schedule\nforiin scheduler(tasks):\nprint(i)\n\n\nPage iii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p3-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p3-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

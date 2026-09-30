@@ -1,0 +1,10 @@
+{
+  "pagina": 3,
+  "texto": "Hip´otese de Indu¸c˜ao (k ≤n):\n\n6\n, ∀k ≤n\n\ni=1 i2 = k(k+1)(2k+1)\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni2 = 1 + 22 + 32... + k2 + (k + 1)2 = k(k+1)(2k+1)\n\n6\n+ (k + 1)2\n\n= k(k+1)(2k+1)+6(k+1)2\n\n6\n= (k + 1)k(2k+1)+6(k+1)\n\n6\n\n= (k + 1)(2k2+k)+(6k+6)\n\n6\n\n= (k + 1)2k2+7k+6\n\n6\n\n= (k+1)(k+2)(2k+3)\n\n6\n= (k+1)((k+1)+1)(2(k+1)+1)\n\n6\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\n(c) Desejamos provar que:\n\n13 + 23 + 33 + ... + n3 = n2(n+1)2\n\n4\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n4\n= 4\n\ni=1 i3 = 12(1+1)2\n\n4 = 1\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\n4\n, ∀k ≤n\n\ni=1 i3 = k2(k+1)2\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni3 = 1 + 23 + 33... + k3 + (k + 1)3 = k2(k+1)2\n\n4\n+ (k + 1)3\n\n= k2(k+1)2+4(k+1)3\n\n4\n= (k+1)2[k2+4(k+1)]\n\n4\n= (k+1)2(k2+4k+4)\n\n4\n\n= (k+1)2(k+2)2\n\n4\n= (k+1)2((k+1)+1)2\n\n4\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\nPage iii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p3.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

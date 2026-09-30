@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresentado contém muitos erros de digitação e símbolos ilegíveis, dificultando a compreensão do algoritmo. Além disso, há partes do código que parecem estar faltando, como a função `greedy_knapsack_fractional` e `greedy_knapsack_binary`. A justificativa para a otimalidade do algoritmo guloso para o problema da mochila fracionada também não está clara.",
+  "decisao": "suspeita",
+  "sha256": "aa3f6db01d61e0bd498d370333937e05986f82c326890ea005506c9c6245b003"
+}

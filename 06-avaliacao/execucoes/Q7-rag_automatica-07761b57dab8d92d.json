@@ -1,0 +1,56 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "2df6e1818523-q4-3",
+    "2df6e1818523-q3-6",
+    "23950cced864-q2-2",
+    "1a81ca283132-q10-10"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0.06199999999807915,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante entre 1 a n usando O(1) de memória, podemos utilizar a seguinte estratégia:\n\n1. **Cálculo da soma esperada**: A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n   \\[\n   S = \\frac{n(n+1)}{2}\n   \\]\n   Isso representa a soma esperada dos números de 1 a n.\n\n2. **Cálculo da soma dos números dados**: Somamos todos os n-1 números dados.\n\n3. **Diferença entre as somas**: A diferença entre a soma esperada e a soma dos números dados é o número faltante.\n\n### Passos Detalhados:\n\n1. **Cálculo da soma esperada**:\n   \\[\n   S_{\\text{esperado}} = \\frac{n(n+1)}{2}\n   \\]\n\n2. **Cálculo da soma dos números dados**:\n   \\[\n   S_{\\text{dados}} = \\sum_{i=1}^{n-1} a_i\n   \\]\n   onde \\(a_i\\) são os números dados.\n\n3. **Encontrar o número faltante**:\n   \\[\n   \\text{faltante} = S_{\\text{esperado}} - S_{\\text{dados}}\n   \\]\n\n### Complexidade:\n- **Tempo**: O(n) para somar os números dados.\n- **Espaço**: O(1) para armazenar a soma e o número faltante.\n\n### Problemas de Overflow:\n- Se os números forem muito grandes, pode ocorrer overflow na soma. No entanto, para números inteiros típicos (como inteiros de 32 bits), o risco de overflow é baixo para valores de n até cerca de 65535. Para valores maiores, pode ser necessário usar tipos de dados de maior precisão ou verificar se o valor está dentro dos limites permitidos.\n\n### Exemplo:\nSe n = 5 e os números dados são 1, 2, 3, 5, então:\n- Soma esperada: \\(\\frac{5(5+1)}{2} = 15\\)\n- Soma dos números dados: \\(1 + 2 + 3 + 5 = 11\\)\n- Número faltante: \\(15 - 11 = 4\\)\n\nPortanto, o número faltante é 4.\n\n### Resumo:\nA estratégia de calcular a soma esperada e subtrair a soma dos números dados é eficiente em termos de tempo e espaço, mas deve ser considerado o risco de overflow para valores muito grandes.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.531000000002678,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

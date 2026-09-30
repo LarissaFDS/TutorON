@@ -1,0 +1,29 @@
+{
+  "id": "3ac1cffa14d8",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31_(2).webp",
+  "copia": "00-originais\\ingestao\\795120b6d8ec88e7041efaf1ad828ea94c09a0e52e1039b7d4f609201f770dca\\WhatsApp_Image_2025-01-12_at_13.13.31_(2).webp",
+  "sha256": "795120b6d8ec88e7041efaf1ad828ea94c09a0e52e1039b7d4f609201f770dca",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] meioiniio+（t\n[incerto] ineio)\n:8\n9:\n[incerto] aX（A,inicio,mei)\n10:\nbX(A,meio+l,fim)\n11:\n[incerto] ifa<bthen\n12:\nreturnb\n13:\nelse\n14\nreturna\n15:\nendif\n16:end procedure\nExplique oque cle fazeprove sna corretude.\nQuestao 4[2pontos]:\nSejan T(n)e f(n)fungoes dosinteiros nos reais. Justifique\n1.Oque sigaifica T(n)éO(f(n))?Defina formalmente.\n2.Everdade que20n²+10n 1gn+5éO（n3)？\n3.EverdadequenéO(n)？\n4.0que siguifica “T(n)éD(f(n)\"？\n5.0que signifiea“T（n)=n+Ω（nlgn)”？\nQuestao5[1ponto]:\nsen=1\nResolva a recorrencia:\nF(n)=\n(2T(n/2)+cn\nsen>1.\nQuestao 6[2 pontos]:\nCalcule a complexidade de tempo do seguinte algoritmo:",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\3ac1cffa14d8\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

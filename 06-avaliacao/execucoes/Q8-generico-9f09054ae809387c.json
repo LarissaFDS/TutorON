@@ -1,0 +1,63 @@
+{
+  "questao": "Q8",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "70d6475b28bf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Backtracking é uma técnica de pesquisa que pode ser usada para encontrar soluções de problemas que envolvem sequências de decisões, como o caso dos quadrados mágicos. Vamos detalhar como usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números 1 a 9.\n\n### Definição do Problema\nUm quadrado mágico de ordem 3 é um quadrado 3x3 preenchido com os números 1 a 9 de tal forma que a soma dos números em cada linha, coluna e diagonal seja igual a 15 (a soma mágica).\n\n### Estrutura do Problema\n1. **Estado Inicial**: Uma matriz 3x3 preenchida com zeros.\n2. **Decisões**: Preencher cada célula com um número de 1 a 9.\n3. **Restrições**: \n   - Cada número de 1 a 9 deve aparecer exatamente uma vez.\n   - A soma de cada linha, coluna e diagonal deve ser igual a 15.\n\n### Algoritmo de Backtracking\n1. **Iniciar o Preenchimento**: Comece preenchendo a matriz com zeros.\n2. **Preencher a Próxima Célula**: Para cada célula, tente preenchê-la com um número de 1 a 9.\n3. **Verificar a Válidade**: Verifique se o número pode ser colocado na célula atual sem violar as restrições.\n4. **Recursão**: Se a colocação é válida, avance para a próxima célula e repita o processo.\n5. **Podar**: Se a colocação violar alguma restrição, retorne para a célula anterior e tente um número diferente.\n6. **Condição de Parada**: Se todas as células forem preenchidas e todas as restrições forem satisfeitas, você encontrou uma solução.\n\n### Implementação em Python\nAqui está uma implementação em Python:\n\n```python\ndef is_valid(board, row, col, num):\n    # Verifica se o número já existe na linha\n    for x in range(3):\n        if board[row][x] == num:\n            return False\n    \n    # Verifica se o número já existe na coluna\n    for x in range(3):\n        if board[x][col] == num:\n            return False\n    \n    # Verifica se o número já existe na submatriz 3x3\n    start_row = row - row % 3\n    start_col = col - col % 3\n    for i in range(3):\n        for j in range(3):\n            if board[i + start_row][j + start_col] == num:\n                return False\n    \n    return True\n\ndef solve_sudoku(board):\n    for i in range(3):\n        for j in range(3):\n            if board[i][j] == 0:\n                for num in range(1, 10):\n                    if is_valid(board, i, j, num):\n                        board[i][j] = num\n                        if solve_sudoku(board):\n                            return True\n                        board[i][j] = 0\n                return False\n    return True\n\ndef print_board(board):\n    for i in range(3):\n        for j in range(3):\n            print(board[i][j], end=\" \")\n        print()\n    print()\n\ndef find_magic_squares():\n    board = [[0 for _ in range(3)] for _ in range(3)]\n    solutions = []\n    \n    def backtrack(board, solutions):\n        if solve_sudoku(board):\n            solutions.append([row[:] for row in board])\n            return True\n        return False\n    \n    backtrack(board, solutions)\n    return solutions\n\nsolutions = find_magic_squares()\nfor solution in solutions:\n    print_board(solution)\n```\n\n### Explicação dos Testes e Podas\n1. **Testes**:\n   - **Teste de Linha**: Verifica se o número já existe na linha atual.\n   - **Teste de Coluna**: Verifica se o número já existe na coluna atual.\n   - **Teste de Submatriz**: Verifica se o número já existe na submatriz 3x3.\n\n2. **Podas**:\n   - **Podar Linha/Coluna/Submatriz**: Se o número já existe na linha, coluna ou submatriz, não é possível colocá-lo na célula atual. Portanto, a tentativa é descartada e o próximo número é testado.\n   - **Podar Solução**: Se a solução atual não for válida (não atender a todas as restrições), a solução é descartada e o backtracking retorna para a célula anterior.\n\n### Conclusão\nEste algoritmo de backtracking busca todas as soluções possíveis para o problema dos quadrados mágicos de ordem 3, verificando as restrições em cada passo e podando as soluções inválidas.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 21.15599999999995,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "row",
+    "col"
+  ],
+  "citacoes_ids_invalidos": [
+    "row",
+    "col"
+  ]
+}

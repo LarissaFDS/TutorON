@@ -1,0 +1,56 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "2df6e1818523-q4-3",
+    "2df6e1818523-q3-6",
+    "ea17161d3bfb-q2-2",
+    "23950cced864-q2-2"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 3.061999999998079,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante em uma sequência de n−1 números distintos de 1 a n usando O(1) de memória, podemos utilizar a técnica de soma de números consecutivos. Vamos detalhar o processo passo a passo:\n\n1. **Cálculo da Soma Esperada:**\n   - A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n     \\[\n     S = \\frac{n(n+1)}{2}\n     \\]\n   - Isso representa a soma esperada se todos os números de 1 a n estivessem presentes.\n\n2. **Cálculo da Soma dos Números Dados:**\n   - Somamos todos os n−1 números dados. Chame essa soma de \\( S' \\).\n\n3. **Encontrar o Número Faltante:**\n   - O número faltante pode ser encontrado subtraindo a soma dos números dados \\( S' \\) da soma esperada \\( S \\):\n     \\[\n     \\text{Número faltante} = S - S'\n     \\]\n\n### Passos em Detalhes:\n\n1. **Calcular \\( S \\):**\n   - \\( S = \\frac{n(n+1)}{2} \\)\n\n2. **Somar os Números Dados:**\n   - Faça a soma dos n−1 números dados e armazene o resultado em \\( S' \\).\n\n3. **Subtrair \\( S' \\) de \\( S \\):**\n   - \\( \\text{Número faltante} = S - S' \\)\n\n### Complexidade de Tempo e Espaço:\n\n- **Tempo:** O(n) para somar os n−1 números dados, mas a operação de subtração é constante.\n- **Espaço:** O(1) de memória, pois apenas variáveis temporárias são usadas.\n\n### Problemas de Overflow:\n\n- **Overflow:** Se os números forem muito grandes, pode ocorrer overflow na soma. No entanto, isso é raro em linguagens modernas que suportam inteiros de precisão arbitrária. Em linguagens que não suportam inteiros de precisão arbitrária, pode ser necessário usar tipos de dados de maior precisão ou realizar a soma de forma iterativa para evitar overflow.\n\n### Exemplo Prático:\n\nSuponha que \\( n = 5 \\) e os números dados são \\( 1, 2, 3, 5 \\).\n\n1. **Calcular \\( S \\):**\n   \\[\n   S = \\frac{5(5+1)}{2} = \\frac{30}{2} = 15\n   \\]\n\n2. **Somar os Números Dados:**\n   \\[\n   S' = 1 + 2 + 3 + 5 = 11\n   \\]\n\n3. **Subtrair \\( S' \\) de \\( S \\):**\n   \\[\n   \\text{Número faltante} = 15 - 11 = 4\n   \\]\n\nPortanto, o número faltante é 4.\n\n### Resumo:\n\n- **Algoritmo:** Calcule a soma esperada \\( S \\) dos números de 1 a n, some os n−1 números dados e subtraia a soma dos números dados da soma esperada.\n- **Complexidade:** O(n) de tempo e O(1) de espaço.\n- **Problemas de Overflow:** Raro em linguagens modernas, mas pode ser um problema em linguagens que não suportam inteiros de precisão arbitrária.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 18.39099999999962,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

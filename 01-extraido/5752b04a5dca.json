@@ -1,0 +1,29 @@
+{
+  "id": "5752b04a5dca",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.30.09_(1).webp",
+  "copia": "00-originais\\ingestao\\46b81b96382238b93725320644786e75a8fd08c00adce6785465bc3806b08dec\\WhatsApp_Image_2025-01-12_at_13.30.09_(1).webp",
+  "sha256": "46b81b96382238b93725320644786e75a8fd08c00adce6785465bc3806b08dec",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "13:21\nPAAProva3.pdf\n[incerto] 3Q\nUaiverddeFederldAlagosUFAL\nInstituto de Computacio\nProjetoeAnflilse deAlgoritmos\n3Prova\nProf.Rlan GabrielPinhelro\n24 de setenbro de 2023\n[incerto] BekoHoriguee\n[incerto] Deedeqsmpdouqdfdia\nQustao1[2pontos]\n[incerto] marinxm？Aedadoalgoriumsnmblana，mqetrupeentaubstco.O\n[incerto] olaolooa\n[incerto] 12\nQuestao2[2pontos]:\n[incerto] Dadsdssindeamercmpnodamaorbin\n[incerto] dlasistomorkpraqulexistmindisem1+Mre cmofaer\nisso em tempo O（mn).\nQuestio3[2pontos]:\n[incerto] d\nQuestio:Existe umsubconjuntoA'A cuja soma dos valores seja exatamente?\nQueatio 4[2pontos]:\n[incerto] Dadurdritdqmajogrdaddfbsmtta\n[incerto] gulakcontbiizndo todsaspivcmbis derulado？ExSen=3k17,t3opos:[5,6,\nQuestio5[1ponto]:\nOgadrado mdgico consiste em encoutrar para um dado n uma matriz n lal que (i) cada ofula da matriz seja um\n[incerto] nmeroentren²,（i）todaslasdamatdevmerderns（i）asmdasinascolasds\n[incerto] d\n[incerto] diagonisio todas gUndoprogaagoporestrisodeeproblmDicause uavariveq\ne diagonal.\nQuestao 6[1 ponto]:\n[incerto] aa）xqd\nconjunto dos vizinhos de v.Qual o problema representado?\n[incerto] a+21WEV\nA34\n[incerto] EN(O)\n[incerto] %∈{0.1)\nVEV\nQuestao 7[2 pontos]:\n[incerto] Ochdokcoistvradmquvodvphelsdmac\nde1andagradenxn.Cadanmeropode aparecer apenas umavezem cadaeacoluna ou linha Usndo\nprogramaoporrestriesmodele chsodafguraabaix.Dia:u uma vrivelque reprsenta\no valor que cada clula （i,) da matris pode nssumir.\nScannedwithCamScanner\n[incerto] der\n[incerto] pdh-mt:crwe_nrn（o,n，m)\n[incerto] forouinwnge（o,c）:\n[incerto] oYolinLonge\n（vow==\n=\n[incerto] oW+=L",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\5752b04a5dca\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

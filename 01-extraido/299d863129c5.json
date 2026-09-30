@@ -1,0 +1,29 @@
+{
+  "id": "299d863129c5",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\Prova_2_2022.2.webp",
+  "copia": "00-originais\\ingestao\\cc288bc8f423b96954cea28d9178688dd9798ed976118c1ffd75d6d998964ef8\\Prova_2_2022.2.webp",
+  "sha256": "cc288bc8f423b96954cea28d9178688dd9798ed976118c1ffd75d6d998964ef8",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] 60\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computacao\nProjeto e Analise de Algoritmos\n2aProva\nProf.Rian Gabriel Pinheiro\n30 de marco de 2023\nQuestao 1[2pontos]:\nSao dadas duas listas ordenadas de tamanho m n.De un algoritmo de tempo O(logm+logn)parscomputar 0\nk-simo menor clemento da uniao das duas lietas\nQuestao2[2pontos]:\nSuponha queoce tenhakarrays ordenaosAAk,cadau comnlementosVoci deja combino\num inicoarray ordenado de tamano kUma maneira de fazer isso seria usar a operago de intercalao (merge)\nSabendo que aintercalagao de dois arrayXeYprecisa de|X|+|Y|pas\n1.Calcule quantos passos o algoritmoa seguir leva:Primeiro intercale osarrays AAdepois ntercaleresitado\ncom Ase assim por diante.\n2.Projcte um algoritmo melhor para este problema.\nQuestao3[2pontos]:\nDadoum conjuntoS de strings.encontre de forta eficiente o prefixo comunmais longo.Exemplo\nEntrado:S={“instituto”，“instigar”，“instavel”,“instaurar\"},Safda“inst”\nQuestao4[2ponto]:\nConsidere o seguinte problema\nSaida:A Arvore Geradora mais leve naqual osnosde U sao folhas(pode haver outrus folhas na arvre tamem)\nQuestao5[2ponto]:\nConsidere os dois algoritmos gulosos para o CAIxEIRo VIAJANTE.Mostre que ambos nao sao exatosistoe.nao\ngarantem retornar a solucao otima\nAlgoritmo 1(Algoritmo do vizinho maisproximo)\n1.Inicialize todos os vertices como naovisitados.\n2.Selecione umvertice arbitrario,defina-o como o verticeatual u.Marque u como visitado\n3.Descubra a aresta mais curta conectando o vertice atual ue um vertice nao visitado \n4.Defina v como overtice atual u.Marque v como visitado\n5.Se todos os vertices do dominio forem visitados,entao termine.Caso contrario,va para o passo3\nAlgoritmo 2(Algoritmo da insercao mais barata)\n1.Crie um ciclo Ccom tres vertices quaisquer.\n2.Eecolha um vertice k qualquer fora de C.\n3.Encontre uma aresta（i,j)∈C tal que dk+ dk-d) éminimo.\n4.Adicione k a C,renova a aresta （i,)e adicione as arestas （i,k)e(k,j)\n5.Se Ccontiver todos os nos,pare.Caso contrario,va para 2.\nQuestao 6[2pontos]:\nUm ladrao entra em uma lojaeve um conjuntoI den itens,I={a.a..a}.Cada item tem un peso associado\nweum valor v;Idealmente,oladrao gostaria de roubar tudo para obter omaximo beneficio.No entanto,hamito\nque ele pode carregar.O ladrao tem uma mochila com capacidadeK.O ladraoagora tem que determinar quais itens\n1.Suponha que os itens sejam tais que uma fracao de umitem possa ser retirada,ou seja,o ladrao pode pegar\nalguma parte de um item (por exemplo.0.4 w, de a,)e deixar a parte restante Isso é chamado de Probleina\nda Mochila Fracionada.Seja A C Io subconjunto de itens que o ladrao rouba.Elabore um algoritmo guloso\nO（nlogn)para encontrar o subconjunto A tal que\n2.Suponha que os itens sopossam serretirados como um todo,ou seja,o ladrao so podepegar ou deixar m item:\nele nao pode pegar uma fracao de um item.Isso é chamado deProblema da Mochila Binaria (ou Mochila 0-1)\nSeu algoritmo guloso para a versao fracionaria do problema (pergunta anterior)ainda encontra uma solucao\notima? Justifique sua resposta.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\299d863129c5\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

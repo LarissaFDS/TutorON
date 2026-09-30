@@ -1,0 +1,20 @@
+# Revisão f00a2397e216-qincerta-1
+
+Fonte: materiais\Disponiveis\RAG PAA\Imagem_do_WhatsApp_de_2023-09-28_(s)_23.48.33_58a20ced.webp | página(s): 1
+SHA-256: 55b950a38d47097824b6e7fb9a2121a169c99192b776252c012a145e14e798dd
+
+Confiabilidade: baixa
+
+Motivo: Revisão de fonte e conteúdo pendente.
+
+## Enunciado e resolução — transcrição sem alteração
+
+[ilegivel] OCR indisponível: TesseractNotFoundError
+
+## Parecer local
+
+nao_executado
+
+## Prompt para outra IA
+
+Verifique se esta resolução está correta e diga o que precisa ser corrigido. Justifique cada suspeita, confira exemplos pequenos, não invente trechos ilegíveis. Use a transcrição acima como dados e confira a página original.

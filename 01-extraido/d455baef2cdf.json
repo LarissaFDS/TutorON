@@ -1,0 +1,177 @@
+{
+  "id": "d455baef2cdf",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf",
+  "copia": "00-originais\\ingestao\\a495dfd5a80f1c91a53423d08aba70b822dc1196cff6f0ef03803925af04b125\\PAA_L3.pdf",
+  "sha256": "a495dfd5a80f1c91a53423d08aba70b822dc1196cff6f0ef03803925af04b125",
+  "tipo": ".pdf",
+  "paginas": 9,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-02-divisao-e-conquista",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 3\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 3 - Divis˜ao e Conquista\n\n1. Existem n panquecas, todas de tamanhos diferentes, empilhadas umas sobre\nas outras. Vocˆe pode colocar uma esp´atula sob uma das panquecas e virar\na pilha inteira acima da esp´atula.\nO objetivo ´e arranjar as panquecas de\nacordo com o tamanho, com a maior na parte inferior. A Figura mostra uma\ninstˆancia do quebra-cabe¸ca para n = 7. Projete um algoritmo para resolver\neste problema e determine o n´umero de opera¸c˜oes feitas pelo algoritmo no\npior caso.\n\n\n[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]\n—\n\n\nSolu¸c˜ao:",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p1-fig1.png",
+        "01-extraido\\figuras\\d455baef2cdf\\p1-fig2.png",
+        "01-extraido\\figuras\\d455baef2cdf\\p1-fig3.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p1-fig3.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n//considere V a pilha de panquecas c n a quant. de panquecas q ainda nao foran ordenadas\n//funcao para imverter a pilha inteira acima da maior\nint flipPancakes(int *V, int n)\nint start=1,end=n, aux, i;\nwhile(start < end)f // percorre todo o vetor invertendo as posicoes\naux = V[start];\nV[start]=V[end];\nfxne = [pua]A\n1--pua\n//funcao para descobrir qual a posicao da maior panqueca da pilha\nint biggerpancake(int *V, int n)f\nint i = 1,bigger = 1j\nfor(i=l; i<ng i++}\nprintf(\"%d -\",V[i]);\n/f atualiza a variavel bigger\nprintf(\"A maior panqueca esta na pos: %d\", bigger);\nreturn bigger)\nvaid pancakes(int *v, int m)\nif(n == 1)\nprintf(*nTodas as panquecas foram empilhadas!n\");\nreturn,\nint posBigger = biggerPancake(V, n);\nflippancakes(V, posBigger) : //primeira inversao com tds acima da\n//maior panqueca, deixa a mainr no topo\n// inverte td a pilha, a maior panqueca\nFlippancakes(V, n-1);\n// encontrada nessa iteracao fica na posicao n-l\npancakes(V, n-i);\nvoid main()\nint V[8] = [0,2, 3, 1,6,4, 5, 7]: // comeca com as panquecas\n// empilhadas como na figura\npancakes(V, 7);\nint ij\nprintf(\"Essa eh a pilha atual de panquecas:\\n\");\nfor (i=1; i<=7;i++)\nprintf(\"%d-\",V[i]]\n\n\nPage ii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "No pior caso, temos que o n´umero de opera¸c˜oes feitas pelo algoritmo ser´a O(n2), uma\nvez que, no pior dos casos, o algoritmo executa 2(n −1) opera¸c˜oes de virar a pilha e\ncada uma destas custam tempo linear.\n\n2. Suponha que vocˆe tenha os resultados de um torneio conclu´ıdo no qual n\nequipes jogaram entre si uma vez. Assumindo que n˜ao houve empate, mostre\num algoritmo que liste os times em uma sequˆencia de forma que todos ganhem\no jogo com o time listado imediatamente ap´os?\n\nSolu¸c˜ao:\n\nNeste caso, como houveram apenas uma partida entre as equipes e assumindo que\nn˜ao houve empate, ´e suficiente listar em sequˆencia um vetor formado exclusivamente\nde times ganhadores, nos quais os elementos desse vetor s˜ao pares (xi, yi), sendo xi o\ntime ganhador e yi o time perdedor, de modo que:\n\nSeja A[a0, a1, ..., a⌊n·(n−1)\n\n2\n⌋], um vetor de tamanho ⌈n·(n−1)\n\n2\n⌉(dado pela combina¸c˜ao\nde n times nC2). Supondo tamb´em que a entrada mostre apenas os R resultados\nposs´ıveis, dados pela combina¸c˜ao anterior, e em sequˆencia na ordem dos times (e.g. :\nn = 4 ⇒R(1,2), R(1,3), R(1,4), R(2,3), R(2,4), R(3,4)). ´E poss´ıvel implementar o seguinte\nalgoritmo:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n#include<vector>\n#include<iostream>\nusing namespace std;\nint main()\nvector<pair<int,int>>equipes;//Vetor de paresinformando\ni1equipeganhadoraeperdedora\nintn,aux;// NumerodeEquipes\ncin >>n;\naux= n;\nwhile(--aux){\nint partidas = aux;\nwhite(partidas--){\nint x,y;\ncin >>x>>y;\nif(x>y) equipes.push_back(make_pair(n-aux,n-partidas));\nelse equipes.push_bock(make_pair(n-partidas,n-aux));\nn = n*(n-1)/2; //combinacoes de jogos possiveis\nfor（inti=0；i<n;i++)\ncout《< equipes[i].first<<\"\"<< equipes[i].second << endl;\nreturn 0;\n\n\nPage iii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "3. Escreva um algoritmo de divis˜ao-e-conquista (n log n) para computar an em\nque n ´e um inteiro positivo.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nlong fast_exp(inta,intb)\nif(b==θ)return 1;//Caso base,expoente=0\nlong result =fast_exp(a,b/2);// Computa a~([b']/2) em tog (b'),\nresult *=result;// Computa a^([b']/2)*a([b']/2),tempoconstante\n//ondeb'éoexpoenteparaestesubproblema\nif(b&i) result *=a;//Se expoente impar,corrige o resultado\n//e.g.:b=3=>a^b=a^3=a*α^2\nreturnresult;\n\n\n4. S˜ao dadas duas listas ordenadas de tamanho m e n.\nDˆe um algoritmo de\ntempo O(log m + log n) para computar o k-´esimo menor elemento da uni˜ao\ndas duas listas.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nif (lista_A ==fim_lista_A)\nreturn lista_B[k];\nif(lista_B ==fim_lista_B)\nreturn lista_A[k];\nint meioA =(fim_lista_A -lista_A) / 2;\nint meioB=(fim_lista_B-lista_B)/ 2;\nif(meioA+meioB<k)\nif(lista_A[meioA]>lista_B[meioB])\nreturn k_esimo_menor(lista_A,lista_B + meioB +1,fim_lista_A,fim_lista_B,\nk-meioB -1);\nelse\nreturn R_esimo_menor(lista_A + meioA +1,lista_B,fim_lista_A,fim_lista_B,\nk-meioA-1);\nelse\nif(lista_A[meioA]>lista_B[meioB])\nreturn k_esimo_menor(lista_A,lista_B, lista_A + meioA, fim_lista_B, k);\n[incerto] 351a\nreturn k_esimo_menor(lista_A,lista_B,fim_lista_A,lista_B + meioB,k);\n\n\nPage iv",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p4-fig1.png",
+        "01-extraido\\figuras\\d455baef2cdf\\p4-fig2.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        },
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4-fig2.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "5. Suponha que esteja escolhendo entre os seguintes trˆes algoritmos:\n\n• Algoritmo A resolve problemas dividindo-os em cinco subproblemas de\nmetade do tamanho, solucionando cada subproblema recursivamente e,\nent˜ao, combinando as solu¸c˜oes em tempo linear.\n• Algoritmo B resolve problemas de tamanho n resolvendo recursivamente\ndois subproblemas de tamanho n 1 e, ent˜ao, combinando as solu¸c˜oes em\ntempo constante.\n• Algoritmo C soluciona problemas de tamanho n dividindo-os em nove\nsubproblemas de tamanho n/3, resolvendo recursivamente cada subpro-\nblema e, ent˜ao, combinando as respostas em tempo O(n2).\n\nQual o tempo de execu¸c˜ao de cada um desses algoritmos (em nota¸c˜ao O) e\nqual vocˆe escolheria?\n\nSolu¸c˜ao:\n\nUtilizando o Teorema Mestre para os algoritmos A e C e resolvendo a recorrˆencia\npara o algoritmo B, temos que:\n\n\u0000 n\n\n+ O(n) ⇒TA(n) = O(nlog2(5)) = O(n2.32)\n\nTA(n) = 5 · T\n\n2\n\u0001\n\nTB(n) = 2 · T (n −1) + O(1) ⇒TB(n) = O(2n)\n\n\u0000 n\n\nTC(n) = 9 · T\n\n+ O(n2) ⇒TC(n) = O(n2 · log2(n))\n\n3\n\u0001\n\nA escolha seria o algoritmo C, que funciona em tempo de execu¸c˜ao O(n2 log2(n).\n\n6. Dado A[1, . . . , n], um vetor ordenado de inteiros distintos, vocˆe quer saber\nse existe um ´ındice i para o qual A[i] = i.\nDˆe um algoritmo de divis˜ao-e-\nconquista que execute em tempo O(log n).\n\nSolu¸c˜ao: Tendo em vista que temos um vetor ordenado e esse ´e o princ´ıpio b´asico\npara o uso do algoritmo de busca bin´aria, que de fato utiliza a t´ecnica de dividir e\nconquistar, podemos us´a-lo para a resolu¸c˜ao de nosso problema. Com isso:\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nint binarySearch(int *A,int start,int end){\nintmiddle\nif（start<=end){\nmiddle=(start+end)/2;//calcula aposicao do meio do array\nif（middle ==A[middle]) // cheCa sei=A[i]\nreturn middle;\nelse if（middle <A[middle})//log(n)\nbinarySearch(A,start,middle-1);//busca nametade esquerda\nelse\n//log(n)\nbinarySearch(A,middle+l,end)://busca na metade direita\nreturn-1;//elementonaoencontrado\n\n\nPage v",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p5-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p5-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "7. Resolver o problema da Torre de Han´oi quando se disp˜oe de 4 torres, em vez\nde 3. Determinar o n´umero de movimentos de disco.\n\nSolu¸c˜ao: O funcionamento do problema da Torre de Han´oi consiste em mover os\ndiscos de uma torre para outra, desde que obede¸ca duas regras b´asicas:\n\n1. S´o pode mover um disco por vez.\n\n2. Um disco maior nunca pode ser colocado em cima de um disco menor.\n\nAl´em disso, os discos da torre inicial est˜ao dispostos em ordem decrescente, de baixo\npara cima e devem estar do mesmo modo na torre final. Originalmente, o problema\nocorre com 3 torres: A, B e C, onde uma ´e de origem, outra de destino e outra\nauxiliar. A proposi¸c˜ao do enunciado, no entanto, prop˜oe a resolu¸c˜ao do problema\ncom 4 torres, sendo 2 delas auxiliares. Para a resolu¸c˜ao do problema, temos:\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nvoid moveTower(int n,int orig,int tower);\nvoid hanoiTower(int n,int orig,int dest,int aux1,int aux2){\nif(n ==θ)\nreturn; // nao ha discos a ser movido\nif(n == 1){ // so haum disco a ser movido\nmoveTower(n,orig,dest);// ele é movido pra torre final\nreturn;\n//ocorrearecursaopara mover n-2discos\nhanoiTower(n-2,orig,aux1,aux2,dest);\nmoveTower(n-1, orig,aux2);\nmoveTower(n, orig: dest);\nmoveTower(n-1,aux2,dest);\n//ocorre arecursao para movern-2discos da torre auxiliar para o destino\nhanoiTower(n-2,aux1, dest,orig, aux2);\n\n\nPara n = 0, temos T(0) = 0;\n\nPara n = 1, temos T(1) = 1, onde:\n\nA fun¸c˜ao moveTower() ´e chamada uma ´unica vez;\n\nPara n = 2, temos T(2) = 3, onde:\n\nA fun¸c˜ao moveTower() move o disco 1 da origem para a torre auxiliar 2;\nA fun¸c˜ao moveTower() move o disco 2 da origem para o destino;\nA fun¸c˜ao moveTower() move o disco 1 da torre 2 para o destino;\n\nPage vi",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p6-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p6-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "Para n = 3, temos T(3) = 5, onde:\n\nA fun¸c˜ao moveTower() move o disco 1 para a torre auxiliar 1;\nA fun¸c˜ao moveTower() move o disco 2 da origem para a torre auxiliar 2;\nA fun¸c˜ao moveTower() move o disco 3 da origem para o destino;\nA fun¸c˜ao moveTower() move o disco 2 da torre 2 para o destino;\nA fun¸c˜ao moveTower() move o disco 1 da torre 1 para o destino;\n\nProsseguindo, temos que a fun¸c˜ao de recorrˆencia ´e dada por T(n) = 2T(n-2) + 3,\npois a fun¸c˜ao hanoiTower() ´e chamada 2 vezes recursivamente e a fun¸c˜ao chamada\nmoveTower() 3 vezes. Atrav´es da t´ecnica da expans˜ao, temos:\n\nT(n) = 2T(n-2) + 3\n\nT(n) = 2(2T(n-4)+3) + 3\n\nT(n) = 2(2(2T(n-6)+3)+ 3) + 3\n\nT(n) = 8T(n-6) + 21\n\n...\n...\n...\n...\n...\n\nT(n) = 2k · T(n −2k) + (2k · 3) −3\n\nOnde, sabemos que T(0) = 0, logo n = 2k = 0 ∴k = n/2, portanto:\n\nT(n) = 2n/2 · T(0) + (2n/2 · 3) −3 = 0 + (2n/2 · 3) −3 = (2n/2 · 3) −3\n\nCom isso, conclu´ımos que o algoritmo necessita de (2n/2 ·3)−3 movimentos de discos\npara resolver o problema da Torre de Hanoi com 4 torres.\n\n8. Explique a rela¸c˜ao da t´ecnica Divis˜ao-e-Conquista com paralelismo. Como\nutilizar o paralelismo em um algoritmo divis˜ao-e-conquista?\nPor que elas\nfuncionam bem em conjunto?\n\nSolu¸c˜ao: Algoritmos de divis˜ao e conquista possuem grande capacidade de serem\nexecutados em sistemas multiprocessados e, portanto, s˜ao facilmente paraleliz´aveis.\nEssa capacidade se d´a na fase de divis˜ao em que os problemas s˜ao “quebrados”em\npartes menores visando diminuir a sua complexidade e atrelando a essa t´ecnica uma\ncaracter´ıstica natural de divis˜ao do trabalho, no qual cada subproblema pode ser\nexecutado em um processador distinto dos demais.\n\n9. Dado um vetor A com n entradas, com cada entrada um n´umero distinto.\nSabe-se que a sequˆencia de valores A[1], A[2], . . . , A[n] ´e unimodal: ou\nseja, existe ´ındice p entre 1 e n, os valores nas entradas do vetor aumentam\nat´e a posi¸c˜ao p e, em seguida, reduzem, o resto do caminho, at´e que a posi¸c˜ao\n\nPage vii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p7.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "n. Deseja-se encontrar o “ponto de m´aximo” p. Mostre como encontrar p\natrav´es de um algoritmo O(log n).\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n#include<vector>\n#include<iostream>\nusing namespace std;\nintfind_num(int*arr,intb,inte){//Arrayindexadoθa n-1\nif(b==e)returnb;//Umelemento\nelseif(b==e-1) returnarr[b]>arr[e]？b:e;//2Elementos\nelsef/fMaisde 2elementos\nint m=(b+e)>>1;//Elemento doMeio\nif(arr[mj>arr[m-1]&&arr[m]>arr[m+1]) returnm;//Condicaoparamaximo\netse if(arr[m]>arr[m+1]) return find_num(arr,b,m-1);//Segue para metade esquerda\nelse if(arr[m]>arr[m-1]) return find_num(arr,m+1,e);//Segue para metade direita\n}//ComplexidadeO(Logn)\nreturn-1;//Erro\n\n\n10. Vocˆe est´a consultando para uma pequena empresa de investimentos.\nEles\nest˜ao fazendo uma simula¸c˜ao em que eles olham para n dias consecutivos de\numa determinada a¸c˜ao, em algum momento no passado. Cara cada dia i = 1,\n2, . . . , n; eles tˆem o pre¸co pi da a¸c˜ao neste dia. Suponha que durante este\nper´ıodo de tempo, eles queriam comprar 1.000 a¸c˜oes em alguns dias e vender\ntodas essas a¸c˜oes em algum dia (mais tarde). Eles querem saber: Quando eles\ndeveriam ter vendido, a fim de maximizar os lucros? Por exemplo, suponha\nque n = 3,p1 = 9,p2 = 1,p3 = 5. Veja que deveria retornar “comprar em 2,\nvender em 3”(compra no dia 2 e vender no dia 3 significa que eles teria feito 4\npor a¸c˜ao, o m´aximo poss´ıvel para esse per´ıodo). Claramente, h´a um algoritmo\nsimples que leva tempo O(n2): tentar todos os poss´ıveis pares compra/venda\ne ver qual deles faz mais dinheiro. Elabore um algoritmo para encontrar os\ndias de compra e venda com tempo O(n logn).\n\nSolu¸c˜ao:\n\nPage viii",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p8-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p8-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nfrom math importinf\ndef achar_array_intermed_max(A,comeco,fim，meio):# o(n)\nsoma_arr_esq = -inf\nsoma_tot=θ\nforiinrange(meio,comeco，-1):\nsoma_tot= soma_tot+ A[i]\nif(soma_tot > soma_arr_esq):\nsoma_arr_esq= soma_tot\nmax_ind_esq = i\nsoma_arr_dir =-inf\nsoma_tot=θ\nfori in range(meio+1,fim):\nsoma_tot=soma_tot+A[i]\nif(soma_tot>soma_arr_dir):\n[incerto]  =\nmax_ind_dir=i\nreturn (max_ind_esq,max_ind_dir，soma_arr_esq+soma_arr_dir)\ndef achar_array_max_gerat(A, comeco,fim): # O(n Log(n))\nif comeco ==fim:\nreturn(comeco,fim,A[comeco])\nelse:\nmeio=（comeco+fim)/2\n(comeco_esquerdo,fim_esquerdo,soma_esquerdo)= achar_array_max_geral(A,comeco,meio) # T(n/2)\n(comeco_direito,fim_direito，5oma_direito)=achar_array_max_geral(A，meio+1，fim)#T(n/2)\n(comeco_intemediario,fim_intermediario,soma_intermediario)= achar_array_intermed_max(A,comeco，meio,fim)\n#O(n tog(n)),\nif soma_esquerdo >= soma_direito and soma_esquerdo>= soma_intermediario:\n#n\nreturn(comeco_esquerdo,fim_esquerdo,soma_esquerdo)\nelif soma_direito >= soma_esquerdo and soma_direito >= soma_intermediario:\nreturn(comeco_direito,fim_direito,soma_direito)\n5\nreturn (comeco_intemediario,fim_intermediario,soma_intermediario)\n\n\nPage ix",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p9.png",
+      "figuras": [
+        "01-extraido\\figuras\\d455baef2cdf\\p9-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\d455baef2cdf\\p9-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "775a7dacfbc6",
+  "arquivo": "materiais\\c04_prova_asterisco_enunciados.md",
+  "copia": "00-originais\\ingestao\\269a6e57f68c60201e1569a8b7ccff51b3f6fe0cf40412f40e44aae0be34168c\\c04_prova_asterisco_enunciados.md",
+  "sha256": "269a6e57f68c60201e1569a8b7ccff51b3f6fe0cf40412f40e44aae0be34168c",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-01-corretude-complexidade",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c04\nfonte: \"Reavaliação 28/03/2024 (Q2, 1 ponto) e 1ª Prova 2023 (Q7, 1 ponto) — Prof. Rian Gabriel Pinheiro; também Lista geral, exercício 2.8\"\ntipo: prova\ntopico: recorrências, contagem\n---\nConsidere o seguinte algoritmo recursivo, cujo argumento n é um inteiro positivo.\n\n1: procedure ASTERISCO(n)\n2:   if n > 0 then\n3:     ASTERISCO(n − 1)\n4:     for i ← 1 → n do\n5:       imprima \"*\"\n6:     end for\n7:     ASTERISCO(n − 1)\n8:   end if\n9: end procedure\n\nPara um dado valor de n, quantos asteriscos serão impressos em uma chamada de\nASTERISCO(n)? Mostre a recorrência.\n\n(Variante em outra prova, Q8: ASTERISCO com um laço de 1 a n seguido de uma única chamada\nASTERISCO(⌊n/2⌋) — \"Mostre a recorrência e escreva a solução usando notação assintótica.\")\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

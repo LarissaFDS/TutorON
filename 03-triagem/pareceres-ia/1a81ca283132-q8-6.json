@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há símbolos ilegíveis na imagem, como na linha 11 e 12, o que pode indicar erros. Além disso, há inconsistências na sintaxe, como no loop 'for(intj=0j<=t;j++)' que deve ser 'for(intj=0;j<=t;j++)'.",
+  "decisao": "suspeita",
+  "sha256": "2ac8a0c317221fc94d8b02bf27f9008b4b7397ca6bdfb4fc711c6c541c534208"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Existem erros matemáticos e de sintaxe nos algoritmos. No algoritmo recursivo, faltam retornos para os casos base. No algoritmo iterativo, há problemas de atribuição de variáveis e falta um retorno. A legibilidade também é prejudicada por caracteres ilegíveis na imagem OCR.",
+  "decisao": "suspeita",
+  "sha256": "a6f32da63af03800c40d3cd4dd32efe56a7a87e099e7aa28e07d0188b950ac82"
+}

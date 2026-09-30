@@ -1,0 +1,87 @@
+{
+  "id": "23950cced864",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\prova_2(1).pdf",
+  "copia": "00-originais\\ingestao\\4deb6e85a1447453001469d12c14399294b8932531092201197af53266c5fde1\\prova_2(1).pdf",
+  "sha256": "4deb6e85a1447453001469d12c14399294b8932531092201197af53266c5fde1",
+  "tipo": ".pdf",
+  "paginas": 4,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidadeFederal deAlagoas-UFAL\n[incerto] Marae Roa d S. Ute\nInstituto de Computacao\nProjetoeAnalisedeAlgoritmos\n2Prova\nProf.RianGabrielPinheiro\n24deagostode2023\nQuestao 1 [2 pontos]:\nQuestao 2 [2 pontos]:\nDado um vetor A con n entradas, com cada entrada um numero distinto.Sabe-se que a sequencia de valores\nA[1],A[2],...,A[n]é unimodal: ou seja, existe indice p entre 1e n,os valores nas entradas do vetor aumentam até a\np. Mostre como encontrar p através de um algoritmo O(log n). (Vave)\nQuestao3[2pontos]:\nVoce tem uma sequencia de numeros inteiros, e deseja encontrar o valor maximo e minimo presentes nessa sequencia.\nProjete um algoritmo eficiente de Divisao e Conquista para encontrar esses dois valores, explicando como sua aborda-\ngemfunciona e analisando sua complexidade.\nQuestao 4 [2 pontos]:\nlitros. Ele possui tambem tem uma lista de postos de gasolina ao longo do caminho, cada um com uma distancia da\ntotal daviagem.\nQuestao 5 [2 ponto]:\nConsidere o seguinte algoritmogulososparaoCAIxEIRoVIAJANTE.Mostre que elenaoéexato,istoé,naogarante\nretornarasolucaootima.Paraissouseumcontra-exemplo.\nAlgoritmo1（Algoritmo dovizinhomaispr6ximo)\n1.Inicialize todos osverticescomo naovisitados.\n2.Selecione umvertice arbitrario,defina-ocomoovertice atual u.Marqueucomovisitado.\n3.Descubra a aresta mais curta conectandoovertice atual ueumverticenaovisitadov.\n4.Definavcomooverticeatualu.Marquevcomovisitado.\n5.Se todos os vertices do dominio forem visitados, entao termine.Caso contrario,va para o passo 3.\nQuestao 6 [2 pontos]:\nUm ladrao entra em uma loja eve um conjunto I de n itens, I ={a1,a2,...,an}.Cada item tem um peso associado\nW e um valor vi. Idealmente, o ladrao gostaria de roubar tudo para obter o maximo beneficio. No entanto, ha muito\nque ele pode carregar. O ladrao tem uma mochila com capacidade K. O ladrao agora tem que determinar quais itens\nroubar para que seu peso total nao exceda K e seu valor total seja maximo.\nalgumaparte de um item(por exemplo,0,4 w; deai)e deixar aparterestante.Issoéchamado deProblema\ndaMochilaFracionada.SejaA C I o subconjunto de itens que o ladrao rouba.Elabore um algoritmo guloso\nO(n log n) para encontrar o subconjunto A tal que Za;eA w; < K e Za;eA v; é maximo.\n2.Suponha que os itens sopossam serretirados como um todo,ou seja,o ladrao s6pode pegar ou deixarum item;\nele nao pode pegar uma fracao de um item. Isso é chamado de Problema da Mochila Binaria (ou Mochila 0-1).\nSeu algoritmo guloso para a versao fracionaria do problema (pergunta anterior) ainda encontra uma solucao\nOtima?Justifique suaresposta.",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\23950cced864\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\23950cced864\\p1-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\23950cced864\\p1-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n[incerto] follox\n[incerto] Joi- pedide ra\n[incerto] dem\napontndegui\n[incerto] neroanDupliredo (Veton):\n[incerto] VetnQnderol=Ondenoeo (Vetn)\n[incerto] #0ndeoo d。 Vatn en O(m. logm)1Nerygal)\n[incerto] tod=[]\n[incerto] aux=Vetn Qderodo]\n[incerto] VetnOdb::\n[incerto] 38#\n()0\n!= aux:\nnesultode.apped(c)\n[incerto] =3\n[incerto] elumreultede\n[incerto] Logeat\n[incerto] tode&dapdda\nQueLoo 02.\n[incerto] Dodeθgu\n[incerto] de\nvmacima (Velon,(n):\n[incerto] ==M：\n[incerto] C==M-j:\n[incerto] Vton[]>=VetnCn]:\n=(x+~) /2\n[incerto] Vetn[m] > Veton -s od Vtn [J>Veln [m+]:\n[incerto] VatenCm了>Velon [3]adVelon[]<Vn[-s]:\n[incerto] seun maria (vder ,i-s)\n[incerto] aximo(Vm,m)",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\23950cced864\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\23950cced864\\p2-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\23950cced864\\p2-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n[incerto] qloi pedib , Va-n\n[incerto] dlanilme:\nLveadhon Hax Min ( Veten):\n[incerto] Je(Uetn 1 ==0:\n[incerto] De(Vebn）=j:\n[incerto] rebinn [Vaten [o1, Vetn te3]\n[incerto] e（Vton)==）:\n[incerto] VatonEo]>VelnCs]:\n[incerto] netm[Vatn[Ualnro了]\n[incerto] nelun[veton Eor, Uebn [s]]\n[incerto] m= Jen(veta) 12\n[incerto] #②\n[incerto] Va =encoto Moxkm (Vatn [:m])\n[incerto] V:JneanHochi(Vbn [a+:3)\n[incerto] Vuult=[]\n4\n[incerto] Va[o]<U[o:\n[incerto] Vnautdb[o]=VaEo]\n[incerto] Va[>U[s]:\n[incerto] VnasutdC=Vaci\n[incerto] Vatod]=V[1]\n[incerto] Adeerdage\n[incerto] ai\n[incerto] dcmn\n[incerto] Gn>.\n[incerto] Diursaede\n[incerto] Aaliocoododineinoo\n[incerto] PaalCmrteud.\n[incerto] Sarde\n[incerto] CAN\n[incerto] algiteatoMxKiiO(lon)\n[incerto] ema\n[incerto] Qedo\n[incerto] mcappnm。p\n[incerto] alopt\n[incerto] 1. arde a Lt\n[incerto] adiaino dodiloio\n[incerto] o caleandeeamainspeJoadiia\n[incerto] 2.Seleiaa\n[incerto] picoo\n3. A cegoda, nline α\n[incerto] lendneloida litelilie aPanio ll\n2.\nPreudo-codigo\n[incerto] canaecemsegue\n[incerto] HoroeRoe dS.t\nchegaraodeslng",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\23950cced864\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\23950cced864\\p3-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\23950cced864\\p3-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n01.\nDd e \n[incerto] neguite cedip\n[incerto] (Vizimba\npralelena b Caxlino\n[incerto] Mécie）,pebn\n[incerto] Jd e y\n[incerto] dlanritne $,\n[incerto] pelll\n[incerto] Cem- ms A. Ll ino\n[incerto] S114\nJ3.\n[incerto] Sade a nalucoe\n[incerto] dioa nguite\n[incerto] xC\n[incerto] ？`4↑Ulαf\n[incerto] cor,\nde 6.\n[incerto] Log， podib\n[incerto] 855987S\n[incerto] del\n[incerto] neeoax Daptcads (Valn , x)\n[incerto] L(Utn==± :\nQuestoa\n[incerto] μ.eΦ\n[incerto] seqile ag guloo:\n[incerto] olen-Ui\n[incerto] J. Dodo θ coryut d I ile, eondene da frma\n[incerto] deeeeeteAaleerelooe\npane\n[incerto] Pialie.\n[incerto] 3. Contimue是ee\n[incerto] amoclelaalij a coporidode mkina\n[incerto] Ap\n05\n[incerto] Mao\neoleca\ndosaten\n[incerto] Cranses",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\23950cced864\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\23950cced864\\p4-fig1.png"
+      ],
+      "visao_candidata": [
+        {
+          "imagem": "01-extraido\\figuras\\23950cced864\\p4-fig1.png",
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

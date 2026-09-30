@@ -1,0 +1,29 @@
+{
+  "id": "a38cdcf2222d",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(6).webp",
+  "copia": "00-originais\\ingestao\\8bb1db2b26b203521e8e11d20f22c5ea594cbfa0fd9113882a7e05574fe4ab74\\WhatsApp_Image_2025-01-12_at_13.13.32_(6).webp",
+  "sha256": "8bb1db2b26b203521e8e11d20f22c5ea594cbfa0fd9113882a7e05574fe4ab74",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[incerto] Questaioe(2potitos\n[incerto] wrlives(o ses dommios)easrestrigoes\nQuestao7[2pontos]:\nDenotaos overtice na i-esima linha e na jesima coluna por (i).Todos osvertices em uma grade tem exataente\n（Zmm）na grade,o problema de escape é determinar se existem m\nDadosmn²pontos departida（ai.yi)..\ncaminhos disjuntos de verticesa partir dos pontos de partida para m pontos diferentes na fronteira.Por exemplo,a\ngradena Figura a te uma saida,mas a gradenaFigurabnao tem.Mostre couo modelar oproblena de ccape\nuisandooprablema dofuxomaximo,",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\a38cdcf2222d\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

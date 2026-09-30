@@ -1,0 +1,13 @@
+{
+  "pagina": 10,
+  "texto": "[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]\ndefprint_solution_kt(board):\nfor i in range(8):\nfor j in range(8):\nprint(board[ij[j], end=′')\nprint()\ndef is_valid_move(board, x, y):\n# verifica se a posicao eh valida de acordo com as limitacoes\nif(x >=θ and y >= θ and x< 8 and y < 8 and board[xJ[y] ==-1):\nreturn true\nreturn False\ndefsolve_kt_bt(board,curr_x,curr_y;next_x,next_y,pos):\nif pos x= 64:\nreturn True\n# tenta todas as coordenadas atraves de backtracking\nfor i in range(8):\nx=curr_x+next_x[i]\ny=curr_y+next_y[i]\niF(is_valid_move(board,x,y)):\nboard[x][y]=pos\nif(solve_kt_bt(board，x,y,next_x,next_y,pos+1)):\nreturn True\nboard[x][y]=-1\nreturn False\ndef knights_tour_bt():\nboard = [[-1 for i in range(8)] for i in range(8)]\nboard[e][e] =θ #inicializa 0 cavala na quina do primeiro bloco\n#prox coordenadas\nnext_x=[2，1，~1,\nnexty=[1,2,2,1,-1,~2,-2-1}\n-2\n-2-2,1,2}\npos = 1\n#chama afuncao que vai executar o backtracking\nif solve_kt_bt(board,0,θ,next_x, next_y, pos):\nprint_solution_kt(board)\nelsey\nprint(\"There's no solution for this problem.\")\nknights_tour_bt()\n\n\n\n[OCR parcial do recorte p10-fig2.png; conferir símbolos na imagem]\nConsiderandoacoordenadadoprimeiromoyimento,asolucaosedaaseguir:\n037583542475651\n593414857504346\n383136412455255\n336039264954344\n3093261402522.53\n176227102320134\n82918156112421\n63167281914512\n\n\nO tempo em segundos decorrido para encontrar a solu¸c˜ao foi: 41.19298219680786s.\nImportante observar que o tempo decorrido varia de acordo com o caminho que se\npercorre, caso invertˆessemos a ordem entre next x e next y ter´ıamos encontrado uma\n\nPage x",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p10.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p10-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p10-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

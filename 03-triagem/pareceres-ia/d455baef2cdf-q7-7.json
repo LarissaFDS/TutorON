@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta símbolos ilegíveis e há um erro matemático na expansão da função de recorrência. A fórmula final não corresponde corretamente ao problema.",
+  "decisao": "suspeita",
+  "sha256": "3f78ed477192210e86f28283e5bd84efa3eaf04ed3b1de76974c3cea74a97a50"
+}

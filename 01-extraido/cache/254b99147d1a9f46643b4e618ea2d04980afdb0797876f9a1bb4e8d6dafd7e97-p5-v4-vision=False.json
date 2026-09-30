@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "= 6k + 3 = 2(3k + 1) + 1\n\n∴\n3m = 2j + 1\n\nPortanto, provamos que ¬q →¬p o que implica, pela prova contrapositiva, que\np →q. Dessa forma, est´a provado que se 2|3m ent˜ao 2|m.\n\n■\n\n(c) Desejamos provar que a soma de 3 n´umeros consecutivos ´e m´ultiplo de 3. Para\n\nisto, utilizaremos prova direta:\n\nHip´otese: 3|a + (a + 1) + (a + 2)\nProva:\n\na + (a+1) + (a+2) = 3a + 3 = 3(a + 1) = 3k,\n\nonde k ´e qualquer n´umero inteiro.\n\nPela defini¸c˜ao de divisibilidade, temos que se existe um inteiro k, tal que j = w·k,\nent˜ao, um n´umero inteiro n˜ao nulo w divide um inteiro j, dessa forma, podemos\nafirmar, ent˜ao, que a + (a+1) + (a+2) ´e divis´ıvel por 3 e portanto, a + (a+1)\n+ (a+2) ´e m´ultiplo de 3.\n\n■\n\n4. Considere um hex´agono regular cujos v´ertices s˜ao v1, v2, ..., v6. Mostre que toda\nmaneira de colorir os segmentos de retas que unem dois v´ertices, utilizando\nas cores azul ou branca, produz pelo menos um triˆangulo cujos lados tem a\nmesma cor.\n\nSolu¸c˜ao: Considerando um hex´agono regular e suas propriedades b´asicas, ´e intuitivo\nnotar que existem in´umeras maneiras de colorir os segmentos de retas que unem dois\nv´ertices e na figura abaixo est´a ilustrada uma delas:\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nObserve que tomamos a liberdade de mudar a cor branca sugerida no enunciado para\na cor vermelha, a fim de promover uma melhor visualiza¸c˜ao do problema.\n\nCom isso em mente, queremos provar que utilizando apenas duas cores - em nosso\ncaso, azul e vermelho - para colorir os segmentos de retas, teremos pelo menos um\ntriˆangulo com seus trˆes lados possuindo a mesma cor, independente da forma que\nescolhermos distribuir as cores.\n\nPage v",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

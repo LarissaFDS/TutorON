@@ -1,0 +1,29 @@
+{
+  "id": "ef40cf393fd2",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.30.webp",
+  "copia": "00-originais\\ingestao\\3ed83243687ff2c3453fa5e975bb6dbc18a17841a2254ad3717358f9a27ddafd\\WhatsApp_Image_2025-01-12_at_13.13.30.webp",
+  "sha256": "3ed83243687ff2c3453fa5e975bb6dbc18a17841a2254ad3717358f9a27ddafd",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "mstituto deComputacao\nProjeto e Anilise de Algoritmos\n1aProva\nProf Rian Gabriel Pinheiro\n02demargo de2023\nQuestao 12pontos):\nvotosou naoProneacoretude de seu algoritmo.\nQuestao 2[2 pontos|:\nCousidere o seguinte algoritmo\n2\nif icio = fm then\n3:\nreturn Ainicio]\n4\nendit\n5\n[incerto] meso\n[incerto] z/（ou-mg）+\n[incerto] 6:\n7\n[incerto] 6X（A.meo+1,5m)\n8\nifa<bthen\n[incerto] 9:\nreturnb\n10\nelse\n11\n12\nendif\n13end procedure\nprovesuacorretude\nExpfiqueo ueele\nQuestao3|1ponto]:\nSeja f（n) uma funcao dos inteiros nos reais.Justifique:\n1.Qual a defnigao formal de O(f(n))？\n2.Everdade que 20n²+10ngn+5éO（n²)？\n3.Everdade que n∈O（n)？",
+      "metodo": "rapidocr",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef40cf393fd2\\p1.png",
+      "figuras": [],
+      "visao_candidata": [
+        {
+          "status": "ilegivel",
+          "erro": "HTTPError"
+        }
+      ]
+    }
+  ]
+}

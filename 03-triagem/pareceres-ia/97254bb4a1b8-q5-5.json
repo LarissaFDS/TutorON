@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A função objetivo está incorreta, com termos duplicados e sinal errado. A restrição V + 2S ≤ 240000 está escrita de forma incomum. Além disso, a notação matemática é inconsistente, como no cálculo do lucro máximo. As coordenadas dos vértices também parecem estar incorretas.",
+  "decisao": "suspeita",
+  "sha256": "e29d697531041cddd177ce184f0f8c97451b478c86fe1232d339c7267a423c24"
+}

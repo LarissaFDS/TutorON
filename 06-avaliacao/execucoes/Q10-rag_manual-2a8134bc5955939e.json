@@ -1,0 +1,49 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c04",
+    "c05"
+  ],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "Claro, vamos analisar o algoritmo e montar a conta para n = 3 para entender por que a fórmula é \\(2^{n+1} - (n + 2)\\) e não apenas \\(n\\).\n\n### Análise do Algoritmo\n\n1. **Chamada inicial ASTERISCO(n):**\n   - Se \\(n > 0\\), o algoritmo faz duas chamadas recursivas com \\(n-1\\) e um laço que imprime \\(n\\) asteriscos.\n\n2. **Chamada ASTERISCO(n-1):**\n   - Essa chamada recursiva imprime \\(n-1\\) asteriscos e faz outra chamada ASTERISCO(n-2).\n\n3. **Laço for:**\n   - O laço for imprime \\(n\\) asteriscos.\n\n4. **Chamada ASTERISCO(n-1) novamente:**\n   - Essa segunda chamada recursiva imprime \\(n-1\\) asteriscos e faz outra chamada ASTERISCO(n-2).\n\n### Contagem de Asteriscos para n = 3\n\nVamos contar os asteriscos passo a passo para \\(n = 3\\):\n\n1. **Primeira chamada ASTERISCO(3):**\n   - Chama ASTERISCO(2).\n   - Chama ASTERISCO(1).\n   - Chama ASTERISCO(0).\n\n2. **Chamada ASTERISCO(2):**\n   - Imprime 2 asteriscos.\n   - Chama ASTERISCO(1).\n   - Chama ASTERISCO(0).\n\n3. **Chamada ASTERISCO(1):**\n   - Imprime 1 asterisco.\n   - Chama ASTERISCO(0).\n\n4. **Chamada ASTERISCO(0):**\n   - Não imprime nada.\n\n5. **Voltando para ASTERISCO(2):**\n   - Segunda chamada ASTERISCO(1).\n   - Imprime 1 asterisco.\n   - Chama ASTERISCO(0).\n\n6. **Voltando para ASTERISCO(2):**\n   - Segunda chamada ASTERISCO(0).\n   - Não imprime nada.\n\n7. **Voltando para ASTERISCO(3):**\n   - Segunda chamada ASTERISCO(2).\n   - Imprime 2 asteriscos.\n   - Chama ASTERISCO(1).\n   - Chama ASTERISCO(0).\n\n8. **Voltando para ASTERISCO(3):**\n   - Segunda chamada ASTERISCO(1).\n   - Imprime 1 asterisco.\n   - Chama ASTERISCO(0).\n\n9. **Voltando para ASTERISCO(3):**\n   - Segunda chamada ASTERISCO(0).\n   - Não imprime nada.\n\n### Contagem Total\n\n- **Primeira chamada ASTERISCO(3):**\n  - Imprime 3 asteriscos.\n  - Chama ASTERISCO(2).\n  - Chama ASTERISCO(1).\n  - Chama ASTERISCO(0).\n\n- **Chamada ASTERISCO(2):**\n  - Imprime 2 asteriscos.\n  - Chama ASTERISCO(1).\n  - Chama ASTERISCO(0).\n\n- **Chamada ASTERISCO(1):**\n  - Imprime 1 asterisco.\n  - Chama ASTERISCO(0).\n\n- **Chamada ASTERISCO(0):**\n  - Não imprime nada.\n\n- **Voltando para ASTERISCO(2):**\n  - Segunda chamada ASTERISCO(1).\n  - Imprime 1 asterisco.\n  - Chama ASTERISCO(0).\n\n- **Voltando para ASTERISCO(2):**\n  - Segunda chamada ASTERISCO(0).\n  - Não imprime nada.\n\n- **Voltando para ASTERISCO(3):**\n  - Segunda chamada ASTERISCO(2).\n  - Imprime 2 asteriscos.\n  - Chama ASTERISCO(1).\n  - Chama ASTERISCO(0).\n\n- **Voltando para ASTERISCO(3):**\n  - Segunda chamada ASTERISCO(1).\n  - Imprime 1 asterisco.\n  - Chama ASTERISCO(0).\n\n- **Voltando para ASTERISCO(3):**\n  - Segunda chamada ASTERISCO(0).\n  - Não imprime nada.\n\n### Contagem Total de Asteriscos\n\n- **Asteriscos impressos diretamente pelo laço for:**\n  - 3 (primeira chamada) + 2 (segunda chamada) + 1 (terceira chamada) = 6 asteriscos.\n\n- **Asteriscos impressos pelas chamadas recursivas:**\n  - 2 (ASTERISCO(2)) + 1 (ASTERISCO(1)) + 2 (ASTERISCO(2)) + 1 (ASTERISCO(1)) = 6 asteriscos.\n\n- **Total de asteriscos impressos:**\n  - 6 (impressos diretamente) + 6 (impressos pelas chamadas recursivas) = 12 asteriscos.\n\n### Fórmula\n\nA fórmula \\(A(n) = 2^{n+1} - (n + 2)\\) é derivada do fato de que cada chamada recursiva duplica o número de asteriscos impressos e adiciona os asteriscos do laço for.\n\nPara \\(n = 3\\):\n\\[ A(3) = 2^{3+1} - (3 + 2) = 2^4 - 5 = 16 - 5 = 11 \\]\n\nPortanto, a conta total de asteriscos impressos para \\(n = 3\\) é 11, não 3.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 25.390000000000327,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

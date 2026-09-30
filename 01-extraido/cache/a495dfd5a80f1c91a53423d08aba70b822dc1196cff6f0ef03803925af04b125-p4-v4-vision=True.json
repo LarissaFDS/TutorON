@@ -1,0 +1,24 @@
+{
+  "pagina": 4,
+  "texto": "3. Escreva um algoritmo de divis˜ao-e-conquista (n log n) para computar an em\nque n ´e um inteiro positivo.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nlong fast_exp(inta,intb)\nif(b==θ)return 1;//Caso base,expoente=0\nlong result =fast_exp(a,b/2);// Computa a~([b']/2) em tog (b'),\nresult *=result;// Computa a^([b']/2)*a([b']/2),tempoconstante\n//ondeb'éoexpoenteparaestesubproblema\nif(b&i) result *=a;//Se expoente impar,corrige o resultado\n//e.g.:b=3=>a^b=a^3=a*α^2\nreturnresult;\n\n\n4. S˜ao dadas duas listas ordenadas de tamanho m e n.\nDˆe um algoritmo de\ntempo O(log m + log n) para computar o k-´esimo menor elemento da uni˜ao\ndas duas listas.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nif (lista_A ==fim_lista_A)\nreturn lista_B[k];\nif(lista_B ==fim_lista_B)\nreturn lista_A[k];\nint meioA =(fim_lista_A -lista_A) / 2;\nint meioB=(fim_lista_B-lista_B)/ 2;\nif(meioA+meioB<k)\nif(lista_A[meioA]>lista_B[meioB])\nreturn k_esimo_menor(lista_A,lista_B + meioB +1,fim_lista_A,fim_lista_B,\nk-meioB -1);\nelse\nreturn R_esimo_menor(lista_A + meioA +1,lista_B,fim_lista_A,fim_lista_B,\nk-meioA-1);\nelse\nif(lista_A[meioA]>lista_B[meioB])\nreturn k_esimo_menor(lista_A,lista_B, lista_A + meioA, fim_lista_B, k);\n[incerto] 351a\nreturn k_esimo_menor(lista_A,lista_B,fim_lista_A,lista_B + meioB,k);\n\n\nPage iv",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p4-fig1.png",
+    "01-extraido\\figuras\\d455baef2cdf\\p4-fig2.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p4-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

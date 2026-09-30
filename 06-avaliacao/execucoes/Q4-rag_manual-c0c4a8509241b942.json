@@ -1,0 +1,77 @@
+{
+  "questao": "Q4",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c10-q1-1",
+    "c10-q2-2",
+    "c09"
+  ],
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [
+    "c09"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "As classes P, NP e NP-completo são conceitos fundamentais na teoria da complexidade de problemas computacionais. Vamos definir cada uma delas:\n\n1. **Classe P**:\n   - **Definição**: A classe P consiste em problemas de decisão que podem ser resolvidos por um algoritmo determinístico em tempo polinomial. Em outras palavras, existe um algoritmo que, dado um problema de entrada, pode determinar a solução em um número de passos que é uma função polinomial do tamanho da entrada.\n   - **Característica**: P é a classe de problemas que podem ser resolvidos eficientemente.\n\n2. **Classe NP**:\n   - **Definição**: A classe NP (não-determinístico polinomial) é composta por problemas de decisão para os quais uma solução pode ser verificada em tempo polinomial. Isso significa que, se alguém nos dá uma solução, podemos verificar se ela é correta em um tempo que é uma função polinomial do tamanho da entrada.\n   - **Característica**: NP inclui todos os problemas em P, pois se um problema pode ser resolvido em tempo polinomial, ele também pode ser verificado em tempo polinomial. Além disso, NP abrange problemas mais complexos que ainda não foram provados serem resolvidos em tempo polinomial.\n\n3. **Problema NP-completo**:\n   - **Definição**: Um problema é NP-completo se é um problema em NP e é pelo menos tão difícil quanto qualquer outro problema em NP. Isso significa que, se um problema NP-completo pode ser resolvido em tempo polinomial, então todos os problemas em NP podem ser resolvidos em tempo polinomial.\n   - **Característica**: NP-completo é uma subclasse da classe NP que contém os problemas mais difíceis. Se um algoritmo polinomial for encontrado para resolver qualquer problema NP-completo, então todos os problemas em NP podem ser resolvidos em tempo polinomial, o que implicaria que P = NP.\n\n**Observação**: Atualmente, não se sabe se P = NP. A conjectura P ≠ NP sugere que existem problemas em NP que não podem ser resolvidos em tempo polinomial, mas isso ainda não foi provado.\n\n### Respostas às Questões Adicionais\n\n1. **Transformação Polinomial**:\n   - **Definição**: Uma transformação polinomial (ou redução polinomial) é uma função que transforma uma instância de um problema Π em uma instância de um problema Π′ de tal forma que a solução de Π pode ser obtida a partir da solução de Π′. Essa transformação deve ser realizada em tempo polinomial.\n   - **Formalização**: Existe um algoritmo polinomial X que, dado uma instância Y de Π, produz uma instância X(Y) de Π′ de tal forma que X(Y) tem solução se e somente se Y tem solução.\n\n2. **Redução Polinomial e Classes P e NP**:\n   - **Questão 2a**: Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ está em P, então Π está em P.\n     - **Resposta**: Sim, se Π pode ser reduzido polinomialmente a um problema Π′ que está em P, então Π também está em P. Isso ocorre porque a redução polinomial permite transformar a solução de Π′ em uma solução para Π, e como Π′ é resolvido em tempo polinomial, Π também pode ser resolvido em tempo polinomial.\n   - **Questão 2b**: Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ é NP-completo, então Π é NP-completo.\n     - **Resposta**: Não necessariamente. Se Π pode ser reduzido polinomialmente a um problema Π′ que é NP-completo, isso significa que Π é pelo menos tão difícil quanto Π′, mas não necessariamente que Π é NP-completo. Para que Π seja NP-completo, ele também precisa ser um problema em NP.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 19.28099999999995,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": false
+      }
+    ],
+    "acertos": 3,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}
