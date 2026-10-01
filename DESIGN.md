@@ -152,6 +152,10 @@ As respostas chegam em Markdown com LaTeX. `design/text.js` converte localmente 
 
 O relatório da PoC, que é interno e aberto com internet, continua usando marked + KaTeX.
 
+## Antes e depois
+
+Capturas do redesign de 30/09/2026 em [`docs/redesign/`](docs/redesign/): escolha da dúvida, respostas, celular, relatório e modo escuro.
+
 ## Como verificar
 
 `python -m pytest tests_acervo` roda `tests_acervo/test_design.py`, que confere:
