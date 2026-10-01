@@ -9,11 +9,11 @@ Pasta do projeto: `C:\Users\crowp\dev\TutorON`.
 1. Abra a pasta do projeto no Explorador de Arquivos.
 2. Dê dois cliques em **`iniciar_validacao.bat`**.
 3. Aguarde abrir `http://127.0.0.1:8765` no navegador. Se o script iniciar uma janela de servidor, mantenha-a aberta. Se o TutorON já estiver rodando, o script reutiliza essa instância.
-4. Escolha uma dúvida e clique em **Comparar respostas**.
+4. Escolha uma dúvida na lista e clique em **Comparar respostas**.
 5. Leia as respostas A e B. A posição de cada condição é sorteada a cada comparação.
-6. Dê uma nota de 1 a 5 para **clareza**, **confiança** e **utilidade para a prova**, em cada resposta.
-7. Escolha A, B ou empate e clique em **Enviar avaliação**. Comentário, curso e período são opcionais. Não informe nome, matrícula ou contato.
-8. A tela deve confirmar **Avaliação salva**. O registro fica em `07-validacao-alunos\respostas.csv`.
+6. Em cada resposta, toque numa nota de 1 a 5 para **clareza**, **confiança** e **utilidade para a prova**. A nota escolhida fica marcada em amarelo.
+7. Escolha A, B ou empate e clique em **Enviar avaliação**. Comentário, curso e período são opcionais. Não informe nome, matrícula ou contato. Se faltar alguma nota, a tela diz qual.
+8. A tela deve confirmar **Avaliação enviada** e já deixa a próxima dúvida da lista selecionada. O registro fica em `07-validacao-alunos\respostas.csv`.
 
 As 12 questões prontas usam **respostas reais pré-geradas**: não precisam de internet nem de modelo carregado na hora da demonstração. Os textos podem conter erros; o objetivo da comparação é justamente identificá-los. Não use a nota do checklist como garantia de resposta correta.
 

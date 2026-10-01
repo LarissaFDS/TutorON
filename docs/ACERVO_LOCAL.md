@@ -46,6 +46,7 @@ Para uma amostra curta: `python -m acervo avaliar --gerar --questoes Q1,Q2`. Ess
 - `03-triagem/relatorio.md`: suspeitas e contagens. `pacote-revisao` contém transcrição e parecer separados. `pareceres.json` lista a rodada atual.
 - `04-rag/indice.json`: chunks e embeddings. Baixa confiança, ilegíveis, assunto incerto e segmentação pendente são excluídos. Na falta de embeddings a busca degrada explicitamente para lexical.
 - `06-avaliacao/questoes.json`: 12 questões, sete assuntos, perguntas de aluno, ausência de informação e material errado. `relatorio.md` e `resultados.json` registram geração real; `recuperacao.json` registra apenas busca.
+- `acervo/web/validacao.html`: página de comparação cega servida por `acervo/app.py` (`python -m acervo servir`). Estilos e renderização das respostas vêm de `design/` (ver `DESIGN.md`); a pasta `07-validacao-alunos/` guarda só dados.
 - `07-validacao-alunos/pares.json`: respostas offline e sua procedência. Pares históricos do HTML são rotulados como contexto manual; não se confundem com execução da busca automática.
 - `07-validacao-alunos/respostas.csv`: votos e notas, criado no primeiro voto. `sessoes.json` guarda a ordem A/B no servidor; o navegador recebe apenas textos e token aleatório. O CSV não registra nome, login, IP ou matrícula. Comentários devem evitar identificação pessoal.
 - `RELATORIO_QUINTA.md`: números e pendências para o professor. `PROGRESSO.md`: etapas executadas.

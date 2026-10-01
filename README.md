@@ -124,3 +124,15 @@ teste_checkpoints.py  sanidade do checklist
 respostas_manuais/    (opção B) cole aqui as respostas do AI Studio
 resultados/           relatórios gerados
 ```
+
+Interface e organização do restante do repositório:
+
+```
+acervo/               pipeline do acervo local; acervo/web/ tem a página de validação com alunos
+design/               design system (tokens, componentes, renderizador de respostas); regras em DESIGN.md
+frontend/             CLI que conversa com o backend FastAPI
+backend/              API FastAPI; check_supabase.py e smoke_check.py são checagens manuais
+01-extraido … 07-validacao-alunos/   dados do pipeline, na ordem em que são produzidos
+```
+
+Antes de criar ou mudar uma tela, leia [DESIGN.md](DESIGN.md).

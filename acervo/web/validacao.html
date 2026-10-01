@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Comparação de respostas de PAA</title>
+<link rel="stylesheet" href="/design.css">
+<style>
+  /* Só o que é específico desta página. Tokens e componentes vêm de /design.css. */
+  #step1 .choice-list { max-width: 820px; }
+  #custom-box { max-width: 820px; }
+  .answer__rating-title { margin-bottom: calc(-1 * var(--space-2)); }
+  #feedback .step:first-child { margin-top: var(--space-8); }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="page masthead__bar">
+    <div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div>
+    <p class="masthead__context">Monitoria de Projeto e Análise de Algoritmos<br>UFAL</p>
+  </div>
+  <div class="page masthead__intro">
+    <h1>Qual resposta te ajuda mais a estudar para a prova?</h1>
+    <p class="masthead__lede">Leia duas respostas para a mesma dúvida de PAA e dê notas para cada uma. A ordem das respostas é sorteada a cada comparação. Não é preciso login, nome nem matrícula.</p>
+  </div>
+</header>
+
+<main class="page">
+  <p id="notice" class="notice step" hidden>Modo de demonstração: estas respostas vêm da prova de conceito anterior, com o material escolhido à mão. Esta rodada não avalia a busca automática no acervo.</p>
+
+  <section class="step" id="step1" aria-labelledby="step1-title">
+    <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="step1-title">Escolha uma dúvida</h2></div>
+    <p class="step__lede">As respostas destas dúvidas já foram geradas e abrem na hora, mesmo sem internet.</p>
+
+    <fieldset class="choice-list" id="questions">
+      <legend class="visually-hidden">Dúvidas prontas</legend>
+      <p class="choice caption" style="grid-template-columns:1fr">Carregando dúvidas…</p>
+    </fieldset>
+
+    <details class="disclosure" id="custom-box">
+      <summary>Escrever minha própria dúvida</summary>
+      <div class="field">
+        <label class="field__label" for="custom">Sua dúvida de PAA</label>
+        <textarea class="input" id="custom" maxlength="4000" placeholder="Ex.: por que a recorrência do ASTERISCO tem duas chamadas recursivas?" aria-describedby="custom-hint"></textarea>
+        <span class="field__hint caption" id="custom-hint">As duas respostas são geradas agora, no modelo local, e podem levar alguns minutos. Não escreva nome, matrícula ou contato.</span>
+      </div>
+    </details>
+
+    <div class="actions">
+      <button class="button" id="start" type="button">Comparar respostas</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <form id="feedback" hidden novalidate>
+    <section class="step" id="step2" aria-labelledby="step2-title">
+      <div class="step__head"><span class="step__number" aria-hidden="true">2</span><h2 class="step__title" id="step2-title" tabindex="-1">Leia as duas respostas para esta dúvida</h2></div>
+      <div class="question prose" id="chosen"></div>
+      <p class="step__lede" style="margin-top:var(--space-5)">Dê uma nota de 1 a 5 em cada critério, nas duas respostas. 1 é pouco, 5 é muito.</p>
+
+      <div class="answers">
+        <article class="answer" aria-labelledby="labelA">
+          <h3 class="answer__label" id="labelA">Resposta A</h3>
+          <div class="prose" id="answerA"></div>
+          <div class="answer__rating" id="ratingsA"><p class="answer__rating-title">Suas notas para a resposta A</p></div>
+        </article>
+        <article class="answer" aria-labelledby="labelB">
+          <h3 class="answer__label" id="labelB">Resposta B</h3>
+          <div class="prose" id="answerB"></div>
+          <div class="answer__rating" id="ratingsB"><p class="answer__rating-title">Suas notas para a resposta B</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="step" id="step3" aria-labelledby="step3-title">
+      <div class="step__head"><span class="step__number" aria-hidden="true">3</span><h2 class="step__title" id="step3-title">Qual você prefere?</h2></div>
+
+      <fieldset class="scale">
+        <legend class="visually-hidden">Resposta preferida</legend>
+        <div class="scale__options">
+          <label class="pick"><input type="radio" name="preferida" value="A"><span>Resposta A</span></label>
+          <label class="pick"><input type="radio" name="preferida" value="B"><span>Resposta B</span></label>
+          <label class="pick"><input type="radio" name="preferida" value="empate"><span>Empate</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field" style="margin-top:var(--space-5);max-width:820px">
+        <label class="field__label" for="comment">O que ajudou ou ficou confuso? <span class="caption">Opcional</span></label>
+        <textarea class="input" id="comment" maxlength="1500" placeholder="Ex.: a resposta B mostrou a recorrência, mas pulou o caso base." aria-describedby="comment-hint"></textarea>
+        <span class="field__hint caption" id="comment-hint">Não escreva nome, matrícula ou contato.</span>
+      </div>
+      <div class="fields-row" style="margin-top:var(--space-4);max-width:820px">
+        <div class="field">
+          <label class="field__label" for="course">Curso <span class="caption">Opcional</span></label>
+          <input class="input" id="course" maxlength="100" autocomplete="off" placeholder="Ex.: Ciência da Computação">
+        </div>
+        <div class="field">
+          <label class="field__label" for="semester">Período <span class="caption">Opcional</span></label>
+          <input class="input" id="semester" maxlength="30" autocomplete="off" placeholder="Ex.: 4º">
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="button" id="send" type="submit">Enviar avaliação</button>
+      </div>
+      <p class="status" id="send-status" role="status" aria-live="polite"></p>
+    </section>
+  </form>
+
+  <section class="confirmation" id="done" hidden tabindex="-1" aria-labelledby="done-title">
+    <h2 id="done-title">Avaliação enviada</h2>
+    <p>Obrigado. Cada comparação ajuda a equipe do TutorON a melhorar a monitoria de PAA. <span id="next-hint">A próxima dúvida da lista já está selecionada.</span></p>
+    <div class="actions"><button class="button" id="again" type="button">Comparar outra dúvida</button></div>
+  </section>
+
+  <footer class="site-footer">
+    <p class="caption">TutorON é um projeto de monitoria acadêmica da UFAL. As respostas são geradas por IA e podem conter erros: confira com o material da disciplina ou com o professor.</p>
+  </footer>
+</main>
+
+<script src="/text.js"></script>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var Text = window.TutorONText;
+  var CRITERIA = [
+    ['clareza', 'Clareza', 'Consigo acompanhar o raciocínio.'],
+    ['confianca', 'Confiança', 'Parece correta, sem inventar nada.'],
+    ['utilidade', 'Utilidade para a prova', 'Me ajudaria numa questão parecida.']
+  ];
+  var LABEL = { a: 'Resposta A', b: 'Resposta B' };
+  var session = null;
+
+  function setStatus(el, text, tone) {
+    el.textContent = text || '';
+    if (tone) el.dataset.tone = tone; else delete el.dataset.tone;
+  }
+
+  function buildRatings(side) {
+    var box = $('ratings' + side.toUpperCase());
+    CRITERIA.forEach(function (c) {
+      var name = c[0] + '_' + side;
+      var fs = document.createElement('fieldset');
+      fs.className = 'scale';
+      fs.dataset.group = name;
+      var legend = document.createElement('legend');
+      legend.className = 'scale__legend';
+      legend.textContent = c[1];
+      var hint = document.createElement('span');
+      hint.className = 'scale__hint caption';
+      hint.id = name + '-hint';
+      hint.textContent = c[2];
+      fs.setAttribute('aria-describedby', hint.id);
+      var opts = document.createElement('div');
+      opts.className = 'scale__options';
+      for (var n = 1; n <= 5; n++) {
+        var label = document.createElement('label');
+        label.className = 'pick';
+        var input = document.createElement('input');
+        input.type = 'radio';
+        input.name = name;
+        input.value = String(n);
+        input.setAttribute('aria-label', c[1] + ': ' + n + ' de 5');
+        var face = document.createElement('span');
+        face.textContent = n;
+        face.setAttribute('aria-hidden', 'true');
+        label.append(input, face);
+        opts.append(label);
+      }
+      fs.append(legend, hint, opts);
+      box.append(fs);
+    });
+  }
+  buildRatings('a');
+  buildRatings('b');
+
+  async function api(path, data) {
+    var res;
+    try {
+      res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+    } catch (e) {
+      throw new Error('O servidor do TutorON não respondeu. Confira se a janela aberta pelo iniciar_validacao.bat continua rodando.');
+    }
+    var payload = {};
+    try { payload = await res.json(); } catch (e) { /* resposta sem JSON */ }
+    if (!res.ok) throw new Error(payload.erro || 'O servidor respondeu com erro ' + res.status + '. Tente de novo.');
+    return payload;
+  }
+
+  // ---------------------------------------------------------------- etapa 1
+  function renderQuestions(list) {
+    var box = $('questions');
+    box.querySelectorAll('.choice').forEach(function (el) { el.remove(); });
+    if (!list.length) {
+      var empty = document.createElement('p');
+      empty.className = 'choice';
+      empty.style.gridTemplateColumns = '1fr';
+      empty.textContent = 'Ainda não há respostas prontas. Rode atualizar_acervo.bat para gerá-las, ou escreva sua própria dúvida abaixo.';
+      box.append(empty);
+      return;
+    }
+    list.forEach(function (q, index) {
+      var label = document.createElement('label');
+      label.className = 'choice';
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'questao';
+      input.value = q.id;
+      input.checked = index === 0;
+      var number = document.createElement('span');
+      number.className = 'choice__number';
+      number.textContent = String(index + 1);
+      number.setAttribute('aria-hidden', 'true');
+      var text = document.createElement('span');
+      text.className = 'choice__text';
+      text.textContent = Text.firstLine(q.pergunta);
+      label.title = q.pergunta;
+      label.append(input, number, text);
+      box.append(label);
+    });
+  }
+
+  function selectedQuestion() {
+    var checked = document.querySelector('input[name="questao"]:checked');
+    return checked ? checked.value : null;
+  }
+
+  function customText() { return $('custom').value.trim(); }
+
+  function syncCustom() {
+    var usingCustom = !!customText();
+    $('questions').setAttribute('aria-disabled', usingCustom ? 'true' : 'false');
+    $('start').textContent = usingCustom ? 'Gerar e comparar' : 'Comparar respostas';
+  }
+  $('custom').addEventListener('input', syncCustom);
+
+  fetch('/api/questoes').then(function (r) { return r.json(); }).then(function (data) {
+    renderQuestions(data.questoes || []);
+    $('notice').hidden = !data.historico;
+  }).catch(function () {
+    renderQuestions([]);
+    setStatus($('status'), 'Não foi possível carregar as dúvidas. Confira se o servidor do TutorON está rodando e recarregue a página.', 'error');
+  });
+
+  $('start').addEventListener('click', async function () {
+    var live = !!customText();
+    if (!live && !selectedQuestion()) {
+      setStatus($('status'), 'Escolha uma dúvida da lista ou escreva a sua.', 'error');
+      return;
+    }
+    session = null;
+    $('feedback').hidden = true;
+    $('done').hidden = true;
+    var button = $('start');
+    var idle = button.textContent;
+    button.disabled = true;
+    button.textContent = live ? 'Gerando…' : 'Abrindo…';
+    setStatus($('status'), live
+      ? 'Gerando as duas respostas no modelo local. Pode levar alguns minutos; mantenha esta aba aberta.'
+      : 'Abrindo a comparação…', 'busy');
+    try {
+      var data = await api('/api/comparar', { questao: selectedQuestion(), pergunta: customText(), ao_vivo: live });
+      session = data.sessao;
+      $('feedback').reset();
+      Text.renderQuestion($('chosen'), data.pergunta);
+      Text.render($('answerA'), data.A);
+      Text.render($('answerB'), data.B);
+      setStatus($('send-status'), '');
+      $('send').disabled = false;
+      $('feedback').hidden = false;
+      setStatus($('status'), '');
+      $('step2-title').focus({ preventScroll: true });
+      $('step2').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+    } catch (e) {
+      setStatus($('status'), e.message, 'error');
+    } finally {
+      button.disabled = false;
+      button.textContent = idle;
+    }
+  });
+
+  // ---------------------------------------------------------------- etapas 2 e 3
+  function missingGroup(form) {
+    for (var s of ['a', 'b']) {
+      for (var c of CRITERIA) {
+        var name = c[0] + '_' + s;
+        if (!form.querySelector('input[name="' + name + '"]:checked')) {
+          return { name: name, message: 'Falta a nota de ' + c[1].toLowerCase() + ' da ' + LABEL[s] + '.' };
+        }
+      }
+    }
+    if (!form.querySelector('input[name="preferida"]:checked')) {
+      return { name: 'preferida', message: 'Escolha a resposta que você prefere, ou empate.' };
+    }
+    return null;
+  }
+
+  $('feedback').addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (!session) return;
+    var form = event.currentTarget;
+    var missing = missingGroup(form);
+    if (missing) {
+      setStatus($('send-status'), missing.message, 'error');
+      var target = form.querySelector('input[name="' + missing.name + '"]');
+      target.focus();
+      return;
+    }
+    var fd = new FormData(form);
+    var data = {
+      sessao: session,
+      preferida: fd.get('preferida'),
+      curso: $('course').value,
+      periodo: $('semester').value,
+      comentario: $('comment').value
+    };
+    ['a', 'b'].forEach(function (s) {
+      CRITERIA.forEach(function (c) { data[c[0] + '_' + s] = Number(fd.get(c[0] + '_' + s)); });
+    });
+    $('send').disabled = true;
+    setStatus($('send-status'), 'Enviando…', 'busy');
+    try {
+      await api('/api/votar', data);
+      session = null;
+      form.hidden = true;
+      setStatus($('send-status'), '');
+      var advanced = selectNext();
+      $('next-hint').hidden = !advanced;
+      $('done').hidden = false;
+      $('done').focus({ preventScroll: true });
+      $('done').scrollIntoView({ block: 'center' });
+    } catch (e) {
+      setStatus($('send-status'), e.message, 'error');
+      $('send').disabled = false;
+    }
+  });
+
+  function selectNext() {
+    if (customText()) return false;
+    var radios = Array.from(document.querySelectorAll('input[name="questao"]'));
+    var current = radios.findIndex(function (r) { return r.checked; });
+    if (radios.length < 2 || current < 0) return false;
+    radios[(current + 1) % radios.length].checked = true;
+    return true;
+  }
+
+  $('again').addEventListener('click', function () {
+    $('done').hidden = true;
+    $('step1').scrollIntoView({ block: 'start' });
+    var checked = document.querySelector('input[name="questao"]:checked');
+    (checked || $('start')).focus({ preventScroll: true });
+  });
+})();
+</script>
+</body>
+</html>

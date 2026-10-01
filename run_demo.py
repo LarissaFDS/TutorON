@@ -30,6 +30,8 @@ CENARIOS = {
     "estruturado": ("Cenário 2 — Prompt estruturado + contexto acadêmico", P.prompt_estruturado),
     "controle": ("Controle — Prompt estruturado SEM contexto", P.prompt_controle),
 }
+# Rótulos curtos para cabeçalhos de tabela: dizem o que muda, não o número do cenário.
+CURTO = {"generico": "Genérico", "estruturado": "Estruturado + contexto", "controle": "Controle sem contexto"}
 MODELO_PADRAO = os.environ.get("GEMINI_MODEL", "gemini-3.1-pro")
 TEMPERATURA = 0.2
 
@@ -190,9 +192,9 @@ def gerar_relatorio(dados: dict, destino: Path):
         juiz = q.get("juiz") or {}
         venc = juiz.get("melhor", "—")
         venc = {"estruturado": "Estruturado + contexto", "generico": "Genérico"}.get(venc, venc)
-        resumo_linhas.append(f"<tr><td>{q['id']} — {esc(q['titulo'])}</td>{''.join(cels)}"
+        resumo_linhas.append(f"<tr><td><a href='#{q['id']}'>{q['id']}</a> {esc(q['titulo'])}</td>{''.join(cels)}"
                              f"{'<td>' + esc(venc) + '</td>' if dados['juiz'] else ''}</tr>")
-    tot_cels = "".join(f"<td class='num'><b>{a}/{b} ({(100*a/b if b else 0):.0f}%)</b></td>" for a, b in tot.values())
+    tot_cels = "".join(f"<td class='num'>{a}/{b} ({(100*a/b if b else 0):.0f}%)</td>" for a, b in tot.values())
 
     blocos = []
     for q in qs:
@@ -224,8 +226,8 @@ def gerar_relatorio(dados: dict, destino: Path):
                 f"<tr><td>{ROTULOS[k]}</td><td class='num'>{j.get('generico', {}).get(k, '—')}</td>"
                 f"<td class='num'>{j.get('estruturado', {}).get(k, '—')}</td></tr>" for k in CRITERIOS)
             probs = lambda c: "".join(f"<li>{esc(p)}</li>" for p in j.get(c, {}).get("problemas", [])) or "<li>nenhum apontado</li>"
-            juiz_html = (f"<h4>Avaliação cega pelo Gemini (1–5)</h4><table><tr><th>Critério</th><th>Genérico</th>"
-                         f"<th>Estruturado + contexto</th></tr>{linhas}</table>"
+            juiz_html = (f"<h4>Avaliação cega pelo Gemini (1–5)</h4><div class='table-scroll'><table class='table'><tr><th>Critério</th><th>Genérico</th>"
+                         f"<th>Estruturado + contexto</th></tr>{linhas}</table></div>"
                          f"<p><b>Melhor:</b> {esc(j.get('melhor'))} — {esc(j.get('justificativa'))} "
                          f"<span class='meta'>({esc(j.get('ordem_apresentada'))})</span></p>"
                          f"<div class='grid2'><div><b>Problemas — genérico</b><ul>{probs('generico')}</ul></div>"
@@ -233,53 +235,52 @@ def gerar_relatorio(dados: dict, destino: Path):
         elif j:
             juiz_html = f"<p class='meta'>Juiz não retornou JSON válido: {esc(j['erro'])}</p>"
         blocos.append(f"""
-<section>
-  <h2>{q['id']} — {esc(q['titulo'])}</h2>
+<section class="report-section" id="{q['id']}">
+  <h2><span class="qid">{q['id']}</span> {esc(q['titulo'])}</h2>
   <p class="why"><b>Por que esta questão:</b> {esc(q['por_que_escolhida'])}</p>
   <h3>Pergunta do aluno</h3><pre class="pergunta">{esc(q['pergunta'])}</pre>
   <details><summary>Materiais usados como contexto (recuperação simulada): {', '.join(c['id'] for c in q['chunks'])}</summary>{chunks}</details>
   {prompts_html}
   <h3>Respostas</h3><div class="cols n{len(cen)}">{colunas}</div>
   <h3>Checklist baseado no material</h3>
-  <table><tr><th>Critério</th>{''.join('<th>' + esc(CENARIOS[c][0].split(' — ')[0] if c != 'controle' else 'Controle') + '</th>' for c in cen)}</tr>{ck_rows}</table>
+  <div class="table-scroll"><table class="table"><tr><th>Critério</th>{''.join('<th>' + esc(CURTO[c]) + '</th>' for c in cen)}</tr>{ck_rows}</table></div>
   {juiz_html}
-  <h3>Notas da equipe</h3><div class="notas" contenteditable="true">Clique para anotar observações (não é salvo).</div>
+  <h3>Notas da equipe</h3><div class="notas" contenteditable="true" aria-label="Notas da equipe (não são salvas)">Clique para anotar. As notas não são salvas: copie antes de fechar.</div>
 </section>""")
 
-    cab = "".join(f"<th>{esc(CENARIOS[c][0].split(' — ')[0] if c != 'controle' else 'Controle')}</th>" for c in cen)
+    cab = "".join(f"<th>{esc(CURTO[c])}</th>" for c in cen)
+    from design import stylesheet  # design system do TutorON, embutido: o relatório é um arquivo avulso
+    css = stylesheet("report.css")
     page = f"""<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>TutorON — PoC RAG em PAA</title>
+<title>TutorON · Relatório da PoC de RAG em PAA</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <style>
-:root{{--bg:#f7f7f5;--card:#fff;--fg:#1d1d1f;--mut:#6b6b70;--line:#e3e3e0;--acc:#2f5bea;--ok:#1a7f4b;--no:#b3261e;--code:#f1f1ee}}
-@media (prefers-color-scheme:dark){{:root{{--bg:#141416;--card:#1d1d20;--fg:#ececef;--mut:#9a9aa2;--line:#2e2e33;--acc:#7c9bff;--ok:#4cc38a;--no:#ff7b72;--code:#26262b}}}}
-*{{box-sizing:border-box}} body{{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}}
-main{{max-width:1280px;margin:0 auto;padding:24px 16px 80px}}
-h1{{font-size:26px;margin:0 0 4px}} h2{{font-size:20px;margin:0 0 8px}} h3{{font-size:15px;margin:22px 0 8px;color:var(--mut);text-transform:uppercase;letter-spacing:.04em}} h4{{margin:0 0 8px;font-size:14px}}
-section,.card{{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px;margin:18px 0}}
-pre{{white-space:pre-wrap;background:var(--code);padding:10px 12px;border-radius:8px;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;margin:6px 0;overflow-x:auto}}
-.meta{{color:var(--mut);font-size:13px}} .tag{{font-size:11px;border:1px solid var(--line);border-radius:99px;padding:1px 7px;color:var(--mut);white-space:nowrap}}
-details{{margin:8px 0}} summary{{cursor:pointer;color:var(--acc)}}
-.cols{{display:grid;gap:14px}} .cols.n2{{grid-template-columns:1fr 1fr}} .cols.n3{{grid-template-columns:1fr 1fr 1fr}}
-@media (max-width:860px){{.cols.n2,.cols.n3{{grid-template-columns:1fr}}}}
-.col{{border:1px solid var(--line);border-radius:10px;padding:14px;min-width:0}}
-.resp{{white-space:pre-wrap;overflow-x:auto}} .resp.rendered{{white-space:normal}} .resp pre{{white-space:pre-wrap}}
-table{{border-collapse:collapse;width:100%;font-size:14px}} td,th{{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}}
-.num{{text-align:center}} td.ok{{color:var(--ok);text-align:center;font-weight:700}} td.no{{color:var(--no);text-align:center;font-weight:700}} td.na{{color:var(--mut);text-align:center}}
-.grid2{{display:grid;grid-template-columns:1fr 1fr;gap:14px}} @media (max-width:700px){{.grid2{{grid-template-columns:1fr}}}}
-.notas{{min-height:60px;border:1px dashed var(--line);border-radius:8px;padding:10px;color:var(--mut)}}
-.why{{color:var(--mut)}} .chunk{{margin:10px 0}}
-</style></head><body><main>
-<h1>TutorON — Prova de conceito de RAG (PAA)</h1>
-<p class="meta">Modelo: <b>{esc(dados['modelo'])}</b> · temperatura {TEMPERATURA} · gerado em {esc(dados['gerado_em'])} · modo: {esc(dados['modo'])}</p>
-<div class="card"><b>Pergunta da PoC:</b> adicionar contexto acadêmico específico de PAA melhora de forma perceptível
-a qualidade das respostas em comparação com um prompt genérico?<br>
-<span class="meta">A recuperação é simulada manualmente: cada questão recebe os trechos da base que uma RAG deveria encontrar.
-O checklist verifica automaticamente elementos que o material da disciplina exige; confirme sempre com leitura humana.</span></div>
-<div class="card"><h2>Resumo — cobertura do checklist</h2>
-<table><tr><th>Questão</th>{cab}{'<th>Melhor (juiz cego)</th>' if dados['juiz'] else ''}</tr>{''.join(resumo_linhas)}
-<tr><td><b>Total</b></td>{tot_cels}{'<td></td>' if dados['juiz'] else ''}</tr></table></div>
+{css}
+</style></head><body class="report">
+<header class="masthead">
+  <div class="page masthead__bar">
+    <div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div>
+    <p class="masthead__context">Relatório interno da equipe<br>Projeto e Análise de Algoritmos, UFAL</p>
+  </div>
+  <div class="page masthead__intro">
+    <h1>Contexto da disciplina melhora a resposta do tutor?</h1>
+    <p class="masthead__lede">Prova de conceito de RAG com recuperação simulada: cada questão recebe, à mão, os trechos da base que uma RAG deveria encontrar. O checklist procura no texto o que o material exige; a leitura humana decide.</p>
+  </div>
+</header>
+<main class="page">
+<dl class="run-facts">
+  <div><dt>Modelo</dt><dd>{esc(dados['modelo'])}</dd></div>
+  <div><dt>Temperatura</dt><dd>{TEMPERATURA}</dd></div>
+  <div><dt>Gerado em</dt><dd>{esc(dados['gerado_em'])}</dd></div>
+  <div><dt>Modo</dt><dd>{esc(dados['modo'])}</dd></div>
+</dl>
+<section class="report-section" aria-labelledby="resumo">
+<h2 id="resumo">Cobertura do checklist por cenário</h2>
+<div class="table-scroll"><table class="table"><thead><tr><th>Questão</th>{cab}{'<th>Melhor (juiz cego)</th>' if dados['juiz'] else ''}</tr></thead>
+<tbody>{''.join(resumo_linhas)}</tbody>
+<tfoot><tr><td>Total</td>{tot_cels}{'<td></td>' if dados['juiz'] else ''}</tr></tfoot></table></div>
+</section>
 {''.join(blocos)}
 </main>
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>

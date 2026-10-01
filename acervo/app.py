@@ -6,6 +6,7 @@ import threading
 from collections import defaultdict
 from datetime import datetime, timezone
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 from urllib.parse import urlparse
 
 from .common import ROOT, digest, read_json, write_json
@@ -124,9 +125,22 @@ def summarize(root=ROOT):
     return {'total': len(rows), 'por_questao': summary}
 
 
+WEB = Path(__file__).resolve().parent / 'web'
+
+
+def pages():
+    """Arquivos estáticos da página de validação. Lista fechada: nada fora dela é servido."""
+    from design import script, stylesheet  # design system do TutorON (pasta design/ na raiz)
+    return {
+        '/': ((WEB / 'validacao.html').read_bytes(), 'text/html; charset=utf-8'),
+        '/design.css': (stylesheet().encode('utf-8'), 'text/css; charset=utf-8'),
+        '/text.js': (script('text.js').encode('utf-8'), 'text/javascript; charset=utf-8'),
+    }
+
+
 def serve(root=ROOT, port=8765):
     study = Study(root)
-    html = (root / '07-validacao-alunos/index.html').read_bytes()
+    static = pages()
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -143,9 +157,11 @@ def serve(root=ROOT, port=8765):
             self.wfile.write(encoded)
 
         def do_GET(self):
-            if self.path == '/':
-                self.send(200, html, 'text/html; charset=utf-8')
-            elif self.path == '/api/questoes':
+            path = urlparse(self.path).path
+            if path in static:
+                body, content_type = static[path]
+                self.send(200, body, content_type)
+            elif path == '/api/questoes':
                 study.pairs = read_json(study.folder / 'pares.json', [])
                 self.send(200, {'questoes': [{'id': p['id'], 'pergunta': p['pergunta']} for p in study.pairs],
                                 'historico': any('historica' in p['origem'] for p in study.pairs)})

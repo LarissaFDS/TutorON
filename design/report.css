@@ -1,0 +1,109 @@
+/* TutorON — camada do relatório da PoC (run_demo.py).
+   Documento interno de leitura densa: seções separadas por fio, não por cards.
+   Carregado depois de components.css via stylesheet("report.css"). */
+
+.report .masthead__intro { padding-bottom: var(--space-6); }
+.report .masthead h1 { max-width: 30ch; }
+
+.run-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
+  margin: var(--space-5) 0 0;
+  font-size: var(--text-caption);
+}
+.run-facts dt { color: var(--color-ink-muted); }
+.run-facts dd { margin: 0; font-weight: var(--weight-medium); }
+
+.report-section { margin-top: var(--space-7); padding-top: var(--space-6); border-top: var(--border); }
+.report-section:first-of-type { border-top: 0; padding-top: 0; }
+.report-section h2 { font-size: var(--text-title); letter-spacing: var(--tracking-title); line-height: 1.3; }
+.report-section h3 {
+  font-size: var(--text-ui);
+  font-weight: var(--weight-bold);
+  margin: var(--space-6) 0 var(--space-3);
+}
+.report-section h4 { font-size: var(--text-ui); font-weight: var(--weight-bold); margin: var(--space-5) 0 var(--space-2); }
+.report-section > .table-scroll { margin-top: var(--space-4); }
+
+.qid {
+  display: inline-block;
+  margin-right: var(--space-2);
+  padding: 0 var(--space-2);
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius);
+  font-size: var(--text-ui);
+  vertical-align: 0.15em;
+  line-height: 1.5;
+}
+.why { color: var(--color-ink-muted); margin-top: var(--space-3); max-width: var(--measure); }
+
+.report pre {
+  font-family: var(--font-code);
+  font-size: calc(var(--text-reading) * 0.82);
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-x: auto;
+  background: var(--color-surface-sunken);
+  border-left: var(--rule-accent);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: var(--space-2) 0;
+}
+
+.report details { margin: var(--space-3) 0; }
+.report summary { cursor: pointer; color: var(--color-focus); font-weight: var(--weight-medium); width: fit-content; }
+.chunk { margin: var(--space-3) 0; }
+.meta { color: var(--color-ink-muted); font-size: var(--text-caption); }
+
+/* Colunas de resposta por cenário */
+.cols { display: grid; gap: var(--space-4); }
+.cols.n2 { grid-template-columns: 1fr 1fr; }
+.cols.n3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 960px) { .cols.n2, .cols.n3 { grid-template-columns: 1fr; } }
+.col {
+  min-width: 0;
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+.col h4 { margin-top: 0; padding-bottom: var(--space-2); border-bottom: var(--border); }
+.resp {
+  font-family: var(--font-reading);
+  font-size: var(--text-reading);
+  line-height: var(--leading-reading);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.resp.rendered { white-space: normal; }
+.resp.rendered > * + * { margin-top: var(--space-3); }
+.resp h1, .resp h2, .resp h3, .resp h4 { font-family: var(--font-ui); font-size: var(--text-ui); margin: var(--space-4) 0 var(--space-2); }
+.resp ul, .resp ol { padding-left: 1.4em; }
+.resp code { font-family: var(--font-code); font-size: var(--code-scale); background: var(--color-surface-sunken); padding: 0.05em 0.25em; border-radius: 3px; }
+
+/* Checklist: ✓ e ✗ carregam o significado; a cor só reforça. */
+td.ok { color: var(--color-success); text-align: center; font-weight: var(--weight-bold); }
+td.no { color: var(--color-danger); text-align: center; font-weight: var(--weight-bold); }
+td.na { color: var(--color-ink-muted); text-align: center; }
+
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-top: var(--space-3); }
+@media (max-width: 700px) { .grid2 { grid-template-columns: 1fr; } }
+.grid2 ul { padding-left: 1.2em; margin-top: var(--space-2); }
+
+.notas {
+  min-height: 72px;
+  padding: var(--space-3);
+  border: 1px dashed var(--color-hairline-strong);
+  border-radius: var(--radius);
+  color: var(--color-ink-muted);
+  max-width: var(--measure);
+}
+.notas:focus { color: var(--color-ink); }
+
+@media print {
+  .masthead { background: none; color: var(--color-ink); }
+  .masthead__lede, .masthead__context { color: var(--color-ink-muted); }
+  .report-section { break-inside: avoid-page; }
+  .notas { display: none; }
+}
