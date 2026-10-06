@@ -13,10 +13,10 @@ A tarefa principal é **ler com atenção e avaliar**. Não é vender um produto
 
 ## A ideia visual
 
-O vocabulário vem da própria disciplina: **quadro-verde da sala, folha de prova quadriculada, marca-texto do aluno e caneta vermelha da correção.**
+A apresentação usa o azul `#066D83` da referência, superfícies brancas e texto escuro. A revisão visual mantém a tipografia e a formatação das respostas.
 
-- **Um único gesto forte**: a faixa do topo (`.masthead`) em verde de quadro com a quadrícula da folha. Ela aparece uma vez por tela, no topo. Nada mais na página compete com ela.
-- **Marca-texto significa "o que você escolheu"**: a nota marcada, a dúvida selecionada. Não use o amarelo para decorar, destacar título ou chamar atenção.
+- **Um único gesto forte**: a faixa do topo (`.masthead`) em azul sólido, sem grade e com a marca toda branca. Ela aparece uma vez por tela, no topo. Nada mais na página compete com ela.
+- **Azul indica seleção**: a nota marcada e a borda da dúvida selecionada. O fundo da dúvida usa o neutro claro da referência.
 - **Vermelho é só erro.** Verde-sucesso é só confirmação.
 
 ### O que evitamos de propósito
@@ -30,14 +30,14 @@ Estes padrões são o que faz uma tela parecer gerada automaticamente. Não trag
 - Hero centralizado com botão único e grade de três cards.
 - Ícones e emojis decorativos. Hoje não usamos ícones; se um dia forem necessários, um conjunto só, mesmo peso e tamanho.
 - Frases genéricas ("Transforme sua jornada de aprendizado"). Escreva o que a tela faz para um aluno de PAA.
-- Destacar uma palavra do título com outra cor ou itálico. O logotipo "Tutor**ON**" é a única exceção, porque é marca.
+- Destacar uma palavra do título com outra cor ou itálico. O logotipo "TutorON" também usa uma única cor, branca no topo.
 
 ## Onde está cada coisa
 
 ```
 design/
 ├── tokens/
-│   ├── colors.css       cores por papel, claro e escuro
+│   ├── colors.css       cores por papel, tema claro fixo
 │   ├── typography.css   famílias, 5 tamanhos, pesos
 │   ├── spacing.css      passos de 4 px, largura de página e de leitura
 │   └── shape.css        raio, bordas, foco (sem sombras)
@@ -56,23 +56,21 @@ Os nomes são de papel, não de cor. Use sempre a variável, nunca o hex.
 
 | Token | Claro | Uso |
 |---|---|---|
-| `--color-canvas` | `#f3f5f2` | Fundo da página (folha) |
-| `--color-surface` | `#fbfcfa` | Blocos que precisam se separar do fundo |
-| `--color-surface-sunken` | `#eaeee8` | Código, pseudocódigo, hover de linha |
-| `--color-ink` | `#1a2420` | Texto principal |
-| `--color-ink-muted` | `#56625c` | Texto de apoio, legendas |
-| `--color-hairline` / `-strong` | `#d5dbd4` / `#a9b5ad` | Fios divisórios / bordas de controle |
-| `--color-board` | `#1f3b32` | Quadro-verde: faixa do topo e botão principal |
-| `--color-chalk` / `-muted` | `#eef2ec` / `#b8c6be` | Texto sobre o quadro |
-| `--color-highlight` / `-soft` | `#f2da5e` / `#fbf3c6` | Marca-texto: escolha da pessoa |
-| `--color-focus` | `#2f6f5a` | Anel de foco, links |
+| `--color-canvas` | `#ffffff` | Fundo da página (folha) |
+| `--color-surface` | `#ffffff` | Blocos que precisam se separar do fundo |
+| `--color-surface-sunken` | `#F6F4EE` | Código, pseudocódigo, hover de linha |
+| `--color-ink` | `#14213D` | Texto principal |
+| `--color-ink-muted` | `#4f5868` | Texto de apoio, legendas |
+| `--color-hairline` / `-strong` | `#E2DDD0` / `#858b95` | Fios divisórios / bordas de controle |
+| `--color-board` | `#066D83` | Azul sólido: faixa do topo e botão principal |
+| `--color-chalk` / `-muted` | `#ffffff` / `#ffffff` | Texto sobre o quadro |
+| `--color-highlight` / `-soft` | `#066D83` / `#F6F4EE` | Seleção: escolha da pessoa |
+| `--color-focus` | `#066D83` | Anel de foco, links |
 | `--color-danger` / `-soft` | `#a8322a` / `#f7e4e1` | Erro |
 | `--color-success` / `-soft` | `#276b45` / `#e1efe5` | Confirmação |
 | `--color-warning` / `-soft` | `#7d5a09` / `#f8eed0` | Aviso (ex.: modo de demonstração) |
 
-O modo escuro redefine os mesmos tokens em `@media (prefers-color-scheme: dark)`. Nenhum componente deve testar o tema por conta própria.
-
-Nada de `#fff` ou `#000` puros: a folha e a tinta são levemente esverdeadas, coerentes com o quadro.
+O tema permanece claro mesmo quando o sistema está em modo escuro, para preservar o fundo branco e o contraste na apresentação. As duas respostas têm colunas de mesma largura e avaliações alinhadas, sem alterar a formatação do conteúdo.
 
 ## Tipografia
 
@@ -143,7 +141,7 @@ Carregando, vazio, erro, sucesso e desabilitado durante envio. Se a ação pode 
 
 - Funciona em 390 px de largura sem rolagem horizontal da página. Código pode rolar dentro do próprio bloco.
 - Foco visível em tudo que é interativo; rótulos ligados aos campos; grupos de rádio em `fieldset` com `legend`.
-- Respeita `prefers-reduced-motion` e `prefers-color-scheme`.
+- Respeita `prefers-reduced-motion` e mantém o tema claro em qualquer preferência do sistema.
 - Cor nunca é o único sinal: ✓/✗ no checklist, texto no status.
 
 ## Respostas da IA na tela

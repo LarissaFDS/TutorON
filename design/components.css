@@ -3,15 +3,10 @@
    Antes de criar um novo, veja se um destes resolve. */
 
 /* ---------------------------------------------------------------- masthead
-   Faixa de quadro-verde com a quadrícula da folha de prova.
+   Faixa azul sólida da apresentação, com marca e texto brancos.
    É o único gesto visual forte do produto: aparece uma vez, no topo. */
 .masthead {
   background-color: var(--color-board);
-  background-image:
-    linear-gradient(var(--color-board-grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-board-grid) 1px, transparent 1px);
-  background-size: 24px 24px;
-  background-position: -1px -1px;
   color: var(--color-chalk);
 }
 .masthead__bar {
@@ -28,7 +23,7 @@
   letter-spacing: var(--tracking-display);
   line-height: 1;
 }
-.wordmark span { color: var(--color-highlight); }
+.wordmark span { color: inherit; }
 .masthead__context { font-size: var(--text-caption); color: var(--color-chalk-muted); text-align: right; }
 .masthead__intro { padding-top: var(--space-6); padding-bottom: var(--space-7); }
 .masthead h1 {
@@ -210,14 +205,17 @@ textarea.input { min-height: 96px; resize: vertical; line-height: var(--leading-
 /* ---------------------------------------------------------------- answer
    As duas respostas têm exatamente o mesmo tratamento: é um teste cego. */
 .answers { display: grid; gap: var(--space-5); margin-top: var(--space-5); }
-@media (min-width: 900px) { .answers { grid-template-columns: 1fr 1fr; align-items: start; } }
+@media (min-width: 900px) { .answers { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; } }
 .answer {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   background: var(--color-surface);
   border: var(--border);
   border-radius: var(--radius);
   padding: var(--space-5);
 }
+.answer > .prose { flex: 1; }
 .answer__label {
   font-size: var(--text-title);
   font-weight: var(--weight-bold);
