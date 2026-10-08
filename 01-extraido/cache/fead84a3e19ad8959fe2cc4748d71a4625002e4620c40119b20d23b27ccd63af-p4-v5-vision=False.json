@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nE\n\nsda ae}\n\nnb\n\nPout A ' A\n\nited “| pinto 2\n\n(9) “vd ae emo\n\nJô af\nManias ea”!\ny “nes - ae A asi — 7 TRAN + MOL =? —? À\n\ne\nCuz\n\nps 75 00% Dl yp\npotas? Ea\n\nPs 0S Al ot al\n\nsoltas 6 2) wm 7) 20507) Vues) on a ud )9 or dd 7)\npm OR i ) e i\n\nry o: a Aa” benb of 9 oe) 2\n\n7\nadia da Po G Dá 9 180 8 a 2 eye) g\n\nores ir\n, O QD PB Gaxepuea SE Sured 2) ama at 2295.\n\nV) A Cópisõnd Pepe) aq ns top va À Pee ap Se) we vid)",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

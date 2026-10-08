@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[incerto] meioiniio+（t\n[incerto] ineio)\n:8\n9:\n[incerto] aX（A,inicio,mei)\n10:\nbX(A,meio+l,fim)\n11:\n[incerto] ifa<bthen\n12:\nreturnb\n13:\nelse\n14\nreturna\n15:\nendif\n16:end procedure\nExplique oque cle fazeprove sna corretude.\nQuestao 4[2pontos]:\nSejan T(n)e f(n)fungoes dosinteiros nos reais. Justifique\n1.Oque sigaifica T(n)éO(f(n))?Defina formalmente.\n2.Everdade que20n²+10n 1gn+5éO（n3)？\n3.EverdadequenéO(n)？\n4.0que siguifica “T(n)éD(f(n)\"？\n5.0que signifiea“T（n)=n+Ω（nlgn)”？\nQuestao5[1ponto]:\nsen=1\nResolva a recorrencia:\nF(n)=\n(2T(n/2)+cn\nsen>1.\nQuestao 6[2 pontos]:\nCalcule a complexidade de tempo do seguinte algoritmo:",
-      "metodo": "rapidocr",
+      "texto": "ae início + (a — 2\nii > A\n\na = RA, inicio, To\nE SA, meto +1, fim\nifa <bthen\n\nreturn b\n\nelse\n\nreturn\n\nend if\nprocedure\n\n2 e prove sna corretude\n\nExplique o que\n\nJustifiqu\n\n{2 pout\n\nfin) funções dos int nos reais\n\nQuestao 4\nSejam Tin) e)\n\nDefina formal\n\né OU\n\n1. O que si\ngon? + 10n Ig\n\n2. É verdade que\n\n3, E ve\n\n4, Q que 7 H\n5. O que significa “T(t) = aml\nQuestão 5 {i ponto):\n\nResolva a recorrel\n\nQuestão 6 [2 pontos\nlgoritnc\n\nCaicnle a complexidade de tempo\n\nlo seguinte é",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\3ac1cffa14d8\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

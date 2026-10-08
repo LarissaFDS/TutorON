@@ -15,9 +15,13 @@ O(nlogn) para encontrar o subconjunto A tal que ~a,eA W; < K e ~a,eA V; f má..x
 
 
 [OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]
-Universidade Federal de Alagoas-UFAL
-Instituto de Computacao
-ProjetoeAnalisedeAlgoritmos
-23 Prova
-Prof.Rian GabrielPinheiro
-30 de marco de 2023
+Universidade Federal de Alagoas - UFAL
+Instituto de Computação
+
+Projeto e Análise de Algoritmos
+
+28 Prova
+
+Prof. Rian Gabriel Pinheiro
+
+30 de março de 2023 ,

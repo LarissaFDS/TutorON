@@ -9,78 +9,54 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidadeFederal deAlagoas-UFAL\n[incerto] Marae Roa d S. Ute\nInstituto de Computacao\nProjetoeAnalisedeAlgoritmos\n2Prova\nProf.RianGabrielPinheiro\n24deagostode2023\nQuestao 1 [2 pontos]:\nQuestao 2 [2 pontos]:\nDado um vetor A con n entradas, com cada entrada um numero distinto.Sabe-se que a sequencia de valores\nA[1],A[2],...,A[n]é unimodal: ou seja, existe indice p entre 1e n,os valores nas entradas do vetor aumentam até a\np. Mostre como encontrar p através de um algoritmo O(log n). (Vave)\nQuestao3[2pontos]:\nVoce tem uma sequencia de numeros inteiros, e deseja encontrar o valor maximo e minimo presentes nessa sequencia.\nProjete um algoritmo eficiente de Divisao e Conquista para encontrar esses dois valores, explicando como sua aborda-\ngemfunciona e analisando sua complexidade.\nQuestao 4 [2 pontos]:\nlitros. Ele possui tambem tem uma lista de postos de gasolina ao longo do caminho, cada um com uma distancia da\ntotal daviagem.\nQuestao 5 [2 ponto]:\nConsidere o seguinte algoritmogulososparaoCAIxEIRoVIAJANTE.Mostre que elenaoéexato,istoé,naogarante\nretornarasolucaootima.Paraissouseumcontra-exemplo.\nAlgoritmo1（Algoritmo dovizinhomaispr6ximo)\n1.Inicialize todos osverticescomo naovisitados.\n2.Selecione umvertice arbitrario,defina-ocomoovertice atual u.Marqueucomovisitado.\n3.Descubra a aresta mais curta conectandoovertice atual ueumverticenaovisitadov.\n4.Definavcomooverticeatualu.Marquevcomovisitado.\n5.Se todos os vertices do dominio forem visitados, entao termine.Caso contrario,va para o passo 3.\nQuestao 6 [2 pontos]:\nUm ladrao entra em uma loja eve um conjunto I de n itens, I ={a1,a2,...,an}.Cada item tem um peso associado\nW e um valor vi. Idealmente, o ladrao gostaria de roubar tudo para obter o maximo beneficio. No entanto, ha muito\nque ele pode carregar. O ladrao tem uma mochila com capacidade K. O ladrao agora tem que determinar quais itens\nroubar para que seu peso total nao exceda K e seu valor total seja maximo.\nalgumaparte de um item(por exemplo,0,4 w; deai)e deixar aparterestante.Issoéchamado deProblema\ndaMochilaFracionada.SejaA C I o subconjunto de itens que o ladrao rouba.Elabore um algoritmo guloso\nO(n log n) para encontrar o subconjunto A tal que Za;eA w; < K e Za;eA v; é maximo.\n2.Suponha que os itens sopossam serretirados como um todo,ou seja,o ladrao s6pode pegar ou deixarum item;\nele nao pode pegar uma fracao de um item. Isso é chamado de Problema da Mochila Binaria (ou Mochila 0-1).\nSeu algoritmo guloso para a versao fracionaria do problema (pergunta anterior) ainda encontra uma solucao\nOtima?Justifique suaresposta.",
-      "metodo": "rapidocr",
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidade Federal de Al: b\nv lagoas - UFAL ) q o\n\nInstituto de Computação Mora Rosa Sd\n\nProjeto e Análise de Algoritmos\n\n28 Prova\n\nProf. Rian Gabriel Pinheiro\n\n24 de agosto de 2023\n\nQuestão 1 [2 pontos):\n\nM .\nostre como remover todos os elementos duplicados de um vetor em O(nlogn), adaptando o algoritmo Mergesort.\n\nQuestão 2 [2 pontos):\nDado um vetor A com n entradas,\n) , com cada entrada um número distinto. Sab ênci\nA(1], A[2],..., A[n] é unimodal: ou seja, existe índice p entre 1 e n, os valores nas entradas do vob aumentere aba\na\n\nposição p e, em seguida, reduzem, o resto do caminho. até ição Dese;\nue a posi , j “pont máximo\np. Mostre como encontrar p através de um algoritmo ‘O(log n). Vono) dirt enone ode ,\n\nQuestão 3 [2 pontos]:\nVocê pum: ; a A\ncê tem uma sequência de números inteiros, e deseja encontrar o valor máximo e mínimo presentes nessa sequência.\n\nProjete um algoritmo eficiente de Divisã i esses\nvisão e Conquist; i i\ngem funciona e analisando sua comalen date quista para encontrar dois valores, explicando como sua aborda-\n\nQuestão 4 [2 pontos]:\npo duo de PAA está Planejando fazer uma viagem de carro e tem um tanque de gasolina com capacidade para L\nros. Ele possui também tem uma lista de postos de gasolina ao longo do caminho, cada um com uma distância da\n\nsua posição atual e um preço por litro. Projete um algoritmo guloso determi inimi\n‘walt ga gC guloso para determinar a rota que minimize o custo\n\nQuestão 5 [2 ponto):\nConsidere o seguinte algoritmo gulosos para o CAIXEIRO VIAJANTE. Mostre que ele não é exato, isto é, não garante\nretornar a solução ótima. Para isso use um contra-exemplo.\nAlgoritmo 1 (Algoritmo do vizinho mais próximo)\n1. Inicialize todos os vértices como não visitados.\n2. Selecione um vértice arbitrário, defina-o como o vértice atual u. Marque u como visitado.\n3. Descubra a aresta mais curta conectando o vértice atual u e um vértice não visitado v.\n4. Defina v como o vértice atual u. Marque v como visitado.\n5. Se todos os vértices do domínio forem visitados, então termine. Caso contrário, vá para o passo 3.\n\nQuestão 6 [2 pontos):\n\nUm ladrão entra em uma loja e vê um conjunto J de n itens, J = (a1,a2,...,an). Cada item tem um peso associado\n\nw; e um valor v;. Idealmente, o ladrão gostaria de roubar tudo para obter o máximo benefício. No entanto, há muito\ncarregar. O ladrão tem uma mochila com capacidade K. O ladrão agora tem que determinar quais itens\n\nque ele pode : )\nque seu peso total não exceda K e seu valor total seja máximo.\n\nroubar para\ntais que uma fração de um item possa ser retirada, ou seja, o ladrão pode pegar\nve i tante. Isso é chamado de Problema\n\nalguma parte de um item (por exemplo, 0,4 wi de a;) e deixar a parte res :\nda Mochila Fracionada. Seja A € J o subconjunto de itens que o ladrão rouba. Elabore um algoritmo guloso\nO(nlogn) para encontrar o subconjunto A tal que Ya, Wi < K e Daca “i é máximo.\ni i j ão só pode pegar ou deixar um item;\n6 possam ser retirados como um todo, ou seja, o ladrão s ) egar 1\n\n* ee E ode ee DE fração de um item. Isso é chamado de Problema da Mochila Binária (ou Meia e\nSeu nigoriteno guloso para a versão fracionária do problema (pergunta anterior) ainda encontra uma solução\nótima? Justifique sua resposta.\n\n1. Suponha que os itens sej",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\23950cced864\\p1.png",
       "figuras": [
         "01-extraido\\figuras\\23950cced864\\p1-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\23950cced864\\p1-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 2,
-      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n[incerto] follox\n[incerto] Joi- pedide ra\n[incerto] dem\napontndegui\n[incerto] neroanDupliredo (Veton):\n[incerto] VetnQnderol=Ondenoeo (Vetn)\n[incerto] #0ndeoo d。 Vatn en O(m. logm)1Nerygal)\n[incerto] tod=[]\n[incerto] aux=Vetn Qderodo]\n[incerto] VetnOdb::\n[incerto] 38#\n()0\n!= aux:\nnesultode.apped(c)\n[incerto] =3\n[incerto] elumreultede\n[incerto] Logeat\n[incerto] tode&dapdda\nQueLoo 02.\n[incerto] Dodeθgu\n[incerto] de\nvmacima (Velon,(n):\n[incerto] ==M：\n[incerto] C==M-j:\n[incerto] Vton[]>=VetnCn]:\n=(x+~) /2\n[incerto] Vetn[m] > Veton -s od Vtn [J>Veln [m+]:\n[incerto] VatenCm了>Velon [3]adVelon[]<Vn[-s]:\n[incerto] seun maria (vder ,i-s)\n[incerto] aximo(Vm,m)",
-      "metodo": "rapidocr",
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n* Vader Qrdanedo = Ondanmção (Vat) 4 Undenção do Nadar am OC mou) IMngrSod)\n: tunadtedo = 11\nj Cx = Votado Lol\n; rolado . appond (aux)\nJa om VtsldudoL$:2: AR Uicoaão a Onda.\n3 ad we b= aux:\n\nnado . oppe-d (o)\n\nQu =>\n\nBart, MERO\n\nLogo, O adapte cima log) a iso ade es ate tor diapheiados da um\nar.\n\nlo (9.\nDodo 0 qua Toi qadido panne Bro mye dqndno :\ndel vraximo (Naa im):\n; a) ma 2 Mm:\nPoa 4 \"\nArtz mo)\nà i a Vet CS >= Vida Em:\n‘ : i nebum à ;\nSy te ce, /\ntoa do nam Mm /\ne wwe (RAIA /\nA Vmiml > Vator Lest od Vals Coto Nida Cometa:\nLEY Vader Cm3 > Vator Emo) od Victor Coal 4 Nba Los):\nTO slim mozima (Udo 4,8)\nDre\nrabiuam vroximo (Nadir mat, mm)",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\23950cced864\\p2.png",
       "figuras": [
         "01-extraido\\figuras\\23950cced864\\p2-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\23950cced864\\p2-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 3,
-      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n[incerto] qloi pedib , Va-n\n[incerto] dlanilme:\nLveadhon Hax Min ( Veten):\n[incerto] Je(Uetn 1 ==0:\n[incerto] De(Vebn）=j:\n[incerto] rebinn [Vaten [o1, Vetn te3]\n[incerto] e（Vton)==）:\n[incerto] VatonEo]>VelnCs]:\n[incerto] netm[Vatn[Ualnro了]\n[incerto] nelun[veton Eor, Uebn [s]]\n[incerto] m= Jen(veta) 12\n[incerto] #②\n[incerto] Va =encoto Moxkm (Vatn [:m])\n[incerto] V:JneanHochi(Vbn [a+:3)\n[incerto] Vuult=[]\n4\n[incerto] Va[o]<U[o:\n[incerto] Vnautdb[o]=VaEo]\n[incerto] Va[>U[s]:\n[incerto] VnasutdC=Vaci\n[incerto] Vatod]=V[1]\n[incerto] Adeerdage\n[incerto] ai\n[incerto] dcmn\n[incerto] Gn>.\n[incerto] Diursaede\n[incerto] Aaliocoododineinoo\n[incerto] PaalCmrteud.\n[incerto] Sarde\n[incerto] CAN\n[incerto] algiteatoMxKiiO(lon)\n[incerto] ema\n[incerto] Qedo\n[incerto] mcappnm。p\n[incerto] alopt\n[incerto] 1. arde a Lt\n[incerto] adiaino dodiloio\n[incerto] o caleandeeamainspeJoadiia\n[incerto] 2.Seleiaa\n[incerto] picoo\n3. A cegoda, nline α\n[incerto] lendneloida litelilie aPanio ll\n2.\nPreudo-codigo\n[incerto] canaecemsegue\n[incerto] HoroeRoe dS.t\nchegaraodeslng",
-      "metodo": "rapidocr",
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nOuyoyp are vobayo ENS Sep Poy Prooye\n\nA\n\nee a eee ee ÃO “4\n\nJig SSE a gemer: e ta yes\nSh eR espa sem o Hp hw 4 pre cód o roms pr\n\nET O edi o maps o Loe va SRE) SD ees Tees ta De py +\nseapdege phew o compl open wef mb o ope\n\nmate cum eh eg ap veg are\nree er me ry go o bree pg\nparen, cop ceprtio vt wed corrmre op coro @\nSepp mad 9 virar mod ory ev wg cp csr ©\nRe aca ro eta O\n\net Reopens yp\n\nCINE Pager, y\n\nENA;\n\nLNPr=L1) aq ‘ '\nSUIT < ey Fe\n\nLOI TM) =F 94 Eq\n\nHe LoIMA = Loy rene -\nOr “1190 > toxop t a\nTAS Waren DE\nCE se 07 vg) apago say ,\n- (1=:3 “FN) SHY pene - “A É\nar\nZEN =\n\not (D\n\nTeast ‘earn wg\nLisp\" ater sap !\nSea ERs toy qm fr |\nEtespeen = fr\nLer een tor MeN eq\nBee (EM foe\n\nPAs\n2025 | EN) = pr\n\niai É EC Stop! cored sy cd cp cel\n\nOr",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\23950cced864\\p3.png",
       "figuras": [
         "01-extraido\\figuras\\23950cced864\\p3-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\23950cced864\\p3-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 4,
-      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n01.\nDd e \n[incerto] neguite cedip\n[incerto] (Vizimba\npralelena b Caxlino\n[incerto] Mécie）,pebn\n[incerto] Jd e y\n[incerto] dlanritne $,\n[incerto] pelll\n[incerto] Cem- ms A. Ll ino\n[incerto] S114\nJ3.\n[incerto] Sade a nalucoe\n[incerto] dioa nguite\n[incerto] xC\n[incerto] ？`4↑Ulαf\n[incerto] cor,\nde 6.\n[incerto] Log， podib\n[incerto] 855987S\n[incerto] del\n[incerto] neeoax Daptcads (Valn , x)\n[incerto] L(Utn==± :\nQuestoa\n[incerto] μ.eΦ\n[incerto] seqile ag guloo:\n[incerto] olen-Ui\n[incerto] J. Dodo θ coryut d I ile, eondene da frma\n[incerto] deeeeeteAaleerelooe\npane\n[incerto] Pialie.\n[incerto] 3. Contimue是ee\n[incerto] amoclelaalij a coporidode mkina\n[incerto] Ap\n05\n[incerto] Mao\neoleca\ndosaten\n[incerto] Cranses",
-      "metodo": "rapidocr",
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nRD) * 7\nDodo o proldica do Coin Nee e aes o Amypde codon Manda\nPompéia) punto o colhoviplo olseixo :\n\nDão o yale A pedir Se quilo danado hy ne ce is 5,\nssc ee\n\nAB» C => DS pra\n\nUrs Gre es ft dis.\nSado a nalução Sli a naquilo sxmução :\nA >B—p DS cs Nida\nNese, & pn ds co Dodtrplo io Gps Ag. 4 Ss 4\nBrites\n\n(ee )\nPF, PP\n\nQto 69)\n\n3. Tamar o mpide oba. quloro : :\n“4. Vode e cojuta de T Sir, entra da from Arcade pie o nuloção\nER o o o Es” a\n3 Cia Sé Qua o mecha obiga o copeidoda mir « ppia imo\nDoro fra, Bro o nnrelreso So prolade Se matita funiodo 2",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\23950cced864\\p4.png",
       "figuras": [
         "01-extraido\\figuras\\23950cced864\\p4-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\23950cced864\\p4-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     }
   ]

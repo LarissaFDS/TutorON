@@ -9,12 +9,12 @@
   "assunto_provavel": "b2-05-transformacao-de-problemas",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Lista de Exerc´ıcios 6\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 6 - Transforma¸c˜ao de Problemas\n\n1. Maria aposta com Jo˜ao que ela pode fazer o seguinte truque. Jo˜ao recitar´a\nn −1 n´umeros diferentes de 1 a n em uma ordem aleat´oria e ela ser´a capaz\nde nomear o ´unico n´umero nesse intervalo que ele ter´a perdido. Claro, ela\nter´a que realizar a tarefa em sua cabe¸ca, sem fazer anota¸c˜oes. Como ela deve\nfazer esse truque? Em outras palavras, projete um algoritmo que descubra o\nn´umero faltante utilizando O(1) de espa¸co em mem´oria.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]\nlint main(){\nint n,x,sum;\ncin >> n;\nsum=n\n(n+1)/2;\nfor(int i=1;i<n;i++)\ncin >> x；\nsum-=x；\ncout<<sum;\n\n\n2. O Rei Arthur espera n cavaleiros para um jantar anual em Camelot. Infe-\nlizmente, alguns dos cavaleiros brigam entre si, e Arthur sabe quem briga\ncom quem. Arthur quer sentar seus convidados ao redor de uma mesa para",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "Lista de Exerc´ıcios 6\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 6 - Transforma¸c˜ao de Problemas\n\n1. Maria aposta com Jo˜ao que ela pode fazer o seguinte truque. Jo˜ao recitar´a\nn −1 n´umeros diferentes de 1 a n em uma ordem aleat´oria e ela ser´a capaz\nde nomear o ´unico n´umero nesse intervalo que ele ter´a perdido. Claro, ela\nter´a que realizar a tarefa em sua cabe¸ca, sem fazer anota¸c˜oes. Como ela deve\nfazer esse truque? Em outras palavras, projete um algoritmo que descubra o\nn´umero faltante utilizando O(1) de espa¸co em mem´oria.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]\nint main(){\nint n,X, sum;\ncin >> n;\nSum = n * (n+1)/2;\n\nfor(int i=tjicnsit)\n\n{\ncin >> x;\nSUM -= x;\n}\n\ncout << sum;\n\n\n2. O Rei Arthur espera n cavaleiros para um jantar anual em Camelot. Infe-\nlizmente, alguns dos cavaleiros brigam entre si, e Arthur sabe quem briga\ncom quem. Arthur quer sentar seus convidados ao redor de uma mesa para",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p1.png",
       "figuras": [
@@ -22,13 +22,7 @@
         "01-extraido\\figuras\\97254bb4a1b8\\p1-fig2.png",
         "01-extraido\\figuras\\97254bb4a1b8\\p1-fig3.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p1-fig3.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
@@ -53,20 +47,14 @@
     },
     {
       "pagina": 4,
-      "texto": "- 0 ≤V ≤110000\n- S ≥0\n- V + 2S ≤240000\n- 1, 5V + S ≤180000\n\n(B)\n\nEixo das Abscissas: (Viralata’s)\nEixo das Ordenadas: (Sucesso)\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nB\n120000\n100000\n80000\n60000\n40000\n20000\nA\n0000\n0\n20000\n40000\n60000\n80000100000120000\n\n\nA = (0,0)\nB = (0,120.000)\nC = (60.000, 90.000) (m´ax)\nD = (110.000, 15.000)\nE = (110.000, 0)\n\nLucro M´aximo Poss´ıvel = 1, 6 · (60.000) + 1, 4 · (110.000)\n\n= 96.000 + 126.000\n\nLucro M´aximo Poss´ıvel = $222.000\n\n6.\nMostre que o problema do troco (Exerc´ıcio ??) pode ser formulado como\num programa linear inteiro. Minimize o n´umero de moedas.\n\nSolu¸c˜ao: O problema do troco no qual dado um estoque ilimitado de moedas de\nvalores x1, x2, ..., xn, queremos dar um troco de v usando no m´aximo k moedas. Logo,\no problema pode ser modelado como um programa linear inteiro e isso pode ser visto\na seguir:\n\nPage iv",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "- 0 ≤V ≤110000\n- S ≥0\n- V + 2S ≤240000\n- 1, 5V + S ≤180000\n\n(B)\n\nEixo das Abscissas: (Viralata’s)\nEixo das Ordenadas: (Sucesso)\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNn ES a co\nS S$ 3 S 3 B\nS S S S E É\n= Ss s S E 3\ns Ss s Ê E E\n\nE\n\n\nA = (0,0)\nB = (0,120.000)\nC = (60.000, 90.000) (m´ax)\nD = (110.000, 15.000)\nE = (110.000, 0)\n\nLucro M´aximo Poss´ıvel = 1, 6 · (60.000) + 1, 4 · (110.000)\n\n= 96.000 + 126.000\n\nLucro M´aximo Poss´ıvel = $222.000\n\n6.\nMostre que o problema do troco (Exerc´ıcio ??) pode ser formulado como\num programa linear inteiro. Minimize o n´umero de moedas.\n\nSolu¸c˜ao: O problema do troco no qual dado um estoque ilimitado de moedas de\nvalores x1, x2, ..., xn, queremos dar um troco de v usando no m´aximo k moedas. Logo,\no problema pode ser modelado como um programa linear inteiro e isso pode ser visto\na seguir:\n\nPage iv",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p4.png",
       "figuras": [
         "01-extraido\\figuras\\97254bb4a1b8\\p4-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p4-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {

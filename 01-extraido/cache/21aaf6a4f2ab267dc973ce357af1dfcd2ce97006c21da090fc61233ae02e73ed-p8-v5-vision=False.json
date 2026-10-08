@@ -1,0 +1,12 @@
+{
+  "pagina": 8,
+  "texto": "Entrada: Um conjunto A com valores inteiros positivos, e um inteiro t.\nQuest˜ao: Existe um subconjunto A ⊆A cuja soma dos valores seja exatamente\nt?\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\nSoot isSubsetSum(int AL), int t, int x)\nt\n\nbool subsetfk Mt + 13;\n(int i 1; i\n\nsubset (@](i]\n\n(int i = 0; 3\nSubset[ijfe)\n\nCinti-a;i\n\n(int j= 4; 3\n\nG < afi ~ 1)\nsubsetf{ij(j]\n* (5 >= ALi - 29)\nSubset[ij[j} = subset[i\n\nsubset[i 1915);\n\n223] || subsetti U5\n\nsaa\", subset (ij(j]);\n\nSubset {hk} [t};\n}\n\nint main()\nint A] = 43, 34, 4, 12, 5, 2»\nint t\nint k\ni (isSubsetSum(A, t, k)\n\nF(A[@));\n\ncout <<\n\n“Não há subconjunto Com soma *f',m;\n\n83\n\nAli\n\n11;\n\n\nPage viii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p8-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Universidade Federal de Alagoas-UFAL\nInstituto de Computacao\nProjetoe Analise deAlgoritmos\nReavaliacao\nProf. Rian Gabriel Pinheiro\n28 de marco de 2024\nQuestao 1[2pontos]:\nConsidere o seguinte algoritmo:\n1:procedure ALGORITMoX（vetor A[...n]，i)\n2:\nifi<fthen\n3:\n4:\nAA\n5:\n6:\nX（A,i+1,-1)\n7:\n!pua\n8:end procedure\nExplique oque cle faz e prove sua corretude.\nQuestao 2[1 ponto]:\nConsidere o seguinte algoritmo recursivo,cujo argumentonéum inteiro positivo.\nprocedure AsTERIsco(n)\n2:\nifn>0then\n3:\nASTERISCO(n-1)\n4:\nfori1→ndo\n5:\nimprima\"*\n6:\nend for\n7:\n8:\nendif\n9:end procedure\nPara um dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco（n)？ Mostre a\nrecorrencia.\nQuestao3[1 ponto]:\nSuponhaquevocetenhaosresultadosdeumtorneioconcluidonoqualnequpesjogaramentre siumavezAssmindo\ncom o tine listado inediatamente apos?\nQuestao 4[1ponto]:\ncomputou uma arvore geradora minima de Ge que tambem computou os caminhos minimos para todos os nos\npartindo de um particular n6 s EV.Agora suponha que cada peso de aresta seja aumentado em uma unidade:os\nnovos pesos sao w=we+1.\nmudar.\n2.Sera que os caminhosminimos mudam？Deun exemplo para oqual eles mudam ou prove que isso nao pode\nocorrer.\nQuestao5[2pontos]:\ntotaldetriangulaoespossiveisdesse poligono.Porexemploparaupoligonode3lados（untriangul)nmero\ntriangulacoes  1;para um poligono de 4 lados (um quadrilatero),o numero de triangulacoes é2;e para um poligono\nde5lados（umpentagono),onimerode triangulacoes5.Comece defnindoumafuncaoderecorrencia querepresente\nQuestao6[1ponto]:",
-      "metodo": "rapidocr",
+      "texto": "'lioUod Odutay wo soprajosau 40s wapod E\nAIG ySnjos v anb 10d andy axa\n\n“uro|gond so sopoy anb woyduyy Juutonigod odor wo ojajdinoo-d jy vutaIgoad um ap ovdnyos v an i\n“a : sik loyuod 1) 9 ovssond\n\n“So1outott souoyjod op somo} wo Sopry y ap ouolijod um vavd soodymue1) op trodujuoo v\n@yoseidos onb vuonsooos ap ovbuny vim Oputugap adowop “6 9 seobyinse1n ap oxaumu o “(ouoSpyuod tum) soe] S9p\nONoáijod um vivd a iz 9 sooduinBuvix op Oxum 0 (ozayyjtapenb um) sopr| p ap otosijod tum waed {1 9 sooSujn Suv)\nSp otomano (ome tum) sopet g op ouo¥yod um ered 'ordinoxo 10 “onoijod ossop stoasssod sooSensuvts op [0101\nStan O avmnoiy> ered voruremp opseuresdord op ouros» wn oyuouajdur ‘sope] t ap aemniax ouosiyod um oprdl\n\ni[soquod z] ¢ ovasand\n\npod oes oss; onb avoid no mrepnnt sojo nb o wred ofdwoxo tum oq amepnu sort soyututes so onb zag\n\navprur\n20d out vo onb aozd no pnt vjo Tonb o ered ojduroxo tm aq zupnat variar ‘wopero# d1ontp v anb prog “1\nT+ 2m = 2m ovs sosod sonou\nA 3 8 9u Jomonied um ap opurired\n“Sinduoo wpquiey anb 2 2) ap way viopesed e10447 wu noimdiioo\n0 < tm sonpesonora visor op sosod moo (7:4) = 9 openorsasp-ogm o7ex8, um axoprsti0,)\n\n#fowod 1] p ovisonty\n\not e Bin vum tuo opojuoumo vos wisore ap osad vpro onb vuodns vso8y\nS911 So sopoy ured souiyuyu soquines so ni\n2904 onb equodng\n\nisodv oywomeyerpomy oprasi om 0 too\ntoo um oxsour 'ajuduta aanoy ov anb\n2 Sopenytisos so wyuay 2204 anb tquodng\n\ni[omod 1) ¢ oeisonty\n\noof © toques sopoy anb utioy ap mratenhos wum wo\n\nio Sou so ays anb ou\nOPutumosy 294 vit is aqua urezvof sodinho à tenb ou opsnyotios orotãos umn\n\n2 onsop ;(u)oosna Sojtenb “tu ap sje opep wn vie\n\nSV 9P wpeureys eum wo sossozdur ovsos sosstzayse\n\nemposoad pus q]\n\nspas os\n\n(1 woosmaisy: 2\n\n9\n\na\n\nope ets soy Y\n\n(= ujoosmaisy E\n\nwomo<uN 7\n\ncao (Woostuaisy ampasoad +\n\n“onpisod ova tm 9 u omtoumze ofa ‘onssmoax omyHoste aqumnos o aropisuoo)\ns[oquod 1] 7 ovsond\n\n@pnyation uns onoxd a ey ajo onb 0 anbrjdxg\n\n‘Sinpasoid pus |\nJ puo\n(pirex\nTS Uy,\nUly > by\nly 5\nvoa [> a\nRODTY eanpooosd st\n\n8\nab\n9\n9\n\nv\n\n= (F's fu! +n)y sony onan\n\n“Uno equines 0 azapisuoy\n“[Sopuod 2] 1 ovysond\n\nPZOZ ep 0Sxem ap gg\nSHU Plaque ueny Jorg\novsurreauayy\n'V 2 Oyaforg\nP omysuy\nPEPISIOATH A\n\nSOU HOSTY op ostyu\n\novdeyduro,\nTVA = se08ery op Tesopa",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\abfdf1a3da4e\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

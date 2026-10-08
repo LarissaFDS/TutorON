@@ -1,0 +1,60 @@
+{
+  "questao": "Q7",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante em uma sequência de 1 a n onde Maria ouve n-1 números distintos, usando O(1) de memória, podemos utilizar a fórmula da soma dos primeiros n números naturais, que é n(n+1)/2. Se a soma dos n números naturais é S, e a soma dos n-1 números ouvidos por Maria é S' então, o número faltante é S - S'. \n\nO tempo de execução para esta solução é O(1) porque não depende do tamanho do conjunto de números ou da quantidade de números ouvidos. No entanto, há um problema potencial de overflow se n for muito grande, pois a fórmula pode resultar em um número muito grande que pode superar o limite de um tipo de dado numérico. Para evitar isso, seria necessário garantir que os números ouvidos por Maria estão dentro de um intervalo de dados suportados. Além disso, para números muito grandes, seria necessário usar um tipo de dado de precisão alta ou um sistema de arredondamento para lidar com o overflow.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 38.98458640199897,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

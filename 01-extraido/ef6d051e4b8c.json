@@ -9,7 +9,7 @@
   "assunto_provavel": "b1-01-corretude-complexidade",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
@@ -36,8 +36,8 @@
     },
     {
       "pagina": 3,
-      "texto": "Solu¸c˜ao:\n\n(a) Fibonacci Recursivo:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nlongfib_recursivo(longn){\nif(n==0)\nreturn\n0\nif(n==1)\nreturn\n[incerto] 1;\nreturn\nfib_recursivo(n-1)+fib_recursivo(n-2);\n\n\n(b) Fibonacci Iterativo:\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\nlongfib_iterativo(long n){\n1ong a=0,b=1,c;\nfor(inti=1;i<=n;i++)\nC=a+b;\na\nb;\nb\n=C；\nreturna;\n\n\nGr´afico Tempo x Entrada\n\n\n[OCR parcial do recorte p3-fig3.png; conferir símbolos na imagem]\nFibonacciRecursivoFibonacciIterativo\n60\nCustodeTempo(s)\n40\n20\n0?680\nEntradaN\n\n\nPage iii",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "Solu¸c˜ao:\n\n(a) Fibonacci Recursivo:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nlong fib recursivo(long mt\n\nif (n==0) return @;\nif (n= =1) return 1;\n\nreturn fib recursi vo(n-1)+fib recursivo(n-2);\n\n\n(b) Fibonacci Iterativo:\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\nlong fib iterativollong nf\n\nlong a=0,b=1,C3\nfor(int ja1;i<=njit+)\n4\nc = ar;\na=b;\nb= ci;\n3\n\nreturn às\n\n\nGr´afico Tempo x Entrada\n\n\n[OCR parcial do recorte p3-fig3.png; conferir símbolos na imagem]\nCusto de Tempo (s)\n\n60\n\n40\n\n= Fibonacci Recursivo = Fibonacci lterativo\n\n20\n\nVILA\n\nEntrada N\n\n\nPage iii",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3.png",
       "figuras": [
@@ -45,65 +45,32 @@
         "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig2.png",
         "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig3.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        },
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig2.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        },
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig3.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 4,
-      "texto": "3. Qual a prov´avel complexidade de um algoritmo que possui as seguintes ob-\nserva¸c˜oes emp´ıricas da contagem de sua opera¸c˜ao b´asica:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nsize\ncount\n1000\n11.966\n2000\n24.303\n3000\n39.992\n4000\n53.010\n5000\n67.272\n6000\n78.692\n7000\n91.274\n8000\n113.063\n0006\n129.799\n10000\n140.538\n\n\nSolu¸c˜ao: A prov´avel complexidade para esse algoritmo ´e linear, pois ´e poss´ıvel ob-\nservar que, de uma certa forma, os n´umeros de opera¸c˜oes crescem linearmente com\no aumento tamb´em linear do tamanho da entrada, como ´e poss´ıvel ver no gr´afico\nabaixo:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\n150.000\n100.000\nOperacoes\n50.000\n2000\n4000\n6000\n8000\n10000\nN°Entradas\n\n\nPage iv",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "3. Qual a prov´avel complexidade de um algoritmo que possui as seguintes ob-\nserva¸c˜oes emp´ıricas da contagem de sua opera¸c˜ao b´asica:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nsize\n1000\n2000\n3000\n4000\n5000\n\n7000\n\n9000\n10000\n\n11.966\n24.303\n39.992\n53.010\n67.272\n78.692\n91.274\n113.063\n129.799\n140.538\n\n\nSolu¸c˜ao: A prov´avel complexidade para esse algoritmo ´e linear, pois ´e poss´ıvel ob-\nservar que, de uma certa forma, os n´umeros de opera¸c˜oes crescem linearmente com\no aumento tamb´em linear do tamanho da entrada, como ´e poss´ıvel ver no gr´afico\nabaixo:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nOperações\n\n150.000\n\n100.000\n\n50.000\n\n2000\n\n4000\n\n6000\n\nNº Entradas\n\n8000\n\n10000\n\n\nPage iv",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4.png",
       "figuras": [
         "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
         "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        },
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 5,
-      "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n(neste caso f(n) = Θ(g(n))):\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nf(n)\ng(n)\n(1)\nn-10\nn-200\n(2)\nn1/2\nn2/3\n(3)\n100n+logn\nn+(logn)²\n(4)\nlog2n\nlog3n\n(5)\n10logn\nlog(n\")\n(6)\nn1,01\nnlog² n\n(7)\nn²/logn\nn(logn)2\n(8)\nn01\n(logn) 0\n(9)\n(log n)logn\nn/logn\n(O1)\n[incerto] √n\n(log n)3\n(11)\nn1/2\n5l0g2 n\n(12)\nn2n\n3\n(13)\n[incerto] 2n\n2n+1\n(14)\nn!\n[incerto] 2n\n(ST)\n(log n)logn\n2(log2 n)2\n(91)\n∑ik\nnk+1\ni=1\n\n\nSolu¸c˜ao:\n\n1. f(n) = Θ(g(n))\n\n2. f(n) = O(g(n))\n\n3. f(n) = Θ(g(n))\n\n4. f(n) = O(g(n))\n\n5. f(n) = Θ(g(n))\n\n6. f(n) = O(g(n))\n\n7. f(n) = Ω(g(n))\n\n8. f(n) = Ω(g(n))\n\n9. f(n) = O(g(n))\n\n10. f(n) = Ω(g(n))\n\n11. f(n) = O(g(n))\n\nPage v",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n(neste caso f(n) = Θ(g(n))):\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nqd)\n(2)\n(3)\n(4)\n(5)\n(6)\n(7)\n(8)\n(9)\n(10)\nay\n(12)\n(13)\n(14)\n(15)\n\n(16)\n\nf(n)\n\nn-10\n\nn!!2\n100n + log nm\nlog2n\n10logn\nnb\nn’/logn\nnol\n\nlogn\n\n(log n)\nvn\n\nn!'2\n\nn2\"\n\nQn\n\nn!\n\n(log n)'°8\"\n\nLe\n\ni=l\n\ng(n)\nn—200\n\nnº!3\n\nn+ (logn)?\nlog3n\nlog(n?)\nnlog? n\nn(logn)?\n(logn)!°\nnilogn\n(log n)?\nslogan\n3\"\n\npm\n\non\n\npilog, n)?\n\nnt+1\n\n\nSolu¸c˜ao:\n\n1. f(n) = Θ(g(n))\n\n2. f(n) = O(g(n))\n\n3. f(n) = Θ(g(n))\n\n4. f(n) = O(g(n))\n\n5. f(n) = Θ(g(n))\n\n6. f(n) = O(g(n))\n\n7. f(n) = Ω(g(n))\n\n8. f(n) = Ω(g(n))\n\n9. f(n) = O(g(n))\n\n10. f(n) = Ω(g(n))\n\n11. f(n) = O(g(n))\n\nPage v",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5.png",
       "figuras": [
         "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
@@ -118,56 +85,38 @@
     },
     {
       "pagina": 7,
-      "texto": "\u0000 n\n\n· n ⇒\nT(n) = n + (log2(n) −log2(2)) · n\n\n⇒\nT(n) = n + log2\n\n2\n\u0001\n\n⇒\nT(n) = n −n + n · log2(n)\n∴\nT(n) = n · log2(n)\n\n6. Descreva um algoritmo de tempo Θ(n lg n) que, dado um conjunto S de n\ninteiros e um outro inteiro x, determine se existe ou n˜ao dois elementos em\nS cuja soma seja exatamente x.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nint verifySum(int x,int *S){\nmergeSort(s):\nint i=0;\nint j =size(S)-1;\nwhile(i<j){\nif(s[i]+S[j]>x)\nj--;\nelse\nf(S[i]+S[]<x)\ni++;\nelsereturn1;\nreturn o;\n\n\nNesse algoritmo, podemos observar a fun¸c˜ao verifySum, que recebe como parˆametros\no inteiro x e o conjunto S de inteiros. Inicialmente, ordenamos o conjunto S atrav´es\ndo algoritmo Merge Sort, cuja complexidade ´e Θ(n lg n). Em seguida, presumimos\nque size(S) retorna n, visto que ´e o tamanho de S, e percorremos o conjunto em busca\nde dois inteiros nele que somando resulte no valor de x. As opera¸c˜oes que sucedem\no Merge Sort tem complexidade Θ(n). Portanto, conclui-se que o algoritmo acima\npossui complexidade dominante Θ(n lg n).\n\n7. Resolva a recorrˆencia: an = a0 + a1+ ··· + an1, em que a0 = 1.\n\nSolu¸c˜ao: Para resolvermos a recorrˆencia e encontrarmos sua f´ormula fechada, deve-\nmos expandi-la de forma a encontrarmos um padr˜ao. Dessa forma:\n\nSe n = 0, a0 = 1;\nSe n = 1, a1 = a0 = 1 = 20;\nSe n = 2, a2 = a0 + a1 = 1 + 1 = 2 = 21\n\nSe n = 3, a3 = a0 + a1 + a2 = 1 + 1 + 2 = 4 = 22\n\nPage vii",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "\u0000 n\n\n· n ⇒\nT(n) = n + (log2(n) −log2(2)) · n\n\n⇒\nT(n) = n + log2\n\n2\n\u0001\n\n⇒\nT(n) = n −n + n · log2(n)\n∴\nT(n) = n · log2(n)\n\n6. Descreva um algoritmo de tempo Θ(n lg n) que, dado um conjunto S de n\ninteiros e um outro inteiro x, determine se existe ou n˜ao dois elementos em\nS cuja soma seja exatamente x.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nint i\n\nint j = size\n\nmhile(i < 5)\n\n“FCT + S[3] > xy\nFo\n\nF (SEI + si < xy\nim;\n\nelse return 1;\n\n\nNesse algoritmo, podemos observar a fun¸c˜ao verifySum, que recebe como parˆametros\no inteiro x e o conjunto S de inteiros. Inicialmente, ordenamos o conjunto S atrav´es\ndo algoritmo Merge Sort, cuja complexidade ´e Θ(n lg n). Em seguida, presumimos\nque size(S) retorna n, visto que ´e o tamanho de S, e percorremos o conjunto em busca\nde dois inteiros nele que somando resulte no valor de x. As opera¸c˜oes que sucedem\no Merge Sort tem complexidade Θ(n). Portanto, conclui-se que o algoritmo acima\npossui complexidade dominante Θ(n lg n).\n\n7. Resolva a recorrˆencia: an = a0 + a1+ ··· + an1, em que a0 = 1.\n\nSolu¸c˜ao: Para resolvermos a recorrˆencia e encontrarmos sua f´ormula fechada, deve-\nmos expandi-la de forma a encontrarmos um padr˜ao. Dessa forma:\n\nSe n = 0, a0 = 1;\nSe n = 1, a1 = a0 = 1 = 20;\nSe n = 2, a2 = a0 + a1 = 1 + 1 = 2 = 21\n\nSe n = 3, a3 = a0 + a1 + a2 = 1 + 1 + 2 = 4 = 22\n\nPage vii",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p7.png",
       "figuras": [
         "01-extraido\\figuras\\ef6d051e4b8c\\p7-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p7-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 8,
-      "texto": "Se n = 4, a4 = a0 + a1 + a2 + a3 = 1 + 1 + 2 + 4 = 8 = 23\n\nSe n = 5, a5 = a0 + a1 + a2 + a3 + a4 = 1 + 1 + 2 + 4 + 8 = 16 = 24\n...\n...\n...\n...\n...\n...\n...\n...\nPortanto, se n = i, ai = a0 + a1 + a2 + a3 + a4+ ...ai−1 = 2i−1\n\nSendo assim, conclui-se atrav´es do padr˜ao observado que para i = n:\n\nan = a0 + a1 + a2 + a3 + a4+ ...+an−1 = 2n−1\n\nLogo, a solu¸c˜ao da recorrˆencia ´e 2n−1.\n\n8. Considere o seguinte trecho de c´odigo:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n1: procedure PRoG1(inteiro positivo k)\n2:\nifk==lthen\n3:\nPrint(\"Oi\")return\n4:\nelse\n5:\nfor i←1 →k do\n6:\nPrint(\"Oi\")\n7:\nendfor\n8:\nProgl(k-1)\n9:\nendif\n10:endprocedure\n\n\nSeja T (n) o n´umero de vezes que a palavra OI ´e impressa quando Prog1 ´e\nchamado com parˆametro n. Calcule T (1) e determine uma rela¸c˜ao entre T (n)\ne T (n −1) para n > 1. Com base na rela¸c˜ao encontrada, utilize indu¸c˜ao para\nmostrar que T (n) ≤n2, para todo n maior ou igual a 1.\n\nSolu¸c˜ao:\n\nPara n = 1, a palavra “OI” ´e impressa apenas uma vez, portanto, T(1) = 1.\n\nPara n > 1, a palavra “OI” ´e inicialmente impressa n vezes, atrav´es do loop for. Em\nseguida, ela ´e impressa T(n-1) vezes. Portanto, T(n) = n + T(n-1).\n\nSendo assim,\n\n(\n\nT(n) =\n\n1, se n = 1\nn + T(n −1), se n > 1\n\nDando continuidade, devemos mostrar que T(n) ≤n2, para todo n maior ou igual a\n1. Por indu¸c˜ao, temos:\n\nPage viii",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "Se n = 4, a4 = a0 + a1 + a2 + a3 = 1 + 1 + 2 + 4 = 8 = 23\n\nSe n = 5, a5 = a0 + a1 + a2 + a3 + a4 = 1 + 1 + 2 + 4 + 8 = 16 = 24\n...\n...\n...\n...\n...\n...\n...\n...\nPortanto, se n = i, ai = a0 + a1 + a2 + a3 + a4+ ...ai−1 = 2i−1\n\nSendo assim, conclui-se atrav´es do padr˜ao observado que para i = n:\n\nan = a0 + a1 + a2 + a3 + a4+ ...+an−1 = 2n−1\n\nLogo, a solu¸c˜ao da recorrˆencia ´e 2n−1.\n\n8. Considere o seguinte trecho de c´odigo:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n1: procedure PROGI1 (inteiro positivo k)\n2: ifk==1then\n\n3: Print(“Oi”) return\n4: else\n\n5: fori—1—kdo\n6: Print(“Oi”)\n7: end for\n\n8: Progl(k- 1)\n9: end if\n\n10: end procedure\n\n\nSeja T (n) o n´umero de vezes que a palavra OI ´e impressa quando Prog1 ´e\nchamado com parˆametro n. Calcule T (1) e determine uma rela¸c˜ao entre T (n)\ne T (n −1) para n > 1. Com base na rela¸c˜ao encontrada, utilize indu¸c˜ao para\nmostrar que T (n) ≤n2, para todo n maior ou igual a 1.\n\nSolu¸c˜ao:\n\nPara n = 1, a palavra “OI” ´e impressa apenas uma vez, portanto, T(1) = 1.\n\nPara n > 1, a palavra “OI” ´e inicialmente impressa n vezes, atrav´es do loop for. Em\nseguida, ela ´e impressa T(n-1) vezes. Portanto, T(n) = n + T(n-1).\n\nSendo assim,\n\n(\n\nT(n) =\n\n1, se n = 1\nn + T(n −1), se n > 1\n\nDando continuidade, devemos mostrar que T(n) ≤n2, para todo n maior ou igual a\n1. Por indu¸c˜ao, temos:\n\nPage viii",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8.png",
       "figuras": [
         "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 9,
-      "texto": "Passo base (k = 1):\n\nNeste caso, T(1) = 1 ≤12.\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k > 1):\n\nT(k) ≤k2, para k > 1.\n\nPasso Indutivo:\n\nNo passo indutivo, aceitamos a hip´otese de indu¸c˜ao P(k), para k > 1 e, portanto,\nprecisamos provar por indu¸c˜ao que se P(k + 1) ´e verdadeiro, P(k) tamb´em ´e.\n\nT(k + 1) = k + 1 + T(k).\n\nComo a hip´otese P(k) garante que T(k) ≤k2:\n\nT(k + 1) ≤k + 1+k2 < (k + 1)2\n\n∴P(k + 1) ´e verdadeiro. ⇒P(k) ´e verdadeiro.\n\n■\n\n9. Considere o seguinte algoritmo recursivo, cujo argumento n ´e um inteiro\npositivo.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1:procedure AsTERISCO(n)\n2:\nifn>0then\n3:\nASTERISCO（n-1)\n4:\nfori-1→ndo\n5:\nimprima\n6:\nendfor\n7:\nASTERISCO(n-1)\n8:\nendif\n9:endprocedure\n\n\nPara um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada\nde ASTERISCO(n)?\n\nSolu¸c˜ao:\n\nConsiderando A(n) como a quantidade de asteriscos impressos dado um valor n, temos\nque:\n\n(\n\nA(n) =\n\n0, se n = 0\n2n+1 −(n + 2), se n ≥1\n\nComo exemplo, temos:\n\nPage ix",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "Passo base (k = 1):\n\nNeste caso, T(1) = 1 ≤12.\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k > 1):\n\nT(k) ≤k2, para k > 1.\n\nPasso Indutivo:\n\nNo passo indutivo, aceitamos a hip´otese de indu¸c˜ao P(k), para k > 1 e, portanto,\nprecisamos provar por indu¸c˜ao que se P(k + 1) ´e verdadeiro, P(k) tamb´em ´e.\n\nT(k + 1) = k + 1 + T(k).\n\nComo a hip´otese P(k) garante que T(k) ≤k2:\n\nT(k + 1) ≤k + 1+k2 < (k + 1)2\n\n∴P(k + 1) ´e verdadeiro. ⇒P(k) ´e verdadeiro.\n\n■\n\n9. Considere o seguinte algoritmo recursivo, cujo argumento n ´e um inteiro\npositivo.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1: procedure ASTERISCO(n)\n2: ifn>Othen\n\n3: ASTERISCO(n — 1)\n4: for i—1— ndo\n5: imprima “*”\n\n6: end for\n\n7: ASTERISCO(n— 1)\n8: endif\n\n9:\n\n: end procedure\n\n\nPara um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada\nde ASTERISCO(n)?\n\nSolu¸c˜ao:\n\nConsiderando A(n) como a quantidade de asteriscos impressos dado um valor n, temos\nque:\n\n(\n\nA(n) =\n\n0, se n = 0\n2n+1 −(n + 2), se n ≥1\n\nComo exemplo, temos:\n\nPage ix",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9.png",
       "figuras": [
         "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {

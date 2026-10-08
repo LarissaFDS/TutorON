@@ -1,7 +1,7 @@
 # Revisão 25264d122fc0-qincerta-1
 
 Fonte: materiais\Disponiveis\RAG PAA\Respostas_prova_2_PAA.pdf | página(s): 1, 2
-SHA-256: ab34331ccd0f48ff6f5c6d319f72cd3b6bc4e130fd087aa0b1c9efa0508a3295
+SHA-256: 512cdc7147b8cfe50c5407d8d60973fae90958dd90b60776a270fddffefea59b
 
 Confiabilidade: nao_verificada
 
@@ -10,150 +10,203 @@ Motivo: Revisão de fonte e conteúdo pendente.
 ## Enunciado e resolução — transcrição sem alteração
 
 [OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]
-ria
-Fernanda
-Rihciro
-Dernardes
-Pinto  Costa
-geSor+(A, P,r)
-(ntercala(a, P,q, r)
-if(p>r)
-[incerto] []:t
-[incerto] bt：u
-2
-Merge Sort(A, P,q)
-Merg eor+(A,q+s, r)
-[incerto] n,]=A[o,,n]
-RLo,.
-Intercala(A, P,q,r)
-[incerto] L[q+.,n] =A[q+,..,h]
-[incerto] i:0,s=0, x=o
-[incerto] For(i=) is)x++)
-[incerto] iF(R[==L[kand R[!:AL-s])
-[incerto] 1A[]=R[] ++ k++
-[incerto] else iF(R[>L[])
-IA[=L[k] k++
-2) Busca(A[, P))
-returnA
-mcio = P+(f-P)
-[incerto] 2
-iF(A[meio]>A[meio +s] αand  A[meio] <A[meio-1]". ]
-return
- meio
-else if(A[meio] >A[meio tj]
-I  busca (A, P, meio-J)
-else
-I busca (A, meio ts, r)
- vai comparand
-e
-Subpartes
-e'ncontrar
-arrag
-ate
-algoritmo
-seus
-visinhos
-da   subporte
-Com
-menfo
-[incerto] oP
-centro
-desefodo.
-inicia
-algori+mo
-Max-Min(A[J, P, r)
-Intercala(A, p,q,r) 
-orcenand.
-array
-por
-MergeSort.
-tend
-meio do
-Merge Sort (A, P, r)
-orde nodo, basta
-[incerto] o arrag
-n2=9+r
-Max=A[r]
-escolher
-primeiro
-Min =A[]
-R[o., ...,hs] = A[o, ...,Ms] 
-timo (ndice
-obter
-pora
-[incerto] 0
-minimo
-Merge Sor+(A[], P,)
-valor, Yespectivamente
-[incerto] i=g=c=o
-if(p>r)
-For(i=s, i<r, i+ t)
-[incerto] 9[号]
-[incerto] if(R[]==]
-Merge Sor+(A, P,q)
-I A[i]=r[] ++ k++
-[incerto] 'si(][])
-MergeSor+(A,qts,r)
-[incerto] 1A[]:L[]k++
-Intercala(A,p,a,r)
-else
-1A[i]=R[y]++
-trA
-[incerto] mlcee
+4 MAM
+
+++ tags frav |
+asja
+y ++ CAs erly]
+(caca) 3: a0
+pan eth CDU TAVA
+caes tha)
+ta sr 's<)403
+
+O = DE far
+
+/
+
+tu boy vo a
+
+Catt
+
+|
+pug monto d 59h "20\r2h 4
+
+\ tod
+ouxom O 2 ow tum 0 sao 'sabqy > 1% a
+
+208) goal ota DA!
+
+12440
+
+o a csymud 9 AQU\ OP SF o) E
+
+4509 ‘opa ap2e BoMD O J46-"U
+ce!
+Paw ean
+
+pet vega bays RAR
+“od hoo O opumuapso
+owA!Aobyo 2589 -
+
+a (a'b1d ly) oye 244 |
+
+0/9 *U1
+|
+\ o
+2y0 sayrrtin $728 Pe
+E Ro)
+to po PRP | 7 > | sorrodgns “2 anti
+pis oduo) VOA |
+-9\2) O o da
+
+li |
+
+ey) DITO — (RR O a
+
+\ Y wanted
+444 Boy cida '
+44% po: 577] y|
+(AMI 4! asa
+ata HE cassino
+(fs-olvei CY propose FINNS
+!
+
+(url usr (pz pes
+0:» 074 O77
+
+/ ule tt yy = Duo “nba
+fru Joyy= fu ou
+ug
+| rei ty
+Jo po
+{ ota su
+
+jon YU
+
+“OQ - (iu! ‘ody 4
+
+asrodgrs MP ag a
+
+[r-aawyy> CorauIy pro [r+ a
+
+wd!
+1 pe
+EI,
+
+(a! b q ‘Y)>) 22 29h Uy
+
+(a tb'd Wysro24ath|
+
+Sopra
+
+(ab! a! yyote23 4
+(atsbiy) 2052 2H
+Cora yyves2bay
+Sat
+(a ARA!
+(ata res by
+
+[ray = “ny
+EOv Ay
+(ald "W405 bay
+
+(a's CID CNY (E
+
+‘ opot asap 29
+OFUZUA
+
+om p00 (oye
+
+ape
+
+(4 ‘F4 Oram ! y) ~2>5nq |
+
+asa
+
+(F - orou tg ty) BISnG 1 |
+(r+ oamqy c Loyamyy) 31 Pg
+
+Oa An 24 |
+
+am Ty < Lorguqy) 3
+©
+
+(d -i)+ 9 = 012
+(A (9 “TIyycom
+is ae
+
+9,
+
+(a HB 'y) poço bay
+
+(b'd 'y) tog absay
+
+(S40):
+
+(ed)
+
+(ate! y) 12959 by
+CAMA oBouss, Lo
 
 
 CamScanner
 [OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]
-iniciopim
-[incerto] lista
-[incerto] ) Glos。(L,P)
-postos
-felorao ao prcso
-S=g,
-While( is+,(a,P[}) > L)
-[incerto] （P0）)
-[incerto] "++?
-[incerto] GS=S O Pe]., P1.
-[incerto] 220
-[incerto] Bulosa( mu Pi,, PL1)
-[incerto] >↓eena
-er se chega
-[incerto] m
-[incerto] at
-5
-ontrc-exemplo·
--> Gvloso:y3dl -> Custo-aq
-)0tima:{3y2> Cs+o=28
-algonitmo
-nao
-e
-Glose(I [],K)
-[incerto] {=g
-()
-I  cdecrescente  em 
-relacao"
-Whilewe<k)
-S=s uai
-se mav couber Xede?
-K=k-wL
-i+t
-S
-feturn
-algoritm 0
-acima
-estara
-cons i; &erando
-pois
-[incerto] OS
-maior valor， os
-col ocan d。
-na
-moch,la , resu(tand.
-assim
-na
-So
-O'tima.
-ugao
+anicid pim NS Bastos e
+| PÉS 3) |
+em relocao ao preso |
+
+) Gu loso (1) Joa) 0°
+decrescente
+
+feitor: êm ordem
+“lote ( dust (ou) 643) 7 L)
+ee Apt! PO! )
+
+4-2
+
+6Oz SU PLAY)" |
+
+Do E) PLAI, by LI)
+
+VA
+
+A ve
+“4 | . i
+
+5) (er ten emplos
+» Guloso+sy2'af > Custo-ag
+
+ad = Otima: S34 pd Custoz à8
+
+é exoto
+
+algontmo não
+
+heqo, (2)
+
+JK Go lose (1 Cj /K)
+
+Vi
+Or el I De cresdente em Yveloção a ( =)
+
+‘ile We <K)
+mer SB a a couber Tee?
+i, a
+
+Ltt
+
+Hi
+
+(éturn S
+algoritmo
+
+ES
+HG ny) pois fo) algoritmo Atma, estara, ons « Levando on
+ey he)
+le maior valor, os colocando na mochila, resillando assim. na So
+
+- ane
+UÇão otima.
 
 
 CamScanner

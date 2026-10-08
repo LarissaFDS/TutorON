@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Questao7[1 ponto]:\nProveque seNPco-NP,cntao PNP.Dica:use teoria dos conjuntos eo fato deque II∈NPi∈co-NP\nem queIi éoproblema complementar de.\nQuestao 8[2 pontos]:\nOproblema PARTICAo DE CoNJUNTOs toma como entrada um conjunto S de numeros.A questao ese os ntimeros\npodem serparticionados em dois conjuntos AeA=S-A taisquezeAz=reAz.JaoSosA DE SuBcoNUNTos\ntem como entrada um conjuntoSem um inteiro k.A questaoe se existe um subconjuntoSS talqek=resz.\nMostre que PARTICAO DE CONJUNTOSαSOMA DESUBCONJUNTOS.\nQuestao9[2pontos:\nque vertices adjacentes nao tenham a mesma cor,utilizando nomaximok cores.\nQuestao10[1ponto]:\nPROGRACAoLINEAReum problema pertencentea P,diferentemente do problema NP-completo PROGRACAoLi-\nNEARINTEIRA no qual varios problemas classcos NP-completos podem sermodelados.Oprimeiro algoritmo para\nPROGRACAo LINEARem tempo polinomial no pior caso foi proposto porLeonid Khachiyanem1979,desbancando\ne enganos do Sr.Browne.\nAn Approach to Difficult Problems\nanycaseit isan important theoretical accomplishment.\nnecity twice.\nthe compexitybecomessogreat that a computerwould require billions ofyearstofinda solution.\nsity.\nwill be solubleinagivennumber ofsteps.\nmplexmethod.\nMALCOL",
-      "metodo": "rapidocr",
+      "texto": "Questão 7 [1 ponto):\nProve que se AP co\n\nCON, então P Av)\nem que TT tão P ANP.\n\nproblema complementar de TL\n\nDicas use teoria dos conjuntos e o\n\nfato de que ENP =» Tie cow\n\nQuestão 8 [2\n\n[2 pontos\nO problema P,\npodem ser p:\n\nARTIÇÃO DE CONJUNTOS toma como entrada um conjunto $ 4\nPodem sr partcionados em doi conjuntos Ae À = S.A ti ue Pero É de\n5 tomo entrada im conjunto S em um inteiro k. A qu isto tm\nMostre que Parição DE Cox\n\nnúmeros. À questão é se ou números\nque cre 7- Já o Soa De Sencon\nJUNTOS x SOMA DE SUBCONJUNTOS. ia an\n\nQuestão 9 [2 pontos):\n\nDesenvolva um algoritmo utilizando a técnica d\n\nCss tilizando a técnica de backtracking para resolver o problema de coloração du\nPRO o ho dieconado (6 0 um número inteiro k, 0 objetivo É atribuir ums cor a cada cee Gee de Dado\n\nque vértices adjacentes não tenham a mesma cor, utilizando no máximo k cons — onan ae\n\nQuestão 10 [1 ponto)\nPROGRAÇÃO LINEAR é\nINEAR é um problema pertencente a P, diferentemente de Uy A\n'ROGRAÇÃO LINEAR em tempo polinomial no pior caso foi proposto por Leonid Khachiyan em 19\nalgoritmo simplex que Possui tempo exponencial em pior caso. Leia o artigo do New York Ti\ne enganos do Sr. Browne.\n\nAn Approach to Difficult Problems\n\nan’s new technique, but concur U\n\nMathematicians disagree as to the ultimate practical value of Leonid Khachi\nn any case it is an important theoreti plishment.\n\nMr. Khachiyan's method is believed to offer an approach for the lix u\nraveling salesman” problems. Such problems are among the most intractable in mathematics, Thy\nnce, finding the shortest route by which a salesman could visit a number of cities without his pot\n\nar programming of computers to solve soci\nThey invols'\ntouch\n\nne city twice.\nEach time a new city is added to the route, the prob!\nwriables must be calculated from large numbers of equations using a system of line:\n, the compexity becomes so great that a computer would require billions of years to find a\nthe past, “traveling salesmen” problems, including the efficient\naffs, have been solved on computers using the “simplex method” in\nsity.\nrule, the simplex method works well, but it offers no guarantee that afte\ns find an answer. Mr, Khachiyan's approach offers a way of telling right from the\nvill be soluble in a given number of steps. Ta\njathematicians conducting research at Stanford already have applied the Khachiya® a poe\nra pocket calculator, which has solved problems that would not have been possible With\nmplex method, E\ncally, the Khachiyan approach uses equations to create imaginary cps that encape\nplex method, in which the answer is represented by the intersections of the sides: poly!\n\nnade smaller and smaller, the known with greater precision.\n\nbecomes very much more complex. Very large\nar programming: M\nsolution.\news of HOSE\nDantzig Of\n\nscheduling of airline cr\nented by George B\n\nmn\nx a certain number of co!\n\nstart whet",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\b7f0e057578a\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

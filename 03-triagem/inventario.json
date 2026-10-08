@@ -682,41 +682,5 @@
     "assunto_provavel": "assunto_incerto",
     "escopo": "acervo",
     "erro": ""
-  },
-  {
-    "id": "626066d3f88f",
-    "arquivo": "00-originais\\referencias\\Texto colado.txt",
-    "copia": "00-originais\\ingestao\\0c2a5480611d334beb9105466841319b8112f2f4048ac5b09fff47380ef248e5\\Texto colado.txt",
-    "sha256": "0c2a5480611d334beb9105466841319b8112f2f4048ac5b09fff47380ef248e5",
-    "tipo": ".txt",
-    "paginas": 1,
-    "texto_extraivel": "s",
-    "assunto_provavel": "b2-07-lidando-com-np-completude",
-    "escopo": "referencia",
-    "erro": ""
-  },
-  {
-    "id": "24cd137836d0",
-    "arquivo": "00-originais\\referencias\\TutorON - vale a pena.pdf",
-    "copia": "00-originais\\ingestao\\f01470872f0a7d0627e687a2cdacadd88bfe62245e4fd90e2e3f25edc89af80b\\TutorON - vale a pena.pdf",
-    "sha256": "f01470872f0a7d0627e687a2cdacadd88bfe62245e4fd90e2e3f25edc89af80b",
-    "tipo": ".pdf",
-    "paginas": 8,
-    "texto_extraivel": "s",
-    "assunto_provavel": "b1-01-corretude-complexidade",
-    "escopo": "referencia",
-    "erro": ""
-  },
-  {
-    "id": "82ebd1d64e82",
-    "arquivo": "00-originais\\referencias\\TutorON_PoC_Gemini_PAA.html",
-    "copia": "00-originais\\ingestao\\b31ac6ab72bea058677a976c8cde08332cb0217429325e55ae8b9209ee411638\\TutorON_PoC_Gemini_PAA.html",
-    "sha256": "b31ac6ab72bea058677a976c8cde08332cb0217429325e55ae8b9209ee411638",
-    "tipo": ".html",
-    "paginas": 1,
-    "texto_extraivel": "s",
-    "assunto_provavel": "b2-04-programacao-dinamica",
-    "escopo": "referencia",
-    "erro": ""
   }
 ]

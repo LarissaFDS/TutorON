@@ -1,0 +1,70 @@
+{
+  "questao": "Q8",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "70d6475b28bf-q1-1",
+    "1a81ca283132-q3-3",
+    "ef6d051e4b8c-q6-6",
+    "1a81ca283132-q8-8"
+  ],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.381975575000979,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9 usando backtracking, devemos seguir um caminho que preencha as posições de um quadrado 3x3, garantindo que a soma de cada linha, coluna e diagonal seja 15. Aqui estão os passos:\n\n1. Inicialmente, preencha as posições do quadrado com números de 1 a 9, mantendo um conjunto dos números ainda não usados. \n\n2. Para cada posição, testamos todos os números disponíveis, garantindo que não haja repetição. Se uma linha, coluna ou diagonal estiver completa, ou se a soma de uma linha parcial já for >=15, descartamos essa posição.\n\n3. Para limitar o que ainda pode completar cada linha, fazemos uma poda, somando os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha.\n\n4. Ao preencher as nove posições, verificamos as três linhas, três colunas e duas diagonais. Se todas as somas forem 15, temos um quadrado mágico.\n\n5. Para garantir que não haja duplicação de soluções, podemos rotacionar e refletir o quadrado, contando as soluções únicas.\n\n6. O tempo de execução é O(9!) devido à permutação dos números, e a memória é O(9) devido à necessidade de armazenar os números ainda não usados.\n\n7. Podemos usar o algoritmo de topologia para garantir que todas as posições são preenchidas de forma que não haja conflitos entre as linhas, colunas e diagonais.\n\n8. Podemos usar o algoritmo de Subset Sum para garantir que todos os números de 1 a 9 são usados exatamente uma vez.\n\n9. O algoritmo de Subset Sum pode ser otimizado para ter tempo O(nt) e memória O(t), onde t é o valor do alvo (15 neste caso).\n\nEsses testes e podas garantem que encontramos todas as possíveis soluções de quadrados mágicos de ordem 3 com os números distintos de 1 a 9.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 135.6143388729979,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5391c7b39026a0f196ab900db6fde13f1b55e92a5eca9b86106a7458e5eca9f9"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

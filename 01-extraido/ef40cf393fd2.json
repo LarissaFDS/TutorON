@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "mstituto deComputacao\nProjeto e Anilise de Algoritmos\n1aProva\nProf Rian Gabriel Pinheiro\n02demargo de2023\nQuestao 12pontos):\nvotosou naoProneacoretude de seu algoritmo.\nQuestao 2[2 pontos|:\nCousidere o seguinte algoritmo\n2\nif icio = fm then\n3:\nreturn Ainicio]\n4\nendit\n5\n[incerto] meso\n[incerto] z/（ou-mg）+\n[incerto] 6:\n7\n[incerto] 6X（A.meo+1,5m)\n8\nifa<bthen\n[incerto] 9:\nreturnb\n10\nelse\n11\n12\nendif\n13end procedure\nprovesuacorretude\nExpfiqueo ueele\nQuestao3|1ponto]:\nSeja f（n) uma funcao dos inteiros nos reais.Justifique:\n1.Qual a defnigao formal de O(f(n))？\n2.Everdade que 20n²+10ngn+5éO（n²)？\n3.Everdade que n∈O（n)？",
-      "metodo": "rapidocr",
+      "texto": "moaputação\n\namstituto de O\nde Algoritmos\n\nProjeto e Análise\n1º Prova\n\nProf. Rian Gabric\n92 de março de 2025\n\n1 Pinheiro\n\nQuestão 1 |? tos)\nO Centro Acadêmico de 1C/UFAL fai ão corn\nar vetos 4 «qutendo valores i\n\nvotos ou não\n\nQuest\nConsidere ©\n\n“E procedure A to\n\n2 if then\n\nE returo\n\n4 end if\n\n6\n\nsi then\n\n9 retu\n\n19, else\n\nun rerusr\n\n12 end if\n\n13: end proced\nExplique ‘ 1 etud\n\nQuestão 3 [1 pontol:\n\nSelo. f(r) uma função dos inteiros © reais, Ji\n1. Qual a definigie formal de out?\n\n560\n\nsun? +1\n\n2. É verdade que",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\ef40cf393fd2\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

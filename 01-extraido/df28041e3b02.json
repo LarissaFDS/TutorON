@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "13:21\nPAAProva4.pdf\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computacio\nProjetoe Anilise de Algoritmos\n4aProva\nProf.Rian Gabriel Pinheiro\n[incerto] BedroHextique5.Aleida\n16de outubro de 2023\nDefinn as classesP,NPeNP-completo.\nQuestao1[1,5ponto]:\nQuestio2[1,5ponto]:\n[incerto] SejaAumproblemP-cmpletosjamBCqulsquerutrproblemaspoemunostarmNP）Supoa\n[incerto] que B6polinomialmente redutivelaAeA6polinomialmnte redutivelaC.Prove seasseguintes afrmaies si\nverdadeiras ou nfio.\n1.C6NP-completo？\n2.BeNP-bard?\n3.C6NP-dificil?\nUma coberturadeciclos deu digrafoD=（V，E）um conjuntoCde ciclos elemntares,talque cada rticV\nQuestao3[2pontos]:\npertence aexatamente umciclo de C.Prove que o seguinte problemn6NP-completo:\nEntada: um digrafoD=（V,E）eum ndmero k ∈Z\nCOBERTURA DE CICLOS.\nQuestio:D possuiuma cobertura de ciclos formnda por k ciclos ou menos？\nQuestao4[2pontos]:\n[incerto] Sd:UmvregrardeGaquadatemgausuordestipxistMosteqar\nAnvoRE GERADonA coM ResTRugAo DE GRAu.Entrada:Um grafo nio-direcionado G(V,E).\ntodok≥2oproblema6NP-completo.\nQuestao 5[2 pontos]：\n[incerto] Dadumblerocnjndemn²pasqundradsmquecadapeapsuiuacrmcadlad\n[incerto] Desejse colocarnasnotabuleirodeformqucadapeapossuamesma oradjacentequ seuvizino.Esrev\num algoritmo Backtrucking para esse problemn.\nQuestio 6[2pontos]\nOproblema k-CoLoRACAoassim definido.\nEntrada:um grafo G=（V,E）e um inteiro positivo k.\nQuestio:ografo G6k-colorivel?\nQuestao7[1 ponto]:\n[incerto] oo\nScannedwithCamScanner",
-      "metodo": "rapidocr",
+      "texto": "13:21\n\nPAA Prova 4.pdf 8 E -\n\nProjeto  Anilie de Algoritmos.\nProm\n\nProt Rian Gabriel Piero — Paya Mntigue Sol Alntiso.\n\n16 de\n\nSide id is E LO\ngd SE\n\nbro de 2023\n\nQuestão 1 [1,8 ponte):\nDefinn as clas P, NP e N’P-completo\n\nQuestão 2 [1,5 ponto):\nSeja A um problema N'P-completo e sejam Be O quaisquer outros problemas (podem ou não estarem NP) Sopomha\n“que E é plinomialmerte reduivel x À e À é polisomiamenteredutvl a C. Prove seas suíte afirmações são\nverdes ou não.\n\n1. CENP compete?\n2 BENP AM\na cenpaisar\n\nQuestão 3 [2 pontos):\nUma cobertura de clelos de um dra D = (VE) é um conjunto O de cleo lomentare, tal que cada véic v € V\npestenc a exatamente Um eco de C. Prove que o segue problema é N?-completo:\n\nComerrena DE Crowes,\n\nEnada: um dgrafo D = (V. E) e um número k € Zs.\n\nQuestão D poi vma cobertura de ils formada poe I cos o enoa?\n\n4 [2 pontos):\nievons GERADORA COM RESTRIÇÃO DE GRAU. Estrdo: Um grato são-ieclmado G(V, E).\n\nSaid: Una árvore geradora de G na qual cada nó tem grau, se uma aver desse tipo existe. Mestre que para\ntodo k 220 problema é NP-compleo.\n\nQuestão § [2 pontos]\n\nDado um tabela e um conjunto de m = n peças quadradas, em que cada peça poms uma co x cada lado.\nDesejo colcar nº poças no tabuleiro de forma que cada peça posa mena cor aceno que eu vinho. Eset\n\num algritine Backtrcting para ese pedem.\n\nBarada um glo G = (VE) ©\nQuestão: 0 gato O é Ico?\nElabore um algoritmo Becktrcking para ce problems.\n\nQuestão 7 [1 pontoj:\nQual a diferença entre um algoritmo exato é um aproximado? Quando usar um algo ov outro? Dê exemplos.\n\nInto posto k\n\nScanned with CamScanner",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\df28041e3b02\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

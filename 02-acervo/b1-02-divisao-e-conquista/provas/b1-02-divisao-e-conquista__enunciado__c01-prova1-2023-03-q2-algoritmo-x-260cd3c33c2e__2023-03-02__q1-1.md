@@ -2,20 +2,7 @@
 
 Fonte: materiais\c01_prova1_2023-03_q2_algoritmo_x.md | página(s): não informada na transcrição
 
-Questão 2 [2 pontos]: Considere o seguinte algoritmo:
+Versão derivada corrigida por agente; original SHA-256: 95fff06c742eb5ed38f3af283cc621f7933debf9981a1287b8e6ed670990d590. Não é aprovação do professor.
 
-1: procedure ALGORITMO X(vetor A[1, ..., n], inicio, fim)
-2:   if inicio = fim then
-3:     return A[inicio]
-4:   end if
-5:   meio ← inicio + (fim − inicio)/2
-6:   a ← X(A, inicio, meio)
-7:   b ← X(A, meio + 1, fim)
-8:   if a < b then
-9:     return b
-10:  else
-11:    return a
-12:  end if
-13: end procedure
-
-Explique o que ele faz e prove sua corretude.
+Explique o que o Algoritmo X faz e prove sua corretude.
+O domínio é um intervalo não vazio A[inicio..fim], com índices inteiros. Interprete a divisão do índice como piso: meio = inicio + floor((fim-inicio)/2). Se inicio=fim, retorne A[inicio]. Caso contrário, calcule a=X(A,inicio,meio), b=X(A,meio+1,fim) e retorne max(a,b). Esta versão retorna o máximo, não a soma. Sem o piso, a notação do enunciado pode produzir índices não inteiros; a interpretação foi explicitada nesta versão derivada.

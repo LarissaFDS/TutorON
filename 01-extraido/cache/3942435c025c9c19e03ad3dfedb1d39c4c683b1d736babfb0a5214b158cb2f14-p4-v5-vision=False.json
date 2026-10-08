@@ -1,0 +1,14 @@
+{
+  "pagina": 4,
+  "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nCUSTO DA REDUC¸ ˜AO = 6 (LIMITE INFERIOR)\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\nUP\n\nPER: INF\n\nc:6\n\nMica\nE cz\nEc:\noa\n\n\nCalcule agora o custo do pr´oximo n´o, que ´e o custo para ir do seu predecessor at´e\nele mais o custo das redu¸c˜oes de linha e coluna anteriores, mais o custo da redu¸c˜ao\nde linha e coluna do caminho atual. Para cada n´o j sucessor de 1, fa¸ca a linha 1 do\nsucessor j ser toda infinita a partir da matriz reduzida do n´o 1, bem como a coluna\n2 tamb´em e assim sucessivamente para todos os n´os vizinhos.\n\n\n[OCR parcial do recorte p4-fig3.png; conferir símbolos na imagem]\nC(1,2)+R+R'\n\nUPPER: INF\nR=6\n\nA\n\nC(1,3) +R + R'\n\nHoc\nE cz\nEcs\noa\n\n\nPara o n´o 2 temos:\n\nPage iv",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig2.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p4-fig3.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

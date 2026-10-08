@@ -2,33 +2,8 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L4.pdf | página(s): 3
 
-3. Considere o problema de agendamento de intervalos. N´os temos um conjunto
-de atividades 1, 2, ..., n; cada atividade i possui um intervalo de tempo a partir
-de si e termina em fi .
-Um agendamento — conjunto de atividades — ´e
-dito compat´ıvel, se nenhuma atividade se sobrep˜oem no tempo. O objetivo
-´e determinar um agendamento compat´ıvel com o maior n´umero poss´ıvel de
-atividades. Projete um algoritmo para este problema.
+Versão derivada corrigida por agente; original SHA-256: aa1f6df1dc46221deb51a57b9ac91703dbfd15141a819c16026fbb38f302de62. Não é aprovação do professor.
 
-Solu¸c˜ao:
-
-
-[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
-def endEventTime(task):
-return task.end
-def scheduler(tasks):
-tasks.sort(key = endEventTime) # Ordena a lista pelo tempo de termino das atividades
-schedule=[]
-prevEndTime =-inf #Inicializa o tempo de término parao algoritmoguloso
-foriin range(1,len(tasks)):
-iftasks[i].begin>prevEndTime:#Encaixa as atividades de acordo com a disponibilidade,
-#ou seja,como as atividades estao ordenadas pelo tempo
-schedule.append(tasks[i])
-prevEndTime =tasks[i].end # de termino,a preferencia sera pelas que comecam logo
-#aposoterminodamenoratividadeateomomento
-return schedule
-foriin scheduler(tasks):
-print(i)
-
-
-Page iii
+Agendamento do maior número de intervalos compatíveis.
+Para intervalos semiabertos [s_i,f_i), ordene por término crescente. Comece com ultimo_fim=-infinito. Para cada atividade nessa ordem, aceite-a se s_i>=ultimo_fim e atualize ultimo_fim=f_i. A convenção semiaberta permite uma atividade começar quando outra termina.
+A escolha do menor término pode substituir a primeira atividade de uma solução ótima sem reduzir o espaço para as seguintes; repetindo o argumento, o algoritmo é ótimo. Custo O(n log n) para ordenar e O(n) para selecionar. Este pseudocódigo derivado substitui OCR de imagem; não é transcrição literal.

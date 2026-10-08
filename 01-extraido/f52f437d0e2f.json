@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Questio 62pontos\n[incerto] Pateu\n+ao com ag>0,pertence a O(nk).\n[incerto] poinamiodegrank.p(n）an+ai-1n*\nQuestao7[1ponto]:\nxitmo reeursivo,ujo argumcnton enm inteiro positivo.\n[incerto] fn>0then\n[incerto] Aso（-1)\n[incerto] 1一ndo\nmprima\nend for\n[incerto] AsTO（h-1)\n[incerto] endif\nend procedure\nrecorrencia\nQuestao &(2pontos]:\n[incerto] Sejam f（n）eg（n）\n[incerto] max（f（n）-g（n)）=θ（f（n）+g(ni）),",
-      "metodo": "rapidocr",
+      "texto": "nce a O(n*\n\nto para diferentes valores de base ;\n\nimento para diferentes valores de base q\n\num inteiro positivo.\n\n==\n\nmada de ASTERISCO(n)?\n\nii\n\ninição básica da notação 6, p",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\f52f437d0e2f\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

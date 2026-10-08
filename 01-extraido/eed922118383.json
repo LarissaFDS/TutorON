@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "pertence a exatamente um ciclo de C.Prove queo seguinte problema NP-completo:\nCOBERTURA DE CICLOS.\nEntada:un digrafo D=(V.E)e tmnimero k∈Z\nQuestao:D possui uma cobertura de ciclos formada por k ciclos oumenos?\nQuestao4[2pontos]:\nCoBERTURA DE CLIQUE.Entrada:um grafo G=(V,E)e um inteiro K ∈ VI. Questao: Os vertices de G podern ser\nparticionados en k≤K conjuntos disjuntosV,V..,V,taisque,para todo1≤i≤,o subgrafo induzido por V\néuma clique?Prove que o problema é NP-completo.Dica:use o problema de CoLoRAcAo DE GRAFos.\nQuestao5(2pontosj:\nDescreva um algoritmo BacktrackingPara o problema da CicLo HAMILToNIANO.\nQuestao6[2pontosj:\nResolva a seguinte instancia do problema da mochilapelo algoritmo Branch-and-Bound com capacidade W=16:\nitem\npeso\nvalor\n1\n10\n$100\n2\n7\n$63\n3\n8\n$56\n4\n4\n$12\nDesenhe a arvore de busca e deixe claro como voce esta calculandoolimitante e comoéfeita aramificacao.\nQuestao 7[1 ponto]:\nNo contexto de problemas NP-dificeis, qual a diferenca entre um algoritrno exato e um aproximado? Responda a\npergunta levando em consideracao:i) eficiencia,i) qualidade da solucao,ii)exploracao do espago de solucao e iv)\naplieacbes praticas",
-      "metodo": "rapidocr",
+      "texto": "tou Cielo de C. Prove que 6 seguinte Problema é N'P-completo\n\nPertence a exatame,\nCOBERTURA DE CrcLos\n\nEntada: mm digrafo D\nQuestão: D possui uma ¢\n\n(4, 2) e um número k €\ncobertura de ciclos formada Por k ciclos ou menos?\nIV}. Questão: Os vértices de G podem ser\n&, 0 subgrafo induzido por Vj\n\nCoLoragio DE Graros\n\nQuestao 4 [2 Pontos}:\nCOBERTURA DE CLIQUE. Entrada:\nParticionados em + SF conjuntos ¢\né uma clique? Prove que o Problema é NP-comple\n\n(VE) e um inteiro Ke\n\num grafo G\nVi, tais que, para todo 1 Sis\n\ndisjuntos 14, V4,\nto. Dica: use o problema de\n\nQuestão 5 [2 pontos]:\nfrevo um algoritmo Backtracking para o Problema da Clero HAMILTONIANO,\nQuestão 6 [2 pontos]:\n\ninstância do problema da mochila Pelo algoritmo Branch-and-Bound com Capacidade W = 16:\n\nResolva a seguinte\nitem,\n\nvocê está calculando o limitante e como é feita a ramificação.\n\nDesenhe a árvore de busca e deixe claro como\nQuestão 7 [1 Ponto}: :\nNo contexto de problemas N'P.difíceis, qual à diferença entre um algoritmo exato e um aproximado? Responda a\nPergunta levando em consideração: i) eficiência, ii) qualidade da solução, iii) exploração do espaço de solução e iv)\naplicações práticas",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\eed922118383\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

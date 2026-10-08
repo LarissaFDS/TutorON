@@ -1,0 +1,64 @@
+{
+  "questao": "Q5",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "a177bf5bc3c7-q1-1",
+    "a177bf5bc3c7-q2-2",
+    "1a81ca283132-q7-7",
+    "1a81ca283132-q9-9"
+  ],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.9003182020023814,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Se somarmos 1 a cada aresta de um grafo conexo, a árvore geradora mínima continua sendo mínima. Isso ocorre porque a soma de 1 a cada aresta não altera a ordem dos pesos das arestas, mantendo a mesma árvore geradora mínima. No entanto, os caminhos mínimos podem mudar. Um contraexemplo numérico é útil para entender isso.\n\nConsidere um grafo simples com vértices s, x, y, t e arestas s-x, x-y, y-t com pesos 0, 0, 0, respectivamente. A árvore geradora mínima é s-t, com custo 0. Se somarmos 1 a cada aresta, a árvore geradora mínima permanece s-t, com custo 1. No entanto, o caminho s-t passando por x e y tem custo 2, que é menor que o custo da árvore geradora mínima. Portanto, o caminho s-t não é mais o caminho mínimo entre s e t após a alteração dos pesos.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 95.58303248100128,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5c1211d75300cc4752c4afa0bf7aa06abe6638446ed1031667f111e289d3f182"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

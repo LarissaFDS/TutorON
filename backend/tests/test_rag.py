@@ -20,6 +20,7 @@ def api_error(code):
 
 @pytest.fixture
 def pipeline(monkeypatch):
+    monkeypatch.setenv("TUTORON_AI_PROVIDER", "gemini")
     monkeypatch.setenv("GEMINI_MODEL", "primary")
     monkeypatch.setenv("GEMINI_FALLBACK_MODEL", "fallback")
     sleep = Mock()

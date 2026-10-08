@@ -1,0 +1,853 @@
+[
+  {
+    "questao": "Q1",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c01",
+      "c02",
+      "c03"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q1",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c01",
+      "c02",
+      "c03"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q1",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c01",
+      "c03",
+      "c02"
+    ],
+    "esperadas": [
+      "c01",
+      "c02",
+      "c03"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q1",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c01",
+      "c02",
+      "320662691e44-q2-2",
+      "2df6e1818523-q2-5"
+    ],
+    "esperadas": [
+      "c01",
+      "c02",
+      "c03"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.86149161999856,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c04",
+      "c05",
+      "c06"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q2",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c04",
+      "c05",
+      "c06"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c06",
+      "c04",
+      "c05"
+    ],
+    "esperadas": [
+      "c04",
+      "c05",
+      "c06"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": true
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c05",
+      "ef6d051e4b8c-q9-9",
+      "fb361b787fc6-q7-2",
+      "320662691e44-q7-5"
+    ],
+    "esperadas": [
+      "c04",
+      "c05",
+      "c06"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": true,
+    "segundos_busca": 3.6153842599997006,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q3",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q3",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q3",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c07",
+      "c08"
+    ],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q3",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c08",
+      "f38bb8142136-q2-2",
+      "c07",
+      "1a81ca283132-q8-8"
+    ],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.361482858999807,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q4",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c09",
+      "c10-q1-1",
+      "c10-q2-2"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q4",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c09",
+      "c10-q1-1",
+      "c10-q2-2"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q4",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c10-q1-1",
+      "c10-q2-2",
+      "c09"
+    ],
+    "esperadas": [
+      "c09",
+      "c10-q1-1",
+      "c10-q2-2"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q4",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c09",
+      "f38bb8142136-q1-1",
+      "f38bb8142136-q3-3",
+      "c10-q1-1"
+    ],
+    "esperadas": [
+      "c09",
+      "c10-q1-1",
+      "c10-q2-2"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 2.977872908999416,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q5",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "a177bf5bc3c7-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q5",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "a177bf5bc3c7-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q5",
+    "cenario": "rag_manual",
+    "fontes": [
+      "a177bf5bc3c7-q1-1"
+    ],
+    "esperadas": [
+      "a177bf5bc3c7-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q5",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "a177bf5bc3c7-q1-1",
+      "a177bf5bc3c7-q2-2",
+      "1a81ca283132-q7-7",
+      "1a81ca283132-q9-9"
+    ],
+    "esperadas": [
+      "a177bf5bc3c7-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.360074184998666,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q6",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "1a81ca283132-q4-4"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q6",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "1a81ca283132-q4-4"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_manual",
+    "fontes": [
+      "1a81ca283132-q4-4"
+    ],
+    "esperadas": [
+      "1a81ca283132-q4-4"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "1a81ca283132-q4-4",
+      "a177bf5bc3c7-q5-5",
+      "1a81ca283132-q1-1"
+    ],
+    "esperadas": [
+      "1a81ca283132-q4-4"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.536100017998251,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q7",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "97254bb4a1b8-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q7",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "97254bb4a1b8-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q7",
+    "cenario": "rag_manual",
+    "fontes": [
+      "97254bb4a1b8-q1-1"
+    ],
+    "esperadas": [
+      "97254bb4a1b8-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q7",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "97254bb4a1b8-q1-1",
+      "2df6e1818523-q4-3",
+      "7b4da6a8adf7-q10-10"
+    ],
+    "esperadas": [
+      "97254bb4a1b8-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.285269840998808,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q8",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "70d6475b28bf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q8",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "70d6475b28bf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q8",
+    "cenario": "rag_manual",
+    "fontes": [
+      "70d6475b28bf-q1-1"
+    ],
+    "esperadas": [
+      "70d6475b28bf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q8",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "70d6475b28bf-q1-1",
+      "1a81ca283132-q3-3",
+      "1a81ca283132-q8-8",
+      "70d6475b28bf-q6-6"
+    ],
+    "esperadas": [
+      "70d6475b28bf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.220458007999696,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q9",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "d455baef2cdf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q9",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "d455baef2cdf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q9",
+    "cenario": "rag_manual",
+    "fontes": [
+      "d455baef2cdf-q1-1"
+    ],
+    "esperadas": [
+      "d455baef2cdf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q9",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "d455baef2cdf-q1-1",
+      "a177bf5bc3c7-q3-3",
+      "1a81ca283132-q6-6",
+      "7b4da6a8adf7-q9-9"
+    ],
+    "esperadas": [
+      "d455baef2cdf-q1-1"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.526461790999747,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q10",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c04",
+      "c05"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q10",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c04",
+      "c05"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q10",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c04",
+      "c05"
+    ],
+    "esperadas": [
+      "c04",
+      "c05"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": true
+  },
+  {
+    "questao": "Q10",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c05",
+      "ef6d051e4b8c-q9-9",
+      "fb361b787fc6-q7-2"
+    ],
+    "esperadas": [
+      "c04",
+      "c05"
+    ],
+    "excluidas_baixa": [
+      "c04"
+    ],
+    "top_k_acertou": true,
+    "segundos_busca": 3.379712465000921,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q11",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q11",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": false,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q11",
+    "cenario": "rag_manual",
+    "fontes": [
+      "c07",
+      "c08"
+    ],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 0,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q11",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "c08",
+      "f38bb8142136-q2-2",
+      "f38bb8142136-q8-8",
+      "c07"
+    ],
+    "esperadas": [
+      "c07",
+      "c08"
+    ],
+    "excluidas_baixa": [],
+    "top_k_acertou": true,
+    "segundos_busca": 3.38234290499895,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q12",
+    "cenario": "generico",
+    "fontes": [],
+    "esperadas": [],
+    "excluidas_baixa": [],
+    "top_k_acertou": null,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q12",
+    "cenario": "controle_prompt",
+    "fontes": [],
+    "esperadas": [],
+    "excluidas_baixa": [],
+    "top_k_acertou": null,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q12",
+    "cenario": "rag_manual",
+    "fontes": [],
+    "esperadas": [],
+    "excluidas_baixa": [],
+    "top_k_acertou": null,
+    "segundos_busca": 0,
+    "ausencia_contexto": true,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  },
+  {
+    "questao": "Q12",
+    "cenario": "rag_automatica",
+    "fontes": [
+      "23950cced864-q4-4",
+      "c461856d5688-q6-5",
+      "7b4da6a8adf7-q6-6"
+    ],
+    "esperadas": [],
+    "excluidas_baixa": [],
+    "top_k_acertou": null,
+    "segundos_busca": 3.111329494000529,
+    "ausencia_contexto": false,
+    "modo_busca": "hibrido",
+    "status": "somente_recuperacao",
+    "manual_adversarial": false
+  }
+]

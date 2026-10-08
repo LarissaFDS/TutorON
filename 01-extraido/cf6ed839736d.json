@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "estao61ponto]:\ncule eatamentequntas operag\npxocedne GEmutr A\nfori+I→ndo\n[n-1)n-\n[incerto] for）+:→no\n[incerto] (n-k)=En\nfork+-i→ndo\nOperapio\n[incerto] [n²n-+\nendfor\nend for\n[incerto] （9-u）-u（9-0）\nendfor\nend procedure\n[incerto] ]\nonsidere o seguinte slgoritino recursivo\nArgumento ncum inteiro p\nprocedure Astrisco(n）\n[incerto] Hn>Qthen\n[incerto] ASTrO-1)\nfor1-1-ndo\n[incerto] ianprina\nend for\n[incerto] AUSTEN\n[incerto] (1-11）0\nendprocedure\nPara  dao valor de qnossterisoos\nen uma channda de AstERiscon)？ Mestra \nQuestao 8[2pontas]\naittoticamente iso aigativas\nUsando n definiio basira in notacao prove qme\n[incerto] Sejam f（n}e gin)fnngo\n[incerto] x（f（n]g（m））=θ（5（n）+g(n））",
-      "metodo": "rapidocr",
+      "texto": "(UJS + [ufa =\nautom er anus jerimeso sob\n\n20 vp mapa OM NUYS m ope\n\nfsoyuod 7) s orsant)\n\nenpasosd pass\n\nnous\nui x\n20) pus\nE tee O de\nemp <4 J\n\nv ampssad\n\n2 te otroMeTtae ofma o\n\nM304 Oty OF\n\n{emod 1) 2 o8ysanj\n\n~ aanpasoad pus\n403 pus\nsoy pus\n403 pua\n\neven ant\n\nlomod 1] 9 ows",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\cf6ed839736d\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

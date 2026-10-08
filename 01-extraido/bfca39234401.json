@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Instituto de Computacao\nProjetoe Analise de Algoritmos\nBedrvo HenigueEeliciano olaSiloa\n23Prova\nProf.Rian Gabriel Pinheiro\n1°defevereiro de2024\nQuestao 1[2pontos]:\nDado um vetor A com n entradas, com cada entrada um ntimero distinto. Sabe-se que a sequencia de valores\nA[1jA[2]..An] éunimodal:ou seja,existe indice p entre 1 en,osvaloresnas entradas dovetor aunentam atea\nposicao p e,em seguida,reduzem,o resto do caminho,ate que a posicaon.Deseja-se encontrar oponto demaximo\np.Mostre como encontrar p atraves deum algoritmo O(logn)\nQuestao2[2pontos]:\nSuponha que voce tenha k arrays ordenados A1,A2,...,Ak, cada un com n elementos.Voce deseja combina-los em\num uinico array ordenado de tamanho kn.Uma maneira de fazer isso seria usar a operacao de intercalacao(merge).\nSabendoque a intercalacao de doisarrayXeYprecisa de|X|+|Y|passos.\n1.Calcule quantos passos oalgoritmo a seguir leva:Primeiro intercale os arrays A,A2, depois intercale o resultado\ncomAeassim pordiante\n2.Projete um algoritmo melhor para este problema.\nQuestao3[2pontos]:\nDado um conjunto S de strings,encontre de forma eficiente o prefixo comum mais longo.Exemplos:\nEntrada:S={“instituto”,“instigar”,“instavel\"，“instaurar”}，Saida:“inst”\nEntrada:S={“portuguese”,“portugues\",“portugal\"},Saida:“portug”\nQuestao4[1ponto]:\nConsidere o problema do caminho de custo minimo em um grafo G direcionado.Assuma que todos os pesos das arestas\nde G sao positivos e distintos.Seja P um caminho de custominimo entre os vertices s e t de G.Agora suponha que\ntodos os pesos cdas arestas de G sejam trocados pelo quadrado do seu valor,ou seja,por cedando origem a uma\nnova instancia do problema no mesmo grafo,mas com pesos diferentes.Determine se o caminho P ira continuar a ser\num caminho de custo minimo entre s e t nesta nova instancia. Caso negativo,de um contra-exemplo",
-      "metodo": "rapidocr",
+      "texto": "=e\n\nanstituto de Computação\n\nProjeto e Análise de Algoritmos |), = —\n28 Prova Lede Hewuyus Eolicte, ola. See\nProf. Rian Gabriel Pinheiro aa a\n1° de fevereiro de 2024\n\na de valores\n\nSabe-se que a sequé\n\nQuestão 1 [2 pontos]:\nDado um vetor 4 com n entradas, com cada entrada um número distinto.\nindice p entre 1 en, os valores nas entradas do vetor aumentam at\nDeseja-se encontrar o “ponto de maximo’\n\nAli}, A[2}, [n] é unimodal: ou seja, existe\nposição p e, em seguida, reduzem, o resto do caminho, até que a posição n\nP. Mostre como encontrar p através de um algoritmo O(log)\n\nm\n\ncom n elementos. Você deseja combiná-\n\nQuestão 2 [2 pontos):\nAy, Ay,..., Ax, cada\nUma maneira de fazer isso seria usar a operação de intercalação (merge\n\nSuponha que você teuha k arrays ordenados A;\num único array ordenado de tamanho kn\nY precisa de\n\nSabendo que a intercalação de dois array X e\n\n1. Calcule quantos passos o als\ncom Ag € assim por diante.\n\nY| passos.\ndepois intercale o resulta:\n\nritmo a seguir leva: Primeiro intercale os arrays Ay\n\n2, Projete um algoritmo melhor para este problem:\njente o prefixo comum mais longo. Exemplos\n\nQuestão 3 [2 pontos):\nado um conjunto S de strings, encontre de forma ef\n\nEntrada: S = {“instituto”, “instigar”, “instável”, “instaurar\n\nEntrada: 5 = (“portuguese”, “português”\n\nportug\n\nportugal\n\numa que todos os pesos das arestas\nG. Agora suponha que\n\ngrafo G direcionado. As\n\nQuestão 4 [1 ponto]:\nConsidere o problema do caminho de custo mínimo em um g\nde G sao positivos e distintos. Seja P um caminho de customínimo entre os vértices s e t de 0\ntas de G sejam trocados pelo quadrado do seu valor, ou seja, por c.?, dando origem a uma\nDetermine se o caminho P irá continuar a ser\nivo, dê um contra-exemplo\n\ntodos os pesos c, das ares\nnova instância do problema no mesmo grafo, mas com pesos diferentes.\nCaso 1\n\num caminho de custo mínimo entre s e t nesta nova instância",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\bfca39234401\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

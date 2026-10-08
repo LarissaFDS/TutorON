@@ -1,0 +1,61 @@
+{
+  "questao": "Q5",
+  "cenario": "rag_manual",
+  "fontes": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Se somarmos 1 a cada aresta de um grafo conexo, a árvore geradora mínima não continuará sendo a mínima. Isso porque a função custo de uma árvore geradora é a soma dos pesos das arestas que a compõem. Quando somamos 1 a cada aresta, a soma total dos pesos das arestas aumenta em n-1 (onde n é o número de vértices), o que afeta a árvore geradora mínima.\n\nUm contraexemplo numérico seria o seguinte: Suponhamos um grafo com 3 vértices (A, B, C) e as arestas com pesos 1, 2 e 3. A árvore geradora mínima seria A-B-C, com custo total de 6. Se somarmos 1 a cada aresta, os pesos se tornam 2, 3 e 4, e a árvore geradora mínima passaria a ser A-B, com custo total de 5.\n\nPara os caminhos mínimos, a situação é diferente. Como mencionado, diferentes caminhos podem usar quantidades diferentes de arestas. Por exemplo, se tivéssemos as arestas com pesos 0, 1 e 2, o caminho mínimo original seria A-B-C (custo 3) e o novo caminho mínimo seria A-B (custo 2). Portanto, o caminho mínimo pode mudar dependendo dos pesos alterados.\n\nEm resumo, somar 1 a cada aresta altera a árvore geradora mínima, mas não necessariamente muda os caminhos mínimos.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 80.18208745000084,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "d894a9cc0bb6c748b3b4a1f095b92b932908480dcce129438b1394885fdf2480"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

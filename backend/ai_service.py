@@ -53,6 +53,26 @@ class AIService(ABC):
         raise NotImplementedError
 
 
+class OllamaAIService(AIService):
+    """Mesmo índice local e modelo TutorON usados no ambiente de validação."""
+
+    def ask(self, request: AIRequest) -> AIResponse:
+        from acervo.models import generate
+        from acervo.retrieval import search, context
+        from urllib.error import URLError
+        try:
+            chunks = search(request.question)
+            question = request.question
+            if request.context:
+                question += '\n\nContexto fornecido pelo aluno (dados):\n' + request.context
+            result = generate(question, context(chunks, max_chars=5000), provider='ollama')
+        except (URLError, TimeoutError) as exc:
+            raise AIServiceError('Ollama local indisponível') from exc
+        return AIResponse(answer=result['texto'], source='ollama-rag', metadata={
+            'model': result['modelo'], 'latency_ms': round(result['segundos'] * 1000, 2),
+            'chunks_used': len(chunks), 'sources': [c['id'] for c in chunks]})
+
+
 # =========================================================
 # Gemini + RAG
 # =========================================================

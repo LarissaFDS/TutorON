@@ -2,23 +2,8 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L6.pdf | página(s): 1
 
-1. Maria aposta com Jo˜ao que ela pode fazer o seguinte truque. Jo˜ao recitar´a
-n −1 n´umeros diferentes de 1 a n em uma ordem aleat´oria e ela ser´a capaz
-de nomear o ´unico n´umero nesse intervalo que ele ter´a perdido. Claro, ela
-ter´a que realizar a tarefa em sua cabe¸ca, sem fazer anota¸c˜oes. Como ela deve
-fazer esse truque? Em outras palavras, projete um algoritmo que descubra o
-n´umero faltante utilizando O(1) de espa¸co em mem´oria.
+Versão derivada corrigida por agente; original SHA-256: b7f7d5a0e358009fbb2c6d4260305c9692f8b118e3397cb09d2ab18d17592dcc. Não é aprovação do professor.
 
-Solu¸c˜ao:
-
-
-[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]
-lint main(){
-int n,x,sum;
-cin >> n;
-sum=n
-(n+1)/2;
-for(int i=1;i<n;i++)
-cin >> x；
-sum-=x；
-cout<<sum;
+Número faltante entre 1 e n, ouvindo n-1 inteiros distintos válidos.
+Inicialize faltante=n(n+1)/2 e subtraia cada número ouvido. Ao final, resta exatamente o omitido. São O(n) operações e O(1) palavras de memória no modelo RAM; representar os acumuladores exige O(log n) bits. Valide as hipóteses de intervalo e distinção se a entrada não for garantida.
+Em tipos inteiros de tamanho fixo, a multiplicação n(n+1) pode transbordar mesmo quando a soma final cabe: divida um dos fatores pares por 2 antes de multiplicar e use um tipo suficientemente largo. Uma alternativa é XOR de 1..n combinado com XOR dos números recebidos; todos os presentes cancelam, deixando o faltante. XOR evita a soma intermediária, mas ainda exige um tipo capaz de representar n.

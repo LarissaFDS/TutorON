@@ -1,0 +1,350 @@
+{
+  "revisor": "Codex (agente; não é julgamento humano independente)",
+  "protocolo": "Revisão dos textos integrais comparada às fontes corrigidas e propriedades matemáticas; sem votos de alunos.",
+  "categorias": {
+    "adequada": "Atende a pergunta sem erro material identificado.",
+    "parcial": "Há conteúdo válido, com omissão/imprecisão que impede aprovação completa.",
+    "erro_material": "Contém afirmação falsa, cálculo errado ou informação inventada, mesmo que o checklist pontue."
+  },
+  "revisoes": [
+    {
+      "questao": "Q1",
+      "cenario": "generico",
+      "resposta_sha256": "83f1be7d4e8cdda6ffc064ba28b85e0c76d92a52df0ef89526ac41ff04f8943f",
+      "parecer": "erro_material",
+      "justificativa": "Confunde máximo com mínimo e busca binária."
+    },
+    {
+      "questao": "Q1",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "cb8d19772a6454b015f890cadbbce01b298a1fb7d3a417660694bf03892f6a4f",
+      "parecer": "erro_material",
+      "justificativa": "Confunde máximo com mínimo e a estrutura recursiva."
+    },
+    {
+      "questao": "Q1",
+      "cenario": "rag_manual",
+      "resposta_sha256": "62880eb18be4a3c2e5575d9ea87f8aec702319e6a35515b66c4380870d2ef18b",
+      "parecer": "erro_material",
+      "justificativa": "Identifica máximo, mas usa comparação entre posições centrais em vez dos máximos recursivos."
+    },
+    {
+      "questao": "Q1",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "3db09b2890e7335a04800f921ac2db72406c4b0ed036e6cda4e19d234c3bbd08",
+      "parecer": "erro_material",
+      "justificativa": "Explica máximo, mas afirma retornar a metade direita quando a esquerda é maior ou igual, invertendo a comparação."
+    },
+    {
+      "questao": "Q2",
+      "cenario": "generico",
+      "resposta_sha256": "1246754e4821937a82341eceb834fc8075940b6ccc5dcbd23b20f1eebb26de08",
+      "parecer": "erro_material",
+      "justificativa": "Afirma n ou 2n−1 e dá 7 para n=3; correto é 11."
+    },
+    {
+      "questao": "Q2",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "dda3e9939bba62036097bfe7e152530062f8d7b9e50cd0fc5e36e771e6621a39",
+      "parecer": "erro_material",
+      "justificativa": "Afirma 2n em vez de A(n)=2A(n−1)+n."
+    },
+    {
+      "questao": "Q2",
+      "cenario": "rag_manual",
+      "resposta_sha256": "e0763b54c6fb12a7d4a2502f9b557c58ec4284c09c5ebfe98cc9f121d328248c",
+      "parecer": "erro_material",
+      "justificativa": "Recorrência/base corretas, mas substituição perde fator 2 e conclui Theta(n²); correto é exponencial."
+    },
+    {
+      "questao": "Q2",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "6971b0054a76d7ad47ae46ba5b6703c254ccec9d51422a6f5f4e605d1cc80ba8",
+      "parecer": "parcial",
+      "justificativa": "Recorrência/base/fórmula corretas; a explicação não distingue n impressões locais do total e omite uma chamada ao justificar o fator 2."
+    },
+    {
+      "questao": "Q3",
+      "cenario": "generico",
+      "resposta_sha256": "a667d65ee3fab272364f35c7450c3087216bac19f018edb1b427ad9c5c729154",
+      "parecer": "erro_material",
+      "justificativa": "Diz que testes podem ser muito mais que n; omite o comprimento binário."
+    },
+    {
+      "questao": "Q3",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "c8341f803baa59660911b7119175b1e60ac0fcc9868ac02fe33781e9271c7405",
+      "parecer": "erro_material",
+      "justificativa": "Trata linearidade como não polinomial e diz haver mais que n divisores."
+    },
+    {
+      "questao": "Q3",
+      "cenario": "rag_manual",
+      "resposta_sha256": "9da5d097c417d1c79356e453db87cb038da806305b8d426c0094d333334a905a",
+      "parecer": "parcial",
+      "justificativa": "Explica corretamente crescimento exponencial em bits, mas a frase sobre divisão/muitos testes é imprecisa."
+    },
+    {
+      "questao": "Q3",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "e8c5f53b5fd527d91a8f785f452abf6d51748636d7d23986dd9e5b8126859bdc",
+      "parecer": "erro_material",
+      "justificativa": "Relação exponencial dos testes em bits correta, mas afirma que a representação binária de n é exponencialmente maior; ela tem Theta(log n) bits."
+    },
+    {
+      "questao": "Q4",
+      "cenario": "generico",
+      "resposta_sha256": "ee19da3d3f0e4713fc3fd7faddd02e3f1d97a765db4a3420c4da2df830eb1fce",
+      "parecer": "adequada",
+      "justificativa": "Definições introdutórias corretas; reduzibilidade aparece de forma informal como dificuldade relativa."
+    },
+    {
+      "questao": "Q4",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "1a53e50ffd8fa374520fd298fcfe8e6830c56d5ef226ca746de05aeb9c444129",
+      "parecer": "erro_material",
+      "justificativa": "Inventa fonte de dados privada, verificação sem certificado e implicações falsas de NP-completude."
+    },
+    {
+      "questao": "Q4",
+      "cenario": "rag_manual",
+      "resposta_sha256": "b7fb3bf132c6edd9d88dde47f1019c7f48894898637fb68cfcf02726c9409bb8",
+      "parecer": "erro_material",
+      "justificativa": "Definições P/NP melhores, mas inverte a direção de redução ao explicar NP-completude."
+    },
+    {
+      "questao": "Q4",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "51d30b72438da8d38c391c5d4f4eacc21dae7c681bac3f2252cbd6fe3e1dd4d1",
+      "parecer": "adequada",
+      "justificativa": "Definições P/NP/NP-completo e direção many-one corretas; não repete a falsa implicação de que todo NP é NP-completo."
+    },
+    {
+      "questao": "Q5",
+      "cenario": "generico",
+      "resposta_sha256": "c2f575559ccc7c3717b1b5ab9f6b0adfecf353b7a5fdefcbcc1ac3f8584bebb2",
+      "parecer": "erro_material",
+      "justificativa": "Diz que AGM pode deixar de ser mínima; exemplo não é árvore geradora válida."
+    },
+    {
+      "questao": "Q5",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "64f82b105808b0b872fd3551996328d0ce90c397d4fcc0fcc2bef8fbf070b5bc",
+      "parecer": "erro_material",
+      "justificativa": "Afirma que AGM muda e usa arestas/custos inconsistentes."
+    },
+    {
+      "questao": "Q5",
+      "cenario": "rag_manual",
+      "resposta_sha256": "c72cd8fcf4bb8a49fd543d2260fbb14e9592b3d9f1d2f5d2f08a40e4baf21535",
+      "parecer": "erro_material",
+      "justificativa": "Reconhece aumento n−1 e mesmo assim conclui que AGM deixa de ser mínima; árvores/exemplos inválidos."
+    },
+    {
+      "questao": "Q5",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "88b618f1a2f6812093a225962810b88031f1747c203152acbea46f1b67c56bd7",
+      "parecer": "erro_material",
+      "justificativa": "Conclusão qualitativa correta, mas contraexemplo inventa aresta e árvore geradora s−t e erra custos."
+    },
+    {
+      "questao": "Q6",
+      "cenario": "generico",
+      "resposta_sha256": "d7ee22a71c08e0418ae002edb595b73de4d3ada3226e7696b0dc70d709c21afe",
+      "parecer": "erro_material",
+      "justificativa": "Ignora contiguidade, erra soma e convenção vazia; correto é 55 e 0."
+    },
+    {
+      "questao": "Q6",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "4a6416c1109b72023408adc60ef859ab80850b67db6d63afa1e2d14efdde18e8",
+      "parecer": "erro_material",
+      "justificativa": "Recorrência correta, mas altera +10 para −10 e devolve 45; trace negativo também errado."
+    },
+    {
+      "questao": "Q6",
+      "cenario": "rag_manual",
+      "resposta_sha256": "828fca1020d0fd00b1dc5416dd5e1667dbea4de519f87721eecb1e1b0decec23",
+      "parecer": "erro_material",
+      "justificativa": "Recorrência correta, valores calculados/resultados errados (50 e −5)."
+    },
+    {
+      "questao": "Q6",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "6c4ed94ad37703dcc42ceaf5ff0fb2bed284dfb28c05db245b59125d4cf593f4",
+      "parecer": "erro_material",
+      "justificativa": "Recorrências corretas, mas pula +10, permite fim/melhor negativos, erra o máximo global e devolve 45 em vez de 55."
+    },
+    {
+      "questao": "Q7",
+      "cenario": "generico",
+      "resposta_sha256": "f93589ba438154947c1ac9a75669d242b79fc76b6314ff42a650e305de000459",
+      "parecer": "erro_material",
+      "justificativa": "Soma correta, mas tempo O(1) ignora leitura dos n−1 números; arredondamento não soluciona overflow exato."
+    },
+    {
+      "questao": "Q7",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "4923e27d570e4c75f89ff33aa9c390070e73716a2c850f89e17220d6dbec2299",
+      "parecer": "erro_material",
+      "justificativa": "Tempo O(1) ignora leitura; tipo complexo não é solução geral de inteiros exatos."
+    },
+    {
+      "questao": "Q7",
+      "cenario": "rag_manual",
+      "resposta_sha256": "726a9d50ea925bf8e8d6925b090eed626ceba715b30e6109be866b41c19068eb",
+      "parecer": "erro_material",
+      "justificativa": "Tempo/overflow melhorados, mas define n como quantidade ouvida, deslocando a fórmula."
+    },
+    {
+      "questao": "Q7",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "46d56507313501ad659052b1430d2427acc8f127aa89589c478e3259704079ea",
+      "parecer": "erro_material",
+      "justificativa": "Streaming correto, mas ponto flutuante não garante inteiro exato; sua alegação de espaço O(log n) para esse tipo é incorreta e falta tempo O(n)."
+    },
+    {
+      "questao": "Q8",
+      "cenario": "generico",
+      "resposta_sha256": "b22d40fa165cd04adc750a57fc6f5b6ede1b1f807c90052402d7b92e8e0ce952",
+      "parecer": "parcial",
+      "justificativa": "Descreve somas 15, diagonais e poda por soma excedente, mas explica repetição local em vez de explicitar conjunto global de usados."
+    },
+    {
+      "questao": "Q8",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "23316f024948dfa8974ff50a35d0b1e3ec1db21ecda12cbb425afe9c893b6103",
+      "parecer": "erro_material",
+      "justificativa": "Poda quando uma soma vira valor já usado não é uma condição válida."
+    },
+    {
+      "questao": "Q8",
+      "cenario": "rag_manual",
+      "resposta_sha256": "03b3880a465984610aa2f8225c5cff97a42de5f6d9377845677748827a929100",
+      "parecer": "erro_material",
+      "justificativa": "Descarta linha/coluna/diagonal simplesmente por estar completa, mesmo com soma válida."
+    },
+    {
+      "questao": "Q8",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "ffafea6588195dd13cada0f9e313f1845dc16c5b0a3f4bc436c163151013f66f",
+      "parecer": "erro_material",
+      "justificativa": "Descarta linhas completas válidas e acrescenta topologia/Subset Sum sem justificar correção."
+    },
+    {
+      "questao": "Q9",
+      "cenario": "generico",
+      "resposta_sha256": "26d4d50b0588ff1001ab62d92d074bd1993dd66f92ec22cee059bfb049ff1da3",
+      "parecer": "erro_material",
+      "justificativa": "Confunde inversões de prefixo com inversões de pares e propõe Merge Sort."
+    },
+    {
+      "questao": "Q9",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "69ac603ee1b0603e9404b8d25a6dfae1cb7cd6dd10cf408ea8d73e72ead98b58",
+      "parecer": "erro_material",
+      "justificativa": "Exemplo/custo de inversões incorretos; [3,2,1] ordena com um flip de comprimento 3."
+    },
+    {
+      "questao": "Q9",
+      "cenario": "rag_manual",
+      "resposta_sha256": "4f13d269c20217c05bff01e94746faf2412e9e2762e2bdb66271719317f624a3",
+      "parecer": "parcial",
+      "justificativa": "Limites de flips e movimentação corretos, mas a descrição operacional não identifica claramente as duas inversões."
+    },
+    {
+      "questao": "Q9",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "78f9a810134490ca870cb1dd81aaca7043e89ba16ba4509b503fc2210fdf7a7d",
+      "parecer": "erro_material",
+      "justificativa": "Descrição operacional incorreta e limite falso de até n−1 flips; confunde contagem linear de flips com custo quadrático de movimentação."
+    },
+    {
+      "questao": "Q10",
+      "cenario": "generico",
+      "resposta_sha256": "7b673ad4ebe2c7ded9978e5085b0aaecf51e4bd7f06cd0aa419406c14a17fdc7",
+      "parecer": "erro_material",
+      "justificativa": "Contagem incoerente 12; correto é 11."
+    },
+    {
+      "questao": "Q10",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "9dd06e8c2d44ea3980f6f8f5f3e54c2a3e1485da6d5216f3967d058f2416581d",
+      "parecer": "erro_material",
+      "justificativa": "Conta chamadas diretas, não asteriscos recursivos."
+    },
+    {
+      "questao": "Q10",
+      "cenario": "rag_manual",
+      "resposta_sha256": "b641776e6a5a965d4c9daaf6cdc746aed08006921cbbfee3f3109b07c708bb78",
+      "parecer": "erro_material",
+      "justificativa": "Afirma 6 e avalia 2^4−3−2 como 6 em vez de 11."
+    },
+    {
+      "questao": "Q10",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "441684da1ba445a6cf556c65be71926573829708fd2fda9fc8a47a04fd034c83",
+      "parecer": "erro_material",
+      "justificativa": "Calcula fórmula como 11 e logo depois conclui 7 com contagem de chamadas/asteriscos falsa."
+    },
+    {
+      "questao": "Q11",
+      "cenario": "generico",
+      "resposta_sha256": "56781358bfb6ce378aefdd9242e0a91d0e1ba30ed4444488715f9f81605fff47",
+      "parecer": "erro_material",
+      "justificativa": "Inverte relação entre valor numérico e bits e omite justificativa exponencial adequada."
+    },
+    {
+      "questao": "Q11",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "b7a295dac35490b0dd7389569672de3d9772d1726371811c8e56f8b6183a02f1",
+      "parecer": "erro_material",
+      "justificativa": "Diz que medir bits não muda análise; linear no valor não é polinomial em bits."
+    },
+    {
+      "questao": "Q11",
+      "cenario": "rag_manual",
+      "resposta_sha256": "22aaaa61ff77128b59a8e98ccf4bdddc3799192338e79a45ae4260e86545f07f",
+      "parecer": "erro_material",
+      "justificativa": "Afirma que o problema COMPOSTO fica fora de P a partir de um algoritmo lento; conclusão inválida."
+    },
+    {
+      "questao": "Q11",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "7efdc464c4dbc109a66926f2b922438b5c97f4a808d66caf060580eaebc80997",
+      "parecer": "erro_material",
+      "justificativa": "Reconhece número de testes exponencial em bits, mas nega o efeito da representação na análise e não responde por que não é polinomial no comprimento da entrada."
+    },
+    {
+      "questao": "Q12",
+      "cenario": "generico",
+      "resposta_sha256": "401834617c0318aa27618a810c142e12cb95476d0aab2e64811c5d71695c1458",
+      "parecer": "erro_material",
+      "justificativa": "Abstém de data/sala, mas inventa expansão de PAA e Fundação Vanzolini."
+    },
+    {
+      "questao": "Q12",
+      "cenario": "controle_prompt",
+      "resposta_sha256": "37e53bbddfaf5768d20e83381b059373c21104488613ce76f9f67468d3187cb1",
+      "parecer": "erro_material",
+      "justificativa": "Abstém de data/sala, mas inventa organização FGV e sigilo como regra."
+    },
+    {
+      "questao": "Q12",
+      "cenario": "rag_manual",
+      "resposta_sha256": "37e53bbddfaf5768d20e83381b059373c21104488613ce76f9f67468d3187cb1",
+      "parecer": "erro_material",
+      "justificativa": "Abstém, mas inventa FGV e motivo de sigilo; contexto manual vazio."
+    },
+    {
+      "questao": "Q12",
+      "cenario": "rag_automatica",
+      "resposta_sha256": "1e5a4ea72a541f4732c5d476b73771095447570143e407235102d3ac1fd960ca",
+      "parecer": "adequada",
+      "justificativa": "Abstém sem inventar data, sala ou organização responsável."
+    }
+  ],
+  "limite": "Rodada pequena, uma semente, parecer por agente; não prova superioridade pedagógica.",
+  "curadoria_bloco_count": 53,
+  "politica_rag": "Somente confiabilidade média/alta; 53 blocos, todos com correção por agente nesta rodada."
+}

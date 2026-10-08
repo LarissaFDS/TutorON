@@ -2,23 +2,63 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\gabaritoprova.webp | página(s): 1
 
-[incerto] eemertoclum
-[incerto] uetor
-[incerto] demcotondetamanhaksn
-[incerto] Putouncludtieg
-[incerto] PanaumaetondedamanhoK+l
-algoutmoduaide-Rnduabpastis
-[incerto] A+（-）/2]Amo（fmn）/）n],qup
-[incerto] menoresdloquKAotimportcnto,gundoqhupolebe demoluceab
-[incerto] damadabauiaaxpumunataeoeamenteginha8aleutm
-[incerto] netonavamaudntedoualooetoncdeemab
-[incerto] Albim,bta poocac@
-20
-[incerto] QusuL3
-[incerto] 3.squnoa demucome,T（n）O（f（n)),endoT（n)f（n）fun
-[incerto] domeenexismonticnopenenoao
-[incerto] aque
-[incerto] O（f（n）)={T（n)<cf（n）1n≥no
-quandop/qucllquen
-[incerto] Poatanto,Um qunaT(n)portenc aoonuntoO(f(n)
-(ouiguae)
+“todo o pork Sire
+
+mma (A opondo quado 8
+
+a Cab yor
+; op
+
+! n ag amie cou comer SE
+ie Ps “ou mo CONAMA o amo opantas TE
+Da we ope CI Fe iat
+bra Qt TN ç quem)
+
+a Pá: sphagd yar‘ weay
+
+q 7 0 MT BPME RO cma rar “O TIP row O \ al
+
+subndgn 9" Nf BL peça ODAS X O coREMMBAe POP
+‘apdmpar we cp © opunbey topped | ey + ib op cavar
+vaquçod “ços are ‘fu o TC om ny sra * [ee aan “TTY
+warn “op Ur nego nana @ pao X vu or x
+conde qorp ui TOPA ari op sp <td amp qu
+
+_ careers ea paço apro WED MY op gs ep quis
+
+wae ap 4 figo q À wr
+> Quy Srs GOD TP WF wo yO}
+expaod amp US © - mY ip i Ni ~
+
+x
+
+eqhuoxcore” AP
+
+oe wh [A weranh x OD Sdumonouy Spa arm
+agua YP Cai é wm 4
+
+Tr
+
+M
+NPY Bplay w? repo um wy
+PR ad NANA XK uy Q acorpir Te get
+mom 9 E
+page 4
+i nT TS opção “E WANT OL ror and Ê
+poi SN o Erabgo o +
+d
+ár oowr oor ae wo mu W OPS WN SENNA 15 ma aan
+ur = = q
+
+Lays
+au O MUDO WN X swyney E s
+vo xp pop ae O A PNQ ums
+xp Oye ou yor omy ABATED prq ox W aad
+Raio agro © PSA x dayne bp q
+
+pa o
+2 aman)
+
+asp WA uz OM
+
+Vea connçoy

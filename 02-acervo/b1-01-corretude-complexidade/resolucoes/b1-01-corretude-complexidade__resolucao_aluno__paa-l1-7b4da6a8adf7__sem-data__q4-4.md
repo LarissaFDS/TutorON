@@ -35,16 +35,17 @@ vermelho, assim como ilustra a figura `a direita.
 
 
 [OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-V2
-V2
-V6
+v2
+
+“4
+
 V3
-V6
-V3
-V5
+
+>
+
 V4
+
 V5
-V4
 
 
 Prosseguindo com a nossa prova:
@@ -56,20 +57,7 @@ cor.
 
 
 [OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]
-V2
-V2
-V2
-V6
-V3
-V6
-V3
-V
-V3
-V5
-V4
-V5
-V4
-V5
+[ilegivel]
 
 
 •
@@ -79,11 +67,7 @@ existˆencia de um triˆangulo monocrom´atico por´em, dessa vez, azul.
 
 
 [OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]
-V2
-V6
-V3
-V5
-V4
+[ilegivel]
 
 
 ■

@@ -2,33 +2,6 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\provaoaa.pdf | página(s): 1
 
-Questao 1 [2 pontos]:
-as listas[1, 2, 3, 5, 6, 7, 9] e [0, 3, 5, 7], a saida deve ser [1, 2, 6, 9]. Prove a corretude do seu algoritmo.
-Questap 2 [2 pontos]:
-Considereoseguintealgoritmo:
-1:procedure ALGORITMoX（vetor A[1,..,n]，,inicio,fm)
-2:
-ifnicio=fim then
-3:
-return A[inicio]
-4:
-endif
-5:
-ifinicio>fimthen
-6:
-return0
-7:
-endif
-8:
-mqio←inicio+（fm-incio）/2
-[incerto] :6
-aX（A,inicio,meio)
-10:
-bx（A,meio+1,fim)
-11:
-returna+b
-12: end procedure
-Expljque oqueelefazeprove sua corretude.
-Questao3[2pontos]:
-Seja f(n) uma funcao dos inteiros nos reais. Justifique:
-1. Qujal a definicao formal de O(f(n))?
+Questão 1 [2 pontos): ,
+Projete jim algoritmo para determinar a subtração de duas listas ordenadas de números inteiros. Por exemplo, para
+as listas [1, 2, 3, 5, 6, 7, 9] e [0, 3, 5, 7], a saída deve ser [1, 2, 6, 9). Prove a corretude do seu algoritmo.

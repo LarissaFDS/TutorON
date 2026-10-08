@@ -6,21 +6,19 @@ Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf | página(s): 7, 8, 9
 
 
 [OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]
-1: procedure ALGORITMO BUBBLESORT(vetor A[1,...,n])
-2:
-fori←n-1→1do
-3:
-for j ← 0 → i - 1 do
-4:
-if A[j] < A[j +1] then
-5:
-troca(A[j],A[j+1])]
-6:
-endif
-7:
-end for
-8:
-end for
+procedure ALGORITMO BUBBLESORT(vetor A[1,...,n])
+
+1:
+
+2 for i—n-1—1do
+
+3 forj—-0->i-ldo
+
+4: if A[j] < A[j +1] then
+5: troca(ALj], Alj + 1D]
+6: end if
+7 end for
+8 end for
 9: end procedure
 
 

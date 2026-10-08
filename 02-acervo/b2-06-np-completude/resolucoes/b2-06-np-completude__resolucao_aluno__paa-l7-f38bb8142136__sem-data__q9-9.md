@@ -2,64 +2,9 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L7.pdf | página(s): 10, 11
 
-9.
-ISOMORFISMO DE SUBGRAFO: dados como entrada dois grafos n˜ao-
-direcionados G e H, determine se G ´e um subgrafo de H. Prove que o problema
-´e NP-completo.
+Versão derivada corrigida por agente; original SHA-256: 4b8b85c6ebdf35871542cfcf74ec8b7c1ffb41ef24094f6c1a76a0a18df6449c. Não é aprovação do professor.
 
-Solu¸c˜ao: Para mostrar que o problema de isomorfismo de grafo ´e NP-Completo ´e
-necess´ario provar 2 proposi¸c˜oes:
-
-• O problema de Isomorfismo de Subgrafo ´e NP
-
-• O problema de Isomorfismo de Subgrafo ´e NP-dif´ıcil
-
-Sendo assim, temos os seguintes passos:
-
-1) O problema de Isomorfismo de Subgrafo ´e NP e para isto ele deve ser capaz de
-verificar para o sim um certificado em tempo polinomial.
-
-Prova:
-
-Certificado: Seja G’ o subgrafo de G e K o mapeamento entre v´ertices de H e G’.
-Verifica¸c˜ao: Basta checar se o mapeamento K ´e uma bije¸c˜ao e se para cada aresta
-(u,v) de H existe uma aresta (f(u), f(v)) contida em G’. Al´em disso, ´e poss´ıvel notar
-que isto pode ser verificado em tempo polinomial.
-
-Page xPortanto, o problema do Isomorfismo de Grafo possui verificabilidade em tempo
-polinomial e assim pertence `a classe dos problemas NP.
-
-■
-2) O problema de Isomorfismo de Grafo ´e NP-Dif´ıcil se for poss´ıvel efetuar a redu¸c˜ao
-em tempo polioOial de algum problema NP-Dif´ıcil para uma instˆancia do problema
-de Isomorfismo de Grafo. Assim, o problema escolhido ´e o problema de decis˜ao da
-Clique. Para provar que o problema da Clique pode ser reduzido polinomialmente
-para uma instˆancia do Isomorfismo de Subgrafo, podemos fazer da seguinte forma:
-Prova:
-
-Seja a entrada para o Problema da Decis˜ao Clique = (G’, L). Sabe-se que a sa´ıda
-´e verdadeira se o grafo G’ conter uma Clique de tamanho L, j´a que uma clique de
-tamanho L ´e um subgrafo de G’. Al´em disso, seja H um grafo completo de L v´ertices
-e seja G ⊆G′, onde H, G s˜ao entradas para o Problema de Isomorfismo do Subgrafo
-e seja tamb´em N o n´umero de v´ertices em G’. Sendo assim, ´e poss´ıvel observar que
-L ≤N. Pois, se L > N, ent˜ao uma Clique de tamanho L n˜ao pode ser um subgrafo
-de G’.
-Assim, o tempo necess´ario para criar H ´e O(L2) = O(N 2) (L ≤N). J´a que o n´umero
-de arestas num grafo completo de tamanho L = LC2 = L·L−1
-
-2
-. Desse modo, G’ tem
-uma Clique de tamanho L, se e somente se H for um subgrafo de G (uma vez que H
-em si ´e um subgrafo de G e cada grafo ´e isom´orfico a si mesmo), logo o resultado do
-problema do Isomorfismo de Subgrafo ´e verdadeiro.
-Assim, H ´e isomorfo do subgrafo G. Portanto, se o Problema da Decis˜ao Clique for
-verdadeiro, o Problema do Isomorfismo de Subgrafo tamb´em ´e verdadeiro e vice-versa.
-Logo, o Problema da Decis˜ao Clique pode ser reduzido ao Problema do Isomorfismo
-do Subgr´afico em tempo polinomial para uma determinada instˆancia
-
-■
-
-Assim, como o problema do Isomorfismo de Grafo ´e NP e NP-Dif´ıcil, conclui-se que
-o problema do Isomorfismo de Grafo ´e NP-Completo.
-
-■
+ISOMORFISMO DE SUBGRAFO: dados o padrão G e o grafo alvo H, existe um mapeamento injetivo f:V(G)->V(H) que preserva todas as arestas do padrão?
+O certificado é esse mapeamento. Verificar injetividade e que cada aresta {u,v} de G mapeia para uma aresta {f(u),f(v)} de H leva tempo polinomial. Para subgrafo não induzido, não é necessário preservar não arestas.
+Redução de CLIQUE: para instância (H,k), construa o padrão G=K_k e mantenha H como alvo. Há uma clique de tamanho k em H se e somente se K_k é isomorfo a um subgrafo de H. Se k>|V(H)|, a resposta é imediatamente NÃO e pode ser enviada a uma instância NÃO fixa; a construção restante é polinomial.
+Logo ISOMORFISMO DE SUBGRAFO é NP-completo. A resolução trocava padrão e alvo e concluía incorretamente NP-completude de ISOMORFISMO DE GRAFOS, que é outro problema; essa conclusão não foi preservada.

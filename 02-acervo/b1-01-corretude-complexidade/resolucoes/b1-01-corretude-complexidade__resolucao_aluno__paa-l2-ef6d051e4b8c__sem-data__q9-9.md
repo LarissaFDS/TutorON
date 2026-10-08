@@ -7,22 +7,21 @@ positivo.
 
 
 [OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]
-1:procedure AsTERISCO(n)
-2:
-ifn>0then
-3:
-ASTERISCO（n-1)
-4:
-fori-1→ndo
-5:
-imprima
-6:
-endfor
-7:
-ASTERISCO(n-1)
-8:
-endif
-9:endprocedure
+1: procedure ASTERISCO(n)
+2: ifn>Othen
+
+3: ASTERISCO(n — 1)
+4: for i—1— ndo
+5: imprima “*”
+
+6: end for
+
+7: ASTERISCO(n— 1)
+8: endif
+
+9:
+
+: end procedure
 
 
 Para um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada

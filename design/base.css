@@ -1,0 +1,112 @@
+/* TutorON — base: reset, página, foco e texto de leitura (.prose). */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-ui);
+  font-size: var(--text-ui);
+  line-height: var(--leading-ui);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4, p, ul, ol, pre, figure { margin: 0; }
+
+a { color: var(--color-focus); text-underline-offset: 2px; }
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+[hidden] { display: none !important; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
+
+/* Container da página */
+.page {
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.caption { font-size: var(--text-caption); color: var(--color-ink-muted); }
+
+/* ---------------------------------------------------------------- .prose
+   Texto de resposta ou enunciado. Serifa, medida confortável, títulos
+   internos da resposta rebaixados (a resposta não compete com a página). */
+.prose {
+  font-family: var(--font-reading);
+  font-size: var(--text-reading);
+  line-height: var(--leading-reading);
+  overflow-wrap: anywhere;
+  max-width: var(--measure);
+}
+.prose > * + * { margin-top: var(--space-4); }
+.prose.is-plain { white-space: pre-wrap; } /* fallback se o renderizador falhar */
+.prose h3, .prose h4 {
+  font-family: var(--font-ui);
+  font-size: var(--text-ui);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-ui);
+  margin-top: var(--space-5);
+}
+.prose h3 + *, .prose h4 + * { margin-top: var(--space-2); }
+.prose ul, .prose ol { padding-left: 1.4em; }
+.prose li + li { margin-top: var(--space-2); }
+.prose li > ul, .prose li > ol { margin-top: var(--space-2); }
+.prose strong { font-weight: var(--weight-bold); }
+.prose hr { border: 0; border-top: var(--border); }
+.prose blockquote {
+  margin: 0; padding-left: var(--space-4);
+  border-left: var(--border-strong);
+  color: var(--color-ink-muted);
+}
+
+code, pre, .pseudocode { font-family: var(--font-code); }
+.prose code {
+  font-size: var(--code-scale);
+  background: var(--color-surface-sunken);
+  padding: 0.05em 0.25em;
+  border-radius: 3px;
+}
+.prose pre, .pseudocode {
+  font-size: calc(var(--text-reading) * 0.82);
+  line-height: 1.55;
+  white-space: pre;
+  overflow-x: auto;
+  background: var(--color-surface-sunken);
+  border-left: var(--rule-accent);
+  padding: var(--space-3) var(--space-4);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  max-width: 100%;
+}
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+
+/* Matemática: renderização leve e local (sem KaTeX), em itálico matemático. */
+.math { font-family: var(--font-reading); font-style: italic; white-space: nowrap; }
+.math-block {
+  display: block;
+  text-align: center;
+  font-family: var(--font-reading);
+  font-style: italic;
+  overflow-x: auto;
+  padding: var(--space-2) 0;
+}
+.math sup, .math sub, .math-block sup, .math-block sub { font-size: 0.72em; }

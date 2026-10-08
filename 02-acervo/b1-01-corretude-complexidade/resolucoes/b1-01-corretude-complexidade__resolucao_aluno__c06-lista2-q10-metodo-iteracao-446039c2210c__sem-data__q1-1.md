@@ -2,19 +2,7 @@
 
 Fonte: materiais\c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição
 
-10. (a) Mostre que a solução de T(n) = T(n − 1) + n; T(1) = 1 é O(n²).
+Versão derivada corrigida por agente; original SHA-256: f0ab5240d45bb64978c5a1f95d54db4eddfe40ba626d3375c27549c2626eeaab. Não é aprovação do professor.
 
-Solução: Desenvolvendo a recorrência, temos que:
-  T(n)     = T(n − 1) + n        (1)
-  T(n − 1) = T(n − 2) + n − 1    (2)
-  T(n − 2) = T(n − 3) + n − 2    (3)
-De (1) e (2): T(n) = T(n − 2) + (n − 1) + n
-De (3) e (4): T(n) = T(n − 3) + (n − 2) + (n − 1) + n
-  ...
-  T(n) = T(n − k) + (n − k + 1) + (n − k + 2) + ... + (n − 1) + n
-Neste caso, o algoritmo encerra quando n − k = 1 ⇒ k = n − 1
-  T(n) = T(1) + 2 + 3 + ... + (n − 2) + (n − 1) + n
-  T(n) = 1 + 2 + 3 + ... + (n − 2) + (n − 1) + n  ⇒  T(n) = n·(n + 1)/2
-Para mostrar que T(n) é O(n²) basta definir f(n) = n·(n+1)/2 e g(n) = n², sendo assim basta
-encontrar n0 e c, tais que f(n) < c·g(n), ∀n ≥ n0; neste sentido, basta tomar n0 = 1 e c = 3,
-por exemplo. Neste caso, vemos que T(n) = O(n²).
+Método da iteração: T(n)=T(n-1)+n, T(1)=1.
+Iterando k vezes, T(n)=T(n-k)+sum(j,n-k+1,n). Para k=n-1 resulta T(n)=1+2+...+n=n(n+1)/2. Assim T(n)=Theta(n^2), e em particular O(n^2). Para n>=1, T(n)<=n^2. Não há necessidade de uma quarta equação não apresentada na transcrição.

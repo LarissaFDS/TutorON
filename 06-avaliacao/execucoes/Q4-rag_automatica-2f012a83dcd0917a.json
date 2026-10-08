@@ -1,0 +1,87 @@
+{
+  "questao": "Q4",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c09",
+    "f38bb8142136-q3-3",
+    "c10-q1-1",
+    "f38bb8142136-q8-8"
+  ],
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 4.340213116000086,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "As classes P, NP e NP-completo são fundamentais na teoria da complexidade computacional.\n\nP é a classe dos problemas de decisão resolvidos por algoritmos determinísticos em tempo polinomial. Ou seja, se um problema pertence a P, existe um algoritmo que pode resolver qualquer entrada de tamanho n em tempo que é um polinômio de n.\n\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial que podem ser verificados em tempo polinomial. Esses problemas podem ser resolvidos por máquinas não determinísticas em tempo polinomial. Não se sabe se P=NP, mas P está contida em NP.\n\nUm problema B é NP-completo se pertence a NP e todo problema de NP se reduz polinomialmente a B. Em outras palavras, se B é NP-completo, então qualquer problema de NP também é NP-completo. Reduzir um problema de NP a um NP-completo é uma tarefa difícil e é usada para mostrar que um problema é NP-completo.\n\nPor exemplo, o problema SAT (Entendimento de Satisfatibilidade) é NP-completo. Se P=NP, todos os problemas de NP seriam resolvidos em tempo polinomial. Se P diferente de NP, não existe um algoritmo polinomial para resolver todos os problemas de NP, incluindo o SAT.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 115.6728508999986,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "263934cc95c563476f341da31d64313ce7d6a3ffcf2cd1cbab37b4d2adb96b15"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": false
+      }
+    ],
+    "acertos": 5,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc"
+}

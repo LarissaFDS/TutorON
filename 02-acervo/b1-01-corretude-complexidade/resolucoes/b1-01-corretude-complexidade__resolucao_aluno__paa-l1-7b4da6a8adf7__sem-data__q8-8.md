@@ -7,15 +7,7 @@ fi+2 = fi+1 + fi, ∀i ≥0. Prove que para todo n ≥1 temos:
 
 
 [OCR parcial do recorte p13-fig1.png; conferir símbolos na imagem]
-n
-1
-1
-fn+1
-fn
-1
-0
-fn
-fn-1
+[ilegivel]
 
 
 em que o lado esquerdo representa n-´esima potˆencia de uma matriz 2 x 2.

@@ -2,45 +2,8 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L6.pdf | página(s): 4, 5
 
-6.
-Mostre que o problema do troco (Exerc´ıcio ??) pode ser formulado como
-um programa linear inteiro. Minimize o n´umero de moedas.
+Versão derivada corrigida por agente; original SHA-256: c718d2863d7d0daa7f4a07a25dc9b6c38f77feecc660724a14d9c79be7bc40b7. Não é aprovação do professor.
 
-Solu¸c˜ao: O problema do troco no qual dado um estoque ilimitado de moedas de
-valores x1, x2, ..., xn, queremos dar um troco de v usando no m´aximo k moedas. Logo,
-o problema pode ser modelado como um programa linear inteiro e isso pode ser visto
-a seguir:
-
-Page ivConsiderando um sistema finito m1 < m2 < ... < mn de inteiros positivos que
-representem n tipos de moedas e um inteiro positivo, desejamos determinar os inteiros
-positivos xi | 1 ≤i ≤t e, que minimizam a seguinte equa¸c˜ao:
-
-n
-X
-
-xi
-(1)
-
-i=1
-
-Sujeita `as as seguintes restri¸c˜oes:
-
-n
-X
-
-n
-X
-
-x =
-
-xici
-
-xi ≤k
-(2)
-
-i=1
-
-i=1
-
-Tendo em vista que uma representa¸c˜ao ´e a sequˆencia dos coeficientes x + 1, ..., xn,
-podemos consider´a-la ´otima se ela ´e de tamanho m´ınimo.
+Troco mínimo como programa linear inteiro.
+Para valores de moedas c_1,...,c_n positivos e alvo v>=0, use x_i inteiro não negativo, quantidade de moedas do tipo i. Minimize sum_i x_i sujeito a sum_i c_i*x_i=v.
+Permitir x_i=0 é necessário: nem todos os tipos precisam aparecer. Para a versão de decisão com no máximo k moedas, acrescente sum_i x_i<=k e verifique viabilidade, sem necessidade de objetivo. Estoque ilimitado não requer limites superiores para x_i. Se não houver solução inteira, o troco exato é impossível. A relaxação para reais pode dar frações de moedas e não resolve o problema inteiro.

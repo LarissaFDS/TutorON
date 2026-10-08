@@ -1,31 +1,17 @@
-# Escolha dos modelos — execução local em 29/09/2026
+# Modelos — validação Linux de 07/10/2026
 
-Hardware medido: 17.014.046.720 bytes de RAM física (aproximadamente 16 GiB); NVIDIA GeForce RTX 4060, 8.188 MiB de VRAM conforme `nvidia-smi`. O campo AdapterRAM do Windows reportou aproximadamente 4 GB; usamos a medição do driver para a decisão.
+Ollama 0.34.4 foi instalado localmente a partir da release oficial, verificando SHA-256. O comando também está em `~/.local/bin/ollama`. Pacotes e modelos do projeto ficam em `.tools/`; o serviço escuta em 127.0.0.1:11434.
 
-Ollama portátil oficial 0.34.4 instalado em `.tools/ollama`, com hash SHA-256 do download verificado. Escuta somente em `127.0.0.1:11434`. Modelos em `.tools/models`; nenhum serviço de sistema foi instalado.
+O notebook atual tem Ryzen 7 3700U e aproximadamente 10 GiB de RAM, sem GPU NVIDIA detectada. Inferência é CPU. A informação antiga sobre RTX 4060 corresponde à máquina Windows anterior, preservada em `historico/`.
 
-## Texto
+A rodada principal usa `qwen2.5:3b` e `tutoron-paa`, com pesos idênticos, contexto 4096 e temperatura 0,2. A base é o cenário genérico; TutorON adiciona instruções e RAG. O controle usa as instruções sem contexto. O nome do modelo não implica treinamento: não houve fine-tuning.
 
-Padrão: `qwen2.5:7b`, 8.192 tokens de contexto. Mantém a continuidade com a PoC da equipe; o catálogo oficial informa pesos de aproximadamente 4,7 GB e janela máxima de 32K. Não usamos a janela máxima nesta GPU. O alias `tutoron-paa` foi criado com o Modelfile desta pasta. As avaliações usam o modelo base com prompts explícitos idênticos entre execuções, para que a condição genérica não herde o prompt do tutor.
+Tesseract 5.3.4 português/inglês foi instalado por pacotes Ubuntu em `.tools/tesseract/`, sem sudo. RapidOCR permanece como fallback. Qwen2.5-VL 3B está disponível para candidatos de visão, mas a tentativa de manuscrito atingiu o limite de saída e foi rejeitada. Fórmulas, manuscritos e diagramas continuam sujeitos a falhas; correções legíveis por agente são derivadas e vinculadas à fonte.
 
-Comparamos rapidamente `qwen2.5:7b` e `gemma3:4b` na mesma pergunta de PAA. Os textos integrais e tempos estão em `comparacao.json`. Ambos responderam em aproximadamente 10 segundos, mas **ambos erraram**: Qwen confundiu NP com número de chamadas e não calculou corretamente a quantidade de asteriscos; Gemma ignorou a segunda chamada recursiva e calculou 6 em vez de 11. Essa pequena prova não demonstra superioridade de nenhum dos dois. Mantemos Qwen como baseline operacional, não como modelo pedagogicamente aprovado.
+Embeddings BGE-M3 e busca lexical compõem o índice híbrido de 53 blocos corrigidos com confiança média. Correções e conteúdo original possuem hashes diferentes; os vetores são reaproveitados somente quando o hash do texto coincide. Conteúdo não verificado, baixa confiança e cortes pendentes são excluídos; duplicatas textuais não ocupam todo o top-k.
 
-## OCR e visão
+Qwen2.5 7B e tutoron-paa-7b também foram preparados. O seguimento de oito respostas levou em média 225,9 segundos por resposta nesta CPU; algumas provas e recorrências melhoraram, mas a amostra não demonstra superioridade. O perfil padrão continua 3B: a recuperação automática levou em média 109,9 segundos na rodada principal, contra 40,8 segundos do genérico. Não houve treinamento de pesos em nenhum dos dois tamanhos.
 
-Qwen2.5-VL 3B foi baixado e testado em fotos e PDFs. Uma foto manuscrita retornou transcrição, mas várias páginas renderizadas falharam com `prediction aborted, token repeat limit reached` nesta combinação de runtime/modelo. Gemma3 4B conseguiu responder a uma página, porém a conferência visual revelou que reescreveu um algoritmo C++ em vez de transcrevê-lo fielmente.
+Veja `../06-avaliacao/COMPARACAO_ATUAL.md` e `../RELATORIO_VALIDACAO.md` para resultados e erros. Cobertura de regex não certifica matemática. O modelo pequeno mostrou erros mesmo com dados corretos; isso limita qualquer conclusão de superioridade. A validação é anterior ao MVP e nenhuma implantação pública foi feita.
 
-Por isso, interpretações de visão são **candidatos incertos separados**, nunca substituição automática de fonte. A transcrição principal usa texto direto e OCR dos recortes na ordem da página. Tesseract `por` é usado se estiver instalado; neste computador o fallback executado foi RapidOCR ONNX local. Seu modelo padrão privilegia caracteres latinos/inglês e não garante todos os acentos portugueses; código, índices e fórmulas permanecem parciais. Não foi possível certificar transcrição fiel de todos os manuscritos.
-
-## Embeddings
-
-`bge-m3`, aproximadamente 1,2 GB, multilíngue. Combina embeddings densos com busca lexical implementada no projeto. O modelo é descarregado após cada lote para liberar VRAM ao gerador. Falhas de embeddings deixam o modo lexical explicitamente registrado.
-
-## Referências verificadas
-
-- [Ollama no Windows e distribuição portátil](https://docs.ollama.com/windows)
-- [Qwen2.5](https://registry.ollama.com/library/qwen2.5)
-- [BGE-M3](https://ollama.com/library/bge-m3)
-- [API de embeddings](https://docs.ollama.com/api/embed)
-- [RapidOCR](https://github.com/RapidAI/RapidOCR)
-
-Não houve fine-tuning, download de modelos de origem desconhecida ou chamada real ao Gemini. A revisão do professor permanece necessária para as respostas e para os critérios de avaliação.
+Fontes técnicas: [Linux Ollama](https://github.com/ollama/ollama/blob/main/docs/linux.mdx), [importação de modelos](https://docs.ollama.com/import), [PEFT](https://huggingface.co/docs/peft/main/en/developer_guides/quantization).

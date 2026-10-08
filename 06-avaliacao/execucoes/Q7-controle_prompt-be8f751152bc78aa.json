@@ -1,0 +1,59 @@
+{
+  "questao": "Q7",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Resposta:\n\nPara encontrar o número faltante em uma sequência de 1 a n, onde Maria ouve n-1 números distintos, podemos usar um método que requer O(1) de memória. A ideia é somar todos os números de 1 a n e subtrair a soma dos n-1 números que Maria ouviu. O número faltante será a diferença entre esses dois totais.\n\nO tempo de execução para essa operação é O(1) porque somar e subtrair n-1 números não depende do tamanho de n. No entanto, há um risco de overflow se n for muito grande, pois a soma dos números de 1 a n pode ultrapassar o limite de um tipo de dado. Para evitar isso, seria necessário usar um tipo de dado que suporte números muito grandes, como um tipo de dado complexo ou uma estrutura de dados especializada.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 44.320240141001705,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

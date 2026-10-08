@@ -9,44 +9,32 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nria\nFernanda\nRihciro\nDernardes\nPinto  Costa\ngeSor+(A, P,r)\n(ntercala(a, P,q, r)\nif(p>r)\n[incerto] []:t\n[incerto] bt：u\n2\nMerge Sort(A, P,q)\nMerg eor+(A,q+s, r)\n[incerto] n,]=A[o,,n]\nRLo,.\nIntercala(A, P,q,r)\n[incerto] L[q+.,n] =A[q+,..,h]\n[incerto] i:0,s=0, x=o\n[incerto] For(i=) is)x++)\n[incerto] iF(R[==L[kand R[!:AL-s])\n[incerto] 1A[]=R[] ++ k++\n[incerto] else iF(R[>L[])\nIA[=L[k] k++\n2) Busca(A[, P))\nreturnA\nmcio = P+(f-P)\n[incerto] 2\niF(A[meio]>A[meio +s] αand  A[meio] <A[meio-1]\". ]\nreturn\n meio\nelse if(A[meio] >A[meio tj]\nI  busca (A, P, meio-J)\nelse\nI busca (A, meio ts, r)\n vai comparand\ne\nSubpartes\ne'ncontrar\narrag\nate\nalgoritmo\nseus\nvisinhos\nda   subporte\nCom\nmenfo\n[incerto] oP\ncentro\ndesefodo.\ninicia\nalgori+mo\nMax-Min(A[J, P, r)\nIntercala(A, p,q,r) \norcenand.\narray\npor\nMergeSort.\ntend\nmeio do\nMerge Sort (A, P, r)\norde nodo, basta\n[incerto] o arrag\nn2=9+r\nMax=A[r]\nescolher\nprimeiro\nMin =A[]\nR[o., ...,hs] = A[o, ...,Ms] \ntimo (ndice\nobter\npora\n[incerto] 0\nminimo\nMerge Sor+(A[], P,)\nvalor, Yespectivamente\n[incerto] i=g=c=o\nif(p>r)\nFor(i=s, i<r, i+ t)\n[incerto] 9[号]\n[incerto] if(R[]==]\nMerge Sor+(A, P,q)\nI A[i]=r[] ++ k++\n[incerto] 'si(][])\nMergeSor+(A,qts,r)\n[incerto] 1A[]:L[]k++\nIntercala(A,p,a,r)\nelse\n1A[i]=R[y]++\ntrA\n[incerto] mlcee\n\n\nCamScanner",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\n4 MAM\n\n++ tags frav |\nasja\ny ++ CAs erly]\n(caca) 3: a0\npan eth CDU TAVA\ncaes tha)\nta sr 's<)403\n\nO = DE far\n\n/\n\ntu boy vo a\n\nCatt\n\n|\npug monto d 59h \"20\\r2h 4\n\n\\ tod\nouxom O 2 ow tum 0 sao 'sabqy > 1% a\n\n208) goal ota DA!\n\n12440\n\no a csymud 9 AQU\\ OP SF o) E\n\n4509 ‘opa ap2e BoMD O J46-\"U\nce!\nPaw ean\n\npet vega bays RAR\n“od hoo O opumuapso\nowA!Aobyo 2589 -\n\na (a'b1d ly) oye 244 |\n\n0/9 *U1\n|\n\\ o\n2y0 sayrrtin $728 Pe\nE Ro)\nto po PRP | 7 > | sorrodgns “2 anti\npis oduo) VOA |\n-9\\2) O o da\n\nli |\n\ney) DITO — (RR O a\n\n\\ Y wanted\n444 Boy cida '\n44% po: 577] y|\n(AMI 4! asa\nata HE cassino\n(fs-olvei CY propose FINNS\n!\n\n(url usr (pz pes\n0:» 074 O77\n\n/ ule tt yy = Duo “nba\nfru Joyy= fu ou\nug\n| rei ty\nJo po\n{ ota su\n\njon YU\n\n“OQ - (iu! ‘ody 4\n\nasrodgrs MP ag a\n\n[r-aawyy> CorauIy pro [r+ a\n\nwd!\n1 pe\nEI,\n\n(a! b q ‘Y)>) 22 29h Uy\n\n(a tb'd Wysro24ath|\n\nSopra\n\n(ab! a! yyote23 4\n(atsbiy) 2052 2H\nCora yyves2bay\nSat\n(a ARA!\n(ata res by\n\n[ray = “ny\nEOv Ay\n(ald \"W405 bay\n\n(a's CID CNY (E\n\n‘ opot asap 29\nOFUZUA\n\nom p00 (oye\n\nape\n\n(4 ‘F4 Oram ! y) ~2>5nq |\n\nasa\n\n(F - orou tg ty) BISnG 1 |\n(r+ oamqy c Loyamyy) 31 Pg\n\nOa An 24 |\n\nam Ty < Lorguqy) 3\n©\n\n(d -i)+ 9 = 012\n(A (9 “TIyycom\nis ae\n\n9,\n\n(a HB 'y) poço bay\n\n(b'd 'y) tog absay\n\n(S40):\n\n(ed)\n\n(ate! y) 12959 by\nCAMA oBouss, Lo\n\n\nCamScanner",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\25264d122fc0\\p1.png",
       "figuras": [
         "01-extraido\\figuras\\25264d122fc0\\p1-fig1.png",
         "01-extraido\\figuras\\25264d122fc0\\p1-fig2.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\25264d122fc0\\p1-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     },
     {
       "pagina": 2,
-      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\niniciopim\n[incerto] lista\n[incerto] ) Glos。(L,P)\npostos\nfelorao ao prcso\nS=g,\nWhile( is+,(a,P[}) > L)\n[incerto] （P0）)\n[incerto] \"++?\n[incerto] GS=S O Pe]., P1.\n[incerto] 220\n[incerto] Bulosa( mu Pi,, PL1)\n[incerto] >↓eena\ner se chega\n[incerto] m\n[incerto] at\n5\nontrc-exemplo·\n-> Gvloso:y3dl -> Custo-aq\n)0tima:{3y2> Cs+o=28\nalgonitmo\nnao\ne\nGlose(I [],K)\n[incerto] {=g\n()\nI  cdecrescente  em \nrelacao\"\nWhilewe<k)\nS=s uai\nse mav couber Xede?\nK=k-wL\ni+t\nS\nfeturn\nalgoritm 0\nacima\nestara\ncons i; &erando\npois\n[incerto] OS\nmaior valor， os\ncol ocan d。\nna\nmoch,la , resu(tand.\nassim\nna\nSo\nO'tima.\nugao\n\n\nCamScanner",
-      "metodo": "rapidocr+texto_pdf",
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nanicid pim NS Bastos e\n| PÉS 3) |\nem relocao ao preso |\n\n) Gu loso (1) Joa) 0°\ndecrescente\n\nfeitor: êm ordem\n“lote ( dust (ou) 643) 7 L)\nee Apt! PO! )\n\n4-2\n\n6Oz SU PLAY)\" |\n\nDo E) PLAI, by LI)\n\nVA\n\nA ve\n“4 | . i\n\n5) (er ten emplos\n» Guloso+sy2'af > Custo-ag\n\nad = Otima: S34 pd Custoz à8\n\né exoto\n\nalgontmo não\n\nheqo, (2)\n\nJK Go lose (1 Cj /K)\n\nVi\nOr el I De cresdente em Yveloção a ( =)\n\n‘ile We <K)\nmer SB a a couber Tee?\ni, a\n\nLtt\n\nHi\n\n(éturn S\nalgoritmo\n\nES\nHG ny) pois fo) algoritmo Atma, estara, ons « Levando on\ney he)\nle maior valor, os colocando na mochila, resillando assim. na So\n\n- ane\nUÇão otima.\n\n\nCamScanner",
+      "metodo": "tesseract-por+texto_pdf",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\25264d122fc0\\p2.png",
       "figuras": [
         "01-extraido\\figuras\\25264d122fc0\\p2-fig1.png",
         "01-extraido\\figuras\\25264d122fc0\\p2-fig2.png"
       ],
-      "visao_candidata": [
-        {
-          "imagem": "01-extraido\\figuras\\25264d122fc0\\p2-fig1.png",
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ],
+      "visao_candidata": [],
       "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
     }
   ]

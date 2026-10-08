@@ -42,10 +42,16 @@ l
 
 
 [OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]
-Universidade Federal de Alagoas -UFAL
-[incerto] Tanel
-InstitutodeComputacao
-Projetqe Analise deAlgoritmos
-1Prova
-Prof.Rian GabrielPinheiro
-31 de julhode2023
+?
+_ | a
+
+Universidade Federal de Alagoas - UFAL
+tituto de Computação >
+
+FO
+Projetg e Análise de Algoritmos =
+12 Pro 4
+
+Prof. Rian Gabriel Pinheiro
+
+31 de Julho de 2023

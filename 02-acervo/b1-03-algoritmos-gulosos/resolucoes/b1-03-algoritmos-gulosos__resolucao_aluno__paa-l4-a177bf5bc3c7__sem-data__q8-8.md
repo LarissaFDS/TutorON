@@ -20,15 +20,19 @@ Solu¸c˜ao:
 
 
 [OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]
-defminimun_weight_feedback_edge_set(V,E):
-foredgeinE:
-edge.weight=-edge.weight
-minSpanTree =kruskal(v,E)#Kruskal vai utilizar as arestas de menor peso que,por serem
-#previamente negadas，construirauma MsT cujos pesos das arestas
-solution=E
-#sao os maiores pesos reais
-#Conjuntosolucaoinicializadocomtodasasarestas
-for edge in minSpanTree:
-solution.remove(edge)#Remove dasolucaoas arestascontidasnaarvoredeexpansao minima
-return solution # Retornao conjunto feedback de peso minimo (complemento da MsT,cujos pesos
-#das arestas sao os maximos)
+mínimun, by = _Set(V,E):
+edge [25
+
+edge .veight = “edge. weight
+
+minSpantree
+
+kruskal(V,E) 4
+
+solution r
+
+edge in minSpantree:
+
+solution.remove(edge) + R
+
+solution &

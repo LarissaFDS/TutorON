@@ -2,172 +2,167 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\prova_2_A.pdf | página(s): 1, 2, 3, 4, 5, 6
 
-Questao 5[2ponto]:
-Considere os dois algoritmos gulosos para o CAIxEIRo VIAJANTE. Mostre que ambos nao sao exatos, isto e,nao
-garantem retornar a solucao 6tima.
-Algoritmo 1 (Algoritmo do vizinho mais proximo)
-1.Inicialize todos os vertices como nao visitados
-2.Selecione um vertice arbitrario, defina-o como o vertice atual u,Marque u como visitado
-3.Descubra a aresta mais curta conectando o vertice atual u e um vertice nao visitado u
-4.Defina v como o vertice atual u.Marque v como visitado.
-5/Se todos os vertices do dominio forem visitados,entao termine, Caso contrario,va para o passo 3
-Algoritmo 2 (Alguritmo da insercao mais barata)
-1.Crie um cico C oom tres vertices quaisquer
-2.Esolha um wertice k qualquer fora de C
-3.Encontre ums asta （i.） eCtalque d+dy-dye minimo
-[incerto] 4Adici ka C,va resta (ij）e adicione as aestas （i,k） e （k,j）.
-S.Se Cotiver todo o ns.pe. Caso contrio,v paa 2
-Questio 6[2pontos]:
-Um ario entra em um lojaeve um conjunto / den itens.I={a.agn]. Cada item tem um peso associalo
-[incerto] Soponhs que c itens #op
-[incerto] Oeima? Juetitinot[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]
-Mg(A,B,K)
-[incerto] encenacemrpoa
-[incerto] mrios=A.1
-[incerto] meioimtio.comk
-[incerto] mcio=B.lem/
-[incerto] ALuio3comBLd
-[incerto] Elemmfomegmtiostmei0z
-[incerto] eAE]<BEAB
-[incerto] 污（m之K
-[incerto] AgABH)
-[incerto] retomAlg(AEmeingsts3BE3,k)
-[incerto] 20
-[incerto] i5（meio<k)
-[incerto] relomAlgCAE3,BLmeiozt,k)
-clse
-[incerto] retnA（A,om)
-[incerto] Veton-s
-[incerto] 21
-[incerto] 0lgontmlerer
-[incerto] .BL
-[incerto] -1As+A1+B-1
-2termosantecessoYes[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
-SoautPara melhor
-[incerto] peahend
-[incerto] nosZplimeilosattoys
-10
-[incerto] tonhaSilomevge
-2utimoscmtinveetegue
-[incerto] tooososa1noys22
-[incerto] Ganreys
-[incerto] As...A
-[incerto] Com
-[incerto] mevg（CAs，Ae)cmevge(AsAe)
-[incerto] mange(AsAn)
-[incerto] paSso5=
-n.K
-[incerto] maicSiciente
-[incerto] alor/orsobtleossepate@mSngoscotesgondentes
-[incerto] （800
-[incerto] sulosd
-[incerto] pimenementeositecon
-[incerto] pegonds
-[incerto] mdiovvaloypoipeso.ate
-[incerto] quenaaameiscspaqonmochile
-[incerto] dissm（istoserebasicmenteordemeinOngn)
-[incerto] Prseudo-ceciygo
-[incerto] 0个[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
-mochilaCitens,k,mochila
-[incerto] Sortl.tens)
-[incerto] oreCo
-[incerto] petz
-[incerto] possapdd
-Enquuto
-iCem=items.0o0
-G.a
-[incerto] Se（K-itemlposo）>0
-1mochila.add（item)
-retutn mochilo
-elaortmo
+Questão 5 [2 ponto]: ae a
+Considere os dois algoritmos gulosos para o CAIXEIRO VIAJANTE. Mostre que ambos não ão sai o E ado
+garantem retornar a solução ótima. ro o
+
+Algoritmo 1 (Algoritmo do vizinho mais próximo)
+
+1. Inicialize todos os vértices como não visitados.
+2 Selecione um vértice arbitrário, defina-o como o vértice atual u. Marque u como visitado.
+3. Descubra a aresta mais curta conectando o vértice atual u é um vértice não visitado v
+4. Défina v como o vértice atual u. Marque v como visitado.
+5/ Se todos os vértices do domínio forem visitados, então termine. Caso contrário, vá para o passo 3
+
+Hk) e (k,9).
+
+| = {a),49,.-.,4n)- Cada item tem um peso associado
+! para obter o máximo benefício. No entanto, há muito
+Idade K. O ladrão agora tem que determinar quais itens
+seja indximo, i
+
+item possa ser retirada, ou seja, o ladrão pode pega
+dvixar a parte restante. Isso é chamado de Probl
+lndriio rouba. Elabore um algoritmo
+
+ca vi é máximo, f[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]
+152) OSSARIUE Samp7] 2 = a
+op ew f Fel oa F'g apvo pego +\5¥\
+
+u 7 is uf 7 iss
+ae os, + (ped? e (4 , é
+
+vA ead] ow) He oF
+; : a : “a = (2
+
+,
+
+T- amo 17h |[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
 0
-[incerto] DtmaiPodemnswostessopocn.tid
-[incerto] etnevume
-Solvcs
-K=4
-[incerto] Umamoch.l
-[incerto] Svpanha
-[incerto] qveoladrsoCenn
-[incerto] escolherovbayenleositonsis(sloxpeo)
-[incerto] 72
-pode
-[incerto] 20
-[incerto] is=（5012),i2=（8,3)
-Seclenequder
-[incerto] pesdr
-[incerto] 1#025066
-openas
-[incerto] Ye
-Commochie
-[incerto] ytend
-[incerto] 21092
-[incerto] 2
-[incerto] podevieacrescent-y
-[incerto] Secioner
-[incerto] Lerie
-[incerto] 1se2.dei
-Yovbari2
-[incerto] VmZol1e
-[incerto] 9=+09
-[incerto] ousnobyo
-[incerto] aiima
-[incerto] 0[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
-[incerto] Pes=（
-[incerto] 01.dS1
-[incerto] K=5c13.si2e
-[incerto] 501<K110/K）
-[incerto] 5Cigals,Scsi）llScsitadesideSts3
-[incerto] （0
-[incerto] Pe5=Pe5+SEs3E13
-[incerto] mluuen
-K,5
-[incerto] Cager
-Petena
-[incerto] gud(Schacnti)
-[incerto] O/kn
-[incerto] Paecsasie(5-{st33)11Oa-s)em
-[incerto] 155:13!=6
-cetotnsslsc
-[incerto] K-（n-s)
-T(n)=
-[incerto] 0（40
-[incerto] xetoinZrue
-A6M
-[incerto] Jv
-[incerto] peutoncentesdo
-[incerto] (om2A6Me61g
-[incerto] osvrvtecs
-[incerto] pelsdrest
-[incerto] Solmdquelig
-[incerto] treA6Me
-[incerto] Gve
-Cemo?
-[incerto] Gulose
-J0
-[incerto] Pserd-ccidigc[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-[incerto] 10
-[incerto] Suponha
-[incerto] Uw
-[incerto] MaitmoSobcens
-[incerto] ekemgleysonperddrgeeleldoe
-[incerto] 3345-
-[incerto] Polem
-[incerto] AleL.
-[incerto] exenplaCeonos
-[incerto] Um.
-[incerto] 850
-[incerto] OR SIO
-[incerto] (.（43），（3)
-[incerto] @crisnto
-[incerto] oessivriew
-[incerto] （S3）:
-[incerto] √s+d4s-ss=4+1-2=3
-[incerto] Creaos4dogon
-[incerto] Peso=1
-[incerto] gelem.sob
-[incerto] 9=0500
-05
-[incerto] 001237
-[incerto] lnmmnco
-dua+d43-d3
-=a+1-3=
+DMA
+
+Cho Brupe y
+Yipem W dd s7 som Shs som
+
+RO) a to renina and e poe E
+
+F/05Sed om op ty2e 500 ved ge ged
+
+Sejm nad sapyoy SebuS “a aped
+PPMP RS good! pal PRE e ete
+
+yeas Few = fessxd gp , A
+
+e
+Sa) wr) Sed 37) “22 AS Shepe sem Php wap e -¢
+
+dd shee 2 79 E magos anb da 5 essed o 24) ea -2
+
+; - 5,46, baal > a s Ay
+» À, + A Dy DA [á j A AA
+OU A dede Cr Cp sy)
+
+4 “Oy ACP? q ata rd
+Ah 2 €2 Sheme So sp
+
+€ e mb 277 anny we? Doda 2 Sw a
+nO Shou A NA "ot ap oe) wed O Eve fy rbeS -=s
+paws
+
+a vue o)
+p- at estoy eed a
+
+ê he o asa comp
+
+sAepe fF[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
+nº hs ao
+| Rar 2 ve Av age É
+
+ie) Ea etn ap f ? “ni ile
+i anal’ ‘Ty wa)!
+
+qr rr musas
+
+DT
+
+(sts) <*1 | (thot ae
+
+) as nop 1/6454 J od / =
+asd ye) Daio <p Ne /
+( Bey war? i ow Pw way oxap ©) o anb à AS
+' * PwuilG a oS “MA peu i a
+Do pes essere Semgestenpe ]°%, SA AR
+" d A a doi a wy er rye 0 o A
+SMDS x |
+
+yew “yn 2)
+
+(2) PET PO |
+
+. (C9 a< (osebyreajt = Y) 29
+L PELA away ea
+app po rsçod ) o vnbu “3
+
+eps as
+yar
+
+(3) oa! E Swe a1)[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
+us ph! A seu
+way Punt eS nã ca ,
+
+(594
+
+ya) ano (+ a eq 5) pe,
+
+(655 me
+¢ i Es À
+10835 4574 * ys) \ \
+
+(ud) cs
+do maos STO Ne
+
+ss of ' a ap BYE ? gat) A | 7
+1 el ar =}
+gaggle yma 4 S merit OF
+mp
+~ 3 € a
+
+eptest pio ap aed (9D e |
+
+o ph opp aaa SPP gpa il[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
+i g=2-F th zal
+
+€'s) gure P
+
+Dr ANA ef US js MiSsod pa ts >: — 7 ch!
+ope 5 oa >) 225) 1 0+) É) = (F a '
+ao 5 ;
+
+G ~ a 9
+sevens) 2 abner ay ve yo
+
+pe S qs y) N
+B 205% ett eh Se] eT)
+= 1: A
+o ja mus s AD Se va apt
+dd rw Sey é
+
+c 2 ¢ a
+al Se. j
+agit
+cr
+
+4 ) po bed
+
+ae 8) a) et Wes
+
+; PP TSO | Fe ?
+Fp ú Da Bin a of aye (Cj
+as crinl , ad
+E if
+
+: ce
+; 9 CS af ey ode
+Se pana eo is Sy
+
+“LE

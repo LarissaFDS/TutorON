@@ -27,23 +27,36 @@ def embed_document(text, model):
 
 def build(root=ROOT, embed=False):
     items = read_json(root / '02-acervo/itens.json', [])
-    chunks = [r for r in items if r['confiabilidade'] != 'baixa' and r['qualidade_ocr'] != 'ilegivel'
+    chunks = [r for r in items if r['confiabilidade'] in ('media', 'alta') and r['qualidade_ocr'] != 'ilegivel'
               and r['assunto'] != 'assunto_incerto' and r['segmentacao'] != 'pendente']
     model, error, vectors = os.environ.get('TUTORON_EMBED_MODEL', 'bge-m3'), None, []
+    previous = read_json(root / '04-rag/indice.json', {})
+    reusable = {}
+    if previous.get('embedding_model') == model and previous.get('embedding_janelas_caracteres') == 1000:
+        reusable = {i['sha256']: v for i, v in zip(previous.get('chunks', []), previous.get('vectors', []))}
     if embed and chunks:
         try:
+            created = False
             # Nesta versão do runtime, lotes maiores podem somar os tokens contra
             # o limite de contexto. Uma questão por chamada preserva o texto inteiro.
             for item in chunks:
-                vectors.append(embed_document(item['texto'], model))
-            models.post(models.ollama_url() + '/api/embed', {'model': model, 'input': '', 'keep_alive': 0})
+                if item['sha256'] in reusable:
+                    vectors.append(reusable[item['sha256']])
+                else:
+                    vectors.append(embed_document(item['texto'], model))
+                    created = True
         except Exception as exc:
             error, vectors = type(exc).__name__, []
+        if vectors and created:
+            try:
+                models.post(models.ollama_url() + '/api/embed', {'model': model, 'input': '', 'keep_alive': 0})
+            except Exception:
+                pass  # Falha de descarregamento não invalida embeddings já calculados.
     index = {'versao': 1, 'modo': 'hibrido' if vectors else 'lexical',
              'embedding_model': model if vectors else None, 'erro_embeddings': error,
              'embedding_janelas_caracteres': 1000, 'chunks': chunks, 'vectors': vectors}
     write_json(root / '04-rag/indice.json', index)
-    progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Baixa confiabilidade, ilegíveis e segmentação incerta excluídos. Itens não verificados são identificados como tal no contexto.', root)
+    progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Somente confiança média/alta. Não verificados, baixa confiança, ilegíveis e segmentação incerta excluídos.', root)
     return index
 
 
@@ -88,7 +101,7 @@ def search(question, root=ROOT, k=4, semantic=True):
     semantic_ranks = {i: rank for rank, i in enumerate(sorted(range(len(chunks)), key=lambda i: semantic_scores[i], reverse=True), 1)} if semantic_scores else {}
     for i, item in enumerate(chunks):
         current = live.get(item['id'])
-        if not current or current['sha256'] != item['sha256'] or current['confiabilidade'] == 'baixa':
+        if not current or current['sha256'] != item['sha256'] or current['confiabilidade'] not in ('media', 'alta'):
             continue
         if scores[i] <= 0 and (not semantic_scores or semantic_scores[i] < 0.55):
             continue
@@ -97,7 +110,13 @@ def search(question, root=ROOT, k=4, semantic=True):
             score += 1 / (60 + semantic_ranks[i])
         score *= {'alta': 1.25, 'media': 1.1}.get(current['confiabilidade'], 1)
         result.append({**current, 'score': score, 'busca': mode})
-    return sorted(result, key=lambda r: r['score'], reverse=True)[:k]
+    unique, seen = [], set()
+    for item in sorted(result, key=lambda r: r['score'], reverse=True):
+        signature = searchable(item['texto'])
+        if signature not in seen:
+            seen.add(signature)
+            unique.append(item)
+    return unique[:k]
 
 
 def context(items, max_chars=18000):

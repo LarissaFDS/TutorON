@@ -19,16 +19,26 @@ m´aximo e, assim, obter m´aximo lucro.
 
 
 [OCR parcial do recorte p9-fig2.png; conferir símbolos na imagem]
-defgreedy_knapsack(values,capacity):
-profit=θ
-values.sort(reverse=True)#Ordena os itens pelo seu valorem ordem decrescente T(n.lg(n))
-whilecapacityandvalues:#Enquantohouvercapacidadeesupondoqueositens
-profit +=int(values.pop(o)) # sao limitados,deposita os itens de maior valor O(n)
-capacity-=1
-print(profit)#Imprimeolucromaximoparaocasoondetodasos objetostemomesmopeso
-values =[int(x)for x in input().split('')]
-capacity=int(input())
-greedy_knapsack(values,capacity)
+def Breedy_knapsack(values, Capacity):
+profit-g
+values. sort(reverse True)
+Nie capacity a values: & E quanto h
+profit += int(values. pop(a)) * são
+Capacity-=1
+
+# Or
+
+Print(profit) # Im
+
+values = [int(x) fo
+
+xi
+Capacity =
+
+r input().split¢: |
+int (input())
+
+Seedy_knapsack(values, capacity)
 
 
 Desse modo, como o algoritmo acima envolve uma ordena¸c˜ao O(n log(n)) e uma

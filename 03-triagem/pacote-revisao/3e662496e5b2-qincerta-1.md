@@ -1,7 +1,7 @@
 # Revisão 3e662496e5b2-qincerta-1
 
 Fonte: materiais\Disponiveis\RAG PAA\WhatsApp_Image_2025-01-12_at_13.13.31_(3).webp | página(s): 1
-SHA-256: 55b950a38d47097824b6e7fb9a2121a169c99192b776252c012a145e14e798dd
+SHA-256: d45183adb33dfee14c7f17386e7b6de43f108a3979bab38ab3138ed4fb296dd9
 
 Confiabilidade: baixa
 
@@ -9,7 +9,7 @@ Motivo: Revisão de fonte e conteúdo pendente.
 
 ## Enunciado e resolução — transcrição sem alteração
 
-[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel]
 
 ## Parecer local
 

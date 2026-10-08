@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Questao 6[2 pontos]:\nProve que\nQuestao7[1ponto]:\n1:procedureAsTERisco(n)\n2:\nifn>0then\n3:\nASTERISCO(n-1)\n4:\nfori-I→ndo\n5:\nimprima*\n6:\nend for\n7:\nASTERISCO(n-1)\n8:\nendif\n9:end procedure\nPara um dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco(n)? Mostra a\nrecorrencia.\nQuestao 8[2pontos]:\nSejam f（n)e g(n) funcoes assintoticamente nao negativas. Usando a definicao basica\nda notacao ,prove que\nmax(f(n).g(n))=θ（f（n)+g(n)).",
-      "metodo": "rapidocr",
+      "texto": "a\nQuestão 6 [2 ponto:\nProve que a(n*\nen a Oupercence ND\no todo polinômio de grau &, p(n) < ayn ayn 1 ++ 0 O lores de base a > 1\ne r to sara diferentes valor\n[ 2, as funções exponenciais a” têm diferentes ordens de crescimem Alpes:\nÉ entes valoresíde D\nBP as funções logarítmicas log, n tém a mesma ordem de crescimento |\nQuestão 7 [1 ponto):\nConsidero © seguinte algoritmo recursivo, cujo argumento n é um inteiro positive\nE procedure ASTERISCO “Fi\n2 if > 0 then\n3: AsTesco\n4 for i— 1 —n do\n5: imprima **\n6 end for\nNe ASTERISCO(n — 1\n8 end if\n9: end procedure SoS\n1 As sco(n)? Mostra a\nPara um dado valor de n, quantos asteriscos serão impressos er na mada \\STERISCO( M\nrecorrência.\nQuestão 8 [2 pontos]:\nassintoticamente não negativas. Usando a d ão básic fa notação ©, prove que\n\nSéjam f(r) e gin) fung:\nmax(f(7). g(n)) = O(f(n) + g(n))",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\fb361b787fc6\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

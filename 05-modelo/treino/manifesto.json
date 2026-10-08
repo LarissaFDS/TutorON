@@ -1,0 +1,39 @@
+{
+  "modelo": "Qwen/Qwen2.5-3B-Instruct",
+  "revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+  "seed": 42,
+  "sistema": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+  "gpu_nvidia": null,
+  "treino_local_executado": false,
+  "gpu_externa_recomendada": true,
+  "treino": 26,
+  "validacao": 6,
+  "familias_reservadas_benchmark": [
+    "1a81ca283132-q4-4",
+    "c01",
+    "c06",
+    "70d6475b28bf-q1-1",
+    "97254bb4a1b8-q1-1",
+    "97254bb4a1b8-q2-2",
+    "97254bb4a1b8-q10-10",
+    "c05",
+    "a177bf5bc3c7-q1-1",
+    "a177bf5bc3c7-q2-2",
+    "d455baef2cdf-q1-1",
+    "c08",
+    "c02",
+    "c09",
+    "f38bb8142136-q1-1",
+    "f38bb8142136-q2-2",
+    "f38bb8142136-q3-3",
+    "f38bb8142136-q5-5",
+    "f38bb8142136-q6-6",
+    "f38bb8142136-q8-8",
+    "f38bb8142136-q9-9"
+  ],
+  "dados": {
+    "validacao": "4b0597b45fc280fc5f7e6e7c40373c008e9f20f0881f171bfb52957718efadc6",
+    "treino": "ece0f485736099f60a97df9dc1f2ea2b6a3cf08178ef2bcb488bca1618d7429b"
+  },
+  "limite": "Dataset pequeno de agente, adequado a teste técnico; não comprova ganho pedagógico."
+}
