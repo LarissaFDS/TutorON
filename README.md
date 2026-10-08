@@ -4,6 +4,8 @@ O estágio atual é validar OCR, curadoria e RAG local antes de construir e publ
 
 ## Abrir a validação
 
+No Ubuntu, use `bash instalar_atalho.sh` uma vez para criar o atalho **TutorON — Validação** no menu de aplicativos e na área de trabalho. O duplo clique em `.sh` pode abrir o editor em vez de executar. Se os serviços já estiverem ativos, abra http://127.0.0.1:8765 diretamente.
+
 Linux/Ubuntu:
 
 ```bash
