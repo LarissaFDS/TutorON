@@ -1,0 +1,12 @@
+{
+  "pagina": 3,
+  "texto": "A mesma pergunta em três condições\n\nPergunta do aluno\n\nMaterial da disciplina\n\nIA\n\nquestões de provas reais\n\nescolhido à mão, simula a busca\n\nresponde com o contexto\n\nCondições\n\nDuas rodadas\n\nA · Genérico: só a pergunta\n\nGemini (chat): 2 questões, roteiro e análise com\no ChatGPT\n\nB · Controle: prompt de tutor, sem material\n\nC · Contexto: prompt de tutor + material\n\nOllama, local (qwen2.5:7b): 4 questões de provas\nde PAA\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nA mesma pergunta em tres condicoes\nPergunta do aluno\nMaterial da disciplina\nIA\nquestoes deprovasreais\nescolhido a mao, simula a busca\nrespondecomocontexto\nCONDICOES\nDUASRODADAS\nA · Genérico: so a pergunta\nGemini (chat): 2 questoes, roteiro e analise com\no ChatGPT\nB · Controle: prompt de tutor, sem material\nOllama, local (qwen2.5:7b): 4 questoes de provas\nC · Contexto: prompt de tutor + material\nde PAA",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p3-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

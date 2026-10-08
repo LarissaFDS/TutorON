@@ -1,0 +1,59 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_manual",
+  "fontes": [
+    "1a81ca283132-q4-4"
+  ],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [
+    "1a81ca283132-q4-4"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, podemos seguir a abordagem descrita no exemplo fornecido. Vamos detalhar o algoritmo e aplicá-lo aos exemplos dados.\n\n### Algoritmo\n\n1. **Inicialização:**\n   - `cur_max` para armazenar a soma máxima atual.\n   - `max_local` para armazenar a soma local atual.\n   - `start_max` e `end_max` para marcar o início e o fim da subsequência com soma máxima.\n   - `start` para marcar o início da subsequência atual.\n\n2. **Iteração:**\n   - Para cada elemento `i` na lista `S`:\n     - Atualizar `max_local` com a soma do elemento atual.\n     - Se `max_local` for maior que `cur_max`, atualizar `cur_max`, `start_max` e `end_max`.\n     - Se `max_local` for menor que 0, reiniciar `max_local` e `start` para o próximo elemento.\n\n3. **Retorno:**\n   - Retornar a subsequência contígua de soma máxima.\n\n### Recorrência\n\nA recorrência para este problema pode ser definida da seguinte forma:\n\n- `max_sum(i)` é a soma máxima de uma subsequência contígua terminando no índice `i`.\n- `max_sum(i) = max(S[i], S[i] + max_sum(i-1))`\n\n### Aplicação aos Exemplos\n\n#### Exemplo 1: [5, 15, -30, 10, -5, 40, 10]\n\n1. **Inicialização:**\n   - `cur_max = -inf`\n   - `max_local = 0`\n   - `start_max = 0`\n   - `end_max = θ`\n   - `start = θ`\n\n2. **Iteração:**\n   - `i = 0`: `max_local = 5`, `cur_max = 5`, `start_max = 0`, `end_max = 0`\n   - `i = 1`: `max_local = 20`, `cur_max = 20`, `start_max = 0`, `end_max = 1`\n   - `i = 2`: `max_local = -10`, `cur_max = 20`, `start_max = 0`, `end_max = 1`\n   - `i = 3`: `max_local = 30`, `cur_max = 30`, `start_max = 2`, `end_max = 3`\n   - `i = 4`: `max_local = 25`, `cur_max = 30`, `start_max = 2`, `end_max = 3`\n   - `i = 5`: `max_local = 65`, `cur_max = 65`, `start_max = 2`, `end_max = 5`\n   - `i = 6`: `max_local = 75`, `cur_max = 75`, `start_max = 2`, `end_max = 6`\n\n3. **Resultado:**\n   - Subsequência contígua de soma máxima: `[10, -5, 40, 10]` com soma `75`.\n\n#### Exemplo 2: [-5, -2, -8]\n\n1. **Inicialização:**\n   - `cur_max = -inf`\n   - `max_local = 0`\n   - `start_max = 0`\n   - `end_max = θ`\n   - `start = θ`\n\n2. **Iteração:**\n   - `i = 0`: `max_local = -5`, `cur_max = -5`, `start_max = 0`, `end_max = 0`\n   - `i = 1`: `max_local = -7`, `cur_max = -5`, `start_max = 0`, `end_max = 0`\n   - `i = 2`: `max_local = -15`, `cur_max = -5`, `start_max = 0`, `end_max = 0`\n\n3. **Resultado:**\n   - Subsequência contígua de soma máxima: `[]` com soma `0`.\n\n### Código Implementado\n\n```python\ndef max_contiguous_sum(S):\n    cur_max = -float('inf')\n    max_local = 0\n    start_max = 0\n    end_max = 0\n    start = 0\n    \n    for i in range(len(S)):\n        max_local += S[i]\n        \n        if max_local > cur_max:\n            cur_max = max_local\n            start_max = start\n            end_max = i\n        \n        if max_local < 0:\n            max_local = 0\n            start = i + 1\n    \n    return S[start_max:end_max+1]\n\n# Testando os exemplos\nprint(max_contiguous_sum([5, 15, -30, 10, -5, 40, 10]))  # Saída: [10, -5, 40, 10]\nprint(max_contiguous_sum([-5, -2, -8]))  # Saída: []\n```\n\nEste código implementa o algoritmo descrito e retorna a subsequência contígua de soma máxima para os exemplos fornecidos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 23.0470000000023,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

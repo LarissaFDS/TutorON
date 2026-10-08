@@ -1,0 +1,24 @@
+{
+  "id": "f52f437d0e2f",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\IMG-20231017-WA0077.webp",
+  "copia": "00-originais\\ingestao\\c9c2d140775a887f57d0b88cb51230852e02ce897fc9aec5ee0e2302bba720c8\\IMG-20231017-WA0077.webp",
+  "sha256": "c9c2d140775a887f57d0b88cb51230852e02ce897fc9aec5ee0e2302bba720c8",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "nce a O(n*\n\nto para diferentes valores de base ;\n\nimento para diferentes valores de base q\n\num inteiro positivo.\n\n==\n\nmada de ASTERISCO(n)?\n\nii\n\ninição básica da notação 6, p",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f52f437d0e2f\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

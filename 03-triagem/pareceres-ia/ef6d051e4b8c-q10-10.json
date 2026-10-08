@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há várias equações e símbolos quebrados ou mal formatados, o que pode indicar ilegibilidade. Além disso, há alguns erros matemáticos, como na solução (c) onde f(n) e g(n) são definidos incorretamente, e faltam passos importantes na resolução.",
+  "decisao": "suspeita",
+  "sha256": "fbad12512938526d313bee56b27ea48ba45e49e5f99414561d29a5130f4d5bc8"
+}

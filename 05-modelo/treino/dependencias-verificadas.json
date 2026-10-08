@@ -1,0 +1,308 @@
+{
+  "resolucao_dependencias_linux": "pip --dry-run --ignore-installed; PyPI, sem instalação nem treino",
+  "bibliotecas": [
+    {
+      "nome": "torch",
+      "versao": "2.14.1"
+    },
+    {
+      "nome": "transformers",
+      "versao": "5.19.0"
+    },
+    {
+      "nome": "peft",
+      "versao": "0.21.2"
+    },
+    {
+      "nome": "trl",
+      "versao": "1.14.2"
+    },
+    {
+      "nome": "datasets",
+      "versao": "5.1.0"
+    },
+    {
+      "nome": "accelerate",
+      "versao": "1.15.0"
+    },
+    {
+      "nome": "bitsandbytes",
+      "versao": "0.50.2"
+    },
+    {
+      "nome": "cuda-toolkit",
+      "versao": "13.0.3.0"
+    },
+    {
+      "nome": "nvidia-cudnn-cu13",
+      "versao": "9.24.0.43"
+    },
+    {
+      "nome": "nvidia-cusparselt-cu13",
+      "versao": "0.8.1"
+    },
+    {
+      "nome": "nvidia-nccl-cu13",
+      "versao": "2.30.7"
+    },
+    {
+      "nome": "nvidia-nvshmem-cu13",
+      "versao": "3.4.5"
+    },
+    {
+      "nome": "nvidia-cublas",
+      "versao": "13.1.1.3"
+    },
+    {
+      "nome": "nvidia-cuda-cupti",
+      "versao": "13.0.85"
+    },
+    {
+      "nome": "nvidia-cuda-nvrtc",
+      "versao": "13.0.88"
+    },
+    {
+      "nome": "nvidia-cuda-runtime",
+      "versao": "13.0.96"
+    },
+    {
+      "nome": "nvidia-cufft",
+      "versao": "12.0.0.61"
+    },
+    {
+      "nome": "nvidia-cufile",
+      "versao": "1.15.1.6"
+    },
+    {
+      "nome": "nvidia-curand",
+      "versao": "10.4.0.35"
+    },
+    {
+      "nome": "nvidia-cusolver",
+      "versao": "12.0.4.66"
+    },
+    {
+      "nome": "nvidia-cusparse",
+      "versao": "12.6.3.3"
+    },
+    {
+      "nome": "nvidia-nvtx",
+      "versao": "13.0.85"
+    },
+    {
+      "nome": "cuda-bindings",
+      "versao": "13.4.3"
+    },
+    {
+      "nome": "dill",
+      "versao": "0.4.1"
+    },
+    {
+      "nome": "fsspec",
+      "versao": "2026.7.0"
+    },
+    {
+      "nome": "filelock",
+      "versao": "4.0.12"
+    },
+    {
+      "nome": "multiprocess",
+      "versao": "0.70.19"
+    },
+    {
+      "nome": "networkx",
+      "versao": "3.7"
+    },
+    {
+      "nome": "numpy",
+      "versao": "2.5.3"
+    },
+    {
+      "nome": "packaging",
+      "versao": "26.3"
+    },
+    {
+      "nome": "pyarrow",
+      "versao": "25.0.1"
+    },
+    {
+      "nome": "PyYAML",
+      "versao": "6.0.3"
+    },
+    {
+      "nome": "regex",
+      "versao": "2026.9.29"
+    },
+    {
+      "nome": "safetensors",
+      "versao": "0.8.0"
+    },
+    {
+      "nome": "setuptools",
+      "versao": "84.0.0"
+    },
+    {
+      "nome": "sympy",
+      "versao": "1.14.0"
+    },
+    {
+      "nome": "tokenizers",
+      "versao": "0.23.2"
+    },
+    {
+      "nome": "huggingface_hub",
+      "versao": "1.33.0"
+    },
+    {
+      "nome": "tqdm",
+      "versao": "4.70.1"
+    },
+    {
+      "nome": "triton",
+      "versao": "3.8.0"
+    },
+    {
+      "nome": "typing_extensions",
+      "versao": "4.16.0"
+    },
+    {
+      "nome": "Jinja2",
+      "versao": "3.1.6"
+    },
+    {
+      "nome": "pandas",
+      "versao": "3.0.6"
+    },
+    {
+      "nome": "psutil",
+      "versao": "7.2.2"
+    },
+    {
+      "nome": "typer",
+      "versao": "0.27.3"
+    },
+    {
+      "nome": "xxhash",
+      "versao": "4.0.1"
+    },
+    {
+      "nome": "aiohttp",
+      "versao": "3.14.4"
+    },
+    {
+      "nome": "annotated-doc",
+      "versao": "0.0.5"
+    },
+    {
+      "nome": "click",
+      "versao": "8.5.0"
+    },
+    {
+      "nome": "cuda-pathfinder",
+      "versao": "1.8.3"
+    },
+    {
+      "nome": "hf-xet",
+      "versao": "1.7.0"
+    },
+    {
+      "nome": "httpx",
+      "versao": "0.28.1"
+    },
+    {
+      "nome": "httpcore",
+      "versao": "1.0.9"
+    },
+    {
+      "nome": "MarkupSafe",
+      "versao": "3.0.4"
+    },
+    {
+      "nome": "mpmath",
+      "versao": "1.3.0"
+    },
+    {
+      "nome": "nvidia-nvjitlink",
+      "versao": "13.4.92"
+    },
+    {
+      "nome": "python-dateutil",
+      "versao": "2.9.0.post0"
+    },
+    {
+      "nome": "rich",
+      "versao": "15.0.0"
+    },
+    {
+      "nome": "shellingham",
+      "versao": "1.5.4"
+    },
+    {
+      "nome": "aiohappyeyeballs",
+      "versao": "2.7.1"
+    },
+    {
+      "nome": "aiosignal",
+      "versao": "1.4.0"
+    },
+    {
+      "nome": "attrs",
+      "versao": "26.1.0"
+    },
+    {
+      "nome": "frozenlist",
+      "versao": "1.8.0"
+    },
+    {
+      "nome": "markdown-it-py",
+      "versao": "4.2.0"
+    },
+    {
+      "nome": "multidict",
+      "versao": "6.9.1"
+    },
+    {
+      "nome": "propcache",
+      "versao": "0.5.4"
+    },
+    {
+      "nome": "Pygments",
+      "versao": "2.21.0"
+    },
+    {
+      "nome": "six",
+      "versao": "1.17.0"
+    },
+    {
+      "nome": "yarl",
+      "versao": "1.25.1"
+    },
+    {
+      "nome": "idna",
+      "versao": "3.20"
+    },
+    {
+      "nome": "anyio",
+      "versao": "4.15.1"
+    },
+    {
+      "nome": "certifi",
+      "versao": "2026.7.22"
+    },
+    {
+      "nome": "h11",
+      "versao": "0.16.0"
+    },
+    {
+      "nome": "mdurl",
+      "versao": "0.1.2"
+    }
+  ],
+  "wheels_cuda126_oficiais_python312": [
+    "https://download-r2.pytorch.org/whl/cu126/torch-2.14.1%2Bcu126-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=75727245346d8f92224a860bf40c56bd681edcfa0456d01d7dfcb0bf6f0cf86c",
+    "https://download-r2.pytorch.org/whl/cu126/torch-2.14.1%2Bcu126-cp312-cp312-win_amd64.whl#sha256=97e3bc87ea74367518b740d912a7f5259c25a3c8115bf5916abee1d53ff115a4"
+  ],
+  "windows_execucao_nativa": false,
+  "gpu_treino_executado": false,
+  "observacao": "A resolução PyPI Linux usa o wheel padrão CUDA 13; wrappers selecionam CUDA 12.6 antes das demais dependências. Compatibilidade real GPU precisa ser executada na máquina de treino."
+}

@@ -1,0 +1,11 @@
+{
+  "pagina": 8,
+  "texto": "n. Deseja-se encontrar o “ponto de m´aximo” p. Mostre como encontrar p\n    atrav´es de um algoritmo O(log n).\n\n\n      Solu¸c˜ao:\n\n\n\n\n\n10. Vocˆe est´a consultando para uma pequena empresa de investimentos.  Eles\n    est˜ao fazendo uma simula¸c˜ao em que eles olham para n dias consecutivos de\n  uma determinada a¸c˜ao, em algum momento no passado. Cara cada dia i = 1,\n    2, .  .  .  , n; eles tˆem o pre¸co pi da a¸c˜ao neste dia. Suponha que durante este\n    per´ıodo de tempo, eles queriam comprar 1.000 a¸c˜oes em alguns dias e vender\n   todas essas a¸c˜oes em algum dia (mais tarde). Eles querem saber: Quando eles\n   deveriam ter vendido, a fim de maximizar os lucros? Por exemplo, suponha\n   que n = 3,p1 = 9,p2 = 1,p3 = 5. Veja que deveria retornar “comprar em 2,\n   vender em 3”(compra no dia 2 e vender no dia 3 significa que eles teria feito 4\n   por a¸c˜ao, o m´aximo poss´ıvel para esse per´ıodo). Claramente, h´a um algoritmo\n   simples que leva tempo O(n2): tentar todos os poss´ıveis pares compra/venda\n   e ver qual deles faz mais dinheiro. Elabore um algoritmo para encontrar os\n    dias de compra e venda com tempo O(n logn).\n\n\n      Solu¸c˜ao:\n\n\n\n\n\n                                   Page viii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p8-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

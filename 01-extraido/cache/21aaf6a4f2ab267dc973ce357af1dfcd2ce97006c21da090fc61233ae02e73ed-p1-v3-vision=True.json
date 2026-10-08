@@ -1,0 +1,13 @@
+{
+  "pagina": 1,
+  "texto": "Lista de Exerc´ıcios 5\n\n                         8 de abril de 2022\n\n                     Engenharia de Computa¸c˜ao\n\n                        Lilian Giselly Pereira Santos\n                Pedro Henrique de Brito Nascimento\n         Projeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\n\n               Cap´ıtulo 5 - Programa¸c˜ao Dinˆamica\n\n1. Inteiros positivos s˜ao arranjados em um triˆangulo equil´atero com n n´umeros\n  em sua base, como o mostrado na figura abaixo para n = 4. O problema\n    ´e encontrar a menor soma em uma descida do ´apice do triˆangulo at´e sua\n  base por meio de uma sequˆencia de n´umeros adjacentes (mostrados na figura\n   pelos c´ırculos).  Projete um algoritmo de programa¸c˜ao dinˆamico para este\n  problema.\n\n\n     Solu¸c˜ao:\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p1-fig1.png",
+    "01-extraido\\figuras\\1a81ca283132\\p1-fig2.png",
+    "01-extraido\\figuras\\1a81ca283132\\p1-fig3.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

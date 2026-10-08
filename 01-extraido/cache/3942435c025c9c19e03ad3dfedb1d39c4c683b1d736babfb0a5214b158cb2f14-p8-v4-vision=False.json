@@ -1,0 +1,12 @@
+{
+  "pagina": 8,
+  "texto": "• clique bound: Faz uma decomposi¸c˜ao do grafo em um conjunto de cliques dis-\njuntas C1, C2, ..., Cr e soma os tamanhos das cliques, de modo que o limitante\ninferior ´e:\n\ni=r\nX\n\n(|Ci| −1)\n\ncliquebound =\n\ni=1\n\n• degree bound: Seleciona o v´ertice com maior grau, nomeando-o v′\n1 e atualiza o\ngrau dos outros v´ertices, seleciona agora o v´ertice de maior grau e o nomeia v′\n\n2\ne assim sucessivamente. Busca-se ent˜ao um v´ertice v′\n\ni tal que\n\nd(v′\n\n1) + d(v′\n2) + · · · + d(v′\ni) ≥|E|\n\nd(v′\n\n1) + d(v′\n2) + · · · + d(v′\ni−1) < |E|\n\nAssim o limitante inferior pode ser dado por:\n\ni+1 ∈H\n\ndegreebound = ⌊i +\n|E′|\nd(v′\n\ni + 1)⌋,\nv′\n\nonde G\\{v′\n\n1, v′\n2, ..., v′\ni} = (V ′, E′)\n\n• sat bound: Reduz o grafo G = (V,E) a uma instˆancia MaxSAT e se G pode ser\nparticionado em k cliques disjuntas e existem s subconjuntos inconsistentes na\ninstˆancia MaxSAT, ent˜ao o limitante inferior ´e dado por:\n\nsatbound = |V | + k + s\n\nAssim, o algoritmo pode ser dado por:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\ndefminimun_vertex_cover_b_bound(G,UpperB,S);\nif len(S)+max(degree_bound(G)，clique_bound(G),sat_bound(G))>=UpperB：\nreturnUpperB\nif len(G)\n==0：\nreturn len(S)\nV=select_max_dg_vert(G)\nsol1=minimun_vertex_cover_b_bound(remove(G,Neighbourhood(v)),UpperB,S.append(Neighbourhood(v)))\nsol2=minimun_vertex_cover_b_bound（remove（G,v),UpperB,S.append(v))\nreturn min(sol1,so12)\n\n\nPage viii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p8-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,293 @@
+{
+  "motivo": "Enriquecimento de procedência de respostas reais desta sessão; pesos conferidos com pesos-validacao.json. Não são novas gerações. Futuras mudanças de modelo invalidam o cache.",
+  "migracoes": [
+    {
+      "de": "Q1-generico-18914c34a6f6fb7f.json",
+      "para": "Q1-generico-02b5324c83b45dcd.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "83f1be7d4e8cdda6ffc064ba28b85e0c76d92a52df0ef89526ac41ff04f8943f"
+    },
+    {
+      "de": "Q1-controle_prompt-4e0ce02c50e1a226.json",
+      "para": "Q1-controle_prompt-9b313a6e79eadb8d.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "cb8d19772a6454b015f890cadbbce01b298a1fb7d3a417660694bf03892f6a4f"
+    },
+    {
+      "de": "Q1-rag_manual-7b8b46e97a8ad968.json",
+      "para": "Q1-rag_manual-f53cab9f04badb4f.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "62880eb18be4a3c2e5575d9ea87f8aec702319e6a35515b66c4380870d2ef18b"
+    },
+    {
+      "de": "Q1-rag_automatica-9514dee884916db1.json",
+      "para": "Q1-rag_automatica-f8201a9da2ebf45a.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "905537266117028487ca65de1cf8b7f34e537629043ee53a2254b721fd623a2c"
+    },
+    {
+      "de": "Q2-generico-5278fd24fd42ac69.json",
+      "para": "Q2-generico-27d8f8af0bd4a6df.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "1246754e4821937a82341eceb834fc8075940b6ccc5dcbd23b20f1eebb26de08"
+    },
+    {
+      "de": "Q2-controle_prompt-d333f58a80bbb052.json",
+      "para": "Q2-controle_prompt-d317218b8b245f67.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "dda3e9939bba62036097bfe7e152530062f8d7b9e50cd0fc5e36e771e6621a39"
+    },
+    {
+      "de": "Q2-rag_manual-7f2e903ea86c5b95.json",
+      "para": "Q2-rag_manual-554816e691dd7045.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "e0763b54c6fb12a7d4a2502f9b557c58ec4284c09c5ebfe98cc9f121d328248c"
+    },
+    {
+      "de": "Q2-rag_automatica-8c3ace405ff7efaa.json",
+      "para": "Q2-rag_automatica-71ea59e83a8a6564.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "3ea6e588ff0b85e471f8a7367681132df6184fe31615861cb6e3f530ad1ae5f0"
+    },
+    {
+      "de": "Q3-generico-92b2f9053a3b9210.json",
+      "para": "Q3-generico-9d934ed519b2a889.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "a667d65ee3fab272364f35c7450c3087216bac19f018edb1b427ad9c5c729154"
+    },
+    {
+      "de": "Q3-controle_prompt-8f2af53fe3e887df.json",
+      "para": "Q3-controle_prompt-36eba00f7a6c645e.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "c8341f803baa59660911b7119175b1e60ac0fcc9868ac02fe33781e9271c7405"
+    },
+    {
+      "de": "Q3-rag_manual-75b1adca5ae52c3e.json",
+      "para": "Q3-rag_manual-0b88137efbb3f5ad.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "9da5d097c417d1c79356e453db87cb038da806305b8d426c0094d333334a905a"
+    },
+    {
+      "de": "Q3-rag_automatica-d00cf06966688cbb.json",
+      "para": "Q3-rag_automatica-f0cb0036cbe3c921.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "a1632b29a48f5daccaa5bebb976decb39d2434ce60f2da981648cef7aa199c3a"
+    },
+    {
+      "de": "Q4-generico-de693f731764dcc5.json",
+      "para": "Q4-generico-1afabd3b7515890e.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "ee19da3d3f0e4713fc3fd7faddd02e3f1d97a765db4a3420c4da2df830eb1fce"
+    },
+    {
+      "de": "Q4-controle_prompt-f1539cdaa8aed805.json",
+      "para": "Q4-controle_prompt-506e2fd24161e988.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "1a53e50ffd8fa374520fd298fcfe8e6830c56d5ef226ca746de05aeb9c444129"
+    },
+    {
+      "de": "Q4-rag_manual-87b0c7871c8c1a3b.json",
+      "para": "Q4-rag_manual-882bd210680f1157.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "b7fb3bf132c6edd9d88dde47f1019c7f48894898637fb68cfcf02726c9409bb8"
+    },
+    {
+      "de": "Q4-rag_automatica-f7abe1ced1b425d7.json",
+      "para": "Q4-rag_automatica-2f012a83dcd0917a.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "62cec92d586daa927b9e24d4e9dfea377b19912f1b48534d1b9a0374a55726ae"
+    },
+    {
+      "de": "Q5-generico-f17dd0da3fa7c944.json",
+      "para": "Q5-generico-39cf38adf9c053b5.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "c2f575559ccc7c3717b1b5ab9f6b0adfecf353b7a5fdefcbcc1ac3f8584bebb2"
+    },
+    {
+      "de": "Q5-controle_prompt-0769c10eb1e74455.json",
+      "para": "Q5-controle_prompt-4b65834e235f4982.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "64f82b105808b0b872fd3551996328d0ce90c397d4fcc0fcc2bef8fbf070b5bc"
+    },
+    {
+      "de": "Q5-rag_manual-a18e82d930c6a9a2.json",
+      "para": "Q5-rag_manual-f6388b8a21e1253c.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "c72cd8fcf4bb8a49fd543d2260fbb14e9592b3d9f1d2f5d2f08a40e4baf21535"
+    },
+    {
+      "de": "Q5-rag_automatica-c54f502e97a21708.json",
+      "para": "Q5-rag_automatica-bb548a8069c86117.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "88b618f1a2f6812093a225962810b88031f1747c203152acbea46f1b67c56bd7"
+    },
+    {
+      "de": "Q6-generico-e7c04293401a64a4.json",
+      "para": "Q6-generico-e89d3e92a1282cd8.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "d7ee22a71c08e0418ae002edb595b73de4d3ada3226e7696b0dc70d709c21afe"
+    },
+    {
+      "de": "Q6-controle_prompt-9f9fcb5fef3e2ea9.json",
+      "para": "Q6-controle_prompt-e52cfea662899d8d.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "4a6416c1109b72023408adc60ef859ab80850b67db6d63afa1e2d14efdde18e8"
+    },
+    {
+      "de": "Q6-rag_manual-64f223db840253df.json",
+      "para": "Q6-rag_manual-68c1ad7a0f8f84b6.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "828fca1020d0fd00b1dc5416dd5e1667dbea4de519f87721eecb1e1b0decec23"
+    },
+    {
+      "de": "Q6-rag_automatica-b231a25c28fa6d60.json",
+      "para": "Q6-rag_automatica-3066ca4911cfb564.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "471aaae1df2dd83738e5e19afee0cd0f9acb4bbe5d5cd3dfb634a4800b23acd5"
+    },
+    {
+      "de": "Q7-generico-e75d7fca88f4fe05.json",
+      "para": "Q7-generico-683b2855fb2e9935.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "f93589ba438154947c1ac9a75669d242b79fc76b6314ff42a650e305de000459"
+    },
+    {
+      "de": "Q7-controle_prompt-be8f751152bc78aa.json",
+      "para": "Q7-controle_prompt-d037efdc61b71419.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "4923e27d570e4c75f89ff33aa9c390070e73716a2c850f89e17220d6dbec2299"
+    },
+    {
+      "de": "Q7-rag_manual-c8c0a745013900bc.json",
+      "para": "Q7-rag_manual-cf9050e6a7dd458e.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "726a9d50ea925bf8e8d6925b090eed626ceba715b30e6109be866b41c19068eb"
+    },
+    {
+      "de": "Q7-rag_automatica-f541013ef60a406e.json",
+      "para": "Q7-rag_automatica-2dff73bd09c7da33.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "93d7ea74aad4a4616b65db22f51b5305e305d7a685ecf6de359d597a77b112b6"
+    },
+    {
+      "de": "Q8-generico-1a6b7adc0ad24cc3.json",
+      "para": "Q8-generico-a150894cbd5bd672.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "b22d40fa165cd04adc750a57fc6f5b6ede1b1f807c90052402d7b92e8e0ce952"
+    },
+    {
+      "de": "Q8-controle_prompt-8f6ea331b5d5c103.json",
+      "para": "Q8-controle_prompt-6015eb777db5f49e.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "23316f024948dfa8974ff50a35d0b1e3ec1db21ecda12cbb425afe9c893b6103"
+    },
+    {
+      "de": "Q8-rag_manual-cdd1977d544f676a.json",
+      "para": "Q8-rag_manual-42738b88c529c894.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "03b3880a465984610aa2f8225c5cff97a42de5f6d9377845677748827a929100"
+    },
+    {
+      "de": "Q8-rag_automatica-77cd564f5102ee82.json",
+      "para": "Q8-rag_automatica-263c16a3709d6b47.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "ffafea6588195dd13cada0f9e313f1845dc16c5b0a3f4bc436c163151013f66f"
+    },
+    {
+      "de": "Q9-generico-dee3cb9333b44406.json",
+      "para": "Q9-generico-b3530e7361fadef0.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "26d4d50b0588ff1001ab62d92d074bd1993dd66f92ec22cee059bfb049ff1da3"
+    },
+    {
+      "de": "Q9-controle_prompt-228614da4044aab1.json",
+      "para": "Q9-controle_prompt-ebef2be02703ded8.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "69ac603ee1b0603e9404b8d25a6dfae1cb7cd6dd10cf408ea8d73e72ead98b58"
+    },
+    {
+      "de": "Q9-rag_manual-704e7c2e517596e4.json",
+      "para": "Q9-rag_manual-b64ecf5e3cef3b64.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "4f13d269c20217c05bff01e94746faf2412e9e2762e2bdb66271719317f624a3"
+    },
+    {
+      "de": "Q9-rag_automatica-0dbd23d7c22ed88a.json",
+      "para": "Q9-rag_automatica-aadd054de91167f1.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "1cd9f68d692163d34981015bec8eecf2ea10ec3e5d524135d2f2a297736c2752"
+    },
+    {
+      "de": "Q10-generico-344916b62d1b32da.json",
+      "para": "Q10-generico-3c784daa3a770ef9.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "7b673ad4ebe2c7ded9978e5085b0aaecf51e4bd7f06cd0aa419406c14a17fdc7"
+    },
+    {
+      "de": "Q10-controle_prompt-2affb3ee0ea7ed0c.json",
+      "para": "Q10-controle_prompt-3bf182d038477e7a.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "9dd06e8c2d44ea3980f6f8f5f3e54c2a3e1485da6d5216f3967d058f2416581d"
+    },
+    {
+      "de": "Q10-rag_manual-bccb911f71467058.json",
+      "para": "Q10-rag_manual-6e12bba62cd20793.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "b641776e6a5a965d4c9daaf6cdc746aed08006921cbbfee3f3109b07c708bb78"
+    },
+    {
+      "de": "Q10-rag_automatica-e16cd604f274ef7b.json",
+      "para": "Q10-rag_automatica-e7d8a45213107188.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "47a2d31f0b13fd389a7135d2dcc05d2c127ec1efed477608e4ecdad9242ff293"
+    },
+    {
+      "de": "Q11-generico-b23d965aa531eb5d.json",
+      "para": "Q11-generico-14c981dbfac16ff2.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "56781358bfb6ce378aefdd9242e0a91d0e1ba30ed4444488715f9f81605fff47"
+    },
+    {
+      "de": "Q11-controle_prompt-2e03c6e3b2916230.json",
+      "para": "Q11-controle_prompt-360c172838b200cd.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "b7a295dac35490b0dd7389569672de3d9772d1726371811c8e56f8b6183a02f1"
+    },
+    {
+      "de": "Q11-rag_manual-fc0e74dc65ee5099.json",
+      "para": "Q11-rag_manual-a7c192e489dddbbe.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "22aaaa61ff77128b59a8e98ccf4bdddc3799192338e79a45ae4260e86545f07f"
+    },
+    {
+      "de": "Q11-rag_automatica-f1ee4417d8a1f866.json",
+      "para": "Q11-rag_automatica-ce3245f4731c798a.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "0ac5ca82ce710384db106b8e122fce6c924b33e397c72febdcab2e9c541fe9e5"
+    },
+    {
+      "de": "Q12-generico-bd9f51744b0e9c2e.json",
+      "para": "Q12-generico-6a74d2afabab83f3.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "401834617c0318aa27618a810c142e12cb95476d0aab2e64811c5d71695c1458"
+    },
+    {
+      "de": "Q12-controle_prompt-feb433a6e0afdc18.json",
+      "para": "Q12-controle_prompt-b86e82301e016745.json",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "resposta_sha256": "37e53bbddfaf5768d20e83381b059373c21104488613ce76f9f67468d3187cb1"
+    },
+    {
+      "de": "Q12-rag_manual-5a3fe6af4f302ba9.json",
+      "para": "Q12-rag_manual-09d3ed1acae64661.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "37e53bbddfaf5768d20e83381b059373c21104488613ce76f9f67468d3187cb1"
+    },
+    {
+      "de": "Q12-rag_automatica-3f8f4db53a4d3f6d.json",
+      "para": "Q12-rag_automatica-29051bd418193230.json",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "resposta_sha256": "0aa1e33f5739256f458fe0f1a41f7fb524d57b8cfc0c9467cc3f0b875b399f6a"
+    }
+  ]
+}

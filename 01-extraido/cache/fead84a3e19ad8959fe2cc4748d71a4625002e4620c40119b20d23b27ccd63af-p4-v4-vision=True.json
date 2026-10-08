@@ -1,0 +1,18 @@
+{
+  "pagina": 4,
+  "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\npectiemente\n[incerto] paasasariatsebondesefcopady\nes\n[incerto] elementodgvalqvev\n[incerto] A[s...]\n[incerto] -Dadvme\n[incerto] pequ\n3\n[incerto] Sunso5cn),eu\n[incerto] Sungi\n[incerto] Dosibns\n[incerto] 250013\n[incerto] Cens,ron\n[incerto] UOKgCn1≤c.5),n2no\n[incerto] 2-\n[incerto] Cim\n[incerto] 2on²+5on65n+5\n[incerto] Sone\n[incerto] Con²+omen+5e（n)qemp\n70\n[incerto] TeConSonlgn+5O（n).Porotoe(dade.\n[incerto] 3—\n075\n[incerto] 37r3u\n[incerto] Y-DdUSuncan\n[incerto] 5m),ev\n[incerto] gms0lsa)gc）cenosttssitistaisge\n[incerto] n#no",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p4-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\320662691e44\\p4-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

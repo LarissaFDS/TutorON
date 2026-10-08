@@ -1,0 +1,24 @@
+{
+  "id": "5ee2f9c93b11",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\gabaritoprova.webp",
+  "copia": "00-originais\\ingestao\\abb2bd26a00a565defabed587dffaf3d36769cd5cc0543a26278e4bb9b1542fb\\gabaritoprova.webp",
+  "sha256": "abb2bd26a00a565defabed587dffaf3d36769cd5cc0543a26278e4bb9b1542fb",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "“todo o pork Sire\n\nmma (A opondo quado 8\n\na Cab yor\n; op\n\n! n ag amie cou comer SE\nie Ps “ou mo CONAMA o amo opantas TE\nDa we ope CI Fe iat\nbra Qt TN ç quem)\n\na Pá: sphagd yar‘ weay\n\nq 7 0 MT BPME RO cma rar “O TIP row O \\ al\n\nsubndgn 9\" Nf BL peça ODAS X O coREMMBAe POP\n‘apdmpar we cp © opunbey topped | ey + ib op cavar\nvaquçod “ços are ‘fu o TC om ny sra * [ee aan “TTY\nwarn “op Ur nego nana @ pao X vu or x\nconde qorp ui TOPA ari op sp <td amp qu\n\n_ careers ea paço apro WED MY op gs ep quis\n\nwae ap 4 figo q À wr\n> Quy Srs GOD TP WF wo yO}\nexpaod amp US © - mY ip i Ni ~\n\nx\n\neqhuoxcore” AP\n\noe wh [A weranh x OD Sdumonouy Spa arm\nagua YP Cai é wm 4\n\nTr\n\nM\nNPY Bplay w? repo um wy\nPR ad NANA XK uy Q acorpir Te get\nmom 9 E\npage 4\ni nT TS opção “E WANT OL ror and Ê\npoi SN o Erabgo o +\nd\nár oowr oor ae wo mu W OPS WN SENNA 15 ma aan\nur = = q\n\nLays\nau O MUDO WN X swyney E s\nvo xp pop ae O A PNQ ums\nxp Oye ou yor omy ABATED prq ox W aad\nRaio agro © PSA x dayne bp q\n\npa o\n2 aman)\n\nasp WA uz OM\n\nVea connçoy",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\5ee2f9c93b11\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "questao": "Q9",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "d455baef2cdf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, podemos aplicar um algoritmo semelhante ao do algoritmo de ordenação por inversão de prefixo (ou pancake sorting). Vamos detalhar o processo e calcular a quantidade de inversões e o custo total de movimentação de elementos.\n\n### Passo a Passo do Algoritmo\n\n1. **Encontre o maior elemento na pilha**:\n   - O maior elemento deve estar no topo da pilha para que possamos empilhá-lo corretamente.\n\n2. **Inverter a pilha para que o maior elemento esteja no topo**:\n   - Se o maior elemento não estiver no topo, inverta a pilha até que ele esteja no topo.\n\n3. **Empilhe o maior elemento**:\n   - Remova o maior elemento do topo da pilha e coloque-o no final da pilha ordenada.\n\n4. **Repita o processo para a subpilha restante**:\n   - Continue o processo com a subpilha restante até que a pilha esteja completamente ordenada.\n\n### Exemplo\n\nSuponha que temos a pilha de panquecas: `[3, 2, 4, 1]`.\n\n1. **Passo 1: Encontre o maior elemento**:\n   - O maior elemento é `4`.\n\n2. **Passo 2: Inverter a pilha para que o maior elemento esteja no topo**:\n   - A pilha atual é `[3, 2, 4, 1]`. Inverta a pilha até que `4` esteja no topo: `[1, 2, 3, 4]`.\n\n3. **Passo 3: Empilhe o maior elemento**:\n   - Remova `4` do topo da pilha: `[1, 2, 3]`.\n\n4. **Passo 4: Repita o processo para a subpilha restante**:\n   - Agora temos a subpilha `[1, 2, 3]`. O maior elemento é `3`.\n   - Inverta a subpilha até que `3` esteja no topo: `[2, 1, 3]`.\n   - Empilhe `3`: `[2, 1]`.\n\n5. **Passo 5: Repita o processo para a subpilha restante**:\n   - Agora temos a subpilha `[2, 1]`. O maior elemento é `2`.\n   - Inverta a subpilha até que `2` esteja no topo: `[1, 2]`.\n   - Empilhe `2`: `[1]`.\n\n6. **Passo 6: Finalmente, empilhe o último elemento**:\n   - Remova `1` do topo da pilha: `[ ]`.\n\n### Contagem de Inversões e Custo Total\n\n- **Inversões**: Cada vez que invertemos a pilha para trazer o maior elemento ao topo, isso é considerado uma inversão.\n- **Custo total de movimentação**: Cada movimento de um elemento da pilha para cima ou para baixo é considerado um movimento.\n\n#### Exemplo de Contagem\n\n1. **Primeira inversão**: `[3, 2, 4, 1]` → `[1, 2, 3, 4]` (1 inversão)\n2. **Empilhar `4`**: `[1, 2, 3]` (0 movimentos)\n3. **Segunda inversão**: `[1, 2, 3]` → `[3, 2, 1]` (1 inversão)\n4. **Empilhar `3`**: `[2, 1]` (0 movimentos)\n5. **Terceira inversão**: `[2, 1]` → `[1, 2]` (1 inversão)\n6. **Empilhar `2`**: `[1]` (0 movimentos)\n7. **Empilhar `1`**: `[ ]` (0 movimentos)\n\n#### Resultados Finais\n\n- **Total de inversões**: 3\n- **Total de movimentações**: 0 (exceto as inversões, que são consideradas movimentações)\n\n### Conclusão\n\nO algoritmo de inversão de prefixo para ordenar uma pilha de panquecas tem um custo de inversão (movimentação) que pode ser eficiente, mas o número de inversões pode variar dependendo da ordem inicial da pilha. Em média, o algoritmo de inversão de prefixo tem um tempo de complexidade de O(n^2) em termos de inversões, onde n é o número de elementos na pilha.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 20.436999999999898,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

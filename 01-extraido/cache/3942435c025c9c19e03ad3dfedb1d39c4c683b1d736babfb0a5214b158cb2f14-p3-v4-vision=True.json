@@ -1,0 +1,18 @@
+{
+  "pagina": 3,
+  "texto": "caminhos hamiltonianos. Para expandir o sub problema do caminho hamiltoniano\ncome¸cando em ’s’ em um grafo G, devemos quebr´a-lo em subproblemas onde o i-´esimo\nsubproblema ser´a uma instˆancia desse problema come¸cando no i-´esimo vizinho de ’s’\nem G.\n\n3. Escolha um problema de otimiza¸c˜ao e dˆe um exemplo de uma execu¸c˜ao de\num algoritmo branch-and-bound sobre o problema escolhido.\nEscolha um\ninstˆancia pequena. Isso implica decidir:\na) Como calcular um limitante para o problema?\nb) Como vocˆe expandir um n´o em subproblemas?\nc) Qual subproblema escolher?\n\nSolu¸c˜ao: O problema escolhido ser´a o TSP. O limitante pode ser calculado a partir\nda redu¸c˜ao das linhas e colunas da matriz de adjacˆencia e ter´a um custo de pelo menos\no custo acumulado para reduzir tanto as linhas, quanto as colunas. O processo de\nredu¸c˜ao ´e simplesmente calcular o valor m´ınimo de cada linha e subtrair de cada\nelemento, bem como calcular o valor m´ınimo de cada coluna e subtrair dos mesmos.\nO custo acumulado de cada linha e cada coluna ´e o limitante inferior para o custo\ndo caminho do caixeiro viajante.\nJ´a o limitante superior ´e inicialmente infinito.\nO crit´erio de escolha dos subproblemas ser´a o custo acumulado do caminho, at´e o\nsubproblema em quest˜ao da ´arvore gerada no problema do TSP. O subproblema a se\nescolher ´e, portanto, aquele que minimiza o custo da viagem do caixeiro. Considere\na seguinte instˆancia do TSP:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n1\n3\n4\n2\n5\n3\n\n\nPara estimar o custo inicial do tour, temos que:\n\nPage iii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p3-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p3-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

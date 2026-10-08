@@ -1,0 +1,11 @@
+{
+  "pagina": 6,
+  "texto": "7. Resolver o problema da Torre de Han´oi quando se disp˜oe de 4 torres, em vez\n  de 3. Determinar o n´umero de movimentos de disco.\n\n\n     Solu¸c˜ao: O funcionamento do problema da Torre de Han´oi consiste em mover os\n     discos de uma torre para outra, desde que obede¸ca duas regras b´asicas:\n\n        1. S´o pode mover um disco por vez.\n\n        2. Um disco maior nunca pode ser colocado em cima de um disco menor.\n\n     Al´em disso, os discos da torre inicial est˜ao dispostos em ordem decrescente, de baixo\n    para cima e devem estar do mesmo modo na torre final. Originalmente, o problema\n     ocorre com 3 torres: A, B e C, onde uma  ´e de origem, outra de destino e outra\n     auxiliar. A proposi¸c˜ao do enunciado, no entanto, prop˜oe a resolu¸c˜ao do problema\n    com 4 torres, sendo 2 delas auxiliares. Para a resolu¸c˜ao do problema, temos:\n\n\n\n\n\n    Para n = 0, temos T(0) = 0;\n\n    Para n = 1, temos T(1) = 1, onde:\n\n    A fun¸c˜ao moveTower() ´e chamada uma ´unica vez;\n\n    Para n = 2, temos T(2) = 3, onde:\n\n    A fun¸c˜ao moveTower() move o disco 1 da origem para a torre auxiliar 2;\n    A fun¸c˜ao moveTower() move o disco 2 da origem para o destino;\n    A fun¸c˜ao moveTower() move o disco 1 da torre 2 para o destino;\n\n\n\n                                  Page vi\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p6-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

@@ -1,0 +1,18 @@
+{
+  "pagina": 5,
+  "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n(neste caso f(n) = Θ(g(n))):\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nf(n)\ng(n)\n(1)\nn-10\nn-200\n(2)\nn1/2\nn2/3\n(3)\n100n+logn\nn+(logn)²\n(4)\nlog2n\nlog3n\n(5)\n10logn\nlog(n\")\n(6)\nn1,01\nnlog² n\n(7)\nn²/logn\nn(logn)2\n(8)\nn01\n(logn) 0\n(9)\n(log n)logn\nn/logn\n(O1)\n[incerto] √n\n(log n)3\n(11)\nn1/2\n5l0g2 n\n(12)\nn2n\n3\n(13)\n[incerto] 2n\n2n+1\n(14)\nn!\n[incerto] 2n\n(ST)\n(log n)logn\n2(log2 n)2\n(91)\n∑ik\nnk+1\ni=1\n\n\nSolu¸c˜ao:\n\n1. f(n) = Θ(g(n))\n\n2. f(n) = O(g(n))\n\n3. f(n) = Θ(g(n))\n\n4. f(n) = O(g(n))\n\n5. f(n) = Θ(g(n))\n\n6. f(n) = O(g(n))\n\n7. f(n) = Ω(g(n))\n\n8. f(n) = Ω(g(n))\n\n9. f(n) = O(g(n))\n\n10. f(n) = Ω(g(n))\n\n11. f(n) = O(g(n))\n\nPage v",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

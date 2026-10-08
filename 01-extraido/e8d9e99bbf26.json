@@ -1,0 +1,24 @@
+{
+  "id": "e8d9e99bbf26",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(5).webp",
+  "copia": "00-originais\\ingestao\\1e1907331268df3077f806391d21f183788f22f6719a34dd843b9759f590da5a\\WhatsApp_Image_2025-01-12_at_13.13.32_(5).webp",
+  "sha256": "1e1907331268df3077f806391d21f183788f22f6719a34dd843b9759f590da5a",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "7 > (ma\neur\nPre Aare qn On unifoid wo ovdenuroy aqumnges e a (q ‘A)5 opes tum Ope\n:[oquod 1] ¢ ovyson®\njord osso 19, pure 9] 2 (9 “g ‘9) ‘fo\ns sown: =yo¢ 1S >I Of yeqoo ‘y e jendt\nDA TUIOS BIEN 1910 & VULTOS ap sopep 1 rout op sed tin opra\n[soyuod 7) + ogysant)\n: som O reurmuajap vied out oJ ‘40110 )UR OF eanisod ovSnjos eum epeq\n:[oqued 1] ¢ ov3sen®\n4 ota exo vfos saro[va sop emos vino F 5, oNMfuooqns t x sogasont\n} ONOWUT UM 9 'SOAHISOd somo sorOTRA NOS | Ojunínoo mp) :Epeua\ngu fo eared (permourod-opr nb ajou) vormeutp ovsy 2p ouros PSouIo\n[soquod z] z oeisond)\n9110991 ap ovSefar 8 AMSOJ “4 DX vpragao op suomanbesqns\nvd ounHoS}y um outomo(dut “p ontotifiduioo tão) * 49 xº Suraignbos Su sugiro w unido O\n1'9'4) Mougnbas v o 'g oouraduroo ui) onber* 4 o x ap (TOS) e8 am »tonbosqns\nwou UNIO ON “A @ X seque op unos voUsAbesqns e aro auanbos\nVa} = 4» lava a oa) <x durex 10d +4 op oqwenb x op our srougebacgne\nPane x wo wouanbasqns wun y Z wouONbas vam aNd sowDEp +4 à XY sutoupabos senp sepld\n:[soguod z) 1 orysand)\nPe0g ap outosaray ap TE\noxoquia prqeo uvny Jorg\nBACT of\n\nsounpezry ap asyyuy a ogofosg\n\nPOTS HP Cayres erram en",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\e8d9e99bbf26\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

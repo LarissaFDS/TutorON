@@ -1,0 +1,56 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "70d6475b28bf-q3-3",
+    "6301b3b327fc-q4-4",
+    "7b4da6a8adf7-q9-9",
+    "2df6e1818523-q3-6"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "d455baef2cdf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0.07800000000042928,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, podemos seguir um algoritmo baseado no princípio do algoritmo de ordenação por inversão de prefixo (prefix reversal, também conhecido como pancake sorting). Vamos detalhar o processo e diferenciar a quantidade de inversões de prefixo da quantidade total de movimentações de panquecas.\n\n### Passos do Algoritmo\n\n1. **Encontre o maior elemento na pilha**:\n   - Identifique o maior elemento na pilha. Suponha que este elemento está na posição `i`.\n\n2. **Inverter a pilha até que o maior elemento esteja no topo**:\n   - Realize uma inversão de prefixo para mover o maior elemento para a posição 1. Isso pode ser feito invertendo os elementos do início até a posição `i`.\n\n3. **Inverter a pilha para colocar o maior elemento na posição correta**:\n   - Realize uma inversão de prefixo para mover o maior elemento para a posição `n` (posição final).\n\n4. **Repetir o processo para a subpilha restante**:\n   - Repita os passos 1 a 3 para a subpilha restante (excluindo o maior elemento já colocado no lugar).\n\n### Exemplo\n\nConsidere a pilha de panquecas com tamanhos `[3, 2, 4, 1]`.\n\n1. **Passo 1: Encontre o maior elemento**:\n   - O maior elemento é `4`, que está na posição 3.\n\n2. **Passo 2: Inverter a pilha até que o maior elemento esteja no topo**:\n   - Inverta os elementos do início até a posição 3: `[3, 2, 4, 1]` → `[4, 2, 3, 1]`.\n\n3. **Passo 3: Inverter a pilha para colocar o maior elemento na posição correta**:\n   - Inverta a pilha completa: `[4, 2, 3, 1]` → `[1, 3, 2, 4]`.\n\n4. **Passo 4: Repetir o processo para a subpilha restante**:\n   - Subpilha restante: `[1, 3, 2]`.\n   - Encontre o maior elemento: `3` (posição 2).\n   - Inverta os elementos do início até a posição 2: `[1, 3, 2]` → `[3, 1, 2]`.\n   - Inverta a subpilha completa: `[3, 1, 2]` → `[2, 1, 3]`.\n\n5. **Passo 5: Repetir o processo para a subpilha restante**:\n   - Subpilha restante: `[2, 1]`.\n   - Encontre o maior elemento: `2` (posição 1).\n   - Inverta os elementos do início até a posição 1: `[2, 1]` → `[1, 2]`.\n\n6. **Passo 6: Subpilha restante: `[1]`**:\n   - A pilha já está ordenada.\n\n### Quantidade de Inversões de Prefixo\n\n- **Inversões de prefixo**: O número de inversões de prefixo é o número de vezes que o maior elemento é movido para o topo da pilha.\n- **Custo total de movimentação**: O custo total de movimentação é o número total de movimentos de panquecas realizados durante o processo.\n\n### Complexidade\n\n- **Complexidade do algoritmo**: O algoritmo de ordenação por inversão de prefixo tem uma complexidade de tempo de \\(O(n^2)\\) no pior caso, pois pode levar a \\(n\\) inversões de prefixo para ordenar \\(n\\) panquecas.\n\n### Resumo\n\n- **Quantidade de inversões de prefixo**: O número de vezes que o maior elemento é movido para o topo da pilha.\n- **Custo total de movimentação**: O número total de movimentos de panquecas realizados durante o processo.\n\n### Exemplo de Implementação\n\n```python\ndef flip(pile, k):\n    # Inverte os primeiros k elementos da pilha\n    pile[:k] = pile[:k][::-1]\n\ndef pancake_sort(pile):\n    n = len(pile)\n    steps = []\n    for size in range(n, 1, -1):\n        max_index = pile.index(max(pile[:size]))\n        if max_index != size - 1:\n            if max_index != 0:\n                flip(pile, max_index + 1)\n                steps.append(max_index + 1)\n            flip(pile, size)\n            steps.append(size)\n    return steps\n\n# Exemplo de uso\npile = [3, 2, 4, 1]\nsteps = pancake_sort(pile)\nprint(\"Passos:\", steps)\n```\n\nEste código implementa o algoritmo de ordenação por inversão de prefixo e retorna os passos necessários para ordenar a pilha.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 24.842999999999847,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

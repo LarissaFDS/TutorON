@@ -1,0 +1,9 @@
+# 1a81ca283132-q9-9
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L5.pdf | página(s): 9
+
+Versão derivada corrigida por agente; original SHA-256: 654d92eb658e0d939c534fed67c4905ca2781457a5ed542ce8b34deccf9ae0f4. Não é aprovação do professor.
+
+Quantidade de caminhos simples distintos entre s e t.
+Em um DAG, inicialize count[t]=1 e processe os vértices em ordem topológica inversa: count[u]=sum(count[v]) para sucessores v de u. A resposta é count[s]. O tempo é O(|V|+|E|) operações aritméticas, com inteiros potencialmente grandes.
+O enunciado fala em grafo simples geral, que pode ter ciclos. Nesse caso, ordenação topológica não se aplica. Uma solução exata usa DP por subconjuntos: D[S,v] conta caminhos iniciados em s que visitam exatamente S e terminam em v. Base D[{s},s]=1; para aresta v->w com w fora de S, acrescente D[S,v] a D[S union {w},w]. Some D[S,t] sobre S. Tempo O(2^n n^2) em implementação densa e memória O(2^n n). Em grafo não dirigido, trate cada aresta em ambos os sentidos. Não confundir contagem de caminhos simples com caminhadas que repetem vértices.

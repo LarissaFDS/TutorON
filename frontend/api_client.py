@@ -47,8 +47,8 @@ def send_student_question(question_text: str, context_text: Optional[str] = None
     }
 
     try:
-        # Requisição isolada da interface, com timeout de 30 segundos (IA pode demorar um pouco)
-        response = httpx.post(endpoint, json=payload, timeout=30.0)
+        # Allow the backend's bounded embedding/generation retries and fallback.
+        response = httpx.post(endpoint, json=payload, timeout=120.0)
         
         # Tratamento de erros HTTP baseados nos contratos definidos
         if response.status_code == 422:
@@ -56,6 +56,9 @@ def send_student_question(question_text: str, context_text: Optional[str] = None
         
         if response.status_code == 502:
             raise AIServiceError("O serviço de IA falhou ao processar a requisição.")
+
+        if response.status_code == 503:
+            raise AIServiceError("O serviço de IA está temporariamente indisponível. Tente novamente em instantes.")
             
         if response.status_code == 500:
             raise InternalServerError("Ocorreu um erro interno no backend.")

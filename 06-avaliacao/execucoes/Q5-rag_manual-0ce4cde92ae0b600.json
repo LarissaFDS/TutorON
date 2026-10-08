@@ -1,0 +1,53 @@
+{
+  "questao": "Q5",
+  "cenario": "rag_manual",
+  "fontes": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "### Resposta\n\n**a) A árvore geradora mínima continua mínima?**\n\n**Resposta:** Não, a árvore geradora mínima pode mudar. \n\n**Justificativa:** Quando somamos 1 ao peso de cada aresta, o custo total de qualquer árvore geradora aumenta em 1 para cada aresta. No entanto, isso não garante que a árvore geradora mínima original permaneça a mesma. Isso ocorre porque a mudança no peso pode alterar a ordem de custo entre as arestas, potencialmente mudando a árvore geradora mínima.\n\n**Exemplo:**\n\nConsidere um grafo com 4 vértices (A, B, C, D) e as seguintes arestas com pesos originais:\n- A-B: 1\n- A-C: 2\n- B-C: 3\n- B-D: 4\n- C-D: 5\n\nA árvore geradora mínima original seria A-B (peso 1) e A-C (peso 2), com um custo total de 3.\n\nAo somar 1 ao peso de cada aresta, os novos pesos seriam:\n- A-B: 2\n- A-C: 3\n- B-C: 4\n- B-D: 5\n- C-D: 6\n\nA nova árvore geradora mínima seria A-B (peso 2) e B-D (peso 5), com um custo total de 7. Note que a aresta A-C (que tinha peso 2) foi substituída pela aresta B-D (que tinha peso 4).\n\n**b) Os caminhos mínimos mudam?**\n\n**Resposta:** Sim, os caminhos mínimos podem mudar.\n\n**Justificativa:** Aumentar o peso de cada aresta igualmente não afeta a ordem relativa dos caminhos, mas pode mudar o custo total de alguns caminhos, fazendo-os mais caros e potencialmente mudando o caminho mínimo.\n\n**Exemplo:**\n\nConsidere o mesmo grafo anterior, mas agora com um caminho específico:\n- Caminho s → A → B → C → t: originalmente com custo 6 (s → A: 1, A → B: 1, B → C: 1, C → t: 3).\n\nAo somar 1 ao peso de cada aresta, o caminho s → A → B → C → t passa a ter um custo de 10 (s → A: 2, A → B: 2, B → C: 2, C → t: 5).\n\nNo entanto, o caminho s → t (que originalmente tinha custo 4) agora tem um custo de 8 (s → t: 4 + 4).\n\nPortanto, o caminho s → t se torna o novo caminho mínimo.\n\n**Conclusão:**\n- A árvore geradora mínima pode mudar.\n- Os caminhos mínimos podem mudar.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 13.890999999999622,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

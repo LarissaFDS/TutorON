@@ -1,0 +1,65 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_manual",
+  "fontes": [
+    "d455baef2cdf-q1-1"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "d455baef2cdf-q1-1"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "Para ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo, podemos projetar um algoritmo baseado no algoritmo de ordenação por pancake flipping. Vamos detalhar o processo e calcular a quantidade de inversões e o custo total de movimentar elementos.\n\n### Algoritmo de Ordenação por Pancake Flipping\n\n1. **Identificar a maior panqueca não ordenada:**\n   - Encontrar a posição da maior panqueca na pilha.\n   - Inverter a pilha para que a maior panqueca fique no topo.\n\n2. **Inverter a pilha para posicionar a maior panqueca na posição correta:**\n   - Inverter a pilha desde o início até a posição da maior panqueca.\n   - Inverter a pilha completa para posicionar a maior panqueca na posição correta.\n\n3. **Repetir o processo para o subvetor restante:**\n   - Reduzir o problema para o subvetor restante e repetir os passos acima.\n\n### Implementação do Algoritmo\n\n```c\n#include <stdio.h>\n\n// Função para inverter a pilha de panquecas\nvoid flipPancakes(int *V, int start, int end) {\n    while (start < end) {\n        int temp = V[start];\n        V[start] = V[end];\n        V[end] = temp;\n        start++;\n        end--;\n    }\n}\n\n// Função para encontrar a posição da maior panqueca\nint findBiggerPancake(int *V, int n) {\n    int bigger = 0;\n    for (int i = 1; i < n; i++) {\n        if (V[i] > V[bigger]) {\n            bigger = i;\n        }\n    }\n    return bigger;\n}\n\n// Função principal para ordenar a pilha de panquecas\nvoid pancakeSort(int *V, int n) {\n    if (n == 1) {\n        printf(\"Todas as panquecas foram empilhadas!\\n\");\n        return;\n    }\n\n    int posBigger = findBiggerPancake(V, n);\n    flipPancakes(V, 1, posBigger); // Inverter a pilha para que a maior panqueca fique no topo\n    flipPancakes(V, 1, n); // Inverter a pilha completa para posicionar a maior panqueca na posição correta\n\n    pancakeSort(V, n - 1); // Recursivamente ordenar o subvetor restante\n}\n\nint main() {\n    int V[8] = {0, 2, 3, 1, 6, 4, 5, 7}; // Começa com as panquecas empilhadas como na figura\n    pancakeSort(V, 7);\n    printf(\"Essa eh a pilha atual de panquecas:\\n\");\n    for (int i = 1; i <= 7; i++) {\n        printf(\"%d-\", V[i]);\n    }\n    return 0;\n}\n```\n\n### Análise de Complexidade\n\n1. **Quantidade de Inversões:**\n   - Para cada iteração, encontramos a maior panqueca e a invertimos para o topo.\n   - Em seguida, invertemos a pilha completa para posicionar a maior panqueca na posição correta.\n   - No pior caso, para uma pilha de \\( n \\) panquecas, precisamos realizar \\( n-1 \\) operações de inversão.\n\n2. **Custo Total de Movimentação de Elementos:**\n   - Cada operação de inversão envolve movimentar todos os elementos na pilha.\n   - No pior caso, cada operação de inversão custa \\( O(n) \\).\n   - Portanto, o custo total de movimentação de elementos é \\( O(n^2) \\).\n\n### Conclusão\n\nO algoritmo de ordenação por pancake flipping realiza \\( O(n^2) \\) operações no pior caso, onde \\( n \\) é o número de panquecas. Isso ocorre porque, para cada iteração, precisamos encontrar a maior panqueca e realizar duas operações de inversão, resultando em um total de \\( 2(n-1) \\) operações de inversão, cada uma custando \\( O(n) \\).",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 19.34400000000005,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "start",
+    "start",
+    "end",
+    "end",
+    "bigger"
+  ],
+  "citacoes_ids_invalidos": [
+    "start",
+    "start",
+    "end",
+    "end",
+    "bigger"
+  ]
+}

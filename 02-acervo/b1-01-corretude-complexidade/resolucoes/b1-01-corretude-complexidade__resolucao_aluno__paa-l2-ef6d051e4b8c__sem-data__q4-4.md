@@ -1,0 +1,116 @@
+# ef6d051e4b8c-q4-4
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L2.pdf | página(s): 5, 6
+
+4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos
+(neste caso f(n) = Θ(g(n))):
+
+
+[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
+qd)
+(2)
+(3)
+(4)
+(5)
+(6)
+(7)
+(8)
+(9)
+(10)
+ay
+(12)
+(13)
+(14)
+(15)
+
+(16)
+
+f(n)
+
+n-10
+
+n!!2
+100n + log nm
+log2n
+10logn
+nb
+n’/logn
+nol
+
+logn
+
+(log n)
+vn
+
+n!'2
+
+n2"
+
+Qn
+
+n!
+
+(log n)'°8"
+
+Le
+
+i=l
+
+g(n)
+n—200
+
+nº!3
+
+n+ (logn)?
+log3n
+log(n?)
+nlog? n
+n(logn)?
+(logn)!°
+nilogn
+(log n)?
+slogan
+3"
+
+pm
+
+on
+
+pilog, n)?
+
+nt+1
+
+
+Solu¸c˜ao:
+
+1. f(n) = Θ(g(n))
+
+2. f(n) = O(g(n))
+
+3. f(n) = Θ(g(n))
+
+4. f(n) = O(g(n))
+
+5. f(n) = Θ(g(n))
+
+6. f(n) = O(g(n))
+
+7. f(n) = Ω(g(n))
+
+8. f(n) = Ω(g(n))
+
+9. f(n) = O(g(n))
+
+10. f(n) = Ω(g(n))
+
+11. f(n) = O(g(n))
+
+Page v12. f(n) = O(g(n))
+
+13. f(n) = Θ(g(n))
+
+14. f(n) = Ω(g(n))
+
+15. f(n) = O(g(n))
+
+16. f(n) = O(g(n))

@@ -1,0 +1,24 @@
+{
+  "base": "qwen2.5:3b",
+  "tutor": "tutoron-paa",
+  "base_pesos": [
+    "sha256:5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6"
+  ],
+  "tutor_pesos": [
+    "sha256:5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6"
+  ],
+  "mesmos_pesos": true,
+  "fine_tuning": false,
+  "seguimento_7b": {
+    "base": "qwen2.5:7b",
+    "tutor": "tutoron-paa-7b",
+    "base_pesos": [
+      "sha256:2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730"
+    ],
+    "tutor_pesos": [
+      "sha256:2bada8a7450677000f678be90653b85d364de7db25eb5ea54136ada5f3933730"
+    ],
+    "mesmos_pesos": true,
+    "fine_tuning": false
+  }
+}

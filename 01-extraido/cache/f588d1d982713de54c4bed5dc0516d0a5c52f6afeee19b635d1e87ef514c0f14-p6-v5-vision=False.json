@@ -1,0 +1,14 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n• Problema do Caminho com Pares Proibidos\nEntrada: Um grafo direcionado G=(V,A), v´ertices s, t ∈V , uma lista de pares\nC = {(a1, b1), (a2, b2), ..., (an, bn)} de v´ertices\nSa´ıda: Existe um caminho direcionado de s para t em G tal que contenha no\nm´aximo um dos v´ertices para cada par de C.\n\ne.g.:\nEntrada: Um grafo direcionado G=(V,A)\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nOs v´ertices s=1,t=4, a lista de pares C = {(1,2), (2,3),(3,5),(1,4)}\n\nSa´ıda: SIM, Solu¸c˜ao: (1,2), (2,3),(3,5),(5,2),(1,4)\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n5. Considere os problemas a seguir.\nPROBLEMA PARTIC¸ ˜AO(A,n):\nDado um vetor A[1,...,n] de n´umeros inteiros positivos, decidir se existe um\nsubconjunto I de 1,...,n tal que\n\nX\n\nX\n\nA[i] =\n\nA[i]\n\ni ∈I\n\ni /∈I\n\nPROBLEMA TRI-PARTIC¸ ˜AO(A,n):\n\nPage vi",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\f38bb8142136\\p6-fig1.png",
+    "01-extraido\\figuras\\f38bb8142136\\p6-fig2.png",
+    "01-extraido\\figuras\\f38bb8142136\\p6-fig3.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

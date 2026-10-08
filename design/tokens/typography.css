@@ -1,0 +1,37 @@
+/* TutorON — tipografia.
+   Três vozes, cada uma com um papel:
+   - reading: o que a IA respondeu. Serifa de apostila para leitura longa.
+   - ui: a interface (rótulos, botões, títulos). Sans do sistema; recua.
+   - code: pseudocódigo e código, como nas provas da disciplina.
+   Todas são fontes locais: a validação precisa funcionar sem internet.
+
+   Escala com cinco tamanhos. Não crie um sexto; reutilize. */
+
+:root {
+  --font-ui: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", "Noto Sans", Arial, sans-serif;
+  --font-reading: Charter, "Bitstream Charter", "Sitka Text", Cambria,
+    "Noto Serif", "DejaVu Serif", Georgia, serif;
+  --font-code: "Cascadia Mono", "JetBrains Mono", "SFMono-Regular", Consolas,
+    "Liberation Mono", "DejaVu Sans Mono", monospace;
+
+  --text-caption: 13px;   /* notas de rodapé, dicas, metadados */
+  --text-ui: 15px;        /* rótulos, botões, corpo da interface */
+  --text-reading: 17px;   /* respostas e enunciados */
+  --text-title: 22px;     /* título de etapa ou seção */
+  --text-display: clamp(28px, 4.2vw, 38px); /* título da página, um por tela */
+
+  --leading-tight: 1.15;
+  --leading-ui: 1.5;
+  --leading-reading: 1.68;
+
+  --tracking-display: -0.022em;
+  --tracking-title: -0.01em;
+
+  --weight-regular: 400;
+  --weight-medium: 600;
+  --weight-bold: 700;
+
+  /* Código acompanha o texto em volta, levemente menor. */
+  --code-scale: 0.86em;
+}

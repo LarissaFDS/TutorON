@@ -1,0 +1,24 @@
+{
+  "id": "3a0ef8722268",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31.webp",
+  "copia": "00-originais\\ingestao\\f628541180bd1edd4bd4e3fde2f4190c602deb990cd6af5f8cac68eb5af8ceb0\\WhatsApp_Image_2025-01-12_at_13.13.31.webp",
+  "sha256": "f628541180bd1edd4bd4e3fde2f4190c602deb990cd6af5f8cac68eb5af8ceb0",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "lique 0\n\nQuestão 3 [2 ponto)\nSeja fin) wine função dos intei\n\n1. Qual a definição formal de\n\n2 É verdade que 20n? + 10n\n\n6 O(n)?\n\n3. É verdade que 3”\n\naf\n\n4. Qual à definição formal\n\nQuestão 4 [1 ponte\nResolva a recorrência\n\nQuestão 5 [1 ponto]:\n\na complexidade r\n\nje tempo do seguin\n\nAN\nend while\n\n9: jai!\n\n10: end while\n\n11º end pr cedure",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\3a0ef8722268\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

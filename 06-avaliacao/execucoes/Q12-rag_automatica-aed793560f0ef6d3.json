@@ -1,0 +1,46 @@
+{
+  "questao": "Q12",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c461856d5688-q4-4",
+    "7b4da6a8adf7-q9-9",
+    "6301b3b327fc-q3-3",
+    "7b4da6a8adf7-q5-5"
+  ],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 0.04700000000048021,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A informação fornecida não contém detalhes sobre a data, a sala e o conteúdo exato da próxima prova de PAA em outubro de 2026. O contexto apresentado trata de problemas de algoritmos, como o CAIXA VIAJANTE, o BIN PACKING e o SUBSET SUM, bem como a prova de corretude do algoritmo Bubblesort. Não há menção a nenhuma prova programada para outubro de 2026.\n\nPara obter essas informações, seria necessário consultar o professor ou o plano de aulas mais recente, que provavelmente contém a programação oficial das provas.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 4.311999999999898,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

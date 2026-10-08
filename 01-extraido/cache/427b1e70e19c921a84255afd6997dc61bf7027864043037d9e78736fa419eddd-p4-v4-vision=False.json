@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "- 0 ≤V ≤110000\n- S ≥0\n- V + 2S ≤240000\n- 1, 5V + S ≤180000\n\n(B)\n\nEixo das Abscissas: (Viralata’s)\nEixo das Ordenadas: (Sucesso)\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nB\n120000\n100000\n80000\n60000\n40000\n20000\nA\n0000\n0\n20000\n40000\n60000\n80000100000120000\n\n\nA = (0,0)\nB = (0,120.000)\nC = (60.000, 90.000) (m´ax)\nD = (110.000, 15.000)\nE = (110.000, 0)\n\nLucro M´aximo Poss´ıvel = 1, 6 · (60.000) + 1, 4 · (110.000)\n\n= 96.000 + 126.000\n\nLucro M´aximo Poss´ıvel = $222.000\n\n6.\nMostre que o problema do troco (Exerc´ıcio ??) pode ser formulado como\num programa linear inteiro. Minimize o n´umero de moedas.\n\nSolu¸c˜ao: O problema do troco no qual dado um estoque ilimitado de moedas de\nvalores x1, x2, ..., xn, queremos dar um troco de v usando no m´aximo k moedas. Logo,\no problema pode ser modelado como um programa linear inteiro e isso pode ser visto\na seguir:\n\nPage iv",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\97254bb4a1b8\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,77 @@
+{
+  "questao": "Q3",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "c07",
+    "1a81ca283132-q8-8",
+    "f802639909c5-q6-5"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.6178664090002712,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo força bruta para o problema COMPOSTO (verificando divisores de 2 até ⌊n/2⌋) não é considerado polinomial porque, embora ele faça apenas O(n) divisões, o número de testes cresce exponencialmente com o número de bits necessários para representar n. Isso ocorre porque cada divisão é feita em um intervalo de tamanho crescente, o que torna o total de testes polinomial em relação ao valor numérico de n, mas exponencial em relação ao número de bits de n. Portanto, mesmo que o número de testes seja polinomial, a complexidade em termos de bits de representação de n torna o algoritmo pseudo-polinomial, não polinomial.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 84.6923762080005,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e742df61728a425b4909e6201e2476d227d94fada3e86cf86d7b2ca5b91cf05f"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 3,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

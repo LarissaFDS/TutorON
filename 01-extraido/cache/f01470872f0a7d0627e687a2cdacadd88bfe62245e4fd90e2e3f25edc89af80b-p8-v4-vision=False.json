@@ -1,0 +1,12 @@
+{
+  "pagina": 8,
+  "texto": "OBRIGADO!\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\nOBRIGADO!",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p8-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

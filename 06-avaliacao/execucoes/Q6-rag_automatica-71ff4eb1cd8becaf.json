@@ -1,0 +1,80 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "1a81ca283132-q4-4",
+    "1a81ca283132-q1-1",
+    "70d6475b28bf-q1-1",
+    "1a81ca283132-q2-2"
+  ],
+  "contexto_texto": "[1a81ca283132-q4-4] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 4; confiabilidade: media; OCR: revisada_por_agente\nSubsequência contígua de soma máxima com subsequência vazia permitida (Lista 5).\nDefina fim[0]=0 e fim[j]=max(0,fim[j-1]+a_j). Defina melhor[0]=0 e melhor[j]=max(melhor[j-1],fim[j]). O resultado é melhor[n]. É possível manter apenas fim e melhor em O(1) de memória; o tempo é O(n). Guarde índices de início/fim se for necessário retornar a subsequência.\nPara [5,15,-30,10,-5,40,10], a resposta é [10,-5,40,10] com soma 55. Para [-5,-2,-8], a resposta é a subsequência vazia, soma 0. Inicializar o melhor valor em -infinito e exigir um elemento muda a convenção da fonte e é inadequado aqui.\n\n[1a81ca283132-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nMenor soma de um caminho do ápice à base de um triângulo.\nSeja tri[i][j] a entrada. Para triângulo não vazio, inicialize dp=[tri[0][0]]. Para cada linha i>0, crie new de tamanho i+1: new[0]=tri[i][0]+dp[0]; new[i]=tri[i][i]+dp[i-1]; para 0<j<i, new[j]=tri[i][j]+min(dp[j-1],dp[j]). Substitua dp por new. A resposta é min(dp).\nA recorrência considera exatamente os pais adjacentes de cada célula. Para n linhas, o tempo é O(n^2) e a memória auxiliar O(n). Para [[2],[3,4],[6,5,7],[4,1,8,3]], a soma mínima é 11. O código desta nota é uma reconstrução editorial, e não certifica a transcrição de índices da imagem.\n\n[70d6475b28bf-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L8.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nTodos os quadrados mágicos normais de ordem 3.\nA soma de 1 até 9 é 45; três linhas iguais dão soma mágica 15. Preencha nove posições por backtracking, mantendo um conjunto dos números ainda não usados. A cada escolha, não repita número; se uma linha, coluna ou diagonal estiver completa, exija soma 15. Se uma linha parcial já tiver soma >=15 com posições restantes, descarte, pois os números são positivos.\nUma poda mais forte soma os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha. Ao preencher as nove posições, confira as três linhas, três colunas e duas diagonais. Há oito soluções ao contar rotações e reflexões separadamente; por exemplo [[8,1,6],[3,5,7],[4,9,2]]. O centro é 5.\nUm limite simples é O(9!) para permutar os números, com memória O(9). Não confundir igualdade entre diagonais com a exigência de que todas as oito somas sejam 15. O código da imagem foi substituído por descrição derivada.\n\n[1a81ca283132-q2-2] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 2; confiabilidade: media; OCR: revisada_por_agente\nRobô coletor de moedas em matriz de r linhas e c colunas, movendo para direita ou baixo.\nDefina dp[i][j]=moeda[i][j]+max(dp[i-1][j],dp[i][j-1]), considerando apenas predecessores válidos. A origem tem dp[0][0]=moeda[0][0]. Grave o predecessor escolhido em cada célula. A contagem máxima é dp[r-1][c-1]; reconstrua o caminho seguindo predecessores até a origem e invertendo a ordem.\nEm empates, qualquer predecessor ótimo produz um caminho ótimo. Tempo O(rc); memória O(rc) com reconstrução. Se somente a soma for pedida, a memória pode cair para O(c). O OCR do código não deve ser usado como programa executável.",
+  "fontes_sha256": {
+    "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+    "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4",
+    "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+    "1a81ca283132-q2-2": "15c399403a902537e63dbff0886fcc82c76dd7ef867603ec4913baba1ca792e2"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.8485427369960235,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, a recorrência é a seguinte:\n\n- Defina `fim[j] = max(0, fim[j-1] + a_j)`.\n- Defina `melhor[j] = max(melhor[j-1], fim[j])`.\n\nO resultado é `melhor[n]`, que representa a soma máxima da subsequência contígua.\n\nPara a sequência [5,15,-30,10,-5,40,10], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, 5) = 5`\n- `fim[2] = max(0, 5 + 15) = 20`\n- `fim[3] = max(0, 20 - 30) = 0`\n- `fim[4] = max(0, 0 - 5) = -5`\n- `fim[5] = max(0, -5 + 40) = 35`\n- `fim[6] = max(0, 35 + 10) = 45`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, 5) = 5`\n- `melhor[2] = max(0, 20) = 20`\n- `melhor[3] = max(0, 0) = 0`\n- `melhor[4] = max(0, -5) = -5`\n- `melhor[5] = max(0, 35) = 35`\n- `melhor[6] = max(0, 45) = 45`\n\nA subsequência contígua de soma máxima é [5, 15, -30, 10, -5, 40, 10] com soma 45.\n\nPara a sequência [-5, -2, -8], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, -5) = -5`\n- `fim[2] = max(0, -5 - 2) = -7`\n- `fim[3] = max(0, -7 - 8) = -15`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, -5) = -5`\n- `melhor[2] = max(0, -7) = -7`\n- `melhor[3] = max(0, -15) = -15`\n\nA subsequência contígua de soma máxima é vazia com soma 0.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 185.80365383199387,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

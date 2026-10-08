@@ -1,0 +1,18 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n[incerto] qodemoi\n[incerto] ond(6）p（n)\n[incerto] o'e\n[incerto] Pe（k)\n[incerto] 2-paodems\n[incerto] Cim\n[incerto] 2\n[incerto] Sonha\n[incerto] <b\n2\n[incerto] 6t\n[incerto] bSvai\n[incerto] m7q<pyns\n[incerto] Roitoutanae\n[incerto] (（6）\n[incerto] loglsntegkpdre\n[incerto] d.teld\n[incerto] 204",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p6-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\320662691e44\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

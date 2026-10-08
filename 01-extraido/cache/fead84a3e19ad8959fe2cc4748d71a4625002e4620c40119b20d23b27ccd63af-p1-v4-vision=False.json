@@ -1,0 +1,12 @@
+{
+  "pagina": 1,
+  "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computacao\nProjeto e Analise de Algoritmos\n1aProva\nProf. Rian Gabriel Pinheiro\n02 de margo de 2023\nQuestao 12 pontos]:\nvotos ou nao. Prove a corretude de seu algoritmo,\nQuestao 2[2 pontos]:\nConsidere o seguinte ulgoritmo\n[incerto] Lprocedure ALGoRMo X（vetor A[1.].inicio,fim）\n2:\nif inicio=fim then\n3:\nreturn Ajiniciol\n4\nend if\n5:\nmeioimicio+（fim-incio）/2\n6:\naX（A,inicio,meio）\n7:\nbX(A,meio+1,fim）\n8:\nifa<bthen\n6\nreturnb\n10:\nelse\n[incerto] T\nreturna\n12:\nendif\n13:end procedure\nExplique o que ele faz e prove sua corretude.\nQuestao3[1ponto]:\nSeja f(n) uma funcao dos inteiros nos reais.Justifique\n1.Qual a definicao formal de O(f(n))?\n2.Everdade que 20n+10nlgn+5éO（n)？\n3.Everdade que n²éO（n)？\n4.Qual a definicao formal de O(f（n))？\nQuestao 4[1 ponto]:\nResolva a recorrencia:\n[incerto] S0n1=2\n[incerto] T(n）=\n2T（n/2）+n、sen=2k、parak>1.\nQuestao5 [1 ponto]:\nCaleule a complexidade de tempo do seguinte algoritmo\nl:procedure Fuxctmatriz Axn.inteiro n)\n[incerto] 2\n[incerto] J-1\nwhitej<ndo\n[incerto] 天一2\nwhilek<ndo\n[incerto] s-S+a丨[丨-a|D]\nkk.k\nend whille\n[incerto] -+1\n10\nend whlle\n1l:end procedure",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p1-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

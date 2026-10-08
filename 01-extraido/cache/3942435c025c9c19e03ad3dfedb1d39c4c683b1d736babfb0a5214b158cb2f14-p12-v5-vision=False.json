@@ -1,0 +1,13 @@
+{
+  "pagina": 12,
+  "texto": "MST : (s →a), (a →c), (s →d), (a →b)\n\n\n[OCR parcial do recorte p12-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nDFS (Pr´e/Em Ordem): s →a →c →a →b →s →d →s\n\nRemovendo duplicatas: s →a →c →a →b →s →d →s\n\nSolu¸c˜ao Caixeiro[2-OPT]: s →a →c →b →d →s\nCUSTO: 25\nSolu¸c˜ao Caixeiro[´Otimo]: s →c →a →b →d →s\nCUSTO: 23\n\n8.\nEscolha um problema de otimiza¸c˜ao NP-dif´ıcil e apresente um estrutura de\nvizinhan¸ca para tal problema\n\nSolu¸c˜ao: O problema escolhido ´e conhecido por ”Parti¸c˜ao de Grafos”e consiste em\nretornar uma parti¸c˜ao dos v´ertices em dois grupos A e B de acordo com a entrada que\nconsiste em um grafo e um n´umero. Esse ´e um problema NP-dif´ıcil e para estruturar\na sua vizinhan¸ca, podemos seguir com a op¸c˜ao (A, B), sendo |A| = |B|. Os vizinhos\nser˜ao todas as solu¸c˜oes obtidas ao trocarmos um par de v´ertices atrav´es dos cortes,\nou seja, a vizinhan¸ca ´e composta por solu¸c˜oes da forma (A - a + b, B - b + a), onde\na ∈A e b ∈B. Um exemplo desse movimento ´e:\n\n\n[OCR parcial do recorte p12-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nNo entanto, ´e poss´ıvel observar que essa solu¸c˜ao n˜ao ´e ´otima e uma melhoria que\npode ser feita ´e a expans˜ao do tamanho da sua vizinhan¸ca a fim de permitir duas\ntrocas por vez.\n\n9.\nEscolha 5 meta-heur´ıstias do livro “Handbook of Metaheuristics”\n\nPage xii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p12.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p12-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p12-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "No Ollama, com o material, a IA cumpriu bem\nmais critérios da disciplina\n41%\n\nA · Genérico\n9 de 22 critérios\n32%\n\nB · Controle\n7 de 22 critérios\n70%\n\nC · Com o material\n16 de 23 critérios\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNo Ollama, com o material, a IA cumpriu bem\nmais criterios da disciplina\n41%\n32%\n70%\nA· Generico\nB·Controle\nC · Com o material\n9 de 22 critérios\n7 de 22 critérios\n16 de 23 critérios",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

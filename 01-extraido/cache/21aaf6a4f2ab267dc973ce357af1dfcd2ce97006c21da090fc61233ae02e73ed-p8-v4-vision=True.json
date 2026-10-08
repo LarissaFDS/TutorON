@@ -1,0 +1,18 @@
+{
+  "pagina": 8,
+  "texto": "Entrada: Um conjunto A com valores inteiros positivos, e um inteiro t.\nQuest˜ao: Existe um subconjunto A ⊆A cuja soma dos valores seja exatamente\nt?\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\nboot isSubsetSum(int A[], int t,int k)\nbool subset[k+1][t+1];\nfor(int i=1;i<=t;i++)\nsubset[o][i]=false;\nfor（inti=0；i<=k;i++)\nsubset[i][o]=true;\nfor(inti=1i<=k;i++)\nfor（intj=1;j<=t;j++)\nif(j<A[i-1])\nsubset[i][j]=subset[i -1][j];\nif(j>=A[i-1])\nsubset[ij[j] =subset[i -1]tj] l| subset[i-1][j-A[i -1]];\nfor（int i=0;i<=ki++)\nfor(intj=0j<=t;j++)\nprintf(\"%4d\",subset[i][i]);\ncout<<\"\\n\";\nreturn subset[k][t];\nint main()\nintA[]={3,344,12,5,2}\nintt=9；\nintk=sizeof(A)/ sizeof(A[o]);\nif (isSubsetSum(A,t,k) == true)\ncout << \"Foi encontrado um subconjunto cuja soma dos valores é exatamente igual a “t'.\";\nelse\ncout << \"Nao ha subconjunto com soma\nreturn 0;\n\n\nPage viii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p8-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p8-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

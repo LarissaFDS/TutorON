@@ -1,0 +1,60 @@
+{
+  "questao": "Q11",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O professor menciona que o algoritmo de testar divisores para determinar se um número é composto (ou seja, não é primo) não é polinomial. Isso ocorre porque, mesmo testando divisores até a raiz quadrada do número, o número de testes é O(n), o que não é polinomial para entradas grandes. Quando a entrada é escrita em binário, o tamanho da entrada é O(log n), o que não muda a complexidade do algoritmo. A complexidade de tempo continua sendo O(n), independentemente da base numérica. Portanto, mesmo com entradas grandes, o algoritmo de testar divisores não pode ser considerado polinomial.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 26.191118476002885,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

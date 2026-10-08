@@ -1,0 +1,18 @@
+{
+  "pagina": 3,
+  "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n[incerto] AEs...S\n[incerto] Votos\n[incerto] onclus.\n[incerto] As.\n[incerto] Velovdeava lqvefvetorAs\n0maiov\nultimelemento\n[incerto] primeis\n[incerto] VoVa\n[incerto] Bose:pa\n[incerto] AEs,...\n[incerto] 00151inh\n[incerto] 2eexoevledo\n[incerto] deA\nval\n[incerto] retornALinovSaAspasmiae\n[incerto] lGoritmg\nfode\n[incerto] smpleAEs3\nHipolese.\n[incerto] #1\n[incerto] Yetmi\n[incerto] velordemanhaK，K<n\n[incerto] qv2igvev\n[incerto] Passo:BqalgeveoA\n[incerto] Cwanhon>L\n[incerto] ix\n156\n[incerto] 2y）\nportantocles\n[incerto] SeGviy\nlinha5ond\n[incerto] idConte\n[incerto] da\nposican\nrentedeAc\ndexmaisdst\n[incerto] Vessspa\n[incerto] roms\nigymento\n[incerto] ASnici..m+]\n[incerto] <ne,pela hipotes\n[incerto] DM210k",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p3-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\320662691e44\\p3-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

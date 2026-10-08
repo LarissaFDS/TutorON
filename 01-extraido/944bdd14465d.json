@@ -1,0 +1,24 @@
+{
+  "id": "944bdd14465d",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\IMG-20231017-WA0076.webp",
+  "copia": "00-originais\\ingestao\\6b4cc23c9cfb20bdde5130c007b3bea2222deb5fea9cee050e803aa4eb6d040c\\IMG-20231017-WA0076.webp",
+  "sha256": "6b4cc23c9cfb20bdde5130c007b3bea2222deb5fea9cee050e803aa4eb6d040c",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "|\n\nPed\n\"de Alagoas = URAL cd\ntputação.\n\nAlgoritmos\n\nRian Gabriel Pinheiro\n\n¢ março de 2028:\n\nQuestão 1 [2 pontos):\n\n© Centro Acadêmico do IC/UPAL fará uma\num vetor Aft\n\nÀ » com d candidatos. Um total dem alunos estão aptos n votar, Dado\n» contendo valores iuteiros (1,....,d), implemento um algoritmo que decida se houve uma maloria de\n\nvotos ou ão. Prove\na correrude\n\nritmo,\n\nQuestão 2 [2 pontos)\nConsidere o segumte al\n\nà IWinielo = fim anon\n\n% return Ali\n\nii end it\n\n6 4 & X(A, início, mo .\nO  biceR Alina Fiz the\n\n& ita chthen\n\n10, else\n\no end it\n\n13. end procedure\n\nExplique o que ele faz e prove sua corretude\n\nQuestão 3 [1 ponto]:\nSeja f(n) uma função dos inteiros nos reais, Justifique\n\n1, Qual a definição formal de O(f(n))\n\n2: É verdade que 20n + 1Un 6 O(n)?\n\n3. É verdude que En? é Ol\n\n4. Qual a definição formal de O(f(n))?\n\nQuestão 4 [1 ponto):\nResolva a recorrência\n\n2, parak>1\n\nQuestão 5 [1 ponto):\n\nCaleule a complexidade de tempo do seguinte algoritmo,\n\n7 duro FUNCInatilz Anny Mteiro 1\n* ped\n\n% whiley <n do\n\n4 fez\n\n5 while <n do\n\n6 S—S + abi [A) = aft]\n\n7 ke\n\ns end w\n\n10\n\n11 end procedure\n\n1\n\n\"o",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\944bdd14465d\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

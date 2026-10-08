@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nàs solution( matriz)f\n\nsum [3] {8} sum_c[3]={9}\n\nSum pd-p\n2-6; ic<g\n\nSum sd-Q\ni++)\n\nj) Sum pd +=\n(itj==2) sum sd +\nsum 1[i] +=\nsum c[j] +\n\nmatriz[i]\n\n= matriz[i]\nmatriz[i]\n\n= matriz[i]\n\nsum c[0] =Ssum c[1]\nsum pd == Sum sd)\n\ngenerate(\n(i==9)\n(element=- 9 )\n\nmatriz[9] element) £\n\n( j-a; 9; Jr)\n\nmatriz[i]-j\n\n(is solution(matriz))(\nprint mat(matriz)\n\nBenerate(matriz ia, 3)\n\nmain(){\nmatriz[9]=(1)\nelement=1\ngenerate(matriz 8 element)\n\n\n2. Projete um algoritmo para o PROBLEMA DO CAMINHO HAMILTONI-\nANO de um v´ertice fixo s.\n\nSolu¸c˜ao: O problema do caminho hamiltoniano pode ser resolvido atrav´es de back-\ntracking, que divide o problema total em subproblemas a fim de facilitar a sua re-\nsolu¸c˜ao - pois solucionaremos pequenos problemas que resultar˜ao na resolu¸c˜ao de\nnosso principal objetivo.\nCom a divis˜ao do problema do caminho hamiltoniano em subproblemas teremos uma\nnova instˆancia dele, no qual teremos um subgrafo do original que come¸ca em um dado\nv´ertice v ∈V. Esse subgrafo nos permitir´a construir progressivamente um caminho\nao removermos v´ertices que j´a foram visitados.\nDevemos definir os sub problemas nos pequenos grafos e, atrav´es deles, escolher\nos v´ertices que ser˜ao avaliados primeiro. Isso reduzir´a a complexidade de espa¸co do\nalgoritmo, visto que um ´unico caminho ativo deve ser mantido na ´arvore dos poss´ıveis\n\nPage ii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,12 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n#include <iostream>\n#include <string.h>\n#include <stdio.h>\n#include <Iimits.h>\nusing namespace std;\nint main()\nint cuts, length, k, split;\nwhile(scanf(\"%d%d\"， &length，&cuts){= EOF)\nint arr[length +1][length+1];\nint cut[cuts];\nint i j\nmemset(arr,0, sizeof(arr));\nfor(i=θ;i<cuts; i++)\ncin >> cut[i];\nfor\n(split=1;split<=length}split++)\nfor (i=0,j=i+split; }<=Iength;j++,i++)\nif (split ==1)\narr[i][j】] =0;\nelse\nint min = INT_MAX;\nfor (k =θ; k<cuts; k++)\nif (cut[k]<j andcut[k]>i)\nint cost=（j -i) +arr[ij[cut[k]] + arr[cut[k]][j];\nif(cost<min)\nmin  costj\nif (min >= INT_MAX)\narr[i[j] =θ;\nelse\n[incerto] uw={]t]e\ncout<<arr[e][length]<<endl;\nreturn o;\n\n\n7. Uma cobertura de v´ertices de um grafo G = (V, E ) ´e um subconjunto de\nv´ertices S ⊇V que inclui ao menos uma extremidade de cada aresta de E .\nForne¸ca um algoritmo de tempo linear para a seguinte tarefa.\n\nEntrada: Uma ´arvore n˜ao-direcionada T = (V, E).\nSa´ıda: O tamanho da menor cobertura de v´ertices de T.\nPor exemplo, na ´arvore abaixo, as poss´ıveis coberturas de v´ertice incluem\n{A, B, C, D, E, F, G} e {A, C, D, F}, mas n˜ao {C, E, F}. A menor cobertura de\nv´ertice tem tamanho 3: B, E, G\n\nPage vi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p6-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

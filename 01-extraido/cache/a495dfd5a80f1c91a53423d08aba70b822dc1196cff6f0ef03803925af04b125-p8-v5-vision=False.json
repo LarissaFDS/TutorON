@@ -1,0 +1,12 @@
+{
+  "pagina": 8,
+  "texto": "n. Deseja-se encontrar o “ponto de m´aximo” p. Mostre como encontrar p\natrav´es de um algoritmo O(log n).\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n#tnclude<vector>\n#include<iostream>\nusing namespace std;\n\nint find num(int “arr, int b, int ex\nif(b==e) return b;\nelse tf (b==e-1) return arr[b}>arrfe] ?b:\nelse{\nint m = (bre)>>1;\n\nlarr[m]»arrpm-1] && arr[m) >arc[m+1]) return m;\nelse larr[m>arrpm4]) return find num(arr,\nelse if(arr[m] >arr[m-1]) return Find numfarr,\n\n}\n\nreturn -1;\n\n\n10. Vocˆe est´a consultando para uma pequena empresa de investimentos.\nEles\nest˜ao fazendo uma simula¸c˜ao em que eles olham para n dias consecutivos de\numa determinada a¸c˜ao, em algum momento no passado. Cara cada dia i = 1,\n2, . . . , n; eles tˆem o pre¸co pi da a¸c˜ao neste dia. Suponha que durante este\nper´ıodo de tempo, eles queriam comprar 1.000 a¸c˜oes em alguns dias e vender\ntodas essas a¸c˜oes em algum dia (mais tarde). Eles querem saber: Quando eles\ndeveriam ter vendido, a fim de maximizar os lucros? Por exemplo, suponha\nque n = 3,p1 = 9,p2 = 1,p3 = 5. Veja que deveria retornar “comprar em 2,\nvender em 3”(compra no dia 2 e vender no dia 3 significa que eles teria feito 4\npor a¸c˜ao, o m´aximo poss´ıvel para esse per´ıodo). Claramente, h´a um algoritmo\nsimples que leva tempo O(n2): tentar todos os poss´ıveis pares compra/venda\ne ver qual deles faz mais dinheiro. Elabore um algoritmo para encontrar os\ndias de compra e venda com tempo O(n logn).\n\nSolu¸c˜ao:\n\nPage viii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p8-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

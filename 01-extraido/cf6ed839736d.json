@@ -1,0 +1,24 @@
+{
+  "id": "cf6ed839736d",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\paa_prova.webp",
+  "copia": "00-originais\\ingestao\\b189b3bb5014c59dc3751c9734cbb6c4aa9ea5875afd125c69c3204f169ca612\\paa_prova.webp",
+  "sha256": "b189b3bb5014c59dc3751c9734cbb6c4aa9ea5875afd125c69c3204f169ca612",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "(UJS + [ufa =\nautom er anus jerimeso sob\n\n20 vp mapa OM NUYS m ope\n\nfsoyuod 7) s orsant)\n\nenpasosd pass\n\nnous\nui x\n20) pus\nE tee O de\nemp <4 J\n\nv ampssad\n\n2 te otroMeTtae ofma o\n\nM304 Oty OF\n\n{emod 1) 2 o8ysanj\n\n~ aanpasoad pus\n403 pus\nsoy pus\n403 pua\n\neven ant\n\nlomod 1] 9 ows",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\cf6ed839736d\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta erros de sintaxe e lógica. A função `topo_sort` retorna imediatamente após a primeira iteração do loop, o que é inválido. Além disso, a função `caminhos_distintos` tem problemas de inicialização e lógica de retorno. Há também uma variável `pos` não declarada antes de uso.",
+  "decisao": "suspeita",
+  "sha256": "9a537bf60988fdb031efc0302ba1708db521a93ac653e18e0db55e7c64621bf2"
+}

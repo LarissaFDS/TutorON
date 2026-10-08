@@ -1,0 +1,9 @@
+{
+  "pagina": 12,
+  "texto": "T(n) = 22 · T(n4) + 2n\nT(n) = 22 · 2 · T(n8) + n4 + 2n\nT(n) = 23 · T(n8) + 3n\n...                      ...                      ...                      ...                      ...                      ...                      ...                      ...\n⇒T(n) = 2k · T( n ) + kn                      2k\n\nA recorrˆencia encerra, desse modo, quando:\n n = 1 ⇒2k = n ⇒k = log2(n)2k\n\n⇒  T(n) = n · T(1) + log2 n · n\n⇒  T(n) = n + n · log2(n)\n\nPara mostrar que T(n) ´e O(n·log2 n) basta definir f(n) = n+n·log2 n e g(n) =\nn · log2 n, sendo assim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0,\nneste sentido, basta tomar n0 = 2 e c = 3, por exemplo. Neste caso, ´e poss´ıvel\nnotar que T(n) = O(n · log2 n).\n\n\n\n\n\n                          Page xii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p12.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

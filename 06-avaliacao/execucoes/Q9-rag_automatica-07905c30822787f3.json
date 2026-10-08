@@ -1,0 +1,56 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "6301b3b327fc-q4-4",
+    "7b4da6a8adf7-q9-9",
+    "70d6475b28bf-q3-3",
+    "2df6e1818523-q3-6"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "d455baef2cdf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0.07800000000133878,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, podemos seguir um algoritmo similar ao do problema do \" Pancake Sorting \". Vamos detalhar o processo e calcular a quantidade de inversões e o custo total de movimentar elementos.\n\n### Algoritmo de Ordenação de Panquecas\n\n1. **Encontre o maior elemento na pilha**.\n2. **Inverta a pilha** para que o maior elemento fique no topo.\n3. **Inverta a pilha novamente** para que o maior elemento fique na posição correta.\n4. **Repita o processo** para a subpilha restante.\n\n### Exemplo\n\nSuponha que temos a pilha de panquecas: `[3, 2, 4, 1]`.\n\n1. **Encontre o maior elemento**: O maior elemento é `4`.\n2. **Inverta a pilha para que o maior elemento fique no topo**: \n   - Inversão para trazer `4` para o topo: `[4, 3, 2, 1]`.\n   - Inversão para colocar `4` na posição correta: `[1, 2, 3, 4]`.\n\n### Quantidade de Inversões\n\n- **Primeira inversão**: Inverter a pilha `[3, 2, 4, 1]` para `[4, 2, 3, 1]`.\n- **Segunda inversão**: Inverter a pilha `[4, 2, 3, 1]` para `[1, 3, 2, 4]`.\n- **Terceira inversão**: Inverter a pilha `[1, 3, 2, 4]` para `[4, 2, 3, 1]`.\n- **Quarta inversão**: Inverter a pilha `[4, 2, 3, 1]` para `[1, 3, 2, 4]`.\n\nNo total, foram necessárias **4 inversões**.\n\n### Custo Total de Movimentação\n\n- **Primeira inversão**: Movimenta `4` elementos.\n- **Segunda inversão**: Movimenta `3` elementos.\n- **Terceira inversão**: Movimenta `2` elementos.\n- **Quarta inversão**: Movimenta `1` elemento.\n\nO custo total de movimentação é a soma dos elementos movimentados em cada inversão: `4 + 3 + 2 + 1 = 10` movimentações.\n\n### Algoritmo em Pseudocódigo\n\n```pseudocode\nfunction sortPancakes(pilha):\n    n = tamanho(pilha)\n    while n > 1:\n        // Encontre o índice do maior elemento\n        i = índice do maior elemento em pilha[0:n]\n        \n        // Inverta a pilha para trazer o maior elemento para o topo\n        inverta(pilha, 0, i)\n        \n        // Inverta a pilha novamente para colocar o maior elemento na posição correta\n        inverta(pilha, 0, n-1)\n        \n        // Reduza o tamanho da pilha\n        n = n - 1\n```\n\n### Complexidade\n\n- **Quantidade de Inversões**: O número de inversões é `O(n^2)`, pois em cada iteração, encontramos o maior elemento e realizamos duas inversões.\n- **Custo Total de Movimentação**: O custo total de movimentação é `O(n^2)`, pois cada inversão envolve a movimentação de elementos.\n\n### Resposta à Pergunta\n\n- **Quantidade de Inversões**: `4`\n- **Custo Total de Movimentação**: `10` movimentações\n\nPortanto, a quantidade de inversões e o custo total de movimentar elementos para ordenar a pilha `[3, 2, 4, 1]` são `4` inversões e `10` movimentações, respectivamente.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 19.65599999999904,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

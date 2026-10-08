@@ -1,0 +1,14 @@
+{
+  "questoes": 12,
+  "por_assunto": {
+    "b1-02-divisao-e-conquista": 2,
+    "b1-01-corretude-complexidade": 2,
+    "b2-06-np-completude": 4,
+    "b1-03-algoritmos-gulosos": 1,
+    "b2-04-programacao-dinamica": 1,
+    "b2-05-transformacao-de-problemas": 1,
+    "b2-07-lidando-com-np-completude": 1
+  },
+  "sem_fonte": [],
+  "revisao_professor": "pendente"
+}

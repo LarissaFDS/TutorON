@@ -1,0 +1,12 @@
+{
+  "pagina": 9,
+  "texto": "10. Prove que o problema da mochila pode ser resolvido em tempo polinomial\n   por um algoritmo guloso, se o peso wi de cada item i for unit´ario.\n\n\n      Solu¸c˜ao: Nesse problema, temos uma mochila com capacidade de aguentar certo\n     peso W e i itens de peso unit´ario wi, mas com valores distintos - sendo alguns mais\n      valiosos que outros. Seu objetivo ´e escolher os itens que resultar˜ao em um maior lucro\n     para o dono na mochila, caso este deseje vender. Uma maneira de resolvˆe-lo (por´em\n    nem sempre t˜ao eficiente)  ´e atrav´es de um algoritmo guloso, que  ´e caracterizado\n     por tomar a decis˜ao com a vantagem imediata mais ´obvia.  Nesse caso, podemos\n      ver ent˜ao que essa vantagem  ´e a escolha dos itens que possuem maior valor, sem\n      levar em considera¸c˜ao o seu peso, visto que todos possuem o mesmo. Sendo assim,\n      necessitamos inicialmente ordenar de maneira decrescente os itens com base em seu\n      valor e em seguida pegar os primeiros W itens, de forma a encher a mochila at´e seu\n     m´aximo e, assim, obter m´aximo lucro.\n\n\n\n\n\n     Desse modo, como o algoritmo acima envolve uma ordena¸c˜ao O(n log(n)) e uma\n       verifica¸c˜ao O(n) temos que a complexidade final  ´e O(n log (n)). Al´em disso, como\n     O(n) < O(n log (n)) < O(n2), ´e poss´ıvel concluir que a complexidade ´e limitada de\n    modo inferior e superior por duas fun¸c˜oes polinomiais (linear e quadr´atica). Logo,\n\n\n\n                                   Page ix\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig1.png",
+    "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig2.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

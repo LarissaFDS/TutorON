@@ -1,0 +1,65 @@
+{
+  "questao": "Q8",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Backtracking é uma técnica de busca que é útil para resolver problemas que envolvem a formação de combinações possíveis. Para encontrar todos os quadrados mágicos de ordem 3 com números distintos de 1 a 9, podemos usar backtracking para testar todas as possíveis combinações e garantir que a soma de cada linha, coluna e diagonal seja igual.\n\nOs testes são feitos para garantir que a soma de cada linha, coluna e diagonal seja igual a 15 (a soma total dos números de 1 a 9 é 45, e dividindo por 3 dá 15). Se a soma não for 15, a combinação é descartada.\n\nAs podas são feitas quando a combinação não pode ser válida. Por exemplo, se a soma de uma linha já excede 15, não precisamos testar essa linha, já que qualquer combinação subsequente também não será válida. Além disso, se um número já foi usado em uma linha, coluna ou diagonal, não podemos usar esse número novamente, pois isso também faria a soma não ser 15.\n\nA técnica de backtracking permite que testemos todas as possíveis combinações sem precisar testar todas as combinações possíveis, economizando tempo e recursos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 45.933946567998646,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

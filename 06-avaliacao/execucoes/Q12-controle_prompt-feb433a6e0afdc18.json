@@ -1,0 +1,51 @@
+{
+  "questao": "Q12",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "[1] Como TutorON, não tenho acesso a informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova de PAA em outubro de 2026. As datas, salas e conteúdos de provas são geralmente mantidos em sigilo pela organização responsável, como a FGV, para garantir a transparência e a confiabilidade do processo. Recomendo que você entre em contato diretamente com a FGV ou o responsável pelo PAA para obter essa informação.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 19.848158159999002,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

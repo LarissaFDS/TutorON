@@ -1,0 +1,12 @@
+### (sem system instruction)
+
+### PROMPT
+Como eu explico o que esse algoritmo faz e provo a corretude dele?
+
+procedure ALGORITMO X(vetor A[1..n], inicio, fim)
+  if inicio = fim then return A[inicio]
+  meio ← inicio + (fim − inicio)/2
+  a ← X(A, inicio, meio)
+  b ← X(A, meio + 1, fim)
+  if a < b then return b else return a
+end procedure

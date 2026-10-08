@@ -1,0 +1,13 @@
+{
+  "pagina": 1,
+  "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nria\nFernanda\nRihciro\nDernardes\nPinto  Costa\ngeSor+(A, P,r)\n(ntercala(a, P,q, r)\nif(p>r)\n[incerto] []:t\n[incerto] bt：u\n2\nMerge Sort(A, P,q)\nMerg eor+(A,q+s, r)\n[incerto] n,]=A[o,,n]\nRLo,.\nIntercala(A, P,q,r)\n[incerto] L[q+.,n] =A[q+,..,h]\n[incerto] i:0,s=0, x=o\n[incerto] For(i=) is)x++)\n[incerto] iF(R[==L[kand R[!:AL-s])\n[incerto] 1A[]=R[] ++ k++\n[incerto] else iF(R[>L[])\nIA[=L[k] k++\n2) Busca(A[, P))\nreturnA\nmcio = P+(f-P)\n[incerto] 2\niF(A[meio]>A[meio +s] αand  A[meio] <A[meio-1]\". ]\nreturn\n meio\nelse if(A[meio] >A[meio tj]\nI  busca (A, P, meio-J)\nelse\nI busca (A, meio ts, r)\n vai comparand\ne\nSubpartes\ne'ncontrar\narrag\nate\nalgoritmo\nseus\nvisinhos\nda   subporte\nCom\nmenfo\n[incerto] oP\ncentro\ndesefodo.\ninicia\nalgori+mo\nMax-Min(A[J, P, r)\nIntercala(A, p,q,r) \norcenand.\narray\npor\nMergeSort.\ntend\nmeio do\nMerge Sort (A, P, r)\norde nodo, basta\n[incerto] o arrag\nn2=9+r\nMax=A[r]\nescolher\nprimeiro\nMin =A[]\nR[o., ...,hs] = A[o, ...,Ms] \ntimo (ndice\nobter\npora\n[incerto] 0\nminimo\nMerge Sor+(A[], P,)\nvalor, Yespectivamente\n[incerto] i=g=c=o\nif(p>r)\nFor(i=s, i<r, i+ t)\n[incerto] 9[号]\n[incerto] if(R[]==]\nMerge Sor+(A, P,q)\nI A[i]=r[] ++ k++\n[incerto] 'si(][])\nMergeSor+(A,qts,r)\n[incerto] 1A[]:L[]k++\nIntercala(A,p,a,r)\nelse\n1A[i]=R[y]++\ntrA\n[incerto] mlcee\n\n\nCamScanner",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\25264d122fc0\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\25264d122fc0\\p1-fig1.png",
+    "01-extraido\\figuras\\25264d122fc0\\p1-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

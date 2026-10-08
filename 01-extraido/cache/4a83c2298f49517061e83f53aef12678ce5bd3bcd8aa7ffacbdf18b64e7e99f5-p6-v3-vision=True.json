@@ -1,0 +1,11 @@
+{
+  "pagina": 6,
+  "texto": "O tempo de execu¸c˜ao em termos de n ´e O(n2). Isso se d´a pois no loop for em que se\n     recebe e insere as conex˜oes no grafo, ocorre n itera¸c˜oes, a fim de encontrar todas as\n     conex˜oes de todos os poss´ıveis convidados, onde cada um pode ter no m´aximo n - 1\n     conex˜oes. Al´em disso, h´a outro loop for que verifica se os requisitos (conhecer mais\n    de 5 pessoas, e n˜ao conhecer no m´ınimo 5 pessoas) est˜ao sendo cumpridos. Em seu\n     pior caso, todos os poss´ıveis convidados foram rejeitados, ent˜ao para cada um deles\n     haver´a n itera¸c˜oes para remover da lista de convidados e de todas as suas conex˜oes.\n    Sendo assim, justifica-se o tempo polinomial O(n2).\n\n\n6. Um servidor tem n usu´arios esperando para serem servidos. O tempo de\n   servi¸co requerido por usu´ario  ´e conhecido previamente:   ´e  ti minutos para\n  o usu´ario i . Portanto se, por exemplo, os usu´arios s˜ao servidos em ordem\n   crescente de  i  , ent˜ao o i-´esimo usu´ario tem de esperar a Pij=1 tj minutos.\n  Queremos minimizar o tempo total de espera\n\n                             n\n                 T = X (tempo gasto pelo usu´ario i na espera).\n\n                           n=1\n\n   Forne¸ca um algoritmo eficiente para computar a ordem ´otima na qual pro-\n   cessar os usu´arios.\n\n\n\n\n\n                                  Page vi\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p6-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

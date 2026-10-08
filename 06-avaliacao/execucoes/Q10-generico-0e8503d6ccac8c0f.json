@@ -1,0 +1,46 @@
+{
+  "questao": "Q10",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Claro, vamos analisar o código que você descreveu. Vamos supor que o código seja algo como:\n\n```python\ndef imprime_estrelas(n):\n    for i in range(n):\n        print(\"*\", end=\"\")\n    print()\n    imprime_estrelas(n-1)\n    imprime_estrelas(n-1)\n```\n\nVamos conferir o que acontece quando `n = 3`:\n\n1. **Primeira chamada: `imprime_estrelas(3)`**\n   - Imprime 3 asteriscos: `***`\n   - Chama `imprime_estrelas(2)` duas vezes.\n\n2. **Primeira chamada recursiva: `imprime_estrelas(2)`**\n   - Imprime 2 asteriscos: `**`\n   - Chama `imprime_estrelas(1)` duas vezes.\n\n3. **Primeira chamada recursiva: `imprime_estrelas(1)`**\n   - Imprime 1 asterisco: `*`\n   - Chama `imprime_estrelas(0)` duas vezes.\n\n4. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada (pois `range(0)` é vazio).\n   - Termina a chamada.\n\n5. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n6. **Segunda chamada recursiva: `imprime_estrelas(1)`**\n   - Imprime 1 asterisco: `*`\n   - Chama `imprime_estrelas(0)` duas vezes.\n\n7. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n8. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n9. **Terceira chamada recursiva: `imprime_estrelas(2)`**\n   - Imprime 2 asteriscos: `**`\n   - Chama `imprime_estrelas(1)` duas vezes.\n\n10. **Primeira chamada recursiva: `imprime_estrelas(1)`**\n    - Imprime 1 asterisco: `*`\n    - Chama `imprime_estrelas(0)` duas vezes.\n\n11. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n12. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n13. **Segunda chamada recursiva: `imprime_estrelas(1)`**\n    - Imprime 1 asterisco: `*`\n    - Chama `imprime_estrelas(0)` duas vezes.\n\n14. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n15. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n### Resultado final:\n```\n***\n**\n*\n**\n*\n***\n```\n\n### Contagem de asteriscos:\n- 3 asteriscos na primeira chamada.\n- 2 asteriscos em cada uma das duas chamadas recursivas de `imprime_estrelas(2)`.\n- 1 asterisco em cada uma das quatro chamadas recursivas de `imprime_estrelas(1)`.\n- 0 asteriscos em cada uma das oito chamadas recursivas de `imprime_estrelas(0)`.\n\nPortanto, o total de asteriscos impressos é:\n- 3 (da primeira chamada) + 2 + 2 + 1 + 1 + 1 + 1 + 0 + 0 + 0 + 0 = 10 asteriscos.\n\nEspero que isso esclareça a lógica e a contagem dos asteriscos!",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 17.95299999999952,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

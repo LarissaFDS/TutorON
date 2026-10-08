@@ -1,0 +1,60 @@
+{
+  "questao": "Q5",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A adição de 1 a cada peso de aresta em um grafo conexo não garante que a árvore geradora mínima (AGM) continuará sendo a mínima. Um contraexemplo numérico pode ajudar a entender isso. Suponhamos um grafo simples com 4 vértices (A, B, C, D) e as arestas com pesos 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Se somarmos 1 a cada peso, teremos pesos 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. \n\nAgora, a AGM original poderia ser A-B-C-D com peso total de 6. Após a adição de 1 a cada peso, a nova AGM pode ser A-B-C-D com peso total de 10. No entanto, a nova AGM não é necessariamente a mínima. Uma nova AGM poderia ser A-B-D com peso total de 9, que é menor que 10. Portanto, a adição de 1 a cada peso de aresta não garante que a AGM continuará sendo a mínima.\n\nQuanto aos caminhos mínimos, a adição de 1 a cada peso de aresta aumentará o peso de todos os caminhos, incluindo os caminhos mínimos existentes. Portanto, os caminhos mínimos também não serão garantidos de continuar sendo mínimos após a adição de 1 a cada peso de aresta.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 58.080187042000034,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

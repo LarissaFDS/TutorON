@@ -1,0 +1,14 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nSa´ıda: SIM\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n• Problema da ´Arvore de Steiner em Grafos\nEntrada: Um grafo G=(V,E), um subconjunto R ⊆V , um inteiro positivo\nK ≤|V | −1\nSa´ıda: Existe uma sub´arvore de G que inclui todos os v´ertices de R e cont´em\nn˜ao mais que K arestas?\n\ne.g.:\nEntrada: Considere o grafo G = (V,E)\n\n\n[OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nAl´em disso R = 1,2,3,4, K=3.\nSa´ıda: SIM, solu¸c˜ao:\n\nPage v",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\f38bb8142136\\p5-fig1.png",
+    "01-extraido\\figuras\\f38bb8142136\\p5-fig2.png",
+    "01-extraido\\figuras\\f38bb8142136\\p5-fig3.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

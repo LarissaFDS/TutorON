@@ -1,0 +1,11 @@
+{
+  "pagina": 4,
+  "texto": "4. Encontre 5 problemas NP-completos n˜ao estudados na disciplina (aula e lista).\n  Para cada um deles, descreva-o formalmente (entrada e quest˜ao) e apresente\n  uma ilustra¸c˜ao de uma instˆancia e uma solu¸c˜ao.\n\n\n     Solu¸c˜ao:\n\n       • Problema da Divis˜ao de Conjuntos\n          Entrada: Uma lista de conjuntos C de subconjuntos de S.\n            Sa´ıda: Existe uma parti¸c˜ao de S em dois subconjuntos S1 e S2 tais que nenhum\n         subconjunto da lista C estejam inteiramente contidos em S1 e S2 ?.\n\n             e.g.:\n          Entrada: S = {1, 2, 3}, C1 = {1, 2}, C2 = {2, 3}\n            Sa´ıda: SIM , S1 = {1, 3}, S2 = {2}\n\n       • D´ıgrafo M´ınimo Equivalente\n          Entrada: Um grafo direcionado G = (V,A) e um inteiro positivo K. Sa´ıda:\n          Existe um conjunto A′ ⊆A cujo |A′| ≤K tal que ∀u, v ∈V , G’=(V,A’)\n          cont´em um caminho de u para v se somente se G possui?\n\n             e.g.:\n          Entrada: G=({a,b,c}, {(a,b), (b,c), (a,c)}), K=2\n            Sa´ıda: SIM, G=({a,b,c},{(a,b), (b,c)})\n\n       • Problema do Grafo 3-Color´ıvel\n          Entrada: Um grafo G=(V,E)\n            Sa´ıda: O grafo G ´e 3-color´ıvel, isto ´e, existe uma fun¸c˜ao f : V →1, 2, 3 tal que\n            f(u)̸ = f(v) sempre que u, v ∈E?\n\n             e.g.:\n          Entrada:\n\n\n\n\n\n                                  Page iv\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\f38bb8142136\\p4-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

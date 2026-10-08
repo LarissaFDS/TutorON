@@ -1,0 +1,85 @@
+{
+  "questao": "Q1",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo X que você descreveu é uma implementação recursiva de uma busca binária modificada. Vamos analisar o que ele faz e como podemos provar sua corretude.\n\n### O que o Algoritmo Faz\n\n1. **Entrada**: O algoritmo recebe um vetor `A` e dois índices `inicio` e `fim`, que delimitam a subarray em que a busca deve ocorrer.\n2. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna o único elemento da subarray, que é `A[inicio]`.\n3. **Divisão**: O algoritmo divide a subarray em duas metades, calculando o índice `meio` como `inicio + (fim - inicio) / 2`.\n4. **Recursão**: O algoritmo chama a si mesmo duas vezes, uma para a subarray à esquerda (`inicio` a `meio`) e outra para a subarray à direita (`meio + 1` a `fim`).\n5. **Comparação**: O algoritmo compara os valores retornados das duas chamadas recursivas e retorna o maior deles.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, precisamos mostrar que ele sempre retorna o maior valor da subarray `A[inicio..fim]`.\n\n1. **Caso Base**:\n   - Se `inicio = fim`, a subarray contém apenas um elemento, `A[inicio]`. Portanto, o algoritmo retorna `A[inicio]`, que é o único elemento da subarray.\n\n2. **Caso Recursivo**:\n   - Suponha que o algoritmo retorne o maior valor da subarray `A[inicio..meio]` e o maior valor da subarray `A[meio + 1..fim]`.\n   - Se `a` é o maior valor da subarray `A[inicio..meio]` e `b` é o maior valor da subarray `A[meio + 1..fim]`, então o algoritmo retorna `b` se `a < b` e `a` se `a >= b`.\n   - Portanto, o algoritmo retorna o maior valor entre `a` e `b`, que é o maior valor da subarray `A[inicio..fim]`.\n\n### Pseudocódigo com Explicações\n\n```pseudocode\nprocedure ALGORITMO X(vetor A[1..n], inicio, fim)\n  // Caso base: se a subarray tem apenas um elemento\n  if inicio = fim then\n    return A[inicio]\n  end if\n\n  // Calcular o meio da subarray\n  meio ← inicio + (fim - inicio) / 2\n\n  // Recursivamente encontrar o maior valor na subarray à esquerda\n  a ← X(A, inicio, meio)\n\n  // Recursivamente encontrar o maior valor na subarray à direita\n  b ← X(A, meio + 1, fim)\n\n  // Retornar o maior valor entre a e b\n  if a < b then\n    return b\n  else\n    return a\n  end if\nend procedure\n```\n\n### Conclusão\n\nO algoritmo X é uma implementação recursiva de uma busca binária modificada que retorna o maior valor de uma subarray. A corretude do algoritmo é garantida pelo fato de que ele sempre compara os maiores valores das duas subarrays resultantes da divisão e retorna o maior deles.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 15.45299999999952,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "inicio",
+    "inicio",
+    "inicio",
+    "inicio"
+  ],
+  "citacoes_ids_invalidos": [
+    "inicio",
+    "inicio",
+    "inicio",
+    "inicio"
+  ]
+}

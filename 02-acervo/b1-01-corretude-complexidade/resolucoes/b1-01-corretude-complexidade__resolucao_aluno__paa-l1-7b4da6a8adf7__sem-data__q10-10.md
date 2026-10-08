@@ -1,0 +1,106 @@
+# 7b4da6a8adf7-q10-10
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf | página(s): 16, 17
+
+10. Considere o algoritmo de Ulam, ele termina?
+De fato, conjectura-se que
+seguindo o algoritmo, sempre ser´a obtida a sequencia 4, 2, 1 (Conjectura
+de Collatz).
+Ex:
+Para o valor a = 22, ser´a obtida a seguinte sequencia:
+22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1.
+Como a prova do
+t´ermino do algoritmo consiste em um dif´ıcil problema matem´atico em aberto.
+Implemente um teste exaustivo mostrando que para qualquer unsigned shot
+int (1 a 65535) de entrada o algoritmo para.
+Escreva um pequeno relato
+informando o tamanho da maior sequˆencia encontrada, o valor na qual a
+maior sequˆencia foi obtida, a m´edia dos tamanhos das sequˆencias e o tempo
+de execu¸c˜ao.
+
+
+[OCR parcial do recorte p16-fig1.png; conferir símbolos na imagem]
+1: procedure ALGORITMO DE ULAM(inteiro positivo a)
+2: x—a
+
+3: while Os três últimos valores de x não for 4,2,1 do
+4: if x for par then
+
+5: x—x/2
+
+6: else
+
+7: x—3x+1
+
+8: end if
+
+9: end while
+
+10: end procedure
+
+
+Solu¸c˜ao: Ap´os a implementa¸c˜ao do algoritmo e da execu¸c˜ao de um teste exaustivo
+contendo 65535 entradas, ou seja, cobrindo a possibilidade de entrada de qualquer
+unsigned short int, pudemos observar que, de fato, o algoritmo para de executar e ´e,
+portanto, finito. Al´em disso, assim como ilustra a figura abaixo, algumas informa¸c˜oes
+foram coletadas:
+
+• O tamanho da maior sequˆencia equivale a 340 n´umeros;
+• O valor de N para a maior sequˆencia ´e 52527;
+• A m´edia dos tamanhos das sequˆencias obtidas ´e 104,21 n´umeros;
+• O tempo de execu¸c˜ao do algoritmo ´e 0.06200 segundos.
+
+Page xvi[OCR parcial do recorte p17-fig1.png; conferir símbolos na imagem]
+FincLude<stdio.h>
+#include<time.h>
+int maior num=0;
+double media tam=0;
+int maior seq=0;
+void ulam(int n){
+int x =n;
+int a3=0,a2=0,a1=0;
+int num_maior_seq=1;
+
+while((a3!=1) || (a2!=2) || (a1!=4)){
+if (x%2==0) x = x/2;
+else x = 3*x +1;
+al = a2;
+a2 = a3;
+a3 =x;
+
+num_maior_seq++;
+if(num_maior_seq >= maior_seq)
+
+maior num = n;
+maior seq = num maior seq;
+
+}
+
+media_tam+=num_maior_seq;
+
+int main(){
+int n,numeros=@;
+clock_t ini = clock();
+
+while(scanf("%d", &n)!=EOF){
+
+ulam(n);
+
+numeros++;
+}
+media_tam/=numeros;
+clock_t fim = clock();
+double tempo = (double)(fim - ini)/ (double)CLOCKS_PER_SEC;
+printf("Tamanho da Maior Sequencia -> %d numeros\n", maior_seq);
+printf("Valor de N para a maior sequencia -> %d\n",maior_num);
+printf("Media dos Tamanhos das Sequencias -> %.21f numeros\n", media tam);
+printf("Tempo de Execucao -> %.51f segundo(s)”, tempo);
+
+Tamanho da Maior Sequencia -> 349 numeros
+Valor de N para a maior sequencia -> 52527
+
+Media dos Tamanhos das Sequencias -> 104.21 numeros
+Tempo de Execucao -> 0.06200 segundo(s)
+
+
+Page xvii

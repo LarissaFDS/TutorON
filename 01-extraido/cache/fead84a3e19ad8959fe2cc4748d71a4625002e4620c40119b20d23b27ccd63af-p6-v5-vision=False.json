@@ -1,0 +1,12 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nrd tes 4\nSea sp 359 wh awe? pr add\ndo / dete\n\n(947 E 3 É ase Jau O 7 ’\nnr, S\n; e ese » shar.\ngeet apenas fe 3Se\nok prato).\nee\nap” ey ) a |\n\npen feck\n\na\n\nE add apo ae\nport ms q pa Gs\n\n4 aa = a\nP a pais =\" E",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p6-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

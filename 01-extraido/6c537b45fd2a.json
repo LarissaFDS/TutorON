@@ -1,0 +1,24 @@
+{
+  "id": "6c537b45fd2a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\correcaoprof.webp",
+  "copia": "00-originais\\ingestao\\8075cf629a1722cf7f0be56fd08301f7ae4685928148724310fb0f2bd55283e5\\correcaoprof.webp",
+  "sha256": "8075cf629a1722cf7f0be56fd08301f7ae4685928148724310fb0f2bd55283e5",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Maa (uy Hey no nho cmo vgn au op pone moto\nOHA aprllce oo BUPA (uy ou vino Poproçol\n\n: s [ou cu) Mt <4} = (un) =\nA 73 epUbynor qupauo wf \"one com safe |\ncoy) or aE he (OL Moh some O cones, E bag\n\nereto Med cot\n\nTo do aviso DET\nT\n\nVesgo me a\nCarr ar ang oP\n\ncot ho",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\6c537b45fd2a\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

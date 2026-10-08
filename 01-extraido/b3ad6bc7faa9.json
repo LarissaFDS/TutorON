@@ -1,0 +1,24 @@
+{
+  "id": "b3ad6bc7faa9",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31_(4).webp",
+  "copia": "00-originais\\ingestao\\f3744cc05e9dfc1e3128a73dd062449804d7b0e1826925916a5904663f6abc38\\WhatsApp_Image_2025-01-12_at_13.13.31_(4).webp",
+  "sha256": "f3744cc05e9dfc1e3128a73dd062449804d7b0e1826925916a5904663f6abc38",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Li\n\nFela crer\n\njade Federal de Atagons - U FAL 1)\nPadre fique f\n\nde Computação\n‘Andlise do Algoritmos\n\nUniversid\nInstituto\nProjeto e\n4º Prova\nProf. Rian\n31 de dezero!\n\nGabriel Pinheiro\n\njuro de 2023\n\n3 [2 pontos\n\nQuest\n\nProjete um ®\n\nQuestão 2 [2 pontos)\nO Centro Acadêmico de\ntun vetor AUS\n\nQuestão 3 [1 ponto\n\nelse\nreturn &\nend if\n\n16, end procedure\n\nxplique-o que cle faz\n\na [2 pontos):\nin) e f(n) fim çõe\n\n1. O que significa “Tlm é\n\nQuestão\nSejam T(",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\b3ad6bc7faa9\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

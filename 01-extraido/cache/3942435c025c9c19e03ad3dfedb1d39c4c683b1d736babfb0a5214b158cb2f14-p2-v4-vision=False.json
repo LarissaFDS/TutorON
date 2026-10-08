@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nintis_solution(int*matriz){\nint sum_1[3]={0},sum_c[3]={θ};sum_pd=0,sum_sd=θ;\nfor(inti≈0;i< 9;i++)\nint j = i%3;\nif(i==j） sum_pd += matriz[i];\nif(i+j==2） sum_sd+=matriz[i];\nsum_l[i] += matriz[i];\nsum_c[j] += matriz[i];\nif(sum_1[0]==sum_1[1] && sum_1{1]==sum_1[2] && sum_c[0]==sum_c[1]\n&& sum_c[1]==sum_c[2] && sum_c[2]== sum_pd && sum_pd == sum_sd)\nreturn 1;\nreturn 0;\nvoid generate(int matriz[9],int i,int element){\nif(i==9) return;\nif(element==9） return;\nfor(int j =1; j<=9;j++)\nmatriz[i]=j\nif(is_solution(matriz)){\nprint_mat(matriz);\ngenerate(matriz,i+1,j);\nint main(){\nint matriz[9]={1};\nint element=1;\ngenerate(matriz,0,element);\n\n\n2. Projete um algoritmo para o PROBLEMA DO CAMINHO HAMILTONI-\nANO de um v´ertice fixo s.\n\nSolu¸c˜ao: O problema do caminho hamiltoniano pode ser resolvido atrav´es de back-\ntracking, que divide o problema total em subproblemas a fim de facilitar a sua re-\nsolu¸c˜ao - pois solucionaremos pequenos problemas que resultar˜ao na resolu¸c˜ao de\nnosso principal objetivo.\nCom a divis˜ao do problema do caminho hamiltoniano em subproblemas teremos uma\nnova instˆancia dele, no qual teremos um subgrafo do original que come¸ca em um dado\nv´ertice v ∈V. Esse subgrafo nos permitir´a construir progressivamente um caminho\nao removermos v´ertices que j´a foram visitados.\nDevemos definir os sub problemas nos pequenos grafos e, atrav´es deles, escolher\nos v´ertices que ser˜ao avaliados primeiro. Isso reduzir´a a complexidade de espa¸co do\nalgoritmo, visto que um ´unico caminho ativo deve ser mantido na ´arvore dos poss´ıveis\n\nPage ii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

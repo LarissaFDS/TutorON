@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNP-Complete\nP=NP\n= NP-Complete\n\nComplexity\n\nP#NP\n\n\n4. Encontre 5 problemas NP-completos n˜ao estudados na disciplina (aula e lista).\nPara cada um deles, descreva-o formalmente (entrada e quest˜ao) e apresente\numa ilustra¸c˜ao de uma instˆancia e uma solu¸c˜ao.\n\nSolu¸c˜ao:\n\n• Problema da Divis˜ao de Conjuntos\nEntrada: Uma lista de conjuntos C de subconjuntos de S.\nSa´ıda: Existe uma parti¸c˜ao de S em dois subconjuntos S1 e S2 tais que nenhum\nsubconjunto da lista C estejam inteiramente contidos em S1 e S2 ?.\n\ne.g.:\nEntrada: S = {1, 2, 3}, C1 = {1, 2}, C2 = {2, 3}\nSa´ıda: SIM , S1 = {1, 3}, S2 = {2}\n\n• D´ıgrafo M´ınimo Equivalente\nEntrada: Um grafo direcionado G = (V,A) e um inteiro positivo K. Sa´ıda:\nExiste um conjunto A′ ⊆A cujo |A′| ≤K tal que ∀u, v ∈V , G’=(V,A’)\ncont´em um caminho de u para v se somente se G possui?\n\ne.g.:\nEntrada: G=({a,b,c}, {(a,b), (b,c), (a,c)}), K=2\nSa´ıda: SIM, G=({a,b,c},{(a,b), (b,c)})\n\n• Problema do Grafo 3-Color´ıvel\nEntrada: Um grafo G=(V,E)\nSa´ıda: O grafo G ´e 3-color´ıvel, isto ´e, existe uma fun¸c˜ao f : V →1, 2, 3 tal que\nf(u)̸ = f(v) sempre que u, v ∈E?\n\ne.g.:\nEntrada:\n\nPage iv",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\f38bb8142136\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

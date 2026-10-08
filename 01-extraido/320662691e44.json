@@ -1,0 +1,87 @@
+{
+  "id": "320662691e44",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\prova_1_A.pdf",
+  "copia": "00-originais\\ingestao\\fead84a3e19ad8959fe2cc4748d71a4625002e4620c40119b20d23b27ccd63af\\prova_1_A.pdf",
+  "sha256": "fead84a3e19ad8959fe2cc4748d71a4625002e4620c40119b20d23b27ccd63af",
+  "tipo": ".pdf",
+  "paginas": 6,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nUniversidade Federal de Alagoas - UFAL | 1 TI\n\nInstituto de Computação\n\nProjeto e Análise de Algoritmos Es\n1º Prova a\nProf. Rian Gabriel Pinheiro\n\n02 de março de 2023\n\nQuestão 1 [2 pontos]:\n\nO Centro Acadêmico do IC/UFAL fará uma ele)\num vetor A[1..n] contendo valores inteiros (1, .\nvotos ou não. Prove a corretude de seu algoritmo\n\nção com d candidatos. Um total de n alunos estão aptos a votar, Dado\n\n+). implemente um algoritmo que decida se houve uma maioria de\nQuestão 2 [2 pontos]:\nConsidere o seguinte algoritmo:\n\n+ procedure ALGORITMO X(vetor A[1,...,n), inicio, fim)\n; if jnicio = fim then\nreturn Alinicio}\nend if\nmeio — inicio + (fim — incio)/2\na + X(A, inicio, meio)\nb + X(A, meio +1, fim)\nifa <6 then\nreturn b\ne 10; else\nHM; return a\n12 end if\n13; end procedure\n\nSerer eene\n\nExplique o que ele faz e prove sua corretude.\n\nQuestão 3 [1 ponto):\nSeja f(n) uma função dos inteiros nos reais. Justifique:\n\n1. Qual a definição formal de O(f(n))?\n\n2. É verdade que 20nº + 10nlgn +5 é O(n)?\n3. É verdade que in? é O(n)?\n\nformal de O(f(n))?\n\nTin) = 2, son =2\nNF 2T(n/2)+n, sen=2, parak> 1.\n\nade de tempo do seguinte algoritmo:\n\nris Ayxy, inteiro ne)\n\nbits + alk)",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p1-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nQuestão 6 [2 pontos):\nProve que:\n\nmi k. = qun*\n1, tudo polinômio de grau k, pin) = aun + ay uns ++ ay com a, > 0, pertence q O(n*).\n\nFr\naes no ponenciais a\" vem diferentes ordens do orestimenta para diferentes valotes de base a > 1\n3. as funções logarítmicas log, n tôm a mesma ordem de crescimento para diferentes valores de base a> 1.\n\nQuestão 7 [1 ponto):\nComidese o seguinte algoritmo reeursivo, Cujo asgumento 746 um inteiro positivo.\n\nee\n\n1. procedure Astimisvo(n)\n\n2 ifn>0 then\n\n3% Asrenigeu (a — 1)\n\n4: for i— l>ndo\n\n5: imprima “**\n\n& end for\na Asrinisoutn — 1)\n\na end if\n\n9, end procedure\n\nanisco(n)? Mostra é\nParaium dado valor; du nt, quantos astériscos serão imipréssos um uma chumuda de Astenisco(n)? Mostr\nrecorrência.\n\nLH 1\n\nQuestão 8 [2 pontos): :\nSejam f(n) ¢ g(t) tunções assintoticamente não negativas. Usando a definição básica da notação ©, prove que\nmax(f(n). g(t) = O(f(n) + a(n).\n\nf ; :\nA Port 2 , pievey , . fy ‘ as UR >.\n,\n\nPele Dema) E base Go)\n\nfee Ss E BO WK “a +4 ,) Ts f e [ee Asde porá 5\nol va\n\n- . e ST\naa Tito © Samet weal pag S que 2 wee\n\n& vi) LA\n\npara Cr ¥,\n3 é e verdade pois\n\nE Som pie PCT ov igual\n\n«da chilis Os ee\ncats “thes\n14553)",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p2-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n} |\n\n9 sa oh qn\n\n| 7 Sanh 409 Su eos ng 4\n\nUt Pu >] form * taaep 7 by 2\n\nhe mês op 2350 eas SA eB\nY £2¢g Sey w/ Seu “pre E\nA ve? hal (Fidny a el\n\na ar E\nae\n\no SSSA | 7",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p3-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nE\n\nsda ae}\n\nnb\n\nPout A ' A\n\nited “| pinto 2\n\n(9) “vd ae emo\n\nJô af\nManias ea”!\ny “nes - ae A asi — 7 TRAN + MOL =? —? À\n\ne\nCuz\n\nps 75 00% Dl yp\npotas? Ea\n\nPs 0S Al ot al\n\nsoltas 6 2) wm 7) 20507) Vues) on a ud )9 or dd 7)\npm OR i ) e i\n\nry o: a Aa” benb of 9 oe) 2\n\n7\nadia da Po G Dá 9 180 8 a 2 eye) g\n\nores ir\n, O QD PB Gaxepuea SE Sured 2) ama at 2295.\n\nV) A Cópisõnd Pepe) aq ns top va À Pee ap Se) we vid)",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p4-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]",
+      "metodo": "tesseract-por",
+      "qualidade": "ilegivel",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p5-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nrd tes 4\nSea sp 359 wh awe? pr add\ndo / dete\n\n(947 E 3 É ase Jau O 7 ’\nnr, S\n; e ese » shar.\ngeet apenas fe 3Se\nok prato).\nee\nap” ey ) a |\n\npen feck\n\na\n\nE add apo ae\nport ms q pa Gs\n\n4 aa = a\nP a pais =\" E",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\320662691e44\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\320662691e44\\p6-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

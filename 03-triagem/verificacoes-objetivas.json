@@ -1,0 +1,91 @@
+{
+  "asterisco": [
+    {
+      "n": 0,
+      "recorrencia": 0,
+      "formula": 0,
+      "ok": true
+    },
+    {
+      "n": 1,
+      "recorrencia": 1,
+      "formula": 1,
+      "ok": true
+    },
+    {
+      "n": 2,
+      "recorrencia": 4,
+      "formula": 4,
+      "ok": true
+    },
+    {
+      "n": 3,
+      "recorrencia": 11,
+      "formula": 11,
+      "ok": true
+    },
+    {
+      "n": 4,
+      "recorrencia": 26,
+      "formula": 26,
+      "ok": true
+    },
+    {
+      "n": 5,
+      "recorrencia": 57,
+      "formula": 57,
+      "ok": true
+    },
+    {
+      "n": 6,
+      "recorrencia": 120,
+      "formula": 120,
+      "ok": true
+    },
+    {
+      "n": 7,
+      "recorrencia": 247,
+      "formula": 247,
+      "ok": true
+    },
+    {
+      "n": 8,
+      "recorrencia": 502,
+      "formula": 502,
+      "ok": true
+    }
+  ],
+  "agm": [
+    {
+      "n": 2,
+      "aumento": 1,
+      "alegacao_uma_unidade": 1,
+      "contraexemplo": false
+    },
+    {
+      "n": 3,
+      "aumento": 2,
+      "alegacao_uma_unidade": 1,
+      "contraexemplo": true
+    },
+    {
+      "n": 4,
+      "aumento": 3,
+      "alegacao_uma_unidade": 1,
+      "contraexemplo": true
+    },
+    {
+      "n": 5,
+      "aumento": 4,
+      "alegacao_uma_unidade": 1,
+      "contraexemplo": true
+    },
+    {
+      "n": 6,
+      "aumento": 5,
+      "alegacao_uma_unidade": 1,
+      "contraexemplo": true
+    }
+  ],
+  "limite": "Verifica estas propriedades, não certifica todas as resoluções."
+}

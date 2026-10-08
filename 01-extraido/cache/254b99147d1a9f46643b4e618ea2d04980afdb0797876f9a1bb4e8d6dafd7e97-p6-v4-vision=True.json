@@ -1,0 +1,30 @@
+{
+  "pagina": 6,
+  "texto": "Atrav´es de prova direta, faremos a demonstra¸c˜ao:\n\nTomando v1 como v´ertice base, sabemos que h´a 5 segmentos de reta em conex˜ao com\nele, assim como mostram as linhas pontilhadas do hex´agono `a esquerda na figura\nabaixo. Por termos apenas duas cores, podemos afirmar que pelo menos trˆes destes\nsegmentos possuir˜ao a mesma cor. Em nosso exemplo, escolheremos a cor vermelha\ne diremos que os v´ertices v2, v4 e v6 est˜ao interligados `a v1 atrav´es de um segmento\nvermelho, assim como ilustra a figura `a direita.\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nV2\nV2\nV6\nV3\nV6\nV3\nV5\nV4\nV5\nV4\n\n\nProsseguindo com a nossa prova:\n\n• Se entre os segmentos v2v4, v2v6 e v4v6, ao menos um deles ´e vermelho conse-\nguimos formar um triˆangulo completamente monocrom´atico, em algum dos formatos\nabaixo, o que nos prova a existˆencia de pelo menos um triˆangulo de lados de mesma\ncor.\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\nV2\nV2\nV2\nV6\nV3\nV6\nV3\nV\nV3\nV5\nV4\nV5\nV4\nV5\n\n\n•\nNo entanto, caso a afirmativa anterior seja falsa, s´o podemos assumir ent˜ao\nque os trˆes segmentos v2v4, v2v6 e v4v6 s˜ao azuis. Dessa forma, tamb´em provamos a\nexistˆencia de um triˆangulo monocrom´atico por´em, dessa vez, azul.\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\nV2\nV6\nV3\nV5\nV4\n\n\n■\n\nPage vi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig1.png",
+    "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig2.png",
+    "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig3.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig3.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta vários erros de sintaxe e lógica, como a falta de vírgulas em `scanf` e `for` loops, uso incorreto de `memset`, falta de fechamento de chaves, entre outros. Há também um OCR parcial que dificulta a leitura, mas não há erros matemáticos aparentes.",
+  "decisao": "suspeita",
+  "sha256": "00b4ee0b883cf73a92dab731ed0223ed54eb6064b4e268a7e06b6af804ef7c28"
+}

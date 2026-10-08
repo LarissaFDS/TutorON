@@ -1,0 +1,24 @@
+{
+  "id": "ef40cf393fd2",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.30.webp",
+  "copia": "00-originais\\ingestao\\3ed83243687ff2c3453fa5e975bb6dbc18a17841a2254ad3717358f9a27ddafd\\WhatsApp_Image_2025-01-12_at_13.13.30.webp",
+  "sha256": "3ed83243687ff2c3453fa5e975bb6dbc18a17841a2254ad3717358f9a27ddafd",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "moaputação\n\namstituto de O\nde Algoritmos\n\nProjeto e Análise\n1º Prova\n\nProf. Rian Gabric\n92 de março de 2025\n\n1 Pinheiro\n\nQuestão 1 |? tos)\nO Centro Acadêmico de 1C/UFAL fai ão corn\nar vetos 4 «qutendo valores i\n\nvotos ou não\n\nQuest\nConsidere ©\n\n“E procedure A to\n\n2 if then\n\nE returo\n\n4 end if\n\n6\n\nsi then\n\n9 retu\n\n19, else\n\nun rerusr\n\n12 end if\n\n13: end proced\nExplique ‘ 1 etud\n\nQuestão 3 [1 pontol:\n\nSelo. f(r) uma função dos inteiros © reais, Ji\n1. Qual a definigie formal de out?\n\n560\n\nsun? +1\n\n2. É verdade que",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\ef40cf393fd2\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

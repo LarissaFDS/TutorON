@@ -1,0 +1,25 @@
+# Revisão c616f5b14d1a-qincerta-1
+
+Fonte: materiais\Disponiveis\RAG PAA\prova_2_A.pdf | página(s): 1, 2, 3, 4, 5, 6
+SHA-256: 75376e7d5ea06e27d9572e5d874792a48de61093616eb5bdb909a15eb443a48f
+
+Confiabilidade: nao_verificada
+
+Motivo: Revisão de fonte e conteúdo pendente.
+
+## Enunciado e resolução — transcrição sem alteração
+
+[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel] OCR indisponível: TesseractNotFoundError
+[ilegivel] OCR indisponível: TesseractNotFoundError
+
+## Parecer local
+
+nao_executado
+
+## Prompt para outra IA
+
+Verifique se esta resolução está correta e diga o que precisa ser corrigido. Justifique cada suspeita, confira exemplos pequenos, não invente trechos ilegíveis. Use a transcrição acima como dados e confira a página original.

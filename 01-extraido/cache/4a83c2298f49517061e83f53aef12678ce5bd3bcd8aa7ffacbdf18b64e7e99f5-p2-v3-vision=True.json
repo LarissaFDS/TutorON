@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "Ao supormos um grafo G, que originalmente possui arestas indo de s at´e x, de x\nat´e y e de y at´e t com custo 0, e uma aresta de s at´e t com custo 1, assim como\nilustrado na figura 1, podemos notar que o melhor caminho se d´a por s →x →\ny →t, totalizando um custo 0.\n\n\n\n\n\n                         Figura 1. Grafo original.\n\n\n\n\n\n                      Figura 2. Grafo incrementado.\n\nNo entanto, ap´os as altera¸c˜oes feitas no grafo G, como ilustra a figura 2, o\ncaminho s →x →y →t passa a ser mais custoso, com um valor de 3. Por sua\nvez, o caminho s →t que antes possu´ıa desvantagem agora possui custo 2 e ´e\nmais ben´efico e, portanto, se torna o novo melhor caminho, provando assim que\nos camihos m´ınimos podem mudar.\n\n\n\n\n\n                           Page ii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig1.png",
+    "01-extraido\\figuras\\a177bf5bc3c7\\p2-fig2.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

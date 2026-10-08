@@ -1,0 +1,67 @@
+{
+  "questao": "Q3",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c07",
+    "c08",
+    "f38bb8142136-q2-2",
+    "299d863129c5-q6-2"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0.09400000000005093,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo de força bruta para verificar se um número \\( n \\) é composto, testando divisores de 2 até \\( \\lfloor n/2 \\rfloor \\), não é considerado polinomial em relação ao tamanho da entrada, mas sim em relação ao valor do número \\( n \\) em si. Vamos detalhar por que isso acontece.\n\n### Complexidade do Algoritmo\n1. **Quantidade de Divisões**: O algoritmo realiza \\( \\lfloor n/2 \\rfloor - 1 \\) divisões, que é \\( O(n) \\) em termos do valor do número \\( n \\). No entanto, isso não é suficiente para determinar a complexidade do algoritmo.\n\n2. **Tamanho da Entrada**: O tamanho da entrada, em termos de bits, é \\( b = \\log_2(n) \\). Isso significa que o valor de \\( n \\) pode ser muito maior do que o tamanho da entrada.\n\n### Complexidade Pseudo-Polinomial\n- **Dependência do Valor de \\( n \\)**: A complexidade do algoritmo é determinada pelo valor de \\( n \\) em si, e não pelo tamanho da entrada \\( b \\). Isso é porque a quantidade de operações depende diretamente do valor de \\( n \\), e não apenas do número de bits que representam \\( n \\).\n\n- **Exemplo**: Se \\( n = 2^{1000} \\), o algoritmo ainda realiza \\( O(n) \\) operações, que é \\( O(2^{1000}) \\). Embora \\( 1000 \\) seja um número constante, \\( 2^{1000} \\) é um número extremamente grande.\n\n- **Complexidade Exponencial**: A complexidade exponencial em termos do valor de \\( n \\) implica que a complexidade do algoritmo não é polinomial em relação ao tamanho da entrada. Isso é porque a complexidade polinomial exige que a quantidade de operações seja limitada por um polinômio em termos do tamanho da entrada.\n\n### Conclusão\nO algoritmo de força bruta para verificar se um número \\( n \\) é composto é considerado pseudo-polinomial, não polinomial, porque a complexidade de tempo depende do valor do número \\( n \\) em si, e não apenas do tamanho da entrada. Portanto, a complexidade é \\( O(n) \\) em termos do valor de \\( n \\), o que é exponencial em termos do tamanho da entrada \\( b = \\log_2(n) \\).\n\n\\[\n\\boxed{\\text{O algoritmo é pseudo-polinomial porque a complexidade depende do valor do número } n \\text{ em si, não apenas do tamanho da entrada.}}\n\\]",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.67199999999957,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

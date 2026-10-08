@@ -1,0 +1,594 @@
+[
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "seed": 7,
+    "cache_key": "700bb3199daa12c00abc07631460ff3394c7efc50a18c8ed63804f776030c15a",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime asteriscos de forma recursiva. Para resolver a recorrência, vamos analisar o comportamento da função. \n\nSe n > 0, a função chama-se recursivamente duas vezes, uma para cima e outra para baixo. A cada chamada recursiva, imprime n asteriscos. \n\nA recorrência pode ser escrita como: T(n) = 2T(n-1) + n, onde T(n) é o tempo de execução da função para entrada n. \n\nPara resolver essa recorrência, podemos usar a técnica de recorrência de recorte. Primeiro, substituímos T(n) por T(n-1) na equação, obtendo: T(n) = 2T(n-1) + n. \n\nAqui, podemos ver que T(n) é a soma de n e duas vezes a chamada recursiva para n-1. Isso nos leva a uma solução de recorrência: T(n) = n + 2T(n-1) = n + 2(n-1) + 4T(n-2) = n + 2(n-1) + 4(n-2) + 8T(n-3) = ... = n + 2(n-1) + 4(n-2) + ... + 2^k(n-k) + 2^kT(n-k) \n\nPara n = k + 1, a solução é: T(n) = n + 2(n-1) + 4(n-2) + ... + 2^k(n-k) + 2^k. \n\nAqui, a soma é uma progressão geométrica, cuja soma é S = 2^k(n-k) + 1. Portanto, a solução é T(n) = n + S = n + 2^k(n-k) + 1. \n\nSubstituindo k por (n-1), temos T(n) = n + 2^(n-1)(n-(n-1)) + 1 = n + 2^(n-1) + 1. \n\nPortanto, a quantidade de asteriscos impressos é T(n) = n + 2^(n-1) + 1.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 63.23367970500112,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 1,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Derivação ou fórmula fechada errada.",
+      "resposta_sha256": "9927de5edf91d6d407229e2f3c1770b6f0125d7b6a7128c81f99fbfc8397df76"
+    },
+    "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "contexto_texto": "",
+    "reutilizada_do_cache": true
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "seed": 7,
+    "cache_key": "37f666c6903d679b0782683d3201fa7cd97f9e1140dc522dd3660e22e0bbcff6",
+    "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505",
+    "contexto_texto": "[c05] Fonte: materiais\\c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nQuantos asteriscos ASTERISCO(n) imprime?\nPara n inteiro não negativo: A(0)=0. Para n>=1, duas chamadas imprimem A(n-1) cada e o laço imprime n, logo A(n)=2A(n-1)+n.\nA solução é A(n)=2^(n+1)-n-2. A substituição na recorrência e o caso base comprovam a fórmula. Valores: A(1)=1, A(2)=4, A(3)=11, A(4)=26. Portanto a contagem é Theta(2^n). A contagem de asteriscos não é o número de chamadas; há 2^(n+1)-1 chamadas, incluindo n=0. A variante com uma chamada em floor(n/2) tem outra recorrência e não usa esta fórmula.\n\n[d455baef2cdf-q3-3] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 4; confiabilidade: media; OCR: revisada_por_agente\nComputar a^n para inteiro n>=0 por divisão e conquista.\npotencia(a,0)=1. Para n>0, calcule uma única vez r=potencia(a,floor(n/2)); se n for par, retorne r*r; se for ímpar, retorne r*r*a.\nA identidade a^(2k)=(a^k)^2 e a^(2k+1)=(a^k)^2*a prova a recorrência por indução. Há O(log n) multiplicações e profundidade O(log n), no modelo de operações aritméticas de custo unitário. O custo em bits depende do tamanho de a^n e das multiplicações. Um limite O(n log n) pedido no enunciado também é atendido por essa solução mais eficiente. Não confundir r*r com r+r; esses símbolos estão corrompidos no OCR.\n\n[97254bb4a1b8-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nNúmero faltante entre 1 e n, ouvindo n-1 inteiros distintos válidos.\nInicialize faltante=n(n+1)/2 e subtraia cada número ouvido. Ao final, resta exatamente o omitido. São O(n) operações e O(1) palavras de memória no modelo RAM; representar os acumuladores exige O(log n) bits. Valide as hipóteses de intervalo e distinção se a entrada não for garantida.\nEm tipos inteiros de tamanho fixo, a multiplicação n(n+1) pode transbordar mesmo quando a soma final cabe: divida um dos fatores pares por 2 antes de multiplicar e use um tipo suficientemente largo. Uma alternativa é XOR de 1..n combinado com XOR dos números recebidos; todos os presentes cancelam, deixando o faltante. XOR evita a soma intermediária, mas ainda exige um tipo capaz de representar n.\n\n[ef6d051e4b8c-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L2.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nSubir n degraus em passos de tamanho 1 ou 2.\nDefina E(0)=1 (sequência vazia) e E(1)=1. Para n>=2, E(n)=E(n-1)+E(n-2), separando pelo último passo. Logo os valores para n=0..5 são 1,1,2,3,5,8.\nPara n=4, as cinco sequências são 1111,112,121,211,22. Para n=5, as oito são 11111,1112,1121,1211,2111,122,212,221. A sequência 221 não pode representar quatro degraus, e não deve ser duplicada na lista de cinco.\nÉ possível calcular em O(n) adições e O(1) palavras auxiliares com duas variáveis. A contagem pode exigir inteiros grandes; a complexidade em bits deve considerar seu crescimento.",
+    "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+    "fontes_sha256": {
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+      "d455baef2cdf-q3-3": "157f0fe26a3e598835f92393a45ed347e8788ce637ebb282db8d6075cc5bfe5f",
+      "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+      "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. Para resolver a recorrência, vamos analisar a função:\n\nA(0) = 0 (caso base)\nPara n >= 1, temos duas chamadas de ASTERISCO(n-1) e imprime n asteriscos.\n\nPortanto, a recorrência é:\nA(n) = 2A(n-1) + n\n\nPara resolver, vamos substituir:\nA(n) = 2A(n-1) + n = 2(2A(n-2) + n-1) + n = 2^2A(n-2) + 2(n-1) + n = ... = 2^(n+1)A(0) + Σ(2^k * k) para k=1 até n\n\nA solução é A(n) = 2^(n+1) - n - 2, conforme mostrado no contexto.\n\nA complexidade é Theta(2^n), pois há 2^(n+1) chamadas de ASTERISCO(n) incluindo n=0.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 141.79040594200342,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 4,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Fórmula e recorrência corretas, mas expansão/somatória e número exato de chamadas são falsos.",
+      "resposta_sha256": "33281686b006011033f258c231bd9653521fe3716ef71c0230e2bd58cc2056b1"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "generico",
+    "seed": 7,
+    "cache_key": "7ee521fd8630fa3fe8a0063f95145592a8d957027a0ac81c8ed55def73a05e09",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida através da recorrência. Para a lista [5,15,-30,10,-5,40,10], a recorrência seria:\n\nT(n) = max{T(n-1) + a[n], a[n]}, onde T(0) = 0 e a[n] é o elemento da lista.\n\nPara [-5,-2,-8], a subsequência contígua de soma máxima é -2, pois é o único elemento na lista.\n\nPara a lista [5,15,-30,10,-5,40,10], a solução é encontrar a soma máxima consecutiva, que é 55 (5 + 15 + (-30) + 10 + (-5) + 40 + 10).\n\nEssa solução é eficiente em tempo linear, fazendo apenas uma passagem pela lista. A complexidade de tempo é O(n), onde n é o tamanho da lista.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 34.52519401800237,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 3,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "32caeb27e32914605ae3354bfdf5c296e6da69a38a5185e474ca45acdcccc913"
+    },
+    "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "contexto_texto": "",
+    "reutilizada_do_cache": true
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_automatica",
+    "seed": 7,
+    "cache_key": "406fae407665cd383f4551d1ab01ed028139954599cb2542d8cab052b7bda581",
+    "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7",
+    "contexto_texto": "[1a81ca283132-q4-4] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 4; confiabilidade: media; OCR: revisada_por_agente\nSubsequência contígua de soma máxima com subsequência vazia permitida (Lista 5).\nDefina fim[0]=0 e fim[j]=max(0,fim[j-1]+a_j). Defina melhor[0]=0 e melhor[j]=max(melhor[j-1],fim[j]). O resultado é melhor[n]. É possível manter apenas fim e melhor em O(1) de memória; o tempo é O(n). Guarde índices de início/fim se for necessário retornar a subsequência.\nPara [5,15,-30,10,-5,40,10], a resposta é [10,-5,40,10] com soma 55. Para [-5,-2,-8], a resposta é a subsequência vazia, soma 0. Inicializar o melhor valor em -infinito e exigir um elemento muda a convenção da fonte e é inadequado aqui.\n\n[1a81ca283132-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nMenor soma de um caminho do ápice à base de um triângulo.\nSeja tri[i][j] a entrada. Para triângulo não vazio, inicialize dp=[tri[0][0]]. Para cada linha i>0, crie new de tamanho i+1: new[0]=tri[i][0]+dp[0]; new[i]=tri[i][i]+dp[i-1]; para 0<j<i, new[j]=tri[i][j]+min(dp[j-1],dp[j]). Substitua dp por new. A resposta é min(dp).\nA recorrência considera exatamente os pais adjacentes de cada célula. Para n linhas, o tempo é O(n^2) e a memória auxiliar O(n). Para [[2],[3,4],[6,5,7],[4,1,8,3]], a soma mínima é 11. O código desta nota é uma reconstrução editorial, e não certifica a transcrição de índices da imagem.\n\n[70d6475b28bf-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L8.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nTodos os quadrados mágicos normais de ordem 3.\nA soma de 1 até 9 é 45; três linhas iguais dão soma mágica 15. Preencha nove posições por backtracking, mantendo um conjunto dos números ainda não usados. A cada escolha, não repita número; se uma linha, coluna ou diagonal estiver completa, exija soma 15. Se uma linha parcial já tiver soma >=15 com posições restantes, descarte, pois os números são positivos.\nUma poda mais forte soma os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha. Ao preencher as nove posições, confira as três linhas, três colunas e duas diagonais. Há oito soluções ao contar rotações e reflexões separadamente; por exemplo [[8,1,6],[3,5,7],[4,9,2]]. O centro é 5.\nUm limite simples é O(9!) para permutar os números, com memória O(9). Não confundir igualdade entre diagonais com a exigência de que todas as oito somas sejam 15. O código da imagem foi substituído por descrição derivada.\n\n[1a81ca283132-q2-2] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 2; confiabilidade: media; OCR: revisada_por_agente\nRobô coletor de moedas em matriz de r linhas e c colunas, movendo para direita ou baixo.\nDefina dp[i][j]=moeda[i][j]+max(dp[i-1][j],dp[i][j-1]), considerando apenas predecessores válidos. A origem tem dp[0][0]=moeda[0][0]. Grave o predecessor escolhido em cada célula. A contagem máxima é dp[r-1][c-1]; reconstrua o caminho seguindo predecessores até a origem e invertendo a ordem.\nEm empates, qualquer predecessor ótimo produz um caminho ótimo. Tempo O(rc); memória O(rc) com reconstrução. Se somente a soma for pedida, a memória pode cair para O(c). O OCR do código não deve ser usado como programa executável.",
+    "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+    "fontes_sha256": {
+      "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+      "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4",
+      "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+      "1a81ca283132-q2-2": "15c399403a902537e63dbff0886fcc82c76dd7ef867603ec4913baba1ca792e2"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "A solução para a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, pode ser resumida com a seguinte recorrência:\n\nfim[j] = max(0, fim[j-1] + a_j)\nmelhor[j] = max(melhor[j-1], fim[j])\n\nOnde:\n- fim[j] representa a soma máxima subsequente até o índice j.\n- melhor[j] representa o índice do início da subsequência de soma máxima até o índice j.\n\nPara os exemplos dados:\n\nPara [5,15,-30,10,-5,40,10]:\n- A recorrência é aplicada de trás para frente, começando com melhor[0] = 0 e fim[0] = 0.\n- Calculamos até melhor[6] e fim[6] = 55, correspondendo ao resultado [10,-5,40,10].\n\nPara [-5,-2,-8]:\n- A recorrência é aplicada de trás para frente, começando com melhor[0] = -infinito e fim[0] = -infinito.\n- Calculamos até melhor[3] e fim[3] = 0, correspondendo ao resultado subsequência vazia.\n\nEsta abordagem garante que ambas as variáveis são mantidas em O(1) de memória, cumprindo o requisito de tempo e memória O(n).",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 135.10032139299437,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 4,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces ou definição de estados/ordem de processamento incorretos; resultados copiados 55/0 não corrigem o raciocínio.",
+      "resposta_sha256": "18b875790aeaabe8aa23bc5a0f1794438b48400703c1305736ef4420d12537c3"
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "seed": 2026,
+    "cache_key": "a29eae4f88f6484ddac5ac5e56f51f15e368862eb6074413526e96892bbd536b",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos em cada chamada, mas ela imprime os asteriscos duas vezes: uma no início e outra no final. Isso significa que para cada chamada, ela imprime 2n asteriscos. A recorrência para o número de asteriscos impressos é dada pela função recursiva. Se n > 0, a função chama-se duas vezes, cada chamada imprime n asteriscos, e a função chama-se novamente com n-1. Portanto, a recorrência é 2 * (n + (n-1) + (n-2) + ... + 1). A solução para essa recorrência é 2^n. Então, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é 2^n.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.655069600004936,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 0,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Derivação ou fórmula fechada errada.",
+      "resposta_sha256": "eaebe8a63eefb8582186f0f066ec43a6e609da2f47511a1db82bfd466dcb939e"
+    },
+    "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "contexto_texto": "",
+    "reutilizada_do_cache": true
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "seed": 2026,
+    "cache_key": "16e485b4dc80acae581526eaceec279eeac3db008c3b9905ca68b35c14d170ce",
+    "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505",
+    "contexto_texto": "[c05] Fonte: materiais\\c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nQuantos asteriscos ASTERISCO(n) imprime?\nPara n inteiro não negativo: A(0)=0. Para n>=1, duas chamadas imprimem A(n-1) cada e o laço imprime n, logo A(n)=2A(n-1)+n.\nA solução é A(n)=2^(n+1)-n-2. A substituição na recorrência e o caso base comprovam a fórmula. Valores: A(1)=1, A(2)=4, A(3)=11, A(4)=26. Portanto a contagem é Theta(2^n). A contagem de asteriscos não é o número de chamadas; há 2^(n+1)-1 chamadas, incluindo n=0. A variante com uma chamada em floor(n/2) tem outra recorrência e não usa esta fórmula.\n\n[d455baef2cdf-q3-3] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 4; confiabilidade: media; OCR: revisada_por_agente\nComputar a^n para inteiro n>=0 por divisão e conquista.\npotencia(a,0)=1. Para n>0, calcule uma única vez r=potencia(a,floor(n/2)); se n for par, retorne r*r; se for ímpar, retorne r*r*a.\nA identidade a^(2k)=(a^k)^2 e a^(2k+1)=(a^k)^2*a prova a recorrência por indução. Há O(log n) multiplicações e profundidade O(log n), no modelo de operações aritméticas de custo unitário. O custo em bits depende do tamanho de a^n e das multiplicações. Um limite O(n log n) pedido no enunciado também é atendido por essa solução mais eficiente. Não confundir r*r com r+r; esses símbolos estão corrompidos no OCR.\n\n[97254bb4a1b8-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nNúmero faltante entre 1 e n, ouvindo n-1 inteiros distintos válidos.\nInicialize faltante=n(n+1)/2 e subtraia cada número ouvido. Ao final, resta exatamente o omitido. São O(n) operações e O(1) palavras de memória no modelo RAM; representar os acumuladores exige O(log n) bits. Valide as hipóteses de intervalo e distinção se a entrada não for garantida.\nEm tipos inteiros de tamanho fixo, a multiplicação n(n+1) pode transbordar mesmo quando a soma final cabe: divida um dos fatores pares por 2 antes de multiplicar e use um tipo suficientemente largo. Uma alternativa é XOR de 1..n combinado com XOR dos números recebidos; todos os presentes cancelam, deixando o faltante. XOR evita a soma intermediária, mas ainda exige um tipo capaz de representar n.\n\n[ef6d051e4b8c-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L2.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nSubir n degraus em passos de tamanho 1 ou 2.\nDefina E(0)=1 (sequência vazia) e E(1)=1. Para n>=2, E(n)=E(n-1)+E(n-2), separando pelo último passo. Logo os valores para n=0..5 são 1,1,2,3,5,8.\nPara n=4, as cinco sequências são 1111,112,121,211,22. Para n=5, as oito são 11111,1112,1121,1211,2111,122,212,221. A sequência 221 não pode representar quatro degraus, e não deve ser duplicada na lista de cinco.\nÉ possível calcular em O(n) adições e O(1) palavras auxiliares com duas variáveis. A contagem pode exigir inteiros grandes; a complexidade em bits deve considerar seu crescimento.",
+    "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+    "fontes_sha256": {
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+      "d455baef2cdf-q3-3": "157f0fe26a3e598835f92393a45ed347e8788ce637ebb282db8d6075cc5bfe5f",
+      "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+      "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. Para resolver a recorrência, vamos considerar a função de acordo com o enunciado. A função ASTERISCO(n) chama-se duas vezes, uma para cada lado da condição if, e imprime n asteriscos entre essas chamadas. Portanto, a recorrência para o número de asteriscos impressos, que chamaremos de S(n), é dada por:\n\nS(n) = 2S(n-1) + n, para n >= 1\nS(0) = 0\n\nAqui, 2S(n-1) representa as duas chamadas recursivas e n é o número de asteriscos impressos diretamente. Para resolver essa recorrência, podemos usar a fórmula fornecida no contexto: S(n) = 2^(n+1) - n - 2. Isso é uma solução que atende a recorrência fornecida e pode ser verificada com os valores S(1)=1, S(2)=4, S(3)=11, S(4)=26, conforme mencionado no contexto. Portanto, a função ASTERISCO(n) imprime 2^(n+1) - n - 2 asteriscos.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 53.1124959420049,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 5,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "adequada",
+      "justificativa": "Recorrência/base/fórmula e exemplos 1,4,11,26 corretos; distingue impressão direta n do total.",
+      "resposta_sha256": "b145c22b0c18e6055163c2eced71af6520b042d58321b0ba8f6bce0b456bd733"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "generico",
+    "seed": 2026,
+    "cache_key": "32ee08483040b424c0614a6053bada870eab82d76ec6c6ac7fba1241ff94c698",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida usando a técnica de Kadane's Algorithm. Para a lista [5,15,-30,10,-5,40,10], a recorrência é a seguinte:\n\n1. Inicializar as variáveis: max_current = max_global = lista[0] = 5.\n2. Para cada elemento na lista, atualizar max_current = max(lista[i], max_current + lista[i]).\n3. Atualizar max_global = max(max_global, max_current).\n\nPara a lista [5,15,-30,10,-5,40,10], a solução é 60, que é a soma dos elementos [10, 40, 10].\n\nPara a lista [-5,-2,-8], a solução é -5, que é o único elemento na lista.\n\nEssa técnica garante que a solução seja encontrada em tempo linear, ou seja, em O(n), onde n é o comprimento da lista.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.054947625998466,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 1,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "19a0682df1fa73b7e964cf5bbb65e426fe7732f0bb124dcbc2f2d0af27df447e"
+    },
+    "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "contexto_texto": "",
+    "reutilizada_do_cache": true
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_automatica",
+    "seed": 2026,
+    "cache_key": "58cd1b195f4f754459a7b4aa0a9f105804570da864a4fa5d4f1a52bbe3bf1481",
+    "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7",
+    "contexto_texto": "[1a81ca283132-q4-4] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 4; confiabilidade: media; OCR: revisada_por_agente\nSubsequência contígua de soma máxima com subsequência vazia permitida (Lista 5).\nDefina fim[0]=0 e fim[j]=max(0,fim[j-1]+a_j). Defina melhor[0]=0 e melhor[j]=max(melhor[j-1],fim[j]). O resultado é melhor[n]. É possível manter apenas fim e melhor em O(1) de memória; o tempo é O(n). Guarde índices de início/fim se for necessário retornar a subsequência.\nPara [5,15,-30,10,-5,40,10], a resposta é [10,-5,40,10] com soma 55. Para [-5,-2,-8], a resposta é a subsequência vazia, soma 0. Inicializar o melhor valor em -infinito e exigir um elemento muda a convenção da fonte e é inadequado aqui.\n\n[1a81ca283132-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nMenor soma de um caminho do ápice à base de um triângulo.\nSeja tri[i][j] a entrada. Para triângulo não vazio, inicialize dp=[tri[0][0]]. Para cada linha i>0, crie new de tamanho i+1: new[0]=tri[i][0]+dp[0]; new[i]=tri[i][i]+dp[i-1]; para 0<j<i, new[j]=tri[i][j]+min(dp[j-1],dp[j]). Substitua dp por new. A resposta é min(dp).\nA recorrência considera exatamente os pais adjacentes de cada célula. Para n linhas, o tempo é O(n^2) e a memória auxiliar O(n). Para [[2],[3,4],[6,5,7],[4,1,8,3]], a soma mínima é 11. O código desta nota é uma reconstrução editorial, e não certifica a transcrição de índices da imagem.\n\n[70d6475b28bf-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L8.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nTodos os quadrados mágicos normais de ordem 3.\nA soma de 1 até 9 é 45; três linhas iguais dão soma mágica 15. Preencha nove posições por backtracking, mantendo um conjunto dos números ainda não usados. A cada escolha, não repita número; se uma linha, coluna ou diagonal estiver completa, exija soma 15. Se uma linha parcial já tiver soma >=15 com posições restantes, descarte, pois os números são positivos.\nUma poda mais forte soma os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha. Ao preencher as nove posições, confira as três linhas, três colunas e duas diagonais. Há oito soluções ao contar rotações e reflexões separadamente; por exemplo [[8,1,6],[3,5,7],[4,9,2]]. O centro é 5.\nUm limite simples é O(9!) para permutar os números, com memória O(9). Não confundir igualdade entre diagonais com a exigência de que todas as oito somas sejam 15. O código da imagem foi substituído por descrição derivada.\n\n[1a81ca283132-q2-2] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 2; confiabilidade: media; OCR: revisada_por_agente\nRobô coletor de moedas em matriz de r linhas e c colunas, movendo para direita ou baixo.\nDefina dp[i][j]=moeda[i][j]+max(dp[i-1][j],dp[i][j-1]), considerando apenas predecessores válidos. A origem tem dp[0][0]=moeda[0][0]. Grave o predecessor escolhido em cada célula. A contagem máxima é dp[r-1][c-1]; reconstrua o caminho seguindo predecessores até a origem e invertendo a ordem.\nEm empates, qualquer predecessor ótimo produz um caminho ótimo. Tempo O(rc); memória O(rc) com reconstrução. Se somente a soma for pedida, a memória pode cair para O(c). O OCR do código não deve ser usado como programa executável.",
+    "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+    "fontes_sha256": {
+      "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+      "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4",
+      "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+      "1a81ca283132-q2-2": "15c399403a902537e63dbff0886fcc82c76dd7ef867603ec4913baba1ca792e2"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, usamos as seguintes convenções:\n\n- Definimos `fim[j] = max(0, fim[j-1] + a_j)` e `melhor[j] = max(melhor[j-1], fim[j])`.\n- `fim[0] = 0` e `melhor[0] = -infinito`.\n- O resultado é `melhor[n]`.\n\nPara os exemplos dados:\n\n- Para [5,15,-30,10,-5,40,10]:\n  - `fim` e `melhor` são calculados em O(1) memória e O(n) tempo.\n  - `fim` = [0, 5, 20, -20, -15, 5, 50]\n  - `melhor` = [0, 5, 25, 5, 0, 50, 50]\n  - A subsequência de soma máxima é [10, -5, 40, 10] com soma 55.\n\n- Para [-5,-2,-8]:\n  - `fim` = [-5, -7, -15]\n  - `melhor` = [-5, -5, -5]\n  - A subsequência de soma máxima é vazia, com soma 0.\n\nEssas convenções garantem que `fim` e `melhor` são calculados em tempo linear, conforme solicitado.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 62.103723366999475,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 4,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces ou definição de estados/ordem de processamento incorretos; resultados copiados 55/0 não corrigem o raciocínio.",
+      "resposta_sha256": "abd731bc199c8e84579ef403dc1250d0e5be0ab5d1dc1c08cf0646841e005ca9"
+    }
+  }
+]

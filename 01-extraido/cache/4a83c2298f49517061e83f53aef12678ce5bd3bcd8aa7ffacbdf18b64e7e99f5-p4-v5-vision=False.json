@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "4. Este ´e um problema que ocorre em an´alise autom´atica de programas. Para\num conjunto de vari´aveis x1, ..., xn, s˜ao dadas algumas restri¸c˜oes de igualdade,\nda forma “xi = xj”e algumas restri¸c˜oes de desigualdade, da forma xi̸ = xj.\nSer´a que ´e poss´ıvel satisfazer todas elas? Por exemplo, as restri¸c˜oes\n\nx1 = x2, x2 = x3, x3 = x4, x1̸ = x4\n\nn˜ao podem ser satisfeitas.\nForne¸ca um algoritmo eficiente que tome como\nentrada m restri¸c˜oes sobre n vari´aveis e decida se as restri¸c˜oes podem ser\nsatisfeitas.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\ncandicoes = [1\nfor à in range(m):\ncondicoes .appendCinput ())\n\nigualdades, desigualdades= ter. condicoes(condicoes) tê ese\n\nsubset=[]\n\nsor v in range(s)+\nsunset -append(Subset(u,2)) * Constrói list\n\nfor igualdade in igualdades:\n\nunion(subset, jgualdade[?), igualdade(1}) sé\n\nf1ag=1\n\nfor desigualdade in desigualdades» Para © igual ica os pais 0\n\nparent = find(subset, desigualdade[@]) é Se todos Os ert componente conexa Pé ma mesma\n\nparent2 ind(subset, desigualdade[3]) ter p E à i p proxi!\n\n1% parent == parent2: é Se poss eco pai, são iguais e, portanto ® de álida é consequentemente à\n\nflag = 8\nprint(\"N válido\")\n=\n\n44 Flag: peint(\" 55 tã og!\n\n\n5. Alice quer dar uma festa e est´a decidindo quem chamar. Ela tem n pessoas\nas quais escolher, e ela fez uma lista de quais pares dessas pessoas conhecem\numa a outra. Ela quer selecionar o maior n´umero de pessoas poss´ıvel, sujeito\na duas restri¸c˜oes: na festa, cada pessoa deve ter pelo menos outras cinco\npessoas que ela conhece e outras cinco pessoas que ela n˜ao conhece. Forne¸ca\num algoritmo eficiente que tome como entrada a lista das n pessoas e a lista\nde pares de quem conhece quem e calcule a melhor escolha de convidados\npara a festa. Dˆe o tempo de execu¸c˜ao em termos de n.\n\nSolu¸c˜ao:\n\nPage iv",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

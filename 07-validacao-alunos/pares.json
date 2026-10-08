@@ -1,0 +1,600 @@
+[
+  {
+    "id": "Q1",
+    "pergunta": "Como eu explico o que esse algoritmo faz e provo a corretude dele?\n\nprocedure ALGORITMO X(vetor A[1..n], inicio, fim)\n  if inicio = fim then return A[inicio]\n  meio ← inicio + (fim − inicio)/2\n  a ← X(A, inicio, meio)\n  b ← X(A, meio + 1, fim)\n  if a < b then return b else return a\nend procedure",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Para explicar o que esse algoritmo faz, precisamos entender que ele é uma implementação de uma função recursiva que busca o menor elemento em um vetor. Este algoritmo é semelhante ao método de busca binária, mas não garante que o vetor está ordenado. Ele divide o vetor em metades e compara os menores elementos de cada metade para determinar qual é o menor.\n\nPara provar sua corretude, podemos usar a técnica de indução. Primeiro, mostramos que o algoritmo funciona corretamente para vetores de tamanho 1 (base da indução). Em seguida, assumimos que o algoritmo funciona para vetores de tamanho k (hipótese da indução) e provamos que ele também funciona para vetores de tamanho k+1. Isso pode ser feito demonstrando que o algoritmo retorna o menor elemento do vetor de tamanho k+1, que é o menor dos menores elementos de cada metade do vetor (que são retornados por chamadas recursivas).\n\nAlém disso, podemos usar testes de casos para validar o algoritmo. Testar com vetores ordenados, desordenados e com repetições pode ajudar a garantir que o algoritmo está funcionando como esperado.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 42.19606517200009,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "O Algoritmo X é uma função recursiva que busca o maior valor em um intervalo dado. Ele funciona dividindo o intervalo em metades menores, comparando os maiores valores de cada metade e retornando o maior. Se o intervalo só tem um elemento (caso base), ele retorna esse elemento. Caso contrário, ele divide o intervalo em duas metades, compara os maiores valores dessas metades e retorna o maior. Isso garante que ele sempre compara os maiores valores, garantindo a corretude.\n\nPara provar a corretude, consideramos o intervalo A[inicio..fim]. Se inicio = fim, a função retorna A[inicio], que é o único elemento e portanto o maior. Se não, dividimos o intervalo em meio e chamamos a função recursivamente para as duas metades. Se a metade esquerda retorna um valor maior ou igual ao da metade direita, o valor da metade direita é retornado. Isso garante que o valor retornado é o maior do intervalo original. Como a função sempre compara os maiores valores, a função sempre retorna o maior valor do intervalo. Portanto, a função X(A, inicio, fim) retorna o maior valor do intervalo A[inicio..fim].",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 118.4297276990037,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "a40aadb40b8b95840eb01dbfefc076a2e670793b4e3292989b3ba352cd02d0df",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c01": "8a10dc47291c4090be09acc3d8f2445697fb2ef0d4dc542e37ac14b3d4af9297",
+        "c02": "6488884c1ed37eec837ad80e0c3357f425d3f7ae983033371f8220bbc92c0f1a",
+        "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+        "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q2",
+    "pergunta": "Quantos asteriscos são impressos em uma chamada de ASTERISCO(n)? O professor pede para mostrar a recorrência.\n\nprocedure ASTERISCO(n)\n  if n > 0 then\n    ASTERISCO(n − 1)\n    for i ← 1 → n do imprima \"*\"\n    ASTERISCO(n − 1)\n  end if\nend procedure",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. Ela usa uma técnica recursiva para fazer isso. Para entender a recorrência, vamos analisar a chamada ASTERISCO(n). Se n > 0, a função chama-se duas vezes recursivamente, uma vez para n-1 e outra para n-1. Isso significa que a função será chamada recursivamente n vezes. Além disso, a função imprime n asteriscos em cada chamada recursiva. Portanto, a quantidade total de asteriscos impressos é 2n-1. Por exemplo, ASTERISCO(3) imprime 7 asteriscos.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 24.59991348100084,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. A recorrência para o número de asteriscos impressos é dada pela fórmula A(n) = 2A(n-1) + n. Para n=0, A(0)=0. Para n>0, a função imprime A(n-1) asteriscos na chamada anterior e n asteriscos na chamada atual. Portanto, a contagem total é dada pela fórmula A(n) = 2A(n-1) + n. A solução para esta recorrência é A(n) = 2^(n+1) - n - 2, conforme mostrado no contexto acadêmico.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 94.51470939400315,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+        "d455baef2cdf-q3-3": "157f0fe26a3e598835f92393a45ed347e8788ce637ebb282db8d6075cc5bfe5f",
+        "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+        "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q3",
+    "pergunta": "Por que o algoritmo força bruta do problema COMPOSTO (testar os divisores de 2 até ⌊n/2⌋) não é considerado polinomial, se ele faz só O(n) divisões?",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "O algoritmo de força bruta que testa divisores de 2 até ⌊n/2⌋ para determinar se um número é primo não é considerado polinomial porque, embora ele faça O(n) divisões, a complexidade de tempo total depende da quantidade de divisões efetivamente necessárias. Para números grandes, muitos desses testes são desnecessários, pois os divisores maiores já foram testados. Isso significa que o número de divisões efetivamente realizadas não é limitado por n, mas por a quantidade de divisores efetivamente necessários, que pode ser muito maior que n. Portanto, mesmo com uma complexidade de tempo de O(n) para divisões, o algoritmo não é polinomial porque seu tempo de execução pode ser muito maior do que o esperado em casos extremos.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.733030315001088,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "O algoritmo força bruta de COMPOSTO não é considerado polinomial, apesar de fazer apenas O(n) divisões, porque o número de divisões cresce exponencialmente em b, que é o número de bits necessário para representar n. Isso significa que, embora o número de testes seja polinomial em n, a complexidade em termos de bits de representação binária cresce exponencialmente com o tamanho de n. Portanto, mesmo que o número de testes seja limitado, a complexidade em termos de bits de representação binária torna o algoritmo não polinomial. Além disso, a representação binária de n pode ser exponencialmente maior, o que afeta a eficiência do algoritmo.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 104.83468748199812,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "d3a20f5f09adcf4c2489349849454c25f16c2cbb30a50b3f1d4b4ff2a3e2983f",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+        "1a81ca283132-q8-8": "06033a53feb1a0227039026a3678ab4ef04bd52bae1aefe3fbd9ff4aadafe365",
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q4",
+    "pergunta": "Defina as classes P, NP e NP-completo.",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "As classes P, NP e NP-completo são fundamentais no contexto da teoria da computação e da complexidade computacional. \n\nP (Polynomial time) é a classe de problemas que podem ser resolvidos eficientemente por um computador, em tempo polinomial. Ou seja, a complexidade de tempo de execução é de ordem polinomial em relação ao tamanho da entrada do problema.\n\nNP (Nondeterministic Polynomial time) é a classe de problemas cuja solução pode ser verificada eficientemente em tempo polinomial. Ou seja, se uma solução é fornecida, um computador pode verificar essa solução em tempo polinomial. Importante notar que não necessariamente esses problemas podem ser resolvidos em tempo polinomial.\n\nNP-completo é uma subclasse de NP que é especialmente importante. Um problema é NP-completo se ele é NP e, além disso, é tão difícil quanto qualquer problema em NP. Ou seja, se um problema NP-completo puder ser resolvido em tempo polinomial, então todos os problemas em NP também podem ser resolvidos em tempo polinomial.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 43.797184946000925,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Claro, aqui está a definição das classes P, NP e NP-completo de acordo com o contexto fornecido:\n\nP é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada. Ou seja, um problema está em P se uma máquina de Turing determinística pode resolver-o em tempo polinomial.\n\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Esses problemas podem ser resolvidos em tempo polinomial por uma máquina não-determinística. Não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.\n\nUm problema B é NP-completo se pertence a NP e todo problema de NP se reduz polinomialmente a B. Isso significa que se um problema NP-completo estiver em P, então P=NP. Redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.\n\nPor exemplo, problemas como SAT (verdadeira solução de uma expressão booleana), CLIQUE (existe um clique de tamanho pelo menos k) e MOCHILA com limite de peso e alvo de valor são NP-complexos. Não todos os problemas em NP são NP-complexos, como a linguagem vazia e a linguagem universal. Não se sabe se existe um problema NP-completo em P, equivalente a P=NP.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 139.95923534400208,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e75fdf29ba53dc08348e8099ca70bcd8b3f72a7ecc35cc139f8503096dbb84d0",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+        "f38bb8142136-q3-3": "3c20b99d4f7747851d05a034df03387d5985a05d8bf0234c714e880c650bbf7d",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995",
+        "f38bb8142136-q5-5": "c6f251eaf32e07dd666b301ff062e71e32de65f2b1ece6e2fefcdda35588505d"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q5",
+    "pergunta": "Se eu somar 1 ao peso de cada aresta de um grafo conexo, a árvore geradora mínima continua mínima? E os caminhos mínimos? Justifique com um contraexemplo numérico.",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "A adição de 1 a cada peso de aresta em um grafo conexo não garante que a árvore geradora mínima (AGM) continuará sendo a mínima. Um contraexemplo numérico pode ajudar a entender isso. Suponhamos um grafo simples com 4 vértices (A, B, C, D) e as arestas com pesos 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Se somarmos 1 a cada peso, teremos pesos 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. \n\nAgora, a AGM original poderia ser A-B-C-D com peso total de 6. Após a adição de 1 a cada peso, a nova AGM pode ser A-B-C-D com peso total de 10. No entanto, a nova AGM não é necessariamente a mínima. Uma nova AGM poderia ser A-B-D com peso total de 9, que é menor que 10. Portanto, a adição de 1 a cada peso de aresta não garante que a AGM continuará sendo a mínima.\n\nQuanto aos caminhos mínimos, a adição de 1 a cada peso de aresta aumentará o peso de todos os caminhos, incluindo os caminhos mínimos existentes. Portanto, os caminhos mínimos também não serão garantidos de continuar sendo mínimos após a adição de 1 a cada peso de aresta.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 58.080187042000034,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Se somarmos 1 a cada aresta de um grafo conexo, a árvore geradora mínima continua sendo mínima. Isso ocorre porque a soma de 1 a cada aresta não altera a ordem dos pesos das arestas, mantendo a mesma árvore geradora mínima. No entanto, os caminhos mínimos podem mudar. Um contraexemplo numérico é útil para entender isso.\n\nConsidere um grafo simples com vértices s, x, y, t e arestas s-x, x-y, y-t com pesos 0, 0, 0, respectivamente. A árvore geradora mínima é s-t, com custo 0. Se somarmos 1 a cada aresta, a árvore geradora mínima permanece s-t, com custo 1. No entanto, o caminho s-t passando por x e y tem custo 2, que é menor que o custo da árvore geradora mínima. Portanto, o caminho s-t não é mais o caminho mínimo entre s e t após a alteração dos pesos.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 95.58303248100128,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5c1211d75300cc4752c4afa0bf7aa06abe6638446ed1031667f111e289d3f182",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "a177bf5bc3c7-q1-1": "1dcf58f433a2c23e4023d63670ced1ca977479af84bfa56e4b4ddf51da3365d5",
+        "a177bf5bc3c7-q2-2": "ff0422914032d457378242d5a810eaa8bcf007806ceb19b6d985fb1fffcfb673",
+        "1a81ca283132-q7-7": "2a3d27cb56dd8478af0dae09e6bfd08ed3374924757c0430ec5cadf4eb0da089",
+        "1a81ca283132-q9-9": "eb73bcd61a3b04150ec8261120cbc782d3fe23f7313c7f4ae314ef3903feff46"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q6",
+    "pergunta": "Como resolver a subsequência contígua de soma máxima em tempo linear, seguindo a convenção da Lista 5? Mostre a recorrência e os resultados para [5,15,-30,10,-5,40,10] e [-5,-2,-8].",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida usando a fórmula básica da dinâmica de recorrência. Para a sequência [5,15,-30,10,-5,40,10], a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100. Para [-5,-2,-8], a subsequência de soma máxima é [-5] com soma total de -5.\n\nA recorrência básica para encontrar a soma máxima subsequencial é:\n\nT(n) = max(T(n-1) + a[n], a[n])\n\nOnde T(n) é a soma máxima subsequencial até o índice n, e a[n] é o elemento na posição n. \n\nPara a sequência [5,15,-30,10,-5,40,10], a solução é:\n\nT(0) = 5\nT(1) = 5 + 15 = 20\nT(2) = 20 - 30 = -10\nT(3) = -10 + 10 = 0\nT(4) = 0 - 5 = -5\nT(5) = -5 + 40 = 35\nT(6) = 35 + 10 = 45\n\nPortanto, a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100.\n\nPara a sequência [-5,-2,-8], a solução é:\n\nT(0) = -5\nT(1) = -5 - 2 = -7\nT(2) = -7 - 8 = -15\n\nPortanto, a subsequência de soma máxima é [-5] com soma total de -5.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 67.70393814900308,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, a recorrência é a seguinte:\n\n- Defina `fim[j] = max(0, fim[j-1] + a_j)`.\n- Defina `melhor[j] = max(melhor[j-1], fim[j])`.\n\nO resultado é `melhor[n]`, que representa a soma máxima da subsequência contígua.\n\nPara a sequência [5,15,-30,10,-5,40,10], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, 5) = 5`\n- `fim[2] = max(0, 5 + 15) = 20`\n- `fim[3] = max(0, 20 - 30) = 0`\n- `fim[4] = max(0, 0 - 5) = -5`\n- `fim[5] = max(0, -5 + 40) = 35`\n- `fim[6] = max(0, 35 + 10) = 45`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, 5) = 5`\n- `melhor[2] = max(0, 20) = 20`\n- `melhor[3] = max(0, 0) = 0`\n- `melhor[4] = max(0, -5) = -5`\n- `melhor[5] = max(0, 35) = 35`\n- `melhor[6] = max(0, 45) = 45`\n\nA subsequência contígua de soma máxima é [5, 15, -30, 10, -5, 40, 10] com soma 45.\n\nPara a sequência [-5, -2, -8], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, -5) = -5`\n- `fim[2] = max(0, -5 - 2) = -7`\n- `fim[3] = max(0, -7 - 8) = -15`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, -5) = -5`\n- `melhor[2] = max(0, -7) = -7`\n- `melhor[3] = max(0, -15) = -15`\n\nA subsequência contígua de soma máxima é vazia com soma 0.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 185.80365383199387,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+        "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4",
+        "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+        "1a81ca283132-q2-2": "15c399403a902537e63dbff0886fcc82c76dd7ef867603ec4913baba1ca792e2"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q7",
+    "pergunta": "Maria ouve n−1 números distintos de 1 a n. Como encontrar o número faltante usando O(1) de memória? Explique tempo e possíveis problemas de overflow.",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Para encontrar o número faltante em uma sequência de 1 a n onde Maria ouve n-1 números distintos, usando O(1) de memória, podemos utilizar a fórmula da soma dos primeiros n números naturais, que é n(n+1)/2. Se a soma dos n números naturais é S, e a soma dos n-1 números ouvidos por Maria é S' então, o número faltante é S - S'. \n\nO tempo de execução para esta solução é O(1) porque não depende do tamanho do conjunto de números ou da quantidade de números ouvidos. No entanto, há um problema potencial de overflow se n for muito grande, pois a fórmula pode resultar em um número muito grande que pode superar o limite de um tipo de dado numérico. Para evitar isso, seria necessário garantir que os números ouvidos por Maria estão dentro de um intervalo de dados suportados. Além disso, para números muito grandes, seria necessário usar um tipo de dado de precisão alta ou um sistema de arredondamento para lidar com o overflow.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 38.98458640199897,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Para encontrar o número faltante entre 1 e n, usando apenas O(1) de memória, Maria pode utilizar a fórmula n(n+1)/2. Ela começa atribuindo o valor inicial n(n+1)/2 à variável faltante. Em seguida, ao ouvir cada número ouvido, subtrai-se do faltante. Ao final, o valor restante será o número faltante. Este método requer apenas uma constante de memória, independentemente de n.\n\nNo entanto, há um problema potencial de overflow. Se n for muito grande, n(n+1)/2 pode exceder o limite de um tipo inteiro de tamanho fixo. Para evitar isso, é necessário usar um tipo de número que suporte grandes valores, como um tipo de ponto flutuante. No entanto, isso aumentaria o custo de memória para O(log n), não atendendo à condição de O(1) de memória solicitada.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 100.0843356559999,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5b8cb1521fd1dfbde245823645122c208ddd6889c0e843c487e2db841bc678c7",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+        "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9",
+        "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+        "ef6d051e4b8c-q6-6": "ad26bcd43514b91eacffc282b00685bedf380d090494fe6f529276d79d371788"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q8",
+    "pergunta": "Como usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9? Explique os testes e as podas.",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Backtracking é uma técnica de busca que é útil para resolver problemas que envolvem a formação de combinações possíveis. Para encontrar todos os quadrados mágicos de ordem 3 com números distintos de 1 a 9, podemos usar backtracking para testar todas as possíveis combinações e garantir que a soma de cada linha, coluna e diagonal seja igual.\n\nOs testes são feitos para garantir que a soma de cada linha, coluna e diagonal seja igual a 15 (a soma total dos números de 1 a 9 é 45, e dividindo por 3 dá 15). Se a soma não for 15, a combinação é descartada.\n\nAs podas são feitas quando a combinação não pode ser válida. Por exemplo, se a soma de uma linha já excede 15, não precisamos testar essa linha, já que qualquer combinação subsequente também não será válida. Além disso, se um número já foi usado em uma linha, coluna ou diagonal, não podemos usar esse número novamente, pois isso também faria a soma não ser 15.\n\nA técnica de backtracking permite que testemos todas as possíveis combinações sem precisar testar todas as combinações possíveis, economizando tempo e recursos.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 45.933946567998646,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9 usando backtracking, devemos seguir um caminho que preencha as posições de um quadrado 3x3, garantindo que a soma de cada linha, coluna e diagonal seja 15. Aqui estão os passos:\n\n1. Inicialmente, preencha as posições do quadrado com números de 1 a 9, mantendo um conjunto dos números ainda não usados. \n\n2. Para cada posição, testamos todos os números disponíveis, garantindo que não haja repetição. Se uma linha, coluna ou diagonal estiver completa, ou se a soma de uma linha parcial já for >=15, descartamos essa posição.\n\n3. Para limitar o que ainda pode completar cada linha, fazemos uma poda, somando os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha.\n\n4. Ao preencher as nove posições, verificamos as três linhas, três colunas e duas diagonais. Se todas as somas forem 15, temos um quadrado mágico.\n\n5. Para garantir que não haja duplicação de soluções, podemos rotacionar e refletir o quadrado, contando as soluções únicas.\n\n6. O tempo de execução é O(9!) devido à permutação dos números, e a memória é O(9) devido à necessidade de armazenar os números ainda não usados.\n\n7. Podemos usar o algoritmo de topologia para garantir que todas as posições são preenchidas de forma que não haja conflitos entre as linhas, colunas e diagonais.\n\n8. Podemos usar o algoritmo de Subset Sum para garantir que todos os números de 1 a 9 são usados exatamente uma vez.\n\n9. O algoritmo de Subset Sum pode ser otimizado para ter tempo O(nt) e memória O(t), onde t é o valor do alvo (15 neste caso).\n\nEsses testes e podas garantem que encontramos todas as possíveis soluções de quadrados mágicos de ordem 3 com os números distintos de 1 a 9.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 135.6143388729979,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5391c7b39026a0f196ab900db6fde13f1b55e92a5eca9b86106a7458e5eca9f9",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+        "1a81ca283132-q3-3": "1dc8c0116d4ce316f104b1e3ebae830741bf72f716ce1c1f01cae19ff4ff49a4",
+        "ef6d051e4b8c-q6-6": "ad26bcd43514b91eacffc282b00685bedf380d090494fe6f529276d79d371788",
+        "1a81ca283132-q8-8": "06033a53feb1a0227039026a3678ab4ef04bd52bae1aefe3fbd9ff4aadafe365"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q9",
+    "pergunta": "Como ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo? Diferencie quantidade de inversões e custo total de movimentar elementos.",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo é uma tarefa complexa. A quantidade de inversões é a quantidade de panquecas que foram invertidas em relação ao seu tamanho original. O custo total de movimentar elementos é o número de trocas necessárias para colocar todas as panquecas no tamanho correto, sem considerar a distância entre elas.\n\nPara resolver essa tarefa, seria necessário um algoritmo que possa contar as inversões e movimentar os elementos de forma eficiente. Uma abordagem possível seria usar um algoritmo de ordenação que possa contar as inversões, como o Merge Sort, que tem uma complexidade de tempo de O(n log n). No entanto, o custo total de movimentação não pode ser calculado diretamente com o número de inversões, pois depende do tamanho das panquecas.\n\nPara calcular o custo total de movimentação, seria necessário um algoritmo adicional que possa contar as trocas necessárias para colocar todas as panquecas no tamanho correto. Este custo pode ser muito maior do que o número de inversões, especialmente se as panquecas estão muito desorganizadas.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 41.980978190000314,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, a estratégia é dividir e conquistar. Primeiro, ordenamos os prefixos de cada panqueca, o que leva a O(n^2) de tempo, conforme mencionado na referência. Em seguida, movemos os prefixos para a base da pilha, o que custa O(m) para cada prefixo. \n\nA quantidade exata de inversões de prefixo é de O(n^2), como mencionado na referência. No entanto, o custo total de movimentar elementos é menor. Para cada inversão de prefixo, precisamos mover o prefixo para a base, o que custa O(m) movimentações. Como há até n-1 inversões de prefixo, o custo total de movimentação é O(n * (n-1)) = O(n^2).\n\nPortanto, embora a contagem exata de inversões seja O(n^2), o custo total de movimentação de elementos é menor, sendo O(n^2). O custo total é dominado pela quantidade de movimentações, não pela contagem exata de inversões.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 117.27990025200415,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "ffc5e2d3d53ad1703276032ea51ec9ff93d710d102f6039562958ed2c898fc95",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "d455baef2cdf-q1-1": "1826cf5ed77fe2ed6c2e34435ebc78317f847cfccac34c9b3e15410450b2d005",
+        "d455baef2cdf-q7-7": "39d47bddb8c52e3f9e05fece66cae3d0f5a5d7cc02f8b7381d18fdf49c7df286",
+        "a177bf5bc3c7-q3-3": "66c2fd23e1a9feca438bef3ae17c7f5c98bfac2a5066e8562842d7129e0235c0",
+        "d455baef2cdf-q4-4": "0c7508bfd7192803550aa9881ecd9bc2ee6418860f8e45154eba80f924fb3b90"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q10",
+    "pergunta": "Me perdi nos asteriscos: por que não é só n vezes? Tem duas chamadas com n menos 1 e um laço que imprime n. Pode montar a conta e conferir n=3?",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Claro, vamos montar a conta para n=3. Vamos considerar que você está falando sobre um loop for que imprime um número n vezes. Para n=3, teremos:\n\n1. Uma chamada inicial para imprimir 3 vezes (n=3).\n2. Um laço que imprime n-1 vezes (n-1=2) para cada iteração do loop.\n3. Um laço que imprime n-1 vezes (n-1=2) para cada iteração do loop.\n\nPortanto, a contagem total será:\n- 3 (primeira chamada para n=3)\n- 2 (segunda chamada para n=2) * 3 (vezes que o loop é executado) = 6\n- 2 (terceira chamada para n=1) * 3 (vezes que o loop é executado) = 6\n\nTotalizando 12 chamadas. Portanto, não é só n vezes, mas sim, n vezes (n-1) + (n-1) + (n-1) = 3*(n-1) + (n-1) + (n-1) = 3*2 + 2 + 2 = 6 + 2 + 2 = 12.\n\nIsso explica por que tem duas chamadas com n-1 e um laço que imprime n.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 48.35732002900113,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "A fórmula A(n) = 2^(n+1) - n - 2 considera duas chamadas recursivas para A(n-1) e um laço que imprime n. Para n=3, vamos calcular:\n\nA(3) = 2^(3+1) - 3 - 2 = 2^4 - 3 - 2 = 16 - 3 - 2 = 11\n\nA contagem é 2^3 - 3 - 1 = 8 - 3 - 1 = 4 chamadas, mas inclui o laço que imprime 3. Portanto, a contagem total é 4 + 3 = 7 asteriscos. Isso explica por que não é apenas n vezes, mas sim 2^(n+1) - n - 2.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 77.43599253000139,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "355a0da2f5ec9b5052f66fc78db41b61010e6335e00dce2c9d398a8af9751a7f",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+        "c06": "4f6d70b01764ed4954a3fb06e5f3bae19c483e1868b3b1a2bc0539b0c0ce9a15",
+        "a177bf5bc3c7-q2-2": "ff0422914032d457378242d5a810eaa8bcf007806ceb19b6d985fb1fffcfb673",
+        "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q11",
+    "pergunta": "Se testar divisores faz só O(n) testes, por que o professor fala que COMPOSTO não ficou polinomial? O que muda quando a entrada está escrita em binário?",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "A complexidade de O(n) para testar divisores é uma suposição simplificada. Na prática, muitos problemas de complexidade polinomial podem ter complexidades subpolinais dependendo da representação da entrada. Quando a entrada é escrita em binário, o tamanho da entrada pode ser muito maior do que o número de divisores, o que pode afetar a eficiência. Além disso, alguns problemas podem ter complexidades que parecem polinomiais em representações normais, mas são de fato não polinomiais em representações binárias, o que é o caso do COMPOSTO. Portanto, é importante considerar a representação da entrada e a complexidade em termos de bits ao avaliar a eficiência de algoritmos.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 27.45455533099812,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "O algoritmo de força bruta para COMPOSTO testa sucessivamente os divisores de 2 até floor(n/2), o que resulta em O(n) testes no pior caso. Este fato não afeta a complexidade polinomial do algoritmo, pois a complexidade é medida em termos de entrada, não de representação. \n\nQuando a entrada é escrita em binário, a quantidade de bits é o que realmente muda. Como mencionado no contexto, a representação binária de n tem b = floor(log2(n)) + 1 bits. Embora o número de testes cresça exponencialmente em b, a complexidade polinomial em b não afeta a complexidade polinomial do algoritmo em termos de n. Portanto, mesmo com a representação binária, o algoritmo de força bruta para COMPOSTO continua sendo polinomial em termos de n.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 102.16889594199893,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "59753665456f534d9f7a1f8d64d533cbc36eb3ab9c5a935576da5631fd1b7351",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+        "7b4da6a8adf7-q7-7": "13b572ccab20134134399ade260887a44a6925ee473aee6babc614dc52b11f11",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995",
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  },
+  {
+    "id": "Q12",
+    "pergunta": "Qual será a data, a sala e o conteúdo exato da próxima prova de PAA em outubro de 2026?",
+    "origem": "avaliacao_local_rag_automatica",
+    "generico": {
+      "texto": "Desculpe, mas não tenho informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova do PAA (Programa de Aperfeiçoamento de Analistas) em outubro de 2026. As datas, salas e conteúdos das provas são geralmente mantidos em sigilo pela organização responsável, que é a Fundação Vanzolini. Para obter essa informação, é melhor consultar diretamente a Fundação Vanzolini ou o site oficial do PAA.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 19.77456666299986,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Como tutor de PAA, não tenho acesso a informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova de PAA em outubro de 2026. Minha função é auxiliar com questões e resoluções de problemas relacionados ao PAA, não fornecer informações sobre datas ou conteúdos de provas.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 47.41999382799986,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5cd5752be563842f737e4dcfea031c1e798639af5416d58eb4660c8a629e06bb",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "7b4da6a8adf7-q6-6": "b8422278ca4a9bf2da0b7ed06994935e8af58c0bf8fceb7e4a56d17c5623b7e6",
+        "97254bb4a1b8-q6-6": "763aebf1fa2aa98fa4066bdfa3bbd048e90e537b4f8c0e44fcab5ffcaa100bbb"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    }
+  }
+]

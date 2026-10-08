@@ -1,0 +1,12 @@
+{
+  "pagina": 11,
+  "texto": "7. Prove a corretude do algoritmo Conversor Decimal-Bin´ario.\n\n\n[OCR parcial do recorte p11-fig1.png; conferir símbolos na imagem]\n1:procedure CoNVERsORD-B(inteiro n)\n2:\nu→1\n3:\nk←0\n4:\nzeretodososbitsdeb\n5:\nwhilet>0do\n6:\nk←k+1\n7:\nb[k]←tmod2\n8:\nt←t÷2\n9:\nendwhile\n10:\nreturn b\n11:endprocedure\n\n\nSolu¸c˜ao:\n\nTeorema: O algoritmo Conversor Decimal-Bin´ario est´a correto, ou seja, retorna\ncorretamente a convers˜ao em bin´ario para um n´umero natural dado.\n\nProva:\n\nSendo:\n- mk ´e o inteiro que representa o estado atual do vetor b, ap´os k itera¸c˜oes, tal que:\n\n0,\nse k = 0\n\n\n\n\n\nmk =\n\ni=k\nP\n\nb[i] 2i−1,\nse k ≥1\n\n\n\n\ni=1\n\n- tk representa o valor de t ao final do k-´esimo loop.\n\nConsidere o seguinte invariante de la¸co, onde na itera¸c˜ao k, o vetor b[1...k] re-\npresenta um inteiro mk tal que:\n\nn(k) = mk + tk.2k, ∀k\n\nInicializa¸c˜ao: Neste caso, a vari´avel t ´e inicializada com o n´umero natural a\nser convertido n, o contador k = 0 e o vetor b est´a vazio. Al´em disso, a itera¸c˜ao\nna inicializa¸c˜ao ´e:\n\npara k = 0:\nn(0) = t0.20 + m0 = n.1 + 0 ∴n(0) = n\n\nPage xi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p11.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p11-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

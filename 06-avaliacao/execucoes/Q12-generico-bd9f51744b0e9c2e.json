@@ -1,0 +1,51 @@
+{
+  "questao": "Q12",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Desculpe, mas não tenho informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova do PAA (Programa de Aperfeiçoamento de Analistas) em outubro de 2026. As datas, salas e conteúdos das provas são geralmente mantidos em sigilo pela organização responsável, que é a Fundação Vanzolini. Para obter essa informação, é melhor consultar diretamente a Fundação Vanzolini ou o site oficial do PAA.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 19.77456666299986,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

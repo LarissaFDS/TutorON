@@ -1,0 +1,12 @@
+{
+  "pagina": 7,
+  "texto": "\u0000 n\n\n· n ⇒\nT(n) = n + (log2(n) −log2(2)) · n\n\n⇒\nT(n) = n + log2\n\n2\n\u0001\n\n⇒\nT(n) = n −n + n · log2(n)\n∴\nT(n) = n · log2(n)\n\n6. Descreva um algoritmo de tempo Θ(n lg n) que, dado um conjunto S de n\ninteiros e um outro inteiro x, determine se existe ou n˜ao dois elementos em\nS cuja soma seja exatamente x.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nint verifySum(int x,int *S){\nmergeSort(s):\nint i=0;\nint j =size(S)-1;\nwhile(i<j){\nif(s[i]+S[j]>x)\nj--;\nelse\nf(S[i]+S[]<x)\ni++;\nelsereturn1;\nreturn o;\n\n\nNesse algoritmo, podemos observar a fun¸c˜ao verifySum, que recebe como parˆametros\no inteiro x e o conjunto S de inteiros. Inicialmente, ordenamos o conjunto S atrav´es\ndo algoritmo Merge Sort, cuja complexidade ´e Θ(n lg n). Em seguida, presumimos\nque size(S) retorna n, visto que ´e o tamanho de S, e percorremos o conjunto em busca\nde dois inteiros nele que somando resulte no valor de x. As opera¸c˜oes que sucedem\no Merge Sort tem complexidade Θ(n). Portanto, conclui-se que o algoritmo acima\npossui complexidade dominante Θ(n lg n).\n\n7. Resolva a recorrˆencia: an = a0 + a1+ ··· + an1, em que a0 = 1.\n\nSolu¸c˜ao: Para resolvermos a recorrˆencia e encontrarmos sua f´ormula fechada, deve-\nmos expandi-la de forma a encontrarmos um padr˜ao. Dessa forma:\n\nSe n = 0, a0 = 1;\nSe n = 1, a1 = a0 = 1 = 20;\nSe n = 2, a2 = a0 + a1 = 1 + 1 = 2 = 21\n\nSe n = 3, a3 = a0 + a1 + a2 = 1 + 1 + 2 = 4 = 22\n\nPage vii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p7-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

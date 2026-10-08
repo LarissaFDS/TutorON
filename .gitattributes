@@ -1,0 +1,12 @@
+# Scripts do Linux precisam de LF mesmo quando o Git do Windows converte finais de linha.
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.csv text eol=lf
+*.pdf binary
+*.webp binary
+# Espelhos de OCR mantêm espaços da transcrição; não reformatar o dado bruto.
+02-acervo/**/*.md whitespace=-blank-at-eol
+03-triagem/pacote-revisao/*.md whitespace=-blank-at-eol

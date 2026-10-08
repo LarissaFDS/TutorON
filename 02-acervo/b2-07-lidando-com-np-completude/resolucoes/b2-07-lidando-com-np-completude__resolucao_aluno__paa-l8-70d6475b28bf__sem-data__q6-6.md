@@ -1,0 +1,95 @@
+# 70d6475b28bf-q6-6
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L8.pdf | página(s): 9, 10, 11
+
+6. Implemente um algoritmo backtracking para o PROBLEMA DO PASSEIO
+DO CAVALO, iniciando de uma das quinas. Informe o tempo em segundos e
+apresente a solu¸c˜ao.
+
+Solu¸c˜ao:
+
+Page ix[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]
+def print solution kt(board
+i in range(s):
+J in range(s):
+
+print (board{iJ[jJ, end"
+print()
+
+):
+o)
+def is valid move(board, x, y):
+
+board(x jy]
+
+def solve kt bt(boara
+
+» CUM x, curry
+pos 84:
+
+4 Next_x, next y, pos):
+
+True
+
+ranga(s):
+
+X= cure x + next x[5]
+
+¥ = curry next y[i)
+
+(is valid move(board, x y)):
+bozrd[x][y] = pos
+
+(solve kt bt(board, X, Y, next x, next y, poss1)):
+
+rue
+board{x} {fy} 1
+
+def knights tour bt():
+board = [7.3
+
+i range(8)}
+board[@}(a} - q 2
+
+range(a)J
+
+next x
+next y
+
+(2,1,
+U,2,2,1,
+
+pos = 1
+
+solve kt bt(board, 8,8, next x, next y, pos):
+Pránt solution kt(boand)
+
+Print("Tere's no solution for this problem")
+
+knights tour bt()
+
+
+
+[OCR parcial do recorte p10-fig2.png; conferir símbolos na imagem]
+Considerando a «
+
+8 37 58 35 42 47 56 5)
+59 34 1 48 57 59 43 ag
+38 32 36 41 2 45 52 55
+33 60 39 26 49 54 3 44
+38 9 32 61 40 25 29 53
+17 62 27 16 23 20 13 4
+8 29 18 15 6 12 24 7
+63 16 7 28 19 14 5 49
+
+do primeiro movimento,
+
+a solução se di a seguir
+
+
+O tempo em segundos decorrido para encontrar a solu¸c˜ao foi: 41.19298219680786s.
+Importante observar que o tempo decorrido varia de acordo com o caminho que se
+percorre, caso invertˆessemos a ordem entre next x e next y ter´ıamos encontrado uma
+
+Page xsolu¸c˜ao em 37.05153942108154s. Al´em disso, a complexidade para esse algoritmo ´e
+O(8N2).

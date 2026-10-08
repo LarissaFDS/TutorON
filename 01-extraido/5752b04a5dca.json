@@ -1,0 +1,24 @@
+{
+  "id": "5752b04a5dca",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.30.09_(1).webp",
+  "copia": "00-originais\\ingestao\\46b81b96382238b93725320644786e75a8fd08c00adce6785465bc3806b08dec\\WhatsApp_Image_2025-01-12_at_13.30.09_(1).webp",
+  "sha256": "46b81b96382238b93725320644786e75a8fd08c00adce6785465bc3806b08dec",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "13: = @)\n\nPAA Prova 3.pdf Mg E\n\nUniversidade Federal do Alagoas = UFAL p=\nTattoo de Computação ——\n\nNletemiroseans Rho forigul Slr de Matido\n\n‘i de aa ara o pode à pad cata ee eed pe at it to e uma\nend o Mo € a nm bus Bem qu tro penta em co Oy\n\nwent D net wer,\nto\nnela) wev\n\nQuestão 7 a ponto\nO hor roll const e ma vação do ado em qu vc dee preces a ist do uma da co eros\nde a md pude nn. Cada pro pode aparece apenas uma ves = em cada de, colina ov a. Usado\nprogramação por restições, model o chuo dou da ur aaa. Di: ts ma tcáel 5 que repeseta\noar que ud cl (4) de mtr pode a\n\nScanned with CamScanner\n\nfn)\ndeg pls (nym et):\nPda mat = Cote nar CO, Nm)\n\nfor vow jn wonge (0,70):\nCor lol in Lompt/ o wy 1):\n\nie (voir 20): 4 65)\nitlglesoyz o\n\niz Rolha wah COTE oJ=L.\nder",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\5752b04a5dca\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

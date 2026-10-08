@@ -1,0 +1,119 @@
+# 299d863129c5-qincerta-1
+
+Fonte: materiais\Disponiveis\RAG PAA\Prova_2_2022.2.webp | página(s): 1
+
+wsodsos uns anbgysnp sumo
+ogdnjos vu exmosua wpure (Joane BMI) nitajgosd op etiyuojoey opsias » vivd osonã ouguofpe nag
+(1-0 VINPON no) wap, VINDO VP TUIIGOIA ap Opolrao 9 oss] “way! tum ap Ovduy vUIN eed apod OBL aja
+sito} tint Jextap no JuSad apod os oBspE] O “#fos no “opoy um Otuoo sopraçãos 198 umssod 9s suayy so an equodng “7,
+
+opere à da VB a y > tm VB on qua y oqunfuooque o zenuoona wired (UZO[U)O
+oso ouNOe um asoquig “YANO: oBIpo O dub sua! ap ojunfuoaqns o 7 5 y elos “vponotosag ejnory vp
+Umagora ap opeureyp 9 oss] AMDISAs aysvd v texto a (*D ap m p'Q 'ojdutoxo 10d) way! tum ap apud uumáio
+xeSod apod oespey o “efos no “apragos tos ussod wy! tm op ouómay mam onb stay ure(os stay so onb equodng “T
+
+ompxyut vfo8 [jon JOjea nas o yy vpaaxa ogu [mo osad nas anb wed Jeqnos
+suar Senb remmmaaiap onb m15) 1088 oBrpyy O “37 opeploudeo woo upypout eum ut) orpe| C «u3oLvo apod aja anb
+umm SM ‘oxTMyT ON “oroMotIAg OUTEXPUL O J2Ngo ved pny Ieqnos op wETE}SOM oxIpe| O “oquaufuapy “a LTA um à im
+operposse osad um uroy tag upug (“os En So) = 7 ‘sway! u ap 7 ogunfttos um 94 9 efo[ vum UID pião OBsPET ML)
+:[soquod 2) 9 ogysond
+
+vied PA ‘ourysquos OSVO “SINA "SPU SO sopor J2AGUOS Dag
+
+(£9) 0 ('2) sussa se onotarpe a (47) vaseru © wonial ‘2D w 4 MODY,
+
+E
+
+y
+
+ounuyu: 9 “sp — p+ Mp anb pe) 9 > (['2) visore vam anuooug “g
+O ap vãoy sanbrenb 3 aotyaga tum emos “Z
+
+sonbstenb ssotnaça sam moo 9 OP! um a) “T
+
+Tere srmm OgSNSUl VP OUNLOATy) Z OMALOSTY
+
+4 ossed o vIvd ya ‘ourysquo> ose “our
+
+opytio ‘Sopey{sta WoO} OfUsWOP OP S9OTIIA SO SOPOI 9g
+
+n penge aon
+
+oper{sta owoa a anbsepy “A [wae aotsapa o CUIOD a vaga p
+£
+
+a opeyisia owu aotgaas um
+
+O opumpatioo vymo sra visam w eEqnI=AC]
+
+posta OUIOS n onbreyy -n yonyw 291494 O OUI0O O-wUyap "Otapiajque aotaa94 tum auoroor
+
+SSOPUIISIA OBU OCO s901739A SO SPO} azgestmy “7
+
+Tounxpid sro oymzia op OUNUIOMV) 1 OmigtaodTy
+
+VUIÇ OpdN[os & IENIOIAS UOTE
+wu soqure anb oxsojy “ALNVIVIA OUISXIVD O vivd sosonã sountoZ;s stop so azpisuoo,
+:foquod 7] 9 oesond
+
+ntgunre, as0azy
+
+uno 19
+
+ADA se
+
+1 apod) senos Os (7 ap sou so [onbyeu aaa] spo viopesas) uosry Y -wpyos
+sp ontinfuiooqnis ‘2m seysaru ap sosad “(9 'A) = 9 opmnorsanp owu oye) svpestag
+uutalgoad ojumsos 0 auoptsuoo
+
+:[ojuod 7] p ovysand
+
+Any10d, :upros *{ jumuod, * sus ny10d,, * asanêngod,) = 4
+yeu, -pjag “( AUIMOISUE, * Jaayrsny
+
+eperua
+sur, * Out.) = S epenug
+no oxyord O aquatogo VULIOS op aynoota SÃNLAS Gp g ontitfuos mm ope
+
+:[soquod 7) ¢ ovysond
+
+soda “of
+
+q suue tm
+
+vntapqoad ajso vsvd soyjour ounL08 ye um aofosg “7
+
+aquerp sod unjsse à Sy uroo
+
+opens o apeasanus modap “Cy ‘ly afimum so arasmny ouompa aa] sINFos w ouros o sossud soyUN ARIE “|
+
+soma | 4) + X finuio sqop ap owdepwazazut @ anb opuaqes
+“uy Ouve, ap Opeuapão Anseo oof tam
+OA nUAUIDI u Udo um vp My "ty 'ty sopeuapão súnuso y WU 990s anb vquodus
+
+i[soquad 2) 7 owsand
+
+(eba onbropeosmay ap onfmsado m rom tias OR: A970}
+a sen pmequioo
+
+D vapores m
+
+SUNS suNp sup ovtum up ojuom
+rendu ead (Ko, + uhoNO adum ap otrgaasipr um oc. cu a ue onquuvar
+
+romoUt OWNS
+ap SUpuUa pao suis senp supep OBS
+i[soquad 7) 1 ovysand
+
+gor ap oSsew ap ag
+
+ospaquia PIQUI UEP "Jord
+
+word qt
+
+souytuoity op asyyuy a oyaforg
+
+Za ovdemduroy ap oynyNsUL
+
+2 4 “TVA - sooiery ap [exapag apepyssaryug
+”

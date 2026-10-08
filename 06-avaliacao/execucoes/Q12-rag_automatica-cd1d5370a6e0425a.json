@@ -1,0 +1,46 @@
+{
+  "questao": "Q12",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "ea17161d3bfb-q2-2",
+    "7b4da6a8adf7-q5-5",
+    "7b4da6a8adf7-q6-6",
+    "c461856d5688-q4-4"
+  ],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 3.0939999999973224,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A pergunta sobre a data, a sala e o conteúdo da próxima prova de PAA em outubro de 2026 não pode ser respondida com base no contexto fornecido. O material apresentado é composto por questões e soluções de algoritmos, mas não contém informações específicas sobre a programação da prova futura.\n\nPara obter essas informações, seria necessário consultar o professor ou a grade de aulas do curso, pois esses detalhes são geralmente definidos pelo professor ou pelo departamento responsável pelo curso.\n\nDito isso, os conteúdos abordados nas questões fornecidas sugerem que a prova pode abranger temas como:\n\n1. Algoritmos de busca e subsequências\n2. Algoritmos de programação dinâmica\n3. Probabilidade e combinações\n4. Teoria dos grafos e árvores\n5. Algoritmos gulósos\n6. Avaliação de polinômios\n\nNo entanto, sem informações adicionais, não é possível afirmar com certeza o conteúdo exato da prova.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 7.2040000000015425,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}
