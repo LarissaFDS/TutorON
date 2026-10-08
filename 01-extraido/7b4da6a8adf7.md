@@ -357,7 +357,7 @@ Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p4.png](../01-extrai
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 = 6k + 3 = 2(3k + 1) + 1
 
@@ -413,15 +413,11 @@ Page v
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p5.png](../01-extraido\figuras\7b4da6a8adf7\p5.png)
 
-### Visão — candidato incerto, não validado
-
-HTTPError
-
 ## Página 6
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 Atrav´es de prova direta, faremos a demonstra¸c˜ao:
 
@@ -434,16 +430,17 @@ vermelho, assim como ilustra a figura `a direita.
 
 
 [OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-V2
-V2
-V6
+v2
+
+“4
+
 V3
-V6
-V3
-V5
+
+>
+
 V4
+
 V5
-V4
 
 
 Prosseguindo com a nossa prova:
@@ -455,20 +452,7 @@ cor.
 
 
 [OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]
-V2
-V2
-V2
-V6
-V3
-V6
-V3
-V
-V3
-V5
-V4
-V5
-V4
-V5
+[ilegivel]
 
 
 •
@@ -478,11 +462,7 @@ existˆencia de um triˆangulo monocrom´atico por´em, dessa vez, azul.
 
 
 [OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]
-V2
-V6
-V3
-V5
-V4
+[ilegivel]
 
 
 ■
@@ -491,43 +471,29 @@ Page vi
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p6.png](../01-extraido\figuras\7b4da6a8adf7\p6.png)
 
-### Visão — candidato incerto, não validado
-
-HTTPError
-
-### Visão — candidato incerto, não validado
-
-HTTPError
-
-### Visão — candidato incerto, não validado
-
-HTTPError
-
 ## Página 7
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 5. Prove a corretude do algoritmo bubblesort:
 
 
 [OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]
-1: procedure ALGORITMO BUBBLESORT(vetor A[1,...,n])
-2:
-fori←n-1→1do
-3:
-for j ← 0 → i - 1 do
-4:
-if A[j] < A[j +1] then
-5:
-troca(A[j],A[j+1])]
-6:
-endif
-7:
-end for
-8:
-end for
+procedure ALGORITMO BUBBLESORT(vetor A[1,...,n])
+
+1:
+
+2 for i—n-1—1do
+
+3 forj—-0->i-ldo
+
+4: if A[j] < A[j +1] then
+5: troca(ALj], Alj + 1D]
+6: end if
+7 end for
+8 end for
 9: end procedure
 
 
@@ -572,10 +538,6 @@ A[0, 1, ..., j, j + 1] ´e aj ou ´e aj+1.
 Page vii
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p7.png](../01-extraido\figuras\7b4da6a8adf7\p7.png)
-
-### Visão — candidato incerto, não validado
-
-HTTPError
 
 ## Página 8
 
@@ -642,7 +604,7 @@ Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p8.png](../01-extrai
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 Portanto, a seguinte proposi¸c˜ao est´a correta:
 
@@ -658,18 +620,16 @@ P(x) = anxn+ an−1xn−1+ ··· +a1x + a0.
 
 
 [OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]
-1: procedure ALGORITMO DE HoRNER(vetor A[O,...,n], real x)
-2:
-p ←A[n]
-3:
-fori←n-1→0do
-4:
-p←p*x+A[i]
-5:
-endfor
-6:
-returnp
-7:endprocedure
+1: procedure ALGORITMO DE HORNER(vetor Al0,...,n], real x)
+2 p — Aln]
+
+3 for i—n-1—0do
+4: p-—p*x+Alil
+5 end for
+
+6 return p
+
+7: end procedure
 
 
 Solu¸c˜ao:
@@ -704,10 +664,6 @@ inclu´ıdo na soma, assim como o valor do termo atual. Sendo que o resultado
 Page ix
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p9.png](../01-extraido\figuras\7b4da6a8adf7\p9.png)
-
-### Visão — candidato incerto, não validado
-
-HTTPError
 
 ## Página 10
 
@@ -786,32 +742,37 @@ Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p10.png](../01-extra
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 7. Prove a corretude do algoritmo Conversor Decimal-Bin´ario.
 
 
 [OCR parcial do recorte p11-fig1.png; conferir símbolos na imagem]
-1:procedure CoNVERsORD-B(inteiro n)
+1:
 2:
-u→1
-3:
-k←0
+3
 4:
-zeretodososbitsdeb
 5:
-whilet>0do
-6:
-k←k+1
-7:
-b[k]←tmod2
-8:
-t←t÷2
+6
+7
+8
+
 9:
-endwhile
+
 10:
+ll:
+
+procedure CONVERSOR D-B(inteiro n)
+t—n
+k-0
+zere todos os bits de b
+while t > 0 do
+k—k+1
+b[k] — t mod 2
+t—t+2
+end while
 return b
-11:endprocedure
+end procedure
 
 
 Solu¸c˜ao:
@@ -861,10 +822,6 @@ n(0) = t0.20 + m0 = n.1 + 0 ∴n(0) = n
 Page xi
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p11.png](../01-extraido\figuras\7b4da6a8adf7\p11.png)
-
-### Visão — candidato incerto, não validado
-
-HTTPError
 
 ## Página 12
 
@@ -971,7 +928,7 @@ Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p12.png](../01-extra
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 Temos ent˜ao que n(k + 1) ´e v´alido ∀tk ´ımpar.
 ( II )
@@ -995,15 +952,7 @@ fi+2 = fi+1 + fi, ∀i ≥0. Prove que para todo n ≥1 temos:
 
 
 [OCR parcial do recorte p13-fig1.png; conferir símbolos na imagem]
-n
-1
-1
-fn+1
-fn
-1
-0
-fn
-fn-1
+[ilegivel]
 
 
 em que o lado esquerdo representa n-´esima potˆencia de uma matriz 2 x 2.
@@ -1095,10 +1044,6 @@ fk−1
 Page xiii
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p13.png](../01-extraido\figuras\7b4da6a8adf7\p13.png)
-
-### Visão — candidato incerto, não validado
-
-HTTPError
 
 ## Página 14
 
@@ -1244,7 +1189,7 @@ Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p15.png](../01-extra
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 10. Considere o algoritmo de Ulam, ele termina?
 De fato, conjectura-se que
@@ -1265,23 +1210,22 @@ de execu¸c˜ao.
 
 [OCR parcial do recorte p16-fig1.png; conferir símbolos na imagem]
 1: procedure ALGORITMO DE ULAM(inteiro positivo a)
-2:
-D→x
-3:
-whileOstrésultimosvaloresdexnaofor 4,2,1do
-4:
-if x for par then
-5:
-x←x/2
-6:
-else
-7:
-x←3x+1
-:8
-end if
-9:
-endwhile
-10:endprocedure
+2: x—a
+
+3: while Os três últimos valores de x não for 4,2,1 do
+4: if x for par then
+
+5: x—x/2
+
+6: else
+
+7: x—3x+1
+
+8: end if
+
+9: end while
+
+10: end procedure
 
 
 Solu¸c˜ao: Ap´os a implementa¸c˜ao do algoritmo e da execu¸c˜ao de um teste exaustivo
@@ -1299,61 +1243,65 @@ Page xvi
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p16.png](../01-extraido\figuras\7b4da6a8adf7\p16.png)
 
-### Visão — candidato incerto, não validado
-
-HTTPError
-
 ## Página 17
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L1.pdf
 
-Qualidade: parcial; método: rapidocr+texto_pdf
+Qualidade: parcial; método: tesseract-por+texto_pdf
 
 [OCR parcial do recorte p17-fig1.png; conferir símbolos na imagem]
-#include<stdio.h>
+FincLude<stdio.h>
 #include<time.h>
-int maior_num=0;
-double media_tam=0;
-int maior_seq=0;
+int maior num=0;
+double media tam=0;
+int maior seq=0;
 void ulam(int n){
-int x = n;
+int x =n;
 int a3=0,a2=0,a1=0;
 int num_maior_seq=1;
-while((a3!=1) ll(a2!=2) 1l (a1!=4)){
-if(x%2==0)x=x/2;
-else x=3*x +1;
-a1 = a2;
+
+while((a3!=1) || (a2!=2) || (a1!=4)){
+if (x%2==0) x = x/2;
+else x = 3*x +1;
+al = a2;
 a2 = a3;
-a3 = x;
+a3 =x;
+
 num_maior_seq++;
 if(num_maior_seq >= maior_seq)
-maior_num = n;
-maior_seq = num_maior_seq;
+
+maior num = n;
+maior seq = num maior seq;
+
+}
+
 media_tam+=num_maior_seq;
+
 int main(){
-int n,numeros=0;
+int n,numeros=@;
 clock_t ini = clock();
-while(scanf("%d"，&n)!=EOF){
+
+while(scanf("%d", &n)!=EOF){
+
 ulam(n);
+
 numeros++;
+}
 media_tam/=numeros;
 clock_t fim = clock();
-double tempo =(double)(fim -ini)/ (double)CLOcKS_PER_SEC;
-printf("Tamanho da Maior Sequencia -> %d numeros\n",maior_seq);
-printf("valor de Nparaa maior sequencia ->%d\n",maior_num);
-printf("Media dos Tamanhos das Sequencias -> %.2lf numeros\n", media_tam);
-printf("Tempo de Execucao ->%.51f segundo(s)",tempo);
-TamanhodaMaiorSequencia->340numeros
-ValordeNparaamaiorsequencia->52527
-MediadosTamanhosdasSequencias->104.21r
-numeros
-Tempo de Execucao ->0.06200 segundo(s)
+double tempo = (double)(fim - ini)/ (double)CLOCKS_PER_SEC;
+printf("Tamanho da Maior Sequencia -> %d numeros\n", maior_seq);
+printf("Valor de N para a maior sequencia -> %d\n",maior_num);
+printf("Media dos Tamanhos das Sequencias -> %.21f numeros\n", media tam);
+printf("Tempo de Execucao -> %.51f segundo(s)”, tempo);
+
+Tamanho da Maior Sequencia -> 349 numeros
+Valor de N para a maior sequencia -> 52527
+
+Media dos Tamanhos das Sequencias -> 104.21 numeros
+Tempo de Execucao -> 0.06200 segundo(s)
 
 
 Page xvii
 
 Imagem para conferência: [01-extraido\figuras\7b4da6a8adf7\p17.png](../01-extraido\figuras\7b4da6a8adf7\p17.png)
-
-### Visão — candidato incerto, não validado
-
-HTTPError

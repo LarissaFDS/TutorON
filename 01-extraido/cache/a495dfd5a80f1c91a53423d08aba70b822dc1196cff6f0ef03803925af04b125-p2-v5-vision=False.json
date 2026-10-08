@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nint FlipPancakes(s + YW, int nj{\nint start=l, end=n, aux, 4)\nwhile(start < endy{\naux = y[start]i\nV[start] = vendi;\nvjend) = aux;\n\nstartt+\nemd--;\n\nE biggerPancake(i' t i mn\nint i = 1, bigger =\nfor (ied; Leng at\nprintf(\"sd - \"s viii\naf(w[i] > v[bigger 1) bigger\n\n}\nprinte( A maior panqueca esta na pos: 4\nreturn biggers\n}\nvoid paneakes(int +¥, int nyt\nif(a == ni\npanquecas faram empithadas!\\n\")3\nreturn;\n\n+ pasbigger = biggerPancake(V, ny\nFlipPancakes(Vs posBigger)é ni LES\n\nFlipPancakes(¥, n-1)}5\npancakes (Vy n-1%\nmainÇM\n+ w[B] = 185 2 2» 1, 6 4) 5, 7h\npancakes (Vy 5\nint à;\nprintf(\"Ess8 eh a pilha atual de panquecas: hn\")\n\nFor (i=; de=75 d+)\nprinth(\"*d - \"o NEED:\n\n\nPage ii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

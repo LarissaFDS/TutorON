@@ -57,20 +57,14 @@ Entrada: Considere o grafo G = (V,E)
 
 
 [OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]
-1
-2
-3
-4
+[ilegivel]
 
 
 Al´em disso R = 1,2,3,4, K=3.
 Sa´ıda: SIM, solu¸c˜ao:
 
 Page v[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-2
-5
-3
-4
+[ilegivel]
 
 
 • Problema do Caminho com Pares Proibidos
@@ -84,11 +78,7 @@ Entrada: Um grafo direcionado G=(V,A)
 
 
 [OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]
-1
-2
-3
-4
-5
+[ilegivel]
 
 
 Os v´ertices s=1,t=4, a lista de pares C = {(1,2), (2,3),(3,5),(1,4)}
@@ -97,7 +87,4 @@ Sa´ıda: SIM, Solu¸c˜ao: (1,2), (2,3),(3,5),(5,2),(1,4)
 
 
 [OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]
-[incerto] 2
-3
-[incerto] ④
-5
+[ilegivel]

@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "5. Suponha que esteja escolhendo entre os seguintes trˆes algoritmos:\n\n• Algoritmo A resolve problemas dividindo-os em cinco subproblemas de\nmetade do tamanho, solucionando cada subproblema recursivamente e,\nent˜ao, combinando as solu¸c˜oes em tempo linear.\n• Algoritmo B resolve problemas de tamanho n resolvendo recursivamente\ndois subproblemas de tamanho n 1 e, ent˜ao, combinando as solu¸c˜oes em\ntempo constante.\n• Algoritmo C soluciona problemas de tamanho n dividindo-os em nove\nsubproblemas de tamanho n/3, resolvendo recursivamente cada subpro-\nblema e, ent˜ao, combinando as respostas em tempo O(n2).\n\nQual o tempo de execu¸c˜ao de cada um desses algoritmos (em nota¸c˜ao O) e\nqual vocˆe escolheria?\n\nSolu¸c˜ao:\n\nUtilizando o Teorema Mestre para os algoritmos A e C e resolvendo a recorrˆencia\npara o algoritmo B, temos que:\n\n\u0000 n\n\n+ O(n) ⇒TA(n) = O(nlog2(5)) = O(n2.32)\n\nTA(n) = 5 · T\n\n2\n\u0001\n\nTB(n) = 2 · T (n −1) + O(1) ⇒TB(n) = O(2n)\n\n\u0000 n\n\nTC(n) = 9 · T\n\n+ O(n2) ⇒TC(n) = O(n2 · log2(n))\n\n3\n\u0001\n\nA escolha seria o algoritmo C, que funciona em tempo de execu¸c˜ao O(n2 log2(n).\n\n6. Dado A[1, . . . , n], um vetor ordenado de inteiros distintos, vocˆe quer saber\nse existe um ´ındice i para o qual A[i] = i.\nDˆe um algoritmo de divis˜ao-e-\nconquista que execute em tempo O(log n).\n\nSolu¸c˜ao: Tendo em vista que temos um vetor ordenado e esse ´e o princ´ıpio b´asico\npara o uso do algoritmo de busca bin´aria, que de fato utiliza a t´ecnica de dividir e\nconquistar, podemos us´a-lo para a resolu¸c˜ao de nosso problema. Com isso:\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n“(pus “testppra “Wyasessueuro\n\n*(T-stppyu Queqs +\n\nVWyueaçtueura\n(tetpprw}\n\nV > STpprm)sr asy\n“etppta uanzas\n(Latppraly aTPPTU)sT\n\n‘t/(pua + queys) = aTppra\n\nMpua => WES) sr\nfetppru >\nVo *UT)yaueasAueura 3\n\nMpua sur “JJR3s\n\nre\n\n\nPage v",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

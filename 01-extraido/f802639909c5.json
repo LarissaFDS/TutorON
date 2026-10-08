@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Universidade Federal de Alagoas-UFAL\nInstituto de Computacio\nProjetoeAnalisedeAlgoritmos\nProva Final\nProf.Rian Gabriel Pinheiro\n04deabrilde2024\nQuostao-1-(2-pontos)\nConsidere o seguinte algoritmo.Diga o que cle faz e prove sua corretude.\n2:\nif inicio=fm then\n3:\nreturn A[inicio]\n4:\nendif\n5:\nmeioinicio+（fim-incio）/2\n6:\na（-X（A,inicio,meio）\n7:\nb-X（A,meio+1,fim）\n:8\nifa<bthen\n9:\nreturnb\n10:\nelse\n11:\nreturna\n12:\nendif\n13:end procedure\nQuestao2[2pontos]:\nCalcule a complexidade de tempo do seguinte algoritimo.Considere que n é da forma 22*\npara un inteiro positivok.\n1:procedure FuNc(inteiro n)\n2:\nc←0\n3:\nfori←1→ndo\n4:\nj←2\n5:\nwhilej<ndo\n[incerto] j←j2\nc←c+1\n8:\nendwhile\n9:\nreturnc\n10:\nendfor\n1l:end procedure\nQuestao3[1ponto]:\nEscreva um algoritmo de divisao-e-conquista O(logn) para computar a em que n éum inteiro positivo.\nQuestao4[1ponto]:\nDado um vetor A com n valores binarios (zero ou um). Mostre um algoritmo O(n) para ordena-lo.\nQuestao5[2pontos]:\nisso ein tempo O（mn)\nQuestao6[2pontos]:\nConsidere o seguinte algoritino forca bruta para resolver o problema do numero CoMposro:Verifique inteiros suces-\nsivos de2a[n2」como possfveisdivisores den.Seumdels dividenretrna IMou sejanmero comost）;\nse nenhum deles o fizer,retorne NAO.Por que esse algoritmo nao é considerado polinomial?\nQuestao 7[2pontos]:\nAGENDAMENTOMULTIPROCESSADOR\nEntrada:Um conjunto finito A de “tarefas” com tamanho l(a) E Z+ para cada a E A,um nimero m E Z+ de\nprocessadores,eum deadlineD∈Z+\nQuestao:Existe una particao de A = A U A2U..U Am em m conjuntos disjuntos tal que\nmax\n[incerto] ∑(a)\n<D\n[incerto] 1<iSm\naEA\nProve que o problema é NP-completo.Dica: Faca uma transformacao polinomial de PARTICAo.\nQuestao 8[2 pontos]:\nElabore um algoritmo Backtracking para resolver o problema do Sudoku. Considere que a entrada é uma matriz 9x 9\ncomo os valores ja preenchidos. Considere que o valor O indica que a celula esta vazia.",
-      "metodo": "rapidocr",
+      "texto": "Ide Alagoas - UFAL\n\nInstituto de Comput\nProjeto o Análise de\nProva\n\nProf\n04 de é\n\ngoritinos.\n\nJabriel Pinheiro\n» 2024\n\nc ogulnto hlgoritmo. Diga/ó que olé faz é prove wud corrotida\ni ALGORITMO X(vetor All, 77h]; Inicio, Him) “Dom\n2 fim thon a\n\n3 return Alinicio}\n\n4: endif\n\n5: molo inicio + (fim — Incio)/2\n\n6 a « X(A, inicio, meio\n\n7% b + X(A, melo +1, fim)\n\n8: ifa<bthen\n\n9 return b\n\n10: else\n\nul return a\n\n12; end if\n\n13: end procedure\n\nQuestão 2 [2 pontos):\n\nCalculo à complexidade de tempo do seguinte algoritmo. Considere que n é da forma 2º para nm inteiro positivo k.\n\nProcedure FUNC(inteiro n)\ncH0\nfor i 1-+ndo\njez\nwhile j <n do\nje?\ncec+\nend while\nreturn c\nend for\nÉ: end procedure\n\ni\n\n2\n3\n4\n5\n\nQuestão 3 [1 ponto):\nEscreva um algoritmo de divisão-e-conquista O(log n) para computar a\" em que n é um inteiro positivo.\n\nQuestão 4 [1 ponto):\nDado um vetor A com n valores binários (zero ou um). Mostre um algoritmo O(n) para ordená-lo\n\nQuestão 5 [2 ponto:\nDadas duas strings x = 11\n+ O maior k para o qual existem índices i e j com giz;\n\n“Zn © Y = Yio\" -* Ymy, desejamos encontrar o comprimento da maior substring comum\nZitk-1 = YjUj+1---Ys+e—1- Mostre como fazer\n\ndelas, isto\n\nisso em tempo O(mn)\n\nQuestão 6 [2 pontos]:\nConsidere o seguinte algoritmo força bruta para resolver o problema do número Composto: Verifique inteiros suces-\n\nsivos de 2 a [n/2) como possíveis divisores de n. Se um deles divide n , retorna SIM (ou seja, o número é composto); é\nse nenhum deles o fizer, retorne NÃO. Por que esse algoritmo não é considerado polinomial?\n\nQuestão 7 [2 pontos]:\n\nAGENDAMENTO MULTIPROCESSADOR À ae\nEntrada: Um conjunto finito A de “tarefas” com tamanho l(a) € Z* para cada a € A, um número m € le\n\nprocessadores, e um deadline D € Z*. : ol\nQuestão; Existe uma partição de A = A; U Ag U::-U Am em m conjuntos disjuntos tal que\n\nl <p?\nEspe OI\nHa acAy\n\nFaça uma transformação polinomial de PARTIÇÃO.\n\nProve que o problema é NP-completo. Dic:\nElabore um algoritmo a Ti ve si ea entrada é uma matriz 9 x 9\ngi i ktracking para resolver o problema do Si ae ©\nO) valores ; e] ve indica que a célula está vazia.\ni ral ; te nchidos. Considere que © alor O indica q!\ncomo os",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\f802639909c5\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

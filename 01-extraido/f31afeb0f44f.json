@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[incerto] UitDsSe\nUniversidade Federal de Alagoas-UFAL\nInstituto de Computagao\nProjeto e Anilise de Algoritmos\n3Prova\nProf.Rian Gabriel Pinheiro\n24 de setembro de 2023\n[incerto] Deteidqdpdqii\nQuestao 1[2 pontos]:\n[incerto] matriznxm？Aentrada doalgoritmoumatriznxm boolana B，qoe trreprsta  obstcuO\nnicos movimentos permitidos sbo ir para bsixo↓ ir para n direlta\nQuestho2[2pontos]:\ndelasstoe.o.maior kpara oqualexistem indiese）com1\nHi+k-1\n[incerto] V,yj-1\nMostre como fazer\nissoem tempo O（mn)\nQuestao 3[2pontos]:\n[incerto] Foeauagoritdepograadincanoeqesedpoliil）paraoproblemSuBsETSu\nEntrada: Um conjuntoA comvalores inteiros positios,um isteiro\nQuestio:Existeum subconjuno A'Acuja soma dos valoresseja exatamente\nQuestao 4[2pontos]:\n[incerto] Daoprerikdequaidsogadodfaaerstta\n[incerto] iguala,cotabilido todnasposiveis combigo dertadEx Sen=3=17tospc[5.6\n[incerto] ]6.5,]6.6,]Faaumalgorim ndoprogamo dinica pararsolver se problea\nQuestao5[1ponto]:\n[incerto] Oquadradomicoconiste emencnar araumdadonumamatizlqe（）cadaclladamati sau\n[incerto] erorn（i）todasaselsdmatridevemsedifrentes（i）sma dsinhsclass\n[incerto] d\nediagonal\n[incerto] Dado umgafoG（V,E）asguistefom mpgoliarinteia baio mqN（）epeta \nQuestao 6(1 ponto]\nconjusto dos vizinhos de Qunl o problemn repreentado?\nmin\nEN(O)\nVuEV\n(0.1)\n[incerto] YUEV\n[incerto] ]o\n[incerto] hcteoqdldc\n[incerto] ncndren,colun ou inhs.Usano\n[incerto] de1an dagadenxn.Cadanimero podesparecor pensa \n[incerto] programoporrestries.modlechoodafguabixoDiuumariqunea\n[incerto] lorquecdacla(i）dmatrizpoder",
-      "metodo": "rapidocr",
-      "qualidade": "parcial",
+      "texto": "[ilegivel]",
+      "metodo": "tesseract-por",
+      "qualidade": "ilegivel",
       "imagem": "01-extraido\\figuras\\f31afeb0f44f\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

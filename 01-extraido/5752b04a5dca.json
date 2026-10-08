@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "13:21\nPAAProva3.pdf\n[incerto] 3Q\nUaiverddeFederldAlagosUFAL\nInstituto de Computacio\nProjetoeAnflilse deAlgoritmos\n3Prova\nProf.Rlan GabrielPinhelro\n24 de setenbro de 2023\n[incerto] BekoHoriguee\n[incerto] Deedeqsmpdouqdfdia\nQustao1[2pontos]\n[incerto] marinxm？Aedadoalgoriumsnmblana，mqetrupeentaubstco.O\n[incerto] olaolooa\n[incerto] 12\nQuestao2[2pontos]:\n[incerto] Dadsdssindeamercmpnodamaorbin\n[incerto] dlasistomorkpraqulexistmindisem1+Mre cmofaer\nisso em tempo O（mn).\nQuestio3[2pontos]:\n[incerto] d\nQuestio:Existe umsubconjuntoA'A cuja soma dos valores seja exatamente?\nQueatio 4[2pontos]:\n[incerto] Dadurdritdqmajogrdaddfbsmtta\n[incerto] gulakcontbiizndo todsaspivcmbis derulado？ExSen=3k17,t3opos:[5,6,\nQuestio5[1ponto]:\nOgadrado mdgico consiste em encoutrar para um dado n uma matriz n lal que (i) cada ofula da matriz seja um\n[incerto] nmeroentren²,（i）todaslasdamatdevmerderns（i）asmdasinascolasds\n[incerto] d\n[incerto] diagonisio todas gUndoprogaagoporestrisodeeproblmDicause uavariveq\ne diagonal.\nQuestao 6[1 ponto]:\n[incerto] aa）xqd\nconjunto dos vizinhos de v.Qual o problema representado?\n[incerto] a+21WEV\nA34\n[incerto] EN(O)\n[incerto] %∈{0.1)\nVEV\nQuestao 7[2 pontos]:\n[incerto] Ochdokcoistvradmquvodvphelsdmac\nde1andagradenxn.Cadanmeropode aparecer apenas umavezem cadaeacoluna ou linha Usndo\nprogramaoporrestriesmodele chsodafguraabaix.Dia:u uma vrivelque reprsenta\no valor que cada clula （i,) da matris pode nssumir.\nScannedwithCamScanner\n[incerto] der\n[incerto] pdh-mt:crwe_nrn（o,n，m)\n[incerto] forouinwnge（o,c）:\n[incerto] oYolinLonge\n（vow==\n=\n[incerto] oW+=L",
-      "metodo": "rapidocr",
+      "texto": "13: = @)\n\nPAA Prova 3.pdf Mg E\n\nUniversidade Federal do Alagoas = UFAL p=\nTattoo de Computação ——\n\nNletemiroseans Rho forigul Slr de Matido\n\n‘i de aa ara o pode à pad cata ee eed pe at it to e uma\nend o Mo € a nm bus Bem qu tro penta em co Oy\n\nwent D net wer,\nto\nnela) wev\n\nQuestão 7 a ponto\nO hor roll const e ma vação do ado em qu vc dee preces a ist do uma da co eros\nde a md pude nn. Cada pro pode aparece apenas uma ves = em cada de, colina ov a. Usado\nprogramação por restições, model o chuo dou da ur aaa. Di: ts ma tcáel 5 que repeseta\noar que ud cl (4) de mtr pode a\n\nScanned with CamScanner\n\nfn)\ndeg pls (nym et):\nPda mat = Cote nar CO, Nm)\n\nfor vow jn wonge (0,70):\nCor lol in Lompt/ o wy 1):\n\nie (voir 20): 4 65)\nitlglesoyz o\n\niz Rolha wah COTE oJ=L.\nder",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\5752b04a5dca\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

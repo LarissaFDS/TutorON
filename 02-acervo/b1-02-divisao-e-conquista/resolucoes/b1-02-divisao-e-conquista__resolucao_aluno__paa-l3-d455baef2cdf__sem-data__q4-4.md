@@ -2,33 +2,9 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L3.pdf | página(s): 4
 
-4. S˜ao dadas duas listas ordenadas de tamanho m e n.
-Dˆe um algoritmo de
-tempo O(log m + log n) para computar o k-´esimo menor elemento da uni˜ao
-das duas listas.
+Versão derivada corrigida por agente; original SHA-256: 01a172bbe7ac2348bc6e64831f7accc8201a33eab33e6082a2d3f54219a70d9d. Não é aprovação do professor.
 
-Solu¸c˜ao:
-
-
-[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]
-if (lista_A ==fim_lista_A)
-return lista_B[k];
-if(lista_B ==fim_lista_B)
-return lista_A[k];
-int meioA =(fim_lista_A -lista_A) / 2;
-int meioB=(fim_lista_B-lista_B)/ 2;
-if(meioA+meioB<k)
-if(lista_A[meioA]>lista_B[meioB])
-return k_esimo_menor(lista_A,lista_B + meioB +1,fim_lista_A,fim_lista_B,
-k-meioB -1);
-else
-return R_esimo_menor(lista_A + meioA +1,lista_B,fim_lista_A,fim_lista_B,
-k-meioA-1);
-else
-if(lista_A[meioA]>lista_B[meioB])
-return k_esimo_menor(lista_A,lista_B, lista_A + meioA, fim_lista_B, k);
-[incerto] 351a
-return k_esimo_menor(lista_A,lista_B,fim_lista_A,lista_B + meioB,k);
-
-
-Page iv
+K-ésimo menor elemento da união de duas listas ordenadas A e B de tamanhos m e n, contando duplicatas.
+Exija 1<=k<=m+n e coloque a lista menor em A. Procure i entre max(0,k-n) e min(k,m), com j=k-i. Use -infinito quando a partição não tiver elemento à esquerda e +infinito quando não tiver elemento à direita.
+Se A[i-1]<=B[j] e B[j-1]<=A[i], retorne max(A[i-1],B[j-1]). Se A[i-1]>B[j], diminua i; caso contrário, aumente i. A busca binária encontra a partição em que exatamente k elementos ficam à esquerda, todos menores ou iguais aos da direita.
+Tempo O(log(min(m,n)+1)) e memória O(1), inclusive quando uma lista é vazia, caso em que basta acessar a outra. Isso atende ao limite O(log m+log n) quando as listas são não vazias. Esta nota é reconstrução derivada; não é transcrição do código rotacionado.

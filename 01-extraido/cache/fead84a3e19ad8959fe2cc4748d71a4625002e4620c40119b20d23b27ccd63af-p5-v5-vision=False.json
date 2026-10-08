@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]",
+  "metodo": "tesseract-por",
+  "qualidade": "ilegivel",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

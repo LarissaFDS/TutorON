@@ -2,32 +2,9 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L6.pdf | página(s): 5, 6
 
-8. O problema das 8 DAMAS consistem em colocar 8 damas em um tabuleiro
-de xadrez. Modele este problema utilizando Programa¸c˜ao por Restri¸c˜ao.
+Versão derivada corrigida por agente; original SHA-256: 2aead388f0beafe11646843ae981f580e0a1ae281ee8dc2a0ae12f9304f00a7f. Não é aprovação do professor.
 
-Page vSolu¸c˜ao:
-
-Vari´aveis:
-
-1, 2, 3, ..., 8 linhas de um vetor A
-
-O Dom´ınio de cada vari´avel ´e:
-
-1, 2, 3, ..., 8 (n´umeros de 1 a 8)
-
-O valor de cada vari´avel (A[j]) indica a coluna onde uma das dama ´e alocada e a
-posi¸c˜ao desta vari´avel no vetor (j) indica a linha que a dama ´e alocada, dessa forma
-n˜ao haver´a duas damas na mesma linha. Para garantir que n˜ao haver´a duas damas
-na mesma coluna ou na mesma diagonal, aplicaremos as seguintes restri¸c˜oes:
-
-Restri¸c˜oes:
-
-• ∀i, j ∈[1, 2, 3, ..., 8], A[i]̸ = A[j];
-
-Garante que haver´a apenas uma dama em cada coluna;
-
-• ∀i, j ∈[1, 2, 3, ..., 8], A[i] + i̸ = A[j] + j;
-
-• ∀i, j ∈[1, 2, 3, ..., 8], A[i] −i̸ = A[j] −j;
-
-Garantem que haver´a apenas uma dama em cada diagonal.
+Oito damas por programação de restrições.
+Variável A[i] em {1,...,8} é a coluna da dama na linha i, para i=1,...,8. Para cada par 1<=i<j<=8, imponha A[i]!=A[j] e abs(A[i]−A[j])!=j−i.
+Equivalentemente, imponha AllDifferent(A[i]), AllDifferent(A[i]+i) e AllDifferent(A[i]−i). Uma dama por variável garante uma por linha; as demais restrições impedem coluna e diagonais compartilhadas.
+O quantificador original para todos i,j inclui i=j e exigiria A[i]!=A[i], o que torna o modelo impossível. A restrição correta é para índices distintos. Uma solução é [1,5,8,6,3,7,2,4]; com linhas rotuladas há 92 soluções quando rotações/reflexões são contadas separadamente.

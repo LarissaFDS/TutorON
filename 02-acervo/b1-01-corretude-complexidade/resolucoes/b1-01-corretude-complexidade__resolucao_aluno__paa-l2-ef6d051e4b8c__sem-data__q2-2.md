@@ -16,43 +16,48 @@ Page iiSolu¸c˜ao:
 
 
 [OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
-longfib_recursivo(longn){
-if(n==0)
-return
-0
-if(n==1)
-return
-[incerto] 1;
-return
-fib_recursivo(n-1)+fib_recursivo(n-2);
+long fib recursivo(long mt
+
+if (n==0) return @;
+if (n= =1) return 1;
+
+return fib recursi vo(n-1)+fib recursivo(n-2);
 
 
 (b) Fibonacci Iterativo:
 
 
 [OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]
-longfib_iterativo(long n){
-1ong a=0,b=1,c;
-for(inti=1;i<=n;i++)
-C=a+b;
-a
-b;
-b
-=C；
-returna;
+long fib iterativollong nf
+
+long a=0,b=1,C3
+for(int ja1;i<=njit+)
+4
+c = ar;
+a=b;
+b= ci;
+3
+
+return às
 
 
 Gr´afico Tempo x Entrada
 
 
 [OCR parcial do recorte p3-fig3.png; conferir símbolos na imagem]
-FibonacciRecursivoFibonacciIterativo
+Custo de Tempo (s)
+
 60
-CustodeTempo(s)
+
 40
+
+= Fibonacci Recursivo = Fibonacci lterativo
+
 20
-0?680
-EntradaN
+
+VILA
+
+Entrada N
 
 
 Page iii

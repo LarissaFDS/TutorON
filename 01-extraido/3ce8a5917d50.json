@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "13:21\nPAAProva2.pdf\nInstituto de Computacio\nUniversidade Federal de Alngoas-UFAL\n2#Prova\nProjetoe Anilise de Algoritmos\nProf.Rian Gabriel Pinheiro\n24de agosto de 2023\n[incerto] BoHntieS.doAled\nQuestho 1[2 pontos]:\nMostre como remover todos os lementos duplicados de um vetor em O(nlogn), adnptando o algoritmo Mergesort.\nQuestio2[2pontos]:\nDado um vetorAcomnentradas,com cads entrads um nimero distinto.Sabe-se queasequencin de vlores\n[incerto] A[1]A[,iodaucxstediccptre1nalrsantrddoetrumnamat\n[incerto] piomidmrdtqsnDsjarptdxi\np.Mostre como encontrar p atraves de um algoritmo O(logn）\nQuestio3[2pontos]:\n[incerto] Vo tqcadrinirdesjnarlmioprtsq\n[incerto] ProjtumalgoritcietedeivisCoquistaaranntarssdoislresxlicandoco subod\ngem funciona e analisando sua complexidade.\nUm aluno dePAA est plaejndo fzer uma vingen de carro e tem um tanque de gasolinn com capacidade para\nQuestao4[2pontos]:\nsmposiioatual eum prego por litro.Projete um igorimo guloso para determinar a rota que minimize o custo\ntotal da viagem.\n[incerto] Cidqs\n[incerto] [ood z]sogson\nretornar a solucio 6tima.Para isso use um contra-cxemplo.\nAlgoritmoI (Algoritmo do vizinbo mnis pe6ximo)\n1. lnicialize todos os virtioes coo lo visitados.\n[incerto] 2.Selcioe rti abitiriodf cm  rtiatl Maq  cm vitado\n[incerto] 3.Descr a aresta mis curta coctando rtice atlumvertice no vitado \n4.Defins  coo o virtice atual u.Marqoe  como visitado.\n[incerto] 5.Se todo s rtis do domio for viitadsetio termeCaso ctiriovpas o pao 3.\n[incerto] Umlaoentra ma lojaeeumcnjuntodenitens/=[}.Cadaitem temum peso sindo\nQuestio6[2pontos]:\nmvaor.Idealeteoladro gostarinderoubar tdoparaobtermxm beeicio.Nontantohmit\n[incerto] que ele poecrregar.Oladrio temummochil com caacdadeK.Olarioagora temquedetermin quisitens\n[incerto] 1.Supnqusie eamisquumafrademitposseretidsjaladodea\n[incerto] alguna partedeumitem (porxemlo,04dea）deixaraparterestante.Ischdod Probles\ndaMochila FracionadaSejaAIo subconjunto de itens quoladro rouba.Elabore umalgoritmo guloso\n[incerto] O（nlogn）para encontraro subconjuntoAtalqaAu<KeaA6mximo.\n[incerto] 2.Sunaquitns6amsretradocomoumtdosjaladrpodegaroudxarumit\nele no pode pegnr umn frnho de um item Io chnmado deProblema da Mochila Binria (ou Mochila 0-1）.\nGtima?Justifique sun resposta.\nScannedwithCamScanner",
-      "metodo": "rapidocr",
+      "texto": "13:21\n\nx PAA Prova 2.pdf 8 E -\n\nVerde rl de Alas - UPAL =\n\nProjeto é Anália de Algoritmos\n2 Prom,\n\nBieogmosems Que ponta $. lo Almeida\n\nQuestão 1 2 ponte:\nMete coma remove tds o meto dpicada de um veto em O(n). adaptando o lero Mer\n\nQuestão 2 2 pontos):\n‘Dado sm vetor À com entradas, com cada otra um número distinto. Sabewe que a tequéncia de valores\nANAL. Ap] é unimodal sj, xe oc pene en, aloe nas cotas do er aumentam a a\n‘pogo pe epi, ee, ra do caminho, é que a poção 1. Dee encanta o “ponto de mimo”\n> Moto como encontrar p araês de rm alerta Og)\n\nQuestão 5 2 ponto:\nConsidero o spun algo pule par © CAIRO VIAJANTE Mete que le ão é exato to é não guto\nreter slo ima. Pa o ts Um contra seio\nAlegria 1 (Ages do vida mai prio)\n\nTdi eno vio ea vit\n\n2: Selecione um ético air dao oma ls ta Marge a eam vlad.\n\nDeco att ma uta cotado oe at! um vc no ado\n\n“Dea cmo vio sal Mau com viado.\n\nSeda cu vb do dm form vtd, estão nl Cis cota, v par pao 3\n\ne pod cega. © ln to la om opacidade KO ão age e que dra ua\n\nae fr qua ps tl o sd os rt am\n\n1. Sup qu las jam ae que ma ão de um am oa ser tind, o adro poda pega\nga parte deus (or explo Om de) ¢ dear pare reto ine chamado de Pra\nNada Palonda Sa ACT obrofno de Res que o ladrão sonha. Bare um algo go\nOto) pao eco o best A tal que Ena <A # Dugas é má\n\n2 Sepa que eo pm e tdos co um od, us bro pose pe ud ne\nSo pts pega wan fag den en, a chad de Protea da Mod sá (os Mocha 0)\nSe dito por n't vero nerd pela (pergunta atri) ida eon tuna slço\nima? ine sa resposta\n\nScanned with CamScanner",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\3ce8a5917d50\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

@@ -4,10 +4,12 @@ import time
 from collections import Counter
 from html.parser import HTMLParser
 
-from .common import ROOT, TOPICS, digest, progress, read_json, write_csv, write_json
-from .curate import searchable
+from .common import ROOT, TOPICS, digest, progress, read_json, write_json
 from .retrieval import search, context
 from . import models
+from .runtime import settings
+
+SCENARIOS = ('generico', 'controle_prompt', 'rag_manual', 'rag_automatica')
 
 
 def checkpoint(label, regex, kind='deve'):
@@ -79,19 +81,26 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
         duration = time.monotonic() - begin
         expected = set(q['fontes_esperadas'])
         excluded = [i for i in expected if i in items and items[i]['confiabilidade'] == 'baixa']
-        for scenario in ['generico', 'rag_manual', 'rag_automatica']:
-            chosen = [] if scenario == 'generico' else ([items[i] for i in q['contexto'] if i in items] if scenario == 'rag_manual' else hits)
-            ctx = context(chosen)
+        for scenario in SCENARIOS:
+            chosen = [] if scenario in ('generico', 'controle_prompt') else ([items[i] for i in q['contexto'] if i in items] if scenario == 'rag_manual' else hits)
+            ctx = context(chosen, max_chars=5000)
             actual_ids = re.findall(r'^\[([^\]]+)\] Fonte:', ctx, re.M)
             row = {'questao': q['id'], 'cenario': scenario, 'fontes': actual_ids,
+                   'contexto_texto': ctx,
+                   'fontes_sha256': {i['id']: i['sha256'] for i in chosen if i['id'] in actual_ids},
+                   'indice_sha256': digest((root / '04-rag/indice.json').read_bytes()),
+                   'limite_palavras_solicitado': 220,
                    'esperadas': sorted(expected), 'excluidas_baixa': excluded,
                    'top_k_acertou': bool(expected.intersection(actual_ids)) if expected else None,
                    'segundos_busca': duration if scenario == 'rag_automatica' else 0,
                    'ausencia_contexto': not actual_ids, 'modo_busca': hits[0]['busca'] if hits else 'sem_resultados',
                    'status': 'somente_recuperacao', 'manual_adversarial': bool(excluded) and scenario == 'rag_manual'}
             # Cache inclui prompt, contexto, modelo e provedor para não reciclar resultados incompatíveis.
-            key = digest(json.dumps([q, ctx, provider, models.SYSTEM,
-                                    __import__('os').environ.get('TUTORON_MODEL', 'qwen2.5:7b')], ensure_ascii=False))
+            profile = settings()
+            selected_model = profile['base_model'] if scenario in ('generico', 'controle_prompt') else profile['tutor_model']
+            identity = models.model_digest(selected_model) if generate and provider == 'ollama' else None
+            row['modelo_digest'] = identity
+            key = digest(json.dumps([q, ctx, provider, models.SYSTEM, profile, selected_model, identity, scenario, 'validation-v4-trust-and-model-digest'], ensure_ascii=False))
             cache = root / '06-avaliacao/execucoes' / f'{q["id"]}-{scenario}-{key[:16]}.json'
             if generate:
                 previous = read_json(cache, {})
@@ -100,7 +109,8 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
                     row['avaliacao'] = assess(q, row['resposta']['texto'], scenario != 'generico')
                 else:
                     try:
-                        response = models.generate(q['pergunta'], ctx, provider, scenario != 'generico')
+                        prompt_question = q['pergunta'] + '\n\nResponda em português em até 220 palavras.'
+                        response = models.generate(prompt_question, ctx, provider, scenario != 'generico', model=selected_model)
                         prose = re.sub(r'```.*?```|`[^`]*`', '', response['texto'], flags=re.S)
                         cited = re.findall(r'\[(c\d+(?:-q[\w-]+)?|[a-f0-9]{12}(?:-q[\w-]+)?)\]', prose)
                         row.update({'status': 'ok', 'resposta': response,
@@ -119,7 +129,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
             print(q['id'], scenario, row['status'], flush=True)
     lines = ['# Avaliação de PAA', '', 'Checklists ainda dependem do professor. Percentuais são cobertura lexical, não acurácia.', '',
              '| Condição | Respostas concluídas | Critérios encontrados | Critérios aplicáveis |', '|---|---:|---:|---:|']
-    for scenario in ['generico', 'rag_manual', 'rag_automatica']:
+    for scenario in SCENARIOS:
         complete = [r for r in results if r['cenario'] == scenario and r['status'] == 'ok']
         lines.append(f'| {scenario} | {len(complete)} | {sum(r["avaliacao"]["acertos"] for r in complete)} | {sum(r["avaliacao"]["total"] for r in complete)} |')
     lines += ['', 'RAG manual usa os contextos previstos, inclusive material de baixa confiabilidade nos casos adversariais. RAG automática os exclui. Esses casos avaliam também abstenção/filtragem, não só top-k.', '',
@@ -127,7 +137,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
     for r in results:
         if r['cenario'] == 'rag_automatica':
             lines.append(f'| {r["questao"]} | {r["top_k_acertou"]} | {", ".join(r["excluidas_baixa"])} | {r["segundos_busca"]:.3f} |')
-    (root / '06-avaliacao' / ('relatorio.md' if generate else 'relatorio-recuperacao.md')).write_text('\n'.join(lines), encoding='utf-8')
+    (root / '06-avaliacao' / ('relatorio.md' if generate else 'relatorio-recuperacao.md')).write_text('\n'.join(lines), encoding='utf-8', newline='\n')
     progress('6. Avaliação', f'{len(questions)} questões definidas; {sum(r["status"] == "ok" for r in results)} respostas reais nesta execução. Resultados de recuperação e geração separados. Revisão com professor pendente.', root)
     return results
 
@@ -161,7 +171,10 @@ def offline(root=ROOT):
         answers = {r['cenario']: r for r in results if r['questao'] == qid and r['status'] == 'ok'}
         if 'generico' in answers and 'rag_automatica' in answers:
             pairs.append({'id': qid, 'pergunta': q['pergunta'], 'origem': 'avaliacao_local_rag_automatica',
-                          'generico': answers['generico']['resposta'], 'tutoron': answers['rag_automatica']['resposta']})
+                          **{name: {**answers[s]['resposta'], 'modelo_digest': answers[s].get('modelo_digest'),
+                                    'fontes_sha256': answers[s].get('fontes_sha256', {}),
+                                    'indice_sha256': answers[s].get('indice_sha256')}
+                             for name, s in [('generico','generico'), ('tutoron','rag_automatica')]}})
     if not pairs:
         # Transcrições reais do relatório fornecido, nunca respostas inventadas/mock.
         source = root / '00-originais/referencias/TutorON_PoC_Gemini_PAA.html'

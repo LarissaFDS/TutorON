@@ -2,53 +2,11 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L7.pdf | página(s): 1, 2
 
-1. Responda cada um dos itens abaixo e dˆe uma justificativa para as respostas.
+Versão derivada corrigida por agente; original SHA-256: 6afd7e7323c4debf3c3d6b23b4de4bd4617c7af3bd29fb0345749716e5becb3b. Não é aprovação do professor.
 
-• O que significa dizer que um problema Π pode ser polinomialmente reduzido a um
-problema Π′?
-
-• Defina as classes P, NP e problema NP-completo.
-
-• P ∩NP = ∅;
-
-Solu¸c˜ao:
-
-• Ao dizer que um problema Π pode ser polinomialmente reduzido a um problema
-Π′, estamos afirmando que existe um algoritmo polinomial X que transforma
-qualquer instˆancia Y de Π em uma instˆancia X(Y) de Π′ de tal forma que X(Y)
-tem solu¸c˜ao se e somente se Y tem solu¸c˜ao.
-
-• Defina as classes P, NP e problema NP-completo.:
-Inicialmente podemos definir um problema computacional como polinomial
-se h´a um algoritmo cujo consumo de tempo, em seu pior caso, limita o problema
-em uma fun¸c˜ao polinomial. Isto ´e, problemas que conseguem ser resolvidos por
-m´aquinas em tempo aceit´avel. Esse tipo de problema ´e o que caracteriza a
-classe P. Alguns exemplos dessa classe s˜ao: o problema do caminho curto, o
-problema do divisor comum grande e o problema da equa¸c˜ao inteira do segundo
-grau.
-
-J´a a classe NP ´e caracterizada pelos problemas de decis˜oes nos quais a sua
-solu¸c˜ao ´e dada por um algoritmo n˜ao determin´ıstico. Essa classe abrange to-
-dos os problemas P mas tamb´em alguns outros que se comportam de maneiradiferenciada.
-Em outras palavras, a classe NP inclui os problemas em que
-ningu´em conseguiu at´e hoje comprovar se s˜ao polinomiais ou intrat´aveis, pois
-seus algoritmos conhecidos resolvem em tempo parecido aos intrat´aveis mas n˜ao
-h´a comprova¸c˜ao de que eles n˜ao possam ser resolvidos em tempo polinomial.
-Tamb´em ´e dito que, para os problemas em NP, o certificado para o SIM pode
-ser dito em tempo polinomial .Exemplos de NP s˜ao: Bin packing e Knapsack.
-
-Os problemas NP-completos s˜ao definidos como uma subclasse da classe NP
-que inclui os problemas mais dif´ıceis da classe NP. Se for encontrado um algo-
-ritmo polinomial que resolva qualquer um dos problemas NP-completos, ent˜ao
-´e poss´ıvel encontrar um algoritmo polinomial para todos os outros problemas e
-poder´ıamos comprovar a igualdade N=NP, rebaixando a classe NP a P. Al´em
-disso, o oposto tamb´em ´e verdade e se um problema NP-completo ´e intrat´avel,
-ent˜ao todos os outros tamb´em s˜ao e a desigualdade P̸ = NP ´e confirmada.
-
-• P ∩NP = ∅?
-N˜ao.
-Na verdade P ⊆NP, pois qualquer algoritmo polinomial que solu-
-ciona problemas de decis˜ao em P pode ser considerado um algoritmo n˜ao-
-determin´ıstico com fase inicial vazia. Al´em disso, tamb´em podemos considerar
-que P ´e apenas uma parte de NP. A menos que P = NP, quest˜ao sem resposta
-at´e os dias de hoje.
+Defina P, NP, NP-completo e redução polinomial.
+P é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada.
+NP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Equivalentemente, são decididos em tempo polinomial por máquina não determinística. NP não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.
+Uma redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.
+B é NP-completo se B pertence a NP e todo problema de NP se reduz polinomialmente a B. Para demonstrar NP-dificuldade, reduza um problema já NP-difícil para o problema novo. A direção contrária não basta.
+Exemplos apropriados de decisão: SAT, CLIQUE (existe clique de tamanho pelo menos k?) e MOCHILA com limite de peso e alvo de valor. Distinguir essas versões das versões de otimização. Se algum NP-completo estiver em P, então P=NP. Esta redação corrige a resolução de alunos.

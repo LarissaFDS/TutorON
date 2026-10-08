@@ -10,15 +10,14 @@ consiste em:
 
 
 [OCR parcial do recorte p14-fig1.png; conferir símbolos na imagem]
-1: procedure ALGORITMo FIRsT FrT(vetor s[1,.., n])
-2:
-fori+1-ndo
-3:
-Coloque o item i no bin de menor indice que tenha espaco
-dis
-ponivel ≥ s;
-end for
-5:endprocedure
+1: procedure ALGORITMO FIRST Err (vetor s[1,..., 8]
+2 fori —1—ndo
+
+a: Coloque o item i no bin de menor indice que tenha espaço dis:
+ponivel = s;
+4; end for
+
+5: end procedure
 
 
 Mostre que o algoritmo ´e 2-aproximado. Dica: O FF n˜ao deixa, ao final, dois

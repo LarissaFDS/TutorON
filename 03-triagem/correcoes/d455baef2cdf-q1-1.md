@@ -1,0 +1,3 @@
+Ordenação da pilha de panquecas distintas com a maior na base.
+Para o prefixo ativo de tamanho m, de n até 2, localize sua maior panqueca na posição p. Se já estiver na base m, não faça nada. Caso contrário, se p não for o topo, inverta o prefixo p para trazê-la ao topo; depois inverta o prefixo m para levá-la à base. Continue com m-1. Por indução, o sufixo já fixado contém as maiores panquecas nas posições corretas e não é tocado novamente.
+Há no máximo 2(n-1) inversões de prefixo, portanto O(n) inversões. Essa contagem não é o tempo total: localizar a maior e movimentar um prefixo custam O(m), dando O(n^2) de tempo e O(1) de espaço auxiliar com inversão in-place. O código OCR usa limites duvidosos; esta é uma reconstrução derivada.

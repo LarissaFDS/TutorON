@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[incerto] Questaioe(2potitos\n[incerto] wrlives(o ses dommios)easrestrigoes\nQuestao7[2pontos]:\nDenotaos overtice na i-esima linha e na jesima coluna por (i).Todos osvertices em uma grade tem exataente\n（Zmm）na grade,o problema de escape é determinar se existem m\nDadosmn²pontos departida（ai.yi)..\ncaminhos disjuntos de verticesa partir dos pontos de partida para m pontos diferentes na fronteira.Por exemplo,a\ngradena Figura a te uma saida,mas a gradenaFigurabnao tem.Mostre couo modelar oproblena de ccape\nuisandooprablema dofuxomaximo,",
-      "metodo": "rapidocr",
-      "qualidade": "parcial",
+      "texto": "[ilegivel]",
+      "metodo": "tesseract-por",
+      "qualidade": "ilegivel",
       "imagem": "01-extraido\\figuras\\a38cdcf2222d\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

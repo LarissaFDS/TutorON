@@ -1,0 +1,73 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "97254bb4a1b8-q1-1",
+    "d455baef2cdf-q9-9",
+    "d455baef2cdf-q6-6",
+    "2df6e1818523-q4-3"
+  ],
+  "contexto_texto": "[97254bb4a1b8-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nNúmero faltante entre 1 e n, ouvindo n-1 inteiros distintos válidos.\nInicialize faltante=n(n+1)/2 e subtraia cada número ouvido. Ao final, resta exatamente o omitido. São O(n) operações e O(1) palavras de memória no modelo RAM; representar os acumuladores exige O(log n) bits. Valide as hipóteses de intervalo e distinção se a entrada não for garantida.\nEm tipos inteiros de tamanho fixo, a multiplicação n(n+1) pode transbordar mesmo quando a soma final cabe: divida um dos fatores pares por 2 antes de multiplicar e use um tipo suficientemente largo. Uma alternativa é XOR de 1..n combinado com XOR dos números recebidos; todos os presentes cancelam, deixando o faltante. XOR evita a soma intermediária, mas ainda exige um tipo capaz de representar n.\n\n[d455baef2cdf-q9-9] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 7, 8; confiabilidade: media; OCR: revisada_por_agente\nPico de vetor unimodal de valores distintos.\nMantenha l=1,r=n. Enquanto l<r, faça m=floor((l+r)/2). Se A[m]<A[m+1], faça l=m+1; caso contrário, faça r=m. Retorne l.\nO intervalo sempre contém o pico. Se a sequência cresce entre m e m+1, o pico fica à direita; se decresce, fica em m ou à esquerda. Enquanto l<r, m<r e portanto m+1 está no vetor. Tempo O(log n), memória O(1). Não é busca pelo máximo de vetor arbitrário; a hipótese de unimodalidade permite descartar uma metade.\n\n[d455baef2cdf-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 5; confiabilidade: media; OCR: revisada_por_agente\nPonto fixo A[i]=i em vetor ordenado de inteiros distintos, índices de 1 a n.\nFaça busca binária: m=floor((l+r)/2). Se A[m]=m, retorne m. Se A[m]<m, procure somente à direita; se A[m]>m, procure somente à esquerda. Se o intervalo ficar vazio, não há ponto fixo.\nComo os valores são inteiros estritamente crescentes, para i<m temos A[i]<=A[m]-(m-i), e para i>m temos A[i]>=A[m]+(i-m). Portanto A[m]<m elimina todos os índices à esquerda; A[m]>m elimina todos à direita. Tempo O(log n), memória O(1) na versão iterativa. Valores repetidos ou números reais eliminam essa justificativa.\n\n[2df6e1818523-q4-3] Fonte: materiais\\Disponiveis\\RAG PAA\\provaoaa.pdf | página(s): 1; confiabilidade: nao_verificada; OCR: parcial\n4. Q4al a definição formal de 0(f(n))? \n\nQuestãl 4 [2 pontos): \nPara c4a um dos seguintes algoritmos, indique (i) uma métrica de tamanho natural para sua entradas, (ii} sua \noperaçãq básica, e (iii) a contagem da operação básica em função do tamanho da entrada: \n\n1. calculando a soma de n números; \n\n2. cofnputação de n!; \n1 \n3. enfontrando o maior elemento em uma lista de n números; \n\n4. al1oritmo de lápis e papel para multiplicar dois inteiros decimais de n dígitos. \n\n1 \nQuestãi 5 [l ponto]: \nResolva 1 \nrecorrência: \n\nT(n) = { ~~(n/2) + cn, \n\nse n = 1 \nse n > 1. \n\n1 \nj \n\nQuestãb 6 [1 ponto]: \nSupouh~ que você queira encontrar o maior e o menor elemento em um conjunto de elementos inteiros S. Para cada \nrepresenf;ação de S fornecida abaixo, descreva em resumidamente (em uma linha} o algoritmo para encontrar o maior \ne menor !elemento e indique as classes de eficiência de tempo desses algoritmos usando a notação mais apropriada (O. \n0 ou f!}i \n1 \n1. U1fa matriz não ordenada. \n\n2. Utjia matriz ordenada. \nl \n\n\n[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\n?\n_ | a\n\nUniversidade Federal de Alagoas - UFAL\ntituto de Computação >\n\nFO\nProjetg e Análise de Algoritmos =\n12 Pro 4\n\nProf. Rian Gabriel Pinheiro\n\n31 de Julho de 2023",
+  "fontes_sha256": {
+    "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+    "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+    "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9",
+    "2df6e1818523-q4-3": "af6a523c00679c91d5debc1d19c0d4495d21188a94895fae3928dfc1e1e17e6d"
+  },
+  "indice_sha256": "c6b0957a36c6c6000e5970030d627e1586916a37e217704cfd784672dada4fb5",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.6969871209985286,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante entre 1 e n, onde Maria ouviu n-1 números distintos, podemos usar uma abordagem com O(1) de memória. Inicialmente, definimos faltante como n(n+1)/2. Em seguida, subtraímos cada número ouvido de faltante. Ao final, o valor restante será o número faltante.\n\nEste método requer O(n) operações e O(1) de memória, conforme mencionado no contexto acadêmico. A complexidade de tempo é linear, O(n), pois precisamos percorrer a lista de números ouvidos.\n\nNo que diz respeito a possíveis problemas de overflow, a soma n(n+1)/2 pode exceder o limite do tipo inteiro se n for muito grande. Para evitar isso, podemos dividir um dos fatores n ou n+1 por 2 antes de multiplicar, ou usar um tipo de grandeza suficiente. Essa abordagem mantém a complexidade de tempo em O(n) e a memória em O(1), garantindo eficiência mesmo para valores de n grandes.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 131.54247723799926,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "d89e015cb953cd6f973371e7d3ffc7a688a738aab790cdf23b236e17b9cf4d15"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

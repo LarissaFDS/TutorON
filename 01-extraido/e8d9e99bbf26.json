@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Projeto e Analise de Algoritmos\n[incerto] BedroHemniguaEelicionobaSisaa\n3aProva\nProf.Rian Gabriel Pinheiro\n21de fevereiro de2024\nQuestao 1[2pontos]:\nDadas dims sequencias Xe Y,dizemos que uma sequencia Z éuma subsequencia comum de Xe Y se Z for uma\nsubsequencia tanto de Xquanto deY.Por cxemplo.seX=(A.B.C,B、D、A.B) e Y=(B,D.C,A.B.A).a\nsequencia [B.CA} éuma subsequencia comum de ambas X e Y.No entanto,a sequencia {B.C.A)nao é uma\ncomum a ambas as sequencins XeY,tem comprinento 4.Implemente um algoritmo para calcular a SCL de duas\nsubsequencias de entradaXeY.Mostre a relacao derecorrencia.\nQuestao2[2pontos]:\nForneca um algoritmo de programacao dinamica (note que sera pseudo-polinomial) para o problema SuBsET SuM.\nEntrada:Um conjunto A com valores inteiros positivos,e um inteiro t.\nQuestao:Existe um subconjunto A'CAcuja soma dosvalores seja exatamente t?\nQuestao3[1ponto]:\nQuestao4[2pontos]:\nDado um par de nuimeros inteiros n e k,de que maneira podemos jogar n dados de forma a obter uma soma total\nigual a k,contabilizando todas as possiveis combinacoes de resultados? Ex: Se n =3e k= 17,temos 3opcoes:[5.6,\nQuestao5[1ponto]:\nDado um grafo G(V,E)ea seguinte formulacao em programacao linear inteira abaixo.Qual o problema representado？\n[incerto] Vrohlema daeehanturade\nmax\n[incerto] UEV\n[incerto] ventices.\n[incerto] S.aT+xu≤1(u,w)∈E\nX\n[incerto] CE{0,1}\nVUEV",
-      "metodo": "rapidocr",
+      "texto": "7 > (ma\neur\nPre Aare qn On unifoid wo ovdenuroy aqumnges e a (q ‘A)5 opes tum Ope\n:[oquod 1] ¢ ovyson®\njord osso 19, pure 9] 2 (9 “g ‘9) ‘fo\ns sown: =yo¢ 1S >I Of yeqoo ‘y e jendt\nDA TUIOS BIEN 1910 & VULTOS ap sopep 1 rout op sed tin opra\n[soyuod 7) + ogysant)\n: som O reurmuajap vied out oJ ‘40110 )UR OF eanisod ovSnjos eum epeq\n:[oqued 1] ¢ ov3sen®\n4 ota exo vfos saro[va sop emos vino F 5, oNMfuooqns t x sogasont\n} ONOWUT UM 9 'SOAHISOd somo sorOTRA NOS | Ojunínoo mp) :Epeua\ngu fo eared (permourod-opr nb ajou) vormeutp ovsy 2p ouros PSouIo\n[soquod z] z oeisond)\n9110991 ap ovSefar 8 AMSOJ “4 DX vpragao op suomanbesqns\nvd ounHoS}y um outomo(dut “p ontotifiduioo tão) * 49 xº Suraignbos Su sugiro w unido O\n1'9'4) Mougnbas v o 'g oouraduroo ui) onber* 4 o x ap (TOS) e8 am »tonbosqns\nwou UNIO ON “A @ X seque op unos voUsAbesqns e aro auanbos\nVa} = 4» lava a oa) <x durex 10d +4 op oqwenb x op our srougebacgne\nPane x wo wouanbasqns wun y Z wouONbas vam aNd sowDEp +4 à XY sutoupabos senp sepld\n:[soguod z) 1 orysand)\nPe0g ap outosaray ap TE\noxoquia prqeo uvny Jorg\nBACT of\n\nsounpezry ap asyyuy a ogofosg\n\nPOTS HP Cayres erram en",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\e8d9e99bbf26\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

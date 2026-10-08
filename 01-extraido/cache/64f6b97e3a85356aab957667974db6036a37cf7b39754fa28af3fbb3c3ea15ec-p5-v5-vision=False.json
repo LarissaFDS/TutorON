@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nus ph! A seu\nway Punt eS nã ca ,\n\n(594\n\nya) ano (+ a eq 5) pe,\n\n(655 me\n¢ i Es À\n10835 4574 * ys) \\ \\\n\n(ud) cs\ndo maos STO Ne\n\nss of ' a ap BYE ? gat) A | 7\n1 el ar =}\ngaggle yma 4 S merit OF\nmp\n~ 3 € a\n\neptest pio ap aed (9D e |\n\no ph opp aaa SPP gpa il",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\c616f5b14d1a\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -2,7 +2,8 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\WhatsApp_Image_2023-07-04_at_21.52.27_(1).webp | página(s): 1
 
-Questao 2[2pontos]:
-[incerto] DadoumconjSdestringsenontre de form eficenteoprefixocoum mis lonoExepls
-Eutrada S=（istitut”instigar,instaveF,instaurar),Saida:“lnst”
-portugueaporhfgaT}.Saida:“portng
+Questão 2 [2 pontos):
+Dado utn conjithta S de atrings, encontra da forms eficiente o prefixo comum mals longo, Exemplos:
+
+Entrada: S = (“lustituto”, tinstigar”, Sinstavel”, Siustaurar” ), Saída: “inst”
+Entrada: $ = (“port Partuguas®, "portal ). Saída: *portug”

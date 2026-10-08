@@ -2,17 +2,9 @@
 
 Fonte: materiais\c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição
 
-2. Considere o seguinte algoritmo força bruta para resolver o problema do número COMPOSTO:
-Verifique inteiros sucessivos de 2 a ⌊n/2⌋ como possíveis divisores de n. Se um deles divide n,
-retorna SIM; se nenhum deles o fizer, retorne NÃO. Por que esse algoritmo não coloca o
-problema na classe P?
+Versão derivada corrigida por agente; original SHA-256: 98992c34d0d2690c60cf3b160b7143a1bbc3b24e2c2c62cca3eb9c12eea898a1. Não é aprovação do professor.
 
-Solução: Este algoritmo não é polinomial e sim pseudo-polinomial, uma vez que a complexidade
-de tempo depende do valor inserido na entrada e não do tamanho da mesma. Sendo assim, dada
-uma entrada n qualquer e considerando-a um vetor binário de b bits, tem-se que:
-  b = log2(n)
-  2^b = 2^(log2 n)
-  n = 2^b
-Logo, é possível notar que a complexidade não pode ser polinomial, pois depende da quantidade
-de bits do valor informado na entrada; sendo assim, a complexidade aumenta exponencialmente
-com o número de bits da entrada e portanto o algoritmo é pseudo-polinomial.
+Por que o algoritmo força bruta de COMPOSTO não demonstra que o problema está em P?
+Para n>=2, a representação binária tem b=floor(log2(n))+1 bits. Portanto 2^(b-1)<=n<2^b; não se deve escrever b=log2(n) como igualdade exata para todo inteiro.
+Testar sucessivamente os divisores de 2 até floor(n/2) pode exigir Theta(n) testes no pior caso, por exemplo em entradas primas. A divisão também tem custo em bits, polinomial em b. O número de testes já cresce exponencialmente em b, apesar de ser polinomial no valor numérico n: daí a descrição pseudo-polinomial.
+Isso classifica este algoritmo, não prova que COMPOSTO esteja fora de P nem que seja NP-completo. Encontrar um divisor é um certificado de composição verificável em tempo polinomial em b.

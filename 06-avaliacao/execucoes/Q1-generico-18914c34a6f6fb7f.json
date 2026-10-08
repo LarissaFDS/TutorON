@@ -1,0 +1,85 @@
+{
+  "questao": "Q1",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para explicar o que esse algoritmo faz, precisamos entender que ele é uma implementação de uma função recursiva que busca o menor elemento em um vetor. Este algoritmo é semelhante ao método de busca binária, mas não garante que o vetor está ordenado. Ele divide o vetor em metades e compara os menores elementos de cada metade para determinar qual é o menor.\n\nPara provar sua corretude, podemos usar a técnica de indução. Primeiro, mostramos que o algoritmo funciona corretamente para vetores de tamanho 1 (base da indução). Em seguida, assumimos que o algoritmo funciona para vetores de tamanho k (hipótese da indução) e provamos que ele também funciona para vetores de tamanho k+1. Isso pode ser feito demonstrando que o algoritmo retorna o menor elemento do vetor de tamanho k+1, que é o menor dos menores elementos de cada metade do vetor (que são retornados por chamadas recursivas).\n\nAlém disso, podemos usar testes de casos para validar o algoritmo. Testar com vetores ordenados, desordenados e com repetições pode ajudar a garantir que o algoritmo está funcionando como esperado.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 42.19606517200009,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 0,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

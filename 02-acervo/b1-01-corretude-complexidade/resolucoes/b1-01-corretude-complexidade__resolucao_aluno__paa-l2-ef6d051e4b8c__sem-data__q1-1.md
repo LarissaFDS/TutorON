@@ -2,76 +2,9 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L2.pdf | página(s): 1, 2
 
-1. Encontre o n´umero de maneiras diferentes de subir uma escada com n degraus
-se cada passo pode ter um ou dois degraus. Por exemplo, uma escada de trˆes
-degraus pode ser escalada de trˆes maneiras: 1–1–1, 1–2 e 2–1.
+Versão derivada corrigida por agente; original SHA-256: d405519cefd8fbcfaf820aee7ac0d4600ee09c93d2be299043a9921c80723902. Não é aprovação do professor.
 
-Solu¸c˜ao: Considerando n o n´umero de degraus da escada, temos que:
-
-Para n=1:
-
-´E necess´ario dar apenas um passo, logo:
-- 1 degrau
-⇒Degrau(1) = 1 maneira.
-
-Para n=2:
-Podemos subir a escada de duas maneiras:
-- 1 degrau
-- 2 degraus
-⇒Degrau(2) = 2 maneiras.
-
-Para n=3:
-Podemos subir a escada de trˆes maneiras:
-- 1 + 1 + 1 degraus
-- 1 + 2 degraus
-- 2 + 1 degraus
-⇒Degrau(3) = 3 maneiras.
-
-Para n=4:
-Podemos subir a escada de cinco maneiras:
-- 1 + 1 + 1 + 1 degraus- 1 + 1 + 2 degraus
-- 2 + 2 degraus
-- 2 + 1 + 1 degraus
-- 2 + 2 + 1 degraus
-⇒Degrau(4) = 5 maneiras.
-
-Para n=5
-Podemos subir a escada de cinco maneiras:
-- 1 + 1 + 1 + 1 +1 degraus
-- 1 + 1 + 1 + 2 degraus
-- 1 + 1 + 2 + 1 degraus
-- 1 + 2 + 1 + 1 degraus
-- 1 + 2 + 2 degraus
-- 2 + 1 + 1 + 1 degraus
-- 2 + 1 + 2 degraus
-- 2 + 2 + 1 degraus
-- 2 + 2 + 1 degraus
-⇒Degrau(5) = 8 maneiras.
-
-Em resumo, obtemos as seguintes rela¸c˜oes:
-
-Degrau(1) = 1
-Degrau(2) = 2
-Degrau(3) = 3
-Degrau(4) = 5
-Degrau(5) = 8
-
-Portanto, ´e poss´ıvel notar que a fun¸c˜ao Degrau se assimila `a sequˆencia de Fibonacci
-
-
-
-
-
-⇒Desse modo, a fun¸c˜ao Degrau(n) =
-
-1,
-se
-n = 1
-2,
-se
-n = 2
-Degrau(n −1) + Degrau(n −2), se
-n ≥3
-
-
-
+Subir n degraus em passos de tamanho 1 ou 2.
+Defina E(0)=1 (sequência vazia) e E(1)=1. Para n>=2, E(n)=E(n-1)+E(n-2), separando pelo último passo. Logo os valores para n=0..5 são 1,1,2,3,5,8.
+Para n=4, as cinco sequências são 1111,112,121,211,22. Para n=5, as oito são 11111,1112,1121,1211,2111,122,212,221. A sequência 221 não pode representar quatro degraus, e não deve ser duplicada na lista de cinco.
+É possível calcular em O(n) adições e O(1) palavras auxiliares com duas variáveis. A contagem pode exigir inteiros grandes; a complexidade em bits deve considerar seu crescimento.

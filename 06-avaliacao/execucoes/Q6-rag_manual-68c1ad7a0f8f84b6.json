@@ -1,0 +1,68 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_manual",
+  "fontes": [
+    "1a81ca283132-q4-4"
+  ],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Resolvendo a subsequência contígua de soma máxima em tempo linear seguindo a Lista 5, a recorrência é definida como:\n\nfim[j] = max(0, fim[j-1] + a_j)\nmelhor[j] = max(melhor[j-1], fim[j])\n\nOnde a_j é o j-ésimo elemento da lista.\n\nPara a lista [5,15,-30,10,-5,40,10], os valores de fim e melhor são calculados conforme a recorrência:\n\nfim = [5,20,10,10,5,50,10]\nmelhor = [5,20,10,10,5,50,10]\n\nO resultado é melhor[6] = 50, que é a soma máxima da subsequência [40,10].\n\nPara a lista [-5,-2,-8], os valores de fim e melhor são calculados conforme a recorrência:\n\nfim = [-5,-2,-2,-2,-2,-2]\nmelhor = [-5,-5,-5,-5,-5,-5]\n\nO resultado é melhor[6] = -5, que é a soma máxima da subsequência vazia.\n\nEsses resultados são obtidos seguindo a Lista 5, onde a função melhor[0] é inicializada em 0 e a função fim[j] é definida como a soma máxima de uma subsequência contígua que termina no j-ésimo elemento.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 68.50244273900171,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "b0f94db1d651bbf50e2b30a954bf559632ac18251097e2ce2f8737abc78724ce"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc"
+}

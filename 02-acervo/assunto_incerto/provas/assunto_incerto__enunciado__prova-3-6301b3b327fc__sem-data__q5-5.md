@@ -81,9 +81,11 @@ o vaJor que
 
 
 [OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]
-Universidade Federal de Alagoas - UFAL
-InstitutodeComputacao
-Projeto e Analise de Algoritmos
-3aProva
-Prof.Rian Gabriel Pinheiro
-24desetembrode2023
+Universidade Federal de
+Instituto de Computação “2 - UFAL
+
+Projeto e Análise de Al
+
+32 Prova
+Prof. Rian Gabriel Pinheiro
+24 de setembro de 2023

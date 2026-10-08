@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "品\nP.Rom\nUniversidade Federal de Alagoas-UFAL\nInstituio de Computacao\nProjeto e Analise de Algoritmos\n1aProva\nProf.Rian Gabricl Pinheiro\n31 de julho de 2023\nQuestao1[2 pontos]:\n[incerto] as listas[12,3,56,7,9e0,35,7]a saida deve ser[1,2,6,9]Prove acorretue doseu algorito.\nQuestao 2 [2 pontos]:\nConsidere o seguinte algoritmo:\n1:procedure ALGoRITMo X（vetor A[1,...,n],inicio,fim）\n2:\nifinicio =fim then\nreturn Alinicio]\n4\nendif\n5:\nif inicio> fim then\n6:\nreturn0\n7:\nendif\n8:\nmeio←inicio+（fim-incio）/2\n9:\naX（A,inicio,meio）\n10:\nb\nX（A,meio+1,fim）\n11:\nreturna+b\n12:end procedure\nExpljque oque ele fazeprove sua corretude.\nQuestao3[2pontos]:\nSeja f(n)una funcao dos inteiros nos reais.Justifique:\n[incerto] 1.Qial a defnicno formal deO(f（n)O(1(al)=g(m)/3c,m∈R+/ 0≤g(m）≤C(a)Vm>m3\n2.Everdadeque20n3+10nlgn+5éO（n3）？\n3.Everdade que n²éO（n）？\n[incerto] 14.Qaladenicaoformal de（f（n）→θ（4a)=g（mcmR0<gm≤o0≤2≤g（a）\n[incerto] m≥mo3\nQuestao 4[2pontos]:\noperacagbasica,e(i) a contagem da operacao basica em funcao do tamanho da entrada:\n1.calculando a soma de nnumeros;\n2.coinputacao de nl\n3.encontrando o maior elemento em uma lista de nntmeros;\n4.algoritimo de lapis e papel para multiplicar dois inteiros decimais de n digitos.\nQuestao5[1ponto]:\nResolvaa recorrencia:\nT(n）=\n1,\nsn=1\n{2T（n/2)+cn,sen>1.\nQuestao 6[1ponto]:\nSuponhdquevocequeiraencontrar o maior e omenor elemento em um conjunto de elementos inteiros S.Para cada\nrepresentacao de S fornecida abaixo,descreva em resumidamente（em uma linha)o algoritmo para encontrar o maior\ne menorelemento e indique as classes de eficiencia de tempo desses algoritmos usando a notacio mais apropriada (O\n[incerto] (unoθ\n1.Uma matriz nao ordenada.\n2.Una matriz ordenada.",
-      "metodo": "rapidocr",
+      "texto": ")\n“vpeuopio zuyeu vitro e\n\nupeuopso ovu zuuur vir “T\n\nHy no q\n*O) vpupadozdo jus ovSujou w oprivsn soum psy sossap Odi} op nongigo ap sassujo su onbiprr 9 ontauia(a; somam\nAQUI O IVIJNODIO VIRÁ OMNI LOR IN O (VIU WIM to) ojomimpjinsor tra NAAIOKP SoxmE MPI9tLI0] gap ovijnasardas\n\nUPL IV “S SONOqUE SoyttOMO[o op ojunfuoo tm nto ojuamofo tona oo ojuur o ANAyHODTIA estonh 990A anb pruodng\noquod 1) 9 geisanty\n\n‘Tuas tua + (gua\nJ=uos wp ps (ua\n\nmalig LODO 1 vAjosay\n:[oquod 1) g ovysonty\n\n‘SOUT UW Op sRUTPAP soupoquy sjop avoy dye and faded a stdyj ap oumuolipe -p\n\n{ROLOUINU U Op MIST] RUIN WA Oquania|o sojuur o oprreuodna “g\n\nnduioo “7\n\n{iu op or\n\n!SOJUINU U ap vuios ¥ opuvinajeo “7\n\nsq bedesado\n\n“Mpento vp OquNUIv) Op ovduTy ut volsvq oníniado vp modens ¥ (mm) a 'eotsy\nuns (n) ‘sopenuo uns vivd jenqen oyteumy ap votou vum (1) anbipuy ‘sounposye saumãos sop um epeo waeg\n:[soquod z] p deysonty\n\nfrw<w ‘ o\n\nA gde 30º prio [3399 w/o\" Elia 3 = (AKU Ne ap reuse ovbrayop e rehtp +\n\nuu 9 ,u% anb opepso4 q “gr\n\nU(c4JO 9S + UB] UOT + çuoz onb opep.\n\nfruto Asas SH) 50] ty wd E]oo8} = (NO co dÚ(U)/)O ap peursoy ovstuyop ¥ puto\n\nconbyiysup “stvox sou sozroquy sop ovsuny wum (li) f vlog\n\nve :[soquod z] ¢ oeysant\n\n‘epnyaizoo wns aaoid a zey aja anb o anblidxq\n\nempssoad pus “71\n\n; 9+ wings\n(wy ‘T+ op py — q\n(Cou ‘opi yx + o :6\na/(omuy — wy) + orm > ome -g\n\nnpuo cy\npum?\n\nua wy < ora 3\nJ} pus\n\n[omni wan’\nayy uy =\n(ty ‘oromay fut] a0%e0) x ramos y\n\nooo aquyno\noquod 7\n\napisuo)\nZ ovisonty\n\n“oumájo nos Op apnyassoo w arora (6 '9 (7 ‘T] 498 anap vpres w LL “e ‘g 0] a [61º 6 “e e II's\nered “ojduaxa 20g “soxaqu SOLUIMU ap SUpeuapão SUSI senp ap ovdenqns v JvutuLoop vivd ountolje um 94\n\n[soquod 7] 1 orysont\n£z0z ap of op Tg\n1 19129 MY Jorg\n\nVhord et\n\nSOU HOY op osyuy o orofont\novseynduros op oa\nIVAN - SvoRUTY op [wsopay opopi\n\nel Soo",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\fc6f103e4d15\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

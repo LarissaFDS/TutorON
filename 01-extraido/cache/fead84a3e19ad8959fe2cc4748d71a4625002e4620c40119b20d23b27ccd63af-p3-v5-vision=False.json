@@ -1,0 +1,12 @@
+{
+  "pagina": 3,
+  "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n} |\n\n9 sa oh qn\n\n| 7 Sanh 409 Su eos ng 4\n\nUt Pu >] form * taaep 7 by 2\n\nhe mês op 2350 eas SA eB\nY £2¢g Sey w/ Seu “pre E\nA ve? hal (Fidny a el\n\na ar E\nae\n\no SSSA | 7",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p3-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

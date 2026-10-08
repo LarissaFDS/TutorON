@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Entrada：S={imsuu\nmstamar,Saida:\n[incerto] amst\nEntrada:S={“portuguese”,“portugues\",“portugal\"},Saida:“portug”\nQuestao4[1ponto]:\nConsidere o problema do caminho de custo minimo em um grafo G direcionado.Assuma que todos os pesos das arestas\nde G sao positivos e distintos. Seja Pum caminho de custominimo entre os vertices s e t de G.Agora suponha que\ntodos os pesos c das arestas de G sejam trocados pelo quadrado do seu valor,ou seja,por ce²,dando origem a uma\num caminho de custo minimo entre se tnesta nova instancia.Caso negativo,de um contra-exemplo\nQuestao5[2pontos]:\nUma empresa de Maceio possui um conjunto decarros numerados de1 an.A empresa possui um estacionamento com\nvagas padronizadas que cabem ate dois carros.Suponha que cada carro ipossui um comprimento plilno intervalo\naberto(0,1) indicando oquanto que ocarro ocupa avaga.Queremos acondicionar os carrosno menornumero possivel\nEscreva um algoritmo queresolva oproblema.\nQuestao 6[1ponto]:\nOalgoritmo da questao anterior é 6timo？Prove.\nQuestao7[2pontos]:\nobjetivo é encontrar o menor numero de“bins”(caixas)unitarias para armazenar osn itens.Dado o algoritmos a\nseguir,mostre que cles nao encontrain a solucao 6tima do problema,ou seja,encontre contraexemplos para cada un\ndos seguinte algoritmos para o problema.\n·Coloque na bin mais livre o maior clemento;\n·Coloque o menor elemento na bin mais livre.",
-      "metodo": "rapidocr",
+      "texto": "E AMBLANOL , AMovauirar |\n\nPESINDAÇIA: O = 4 INSUINIO , SNE da. AS\n\nEntrada: $= ( “portuguese”, “português”,\n\nportugal\" ), Saída: “portug”\n\nQuestão 4 [1 ponto):\n\nConsidere o problema do caminho de custo mínimo em um grafo G\nde G são positivos e distintos. Seja P um caminho de customínir\ntodos os pesos c, das arestas de G sejam trocados pelo quadr\nmova instância do problema no mesmo grafo, mas com pesos diferentes. Determine se o caminho P irá continuar a ser\num caminho de custo mínimo entre s e t nesta nova instância. Caso neg:\n\nionado. Assuma que todos os pesos das arestas\n\nre os vértices s e t de G. Agora suponha que\n\n» do seu valor, ou seja, por c.*, dando origem a uma\n\ntivo, dê um contra-exemplo\n\nQuestão 5 [2 pontos)\nUma empresa de Maceió possui um conjunto de carros numerados de 1 an. A en\n\npresa possui um estacionamento com\n\ni um comprimento pfi] no intervalo\n\nvagas padronizadas que cabem até dois carros. Suponha que cada ca possi\nAberto (0, 1) indicando o quanto que o carro ocupa a vaga. Queremos acondicionar os carros no menor número possível\nde vagas de modo que (i) cada vaga tenha < 2 carros e (ii) mpritr dos carros em cada vaga não passe de 1\n\nEscreva um algoritmo que resolva o problema\n\nQuestão 6 [1 ponto]:\nO algoritmo da questão anterior é ótimo? Prove.\n\nQuestão 7 [2 pontos]:\n\n(O BIN PACKING é um problema cuja entrada consiste em: n itens com tamanhos s4,82,...,5n em que s; € [0,1]. O\nobjetivo é encontrar o menor número de “bins” (caixas) unitárias para armazenar os n itens. Dado o algoritmos a\nseguir, mostre que cles não encontram a solução ótima do problema, ou seja, encontre contraexemplos para cada um\ndos seguinte algoritmos para o problema.\n\ne Coloque na bin mais livre o maior elemento;\n\n* Coloque o menor elemento na bin mais livre.",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\f31fd59937d3\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

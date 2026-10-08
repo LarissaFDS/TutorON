@@ -25,100 +25,29 @@ a seguinte instˆancia do TSP:
 
 
 [OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]
-1
-3
-4
-2
-5
-3
+SAY
 
 
 Para estimar o custo inicial do tour, temos que:
 
 Page iii[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-3
-4
-2
-2
-2
-3
-INF
-1
-5
-1
-3
-4
-1
-INF
-4
-1
-4
-2
-5
-4
-INF
-2
-MIN
-<-CUSTO
-1
-2
-3
-4
-MIN
-1
-INF
-1
-2
-0
-2
-2
-2
-INF
-0
-4
-1
-3
-3
-0
-INF
-3
-1
-4
-0
-3
-2
-INF
-2
-MIN
-0
-0
-0
-0
-9=0+9
-<-CUSTO
+[ilegivel]
 
 
 CUSTO DA REDUC¸ ˜AO = 6 (LIMITE INFERIOR)
 
 
 [OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]
-C1
-UPPER:INF
-1
-C2
-C:6
-100
-C3
-C4
-2
-3
+UP
+
+PER: INF
+
+c:6
+
+Mica
+E cz
+Ec:
+oa
 
 
 Calcule agora o custo do pr´oximo n´o, que ´e o custo para ir do seu predecessor at´e
@@ -129,58 +58,25 @@ sucessor j ser toda infinita a partir da matriz reduzida do n´o 1, bem como a c
 
 
 [OCR parcial do recorte p4-fig3.png; conferir símbolos na imagem]
-C1
-UPPER:INF
-C2
-[incerto] T
-R =6
-C3
-C(1,4) +R + R'
-C4
-C(1,2)+R+R
-C(1,3)+R+R
-2
-3
+C(1,2)+R+R'
+
+UPPER: INF
+R=6
+
+A
+
+C(1,3) +R + R'
+
+Hoc
+E cz
+Ecs
+oa
 
 
 Para o n´o 2 temos:
 
 Page iv[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-INF
-INF
-INF
-0
-2
-2
-INF
-0
-4
-0
-3
-[incerto] D
-INF
-INF
-0
-3
-4
-0
-INF
-2
-INF
-0
-MIN
-0
-0
-[incerto] 0
-3
-<-CUSTO
+[ilegivel]
 
 
 C(C1, C2) + R + R′ = 1 + 6 + 3 = 10
@@ -189,39 +85,7 @@ Para o n´o 3 temos:
 
 
 [OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-INF
-INF
-INF
-0
-2
-0
-INF
-INF
-0
-0
-3
-3
-0
-INF
-3
-0
-4
-0
-3
-INF
-INF
-0
-MIN
-2
-2
-<-CUSTO
+[ilegivel]
 
 
 C(C1, C3) + R + R′ = 2 + 6 + 2 = 10
@@ -230,41 +94,9 @@ Para o n´o 4 temos:
 
 
 [OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-INF
-INF
-INF
-0
-2
-2
-INF
-0
-INF
-0
-3
-3
-0
-INF
-INF
-0
-4
-0
-3
-2
-INF
-0
-MIN
-0
-[incerto] 0
-[incerto] 0
-0
-<-CUSTO
+[a [o [me pie [o |
+[o [3s [2 [ue [o |
+vu RR RI custo
 
 
 C(C1, C4) + R + R′ = 0 + 6 + 0 = 6
@@ -276,62 +108,21 @@ partir do n´o 4.
 
 
 [OCR parcial do recorte p5-fig4.png; conferir símbolos na imagem]
-C1
-UPPER:INF
-C2
-1
-R=6
-C3
-C4
-R=10
-R=10
-R=6
-2
-4
-3
-C(4,5) + R + R'
-C(4,6) + R + R'
-5
-6
+Hc
+
+UPPER: INF im] cz
+R=6 mcs
+ca
+R=10 R=10 R=6
+
+dasj+R+ / CIS 6) +R +R"
 
 
 Page vPara o n´o 5, temos que:
 
 
 [OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-INF
-INF
-INF
-0
-2
-INF
-INF
-0
-INF
-0
-3
-0
-INF
-INF
-INF
-3
-4
-INF
-INF
-INF
-INF
-0
-MIN
-[incerto] 0
-3
-<-CUSTO
+[ilegivel]
 
 
 C(C4, C2) + R + R′ = 3 + 6 + 3 = 12
@@ -340,41 +131,16 @@ Para o n´o 6, temos que:
 
 
 [OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]
-1
-2
-3
-4
-MIN
-1
-INF
-INF
-INF
-INF
-0
-2
-0
-INF
-INF
-INF
-2
-3
-0
-0
-INF
-INF
-3
-4
-INF
-INF
-INF
-INF
-0
-MIN
-0
-[incerto] 0
-[incerto] 0
-5
 <-CUSTO
+
+5
+
+INF
+
+Boe
+=
+E
+=
 
 
 C(C4, C3) + R + R′ = 2 + 6 + 5 = 13
@@ -383,55 +149,45 @@ Temos a seguinte situa¸c˜ao:
 
 
 [OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]
-C1
-UPPER:INF
-C2
-R =6
-1
-C3
-C4
 R=10
-R=10
+
+UPPER: INF
+
 R=6
-2
-4
-3
-R=12
+
+R=10
+
 R=13
-5
-6
+
+Hc
+E c2
+E c3
+Da
 
 
 A t´ıtulo de simplifica¸c˜ao, ocultaremos os pr´oximos passos que s˜ao an´alogos e obtemos o
 seguinte resultado:.
 
 Page vi[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]
-C1
-UPPER:10
-C2
-1
-R=6
-C3
-C4
 R=10
-R=10
-R=6
-2
-4
-3
-R=12
-R=10
-R=16
->=UPPER
-R=13
-5
-6
-8
+
+Hoc
+Ec
+
+R=6 E c3
+oa
+
+R=10 R=6
+
+Peper RoW? /
+
 >UPPER
-R=10
->UPPER
->UPPER
-->UPPER
+
+R=13,
+x
+
+R=10 >UPPER >UPPER
+-> UPPER
 
 
 ´E poss´ıvel verificar que ao obter uma solu¸c˜ao candidata todas as outras ramifica¸c˜oes que

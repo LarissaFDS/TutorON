@@ -1,0 +1,67 @@
+{
+  "questao": "Q8",
+  "cenario": "rag_manual",
+  "fontes": [
+    "70d6475b28bf-q1-1"
+  ],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9, seguimos estes passos:\n\n1. Inicialmente, preenchemos as posições com números de 1 a 9, mantendo um conjunto de números ainda não usados.\n\n2. Para cada posição, testamos todos os números que ainda não foram usados. Se uma linha, coluna ou diagonal já estiver completa, descartamos essa opção.\n\n3. Para evitar que a soma de uma linha seja maior que 15, somamos os menores e maiores números disponíveis para limitar o que ainda pode completar a linha.\n\n4. Ao preencher as nove posições, verificamos se as três linhas, três colunas e duas diagonais formam uma soma de 15. Se não, descartamos essa combinação.\n\n5. Para testar todas as possibilidades, utilizamos um limite de O(9!) para permutar os números, com memória O(9).\n\n6. Não confundimos a igualdade entre as diagonais com a exigência de que todas as oito somas sejam 15.\n\n7. Ao usar backtracking, podemos explorar todas as possibilidades, garantindo que encontramos todas as soluções possíveis.\n\nEsses testes e podas garantem que apenas quadrados mágicos válidos sejam considerados, evitando duplicatas e soluções inválidas.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 76.84992301500097,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "319260ca4d0fd853521da561c3da99035c1247b180dd1c4919f67cb5f82acc41"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

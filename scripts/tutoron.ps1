@@ -54,11 +54,15 @@ function Setup-Ollama {
         if (!$pronto) { throw 'Ollama nao iniciou. Veja .tools\ollama-server-error.log.' }
     }
     if ($Acao -eq 'Modelos') {
-        foreach ($modeloTutor in @('qwen2.5:7b','qwen2.5vl:3b','bge-m3')) {
+        $baseTutor = if ($env:TUTORON_BASE_MODEL) { $env:TUTORON_BASE_MODEL } else { 'qwen2.5:3b' }
+        foreach ($modeloTutor in @($baseTutor,'qwen2.5vl:3b','bge-m3')) {
             & $ollamaTutor pull $modeloTutor
             Check-Native
         }
-        & $ollamaTutor create tutoron-paa -f 05-modelo\Modelfile
+        & $pythonTutor -m acervo.runtime
+        Check-Native
+        $nomeTutor = if ($env:TUTORON_MODEL) { $env:TUTORON_MODEL } else { 'tutoron-paa' }
+        & $ollamaTutor create $nomeTutor -f .tools\Modelfile.local
         Check-Native
     }
 }
@@ -69,8 +73,17 @@ switch ($Acao) {
     'Modelos' { Setup-Ollama }
     'Pipeline' { & $pythonTutor -m acervo pipeline; Check-Native }
     'Visao' { Setup-Ollama; & $pythonTutor -m acervo pipeline --visao --embeddings; Check-Native }
-    'Avaliar' { Setup-Ollama; & $pythonTutor -m acervo triar --ia; Check-Native; & $pythonTutor -m acervo indexar --embeddings; Check-Native; & $pythonTutor -m acervo avaliar --gerar; Check-Native; & $pythonTutor -m acervo offline; Check-Native }
+    'Avaliar' {
+        Setup-Ollama
+        if ($env:TUTORON_TRIAGE_AI -eq '1') { & $pythonTutor -m acervo triar --ia } else { & $pythonTutor -m acervo triar }
+        Check-Native
+        & $pythonTutor -m acervo indexar --embeddings; Check-Native
+        & $pythonTutor -m acervo avaliar --gerar; Check-Native
+        & $pythonTutor -m acervo.benchmark_report; Check-Native
+        & $pythonTutor -m acervo offline; Check-Native
+    }
     'Validar' {
+        Setup-Ollama
         if (!(Test-Path '07-validacao-alunos\pares.json')) { & $pythonTutor -m acervo pipeline; Check-Native }
         $instanciaTutor = $false
         try { $estadoTutor = Invoke-RestMethod 'http://127.0.0.1:8765/api/questoes' -TimeoutSec 2; $instanciaTutor = $null -ne $estadoTutor.questoes } catch { }
@@ -80,5 +93,5 @@ switch ($Acao) {
     }
     'Resumo' { & $pythonTutor -m acervo resumo; Check-Native }
     'Dataset' { & $pythonTutor -m acervo triar; Check-Native; & $pythonTutor -m acervo relatorio; Check-Native; Write-Host 'Dataset atualizado em 05-modelo\dataset-finetuning.jsonl. Somente pares aprovados sao exportados.' }
-    'Testar' { $testeTempTutor = Join-Path $raizTutor ('tmp\pytest-' + [guid]::NewGuid().ToString('N')); & $pythonTutor -m pytest tests_acervo -q --basetemp $testeTempTutor -o cache_dir=tmp/pytest-cache; Check-Native }
+    'Testar' { New-Item -ItemType Directory -Force (Join-Path $raizTutor 'tmp') | Out-Null; $testeTempTutor = Join-Path $raizTutor ('tmp\pytest-' + [guid]::NewGuid().ToString('N')); & $pythonTutor -m pytest tests_acervo -q --basetemp $testeTempTutor -o cache_dir=tmp/pytest-cache; Check-Native }
 }

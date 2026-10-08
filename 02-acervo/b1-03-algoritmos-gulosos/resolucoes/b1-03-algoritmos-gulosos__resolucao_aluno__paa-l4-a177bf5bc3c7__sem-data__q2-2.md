@@ -2,22 +2,7 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L4.pdf | página(s): 3
 
-2. Seja G um grafo n˜ao-direcionado. Prove que se todas as arestas s˜ao distintas,
-ent˜ao ele tem uma ´unica ´arvore geradora m´ınima.
+Versão derivada corrigida por agente; original SHA-256: 00def19c291a56826b74693e3ce89a2914d12883f2a56d66addd80b67b11d9de. Não é aprovação do professor.
 
-Solu¸c˜ao: Considerando o enunciado, possu´ımos um grafo n˜ao-direcionado G e dese-
-jamos provar que se todas as arestas s˜ao distintas, ent˜ao ele tem uma ´unica ´arvore
-geradora m´ınima. Para provar isso, assumiremos que este grafo possui no m´ınimo
-duas ´arvores geradoras, T0 e T1, e, em seguida, provaremos que pelo menos um par
-de arestas em G possui peso igual entre si, efetuando, ent˜ao, a prova por contradi¸c˜ao.
-
-Prosseguindo, tanto T0 quanto T1 dever˜ao conter uma aresta que a outra n˜ao possui,
-agregando diferen¸ca entre si. Sendo e0 a aresta de peso m´ınimo em T0/T1 e e1 a
-aresta de peso m´ınimo em T1 /T0, supomos que o peso de e0 ´e menor ou igual ao peso
-de e1. Dessa forma, teremos um novo sub-grafo T1 ∪e0 que possui um ciclo e uma
-aresta e2 que n˜ao est´a em T0. Como e0 ∈T0, temos que e2̸ = e0 e portanto e2 ∈T1
-/T0, sendo assim, w(e2) > w(e1) > w(e0). Agora consideramos a ´arvore geradora T2
-= T1 + e - e2, onde w(T2) = w(T1 ) + w(e0) - w(e2) ≤w(T1 ). Mas T1 ´e uma ´arvore
-geradora m´ınima, ent˜ao w(T1 ) = w(T2), resultando que T2 tamb´em ´e uma ´arvore
-geradora m´ınima. Com isso, conclu´ımos por contradi¸c˜ao que se todas as arestas s˜ao
-distintas, ent˜ao ele tem uma ´unica ´arvore geradora m´ınima.
+Prove a unicidade da árvore geradora mínima quando os pesos das arestas são distintos.
+Assuma duas AGMs diferentes T e U. Seja e a aresta de menor peso na diferença simétrica T xor U; troque seus nomes se necessário para que e esteja em T. Inserir e em U cria um ciclo. Esse ciclo contém uma aresta f de U que não está em T, pois T não contém ciclos. Como os pesos são distintos e e é a menor aresta na diferença simétrica, w(e)<w(f). Logo U+e-f é uma árvore geradora de custo menor que U, contradição. É a distinção entre pesos que interessa; arestas serem objetos distintos por si só não garante unicidade.

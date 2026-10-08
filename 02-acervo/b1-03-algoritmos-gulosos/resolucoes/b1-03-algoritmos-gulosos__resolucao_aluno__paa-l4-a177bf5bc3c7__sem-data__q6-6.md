@@ -27,16 +27,17 @@ Page viSolu¸c˜ao:
 
 
 [OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]
-1
-def
-getCPUTime(user):
-2３4567
-returnuser.cpurime
-def server_sched(users_array):
-users_array.sort(key=getcpurime) # Ordena de maneira ascendente ém n log(n)
-#pelotempo deservico、Tempos de servico menor，
-#reduzemo tempo de esperaentre astarefas
-foruserinusers_array:
-server.execute(user.task)
-#Paracadausuarioo(n)noarraydeusuarios
-#Executaataskfornecidapelousuario O(1)
+8etCPUTime (user):
+
+retur user. CPUTime
+~Sched(users array):
+
+users array. sort (key-getCputime)
+
+f server
+
+# pe
+
+user ir users array: # P.
+
+sérver -execute(user.task) #€E

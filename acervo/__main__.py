@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from .common import ROOT, init, read_json, write_json
+from .common import ROOT, init, read_json
 from .extract import inventory, extract
 from .curate import organize, triage
 from .retrieval import build, search
@@ -21,7 +21,7 @@ def report(root=ROOT):
     candidates = [c for p in pages for c in p.get('visao_candidata', [])]
     verdicts = read_json(root / '03-triagem/pareceres.json', [])
     counts = Counter(i['assunto'] for i in items)
-    lines = ['# TutorON — relatório para quinta-feira, 1º de outubro', '',
+    lines = ['# TutorON — baseline de validação local', '',
              'Este relatório separa execução técnica de validação pedagógica. Os resultados anteriores de 41%/70% pertencem à PoC fornecida, não a esta rodada.', '',
              '## 1. Digitalizar e revisar o acervo', '',
              f'- {len(docs)} documentos de entrada inventariados; {len(extracts)} saídas de extração.',
@@ -49,19 +49,19 @@ def report(root=ROOT):
               '- Conferir origem/autoria e corrigir apenas em arquivos derivados aprovados; triagem não reescreve resoluções.',
               '- Revisar suspeitas em 03-triagem/relatorio.md e confirmar enunciados, fontes esperadas e checklists em 06-avaliacao/questoes.json.',
               '- Nenhum fine-tuning foi executado. Dataset só admite pares de alta confiança, com aprovação e fonte verificável.',
-              '- Os dois modelos de texto erraram na comparação rápida; veja 05-modelo/comparacao.json. Respostas de IA exigem conferência, mesmo quando o checklist lexical passa.',
-              '- Esta entrega é local. Não houve publicação, envio do acervo a Gemini, commit ou push automático.', '',
-              'Execução: iniciar_validacao.bat abre o ambiente; atualizar_acervo.bat refaz o pipeline; avaliar_modelos.bat executa as três condições.']
+              '- A comparação rápida antiga em 05-modelo/comparacao.json pertence ao hardware Windows de setembro; não é o resultado desta validação Linux.',
+              '- Inferência e acervo são locais; GitHub recebe código e artefatos de validação. Não há publicação do servidor nem envio a Gemini nesta rodada.', '',
+              'Execução: iniciar_validacao.sh (Linux) ou iniciar_validacao.bat (Windows). avaliar_modelos executa quatro condições, incluindo controle somente com instruções.']
     lines += ['', '## Resultados técnicos do checklist', '',
               '| Condição | Respostas concluídas | Critérios encontrados / aplicáveis |',
               '|---|---:|---:|']
-    for scenario in ('generico', 'rag_manual', 'rag_automatica'):
+    for scenario in ('generico', 'controle_prompt', 'rag_manual', 'rag_automatica'):
         complete = [r for r in results if r['cenario'] == scenario and r['status'] == 'ok']
         hits = sum(r['avaliacao']['acertos'] for r in complete)
         total = sum(r['avaliacao']['total'] for r in complete)
         lines.append(f'| {scenario} | {len(complete)} | {hits} / {total} |')
     lines += ['', 'Esses números não são acurácia matemática. Fontes recuperadas e exclusões estão em 06-avaliacao/relatorio.md; respostas, tempos de geração e eventuais repetições estão em 06-avaliacao/resultados.json.']
-    (root / 'RELATORIO_QUINTA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    (root / 'RELATORIO_QUINTA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
 
 def dataset(root=ROOT):
@@ -73,7 +73,24 @@ def dataset(root=ROOT):
         item = by_id.get(pair.get('fonte_id'))
         if item and item['confiabilidade'] == 'alta' and pair.get('sha256') == item['sha256'] and pair.get('revisor') and pair.get('pergunta') and pair.get('resposta_ideal'):
             records.append(pair)
-    (root / '05-modelo/dataset-finetuning.jsonl').write_text(''.join(json.dumps(p, ensure_ascii=False) + '\n' for p in records), encoding='utf-8')
+    (root / '05-modelo/dataset-finetuning.jsonl').write_text(''.join(json.dumps(p, ensure_ascii=False) + '\n' for p in records), encoding='utf-8', newline='\n')
+
+
+def show_summary(root=ROOT):
+    data = summarize(root)
+    sessions = read_json(root / '07-validacao-alunos/sessoes.json', {})
+    pending = sum(not s.get('votado') for s in sessions.values())
+    print(f'Avaliações salvas: {data["total"]} (comparações abertas sem voto: {pending})')
+    if not data['total']:
+        print('Nenhum voto registrado ainda em 07-validacao-alunos/respostas.csv.')
+        print('Rode ./iniciar_validacao.sh, gere uma comparação e envie a avaliação (notas + preferência).')
+        return
+    for e in data['por_questao']:
+        print(f'\n{e["questao"]} ({e["origem"]}) — {e["votos"]} voto(s)')
+        print(f'  Preferência: TutorON {e["preferencia_tutoron"]:.0f}% · genérico {e["preferencia_generico"]:.0f}% · empate {e["preferencia_empate"]:.0f}%')
+        for criterion in ('clareza', 'confianca', 'utilidade'):
+            print(f'  {criterion:<10} TutorON {e[criterion + "_tutoron"]:.2f} · genérico {e[criterion + "_generico"]:.2f}')
+    print('\nDetalhes em 07-validacao-alunos/resumo.json.')
 
 
 def main():
@@ -102,7 +119,7 @@ def main():
         evaluate(provider=args.provedor, generate=args.gerar, selected=args.questoes.split(',') if args.questoes else None)
     if args.acao in ('offline', 'pipeline'): offline()
     if args.acao == 'servir': serve(port=args.porta)
-    if args.acao == 'resumo': print(json.dumps(summarize(), ensure_ascii=False, indent=2))
+    if args.acao == 'resumo': show_summary()
     if args.acao == 'buscar': print(json.dumps(search(args.pergunta or ''), ensure_ascii=False, indent=2))
     dataset()
     report()

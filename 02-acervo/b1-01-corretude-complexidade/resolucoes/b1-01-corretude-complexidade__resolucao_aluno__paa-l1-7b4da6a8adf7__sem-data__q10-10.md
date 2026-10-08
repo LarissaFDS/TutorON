@@ -21,23 +21,22 @@ de execu¸c˜ao.
 
 [OCR parcial do recorte p16-fig1.png; conferir símbolos na imagem]
 1: procedure ALGORITMO DE ULAM(inteiro positivo a)
-2:
-D→x
-3:
-whileOstrésultimosvaloresdexnaofor 4,2,1do
-4:
-if x for par then
-5:
-x←x/2
-6:
-else
-7:
-x←3x+1
-:8
-end if
-9:
-endwhile
-10:endprocedure
+2: x—a
+
+3: while Os três últimos valores de x não for 4,2,1 do
+4: if x for par then
+
+5: x—x/2
+
+6: else
+
+7: x—3x+1
+
+8: end if
+
+9: end while
+
+10: end procedure
 
 
 Solu¸c˜ao: Ap´os a implementa¸c˜ao do algoritmo e da execu¸c˜ao de um teste exaustivo
@@ -52,44 +51,56 @@ foram coletadas:
 • O tempo de execu¸c˜ao do algoritmo ´e 0.06200 segundos.
 
 Page xvi[OCR parcial do recorte p17-fig1.png; conferir símbolos na imagem]
-#include<stdio.h>
+FincLude<stdio.h>
 #include<time.h>
-int maior_num=0;
-double media_tam=0;
-int maior_seq=0;
+int maior num=0;
+double media tam=0;
+int maior seq=0;
 void ulam(int n){
-int x = n;
+int x =n;
 int a3=0,a2=0,a1=0;
 int num_maior_seq=1;
-while((a3!=1) ll(a2!=2) 1l (a1!=4)){
-if(x%2==0)x=x/2;
-else x=3*x +1;
-a1 = a2;
+
+while((a3!=1) || (a2!=2) || (a1!=4)){
+if (x%2==0) x = x/2;
+else x = 3*x +1;
+al = a2;
 a2 = a3;
-a3 = x;
+a3 =x;
+
 num_maior_seq++;
 if(num_maior_seq >= maior_seq)
-maior_num = n;
-maior_seq = num_maior_seq;
+
+maior num = n;
+maior seq = num maior seq;
+
+}
+
 media_tam+=num_maior_seq;
+
 int main(){
-int n,numeros=0;
+int n,numeros=@;
 clock_t ini = clock();
-while(scanf("%d"，&n)!=EOF){
+
+while(scanf("%d", &n)!=EOF){
+
 ulam(n);
+
 numeros++;
+}
 media_tam/=numeros;
 clock_t fim = clock();
-double tempo =(double)(fim -ini)/ (double)CLOcKS_PER_SEC;
-printf("Tamanho da Maior Sequencia -> %d numeros\n",maior_seq);
-printf("valor de Nparaa maior sequencia ->%d\n",maior_num);
-printf("Media dos Tamanhos das Sequencias -> %.2lf numeros\n", media_tam);
-printf("Tempo de Execucao ->%.51f segundo(s)",tempo);
-TamanhodaMaiorSequencia->340numeros
-ValordeNparaamaiorsequencia->52527
-MediadosTamanhosdasSequencias->104.21r
-numeros
-Tempo de Execucao ->0.06200 segundo(s)
+double tempo = (double)(fim - ini)/ (double)CLOCKS_PER_SEC;
+printf("Tamanho da Maior Sequencia -> %d numeros\n", maior_seq);
+printf("Valor de N para a maior sequencia -> %d\n",maior_num);
+printf("Media dos Tamanhos das Sequencias -> %.21f numeros\n", media tam);
+printf("Tempo de Execucao -> %.51f segundo(s)”, tempo);
+
+Tamanho da Maior Sequencia -> 349 numeros
+Valor de N para a maior sequencia -> 52527
+
+Media dos Tamanhos das Sequencias -> 104.21 numeros
+Tempo de Execucao -> 0.06200 segundo(s)
 
 
 Page xvii

@@ -18,27 +18,33 @@ Solu¸c˜ao:
 
 
 [OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
-def main():
-m =int(input())
-n=int(input(）)
-condicoes = []
-for i in range(m):
-condicoes.append(input())
-igualdades,desigualdades= ler_condicoes(condicoes) # Le e separa as condicoes de igualdade e desigualdade D(m)
+candicoes = [1
+for à in range(m):
+condicoes .appendCinput ())
+
+igualdades, desigualdades= ter. condicoes(condicoes) tê ese
+
 subset=[]
-for u in range(n):
-subset.append(Subset(u,0)) # Constroi lista de dependencia do Grafo,
-#com as componentes conexas D（n)
-#Para cada igualdade,constroi as componentes conexas
-for igualdadein igualdades:
-union(subset, igualdade[0], igualdade[1]) # Em formato de estrutura de conjuntos disjuntos (unian-find)
-flag=1
-#Para cada desigualdade, verifica os pais das componentes conexas
-for desigualdadein desiguaidades:
-parent1 = find(subset, desigualdade[O]) #Se todos os vertices na componente conexa representam a mesma igualdade
-parent2 = find(subset, desiguaidade[1]) # e portanto tem o mesmo pai. Entao basta achar  pai da componente conexa que é aproximadamente O(1)
-if parent1 == parent2: # Se possuem Q mesmo pai, sao iguais e, portanto a desigualdade é invalida e consequentemente a lista de condicoes、
-flag=0
-print("Nao évalido")
-break
-if flag:print("E valido") #5e todas as desigualdades sao validas, entao o programa é valido
+
+sor v in range(s)+
+sunset -append(Subset(u,2)) * Constrói list
+
+for igualdade in igualdades:
+
+union(subset, jgualdade[?), igualdade(1}) sé
+
+f1ag=1
+
+for desigualdade in desigualdades» Para © igual ica os pais 0
+
+parent = find(subset, desigualdade[@]) é Se todos Os ert componente conexa Pé ma mesma
+
+parent2 ind(subset, desigualdade[3]) ter p E à i p proxi!
+
+1% parent == parent2: é Se poss eco pai, são iguais e, portanto ® de álida é consequentemente à
+
+flag = 8
+print("N válido")
+=
+
+44 Flag: peint(" 55 tã og!

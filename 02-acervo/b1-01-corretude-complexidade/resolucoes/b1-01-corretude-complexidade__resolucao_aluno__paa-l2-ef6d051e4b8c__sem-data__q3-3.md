@@ -8,26 +8,26 @@ serva¸c˜oes emp´ıricas da contagem de sua opera¸c˜ao b´asica:
 
 [OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]
 size
-count
 1000
-11.966
 2000
-24.303
 3000
-39.992
 4000
-53.010
 5000
-67.272
-6000
-78.692
+
 7000
-91.274
-8000
-113.063
-0006
-129.799
+
+9000
 10000
+
+11.966
+24.303
+39.992
+53.010
+67.272
+78.692
+91.274
+113.063
+129.799
 140.538
 
 
@@ -38,16 +38,25 @@ abaixo:
 
 
 [OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]
+Operações
+
 150.000
+
 100.000
-Operacoes
+
 50.000
+
 2000
+
 4000
+
 6000
+
+Nº Entradas
+
 8000
+
 10000
-N°Entradas
 
 
 Page iv

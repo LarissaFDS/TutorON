@@ -1,0 +1,12 @@
+{
+  "pagina": 9,
+  "texto": "Passo base (k = 1):\n\nNeste caso, T(1) = 1 ≤12.\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k > 1):\n\nT(k) ≤k2, para k > 1.\n\nPasso Indutivo:\n\nNo passo indutivo, aceitamos a hip´otese de indu¸c˜ao P(k), para k > 1 e, portanto,\nprecisamos provar por indu¸c˜ao que se P(k + 1) ´e verdadeiro, P(k) tamb´em ´e.\n\nT(k + 1) = k + 1 + T(k).\n\nComo a hip´otese P(k) garante que T(k) ≤k2:\n\nT(k + 1) ≤k + 1+k2 < (k + 1)2\n\n∴P(k + 1) ´e verdadeiro. ⇒P(k) ´e verdadeiro.\n\n■\n\n9. Considere o seguinte algoritmo recursivo, cujo argumento n ´e um inteiro\npositivo.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1: procedure ASTERISCO(n)\n2: ifn>Othen\n\n3: ASTERISCO(n — 1)\n4: for i—1— ndo\n5: imprima “*”\n\n6: end for\n\n7: ASTERISCO(n— 1)\n8: endif\n\n9:\n\n: end procedure\n\n\nPara um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada\nde ASTERISCO(n)?\n\nSolu¸c˜ao:\n\nConsiderando A(n) como a quantidade de asteriscos impressos dado um valor n, temos\nque:\n\n(\n\nA(n) =\n\n0, se n = 0\n2n+1 −(n + 2), se n ≥1\n\nComo exemplo, temos:\n\nPage ix",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

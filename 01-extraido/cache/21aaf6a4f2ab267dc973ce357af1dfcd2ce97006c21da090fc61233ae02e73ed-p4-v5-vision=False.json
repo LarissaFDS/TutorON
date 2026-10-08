@@ -1,0 +1,12 @@
+{
+  "pagina": 4,
+  "texto": "4.\nUma subsequˆencia cont´ıgua de uma lista S ´e uma subsequˆencia feita de\nelementos consecutivos de S. Por exemplo, se S ´e\n\n5, 15, −30, 10, −5, 40, 10,\n\nent˜ao, 15, -30, 10 ´e uma subsequˆencia cont´ıgua, mas 5, 15, 40 n˜ao ´e. Forne¸ca\num algoritmo de tempo linear para a seguinte tarefa:\n\nEntrada: Uma lista de n´umeros a1, a2, ..., an .\n\nSa´ıda: A subsequˆencia cont´ıgua de soma m´axima (a subsequˆencia de tamanho\nzero tem soma zero).\n\nPara o exemplo anterior, a resposta seria 10, -5, 40, 10, com uma soma de 55.\n(Dica: Para cada j ∈1, 2, ..., n considere subsequˆencias cont´ıguas terminando\nexatamente na posi¸c˜ao j .\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nTax contiguous sum(S):\nCur max = “inf\nmax local = 9\nstart max = 9\nend max ~ q\nstart <= 9\nfor i in len(s):\nmax local + Sli]\n\nif max local > cur max:\ncur max = max local\nStart max = start\nend max = j\n\n1* max local « q:\nmax local = q\nStart max = js\n\nin range(start_max, end_max): print(s[iJ” “)\n\n\n5. Dadas duas strings x = x1x2xney = y1y2ym, desejamos encontrar o comprimento\nda maior substring comum delas, isto ´e, o maior k para o qual existem ´ındices\ni e j com xi xi+1 xi+k1 = yj yj+1 yj+k1. Mostre como fazer isso em tempo O(mn)\n\nSolu¸c˜ao:\n\nPage iv",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p4-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

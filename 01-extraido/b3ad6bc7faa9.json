@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "[incerto] edHennigueFeliciandaSisou\nUniversidade Federal deAlagoas-UFAL\nInstituto de Computacao\nProjetoe Analise de Algoritmos\nlaProva\nProf.Rian Gabriel Pinheiro\n11 dedezembro de2023\nQuestao1[2pantos]:\nProjete umaigoritm para encontrar todos os elementos comnsem dus listas ordenadas denumerosimeis.Por\n[incerto] exemplo,paaalistas25,5.5]2.2.3.5,5,7].a saida deve ser2，5.5].Povacortuddosuaigort\nQuestao 2 [2 pontos]:\nOCentre Academico do IC/UFALfarumaclicaacon d candidatosUn total denalasestaoaptosa votar.Dado\n),implementeum algoritmo que deeida se houve uma maioria de\num vetorA|1.a}contendovalores inteiros{1,\nvotos ou nao.Prove acorretude de sealgoritmo.\nQuestao 3[1 ponto]:\nConsidere o seguinte algoritino:\n[incerto] ],inicio,fim）\nprocedure ALcorro XivotorAl.\n2:\nifinicio =fi then\n3:\n[incerto] oyunga\n4\nendif\n5\nif mico>fi then\n[incerto] 6.\nreturn\n[incerto] 7:\nendif\n[incerto] 8\nmeic\ninicio+（fixn-incio）/2\n9:\naX（A、inicio,meio)\n[incerto] :01\n[incerto] bX（A,meio+1,fm)\n11:\n[incerto] ifn<&chen\n12:\nreturn6\n13:\nelse\n14:\nreturna\n15:\nendif\n16:\nend procedure\nExplique oque cle faze prove sua corretude.\nQuestao4[2pontos]:\nSejam T(n)e f(n)funcoes dos inteiras nos reais.Justifique:\n1.Oque significa“T(n)eO(f(n)\"？Defina forualmente.",
-      "metodo": "rapidocr",
+      "texto": "Li\n\nFela crer\n\njade Federal de Atagons - U FAL 1)\nPadre fique f\n\nde Computação\n‘Andlise do Algoritmos\n\nUniversid\nInstituto\nProjeto e\n4º Prova\nProf. Rian\n31 de dezero!\n\nGabriel Pinheiro\n\njuro de 2023\n\n3 [2 pontos\n\nQuest\n\nProjete um ®\n\nQuestão 2 [2 pontos)\nO Centro Acadêmico de\ntun vetor AUS\n\nQuestão 3 [1 ponto\n\nelse\nreturn &\nend if\n\n16, end procedure\n\nxplique-o que cle faz\n\na [2 pontos):\nin) e f(n) fim çõe\n\n1. O que significa “Tlm é\n\nQuestão\nSejam T(",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\b3ad6bc7faa9\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

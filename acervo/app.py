@@ -15,7 +15,7 @@ from .retrieval import search, context
 
 FIELDS = ['sessao', 'data', 'questao', 'origem', 'preferida', 'condicao_preferida',
           'condicao_a', 'condicao_b', 'clareza_a', 'confianca_a', 'utilidade_a',
-          'clareza_b', 'confianca_b', 'utilidade_b', 'curso', 'periodo', 'comentario']
+          'clareza_b', 'confianca_b', 'utilidade_b', 'curso', 'periodo', 'comentario', 'par_sha256']
 
 
 def csv_safe(value):
@@ -41,7 +41,7 @@ class Study:
             pair = {'id': 'livre-' + digest(question)[:12], 'pergunta': question,
                     'origem': 'ao_vivo_ollama',
                     'generico': models.generate(question, provider='ollama', structured=False),
-                    'tutoron': models.generate(question, context(search(question, self.root)), provider='ollama')}
+                    'tutoron': models.generate(question, context(search(question, self.root), max_chars=5000), provider='ollama')}
         else:
             self.pairs = read_json(self.folder / 'pares.json', [])
             pair = next((p for p in self.pairs if p['id'] == qid), None)
@@ -51,7 +51,10 @@ class Study:
         secrets.SystemRandom().shuffle(order)
         token = secrets.token_urlsafe(24)
         with self.lock:
+            pair_hash = digest(json.dumps(pair, ensure_ascii=False, sort_keys=True))
+            write_json(self.folder / 'pares-sessoes' / (pair_hash + '.json'), pair)
             self.sessions[token] = {'questao': pair['id'], 'origem': pair['origem'], 'ordem': order,
+                                    'par_sha256': pair_hash,
                                     'votado': False, 'data': datetime.now(timezone.utc).isoformat()}
             write_json(self.folder / 'sessoes.json', self.sessions)
         return {'sessao': token, 'pergunta': pair['pergunta'],
@@ -65,9 +68,26 @@ class Study:
                 raise ValueError('Sessão inválida; gere uma comparação.')
             path = self.folder / 'respostas.csv'
             existing = []
+            fields = FIELDS
+            has_header = path.exists() and path.stat().st_size > 0
             if path.exists():
                 with path.open(encoding='utf-8-sig', newline='') as f:
-                    existing = list(csv.DictReader(f))
+                    reader = csv.DictReader(f)
+                    existing = list(reader)
+                    old_fields = reader.fieldnames or []
+                if has_header and 'par_sha256' not in old_fields:
+                    # Preservar votos legados sem atribuir-lhes respostas não conhecidas.
+                    backup = path.with_name('respostas-v1.csv')
+                    if not backup.exists(): backup.write_bytes(path.read_bytes())
+                    fields = list(dict.fromkeys(old_fields + FIELDS))
+                    temporary = path.with_suffix('.tmp')
+                    with temporary.open('w', newline='', encoding='utf-8-sig') as f:
+                        writer = csv.DictWriter(f, fieldnames=fields)
+                        writer.writeheader()
+                        writer.writerows(existing)
+                    temporary.replace(path)
+                elif old_fields:
+                    fields = old_fields
             if session['votado'] or any(r['sessao'] == token for r in existing):
                 raise ValueError('Esta comparação já recebeu uma avaliação.')
             preference = data.get('preferida')
@@ -90,10 +110,11 @@ class Study:
             record = {'sessao': token, 'data': datetime.now(timezone.utc).isoformat(),
                       'questao': session['questao'], 'origem': session['origem'], 'preferida': preference,
                       'condicao_preferida': 'empate' if preference == 'empate' else session['ordem'][0 if preference == 'A' else 1],
-                      'condicao_a': session['ordem'][0], 'condicao_b': session['ordem'][1], **scores, **free}
+                      'condicao_a': session['ordem'][0], 'condicao_b': session['ordem'][1],
+                      'par_sha256': session.get('par_sha256', ''), **scores, **free}
             with path.open('a', newline='', encoding='utf-8-sig') as f:
-                writer = csv.DictWriter(f, fieldnames=FIELDS)
-                if not existing:
+                writer = csv.DictWriter(f, fieldnames=fields)
+                if not has_header:
                     writer.writeheader()
                 writer.writerow(record)
                 f.flush()
@@ -110,10 +131,11 @@ def summarize(root=ROOT):
             rows = list(csv.DictReader(f))
     groups = defaultdict(list)
     for row in rows:
-        groups[(row['questao'], row['origem'])].append(row)
+        groups[(row['questao'], row['origem'], row.get('par_sha256', ''))].append(row)
     summary = []
-    for (qid, origin), votes in groups.items():
-        entry = {'questao': qid, 'origem': origin, 'votos': len(votes)}
+    for (qid, origin, pair_hash), votes in groups.items():
+        entry = {'questao': qid, 'origem': origin, 'par_sha256': pair_hash,
+                 'rastreabilidade': 'par_preservado' if pair_hash else 'legado_sem_hash', 'votos': len(votes)}
         for condition in ('generico', 'tutoron', 'empate'):
             entry['preferencia_' + condition] = 100 * sum(r['condicao_preferida'] == condition for r in votes) / len(votes)
         for condition in ('generico', 'tutoron'):
@@ -192,7 +214,7 @@ def serve(root=ROOT, port=8765):
             except (ValueError, TypeError, KeyError) as exc:
                 self.send(400, {'erro': str(exc)})
             except Exception:
-                self.send(503, {'erro': 'Modelo local indisponível. Use as questões offline ou execute preparar_modelos.bat.'})
+                self.send(503, {'erro': 'Modelo local indisponível. Use as questões offline ou execute preparar_modelos.sh no Linux / preparar_modelos.bat no Windows.'})
 
     print(f'TutorON em http://127.0.0.1:{port} — Ctrl+C para encerrar.', flush=True)
     ThreadingHTTPServer(('127.0.0.1', port), Handler).serve_forever()

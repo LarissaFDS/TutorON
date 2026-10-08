@@ -2,24 +2,9 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L7.pdf | página(s): 2
 
-2. Considere o seguinte algoritmo for¸ca bruta para resolver o problema do
-n´umero COMPOSTO: Verifique inteiros sucessivos de 2 a ⌊n/2⌋como poss´ıveis
-divisores de n. Se um deles divide n , retorna SIM (ou seja, o n´umero ´e com-
-posto); se nenhum deles o fizer, retorne N˜AO. Por que esse algoritmo n˜ao
-coloca o problema na classe P?
+Versão derivada corrigida por agente; original SHA-256: 8cdbcab998bd205d35dee32b604c89f3f8b4442ee9442cf751166737f172f5ca. Não é aprovação do professor.
 
-Solu¸c˜ao: Este algoritmo n˜ao ´e polinomial e sim pseudo-polinomial, uma vez que
-a complexidade de tempo depende do valor inserido na entrada e n˜ao do tamanho
-da mesma. Sendo assim, dada uma entrada n qualquer e considerando-a um vetor
-bin´ario de b bits, tem-se que:
-
-b = log2(n)
-
-2b = 2log2(n)
-
-n = 2b
-
-Logo, ´e poss´ıvel notar que complexidade n˜ao pode ser polinomial, pois depende da
-quantidade de bits do valor informado na entrada, sendo assim a complexidade au-
-menta exponencialmente com o n´umero de bits da entrada e portanto o algoritmo ´e
-pseudo-polinomial.
+Por que o algoritmo força bruta de COMPOSTO não demonstra que o problema está em P?
+Para n>=2, a representação binária tem b=floor(log2(n))+1 bits. Portanto 2^(b-1)<=n<2^b; não se deve escrever b=log2(n) como igualdade exata para todo inteiro.
+Testar sucessivamente os divisores de 2 até floor(n/2) pode exigir Theta(n) testes no pior caso, por exemplo em entradas primas. A divisão também tem custo em bits, polinomial em b. O número de testes já cresce exponencialmente em b, apesar de ser polinomial no valor numérico n: daí a descrição pseudo-polinomial.
+Isso classifica este algoritmo, não prova que COMPOSTO esteja fora de P nem que seja NP-completo. Encontrar um divisor é um certificado de composição verificável em tempo polinomial em b.

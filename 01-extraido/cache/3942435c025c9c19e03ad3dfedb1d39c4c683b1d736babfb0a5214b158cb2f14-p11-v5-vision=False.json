@@ -1,0 +1,13 @@
+{
+  "pagina": 11,
+  "texto": "solu¸c˜ao em 37.05153942108154s. Al´em disso, a complexidade para esse algoritmo ´e\nO(8N2).\n\n7. Apresente o algoritmo de busca local 2-opt para o TSP, dˆe um exemplo de\nexecu¸c˜ao e mostre que ele n˜ao ´e exato.\n\nSolu¸c˜ao: Supondo que o DFS escolha arbitrariamente um v´ertice inicial para cons-\ntruir o caminho em pr´e-ordem e simultaneamente em ordem. Temos o seguinte algo-\nritmo:\n\n\n[OCR parcial do recorte p11-fig1.png; conferir símbolos na imagem]\nuotantos\n\n(o RNTOS pes onsnsuoo) anos uoujajes Tanp-aja\n\n[sp = uotantos\n(uotantos “sudysu)s sp =\n\nVOFInTOS paiznujsuo>\n\nCudeuS ayatduos Jurad =\n\n~ UOTINTOS sud-3 sw\n(Ydeuse3atduo>) doom,\n\n\nO algoritmo ´e 2-OPT pois o custo para achar um caminho que visita todos os v´ertices\nexatamente uma vez, no pior dos casos, ´e o custo de executar o DFS em cada v´ertice\nda MST. Neste sentido, cada aresta da MST ´e verificada 2 vezes. Assim, o custo ´e\ndado por:\n\nOPT >= MST\n\nMSTtrilha ≤2MST\n\n∴\nMSTTrilha ≤2 · OPT\n\nEle n˜ao ´e exato pois depende da escolha e constru¸c˜ao da MST e da elimina¸c˜ao dos\nv´ertices duplicados. Nem sempre escolhe o ´otimo global, dado que a troca de v´ertices\nconstr´oi um ´otimo local favor´avel `a MST.\n\nExemplo:\n\n\n[OCR parcial do recorte p11-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nPage xi",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p11.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p11-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p11-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

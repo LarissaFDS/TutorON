@@ -1,0 +1,90 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c01",
+    "c03",
+    "c02"
+  ],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O Algoritmo X é uma função recursiva que busca o maior valor em um intervalo dado. Ele divide o intervalo em dois e compara os maiores valores encontrados nos subintervalos. Se o valor do meio for menor que o valor do próximo subintervalo, o maior valor é retornado do subintervalo seguinte. Caso contrário, o valor do meio é retornado. \n\nPara provar sua corretude, consideramos o Teorema: para qualquer intervalo não vazio A[inicio..fim], X retorna seu máximo. O caso base é quando o intervalo tem tamanho 1, onde o único elemento é retornado. Para o passo indutivo, dividimos o intervalo em dois e garantimos que os maiores valores dos subintervalos são comparados e retornados. A função X é recursiva, comparando os maiores valores dos subintervalos menores que o intervalo original. Assim, a função X sempre retorna o maior valor do intervalo original.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 83.07559855799991,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "b65c36a4487c176c8f4b76c4494319f7f04ad633f7f10c2186b8aec5f9f39d2b"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc"
+}

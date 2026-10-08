@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "Explique oque ele\nprovesua corretude\nQuestao3[1ponto]:\nSeja f(n)uma fungao dos inteiros nos reais. Justifique\n1.Qual a definicao formal de O(f(n))?\n2Everdadeque20n+10nign+5O（n3)？\n3.Everdauie quen²éO（n)？\n4.Quala definicao formal de（f（n))？\nQuestao 4[1 ponto]:\nResolva a recorencia:\nsen=2\n2\nT(n)\n(2T（n/2）+n，sen=2k,parak>1.\nQuestao5[1ponto]:\nCalcutea complexidade de tenpo do seguinte algoritmo:\n1:procedure FuNc(utatriz Auxn,inteiron)\n3:\nwhilej<ndo\n4:\n[incerto] k-2\n5:\nwhilek<ndo\n6:\n7:\n8:\nendwhile\n[incerto] 9:\n[incerto] 1-j+1\n10:\nendwhile\n11:end procedure",
-      "metodo": "rapidocr",
+      "texto": "lique 0\n\nQuestão 3 [2 ponto)\nSeja fin) wine função dos intei\n\n1. Qual a definição formal de\n\n2 É verdade que 20n? + 10n\n\n6 O(n)?\n\n3. É verdade que 3”\n\naf\n\n4. Qual à definição formal\n\nQuestão 4 [1 ponte\nResolva a recorrência\n\nQuestão 5 [1 ponto]:\n\na complexidade r\n\nje tempo do seguin\n\nAN\nend while\n\n9: jai!\n\n10: end while\n\n11º end pr cedure",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\3a0ef8722268\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

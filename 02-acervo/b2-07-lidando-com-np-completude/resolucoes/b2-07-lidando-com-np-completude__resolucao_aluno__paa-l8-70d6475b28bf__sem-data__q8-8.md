@@ -16,7 +16,7 @@ a ∈A e b ∈B. Um exemplo desse movimento ´e:
 
 
 [OCR parcial do recorte p12-fig2.png; conferir símbolos na imagem]
-→
+[ilegivel]
 
 
 No entanto, ´e poss´ıvel observar que essa solu¸c˜ao n˜ao ´e ´otima e uma melhoria que

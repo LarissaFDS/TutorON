@@ -1,0 +1,56 @@
+{
+  "questao": "Q10",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Vamos analisar a situação com n=3 para entender por que não é simplesmente n vezes.\n\nSe n=3, teremos três chamadas ao asterisco. Isso ocorre porque temos uma chamada inicial para o asterisco, uma chamada para o asterisco com n-1 (n-1=2), e uma chamada para o asterisco com n-1 (n-1=2) novamente. Além disso, temos um laço que imprime n, que será 3.\n\nPortanto, a contagem será:\n1. Primeira chamada ao asterisco (n=3)\n2. Segunda chamada ao asterisco (n=2)\n3. Terceira chamada ao asterisco (n=2)\n\nSomando essas chamadas, temos 3 chamadas ao asterisco, não 3 vezes. Portanto, a resposta é que não é simplesmente n vezes porque temos duas chamadas com n-1 (n=2) e um laço que imprime n (n=3), totalizando 3 chamadas ao asterisco.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 39.325103993000084,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 0,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

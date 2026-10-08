@@ -87,8 +87,8 @@ def test_question_number_on_separate_pdf_line_is_preserved():
     assert parts[1]['texto'].startswith('4.\nUma')
 
 
-def seed_item(identifier, text, confidence='nao_verificada'):
-    return {'id': identifier, 'texto': text, 'sha256': digest(text), 'confiabilidade': confidence,
+def seed_item(identifier, text, confidence='media'):
+    return {'id': identifier, 'texto': text, 'sha256': digest(text), 'sha256_fonte': digest('fonte de teste'), 'confiabilidade': confidence,
             'qualidade_ocr': 'boa', 'assunto': TOPICS[0], 'segmentacao': 'automatica',
             'fonte_original': 'lista.pdf | p1', 'tem_resposta': 's'}
 
@@ -198,10 +198,13 @@ def test_cached_ai_suspicion_survives_non_ai_rerun(workspace):
 
 def test_human_approval_expires_when_source_changes(workspace):
     item = seed_item('a', 'Solução inicial.')
-    write_json(workspace / '03-triagem/revisoes.json', {'a': {'sha256': item['sha256'], 'revisor': 'Revisor de teste',
+    write_json(workspace / '03-triagem/revisoes.json', {'a': {'sha256': item['sha256'], 'sha256_fonte': item['sha256_fonte'], 'revisor': 'Revisor de teste',
                                                           'justificativa':'Conferido.', 'confiabilidade':'alta'}})
     write_json(workspace / '02-acervo/itens.json', [item])
     assert triage(workspace)[0]['confiabilidade'] == 'alta'
+    item['sha256_fonte'] = digest('imagem modificada com OCR idêntico')
+    write_json(workspace / '02-acervo/itens.json', [item])
+    assert triage(workspace)[0]['confiabilidade'] == 'nao_verificada'
     item['texto'] = 'Solução alterada.'
     item['sha256'] = digest(item['texto'])
     write_json(workspace / '02-acervo/itens.json', [item])

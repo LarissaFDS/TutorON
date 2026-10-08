@@ -2,43 +2,8 @@
 
 Fonte: materiais\Disponiveis\RAG PAA\PAA_L5.pdf | página(s): 7, 8
 
-8. Forne¸ca um algoritmo de programa¸c˜ao dinˆamica (note que ser´a pseudo-polinomial)
-para o problema SUBSET SUM.
+Versão derivada corrigida por agente; original SHA-256: 6b1d27d5b3e65143f2eb8964a47b2229591f1dfcda2b6b9fd6e41b1b5ddb9870. Não é aprovação do professor.
 
-Page viiEntrada: Um conjunto A com valores inteiros positivos, e um inteiro t.
-Quest˜ao: Existe um subconjunto A ⊆A cuja soma dos valores seja exatamente
-t?
-
-Solu¸c˜ao:
-
-
-[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]
-boot isSubsetSum(int A[], int t,int k)
-bool subset[k+1][t+1];
-for(int i=1;i<=t;i++)
-subset[o][i]=false;
-for（inti=0；i<=k;i++)
-subset[i][o]=true;
-for(inti=1i<=k;i++)
-for（intj=1;j<=t;j++)
-if(j<A[i-1])
-subset[i][j]=subset[i -1][j];
-if(j>=A[i-1])
-subset[ij[j] =subset[i -1]tj] l| subset[i-1][j-A[i -1]];
-for（int i=0;i<=ki++)
-for(intj=0j<=t;j++)
-printf("%4d",subset[i][i]);
-cout<<"\n";
-return subset[k][t];
-int main()
-intA[]={3,344,12,5,2}
-intt=9；
-intk=sizeof(A)/ sizeof(A[o]);
-if (isSubsetSum(A,t,k) == true)
-cout << "Foi encontrado um subconjunto cuja soma dos valores é exatamente igual a “t'.";
-else
-cout << "Nao ha subconjunto com soma
-return 0;
-
-
-Page viii
+SUBSET SUM para inteiros positivos e alvo t>=0.
+Inicialize possivel[0]=True e demais posições até t em False. Para cada valor a, percorra s de t até a em ordem decrescente e faça possivel[s]=possivel[s] or possivel[s-a]. Retorne possivel[t]. O sentido decrescente impede usar o mesmo elemento mais de uma vez.
+Tempo O(nt), memória O(t), pseudo-polinomial porque t pode ser exponencial no comprimento de sua representação binária. Para [3,34,4,12,5,2] e t=9, existe subconjunto [4,5]. A versão de decisão tem certificado verificável; esta DP não prova P=NP.

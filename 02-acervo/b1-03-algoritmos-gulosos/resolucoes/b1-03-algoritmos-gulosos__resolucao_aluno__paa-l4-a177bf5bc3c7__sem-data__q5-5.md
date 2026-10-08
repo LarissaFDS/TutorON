@@ -14,69 +14,122 @@ para a festa. Dˆe o tempo de execu¸c˜ao em termos de n.
 Solu¸c˜ao:
 
 Page iv[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]
-void aliceAlgoritm(int n)
-GraphG(n);
-bool convidados[n];
-queue<int>rejeitados;
-int entry,aceitos=0；
-//Recebe os dados do grafo
-for(inti=θ;i<n;i++)
-[incerto] do
-cout 《<"Person #:";
-cin >>entry;
-//Adicionar relacaoa matriz
-if(entry>θ&&entry<=n&entry!=i+1)
-if (G.isEdge(i,entry -1))
-[incerto] a>>oxaomnsof>ua>>opepa>>+>>opp>>ao
-else
-G.addedge(i,entry - 1);
-else if (entry ==i + 1)
-cout<<"Essaentradanaoévalida!"<<endl;
-else if (entry == -1)
-[incerto] >>x>>（>>>>+>>>
-else
-cout<<"Entradainvalida,tentenovamente!“;
-}while (entry !=-1);
+void aliceAlgoritm(int 1)
+
+{
+
+graph S(n)>
+boot convidadosIn];
+rejeitados;
+
+queuecint
+8;
+
+int entry, aceitos
+
+(int i= ® ;
+qui quem a pessoa G.getPerson(i) << ” conhece. pigite -2 para encerrar.
+
+cout << "Insira à
+
+{
+
+cout << “Person 40
+cin >> entry;
+
+i
+
+(entry > 8 entry 1= i+ 1)
+
+entry
+
+4))
+ce entry <<" já possuem conexão.”
+
+eqisiate convidado *
+
+(G.isEdge(i, entry
+cout << "Convidado
+
+G.addedgeçi, entry - 1)5
+
+(entry = 5 + 4)
+cout << "Essa entrada não é válida!” << endl;
+(entry 1)
+«convidado ” << i + 2 << ~ Tem » ce G.getoegree(t)
+
+" conexões.” endl;
+
+cout <<
+cout << “Entrada inválida, tente novamente! “5
+(entry |= 15
+
+«
 
 
 
 [OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]
-for(int i=0；i<n;i++)
-convidados[i]=1;//convidatodomundo
-connections=G.getDegree(i);
-if(connections<5lln-connections<5）//verifica os requisitos
-rejeitados.push(i);// coloca na lista de rejeitados
-convidados[i] = 0; // tira da lista de convidados
-//Verifica os requisitos
-while(!rejeitados.empty())
-intj=rejeitados.front();
-rejeitados.pop();
-for (int i=θ;i<n;i++)
-6.removeEdge(i,j);
-[incerto] S   p eti / ( ==sop  (s > sua -u ! s > ()au)) 
-rejeitados.push(i);
-convidados[i]=0;
+(r
+
+Er]sopepyauos
+
+“o = [r]sopeprauos
+“(Dysnd-sopeyyafau
+
+(5 > suotasuuoa s
+
+(Dosugagaas-9))
+“(E *r)a8paancuas-y
+
+fer fu > x fg F que)
+
+'Qdodsopeyracay
+
+O3u0u3- sopra rafay £ que
+
+(Ofadua-sopez raras )
+
+“o = [T]sopeprauos
+*(Dysnd-sopeyrafay
+
+(S > suoryawmos - yu || q Su0T322UU03)
+(F)souBagog+g ~ suora saves
+
+2 *T = EE}sopeprauos
+
+F
+
+“o = T aun)
 
 
 Page v[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]
-//Contagemdeconvidados
-cout<<endl;
-for（int i=0;i<n;i++)
-if (convidados[i]==1)
-aceitos++;
-I/Resultadodoalgoritmo
-if (aceitos == n)
-else if (aceitos == 0)
-cout <<"Ninguem atende aos requisitos,entao naoé possivel Alice dar uma festa.\n";
-else
-[incerto] sd od>> sa>>，osad>>u>>s>>
+cout << end);
+
+Cint i= es i cn; g )
+t
+
+if (convidados[i) -- 1)
+
+{
+
+aceitos
+
+(aceitos -- ny
+cout << *
+
 int main()
-intn;//numerodepessoas
+if
+int n;
 cin >> n;
-cout<< endl;
-aliceAlgoritm(n);
-cout<<endl;
-return 0；
+cout << endl;
+
+aliceslgoritm(n);
+cout << endl;
+o;
+
+" << aceitos <<
+
+” podem comparecer a festa. \n";
 
 
 O tempo de execu¸c˜ao em termos de n ´e O(n2). Isso se d´a pois no loop for em que se

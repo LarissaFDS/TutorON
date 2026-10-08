@@ -1,0 +1,13 @@
+{
+  "pagina": 3,
+  "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\ndef addEdge (adj, us, v):\n\nadj[u].append(v)\n\ndef dfs(node, adj, arr, visited):\n\nvisited[node] True\n\nfor i range(@, len(adj{node])):\n\nvisited[adj[node}[i}}:\n\ndfs(adj[node][i), adj, arr, visited)\n\narr[node] max(arrfnode], 1+ arrladj[node]J[1]])\n\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\na «(pe )ureaasafuonundus)aurad\n\n(s ‘vy *fpe)adpappe\n(s te “Epe)agpappe\n(c “o “Lpe)aBpappe\n(y “7 'Cpe)aBpapre\n(e “e 'fpe)aBpappe\n\naxa &\n\n[(x + x)agued\n\nuBua1xeu\n\n([rluue “uyygua1xeuw)xeu uaBuaxeu\n(T+ “T)aBued T\n\ng = uaguaTxem\n(paxrsta “sue “(pe ‘¥)ssP\n[P]pestsTs\n(t+ «T)adues\n(r+ [estes] = PaMESTA\n\n(x +) « Lol = ue\n\n1 «cpo)yaeeasafuoTuaBuat fap\n\n\nPage iii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p3-fig1.png",
+    "01-extraido\\figuras\\1a81ca283132\\p3-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

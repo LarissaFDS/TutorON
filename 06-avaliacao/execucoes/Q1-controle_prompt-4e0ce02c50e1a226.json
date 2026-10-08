@@ -1,0 +1,85 @@
+{
+  "questao": "Q1",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para explicar o algoritmo X e prová-la corretamente, é importante entender que X é uma função recursiva que implementa a busca binária. Ela recebe um vetor A e dois índices, início e fim, que delimitam a subárvore do vetor que será buscada. A função divide o intervalo [inicio, fim] em dois e busca a subárvore com o menor valor.\n\n1. **Explicação do Algoritmo**: \n   - Se o intervalo for único (índice de início igual ao fim), a função retorna o único elemento do vetor.\n   - Caso contrário, ela divide o intervalo em duas partes: até o meio (meio) e depois do meio (meio + 1 até fim).\n   - A função chama-se recursivamente para cada subintervalo.\n   - Se o valor do subintervalo esquerdo (a) for menor que o valor do subintervalo direito (b), a função retorna o valor do subintervalo esquerdo. Caso contrário, retorna o valor do subintervalo direito.\n\n2. **Prova de Corretude**:\n   - **Base da Indução**: Se o intervalo [inicio, fim] contém apenas um elemento, a função retorna esse elemento, que é o valor esperado.\n   - **Hipótese**: Suponha que a função X seja correta para intervalos menores que [inicio, fim].\n   - **Passo Indutivo**: Para intervalos [inicio, fim], a função X retorna o menor valor entre os subintervalos [inicio, meio] e [meio + 1, fim]. Como a função é recursiva, a menor subárvore é retornada, garantindo que a função X é correta para o intervalo [inicio, fim].\n\nPara concluir, a função X é correta porque ela sempre retorna o menor valor entre os subintervalos, garantindo que a função X é aplicada corretamente em cada passo da recursão.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 75.95918715699736,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 1,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

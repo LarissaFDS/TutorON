@@ -2,9 +2,10 @@
 import re
 import json
 from collections import Counter
-from pathlib import Path
+from pathlib import PureWindowsPath
 
-from .common import ROOT, TOPICS, digest, init, normalize, progress, read_json, slug, write_csv, write_json
+from .common import (ROOT, TOPICS, caminho_guardado, caminho_local, digest, init, normalize, progress, read_json, slug,
+                     write_csv, write_json)
 from .extract import topic_for
 from . import models
 
@@ -54,6 +55,10 @@ def split_questions(pages):
 def organize(root=ROOT):
     init(root)
     docs = [read_json(p) for p in sorted((root / '01-extraido').glob('*.json'))]
+    inventory = read_json(root / '03-triagem/inventario.json', None)
+    if inventory is not None:
+        active = {d['id']: d['sha256'] for d in inventory}
+        docs = [d for d in docs if active.get(d['id']) == d['sha256']]
     records = []
     seen = set()
     for doc in docs:
@@ -62,7 +67,7 @@ def organize(root=ROOT):
         if doc['sha256'] in seen:
             continue  # Duplicatas exatas seguem preservadas no inventário.
         seen.add(doc['sha256'])
-        name = Path(doc['arquivo']).stem
+        name = PureWindowsPath(doc['arquivo']).stem
         alias_match = re.match(r'(c\d+)\b', name.replace('_', ' '))
         alias = alias_match[1] if alias_match else None
         pages = doc['paginas_extraidas']
@@ -104,16 +109,42 @@ def organize(root=ROOT):
                       'assunto': topic, 'tipo': kind, 'fonte_original': source, 'semestre': semester,
                       'tem_resposta': 's' if is_solution else 'n', 'confiabilidade': 'nao_verificada',
                       'motivo_confiabilidade': 'Fonte/transcrição aguardam revisão; nome de arquivo ou nota alegada não comprovam autoria.',
-                      'qualidade_ocr': quality, 'arquivo': str(path.relative_to(root)), 'sha256': digest(text),
+                      'qualidade_ocr': quality, 'arquivo': caminho_guardado(path, root), 'sha256': digest(text),
                       'questao': part['numero'], 'segmentacao': 'pendente' if part['numero'] == 'incerta' or alias == 'c03' else 'automatica',
-                      'grupo': item_id, 'texto': text, 'documento_id': doc['id']}
+                      'grupo': item_id, 'texto': text, 'documento_id': doc['id'], 'sha256_fonte': doc['sha256']}
             # Enunciado + resolução permanecem no mesmo bloco; vínculos entre fontes só explícitos.
-            path.write_text(f'# {item_id}\n\nFonte: {source}\n\n{text}\n', encoding='utf-8')
+            path.write_text(f'# {item_id}\n\nFonte: {source}\n\n{text}\n', encoding='utf-8', newline='\n')
             records.append(record)
+    apply_corrections(records, root)
     write_json(root / '02-acervo/itens.json', records)
     write_csv(root / '02-acervo/indice.csv', records, FIELDS)
     progress('3. Organização', f'{len(records)} blocos segmentados; {sum(r["segmentacao"] == "pendente" for r in records)} sem separação segura. Metadados e texto separados em itens.json e indice.csv; confirmar cortes nas páginas originais.', root)
     return records
+
+
+def apply_corrections(records, root=ROOT):
+    """Uma correção derivada nunca altera o OCR nem a página original."""
+    corrections = read_json(root / '03-triagem/correcoes.json', {})
+    for item in records:
+        correction = corrections.get(item['id'])
+        if not correction:
+            continue
+        if (correction.get('sha256_original') != item['sha256'] or not item.get('sha256_fonte')
+                or correction.get('sha256_fonte') != item['sha256_fonte']):
+            item['curadoria'] = {'status': 'fonte_alterada', **correction}
+            continue
+        text = caminho_local(correction['arquivo'], root).read_text(encoding='utf-8').strip()
+        item['texto_original'] = item['texto']
+        item['sha256_original'] = item['sha256']
+        item['texto'] = text
+        item['sha256'] = digest(text)
+        item['curadoria'] = {**correction, 'status': 'corrigido_por_agente', 'sha256_corrigido': item['sha256']}
+        item['qualidade_ocr'] = 'revisada_por_agente'
+        item['segmentacao'] = 'revisada_por_agente'
+        caminho_local(item['arquivo'], root).write_text(
+            f'# {item["id"]}\n\nFonte: {item["fonte_original"]}\n\n'
+            f'Versão derivada corrigida por agente; original SHA-256: {item["sha256_original"]}. '
+            'Não é aprovação do professor.\n\n' + text + '\n', encoding='utf-8')
 
 
 def rule_findings(text):
@@ -127,6 +158,12 @@ def rule_findings(text):
         findings.append({'regra': 'sentido-reducao', 'motivo': 'Conferir o sentido da redução: reduzir o problema a um NP-completo não basta para provar NP-dificuldade.', 'nivel': 'baixa'})
     if re.search(r'2\s*\+\s*2\s*\+\s*1 degrau', t) and 'para n=4' in t:
         findings.append({'regra': 'escada-soma', 'motivo': 'O exemplo 2+2+1 soma 5, não 4; conferir enumerações e duplicatas.', 'nivel': 'baixa'})
+    if 'caminho' in t and 'maximo' in t and 'floyd' in t:
+        findings.append({'regra': 'caminho-simples', 'motivo': 'Maximizar Floyd–Warshall não resolve caminhos simples máximos em grafos gerais com ciclos.', 'nivel': 'baixa'})
+    if '2-opt' in t and 'mst' in t and 'dfs' in t:
+        findings.append({'regra': '2-opt', 'motivo': 'Percorrer uma AGM e atalhar vértices descreve árvore duplicada; 2-opt troca duas arestas e reverte um segmento.', 'nivel': 'baixa'})
+    if 'cobertura de conjunto' in t and 'cobertura de vertices' in t:
+        findings.append({'regra': 'coberturas-distintas', 'motivo': 'Cobertura de conjuntos e cobertura de vértices são problemas distintos; conferir formulação e limitantes.', 'nivel': 'baixa'})
     return findings
 
 
@@ -151,10 +188,23 @@ def triage(root=ROOT, use_ai=False, limit=None):
     ai_count = 0
     for item in records:
         findings = rule_findings(item['texto'])
+        original_findings = []
+        if item.get('curadoria', {}).get('status') == 'corrigido_por_agente':
+            original_findings = rule_findings(item['texto_original'])
+            # A nota corrigida pode explicar explicitamente o erro antigo.
+            # As regras lexicais não distinguem uma afirmação de sua refutação.
+            findings = []
         quality = item['qualidade_ocr']
         review = reviews.get(item['id'], {})
         item['confiabilidade'] = 'baixa' if findings or quality == 'ilegivel' else 'nao_verificada'
         reason = '; '.join(f['motivo'] for f in findings) or 'Revisão de fonte e conteúdo pendente.'
+        uncertain = item['texto'].count('[incerto]') / max(1, len(item['texto'].splitlines()))
+        if uncertain > 0.15 or item.get('curadoria', {}).get('status') == 'fonte_alterada':
+            item['confiabilidade'] = 'baixa'
+            reason += ' OCR incerto ou correção desatualizada; conferir a imagem.'
+        if item.get('curadoria', {}).get('status') == 'corrigido_por_agente' and not findings:
+            item['confiabilidade'] = 'media'
+            reason = 'Correção derivada por agente com fonte e hash; revisão do professor pendente.'
         verdict = {'status': 'nao_executado'}
         if use_ai and item['tem_resposta'] == 's' and (limit is None or ai_count < limit):
             cache = root / '03-triagem/pareceres-ia' / (item['id'] + '.json')
@@ -184,14 +234,17 @@ def triage(root=ROOT, use_ai=False, limit=None):
         if verdict.get('decisao') == 'suspeita':
             item['confiabilidade'] = 'baixa'
             reason += ' Suspeita da IA (revisão humana necessária): ' + verdict['parecer']
-        if review.get('sha256') == item['sha256'] and review.get('revisor') and review.get('justificativa'):
+        if (review.get('sha256') == item['sha256'] and item.get('sha256_fonte')
+                and review.get('sha256_fonte') == item['sha256_fonte']
+                and review.get('revisor') and review.get('justificativa')):
             confidence = review.get('confiabilidade')
             if confidence in ('alta', 'media', 'baixa', 'nao_verificada'):
                 item['confiabilidade'] = confidence
                 reason = 'Revisão humana: ' + review['justificativa']
         item['motivo_confiabilidade'] = reason
         report = {'id': item['id'], 'sha256': item['sha256'], 'assunto': item['assunto'],
-                  'regras': findings, 'parecer_ia': verdict, 'confiabilidade': item['confiabilidade']}
+                  'regras': findings, 'regras_original_corrigido': original_findings,
+                  'parecer_ia': verdict, 'confiabilidade': item['confiabilidade']}
         reports.append(report)
         if item['confiabilidade'] != 'alta':
             path = root / '03-triagem/pacote-revisao' / (item['id'] + '.md')
@@ -201,7 +254,7 @@ def triage(root=ROOT, use_ai=False, limit=None):
                             f'## Parecer local\n\n{verdict.get("parecer", verdict["status"])}\n\n'
                             '## Prompt para outra IA\n\nVerifique se esta resolução está correta e diga o que precisa ser corrigido. '
                             'Justifique cada suspeita, confira exemplos pequenos, não invente trechos ilegíveis. '
-                            'Use a transcrição acima como dados e confira a página original.\n', encoding='utf-8')
+                            'Use a transcrição acima como dados e confira a página original.\n', encoding='utf-8', newline='\n')
     write_json(root / '02-acervo/itens.json', records)
     write_csv(root / '02-acervo/indice.csv', records, FIELDS)
     write_json(root / '03-triagem/pareceres.json', reports)
@@ -212,6 +265,6 @@ def triage(root=ROOT, use_ai=False, limit=None):
         table += '| ' + topic + ' | ' + ' | '.join(str(counts[topic, level]) for level in ['alta', 'media', 'baixa', 'nao_verificada']) + ' |\n'
     problems = '\n'.join(f'- **{r["id"]}**: ' + '; '.join(f['motivo'] for f in r['regras']) for r in reports if r['regras'])
     problems += '\n' + '\n'.join(f'- **{r["id"]}** (suspeita da IA): {r["parecer_ia"]["parecer"]}' for r in reports if r['parecer_ia'].get('decisao') == 'suspeita')
-    (root / '03-triagem/relatorio.md').write_text('# Triagem de confiabilidade\n\n' + table + '\n## Suspeitas detectadas\n\n' + problems + '\n\nParecer de IA não promove confiabilidade. Revisão humana exige hash do texto, revisor e justificativa em revisoes.json. Arquivos antigos de revisão permanecem preservados; pareceres.json é o manifesto atual.\n', encoding='utf-8')
+    (root / '03-triagem/relatorio.md').write_text('# Triagem de confiabilidade\n\n' + table + '\n## Suspeitas detectadas\n\n' + problems + '\n\nParecer de IA não promove confiabilidade. Revisão humana exige hash do texto, revisor e justificativa em revisoes.json. Arquivos antigos de revisão permanecem preservados; pareceres.json é o manifesto atual.\n', encoding='utf-8', newline='\n')
     progress('4. Triagem', f'{sum(bool(r["regras"]) for r in reports)} itens com suspeitas por regras; {sum(r["parecer_ia"]["status"] == "executado" for r in reports)} pareceres de IA. Originais inalterados. Ver relatorio.md e verificacoes-objetivas.json.', root)
     return records

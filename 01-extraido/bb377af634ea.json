@@ -9,21 +9,16 @@
   "assunto_provavel": "assunto_incerto",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": 1,
-      "texto": "IaProva\nProf.Rian Gabriel Pinheiro\n25 de abril de 2022\nQuestao 1 [2 pontos}:\n[incerto] nidyBnutoeCic\nvotos ounno.Prove a corretude de se algoritmo.\nQuestio 2 [2 pontos]:\nConsidere o seguinte algoritmo:\nprocedure ALGoRiTMoX（vetor A[1n],inleio,fim)\n2:\n3\nIfinicio =fim then\nreturn Alinicio]\n[incerto] 4\nmelo+-inicio+（fm-Incio）/2\nend if\n[incerto] aX（A，inicio,meio)\nbX（A.meio+1、fm）\n[incerto] 8:\n9:\nreturnb\nOT\nolse\n11:\nreturna\n13:end procedure\n12:\nendif\nExplique o que ole faz e prove sua corretude\nQuestao3[2pontos]:\nSejam T（n)e f（n)funcoes dos inteiros nos reais. Justifique;\n1.0que significa “T(n)é O（f(n)）)\"？\n2.Everdade que 20n+10ngn+5é0（n²）)？）\n3.Everdade que n²éO（n)？\n4.0que significa T（n)eΩ（f(n))？\n5.0que signifiea“T（n）=n+Ω（nlgn)？\nQuestao 4[1 ponto]:\nResolva a recorrencia:\nT(n)=\n[incerto] 2.\nsen=2\n[2T（n/2)+n,\nsen=2，parak>1\nCaleule a complexidade de tempo do seguinte algoritmo:\n1:procedure FuNc（matriz Anxn,inteiro m）\nwhile j<n do\n[incerto] j11\n4\nk+2\n5\nwhilek<@do\n（n-2）=（n-⊥）（n-2)\n9\n8:\nend while\n=n²-2n-n+2\n9:\n←j+1\n10:\nend while\n=n²-3n+2\n11:end procedure",
-      "metodo": "rapidocr",
+      "texto": "Astitye tte Federal de Alng\n\nProjeto de Compritação UrAL\n\nwy Análiso de Aly\n\nfim then\nend if\n— X(A, mei\n\nend if\nend procedure\n\nExplique\n\nQuestão 3 [2 pontos)\n\nfunções dos inteiras nos reais. Justif\nnstifiqu\nO que significa “T(n) é O(f(n))\n\n2. É verdade que 20n% +\nÉ verdade que in:\n\n4. O que significa “T(n) 6 A(F(n))\"\nO que significa “T(n) =n + Mnlg\n\nQuestão 4 [1 ponto):\n\nResolva # récorréncia.\n\nQuestão 5 [1 ponto]\nCalcule a complexidade de tempo do seguinte algoritm\n\na fet\nwhile j <n do\nRes\nwhile k\nSeul call)\npa\nonda\njegel\nend while\nIi: end procedure",
+      "metodo": "tesseract-por",
       "qualidade": "parcial",
       "imagem": "01-extraido\\figuras\\bb377af634ea\\p1.png",
       "figuras": [],
-      "visao_candidata": [
-        {
-          "status": "ilegivel",
-          "erro": "HTTPError"
-        }
-      ]
+      "visao_candidata": []
     }
   ]
 }

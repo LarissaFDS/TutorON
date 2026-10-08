@@ -4,18 +4,49 @@
     "pergunta": "Como eu explico o que esse algoritmo faz e provo a corretude dele?\n\nprocedure ALGORITMO X(vetor A[1..n], inicio, fim)\n  if inicio = fim then return A[inicio]\n  meio ← inicio + (fim − inicio)/2\n  a ← X(A, inicio, meio)\n  b ← X(A, meio + 1, fim)\n  if a < b then return b else return a\nend procedure",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "O algoritmo X que você descreveu é uma implementação recursiva de uma busca binária modificada. Vamos analisar o que ele faz e como podemos provar sua corretude.\n\n### O que o Algoritmo Faz\n\n1. **Entrada**: O algoritmo recebe um vetor `A` e dois índices `inicio` e `fim`, que delimitam a subarray em que a busca deve ocorrer.\n2. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna o único elemento da subarray, que é `A[inicio]`.\n3. **Divisão**: O algoritmo divide a subarray em duas metades, calculando o índice `meio` como `inicio + (fim - inicio) / 2`.\n4. **Recursão**: O algoritmo chama a si mesmo duas vezes, uma para a subarray à esquerda (`inicio` a `meio`) e outra para a subarray à direita (`meio + 1` a `fim`).\n5. **Comparação**: O algoritmo compara os valores retornados das duas chamadas recursivas e retorna o maior deles.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, precisamos mostrar que ele sempre retorna o maior valor da subarray `A[inicio..fim]`.\n\n1. **Caso Base**:\n   - Se `inicio = fim`, a subarray contém apenas um elemento, `A[inicio]`. Portanto, o algoritmo retorna `A[inicio]`, que é o único elemento da subarray.\n\n2. **Caso Recursivo**:\n   - Suponha que o algoritmo retorne o maior valor da subarray `A[inicio..meio]` e o maior valor da subarray `A[meio + 1..fim]`.\n   - Se `a` é o maior valor da subarray `A[inicio..meio]` e `b` é o maior valor da subarray `A[meio + 1..fim]`, então o algoritmo retorna `b` se `a < b` e `a` se `a >= b`.\n   - Portanto, o algoritmo retorna o maior valor entre `a` e `b`, que é o maior valor da subarray `A[inicio..fim]`.\n\n### Pseudocódigo com Explicações\n\n```pseudocode\nprocedure ALGORITMO X(vetor A[1..n], inicio, fim)\n  // Caso base: se a subarray tem apenas um elemento\n  if inicio = fim then\n    return A[inicio]\n  end if\n\n  // Calcular o meio da subarray\n  meio ← inicio + (fim - inicio) / 2\n\n  // Recursivamente encontrar o maior valor na subarray à esquerda\n  a ← X(A, inicio, meio)\n\n  // Recursivamente encontrar o maior valor na subarray à direita\n  b ← X(A, meio + 1, fim)\n\n  // Retornar o maior valor entre a e b\n  if a < b then\n    return b\n  else\n    return a\n  end if\nend procedure\n```\n\n### Conclusão\n\nO algoritmo X é uma implementação recursiva de uma busca binária modificada que retorna o maior valor de uma subarray. A corretude do algoritmo é garantida pelo fato de que ele sempre compara os maiores valores das duas subarrays resultantes da divisão e retorna o maior deles.",
+      "texto": "Para explicar o que esse algoritmo faz, precisamos entender que ele é uma implementação de uma função recursiva que busca o menor elemento em um vetor. Este algoritmo é semelhante ao método de busca binária, mas não garante que o vetor está ordenado. Ele divide o vetor em metades e compara os menores elementos de cada metade para determinar qual é o menor.\n\nPara provar sua corretude, podemos usar a técnica de indução. Primeiro, mostramos que o algoritmo funciona corretamente para vetores de tamanho 1 (base da indução). Em seguida, assumimos que o algoritmo funciona para vetores de tamanho k (hipótese da indução) e provamos que ele também funciona para vetores de tamanho k+1. Isso pode ser feito demonstrando que o algoritmo retorna o menor elemento do vetor de tamanho k+1, que é o menor dos menores elementos de cada metade do vetor (que são retornados por chamadas recursivas).\n\nAlém disso, podemos usar testes de casos para validar o algoritmo. Testar com vetores ordenados, desordenados e com repetições pode ajudar a garantir que o algoritmo está funcionando como esperado.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 15.45299999999952,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 42.19606517200009,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "### Explicação do Algoritmo\n\nO algoritmo `ALGORITMO X` é um algoritmo recursivo que encontra o maior elemento em um subvetor de `A`. Vamos detalhar o que ele faz:\n\n1. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna o único elemento do subvetor, que é `A[inicio]`.\n\n2. **Divisão do Problema**: Se `inicio` for diferente de `fim`, o algoritmo divide o subvetor em duas partes:\n   - A primeira parte vai do `inicio` até o `meio` (inclusive).\n   - A segunda parte vai do `meio + 1` até `fim`.\n\n3. **Chamadas Recursivas**: O algoritmo chama `ALGORITMO X` recursivamente para cada uma das duas partes:\n   - `a` é o maior elemento da primeira parte.\n   - `b` é o maior elemento da segunda parte.\n\n4. **Retorno**: O algoritmo retorna o maior entre `a` e `b`.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, vamos considerar o seguinte:\n\n1. **Caso Base**: Se `inicio = fim`, o subvetor contém apenas um elemento, que é `A[inicio]`. Portanto, retornar `A[inicio]` é a solução correta.\n\n2. **Divisão e Conquista**: O algoritmo divide o problema em duas partes menores e resolve cada parte recursivamente. A solução do problema original é o maior elemento entre a solução das duas partes.\n\n3. **Correção das Chamadas Recursivas**:\n   - `a` é o maior elemento do subvetor `[inicio, meio]`.\n   - `b` é o maior elemento do subvetor `[meio + 1, fim]`.\n\n4. **Retorno Correto**: O algoritmo retorna o maior entre `a` e `b`, garantindo que o maior elemento do subvetor `[inicio, fim]` é retornado.\n\n### Resumo\n\n- **O que o Algoritmo Faz**: Encontra o maior elemento em um subvetor de `A` usando uma abordagem de divisão e conquista.\n- **Prova de Corretude**: O algoritmo resolve corretamente o problema ao dividir o subvetor em duas partes, resolver recursivamente cada parte e retornar o maior elemento entre as soluções das partes.\n\n### Complexidade\n\nO algoritmo tem complexidade de tempo `O(n)`, pois cada chamada recursiva divide o subvetor em duas partes, e o processo é repetido até que o subvetor tenha tamanho 1. No entanto, a análise de complexidade detalhada não é solicitada na pergunta.",
+      "texto": "O Algoritmo X é uma função recursiva que busca o maior valor em um intervalo dado. Ele funciona dividindo o intervalo em metades menores, comparando os maiores valores de cada metade e retornando o maior. Se o intervalo só tem um elemento (caso base), ele retorna esse elemento. Caso contrário, ele divide o intervalo em duas metades, compara os maiores valores dessas metades e retorna o maior. Isso garante que ele sempre compara os maiores valores, garantindo a corretude.\n\nPara provar a corretude, consideramos o intervalo A[inicio..fim]. Se inicio = fim, a função retorna A[inicio], que é o único elemento e portanto o maior. Se não, dividimos o intervalo em meio e chamamos a função recursivamente para as duas metades. Se a metade esquerda retorna um valor maior ou igual ao da metade direita, o valor da metade direita é retornado. Isso garante que o valor retornado é o maior do intervalo original. Como a função sempre compara os maiores valores, a função sempre retorna o maior valor do intervalo. Portanto, a função X(A, inicio, fim) retorna o maior valor do intervalo A[inicio..fim].",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 12.889999999999418,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 118.4297276990037,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "a40aadb40b8b95840eb01dbfefc076a2e670793b4e3292989b3ba352cd02d0df",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c01": "8a10dc47291c4090be09acc3d8f2445697fb2ef0d4dc542e37ac14b3d4af9297",
+        "c02": "6488884c1ed37eec837ad80e0c3357f425d3f7ae983033371f8220bbc92c0f1a",
+        "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+        "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -23,18 +54,49 @@
     "pergunta": "Quantos asteriscos são impressos em uma chamada de ASTERISCO(n)? O professor pede para mostrar a recorrência.\n\nprocedure ASTERISCO(n)\n  if n > 0 then\n    ASTERISCO(n − 1)\n    for i ← 1 → n do imprima \"*\"\n    ASTERISCO(n − 1)\n  end if\nend procedure",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "A procedure `ASTERISCO(n)` é uma função de recursão que imprime asteriscos de maneira recursiva. Vamos analisar a recorrência para entender quantos asteriscos são impressos.\n\n### Análise da Recorrência\n\n1. **Caso Base:**\n   - Se `n <= 0`, a função não faz nada. Portanto, a chamada recursiva termina aqui.\n\n2. **Caso Recursivo:**\n   - Para `n > 0`, a função faz três partes:\n     1. Chama `ASTERISCO(n - 1)`.\n     2. Imprime `n` asteriscos.\n     3. Chama `ASTERISCO(n - 1)` novamente.\n\n### Contagem de Asteriscos\n\nVamos contar quantos asteriscos são impressos para um valor específico de `n`.\n\n#### Exemplo com `n = 3`:\n\n1. **Chamada inicial: `ASTERISCO(3)`**\n   - Chama `ASTERISCO(2)`.\n   - Imprime 3 asteriscos.\n   - Chama `ASTERISCO(2)` novamente.\n\n2. **Chamada `ASTERISCO(2)` (primeira vez):**\n   - Chama `ASTERISCO(1)`.\n   - Imprime 2 asteriscos.\n   - Chama `ASTERISCO(1)` novamente.\n\n3. **Chamada `ASTERISCO(1)` (primeira vez):**\n   - Chama `ASTERISCO(0)`.\n   - Imprime 1 asterisco.\n   - Chama `ASTERISCO(0)` novamente.\n\n4. **Chamada `ASTERISCO(0)`:**\n   - Não faz nada.\n\n5. **Retornando para `ASTERISCO(1)` (segunda vez):**\n   - Não faz nada.\n\n6. **Retornando para `ASTERISCO(2)` (segunda vez):**\n   - Imprime 2 asteriscos.\n   - Chama `ASTERISCO(1)` novamente.\n\n7. **Retornando para `ASTERISCO(3)`:**\n   - Imprime 3 asteriscos.\n   - Chama `ASTERISCO(2)` novamente.\n\n### Contagem de Asteriscos\n\n- **Primeira chamada `ASTERISCO(3)`**:\n  - Imprime 3 asteriscos.\n  - Chama `ASTERISCO(2)` (2 vezes).\n  - Chama `ASTERISCO(1)` (2 vezes).\n  - Chama `ASTERISCO(0)` (2 vezes).\n\n- **Chamada `ASTERISCO(2)` (primeira vez)**:\n  - Imprime 2 asteriscos.\n  - Chama `ASTERISCO(1)` (2 vezes).\n  - Chama `ASTERISCO(0)` (2 vezes).\n\n- **Chamada `ASTERISCO(1)` (primeira vez)**:\n  - Imprime 1 asterisco.\n  - Chama `ASTERISCO(0)` (2 vezes).\n\n- **Chamada `ASTERISCO(0)`:**\n  - Não faz nada.\n\n- **Chamada `ASTERISCO(1)` (segunda vez)**:\n  - Não faz nada.\n\n- **Chamada `ASTERISCO(2)` (segunda vez)**:\n  - Imprime 2 asteriscos.\n  - Chama `ASTERISCO(1)` (2 vezes).\n  - Chama `ASTERISCO(0)` (2 vezes).\n\n- **Chamada `ASTERISCO(3)` (segunda vez)**:\n  - Imprime 3 asteriscos.\n  - Chama `ASTERISCO(2)` (2 vezes).\n  - Chama `ASTERISCO(1)` (2 vezes).\n  - Chama `ASTERISCO(0)` (2 vezes).\n\n### Resultado\n\n- **Total de asteriscos impressos**:\n  - Para `n = 3`, a função imprime 3 asteriscos na primeira chamada, 2 asteriscos em cada das duas chamadas seguintes, e assim por diante.\n  - A contagem total de asteriscos impressos é `3 + 2 + 2 + 1 + 1 + 2 + 2 + 3 = 16`.\n\n### Geral\n\n- Para `n`, a função imprime `n` asteriscos em cada chamada, e cada chamada recursiva imprime `n` asteriscos em cada chamada, resultando em uma contagem total de `2 * (1 + 2 + 3 + ... + n - 1) + n` asteriscos, que simplifica a um padrão de `2 * (n * (n + 1) / 2) - n = n * (n + 1) - n = n * n` asteriscos.\n\nPortanto, a função `ASTERISCO(n)` imprime `n * n` asteriscos.",
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. Ela usa uma técnica recursiva para fazer isso. Para entender a recorrência, vamos analisar a chamada ASTERISCO(n). Se n > 0, a função chama-se duas vezes recursivamente, uma vez para n-1 e outra para n-1. Isso significa que a função será chamada recursivamente n vezes. Além disso, a função imprime n asteriscos em cada chamada recursiva. Portanto, a quantidade total de asteriscos impressos é 2n-1. Por exemplo, ASTERISCO(3) imprime 7 asteriscos.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 20.5,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 24.59991348100084,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "Para determinar quantos asteriscos são impressos em uma chamada de `ASTERISCO(n)`, vamos analisar o algoritmo passo a passo e derivar a recorrência.\n\n### Análise do Algoritmo\n\n1. **Chamada Recursiva:**\n   - Se `n > 0`, o algoritmo chama `ASTERISCO(n-1)` duas vezes.\n   - Entre as chamadas recursivas, há um `for` que imprime `n` asteriscos.\n\n2. **Contagem de Asteriscos:**\n   - Em cada chamada recursiva, a função imprime `n` asteriscos.\n   - A função `ASTERISCO(n-1)` é chamada duas vezes, resultando em `2 * A(n-1)` asteriscos.\n\n### Recorrência\n\nA recorrência para o número de asteriscos impressos, `A(n)`, pode ser derivada da seguinte forma:\n\n- **Caso Base:**\n  - Se `n = 0`, não há asteriscos a serem impressos.\n  - Portanto, `A(0) = 0`.\n\n- **Caso Recursivo:**\n  - Para `n > 0`, a função imprime `n` asteriscos e chama `ASTERISCO(n-1)` duas vezes.\n  - Isso resulta na recorrência:\n    \\[\n    A(n) = n + 2 \\cdot A(n-1)\n    \\]\n\n### Solução da Recorrência\n\nPara resolver a recorrência, podemos expandir a função:\n\n\\[\nA(n) = n + 2 \\cdot A(n-1)\n\\]\n\n\\[\nA(n-1) = (n-1) + 2 \\cdot A(n-2)\n\\]\n\nSubstituindo `A(n-1)` na primeira equação:\n\n\\[\nA(n) = n + 2 \\cdot \\left( (n-1) + 2 \\cdot A(n-2) \\right)\n\\]\n\n\\[\nA(n) = n + 2 \\cdot (n-1) + 4 \\cdot A(n-2)\n\\]\n\n\\[\nA(n) = n + 2 \\cdot (n-1) + 4 \\cdot \\left( (n-2) + 2 \\cdot A(n-3) \\right)\n\\]\n\n\\[\nA(n) = n + 2 \\cdot (n-1) + 4 \\cdot (n-2) + 8 \\cdot A(n-3)\n\\]\n\nContinuando a expansão, notamos que a solução geral é:\n\n\\[\nA(n) = n + 2 \\cdot (n-1) + 4 \\cdot (n-2) + \\ldots + 2^{n-1} \\cdot 1 + 2^n \\cdot A(0)\n\\]\n\nComo `A(0) = 0`, a fórmula simplifica para:\n\n\\[\nA(n) = n + 2 \\cdot (n-1) + 4 \\cdot (n-2) + \\ldots + 2^{n-1} \\cdot 1\n\\]\n\n### Simplificação\n\nA expressão pode ser simplificada para:\n\n\\[\nA(n) = \\sum_{k=0}^{n} 2^k \\cdot (n-k)\n\\]\n\n### Notação Asintótica\n\nPara a notação asintótica, observamos que a soma é dominada pelo termo `2^n`:\n\n\\[\nA(n) \\approx 2^{n+1} - (n + 2)\n\\]\n\nPortanto, a solução final é:\n\n\\[\nA(n) = 2^{n+1} - (n + 2)\n\\]\n\n### Resposta Final\n\nPara um dado valor de `n`, o número de asteriscos impressos em uma chamada de `ASTERISCO(n)` é dado pela recorrência:\n\n\\[\nA(n) = 2^{n+1} - (n + 2)\n\\]\n\nEsta recorrência e a solução asintótica mostram que o número de asteriscos impressos cresce exponencialmente com `n`.",
+      "texto": "A função ASTERISCO(n) imprime n asteriscos. A recorrência para o número de asteriscos impressos é dada pela fórmula A(n) = 2A(n-1) + n. Para n=0, A(0)=0. Para n>0, a função imprime A(n-1) asteriscos na chamada anterior e n asteriscos na chamada atual. Portanto, a contagem total é dada pela fórmula A(n) = 2A(n-1) + n. A solução para esta recorrência é A(n) = 2^(n+1) - n - 2, conforme mostrado no contexto acadêmico.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 18.64100000000326,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 94.51470939400315,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "c55744f36746a2c175371741a69c96f6ec65ea00f1cf3aad5cfede124afa1505",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+        "d455baef2cdf-q3-3": "157f0fe26a3e598835f92393a45ed347e8788ce637ebb282db8d6075cc5bfe5f",
+        "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+        "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -42,18 +104,49 @@
     "pergunta": "Por que o algoritmo força bruta do problema COMPOSTO (testar os divisores de 2 até ⌊n/2⌋) não é considerado polinomial, se ele faz só O(n) divisões?",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "A complexidade de um algoritmo é geralmente medida em termos do tamanho da entrada, não diretamente em termos de operações individuais. No caso do algoritmo de força bruta para testar se um número é composto, o tamanho da entrada é o número de dígitos de `n`, que é logarítmico em `n` (ou seja, O(log n)), não `n` em si.\n\nVamos analisar por que o algoritmo de força bruta para testar se um número `n` é composto (testando divisores de 2 até ⌊n/2⌋) não é considerado polinomial em termos de complexidade de tempo:\n\n1. **Complexidade de Tempo**: O número de divisões que o algoritmo realiza é diretamente proporcional a `n`, mas a complexidade de tempo é medida em termos do tamanho da entrada, que é logarítmico em `n`. Portanto, a complexidade de tempo é O(n), mas o tamanho da entrada é O(log n).\n\n2. **Definição de Complexidade Polinomial**: Um algoritmo é considerado polinomial se sua complexidade de tempo é O(n^k) para algum número constante `k`. No caso do algoritmo de força bruta, a complexidade de tempo é O(n), o que não é um polinômio em termos do tamanho da entrada (log n).\n\n3. **Tamanho da Entrada vs. Valor da Entrada**: A complexidade de tempo é geralmente expressa em termos do tamanho da entrada, não do valor da entrada. No caso de números grandes, o tamanho da entrada (log n) é muito menor que n. Portanto, mesmo que o algoritmo realize O(n) divisões, isso não significa que é polinomial em termos do tamanho da entrada.\n\n4. **Exemplo**: Se `n` tiver 100 dígitos, então log n é aproximadamente 300 (se considerarmos que estamos usando base 10). O algoritmo realiza O(n) = O(10^100) operações, mas o tamanho da entrada é apenas 300. Isso mostra que a complexidade é exponencial em termos do tamanho da entrada.\n\nPortanto, mesmo que o algoritmo realize apenas O(n) divisões, ele não é considerado polinomial em termos de complexidade de tempo, pois a complexidade de tempo é O(n) e o tamanho da entrada é O(log n), o que não é um polinômio em termos de `log n`.\n\nEm resumo, a complexidade de tempo O(n) é exponencial em termos do tamanho da entrada O(log n), e isso é o que determina que o algoritmo não é polinomial.",
+      "texto": "O algoritmo de força bruta que testa divisores de 2 até ⌊n/2⌋ para determinar se um número é primo não é considerado polinomial porque, embora ele faça O(n) divisões, a complexidade de tempo total depende da quantidade de divisões efetivamente necessárias. Para números grandes, muitos desses testes são desnecessários, pois os divisores maiores já foram testados. Isso significa que o número de divisões efetivamente realizadas não é limitado por n, mas por a quantidade de divisores efetivamente necessários, que pode ser muito maior que n. Portanto, mesmo com uma complexidade de tempo de O(n) para divisões, o algoritmo não é polinomial porque seu tempo de execução pode ser muito maior do que o esperado em casos extremos.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 12.389999999999418,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.733030315001088,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "O algoritmo de força bruta para verificar se um número \\( n \\) é composto, que testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\), não é considerado polinomial porque a complexidade de tempo do algoritmo depende do valor do número \\( n \\) em si, e não do tamanho do número \\( n \\) representado em bits.\n\n### Explicação:\n\n1. **Complexidade de Tempo em Termos de \\( n \\)**:\n   - O algoritmo testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\). Portanto, o número de divisões é \\( \\lfloor n/2 \\rfloor - 2 + 1 = \\lfloor n/2 \\rfloor \\), que é \\( O(n) \\).\n\n2. **Complexidade de Tempo em Termos do Tamanho do Número \\( n \\)**:\n   - O tamanho do número \\( n \\) é dado pelo número de bits necessário para representar \\( n \\). Se \\( n \\) é representado com \\( b \\) bits, então \\( n \\) pode ser expresso como \\( n = 2^b \\).\n   - A complexidade de tempo do algoritmo é \\( O(n) \\), mas \\( n \\) é \\( 2^b \\). Portanto, a complexidade de tempo em termos do tamanho \\( b \\) é \\( O(2^b) \\), que é exponencial em \\( b \\).\n\n3. **Classe P**:\n   - Um algoritmo é considerado polinomial se a complexidade de tempo é \\( O(n^k) \\) para algum constante \\( k \\). No entanto, \\( O(2^b) \\) não é polinomial em \\( b \\).\n\n4. **Pseudo-Polinomialidade**:\n   - O algoritmo é considerado pseudo-polinomial porque a complexidade depende do valor do número \\( n \\) em si, e não apenas do tamanho do número \\( n \\) em bits. Para um número grande, a complexidade pode ser muito alta, mesmo que o número de bits seja relativamente pequeno.\n\n### Conclusão:\nO algoritmo de força bruta para verificar se um número \\( n \\) é composto é \\( O(n) \\) em termos do valor do número \\( n \\), mas é \\( O(2^b) \\) em termos do tamanho do número \\( n \\) em bits. Portanto, ele não é considerado polinomial, mas pseudo-polinomial.\n\n\\[\n\\boxed{\\text{O algoritmo é } O(n) \\text{ em termos do valor do número } n, \\text{ mas é } O(2^b) \\text{ em termos do tamanho do número } n \\text{ em bits, o que o torna pseudo-polinomial.}}\n\\]",
+      "texto": "O algoritmo força bruta de COMPOSTO não é considerado polinomial, apesar de fazer apenas O(n) divisões, porque o número de divisões cresce exponencialmente em b, que é o número de bits necessário para representar n. Isso significa que, embora o número de testes seja polinomial em n, a complexidade em termos de bits de representação binária cresce exponencialmente com o tamanho de n. Portanto, mesmo que o número de testes seja limitado, a complexidade em termos de bits de representação binária torna o algoritmo não polinomial. Além disso, a representação binária de n pode ser exponencialmente maior, o que afeta a eficiência do algoritmo.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 13.140999999999622,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 104.83468748199812,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "d3a20f5f09adcf4c2489349849454c25f16c2cbb30a50b3f1d4b4ff2a3e2983f",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+        "1a81ca283132-q8-8": "06033a53feb1a0227039026a3678ab4ef04bd52bae1aefe3fbd9ff4aadafe365",
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -61,18 +154,49 @@
     "pergunta": "Defina as classes P, NP e NP-completo.",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Claro! Vou definir as classes P, NP e NP-completo de forma simples e concisa:\n\n1. Classe P:\n   - Conjunto de problemas que podem ser resolvidos pelo computador em tempo polinomial.\n   - Em outras palavras, existem algoritmos que podem resolver esses problemas em um tempo que é razoável para grandes entradas.\n   - Exemplos: Problema do Caminho Hamiltoniano para grafos pequenos, cálculo de expressões aritméticas.\n\n2. Classe NP:\n   - Conjunto de problemas para os quais, se uma solução for dada, pode ser verificada em tempo polinomial.\n   - Em outras palavras, se você tiver uma solução, pode verificar se ela é correta rapidamente.\n   - Exemplos: Problema do Caixeiro Viajante, Fatoração de números inteiros.\n\n3. Classe NP-completo:\n   - Conjunto de problemas que são tanto NP quanto pelo menos tão difíceis quanto os problemas mais difíceis da classe NP.\n   - Se um problema NP-completo pode ser resolvido em tempo polinomial, então todos os problemas NP podem ser resolvidos em tempo polinomial.\n   - Exemplos: Problema do Caixeiro Viajante, Problema do Conjunto Cobertura, Problema do Fluxo Máximo.\n\nA relação entre essas classes é importante na teoria da complexidade computacional. A conjectura P ≠ NP sugere que existem problemas NP que não podem ser resolvidos em tempo polinomial, mas isso ainda não foi provado.",
+      "texto": "As classes P, NP e NP-completo são fundamentais no contexto da teoria da computação e da complexidade computacional. \n\nP (Polynomial time) é a classe de problemas que podem ser resolvidos eficientemente por um computador, em tempo polinomial. Ou seja, a complexidade de tempo de execução é de ordem polinomial em relação ao tamanho da entrada do problema.\n\nNP (Nondeterministic Polynomial time) é a classe de problemas cuja solução pode ser verificada eficientemente em tempo polinomial. Ou seja, se uma solução é fornecida, um computador pode verificar essa solução em tempo polinomial. Importante notar que não necessariamente esses problemas podem ser resolvidos em tempo polinomial.\n\nNP-completo é uma subclasse de NP que é especialmente importante. Um problema é NP-completo se ele é NP e, além disso, é tão difícil quanto qualquer problema em NP. Ou seja, se um problema NP-completo puder ser resolvido em tempo polinomial, então todos os problemas em NP também podem ser resolvidos em tempo polinomial.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 6.95299999999952,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 43.797184946000925,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "As classes P, NP e NP-completo são conceitos fundamentais na teoria da complexidade de computação. Vamos definir cada uma delas:\n\n1. **Classe P**: \n   - **Definição**: A classe P contém todos os problemas que podem ser resolvidos pelo algoritmo de determinação em tempo polinomial. Em outras palavras, se um problema está em P, existem algoritmos que podem resolver esse problema em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Significado**: Se um problema está em P, ele pode ser resolvido eficientemente, pois a solução pode ser encontrada rapidamente, independentemente do tamanho do problema.\n\n2. **Classe NP**:\n   - **Definição**: A classe NP contém todos os problemas para os quais uma solução pode ser verificada em tempo polinomial. Em outras palavras, se um problema está em NP, existem algoritmos que podem verificar uma dada solução em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Significado**: Se um problema está em NP, a solução pode ser verificada rapidamente, mas não necessariamente encontrada rapidamente. O problema do NP é se todos os problemas em NP também estão em P, ou seja, se uma solução pode ser encontrada rapidamente.\n\n3. **Classe NP-completo**:\n   - **Definição**: A classe NP-completo contém os problemas mais difíceis dentro da classe NP. Um problema é NP-completo se é um problema NP e se pode ser usado para reduzir qualquer outro problema em NP a ele em tempo polinomial. Isso significa que se um problema NP-completo pode ser resolvido em tempo polinomial, então todos os problemas em NP podem ser resolvidos em tempo polinomial.\n   - **Significado**: Se um problema está em NP-completo, ele é tanto NP quanto NP-difícil. Isso significa que não apenas uma solução pode ser verificada rapidamente, mas também é extremamente difícil de encontrar uma solução.\n\nEssas definições são fundamentais para entender a complexidade relativa de problemas computacionais e a hipótese de que P ≠ NP, que é uma das grandes questões abertas na teoria da computação.",
+      "texto": "Claro, aqui está a definição das classes P, NP e NP-completo de acordo com o contexto fornecido:\n\nP é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada. Ou seja, um problema está em P se uma máquina de Turing determinística pode resolver-o em tempo polinomial.\n\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Esses problemas podem ser resolvidos em tempo polinomial por uma máquina não-determinística. Não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.\n\nUm problema B é NP-completo se pertence a NP e todo problema de NP se reduz polinomialmente a B. Isso significa que se um problema NP-completo estiver em P, então P=NP. Redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.\n\nPor exemplo, problemas como SAT (verdadeira solução de uma expressão booleana), CLIQUE (existe um clique de tamanho pelo menos k) e MOCHILA com limite de peso e alvo de valor são NP-complexos. Não todos os problemas em NP são NP-complexos, como a linguagem vazia e a linguagem universal. Não se sabe se existe um problema NP-completo em P, equivalente a P=NP.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 11.09400000000096,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 139.95923534400208,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e75fdf29ba53dc08348e8099ca70bcd8b3f72a7ecc35cc139f8503096dbb84d0",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+        "f38bb8142136-q3-3": "3c20b99d4f7747851d05a034df03387d5985a05d8bf0234c714e880c650bbf7d",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995",
+        "f38bb8142136-q5-5": "c6f251eaf32e07dd666b301ff062e71e32de65f2b1ece6e2fefcdda35588505d"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -80,18 +204,49 @@
     "pergunta": "Se eu somar 1 ao peso de cada aresta de um grafo conexo, a árvore geradora mínima continua mínima? E os caminhos mínimos? Justifique com um contraexemplo numérico.",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Para responder à sua pergunta, vamos analisar o efeito de somar 1 ao peso de cada aresta de um grafo conexo em relação à árvore geradora mínima (AGM) e aos caminhos mínimos.\n\n### Árvore Geradora Mínima (AGM)\n\nA árvore geradora mínima de um grafo é a árvore que conecta todos os vértices com o menor custo total. Se você soma 1 ao peso de cada aresta, o custo relativo entre as arestas não muda. Portanto, a árvore geradora mínima continua sendo a mesma, pois a ordem de prioridade entre as arestas não muda. Isso significa que a AGM continua sendo a AGM, mas o custo total da AGM aumentará.\n\n### Caminhos Mínimos\n\nPara caminhos mínimos, a situação é um pouco mais complexa. Os caminhos mínimos são aqueles que conectam dois vértices com o menor custo possível. Se você soma 1 ao peso de cada aresta, o custo de todos os caminhos aumentará uniformemente. No entanto, a ordem dos caminhos em termos de custo relativo permanece a mesma. Portanto, os caminhos mínimos também não mudam.\n\n### Contrademostração Numérica\n\nVamos considerar um grafo simples com 4 vértices (A, B, C, D) e as seguintes arestas com pesos originais:\n\n- A-B: 1\n- A-C: 2\n- B-C: 1\n- B-D: 2\n- C-D: 1\n\n#### Grafo Original\n- AGM: A-B, B-C, C-D (peso total = 1 + 1 + 1 = 3)\n- Caminho mínimo de A a D: A-B-C-D (peso = 1 + 1 + 1 = 3)\n\n#### Grafo Modificado\n- A-B: 2\n- A-C: 3\n- B-C: 2\n- B-D: 3\n- C-D: 2\n\n#### AGM Modificada\n- AGM: A-B, B-C, C-D (peso total = 2 + 2 + 2 = 6)\n\n#### Caminho Mínimo Modificado\n- Caminho mínimo de A a D: A-B-C-D (peso = 2 + 2 + 2 = 6)\n\n### Conclusão\n\nComo você pode ver, a AGM e os caminhos mínimos não mudaram em termos de estrutura, apenas no custo total. No entanto, se você considerar um grafo onde a soma de 1 ao peso de cada aresta resulta em uma configuração diferente, a AGM e os caminhos mínimos podem mudar. No entanto, no exemplo fornecido, eles permanecem os mesmos.\n\n### Exemplo de Contrademostração\n\nConsidere um grafo com 4 vértices e as seguintes arestas:\n\n- A-B: 1\n- A-C: 2\n- B-C: 1\n- B-D: 2\n- C-D: 1\n\n#### Grafo Original\n- AGM: A-B, B-C, C-D (peso total = 1 + 1 + 1 = 3)\n- Caminho mínimo de A a D: A-B-C-D (peso = 1 + 1 + 1 = 3)\n\n#### Grafo Modificado\n- A-B: 2\n- A-C: 3\n- B-C: 2\n- B-D: 3\n- C-D: 2\n\n#### AGM Modificada\n- AGM: A-B, B-D, C-D (peso total = 2 + 3 + 2 = 7)\n\n#### Caminho Mínimo Modificado\n- Caminho mínimo de A a D: A-B-D-C (peso = 2 + 3 + 2 = 7)\n\nNeste caso, a AGM e os caminhos mínimos mudaram, mostrando que a soma de 1 ao peso de cada aresta pode afetar a estrutura da AGM e os caminhos mínimos.\n\n### Resposta Final\n\nA soma de 1 ao peso de cada aresta de um grafo conexo pode afetar a estrutura da árvore geradora mínima e os caminhos mínimos, dependendo da configuração do grafo. No exemplo fornecido, a AGM e os caminhos mínimos permanecem os mesmos, mas em outros casos, eles podem mudar.",
+      "texto": "A adição de 1 a cada peso de aresta em um grafo conexo não garante que a árvore geradora mínima (AGM) continuará sendo a mínima. Um contraexemplo numérico pode ajudar a entender isso. Suponhamos um grafo simples com 4 vértices (A, B, C, D) e as arestas com pesos 1, 2, 3, 4, 5, 6, 7, 8, 9, 10. Se somarmos 1 a cada peso, teremos pesos 2, 3, 4, 5, 6, 7, 8, 9, 10, 11. \n\nAgora, a AGM original poderia ser A-B-C-D com peso total de 6. Após a adição de 1 a cada peso, a nova AGM pode ser A-B-C-D com peso total de 10. No entanto, a nova AGM não é necessariamente a mínima. Uma nova AGM poderia ser A-B-D com peso total de 9, que é menor que 10. Portanto, a adição de 1 a cada peso de aresta não garante que a AGM continuará sendo a mínima.\n\nQuanto aos caminhos mínimos, a adição de 1 a cada peso de aresta aumentará o peso de todos os caminhos, incluindo os caminhos mínimos existentes. Portanto, os caminhos mínimos também não serão garantidos de continuar sendo mínimos após a adição de 1 a cada peso de aresta.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 20.25,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 58.080187042000034,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "Para responder à pergunta, vamos analisar o efeito de aumentar o peso de cada aresta em um grafo conexo e verificar se a árvore geradora mínima e os caminhos mínimos mudam.\n\n### Análise Teórica\n\n1. **Árvore Geradora Mínima (AGM):**\n   - A AGM de um grafo é a subgrafo que é uma árvore e tem o menor peso possível.\n   - Se o peso de cada aresta é aumentado em 1, o grau de importância relativa entre as arestas não muda. Portanto, a AGM original ainda será a AGM após o aumento de peso.\n\n2. **Caminhos Mínimos:**\n   - Os caminhos mínimos são aqueles que têm o menor peso entre dois vértices.\n   - Se o peso de cada aresta é aumentado em 1, o caminho mínimo entre dois vértices também será aumentado em 1. Portanto, os caminhos mínimos originais não mudarão em termos de estrutura, apenas em termos de peso.\n\n### Contraexemplo Numérico\n\nVamos considerar um grafo simples com 4 vértices (A, B, C, D) e as seguintes arestas com pesos originais:\n\n- A-B: 1\n- A-C: 2\n- B-C: 3\n- B-D: 4\n- C-D: 5\n\nA AGM original seria A-B (peso 1) e A-C (peso 2), com um total de peso 3.\n\nAgora, aumentamos o peso de cada aresta em 1:\n\n- A-B: 2\n- A-C: 3\n- B-C: 4\n- B-D: 5\n- C-D: 6\n\nA AGM agora seria A-B (peso 2) e A-C (peso 3), com um total de peso 5. No entanto, se considerarmos os caminhos mínimos, eles permanecem os mesmos em termos de estrutura, apenas com pesos aumentados.\n\n### Conclusão\n\n- **Árvore Geradora Mínima:** Sim, a AGM continua sendo a mesma, apenas com pesos aumentados.\n- **Caminhos Mínimos:** Não, os caminhos mínimos em termos de estrutura não mudam, apenas em termos de peso.\n\nPortanto, os caminhos mínimos em termos de estrutura não mudam, mas os pesos dos caminhos mínimos aumentam.",
+      "texto": "Se somarmos 1 a cada aresta de um grafo conexo, a árvore geradora mínima continua sendo mínima. Isso ocorre porque a soma de 1 a cada aresta não altera a ordem dos pesos das arestas, mantendo a mesma árvore geradora mínima. No entanto, os caminhos mínimos podem mudar. Um contraexemplo numérico é útil para entender isso.\n\nConsidere um grafo simples com vértices s, x, y, t e arestas s-x, x-y, y-t com pesos 0, 0, 0, respectivamente. A árvore geradora mínima é s-t, com custo 0. Se somarmos 1 a cada aresta, a árvore geradora mínima permanece s-t, com custo 1. No entanto, o caminho s-t passando por x e y tem custo 2, que é menor que o custo da árvore geradora mínima. Portanto, o caminho s-t não é mais o caminho mínimo entre s e t após a alteração dos pesos.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 12.312000000001717,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 95.58303248100128,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5c1211d75300cc4752c4afa0bf7aa06abe6638446ed1031667f111e289d3f182",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "a177bf5bc3c7-q1-1": "1dcf58f433a2c23e4023d63670ced1ca977479af84bfa56e4b4ddf51da3365d5",
+        "a177bf5bc3c7-q2-2": "ff0422914032d457378242d5a810eaa8bcf007806ceb19b6d985fb1fffcfb673",
+        "1a81ca283132-q7-7": "2a3d27cb56dd8478af0dae09e6bfd08ed3374924757c0430ec5cadf4eb0da089",
+        "1a81ca283132-q9-9": "eb73bcd61a3b04150ec8261120cbc782d3fe23f7313c7f4ae314ef3903feff46"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -99,18 +254,49 @@
     "pergunta": "Como resolver a subsequência contígua de soma máxima em tempo linear, seguindo a convenção da Lista 5? Mostre a recorrência e os resultados para [5,15,-30,10,-5,40,10] e [-5,-2,-8].",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Para resolver o problema da subsequência contígua de soma máxima em tempo linear, podemos usar a técnica conhecida como Algoritmo de Kadane. Este algoritmo segue a convenção da Lista 5, que refere-se a uma forma de resolver problemas de programação dinâmica de maneira eficiente.\n\n### Recorrência do Algoritmo de Kadane\n\nA recorrência para o Algoritmo de Kadane pode ser expressa da seguinte forma:\n\n- **Definição do Problema:**\n  - `maxSubarraySum(i)` é a função que retorna a soma máxima de uma subsequência contígua que termina no índice `i`.\n\n- **Regra de Recorrência:**\n  - `maxSubarraySum(i) = max(arr[i], arr[i] + maxSubarraySum(i-1))`\n\n- **Base do Algoritmo:**\n  - `maxSubarraySum(0) = arr[0]`\n\n- **Resultado Final:**\n  - O valor máximo encontrado durante a execução do algoritmo é o resultado final.\n\n### Passo a Passo do Algoritmo de Kadane\n\n1. Inicialize duas variáveis:\n   - `maxSoFar` para armazenar a soma máxima encontrada até o momento.\n   - `maxEndingHere` para armazenar a soma máxima que termina no índice atual.\n\n2. Itere sobre o array:\n   - Atualize `maxEndingHere` como `max(arr[i], maxEndingHere + arr[i])`.\n   - Atualize `maxSoFar` se `maxEndingHere` for maior que `maxSoFar`.\n\n### Aplicação no Exemplo [5, 15, -30, 10, -5, 40, 10]\n\n1. **Inicialização:**\n   - `maxSoFar = 5`\n   - `maxEndingHere = 5`\n\n2. **Iteração:**\n   - `i = 1`: `maxEndingHere = max(15, 5 + 15) = 15`, `maxSoFar = 15`\n   - `i = 2`: `maxEndingHere = max(-30, 15 - 30) = 15`, `maxSoFar = 15`\n   - `i = 3`: `maxEndingHere = max(10, 15 + 10) = 25`, `maxSoFar = 25`\n   - `i = 4`: `maxEndingHere = max(-5, 25 - 5) = 20`, `maxSoFar = 25`\n   - `i = 5`: `maxEndingHere = max(40, 20 + 40) = 40`, `maxSoFar = 40`\n   - `i = 6`: `maxEndingHere = max(10, 40 + 10) = 50`, `maxSoFar = 50`\n\n3. **Resultado Final:**\n   - A soma máxima é `50`.\n\n### Aplicação no Exemplo [-5, -2, -8]\n\n1. **Inicialização:**\n   - `maxSoFar = -5`\n   - `maxEndingHere = -5`\n\n2. **Iteração:**\n   - `i = 1`: `maxEndingHere = max(-2, -5 - 2) = -2`, `maxSoFar = -2`\n   - `i = 2`: `maxEndingHere = max(-8, -2 - 8) = -2`, `maxSoFar = -2`\n\n3. **Resultado Final:**\n   - A soma máxima é `-2`.\n\n### Código em Python\n\nAqui está um exemplo de implementação do Algoritmo de Kadane em Python:\n\n```python\ndef max_subarray_sum(arr):\n    max_so_far = arr[0]\n    max_ending_here = arr[0]\n    \n    for i in range(1, len(arr)):\n        max_ending_here = max(arr[i], max_ending_here + arr[i])\n        max_so_far = max(max_so_far, max_ending_here)\n    \n    return max_so_far\n\n# Exemplo 1\narr1 = [5, 15, -30, 10, -5, 40, 10]\nprint(max_subarray_sum(arr1))  # Saída: 50\n\n# Exemplo 2\narr2 = [-5, -2, -8]\nprint(max_subarray_sum(arr2))  # Saída: -2\n```\n\nEste código implementa o Algoritmo de Kadane e retorna a soma máxima de uma subsequência contígua para os dois exemplos fornecidos.",
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida usando a fórmula básica da dinâmica de recorrência. Para a sequência [5,15,-30,10,-5,40,10], a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100. Para [-5,-2,-8], a subsequência de soma máxima é [-5] com soma total de -5.\n\nA recorrência básica para encontrar a soma máxima subsequencial é:\n\nT(n) = max(T(n-1) + a[n], a[n])\n\nOnde T(n) é a soma máxima subsequencial até o índice n, e a[n] é o elemento na posição n. \n\nPara a sequência [5,15,-30,10,-5,40,10], a solução é:\n\nT(0) = 5\nT(1) = 5 + 15 = 20\nT(2) = 20 - 30 = -10\nT(3) = -10 + 10 = 0\nT(4) = 0 - 5 = -5\nT(5) = -5 + 40 = 35\nT(6) = 35 + 10 = 45\n\nPortanto, a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100.\n\nPara a sequência [-5,-2,-8], a solução é:\n\nT(0) = -5\nT(1) = -5 - 2 = -7\nT(2) = -7 - 8 = -15\n\nPortanto, a subsequência de soma máxima é [-5] com soma total de -5.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 20.0779999999977,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 67.70393814900308,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, podemos usar o algoritmo de Kadane, que segue a convenção da Lista 5. Vamos resolver a questão passo a passo.\n\n### Recorrência\n\nA recorrência para o problema da subsequência contígua de soma máxima pode ser definida da seguinte forma:\n\n\\[ \\text{max\\_sum}(n) = \\max \\left( \\text{max\\_sum}(n-1) + a_n, a_n \\right) \\]\n\nOnde:\n- \\( \\text{max\\_sum}(n) \\) é a soma máxima contígua até o índice \\( n \\).\n- \\( a_n \\) é o valor do elemento no índice \\( n \\).\n\n### Algoritmo de Kadane\n\n1. Inicialize duas variáveis:\n   - `max_atual` para armazenar a soma máxima atual.\n   - `max_global` para armazenar a soma máxima global.\n\n2. Itere sobre a lista, atualizando `max_atual` e `max_global` conforme a recorrência.\n\n### Implementação\n\n```python\ndef max_subarray_sum(arr):\n    max_atual = max_global = arr[0]\n    for i in range(1, len(arr)):\n        max_atual = max(arr[i], max_atual + arr[i])\n        if max_atual > max_global:\n            max_global = max_atual\n    return max_global\n\n# Testando com os exemplos fornecidos\narr1 = [5, 15, -30, 10, -5, 40, 10]\narr2 = [-5, -2, -8]\n\nprint(\"Soma máxima contígua para [5, 15, -30, 10, -5, 40, 10]:\", max_subarray_sum(arr1))  # Saída: 50\nprint(\"Soma máxima contígua para [-5, -2, -8]:\", max_subarray_sum(arr2))  # Saída: -2\n```\n\n### Resultados\n\n- Para a lista `[5, 15, -30, 10, -5, 40, 10]`, a subsequência contígua de soma máxima é `[10, -5, 40, 10]`, com uma soma de 50.\n- Para a lista `[-5, -2, -8]`, a subsequência contígua de soma máxima é `[-2]`, com uma soma de -2.\n\n### Complexidade de Tempo\n\nO algoritmo de Kadane tem complexidade de tempo \\( O(n) \\), onde \\( n \\) é o tamanho da lista, pois percorre a lista apenas uma vez.\n\n### Conclusão\n\nO algoritmo de Kadane é eficiente para resolver o problema da subsequência contígua de soma máxima em tempo linear.",
+      "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, a recorrência é a seguinte:\n\n- Defina `fim[j] = max(0, fim[j-1] + a_j)`.\n- Defina `melhor[j] = max(melhor[j-1], fim[j])`.\n\nO resultado é `melhor[n]`, que representa a soma máxima da subsequência contígua.\n\nPara a sequência [5,15,-30,10,-5,40,10], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, 5) = 5`\n- `fim[2] = max(0, 5 + 15) = 20`\n- `fim[3] = max(0, 20 - 30) = 0`\n- `fim[4] = max(0, 0 - 5) = -5`\n- `fim[5] = max(0, -5 + 40) = 35`\n- `fim[6] = max(0, 35 + 10) = 45`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, 5) = 5`\n- `melhor[2] = max(0, 20) = 20`\n- `melhor[3] = max(0, 0) = 0`\n- `melhor[4] = max(0, -5) = -5`\n- `melhor[5] = max(0, 35) = 35`\n- `melhor[6] = max(0, 45) = 45`\n\nA subsequência contígua de soma máxima é [5, 15, -30, 10, -5, 40, 10] com soma 45.\n\nPara a sequência [-5, -2, -8], vamos calcular `fim` e `melhor`:\n\n- `fim[0] = 0`\n- `fim[1] = max(0, -5) = -5`\n- `fim[2] = max(0, -5 - 2) = -7`\n- `fim[3] = max(0, -7 - 8) = -15`\n\n- `melhor[0] = 0`\n- `melhor[1] = max(0, -5) = -5`\n- `melhor[2] = max(0, -7) = -7`\n- `melhor[3] = max(0, -15) = -15`\n\nA subsequência contígua de soma máxima é vazia com soma 0.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 13.078000000001339,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 185.80365383199387,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "0df43c1d7a30c744f4a7efc41d7236facd8d19834004ed62e95d99b426a7beb7",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+        "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4",
+        "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+        "1a81ca283132-q2-2": "15c399403a902537e63dbff0886fcc82c76dd7ef867603ec4913baba1ca792e2"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -118,18 +304,49 @@
     "pergunta": "Maria ouve n−1 números distintos de 1 a n. Como encontrar o número faltante usando O(1) de memória? Explique tempo e possíveis problemas de overflow.",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Para encontrar o número faltante em uma sequência de n-1 números distintos de 1 a n usando apenas O(1) de memória, podemos utilizar a técnica de soma aritmética. Aqui está o passo a passo:\n\n1. **Cálculo da Soma Esperada**:\n   - A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n     \\[\n     S = \\frac{n \\cdot (n + 1)}{2}\n     \\]\n   - No caso de n-1 números, a soma esperada seria:\n     \\[\n     S_{esperada} = \\frac{n \\cdot (n + 1)}{2} - n\n     \\]\n     ou simplificando:\n     \\[\n     S_{esperada} = \\frac{n \\cdot (n - 1)}{2}\n     \\]\n\n2. **Cálculo da Soma dos Números Dados**:\n   - Somamos todos os números que foram fornecidos.\n\n3. **Encontrar o Número Faltante**:\n   - O número faltante pode ser encontrado subtraindo a soma dos números dados da soma esperada:\n     \\[\n     \\text{Número Faltante} = S_{esperada} - \\text{Soma dos Números Dados}\n     \\]\n\n### Exemplo:\nSe n = 5, então os números esperados são 1, 2, 3, 4, 5. A soma esperada é:\n\\[\nS_{esperada} = \\frac{5 \\cdot 4}{2} = 10\n\\]\nSe os números dados são 1, 2, 3, 5, a soma dos números dados é:\n\\[\n1 + 2 + 3 + 5 = 11\n\\]\nEntão, o número faltante é:\n\\[\n10 - 11 = -1 \\quad \\text{(erro de cálculo, corrigindo:)} \\quad 10 - 11 + 4 = 3\n\\]\n\n### Tempo e Espaço de Complexidade:\n- **Tempo de Complexidade**: O(n) para somar os números dados.\n- **Espaço de Complexidade**: O(1) para armazenar as variáveis de soma e cálculos.\n\n### Problemas de Overflow:\n- **Overflow de Inteiros**: Se os números forem muito grandes, pode ocorrer overflow na soma. Para evitar isso, pode-se usar tipos de dados de maior precisão (como `long` ou `BigInteger` em linguagens que suportam) ou realizar cálculos de forma iterativa para evitar a soma direta.\n\n### Código em Python:\n```python\ndef encontrar_faltante(n, numeros):\n    # Soma esperada\n    soma_esperada = n * (n + 1) // 2\n    # Soma dos números dados\n    soma_numeros = sum(numeros)\n    # Número faltante\n    numero_faltante = soma_esperada - soma_numeros\n    return numero_faltante\n\n# Exemplo de uso\nn = 5\nnumeros = [1, 2, 3, 5]\nprint(encontrar_faltante(n, numeros))  # Saída: 4\n```\n\nEste método é eficiente em termos de memória e funciona bem para valores de n razoavelmente grandes, desde que sejam cuidadosos com overflow.",
+      "texto": "Para encontrar o número faltante em uma sequência de 1 a n onde Maria ouve n-1 números distintos, usando O(1) de memória, podemos utilizar a fórmula da soma dos primeiros n números naturais, que é n(n+1)/2. Se a soma dos n números naturais é S, e a soma dos n-1 números ouvidos por Maria é S' então, o número faltante é S - S'. \n\nO tempo de execução para esta solução é O(1) porque não depende do tamanho do conjunto de números ou da quantidade de números ouvidos. No entanto, há um problema potencial de overflow se n for muito grande, pois a fórmula pode resultar em um número muito grande que pode superar o limite de um tipo de dado numérico. Para evitar isso, seria necessário garantir que os números ouvidos por Maria estão dentro de um intervalo de dados suportados. Além disso, para números muito grandes, seria necessário usar um tipo de dado de precisão alta ou um sistema de arredondamento para lidar com o overflow.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 14.891000000000531,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 38.98458640199897,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "Para encontrar o número faltante em uma sequência de n−1 números distintos de 1 a n usando O(1) de memória, podemos utilizar a técnica de soma de números consecutivos. Vamos detalhar o processo passo a passo:\n\n1. **Cálculo da Soma Esperada:**\n   - A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n     \\[\n     S = \\frac{n(n+1)}{2}\n     \\]\n   - Isso representa a soma esperada se todos os números de 1 a n estivessem presentes.\n\n2. **Cálculo da Soma dos Números Dados:**\n   - Somamos todos os n−1 números dados. Chame essa soma de \\( S' \\).\n\n3. **Encontrar o Número Faltante:**\n   - O número faltante pode ser encontrado subtraindo a soma dos números dados \\( S' \\) da soma esperada \\( S \\):\n     \\[\n     \\text{Número faltante} = S - S'\n     \\]\n\n### Passos em Detalhes:\n\n1. **Calcular \\( S \\):**\n   - \\( S = \\frac{n(n+1)}{2} \\)\n\n2. **Somar os Números Dados:**\n   - Faça a soma dos n−1 números dados e armazene o resultado em \\( S' \\).\n\n3. **Subtrair \\( S' \\) de \\( S \\):**\n   - \\( \\text{Número faltante} = S - S' \\)\n\n### Complexidade de Tempo e Espaço:\n\n- **Tempo:** O(n) para somar os n−1 números dados, mas a operação de subtração é constante.\n- **Espaço:** O(1) de memória, pois apenas variáveis temporárias são usadas.\n\n### Problemas de Overflow:\n\n- **Overflow:** Se os números forem muito grandes, pode ocorrer overflow na soma. No entanto, isso é raro em linguagens modernas que suportam inteiros de precisão arbitrária. Em linguagens que não suportam inteiros de precisão arbitrária, pode ser necessário usar tipos de dados de maior precisão ou realizar a soma de forma iterativa para evitar overflow.\n\n### Exemplo Prático:\n\nSuponha que \\( n = 5 \\) e os números dados são \\( 1, 2, 3, 5 \\).\n\n1. **Calcular \\( S \\):**\n   \\[\n   S = \\frac{5(5+1)}{2} = \\frac{30}{2} = 15\n   \\]\n\n2. **Somar os Números Dados:**\n   \\[\n   S' = 1 + 2 + 3 + 5 = 11\n   \\]\n\n3. **Subtrair \\( S' \\) de \\( S \\):**\n   \\[\n   \\text{Número faltante} = 15 - 11 = 4\n   \\]\n\nPortanto, o número faltante é 4.\n\n### Resumo:\n\n- **Algoritmo:** Calcule a soma esperada \\( S \\) dos números de 1 a n, some os n−1 números dados e subtraia a soma dos números dados da soma esperada.\n- **Complexidade:** O(n) de tempo e O(1) de espaço.\n- **Problemas de Overflow:** Raro em linguagens modernas, mas pode ser um problema em linguagens que não suportam inteiros de precisão arbitrária.",
+      "texto": "Para encontrar o número faltante entre 1 e n, usando apenas O(1) de memória, Maria pode utilizar a fórmula n(n+1)/2. Ela começa atribuindo o valor inicial n(n+1)/2 à variável faltante. Em seguida, ao ouvir cada número ouvido, subtrai-se do faltante. Ao final, o valor restante será o número faltante. Este método requer apenas uma constante de memória, independentemente de n.\n\nNo entanto, há um problema potencial de overflow. Se n for muito grande, n(n+1)/2 pode exceder o limite de um tipo inteiro de tamanho fixo. Para evitar isso, é necessário usar um tipo de número que suporte grandes valores, como um tipo de ponto flutuante. No entanto, isso aumentaria o custo de memória para O(log n), não atendendo à condição de O(1) de memória solicitada.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 18.39099999999962,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 100.0843356559999,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5b8cb1521fd1dfbde245823645122c208ddd6889c0e843c487e2db841bc678c7",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+        "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9",
+        "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+        "ef6d051e4b8c-q6-6": "ad26bcd43514b91eacffc282b00685bedf380d090494fe6f529276d79d371788"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -137,18 +354,49 @@
     "pergunta": "Como usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9? Explique os testes e as podas.",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Backtracking é uma técnica de pesquisa que pode ser usada para encontrar soluções de problemas que envolvem sequências de decisões, como o caso dos quadrados mágicos. Vamos detalhar como usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números 1 a 9.\n\n### Definição do Problema\nUm quadrado mágico de ordem 3 é um quadrado 3x3 preenchido com os números 1 a 9 de tal forma que a soma dos números em cada linha, coluna e diagonal seja igual a 15 (a soma mágica).\n\n### Estrutura do Problema\n1. **Estado Inicial**: Uma matriz 3x3 preenchida com zeros.\n2. **Decisões**: Preencher cada célula com um número de 1 a 9.\n3. **Restrições**: \n   - Cada número de 1 a 9 deve aparecer exatamente uma vez.\n   - A soma de cada linha, coluna e diagonal deve ser igual a 15.\n\n### Algoritmo de Backtracking\n1. **Iniciar o Preenchimento**: Comece preenchendo a matriz com zeros.\n2. **Preencher a Próxima Célula**: Para cada célula, tente preenchê-la com um número de 1 a 9.\n3. **Verificar a Válidade**: Verifique se o número pode ser colocado na célula atual sem violar as restrições.\n4. **Recursão**: Se a colocação é válida, avance para a próxima célula e repita o processo.\n5. **Podar**: Se a colocação violar alguma restrição, retorne para a célula anterior e tente um número diferente.\n6. **Condição de Parada**: Se todas as células forem preenchidas e todas as restrições forem satisfeitas, você encontrou uma solução.\n\n### Implementação em Python\nAqui está uma implementação em Python:\n\n```python\ndef is_valid(board, row, col, num):\n    # Verifica se o número já existe na linha\n    for x in range(3):\n        if board[row][x] == num:\n            return False\n    \n    # Verifica se o número já existe na coluna\n    for x in range(3):\n        if board[x][col] == num:\n            return False\n    \n    # Verifica se o número já existe na submatriz 3x3\n    start_row = row - row % 3\n    start_col = col - col % 3\n    for i in range(3):\n        for j in range(3):\n            if board[i + start_row][j + start_col] == num:\n                return False\n    \n    return True\n\ndef solve_sudoku(board):\n    for i in range(3):\n        for j in range(3):\n            if board[i][j] == 0:\n                for num in range(1, 10):\n                    if is_valid(board, i, j, num):\n                        board[i][j] = num\n                        if solve_sudoku(board):\n                            return True\n                        board[i][j] = 0\n                return False\n    return True\n\ndef print_board(board):\n    for i in range(3):\n        for j in range(3):\n            print(board[i][j], end=\" \")\n        print()\n    print()\n\ndef find_magic_squares():\n    board = [[0 for _ in range(3)] for _ in range(3)]\n    solutions = []\n    \n    def backtrack(board, solutions):\n        if solve_sudoku(board):\n            solutions.append([row[:] for row in board])\n            return True\n        return False\n    \n    backtrack(board, solutions)\n    return solutions\n\nsolutions = find_magic_squares()\nfor solution in solutions:\n    print_board(solution)\n```\n\n### Explicação dos Testes e Podas\n1. **Testes**:\n   - **Teste de Linha**: Verifica se o número já existe na linha atual.\n   - **Teste de Coluna**: Verifica se o número já existe na coluna atual.\n   - **Teste de Submatriz**: Verifica se o número já existe na submatriz 3x3.\n\n2. **Podas**:\n   - **Podar Linha/Coluna/Submatriz**: Se o número já existe na linha, coluna ou submatriz, não é possível colocá-lo na célula atual. Portanto, a tentativa é descartada e o próximo número é testado.\n   - **Podar Solução**: Se a solução atual não for válida (não atender a todas as restrições), a solução é descartada e o backtracking retorna para a célula anterior.\n\n### Conclusão\nEste algoritmo de backtracking busca todas as soluções possíveis para o problema dos quadrados mágicos de ordem 3, verificando as restrições em cada passo e podando as soluções inválidas.",
+      "texto": "Backtracking é uma técnica de busca que é útil para resolver problemas que envolvem a formação de combinações possíveis. Para encontrar todos os quadrados mágicos de ordem 3 com números distintos de 1 a 9, podemos usar backtracking para testar todas as possíveis combinações e garantir que a soma de cada linha, coluna e diagonal seja igual.\n\nOs testes são feitos para garantir que a soma de cada linha, coluna e diagonal seja igual a 15 (a soma total dos números de 1 a 9 é 45, e dividindo por 3 dá 15). Se a soma não for 15, a combinação é descartada.\n\nAs podas são feitas quando a combinação não pode ser válida. Por exemplo, se a soma de uma linha já excede 15, não precisamos testar essa linha, já que qualquer combinação subsequente também não será válida. Além disso, se um número já foi usado em uma linha, coluna ou diagonal, não podemos usar esse número novamente, pois isso também faria a soma não ser 15.\n\nA técnica de backtracking permite que testemos todas as possíveis combinações sem precisar testar todas as combinações possíveis, economizando tempo e recursos.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 21.15599999999995,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 45.933946567998646,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "O problema do quadrado mágico de ordem 3 com números distintos de 1 a 9 é um problema de backtracking, mas não é o problema do passeio do cavalo. Vamos abordar o problema do quadrado mágico de forma a usar backtracking.\n\n### Definição do Problema\nUm quadrado mágico de ordem 3 é um quadrado 3x3 preenchido com os números 1 a 9 de forma que a soma de cada linha, coluna e diagonal seja igual a 15.\n\n### Algoritmo Backtracking\n1. **Inicialização**: Crie uma matriz 3x3 preenchida com zeros.\n2. **Preenchimento**: Tente preencher a matriz com os números 1 a 9.\n3. **Verificação**: Verifique se o número atual pode ser colocado na posição atual sem violar as regras do quadrado mágico.\n4. **Recursão**: Se a verificação passar, continue preenchendo a matriz recursivamente.\n5. **Poda**: Se a verificação falhar, reverta a última colocação e tente outra opção.\n6. **Condição de Parada**: Se a matriz estiver preenchida corretamente, imprima a solução.\n\n### Implementação em Python\n\n```python\ndef is_valid(board, row, col, num):\n    # Verifica se o número já está na linha\n    for i in range(3):\n        if board[row][i] == num:\n            return False\n    \n    # Verifica se o número já está na coluna\n    for i in range(3):\n        if board[i][col] == num:\n            return False\n    \n    # Verifica se o número já está na diagonal\n    if row == col:\n        for i in range(3):\n            if board[i][i] == num:\n                return False\n    \n    # Verifica se o número já está na submatriz 3x3\n    start_row, start_col = 3 * (row // 3), 3 * (col // 3)\n    for i in range(start_row, start_row + 3):\n        for j in range(start_col, start_col + 3):\n            if board[i][j] == num:\n                return False\n    \n    return True\n\ndef solve_sudoku(board, row=0, col=0):\n    if row == 3:\n        # Se chegou ao final da matriz, imprime a solução\n        for i in range(3):\n            for j in range(3):\n                print(board[i][j], end=\" \")\n            print()\n        return True\n    \n    next_row, next_col = (row + 1, 0) if col == 2 else (row, col + 1)\n    \n    for num in range(1, 10):\n        if is_valid(board, row, col, num):\n            board[row][col] = num\n            if solve_sudoku(board, next_row, next_col):\n                return True\n            board[row][col] = 0  # Poda: reverter a última colocação\n    \n    return False\n\n# Inicializa a matriz 3x3\nboard = [[0 for _ in range(3)] for _ in range(3)]\n\n# Resolve o problema\nsolve_sudoku(board)\n```\n\n### Explicação\n1. **is_valid**: Verifica se um número pode ser colocado em uma posição sem violar as regras do quadrado mágico.\n2. **solve_sudoku**: Função recursiva que preenche a matriz. Se a matriz estiver preenchida corretamente, imprime a solução. Caso contrário, tenta preencher a próxima posição.\n3. **Poda**: Se um número não pode ser colocado em uma posição, a função reverte a última colocação e tenta outra opção.\n\n### Complexidade\nA complexidade do algoritmo de backtracking para resolver o quadrado mágico é \\(O(n!)\\), onde \\(n\\) é o número de posições a serem preenchidas (no caso, 9).",
+      "texto": "Para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9 usando backtracking, devemos seguir um caminho que preencha as posições de um quadrado 3x3, garantindo que a soma de cada linha, coluna e diagonal seja 15. Aqui estão os passos:\n\n1. Inicialmente, preencha as posições do quadrado com números de 1 a 9, mantendo um conjunto dos números ainda não usados. \n\n2. Para cada posição, testamos todos os números disponíveis, garantindo que não haja repetição. Se uma linha, coluna ou diagonal estiver completa, ou se a soma de uma linha parcial já for >=15, descartamos essa posição.\n\n3. Para limitar o que ainda pode completar cada linha, fazemos uma poda, somando os menores e maiores números disponíveis para limitar o que ainda pode completar cada linha.\n\n4. Ao preencher as nove posições, verificamos as três linhas, três colunas e duas diagonais. Se todas as somas forem 15, temos um quadrado mágico.\n\n5. Para garantir que não haja duplicação de soluções, podemos rotacionar e refletir o quadrado, contando as soluções únicas.\n\n6. O tempo de execução é O(9!) devido à permutação dos números, e a memória é O(9) devido à necessidade de armazenar os números ainda não usados.\n\n7. Podemos usar o algoritmo de topologia para garantir que todas as posições são preenchidas de forma que não haja conflitos entre as linhas, colunas e diagonais.\n\n8. Podemos usar o algoritmo de Subset Sum para garantir que todos os números de 1 a 9 são usados exatamente uma vez.\n\n9. O algoritmo de Subset Sum pode ser otimizado para ter tempo O(nt) e memória O(t), onde t é o valor do alvo (15 neste caso).\n\nEsses testes e podas garantem que encontramos todas as possíveis soluções de quadrados mágicos de ordem 3 com os números distintos de 1 a 9.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 26.14099999999962,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 135.6143388729979,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5391c7b39026a0f196ab900db6fde13f1b55e92a5eca9b86106a7458e5eca9f9",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "70d6475b28bf-q1-1": "afdbe199f6abb409be6258211e3859bb6870f02250dc8c0830e2a137f79f3fef",
+        "1a81ca283132-q3-3": "1dc8c0116d4ce316f104b1e3ebae830741bf72f716ce1c1f01cae19ff4ff49a4",
+        "ef6d051e4b8c-q6-6": "ad26bcd43514b91eacffc282b00685bedf380d090494fe6f529276d79d371788",
+        "1a81ca283132-q8-8": "06033a53feb1a0227039026a3678ab4ef04bd52bae1aefe3fbd9ff4aadafe365"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -156,20 +404,49 @@
     "pergunta": "Como ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo? Diferencie quantidade de inversões e custo total de movimentar elementos.",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, podemos aplicar um algoritmo semelhante ao do algoritmo de ordenação por inversão de prefixo (ou pancake sorting). Vamos detalhar o processo e calcular a quantidade de inversões e o custo total de movimentação de elementos.\n\n### Passo a Passo do Algoritmo\n\n1. **Encontre o maior elemento na pilha**:\n   - O maior elemento deve estar no topo da pilha para que possamos empilhá-lo corretamente.\n\n2. **Inverter a pilha para que o maior elemento esteja no topo**:\n   - Se o maior elemento não estiver no topo, inverta a pilha até que ele esteja no topo.\n\n3. **Empilhe o maior elemento**:\n   - Remova o maior elemento do topo da pilha e coloque-o no final da pilha ordenada.\n\n4. **Repita o processo para a subpilha restante**:\n   - Continue o processo com a subpilha restante até que a pilha esteja completamente ordenada.\n\n### Exemplo\n\nSuponha que temos a pilha de panquecas: `[3, 2, 4, 1]`.\n\n1. **Passo 1: Encontre o maior elemento**:\n   - O maior elemento é `4`.\n\n2. **Passo 2: Inverter a pilha para que o maior elemento esteja no topo**:\n   - A pilha atual é `[3, 2, 4, 1]`. Inverta a pilha até que `4` esteja no topo: `[1, 2, 3, 4]`.\n\n3. **Passo 3: Empilhe o maior elemento**:\n   - Remova `4` do topo da pilha: `[1, 2, 3]`.\n\n4. **Passo 4: Repita o processo para a subpilha restante**:\n   - Agora temos a subpilha `[1, 2, 3]`. O maior elemento é `3`.\n   - Inverta a subpilha até que `3` esteja no topo: `[2, 1, 3]`.\n   - Empilhe `3`: `[2, 1]`.\n\n5. **Passo 5: Repita o processo para a subpilha restante**:\n   - Agora temos a subpilha `[2, 1]`. O maior elemento é `2`.\n   - Inverta a subpilha até que `2` esteja no topo: `[1, 2]`.\n   - Empilhe `2`: `[1]`.\n\n6. **Passo 6: Finalmente, empilhe o último elemento**:\n   - Remova `1` do topo da pilha: `[ ]`.\n\n### Contagem de Inversões e Custo Total\n\n- **Inversões**: Cada vez que invertemos a pilha para trazer o maior elemento ao topo, isso é considerado uma inversão.\n- **Custo total de movimentação**: Cada movimento de um elemento da pilha para cima ou para baixo é considerado um movimento.\n\n#### Exemplo de Contagem\n\n1. **Primeira inversão**: `[3, 2, 4, 1]` → `[1, 2, 3, 4]` (1 inversão)\n2. **Empilhar `4`**: `[1, 2, 3]` (0 movimentos)\n3. **Segunda inversão**: `[1, 2, 3]` → `[3, 2, 1]` (1 inversão)\n4. **Empilhar `3`**: `[2, 1]` (0 movimentos)\n5. **Terceira inversão**: `[2, 1]` → `[1, 2]` (1 inversão)\n6. **Empilhar `2`**: `[1]` (0 movimentos)\n7. **Empilhar `1`**: `[ ]` (0 movimentos)\n\n#### Resultados Finais\n\n- **Total de inversões**: 3\n- **Total de movimentações**: 0 (exceto as inversões, que são consideradas movimentações)\n\n### Conclusão\n\nO algoritmo de inversão de prefixo para ordenar uma pilha de panquecas tem um custo de inversão (movimentação) que pode ser eficiente, mas o número de inversões pode variar dependendo da ordem inicial da pilha. Em média, o algoritmo de inversão de prefixo tem um tempo de complexidade de O(n^2) em termos de inversões, onde n é o número de elementos na pilha.",
+      "texto": "Ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo é uma tarefa complexa. A quantidade de inversões é a quantidade de panquecas que foram invertidas em relação ao seu tamanho original. O custo total de movimentar elementos é o número de trocas necessárias para colocar todas as panquecas no tamanho correto, sem considerar a distância entre elas.\n\nPara resolver essa tarefa, seria necessário um algoritmo que possa contar as inversões e movimentar os elementos de forma eficiente. Uma abordagem possível seria usar um algoritmo de ordenação que possa contar as inversões, como o Merge Sort, que tem uma complexidade de tempo de O(n log n). No entanto, o custo total de movimentação não pode ser calculado diretamente com o número de inversões, pois depende do tamanho das panquecas.\n\nPara calcular o custo total de movimentação, seria necessário um algoritmo adicional que possa contar as trocas necessárias para colocar todas as panquecas no tamanho correto. Este custo pode ser muito maior do que o número de inversões, especialmente se as panquecas estão muito desorganizadas.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 20.436999999999898,
-      "fallback": null
-    },
-    "tutoron": {
-      "texto": "Para ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo, vamos seguir os seguintes passos:\n\n1. **Identificar a maior panqueca** na pilha e determinar seu índice.\n2. **Inverter o prefixo** da pilha para que a maior panqueca esteja no topo.\n3. **Inverter o prefixo** novamente para que a maior panqueca esteja na posição correta.\n4. **Repetir o processo** para o subconjunto restante da pilha.\n\n### Exemplo\n\nSuponha que temos a pilha de panquecas com tamanhos: [3, 2, 4, 1].\n\n1. **Identificar a maior panqueca**:\n   - A maior panqueca é 4, que está na posição 2 (considerando índice 0).\n\n2. **Inverter o prefixo** até a maior panqueca:\n   - Inverter o prefixo até a posição 2: [4, 2, 3, 1].\n\n3. **Inverter o prefixo** novamente para posicionar a maior panqueca no topo:\n   - Inverter o prefixo até a posição 0: [1, 3, 2, 4].\n\n4. **Repetir o processo** para o subconjunto restante:\n   - Subconjunto restante: [3, 2, 1].\n   - Identificar a maior panqueca: 3 (posição 1).\n   - Inverter o prefixo até a posição 1: [3, 1, 2].\n   - Inverter o prefixo novamente: [1, 2, 3].\n\n### Inversões e Custo Total\n\n- **Inversões**: É o número de vezes que o prefixo é invertido para posicionar a maior panqueca.\n- **Custo total de movimentar elementos**: É o número total de movimentos de panquecas durante o processo.\n\n#### Exemplo de Contagem\n\n1. **Primeira inversão**:\n   - Inverter [3, 2, 4, 1] até a posição 2: 3 movimentos (2, 3, 4).\n   - Inverter [4, 2, 3, 1] até a posição 0: 4 movimentos (4, 3, 2, 1).\n\n2. **Segunda inversão**:\n   - Inverter [3, 1, 2, 4] até a posição 1: 2 movimentos (3, 1, 2, 4).\n   - Inverter [1, 3, 2, 4] até a posição 0: 1 movimento (1, 3, 2, 4).\n\n3. **Terceira inversão**:\n   - Inverter [2, 3, 1, 4] até a posição 1: 2 movimentos (2, 3, 1, 4).\n   - Inverter [3, 2, 1, 4] até a posição 0: 3 movimentos (3, 2, 1, 4).\n\n### Resumo\n\n- **Inversões**: 2 + 1 = 3\n- **Custo total de movimentar elementos**: 4 + 1 + 2 + 3 = 10\n\n### Complexidade\n\n- **Inversões**: O número de inversões é O(n) no pior caso.\n- **Custo total de movimentar elementos**: O número total de movimentos é O(n^2) no pior caso.\n\nPortanto, a ordenação da pilha de panquecas usando inversões de prefixo envolve contagem de inversões e movimentação de elementos, com complexidades que variam dependendo da implementação e do tamanho da pilha.",
-      "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 25.5779999999977,
+      "modelo": "qwen2.5:3b",
+      "segundos": 41.980978190000314,
       "fallback": null,
       "repetida_por_truncamento": false,
-      "limite_saida_tokens": 1800
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
+    },
+    "tutoron": {
+      "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, a estratégia é dividir e conquistar. Primeiro, ordenamos os prefixos de cada panqueca, o que leva a O(n^2) de tempo, conforme mencionado na referência. Em seguida, movemos os prefixos para a base da pilha, o que custa O(m) para cada prefixo. \n\nA quantidade exata de inversões de prefixo é de O(n^2), como mencionado na referência. No entanto, o custo total de movimentar elementos é menor. Para cada inversão de prefixo, precisamos mover o prefixo para a base, o que custa O(m) movimentações. Como há até n-1 inversões de prefixo, o custo total de movimentação é O(n * (n-1)) = O(n^2).\n\nPortanto, embora a contagem exata de inversões seja O(n^2), o custo total de movimentação de elementos é menor, sendo O(n^2). O custo total é dominado pela quantidade de movimentações, não pela contagem exata de inversões.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 117.27990025200415,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "ffc5e2d3d53ad1703276032ea51ec9ff93d710d102f6039562958ed2c898fc95",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "d455baef2cdf-q1-1": "1826cf5ed77fe2ed6c2e34435ebc78317f847cfccac34c9b3e15410450b2d005",
+        "d455baef2cdf-q7-7": "39d47bddb8c52e3f9e05fece66cae3d0f5a5d7cc02f8b7381d18fdf49c7df286",
+        "a177bf5bc3c7-q3-3": "66c2fd23e1a9feca438bef3ae17c7f5c98bfac2a5066e8562842d7129e0235c0",
+        "d455baef2cdf-q4-4": "0c7508bfd7192803550aa9881ecd9bc2ee6418860f8e45154eba80f924fb3b90"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -177,18 +454,49 @@
     "pergunta": "Me perdi nos asteriscos: por que não é só n vezes? Tem duas chamadas com n menos 1 e um laço que imprime n. Pode montar a conta e conferir n=3?",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Claro, vamos analisar o código que você descreveu. Vamos supor que o código seja algo como:\n\n```python\ndef imprime_estrelas(n):\n    for i in range(n):\n        print(\"*\", end=\"\")\n    print()\n    imprime_estrelas(n-1)\n    imprime_estrelas(n-1)\n```\n\nVamos conferir o que acontece quando `n = 3`:\n\n1. **Primeira chamada: `imprime_estrelas(3)`**\n   - Imprime 3 asteriscos: `***`\n   - Chama `imprime_estrelas(2)` duas vezes.\n\n2. **Primeira chamada recursiva: `imprime_estrelas(2)`**\n   - Imprime 2 asteriscos: `**`\n   - Chama `imprime_estrelas(1)` duas vezes.\n\n3. **Primeira chamada recursiva: `imprime_estrelas(1)`**\n   - Imprime 1 asterisco: `*`\n   - Chama `imprime_estrelas(0)` duas vezes.\n\n4. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada (pois `range(0)` é vazio).\n   - Termina a chamada.\n\n5. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n6. **Segunda chamada recursiva: `imprime_estrelas(1)`**\n   - Imprime 1 asterisco: `*`\n   - Chama `imprime_estrelas(0)` duas vezes.\n\n7. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n8. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n   - Não imprime nada.\n   - Termina a chamada.\n\n9. **Terceira chamada recursiva: `imprime_estrelas(2)`**\n   - Imprime 2 asteriscos: `**`\n   - Chama `imprime_estrelas(1)` duas vezes.\n\n10. **Primeira chamada recursiva: `imprime_estrelas(1)`**\n    - Imprime 1 asterisco: `*`\n    - Chama `imprime_estrelas(0)` duas vezes.\n\n11. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n12. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n13. **Segunda chamada recursiva: `imprime_estrelas(1)`**\n    - Imprime 1 asterisco: `*`\n    - Chama `imprime_estrelas(0)` duas vezes.\n\n14. **Primeira chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n15. **Segunda chamada recursiva: `imprime_estrelas(0)`**\n    - Não imprime nada.\n    - Termina a chamada.\n\n### Resultado final:\n```\n***\n**\n*\n**\n*\n***\n```\n\n### Contagem de asteriscos:\n- 3 asteriscos na primeira chamada.\n- 2 asteriscos em cada uma das duas chamadas recursivas de `imprime_estrelas(2)`.\n- 1 asterisco em cada uma das quatro chamadas recursivas de `imprime_estrelas(1)`.\n- 0 asteriscos em cada uma das oito chamadas recursivas de `imprime_estrelas(0)`.\n\nPortanto, o total de asteriscos impressos é:\n- 3 (da primeira chamada) + 2 + 2 + 1 + 1 + 1 + 1 + 0 + 0 + 0 + 0 = 10 asteriscos.\n\nEspero que isso esclareça a lógica e a contagem dos asteriscos!",
+      "texto": "Claro, vamos montar a conta para n=3. Vamos considerar que você está falando sobre um loop for que imprime um número n vezes. Para n=3, teremos:\n\n1. Uma chamada inicial para imprimir 3 vezes (n=3).\n2. Um laço que imprime n-1 vezes (n-1=2) para cada iteração do loop.\n3. Um laço que imprime n-1 vezes (n-1=2) para cada iteração do loop.\n\nPortanto, a contagem total será:\n- 3 (primeira chamada para n=3)\n- 2 (segunda chamada para n=2) * 3 (vezes que o loop é executado) = 6\n- 2 (terceira chamada para n=1) * 3 (vezes que o loop é executado) = 6\n\nTotalizando 12 chamadas. Portanto, não é só n vezes, mas sim, n vezes (n-1) + (n-1) + (n-1) = 3*(n-1) + (n-1) + (n-1) = 3*2 + 2 + 2 = 6 + 2 + 2 = 12.\n\nIsso explica por que tem duas chamadas com n-1 e um laço que imprime n.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 17.95299999999952,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 48.35732002900113,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "Vamos analisar o algoritmo `ASTERISCO(n)` e montar a conta para entender por que a quantidade de asteriscos impressos não é simplesmente `n` vezes.\n\n### Algoritmo `ASTERISCO(n)`\n```plaintext\nprocedure ASTERISCO(n)\n1: if n > 0 then\n2:   ASTERISCO(n-1)\n3:   for i from 1 to n\n4:     imprima *\n5:   end for\n6:   ASTERISCO(n-1)\n7: endif\n8: end procedure\n```\n\n### Análise da Conta\n\n1. **Chamada `ASTERISCO(n-1)` antes do laço:**\n   - Isso significa que, antes de entrar no laço, o algoritmo chama `ASTERISCO(n-1)`, que imprimirá `n-1` asteriscos.\n\n2. **Laço `for i from 1 to n`:**\n   - Dentro do laço, o algoritmo imprime um asterisco para cada iteração de `i` de 1 a `n`. Isso significa que o laço imprimirá `n` asteriscos.\n\n3. **Chamada `ASTERISCO(n-1)` depois do laço:**\n   - Após o laço, o algoritmo chama `ASTERISCO(n-1)` novamente, que imprimirá `n-1` asteriscos.\n\n### Contagem Total de Asteriscos\n\nPara `n = 3`:\n- **Primeira chamada `ASTERISCO(3-1) = ASTERISCO(2)`:**\n  - `ASTERISCO(2)` chama `ASTERISCO(1)`.\n  - `ASTERISCO(1)` chama `ASTERISCO(0)`, que não imprime nada (pois `n = 0`).\n  - `ASTERISCO(1)` imprime 1 asterisco.\n  - `ASTERISCO(2)` imprime 2 asteriscos (de `ASTERISCO(1)`) + 2 asteriscos (do laço) + 2 asteriscos (de `ASTERISCO(1)`).\n\n- **Segunda chamada `ASTERISCO(3-1) = ASTERISCO(2)`:**\n  - `ASTERISCO(2)` chama `ASTERISCO(1)`.\n  - `ASTERISCO(1)` chama `ASTERISCO(0)`, que não imprime nada.\n  - `ASTERISCO(1)` imprime 1 asterisco.\n  - `ASTERISCO(2)` imprime 2 asteriscos (de `ASTERISCO(1)`) + 2 asteriscos (do laço) + 2 asteriscos (de `ASTERISCO(1)`).\n\n### Contagem Total para `n = 3`:\n- **Primeira chamada `ASTERISCO(2)`:**\n  - 2 (de `ASTERISCO(1)`) + 2 (do laço) + 2 (de `ASTERISCO(1)`) = 6 asteriscos.\n\n- **Segunda chamada `ASTERISCO(2)`:**\n  - 2 (de `ASTERISCO(1)`) + 2 (do laço) + 2 (de `ASTERISCO(1)`) = 6 asteriscos.\n\n- **Total:**\n  - 6 (primeira chamada) + 6 (segunda chamada) = 12 asteriscos.\n\n### Recorrência\n\nA recorrência para a quantidade de asteriscos impressos `A(n)` pode ser definida como:\n\\[ A(n) = \\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2A(n-1) + n & \\text{se } n \\geq 1 \n\\end{cases} \\]\n\n### Resposta\n\nPara `n = 3`, a quantidade de asteriscos impressos é 12. A recorrência é:\n\\[ A(n) = 2A(n-1) + n \\]\n\nIsso explica por que a quantidade de asteriscos não é simplesmente `n` vezes, pois há chamadas recursivas que duplicam a quantidade de asteriscos impressos.",
+      "texto": "A fórmula A(n) = 2^(n+1) - n - 2 considera duas chamadas recursivas para A(n-1) e um laço que imprime n. Para n=3, vamos calcular:\n\nA(3) = 2^(3+1) - 3 - 2 = 2^4 - 3 - 2 = 16 - 3 - 2 = 11\n\nA contagem é 2^3 - 3 - 1 = 8 - 3 - 1 = 4 chamadas, mas inclui o laço que imprime 3. Portanto, a contagem total é 4 + 3 = 7 asteriscos. Isso explica por que não é apenas n vezes, mas sim 2^(n+1) - n - 2.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 24.625,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 77.43599253000139,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "355a0da2f5ec9b5052f66fc78db41b61010e6335e00dce2c9d398a8af9751a7f",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+        "c06": "4f6d70b01764ed4954a3fb06e5f3bae19c483e1868b3b1a2bc0539b0c0ce9a15",
+        "a177bf5bc3c7-q2-2": "ff0422914032d457378242d5a810eaa8bcf007806ceb19b6d985fb1fffcfb673",
+        "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -196,18 +504,49 @@
     "pergunta": "Se testar divisores faz só O(n) testes, por que o professor fala que COMPOSTO não ficou polinomial? O que muda quando a entrada está escrita em binário?",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Para entender por que o algoritmo de testar divisores para verificar se um número é primo só é O(n) e não é considerado polinomial em termos de complexidade computacional, precisamos analisar o problema em detalhes.\n\n### Complexidade O(n)\n\nQuando você testa divisores de um número `n` para verificar se ele é primo, você testa todos os números de 2 até `n-1`. Isso significa que o número de testes é diretamente proporcional ao valor de `n`. Portanto, a complexidade desse algoritmo é O(n).\n\n### Por que não é Polinomial?\n\nUm algoritmo é considerado polinomial se a sua complexidade de tempo for O(n^k) onde `k` é uma constante. No caso do algoritmo de testar divisores, a complexidade é O(n), o que não é um polinômio em `n` (exceto se `n` for uma constante). Portanto, o algoritmo não é considerado polinomial.\n\n### Entrada em Binário\n\nA forma como a entrada é representada (por exemplo, em binário) não muda a complexidade fundamental do algoritmo. No entanto, pode afetar a eficiência prática:\n\n1. **Representação Binária**: Se o número `n` é dado em binário, a representação do número pode ser mais compacta do que em notação decimal. Por exemplo, o número 1000 em decimal é 1111101000 em binário. No entanto, a complexidade do algoritmo de testar divisores ainda é O(n) em termos de `n` em decimal, pois o número de testes não muda com a representação binária.\n\n2. **Eficiência Prática**: Em termos de eficiência prática, a representação binária pode influenciar a eficiência. Por exemplo, se `n` é muito grande, a conversão de `n` de binário para decimal pode ser custosa, mas isso não muda a complexidade do algoritmo em termos teóricos.\n\n### Exemplo\n\nSe `n` é um número grande, digamos 10^6, o algoritmo de testar divisores irá realizar 10^6 testes, o que é O(n). Se `n` é dado em binário, a conversão para decimal pode ser um processo adicional, mas a complexidade do algoritmo permanece O(n).\n\n### Conclusão\n\nO algoritmo de testar divisores para verificar se um número é primo é O(n) porque ele testa todos os números de 2 até `n-1`. Isso não é considerado polinomial porque a complexidade é linear em `n`, não polinomial. A representação em binário não muda a complexidade fundamental, mas pode afetar a eficiência prática.",
+      "texto": "A complexidade de O(n) para testar divisores é uma suposição simplificada. Na prática, muitos problemas de complexidade polinomial podem ter complexidades subpolinais dependendo da representação da entrada. Quando a entrada é escrita em binário, o tamanho da entrada pode ser muito maior do que o número de divisores, o que pode afetar a eficiência. Além disso, alguns problemas podem ter complexidades que parecem polinomiais em representações normais, mas são de fato não polinomiais em representações binárias, o que é o caso do COMPOSTO. Portanto, é importante considerar a representação da entrada e a complexidade em termos de bits ao avaliar a eficiência de algoritmos.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 12.484999999999673,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 27.45455533099812,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "A resolução do problema do número composto pelo algoritmo de força bruta, que verifica inteiros sucessivos de 2 a ⌊n/2⌋, não é polinomial em termos de tempo de execução, mesmo que realize apenas \\(O(n)\\) testes. O motivo é que a complexidade do algoritmo depende do valor do número \\(n\\) em si, e não do tamanho do número em bits.\n\n### Explicação:\n\n1. **Complexidade em Termos de Valor do Número:**\n   - O algoritmo verifica divisores de \\(n\\) de 2 até ⌊n/2⌋. Se \\(n\\) é um número grande, o número de divisores a serem verificados também é grande.\n   - A complexidade é \\(O(n)\\), o que significa que o tempo de execução aumenta linearmente com o valor do número \\(n\\).\n\n2. **Complexidade em Termos do Tamanho do Número:**\n   - O tamanho do número \\(n\\) em bits é \\(b = \\log_2(n)\\).\n   - A complexidade do algoritmo é pseudo-polinomial, pois depende do valor de \\(n\\) em si, e não apenas do tamanho do número em bits.\n\n### Por que o Algoritmo Não é Polinomial:\n\n- **Definição de Polinomial:** Um algoritmo é considerado polinomial se sua complexidade de tempo é \\(O(n^k)\\) para algum expoente \\(k\\), onde \\(n\\) é o tamanho da entrada em bits.\n- **Complexidade Real:** A complexidade do algoritmo é \\(O(n)\\), que depende do valor de \\(n\\) em si, não do tamanho do número em bits. Portanto, é pseudo-polinomial.\n\n### Efeito da Representação em Binário:\n\n- **Tamanho da Entrada:** Quando \\(n\\) é representado em binário, o tamanho da entrada é \\(b = \\log_2(n)\\).\n- **Complexidade Pseudo-Polinomial:** A complexidade do algoritmo é \\(O(n)\\), que é exponencial em termos do tamanho \\(b\\) da entrada. Isso significa que a complexidade aumenta exponencialmente com o número de bits \\(b\\).\n\n### Resumo:\n\n- O algoritmo realiza \\(O(n)\\) testes, mas \\(n\\) é o valor do número em si, não o tamanho do número em bits.\n- A complexidade é pseudo-polinomial, pois depende do valor de \\(n\\) em si, não do tamanho do número em bits.\n- A representação em binário afeta a complexidade, pois o tamanho da entrada é \\(b = \\log_2(n)\\), e a complexidade \\(O(n)\\) é exponencial em termos de \\(b\\).\n\nPortanto, o algoritmo não é polinomial em termos do tamanho da entrada, mas sim pseudo-polinomial.",
+      "texto": "O algoritmo de força bruta para COMPOSTO testa sucessivamente os divisores de 2 até floor(n/2), o que resulta em O(n) testes no pior caso. Este fato não afeta a complexidade polinomial do algoritmo, pois a complexidade é medida em termos de entrada, não de representação. \n\nQuando a entrada é escrita em binário, a quantidade de bits é o que realmente muda. Como mencionado no contexto, a representação binária de n tem b = floor(log2(n)) + 1 bits. Embora o número de testes cresça exponencialmente em b, a complexidade polinomial em b não afeta a complexidade polinomial do algoritmo em termos de n. Portanto, mesmo com a representação binária, o algoritmo de força bruta para COMPOSTO continua sendo polinomial em termos de n.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 17.81199999999808,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 102.16889594199893,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "59753665456f534d9f7a1f8d64d533cbc36eb3ab9c5a935576da5631fd1b7351",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+        "7b4da6a8adf7-q7-7": "13b572ccab20134134399ade260887a44a6925ee473aee6babc614dc52b11f11",
+        "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995",
+        "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   },
   {
@@ -215,18 +554,47 @@
     "pergunta": "Qual será a data, a sala e o conteúdo exato da próxima prova de PAA em outubro de 2026?",
     "origem": "avaliacao_local_rag_automatica",
     "generico": {
-      "texto": "Desculpe, mas não tenho acesso a informações específicas sobre a agenda de provas futuras, como a data, a sala e o conteúdo exato da próxima prova de PAA em outubro de 2026, pois essas informações geralmente são divulgadas pelos departamentos ou instituições responsáveis pela organização das provas. \n\nPara obter essas informações, você deve:\n\n1. Verificar o site oficial da instituição de ensino ou do departamento responsável.\n2. Consultar o professor ou coordenador do curso.\n3. Verificar o calendário acadêmico disponível no seu instituto de ensino.\n4. Fazer perguntas diretamente ao departamento de graduação ou ao setor responsável pelo exame.\n\nSe você precisar de ajuda com outros aspectos do estudo ou preparação para o exame, estou à disposição para ajudar!",
+      "texto": "Desculpe, mas não tenho informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova do PAA (Programa de Aperfeiçoamento de Analistas) em outubro de 2026. As datas, salas e conteúdos das provas são geralmente mantidos em sigilo pela organização responsável, que é a Fundação Vanzolini. Para obter essa informação, é melhor consultar diretamente a Fundação Vanzolini ou o site oficial do PAA.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 3.811999999999898,
-      "fallback": null
+      "modelo": "qwen2.5:3b",
+      "segundos": 19.77456666299986,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "fontes_sha256": {},
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     },
     "tutoron": {
-      "texto": "A pergunta sobre a data, a sala e o conteúdo da próxima prova de PAA em outubro de 2026 não pode ser respondida com base no contexto fornecido. O material apresentado é composto por questões e soluções de algoritmos, mas não contém informações específicas sobre a programação da prova futura.\n\nPara obter essas informações, seria necessário consultar o professor ou a grade de aulas do curso, pois esses detalhes são geralmente definidos pelo professor ou pelo departamento responsável pelo curso.\n\nDito isso, os conteúdos abordados nas questões fornecidas sugerem que a prova pode abranger temas como:\n\n1. Algoritmos de busca e subsequências\n2. Algoritmos de programação dinâmica\n3. Probabilidade e combinações\n4. Teoria dos grafos e árvores\n5. Algoritmos gulósos\n6. Avaliação de polinômios\n\nNo entanto, sem informações adicionais, não é possível afirmar com certeza o conteúdo exato da prova.",
+      "texto": "Como tutor de PAA, não tenho acesso a informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova de PAA em outubro de 2026. Minha função é auxiliar com questões e resoluções de problemas relacionados ao PAA, não fornecer informações sobre datas ou conteúdos de provas.",
       "provedor": "ollama",
-      "modelo": "qwen2.5:7b",
-      "segundos": 7.2040000000015425,
-      "fallback": null
+      "modelo": "tutoron-paa",
+      "segundos": 47.41999382799986,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5cd5752be563842f737e4dcfea031c1e798639af5416d58eb4660c8a629e06bb",
+      "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+      "fontes_sha256": {
+        "7b4da6a8adf7-q6-6": "b8422278ca4a9bf2da0b7ed06994935e8af58c0bf8fceb7e4a56d17c5623b7e6",
+        "97254bb4a1b8-q6-6": "763aebf1fa2aa98fa4066bdfa3bbd048e90e537b4f8c0e44fcab5ffcaa100bbb"
+      },
+      "indice_sha256": "b72cc2265bc571cf29641da6dd1067712b6a7342d55d2603ab9011be26e6be10"
     }
   }
 ]

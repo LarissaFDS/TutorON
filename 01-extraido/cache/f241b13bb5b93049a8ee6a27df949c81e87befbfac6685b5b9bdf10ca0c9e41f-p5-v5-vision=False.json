@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n(neste caso f(n) = Θ(g(n))):\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nqd)\n(2)\n(3)\n(4)\n(5)\n(6)\n(7)\n(8)\n(9)\n(10)\nay\n(12)\n(13)\n(14)\n(15)\n\n(16)\n\nf(n)\n\nn-10\n\nn!!2\n100n + log nm\nlog2n\n10logn\nnb\nn’/logn\nnol\n\nlogn\n\n(log n)\nvn\n\nn!'2\n\nn2\"\n\nQn\n\nn!\n\n(log n)'°8\"\n\nLe\n\ni=l\n\ng(n)\nn—200\n\nnº!3\n\nn+ (logn)?\nlog3n\nlog(n?)\nnlog? n\nn(logn)?\n(logn)!°\nnilogn\n(log n)?\nslogan\n3\"\n\npm\n\non\n\npilog, n)?\n\nnt+1\n\n\nSolu¸c˜ao:\n\n1. f(n) = Θ(g(n))\n\n2. f(n) = O(g(n))\n\n3. f(n) = Θ(g(n))\n\n4. f(n) = O(g(n))\n\n5. f(n) = Θ(g(n))\n\n6. f(n) = O(g(n))\n\n7. f(n) = Ω(g(n))\n\n8. f(n) = Ω(g(n))\n\n9. f(n) = O(g(n))\n\n10. f(n) = Ω(g(n))\n\n11. f(n) = O(g(n))\n\nPage v",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

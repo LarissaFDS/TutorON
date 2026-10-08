@@ -1,0 +1,275 @@
+{
+  "c01": {
+    "sha256_original": "95fff06c742eb5ed38f3af283cc621f7933debf9981a1287b8e6ed670990d590",
+    "arquivo": "03-triagem\\correcoes\\c01.md",
+    "motivo": "Índices inteiros e domínio do algoritmo.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "260cd3c33c2e"
+  },
+  "c02": {
+    "sha256_original": "f975aafbe28e28a84aa69a50fb029c1f4aad504d6b2d90ee483ef52b9d5c3a98",
+    "arquivo": "03-triagem\\correcoes\\c02.md",
+    "motivo": "Corrigir a variável da hipótese de indução e os limites dos subvetores.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "ebd32d24085d"
+  },
+  "c05": {
+    "sha256_original": "00cd438ca3bb7f5699fd7d3d51f5882a260b658b3f173e3945bf367adef813c6",
+    "arquivo": "03-triagem\\correcoes\\c05.md",
+    "motivo": "Acrescentar a recorrência exigida e distinguir contagem de tempo.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "a16243942b3d"
+  },
+  "c06": {
+    "sha256_original": "f0ab5240d45bb64978c5a1f95d54db4eddfe40ba626d3375c27549c2626eeaab",
+    "arquivo": "03-triagem\\correcoes\\c06.md",
+    "motivo": "Eliminar referência a uma equação inexistente e fechar a soma.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "446039c2210c"
+  },
+  "c08": {
+    "sha256_original": "98992c34d0d2690c60cf3b160b7143a1bbc3b24e2c2c62cca3eb9c12eea898a1",
+    "arquivo": "03-triagem\\correcoes\\c08.md",
+    "motivo": "Usar o tamanho exato da entrada binária e analisar o pior caso.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "e6e6491d28fd"
+  },
+  "c09": {
+    "sha256_original": "2a09f636707a57aa59a98d873595d5c557a4498c2eadfa231eebd4c72107da34",
+    "arquivo": "03-triagem\\correcoes\\c09.md",
+    "motivo": "Substituir a definição incorreta de NP e explicitar redução e decisão.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "ec1dc2e2e188"
+  },
+  "a177bf5bc3c7-q1-1": {
+    "sha256_original": "e388bcff3b6747479bd1b8fe5a3a2ce370bcfb74ceb6710389a3647ef2a7704c",
+    "arquivo": "03-triagem\\correcoes\\a177bf5bc3c7-q1-1.md",
+    "motivo": "Uma AGM aumenta n-1 unidades; preservar o contraexemplo da fonte.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "a177bf5bc3c7"
+  },
+  "a177bf5bc3c7-q2-2": {
+    "sha256_original": "00def19c291a56826b74693e3ce89a2914d12883f2a56d66addd80b67b11d9de",
+    "arquivo": "03-triagem\\correcoes\\a177bf5bc3c7-q2-2.md",
+    "motivo": "Corrigir o argumento de troca e exigir pesos distintos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "a177bf5bc3c7"
+  },
+  "a177bf5bc3c7-q3-3": {
+    "sha256_original": "aa1f6df1dc46221deb51a57b9ac91703dbfd15141a819c16026fbb38f302de62",
+    "arquivo": "03-triagem\\correcoes\\a177bf5bc3c7-q3-3.md",
+    "motivo": "Reconstruir o pseudocódigo ilegível e explicitar a convenção de intervalos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "a177bf5bc3c7"
+  },
+  "1a81ca283132-q1-1": {
+    "sha256_original": "7b35d6d539fa5ed313bfefa8703e8804606c52548d22fa6b14b1c1480345afd7",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q1-1.md",
+    "motivo": "Reconstrução correta de DP triangular; código OCR não é executável.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q2-2": {
+    "sha256_original": "1637b8c6524194dd12e98be0dacd0e06189cae1df413f518817d5404bcc4ee16",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q2-2.md",
+    "motivo": "O exercício pede o caminho, além da contagem de moedas.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q3-3": {
+    "sha256_original": "cdd6b9946b202b3084c2c6bcfffba1501a26c6077f6f2b9052c4f7a130387f61",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q3-3.md",
+    "motivo": "Reconstruir recorrência e restringir corretamente ao DAG.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q4-4": {
+    "sha256_original": "0891ccf6d17d3f6b8a0b19533d10ee42f8cde20e1dbe6956093c645ef3144d25",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q4-4.md",
+    "motivo": "Garantir subsequência vazia e corrigir Kadane.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q5-5": {
+    "sha256_original": "5310fdae7cf8c08f22b6e41813d62271a7d4dea532f78ef3b988aa3ae3d5fc24",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q5-5.md",
+    "motivo": "Distinguir substring contígua de subsequência.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q6-6": {
+    "sha256_original": "d74241311f84dffd701b94a4183fe97e2fe9c7e9a694998dd2ba70da6b09c36e",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q6-6.md",
+    "motivo": "Reconstruir DP dos cortes e preservar o exemplo 37 versus 30.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q7-7": {
+    "sha256_original": "fbb18de37435d6a856784e02d56e436daa3ddeec4a966c0bb7feee093b5eee84",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q7-7.md",
+    "motivo": "Cobertura é subconjunto de V, não superconjunto; DP em árvore.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q8-8": {
+    "sha256_original": "6b1d27d5b3e65143f2eb8964a47b2229591f1dfcda2b6b9fd6e41b1b5ddb9870",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q8-8.md",
+    "motivo": "Reconstruir Subset Sum 0/1 e explicar pseudopolinomial.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q9-9": {
+    "sha256_original": "654d92eb658e0d939c534fed67c4905ca2781457a5ed542ce8b34deccf9ae0f4",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q9-9.md",
+    "motivo": "A contagem por ordenação topológica só é válida em DAG.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "1a81ca283132-q10-10": {
+    "sha256_original": "6e6260e16d1f596e5310228ede7d2eecc2f085510a735103320e9704c0e98ab0",
+    "arquivo": "03-triagem\\correcoes\\1a81ca283132-q10-10.md",
+    "motivo": "Substituir maximização inválida de Floyd por DP exponencial.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "1a81ca283132"
+  },
+  "f38bb8142136-q1-1": {
+    "sha256_original": "6afd7e7323c4debf3c3d6b23b4de4bd4617c7af3bd29fb0345749716e5becb3b",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q1-1.md",
+    "motivo": "Mesma definição de NP incorreta encontrada no PDF original.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q2-2": {
+    "sha256_original": "8cdbcab998bd205d35dee32b604c89f3f8b4442ee9442cf751166737f172f5ca",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q2-2.md",
+    "motivo": "Corrigir tamanho binário exato no PDF original.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q3-3": {
+    "sha256_original": "a2eeccfe749d59b3b892cae8a251aae26322cc22c57446ee3f665211eef5018c",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q3-3.md",
+    "motivo": "NP-dificuldade não dispensa pertinência a NP.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q5-5": {
+    "sha256_original": "abf6ccee2657c2c8f99e420f52f2311f8d12504135c4c104bb5a65f7364de0d1",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q5-5.md",
+    "motivo": "Não confundir três partes iguais com 3-PARTITION; redução não pode usar solução desconhecida.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q6-6": {
+    "sha256_original": "8d7464cb75bb1af15754d043ad7d931535f798524b1341af0bf4587c3434baee",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q6-6.md",
+    "motivo": "Adicionar k-2 folhas, não k-1; separar decisão e busca.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q8-8": {
+    "sha256_original": "f219a0b5c27d882a0b0f65929d0ac1944159d5d474141ef4ebd71799f00a062a",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q8-8.md",
+    "motivo": "Interseção não vazia não significa inclusão do certificado em cada conjunto.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "f38bb8142136-q9-9": {
+    "sha256_original": "4b8b85c6ebdf35871542cfcf74ec8b7c1ffb41ef24094f6c1a76a0a18df6449c",
+    "arquivo": "03-triagem\\correcoes\\f38bb8142136-q9-9.md",
+    "motivo": "Isomorfismo de subgrafo não é o problema de isomorfismo de grafos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "f38bb8142136"
+  },
+  "70d6475b28bf-q1-1": {
+    "sha256_original": "38bfcad4509fc4e2a4491de87c4693338d17c8c63d361da646bce1fca541dcfb",
+    "arquivo": "03-triagem\\correcoes\\70d6475b28bf-q1-1.md",
+    "motivo": "Reconstruir backtracking legível, com verificação das oito somas.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "70d6475b28bf"
+  },
+  "70d6475b28bf-q4-4": {
+    "sha256_original": "80d42e8075ed67a85d9913516a9841c65fce482e205507da39386474abff2c50",
+    "arquivo": "03-triagem\\correcoes\\70d6475b28bf-q4-4.md",
+    "motivo": "A fonte responde cobertura de vértices a um enunciado de cobertura de conjuntos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "70d6475b28bf"
+  },
+  "70d6475b28bf-q7-7": {
+    "sha256_original": "d8f3db85a5b7451a0b3214927e9a440b4d136c2ad40564c2367e5c1f11995d03",
+    "arquivo": "03-triagem\\correcoes\\70d6475b28bf-q7-7.md",
+    "motivo": "Descrever 2-opt; o original descreve árvore duplicada.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "70d6475b28bf"
+  },
+  "70d6475b28bf-q9-9": {
+    "sha256_original": "ad49afcdb0346e7c674db5e3b19baf0084c35d6da15aed46d29a0505d46fa9f0",
+    "arquivo": "03-triagem\\correcoes\\70d6475b28bf-q9-9.md",
+    "motivo": "Corrigir a atribuição fixa de diversificação/intensificação nos algoritmos genéticos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "70d6475b28bf"
+  },
+  "97254bb4a1b8-q1-1": {
+    "sha256_original": "b7f7d5a0e358009fbb2c6d4260305c9692f8b118e3397cb09d2ab18d17592dcc",
+    "arquivo": "03-triagem\\correcoes\\97254bb4a1b8-q1-1.md",
+    "motivo": "Reconstruir código da imagem; memória em palavras e overflow.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "97254bb4a1b8"
+  },
+  "d455baef2cdf-q1-1": {
+    "sha256_original": "69c88c88f2d77f2b6db273fe6dba878f11dd30e66c8ab1f1532d17f0d896f2f7",
+    "arquivo": "03-triagem\\correcoes\\d455baef2cdf-q1-1.md",
+    "motivo": "Reconstruir panquecas e distinguir inversões do custo de movimentação.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "d455baef2cdf"
+  },
+  "7b4da6a8adf7-q2-2": {
+    "sha256_original": "b2c9f1f8cc87a3d74a1c80c0f7a09791c3dce1925c13ee553b4dec75f0651938",
+    "arquivo": "03-triagem\\correcoes\\7b4da6a8adf7-q2-2.md",
+    "motivo": "Corrigir direção da implicação indutiva e tornar fórmulas legíveis.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "7b4da6a8adf7"
+  },
+  "7b4da6a8adf7-q3-3": {
+    "sha256_original": "dfc8e00ba0a6d1dec35e52b101b3b5b014cd456b050b9884a7fa9ed5b175158b",
+    "arquivo": "03-triagem\\correcoes\\7b4da6a8adf7-q3-3.md",
+    "motivo": "Corrigir a hipótese circular da prova direta e o rótulo do caso base.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "7b4da6a8adf7"
+  },
+  "7b4da6a8adf7-q6-6": {
+    "sha256_original": "117d4ad395c2dbf825a3be75333eb4615f839fdef7b3557d43413a87752fadfc",
+    "arquivo": "03-triagem\\correcoes\\7b4da6a8adf7-q6-6.md",
+    "motivo": "Distinguir o invariante antes e depois de cada iteração de Horner.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "7b4da6a8adf7"
+  },
+  "7b4da6a8adf7-q7-7": {
+    "sha256_original": "9f52bb82b32d00353fd7e7fb031fba8138ee4f3b673a06a541586700cee20db3",
+    "arquivo": "03-triagem\\correcoes\\7b4da6a8adf7-q7-7.md",
+    "motivo": "O OCR troca divisão inteira por adição na atualização de t.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "7b4da6a8adf7"
+  },
+  "ef6d051e4b8c-q1-1": {
+    "sha256_original": "d405519cefd8fbcfaf820aee7ac0d4600ee09c93d2be299043a9921c80723902",
+    "arquivo": "03-triagem\\correcoes\\ef6d051e4b8c-q1-1.md",
+    "motivo": "Corrigir enumerações de escada, com casos base explícitos.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "ef6d051e4b8c"
+  },
+  "ef6d051e4b8c-q6-6": {
+    "sha256_original": "280f07492b6c65bd2c8aa100d9adf49691fcf757ae379efe82a868399779e1bf",
+    "arquivo": "03-triagem\\correcoes\\ef6d051e4b8c-q6-6.md",
+    "motivo": "Índices corretos do algoritmo de dois ponteiros.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "ef6d051e4b8c"
+  },
+  "ef6d051e4b8c-q8-8": {
+    "sha256_original": "a8ede23ef22773025eb81e796d368daf05aeda0605bd1f5f9e0160badd731234",
+    "arquivo": "03-triagem\\correcoes\\ef6d051e4b8c-q8-8.md",
+    "motivo": "Corrigir a direção da indução no limite da contagem de OI.",
+    "revisor": "Codex (agente; não é revisão humana)",
+    "documento_id": "ef6d051e4b8c"
+  }
+}

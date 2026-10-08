@@ -9,7 +9,7 @@
   "assunto_provavel": "b2-06-np-completude",
   "escopo": "acervo",
   "erro": "",
-  "pipeline": "v4-vision=True",
+  "pipeline": "v5-vision=False",
   "paginas_extraidas": [
     {
       "pagina": null,
