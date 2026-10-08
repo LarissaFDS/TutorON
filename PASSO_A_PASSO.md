@@ -4,6 +4,14 @@ Resultados medidos e pendências: [RELATORIO_VALIDACAO.md](RELATORIO_VALIDACAO.m
 
 ## Abrir a validação
 
+No Ubuntu, o duplo clique em `.sh` pode abrir um editor. Para instalar o atalho **TutorON — Validação** no menu de aplicativos e na área de trabalho, execute uma vez, pelo terminal dentro da pasta do projeto:
+
+```bash
+bash instalar_atalho.sh
+```
+
+Depois abra o atalho. Se o Ubuntu pedir, clique com o botão direito nele e escolha **Permitir execução**. Com os serviços locais já ativos, também basta abrir http://127.0.0.1:8765 no navegador.
+
 No Ubuntu, dentro da pasta do projeto:
 
 ```bash
