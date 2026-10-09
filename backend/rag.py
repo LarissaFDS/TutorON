@@ -1,8 +1,8 @@
 import os
 
+import ollama
+
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
 from supabase import create_client
 
 
@@ -13,9 +13,7 @@ load_dotenv()
 # Clientes
 # ---------------------------------------------------------
 
-gemini = genai.Client(
-    api_key=os.getenv("GEMINI_API_KEY")
-)
+EMBEDDING_MODEL = "bge-m3"
 
 supabase = create_client(
     os.getenv("SUPABASE_URL"),
@@ -27,21 +25,14 @@ supabase = create_client(
 # Embeddings
 # ---------------------------------------------------------
 
-def generate_embedding(
-    text: str,
-    task_type: str
-) -> list[float]:
+def generate_embedding(text: str) -> list[float]:
 
-    response = gemini.models.embed_content(
-        model="gemini-embedding-001",
-        contents=text,
-        config=types.EmbedContentConfig(
-            task_type=task_type,
-            output_dimensionality=1536,
-        ),
+    response = ollama.embeddings(
+        model=EMBEDDING_MODEL,
+        prompt=text,
     )
 
-    return response.embeddings[0].values
+    return response["embedding"]
 
 
 # ---------------------------------------------------------
@@ -54,10 +45,7 @@ def search_context(
 ) -> list[dict]:
 
     # Embedding da pergunta
-    embedding = generate_embedding(
-        question,
-        "RETRIEVAL_QUERY"
-    )
+    embedding = generate_embedding(question)
 
     # Busca os chunks semanticamente mais próximos
     response = supabase.rpc(
