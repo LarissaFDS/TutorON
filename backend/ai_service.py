@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 
 from dotenv import load_dotenv
 from google import genai
+from google.genai import errors as genai_errors
 
 from .rag import search_context
 
@@ -63,6 +64,14 @@ class AIServiceError(Exception):
 # =========================================================
 # Gemini + RAG
 # =========================================================
+
+GEMINI_MODELS = [
+    "gemini-3.8-flash",
+    "gemini-flash-latest",
+    "gemini-3.7-flash",
+    "gemini-flash-lite-latest",
+]
+
 
 class GeminiAIService(AIService):
 
@@ -150,17 +159,41 @@ Pergunta do aluno:
 """
 
             # ---------------------------------------------
-            # 4. Gemini
+            # 4. Gemini (com fallback entre modelos)
             # ---------------------------------------------
 
-            response = self.client.models.generate_content(
-                model="gemini-3.8-flash",
-                contents=prompt,
-            )
+            response = None
+            used_model = None
+            errors_by_model: dict[str, str] = {}
 
-            if response.text is None:
+            for model in GEMINI_MODELS:
+
+                try:
+
+                    response = self.client.models.generate_content(
+                        model=model,
+                        contents=prompt,
+                    )
+
+                    if response.text is None:
+                        raise AIServiceError(
+                            f"{model} returned an empty response"
+                        )
+
+                    used_model = model
+                    break
+
+                except (genai_errors.APIError, AIServiceError) as exc:
+
+                    errors_by_model[model] = str(exc)
+                    continue
+
+            if response is None or used_model is None:
+
                 raise AIServiceError(
-                    "Gemini returned an empty response"
+                    "Nenhum modelo Gemini disponível no momento "
+                    f"(tentados: {list(errors_by_model.keys())}). "
+                    f"Erros: {errors_by_model}"
                 )
 
             elapsed_ms = round(
@@ -178,8 +211,14 @@ Pergunta do aluno:
                 metadata={
                     "chunks_used": len(chunks),
                     "latency_ms": elapsed_ms,
+                    "model_used": used_model,
+                    "fallback_errors": errors_by_model or None,
                 },
             )
+
+        except AIServiceError:
+
+            raise
 
         except Exception as exc:
 
