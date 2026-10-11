@@ -41,6 +41,10 @@ The Supabase `chunks` table must store embeddings as `vector(1024)` (bge-m3's na
 dimensionality) — see [backend/ingest.py](backend/ingest.py) and
 [backend/rag.py](backend/rag.py) for how embeddings are generated and queried.
 
+To create the database from scratch, paste [docs/schema.sql](docs/schema.sql) into the
+Supabase SQL Editor. It creates the `documents` and `chunks` tables and the
+`match_chunks` search function.
+
 ### Ingest course material
 
 Before asking questions, ingest the PDF referenced by `PDF_PATH` in

@@ -107,6 +107,11 @@ class GeminiAIService(AIService):
 
             for chunk in chunks:
 
+                source = chunk.get(
+                    "document_name",
+                    "Material sem título"
+                )
+
                 page = chunk.get(
                     "page_number"
                 )
@@ -117,7 +122,7 @@ class GeminiAIService(AIService):
                 )
 
                 context_parts.append(
-                    f"[Página {page}]\n{content}"
+                    f"[Fonte: {source} — Página {page}]\n{content}"
                 )
 
             context = "\n\n".join(
@@ -139,6 +144,11 @@ abaixo para responder.
 
 Não invente informações que não estejam
 no material.
+
+Cada trecho do material abaixo indica
+sua fonte (livro) e página entre colchetes.
+Ao final da resposta, informe de qual(is)
+livro(s) e página(s) você tirou a informação.
 
 Se a pergunta não puder ser respondida
 com base no material fornecido, diga
