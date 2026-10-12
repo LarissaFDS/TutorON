@@ -191,6 +191,15 @@ function Mostrar-Enderecos($url) {
 }
 
 function Servidor {
+    # Uma janela por vez: duas janelas vigiando o mesmo servidor ficariam reiniciando uma à outra.
+    $trava = New-Object System.Threading.Mutex($false, 'Local\TutorON-Servidor')
+    if (!$trava.WaitOne(0)) {
+        $url = Join-Path $Dados 'url-publica.txt'
+        Aviso 'O TutorON já está rodando em outra janela.'
+        if (Test-Path $url) { Mostrar-Enderecos ((Get-Content $url -Raw).Trim()) }
+        Start-Process "$Local/"
+        return
+    }
     Preparar-Python
     Preparar-Env
     Iniciar-Ollama
@@ -278,7 +287,13 @@ switch ($Acao) {
     'Servidor'  { Servidor }
     'Validacao' { Validacao }
     'Treinar'   { Treinar }
-    'Parar'     { Parar-Tudo; Ok 'servidor e túnel desligados' }
+    'Parar'     {
+        # Fecha também a janela do 1-Iniciar-Servidor (senão ela religa o servidor).
+        Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |
+            Where-Object { $_.ProcessId -ne $PID -and $_.CommandLine -match 'tutoron\.ps1' -and $_.CommandLine -match 'Servidor' } |
+            ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+        Parar-Tudo; Ok 'servidor e túnel desligados'
+    }
     'Testar'    {
         Preparar-Python
         & $Python -m pytest backend\tests tests_acervo -q -p no:cacheprovider; Falhou

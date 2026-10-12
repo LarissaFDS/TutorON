@@ -5,14 +5,14 @@ Etapas:
                 questões reservadas do benchmark nunca entram no treino.
   2. treino     QLoRA (4 bits) sobre o mesmo modelo de base servido pelo Ollama (Qwen3-8B), na GPU.
   3. mescla     aplica o adapter LoRA nos pesos originais, arquivo por arquivo (cabe em 16 GB de RAM).
-  4. ollama     importa os pesos mesclados como "tutoron-paa-ft", quantizados em Q4_K_M.
+  4. ollama     converte para GGUF (llama.cpp), quantiza em Q4_K_M e importa como "tutoron-paa-ft".
   5. avaliação  compara tutoron-paa (atual) e tutoron-paa-ft nas questões de validação, com a solução
                 de referência ao lado e nota de um juiz (Gemini) quando disponível.
 
 O modelo novo NÃO substitui o atual automaticamente. Depois de ler o relatório, para usar:
   TUTORON_MODELO_LOCAL=tutoron-paa-ft  no .env, e reinicie o 1-Iniciar-Servidor.bat.
 
-Uso: python scripts/treinar.py [--passos 60] [--base Qwen/Qwen3-8B] [--so-dados] [--pular-avaliacao]
+Uso: python scripts/treinar.py [--passos 30] [--base Qwen/Qwen3-8B] [--so-dados] [--pular-avaliacao]
 """
 from __future__ import annotations
 
@@ -117,13 +117,37 @@ def liberar_gpu() -> None:
         pass
 
 
+def tokenizar(tokenizer, linhas: list[dict], seq: int) -> list[dict]:
+    """Prompt mascarado (-100): a perda conta só a resposta do tutor.
+
+    O Qwen3 insere um bloco de raciocínio vazio (<think></think>) antes da resposta. Ele fica
+    fora da perda: se o modelo aprendesse a gerá-lo, pararia de raciocinar antes de responder,
+    e o raciocínio é justamente o que evita os erros de conta.
+    """
+    exemplos = []
+    for r in linhas:
+        prompt = tokenizer.apply_chat_template(r['prompt'], tokenize=False, add_generation_prompt=True)
+        completo = tokenizer.apply_chat_template(r['prompt'] + r['completion'], tokenize=False)
+        if not completo.startswith(prompt):
+            raise SystemExit('O template de chat não mantém o prompt como prefixo; confira a base escolhida.')
+        vazio = '<think>\n\n</think>\n\n'
+        if completo[len(prompt):].startswith(vazio):
+            prompt += vazio
+        ids_prompt = tokenizer(prompt, add_special_tokens=False)['input_ids']
+        ids = tokenizer(completo, add_special_tokens=False)['input_ids'][:seq]
+        rotulos = [-100] * min(len(ids_prompt), len(ids)) + ids[len(ids_prompt):]
+        if any(x != -100 for x in rotulos):
+            exemplos.append({'input_ids': ids, 'attention_mask': [1] * len(ids), 'labels': rotulos})
+    return exemplos
+
+
 def treinar(grupos: dict, base: str, passos: int, rank: int, seq: int) -> Path:
     titulo(f'2/5 Treino QLoRA de {base} ({passos} passos)')
     import torch
     from datasets import Dataset
-    from peft import LoraConfig, prepare_model_for_kbit_training
-    from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
-    from trl import SFTConfig, SFTTrainer
+    from peft import LoraConfig, get_peft_model
+    from transformers import (AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, DataCollatorForSeq2Seq,
+                              Trainer, TrainingArguments)
 
     if not torch.cuda.is_available():
         raise SystemExit('GPU NVIDIA com CUDA não encontrada.')
@@ -132,34 +156,38 @@ def treinar(grupos: dict, base: str, passos: int, rank: int, seq: int) -> Path:
     tokenizer = AutoTokenizer.from_pretrained(base)
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+    treino, validacao = tokenizar(tokenizer, grupos['treino'], seq), tokenizar(tokenizer, grupos['validacao'], seq)
+    print(f'   tokens por exemplo: até {max(len(e["input_ids"]) for e in treino + validacao)} (limite {seq})')
     modelo = AutoModelForCausalLM.from_pretrained(
         base, device_map={'': 0}, dtype=torch.bfloat16,
         quantization_config=BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type='nf4',
                                                bnb_4bit_use_double_quant=True, bnb_4bit_compute_dtype=torch.bfloat16))
-    modelo = prepare_model_for_kbit_training(modelo, use_gradient_checkpointing=True)
+    # Sem prepare_model_for_kbit_training: ele converte as embeddings (151 mil tokens) para float32
+    # e estoura os 8 GB da GPU. Checkpointing + gradiente na entrada bastam para o LoRA.
+    modelo.gradient_checkpointing_enable(gradient_checkpointing_kwargs={'use_reentrant': False})
+    modelo.enable_input_require_grads()
+    modelo.config.use_cache = False
+    modelo = get_peft_model(modelo, LoraConfig(
+        r=rank, lora_alpha=2 * rank, lora_dropout=0.05, bias='none', task_type='CAUSAL_LM',
+        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj']))
     print(f'   VRAM após carregar: {torch.cuda.memory_allocated() / 2**30:.1f} GB')
 
-    def ds(linhas):
-        return Dataset.from_list([{'prompt': r['prompt'], 'completion': r['completion']} for r in linhas])
-
-    config = SFTConfig(
-        output_dir=str(saida), max_steps=passos, max_length=seq, per_device_train_batch_size=1,
-        per_device_eval_batch_size=1, gradient_accumulation_steps=4, learning_rate=1e-4, lr_scheduler_type='cosine',
-        warmup_steps=max(1, passos // 10), gradient_checkpointing=True, completion_only_loss=True, bf16=True,
-        optim='paged_adamw_8bit', eval_strategy='steps', eval_steps=max(5, passos // 4), save_strategy='no',
-        logging_steps=5, report_to='none', seed=42, dataloader_pin_memory=False)
-    treinador = SFTTrainer(
-        model=modelo, processing_class=tokenizer, args=config, train_dataset=ds(grupos['treino']),
-        eval_dataset=ds(grupos['validacao']),
-        peft_config=LoraConfig(r=rank, lora_alpha=2 * rank, lora_dropout=0.05, bias='none', task_type='CAUSAL_LM',
-                               target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj']))
+    argumentos = TrainingArguments(
+        output_dir=str(saida), max_steps=passos, per_device_train_batch_size=1, per_device_eval_batch_size=1,
+        gradient_accumulation_steps=4, learning_rate=5e-5, lr_scheduler_type='cosine', warmup_steps=max(1, passos // 10),
+        bf16=True, optim='paged_adamw_8bit', eval_strategy='steps', eval_steps=max(5, passos // 4), save_strategy='no',
+        logging_steps=5, report_to='none', seed=42, dataloader_pin_memory=False, remove_unused_columns=False)
+    treinador = Trainer(model=modelo, args=argumentos, train_dataset=Dataset.from_list(treino),
+                        eval_dataset=Dataset.from_list(validacao),
+                        data_collator=DataCollatorForSeq2Seq(tokenizer, label_pad_token_id=-100, pad_to_multiple_of=8))
     inicio = time.monotonic()
     resultado = treinador.train()
     avaliacao = treinador.evaluate()
-    treinador.save_model(str(saida))
+    modelo.save_pretrained(str(saida))
     write_json(PASTA_TRABALHO / 'resultado-treino.json', {
         'base': base, 'passos': passos, 'rank': rank, 'max_length': seq, 'minutos': round((time.monotonic() - inicio) / 60, 1),
         'metricas_treino': resultado.metrics, 'metricas_validacao': avaliacao,
+        'historico': treinador.state.log_history,
         'pico_vram_gb': round(torch.cuda.max_memory_allocated() / 2**30, 2),
         'aviso': 'Loss menor não prova que o tutor melhorou: leia o relatório de avaliação.'})
     print(f'   loss de validação: {avaliacao.get("eval_loss"):.3f}; pico de VRAM '
@@ -223,15 +251,50 @@ def mesclar(base: str, adapter: Path) -> Path:
 
 
 # ---------------------------------------------------------------------------- 4. ollama
+LLAMACPP_VERSAO = '0.6.0'
+LLAMACPP_ZIP = f'https://github.com/ggml-org/llama.cpp/archive/refs/tags/v{LLAMACPP_VERSAO}.zip'
+
+
+def conversor_gguf() -> Path:
+    """Conversor oficial do llama.cpp (só os scripts Python), baixado uma vez para .tools/llamacpp."""
+    pasta = ROOT / '.tools/llamacpp' / f'llama.cpp-{LLAMACPP_VERSAO}'
+    if not (pasta / 'convert_hf_to_gguf.py').exists():
+        import io
+        import zipfile
+        import httpx
+        print('   baixando o conversor GGUF do llama.cpp (uma vez)...')
+        dados = httpx.get(LLAMACPP_ZIP, follow_redirects=True, timeout=300).content
+        with zipfile.ZipFile(io.BytesIO(dados)) as z:
+            prefixo = f'llama.cpp-{LLAMACPP_VERSAO}/'
+            nomes = [n for n in z.namelist() if n.startswith(prefixo) and (
+                n.count('/') == 1 and n.endswith('.py') or n.startswith((prefixo + 'gguf-py/', prefixo + 'conversion/')))]
+            z.extractall(pasta.parent, nomes)
+    return pasta
+
+
 def importar_no_ollama(pasta: Path, nome: str) -> None:
+    """safetensors -> GGUF bf16 (llama.cpp) -> Q4_K_M (llama-quantize do Ollama) -> ollama create.
+
+    O import direto de safetensors do Ollama usa o runtime MLX, que não existe no Windows.
+    """
     titulo(f'4/5 Importando no Ollama como {nome} (Q4_K_M)')
+    conversor = conversor_gguf()
+    saida = PASTA_TRABALHO / 'gguf'
+    saida.mkdir(parents=True, exist_ok=True)
+    bf16, q4 = saida / f'{nome}-bf16.gguf', saida / f'{nome}-q4_k_m.gguf'
+    env = {**os.environ, 'PYTHONPATH': str(conversor / 'gguf-py'), 'PYTHONUTF8': '1'}
+    subprocess.run([sys.executable, str(conversor / 'convert_hf_to_gguf.py'), str(pasta), '--outtype', 'bf16',
+                    '--outfile', str(bf16)], check=True, env=env)
+    subprocess.run([str(OLLAMA.parent / 'lib/ollama/llama-quantize.exe'), str(bf16), str(q4), 'Q4_K_M'], check=True)
+    bf16.unlink()
     atual = subprocess.run([str(OLLAMA), 'show', 'tutoron-paa', '--modelfile'], capture_output=True, text=True,
                            encoding='utf-8', check=True).stdout
     linhas = [ln for ln in atual.splitlines() if not ln.startswith('FROM ') and not ln.startswith('#')]
-    modelfile = pasta / 'Modelfile'
-    modelfile.write_text(f'FROM {pasta}\n' + '\n'.join(linhas) + '\n', encoding='utf-8')
+    modelfile = saida / 'Modelfile'
+    modelfile.write_text(f'FROM {q4}\n' + '\n'.join(linhas) + '\n', encoding='utf-8')
     env = {**os.environ, 'OLLAMA_MODELS': str(ROOT / '.tools/models'), 'OLLAMA_HOST': '127.0.0.1:11434'}
-    subprocess.run([str(OLLAMA), 'create', nome, '-f', str(modelfile), '--quantize', 'q4_K_M'], check=True, env=env)
+    subprocess.run([str(OLLAMA), 'create', nome, '-f', str(modelfile)], check=True, env=env)
+    q4.unlink()  # o Ollama guardou uma cópia em .tools/models
 
 
 # ---------------------------------------------------------------------------- 5. avaliação
@@ -256,7 +319,7 @@ async def avaliar(grupos: dict, nome: str) -> Path:
     placar = {'tutoron-paa': [], nome: []}
     gemini = [m for m in llm.cascade() if m.provider == 'gemini']
     for i, caso in enumerate(casos, 1):
-        print(f'   [{i}/{len(casos)}] {caso["pergunta"][:70]}')
+        print(f'   [{i}/{len(casos)}] {caso["pergunta"][:70]}', flush=True)
         linhas += [f'## {i}. {caso["pergunta"]}', '', f'*Origem: {caso["origem"]}*', '', '**Referência:**', '',
                    caso['referencia'], '']
         for modelo in ('tutoron-paa', nome):
@@ -277,7 +340,8 @@ async def avaliar(grupos: dict, nome: str) -> Path:
             if 'nota' in julgamento:
                 placar[modelo].append(int(julgamento['nota']))
             nota = f'nota {julgamento["nota"]}/2 — {julgamento.get("motivo", "")}' if 'nota' in julgamento else 'sem juiz disponível'
-            linhas += [f'### {modelo} ({segundos:.0f} s) — {nota}', '', resposta, '']
+            citada = '\n'.join('> ' + ln if ln.strip() else '>' for ln in resposta.splitlines())
+            linhas += [f'### {modelo} ({segundos:.0f} s) — {nota}', '', citada, '']
     await llm.client.aclose()
     resumo = ['## Placar', '', '| Modelo | Nota média (0–2) | Casos julgados |', '|---|---:|---:|']
     for modelo, notas in placar.items():
@@ -292,7 +356,7 @@ async def avaliar(grupos: dict, nome: str) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--passos', type=int, default=60)
+    parser.add_argument('--passos', type=int, default=30, help='~4 épocas com o dataset atual; mais passos sobreajustam')
     parser.add_argument('--base', default=os.environ.get('TUTORON_TREINO_BASE', 'Qwen/Qwen3-8B'))
     parser.add_argument('--nome', default='tutoron-paa-ft')
     parser.add_argument('--rank', type=int, default=16)
