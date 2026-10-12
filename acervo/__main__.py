@@ -5,8 +5,7 @@ from .common import ROOT, init, read_json
 from .extract import inventory, extract
 from .curate import organize, triage
 from .retrieval import build, search
-from .evaluate import make_questions, evaluate, offline
-from .app import serve, summarize
+from .evaluate import make_questions, evaluate
 
 
 def report(root=ROOT):
@@ -15,7 +14,6 @@ def report(root=ROOT):
     items = read_json(root / '02-acervo/itens.json', [])
     index = read_json(root / '04-rag/indice.json', {})
     results = read_json(root / '06-avaliacao/resultados.json', [])
-    pairs = read_json(root / '07-validacao-alunos/pares.json', [])
     extracts = [read_json(root / '01-extraido' / (d['id'] + '.json'), {}) for d in docs]
     pages = [p for d in extracts for p in d.get('paginas_extraidas', [])]
     candidates = [c for p in pages for c in p.get('visao_candidata', [])]
@@ -41,7 +39,7 @@ def report(root=ROOT):
               '- Ollama local; Gemini opcional com fallback. As chamadas reais registram provedor, modelo e tempo.', '',
               '## 4. Validar com questões, alunos e professor', '',
               f'- {len(read_json(root / "06-avaliacao/questoes.json", []))} questões no conjunto; {sum(r["status"] == "ok" for r in results)} respostas reais concluídas na rodada atual.',
-              f'- {len(pairs)} pares offline; {summarize(root)["total"]} registros de avaliação salvos (não equivalem, por si, a um estudo com alunos).',
+              '- Avaliações de alunos: coletadas pelo site (modo Validação) em dados/validacao/avaliacoes.jsonl.',
               '- Comparação A/B sorteada no servidor; notas separadas para clareza, confiança e utilidade.',
               '- Professor: pendente. As expressões regulares medem cobertura lexical, não prova de correção.', '',
               '## Limitações e revisão manual necessária', '',
@@ -51,7 +49,7 @@ def report(root=ROOT):
               '- Nenhum fine-tuning foi executado. Dataset só admite pares de alta confiança, com aprovação e fonte verificável.',
               '- A comparação rápida antiga em 05-modelo/comparacao.json pertence ao hardware Windows de setembro; não é o resultado desta validação Linux.',
               '- Inferência e acervo são locais; GitHub recebe código e artefatos de validação. Não há publicação do servidor nem envio a Gemini nesta rodada.', '',
-              'Execução: iniciar_validacao.sh (Linux) ou iniciar_validacao.bat (Windows). avaliar_modelos executa quatro condições, incluindo controle somente com instruções.']
+              'Execução: python -m acervo pipeline --embeddings refaz OCR, curadoria e índice; python -m acervo avaliar --gerar executa as quatro condições.']
     lines += ['', '## Resultados técnicos do checklist', '',
               '| Condição | Respostas concluídas | Critérios encontrados / aplicáveis |',
               '|---|---:|---:|']
@@ -61,7 +59,7 @@ def report(root=ROOT):
         total = sum(r['avaliacao']['total'] for r in complete)
         lines.append(f'| {scenario} | {len(complete)} | {hits} / {total} |')
     lines += ['', 'Esses números não são acurácia matemática. Fontes recuperadas e exclusões estão em 06-avaliacao/relatorio.md; respostas, tempos de geração e eventuais repetições estão em 06-avaliacao/resultados.json.']
-    (root / 'RELATORIO_QUINTA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
+    (root / 'docs/validacao-pre-mvp/RELATORIO_QUINTA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8', newline='\n')
 
 
 def dataset(root=ROOT):
@@ -76,26 +74,9 @@ def dataset(root=ROOT):
     (root / '05-modelo/dataset-finetuning.jsonl').write_text(''.join(json.dumps(p, ensure_ascii=False) + '\n' for p in records), encoding='utf-8', newline='\n')
 
 
-def show_summary(root=ROOT):
-    data = summarize(root)
-    sessions = read_json(root / '07-validacao-alunos/sessoes.json', {})
-    pending = sum(not s.get('votado') for s in sessions.values())
-    print(f'Avaliações salvas: {data["total"]} (comparações abertas sem voto: {pending})')
-    if not data['total']:
-        print('Nenhum voto registrado ainda em 07-validacao-alunos/respostas.csv.')
-        print('Rode ./iniciar_validacao.sh, gere uma comparação e envie a avaliação (notas + preferência).')
-        return
-    for e in data['por_questao']:
-        print(f'\n{e["questao"]} ({e["origem"]}) — {e["votos"]} voto(s)')
-        print(f'  Preferência: TutorON {e["preferencia_tutoron"]:.0f}% · genérico {e["preferencia_generico"]:.0f}% · empate {e["preferencia_empate"]:.0f}%')
-        for criterion in ('clareza', 'confianca', 'utilidade'):
-            print(f'  {criterion:<10} TutorON {e[criterion + "_tutoron"]:.2f} · genérico {e[criterion + "_generico"]:.2f}')
-    print('\nDetalhes em 07-validacao-alunos/resumo.json.')
-
-
 def main():
     parser = argparse.ArgumentParser(description='TutorON — acervo local de PAA')
-    parser.add_argument('acao', choices=['inventario', 'extrair', 'organizar', 'triar', 'indexar', 'avaliar', 'offline', 'servir', 'resumo', 'pipeline', 'relatorio', 'buscar'])
+    parser.add_argument('acao', choices=['inventario', 'extrair', 'organizar', 'triar', 'indexar', 'avaliar', 'pipeline', 'relatorio', 'buscar'])
     parser.add_argument('--visao', action='store_true')
     parser.add_argument('--reprocessar', action='store_true')
     parser.add_argument('--ia', action='store_true')
@@ -106,7 +87,6 @@ def main():
     parser.add_argument('--limite-ia', type=int)
     parser.add_argument('--pasta')
     parser.add_argument('--pergunta')
-    parser.add_argument('--porta', type=int, default=8765)
     args = parser.parse_args()
     init()
     if args.acao in ('inventario', 'pipeline'): inventory(extra=args.pasta)
@@ -117,9 +97,6 @@ def main():
     if args.acao in ('avaliar', 'pipeline'):
         make_questions()
         evaluate(provider=args.provedor, generate=args.gerar, selected=args.questoes.split(',') if args.questoes else None)
-    if args.acao in ('offline', 'pipeline'): offline()
-    if args.acao == 'servir': serve(port=args.porta)
-    if args.acao == 'resumo': show_summary()
     if args.acao == 'buscar': print(json.dumps(search(args.pergunta or ''), ensure_ascii=False, indent=2))
     dataset()
     report()

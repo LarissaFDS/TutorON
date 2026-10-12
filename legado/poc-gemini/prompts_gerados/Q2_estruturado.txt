@@ -1,0 +1,86 @@
+### SYSTEM INSTRUCTION (cole em 'System instructions' no AI Studio)
+Você é o TutorON, monitor da disciplina Projeto e Análise de Algoritmos (PAA) da UFAL (Instituto de Computação), ministrada pelo Prof. Rian Gabriel Pinheiro.
+
+Seu objetivo é ajudar o aluno a responder a questão como ela é cobrada NESTA disciplina.
+
+Regras:
+1. Use o CONTEXTO ACADÊMICO como referência principal: siga a mesma estrutura de resposta, notação e vocabulário usados nas provas, listas e resoluções fornecidas.
+2. Responda exatamente ao que foi perguntado. Se o enunciado da prova pede algo específico (ex.: "mostre a recorrência", "prove a corretude"), inclua isso explicitamente.
+3. Cite de qual material veio cada ideia importante, usando o id entre colchetes (ex.: [c02]).
+4. Os materiais incluem resoluções de alunos, que podem conter erros. Se algum trecho do contexto estiver impreciso ou incorreto, NÃO o reproduza: corrija e avise o aluno de forma explícita ("Atenção: o material [cX] diz ... mas o correto é ...").
+5. Não invente informações sobre a disciplina (critérios de correção, pesos, preferências do professor) que não estejam no contexto. Conhecimento geral correto pode ser usado, mas indique quando algo não vem do material.
+6. Escreva em português do Brasil, de forma didática, com a resposta pronta para ser reproduzida numa prova, seguida de uma breve dica de estudo.
+
+### PROMPT
+CONTEXTO ACADÊMICO (trechos recuperados da base de materiais de PAA):
+
+[c04] Fonte: Reavaliação 28/03/2024 (Q2, 1 ponto) e 1ª Prova 2023 (Q7, 1 ponto) — Prof. Rian Gabriel Pinheiro; também Lista geral, exercício 2.8 (tipo: prova)
+Considere o seguinte algoritmo recursivo, cujo argumento n é um inteiro positivo.
+
+1: procedure ASTERISCO(n)
+2:   if n > 0 then
+3:     ASTERISCO(n − 1)
+4:     for i ← 1 → n do
+5:       imprima "*"
+6:     end for
+7:     ASTERISCO(n − 1)
+8:   end if
+9: end procedure
+
+Para um dado valor de n, quantos asteriscos serão impressos em uma chamada de
+ASTERISCO(n)? Mostre a recorrência.
+
+(Variante em outra prova, Q8: ASTERISCO com um laço de 1 a n seguido de uma única chamada
+ASTERISCO(⌊n/2⌋) — "Mostre a recorrência e escreva a solução usando notação assintótica.")
+
+-----
+
+[c05] Fonte: Lista de Exercícios 2 (Cap. 2 — Complexidade de Algoritmos), questão 9 — resolução de alunos (tipo: resolucao_lista)
+9. Considere o algoritmo recursivo ASTERISCO(n). Para um dado valor de n, quantos asteriscos
+serão impressos em uma chamada de ASTERISCO(n)?
+
+Solução: Considerando A(n) como a quantidade de asteriscos impressos dado um valor n, temos que:
+
+  A(n) = 0,                se n = 0
+  A(n) = 2^(n+1) − (n + 2), se n ≥ 1
+
+Como exemplo, temos:
+  Para n = 1, 2^2 − (1+2) = 4 − 3 = 1 asterisco impresso;
+  Para n = 2, 2^3 − (2+2) = 8 − 4 = 4 asteriscos impressos;
+  Para n = 3, 2^4 − (3+2) = 16 − 5 = 11 asteriscos impressos;
+  Para n = 4, 2^5 − (4+2) = 32 − 6 = 26 asteriscos impressos;
+  ...
+  Para n = i, 2^(i+1) − (i+2) asteriscos impressos.
+
+-----
+
+[c06] Fonte: Lista de Exercícios 2, questão 10(a) — resolução de alunos (método de desenvolver/iterar a recorrência) (tipo: resolucao_lista)
+10. (a) Mostre que a solução de T(n) = T(n − 1) + n; T(1) = 1 é O(n²).
+
+Solução: Desenvolvendo a recorrência, temos que:
+  T(n)     = T(n − 1) + n        (1)
+  T(n − 1) = T(n − 2) + n − 1    (2)
+  T(n − 2) = T(n − 3) + n − 2    (3)
+De (1) e (2): T(n) = T(n − 2) + (n − 1) + n
+De (3) e (4): T(n) = T(n − 3) + (n − 2) + (n − 1) + n
+  ...
+  T(n) = T(n − k) + (n − k + 1) + (n − k + 2) + ... + (n − 1) + n
+Neste caso, o algoritmo encerra quando n − k = 1 ⇒ k = n − 1
+  T(n) = T(1) + 2 + 3 + ... + (n − 2) + (n − 1) + n
+  T(n) = 1 + 2 + 3 + ... + (n − 2) + (n − 1) + n  ⇒  T(n) = n·(n + 1)/2
+Para mostrar que T(n) é O(n²) basta definir f(n) = n·(n+1)/2 e g(n) = n², sendo assim basta
+encontrar n0 e c, tais que f(n) < c·g(n), ∀n ≥ n0; neste sentido, basta tomar n0 = 1 e c = 3,
+por exemplo. Neste caso, vemos que T(n) = O(n²).
+
+=====
+
+PERGUNTA DO ALUNO:
+Quantos asteriscos são impressos em uma chamada de ASTERISCO(n)? O professor pede para mostrar a recorrência.
+
+procedure ASTERISCO(n)
+  if n > 0 then
+    ASTERISCO(n − 1)
+    for i ← 1 → n do imprima "*"
+    ASTERISCO(n − 1)
+  end if
+end procedure

@@ -3,12 +3,11 @@
 Não há bundler no projeto. Este módulo junta os arquivos na ordem certa
 para quem precisa deles:
 
-- ``acervo/app.py`` serve ``/design.css`` e ``/text.js`` para a página de
-  validação (funciona offline).
-- ``run_demo.py`` embute o CSS no relatório HTML, que é um arquivo avulso.
+- ``backend/main.py`` serve ``/design.css`` para o site (modo Tutor e Validação).
+- ``legado/poc-gemini/run_demo.py`` embute o CSS no relatório HTML da PoC antiga.
 
 Para mudar cor, tipo, espaço ou raio, edite ``design/tokens/``. Regras e
-motivos estão em ``DESIGN.md`` na raiz.
+motivos estão em ``docs/DESIGN.md``.
 """
 from __future__ import annotations
 

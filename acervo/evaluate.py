@@ -2,7 +2,6 @@ import json
 import re
 import time
 from collections import Counter
-from html.parser import HTMLParser
 
 from .common import ROOT, TOPICS, digest, progress, read_json, write_json
 from .retrieval import search, context
@@ -18,7 +17,7 @@ def checkpoint(label, regex, kind='deve'):
 
 def make_questions(root=ROOT):
     items = read_json(root / '02-acervo/itens.json', [])
-    original = read_json(root / 'questoes.json', [])
+    original = read_json(root / 'legado/poc-gemini/questoes.json', [])
     questions = []
     for q in original:
         refs = [r['id'] for r in items if any(r['id'] == ref or r['id'].startswith(ref + '-q') for ref in q['contexto'])]
@@ -61,6 +60,8 @@ def make_questions(root=ROOT):
 
 def assess(q, answer, structured):
     # Reutiliza o avaliador e as exceções da PoC (inclusive citações de erros corrigidos).
+    import sys
+    sys.path.insert(0, str(ROOT / 'legado/poc-gemini'))
     from run_demo import avaliar_checkpoints, cobertura
     checks = avaliar_checkpoints(q, answer, 'estruturado' if structured else 'generico')
     ok, total = cobertura(checks)
@@ -141,69 +142,3 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
     progress('6. Avaliação', f'{len(questions)} questões definidas; {sum(r["status"] == "ok" for r in results)} respostas reais nesta execução. Resultados de recuperação e geração separados. Revisão com professor pendente.', root)
     return results
 
-
-class HistoricalParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.pre = None
-        self.blocks = []
-        self.depth = 0
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'pre':
-            self.pre = []
-
-    def handle_data(self, data):
-        if self.pre is not None:
-            self.pre.append(data)
-
-    def handle_endtag(self, tag):
-        if tag == 'pre' and self.pre is not None:
-            self.blocks.append(''.join(self.pre))
-            self.pre = None
-
-
-def offline(root=ROOT):
-    results = read_json(root / '06-avaliacao/resultados.json', [])
-    questions = {q['id']: q for q in read_json(root / '06-avaliacao/questoes.json', [])}
-    pairs = []
-    for qid, q in questions.items():
-        answers = {r['cenario']: r for r in results if r['questao'] == qid and r['status'] == 'ok'}
-        if 'generico' in answers and 'rag_automatica' in answers:
-            pairs.append({'id': qid, 'pergunta': q['pergunta'], 'origem': 'avaliacao_local_rag_automatica',
-                          **{name: {**answers[s]['resposta'], 'modelo_digest': answers[s].get('modelo_digest'),
-                                    'fontes_sha256': answers[s].get('fontes_sha256', {}),
-                                    'indice_sha256': answers[s].get('indice_sha256')}
-                             for name, s in [('generico','generico'), ('tutoron','rag_automatica')]}})
-    if not pairs:
-        # Transcrições reais do relatório fornecido, nunca respostas inventadas/mock.
-        source = root / '00-originais/referencias/TutorON_PoC_Gemini_PAA.html'
-        if source.exists():
-            parser = HistoricalParser()
-            parser.feed(source.read_text(encoding='utf-8'))
-            blocks = parser.blocks
-            prompts = [(i, b) for i, b in enumerate(blocks) if ('Como resolver em tempo linear o problema da subsequência' in b or 'Considere um grafo não direcionado conexo' in b) and not b.lstrip().startswith('- main:') and len(b) < 6000]
-            candidates = {'soma': [], 'grafos': []}
-            for i, prompt in prompts:
-                if i+1 >= len(blocks): continue
-                answer = blocks[i+1]
-                if answer.lstrip().startswith('- main:') or len(answer.strip()) < 200: continue
-                if 'CONTEXTO ACADÊMICO:' in prompt:
-                    kind = 'tutoron'
-                elif 'Você é uma IA' not in prompt and len(prompt) < 600:
-                    kind = 'generico'
-                else:
-                    continue
-                group = 'soma' if 'subsequência' in prompt else 'grafos'
-                candidates[group].append((kind, prompt.split('PERGUNTA DO ALUNO:')[-1].strip(), answer))
-            for name, candidates_for_q in candidates.items():
-                choices = {kind: (prompt, answer) for kind, prompt, answer in candidates_for_q}
-                if set(choices) == {'generico', 'tutoron'}:
-                    pairs.append({'id': 'historico-' + name, 'pergunta': choices['generico'][0],
-                                  'origem': 'poc_historica_gemini_contexto_manual',
-                                  **{kind: {'texto': choices[kind][1], 'modelo': 'Gemini (chat, relatório fornecido)', 'provedor': 'registro_historico'} for kind in choices}})
-    if not pairs:
-        raise RuntimeError('Sem pares reais completos. Gere a avaliação antes de iniciar a validação.')
-    write_json(root / '07-validacao-alunos/pares.json', pairs)
-    progress('7. Respostas offline', f'{len(pairs)} pares reais disponíveis; origem registrada em cada par. Não foram fabricadas respostas nem votos.', root)
-    return pairs

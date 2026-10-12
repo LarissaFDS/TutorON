@@ -1,0 +1,4 @@
+### (sem system instruction)
+
+### PROMPT
+Por que o algoritmo força bruta do problema COMPOSTO (testar os divisores de 2 até ⌊n/2⌋) não é considerado polinomial, se ele faz só O(n) divisões?
