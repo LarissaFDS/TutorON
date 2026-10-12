@@ -1,0 +1,9 @@
+# 1a81ca283132-q2-2
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L5.pdf | página(s): 2
+
+Versão derivada corrigida por agente; original SHA-256: 1637b8c6524194dd12e98be0dacd0e06189cae1df413f518817d5404bcc4ee16. Não é aprovação do professor.
+
+Robô coletor de moedas em matriz de r linhas e c colunas, movendo para direita ou baixo.
+Defina dp[i][j]=moeda[i][j]+max(dp[i-1][j],dp[i][j-1]), considerando apenas predecessores válidos. A origem tem dp[0][0]=moeda[0][0]. Grave o predecessor escolhido em cada célula. A contagem máxima é dp[r-1][c-1]; reconstrua o caminho seguindo predecessores até a origem e invertendo a ordem.
+Em empates, qualquer predecessor ótimo produz um caminho ótimo. Tempo O(rc); memória O(rc) com reconstrução. Se somente a soma for pedida, a memória pode cair para O(c). O OCR do código não deve ser usado como programa executável.

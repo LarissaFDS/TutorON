@@ -1,0 +1,12 @@
+{
+  "pagina": 7,
+  "texto": "Solu¸c˜ao:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\n1\ndef\ngetCPUTime(user):\n2３4567\nreturnuser.cpurime\ndef server_sched(users_array):\nusers_array.sort(key=getcpurime) # Ordena de maneira ascendente ém n log(n)\n#pelotempo deservico、Tempos de servico menor，\n#reduzemo tempo de esperaentre astarefas\nforuserinusers_array:\nserver.execute(user.task)\n#Paracadausuarioo(n)noarraydeusuarios\n#Executaataskfornecidapelousuario O(1)\n\n\n7. Considere o seguinte problema.\nEntrada: Grafo n˜ao direcionado G = (V, E ); pesos de arestas we ; subconjunto\nde v´ertices U ⊂V.\nSa´ıda: A ´Arvore Geradora mais leve na qual os n´os de U s˜ao folhas (pode\nhaver outras folhas na ´arvore tamb´em)\n\nSolu¸c˜ao: Para encontrar a sa´ıda desejada, ou seja, a ´arvore geradora mais leve na\nqual os n´os de U s˜ao folhas, necessitamos fazer alguns passos, descritos a seguir:\n\nO primeiro ´e a construir¸c˜ao Grafo G′ = (V ′, E′), onde\n\nV ′ = V −U e E′ = {(u, v) | u, v ∈V −U ∧(u, v) ∈E}\n\nAp´os isso, deve-se aplicar o algoritmo de Kruskal a fim de encontrar a ´arvore geradora\nm´ınima de G′, que ´e T ′. Caso T ′ n˜ao exista, ent˜ao a ´arvore geradora mais leve ´e\nimpratic´avel e n˜ao podemos encontrar uma solu¸c˜ao. Isso ´e explicado pois assumindo\nque h´a duas ´arvores na floresta geradora para o grafo G′, dever´a haver um n´o u ∈U\nque conecte as duas ´arvores na floresta, mas isso far´a com que u deixe de ser uma\nfolha, resultando em uma contradi¸c˜ao.\n\nNo entanto, caso T ′ exista, prosseguimos para a constru¸c˜ao de um conjunto de arestas\nE’, onde:\n\nE′ : ∀(u, v) ∈E′ | u ∈U ∧v /∈U\n\nE o pseudo-c´odigo ´e dado a seguir:\n\nfor each u in U:\n\ngenerateSet(u) # filtra as arestas pelo seu peso\nfor all edges u,v in E # por ordem de peso\n\nif encontrar(u) != encontrar(v):\n\nadd edge u,v to T'\nunion(u,v)\nreturn T'\n\nPage vii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p7-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

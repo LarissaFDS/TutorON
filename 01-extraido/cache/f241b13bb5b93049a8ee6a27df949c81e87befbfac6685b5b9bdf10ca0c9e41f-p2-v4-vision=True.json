@@ -1,0 +1,10 @@
+{
+  "pagina": 2,
+  "texto": "- 1 + 1 + 2 degraus\n- 2 + 2 degraus\n- 2 + 1 + 1 degraus\n- 2 + 2 + 1 degraus\n⇒Degrau(4) = 5 maneiras.\n\nPara n=5\nPodemos subir a escada de cinco maneiras:\n- 1 + 1 + 1 + 1 +1 degraus\n- 1 + 1 + 1 + 2 degraus\n- 1 + 1 + 2 + 1 degraus\n- 1 + 2 + 1 + 1 degraus\n- 1 + 2 + 2 degraus\n- 2 + 1 + 1 + 1 degraus\n- 2 + 1 + 2 degraus\n- 2 + 2 + 1 degraus\n- 2 + 2 + 1 degraus\n⇒Degrau(5) = 8 maneiras.\n\nEm resumo, obtemos as seguintes rela¸c˜oes:\n\nDegrau(1) = 1\nDegrau(2) = 2\nDegrau(3) = 3\nDegrau(4) = 5\nDegrau(5) = 8\n\nPortanto, ´e poss´ıvel notar que a fun¸c˜ao Degrau se assimila `a sequˆencia de Fibonacci\n\n\n\n\n\n⇒Desse modo, a fun¸c˜ao Degrau(n) =\n\n1,\nse\nn = 1\n2,\nse\nn = 2\nDegrau(n −1) + Degrau(n −2), se\nn ≥3\n\n\n\n\n2. Na linguagem de sua escolha, implemente dois algoritmos para calcular o\nen´esimo n´umero de Fibonacci: (a) o algoritmo baseado na defini¸c˜ao recursiva\ne (b) o algoritmo iterativo.\nPlote um gr´afico com o tempo de ambos os\nalgoritmos para cada valor de n = 1, . . . , nmax. Em que nmax ´e o maior valor\nde n para o qual ambos programas executam em menos de 1 minuto em seu\ncomputador\n\nPage ii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p2.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,11 @@
+# Servidor TutorON (site, cascata Gemini -> modelo local, RAG). Python 3.11+.
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+pydantic==2.11.3
+httpx==0.28.1
+python-dotenv==1.2.3
+# Ingestão de PDFs no Supabase (backend/ingest.py)
+pypdf==6.19.0
+# Testes
+pytest==8.3.5
+pytest-asyncio==0.26.0

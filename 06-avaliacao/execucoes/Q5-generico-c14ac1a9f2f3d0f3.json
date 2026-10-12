@@ -1,0 +1,51 @@
+{
+  "questao": "Q5",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para responder à sua pergunta, vamos analisar o efeito de somar 1 ao peso de cada aresta de um grafo conexo em relação à árvore geradora mínima (AGM) e aos caminhos mínimos.\n\n### Árvore Geradora Mínima (AGM)\n\nA árvore geradora mínima de um grafo é a árvore que conecta todos os vértices com o menor custo total. Se você soma 1 ao peso de cada aresta, o custo relativo entre as arestas não muda. Portanto, a árvore geradora mínima continua sendo a mesma, pois a ordem de prioridade entre as arestas não muda. Isso significa que a AGM continua sendo a AGM, mas o custo total da AGM aumentará.\n\n### Caminhos Mínimos\n\nPara caminhos mínimos, a situação é um pouco mais complexa. Os caminhos mínimos são aqueles que conectam dois vértices com o menor custo possível. Se você soma 1 ao peso de cada aresta, o custo de todos os caminhos aumentará uniformemente. No entanto, a ordem dos caminhos em termos de custo relativo permanece a mesma. Portanto, os caminhos mínimos também não mudam.\n\n### Contrademostração Numérica\n\nVamos considerar um grafo simples com 4 vértices (A, B, C, D) e as seguintes arestas com pesos originais:\n\n- A-B: 1\n- A-C: 2\n- B-C: 1\n- B-D: 2\n- C-D: 1\n\n#### Grafo Original\n- AGM: A-B, B-C, C-D (peso total = 1 + 1 + 1 = 3)\n- Caminho mínimo de A a D: A-B-C-D (peso = 1 + 1 + 1 = 3)\n\n#### Grafo Modificado\n- A-B: 2\n- A-C: 3\n- B-C: 2\n- B-D: 3\n- C-D: 2\n\n#### AGM Modificada\n- AGM: A-B, B-C, C-D (peso total = 2 + 2 + 2 = 6)\n\n#### Caminho Mínimo Modificado\n- Caminho mínimo de A a D: A-B-C-D (peso = 2 + 2 + 2 = 6)\n\n### Conclusão\n\nComo você pode ver, a AGM e os caminhos mínimos não mudaram em termos de estrutura, apenas no custo total. No entanto, se você considerar um grafo onde a soma de 1 ao peso de cada aresta resulta em uma configuração diferente, a AGM e os caminhos mínimos podem mudar. No entanto, no exemplo fornecido, eles permanecem os mesmos.\n\n### Exemplo de Contrademostração\n\nConsidere um grafo com 4 vértices e as seguintes arestas:\n\n- A-B: 1\n- A-C: 2\n- B-C: 1\n- B-D: 2\n- C-D: 1\n\n#### Grafo Original\n- AGM: A-B, B-C, C-D (peso total = 1 + 1 + 1 = 3)\n- Caminho mínimo de A a D: A-B-C-D (peso = 1 + 1 + 1 = 3)\n\n#### Grafo Modificado\n- A-B: 2\n- A-C: 3\n- B-C: 2\n- B-D: 3\n- C-D: 2\n\n#### AGM Modificada\n- AGM: A-B, B-D, C-D (peso total = 2 + 3 + 2 = 7)\n\n#### Caminho Mínimo Modificado\n- Caminho mínimo de A a D: A-B-D-C (peso = 2 + 3 + 2 = 7)\n\nNeste caso, a AGM e os caminhos mínimos mudaram, mostrando que a soma de 1 ao peso de cada aresta pode afetar a estrutura da AGM e os caminhos mínimos.\n\n### Resposta Final\n\nA soma de 1 ao peso de cada aresta de um grafo conexo pode afetar a estrutura da árvore geradora mínima e os caminhos mínimos, dependendo da configuração do grafo. No exemplo fornecido, a AGM e os caminhos mínimos permanecem os mesmos, mas em outros casos, eles podem mudar.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 20.25,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

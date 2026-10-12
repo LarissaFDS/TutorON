@@ -1,0 +1,86 @@
+### SYSTEM INSTRUCTION (cole em 'System instructions' no AI Studio)
+Você é o TutorON, monitor da disciplina Projeto e Análise de Algoritmos (PAA) da UFAL (Instituto de Computação), ministrada pelo Prof. Rian Gabriel Pinheiro.
+
+Seu objetivo é ajudar o aluno a responder a questão como ela é cobrada NESTA disciplina.
+
+Regras:
+1. Use o CONTEXTO ACADÊMICO como referência principal: siga a mesma estrutura de resposta, notação e vocabulário usados nas provas, listas e resoluções fornecidas.
+2. Responda exatamente ao que foi perguntado. Se o enunciado da prova pede algo específico (ex.: "mostre a recorrência", "prove a corretude"), inclua isso explicitamente.
+3. Cite de qual material veio cada ideia importante, usando o id entre colchetes (ex.: [c02]).
+4. Os materiais incluem resoluções de alunos, que podem conter erros. Se algum trecho do contexto estiver impreciso ou incorreto, NÃO o reproduza: corrija e avise o aluno de forma explícita ("Atenção: o material [cX] diz ... mas o correto é ...").
+5. Não invente informações sobre a disciplina (critérios de correção, pesos, preferências do professor) que não estejam no contexto. Conhecimento geral correto pode ser usado, mas indique quando algo não vem do material.
+6. Escreva em português do Brasil, de forma didática, com a resposta pronta para ser reproduzida numa prova, seguida de uma breve dica de estudo.
+
+### PROMPT
+CONTEXTO ACADÊMICO (trechos recuperados da base de materiais de PAA):
+
+[c01] Fonte: 1ª Prova — PAA, Prof. Rian Gabriel Pinheiro, 02/03/2023 (Questão 2, 2 pontos) (tipo: prova)
+Questão 2 [2 pontos]: Considere o seguinte algoritmo:
+
+1: procedure ALGORITMO X(vetor A[1, ..., n], inicio, fim)
+2:   if inicio = fim then
+3:     return A[inicio]
+4:   end if
+5:   meio ← inicio + (fim − inicio)/2
+6:   a ← X(A, inicio, meio)
+7:   b ← X(A, meio + 1, fim)
+8:   if a < b then
+9:     return b
+10:  else
+11:    return a
+12:  end if
+13: end procedure
+
+Explique o que ele faz e prove sua corretude.
+
+-----
+
+[c02] Fonte: Resolução de aluno da Questão 2 (1ª Prova), corrigida pelo professor com nota 2,0/2,0 — transcrição do manuscrito (tipo: resolucao_corrigida)
+Questão 2. O algoritmo X encontra o maior elemento em um vetor. Faremos a prova de sua
+corretude utilizando indução forte no tamanho do vetor (n).
+
+Teorema: O algoritmo X retorna corretamente o maior elemento de um vetor.
+
+Caso base: se tivermos um vetor de tamanho n = 1, então inicio = fim e o algoritmo entra
+na linha 3, retornando o 1º e único elemento de A.
+
+Hipótese de indução: O algoritmo X determina corretamente o maior elemento de um vetor
+de tamanho k ≤ n.
+
+Passo indutivo: Provaremos que X funciona para um vetor de tamanho n + 1.
+Para um vetor de tamanho n + 1, o algoritmo divide-o em duas partes a partir do cálculo do
+seu índice médio na variável meio. Sendo assim, as duas partes do vetor são inseridas em
+duas chamadas recursivas a X. Dessa forma, X calcula o maior valor em cada um dos
+subarranjos A[1 .. inicio + (fim − inicio)/2] e A[(inicio + (fim − inicio)/2) + 1 .. n], que são,
+portanto, menores do que k.
+Assim, segundo a hipótese de indução, as chamadas recursivas a X funcionarão corretamente
+e, na linha 8, o algoritmo retornará o maior dentre os dois valores retornados em a e b.
+Assim, está provado.
+
+[Correção do professor: ✓ — 2,0]
+
+-----
+
+[c03] Fonte: 1ª Prova 31/07/2023 (Q2), 1ª Prova 11/12/2023 (Q3), Prova Final 04/04/2024 (Q1) — mesmo professor (tipo: prova)
+O mesmo "Algoritmo X" aparece em várias provas, sempre com o enunciado
+"Explique o que ele faz e prove sua corretude" (ou "Diga o que ele faz e prove sua corretude").
+
+- Prova Final 04/04/2024, Questão 1 [2 pontos]: versão idêntica à da 1ª Prova de 02/03/2023
+  (retorna o maior entre a e b).
+- 1ª Prova 11/12/2023, Questão 3 [1 ponto]: mesma versão, com o caso extra
+  "if inicio > fim then return −∞".
+- 1ª Prova 31/07/2023, Questão 2 [2 pontos]: variante com
+  "if inicio > fim then return 0" e "return a + b" (soma dos elementos).
+
+=====
+
+PERGUNTA DO ALUNO:
+Como eu explico o que esse algoritmo faz e provo a corretude dele?
+
+procedure ALGORITMO X(vetor A[1..n], inicio, fim)
+  if inicio = fim then return A[inicio]
+  meio ← inicio + (fim − inicio)/2
+  a ← X(A, inicio, meio)
+  b ← X(A, meio + 1, fim)
+  if a < b then return b else return a
+end procedure

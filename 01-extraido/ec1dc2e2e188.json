@@ -1,0 +1,22 @@
+{
+  "id": "ec1dc2e2e188",
+  "arquivo": "materiais\\c09_lista7_q1_classes_resolucao.md",
+  "copia": "00-originais\\ingestao\\8b6d19c7d3970752156a9a9eef3ff5f96f7af1adc328a8fc748762e6331a1d40\\c09_lista7_q1_classes_resolucao.md",
+  "sha256": "8b6d19c7d3970752156a9a9eef3ff5f96f7af1adc328a8fc748762e6331a1d40",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-06-np-completude",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c09\nfonte: \"Lista de Exercícios 7 (Cap. 7 — NP-Completude), questão 1 — resolução de alunos (NÃO revisada pelo professor)\"\ntipo: resolucao_lista\ntopico: classes P, NP, NP-completo, redução polinomial\n---\n• O que significa dizer que um problema Π pode ser polinomialmente reduzido a um problema Π′?\nEstamos afirmando que existe um algoritmo polinomial X que transforma qualquer instância Y de Π\nem uma instância X(Y) de Π′ de tal forma que X(Y) tem solução se e somente se Y tem solução.\n\n• Defina as classes P, NP e problema NP-completo:\nInicialmente podemos definir um problema computacional como polinomial se há um algoritmo cujo\nconsumo de tempo, em seu pior caso, limita o problema em uma função polinomial. Esse tipo de\nproblema é o que caracteriza a classe P.\nJá a classe NP é caracterizada pelos problemas de decisões nos quais a sua solução é dada por um\nalgoritmo não determinístico. Essa classe abrange todos os problemas P mas também alguns outros\nque se comportam de maneira diferenciada. Em outras palavras, a classe NP inclui os problemas em\nque ninguém conseguiu até hoje comprovar se são polinomiais ou intratáveis. Também é dito que,\npara os problemas em NP, o certificado para o SIM pode ser dito em tempo polinomial.\nExemplos de NP são: Bin packing e Knapsack.\nOs problemas NP-completos são definidos como uma subclasse da classe NP que inclui os problemas\nmais difíceis da classe NP. Se for encontrado um algoritmo polinomial que resolva qualquer um dos\nproblemas NP-completos, então é possível encontrar um algoritmo polinomial para todos os outros\nproblemas e poderíamos comprovar a igualdade P = NP.\n\n• P ∩ NP = ∅? Não. Na verdade P ⊆ NP, pois qualquer algoritmo polinomial que soluciona problemas\nde decisão em P pode ser considerado um algoritmo não-determinístico com fase inicial vazia.\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

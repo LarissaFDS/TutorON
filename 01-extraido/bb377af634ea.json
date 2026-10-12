@@ -1,0 +1,24 @@
+{
+  "id": "bb377af634ea",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\paaprova.webp",
+  "copia": "00-originais\\ingestao\\ec9958c2a3928465375ff13feea347c6d1367466677f76ce33152a894f11786f\\paaprova.webp",
+  "sha256": "ec9958c2a3928465375ff13feea347c6d1367466677f76ce33152a894f11786f",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Astitye tte Federal de Alng\n\nProjeto de Compritação UrAL\n\nwy Análiso de Aly\n\nfim then\nend if\n— X(A, mei\n\nend if\nend procedure\n\nExplique\n\nQuestão 3 [2 pontos)\n\nfunções dos inteiras nos reais. Justif\nnstifiqu\nO que significa “T(n) é O(f(n))\n\n2. É verdade que 20n% +\nÉ verdade que in:\n\n4. O que significa “T(n) 6 A(F(n))\"\nO que significa “T(n) =n + Mnlg\n\nQuestão 4 [1 ponto):\n\nResolva # récorréncia.\n\nQuestão 5 [1 ponto]\nCalcule a complexidade de tempo do seguinte algoritm\n\na fet\nwhile j <n do\nRes\nwhile k\nSeul call)\npa\nonda\njegel\nend while\nIi: end procedure",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\bb377af634ea\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

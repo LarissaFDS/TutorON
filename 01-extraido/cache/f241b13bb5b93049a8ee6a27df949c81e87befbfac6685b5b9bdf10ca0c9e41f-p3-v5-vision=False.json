@@ -1,0 +1,14 @@
+{
+  "pagina": 3,
+  "texto": "Solu¸c˜ao:\n\n(a) Fibonacci Recursivo:\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nlong fib recursivo(long mt\n\nif (n==0) return @;\nif (n= =1) return 1;\n\nreturn fib recursi vo(n-1)+fib recursivo(n-2);\n\n\n(b) Fibonacci Iterativo:\n\n\n[OCR parcial do recorte p3-fig2.png; conferir símbolos na imagem]\nlong fib iterativollong nf\n\nlong a=0,b=1,C3\nfor(int ja1;i<=njit+)\n4\nc = ar;\na=b;\nb= ci;\n3\n\nreturn às\n\n\nGr´afico Tempo x Entrada\n\n\n[OCR parcial do recorte p3-fig3.png; conferir símbolos na imagem]\nCusto de Tempo (s)\n\n60\n\n40\n\n= Fibonacci Recursivo = Fibonacci lterativo\n\n20\n\nVILA\n\nEntrada N\n\n\nPage iii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig1.png",
+    "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig2.png",
+    "01-extraido\\figuras\\ef6d051e4b8c\\p3-fig3.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

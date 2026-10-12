@@ -1,0 +1,13 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nvoid aliceAlgoritm(int 1)\n\n{\n\ngraph S(n)>\nboot convidadosIn];\nrejeitados;\n\nqueuecint\n8;\n\nint entry, aceitos\n\n(int i= ® ;\nqui quem a pessoa G.getPerson(i) << ” conhece. pigite -2 para encerrar.\n\ncout << \"Insira à\n\n{\n\ncout << “Person 40\ncin >> entry;\n\ni\n\n(entry > 8 entry 1= i+ 1)\n\nentry\n\n4))\nce entry <<\" já possuem conexão.”\n\neqisiate convidado *\n\n(G.isEdge(i, entry\ncout << \"Convidado\n\nG.addedgeçi, entry - 1)5\n\n(entry = 5 + 4)\ncout << \"Essa entrada não é válida!” << endl;\n(entry 1)\n«convidado ” << i + 2 << ~ Tem » ce G.getoegree(t)\n\n\" conexões.” endl;\n\ncout <<\ncout << “Entrada inválida, tente novamente! “5\n(entry |= 15\n\n«\n\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\n(r\n\nEr]sopepyauos\n\n“o = [r]sopeprauos\n“(Dysnd-sopeyyafau\n\n(5 > suotasuuoa s\n\n(Dosugagaas-9))\n“(E *r)a8paancuas-y\n\nfer fu > x fg F que)\n\n'Qdodsopeyracay\n\nO3u0u3- sopra rafay £ que\n\n(Ofadua-sopez raras )\n\n“o = [T]sopeprauos\n*(Dysnd-sopeyrafay\n\n(S > suoryawmos - yu || q Su0T322UU03)\n(F)souBagog+g ~ suora saves\n\n2 *T = EE}sopeprauos\n\nF\n\n“o = T aun)\n\n\nPage v",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig1.png",
+    "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

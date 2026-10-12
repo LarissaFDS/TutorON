@@ -1,0 +1,11 @@
+{
+  "pagina": 5,
+  "texto": "5. Suponha que esteja escolhendo entre os seguintes trˆes algoritmos:\n\n     • Algoritmo A resolve problemas dividindo-os em cinco subproblemas de\n      metade do tamanho, solucionando cada subproblema recursivamente e,\n        ent˜ao, combinando as solu¸c˜oes em tempo linear.\n     • Algoritmo B resolve problemas de tamanho n resolvendo recursivamente\n       dois subproblemas de tamanho n 1 e, ent˜ao, combinando as solu¸c˜oes em\n     tempo constante.\n     • Algoritmo C soluciona problemas de tamanho n dividindo-os em nove\n      subproblemas de tamanho n/3, resolvendo recursivamente cada subpro-\n      blema e, ent˜ao, combinando as respostas em tempo O(n2).\n\n  Qual o tempo de execu¸c˜ao de cada um desses algoritmos (em nota¸c˜ao O) e\n  qual vocˆe escolheria?\n\n\n     Solu¸c˜ao:\n\n     Utilizando o Teorema Mestre para os algoritmos A e C e resolvendo a recorrˆencia\n    para o algoritmo B, temos que:\n    TA(n) = 5 · T  n2 + O(n) ⇒TA(n) = O(nlog2(5)) = O(n2.32)\n    TB(n) = 2 · T (n −1) + O(1) ⇒TB(n) = O(2n)\n    TC(n) = 9 · T  n3 + O(n2) ⇒TC(n) = O(n2 · log2(n))\n\n   A escolha seria o algoritmo C, que funciona em tempo de execu¸c˜ao O(n2 log2(n).\n\n\n6. Dado A[1, .  .  .  , n], um vetor ordenado de inteiros distintos, vocˆe quer saber\n   se existe um ´ındice  i para o qual A[i] =  i.  Dˆe um algoritmo de divis˜ao-e-\n  conquista que execute em tempo O(log n).\n\n\n     Solu¸c˜ao: Tendo em vista que temos um vetor ordenado e esse ´e o princ´ıpio b´asico\n    para o uso do algoritmo de busca bin´aria, que de fato utiliza a t´ecnica de dividir e\n     conquistar, podemos us´a-lo para a resolu¸c˜ao de nosso problema. Com isso:\n\n\n\n\n\n                                   Page v\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p5-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

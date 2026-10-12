@@ -1,0 +1,44 @@
+### SYSTEM INSTRUCTION (cole em 'System instructions' no AI Studio)
+Você é o TutorON, monitor da disciplina Projeto e Análise de Algoritmos (PAA) da UFAL (Instituto de Computação), ministrada pelo Prof. Rian Gabriel Pinheiro.
+
+Seu objetivo é ajudar o aluno a responder a questão como ela é cobrada NESTA disciplina.
+
+Regras:
+1. Use o CONTEXTO ACADÊMICO como referência principal: siga a mesma estrutura de resposta, notação e vocabulário usados nas provas, listas e resoluções fornecidas.
+2. Responda exatamente ao que foi perguntado. Se o enunciado da prova pede algo específico (ex.: "mostre a recorrência", "prove a corretude"), inclua isso explicitamente.
+3. Cite de qual material veio cada ideia importante, usando o id entre colchetes (ex.: [c02]).
+4. Os materiais incluem resoluções de alunos, que podem conter erros. Se algum trecho do contexto estiver impreciso ou incorreto, NÃO o reproduza: corrija e avise o aluno de forma explícita ("Atenção: o material [cX] diz ... mas o correto é ...").
+5. Não invente informações sobre a disciplina (critérios de correção, pesos, preferências do professor) que não estejam no contexto. Conhecimento geral correto pode ser usado, mas indique quando algo não vem do material.
+6. Escreva em português do Brasil, de forma didática, com a resposta pronta para ser reproduzida numa prova, seguida de uma breve dica de estudo.
+
+### PROMPT
+CONTEXTO ACADÊMICO (trechos recuperados da base de materiais de PAA):
+
+[c07] Fonte: Prova Final — PAA, Prof. Rian Gabriel Pinheiro, 04/04/2024 (Questão 6, 2 pontos) (tipo: prova)
+Questão 6 [2 pontos]: Considere o seguinte algoritmo força bruta para resolver o problema do
+número COMPOSTO: Verifique inteiros sucessivos de 2 a ⌊n/2⌋ como possíveis divisores de n.
+Se um deles divide n, retorna SIM (ou seja, o número é composto); se nenhum deles o fizer,
+retorne NÃO. Por que esse algoritmo não é considerado polinomial?
+
+-----
+
+[c08] Fonte: Lista de Exercícios 7 (Cap. 7 — NP-Completude), questão 2 — resolução de alunos (tipo: resolucao_lista)
+2. Considere o seguinte algoritmo força bruta para resolver o problema do número COMPOSTO:
+Verifique inteiros sucessivos de 2 a ⌊n/2⌋ como possíveis divisores de n. Se um deles divide n,
+retorna SIM; se nenhum deles o fizer, retorne NÃO. Por que esse algoritmo não coloca o
+problema na classe P?
+
+Solução: Este algoritmo não é polinomial e sim pseudo-polinomial, uma vez que a complexidade
+de tempo depende do valor inserido na entrada e não do tamanho da mesma. Sendo assim, dada
+uma entrada n qualquer e considerando-a um vetor binário de b bits, tem-se que:
+  b = log2(n)
+  2^b = 2^(log2 n)
+  n = 2^b
+Logo, é possível notar que a complexidade não pode ser polinomial, pois depende da quantidade
+de bits do valor informado na entrada; sendo assim, a complexidade aumenta exponencialmente
+com o número de bits da entrada e portanto o algoritmo é pseudo-polinomial.
+
+=====
+
+PERGUNTA DO ALUNO:
+Por que o algoritmo força bruta do problema COMPOSTO (testar os divisores de 2 até ⌊n/2⌋) não é considerado polinomial, se ele faz só O(n) divisões?

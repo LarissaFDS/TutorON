@@ -1,0 +1,78 @@
+{
+  "questao": "Q4",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c10-q1-1",
+    "c10-q2-2",
+    "f38bb8142136-q8-8",
+    "f38bb8142136-q6-6"
+  ],
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [
+    "c09"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 2.797000000002299,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "As classes P, NP e NP-completo são conceitos fundamentais na teoria da complexidade de computação. Vamos definir cada uma delas:\n\n1. **Classe P**: \n   - **Definição**: A classe P contém todos os problemas que podem ser resolvidos pelo algoritmo de determinação em tempo polinomial. Em outras palavras, se um problema está em P, existem algoritmos que podem resolver esse problema em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Significado**: Se um problema está em P, ele pode ser resolvido eficientemente, pois a solução pode ser encontrada rapidamente, independentemente do tamanho do problema.\n\n2. **Classe NP**:\n   - **Definição**: A classe NP contém todos os problemas para os quais uma solução pode ser verificada em tempo polinomial. Em outras palavras, se um problema está em NP, existem algoritmos que podem verificar uma dada solução em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Significado**: Se um problema está em NP, a solução pode ser verificada rapidamente, mas não necessariamente encontrada rapidamente. O problema do NP é se todos os problemas em NP também estão em P, ou seja, se uma solução pode ser encontrada rapidamente.\n\n3. **Classe NP-completo**:\n   - **Definição**: A classe NP-completo contém os problemas mais difíceis dentro da classe NP. Um problema é NP-completo se é um problema NP e se pode ser usado para reduzir qualquer outro problema em NP a ele em tempo polinomial. Isso significa que se um problema NP-completo pode ser resolvido em tempo polinomial, então todos os problemas em NP podem ser resolvidos em tempo polinomial.\n   - **Significado**: Se um problema está em NP-completo, ele é tanto NP quanto NP-difícil. Isso significa que não apenas uma solução pode ser verificada rapidamente, mas também é extremamente difícil de encontrar uma solução.\n\nEssas definições são fundamentais para entender a complexidade relativa de problemas computacionais e a hipótese de que P ≠ NP, que é uma das grandes questões abertas na teoria da computação.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 11.09400000000096,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": false
+      }
+    ],
+    "acertos": 3,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

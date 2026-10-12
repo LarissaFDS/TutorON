@@ -1,0 +1,60 @@
+{
+  "questao": "Q5",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "[1] Este problema envolve a influência de alterações nos pesos das arestas de um grafo sobre a árvore geradora mínima e os caminhos mínimos.\n\nPara responder, vamos considerar um contraexemplo numérico.\n\nConsidere um grafo simples com 4 vértices (A, B, C, D) e 4 arestas com pesos iniciais: AB=1, AC=2, AD=3, BC=4. A árvore geradora mínima neste caso é A-B-C-D, com custo total de 1+1+4=6.\n\nSe somarmos 1 a cada aresta, os pesos se tornam: AB=2, AC=3, AD=4, BC=5. A nova árvore geradora mínima é A-B-C-D, com custo total de 2+2+5=9. Portanto, a árvore geradora mínima não continua sendo mínima após a alteração.\n\nPara os caminhos mínimos, consideremos o caminho A-D, cujo custo inicial é 3. Após a alteração, o custo do mesmo caminho é 4. Portanto, os caminhos mínimos também não continuam sendo mínimos após a alteração.\n\nEsta configuração numérica demonstra que, ao somar 1 a cada aresta de um grafo conexo, a árvore geradora mínima e os caminhos mínimos não continuam sendo mínimos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 53.59963568400053,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

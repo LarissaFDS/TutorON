@@ -1,0 +1,51 @@
+{
+  "questao": "Q7",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante em uma sequência de n-1 números distintos de 1 a n usando apenas O(1) de memória, podemos utilizar a técnica de soma aritmética. Aqui está o passo a passo:\n\n1. **Cálculo da Soma Esperada**:\n   - A soma dos números de 1 a n pode ser calculada usando a fórmula da soma de uma progressão aritmética:\n     \\[\n     S = \\frac{n \\cdot (n + 1)}{2}\n     \\]\n   - No caso de n-1 números, a soma esperada seria:\n     \\[\n     S_{esperada} = \\frac{n \\cdot (n + 1)}{2} - n\n     \\]\n     ou simplificando:\n     \\[\n     S_{esperada} = \\frac{n \\cdot (n - 1)}{2}\n     \\]\n\n2. **Cálculo da Soma dos Números Dados**:\n   - Somamos todos os números que foram fornecidos.\n\n3. **Encontrar o Número Faltante**:\n   - O número faltante pode ser encontrado subtraindo a soma dos números dados da soma esperada:\n     \\[\n     \\text{Número Faltante} = S_{esperada} - \\text{Soma dos Números Dados}\n     \\]\n\n### Exemplo:\nSe n = 5, então os números esperados são 1, 2, 3, 4, 5. A soma esperada é:\n\\[\nS_{esperada} = \\frac{5 \\cdot 4}{2} = 10\n\\]\nSe os números dados são 1, 2, 3, 5, a soma dos números dados é:\n\\[\n1 + 2 + 3 + 5 = 11\n\\]\nEntão, o número faltante é:\n\\[\n10 - 11 = -1 \\quad \\text{(erro de cálculo, corrigindo:)} \\quad 10 - 11 + 4 = 3\n\\]\n\n### Tempo e Espaço de Complexidade:\n- **Tempo de Complexidade**: O(n) para somar os números dados.\n- **Espaço de Complexidade**: O(1) para armazenar as variáveis de soma e cálculos.\n\n### Problemas de Overflow:\n- **Overflow de Inteiros**: Se os números forem muito grandes, pode ocorrer overflow na soma. Para evitar isso, pode-se usar tipos de dados de maior precisão (como `long` ou `BigInteger` em linguagens que suportam) ou realizar cálculos de forma iterativa para evitar a soma direta.\n\n### Código em Python:\n```python\ndef encontrar_faltante(n, numeros):\n    # Soma esperada\n    soma_esperada = n * (n + 1) // 2\n    # Soma dos números dados\n    soma_numeros = sum(numeros)\n    # Número faltante\n    numero_faltante = soma_esperada - soma_numeros\n    return numero_faltante\n\n# Exemplo de uso\nn = 5\nnumeros = [1, 2, 3, 5]\nprint(encontrar_faltante(n, numeros))  # Saída: 4\n```\n\nEste método é eficiente em termos de memória e funciona bem para valores de n razoavelmente grandes, desde que sejam cuidadosos com overflow.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 14.891000000000531,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

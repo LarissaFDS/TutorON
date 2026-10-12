@@ -1,0 +1,12 @@
+{
+  "pagina": 9,
+  "texto": "9. Dado um grafo simples G(V, E ) e dois v´ertices s, t ∈V , projete um algoritmo\nde programa¸c˜ao dinˆamica que encontre a quantidade de caminhos simples\ndistintos entre s e t\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nvector<int> topo sort(int freg[], int &raph size)\n\n{\n\nqueue<int> fila;\n\nti-e; ic My im)f\n1f (!freqfi}) fila.push(i);\n\nvector<int> grafo_ordenado;\n\nwhile (!fíla.empty()) {\nint u Fila. front();\nfila.pop();\nBrafo ordenado. push back(u);\n\nfor (int i = 8; i«< Brafo inicial[u].size(); im) 4\nfrealgrafo inicial [u)f1]]\n\nif (freq[grafo_inicial{u}{i}]--@)\nfila. push(grafo_inicial(uj[ij);\n+\n3\nreturn 8rafo_ordenado;\n}\nint Caminhos distintos(int destino, int a, int Fregr])\n\nt\n\nvector<int> grafo ordenado - topo sort(freg, n);\n\nt estados anteriores[n] = { 4};\n\nsstados_anteriores{destino] = 1;\n\nfor (int i - grafo ordenado. size() “2 io g; i--) {\npos = Brafo ordenado[i];\nfor (int 5 j\n\n}\n\nreturn estados anteriores[g];\n\n\nPage ix",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

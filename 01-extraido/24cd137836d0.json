@@ -1,0 +1,111 @@
+{
+  "id": "24cd137836d0",
+  "arquivo": "00-originais\\referencias\\TutorON - vale a pena.pdf",
+  "copia": "00-originais\\ingestao\\f01470872f0a7d0627e687a2cdacadd88bfe62245e4fd90e2e3f25edc89af80b\\TutorON - vale a pena.pdf",
+  "sha256": "f01470872f0a7d0627e687a2cdacadd88bfe62245e4fd90e2e3f25edc89af80b",
+  "tipo": ".pdf",
+  "paginas": 8,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-01-corretude-complexidade",
+  "escopo": "referencia",
+  "erro": "",
+  "pipeline": "v4-vision=True",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Empreendedorismo\n\nUniversidade Federal de Alagoas\n\nTutorON\n\nMini-PoC: o material da disciplina melhora a resposta da IA?\n\nMatheus · Otávio · Cleversson · Larissa\n\n\n[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\nEMPREENDEDORISMO\nUniversidade Federal de Alagoas\nUNIVERSIDADEFEDERAL\nDEALAGOAS\nTutorON\nMini-PoC: o material da disciplina melhora a resposta da IA?\nMATHEUS · OTAVIO · CLEVERSSON · LARISSA",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p1-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "A IA genérica responde “no geral”. A prova da\ndisciplina não é “no geral”.\n\nHoje\n\nTutorON\n\nAntes de responder, a IA consulta o material\nda própria disciplina: provas antigas, listas e\ngabaritos (RAG).\n\nIgnora como a disciplina cobra: formato\nda prova, regras das listas, vocabulário\ndo professor\nPode errar com confiança, e o aluno\nnão percebe\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nA IA genérica responde \"no geral\". A prova da\ndisciplina nao é \"no geral\".\nHoje\nTutorON\nIgnora como a disciplina cobra: formato\nda prova, regras das listas, vocabulario\nAntes de responder, a IA consulta o material\ndo professor\nda propria disciplina: provas antigas, listas e\n Pode errar com confianca, e o aluno\ngabaritos (RAG).\nnao percebe",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p2-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "A mesma pergunta em três condições\n\nPergunta do aluno\n\nMaterial da disciplina\n\nIA\n\nquestões de provas reais\n\nescolhido à mão, simula a busca\n\nresponde com o contexto\n\nCondições\n\nDuas rodadas\n\nA · Genérico: só a pergunta\n\nGemini (chat): 2 questões, roteiro e análise com\no ChatGPT\n\nB · Controle: prompt de tutor, sem material\n\nC · Contexto: prompt de tutor + material\n\nOllama, local (qwen2.5:7b): 4 questões de provas\nde PAA\n\n\n[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nA mesma pergunta em tres condicoes\nPergunta do aluno\nMaterial da disciplina\nIA\nquestoes deprovasreais\nescolhido a mao, simula a busca\nrespondecomocontexto\nCONDICOES\nDUASRODADAS\nA · Genérico: so a pergunta\nGemini (chat): 2 questoes, roteiro e analise com\no ChatGPT\nB · Controle: prompt de tutor, sem material\nOllama, local (qwen2.5:7b): 4 questoes de provas\nC · Contexto: prompt de tutor + material\nde PAA",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p3-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "No Ollama, com o material, a IA cumpriu bem\nmais critérios da disciplina\n41%\n\nA · Genérico\n9 de 22 critérios\n32%\n\nB · Controle\n7 de 22 critérios\n70%\n\nC · Com o material\n16 de 23 critérios\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNo Ollama, com o material, a IA cumpriu bem\nmais criterios da disciplina\n41%\n32%\n70%\nA· Generico\nB·Controle\nC · Com o material\n9 de 22 critérios\n7 de 22 critérios\n16 de 23 critérios",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p4-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "O que mudou nas respostas\n\nRecorrência\n\nComplexidade\n\nRegra da lista\n\nOllama\n\nOllama\n\nGemini\n\nSem material\n\nSem material\n\nSem material\n\nFórmula errada: n(n+1).\n\nPara [ 5,  2,  8], responde  2.\n\nSe contradiz: diz que O(n) “não é\npolinomial”.\n\nCom material\n\nCom material\n\nCom material\n\nSegue a lista: sequência vazia\nvale 0.\n\nRecorrência certa, A(n) =\n2A(n 1) + n. Ainda errou a\nconta final.\n\nA resposta da prova: n = 2^b,\nlogo pseudo-polinomial.\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nO que mudou nas respostas\nRecorrencia\nComplexidade\nRegra da lista\nOllama\nOllama\nGemini\nSEMMATERIAL\nSEMMATERIAL\nSEMMATERIAL\nFormula errada: n(n+1).\nSe contradiz: diz que O(n) “nao é\nPara [-5, -2, -8], responde -2.\npolinomial\".\nCOMMATERIAL\nCOMMATERIAL\nRecorréncia certa, A(n) =\nCOMMATERIAL\nSegue a lista: sequencia vazia\n2A(n-1) + n. Ainda errou a\nA resposta da prova: n = 2^b,\nvale 0.\nconta final.\nlogo pseudo-polinomial.",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p5-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "O material ajuda, mas não faz milagre\n\nMaterial com erro contamina a resposta\n\nUma resolução de aluno com definição imprecisa de NP foi repetida pela IA.\n\nSe a IA já acerta, o material só alonga\n\nNa questão de grafos (Gemini), a resposta genérica já estava certa.\n\nO acervo precisa ser preparado\n\nProvas escaneadas e gabaritos à mão não têm texto legível: sem OCR, a IA não os enxerga.\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nO material ajuda, mas nao faz milagre\nMaterial com erro contamina a resposta\nUma resolucao de aluno com definicao imprecisa de NP foi repetida pela IA.\nSe a IA ja acerta, o material so alonga\nNa questao de grafos (Gemini), a resposta genérica ja estava certa.\nO acervo precisa ser preparado\nProvas escaneadas e gabaritos a mao nao tem texto legivel: sem OcR, a IA nao os enxerga.",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p6-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "Vale construir a RAG do TutorON, com curadoria\ndo material.\n\n1\n\n2\n\n3\n\n4\n\nDigitalizar e revisar o\nacervo (OCR)\n\nAutomatizar a busca\ndo trecho certo\n\nOrganizar por questão,\ncom fonte e\nconfiabilidade\n\nValidar com 10 a 20\nquestões e com o\nprofessor\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nVale construir a RAG do TutorON, com curadoria\ndo material.\n2\n3\nDigitalizar e revisar 0\nOrganizar por questao,\nAutomatizar a busca\nValidar com 10 a 20\nacervo (OCR)\ncom fonte e\ndo trecho certo\nquestoes e com o\nconfiabilidade\nprofessor",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p7-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "OBRIGADO!\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\nOBRIGADO!",
+      "metodo": "rapidocr+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\24cd137836d0\\p8.png",
+      "figuras": [
+        "01-extraido\\figuras\\24cd137836d0\\p8-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

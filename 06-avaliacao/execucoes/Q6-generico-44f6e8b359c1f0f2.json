@@ -1,0 +1,57 @@
+{
+  "questao": "Q6",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [
+    "1a81ca283132-q4-4"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para resolver o problema da subsequência contígua de soma máxima em tempo linear, podemos usar a técnica conhecida como Algoritmo de Kadane. Este algoritmo segue a convenção da Lista 5, que refere-se a uma forma de resolver problemas de programação dinâmica de maneira eficiente.\n\n### Recorrência do Algoritmo de Kadane\n\nA recorrência para o Algoritmo de Kadane pode ser expressa da seguinte forma:\n\n- **Definição do Problema:**\n  - `maxSubarraySum(i)` é a função que retorna a soma máxima de uma subsequência contígua que termina no índice `i`.\n\n- **Regra de Recorrência:**\n  - `maxSubarraySum(i) = max(arr[i], arr[i] + maxSubarraySum(i-1))`\n\n- **Base do Algoritmo:**\n  - `maxSubarraySum(0) = arr[0]`\n\n- **Resultado Final:**\n  - O valor máximo encontrado durante a execução do algoritmo é o resultado final.\n\n### Passo a Passo do Algoritmo de Kadane\n\n1. Inicialize duas variáveis:\n   - `maxSoFar` para armazenar a soma máxima encontrada até o momento.\n   - `maxEndingHere` para armazenar a soma máxima que termina no índice atual.\n\n2. Itere sobre o array:\n   - Atualize `maxEndingHere` como `max(arr[i], maxEndingHere + arr[i])`.\n   - Atualize `maxSoFar` se `maxEndingHere` for maior que `maxSoFar`.\n\n### Aplicação no Exemplo [5, 15, -30, 10, -5, 40, 10]\n\n1. **Inicialização:**\n   - `maxSoFar = 5`\n   - `maxEndingHere = 5`\n\n2. **Iteração:**\n   - `i = 1`: `maxEndingHere = max(15, 5 + 15) = 15`, `maxSoFar = 15`\n   - `i = 2`: `maxEndingHere = max(-30, 15 - 30) = 15`, `maxSoFar = 15`\n   - `i = 3`: `maxEndingHere = max(10, 15 + 10) = 25`, `maxSoFar = 25`\n   - `i = 4`: `maxEndingHere = max(-5, 25 - 5) = 20`, `maxSoFar = 25`\n   - `i = 5`: `maxEndingHere = max(40, 20 + 40) = 40`, `maxSoFar = 40`\n   - `i = 6`: `maxEndingHere = max(10, 40 + 10) = 50`, `maxSoFar = 50`\n\n3. **Resultado Final:**\n   - A soma máxima é `50`.\n\n### Aplicação no Exemplo [-5, -2, -8]\n\n1. **Inicialização:**\n   - `maxSoFar = -5`\n   - `maxEndingHere = -5`\n\n2. **Iteração:**\n   - `i = 1`: `maxEndingHere = max(-2, -5 - 2) = -2`, `maxSoFar = -2`\n   - `i = 2`: `maxEndingHere = max(-8, -2 - 8) = -2`, `maxSoFar = -2`\n\n3. **Resultado Final:**\n   - A soma máxima é `-2`.\n\n### Código em Python\n\nAqui está um exemplo de implementação do Algoritmo de Kadane em Python:\n\n```python\ndef max_subarray_sum(arr):\n    max_so_far = arr[0]\n    max_ending_here = arr[0]\n    \n    for i in range(1, len(arr)):\n        max_ending_here = max(arr[i], max_ending_here + arr[i])\n        max_so_far = max(max_so_far, max_ending_here)\n    \n    return max_so_far\n\n# Exemplo 1\narr1 = [5, 15, -30, 10, -5, 40, 10]\nprint(max_subarray_sum(arr1))  # Saída: 50\n\n# Exemplo 2\narr2 = [-5, -2, -8]\nprint(max_subarray_sum(arr2))  # Saída: -2\n```\n\nEste código implementa o Algoritmo de Kadane e retorna a soma máxima de uma subsequência contígua para os dois exemplos fornecidos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 20.0779999999977,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

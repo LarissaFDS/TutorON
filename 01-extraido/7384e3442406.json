@@ -1,0 +1,22 @@
+{
+  "id": "7384e3442406",
+  "arquivo": "materiais\\c03_variantes_algoritmo_x_outras_provas.md",
+  "copia": "00-originais\\ingestao\\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\\c03_variantes_algoritmo_x_outras_provas.md",
+  "sha256": "c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-02-divisao-e-conquista",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c03\nfonte: \"1ª Prova 31/07/2023 (Q2), 1ª Prova 11/12/2023 (Q3), Prova Final 04/04/2024 (Q1) — mesmo professor\"\ntipo: prova\ntopico: corretude, divisão e conquista\n---\nO mesmo \"Algoritmo X\" aparece em várias provas, sempre com o enunciado\n\"Explique o que ele faz e prove sua corretude\" (ou \"Diga o que ele faz e prove sua corretude\").\n\n- Prova Final 04/04/2024, Questão 1 [2 pontos]: versão idêntica à da 1ª Prova de 02/03/2023\n  (retorna o maior entre a e b).\n- 1ª Prova 11/12/2023, Questão 3 [1 ponto]: mesma versão, com o caso extra\n  \"if inicio > fim then return −∞\".\n- 1ª Prova 31/07/2023, Questão 2 [2 pontos]: variante com\n  \"if inicio > fim then return 0\" e \"return a + b\" (soma dos elementos).\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

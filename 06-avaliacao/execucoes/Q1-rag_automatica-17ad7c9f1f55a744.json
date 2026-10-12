@@ -1,0 +1,86 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c01",
+    "320662691e44-q2-2",
+    "fc6f103e4d15-q2-1",
+    "bb377af634ea-q1-1"
+  ],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0.10900000000037835,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "### Explicação do Algoritmo\n\nO algoritmo `ALGORITMO X` é um algoritmo recursivo que busca o maior elemento em um vetor `A` com `n` elementos, onde `inicio` e `fim` são os índices inicial e final do intervalo a ser analisado.\n\n#### Passos do Algoritmo:\n1. **Verificação do Único Elemento**: Se `inicio` for igual a `fim`, então o intervalo contém apenas um elemento, e esse elemento é retornado.\n2. **Divisão do Intervalo**: O intervalo é dividido em duas partes: `[inicio, meio]` e `[meio + 1, fim]`, onde `meio` é o índice do meio do intervalo.\n3. **Recursão**: O algoritmo é chamado recursivamente para cada subintervalo.\n4. **Comparação**: Os maiores elementos dos dois subintervalos são comparados, e o maior desses elementos é retornado.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, vamos considerar os seguintes pontos:\n\n1. **Caso Base**: Se `inicio = fim`, o intervalo contém apenas um elemento, que é o maior (ou o único) elemento no intervalo. Portanto, a função retorna `A[inicio]`, que é correto.\n\n2. **Divisão do Intervalo**: O intervalo é dividido em duas partes, `[inicio, meio]` e `[meio + 1, fim]`. Cada subintervalo é processado recursivamente.\n\n3. **Comparação**: Após obter os maiores elementos de cada subintervalo, o algoritmo compara esses elementos e retorna o maior. Isso garante que o maior elemento do intervalo original será retornado.\n\n### Detalhamento da Prova\n\n1. **Caso Base**:\n   - Se `inicio = fim`, então o intervalo contém apenas um elemento, que é o maior (ou o único) elemento no intervalo. Portanto, a função retorna `A[inicio]`, que é correto.\n\n2. **Divisão do Intervalo**:\n   - O intervalo `[inicio, fim]` é dividido em `[inicio, meio]` e `[meio + 1, fim]`.\n   - Cada subintervalo é processado recursivamente, garantindo que o maior elemento de cada subintervalo seja encontrado.\n\n3. **Comparação**:\n   - Após obter os maiores elementos de cada subintervalo, o algoritmo compara esses elementos e retorna o maior. Isso garante que o maior elemento do intervalo original será retornado.\n\n### Conclusão\n\nO algoritmo `ALGORITMO X` é correto porque:\n- Para intervalos de tamanho 1, a função retorna o único elemento, que é o maior.\n- Para intervalos maiores, o algoritmo divide o intervalo em duas partes, processa recursivamente cada parte, e retorna o maior elemento encontrado.\n\nPortanto, o algoritmo `ALGORITMO X` retorna o maior elemento do vetor `A` no intervalo `[inicio, fim]`.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 14.45299999999952,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "inicio",
+    "inicio"
+  ],
+  "citacoes_ids_invalidos": [
+    "inicio",
+    "inicio"
+  ]
+}

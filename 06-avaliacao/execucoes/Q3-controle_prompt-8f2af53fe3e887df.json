@@ -1,0 +1,72 @@
+{
+  "questao": "Q3",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo força bruta para o problema COMPOSTO, que testa os divisores de 2 até ⌊n/2⌋, não é considerado polinomial porque a complexidade de tempo é O(n), o que é considerado linear. Embora a quantidade de divisões seja linear em relação a n, o fato de ter que testar todos os divisores até ⌊n/2⌋, mesmo que seja uma parte do intervalo, faz com que a complexidade total seja considerada não polinomial. Isso ocorre porque o número de divisores que precisamos testar pode ser muito maior do que n, especialmente para números grandes. Portanto, a complexidade total do algoritmo é considerada não polinomial, mesmo que a complexidade de cada divisão seja linear.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 30.35088229399844,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 0,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

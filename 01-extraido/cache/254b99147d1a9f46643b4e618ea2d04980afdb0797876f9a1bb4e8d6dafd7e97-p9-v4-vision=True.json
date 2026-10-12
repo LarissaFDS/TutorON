@@ -1,0 +1,18 @@
+{
+  "pagina": 9,
+  "texto": "Portanto, a seguinte proposi¸c˜ao est´a correta:\n\na0 ≥a1 ≥... ≥an−2 ≥an−1\n\nConsequentemente, os elementos do vetor A[0, ..., n −1], est˜ao ordenados de maneira\ndecrescente.\n\n■\n\n6. Prove a corretude do algoritmo de Horner para a avalia¸c˜ao de polinˆomios.\nP(x) = anxn+ an−1xn−1+ ··· +a1x + a0.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1: procedure ALGORITMO DE HoRNER(vetor A[O,...,n], real x)\n2:\np ←A[n]\n3:\nfori←n-1→0do\n4:\np←p*x+A[i]\n5:\nendfor\n6:\nreturnp\n7:endprocedure\n\n\nSolu¸c˜ao:\n\nTeorema: O algoritmo de Horner est´a correto, ou seja, retorna corretamente o\nc´alculo do polinˆomio para um valor real dado.\n\nProva:\n\nConsidere o seguinte invariante de la¸co:\n\nn\nX\n\np =\n\nAj xj−i\n\nj=i\n\nInicializa¸c˜ao: Neste caso, fica garantido, pela linha (2) que, antes de execu-\ntarmos o la¸co de itera¸c˜ao propriamento dito, p resulta no coeficiente do termo\nde maior grau do polinˆomio informado, isto ´e: A[n]. Assim, considerando que a\nopera¸c˜ao antes do la¸co de repeti¸c˜ao torna i = n (para fins de simplifica¸c˜ao), a\n2ª linha de c´odigo mostra que o invariante de la¸co est´a correto antes do loop for.\n\nManuten¸c˜ao: ´E poss´ıvel ent˜ao prosseguir para a execu¸c˜ao do la¸co nos passos\nseguintes, onde “i” ´e decrementado uma unidade em cada itera¸c˜ao e, de mesmo\nmodo, a linha (4) garante que o valor do pr´oximo termo do invariante ser´a\ninclu´ıdo na soma, assim como o valor do termo atual. Sendo que o resultado\n\nPage ix",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p9-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p9-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,10 @@
+{
+  "pagina": 12,
+  "texto": "2. Devemos provar que existe um problema NP-completo conhecido que pode ser\npolinomialmente reduzido a A: Para isso, sabemos que esse problema ´e uma\ngeneraliza¸c˜ao do problema do clique. Sendo assim, dado uma instˆancia (G, k)\nconsideramos a = k, b = k(k-1)/2. Dessa forma, qualquer subgrafo de G com k\nv´ertices e contendo k(k-1)/2 arestas deve ter uma aresta entre cada par poss´ıvel\ndesses k v´ertices e, portanto, deve ser um clique. Similarmente, um clique com\nk v´ertices deve conter k(k-1)/2 arestas.\n\n■\n\nPage xii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p12.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

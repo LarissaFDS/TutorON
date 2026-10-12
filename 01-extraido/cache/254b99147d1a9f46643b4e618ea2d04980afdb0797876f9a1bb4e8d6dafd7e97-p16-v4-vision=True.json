@@ -1,0 +1,18 @@
+{
+  "pagina": 16,
+  "texto": "10. Considere o algoritmo de Ulam, ele termina?\nDe fato, conjectura-se que\nseguindo o algoritmo, sempre ser´a obtida a sequencia 4, 2, 1 (Conjectura\nde Collatz).\nEx:\nPara o valor a = 22, ser´a obtida a seguinte sequencia:\n22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1.\nComo a prova do\nt´ermino do algoritmo consiste em um dif´ıcil problema matem´atico em aberto.\nImplemente um teste exaustivo mostrando que para qualquer unsigned shot\nint (1 a 65535) de entrada o algoritmo para.\nEscreva um pequeno relato\ninformando o tamanho da maior sequˆencia encontrada, o valor na qual a\nmaior sequˆencia foi obtida, a m´edia dos tamanhos das sequˆencias e o tempo\nde execu¸c˜ao.\n\n\n[OCR parcial do recorte p16-fig1.png; conferir símbolos na imagem]\n1: procedure ALGORITMO DE ULAM(inteiro positivo a)\n2:\nD→x\n3:\nwhileOstrésultimosvaloresdexnaofor 4,2,1do\n4:\nif x for par then\n5:\nx←x/2\n6:\nelse\n7:\nx←3x+1\n:8\nend if\n9:\nendwhile\n10:endprocedure\n\n\nSolu¸c˜ao: Ap´os a implementa¸c˜ao do algoritmo e da execu¸c˜ao de um teste exaustivo\ncontendo 65535 entradas, ou seja, cobrindo a possibilidade de entrada de qualquer\nunsigned short int, pudemos observar que, de fato, o algoritmo para de executar e ´e,\nportanto, finito. Al´em disso, assim como ilustra a figura abaixo, algumas informa¸c˜oes\nforam coletadas:\n\n• O tamanho da maior sequˆencia equivale a 340 n´umeros;\n• O valor de N para a maior sequˆencia ´e 52527;\n• A m´edia dos tamanhos das sequˆencias obtidas ´e 104,21 n´umeros;\n• O tempo de execu¸c˜ao do algoritmo ´e 0.06200 segundos.\n\nPage xvi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p16.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p16-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p16-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

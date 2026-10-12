@@ -1,5 +1,4 @@
 import sys
-from typing import Optional
 from api_client import (
     send_student_question, 
     APICommunicationError, 
@@ -8,9 +7,11 @@ from api_client import (
     InternalServerError
 )
 
+RULE = "-" * 60
+
 def display_header() -> None:
     """
-    Exibe o cabeçalho principal da interface CLI do TutorOn.
+    Exibe o cabeçalho principal da interface CLI do TutorON.
     
     Args:
         Nenhum.
@@ -18,10 +19,10 @@ def display_header() -> None:
     Returns:
         None.
     """
-    print("\n========================================")
-    print("              TutorOn AI")
-    print("         Seu tutor acadêmico")
-    print("========================================\n")
+    print()
+    print("TutorON · monitoria de Projeto e Análise de Algoritmos")
+    print("Escreva sua dúvida. Se ela envolver código ou pseudocódigo, cole na etapa seguinte.")
+    print(RULE)
 
 def prompt_student_question() -> str:
     """
@@ -38,7 +39,7 @@ def prompt_student_question() -> str:
         question = input("Digite sua dúvida:\n> ").strip()
         if question:
             return question
-        print("[Aviso] A pergunta não pode estar vazia. Tente novamente.\n")
+        print("Escreva a dúvida antes de continuar.\n")
 
 def prompt_optional_context() -> str | None:
     """
@@ -52,7 +53,7 @@ def prompt_optional_context() -> str | None:
         str | None: O contexto fornecido pelo estudante ou None quando nenhum
         contexto foi informado.
     """
-    print("\nDigite código ou contexto adicional (opcional, pressione Enter para pular):")
+    print("\nCódigo ou contexto adicional (opcional). Termine com uma linha vazia; Enter direto pula:")
     
     lines = []
     while True:
@@ -84,13 +85,12 @@ def display_ai_response(response_data: dict) -> None:
     answer = response_data.get("answer", "Nenhuma resposta encontrada no payload.")
     source = response_data.get("source", "desconhecido")
     
-    print("\n========================================")
-    print("          Resposta do TutorOn")
-    print("========================================\n")
+    print()
+    print(RULE)
     print(answer)
-    print("\n========================================")
-    print(f"[Fonte da resposta: {source}]")
-    print("========================================\n")
+    print(RULE)
+    print(f"Gerada por: {source}. Confira com o material da disciplina antes de usar na prova.")
+    print()
 
 def display_api_error(error_message: str) -> None:
     """
@@ -103,9 +103,9 @@ def display_api_error(error_message: str) -> None:
     Returns:
         None.
     """
-    print("\n[ERRO DO SISTEMA]")
-    print(error_message)
-    print("========================================\n")
+    print()
+    print(f"Não foi possível responder. {error_message}")
+    print()
 
 def run_cli() -> None:
     """
@@ -128,7 +128,7 @@ def run_cli() -> None:
         question = prompt_student_question()
         context = prompt_optional_context()
         
-        print("\nProcessando sua dúvida...")
+        print("\nConsultando o tutor. Pode levar até dois minutos...")
         
         # 2. Requisição HTTP encapsulada
         response_data = send_student_question(question_text=question, context_text=context)
@@ -137,19 +137,19 @@ def run_cli() -> None:
         display_ai_response(response_data)
         
     except APIValidationError as e:
-        display_api_error(f"Validação: {str(e)}")
+        display_api_error(str(e))
     except AIServiceError:
-        display_api_error("Não foi possível processar sua dúvida pela IA. Tente novamente.")
+        display_api_error("O serviço de IA falhou ou está indisponível. Tente de novo em instantes.")
     except InternalServerError:
-        display_api_error("Erro interno do servidor. Nossa equipe já foi notificada. Tente mais tarde.")
+        display_api_error("O backend teve um erro interno. Veja o log do uvicorn para o detalhe.")
     except APICommunicationError as e:
         display_api_error(f"Falha de comunicação: {str(e)}\n\nVerifique se o backend está executando com:\n'uvicorn backend.main:app --reload'")
     except KeyboardInterrupt:
-        print("\n\nOperação cancelada pelo usuário. Até logo!")
+        print("\n\nCancelado.")
         sys.exit(0)
     except Exception as e:
         # Tratamento de último recurso (catch-all) para evitar quebra grosseira do terminal
-        display_api_error(f"Um erro inesperado e desconhecido ocorreu: {str(e)}")
+        display_api_error(f"Erro inesperado: {str(e)}")
 
 if __name__ == "__main__":
     # Garante a execução da CLI apenas se o arquivo for chamado diretamente.

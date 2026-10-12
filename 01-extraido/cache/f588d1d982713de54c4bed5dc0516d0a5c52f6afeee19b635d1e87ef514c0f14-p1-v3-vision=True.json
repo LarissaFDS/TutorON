@@ -1,0 +1,12 @@
+{
+  "pagina": 1,
+  "texto": "Lista de Exerc´ıcios 7\n\n                         8 de abril de 2022\n\n                     Engenharia de Computa¸c˜ao\n\n                        Lilian Giselly Pereira Santos\n                Pedro Henrique de Brito Nascimento\n         Projeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\n\n                   Cap´ıtulo 7 - NP-Completude\n\n1. Responda cada um dos itens abaixo e dˆe uma justificativa para as respostas.\n\n     • O que significa dizer que um problema Π pode ser polinomialmente reduzido a um\n       problema Π′?\n\n     • Defina as classes P, NP e problema NP-completo.\n     • P ∩NP = ∅;\n\n\n\n     Solu¸c˜ao:\n\n       • Ao dizer que um problema Π pode ser polinomialmente reduzido a um problema\n           Π′, estamos afirmando que existe um algoritmo polinomial X que transforma\n          qualquer instˆancia Y de Π em uma instˆancia X(Y) de Π′ de tal forma que X(Y)\n        tem solu¸c˜ao se e somente se Y tem solu¸c˜ao.\n\n       • Defina as classes P, NP e problema NP-completo.:\n             Inicialmente podemos definir um problema computacional como polinomial\n           se h´a um algoritmo cujo consumo de tempo, em seu pior caso, limita o problema\n       em uma fun¸c˜ao polinomial. Isto ´e, problemas que conseguem ser resolvidos por\n          m´aquinas em tempo aceit´avel.  Esse tipo de problema  ´e o que caracteriza a\n           classe P. Alguns exemplos dessa classe s˜ao: o problema do caminho curto, o\n         problema do divisor comum grande e o problema da equa¸c˜ao inteira do segundo\n          grau.\n                 J´a a classe NP ´e caracterizada pelos problemas de decis˜oes nos quais a sua\n             solu¸c˜ao ´e dada por um algoritmo n˜ao determin´ıstico. Essa classe abrange to-\n         dos os problemas P mas tamb´em alguns outros que se comportam de maneira\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\f38bb8142136\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\f38bb8142136\\p1-fig1.png",
+    "01-extraido\\figuras\\f38bb8142136\\p1-fig2.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

@@ -1,0 +1,24 @@
+{
+  "pagina": 4,
+  "texto": "3. Qual a prov´avel complexidade de um algoritmo que possui as seguintes ob-\nserva¸c˜oes emp´ıricas da contagem de sua opera¸c˜ao b´asica:\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nsize\ncount\n1000\n11.966\n2000\n24.303\n3000\n39.992\n4000\n53.010\n5000\n67.272\n6000\n78.692\n7000\n91.274\n8000\n113.063\n0006\n129.799\n10000\n140.538\n\n\nSolu¸c˜ao: A prov´avel complexidade para esse algoritmo ´e linear, pois ´e poss´ıvel ob-\nservar que, de uma certa forma, os n´umeros de opera¸c˜oes crescem linearmente com\no aumento tamb´em linear do tamanho da entrada, como ´e poss´ıvel ver no gr´afico\nabaixo:\n\n\n[OCR parcial do recorte p4-fig2.png; conferir símbolos na imagem]\n150.000\n100.000\nOperacoes\n50.000\n2000\n4000\n6000\n8000\n10000\nN°Entradas\n\n\nPage iv",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
+    "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p4-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

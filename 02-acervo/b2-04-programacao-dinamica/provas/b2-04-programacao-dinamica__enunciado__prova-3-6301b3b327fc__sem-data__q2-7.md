@@ -1,0 +1,23 @@
+# 6301b3b327fc-q2-7
+
+Fonte: materiais\Disponiveis\RAG PAA\prova_3.pdf | página(s): 1
+
+Questão 2 [2 pontos): vg
+Dadas duas strings z = 2122 Zn CV = Uiy2 "Um d
+delas, isto é, o maior k para o qual existem índices ie j com Z;Z;p1**Tipk-1 = YjYj41°
+
+isso em tempo O(mn).
+
+“Ym, desejamos encontrar o comprimento da maior substring comum
+--yj+4-1- Mostre como fazer
+
+uestão 3 [2 pontos): No
+Eures um o de programação dinâmica (note que será pseudo-polinomial) para o problema SUBSET SUM.
+
+Entrada: Um conjunto A com valores inteiros positivos, e um inteiro t.
+Questão: Existe um subconjunto A’ € A cuja soma dos valores seja exatamente t?
+
+ai ontos):
+Erg Les ae inteiros n ek, de que maneira podemos jogar n dados de forma a obter uma soma total
+x k, contabilizando todas as possíveis combinações de resultados? Ex: Se n = 3 e k= 17, temos 3 opções: [5, 6,
+Hr E 6] e (6, 6, 5]. Faça um algoritmo usando programação dinâmica para resolver esse problema.

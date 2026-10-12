@@ -1,0 +1,10 @@
+{
+  "pagina": 14,
+  "texto": "Passo Indutivo: (n = k + 1)\n\nDeseja-se saber se a hip´otese ´e v´alida ∀n > k. Portanto, sabendo que\n\n\u0013k\n\nAk+1 = Ak · A1\n, por defini¸c˜ao, e\nAk =\n\n, por hip´otese.\n\n\u00121\n1\n1\n0\n\nSegue-se que:\n\n\u0013\n\n\u0013\n\n\u0013\n\nAk · A =\n\n=\n\n·\n\u00121\n1\n1\n0\n\n\u0012fk+1\nfk\nfk\nfk−1\n\n\u0012fk+1 + fk\nfk+1\nfk + fk−1\nfk\n\n\u0013\n\n\u0013\n\n∴\nAk · A =\n\n⇒\nAk+1 =\n\n\u0012fk+2\nfk+1\nfk+1\nfk\n\n\u0012fk+2\nfk+1\nfk+1\nfk\n\nPortanto, por indu¸c˜ao, se a hip´otese ´e v´alida para n = k ent˜ao ´e v´alida para n = k+1,\n\n\u0013n\n\nlogo a matriz An =\n\nprovˆe os {n + 1, n, n −1} -´esimos termos da\n\n\u00121\n1\n1\n0\n\nsequˆencia de Fibonacci, ∀n ≥1.\n\n■\n\n9. O BIN PACKING ´e um problema cuja entrada consiste em: n itens com\ntamanhos s1, s2, ..., sn em que si ∈[0, 1]. O objetivo ´e encontrar o menor n´umero\nde “bins” (caixas) unit´arias para armazenar os n itens. Dado os algoritmos\na seguir, mostre que eles n˜ao encontram a solu¸c˜ao ´otima do problema, ou\nseja, encontre contraexemplos para cada um dos seguinte algoritmos para o\nproblema.\n\n• (A) Coloque na bins os elementos em ordem da esquerda para a direita,\nse ele couber, caso contr´ario tente na pr´oxima bin;\n\n• (B) Coloque na bin mais livre o maior elemento;\n\n• (C) Coloque o menor elemento na bin mais livre.\n\nPage xiv",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p14.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

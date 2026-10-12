@@ -1,0 +1,11 @@
+{
+  "pagina": 9,
+  "texto": "Passo base (k = 1):\n    Neste caso, T(1) = 1 ≤12.  ∴   P(1) ´e verdadeiro\n\n    Hip´otese de Indu¸c˜ao (k > 1):\n\n    T(k) ≤k2, para k > 1.\n\n    Passo Indutivo:\n\n   No passo indutivo, aceitamos a hip´otese de indu¸c˜ao P(k), para k > 1 e, portanto,\n    precisamos provar por indu¸c˜ao que se P(k + 1) ´e verdadeiro, P(k) tamb´em ´e.\n\n                           T(k + 1) = k + 1 + T(k).\n\n   Como a hip´otese P(k) garante que T(k) ≤k2:\n\n                        T(k + 1) ≤k + 1+k2 < (k + 1)2\n                ∴P(k + 1) ´e verdadeiro. ⇒P(k) ´e verdadeiro.\n\n                                                ■\n\n\n9. Considere o seguinte algoritmo recursivo, cujo argumento n  ´e um inteiro\n   positivo.\n\n\n\n\n\n  Para um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada\n  de ASTERISCO(n)?\n\n\n     Solu¸c˜ao:\n\n    Considerando A(n) como a quantidade de asteriscos impressos dado um valor n, temos\n     que:\n\n                   (                                    0, se n = 0\n                  A(n) =\n                              2n+1 −(n + 2), se n ≥1\n\n   Como exemplo, temos:\n\n\n\n                                  Page ix\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p9-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

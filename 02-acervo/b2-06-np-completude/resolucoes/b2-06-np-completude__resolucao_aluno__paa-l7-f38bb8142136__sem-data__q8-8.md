@@ -1,0 +1,10 @@
+# f38bb8142136-q8-8
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L7.pdf | página(s): 9, 10
+
+Versão derivada corrigida por agente; original SHA-256: f219a0b5c27d882a0b0f65929d0ac1944159d5d474141ef4ebd71799f00a062a. Não é aprovação do professor.
+
+CONJUNTO INCIDENTE (Hitting Set).
+Entrada: universo U, conjuntos S_i subseteq U e limite b. Certificado: H subseteq U com |H|<=b. Verifique H intersection S_i não vazio para todo i. Não é necessário H subseteq S_i. Essa verificação é polinomial na representação explícita da entrada.
+Redução de COBERTURA DE VÉRTICES: para G=(V,E) e limite k, use U=V, S_e={u,v} para cada aresta e={u,v}, e b=k. Um H que intersecta todos os S_e é exatamente uma cobertura de vértices de tamanho no máximo k. A transformação é polinomial e preserva SIM/NÃO.
+Logo CONJUNTO INCIDENTE é NP-completo. Se P=NP, passa a haver algoritmo polinomial de decisão; se P diferente de NP, não existe tal algoritmo. O enunciado transcrito menciona afirmativas sem enumerá-las, então não se devem inventar itens ausentes.

@@ -1,0 +1,10 @@
+{
+  "pagina": 6,
+  "texto": "12. f(n) = O(g(n))\n\n13. f(n) = Θ(g(n))\n\n14. f(n) = Ω(g(n))\n\n15. f(n) = O(g(n))\n\n16. f(n) = O(g(n))\n\n5. Resolva a recorrˆencia:\n\n(\n\nT(n) =\n\n2, se n = 2\n2 · T(n\n2) + n, se n = 2k, para k > 1\n\nSolu¸c˜ao:\n\nDesenvolvendo a recorrˆencia obtemos as seguintes fun¸c˜oes:\n\nT(n) = 2 · T(n\n\n2) + n\n(1)\n\nT(n/2) = 2 · T(n\n\n4) + n/2\n(2)\n\nT(n/4) = 2 · T(n\n\n8) + n/4\n(3)\n\nSabendo disso, temos que a partir de (1) e (2):\n\nT(n) = 2 · T(n\n\n2) + n\n\n\u0000\n\nT(n) = 2 ·\n\n+ n\n\n2 · T(n\n4) + n\n2\n\u0001\n\nT(n) = 22 · T(n\n\n4) + 2n\n(4)\n\nDe (3) e (4):\n\nT(n) = 22 · T(n\n\n4) + 2n\n\n\u0000\n\nT(n) = 22 ·\n\n+ 2n\n\n2 · T(n\n8) + n\n4\n\u0001\n\nT(n) = 23 · T(n\n\n8) + 3n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n⇒T(n) = 2k · T( n\n\n2k ) + kn\n\nA recorrˆencia encerra, desse modo, quando:\n\nn\n2k = 2 ⇒2k+1 = n ⇒k + 1 = log2(n) ⇒k = log2(n) −1\n\n⇒k = log2(n) −log2(2) ⇒k = log2(n\n\n2)\n\n⇒\nT(n) = n\n\n2 · T(2) + log2(n\n2) · n\n\nPage vi",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p6.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

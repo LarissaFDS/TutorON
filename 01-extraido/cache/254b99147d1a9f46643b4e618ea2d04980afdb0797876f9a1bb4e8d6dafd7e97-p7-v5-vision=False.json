@@ -1,0 +1,12 @@
+{
+  "pagina": 7,
+  "texto": "5. Prove a corretude do algoritmo bubblesort:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nprocedure ALGORITMO BUBBLESORT(vetor A[1,...,n])\n\n1:\n\n2 for i—n-1—1do\n\n3 forj—-0->i-ldo\n\n4: if A[j] < A[j +1] then\n5: troca(ALj], Alj + 1D]\n6: end if\n7 end for\n8 end for\n9: end procedure\n\n\nSolu¸c˜ao:\n\nPara provar a corretude do algoritmo Bubblesort ´e necess´ario provar os dois invari-\nantes das estruturas de repeti¸c˜ao presentes no mesmo. Primeiro, o la¸co interno e,\npor fim, a propriedade do primeiro la¸co servir´a de base para a prova do la¸co externo.\nAssim, dando continuidade para a prova:\n\nInvariante do la¸co interno:\n\nTeorema: Depois da itera¸c˜ao j do loop interno, o menor elemento do vetor A[0, 1, ..., j]\nestar´a na posi¸c˜ao j .\n\nA prova ser´a feita por indu¸c˜ao:\n\n(Inicializa¸c˜ao)\n\nPasso Base (j=0)\n\nNeste caso, o passo base ocorre antes da itera¸c˜ao do loop, pois no caso onde j=0,\ntemos o vetor A[0, ..., 0], constitu´ıdo apenas pelo elemento a0, desse modo, ele ´e o\nmenor elemento do vetor e, portanto, P(j=0) ´e verdadeiro.\n\n(Manuten¸c˜ao)\n\nHip´otese da Indu¸c˜ao:\n\nComo hip´otese indutiva, vamos assumir primeiramente que ap´os a itera¸c˜ao j, o menor\nelemento do vetor esteja na posi¸c˜ao j.\n\nPasso Indutivo (j ≥0):\n\nAssim, para concluir, ´e necess´ario mostrar que ap´os a itera¸c˜ao j+1, o menor elemento\ndo vetor A[0, 1, ..., j, j + 1] estar´a na posi¸c˜ao j+1.\n\nSabemos pela hip´otese de indu¸c˜ao que ap´os a itera¸c˜ao j, o elemento da posi¸c˜ao j (aj)\n´e o menor elemento. Sendo assim, na itera¸c˜ao j+1, ou o menor elemento no vetor\nA[0, 1, ..., j, j + 1] ´e aj ou ´e aj+1.\n\nPage vii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p7-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

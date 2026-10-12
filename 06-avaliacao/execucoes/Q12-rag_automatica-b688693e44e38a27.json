@@ -1,0 +1,62 @@
+{
+  "questao": "Q12",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "7b4da6a8adf7-q6-6",
+    "97254bb4a1b8-q6-6"
+  ],
+  "contexto_texto": "[7b4da6a8adf7-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L1.pdf | página(s): 9, 10; confiabilidade: media; OCR: revisada_por_agente\nCorretude de Horner para P(x)=sum(A[j]x^j,j=0..n).\nInicialize p=A[n]. Para i=n-1,n-2,...,0, faça p=p*x+A[i]. Antes da iteração i, o invariante é p=sum(A[j]x^(j-i-1),j=i+1..n). Vale inicialmente para i=n-1, pois p=A[n]. Após o corpo, p=sum(A[j]x^(j-i),j=i..n), que é o invariante antes da próxima iteração i-1. Ao terminar i=0, p=P(x).\nO número de multiplicações e adições é n, portanto O(n) operações aritméticas e O(1) memória auxiliar. Isso não limita o custo em bits para coeficientes inteiros arbitrariamente grandes. A formulação considera aritmética exata; erros de ponto flutuante são outra questão.\n\n[97254bb4a1b8-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf | página(s): 4, 5; confiabilidade: media; OCR: revisada_por_agente\nTroco mínimo como programa linear inteiro.\nPara valores de moedas c_1,...,c_n positivos e alvo v>=0, use x_i inteiro não negativo, quantidade de moedas do tipo i. Minimize sum_i x_i sujeito a sum_i c_i*x_i=v.\nPermitir x_i=0 é necessário: nem todos os tipos precisam aparecer. Para a versão de decisão com no máximo k moedas, acrescente sum_i x_i<=k e verifique viabilidade, sem necessidade de objetivo. Estoque ilimitado não requer limites superiores para x_i. Se não houver solução inteira, o troco exato é impossível. A relaxação para reais pode dar frações de moedas e não resolve o problema inteiro.",
+  "fontes_sha256": {
+    "7b4da6a8adf7-q6-6": "b8422278ca4a9bf2da0b7ed06994935e8af58c0bf8fceb7e4a56d17c5623b7e6",
+    "97254bb4a1b8-q6-6": "763aebf1fa2aa98fa4066bdfa3bbd048e90e537b4f8c0e44fcab5ffcaa100bbb"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 3.294443118000345,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "Como tutor de PAA, não tenho acesso a informações específicas sobre datas, salas ou conteúdos de provas futuras, incluindo a próxima prova de PAA em outubro de 2026. Minha função é auxiliar com questões e resoluções de problemas relacionados ao PAA, não fornecer informações sobre datas ou conteúdos de provas.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 47.41999382799986,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5cd5752be563842f737e4dcfea031c1e798639af5416d58eb4660c8a629e06bb"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

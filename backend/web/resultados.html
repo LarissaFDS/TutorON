@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Resultados</title>
+<link rel="stylesheet" href="/design.css">
+<link rel="stylesheet" href="/static/app.css">
+<style>
+  .numeros { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); margin-top: var(--space-5); }
+  .numero { border: var(--border); border-radius: var(--radius); padding: var(--space-4); }
+  .numero strong { display: block; font-size: var(--text-title); }
+  .bloco { margin-top: var(--space-7); }
+  .bloco h2 { font-size: var(--text-title); }
+  .url { font-family: var(--font-code); font-size: var(--text-ui); word-break: break-all; }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="page masthead__bar"><div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div></div>
+  <div class="page masthead__intro">
+    <h1>Resultados da validação</h1>
+    <p class="masthead__lede">Esta página só abre nesta máquina. Os dados completos estão em <code>dados/validacao/avaliacoes.jsonl</code> e <code>dados/perguntas.jsonl</code>.</p>
+  </div>
+</header>
+<main class="page">
+  <section class="bloco" style="margin-top:var(--space-5)">
+    <h2>Endereço público</h2>
+    <p class="url" id="url">—</p>
+    <p class="caption">Envie este link aos alunos. Ele muda quando o servidor é reiniciado.</p>
+  </section>
+  <section class="bloco">
+    <h2>Validação A/B (cega)</h2>
+    <div class="numeros" id="validacao"></div>
+    <div class="table-scroll" style="margin-top:var(--space-5)"><table class="table" id="notas"></table></div>
+  </section>
+  <section class="bloco">
+    <h2>Modo Tutor</h2>
+    <div class="numeros" id="tutor"></div>
+  </section>
+  <section class="bloco">
+    <h2>Últimas avaliações</h2>
+    <div class="table-scroll"><table class="table" id="ultimas"></table></div>
+  </section>
+  <p class="status" id="status"></p>
+</main>
+<script>
+(async function () {
+  var $ = function (id) { return document.getElementById(id); };
+  function numero(box, rotulo, valor) {
+    var d = document.createElement('div'); d.className = 'numero';
+    var s = document.createElement('strong'); s.textContent = valor === null || valor === undefined ? '—' : valor;
+    var p = document.createElement('span'); p.className = 'caption'; p.textContent = rotulo;
+    d.append(s, p); box.append(d);
+  }
+  function linha(table, cells, head) {
+    var tr = document.createElement('tr');
+    cells.forEach(function (c) { var td = document.createElement(head ? 'th' : 'td'); td.textContent = c === null || c === undefined ? '—' : c; tr.append(td); });
+    table.append(tr);
+  }
+  try {
+    var st = await (await fetch('/api/status')).json();
+    $('url').textContent = st.url_publica || 'Túnel público desligado (somente http://127.0.0.1:8000).';
+    var r = await (await fetch('/api/resultados')).json();
+    var v = r.validacao, t = r.tutor, pct = function (x) { return x === null ? null : x + '%'; };
+    numero($('validacao'), 'avaliações recebidas', v.avaliacoes);
+    numero($('validacao'), 'preferiram o TutorON', pct(v.preferencia_pct.tutoron));
+    numero($('validacao'), 'preferiram o genérico', pct(v.preferencia_pct.generico));
+    numero($('validacao'), 'empates', pct(v.preferencia_pct.empate));
+    linha($('notas'), ['Sistema', 'Clareza', 'Confiança', 'Utilidade', 'Com erro de matemática'], true);
+    ['tutoron', 'generico'].forEach(function (k) {
+      var n = v.notas[k];
+      linha($('notas'), [k === 'tutoron' ? 'TutorON' : 'Genérico', n.clareza, n.confianca, n.utilidade, pct(n.erro_matematico_pct)]);
+    });
+    numero($('tutor'), 'perguntas', t.perguntas);
+    numero($('tutor'), 'sem nenhum modelo disponível', t.sem_modelo);
+    numero($('tutor'), 'tempo médio (s)', t.tempo_medio_s);
+    numero($('tutor'), 'marcadas com erro de conta', t.feedback.erro_matematico);
+    Object.keys(t.por_modelo).forEach(function (m) { numero($('tutor'), 'respostas de ' + m, t.por_modelo[m]); });
+    linha($('ultimas'), ['Data', 'Pergunta', 'Preferida', 'Comentário'], true);
+    v.ultimas.forEach(function (u) { linha($('ultimas'), [u.data.replace('T', ' ').slice(0, 16), u.pergunta, u.preferida, u.comentario]); });
+  } catch (e) {
+    $('status').textContent = 'Não foi possível carregar os resultados: ' + e.message;
+  }
+})();
+</script>
+</body>
+</html>

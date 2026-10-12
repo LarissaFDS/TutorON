@@ -1,0 +1,262 @@
+{
+  "condicoes": {
+    "generico": {
+      "respostas_ok": 12,
+      "falhas": 0,
+      "criterios_lexicais_encontrados": 17,
+      "criterios_lexicais_aplicaveis": 46,
+      "criterios_comuns_encontrados": 17,
+      "criterios_comuns_aplicaveis": 46,
+      "tempo_medio_segundos": 40.79968935733359,
+      "citacoes_invalidas": 0
+    },
+    "controle_prompt": {
+      "respostas_ok": 12,
+      "falhas": 0,
+      "criterios_lexicais_encontrados": 16,
+      "criterios_lexicais_aplicaveis": 47,
+      "criterios_comuns_encontrados": 16,
+      "criterios_comuns_aplicaveis": 46,
+      "tempo_medio_segundos": 46.88135558675003,
+      "citacoes_invalidas": 0
+    },
+    "rag_manual": {
+      "respostas_ok": 12,
+      "falhas": 0,
+      "criterios_lexicais_encontrados": 30,
+      "criterios_lexicais_aplicaveis": 47,
+      "criterios_comuns_encontrados": 30,
+      "criterios_comuns_aplicaveis": 46,
+      "tempo_medio_segundos": 66.01117944208363,
+      "citacoes_invalidas": 0
+    },
+    "rag_automatica": {
+      "respostas_ok": 12,
+      "falhas": 0,
+      "criterios_lexicais_encontrados": 34,
+      "criterios_lexicais_aplicaveis": 47,
+      "criterios_comuns_encontrados": 34,
+      "criterios_comuns_aplicaveis": 46,
+      "tempo_medio_segundos": 105.09979980058324,
+      "citacoes_invalidas": 0
+    }
+  },
+  "comparacao_por_questao": [
+    {
+      "questao": "Q1",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Caso base inicio = fim (n = 1, linha 3)",
+        "Conclui com a comparação a < b (linha 8)",
+        "Estrutura caso base / hipótese / passo indutivo",
+        "Identifica que retorna o maior elemento",
+        "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "Justifica que as metades são estritamente menores",
+        "Usa indução FORTE (como no gabarito)"
+      ],
+      "acertos_comuns": {
+        "generico": 0,
+        "controle_prompt": 1,
+        "rag_manual": 2,
+        "rag_automatica": 3
+      }
+    },
+    {
+      "questao": "Q2",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Caso base A(0) = 0",
+        "Confere com valores (1, 4, 11, 26)",
+        "Escreve a recorrência A(n) = 2A(n−1) + n",
+        "Fórmula fechada 2^(n+1) − n − 2",
+        "Mostra o desenvolvimento/iteração da recorrência",
+        "Não confunde com complexidade de tempo apenas (dá o número exato)"
+      ],
+      "acertos_comuns": {
+        "generico": 0,
+        "controle_prompt": 0,
+        "rag_manual": 3,
+        "rag_automatica": 4
+      }
+    },
+    {
+      "questao": "Q3",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Conclui que é exponencial no tamanho da entrada",
+        "Relaciona b = log n e n = 2^b",
+        "Tamanho da entrada medido em bits/dígitos",
+        "Usa o termo pseudo-polinomial (vocabulário da disciplina)"
+      ],
+      "acertos_comuns": {
+        "generico": 0,
+        "controle_prompt": 0,
+        "rag_manual": 2,
+        "rag_automatica": 3
+      }
+    },
+    {
+      "questao": "Q4",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Menciona P ⊆ NP",
+        "NP via certificado verificável em tempo polinomial",
+        "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "NÃO repete a definição errada de NP do material",
+        "P: problemas de decisão resolvíveis em tempo polinomial"
+      ],
+      "acertos_comuns": {
+        "generico": 3,
+        "controle_prompt": 3,
+        "rag_manual": 4,
+        "rag_automatica": 5
+      }
+    },
+    {
+      "questao": "Q5",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Aumento n−1 por árvore",
+        "Caminho depende do número de arestas",
+        "Dá contraexemplo"
+      ],
+      "acertos_comuns": {
+        "generico": 1,
+        "controle_prompt": 1,
+        "rag_manual": 2,
+        "rag_automatica": 1
+      }
+    },
+    {
+      "questao": "Q6",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Caso negativo retorna zero",
+        "Exemplo positivo: 55",
+        "Permite subsequência vazia",
+        "Tempo linear"
+      ],
+      "acertos_comuns": {
+        "generico": 2,
+        "controle_prompt": 2,
+        "rag_manual": 2,
+        "rag_automatica": 4
+      }
+    },
+    {
+      "questao": "Q7",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Espaço constante",
+        "Soma ou XOR",
+        "Tempo linear"
+      ],
+      "acertos_comuns": {
+        "generico": 2,
+        "controle_prompt": 2,
+        "rag_manual": 3,
+        "rag_automatica": 2
+      }
+    },
+    {
+      "questao": "Q8",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Números não repetidos",
+        "Retrocede e poda",
+        "Soma mágica 15",
+        "Verifica diagonais"
+      ],
+      "acertos_comuns": {
+        "generico": 4,
+        "controle_prompt": 3,
+        "rag_manual": 4,
+        "rag_automatica": 4
+      }
+    },
+    {
+      "questao": "Q9",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Coloca a maior na base",
+        "Custo quadrático ao mover elementos",
+        "Inversões lineares"
+      ],
+      "acertos_comuns": {
+        "generico": 1,
+        "controle_prompt": 0,
+        "rag_manual": 3,
+        "rag_automatica": 3
+      }
+    },
+    {
+      "questao": "Q10",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Onze asteriscos",
+        "Recorrência com duas chamadas"
+      ],
+      "acertos_comuns": {
+        "generico": 0,
+        "controle_prompt": 0,
+        "rag_manual": 0,
+        "rag_automatica": 0
+      }
+    },
+    {
+      "questao": "Q11",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Exponencial no tamanho da entrada",
+        "Mede entrada em bits",
+        "Não afirma que COMPOSTO é NP-completo"
+      ],
+      "acertos_comuns": {
+        "generico": 2,
+        "controle_prompt": 2,
+        "rag_manual": 3,
+        "rag_automatica": 3
+      }
+    },
+    {
+      "questao": "Q12",
+      "completa_quatro_condicoes": true,
+      "criterios_comuns": [
+        "Admite ausência no acervo",
+        "Não inventa sala"
+      ],
+      "acertos_comuns": {
+        "generico": 2,
+        "controle_prompt": 2,
+        "rag_manual": 2,
+        "rag_automatica": 2
+      }
+    }
+  ],
+  "diferencas_checklist_comum": {
+    "generico": {
+      "rag_maior": 7,
+      "empate": 5,
+      "rag_menor": 0
+    },
+    "controle_prompt": {
+      "rag_maior": 8,
+      "empate": 4,
+      "rag_menor": 0
+    }
+  },
+  "recuperacao_fontes_esperadas": {
+    "encontradas": 11,
+    "avaliaveis": 11
+  },
+  "status": {
+    "ok": 48
+  },
+  "limitacoes": [
+    "Cobertura lexical não é acurácia.",
+    "Questões incluem variantes da mesma família.",
+    "Uma semente na rodada principal; sem inferência estatística de superioridade.",
+    "Material no RAG é permitido no protocolo aberto; não é teste de conhecimento memorizado.",
+    "Revisão técnica por agente e validação cega com alunos/professor são evidências separadas."
+  ]
+}

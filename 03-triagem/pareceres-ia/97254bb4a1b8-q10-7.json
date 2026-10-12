@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta alguns erros matemáticos, como a definição de hj (hj pode ser 0 ou |NVj|) e a expressão da restrição não está completa (falta somar xi). Além disso, há um erro de digitação (NVj = 0 deve ser NVj ≠ ∅).",
+  "decisao": "suspeita",
+  "sha256": "694562f74893e510581264d50f19a8619648a0ffbffc63579aa2bcd43a47c1f0"
+}

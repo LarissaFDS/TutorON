@@ -1,0 +1,71 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c05",
+    "c06",
+    "a177bf5bc3c7-q2-2",
+    "ef6d051e4b8c-q1-1"
+  ],
+  "contexto_texto": "[c05] Fonte: materiais\\c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nQuantos asteriscos ASTERISCO(n) imprime?\nPara n inteiro não negativo: A(0)=0. Para n>=1, duas chamadas imprimem A(n-1) cada e o laço imprime n, logo A(n)=2A(n-1)+n.\nA solução é A(n)=2^(n+1)-n-2. A substituição na recorrência e o caso base comprovam a fórmula. Valores: A(1)=1, A(2)=4, A(3)=11, A(4)=26. Portanto a contagem é Theta(2^n). A contagem de asteriscos não é o número de chamadas; há 2^(n+1)-1 chamadas, incluindo n=0. A variante com uma chamada em floor(n/2) tem outra recorrência e não usa esta fórmula.\n\n[c06] Fonte: materiais\\c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nMétodo da iteração: T(n)=T(n-1)+n, T(1)=1.\nIterando k vezes, T(n)=T(n-k)+sum(j,n-k+1,n). Para k=n-1 resulta T(n)=1+2+...+n=n(n+1)/2. Assim T(n)=Theta(n^2), e em particular O(n^2). Para n>=1, T(n)<=n^2. Não há necessidade de uma quarta equação não apresentada na transcrição.\n\n[a177bf5bc3c7-q2-2] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L4.pdf | página(s): 3; confiabilidade: media; OCR: revisada_por_agente\nProve a unicidade da árvore geradora mínima quando os pesos das arestas são distintos.\nAssuma duas AGMs diferentes T e U. Seja e a aresta de menor peso na diferença simétrica T xor U; troque seus nomes se necessário para que e esteja em T. Inserir e em U cria um ciclo. Esse ciclo contém uma aresta f de U que não está em T, pois T não contém ciclos. Como os pesos são distintos e e é a menor aresta na diferença simétrica, w(e)<w(f). Logo U+e-f é uma árvore geradora de custo menor que U, contradição. É a distinção entre pesos que interessa; arestas serem objetos distintos por si só não garante unicidade.\n\n[ef6d051e4b8c-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L2.pdf | página(s): 1, 2; confiabilidade: media; OCR: revisada_por_agente\nSubir n degraus em passos de tamanho 1 ou 2.\nDefina E(0)=1 (sequência vazia) e E(1)=1. Para n>=2, E(n)=E(n-1)+E(n-2), separando pelo último passo. Logo os valores para n=0..5 são 1,1,2,3,5,8.\nPara n=4, as cinco sequências são 1111,112,121,211,22. Para n=5, as oito são 11111,1112,1121,1211,2111,122,212,221. A sequência 221 não pode representar quatro degraus, e não deve ser duplicada na lista de cinco.\nÉ possível calcular em O(n) adições e O(1) palavras auxiliares com duas variáveis. A contagem pode exigir inteiros grandes; a complexidade em bits deve considerar seu crescimento.",
+  "fontes_sha256": {
+    "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+    "c06": "4f6d70b01764ed4954a3fb06e5f3bae19c483e1868b3b1a2bc0539b0c0ce9a15",
+    "a177bf5bc3c7-q2-2": "ff0422914032d457378242d5a810eaa8bcf007806ceb19b6d985fb1fffcfb673",
+    "ef6d051e4b8c-q1-1": "292543bc9a13950e83bc309561f350d1ac325ca5264076cc772e2cf759263592"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 3.5067921669979114,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "A fórmula A(n) = 2^(n+1) - n - 2 considera duas chamadas recursivas para A(n-1) e um laço que imprime n. Para n=3, vamos calcular:\n\nA(3) = 2^(3+1) - 3 - 2 = 2^4 - 3 - 2 = 16 - 3 - 2 = 11\n\nA contagem é 2^3 - 3 - 1 = 8 - 3 - 1 = 4 chamadas, mas inclui o laço que imprime 3. Portanto, a contagem total é 4 + 3 = 7 asteriscos. Isso explica por que não é apenas n vezes, mas sim 2^(n+1) - n - 2.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 77.43599253000139,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "355a0da2f5ec9b5052f66fc78db41b61010e6335e00dce2c9d398a8af9751a7f"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

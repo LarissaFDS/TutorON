@@ -1,0 +1,11 @@
+{
+  "pagina": 8,
+  "texto": "Com isso, encontramos e retornamos T ′, que ´e ´arvore geradora mais leve na qual os\n      n´os de U s˜ao folhas.\n\n\n8. Um conjunto feedback de arestas de um grafo n˜ao-direcionado G = (V, E )\n    ´e um subconjunto de arestas E ′ ⊆E que intercepta todos os ciclos do grafo.\n  Assim, remover as arestas E tornar´a o grafo ac´ıclico. Forne¸ca um algoritmo\n   eficiente para o seguinte problema:\n\n  Entrada: Grafo n˜ao-direcionado G = (V, E) com pesos de aresta positivos\n   we.\n   Sa´ıda: Um conjunto feedback de arestas definida E ⊆E de peso total m´ınimo\n Pe∈E’ we.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n9. Forne¸ca um algoritmo de tempo linear que tome como entrada uma ´arvore e\n  determine se ela tem um emparelhamento perfeito: um conjunto de arestas\n  que tocam cada v´ertice exatamente uma vez.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                  Page viii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p8-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

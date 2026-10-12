@@ -1,0 +1,119 @@
+# ef6d051e4b8c-q10-11
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L2.pdf | página(s): 10, 11, 12
+
+10. Mostre que:
+     (a) A solu¸c˜ao de T (n) = T (n −1) + n; T (1) = 1 ´e O(n2).
+     (b) A solu¸c˜ao de T (n) = T (⌈n/2⌉) + 1; T (1) = 1 ´e O(lgn).
+     (c) A solu¸c˜ao de 2T (⌊n/2⌋) + n; T (1) = 1 ´e O(n · lgn).
+
+
+      Solu¸c˜ao:
+
+       (a) Solu¸c˜ao: Desenvolvendo a recorrˆencia, temos que:
+
+         T(n) = T(n −1) + n  (1)
+
+        T(n −1) = T(n −2) + n −1  (2)
+
+        T(n −2) = T(n −3) + n −2  (3)
+
+        De (1) e (2):
+
+         T(n) = T(n −2) + (n −1) + n  (4)
+
+        De (3) e (4):
+
+         T(n) = T(n −3) + (n −2) + (n −1) + n  (4)
+                                                   ...                      ...                      ...                      ...                      ...                      ...                                ...
+
+         T(n) = T(n −k) + (n −k + 1) + (n −k + 2) +  ... + (n −2) + (n −1) + n
+
+          Neste caso, o algoritmo encerra quando n −k = 1 ⇒k = n −1
+
+         T(n) = T(n−(n−1))+(n−(n−1)+1)+(n−(n−1)+2)+ ... +(n−2)+(n−1)+n
+
+         T(n) = T(1) + (2) + (3) +  ... + (n −2) + (n −1) + n
+
+         T(n) = 1 + (2) + (3) +  ... + (n −2) + (n −1) + n
+
+                                      n · (n + 1)
+                ⇒  T(n) =
+                                                 2
+
+         Para mostrar que T(n) ´e O(n2) basta definir f(n) = n·(n+1) e g(n) = n2, sendo                                                                                 2
+          assim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0, neste sentido,
+          basta tomar n0 = 1 e c = 3, por exemplo. Neste caso, vemos que T(n) = O(n2).
+
+
+
+                                   Page x(b) Solu¸c˜ao: Supondo que n  ´e uma potˆencia de 2, ou seja n = 2k, segue-se que
+    desenvolvendo a recorrˆencia:
+
+   T(n) = T(n/2) + 1  (1)
+
+    T(n/2) = T(n/4) + 1  (2)
+
+    T(n/4) = T(n/8) + 1  (3)
+
+   Sabendo disso, temos que a partir de (1) e (2): T(n) = T(n/2) + 1
+
+   T(n) = T(n/4) + 1 + 1
+
+   T(n) = T(n/4) + 2  (4)
+
+   De (3) e (4): T(n) = T(n/4) + 2
+
+   T(n) = T(n/8) + 1 + 2
+
+   T(n) = T(n/8) + 3
+                    ...                      ...                      ...                      ...                      ...                      ...                      ...                      ...
+
+   T(n) = T(n/2k) + k
+
+  A recorrˆencia encerra, desse modo, quando:
+     n = 1 ⇒2k = n ⇒k = log2(n)      2k
+
+  ⇒  T(n) = T(1) + log2 n
+  ⇒  T(n) = 1 + log2(n)
+
+    Para mostrar que T(n) ´e O(log n) basta definir f(n) = 1 + log(n) e g(n) = log n
+    e encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0. Sendo assim, tomamos
+    n0 = 2 e c = 3 e provamos que T(n) = O(log2 n).
+
+(c) Solu¸c˜ao: Supondo que n ´e uma potˆencia de 2, ou seja n = 2k, segue-se que:
+
+   T(n) = 2 · T(n2) + n  (1)
+    T(n/2) = 2 · T(n4) + n/2  (2)
+    T(n/4) = 2 · T(n8) + n/4  (3)
+   Sabendo disso, temos que a partir de (1) e (2):
+   T(n) = 2 · T(n2) + n
+   T(n) = 2 · 2 · T(n4) + n2 + n
+   T(n) = 22 · T(n4) + 2n  (4)
+
+   De (3) e (4):
+
+
+
+                              Page xiT(n) = 22 · T(n4) + 2n
+T(n) = 22 · 2 · T(n8) + n4 + 2n
+T(n) = 23 · T(n8) + 3n
+...                      ...                      ...                      ...                      ...                      ...                      ...                      ...
+⇒T(n) = 2k · T( n ) + kn                      2k
+
+A recorrˆencia encerra, desse modo, quando:
+ n = 1 ⇒2k = n ⇒k = log2(n)2k
+
+⇒  T(n) = n · T(1) + log2 n · n
+⇒  T(n) = n + n · log2(n)
+
+Para mostrar que T(n) ´e O(n·log2 n) basta definir f(n) = n+n·log2 n e g(n) =
+n · log2 n, sendo assim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0,
+neste sentido, basta tomar n0 = 2 e c = 3, por exemplo. Neste caso, ´e poss´ıvel
+notar que T(n) = O(n · log2 n).
+
+
+
+
+
+                          Page xii

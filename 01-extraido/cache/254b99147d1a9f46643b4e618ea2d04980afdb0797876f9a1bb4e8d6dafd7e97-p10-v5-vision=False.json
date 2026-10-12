@@ -1,0 +1,10 @@
+{
+  "pagina": 10,
+  "texto": "da opera¸c˜ao do termo atual pelo valor real x, informado pelo usu´ario, vai sendo\nparcialmente computado em cada la¸co de itera¸c˜ao. Desse modo, para:\n\nn\nX\n\ni = n −1 :\n\nAj xj−i = An−1x0 + Anx1\n\nj= n−1\n\nn\nX\n\ni = n −2 :\n\nAj xj−i = An−2x0 + An−1x1 + Anx2\n\nj= n−2\n\n...\n...\n...\n\nn\nX\n\ni = 1 :\n\nAj xj−i = A1 x0 + A2 x1 + ... + AN−1 xN−2 + AN xN−1\n\nj=1\n\nSendo assim, ao longo da execu¸c˜ao dos la¸cos de repeti¸c˜ao\n\nn\nX\n\np =\n\nAj xj−i\n\nj=1\n\nT´ermino: Sabendo que a vari´avel “i” est´a sendo decrementada e avaliada de\nn−1 at´e 0, e considerando que a inicializa¸c˜ao e manuten¸c˜ao do la¸co de repeti¸c˜ao\ns˜ao v´alidas. Ap´os a execu¸c˜ao da ´ultima itera¸c˜ao “i = 0”, temos que o valor de p\n´e:\nn\nX\n\nAj xj−i = A0 x0 + A1 x1−0 + ... + AN−1 x(N−1)−0 + AN xN−0\n\nj=0\n\n= A0 x0 + A1 x1 + ... + AN−1 xN−1 + AN xN\n\nPortanto, conclui-se que o algoritmo de Horner est´a correto e ´e capaz de calcular\no valor do polinˆomio de Grau N dado para um determinado valor de x.\n\n■\n\nPage x",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p10.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,87 @@
+{
+  "questao": "Q3",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "1a81ca283132-q8-8",
+    "c09",
+    "f38bb8142136-q8-8"
+  ],
+  "contexto_texto": "[c08] Fonte: materiais\\c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nPor que o algoritmo força bruta de COMPOSTO não demonstra que o problema está em P?\nPara n>=2, a representação binária tem b=floor(log2(n))+1 bits. Portanto 2^(b-1)<=n<2^b; não se deve escrever b=log2(n) como igualdade exata para todo inteiro.\nTestar sucessivamente os divisores de 2 até floor(n/2) pode exigir Theta(n) testes no pior caso, por exemplo em entradas primas. A divisão também tem custo em bits, polinomial em b. O número de testes já cresce exponencialmente em b, apesar de ser polinomial no valor numérico n: daí a descrição pseudo-polinomial.\nIsso classifica este algoritmo, não prova que COMPOSTO esteja fora de P nem que seja NP-completo. Encontrar um divisor é um certificado de composição verificável em tempo polinomial em b.\n\n[1a81ca283132-q8-8] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 7, 8; confiabilidade: media; OCR: revisada_por_agente\nSUBSET SUM para inteiros positivos e alvo t>=0.\nInicialize possivel[0]=True e demais posições até t em False. Para cada valor a, percorra s de t até a em ordem decrescente e faça possivel[s]=possivel[s] or possivel[s-a]. Retorne possivel[t]. O sentido decrescente impede usar o mesmo elemento mais de uma vez.\nTempo O(nt), memória O(t), pseudo-polinomial porque t pode ser exponencial no comprimento de sua representação binária. Para [3,34,4,12,5,2] e t=9, existe subconjunto [4,5]. A versão de decisão tem certificado verificável; esta DP não prova P=NP.\n\n[c09] Fonte: materiais\\c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nDefina P, NP, NP-completo e redução polinomial.\nP é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada.\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Equivalentemente, são decididos em tempo polinomial por máquina não determinística. NP não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.\nUma redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.\nB é NP-completo se B pertence a NP e todo problema de NP se reduz polinomialmente a B. Para demonstrar NP-dificuldade, reduza um problema já NP-difícil para o problema novo. A direção contrária não basta.\nExemplos apropriados de decisão: SAT, CLIQUE (existe clique de tamanho pelo menos k?) e MOCHILA com limite de peso e alvo de valor. Distinguir essas versões das versões de otimização. Se algum NP-completo estiver em P, então P=NP. Esta redação corrige a resolução de alunos.\n\n[f38bb8142136-q8-8] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L7.pdf | página(s): 9, 10; confiabilidade: media; OCR: revisada_por_agente\nCONJUNTO INCIDENTE (Hitting Set).\nEntrada: universo U, conjuntos S_i subseteq U e limite b. Certificado: H subseteq U com |H|<=b. Verifique H intersection S_i não vazio para todo i. Não é necessário H subseteq S_i. Essa verificação é polinomial na representação explícita da entrada.\nRedução de COBERTURA DE VÉRTICES: para G=(V,E) e limite k, use U=V, S_e={u,v} para cada aresta e={u,v}, e b=k. Um H que intersecta todos os S_e é exatamente uma cobertura de vértices de tamanho no máximo k. A transformação é polinomial e preserva SIM/NÃO.\nLogo CONJUNTO INCIDENTE é NP-completo. Se P=NP, passa a haver algoritmo polinomial de decisão; se P diferente de NP, não existe tal algoritmo. O enunciado transcrito menciona afirmativas sem enumerá-las, então não se devem inventar itens ausentes.",
+  "fontes_sha256": {
+    "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+    "1a81ca283132-q8-8": "06033a53feb1a0227039026a3678ab4ef04bd52bae1aefe3fbd9ff4aadafe365",
+    "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+    "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.4264833819979685,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "O algoritmo força bruta de COMPOSTO não é considerado polinomial, apesar de fazer apenas O(n) divisões, porque o número de divisões cresce exponencialmente em b, que é o número de bits necessário para representar n. Isso significa que, embora o número de testes seja polinomial em n, a complexidade em termos de bits de representação binária cresce exponencialmente com o tamanho de n. Portanto, mesmo que o número de testes seja limitado, a complexidade em termos de bits de representação binária torna o algoritmo não polinomial. Além disso, a representação binária de n pode ser exponencialmente maior, o que afeta a eficiência do algoritmo.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 104.83468748199812,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "d3a20f5f09adcf4c2489349849454c25f16c2cbb30a50b3f1d4b4ff2a3e2983f"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

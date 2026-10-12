@@ -1,0 +1,12 @@
+{
+  "pagina": 10,
+  "texto": "10. Mostre uma algoritmo de programa¸c˜ao dinˆamica para o problema do CAMI-\nNHO M´AXIMO entre dois v´ertices s e t (caminho simples). Qual a comple-\nxidade do algoritmo (tempo e mem´oria)?\n\nSolu¸c˜ao: Um poss´ıvel algoritmo para resolver tal tarefa ´e o algoritmo de Floyd-\nWarshall com uma pequena modifica¸c˜ao (o algoritmo original foi feito para computar\no caminho m´ınimo entre dois v´ertices), assim, o algoritmo ficaria:\n\n\n[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]\nCL Dyastp-xeu\n\no. STP Kew 3\nDt astp-xew “CEM astpxew)xew - Ef} t]astp~xew\n2(T+u “T)aBues ur € 4\n\n:(ttu ‘TaSueu T\n:(T+u “T)aBupy\n\nF Y do)\nXTu3ew stp [pe 2STp xew\n([oJxruyeu asrp-fpe)usr =u\n\n: (xTu2eW Is Tp-fpe) rey I$ 48\n\n\nComplexidade de Tempo: O(n3)\nComplexidade de Mem´oria: O(n2)\n\nOutros algoritmos mais eficientes para fontes ´unicas, como o algoritmo de Bellman-\nFord ou Djikstra, tamb´em poderiam funcionar, a abordagem, neste caso, seria a\nmesma, maximizar o caminho ao v´ertice destino.\n\nPage x",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p10.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p10-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

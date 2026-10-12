@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta erros matemáticos, como a afirmação de que a complexidade é linear-logarítmica, o que não é correto. Além disso, a função `greedy_knapsack` não está corretamente implementada, pois `capacity` não é decrementado corretamente. A justificativa matemática também é confusa e não bem fundamentada.",
+  "decisao": "suspeita",
+  "sha256": "60e523fc4fe1e96a4f5176fea428263220481cac8749cf05121e640306ffffc5"
+}

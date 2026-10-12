@@ -1,0 +1,73 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "d455baef2cdf-q1-1",
+    "d455baef2cdf-q7-7",
+    "a177bf5bc3c7-q3-3",
+    "1a81ca283132-q6-6"
+  ],
+  "contexto_texto": "[d455baef2cdf-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 1, 2, 3; confiabilidade: media; OCR: revisada_por_agente\nOrdenação da pilha de panquecas distintas com a maior na base.\nPara o prefixo ativo de tamanho m, de n até 2, localize sua maior panqueca na posição p. Se já estiver na base m, não faça nada. Caso contrário, se p não for o topo, inverta o prefixo p para trazê-la ao topo; depois inverta o prefixo m para levá-la à base. Continue com m-1. Por indução, o sufixo já fixado contém as maiores panquecas nas posições corretas e não é tocado novamente.\nHá no máximo 2(n-1) inversões de prefixo, portanto O(n) inversões. Essa contagem não é o tempo total: localizar a maior e movimentar um prefixo custam O(m), dando O(n^2) de tempo e O(1) de espaço auxiliar com inversão in-place. O código OCR usa limites duvidosos; esta é uma reconstrução derivada.\n\n[d455baef2cdf-q7-7] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 6, 7; confiabilidade: media; OCR: revisada_por_agente\nHanoi com quatro pinos: analisar a estratégia apresentada, não afirmar que ela é ótima.\nPara n>=2, mova n−2 discos para um pino auxiliar usando quatro pinos; mova o penúltimo para o outro auxiliar, o maior para o destino e o penúltimo para o destino; por fim mova os n−2 discos para o destino. Bases T(0)=0, T(1)=1. Assim T(n)=2T(n−2)+3.\nPara n=2k, T(n)=3*2^k−3. Para n=2k+1, T(n)=4*2^k−3. Em particular T(2)=3, T(3)=5 e T(4)=9. O crescimento dessa estratégia é Theta(2^(n/2)).\nA expressão 3*2^(n/2)−3 não serve para n ímpar. A recorrência conta movimentos desse algoritmo; não demonstra o mínimo possível para quatro pinos. Por exemplo existem estratégias melhores para tamanhos maiores, então não se deve chamar essa contagem de ótimo geral.\n\n[a177bf5bc3c7-q3-3] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L4.pdf | página(s): 3; confiabilidade: media; OCR: revisada_por_agente\nAgendamento do maior número de intervalos compatíveis.\nPara intervalos semiabertos [s_i,f_i), ordene por término crescente. Comece com ultimo_fim=-infinito. Para cada atividade nessa ordem, aceite-a se s_i>=ultimo_fim e atualize ultimo_fim=f_i. A convenção semiaberta permite uma atividade começar quando outra termina.\nA escolha do menor término pode substituir a primeira atividade de uma solução ótima sem reduzir o espaço para as seguintes; repetindo o argumento, o algoritmo é ótimo. Custo O(n log n) para ordenar e O(n) para selecionar. Este pseudocódigo derivado substitui OCR de imagem; não é transcrição literal.\n\n[1a81ca283132-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L5.pdf | página(s): 5, 6; confiabilidade: media; OCR: revisada_por_agente\nCusto mínimo de cortar uma string de comprimento n nas posições dadas.\nOrdene os m cortes distintos e internos e acrescente p[0]=0 e p[m+1]=n. Para j=i+1, C[i][j]=0. Para intervalos com cortes internos, C[i][j]=(p[j]-p[i])+min(C[i][k]+C[k][j]) sobre i<k<j. Calcule por tamanho crescente do intervalo e retorne C[0][m+1].\nCada primeiro corte custa o comprimento do segmento atual e divide o problema em dois segmentos independentes. Tempo O(m^3), memória O(m^2). Para n=20 e cortes 3 e 10, cortar em 3 primeiro custa 37; cortar em 10 primeiro custa 30, que é o ótimo.",
+  "fontes_sha256": {
+    "d455baef2cdf-q1-1": "1826cf5ed77fe2ed6c2e34435ebc78317f847cfccac34c9b3e15410450b2d005",
+    "d455baef2cdf-q7-7": "39d47bddb8c52e3f9e05fece66cae3d0f5a5d7cc02f8b7381d18fdf49c7df286",
+    "a177bf5bc3c7-q3-3": "66c2fd23e1a9feca438bef3ae17c7f5c98bfac2a5066e8562842d7129e0235c0",
+    "1a81ca283132-q6-6": "1e8dd7862e3f9a9409569d4ff94bf7e644e92dc529cae4285d251bb02d88bc0e"
+  },
+  "indice_sha256": "c6b0957a36c6c6000e5970030d627e1586916a37e217704cfd784672dada4fb5",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.3359602840027947,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo, a estratégia é a seguinte:\n\n1. **Identificar a maior panqueca**: Localize a maior panqueca na pilha. Se já estiver na base da pilha, não faz nada. Caso contrário, inverta o prefixo até a posição da maior panqueca para que ela fique no topo.\n\n2. **Repetir o processo**: Continue com o prefixo de tamanho 1, inverta-o se necessário, e repita até que todos os panquecas estejam na base da pilha.\n\nA quantidade de inversões necessárias para essa operação é de O(n), onde n é o tamanho da pilha. \n\n**Custo total de movimentação**: Para cada inversão de prefixo, movemos o prefixo para o topo e depois o prefixo de tamanho m para a base. Isso leva O(m) para cada inversão. Como há no máximo 2(n-1) inversões de prefixo, o custo total de movimentação é O(n^2).\n\nPortanto, a complexidade de tempo é O(n^2) e a memória é O(1) para auxiliares, considerando a inversão em-place.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 113.11490230100026,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e89f6b1d5b09dd1b66fb4f3a27f82e4249d0892ca0fec0651a78be5157cb67f7"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

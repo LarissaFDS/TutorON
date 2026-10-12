@@ -1,0 +1,11 @@
+{
+  "pagina": 8,
+  "texto": "Se n = 4, a4 = a0 + a1 + a2 + a3 = 1 + 1 + 2 + 4 = 8 = 23\n    Se n = 5, a5 = a0 + a1 + a2 + a3 + a4 = 1 + 1 + 2 + 4 + 8 = 16 = 24\n                      ...                      ...                      ...                      ...                      ...                      ...                      ...                      ...\n     Portanto, se n = i, ai = a0 + a1 + a2 + a3 + a4+ ...ai−1 = 2i−1\n\n    Sendo assim, conclui-se atrav´es do padr˜ao observado que para i = n:\n\n                      an = a0 + a1 + a2 + a3 + a4+ ...+an−1 = 2n−1\n\n\n    Logo, a solu¸c˜ao da recorrˆencia ´e 2n−1.\n\n\n8. Considere o seguinte trecho de c´odigo:\n\n\n\n\n\n  Seja T (n) o n´umero de vezes que a palavra OI ´e impressa quando Prog1  ´e\n  chamado com parˆametro n. Calcule T (1) e determine uma rela¸c˜ao entre T (n)\n  e T (n −1) para n > 1. Com base na rela¸c˜ao encontrada, utilize indu¸c˜ao para\n  mostrar que T (n) ≤n2, para todo n maior ou igual a 1.\n\n\n     Solu¸c˜ao:\n\n    Para n = 1, a palavra “OI” ´e impressa apenas uma vez, portanto, T(1) = 1.\n\n    Para n > 1, a palavra “OI” ´e inicialmente impressa n vezes, atrav´es do loop for. Em\n     seguida, ela ´e impressa T(n-1) vezes. Portanto, T(n) = n + T(n-1).\n\n    Sendo assim,\n                    (                                            1, se n = 1\n                        T(n) =\n                            n + T(n −1), se n > 1\n\n    Dando continuidade, devemos mostrar que T(n) ≤n2, para todo n maior ou igual a\n     1. Por indu¸c˜ao, temos:\n\n\n\n\n                                  Page viii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

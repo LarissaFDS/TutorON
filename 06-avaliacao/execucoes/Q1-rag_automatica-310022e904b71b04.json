@@ -1,0 +1,100 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c01",
+    "c02",
+    "d455baef2cdf-q9-9",
+    "d455baef2cdf-q6-6"
+  ],
+  "contexto_texto": "[c01] Fonte: materiais\\c01_prova1_2023-03_q2_algoritmo_x.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nExplique o que o Algoritmo X faz e prove sua corretude.\nO domínio é um intervalo não vazio A[inicio..fim], com índices inteiros. Interprete a divisão do índice como piso: meio = inicio + floor((fim-inicio)/2). Se inicio=fim, retorne A[inicio]. Caso contrário, calcule a=X(A,inicio,meio), b=X(A,meio+1,fim) e retorne max(a,b). Esta versão retorna o máximo, não a soma. Sem o piso, a notação do enunciado pode produzir índices não inteiros; a interpretação foi explicitada nesta versão derivada.\n\n[c02] Fonte: materiais\\c02_gabarito_algoritmo_x_nota_2.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nProva de corretude do Algoritmo X que retorna o maior elemento.\nTeorema: para qualquer intervalo não vazio A[inicio..fim] de tamanho m=fim-inicio+1, X retorna seu máximo.\nCaso base: m=1 implica inicio=fim; o retorno A[inicio] é o único elemento.\nHipótese de indução forte: para todo tamanho k com 1<=k<m, X devolve o máximo de qualquer intervalo desse tamanho.\nPasso indutivo: para m>1, meio=inicio+floor((fim-inicio)/2). Os intervalos A[inicio..meio] e A[meio+1..fim] são não vazios, disjuntos, cobrem o intervalo original e têm tamanhos menores que m. Pela hipótese, as chamadas retornam os máximos a e b. Compará-los e retornar o maior produz o máximo do intervalo inteiro. Os tamanhos diminuem, provando também a terminação.\nSão m-1 comparações de combinação e tempo Theta(m); a pilha tem profundidade O(log m). Esta é uma correção editorial da prova transcrita, sem atribuir ao professor a nova redação.\n\n[d455baef2cdf-q9-9] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 7, 8; confiabilidade: media; OCR: revisada_por_agente\nPico de vetor unimodal de valores distintos.\nMantenha l=1,r=n. Enquanto l<r, faça m=floor((l+r)/2). Se A[m]<A[m+1], faça l=m+1; caso contrário, faça r=m. Retorne l.\nO intervalo sempre contém o pico. Se a sequência cresce entre m e m+1, o pico fica à direita; se decresce, fica em m ou à esquerda. Enquanto l<r, m<r e portanto m+1 está no vetor. Tempo O(log n), memória O(1). Não é busca pelo máximo de vetor arbitrário; a hipótese de unimodalidade permite descartar uma metade.\n\n[d455baef2cdf-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 5; confiabilidade: media; OCR: revisada_por_agente\nPonto fixo A[i]=i em vetor ordenado de inteiros distintos, índices de 1 a n.\nFaça busca binária: m=floor((l+r)/2). Se A[m]=m, retorne m. Se A[m]<m, procure somente à direita; se A[m]>m, procure somente à esquerda. Se o intervalo ficar vazio, não há ponto fixo.\nComo os valores são inteiros estritamente crescentes, para i<m temos A[i]<=A[m]-(m-i), e para i>m temos A[i]>=A[m]+(i-m). Portanto A[m]<m elimina todos os índices à esquerda; A[m]>m elimina todos à direita. Tempo O(log n), memória O(1) na versão iterativa. Valores repetidos ou números reais eliminam essa justificativa.",
+  "fontes_sha256": {
+    "c01": "8a10dc47291c4090be09acc3d8f2445697fb2ef0d4dc542e37ac14b3d4af9297",
+    "c02": "6488884c1ed37eec837ad80e0c3357f425d3f7ae983033371f8220bbc92c0f1a",
+    "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+    "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.598410591002903,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "O Algoritmo X é uma função recursiva que busca o maior valor em um intervalo dado. Ele funciona dividindo o intervalo em metades menores, comparando os maiores valores de cada metade e retornando o maior. Se o intervalo só tem um elemento (caso base), ele retorna esse elemento. Caso contrário, ele divide o intervalo em duas metades, compara os maiores valores dessas metades e retorna o maior. Isso garante que ele sempre compara os maiores valores, garantindo a corretude.\n\nPara provar a corretude, consideramos o intervalo A[inicio..fim]. Se inicio = fim, a função retorna A[inicio], que é o único elemento e portanto o maior. Se não, dividimos o intervalo em meio e chamamos a função recursivamente para as duas metades. Se a metade esquerda retorna um valor maior ou igual ao da metade direita, o valor da metade direita é retornado. Isso garante que o valor retornado é o maior do intervalo original. Como a função sempre compara os maiores valores, a função sempre retorna o maior valor do intervalo. Portanto, a função X(A, inicio, fim) retorna o maior valor do intervalo A[inicio..fim].",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 118.4297276990037,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "a40aadb40b8b95840eb01dbfefc076a2e670793b4e3292989b3ba352cd02d0df"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

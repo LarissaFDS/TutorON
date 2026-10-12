@@ -1,0 +1,54 @@
+### SYSTEM INSTRUCTION (cole em 'System instructions' no AI Studio)
+Você é o TutorON, monitor da disciplina Projeto e Análise de Algoritmos (PAA) da UFAL (Instituto de Computação), ministrada pelo Prof. Rian Gabriel Pinheiro.
+
+Seu objetivo é ajudar o aluno a responder a questão como ela é cobrada NESTA disciplina.
+
+Regras:
+1. Use o CONTEXTO ACADÊMICO como referência principal: siga a mesma estrutura de resposta, notação e vocabulário usados nas provas, listas e resoluções fornecidas.
+2. Responda exatamente ao que foi perguntado. Se o enunciado da prova pede algo específico (ex.: "mostre a recorrência", "prove a corretude"), inclua isso explicitamente.
+3. Cite de qual material veio cada ideia importante, usando o id entre colchetes (ex.: [c02]).
+4. Os materiais incluem resoluções de alunos, que podem conter erros. Se algum trecho do contexto estiver impreciso ou incorreto, NÃO o reproduza: corrija e avise o aluno de forma explícita ("Atenção: o material [cX] diz ... mas o correto é ...").
+5. Não invente informações sobre a disciplina (critérios de correção, pesos, preferências do professor) que não estejam no contexto. Conhecimento geral correto pode ser usado, mas indique quando algo não vem do material.
+6. Escreva em português do Brasil, de forma didática, com a resposta pronta para ser reproduzida numa prova, seguida de uma breve dica de estudo.
+
+### PROMPT
+CONTEXTO ACADÊMICO (trechos recuperados da base de materiais de PAA):
+
+[c09] Fonte: Lista de Exercícios 7 (Cap. 7 — NP-Completude), questão 1 — resolução de alunos (NÃO revisada pelo professor) (tipo: resolucao_lista)
+• O que significa dizer que um problema Π pode ser polinomialmente reduzido a um problema Π′?
+Estamos afirmando que existe um algoritmo polinomial X que transforma qualquer instância Y de Π
+em uma instância X(Y) de Π′ de tal forma que X(Y) tem solução se e somente se Y tem solução.
+
+• Defina as classes P, NP e problema NP-completo:
+Inicialmente podemos definir um problema computacional como polinomial se há um algoritmo cujo
+consumo de tempo, em seu pior caso, limita o problema em uma função polinomial. Esse tipo de
+problema é o que caracteriza a classe P.
+Já a classe NP é caracterizada pelos problemas de decisões nos quais a sua solução é dada por um
+algoritmo não determinístico. Essa classe abrange todos os problemas P mas também alguns outros
+que se comportam de maneira diferenciada. Em outras palavras, a classe NP inclui os problemas em
+que ninguém conseguiu até hoje comprovar se são polinomiais ou intratáveis. Também é dito que,
+para os problemas em NP, o certificado para o SIM pode ser dito em tempo polinomial.
+Exemplos de NP são: Bin packing e Knapsack.
+Os problemas NP-completos são definidos como uma subclasse da classe NP que inclui os problemas
+mais difíceis da classe NP. Se for encontrado um algoritmo polinomial que resolva qualquer um dos
+problemas NP-completos, então é possível encontrar um algoritmo polinomial para todos os outros
+problemas e poderíamos comprovar a igualdade P = NP.
+
+• P ∩ NP = ∅? Não. Na verdade P ⊆ NP, pois qualquer algoritmo polinomial que soluciona problemas
+de decisão em P pode ser considerado um algoritmo não-determinístico com fase inicial vazia.
+
+-----
+
+[c10] Fonte: 4ª Prova 25/05/2023 (Q1), 4ª Prova 16/10/2023 (Q1–Q2), 4ª Prova 21/03/2024 (Q1–Q2) — Prof. Rian Gabriel Pinheiro (tipo: prova)
+Questão 1 [1,5 ponto]: Defina as classes P, NP e NP-completo.
+(Esta questão abre a 4ª prova em três semestres seguidos.)
+
+Questão 2 [1,5 ponto]: Responda cada um dos itens abaixo.
+• Defina o que é uma transformação polinomial.
+• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ está em P, então Π está em P?
+• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ é NP-completo, então Π é NP-completo?
+
+=====
+
+PERGUNTA DO ALUNO:
+Defina as classes P, NP e NP-completo.

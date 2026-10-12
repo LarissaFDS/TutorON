@@ -1,0 +1,50 @@
+{
+  "questao": "Q11",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para entender por que o algoritmo de testar divisores para verificar se um número é primo só é O(n) e não é considerado polinomial em termos de complexidade computacional, precisamos analisar o problema em detalhes.\n\n### Complexidade O(n)\n\nQuando você testa divisores de um número `n` para verificar se ele é primo, você testa todos os números de 2 até `n-1`. Isso significa que o número de testes é diretamente proporcional ao valor de `n`. Portanto, a complexidade desse algoritmo é O(n).\n\n### Por que não é Polinomial?\n\nUm algoritmo é considerado polinomial se a sua complexidade de tempo for O(n^k) onde `k` é uma constante. No caso do algoritmo de testar divisores, a complexidade é O(n), o que não é um polinômio em `n` (exceto se `n` for uma constante). Portanto, o algoritmo não é considerado polinomial.\n\n### Entrada em Binário\n\nA forma como a entrada é representada (por exemplo, em binário) não muda a complexidade fundamental do algoritmo. No entanto, pode afetar a eficiência prática:\n\n1. **Representação Binária**: Se o número `n` é dado em binário, a representação do número pode ser mais compacta do que em notação decimal. Por exemplo, o número 1000 em decimal é 1111101000 em binário. No entanto, a complexidade do algoritmo de testar divisores ainda é O(n) em termos de `n` em decimal, pois o número de testes não muda com a representação binária.\n\n2. **Eficiência Prática**: Em termos de eficiência prática, a representação binária pode influenciar a eficiência. Por exemplo, se `n` é muito grande, a conversão de `n` de binário para decimal pode ser custosa, mas isso não muda a complexidade do algoritmo em termos teóricos.\n\n### Exemplo\n\nSe `n` é um número grande, digamos 10^6, o algoritmo de testar divisores irá realizar 10^6 testes, o que é O(n). Se `n` é dado em binário, a conversão para decimal pode ser um processo adicional, mas a complexidade do algoritmo permanece O(n).\n\n### Conclusão\n\nO algoritmo de testar divisores para verificar se um número é primo é O(n) porque ele testa todos os números de 2 até `n-1`. Isso não é considerado polinomial porque a complexidade é linear em `n`, não polinomial. A representação em binário não muda a complexidade fundamental, mas pode afetar a eficiência prática.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.484999999999673,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

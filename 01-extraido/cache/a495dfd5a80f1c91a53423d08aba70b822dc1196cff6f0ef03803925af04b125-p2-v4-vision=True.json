@@ -1,0 +1,18 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n//considere V a pilha de panquecas c n a quant. de panquecas q ainda nao foran ordenadas\n//funcao para imverter a pilha inteira acima da maior\nint flipPancakes(int *V, int n)\nint start=1,end=n, aux, i;\nwhile(start < end)f // percorre todo o vetor invertendo as posicoes\naux = V[start];\nV[start]=V[end];\nfxne = [pua]A\n1--pua\n//funcao para descobrir qual a posicao da maior panqueca da pilha\nint biggerpancake(int *V, int n)f\nint i = 1,bigger = 1j\nfor(i=l; i<ng i++}\nprintf(\"%d -\",V[i]);\n/f atualiza a variavel bigger\nprintf(\"A maior panqueca esta na pos: %d\", bigger);\nreturn bigger)\nvaid pancakes(int *v, int m)\nif(n == 1)\nprintf(*nTodas as panquecas foram empilhadas!n\");\nreturn,\nint posBigger = biggerPancake(V, n);\nflippancakes(V, posBigger) : //primeira inversao com tds acima da\n//maior panqueca, deixa a mainr no topo\n// inverte td a pilha, a maior panqueca\nFlippancakes(V, n-1);\n// encontrada nessa iteracao fica na posicao n-l\npancakes(V, n-i);\nvoid main()\nint V[8] = [0,2, 3, 1,6,4, 5, 7]: // comeca com as panquecas\n// empilhadas como na figura\npancakes(V, 7);\nint ij\nprintf(\"Essa eh a pilha atual de panquecas:\\n\");\nfor (i=1; i<=7;i++)\nprintf(\"%d-\",V[i]]\n\n\nPage ii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p2-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p2-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

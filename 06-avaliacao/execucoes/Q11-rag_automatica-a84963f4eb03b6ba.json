@@ -1,0 +1,55 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "c07",
+    "f38bb8142136-q2-2",
+    "7b4da6a8adf7-q7-7"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.625,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A resolução do problema do número composto pelo algoritmo de força bruta, que verifica inteiros sucessivos de 2 a ⌊n/2⌋, não é polinomial em termos de tempo de execução, mesmo que realize apenas \\(O(n)\\) testes. O motivo é que a complexidade do algoritmo depende do valor do número \\(n\\) em si, e não do tamanho do número em bits.\n\n### Explicação:\n\n1. **Complexidade em Termos de Valor do Número:**\n   - O algoritmo verifica divisores de \\(n\\) de 2 até ⌊n/2⌋. Se \\(n\\) é um número grande, o número de divisores a serem verificados também é grande.\n   - A complexidade é \\(O(n)\\), o que significa que o tempo de execução aumenta linearmente com o valor do número \\(n\\).\n\n2. **Complexidade em Termos do Tamanho do Número:**\n   - O tamanho do número \\(n\\) em bits é \\(b = \\log_2(n)\\).\n   - A complexidade do algoritmo é pseudo-polinomial, pois depende do valor de \\(n\\) em si, e não apenas do tamanho do número em bits.\n\n### Por que o Algoritmo Não é Polinomial:\n\n- **Definição de Polinomial:** Um algoritmo é considerado polinomial se sua complexidade de tempo é \\(O(n^k)\\) para algum expoente \\(k\\), onde \\(n\\) é o tamanho da entrada em bits.\n- **Complexidade Real:** A complexidade do algoritmo é \\(O(n)\\), que depende do valor de \\(n\\) em si, não do tamanho do número em bits. Portanto, é pseudo-polinomial.\n\n### Efeito da Representação em Binário:\n\n- **Tamanho da Entrada:** Quando \\(n\\) é representado em binário, o tamanho da entrada é \\(b = \\log_2(n)\\).\n- **Complexidade Pseudo-Polinomial:** A complexidade do algoritmo é \\(O(n)\\), que é exponencial em termos do tamanho \\(b\\) da entrada. Isso significa que a complexidade aumenta exponencialmente com o número de bits \\(b\\).\n\n### Resumo:\n\n- O algoritmo realiza \\(O(n)\\) testes, mas \\(n\\) é o valor do número em si, não o tamanho do número em bits.\n- A complexidade é pseudo-polinomial, pois depende do valor de \\(n\\) em si, não do tamanho do número em bits.\n- A representação em binário afeta a complexidade, pois o tamanho da entrada é \\(b = \\log_2(n)\\), e a complexidade \\(O(n)\\) é exponencial em termos de \\(b\\).\n\nPortanto, o algoritmo não é polinomial em termos do tamanho da entrada, mas sim pseudo-polinomial.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 17.81199999999808,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

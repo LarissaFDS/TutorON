@@ -1,0 +1,11 @@
+{
+  "pagina": 5,
+  "texto": "= 6k + 3 = 2(3k + 1) + 1\n                         ∴  3m = 2j + 1\n\n         Portanto, provamos que ¬q →¬p o que implica, pela prova contrapositiva, que\n        p →q. Dessa forma, est´a provado que se 2|3m ent˜ao 2|m.\n                                                ■\n\n      (c) Desejamos provar que a soma de 3 n´umeros consecutivos ´e m´ultiplo de 3. Para\n           isto, utilizaremos prova direta:\n\n         Hip´otese: 3|a + (a + 1) + (a + 2)\n        Prova:\n                      a + (a+1) + (a+2) = 3a + 3 = 3(a + 1) = 3k,\n\n                           onde k ´e qualquer n´umero inteiro.\n\n         Pela defini¸c˜ao de divisibilidade, temos que se existe um inteiro k, tal que j = w·k,\n           ent˜ao, um n´umero inteiro n˜ao nulo w divide um inteiro j, dessa forma, podemos\n          afirmar, ent˜ao, que a + (a+1) + (a+2) ´e divis´ıvel por 3 e portanto, a + (a+1)\n     + (a+2) ´e m´ultiplo de 3.\n                                                ■\n\n\n4. Considere um hex´agono regular cujos v´ertices s˜ao v1, v2, ..., v6. Mostre que toda\n  maneira de colorir os segmentos de retas que unem dois v´ertices, utilizando\n   as cores azul ou branca, produz pelo menos um triˆangulo cujos lados tem a\n  mesma cor.\n\n\n     Solu¸c˜ao: Considerando um hex´agono regular e suas propriedades b´asicas, ´e intuitivo\n    notar que existem in´umeras maneiras de colorir os segmentos de retas que unem dois\n      v´ertices e na figura abaixo est´a ilustrada uma delas:\n\n\n\n\n\n    Observe que tomamos a liberdade de mudar a cor branca sugerida no enunciado para\n    a cor vermelha, a fim de promover uma melhor visualiza¸c˜ao do problema.\n\n   Com isso em mente, queremos provar que utilizando apenas duas cores - em nosso\n     caso, azul e vermelho - para colorir os segmentos de retas, teremos pelo menos um\n     triˆangulo com seus trˆes lados possuindo a mesma cor, independente da forma que\n    escolhermos distribuir as cores.\n\n\n\n                                   Page v\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p5-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

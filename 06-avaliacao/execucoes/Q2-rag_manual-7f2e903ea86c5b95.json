@@ -1,0 +1,85 @@
+{
+  "questao": "Q2",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c06",
+    "c04",
+    "c05"
+  ],
+  "esperadas": [
+    "c04",
+    "c05",
+    "c06"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "A recorrência para o número de asteriscos impressos em uma chamada de ASTERISCO(n) é dada pela quantidade de chamadas internas e a impressão de asteriscos. Para cada chamada interna de ASTERISCO(n-1), há duas chamadas externas, uma antes e uma depois do laço for. Além disso, o laço for imprime n asteriscos. Portanto, a recorrência é:\n\nT(n) = 2T(n-1) + n, para n > 0\nT(0) = 0\n\nO professor pede para mostrar a recorrência, que é T(n) = 2T(n-1) + n. Para resolver essa recorrência, podemos usar a técnica de substituição. Supondo T(n) ≤ c * n^2, temos:\n\n2T(n-1) + n ≤ c * (n-1)^2 + n\n2T(n-1) ≤ c * (n^2 - 2n + 1) + n\n2T(n-1) ≤ c * n^2 - 2cn + c + n\n\nPara que a recorrência seja válida, precisamos que:\n\nc * n^2 - 2cn + c + n ≤ c * n^2\n-2cn + c + n ≤ 0\nn ≤ (c - 1) / 2\n\nComo a recorrência é válida para n ≤ (c - 1) / 2, escolhendo c = 2, obtemos:\n\nn ≤ 1\n\nPortanto, T(n) ≤ 2 * n^2. Como a recorrência é válida, a solução é T(n) = Θ(n^2).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 104.88981280499866,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5acdff58fdcaf61a00b2b262a6d1ac56ed5b93f1847241f7cd8bb8d82c5865b4"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+        "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caso base A(0) = 0",
+        "regex": "[a-z]\\(0\\)=0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+        "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+        "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Confere com valores (1, 4, 11, 26)",
+        "regex": "26|11 asteriscos|=11",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+        "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 3,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

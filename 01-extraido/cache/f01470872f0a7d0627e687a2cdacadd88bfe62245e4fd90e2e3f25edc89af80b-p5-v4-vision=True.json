@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "O que mudou nas respostas\n\nRecorrência\n\nComplexidade\n\nRegra da lista\n\nOllama\n\nOllama\n\nGemini\n\nSem material\n\nSem material\n\nSem material\n\nFórmula errada: n(n+1).\n\nPara [ 5,  2,  8], responde  2.\n\nSe contradiz: diz que O(n) “não é\npolinomial”.\n\nCom material\n\nCom material\n\nCom material\n\nSegue a lista: sequência vazia\nvale 0.\n\nRecorrência certa, A(n) =\n2A(n 1) + n. Ainda errou a\nconta final.\n\nA resposta da prova: n = 2^b,\nlogo pseudo-polinomial.\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nO que mudou nas respostas\nRecorrencia\nComplexidade\nRegra da lista\nOllama\nOllama\nGemini\nSEMMATERIAL\nSEMMATERIAL\nSEMMATERIAL\nFormula errada: n(n+1).\nSe contradiz: diz que O(n) “nao é\nPara [-5, -2, -8], responde -2.\npolinomial\".\nCOMMATERIAL\nCOMMATERIAL\nRecorréncia certa, A(n) =\nCOMMATERIAL\nSegue a lista: sequencia vazia\n2A(n-1) + n. Ainda errou a\nA resposta da prova: n = 2^b,\nvale 0.\nconta final.\nlogo pseudo-polinomial.",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

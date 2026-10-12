@@ -1,0 +1,10 @@
+{
+  "pagina": 2,
+  "texto": "2. Prove por indu¸c˜ao que:\n\n•\nPn\n\n2\n, para n ≥1\n\ni=1 i = n(n+1)\n\n•\nPn\n\n6\n, para n ≥1\n\ni=1 i2 = n(n+1)(2n+1)\n\n•\nPn\n\n4\n, para n ≥1\n\ni=1 i3 = n2(n+1)2\n\nSolu¸c˜ao:\n\n(a) Desejamos provar que:\n\n1 + 2 + 3 + ... + n = n(n+1)\n2\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n2\n= 1\n∴\nP(1) ´e verdadeiro\n\ni=1 i = 1(1+1)\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\n2\n, ∀k ≤n\n\ni=1 i = k(k+1)\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni = 1 + 2 + 3 + ... + k + (k + 1) = k(k+1)\n\n2\n+ (k + 1)\n\n= k(k+1)+2(k+1)\n\n2\n= (k+1)(k+2)\n\n2\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\n(b) Desejamos provar que:\n\n1 + 22 + 32 + ... + n2 = n(n+1)(2n+1)\n6\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n6\n= 6\n\ni=1 i2 = 1(1+1)(2.1+1)\n\n6 = 1\n∴\nV erdadeiro\n\nPage ii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p2.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

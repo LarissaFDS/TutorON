@@ -1,0 +1,11 @@
+{
+  "pagina": 7,
+  "texto": "5. Prove a corretude do algoritmo bubblesort:\n\n\n\n\n\n     Solu¸c˜ao:\n\n    Para provar a corretude do algoritmo Bubblesort  ´e necess´ario provar os dois invari-\n     antes das estruturas de repeti¸c˜ao presentes no mesmo.  Primeiro, o la¸co interno e,\n    por fim, a propriedade do primeiro la¸co servir´a de base para a prova do la¸co externo.\n    Assim, dando continuidade para a prova:\n\n    Invariante do la¸co interno:\n\n    Teorema: Depois da itera¸c˜ao j do loop interno, o menor elemento do vetor A[0, 1, ..., j]\n      estar´a na posi¸c˜ao j .\n\n   A prova ser´a feita por indu¸c˜ao:\n\n       (Inicializa¸c˜ao)\n\n    Passo Base (j=0)\n\n    Neste caso, o passo base ocorre antes da itera¸c˜ao do loop, pois no caso onde j=0,\n    temos o vetor A[0, ..., 0], constitu´ıdo apenas pelo elemento a0, desse modo, ele  ´e o\n    menor elemento do vetor e, portanto, P(j=0) ´e verdadeiro.\n\n      (Manuten¸c˜ao)\n\n    Hip´otese da Indu¸c˜ao:\n\n   Como hip´otese indutiva, vamos assumir primeiramente que ap´os a itera¸c˜ao j, o menor\n    elemento do vetor esteja na posi¸c˜ao j.\n\n    Passo Indutivo (j ≥0):\n\n    Assim, para concluir, ´e necess´ario mostrar que ap´os a itera¸c˜ao j+1, o menor elemento\n    do vetor A[0, 1, ..., j, j + 1] estar´a na posi¸c˜ao j+1.\n\n    Sabemos pela hip´otese de indu¸c˜ao que ap´os a itera¸c˜ao j, o elemento da posi¸c˜ao j (aj)\n        ´e o menor elemento. Sendo assim, na itera¸c˜ao j+1, ou o menor elemento no vetor\n     A[0, 1, ..., j, j + 1] ´e aj ou ´e aj+1.\n\n\n\n                                  Page vii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p7-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

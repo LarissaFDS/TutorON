@@ -1,0 +1,59 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c04",
+    "c05"
+  ],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "A função ASTERISCO(n) imprime n asteriscos quando chamada com n > 0. Para n = 3, a função será chamada duas vezes, uma chamada com n-1 (n=2) e uma chamada com n-2 (n=1). A chamada com n=2 imprimirá 2 asteriscos, e a chamada com n=1 imprimirá 1 asterisco. Além disso, há um laço que imprime 3 asteriscos. Portanto, no total, ASTERISCO(3) imprimirá 2 + 1 + 3 = 6 asteriscos. Esta conta confirma a fórmula apresentada, onde A(3) = 2^(3+1) - 3 - 2 = 6. Portanto, a resposta é que ASTERISCO(3) imprime 6 asteriscos.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 64.04247086199757,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "4c757012a4c0a113e19549d9000426cad1ee6b51c8e05a71a2a2d6821f869ae1"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 0,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

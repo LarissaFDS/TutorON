@@ -1,0 +1,53 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c07",
+    "c08"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A confusão pode surgir devido à distinção entre a complexidade em termos de tamanho da entrada e a complexidade em termos do valor da entrada em si. Vamos analisar isso passo a passo:\n\n1. **Complexidade em termos de tamanho da entrada:**\n   - O algoritmo força bruta para verificar se um número \\( n \\) é composto envolve verificar divisores de 2 a \\( \\lfloor n/2 \\rfloor \\).\n   - O número de divisores a serem testados é \\( \\lfloor n/2 \\rfloor \\), que é \\( O(n) \\) no sentido de que é linear em \\( n \\).\n   - No entanto, a complexidade de tempo do algoritmo não é \\( O(n) \\) em termos de tamanho da entrada. O tamanho da entrada é o número de bits necessário para representar \\( n \\), que é \\( \\log_2(n) \\).\n\n2. **Complexidade em termos do valor da entrada:**\n   - Se \\( n \\) é representado em binário, o número de bits \\( b \\) necessário para representar \\( n \\) é \\( b = \\log_2(n) \\).\n   - O algoritmo testa divisores de 2 a \\( \\lfloor n/2 \\rfloor \\), o que envolve \\( \\lfloor n/2 \\rfloor \\) testes.\n   - Como \\( \\lfloor n/2 \\rfloor \\) é aproximadamente \\( n/2 \\), a complexidade em termos do valor de \\( n \\) é \\( O(n) \\).\n\n3. **Complexidade em termos do tamanho da entrada:**\n   - A complexidade em termos do tamanho da entrada é \\( O(b \\cdot n) \\), onde \\( b = \\log_2(n) \\).\n   - Substituindo \\( b \\) em \\( O(b \\cdot n) \\), temos \\( O(\\log_2(n) \\cdot n) \\).\n   - Isso é \\( O(n \\log n) \\), que é superpolinomial em termos de tamanho da entrada.\n\n4. **Por que o algoritmo não é polinomial:**\n   - Um algoritmo é considerado polinomial se sua complexidade de tempo é \\( O(n^k) \\) para algum constante \\( k \\).\n   - A complexidade \\( O(n \\log n) \\) não é polinomial, pois \\( \\log n \\) não é uma constante.\n\n5. **Pseudo-polinomialidade:**\n   - O algoritmo é chamado de pseudo-polinomial porque a complexidade depende do valor da entrada em si, não apenas do tamanho da entrada.\n   - No caso do algoritmo de força bruta para verificar se um número é composto, a complexidade é \\( O(n \\log n) \\), que é superpolinomial em termos de tamanho da entrada.\n\nPortanto, o algoritmo não é considerado polinomial porque sua complexidade de tempo \\( O(n \\log n) \\) é superpolinomial em termos do tamanho da entrada. A complexidade depende do valor de \\( n \\) em si, não apenas do número de bits necessário para representá-lo.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 14.04700000000048,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,9 @@
+{
+  "pagina": 11,
+  "texto": "(b) Solu¸c˜ao: Supondo que n  ´e uma potˆencia de 2, ou seja n = 2k, segue-se que\n    desenvolvendo a recorrˆencia:\n\n   T(n) = T(n/2) + 1  (1)\n\n    T(n/2) = T(n/4) + 1  (2)\n\n    T(n/4) = T(n/8) + 1  (3)\n\n   Sabendo disso, temos que a partir de (1) e (2): T(n) = T(n/2) + 1\n\n   T(n) = T(n/4) + 1 + 1\n\n   T(n) = T(n/4) + 2  (4)\n\n   De (3) e (4): T(n) = T(n/4) + 2\n\n   T(n) = T(n/8) + 1 + 2\n\n   T(n) = T(n/8) + 3\n                    ...                      ...                      ...                      ...                      ...                      ...                      ...                      ...\n\n   T(n) = T(n/2k) + k\n\n  A recorrˆencia encerra, desse modo, quando:\n     n = 1 ⇒2k = n ⇒k = log2(n)      2k\n\n  ⇒  T(n) = T(1) + log2 n\n  ⇒  T(n) = 1 + log2(n)\n\n    Para mostrar que T(n) ´e O(log n) basta definir f(n) = 1 + log(n) e g(n) = log n\n    e encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0. Sendo assim, tomamos\n    n0 = 2 e c = 3 e provamos que T(n) = O(log2 n).\n\n(c) Solu¸c˜ao: Supondo que n ´e uma potˆencia de 2, ou seja n = 2k, segue-se que:\n\n   T(n) = 2 · T(n2) + n  (1)\n    T(n/2) = 2 · T(n4) + n/2  (2)\n    T(n/4) = 2 · T(n8) + n/4  (3)\n   Sabendo disso, temos que a partir de (1) e (2):\n   T(n) = 2 · T(n2) + n\n   T(n) = 2 · 2 · T(n4) + n2 + n\n   T(n) = 22 · T(n4) + 2n  (4)\n\n   De (3) e (4):\n\n\n\n                              Page xi",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p11.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

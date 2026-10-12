@@ -1,0 +1,36 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n2\nINF\n0\n4\n0\n3\n[incerto] D\nINF\nINF\n0\n3\n4\n0\nINF\n2\nINF\n0\nMIN\n0\n0\n[incerto] 0\n3\n<-CUSTO\n\n\nC(C1, C2) + R + R′ = 1 + 6 + 3 = 10\n\nPara o n´o 3 temos:\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n0\nINF\nINF\n0\n0\n3\n3\n0\nINF\n3\n0\n4\n0\n3\nINF\nINF\n0\nMIN\n2\n2\n<-CUSTO\n\n\nC(C1, C3) + R + R′ = 2 + 6 + 2 = 10\n\nPara o n´o 4 temos:\n\n\n[OCR parcial do recorte p5-fig3.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n2\nINF\n0\nINF\n0\n3\n3\n0\nINF\nINF\n0\n4\n0\n3\n2\nINF\n0\nMIN\n0\n[incerto] 0\n[incerto] 0\n0\n<-CUSTO\n\n\nC(C1, C4) + R + R′ = 0 + 6 + 0 = 6\n\nComo a estrat´egia adotada ´e do Least Cost Branch and Bound, o n´o a ser escolhido\nser´a o n´o 4. Repetindo as estrat´egias citadas anteriormente e gerando os sucessores.\nAl´em disso, os passos anteriores de redu¸c˜ao e c´alculo de custo se repetem, agora, a\npartir do n´o 4.\n\n\n[OCR parcial do recorte p5-fig4.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\n1\nR=6\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nC(4,5) + R + R'\nC(4,6) + R + R'\n5\n6\n\n\nPage v",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p5-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p5-fig2.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p5-fig3.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p5-fig4.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig3.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p5-fig4.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

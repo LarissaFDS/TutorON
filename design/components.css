@@ -1,0 +1,308 @@
+/* TutorON — componentes compartilhados.
+   Cada componente existe por um motivo de uso, escrito ao lado dele.
+   Antes de criar um novo, veja se um destes resolve. */
+
+/* ---------------------------------------------------------------- masthead
+   Faixa azul sólida da apresentação, com marca e texto brancos.
+   É o único gesto visual forte do produto: aparece uma vez, no topo. */
+.masthead {
+  background-color: var(--color-board);
+  color: var(--color-chalk);
+}
+.masthead__bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-top: var(--space-4);
+  padding-bottom: var(--space-4);
+}
+.wordmark {
+  font-size: var(--text-title);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-display);
+  line-height: 1;
+}
+.wordmark span { color: inherit; }
+.masthead__context { font-size: var(--text-caption); color: var(--color-chalk-muted); text-align: right; }
+.masthead__intro { padding-top: var(--space-6); padding-bottom: var(--space-7); }
+.masthead h1 {
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  font-weight: var(--weight-bold);
+  max-width: 22ch;
+}
+.masthead__lede {
+  margin-top: var(--space-4);
+  max-width: 60ch;
+  font-size: var(--text-reading);
+  line-height: var(--leading-reading);
+  color: var(--color-chalk-muted);
+}
+
+/* ---------------------------------------------------------------- step
+   Etapas numeradas porque o fluxo É uma sequência (escolher, ler, avaliar). */
+.step { margin-top: var(--space-7); }
+.step__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.step__number {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 28px; height: 28px;
+  border: 2px solid var(--color-ink);
+  border-radius: var(--radius);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+.step__title {
+  font-size: var(--text-title);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  line-height: 1.3;
+}
+.step__lede { color: var(--color-ink-muted); max-width: 64ch; margin-bottom: var(--space-4); }
+
+/* ---------------------------------------------------------------- button
+   Uma ação principal por etapa. Rótulo diz exatamente o que acontece. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0 var(--space-5);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font: inherit;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+}
+.button:hover { background: var(--color-primary-hover); }
+.button:disabled { opacity: 0.6; cursor: progress; }
+.button--secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border: var(--border-strong);
+}
+.button--secondary:hover { background: var(--color-surface-sunken); }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+  margin-top: var(--space-5);
+}
+
+/* ---------------------------------------------------------------- field */
+.field + .field { margin-top: var(--space-4); }
+.field__label { display: block; font-weight: var(--weight-medium); margin-bottom: var(--space-2); }
+.field__label .caption { font-weight: var(--weight-regular); }
+.field__hint { display: block; margin-top: var(--space-2); }
+.input {
+  display: block;
+  width: 100%;
+  padding: var(--space-3);
+  border: var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font: inherit;
+}
+textarea.input { min-height: 96px; resize: vertical; line-height: var(--leading-ui); }
+.input:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 0; border-color: var(--color-focus); }
+.fields-row { display: grid; gap: var(--space-4); }
+@media (min-width: 640px) { .fields-row { grid-template-columns: 1fr 1fr; } .fields-row .field + .field { margin-top: 0; } }
+
+/* ---------------------------------------------------------------- choice-list
+   Lista de dúvidas prontas. Substitui um <select> em que o enunciado
+   inteiro (com pseudocódigo) ficava cortado numa linha só. */
+.choice-list {
+  margin: 0; padding: 0; border: var(--border); border-radius: var(--radius);
+  background: var(--color-surface);
+  overflow: hidden;
+}
+.choice {
+  display: grid;
+  grid-template-columns: auto 2.2em 1fr;
+  align-items: baseline;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+  border-left: 3px solid transparent;
+}
+.choice + .choice { border-top: var(--border); }
+.choice:hover { background: var(--color-surface-sunken); }
+.choice input { accent-color: var(--color-focus); margin: 0; transform: translateY(2px); }
+.choice__number { color: var(--color-ink-muted); font-variant-numeric: tabular-nums; }
+.choice__text {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.choice:has(input:checked) {
+  background: var(--color-highlight-soft);
+  border-left-color: var(--color-highlight);
+}
+.choice-list[aria-disabled="true"] { opacity: 0.55; }
+
+.disclosure { margin-top: var(--space-4); }
+.disclosure > summary {
+  cursor: pointer;
+  font-weight: var(--weight-medium);
+  color: var(--color-ink);
+  padding: var(--space-2) 0;
+  width: fit-content;
+}
+.disclosure[open] > summary { margin-bottom: var(--space-3); }
+
+/* ---------------------------------------------------------------- scale
+   Nota de 1 a 5 em um toque, em vez de um menu por critério.
+   A nota escolhida recebe marca-texto. */
+.scale { margin: 0; padding: 0; border: 0; min-width: 0; }
+.scale__legend { padding: 0; font-weight: var(--weight-medium); }
+.scale__hint { display: block; }
+.scale__options { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.pick { position: relative; }
+.pick input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.pick span {
+  display: inline-grid;
+  place-items: center;
+  min-width: 44px; height: 44px;
+  padding: 0 var(--space-3);
+  border: var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font-weight: var(--weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+.pick input:hover + span { border-color: var(--color-ink); }
+.pick input:checked + span {
+  background: var(--color-highlight);
+  border-color: var(--color-on-highlight);
+  color: var(--color-on-highlight);
+}
+.pick input:focus-visible + span { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+
+/* ---------------------------------------------------------------- question
+   Enunciado que o aluno trouxe. Texto em serifa, pseudocódigo com régua. */
+.question {
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+/* ---------------------------------------------------------------- answer
+   As duas respostas têm exatamente o mesmo tratamento: é um teste cego. */
+.answers { display: grid; gap: var(--space-5); margin-top: var(--space-5); }
+@media (min-width: 900px) { .answers { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; } }
+.answer {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+}
+.answer > .prose { flex: 1; }
+.answer__label {
+  font-size: var(--text-title);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-title);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  border-bottom: var(--border);
+}
+.answer__rating {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: var(--border);
+}
+.answer__rating-title { font-weight: var(--weight-bold); }
+
+/* ---------------------------------------------------------------- notice / status */
+.notice {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-warning-soft);
+  border-left: 3px solid var(--color-warning);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  max-width: 72ch;
+}
+.status { min-height: 1.5em; margin-top: var(--space-4); color: var(--color-ink-muted); }
+.status:empty { margin-top: 0; }
+.status[data-tone="error"] {
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+}
+.status[data-tone="busy"]::before {
+  content: "";
+  display: inline-block;
+  width: 0.7em; height: 0.7em;
+  margin-right: var(--space-2);
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  vertical-align: -0.05em;
+  animation: tutoron-spin 0.9s linear infinite;
+}
+@keyframes tutoron-spin { to { transform: rotate(1turn); } }
+
+.confirmation {
+  margin-top: var(--space-7);
+  padding: var(--space-5);
+  background: var(--color-success-soft);
+  border-left: 3px solid var(--color-success);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.confirmation h2 { font-size: var(--text-title); letter-spacing: var(--tracking-title); }
+.confirmation p { margin-top: var(--space-2); max-width: 60ch; }
+
+/* ---------------------------------------------------------------- footer */
+.site-footer {
+  margin-top: var(--space-8);
+  padding: var(--space-5) 0 var(--space-7);
+  border-top: var(--border);
+}
+.site-footer p { max-width: 70ch; }
+
+/* ---------------------------------------------------------------- table
+   Para dados comparáveis (relatório). Números alinhados à direita. */
+.table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.table th {
+  text-align: left;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-medium);
+  color: var(--color-ink-muted);
+  padding: var(--space-2) var(--space-3);
+  border-bottom: var(--border-strong);
+}
+.table td { padding: var(--space-2) var(--space-3); border-bottom: var(--border); vertical-align: top; }
+.table .num { text-align: right; white-space: nowrap; }
+.table tfoot td { font-weight: var(--weight-bold); border-bottom: 0; }
+.table-scroll { overflow-x: auto; }
+
+.tag {
+  display: inline-block;
+  font-size: var(--text-caption);
+  line-height: 1.6;
+  padding: 0 var(--space-2);
+  border: var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink-muted);
+  white-space: nowrap;
+}

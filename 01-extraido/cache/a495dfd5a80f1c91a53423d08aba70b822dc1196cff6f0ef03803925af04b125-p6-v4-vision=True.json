@@ -1,0 +1,18 @@
+{
+  "pagina": 6,
+  "texto": "7. Resolver o problema da Torre de Han´oi quando se disp˜oe de 4 torres, em vez\nde 3. Determinar o n´umero de movimentos de disco.\n\nSolu¸c˜ao: O funcionamento do problema da Torre de Han´oi consiste em mover os\ndiscos de uma torre para outra, desde que obede¸ca duas regras b´asicas:\n\n1. S´o pode mover um disco por vez.\n\n2. Um disco maior nunca pode ser colocado em cima de um disco menor.\n\nAl´em disso, os discos da torre inicial est˜ao dispostos em ordem decrescente, de baixo\npara cima e devem estar do mesmo modo na torre final. Originalmente, o problema\nocorre com 3 torres: A, B e C, onde uma ´e de origem, outra de destino e outra\nauxiliar. A proposi¸c˜ao do enunciado, no entanto, prop˜oe a resolu¸c˜ao do problema\ncom 4 torres, sendo 2 delas auxiliares. Para a resolu¸c˜ao do problema, temos:\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nvoid moveTower(int n,int orig,int tower);\nvoid hanoiTower(int n,int orig,int dest,int aux1,int aux2){\nif(n ==θ)\nreturn; // nao ha discos a ser movido\nif(n == 1){ // so haum disco a ser movido\nmoveTower(n,orig,dest);// ele é movido pra torre final\nreturn;\n//ocorrearecursaopara mover n-2discos\nhanoiTower(n-2,orig,aux1,aux2,dest);\nmoveTower(n-1, orig,aux2);\nmoveTower(n, orig: dest);\nmoveTower(n-1,aux2,dest);\n//ocorre arecursao para movern-2discos da torre auxiliar para o destino\nhanoiTower(n-2,aux1, dest,orig, aux2);\n\n\nPara n = 0, temos T(0) = 0;\n\nPara n = 1, temos T(1) = 1, onde:\n\nA fun¸c˜ao moveTower() ´e chamada uma ´unica vez;\n\nPara n = 2, temos T(2) = 3, onde:\n\nA fun¸c˜ao moveTower() move o disco 1 da origem para a torre auxiliar 2;\nA fun¸c˜ao moveTower() move o disco 2 da origem para o destino;\nA fun¸c˜ao moveTower() move o disco 1 da torre 2 para o destino;\n\nPage vi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p6-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\d455baef2cdf\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

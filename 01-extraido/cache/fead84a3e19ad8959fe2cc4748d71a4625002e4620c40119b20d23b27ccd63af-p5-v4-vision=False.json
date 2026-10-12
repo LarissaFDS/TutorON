@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\ntemes\ntye\n[incerto] Usondo\nTeolemames\n[incerto] 2=P\n[incerto] g2\nT（n)=2T（h)+n\n[incerto] 2（2t(na)+）+n\n[incerto] （2)++\n[incerto] ..+h\nK-S\nK+K=n-S",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

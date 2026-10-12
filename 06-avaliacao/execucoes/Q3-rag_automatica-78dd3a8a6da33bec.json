@@ -1,0 +1,67 @@
+{
+  "questao": "Q3",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c07",
+    "c08",
+    "f38bb8142136-q2-2",
+    "7b4da6a8adf7-q5-5"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0.07800000000133878,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo de força bruta para verificar se um número \\( n \\) é composto, que testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\), não é considerado polinomial porque a complexidade de tempo depende do valor do número \\( n \\) em si, e não do tamanho do número representado em bits.\n\n### Explicação:\n\n1. **Complexidade de Tempo**:\n   - O algoritmo testa divisores de 2 até \\( \\lfloor n/2 \\rfloor \\). Isso significa que o número de divisões é diretamente proporcional a \\( n \\).\n   - No entanto, a complexidade de tempo é medida em termos do tamanho do número \\( n \\) representado em bits, não em termos do valor numérico de \\( n \\).\n\n2. **Tamanho em Bits**:\n   - Se \\( n \\) é representado em \\( b \\) bits, então \\( n \\) pode ser expresso como \\( n = 2^b \\).\n   - O número de divisões é \\( \\lfloor n/2 \\rfloor \\), que é aproximadamente \\( n/2 \\).\n   - Em termos de \\( b \\), \\( n \\approx 2^b \\), então o número de divisões é aproximadamente \\( 2^b / 2 = 2^{b-1} \\).\n\n3. **Complexidade Exponencial**:\n   - A complexidade de tempo do algoritmo é \\( O(2^{b-1}) \\), que é exponencial em termos do tamanho \\( b \\) do número \\( n \\).\n   - Para ser considerado polinomial, a complexidade de tempo deve ser \\( O(p(b)) \\), onde \\( p(b) \\) é um polinômio em \\( b \\). No caso, \\( 2^{b-1} \\) não é um polinômio em \\( b \\).\n\n### Conclusão:\n- O algoritmo força bruta para verificar se um número \\( n \\) é composto é pseudo-polinomial, pois a complexidade de tempo depende do valor do número \\( n \\) em si, e não do tamanho do número representado em bits. Portanto, ele não é considerado polinomial.\n\n### Resposta:\nO algoritmo de força bruta para verificar se um número \\( n \\) é composto não é considerado polinomial porque a complexidade de tempo é exponencial em termos do número de bits \\( b \\) necessário para representar \\( n \\), e não polinomial em \\( b \\).",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.671999999998661,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

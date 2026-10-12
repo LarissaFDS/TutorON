@@ -1,0 +1,60 @@
+{
+  "questao": "Q9",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "[1] A ordenação de uma pilha de panquecas de tamanhos distintos usando inversões de prefixo é uma tarefa complexa, pois cada inversão de prefixo pode alterar a ordem dos panquecas. Para resolver isso, podemos considerar a quantidade de inversões necessárias e o custo total de movimentar elementos.\n\nA quantidade de inversões é determinada pela quantidade de inversões de prefixo que são necessárias para ordenar a pilha. Por exemplo, se temos uma pilha de panquecas de tamanhos 3, 2, 1, precisamos de 2 inversões de prefixo para ordená-la (1, 2, 3).\n\nO custo total de movimentar elementos é o número de movimentos necessários para realizar todas as inversões de prefixo. Para a mesma pilha, o custo total de movimentar elementos seria 2, pois precisamos de 2 movimentos para realizar as 2 inversões necessárias.\n\nÉ importante notar que a quantidade de inversões e o custo total de movimentar elementos são diretamente relacionados. Portanto, uma inversão de prefixo que altera a ordem de apenas dois panquecas terá um custo de movimentação de 1, enquanto uma inversão que altera a ordem de todos os panquecas terá um custo de movimentação de 6 (pois precisamos de 6 movimentos para realizar 3 inversões de prefixo).\n\nNeste exemplo, a inversão de prefixo que altera a ordem de apenas dois panquecas (1, 2, 3) terá um custo de movimentação de 1, enquanto a inversão que altera a ordem de todos os panquecas (3, 2, 1) terá um custo de movimentação de 6.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 63.06024955799876,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 0,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

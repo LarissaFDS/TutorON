@@ -1,0 +1,12 @@
+{
+  "pagina": 13,
+  "texto": "Temos ent˜ao que n(k + 1) ´e v´alido ∀tk ´ımpar.\n( II )\n\nLogo, de (I) e (II), temos que o invariante ´e v´alido ∀tk\n\nT´ermino: Sabemos que o la¸co de repeti¸c˜ao executa enquanto o nosso inteiro t\n´e maior do que zero, no entanto, isso acontece considerando que t inicializa com\nn e ´e decrementado dividindo seu valor por dois a cada intera¸c˜ao. Desse modo,\nna ´ultima itera¸c˜ao, quando “t ≤0”e “k = n”, o valor de n ´e:\n\nn = tn.2n + mn\n\nPortanto, conclui-se que o algoritmo Conversor D-B est´a correto e, de fato, con-\nverte para bin´ario um n´umero natural dado.\n\n■\n\n8. A sequˆencia de Fibonacci ´e definida da seguinte forma: f0 = 0; f1 = 1 e\nfi+2 = fi+1 + fi, ∀i ≥0. Prove que para todo n ≥1 temos:\n\n\n[OCR parcial do recorte p13-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nem que o lado esquerdo representa n-´esima potˆencia de uma matriz 2 x 2.\n\nSolu¸c˜ao:\n\nA prova pode ser feita por indu¸c˜ao:\n\nPasso Base: (n = 1)\n\n\u00131\n\n\u0013\n\n\u0013\n\nAn =\n\n=\n\n=\n\n\u00121\n1\n1\n0\n\n\u0012f1+1\nf1\nf1\nf0\n\n\u0012f2\nf1\nf1\nf0\n\nConsiderando a sequˆencia de Fibonacci at´e os 3 primeiros termos, temos que:\n\nf0 = 0\nf1 = 1\nf2 = f0 + f1 = 1\n\n\u00131\n\n\u0013\n\ne, portanto, a matriz A =\n\n=\n\n, associa direta e corretamente a\n\n\u00121\n1\n1\n0\n\n\u0012f2\nf1\nf1\nf0\n\nsequˆencia de Fibonacci para os seus 3 primeiros elementos elementos.\n\nHip´otese de Indu¸c˜ao: (n ≤k)\n\n\u0013k\n\n\u0013\n\nSuponha que a hip´otese de indu¸c˜ao Ak =\n\n=\n\n,\n∀n ≤k.\n\n\u00121\n1\n1\n0\n\n\u0012fk+1\nfk\nfk\nfk−1\n\nPage xiii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p13.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p13-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

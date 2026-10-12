@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "A IA genérica responde “no geral”. A prova da\ndisciplina não é “no geral”.\n\nHoje\n\nTutorON\n\nAntes de responder, a IA consulta o material\nda própria disciplina: provas antigas, listas e\ngabaritos (RAG).\n\nIgnora como a disciplina cobra: formato\nda prova, regras das listas, vocabulário\ndo professor\nPode errar com confiança, e o aluno\nnão percebe\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nA IA genérica responde \"no geral\". A prova da\ndisciplina nao é \"no geral\".\nHoje\nTutorON\nIgnora como a disciplina cobra: formato\nda prova, regras das listas, vocabulario\nAntes de responder, a IA consulta o material\ndo professor\nda propria disciplina: provas antigas, listas e\n Pode errar com confianca, e o aluno\ngabaritos (RAG).\nnao percebe",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

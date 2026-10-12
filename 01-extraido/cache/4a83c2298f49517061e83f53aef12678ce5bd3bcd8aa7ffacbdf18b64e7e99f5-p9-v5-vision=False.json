@@ -1,0 +1,13 @@
+{
+  "pagina": 9,
+  "texto": "[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nf match t\nif len(v)z2--1;\n\nlen(v):\nlot len(E):\nt False\nselect leaf(v,E)\nBet parent(lear,E)\n\nleaf\nparent\n\nedge in get_ed\nE.remove(edge)\nV.remove( leaf)\nV-remove(parent)\nTrue\n\nges(parent,v,E):\n\n\n10. Prove que o problema da mochila pode ser resolvido em tempo polinomial\npor um algoritmo guloso, se o peso wi de cada item i for unit´ario.\n\nSolu¸c˜ao: Nesse problema, temos uma mochila com capacidade de aguentar certo\npeso W e i itens de peso unit´ario wi, mas com valores distintos - sendo alguns mais\nvaliosos que outros. Seu objetivo ´e escolher os itens que resultar˜ao em um maior lucro\npara o dono na mochila, caso este deseje vender. Uma maneira de resolvˆe-lo (por´em\nnem sempre t˜ao eficiente) ´e atrav´es de um algoritmo guloso, que ´e caracterizado\npor tomar a decis˜ao com a vantagem imediata mais ´obvia. Nesse caso, podemos\nver ent˜ao que essa vantagem ´e a escolha dos itens que possuem maior valor, sem\nlevar em considera¸c˜ao o seu peso, visto que todos possuem o mesmo. Sendo assim,\nnecessitamos inicialmente ordenar de maneira decrescente os itens com base em seu\nvalor e em seguida pegar os primeiros W itens, de forma a encher a mochila at´e seu\nm´aximo e, assim, obter m´aximo lucro.\n\n\n[OCR parcial do recorte p9-fig2.png; conferir símbolos na imagem]\ndef Breedy_knapsack(values, Capacity):\nprofit-g\nvalues. sort(reverse True)\nNie capacity a values: & E quanto h\nprofit += int(values. pop(a)) * são\nCapacity-=1\n\n# Or\n\nPrint(profit) # Im\n\nvalues = [int(x) fo\n\nxi\nCapacity =\n\nr input().split¢: |\nint (input())\n\nSeedy_knapsack(values, capacity)\n\n\nDesse modo, como o algoritmo acima envolve uma ordena¸c˜ao O(n log(n)) e uma\nverifica¸c˜ao O(n) temos que a complexidade final ´e O(n log (n)). Al´em disso, como\nO(n) < O(n log (n)) < O(n2), ´e poss´ıvel concluir que a complexidade ´e limitada de\nmodo inferior e superior por duas fun¸c˜oes polinomiais (linear e quadr´atica). Logo,\n\nPage ix",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig1.png",
+    "01-extraido\\figuras\\a177bf5bc3c7\\p9-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

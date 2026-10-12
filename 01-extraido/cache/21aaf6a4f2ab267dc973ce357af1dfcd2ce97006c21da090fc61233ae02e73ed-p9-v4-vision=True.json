@@ -1,0 +1,18 @@
+{
+  "pagina": 9,
+  "texto": "9. Dado um grafo simples G(V, E ) e dois v´ertices s, t ∈V , projete um algoritmo\nde programa¸c˜ao dinˆamica que encontre a quantidade de caminhos simples\ndistintos entre s e t\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\nvector<int> topo_sort(int freq[], int graph_size)\nqueue<int> fila;\nfor (int i = 0;i< n; i++){\nif (!freq[i]) fila.push(i);\nvector<int> grafo_ordenado;\nwhile (!fila.empty()){\nint u = fila.front();\nfila.pop();\ngrafo_ordenado.push_back(u);\nfor(int i =0; i< grafo_inicial[u].size(); i++) {\nfreq[grafo_inicial[u][i]]--;\nif (freq[grafo_inicial[u][i]]==0)\nfila.push(grafo_inicial[u][i]);\nreturn grafo_ordenado;\nint caminhos_distintos(int destino, int n, int freq[])\nvector<int> grafo_ordenado = topo_sort(freq, n);\nint estados_anteriores[n]={ θ };\nestados_anteriores[destino] =1;\nfor (int i = grafo_ordenado.size() -1;i >= 0; i--){\npos = grafo_ordenado[i];\nfor(intj=0;j<grafo_inicial[pos].size();j++){\nestados_anteriores[pos] += estados_anteriores[grafo_inicial[pos][j]];\nreturn estados_anteriores[o];\n\n\nPage ix",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

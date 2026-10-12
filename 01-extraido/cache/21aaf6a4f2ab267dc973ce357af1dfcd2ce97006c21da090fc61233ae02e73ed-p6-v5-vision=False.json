@@ -1,0 +1,12 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nFUN ExJana) use\n\nfg\n{\n\n“Tpua >> (ua8usr)[e}iue >> ynoz\n\nf\n\n{\n\nfuga = [flr]ue\n£8 = [frase\nOOWTINE =< uru)\n\n{\n\n$3509 = um\n(uw > 3502)\n\nCEalsna] fz Jase (F- £) 3502 Jur\nCF < Eno pue Es tm\nk\n(4 fsgno 4 p=»)\nSXVNT ONE = utw quy\n\n(€ift]Jsue\nG 3ttds)\nCE CHE fyyguar\n\nF Sits + r= 6 “= gy\n\nCarts Tqqfuay HIds fy = ay ds)\nT\n\nSErlan> «e ups\n\n(+t {sgn T fg 9)\n\nH((use) “O “sue)sosusw\n\nEra\n\n“[saoJaro 2uy\n\n“E “3SusTI(r Bust Jose 3uy\n\n(san *usduaro “ps %u )JUEDS)\n\nSarrds “uzduat “sam quay\n\n(403\n\nOures uy\n\n“PIS s2ndsawny\n<U\"syrurr>\n<yorpys>\n<urduyays>\n<weasysoy>\n\n\n7. Uma cobertura de v´ertices de um grafo G = (V, E ) ´e um subconjunto de\nv´ertices S ⊇V que inclui ao menos uma extremidade de cada aresta de E .\nForne¸ca um algoritmo de tempo linear para a seguinte tarefa.\n\nEntrada: Uma ´arvore n˜ao-direcionada T = (V, E).\nSa´ıda: O tamanho da menor cobertura de v´ertices de T.\nPor exemplo, na ´arvore abaixo, as poss´ıveis coberturas de v´ertice incluem\n{A, B, C, D, E, F, G} e {A, C, D, F}, mas n˜ao {C, E, F}. A menor cobertura de\nv´ertice tem tamanho 3: B, E, G\n\nPage vi",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p6-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

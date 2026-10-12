@@ -1,0 +1,91 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c01",
+    "c02",
+    "320662691e44-q2-2",
+    "2df6e1818523-q2-5"
+  ],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.89577210599964,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo X, como descrito, é um algoritmo de busca binária. Ele busca o maior elemento em um intervalo dado do vetor A. O intervalo é definido por seus índices inicio e fim, onde A[inicio] é o primeiro elemento e A[fim] é o último. O algoritmo divide o intervalo em metade e compara os maiores elementos de cada metade. Se a metade esquerda for maior, retorna o valor da metade direita; caso contrário, retorna o valor da metade esquerda. \n\nPara provar sua corretude, podemos usar indução. Para o caso base, se o intervalo tem tamanho 1 (inicio=fim), o algoritmo retorna A[inicio], que é o único elemento. Para o caso de indução, suponhamos que o algoritmo funciona para intervalos menores. Se o intervalo é maior, ele é dividido em duas metades e o algoritmo chama-se recursivamente para cada metade. Se a metade esquerda for maior, o resultado será o valor da metade direita, que é maior ou igual ao valor da metade esquerda. Portanto, o algoritmo retorna o maior valor do intervalo original. Como o tamanho do intervalo diminui com cada chamada recursiva, o algoritmo termina em um número finito de passos, provando sua eficiência.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 104.24691118199917,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5e6780ec358eb8cf28f42c8e0fe5d763673b7ec4bc8cb0670292c7b05b321aa5"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 3,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc"
+}

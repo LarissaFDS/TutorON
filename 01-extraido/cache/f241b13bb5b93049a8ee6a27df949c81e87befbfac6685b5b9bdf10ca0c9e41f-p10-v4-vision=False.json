@@ -1,0 +1,10 @@
+{
+  "pagina": 10,
+  "texto": "Para n = 1, 22 (1+2) = 4 - 3 = 1 asterisco impresso;\nPara n = 2, 23 - (2+2) = 8 - 4 = 4 asteriscos impressos;\nPara n = 3, 24 - (3+2) = 16 - 5 = 11 asteriscos impressos;\nPara n = 4, 25 - (4+2) = 32 - 6 = 26 asteriscos impressos;\n\n...\n...\n...\n...\n...\n...\n...\n...\nPara n = i, 2i+1 - (i+2) asteriscos impressos.\n\n10. Mostre que:\n\n(a) A solu¸c˜ao de T (n) = T (n −1) + n; T (1) = 1 ´e O(n2).\n\n(b) A solu¸c˜ao de T (n) = T (⌈n/2⌉) + 1; T (1) = 1 ´e O(lgn).\n\n(c) A solu¸c˜ao de 2T (⌊n/2⌋) + n; T (1) = 1 ´e O(n · lgn).\n\nSolu¸c˜ao:\n\n(a) Solu¸c˜ao: Desenvolvendo a recorrˆencia, temos que:\n\nT(n) = T(n −1) + n\n(1)\n\nT(n −1) = T(n −2) + n −1\n(2)\n\nT(n −2) = T(n −3) + n −2\n(3)\n\nDe (1) e (2):\n\nT(n) = T(n −2) + (n −1) + n\n(4)\n\nDe (3) e (4):\n\nT(n) = T(n −3) + (n −2) + (n −1) + n\n(4)\n...\n...\n...\n...\n...\n...\n...\n\nT(n) = T(n −k) + (n −k + 1) + (n −k + 2) + ... + (n −2) + (n −1) + n\n\nNeste caso, o algoritmo encerra quando n −k = 1 ⇒k = n −1\n\nT(n) = T(n−(n−1))+(n−(n−1)+1)+(n−(n−1)+2)+ ... +(n−2)+(n−1)+n\n\nT(n) = T(1) + (2) + (3) + ... + (n −2) + (n −1) + n\n\nT(n) = 1 + (2) + (3) + ... + (n −2) + (n −1) + n\n\n⇒\nT(n) = n · (n + 1)\n\n2\n\nPara mostrar que T(n) ´e O(n2) basta definir f(n) = n·(n+1)\n\n2\ne g(n) = n2, sendo\nassim basta encontrar n0 e c, tais que f(n) < c · g(n), ∀n ≥n0, neste sentido,\nbasta tomar n0 = 1 e c = 3, por exemplo. Neste caso, vemos que T(n) = O(n2).\n\nPage x",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p10.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

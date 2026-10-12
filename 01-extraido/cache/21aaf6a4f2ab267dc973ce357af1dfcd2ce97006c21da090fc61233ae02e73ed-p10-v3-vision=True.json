@@ -1,0 +1,11 @@
+{
+  "pagina": 10,
+  "texto": "10. Mostre uma algoritmo de programa¸c˜ao dinˆamica para o problema do CAMI-\n  NHO M´AXIMO entre dois v´ertices s e t (caminho simples). Qual a comple-\n   xidade do algoritmo (tempo e mem´oria)?\n\n\n      Solu¸c˜ao: Um poss´ıvel algoritmo para resolver tal tarefa  ´e o algoritmo de Floyd-\n     Warshall com uma pequena modifica¸c˜ao (o algoritmo original foi feito para computar\n     o caminho m´ınimo entre dois v´ertices), assim, o algoritmo ficaria:\n\n\n\n\n\n    Complexidade de Tempo: O(n3)\n    Complexidade de Mem´oria: O(n2)\n\n     Outros algoritmos mais eficientes para fontes ´unicas, como o algoritmo de Bellman-\n     Ford ou Djikstra, tamb´em poderiam funcionar, a abordagem, neste caso, seria a\n     mesma, maximizar o caminho ao v´ertice destino.\n\n\n\n\n\n                                   Page x\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p10.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p10-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

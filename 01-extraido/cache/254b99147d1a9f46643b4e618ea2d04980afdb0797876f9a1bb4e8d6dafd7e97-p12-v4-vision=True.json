@@ -1,0 +1,10 @@
+{
+  "pagina": 12,
+  "texto": "Dessa forma, a defini¸c˜ao de invariante na inicializa¸c˜ao est´a satisfeita.\n\nManuten¸c˜ao: Prosseguimos ent˜ao para a execu¸c˜ao do la¸co nos passos seguintes,\nonde k ´e incrementado uma unidade a cada itera¸c˜ao e, dessa forma, o vetor b na\nposi¸c˜ao k ´e atualizado com o valor da opera¸c˜ao modular com 2, isto ´e, tk mod\n2. Dando prosseguimento com a atualiza¸c˜ao do valor de tk ao ser dividido por 2,\no que permite que haja o algoritmo continue para que a convers˜ao pare quando\no n´umero for menor ou igual a zero. Dessa forma, precisamos mostrar que se o\ninvariante de la¸co ´e v´alido para k, ele ser´a v´alido para k+1. Supomos, ent˜ao,\nque n(k) ´e v´alido, ent˜ao sabemos que n(k) = tk.2k + mk e a partir do corpo do\nloop deduzimos que:\n\nk’ = k + 1\nb[k’] = tk mod 2\n\ntk′ = tk ÷ 2\n\nAssim, temos dois casos a provar:\n\n• Quando tk ´e par, ent˜ao b[k’] = 0 e b[1...k’] ainda representa mk.\n\n∴\nmk′ = mk\n\nLogo\nn(k) = mk + tk.2k ⇒n(k′) = mk′ + tk′.2k′\n\n= mk + (tk/2).2k′ = mk + tk.2k = n\n\n, temos ent˜ao que n(k + 1) ´e v´alido ∀tk par\n( I )\n\n• Quando tk ´e ´ımpar, isso nos d´a ent˜ao que b[k’] = 1 e b[1...k’] representa\n2k + mk.\n\ni=k\nX\n\ni=k+1\nX\n\ni=k′\nX\n\nb[i] 2i−1 =\n\nb[i] 2i−1\n\nPois, mk =\n\nb[i] 2i−1 ⇒mk+1 =\n\ni=1\n\ni=1\n\ni=1\n\ni=k′\nX\n\ni=k\nX\n\n=\n\nb[i] 2i−1 = b[k′].2k +\n\nb[i] 2i−1\n\ni=1\n\ni=1\n\n∴mk′ = 2k + mk\n\nSabendo disso e que, quando tk ´e ´ımpar tk′ = tk−1\n\n2 , segue-se que:\n\nn(k) = mk + tk.2k ⇒n(k′) = mk′ + tk′.2k′\n\n= (mk + 2k) + tk −1\n\n2\n.2k′\n\n= (mk + 2k) + (tk −1).2k\n\n= mk + 2k + tk.2k −2k = mk + tk.2k = n\n\nPage xii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p12.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

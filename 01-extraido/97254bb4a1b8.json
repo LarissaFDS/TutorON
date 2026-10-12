@@ -1,0 +1,91 @@
+{
+  "id": "97254bb4a1b8",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf",
+  "copia": "00-originais\\ingestao\\427b1e70e19c921a84255afd6997dc61bf7027864043037d9e78736fa419eddd\\PAA_L6.pdf",
+  "sha256": "427b1e70e19c921a84255afd6997dc61bf7027864043037d9e78736fa419eddd",
+  "tipo": ".pdf",
+  "paginas": 7,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-05-transformacao-de-problemas",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 6\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 6 - Transforma¸c˜ao de Problemas\n\n1. Maria aposta com Jo˜ao que ela pode fazer o seguinte truque. Jo˜ao recitar´a\nn −1 n´umeros diferentes de 1 a n em uma ordem aleat´oria e ela ser´a capaz\nde nomear o ´unico n´umero nesse intervalo que ele ter´a perdido. Claro, ela\nter´a que realizar a tarefa em sua cabe¸ca, sem fazer anota¸c˜oes. Como ela deve\nfazer esse truque? Em outras palavras, projete um algoritmo que descubra o\nn´umero faltante utilizando O(1) de espa¸co em mem´oria.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p1-fig3.png; conferir símbolos na imagem]\nint main(){\nint n,X, sum;\ncin >> n;\nSum = n * (n+1)/2;\n\nfor(int i=tjicnsit)\n\n{\ncin >> x;\nSUM -= x;\n}\n\ncout << sum;\n\n\n2. O Rei Arthur espera n cavaleiros para um jantar anual em Camelot. Infe-\nlizmente, alguns dos cavaleiros brigam entre si, e Arthur sabe quem briga\ncom quem. Arthur quer sentar seus convidados ao redor de uma mesa para",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\97254bb4a1b8\\p1-fig1.png",
+        "01-extraido\\figuras\\97254bb4a1b8\\p1-fig2.png",
+        "01-extraido\\figuras\\97254bb4a1b8\\p1-fig3.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "que dois cavaleiros briguentos n˜ao se sentem pr´oximos um do outro. Qual\nproblema pode ser usado para modelar a tarefa do Rei Arthur?\n\nSolu¸c˜ao: O problema do Ciclo Hamiltoniano poderia ser utilizado para modelar o\nproblema do Rei Arthur com grafos, visto que cada cavaleiro poderia ser modelado\ncomo um v´ertice do ciclo hamiltoniano. Assim sendo, o problema seria caracterizado\nda seguinte forma:\n\nDado um grafo G = (V,E) onde V ´e o conjunto de cavaleiros e E o conjunto de arestas\nque ditam se os cavaleiros podem se sentar ao lado um do outro, ent˜ao a ausˆencia\nde arestas unindo dois v´ertices, por sua vez, determina a impossibilidade de dois\ncavaleiros sentarem pr´oximos. Logo, o ciclo hamiltoniano representa uma solu¸c˜ao\npara o problema, visto que, um caminho simples ligaria todos os v´ertices uma ´unica\nvez, indicando que todos os cavaleiros poderiam se sentar `a mesa naquela disposi¸c˜ao.\nSabendo que o problema do Ciclo Hamiltoniano ´e um problema NP-Completo e que\no problema do Rei Arthur, por sua vez, uma instˆancia do Ciclo Hamiltoniano, o\ncertificado para o sim de uma disposi¸c˜ao qualquer de cavaleiros poderia ser dita em\ntempo polinomial. A redu¸c˜ao do problema nos diz que o problema do Rei Arthur\ntamb´em ´e NP-Completo.\n\n3. V´arias fam´ılias saem para jantar juntas. Para aumentar sua intera¸c˜ao social,\neles gostariam de sentar-se `a mesa, de modo que dois membros da mesma\nfam´ılia n˜ao estivessem na mesma mesa.\nMostre como encontrar uma dis-\nposi¸c˜ao dos assentos que atenda a esse objetivo (ou prove que n˜ao existe tal\ndisposi¸c˜ao) usando o problema de fluxo m´aximo. Suponha que o jantar tenha\np fam´ılias e que a i-´esima fam´ılia tenha ai membros. Suponha que q mesas\ns˜ao dispon´ıveis e que a meja j-´esima mesa possui capacidade bj\n\nSolu¸c˜ao: Para encontrar uma disposi¸c˜ao dos assentos que atenda a esse objetivo\nusando o problema de fluxo m´aximo podemos come¸car definindo o grafo G(V, A),\nonde:\n\nV = {s, t} ∪{ui | 1 ≤i ≤p} ∪{cj ≤j ≤q}\n\nA = {(s, ui) | 1 ≤i ≤p} ∪{(ui, vi) | 1 ≤i ≤p, 1 ≤j ≤q} ∪{(vj, t) | 1 ≤j ≤q}\n\nAl´em disso, temos que as capacidades est˜ao definidas a seguir:\n\nc(s, ui) = ai;\nc(ui, vj) = 1;\nc(vj, t) = bj;\n\nUm fluxo que vai de ui at´e vj ´e ’0’ ou ’1’ e significa que um membro da familia i\nsentar´a na mesa j. Com isso e utilizando uma solu¸c˜ao integral com o uso do problema\nde fluxo m´aximo ´e poss´ıvel dar uma solu¸c˜ao para a disposi¸c˜ao das fam´ılias nas mesas,\ntendo em vista que esse problema maximiza o n´umero de pessoas que podem sentar\nconsiderando as restri¸c˜oes dadas.\n\nPage ii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p2.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "4.\nO problema da colora¸c˜ao em grafos ´e geralmente declarado como o problema\nda colora¸c˜ao do v´ertice: atribua o menor n´umero de cores aos v´ertices de\num dado grafo de forma que n˜ao haja dois v´ertices adjacentes da mesma\ncor. Considere agora o problema da colora¸c˜ao das arestas: atribua o menor\nn´umero poss´ıvel de cores `as arestas de um determinado grafo, de modo que\nduas arestas com o mesmo v´ertices n˜ao tenham a mesma cor. Explique como\no problema de colora¸c˜ao de arestas pode ser reduzido a um problema de\ncolora¸c˜ao de v´ertices.\n\nSolu¸c˜ao: Considerando que temos o problema da colora¸c˜ao de arestas com o grafo\nG(V,A). Ao utilizarmos um grafo adjunto, ou grafo linha, L(G) cujos v´ertices est˜ao\nem correspondˆencia 1 a 1 com as arestas de G e cujas arestas ligam v´ertices que cor-\nrespondem a arestas incidentes em G, podemos reduz´ı-lo a um problema de colora¸c˜ao\nde v´ertices. Dessa forma, basta que encontremos uma colora¸c˜ao de v´ertice para L(G)\nque encontraremos a colora¸c˜ao das arestas de G, visto que a cor das arestas de G\ndeve ter sido aplicada a partir de seu v´ertice correspondente de L(G).\n\n5.\nA companhia de produtos caninos oferece duas comidas para cachorro: Vi-\nralata’s e Ra¸c˜ao do Sucesso, que s˜ao feitas de uma mistura de cereais e carne.\nUm pacote de Viralata’s requer 1 quilo de cereal e 1, 5 quilo de carne, e ´e\nvendido por $7. Um pacote de Ra¸c˜ao do Sucesso usa 2 quilos de cereal e 1\nquilo de carne, e ´e vendido por $6. O cereal bruto custa $1 por quilo e a carne\nbruta,$2 por quilo. H´a tamb´em o custo de $1, 40 para empacotar o Viralata’s\ne $0, 60 para o Ra¸c˜ao do Sucesso. Um total de 240.000 quilos de cereal e\n180.000 quilos de carne est˜ao dispon´ıveis a cada mˆes.\nO ´unico gargalo de\nprodu¸c˜ao est´a no fato de a f´abrica poder empacotar apenas 110.000 pacotes\nde Viralata’s por mˆes. Desnecess´ario dizer, a gerˆencia gostaria de maximizar\no lucro.\n\n(a) Formule o problema como um programa linear em duas vari´aveis.\n(b) Desenhe a regi˜ao fact´ıvel, dˆe as coordenadas de cada v´ertice, e circule o\nv´ertice que maximiza o lucro. Qual o lucro m´aximo poss´ıvel?\n\nSolu¸c˜ao:\n(A) Considerando que V ´e o n´umero de pacotes da Ra¸c˜ao Viralata’s e S ´e o n´umero\nde pacotes da Ra¸c˜ao do Sucesso, temos que:\n\nFun¸c˜ao Objetivo:\n\n−V −3V + 7V + 6S −2S −2S −1, 4V −0, 6S = 0\n\n⇒m´ax(1, 6V + 1, 4S = 0)\n\nRestri¸c˜oes:\n\nPage iii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p3.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "- 0 ≤V ≤110000\n- S ≥0\n- V + 2S ≤240000\n- 1, 5V + S ≤180000\n\n(B)\n\nEixo das Abscissas: (Viralata’s)\nEixo das Ordenadas: (Sucesso)\n\n\n[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nNn ES a co\nS S$ 3 S 3 B\nS S S S E É\n= Ss s S E 3\ns Ss s Ê E E\n\nE\n\n\nA = (0,0)\nB = (0,120.000)\nC = (60.000, 90.000) (m´ax)\nD = (110.000, 15.000)\nE = (110.000, 0)\n\nLucro M´aximo Poss´ıvel = 1, 6 · (60.000) + 1, 4 · (110.000)\n\n= 96.000 + 126.000\n\nLucro M´aximo Poss´ıvel = $222.000\n\n6.\nMostre que o problema do troco (Exerc´ıcio ??) pode ser formulado como\num programa linear inteiro. Minimize o n´umero de moedas.\n\nSolu¸c˜ao: O problema do troco no qual dado um estoque ilimitado de moedas de\nvalores x1, x2, ..., xn, queremos dar um troco de v usando no m´aximo k moedas. Logo,\no problema pode ser modelado como um programa linear inteiro e isso pode ser visto\na seguir:\n\nPage iv",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\97254bb4a1b8\\p4-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "Considerando um sistema finito m1 < m2 < ... < mn de inteiros positivos que\nrepresentem n tipos de moedas e um inteiro positivo, desejamos determinar os inteiros\npositivos xi | 1 ≤i ≤t e, que minimizam a seguinte equa¸c˜ao:\n\nn\nX\n\nxi\n(1)\n\ni=1\n\nSujeita `as as seguintes restri¸c˜oes:\n\nn\nX\n\nn\nX\n\nx =\n\nxici\n\nxi ≤k\n(2)\n\ni=1\n\ni=1\n\nTendo em vista que uma representa¸c˜ao ´e a sequˆencia dos coeficientes x + 1, ..., xn,\npodemos consider´a-la ´otima se ela ´e de tamanho m´ınimo.\n\n7. Leia o artigo da wikipedia sobre o puzzle Kakuro https://en.wikipedia.org/wiki/Kakuro\ne modele exemplo dado utilizando Programa¸c˜ao por Restri¸c˜ao.\n\nSolu¸c˜ao: Neste caso, modelaremos Kakuro como um par < K, P >, no qual est˜ao\nrepresentadas as vari´aveis:\n- K: As c´elulas do Kakuro\n- P: O conjunto das dicas, definido como um par < K′, n >,\nonde K’ ´e um subconjunto de K (c´elulas) e n ´e um inteiro positivo que, para o\nsubconjunto K’, representa a soma dos elementos nas c´elulas de K’.\n\nVari´aveis:\n\nXk|∀k ∈K : Xk ∈[1, 9]\n\nDom´ınio:\n\n[1, 9]\n\nRestri¸c˜oes:\n\n-∀\n< K′, n >\n∈P : diferentes entre si({Xk | k ∈K′})\n\nX\n\n-∀\n< K′, n >\n∈P :\n\nXk = n\n\nk ∈K′\n\nOu seja, os elementos de K’ devem ser diferentes entre si e a soma dos elementos de\nK’ tem que ser igual ao inteiro n.\n\n8. O problema das 8 DAMAS consistem em colocar 8 damas em um tabuleiro\nde xadrez. Modele este problema utilizando Programa¸c˜ao por Restri¸c˜ao.\n\nPage v",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p5.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "Solu¸c˜ao:\n\nVari´aveis:\n\n1, 2, 3, ..., 8 linhas de um vetor A\n\nO Dom´ınio de cada vari´avel ´e:\n\n1, 2, 3, ..., 8 (n´umeros de 1 a 8)\n\nO valor de cada vari´avel (A[j]) indica a coluna onde uma das dama ´e alocada e a\nposi¸c˜ao desta vari´avel no vetor (j) indica a linha que a dama ´e alocada, dessa forma\nn˜ao haver´a duas damas na mesma linha. Para garantir que n˜ao haver´a duas damas\nna mesma coluna ou na mesma diagonal, aplicaremos as seguintes restri¸c˜oes:\n\nRestri¸c˜oes:\n\n• ∀i, j ∈[1, 2, 3, ..., 8], A[i]̸ = A[j];\n\nGarante que haver´a apenas uma dama em cada coluna;\n\n• ∀i, j ∈[1, 2, 3, ..., 8], A[i] + i̸ = A[j] + j;\n\n• ∀i, j ∈[1, 2, 3, ..., 8], A[i] −i̸ = A[j] −j;\n\nGarantem que haver´a apenas uma dama em cada diagonal.\n\n9. Modele o problema da MOCHILA utilizando programa¸c˜ao linear inteira.\n\nSolu¸c˜ao:\nConsiderando p como a quantidade de itens, C como a capacidade m´axima da mo-\nchila, xi como a optatividade pelo item i, pi como o peso do item i e vi o valor de\nutilidade do item i.\n\nVARI´AVEIS:\n\n- i ∈1, 2, ..., p\n- pi ∈N\n- xi ∈{0, 1}\n- vi ∈R\n- C ∈N\n\nFUNC¸ ˜AO OBJETIVO:\n\ni=p\nX\n\nmaximizar :\n\n(vi · xi)\n\ni=1\n\ni=p\nX\n\nsujeito `a :\n\n(pi · xi) ≤C\n\ni=1\n\nPage vi",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p6.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "Deseja-se, portanto, maximizar o valor dos itens recolhidos na mochila, de modo\nque o peso de cada item e disponibilidade dos mesmos esteja sujeita `a restri¸c˜ao da\ncapacidade da mochila.\n\n10. Modele o problema da CLIQUE M´AXIMA utilizando programa¸c˜ao linear\ninteira.\n\nSolu¸c˜ao: Como os problemas da CLIQUE M´AXIMA e CONJUNTO INDEPEN-\nDENTE M´AXIMO s˜ao complementares, podemos definir um problema em termos\ndo outro. Neste sentido, seja G=(V,E) um grafo simples, onde V = v1, v2, ..., vn.\nSeja ∆uma clique no grafo G e U o conjunto de v´ertices de ∆. Al´em disso, dada a\nexistˆencia da vari´avel bin´aria xi, onde i ∈{1, 2, . . . , n} tal que xi ∈{0, 1}\n\n(\n\nxi =\n\n0, se vi /∈U\n1, se vi ∈U\n\nDefinimos tamb´em a nota¸c˜ao NVj, que denota o conjunto dos v´ertices n˜ao-vizinhos\nao v´ertice j em G. De modo que vj /∈NVj, assim a cardinalidade de NVj pode ser\ndefinida por hj da seguinte maneira:\n\n(\n\nhj =\n\n|NVj|, se NVj̸ = ∅\n1, se NVj = 0\n\nDesse modo, o programa linear ´e dado pelas seguintes equa¸c˜oes e restri¸c˜oes:\n\ni=n\nX\n\nm´aximizar :\n\nxi\n\ni=1\n\nX\n\nxi ≤1, para cada 1 ≤j ≤n\n\nsujeita `a :\nhjxj +\n\ni ∈NVj\n\nLogo, a solu¸c˜ao do programa linear resolve o problema da clique m´axima.\n\nPage vii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p7.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

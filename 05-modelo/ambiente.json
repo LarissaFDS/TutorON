@@ -1,0 +1,107 @@
+{
+  "data": "2026-10-07",
+  "sistema": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+  "cpu": "AMD Ryzen 7 3700U",
+  "ram_bytes": 10356252672,
+  "gpu_nvidia": null,
+  "contexto_configurado": 4096,
+  "ollama": {
+    "version": "0.34.4"
+  },
+  "modelos": {
+    "models": [
+      {
+        "name": "bge-m3:latest",
+        "model": "bge-m3:latest",
+        "modified_at": "2026-10-07T18:28:40.066093143-03:00",
+        "size": 1157672605,
+        "digest": "7907646426070047a77226ac3e684fbbe8410524f7b4a74d02837e43f2146bab",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "bert",
+          "families": [
+            "bert"
+          ],
+          "parameter_size": "566.70M",
+          "quantization_level": "F16",
+          "context_length": 8192,
+          "embedding_length": 1024
+        },
+        "capabilities": [
+          "embedding"
+        ]
+      },
+      {
+        "name": "tutoron-paa:latest",
+        "model": "tutoron-paa:latest",
+        "modified_at": "2026-10-07T18:28:40.290092982-03:00",
+        "size": 1929912594,
+        "digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+        "details": {
+          "parent_model": "qwen2.5:3b",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      {
+        "name": "qwen2.5vl:3b",
+        "model": "qwen2.5vl:3b",
+        "modified_at": "2026-10-07T18:27:58.130133238-03:00",
+        "size": 3200627168,
+        "digest": "fb90415cde1ef08aa669ae74b082d49b158729b6db1ab183c941417d507e71a1",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen25vl",
+          "families": [
+            "qwen25vl"
+          ],
+          "parameter_size": "3.8B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 128000,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "vision"
+        ]
+      },
+      {
+        "name": "qwen2.5:3b",
+        "model": "qwen2.5:3b",
+        "modified_at": "2026-10-07T18:26:13.692326336-03:00",
+        "size": 1929912432,
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 2048
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      }
+    ]
+  },
+  "treinamento_executado": false
+}

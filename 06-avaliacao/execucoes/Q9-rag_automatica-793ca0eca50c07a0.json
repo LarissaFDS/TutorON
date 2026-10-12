@@ -1,0 +1,58 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "70d6475b28bf-q3-3",
+    "7b4da6a8adf7-q9-9",
+    "2df6e1818523-q4-3",
+    "70d6475b28bf-q10-10"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [
+    "d455baef2cdf-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 3.25,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo, vamos seguir os seguintes passos:\n\n1. **Identificar a maior panqueca** na pilha e determinar seu índice.\n2. **Inverter o prefixo** da pilha para que a maior panqueca esteja no topo.\n3. **Inverter o prefixo** novamente para que a maior panqueca esteja na posição correta.\n4. **Repetir o processo** para o subconjunto restante da pilha.\n\n### Exemplo\n\nSuponha que temos a pilha de panquecas com tamanhos: [3, 2, 4, 1].\n\n1. **Identificar a maior panqueca**:\n   - A maior panqueca é 4, que está na posição 2 (considerando índice 0).\n\n2. **Inverter o prefixo** até a maior panqueca:\n   - Inverter o prefixo até a posição 2: [4, 2, 3, 1].\n\n3. **Inverter o prefixo** novamente para posicionar a maior panqueca no topo:\n   - Inverter o prefixo até a posição 0: [1, 3, 2, 4].\n\n4. **Repetir o processo** para o subconjunto restante:\n   - Subconjunto restante: [3, 2, 1].\n   - Identificar a maior panqueca: 3 (posição 1).\n   - Inverter o prefixo até a posição 1: [3, 1, 2].\n   - Inverter o prefixo novamente: [1, 2, 3].\n\n### Inversões e Custo Total\n\n- **Inversões**: É o número de vezes que o prefixo é invertido para posicionar a maior panqueca.\n- **Custo total de movimentar elementos**: É o número total de movimentos de panquecas durante o processo.\n\n#### Exemplo de Contagem\n\n1. **Primeira inversão**:\n   - Inverter [3, 2, 4, 1] até a posição 2: 3 movimentos (2, 3, 4).\n   - Inverter [4, 2, 3, 1] até a posição 0: 4 movimentos (4, 3, 2, 1).\n\n2. **Segunda inversão**:\n   - Inverter [3, 1, 2, 4] até a posição 1: 2 movimentos (3, 1, 2, 4).\n   - Inverter [1, 3, 2, 4] até a posição 0: 1 movimento (1, 3, 2, 4).\n\n3. **Terceira inversão**:\n   - Inverter [2, 3, 1, 4] até a posição 1: 2 movimentos (2, 3, 1, 4).\n   - Inverter [3, 2, 1, 4] até a posição 0: 3 movimentos (3, 2, 1, 4).\n\n### Resumo\n\n- **Inversões**: 2 + 1 = 3\n- **Custo total de movimentar elementos**: 4 + 1 + 2 + 3 = 10\n\n### Complexidade\n\n- **Inversões**: O número de inversões é O(n) no pior caso.\n- **Custo total de movimentar elementos**: O número total de movimentos é O(n^2) no pior caso.\n\nPortanto, a ordenação da pilha de panquecas usando inversões de prefixo envolve contagem de inversões e movimentação de elementos, com complexidades que variam dependendo da implementação e do tamanho da pilha.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 25.5779999999977,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,24 @@
+{
+  "id": "f00a2397e216",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\Imagem_do_WhatsApp_de_2023-09-28_(s)_23.48.33_58a20ced.webp",
+  "copia": "00-originais\\ingestao\\63cc32ccf4ffa08e3947b51ee24a5e7111b16cc8ccb71a08a0851cadd0e3f164\\Imagem_do_WhatsApp_de_2023-09-28_(s)_23.48.33_58a20ced.webp",
+  "sha256": "63cc32ccf4ffa08e3947b51ee24a5e7111b16cc8ccb71a08a0851cadd0e3f164",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Questão 4 [2 pontos;\nO problema CAMINHO ConDI DO E assim\n\nrod VE). vértices 9,¢€ 4\nQuestão. existe um camiuho P entre s e tem ¢ 1 v\nProvar que esse problema & A'P-complete :\nQuestão 5 [1 ponto)\nEscreva tum alguritino para gurar to Jo conjunto (1.2: un\n\nQuestão 6 |2 pontos)\nO problema k-COLORAÇÃO é\n= (, E) eum i\n\nEntrada: um graf\nElabore um algoritmo Buckt\n\nQuestão 7 [2 pontos]\nDescreva um algoritmi\n\nBronich-and-Bound para o problema da MocHita Mostre! [y\n\nnbproblomas e (ii) conto escolher um subppeoblem\n\nparis o problema\n\nQuestão 8 [1 ponto):\nQual a diferença entre",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\f00a2397e216\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta várias inconsistências e erros, como a função `topo_sort` retornando prematuramente, a inicialização incorreta do array `estados_anteriores`, e a falta de definição de `grafo_inicial`. Além disso, há um possível erro de indexação na última linha.",
+  "decisao": "suspeita",
+  "sha256": "9a537bf60988fdb031efc0302ba1708db521a93ac653e18e0db55e7c64621bf2"
+}

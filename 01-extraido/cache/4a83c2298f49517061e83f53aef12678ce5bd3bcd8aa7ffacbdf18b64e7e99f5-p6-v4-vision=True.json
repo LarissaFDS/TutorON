@@ -1,0 +1,18 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n//Contagemdeconvidados\ncout<<endl;\nfor（int i=0;i<n;i++)\nif (convidados[i]==1)\naceitos++;\nI/Resultadodoalgoritmo\nif (aceitos == n)\nelse if (aceitos == 0)\ncout <<\"Ninguem atende aos requisitos,entao naoé possivel Alice dar uma festa.\\n\";\nelse\n[incerto] sd od>> sa>>，osad>>u>>s>>\nint main()\nintn;//numerodepessoas\ncin >> n;\ncout<< endl;\naliceAlgoritm(n);\ncout<<endl;\nreturn 0；\n\n\nO tempo de execu¸c˜ao em termos de n ´e O(n2). Isso se d´a pois no loop for em que se\nrecebe e insere as conex˜oes no grafo, ocorre n itera¸c˜oes, a fim de encontrar todas as\nconex˜oes de todos os poss´ıveis convidados, onde cada um pode ter no m´aximo n - 1\nconex˜oes. Al´em disso, h´a outro loop for que verifica se os requisitos (conhecer mais\nde 5 pessoas, e n˜ao conhecer no m´ınimo 5 pessoas) est˜ao sendo cumpridos. Em seu\npior caso, todos os poss´ıveis convidados foram rejeitados, ent˜ao para cada um deles\nhaver´a n itera¸c˜oes para remover da lista de convidados e de todas as suas conex˜oes.\nSendo assim, justifica-se o tempo polinomial O(n2).\n\n6. Um servidor tem n usu´arios esperando para serem servidos.\nO tempo de\nservi¸co requerido por usu´ario ´e conhecido previamente: ´e ti minutos para\no usu´ario i . Portanto se, por exemplo, os usu´arios s˜ao servidos em ordem\ncrescente de i , ent˜ao o i-´esimo usu´ario tem de esperar a Pi\n\nj=1 tj minutos.\nQueremos minimizar o tempo total de espera\n\nn\nX\n\nT =\n\n(tempo gasto pelo usu´ario i na espera).\n\nn=1\n\nForne¸ca um algoritmo eficiente para computar a ordem ´otima na qual pro-\ncessar os usu´arios.\n\nPage vi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p6-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

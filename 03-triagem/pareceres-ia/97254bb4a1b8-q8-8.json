@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A restrição `A[i]̸ = A[j]` não garante que haverá apenas uma dama em cada coluna, pois apenas impede que duas damas ocupem a mesma coluna. As restrições de diagonais estão corretas, mas a restrição de colunas é redundante com a definição das variáveis.",
+  "decisao": "suspeita",
+  "sha256": "2aead388f0beafe11646843ae981f580e0a1ae281ee8dc2a0ae12f9304f00a7f"
+}

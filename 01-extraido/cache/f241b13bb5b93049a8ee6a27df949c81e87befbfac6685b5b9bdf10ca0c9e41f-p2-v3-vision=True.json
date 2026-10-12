@@ -1,0 +1,9 @@
+{
+  "pagina": 2,
+  "texto": "- 1 + 1 + 2 degraus\n      - 2 + 2 degraus\n      - 2 + 1 + 1 degraus\n      - 2 + 2 + 1 degraus\n    ⇒Degrau(4) = 5 maneiras.\n\n    Para n=5\n    Podemos subir a escada de cinco maneiras:\n      - 1 + 1 + 1 + 1 +1 degraus\n      - 1 + 1 + 1 + 2 degraus\n      - 1 + 1 + 2 + 1 degraus\n      - 1 + 2 + 1 + 1 degraus\n      - 1 + 2 + 2 degraus\n      - 2 + 1 + 1 + 1 degraus\n      - 2 + 1 + 2 degraus\n      - 2 + 2 + 1 degraus\n      - 2 + 2 + 1 degraus\n    ⇒Degrau(5) = 8 maneiras.\n\n   Em resumo, obtemos as seguintes rela¸c˜oes:\n\n    Degrau(1) = 1\n    Degrau(2) = 2\n    Degrau(3) = 3\n    Degrau(4) = 5\n    Degrau(5) = 8\n\n     Portanto, ´e poss´ıvel notar que a fun¸c˜ao Degrau se assimila `a sequˆencia de Fibonacci\n                    1,   se  n = 1\n                                            ⇒Desse modo, a fun¸c˜ao Degrau(n) =   2,   se  n = 2\n                                        Degrau(n −1) + Degrau(n −2), se  n ≥3\n\n\n2. Na linguagem de sua escolha, implemente dois algoritmos para calcular o\n   en´esimo n´umero de Fibonacci: (a) o algoritmo baseado na defini¸c˜ao recursiva\n  e (b) o algoritmo iterativo.  Plote um gr´afico com o tempo de ambos os\n  algoritmos para cada valor de n = 1, .  .  .  , nmax. Em que nmax ´e o maior valor\n  de n para o qual ambos programas executam em menos de 1 minuto em seu\n  computador\n\n\n\n\n\n                                   Page ii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p2.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

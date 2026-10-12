@@ -1,0 +1,11 @@
+{
+  "pagina": 2,
+  "texto": "2. Algumas moedas s˜ao espalhadas nas c´elulas de um tabuleiro n × m, uma mo-\n  eda por c´elula. Um robˆo, localizado na c´elula superior esquerda do tabuleiro,\n   precisa coletar o m´aximo de moedas poss´ıvel e trazˆe-las para a c´elula inferior\n   direita. Em cada etapa, o robˆo pode mover uma c´elula para a direita ou uma\n   c´elula para baixo de sua localiza¸c˜ao atual. Quando o robˆo visita uma c´elula\n  com uma moeda, ele pega a moeda. Elabore um algoritmo para encontrar o\n  n´umero m´aximo de moedas que o robˆo pode coletar e um caminho que ele\n   precisa seguir para fazer isso.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n3. Projete um algoritmo eficiente para encontrar o comprimento do caminho\n  mais longo em um DAG. (Este problema ´e importante como um prot´otipo de\n  muitos outros aplicativos de programa¸c˜ao dinˆamica, pois determina o tempo\n  m´ınimo necess´ario para concluir um projeto que compreende tarefas de pre-\n   cedˆencia restrita.)\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                   Page ii\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p2-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

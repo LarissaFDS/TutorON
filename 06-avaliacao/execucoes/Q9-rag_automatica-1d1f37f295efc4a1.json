@@ -1,0 +1,64 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "d455baef2cdf-q1-1",
+    "a177bf5bc3c7-q3-3",
+    "7b4da6a8adf7-q9-9",
+    "1a81ca283132-q6-6"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.6968667630026175,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo, seguimos o algoritmo descrito na referência fornecida. A solução é encontrada por meio de uma indução, onde a maior panqueca é sempre movida para a base da pilha. Para cada panqueca que não está na base, se for diferente do topo, ela é invertida para o topo. Depois, a panqueca na base é invertida para a base. Isso é repetido até que todas as panquecas estejam na posição correta.\n\nQuanto à quantidade de inversões necessárias, o algoritmo garante que há no máximo 2(n-1) inversões de prefixo. No entanto, o custo total de movimentar elementos é O(n^2), pois para cada panqueca que precisa ser movida para a posição correta, é necessário mover todos os elementos que estão acima dela. Portanto, a complexidade total do algoritmo é O(n^2).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 112.91346353300105,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "35440925035e74703ade129607c7df2275031912d91368a47063f91caca9b83b"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,81 @@
+{
+  "questao": "Q4",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "As classes P, NP e NP-completo são fundamentais no contexto da teoria da computação e da complexidade computacional. \n\nP (Polynomial time) é a classe de problemas que podem ser resolvidos eficientemente por um computador, em tempo polinomial. Ou seja, a complexidade de tempo de execução é de ordem polinomial em relação ao tamanho da entrada do problema.\n\nNP (Nondeterministic Polynomial time) é a classe de problemas cuja solução pode ser verificada eficientemente em tempo polinomial. Ou seja, se uma solução é fornecida, um computador pode verificar essa solução em tempo polinomial. Importante notar que não necessariamente esses problemas podem ser resolvidos em tempo polinomial.\n\nNP-completo é uma subclasse de NP que é especialmente importante. Um problema é NP-completo se ele é NP e, além disso, é tão difícil quanto qualquer problema em NP. Ou seja, se um problema NP-completo puder ser resolvido em tempo polinomial, então todos os problemas em NP também podem ser resolvidos em tempo polinomial.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 43.797184946000925,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": null
+      }
+    ],
+    "acertos": 3,
+    "total": 5,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

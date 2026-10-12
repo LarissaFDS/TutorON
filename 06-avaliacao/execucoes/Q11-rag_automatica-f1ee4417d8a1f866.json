@@ -1,0 +1,74 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "7b4da6a8adf7-q7-7",
+    "c07",
+    "f802639909c5-q6-5"
+  ],
+  "contexto_texto": "[c08] Fonte: materiais\\c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nPor que o algoritmo força bruta de COMPOSTO não demonstra que o problema está em P?\nPara n>=2, a representação binária tem b=floor(log2(n))+1 bits. Portanto 2^(b-1)<=n<2^b; não se deve escrever b=log2(n) como igualdade exata para todo inteiro.\nTestar sucessivamente os divisores de 2 até floor(n/2) pode exigir Theta(n) testes no pior caso, por exemplo em entradas primas. A divisão também tem custo em bits, polinomial em b. O número de testes já cresce exponencialmente em b, apesar de ser polinomial no valor numérico n: daí a descrição pseudo-polinomial.\nIsso classifica este algoritmo, não prova que COMPOSTO esteja fora de P nem que seja NP-completo. Encontrar um divisor é um certificado de composição verificável em tempo polinomial em b.\n\n[7b4da6a8adf7-q7-7] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L1.pdf | página(s): 11, 12, 13; confiabilidade: media; OCR: revisada_por_agente\nConversor decimal-binário de n inteiro não negativo.\nFaça t=n e k=0. Enquanto t>0, guarde b[k]=t mod 2, atualize t=floor(t/2) e incremente k. Os bits são armazenados do menos significativo para o mais significativo; inverta a ordem para exibir. Para n=0, exiba 0.\nInvariante após k iterações: n=sum(b[j]2^j,j=0..k-1)+t*2^k. A divisão euclidiana t=2*floor(t/2)+(t mod 2) preserva a igualdade ao acrescentar um bit. Como t diminui estritamente quando positivo, termina; em t=0 os bits representam n.\nA linha extraída como t=t+2 está errada: a fonte usa divisão inteira. São O(log(n+1)) iterações; armazenar a saída exige O(log(n+1)) bits.\n\n[c07] Fonte: materiais\\c07_provafinal_2024_q6_composto.md | página(s): não informada na transcrição; confiabilidade: nao_verificada; OCR: boa\nQuestão 6 [2 pontos]: Considere o seguinte algoritmo força bruta para resolver o problema do\nnúmero COMPOSTO: Verifique inteiros sucessivos de 2 a ⌊n/2⌋ como possíveis divisores de n.\nSe um deles divide n, retorna SIM (ou seja, o número é composto); se nenhum deles o fizer,\nretorne NÃO. Por que esse algoritmo não é considerado polinomial?\n\n[f802639909c5-q6-5] Fonte: materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.40.55.webp | página(s): 1; confiabilidade: nao_verificada; OCR: parcial\nQuestão 6 [2 pontos]:\nConsidere o seguinte algoritmo força bruta para resolver o problema do número Composto: Verifique inteiros suces-\n\nsivos de 2 a [n/2) como possíveis divisores de n. Se um deles divide n , retorna SIM (ou seja, o número é composto); é\nse nenhum deles o fizer, retorne NÃO. Por que esse algoritmo não é considerado polinomial?",
+  "fontes_sha256": {
+    "c08": "84e6218a2f726408ac66e48c07c9bd437571ad7748e03893959625cf299642f2",
+    "7b4da6a8adf7-q7-7": "13b572ccab20134134399ade260887a44a6925ee473aee6babc614dc52b11f11",
+    "c07": "c6aa82b2ee45f26dae17f5d8f3ba5623fc96506c084718aea07c594cb5633d46",
+    "f802639909c5-q6-5": "e219f04a2aafd845f1180cb9cd21b300df1b75426c2b0f4e29dfa8e5374b9571"
+  },
+  "indice_sha256": "c6b0957a36c6c6000e5970030d627e1586916a37e217704cfd784672dada4fb5",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.846665548000601,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo de força bruta para verificar divisores de um número composto tem um custo de teste linear em relação ao tamanho da entrada, o que é O(n). No entanto, o tamanho da entrada é representado em binário, o que é O(log n). Isso significa que mesmo se o número de testes fosse O(n), o tempo total seria O(n log n), que ainda não é polinomial. O problema é que o número de divisores testados pode ser muito maior do que n, dependendo da estrutura do número. Além disso, o algoritmo não fornece um certificado de composição em tempo polinomial, o que é um requisito para ser considerado polinomial. Portanto, embora o teste individual de divisores seja linear, a combinação desses testes com a representação binária faz com que o algoritmo não seja polinomial.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 93.1371824960006,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "6f84cb2cd8c68c491e52e61e323bd59c060b9b298e2fa4938d981eb27b8c4ebf"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

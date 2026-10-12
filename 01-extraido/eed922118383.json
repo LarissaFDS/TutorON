@@ -1,0 +1,24 @@
+{
+  "id": "eed922118383",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(10).webp",
+  "copia": "00-originais\\ingestao\\958896212b7524014af70da0f3592d6663f9952a9abaeb1da2ba2dff4f8e29ba\\WhatsApp_Image_2025-01-12_at_13.13.32_(10).webp",
+  "sha256": "958896212b7524014af70da0f3592d6663f9952a9abaeb1da2ba2dff4f8e29ba",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "tou Cielo de C. Prove que 6 seguinte Problema é N'P-completo\n\nPertence a exatame,\nCOBERTURA DE CrcLos\n\nEntada: mm digrafo D\nQuestão: D possui uma ¢\n\n(4, 2) e um número k €\ncobertura de ciclos formada Por k ciclos ou menos?\nIV}. Questão: Os vértices de G podem ser\n&, 0 subgrafo induzido por Vj\n\nCoLoragio DE Graros\n\nQuestao 4 [2 Pontos}:\nCOBERTURA DE CLIQUE. Entrada:\nParticionados em + SF conjuntos ¢\né uma clique? Prove que o Problema é NP-comple\n\n(VE) e um inteiro Ke\n\num grafo G\nVi, tais que, para todo 1 Sis\n\ndisjuntos 14, V4,\nto. Dica: use o problema de\n\nQuestão 5 [2 pontos]:\nfrevo um algoritmo Backtracking para o Problema da Clero HAMILTONIANO,\nQuestão 6 [2 pontos]:\n\ninstância do problema da mochila Pelo algoritmo Branch-and-Bound com Capacidade W = 16:\n\nResolva a seguinte\nitem,\n\nvocê está calculando o limitante e como é feita a ramificação.\n\nDesenhe a árvore de busca e deixe claro como\nQuestão 7 [1 Ponto}: :\nNo contexto de problemas N'P.difíceis, qual à diferença entre um algoritmo exato e um aproximado? Responda a\nPergunta levando em consideração: i) eficiência, ii) qualidade da solução, iii) exploração do espaço de solução e iv)\naplicações práticas",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\eed922118383\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

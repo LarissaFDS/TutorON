@@ -1,0 +1,18 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n[incerto] 10\n[incerto] Suponha\n[incerto] Uw\n[incerto] MaitmoSobcens\n[incerto] ekemgleysonperddrgeeleldoe\n[incerto] 3345-\n[incerto] Polem\n[incerto] AleL.\n[incerto] exenplaCeonos\n[incerto] Um.\n[incerto] 850\n[incerto] OR SIO\n[incerto] (.（43），（3)\n[incerto] @crisnto\n[incerto] oessivriew\n[incerto] （S3）:\n[incerto] √s+d4s-ss=4+1-2=3\n[incerto] Creaos4dogon\n[incerto] Peso=1\n[incerto] gelem.sob\n[incerto] 9=0500\n05\n[incerto] 001237\n[incerto] lnmmnco\ndua+d43-d3\n=a+1-3=",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

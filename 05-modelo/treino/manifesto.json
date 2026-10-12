@@ -1,0 +1,34 @@
+{
+  "gerado_em": "2026-10-12T01:19:44",
+  "sistema": "Windows-11-10.0.26300-SP0",
+  "treino": 26,
+  "validacao": 6,
+  "familias_reservadas_benchmark": [
+    "1a81ca283132-q4-4",
+    "70d6475b28bf-q1-1",
+    "97254bb4a1b8-q1-1",
+    "97254bb4a1b8-q10-10",
+    "97254bb4a1b8-q2-2",
+    "a177bf5bc3c7-q1-1",
+    "a177bf5bc3c7-q2-2",
+    "c01",
+    "c02",
+    "c05",
+    "c06",
+    "c08",
+    "c09",
+    "d455baef2cdf-q1-1",
+    "f38bb8142136-q1-1",
+    "f38bb8142136-q2-2",
+    "f38bb8142136-q3-3",
+    "f38bb8142136-q5-5",
+    "f38bb8142136-q6-6",
+    "f38bb8142136-q8-8",
+    "f38bb8142136-q9-9"
+  ],
+  "dados": {
+    "validacao": "dcfbc301e9394bc35731ebee7c29d37417bf9ab55f990e73631ffba877d05e3c",
+    "treino": "6ec07c4e59040ca920f988943649509a013f52786d7f234093ac3f2d55461f70"
+  },
+  "limite": "Dataset pequeno e corrigido por agente: serve para validar o processo de treino; ganho real exige mais soluções revisadas por humanos."
+}

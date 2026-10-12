@@ -1,0 +1,13 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nvoid aliceAlgoritm(int n)\nGraphG(n);\nbool convidados[n];\nqueue<int>rejeitados;\nint entry,aceitos=0；\n//Recebe os dados do grafo\nfor(inti=θ;i<n;i++)\n[incerto] do\ncout 《<\"Person #:\";\ncin >>entry;\n//Adicionar relacaoa matriz\nif(entry>θ&&entry<=n&entry!=i+1)\nif (G.isEdge(i,entry -1))\n[incerto] a>>oxaomnsof>ua>>opepa>>+>>opp>>ao\nelse\nG.addedge(i,entry - 1);\nelse if (entry ==i + 1)\ncout<<\"Essaentradanaoévalida!\"<<endl;\nelse if (entry == -1)\n[incerto] >>x>>（>>>>+>>>\nelse\ncout<<\"Entradainvalida,tentenovamente!“;\n}while (entry !=-1);\n\n\n\n[OCR parcial do recorte p5-fig2.png; conferir símbolos na imagem]\nfor(int i=0；i<n;i++)\nconvidados[i]=1;//convidatodomundo\nconnections=G.getDegree(i);\nif(connections<5lln-connections<5）//verifica os requisitos\nrejeitados.push(i);// coloca na lista de rejeitados\nconvidados[i] = 0; // tira da lista de convidados\n//Verifica os requisitos\nwhile(!rejeitados.empty())\nintj=rejeitados.front();\nrejeitados.pop();\nfor (int i=θ;i<n;i++)\n6.removeEdge(i,j);\n[incerto] S   p eti / ( ==sop  (s > sua -u ! s > ()au)) \nrejeitados.push(i);\nconvidados[i]=0;\n\n\nPage v",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig1.png",
+    "01-extraido\\figuras\\a177bf5bc3c7\\p5-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

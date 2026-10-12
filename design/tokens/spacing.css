@@ -1,0 +1,21 @@
+/* TutorON — espaçamento em múltiplos de 4px.
+   Use só estes passos. Espaço grande separa etapas; pequeno agrupa. */
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --page-width: 1180px;
+  --measure: 68ch;          /* largura máxima de um parágrafo lido */
+  --gutter: var(--space-4); /* margem lateral no celular */
+}
+
+@media (min-width: 720px) {
+  :root { --gutter: var(--space-5); }
+}

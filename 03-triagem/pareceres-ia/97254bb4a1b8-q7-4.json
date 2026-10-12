@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta alguns erros matemáticos e de modelagem. A restrição de que os elementos de K' devem ser diferentes entre si não é necessária, pois já é implícita na natureza das variáveis. Além disso, a restrição de soma deve ser uma soma estrita, não uma igualdade exata. A notação matemática também pode ser melhorada para clareza.",
+  "decisao": "suspeita",
+  "sha256": "c913e7fcd31381c734c3e544423f4c066f6c18ee7ade7fb8d42c5e46a2706452"
+}

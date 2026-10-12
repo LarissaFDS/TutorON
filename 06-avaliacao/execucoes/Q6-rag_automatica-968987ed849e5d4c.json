@@ -1,0 +1,62 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "320662691e44-q4-3",
+    "e8d9e99bbf26-q1-1",
+    "fc6f103e4d15-q4-2",
+    "bb377af634ea-q4-2"
+  ],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [
+    "1a81ca283132-q4-4"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 3.125,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, podemos usar o algoritmo de Kadane, que segue a convenção da Lista 5. Vamos resolver a questão passo a passo.\n\n### Recorrência\n\nA recorrência para o problema da subsequência contígua de soma máxima pode ser definida da seguinte forma:\n\n\\[ \\text{max\\_sum}(n) = \\max \\left( \\text{max\\_sum}(n-1) + a_n, a_n \\right) \\]\n\nOnde:\n- \\( \\text{max\\_sum}(n) \\) é a soma máxima contígua até o índice \\( n \\).\n- \\( a_n \\) é o valor do elemento no índice \\( n \\).\n\n### Algoritmo de Kadane\n\n1. Inicialize duas variáveis:\n   - `max_atual` para armazenar a soma máxima atual.\n   - `max_global` para armazenar a soma máxima global.\n\n2. Itere sobre a lista, atualizando `max_atual` e `max_global` conforme a recorrência.\n\n### Implementação\n\n```python\ndef max_subarray_sum(arr):\n    max_atual = max_global = arr[0]\n    for i in range(1, len(arr)):\n        max_atual = max(arr[i], max_atual + arr[i])\n        if max_atual > max_global:\n            max_global = max_atual\n    return max_global\n\n# Testando com os exemplos fornecidos\narr1 = [5, 15, -30, 10, -5, 40, 10]\narr2 = [-5, -2, -8]\n\nprint(\"Soma máxima contígua para [5, 15, -30, 10, -5, 40, 10]:\", max_subarray_sum(arr1))  # Saída: 50\nprint(\"Soma máxima contígua para [-5, -2, -8]:\", max_subarray_sum(arr2))  # Saída: -2\n```\n\n### Resultados\n\n- Para a lista `[5, 15, -30, 10, -5, 40, 10]`, a subsequência contígua de soma máxima é `[10, -5, 40, 10]`, com uma soma de 50.\n- Para a lista `[-5, -2, -8]`, a subsequência contígua de soma máxima é `[-2]`, com uma soma de -2.\n\n### Complexidade de Tempo\n\nO algoritmo de Kadane tem complexidade de tempo \\( O(n) \\), onde \\( n \\) é o tamanho da lista, pois percorre a lista apenas uma vez.\n\n### Conclusão\n\nO algoritmo de Kadane é eficiente para resolver o problema da subsequência contígua de soma máxima em tempo linear.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 13.078000000001339,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

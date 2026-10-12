@@ -1,0 +1,10 @@
+{
+  "pagina": 4,
+  "texto": "3. Prove que:\n\n• n3 + 2n ´e divis´ıvel por 3 para todo n ≥0, por indu¸c˜ao.\n\n• Se 2|3m (2 divide 3m) ent˜ao 2|m, por contra-posi¸c˜ao.\n\n• A soma de 3 n´umeros consecutivos ´e m´ultiplo de 3, use prova direta.\n\nSolu¸c˜ao:\n\n(a) Desejamos provar que: n3 + 2n ´e divis´ıvel por 3 para todo n ≥0.\n\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 0):\n\nNeste caso, n3 + 2n = 03 + 2 · 0 = 0\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\nSupondo por hip´otese de indu¸c˜ao que: 3 divide k3 + 2k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\n(k + 1)3 + 2(k + 1) = (k3 + 3k2 + 3k + 1) + 2k + 2 =\n\n(k3 + 2k) + (3k2 + 3k + 1 + 2) = (k3 + 2k) + 3(k2 + k + 1)\n\nPor hip´otese, temos que k3+2k ´e divis´ıvel por 3. Al´em disso, atrav´es da defini¸c˜ao\nde divisibilidade: “Um n´umero inteiro n˜ao nulo a divide um inteiro b, se existe\num inteiro c, tal que b = a · c” podemos afirmar, ent˜ao, que 3 · (k2 + k + 1)\ntamb´em ´e divis´ıvel por 3.\nLogo, como ambas as partes s˜ao divis´ıveis por 3,\npodemos afirmar que P(k+1) tamb´em ´e.\n\n∴\nP(k+1) ´e verdadeiro.\n\n■\n\n(b) Desejamos provar que se 2|3m (2 divide 3m) ent˜ao 2|m. Para isto, utilizaremos\n\na prova por contra-posi¸c˜ao, p →q = ¬q →¬p, onde:\n\n•\np: 2 |3m\n•\nq: 2 |m\n\nDessa forma, para provarmos ¬q →¬p, temos pela defini¸c˜ao de divisibilidade:\n\nHip´otese: m = 2k + 1, onde k ´e qualquer n´umero inteiro.\nObjetivo: 3m = 2j + 1, onde j ´e qualquer n´umero inteiro.\nDesenvolvendo:\n\nm = 2k +1 ⇒3m = 3(2k + 1)\n\nPage iv",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p4.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

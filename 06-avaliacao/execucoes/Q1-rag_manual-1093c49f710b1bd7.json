@@ -1,0 +1,85 @@
+{
+  "questao": "Q1",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c01",
+    "c03",
+    "c02"
+  ],
+  "esperadas": [
+    "c01",
+    "c02",
+    "c03"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "### Explicação do Algoritmo\n\nO algoritmo `ALGORITMO X` é um algoritmo recursivo que encontra o maior elemento em um vetor `A` com base em um intervalo definido pelo índice `inicio` e `fim`. Aqui está uma explicação passo a passo:\n\n1. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna o único elemento do vetor, que é `A[inicio]`.\n2. **Divisão do Vetor**: O algoritmo calcula o índice `meio` como a metade do intervalo entre `inicio` e `fim`.\n3. **Chamadas Recursivas**: O algoritmo divide o vetor em duas partes:\n   - A primeira parte é `A[inicio .. meio]`, que é passada para a chamada recursiva `X(A, inicio, meio)`.\n   - A segunda parte é `A[meio + 1 .. fim]`, que é passada para a chamada recursiva `X(A, meio + 1, fim)`.\n4. **Retorno do Maior Valor**: O algoritmo compara os maiores valores retornados das duas chamadas recursivas (`a` e `b`) e retorna o maior entre eles.\n\n### Prova de Corretude\n\nPara provar a corretude do algoritmo, usaremos indução forte no tamanho do vetor.\n\n#### Teorema\nO algoritmo `ALGORITMO X` retorna corretamente o maior elemento de um vetor `A` com `n` elementos.\n\n#### Caso Base\nSe `n = 1`, então `inicio = fim` e o algoritmo retorna `A[inicio]`, que é o único elemento do vetor. Portanto, o maior elemento é retornado corretamente.\n\n#### Hipótese de Indução\nSuponha que o algoritmo funcione corretamente para vetores de tamanho `k` (ou seja, para `1 ≤ k ≤ n`).\n\n#### Passo Indutivo\nConsidere um vetor `A` com `n + 1` elementos. O algoritmo divide o vetor em duas partes:\n- A primeira parte é `A[inicio .. meio]`, que tem tamanho `meio - inicio + 1`.\n- A segunda parte é `A[meio + 1 .. fim]`, que tem tamanho `fim - meio`.\n\nAmbas as partes têm tamanho `k` ou menos, onde `k = n + 1`. De acordo com a hipótese de indução, o algoritmo `X` retorna corretamente o maior elemento em cada uma dessas partes.\n\n- Seja `a` o maior elemento em `A[inicio .. meio]`.\n- Seja `b` o maior elemento em `A[meio + 1 .. fim]`.\n\nO algoritmo retorna o maior entre `a` e `b`. Portanto, o maior elemento do vetor `A` é retornado corretamente.\n\n### Conclusão\nO algoritmo `ALGORITMO X` encontra o maior elemento em um vetor de maneira correta, tanto no caso base quanto no passo indutivo. Portanto, a corretude do algoritmo é provada.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 14.516000000000531,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Identifica que retorna o maior elemento",
+        "regex": "maior (elemento|valor)|maximo",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa indução FORTE (como no gabarito)",
+        "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+        "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+        "regex": "inicio ?= ?fim",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+        "regex": "hipotese de inducao",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Justifica que as metades são estritamente menores",
+        "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui com a comparação a < b (linha 8)",
+        "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 6,
+    "total": 7,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [
+    "inicio",
+    "inicio"
+  ],
+  "citacoes_ids_invalidos": [
+    "inicio",
+    "inicio"
+  ]
+}

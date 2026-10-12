@@ -1,0 +1,66 @@
+{
+  "questao": "Q8",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "70d6475b28bf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "BACKTRACKING PARA ENCONTRAR QUADRADO MÁGICO DE ORDEM 3 COM NÚMEROS 1 A 9:\n\nPara resolver este problema, utilizamos o backtracking. Iniciamos com uma matriz 3x3 vazia e tentamos inserir os números de 1 a 9, garantindo que cada linha, coluna e diagonal somem 15. Se um número não pode ser inserido sem violar as regras, removemos-o e tentamos outro. \n\nTestamos todas as possibilidades, fazendo backtracking quando encontramos um caminho sem solução. Podemos cortar caminhos (podas) quando uma linha, coluna ou diagonal já contém números que, combinados com um novo número, resultariam em um valor já usado anteriormente. \n\nCom este método, encontramos todos os 8 quadrados mágicos possíveis.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 33.235545011000795,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma mágica 15",
+        "regex": "15",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Números não repetidos",
+        "regex": "distint|repet",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Verifica diagonais",
+        "regex": "diagona",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Retrocede e poda",
+        "regex": "backtrack|retroced",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

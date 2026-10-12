@@ -1,0 +1,12 @@
+### (sem system instruction)
+
+### PROMPT
+Quantos asteriscos são impressos em uma chamada de ASTERISCO(n)? O professor pede para mostrar a recorrência.
+
+procedure ASTERISCO(n)
+  if n > 0 then
+    ASTERISCO(n − 1)
+    for i ← 1 → n do imprima "*"
+    ASTERISCO(n − 1)
+  end if
+end procedure

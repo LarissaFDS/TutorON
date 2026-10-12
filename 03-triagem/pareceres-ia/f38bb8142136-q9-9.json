@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta uma argumentação lógica e coerente para provar que o problema de isomorfismo de subgrafo é NP-completo. Os passos necessários são bem detalhados e a justificativa para a verificabilidade em tempo polinomial e a redução polinomial do problema da clique são bem explicadas.",
+  "decisao": "sem_erro_detectado",
+  "sha256": "4b8b85c6ebdf35871542cfcf74ec8b7c1ffb41ef24094f6c1a76a0a18df6449c"
+}

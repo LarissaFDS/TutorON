@@ -1,0 +1,63 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "97254bb4a1b8-q1-1",
+    "2df6e1818523-q4-3",
+    "ef6d051e4b8c-q6-6"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.6564862949999224,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante entre 1 e n, onde Maria ouviu n-1 números distintos, podemos usar a fórmula n(n+1)/2 para calcular o valor esperado da soma dos n números. Se somarmos todos os números ouvidos e subtrairmos do valor esperado, o resultado será o número faltante.\n\nO tempo de execução para essa operação é O(1) pois somente envolve uma soma e uma subtração, ambas operações de tempo constante. A memória também é O(1) pois apenas precisamos de espaço para armazenar os números ouvidos e o valor esperado.\n\nNo entanto, há um risco de overflow se n for muito grande. A fórmula n(n+1)/2 pode exceder o limite de um tipo inteiro, especialmente se n for muito grande. Para evitar isso, podemos dividir n por 2 antes de multiplicar, mantendo o valor dentro do limite de um tipo inteiro. Isso pode ser feito de forma eficiente sem precisar de um tipo de grande capacidade.\n\nUm possível problema é que, se n for muito grande, a soma dos n números ouvidos pode exceder o limite de um tipo inteiro, resultando em overflow. Para evitar isso, podemos usar um tipo de grande capacidade, como um tipo de grande precisão numérica, ou dividir n por 2 antes de somar.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 103.23802717999934,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "c231283c0ad15c22bcf05755768adb74cf17a228fa4b896b63079c8f5ef3dda5"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

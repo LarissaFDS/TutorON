@@ -1,0 +1,37 @@
+# 320662691e44-q2-2
+
+Fonte: materiais\Disponiveis\RAG PAA\prova_1_A.pdf | página(s): 1
+
+Questao 2[2 pontos]:
+Considere o seguinte ulgoritmo
+[incerto] Lprocedure ALGoRMo X（vetor A[1.].inicio,fim）
+2:
+if inicio=fim then
+3:
+return Ajiniciol
+4
+end if
+5:
+meioimicio+（fim-incio）/2
+6:
+aX（A,inicio,meio）
+7:
+bX(A,meio+1,fim）
+8:
+ifa<bthen
+6
+returnb
+10:
+else
+[incerto] T
+returna
+12:
+endif
+13:end procedure
+Explique o que ele faz e prove sua corretude.
+Questao3[1ponto]:
+Seja f(n) uma funcao dos inteiros nos reais.Justifique
+1.Qual a definicao formal de O(f(n))?
+2.Everdade que 20n+10nlgn+5éO（n)？
+3.Everdade que n²éO（n)？
+4.Qual a definicao formal de O(f（n))？

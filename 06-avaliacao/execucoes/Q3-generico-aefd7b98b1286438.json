@@ -1,0 +1,62 @@
+{
+  "questao": "Q3",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A complexidade de um algoritmo é geralmente medida em termos do tamanho da entrada, não diretamente em termos de operações individuais. No caso do algoritmo de força bruta para testar se um número é composto, o tamanho da entrada é o número de dígitos de `n`, que é logarítmico em `n` (ou seja, O(log n)), não `n` em si.\n\nVamos analisar por que o algoritmo de força bruta para testar se um número `n` é composto (testando divisores de 2 até ⌊n/2⌋) não é considerado polinomial em termos de complexidade de tempo:\n\n1. **Complexidade de Tempo**: O número de divisões que o algoritmo realiza é diretamente proporcional a `n`, mas a complexidade de tempo é medida em termos do tamanho da entrada, que é logarítmico em `n`. Portanto, a complexidade de tempo é O(n), mas o tamanho da entrada é O(log n).\n\n2. **Definição de Complexidade Polinomial**: Um algoritmo é considerado polinomial se sua complexidade de tempo é O(n^k) para algum número constante `k`. No caso do algoritmo de força bruta, a complexidade de tempo é O(n), o que não é um polinômio em termos do tamanho da entrada (log n).\n\n3. **Tamanho da Entrada vs. Valor da Entrada**: A complexidade de tempo é geralmente expressa em termos do tamanho da entrada, não do valor da entrada. No caso de números grandes, o tamanho da entrada (log n) é muito menor que n. Portanto, mesmo que o algoritmo realize O(n) divisões, isso não significa que é polinomial em termos do tamanho da entrada.\n\n4. **Exemplo**: Se `n` tiver 100 dígitos, então log n é aproximadamente 300 (se considerarmos que estamos usando base 10). O algoritmo realiza O(n) = O(10^100) operações, mas o tamanho da entrada é apenas 300. Isso mostra que a complexidade é exponencial em termos do tamanho da entrada.\n\nPortanto, mesmo que o algoritmo realize apenas O(n) divisões, ele não é considerado polinomial em termos de complexidade de tempo, pois a complexidade de tempo é O(n) e o tamanho da entrada é O(log n), o que não é um polinômio em termos de `log n`.\n\nEm resumo, a complexidade de tempo O(n) é exponencial em termos do tamanho da entrada O(log n), e isso é o que determina que o algoritmo não é polinomial.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.389999999999418,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Tamanho da entrada medido em bits/dígitos",
+        "regex": "bits|digitos|tamanho da entrada",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Relaciona b = log n e n = 2^b",
+        "regex": "n ?= ?2\\^\\(?b|b ?= ?log|2\\^\\(?b\\)?|log ?2 ?n|log_?2",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Conclui que é exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Usa o termo pseudo-polinomial (vocabulário da disciplina)",
+        "regex": "pseudo-?polinomial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Menciona AKS / PRIMES ∈ P (correto, mas fora do material)",
+        "regex": "aks|agrawal|primes",
+        "tipo": "info",
+        "ok": false
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

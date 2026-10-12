@@ -1,0 +1,30 @@
+{
+  "pagina": 6,
+  "texto": "Para o n´o 5, temos que:\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\nINF\nINF\n0\nINF\n0\n3\n0\nINF\nINF\nINF\n3\n4\nINF\nINF\nINF\nINF\n0\nMIN\n[incerto] 0\n3\n<-CUSTO\n\n\nC(C4, C2) + R + R′ = 3 + 6 + 3 = 12\n\nPara o n´o 6, temos que:\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\n1\n2\n3\n4\nMIN\n1\nINF\nINF\nINF\nINF\n0\n2\n0\nINF\nINF\nINF\n2\n3\n0\n0\nINF\nINF\n3\n4\nINF\nINF\nINF\nINF\n0\nMIN\n0\n[incerto] 0\n[incerto] 0\n5\n<-CUSTO\n\n\nC(C4, C3) + R + R′ = 2 + 6 + 5 = 13\n\nTemos a seguinte situa¸c˜ao:\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\nC1\nUPPER:INF\nC2\nR =6\n1\nC3\nC4\nR=10\nR=10\nR=6\n2\n4\n3\nR=12\nR=13\n5\n6\n\n\nA t´ıtulo de simplifica¸c˜ao, ocultaremos os pr´oximos passos que s˜ao an´alogos e obtemos o\nseguinte resultado:.\n\nPage vi",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p6-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p6-fig2.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p6-fig3.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig2.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    },
+    {
+      "imagem": "01-extraido\\figuras\\70d6475b28bf\\p6-fig3.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

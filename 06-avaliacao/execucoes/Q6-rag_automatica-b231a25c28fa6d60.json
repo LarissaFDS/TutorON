@@ -1,0 +1,69 @@
+{
+  "questao": "Q6",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "1a81ca283132-q4-4",
+    "7b4da6a8adf7-q10-10",
+    "1a81ca283132-q1-1"
+  ],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.7834845569996105,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Resolvendo a subsequência contígua de soma máxima em tempo linear, seguindo a Lista 5, temos a seguinte recorrência:\n\n- Fim[j] = max(0, Fim[j-1] + A[j])\n- Melhor[j] = max(Melhor[j-1], Fim[j])\n\nPara [5,15,-30,10,-5,40,10]:\n\n- Fim = [5,20,10,-15,5,45,10]\n- Melhor = [5,25,30,15,10,55,10]\n\nA subsequência de soma máxima é [10,-5,40,10] com soma 55.\n\nPara [-5,-2,-8]:\n\n- Fim = [-5,-7,-9,-11,-13,-15,-17]\n- Melhor = [-5,-5,-5,-5,-5,-5,-5]\n\nA subsequência de soma máxima é vazia, com soma 0.\n\nEsta solução mantém apenas os vetores Fim e Melhor em O(1) de memória, cumprindo o requisito de tempo e memória O(n).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 131.469615916998,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "b7b7228347bc4dee28fc9fee5487bf7f390874556a52f6f6522c5d515ce20e5e"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 4,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

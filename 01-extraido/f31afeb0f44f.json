@@ -1,0 +1,24 @@
+{
+  "id": "f31afeb0f44f",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.37.23.webp",
+  "copia": "00-originais\\ingestao\\88d9f7de53a5db2d84469e47ab21047415cd39dd338789a44b21565765bd0b16\\WhatsApp_Image_2025-01-12_at_13.37.23.webp",
+  "sha256": "88d9f7de53a5db2d84469e47ab21047415cd39dd338789a44b21565765bd0b16",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[ilegivel]",
+      "metodo": "tesseract-por",
+      "qualidade": "ilegivel",
+      "imagem": "01-extraido\\figuras\\f31afeb0f44f\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

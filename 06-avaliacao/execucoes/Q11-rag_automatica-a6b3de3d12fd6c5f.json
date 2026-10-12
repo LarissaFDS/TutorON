@@ -1,0 +1,65 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c08",
+    "7b4da6a8adf7-q7-7",
+    "c07",
+    "f38bb8142136-q8-8"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.5538824620016385,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo de força bruta para verificar se um número é composto (COMPOSTO) testa divisores de 2 até floor(n/2), o que resulta em O(n) testes. No entanto, quando a entrada é escrita em binário, o número de bits necessário para representar n é b=floor(log2(n))+1. Isso significa que o número de divisores a serem testados não é diretamente proporcional a n, mas sim a b. Como b cresce mais lentamente que n, o número de testes ainda cresce exponencialmente em b, mesmo que seja polinomial em n. Portanto, embora o número de testes seja O(n), a complexidade em termos de bits continua sendo exponencial, o que mantém o algoritmo fora de P. A representação binária faz com que o número de divisores a serem testados dependa mais da quantidade de bits do que do valor numérico de n, explicando por que o professor considera o algoritmo fora de P.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 86.29537280700242,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "d315fae2f7a95a30a6483e216916671ef8b1e2537ba576735b7f35563795a95b"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

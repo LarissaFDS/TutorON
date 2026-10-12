@@ -1,0 +1,11 @@
+{
+  "pagina": 4,
+  "texto": "4. Este ´e um problema que ocorre em an´alise autom´atica de programas. Para\n  um conjunto de vari´aveis x1, ..., xn, s˜ao dadas algumas restri¸c˜oes de igualdade,\n  da forma “xi = xj”e algumas restri¸c˜oes de desigualdade, da forma  xi̸ = xj.\n   Ser´a que ´e poss´ıvel satisfazer todas elas? Por exemplo, as restri¸c˜oes\n\n                            x1 = x2, x2 = x3, x3 = x4, x1̸ = x4\n\n   n˜ao podem ser satisfeitas.  Forne¸ca um algoritmo eficiente que tome como\n  entrada m restri¸c˜oes sobre n vari´aveis e decida se as restri¸c˜oes podem ser\n   satisfeitas.\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n5. Alice quer dar uma festa e est´a decidindo quem chamar. Ela tem n pessoas\n   as quais escolher, e ela fez uma lista de quais pares dessas pessoas conhecem\n  uma a outra. Ela quer selecionar o maior n´umero de pessoas poss´ıvel, sujeito\n  a duas restri¸c˜oes: na festa, cada pessoa deve ter pelo menos outras cinco\n  pessoas que ela conhece e outras cinco pessoas que ela n˜ao conhece. Forne¸ca\n  um algoritmo eficiente que tome como entrada a lista das n pessoas e a lista\n  de pares de quem conhece quem e calcule a melhor escolha de convidados\n  para a festa. Dˆe o tempo de execu¸c˜ao em termos de n.\n\n\n     Solu¸c˜ao:\n\n\n\n\n                                  Page iv\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\a177bf5bc3c7\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\a177bf5bc3c7\\p4-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

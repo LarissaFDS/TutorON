@@ -1,0 +1,9 @@
+{
+  "pagina": 6,
+  "texto": "Solu¸c˜ao:\n\n     Vari´aveis:\n        1, 2, 3, ..., 8 linhas de um vetor A\n\n   O Dom´ınio de cada vari´avel ´e:\n        1, 2, 3, ..., 8 (n´umeros de 1 a 8)\n\n   O valor de cada vari´avel (A[j]) indica a coluna onde uma das dama  ´e alocada e a\n      posi¸c˜ao desta vari´avel no vetor (j) indica a linha que a dama ´e alocada, dessa forma\n     n˜ao haver´a duas damas na mesma linha. Para garantir que n˜ao haver´a duas damas\n    na mesma coluna ou na mesma diagonal, aplicaremos as seguintes restri¸c˜oes:\n\n      Restri¸c˜oes:\n\n       • ∀i, j ∈[1, 2, 3, ..., 8], A[i]̸ = A[j];\n\n         Garante que haver´a apenas uma dama em cada coluna;\n\n       • ∀i, j ∈[1, 2, 3, ..., 8], A[i] + i̸ = A[j] + j;\n\n       • ∀i, j ∈[1, 2, 3, ..., 8], A[i] −i̸ = A[j] −j;\n\n        Garantem que haver´a apenas uma dama em cada diagonal.\n\n\n9. Modele o problema da MOCHILA utilizando programa¸c˜ao linear inteira.\n\n\n     Solu¸c˜ao:\n    Considerando p como a quantidade de itens, C como a capacidade m´axima da mo-\n     chila, xi como a optatividade pelo item i, pi como o peso do item i e vi o valor de\n     utilidade do item i.\n    VARI´AVEIS:\n\n      - i ∈1, 2, ..., p\n      - pi ∈N\n      - xi ∈{0, 1}\n      - vi ∈R\n      - C ∈N\n    FUNC¸ ˜AO OBJETIVO:\n\n\n                                                        i=p\n                          maximizar : X (vi · xi)\n\n                                                        i=1\n\n                                                    i=p\n                               sujeito `a : X (pi · xi) ≤C\n\n                                                    i=1\n\n\n\n                                  Page vi",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p6.png",
+  "figuras": [],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

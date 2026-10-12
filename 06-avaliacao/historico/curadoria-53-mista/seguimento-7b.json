@@ -1,0 +1,700 @@
+[
+  {
+    "questao": "Q1",
+    "cenario": "generico",
+    "cache_key": "6fd21ea72d00bb53650ac3f9d856ba76250f0b65e13fe390173d974008fbb5d3",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {},
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "Este algoritmo X é uma versão simplificada do algoritmo de busca binária, mas com um objetivo diferente. Ele não busca um elemento específico, mas sim retorna o maior valor presente no vetor A entre os índices `inicio` e `fim`. Vamos explicar o funcionamento e a corretude:\n\n1. **Caso Base**: Se `inicio` for igual a `fim`, o algoritmo retorna `A[inicio]`, pois é o único elemento no intervalo.\n\n2. **Divisão**: O intervalo é dividido ao meio, calculando `meio` como `(inicio + fim) / 2`.\n\n3. **Recursão**: O algoritmo é chamado recursivamente duas vezes, uma para a primeira metade do intervalo (`inicio` a `meio`) e outra para a segunda metade (`meio + 1` a `fim`).\n\n4. **Comparação**: Os valores retornados das duas chamadas recursivas são comparados. O maior valor entre `a` e `b` é retornado.\n\n**Corretude**:\n- A divisão do intervalo garante que a busca se concentre em subintervalos menores à medida que a recursão avança.\n- A comparação entre `a` e `b` garante que o maior valor seja retornado.\n- A condição de parada (`inicio = fim`) é correta, pois nesse caso, o intervalo contém apenas um elemento, que é o maior (ou único) no intervalo.\n\nEste algoritmo é corretamente implementado para encontrar o maior valor em um intervalo de um vetor ordenado, embora seja menos eficiente que a busca binária tradicional para encontrar um elemento específico.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:7b",
+      "segundos": 154.239449951001,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Identifica que retorna o maior elemento",
+          "regex": "maior (elemento|valor)|maximo",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Usa indução FORTE (como no gabarito)",
+          "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+          "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+          "regex": "inicio ?= ?fim",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+          "regex": "hipotese de inducao",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Justifica que as metades são estritamente menores",
+          "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Conclui com a comparação a < b (linha 8)",
+          "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 2,
+      "total": 7,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "7eb799305c5bd0b651f6d07c9b2c97dee10903eb9669df75aeed40c3c4049404",
+      "parecer": "parcial",
+      "justificativa": "Identifica máximo e duas chamadas, mas chama de busca binária e restringe explicação a vetor ordenado; prova informal."
+    }
+  },
+  {
+    "questao": "Q1",
+    "cenario": "controle_prompt",
+    "cache_key": "0d30162e1a259ee8c54e050d0c72e8f41d47dad0a11ccde7f426a7a917eef67c",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {},
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "O algoritmo X implementa uma versão modificada do algoritmo de busca binária, mas com um objetivo diferente: encontrar o maior elemento em um vetor. Vamos analisar o algoritmo passo a passo:\n\n1. **Caso Base**: Se o intervalo de busca for de um único elemento (inicio = fim), retorna esse elemento, que é o único presente no intervalo.\n\n2. **Divisão do Intervalo**: O intervalo é dividido em duas partes: a primeira parte vai do início até o meio, e a segunda parte vai do meio + 1 até o fim.\n\n3. **Recursão**: O algoritmo é chamado recursivamente para cada parte do intervalo. A chamada recursiva para a primeira parte retorna a variável `a`, e a chamada recursiva para a segunda parte retorna a variável `b`.\n\n4. **Comparação e Retorno**: O algoritmo compara os valores retornados `a` e `b`, e retorna o maior deles.\n\n### Explicação do Algoritmo\nO algoritmo X divide o vetor em duas partes, chama a si mesmo recursivamente em cada parte, e retorna o maior valor entre os dois resultados. Isso garante que o maior valor do vetor será encontrado.\n\n### Prova de Corretude\n1. **Caso Base**: Se o intervalo contém apenas um elemento, o algoritmo retorna esse elemento, que é o único maior (ou menor, dependendo do contexto) no intervalo.\n\n2. **Divisão e Recursão**: A divisão do intervalo garante que cada chamada recursiva trabalha com um subvetor menor. A recursão termina quando o intervalo contém apenas um elemento.\n\n3. **Comparação**: A comparação entre `a` e `b` garante que o maior valor entre os dois subvetores é retornado. Isso é verdadeiro porque cada subvetor é processado recursivamente, e a comparação garante que o maior valor seja mantido.\n\n4. **Corretude Total**: Ao dividir o vetor e processar recursivamente, o algoritmo X garante que o maior valor do vetor será encontrado e retornado.\n\nPortanto, o algoritmo X é correto para encontrar o maior elemento em um vetor, e a prova de corretude se baseia na divisão do problema em subproblemas menores, que são processados recursivamente e comparados para garantir a corretude.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:7b",
+      "segundos": 211.18507393699838,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Identifica que retorna o maior elemento",
+          "regex": "maior (elemento|valor)|maximo",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Usa indução FORTE (como no gabarito)",
+          "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+          "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+          "regex": "inicio ?= ?fim",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+          "regex": "hipotese de inducao",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Justifica que as metades são estritamente menores",
+          "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Conclui com a comparação a < b (linha 8)",
+          "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 2,
+      "total": 7,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "e5bcef11b334a5903c119f9b6f003935dbaa98d8cb209653d80abebb0695a85e",
+      "parecer": "parcial",
+      "justificativa": "Explica máximos recursivos, mas usa termo busca binária e não explicita hipótese de indução forte."
+    }
+  },
+  {
+    "questao": "Q1",
+    "cenario": "rag_manual",
+    "cache_key": "9ee607009cf765da82cd8c7c773c63b8ecc102b8bbeb5bf0a77938df36c73c8a",
+    "contexto_sha256": "b65c36a4487c176c8f4b76c4494319f7f04ad633f7f10c2186b8aec5f9f39d2b",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {
+      "c01": "8a10dc47291c4090be09acc3d8f2445697fb2ef0d4dc542e37ac14b3d4af9297",
+      "c03": "f739ccba01e13938f222037fcf0db48c8e294cbb3540952bd33b2efde18eb185",
+      "c02": "6488884c1ed37eec837ad80e0c3357f425d3f7ae983033371f8220bbc92c0f1a"
+    },
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "O Algoritmo X é um algoritmo recursivo que encontra o maior elemento em um intervalo não vazio de um vetor. Ele divide o intervalo em duas partes iguais (ou quase iguais) e recursivamente encontra o maior elemento em cada parte. O maior entre esses dois elementos é retornado como o resultado.\n\nPara provar a corretude do algoritmo, consideramos o seguinte:\n\n1. **Caso Base**: Se o intervalo tiver apenas um elemento (inicio = fim), o algoritmo retorna esse elemento, que é o único elemento no intervalo, e portanto o maior.\n\n2. **Hipótese de Indução**: Suponha que para qualquer intervalo de tamanho \\( k \\) (onde \\( 1 \\leq k < m \\)), o algoritmo X retorna o maior elemento do intervalo.\n\n3. **Passo Indutivo**: Para um intervalo de tamanho \\( m > 1 \\):\n   - O algoritmo divide o intervalo em duas partes: \\( A[inicio..meio] \\) e \\( A[meio+1..fim] \\).\n   - Cada parte é um intervalo não vazio com tamanho menor que \\( m \\).\n   - Por hipótese de indução, as chamadas recursivas \\( X(A, inicio, meio) \\) e \\( X(A, meio+1, fim) \\) retornam os maiores elementos de suas respectivas partes.\n   - O algoritmo compara esses dois maiores elementos e retorna o maior, garantindo que o resultado é o maior elemento do intervalo original.\n\nA prova de terminação é garantida pelo fato de que a profundidade da recursão é \\( O(\\log m) \\), e a cada chamada, o tamanho do intervalo é reduzido pela metade. A complexidade temporal é \\( \\Theta(m) \\), pois cada chamada compara dois elementos.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa-7b",
+      "segundos": 277.35408889500104,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "b65c36a4487c176c8f4b76c4494319f7f04ad633f7f10c2186b8aec5f9f39d2b"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Identifica que retorna o maior elemento",
+          "regex": "maior (elemento|valor)|maximo",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Usa indução FORTE (como no gabarito)",
+          "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+          "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+          "regex": "inicio ?= ?fim",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+          "regex": "hipotese de inducao",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Justifica que as metades são estritamente menores",
+          "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Conclui com a comparação a < b (linha 8)",
+          "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 5,
+      "total": 7,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "b25b9624c9a300c6c84b94ab490cd347e80fe244d0f0316a4de2d9f93cd89152",
+      "parecer": "adequada",
+      "justificativa": "Máximo, indução forte, subintervalos menores, terminação e tempo Theta(m) corretos."
+    }
+  },
+  {
+    "questao": "Q1",
+    "cenario": "rag_automatica",
+    "cache_key": "d545bffe5d43dcfaa1e4d61fa42e57b317a375ecb0a6ad402c30663025f69215",
+    "contexto_sha256": "5e6780ec358eb8cf28f42c8e0fe5d763673b7ec4bc8cb0670292c7b05b321aa5",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {
+      "c01": "8a10dc47291c4090be09acc3d8f2445697fb2ef0d4dc542e37ac14b3d4af9297",
+      "c02": "6488884c1ed37eec837ad80e0c3357f425d3f7ae983033371f8220bbc92c0f1a",
+      "320662691e44-q2-2": "6d160d20c3dd3eaa1de1ee447318b21acf7bde67d3a03b671864769b4e15b401",
+      "2df6e1818523-q2-5": "32f8e3418617e42ce920b613ca1b231c181825b334f22ecf575b3abefbf02745"
+    },
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "O algoritmo X busca o maior elemento em um vetor A de tamanho n, utilizando uma abordagem de busca binária. Inicialmente, verifica se o intervalo é de um único elemento, retornando-o se for. Caso contrário, divide o vetor em duas metades, recursivamente encontra o maior elemento em cada metade e retorna o maior entre eles.\n\nPara provar a corretude, consideramos o seguinte:\n\n1. **Caso Base**: Se `inicio = fim`, o intervalo contém apenas um elemento, que é retornado diretamente. Este é o maior elemento possível.\n\n2. **Hipótese de Indução**: Suponha que para qualquer intervalo de tamanho `k` (onde `1 <= k < n`), o algoritmo X retorna o maior elemento.\n\n3. **Passo Indutivo**: Para um intervalo de tamanho `n > 1`, o algoritmo divide o vetor em duas metades. Cada metade é um intervalo de tamanho menor que `n`, e pelo princípio da indução, cada metade contém seu próprio maior elemento. O algoritmo então compara esses dois maiores elementos e retorna o maior. Como cada metade é um subintervalo do original, a indução se mantém.\n\n4. **Terminação**: A divisão continua até que o intervalo seja de tamanho 1, garantindo que o algoritmo termina após um número finito de passos.\n\n5. **Complexidade**: O algoritmo realiza log(n) divisões, cada uma com duas comparações, resultando em um tempo de execução de O(log n).\n\nPortanto, o algoritmo X corretamente encontra o maior elemento em qualquer vetor, comprovando sua eficácia e corretude.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa-7b",
+      "segundos": 259.41465926500314,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5e6780ec358eb8cf28f42c8e0fe5d763673b7ec4bc8cb0670292c7b05b321aa5"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Identifica que retorna o maior elemento",
+          "regex": "maior (elemento|valor)|maximo",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Usa indução FORTE (como no gabarito)",
+          "regex": "inducao forte|inducao completa|todo k ?(<|≤|<=|menor)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Induz no tamanho do vetor (n = fim − inicio + 1)",
+          "regex": "tamanho d[oe] (vetor|subvetor|arranjo|intervalo)|fim ?- ?inicio ?\\+ ?1",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso base inicio = fim (n = 1, linha 3)",
+          "regex": "inicio ?= ?fim",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Estrutura caso base / hipótese / passo indutivo",
+          "regex": "hipotese de inducao",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Justifica que as metades são estritamente menores",
+          "regex": "(estritamente )?menor(es)? (que|do que)|< ?n",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Conclui com a comparação a < b (linha 8)",
+          "regex": "a ?< ?b|linha 8|maior entre a e b|max ?\\(a",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 4,
+      "total": 7,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "a5b28bfc77057e0e2287b56b357d9347a412ea24fb9eab1745448304ce664543",
+      "parecer": "erro_material",
+      "justificativa": "Prova de máximo melhorada, mas confunde com busca binária e dá O(log n) em vez de Theta(n)."
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "cache_key": "1568597e790cbe8d70584a99739f87c7b32ddbee48f4e6f2d7b4d6ac113d94b0",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {},
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "A procedure ASTERISCO(n) imprime asteriscos de forma recursiva, duplicando a quantidade a cada chamada. Para entender a quantidade total de asteriscos impressos, analisamos a recorrência:\n\n1. Para n = 1, imprime 1 asterisco.\n2. Para n > 1, a procedure chama a si mesma duas vezes com n-1, e imprime n asteriscos no meio.\n\nA quantidade total de asteriscos impressos pode ser expressa pela fórmula T(n) = 2T(n-1) + n, com T(1) = 1. Esta é uma recorrência linear com termo não-recursivo adicional.\n\nPara resolver, notamos que a procedure faz duas chamadas recursivas, cada uma processando n-1, e imprime n asteriscos no meio. Portanto, a quantidade total de asteriscos é 2 * (asteriscos impressos para n-1) + n.\n\nDesenvolvendo a fórmula:\n- T(n) = 2T(n-1) + n\n- T(n-1) = 2T(n-2) + (n-1)\n- T(n-2) = 2T(n-3) + (n-2)\n- ...\n- T(2) = 2T(1) + 2 = 2*1 + 2 = 4\n- T(1) = 1\n\nSomando recursivamente, vemos que T(n) = 2^n - 1 + n(2^(n-1)).\n\nPortanto, a procedure ASTERISCO(n) imprime 2^n - 1 + n(2^(n-1)) asteriscos no total.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:7b",
+      "segundos": 129.87053495600048,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 2,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "b62301530332cbff0544d566372880a955472db5efe6cdcc5f87b7ad3d76e5af",
+      "parecer": "erro_material",
+      "justificativa": "Recorrência correta e base equivalente n=1; fórmula fechada final errada."
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "controle_prompt",
+    "cache_key": "ca11c52e310ebf12ab718961153cd9aa16253eb2ec822414ed16821c95701ae6",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {},
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "A procedure ASTERISCO(n) imprime asteriscos de forma recursiva. Vamos analisar a recorrência:\n\n1. **Chamada inicial**: ASTERISCO(n) é chamado.\n2. **Recursão**: Se n > 0, a procedure chama ASTERISCO(n - 1) duas vezes e imprime n asteriscos.\n3. **Impressão**: A impressão de n asteriscos ocorre entre as duas chamadas recursivas.\n4. **Terminação**: A procedure termina quando n ≤ 0.\n\nPara determinar quantos asteriscos são impressos, vamos considerar a chamada ASTERISCO(n):\n\n- Para n = 1: ASTERISCO(0) não imprime nada, e ASTERISCO(0) imprime 1 asterisco. Total: 1 asterisco.\n- Para n = 2: ASTERISCO(1) imprime 1 asterisco, ASTERISCO(1) imprime 1 asterisco, e ASTERISCO(1) imprime 1 asterisco. Total: 3 asteriscos.\n- Para n = 3: ASTERISCO(2) imprime 3 asteriscos, ASTERISCO(2) imprime 3 asteriscos, e ASTERISCO(2) imprime 3 asteriscos. Total: 9 asteriscos.\n\nGeralmente, a procedure ASTERISCO(n) imprime \\(3 \\times 2^{n-1} - 1\\) asteriscos. Isso ocorre porque cada chamada recursiva duplica a impressão de asteriscos e adiciona um novo nível de impressão.\n\nA recorrência pode ser expressa como:\n\\[ T(n) = 2T(n-1) + n \\]\ncom a condição base \\( T(0) = 0 \\).\n\nPortanto, a procedure ASTERISCO(n) imprime \\(3 \\times 2^{n-1} - 1\\) asteriscos.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:7b",
+      "segundos": 174.23023595999985,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 2,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "5aaa87c4d637900533529fbc26309305db33de4423607e924ecf207c1952d5ae",
+      "parecer": "erro_material",
+      "justificativa": "Recorrência/base corretas, mas contagens e fórmula finais falsas."
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_manual",
+    "cache_key": "0a719abadd321d5e4b6aa594aeafbe7d8e29371cdd8538e9754bc9d92eb26e72",
+    "contexto_sha256": "5acdff58fdcaf61a00b2b262a6d1ac56ed5b93f1847241f7cd8bb8d82c5865b4",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {
+      "c06": "4f6d70b01764ed4954a3fb06e5f3bae19c483e1868b3b1a2bc0539b0c0ce9a15",
+      "c04": "e3e3c4adb84f6a4ab2c86aced7d9404f2c182d786bf9881af0bd642cc88f0957",
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4"
+    },
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "Para determinar a quantidade de asteriscos impressos pela chamada de `ASTERISCO(n)`, podemos estabelecer uma recorrência. Considerando a estrutura do algoritmo, temos:\n\n1. Se `n > 0`, ocorrem duas chamadas recursivas de `ASTERISCO(n-1)`, cada uma das quais imprime um número de asteriscos igual ao resultado da chamada recursiva.\n2. O laço `for` imprime `n` asteriscos.\n\nPortanto, a recorrência para o número de asteriscos impressos, denotado por `A(n)`, pode ser expressa como:\n\n\\[ A(n) = \\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2A(n-1) + n & \\text{se } n > 0 \n\\end{cases} \\]\n\nA explicação para essa recorrência é que, para `n > 0`, temos duas chamadas recursivas de `ASTERISCO(n-1)`, cada uma das quais imprime `A(n-1)` asteriscos, somados aos `n` asteriscos impressos pelo laço.\n\nEsta recorrência pode ser resolvida para obter a solução exata, mas para fins de análise assintótica, podemos concluir que a solução é `Theta(2^n)`, pois a parte principal da recorrência é o termo `2A(n-1)`, que indica um crescimento exponencial.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa-7b",
+      "segundos": 214.11955791500077,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "5acdff58fdcaf61a00b2b262a6d1ac56ed5b93f1847241f7cd8bb8d82c5865b4"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 2,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "5a443430cd9fe96240a7b363fb1219eaa7bc32645c900e7ece8a28761f60c5a2",
+      "parecer": "adequada",
+      "justificativa": "Recorrência/base e crescimento Theta(2^n) corretos; enunciado pede recorrência."
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "cache_key": "e85a73d4b8953cb7536fa6b0eb3e1c249d918573bd4d0005c023454938721609",
+    "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7",
+    "configuracao": {
+      "base_model": "qwen2.5:7b",
+      "tutor_model": "tutoron-paa-7b",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "fontes_sha256": {
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+      "ef6d051e4b8c-q9-9": "12fccb8df986e16e0b0d322069ff4d5d7b8a7d234aeb75cbec2bdedeb4f61568",
+      "fb361b787fc6-q7-2": "c12f8874069399b2dd7d8d77a190b547eddd9db8dc29db8bcf1b9352f2031433",
+      "320662691e44-q7-5": "9441a08a6205f875c84267a6c36c5a9d95b4317169db331fd8e7e9b70c6791cd"
+    },
+    "limite": "Seguimento exploratório de duas questões; não prova superioridade nem treinamento.",
+    "status": "ok",
+    "resposta": {
+      "texto": "Para determinar quantos asteriscos são impressos em uma chamada de `ASTERISCO(n)`, devemos analisar o algoritmo e estabelecer a recorrência.\n\nO algoritmo `ASTERISCO(n)` imprime `n` asteriscos e faz duas chamadas recursivas para `ASTERISCO(n-1)`. Portanto, a quantidade de asteriscos impressos, denotada por \\( A(n) \\), pode ser expressa pela seguinte recorrência:\n\n\\[ A(n) = \n\\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2A(n-1) + n & \\text{se } n \\geq 1 \n\\end{cases}\n\\]\n\nA recorrência reflete que, para \\( n \\geq 1 \\), o algoritmo imprime \\( n \\) asteriscos e realiza duas chamadas recursivas para `ASTERISCO(n-1)`, resultando em \\( 2A(n-1) \\) asteriscos adicionais.\n\nEsta recorrência pode ser resolvida para obter a fórmula explícita, mas para a resposta à pergunta do professor, basta apresentar a recorrência correta, que é:\n\n\\[ A(n) = \n\\begin{cases} \n0 & \\text{se } n = 0 \\\\\n2A(n-1) + n & \\text{se } n \\geq 1 \n\\end{cases}\n\\]\n\nEsta recorrência mostra claramente que a quantidade de asteriscos impressos depende das chamadas recursivas e da impressão direta de \\( n \\) asteriscos.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa-7b",
+      "segundos": 289.07269478599846,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:7b",
+        "tutor_model": "tutoron-paa-7b",
+        "num_ctx": 4096,
+        "seed": 42,
+        "timeout": 900
+      },
+      "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 1,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente; não é humano independente)",
+      "resposta_sha256": "51966a7242a47905af39e182f8dcc889e3ece12239e486fdc9b71271f6a2c4e2",
+      "parecer": "adequada",
+      "justificativa": "Recorrência e base corretas; explica as duas chamadas e laço."
+    }
+  }
+]

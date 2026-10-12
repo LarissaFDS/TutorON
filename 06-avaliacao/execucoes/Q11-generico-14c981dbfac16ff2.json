@@ -1,0 +1,61 @@
+{
+  "questao": "Q11",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A complexidade de O(n) para testar divisores é uma suposição simplificada. Na prática, muitos problemas de complexidade polinomial podem ter complexidades subpolinais dependendo da representação da entrada. Quando a entrada é escrita em binário, o tamanho da entrada pode ser muito maior do que o número de divisores, o que pode afetar a eficiência. Além disso, alguns problemas podem ter complexidades que parecem polinomiais em representações normais, mas são de fato não polinomiais em representações binárias, o que é o caso do COMPOSTO. Portanto, é importante considerar a representação da entrada e a complexidade em termos de bits ao avaliar a eficiência de algoritmos.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 27.45455533099812,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b"
+}

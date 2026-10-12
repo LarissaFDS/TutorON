@@ -1,0 +1,11 @@
+{
+  "pagina": 9,
+  "texto": "Page ix\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "ilegivel",
+  "imagem": "01-extraido\\figuras\\d455baef2cdf\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\d455baef2cdf\\p9-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

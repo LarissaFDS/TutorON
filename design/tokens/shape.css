@@ -1,0 +1,17 @@
+/* TutorON — bordas, raios e elevação.
+   Um raio para tudo que é controle ou bloco; pílula só para chips de nota.
+   Elevação: NÃO usamos sombra. Profundidade vem de superfície + fio (hairline).
+   A única "sombra" é o anel de foco, que é informação, não decoração. */
+
+:root {
+  --radius: 6px;
+  --radius-pill: 999px;
+
+  --border-width: 1px;
+  --border: var(--border-width) solid var(--color-hairline);
+  --border-strong: var(--border-width) solid var(--color-hairline-strong);
+  --rule-accent: 3px solid var(--color-board); /* régua do pseudocódigo */
+
+  --focus-ring: 0 0 0 3px var(--color-focus);
+  --shadow: none;
+}

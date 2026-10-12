@@ -1,0 +1,42 @@
+/* TutorON — paleta da apresentação, superfícies brancas e tema claro fixo. */
+
+:root {
+  color-scheme: light;
+
+  /* Folha */
+  --color-canvas: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-sunken: #f6f4ee;
+  --color-hairline: #e2ddd0;
+  --color-hairline-strong: #858b95;
+
+  /* Tinta */
+  --color-ink: #14213d;
+  --color-ink-muted: #4f5868;
+
+  /* Azul da referência */
+  --color-board: #066d83;
+  --color-board-raised: #05576a;
+  --color-chalk: #ffffff;
+  --color-chalk-muted: #ffffff;
+
+  /* Ação principal = quadro */
+  --color-primary: var(--color-board);
+  --color-primary-hover: var(--color-board-raised);
+  --color-on-primary: var(--color-chalk);
+
+  /* Seleção da pessoa */
+  --color-highlight: #066d83;
+  --color-highlight-soft: #f6f4ee;
+  --color-on-highlight: #ffffff;
+
+  --color-focus: #066d83;
+
+  /* Estados */
+  --color-danger: #a8322a;
+  --color-danger-soft: #f7e4e1;
+  --color-success: #276b45;
+  --color-success-soft: #e1efe5;
+  --color-warning: #7d5a09;
+  --color-warning-soft: #f8eed0;
+}

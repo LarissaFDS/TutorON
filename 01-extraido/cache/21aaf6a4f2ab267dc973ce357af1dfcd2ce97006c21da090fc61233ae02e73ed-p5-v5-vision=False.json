@@ -1,0 +1,12 @@
+{
+  "pagina": 5,
+  "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nint longest common substr(cha\nint suff[sizes;\nint max len-g;\n\nP *stri, ch\n\nar *str2, int\n1) [size2+1};\n\nsize1, int size2){\n\nfor(int\n{\n\n4-03 i<sizet;iss)\n\nfor(int 5-03 j<size2; 5:4)\n\nif(i--6 j--0) suff[ilfj} = e;\n\nel if(stra[i-1] ~~ Str2[5-1])4\nsufffijfjj = suff[i-2][5-2] + 2;\nmax len = max(max len, suff[iJ[j]);\n\nsuff[i][j]-o;\n}\n\nreturn max_len;\n\n\n6.\nUma certa linguagem de processamento e strings oferece uma opera¸c˜ao pri-\nmitiva que divide uma string em dois peda¸cos. Como essa opera¸c˜ao envolve\ncopiar a string original, ela toma n unidades de tempo para uma string de\ntamanho n, n˜ao importa a posi¸c˜ao do corte. Suponha, agora, que vocˆe queira\nquebrar a string em muitos peda¸cos. A ordem na qual os cortes s˜ao feitos\npode afetar o tempo de execu¸c˜ao total.\nPor exemplo, se vocˆe quiser cor-\ntar uma string de 20 caracteres nas posi¸c˜oes 3 e 10, fazer o primeiro corte\nna posi¸c˜ao 3 incorrer´a em um custo total de 20+17 = 37, enquanto fazer a\nposi¸c˜ao 10 primeiro ter´a um custo melhor de 20 + 10 = 30. Forne¸ca um algo-\nritmo de programa¸c˜ao dinˆamica que, dadas as posi¸c˜oes de m cortes em uma\nstring de comprimento n, encontre o custo m´ınimo de dividir a string nos m\n+ 1 peda¸cos.\n\nSolu¸c˜ao:\n\nPage v",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p5-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,87 @@
+{
+  "id": "c616f5b14d1a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\prova_2_A.pdf",
+  "copia": "00-originais\\ingestao\\64f6b97e3a85356aab957667974db6036a37cf7b39754fa28af3fbb3c3ea15ec\\prova_2_A.pdf",
+  "sha256": "64f6b97e3a85356aab957667974db6036a37cf7b39754fa28af3fbb3c3ea15ec",
+  "tipo": ".pdf",
+  "paginas": 6,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "[OCR parcial do recorte p1-fig1.png; conferir símbolos na imagem]\n4\n| Universidade Federal de Alagoas - UFAL 4\nInstituto de Computação\nProjeto e Análise de Algoritmos\n2º Prova\nProf. Rian Gabriel Pinheiro\n\n30 de março de 2023\n\nQuestão 1 [2 pontos):\nSão dadas duas listas ordenadas de tamanho m en, Dê um algori = ,\nPap canenento da união das dues listen, goritmo de tempo O(log m + logn) para computar o\n\nQuestão 2 [2 pontos):\nSuponha que tenha k arrays ordenados Ay, Ag,..., Ap, cada um com nº elementos. Você deseja combiná-los em\num único array ordenado de tamanho kn. Uma maneira de fazer isso seria usar à operação de intercalação (merge).\nSabendo que a intercalação de dois array X «e Y precisa de |X| + |Y| p q\n1. Calcule quantos passos o algoritmo a seguir leva: Primeiro intercale os arrays Ar, Az, depois intercale o resultado\ncom Ay e assim por diante.\n\n2. Projete um algoritmo melhor para este problema.\n\nQuestão 3 [2 pontos]:\n\nDado um conjunto Ss de strings, encontre de forma eficiente o prefixo comum mais longo. Exemplos:\nEntrada: S = (“instituto”, “instigar”, “instável”, “instaurar\"}, Saída: “inst”\n\nEntrada: S = (“portuguese”, “português”, “portugal” ), Saída: “portug”\n\nQuestão 4 [2 ponto):\nConsidere oSeguinte problema.\n: Grafo não direcionado G = (V, E); pesos de arestas w,; subconjunto de vértices U € V.\n: A Árvore Geradora mais leve na qual os nós de U são folhas (pode haver outras folhas na árvore também),\n\nQuestão 5 [2 ponto]: ae a\nConsidere os dois algoritmos gulosos para o CAIXEIRO VIAJANTE. Mostre que ambos não ão sai o E ado\ngarantem retornar a solução ótima. ro o\n\nAlgoritmo 1 (Algoritmo do vizinho mais próximo)\n\n1. Inicialize todos os vértices como não visitados.\n2 Selecione um vértice arbitrário, defina-o como o vértice atual u. Marque u como visitado.\n3. Descubra a aresta mais curta conectando o vértice atual u é um vértice não visitado v\n4. Défina v como o vértice atual u. Marque v como visitado.\n5/ Se todos os vértices do domínio forem visitados, então termine. Caso contrário, vá para o passo 3\n\nHk) e (k,9).\n\n| = {a),49,.-.,4n)- Cada item tem um peso associado\n! para obter o máximo benefício. No entanto, há muito\nIdade K. O ladrão agora tem que determinar quais itens\nseja indximo, i\n\nitem possa ser retirada, ou seja, o ladrão pode pega\ndvixar a parte restante. Isso é chamado de Probl\nlndriio rouba. Elabore um algoritmo\n\nca vi é máximo, f",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p1-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n152) OSSARIUE Samp7] 2 = a\nop ew f Fel oa F'g apvo pego +\\5¥\\\n\nu 7 is uf 7 iss\nae os, + (ped? e (4 , é\n\nvA ead] ow) He oF\n; : a : “a = (2\n\n,\n\nT- amo 17h |",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p2.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p2-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\n0\nDMA\n\nCho Brupe y\nYipem W dd s7 som Shs som\n\nRO) a to renina and e poe E\n\nF/05Sed om op ty2e 500 ved ge ged\n\nSejm nad sapyoy SebuS “a aped\nPPMP RS good! pal PRE e ete\n\nyeas Few = fessxd gp , A\n\ne\nSa) wr) Sed 37) “22 AS Shepe sem Php wap e -¢\n\ndd shee 2 79 E magos anb da 5 essed o 24) ea -2\n\n; - 5,46, baal > a s Ay\n» À, + A Dy DA [á j A AA\nOU A dede Cr Cp sy)\n\n4 “Oy ACP? q ata rd\nAh 2 €2 Sheme So sp\n\n€ e mb 277 anny we? Doda 2 Sw a\nnO Shou A NA \"ot ap oe) wed O Eve fy rbeS -=s\npaws\n\na vue o)\np- at estoy eed a\n\nê he o asa comp\n\nsAepe fF",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p3.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p3-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "[OCR parcial do recorte p4-fig1.png; conferir símbolos na imagem]\nnº hs ao\n| Rar 2 ve Av age É\n\nie) Ea etn ap f ? “ni ile\ni anal’ ‘Ty wa)!\n\nqr rr musas\n\nDT\n\n(sts) <*1 | (thot ae\n\n) as nop 1/6454 J od / =\nasd ye) Daio <p Ne /\n( Bey war? i ow Pw way oxap ©) o anb à AS\n' * PwuilG a oS “MA peu i a\nDo pes essere Semgestenpe ]°%, SA AR\n\" d A a doi a wy er rye 0 o A\nSMDS x |\n\nyew “yn 2)\n\n(2) PET PO |\n\n. (C9 a< (osebyreajt = Y) 29\nL PELA away ea\napp po rsçod ) o vnbu “3\n\neps as\nyar\n\n(3) oa! E Swe a1)",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p4.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p4-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\nus ph! A seu\nway Punt eS nã ca ,\n\n(594\n\nya) ano (+ a eq 5) pe,\n\n(655 me\n¢ i Es À\n10835 4574 * ys) \\ \\\n\n(ud) cs\ndo maos STO Ne\n\nss of ' a ap BYE ? gat) A | 7\n1 el ar =}\ngaggle yma 4 S merit OF\nmp\n~ 3 € a\n\neptest pio ap aed (9D e |\n\no ph opp aaa SPP gpa il",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p5-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\ni g=2-F th zal\n\n€'s) gure P\n\nDr ANA ef US js MiSsod pa ts >: — 7 ch!\nope 5 oa >) 225) 1 0+) É) = (F a '\nao 5 ;\n\nG ~ a 9\nsevens) 2 abner ay ve yo\n\npe S qs y) N\nB 205% ett eh Se] eT)\n= 1: A\no ja mus s AD Se va apt\ndd rw Sey é\n\nc 2 ¢ a\nal Se. j\nagit\ncr\n\n4 ) po bed\n\nae 8) a) et Wes\n\n; PP TSO | Fe ?\nFp ú Da Bin a of aye (Cj\nas crinl , ad\nE if\n\n: ce\n; 9 CS af ey ode\nSe pana eo is Sy\n\n“LE",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

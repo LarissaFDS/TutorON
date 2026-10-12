@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nQuestão 6 [2 pontos):\nProve que:\n\nmi k. = qun*\n1, tudo polinômio de grau k, pin) = aun + ay uns ++ ay com a, > 0, pertence q O(n*).\n\nFr\naes no ponenciais a\" vem diferentes ordens do orestimenta para diferentes valotes de base a > 1\n3. as funções logarítmicas log, n tôm a mesma ordem de crescimento para diferentes valores de base a> 1.\n\nQuestão 7 [1 ponto):\nComidese o seguinte algoritmo reeursivo, Cujo asgumento 746 um inteiro positivo.\n\nee\n\n1. procedure Astimisvo(n)\n\n2 ifn>0 then\n\n3% Asrenigeu (a — 1)\n\n4: for i— l>ndo\n\n5: imprima “**\n\n& end for\na Asrinisoutn — 1)\n\na end if\n\n9, end procedure\n\nanisco(n)? Mostra é\nParaium dado valor; du nt, quantos astériscos serão imipréssos um uma chumuda de Astenisco(n)? Mostr\nrecorrência.\n\nLH 1\n\nQuestão 8 [2 pontos): :\nSejam f(n) ¢ g(t) tunções assintoticamente não negativas. Usando a definição básica da notação ©, prove que\nmax(f(n). g(t) = O(f(n) + a(n).\n\nf ; :\nA Port 2 , pievey , . fy ‘ as UR >.\n,\n\nPele Dema) E base Go)\n\nfee Ss E BO WK “a +4 ,) Ts f e [ee Asde porá 5\nol va\n\n- . e ST\naa Tito © Samet weal pag S que 2 wee\n\n& vi) LA\n\npara Cr ¥,\n3 é e verdade pois\n\nE Som pie PCT ov igual\n\n«da chilis Os ee\ncats “thes\n14553)",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\320662691e44\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\320662691e44\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

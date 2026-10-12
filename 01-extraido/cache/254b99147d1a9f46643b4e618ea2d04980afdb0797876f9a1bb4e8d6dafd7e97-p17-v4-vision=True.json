@@ -1,0 +1,18 @@
+{
+  "pagina": 17,
+  "texto": "[OCR parcial do recorte p17-fig1.png; conferir símbolos na imagem]\n#include<stdio.h>\n#include<time.h>\nint maior_num=0;\ndouble media_tam=0;\nint maior_seq=0;\nvoid ulam(int n){\nint x = n;\nint a3=0,a2=0,a1=0;\nint num_maior_seq=1;\nwhile((a3!=1) ll(a2!=2) 1l (a1!=4)){\nif(x%2==0)x=x/2;\nelse x=3*x +1;\na1 = a2;\na2 = a3;\na3 = x;\nnum_maior_seq++;\nif(num_maior_seq >= maior_seq)\nmaior_num = n;\nmaior_seq = num_maior_seq;\nmedia_tam+=num_maior_seq;\nint main(){\nint n,numeros=0;\nclock_t ini = clock();\nwhile(scanf(\"%d\"，&n)!=EOF){\nulam(n);\nnumeros++;\nmedia_tam/=numeros;\nclock_t fim = clock();\ndouble tempo =(double)(fim -ini)/ (double)CLOcKS_PER_SEC;\nprintf(\"Tamanho da Maior Sequencia -> %d numeros\\n\",maior_seq);\nprintf(\"valor de Nparaa maior sequencia ->%d\\n\",maior_num);\nprintf(\"Media dos Tamanhos das Sequencias -> %.2lf numeros\\n\", media_tam);\nprintf(\"Tempo de Execucao ->%.51f segundo(s)\",tempo);\nTamanhodaMaiorSequencia->340numeros\nValordeNparaamaiorsequencia->52527\nMediadosTamanhosdasSequencias->104.21r\nnumeros\nTempo de Execucao ->0.06200 segundo(s)\n\n\nPage xvii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p17.png",
+  "figuras": [
+    "01-extraido\\figuras\\7b4da6a8adf7\\p17-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p17-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

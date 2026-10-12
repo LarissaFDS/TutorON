@@ -1,0 +1,12 @@
+{
+  "pagina": 6,
+  "texto": "[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\ni g=2-F th zal\n\n€'s) gure P\n\nDr ANA ef US js MiSsod pa ts >: — 7 ch!\nope 5 oa >) 225) 1 0+) É) = (F a '\nao 5 ;\n\nG ~ a 9\nsevens) 2 abner ay ve yo\n\npe S qs y) N\nB 205% ett eh Se] eT)\n= 1: A\no ja mus s AD Se va apt\ndd rw Sey é\n\nc 2 ¢ a\nal Se. j\nagit\ncr\n\n4 ) po bed\n\nae 8) a) et Wes\n\n; PP TSO | Fe ?\nFp ú Da Bin a of aye (Cj\nas crinl , ad\nE if\n\n: ce\n; 9 CS af ey ode\nSe pana eo is Sy\n\n“LE",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\c616f5b14d1a\\p6-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

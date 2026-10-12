@@ -1,0 +1,206 @@
+{
+  "id": "7b4da6a8adf7",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\PAA_L1.pdf",
+  "copia": "00-originais\\ingestao\\254b99147d1a9f46643b4e618ea2d04980afdb0797876f9a1bb4e8d6dafd7e97\\PAA_L1.pdf",
+  "sha256": "254b99147d1a9f46643b4e618ea2d04980afdb0797876f9a1bb4e8d6dafd7e97",
+  "tipo": ".pdf",
+  "paginas": 17,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b1-01-corretude-complexidade",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "Lista de Exerc´ıcios 1\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 1 - Corretude de Algoritmos\n\n1. Fa¸ca uma pesquisa (escreva pelo menos 10 linhas) sobre al-Khorezmi (tamb´em\nal-Khwarizmi), o homem de cujo nome deriva a palavra “algoritmo”. Mostre\no que as origens das palavras “algoritmo” e “´algebra” tˆem em comum.\n\nSolu¸c˜ao:\n\nMohamed ibn Musa al-Khwarizmi, nascido por volta do ano 780, viveu em Bagd´a,\nlocalizada no Iraque. Ele trabalhou na Casa da Sabedoria, um lugar de pesquisas\ncient´ıficas, e l´a estudou as obras de s´abios ´arabes, gregos e indianos.\n\nAl-Khwarizmi ficou conhecido por criar novas maneiras de solucionar problemas\nmatem´aticos. Dentre os livros escritos por ele, um explicava o m´etodo de sistemas de\nsolu¸c˜oes que hoje ´e conhecido por ”´algebra”, palavra cuja origem vem da express˜ao\n´arabe al-jabr, que aparece no t´ıtulo do livro. Este livro foi mais utilizado nas univer-\nsidades europ´eias no ensino da matem´atica.\n\nA palavra algoritmo se origina do ´arabe “al-khwarizmi” influˆencia do nome do\nmatem´atico ´arabe do s´eculo IX. J´a o termo ´algebra, deriva do termo al-jabr, como\nj´a citado anteriormente, este termo nomeou o livro produzido pelo matem´atico onde\nestava descrito um m´etodo para solu¸c˜ao de equa¸c˜oes do segundo grau, utilizando\nm´etodos que somente com o que conhecemos hoje por ´algebra e a sua simbologia ´e\nposs´ıvel visualizar, como a representa¸c˜ao de inc´ognitas e ra´ızes de uma equa¸c˜ao, bem\ncomo a solu¸c˜ao de sistemas de equa¸c˜oes.",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p1.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p1-fig1.png",
+        "01-extraido\\figuras\\7b4da6a8adf7\\p1-fig2.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 2,
+      "texto": "2. Prove por indu¸c˜ao que:\n\n•\nPn\n\n2\n, para n ≥1\n\ni=1 i = n(n+1)\n\n•\nPn\n\n6\n, para n ≥1\n\ni=1 i2 = n(n+1)(2n+1)\n\n•\nPn\n\n4\n, para n ≥1\n\ni=1 i3 = n2(n+1)2\n\nSolu¸c˜ao:\n\n(a) Desejamos provar que:\n\n1 + 2 + 3 + ... + n = n(n+1)\n2\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n2\n= 1\n∴\nP(1) ´e verdadeiro\n\ni=1 i = 1(1+1)\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\n2\n, ∀k ≤n\n\ni=1 i = k(k+1)\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni = 1 + 2 + 3 + ... + k + (k + 1) = k(k+1)\n\n2\n+ (k + 1)\n\n= k(k+1)+2(k+1)\n\n2\n= (k+1)(k+2)\n\n2\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\n(b) Desejamos provar que:\n\n1 + 22 + 32 + ... + n2 = n(n+1)(2n+1)\n6\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n6\n= 6\n\ni=1 i2 = 1(1+1)(2.1+1)\n\n6 = 1\n∴\nV erdadeiro\n\nPage ii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p2.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 3,
+      "texto": "Hip´otese de Indu¸c˜ao (k ≤n):\n\n6\n, ∀k ≤n\n\ni=1 i2 = k(k+1)(2k+1)\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni2 = 1 + 22 + 32... + k2 + (k + 1)2 = k(k+1)(2k+1)\n\n6\n+ (k + 1)2\n\n= k(k+1)(2k+1)+6(k+1)2\n\n6\n= (k + 1)k(2k+1)+6(k+1)\n\n6\n\n= (k + 1)(2k2+k)+(6k+6)\n\n6\n\n= (k + 1)2k2+7k+6\n\n6\n\n= (k+1)(k+2)(2k+3)\n\n6\n= (k+1)((k+1)+1)(2(k+1)+1)\n\n6\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\n(c) Desejamos provar que:\n\n13 + 23 + 33 + ... + n3 = n2(n+1)2\n\n4\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 1):\n\nNeste caso,\nPi=k\n\n4\n= 4\n\ni=1 i3 = 12(1+1)2\n\n4 = 1\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\n4\n, ∀k ≤n\n\ni=1 i3 = k2(k+1)2\n\nSupondo por hip´otese de indu¸c˜ao que: Pi=k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\nPi=k+1\n\ni=1\ni3 = 1 + 23 + 33... + k3 + (k + 1)3 = k2(k+1)2\n\n4\n+ (k + 1)3\n\n= k2(k+1)2+4(k+1)3\n\n4\n= (k+1)2[k2+4(k+1)]\n\n4\n= (k+1)2(k2+4k+4)\n\n4\n\n= (k+1)2(k+2)2\n\n4\n= (k+1)2((k+1)+1)2\n\n4\n∴\nP(k+1) ´e verdadeiro. ⇒P(k) ´e verdadeiro\n\n■\n\nPage iii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p3.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 4,
+      "texto": "3. Prove que:\n\n• n3 + 2n ´e divis´ıvel por 3 para todo n ≥0, por indu¸c˜ao.\n\n• Se 2|3m (2 divide 3m) ent˜ao 2|m, por contra-posi¸c˜ao.\n\n• A soma de 3 n´umeros consecutivos ´e m´ultiplo de 3, use prova direta.\n\nSolu¸c˜ao:\n\n(a) Desejamos provar que: n3 + 2n ´e divis´ıvel por 3 para todo n ≥0.\n\nPara isto, utilizaremos a prova por indu¸c˜ao e, neste caso:\n\nPasso base (k = 0):\n\nNeste caso, n3 + 2n = 03 + 2 · 0 = 0\n∴\nP(1) ´e verdadeiro\n\nHip´otese de Indu¸c˜ao (k ≤n):\n\nSupondo por hip´otese de indu¸c˜ao que: 3 divide k3 + 2k\n\nPasso indutivo:\n\nSegue-se para o passo da indu¸c˜ao onde, aceitando a hip´otese de indu¸c˜ao P(k),\nk ≤n, provaremos que se P(k+1) ´e verdadeiro, ent˜ao P(k) tamb´em ´e, por\nindu¸c˜ao. Logo:\n\n(k + 1)3 + 2(k + 1) = (k3 + 3k2 + 3k + 1) + 2k + 2 =\n\n(k3 + 2k) + (3k2 + 3k + 1 + 2) = (k3 + 2k) + 3(k2 + k + 1)\n\nPor hip´otese, temos que k3+2k ´e divis´ıvel por 3. Al´em disso, atrav´es da defini¸c˜ao\nde divisibilidade: “Um n´umero inteiro n˜ao nulo a divide um inteiro b, se existe\num inteiro c, tal que b = a · c” podemos afirmar, ent˜ao, que 3 · (k2 + k + 1)\ntamb´em ´e divis´ıvel por 3.\nLogo, como ambas as partes s˜ao divis´ıveis por 3,\npodemos afirmar que P(k+1) tamb´em ´e.\n\n∴\nP(k+1) ´e verdadeiro.\n\n■\n\n(b) Desejamos provar que se 2|3m (2 divide 3m) ent˜ao 2|m. Para isto, utilizaremos\n\na prova por contra-posi¸c˜ao, p →q = ¬q →¬p, onde:\n\n•\np: 2 |3m\n•\nq: 2 |m\n\nDessa forma, para provarmos ¬q →¬p, temos pela defini¸c˜ao de divisibilidade:\n\nHip´otese: m = 2k + 1, onde k ´e qualquer n´umero inteiro.\nObjetivo: 3m = 2j + 1, onde j ´e qualquer n´umero inteiro.\nDesenvolvendo:\n\nm = 2k +1 ⇒3m = 3(2k + 1)\n\nPage iv",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p4.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 5,
+      "texto": "= 6k + 3 = 2(3k + 1) + 1\n\n∴\n3m = 2j + 1\n\nPortanto, provamos que ¬q →¬p o que implica, pela prova contrapositiva, que\np →q. Dessa forma, est´a provado que se 2|3m ent˜ao 2|m.\n\n■\n\n(c) Desejamos provar que a soma de 3 n´umeros consecutivos ´e m´ultiplo de 3. Para\n\nisto, utilizaremos prova direta:\n\nHip´otese: 3|a + (a + 1) + (a + 2)\nProva:\n\na + (a+1) + (a+2) = 3a + 3 = 3(a + 1) = 3k,\n\nonde k ´e qualquer n´umero inteiro.\n\nPela defini¸c˜ao de divisibilidade, temos que se existe um inteiro k, tal que j = w·k,\nent˜ao, um n´umero inteiro n˜ao nulo w divide um inteiro j, dessa forma, podemos\nafirmar, ent˜ao, que a + (a+1) + (a+2) ´e divis´ıvel por 3 e portanto, a + (a+1)\n+ (a+2) ´e m´ultiplo de 3.\n\n■\n\n4. Considere um hex´agono regular cujos v´ertices s˜ao v1, v2, ..., v6. Mostre que toda\nmaneira de colorir os segmentos de retas que unem dois v´ertices, utilizando\nas cores azul ou branca, produz pelo menos um triˆangulo cujos lados tem a\nmesma cor.\n\nSolu¸c˜ao: Considerando um hex´agono regular e suas propriedades b´asicas, ´e intuitivo\nnotar que existem in´umeras maneiras de colorir os segmentos de retas que unem dois\nv´ertices e na figura abaixo est´a ilustrada uma delas:\n\n\n[OCR parcial do recorte p5-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nObserve que tomamos a liberdade de mudar a cor branca sugerida no enunciado para\na cor vermelha, a fim de promover uma melhor visualiza¸c˜ao do problema.\n\nCom isso em mente, queremos provar que utilizando apenas duas cores - em nosso\ncaso, azul e vermelho - para colorir os segmentos de retas, teremos pelo menos um\ntriˆangulo com seus trˆes lados possuindo a mesma cor, independente da forma que\nescolhermos distribuir as cores.\n\nPage v",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p5.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p5-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 6,
+      "texto": "Atrav´es de prova direta, faremos a demonstra¸c˜ao:\n\nTomando v1 como v´ertice base, sabemos que h´a 5 segmentos de reta em conex˜ao com\nele, assim como mostram as linhas pontilhadas do hex´agono `a esquerda na figura\nabaixo. Por termos apenas duas cores, podemos afirmar que pelo menos trˆes destes\nsegmentos possuir˜ao a mesma cor. Em nosso exemplo, escolheremos a cor vermelha\ne diremos que os v´ertices v2, v4 e v6 est˜ao interligados `a v1 atrav´es de um segmento\nvermelho, assim como ilustra a figura `a direita.\n\n\n[OCR parcial do recorte p6-fig1.png; conferir símbolos na imagem]\nv2\n\n“4\n\nV3\n\n>\n\nV4\n\nV5\n\n\nProsseguindo com a nossa prova:\n\n• Se entre os segmentos v2v4, v2v6 e v4v6, ao menos um deles ´e vermelho conse-\nguimos formar um triˆangulo completamente monocrom´atico, em algum dos formatos\nabaixo, o que nos prova a existˆencia de pelo menos um triˆangulo de lados de mesma\ncor.\n\n\n[OCR parcial do recorte p6-fig2.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n•\nNo entanto, caso a afirmativa anterior seja falsa, s´o podemos assumir ent˜ao\nque os trˆes segmentos v2v4, v2v6 e v4v6 s˜ao azuis. Dessa forma, tamb´em provamos a\nexistˆencia de um triˆangulo monocrom´atico por´em, dessa vez, azul.\n\n\n[OCR parcial do recorte p6-fig3.png; conferir símbolos na imagem]\n[ilegivel]\n\n\n■\n\nPage vi",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p6.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig1.png",
+        "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig2.png",
+        "01-extraido\\figuras\\7b4da6a8adf7\\p6-fig3.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 7,
+      "texto": "5. Prove a corretude do algoritmo bubblesort:\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nprocedure ALGORITMO BUBBLESORT(vetor A[1,...,n])\n\n1:\n\n2 for i—n-1—1do\n\n3 forj—-0->i-ldo\n\n4: if A[j] < A[j +1] then\n5: troca(ALj], Alj + 1D]\n6: end if\n7 end for\n8 end for\n9: end procedure\n\n\nSolu¸c˜ao:\n\nPara provar a corretude do algoritmo Bubblesort ´e necess´ario provar os dois invari-\nantes das estruturas de repeti¸c˜ao presentes no mesmo. Primeiro, o la¸co interno e,\npor fim, a propriedade do primeiro la¸co servir´a de base para a prova do la¸co externo.\nAssim, dando continuidade para a prova:\n\nInvariante do la¸co interno:\n\nTeorema: Depois da itera¸c˜ao j do loop interno, o menor elemento do vetor A[0, 1, ..., j]\nestar´a na posi¸c˜ao j .\n\nA prova ser´a feita por indu¸c˜ao:\n\n(Inicializa¸c˜ao)\n\nPasso Base (j=0)\n\nNeste caso, o passo base ocorre antes da itera¸c˜ao do loop, pois no caso onde j=0,\ntemos o vetor A[0, ..., 0], constitu´ıdo apenas pelo elemento a0, desse modo, ele ´e o\nmenor elemento do vetor e, portanto, P(j=0) ´e verdadeiro.\n\n(Manuten¸c˜ao)\n\nHip´otese da Indu¸c˜ao:\n\nComo hip´otese indutiva, vamos assumir primeiramente que ap´os a itera¸c˜ao j, o menor\nelemento do vetor esteja na posi¸c˜ao j.\n\nPasso Indutivo (j ≥0):\n\nAssim, para concluir, ´e necess´ario mostrar que ap´os a itera¸c˜ao j+1, o menor elemento\ndo vetor A[0, 1, ..., j, j + 1] estar´a na posi¸c˜ao j+1.\n\nSabemos pela hip´otese de indu¸c˜ao que ap´os a itera¸c˜ao j, o elemento da posi¸c˜ao j (aj)\n´e o menor elemento. Sendo assim, na itera¸c˜ao j+1, ou o menor elemento no vetor\nA[0, 1, ..., j, j + 1] ´e aj ou ´e aj+1.\n\nPage vii",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p7.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p7-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 8,
+      "texto": "De todo modo, pela linha (4) o algoritmo verifica e garante que se aj < aj+1, ocorra\na troca dos mesmos, de modo a preservar o menor elemento na posi¸c˜ao j+1 e, assim,\nfica assegurado que se h´a j+1 posi¸c˜oes no vetor A[0, 1, ..., j, j + 1], ent˜ao, ap´os j+1\nitera¸c˜oes, o menor elemento estar´a na posi¸c˜ao j+1.\n\n(T´ermino)\n\nPortanto, por indu¸c˜ao, ap´os j itera¸c˜oes o menor elemento encontra-se na posi¸c˜ao\nj. Em outras palavras, ao final da execu¸c˜ao do la¸co de repeti¸c˜ao, a posi¸c˜ao j ser´a\nocupada pelo menor elemento do vetor A[0, 1, ..., j].\n\nInvariante do la¸co externo:\n\nTeorema: Ap´os a itera¸c˜ao “i” do loop externo, os “n −i” menores elementos do\nvetor A[0, 1, ..., n −1] estar˜ao em ordem decrescente nas posi¸c˜oes i at´e n-1, ocupando\nportanto, o vetor A[i, ..., n −1].\n\n(Inicializa¸c˜ao)\n\nDe fato, na itera¸c˜ao n−1 do loop externo os 1 menores elementos ocupam as posi¸c˜oes\ndo vetor A[n −1, ..., n −1], que s´o possui um elemento nas posi¸c˜oes previamente\ncitadas (n −1 at´e n −1) e consequentemente est´a em ordem decrescente. Portanto,\no invariante ´e v´alido.\n\n(Manuten¸c˜ao)\n\nO invariante de la¸co ´e valido para a inicializa¸c˜ao, ou primeira itera¸c˜ao, pois de fato,\ns´o h´a um elemento, consequentemente em ordem decrescente, ocupando a posi¸cao\nn-1. Logo, resta analisar as pr´oximas “i” itera¸c˜oes.\n\nSendo assim, sabendo que o la¸co interno garante que o menor elemento do vetor\nA[0, ..., i] estar´a na posi¸c˜ao i e que ao fim do la¸co externo o i ´e decrementado para\ni −1. Analogamente, na pr´oxima itera¸c˜ao o subvetor A[0, ..., i −1], ter´a seu menor\nvalor posicionado em A[i −1] e assim sucessivamente. Desse modo, ´e f´acil observar\nque ap´os estas itera¸c˜oes, a seguinte proposi¸c˜ao ´e verdadeira:\n\nai−1 ≥ai\n\nLogo, ´e poss´ıvel concluir tamb´em que os elementos comparados at´e ent˜ao estar˜ao,\ncom base na linha (4), em ordem decrescente, mantendo a propriedade de ordena¸c˜ao\ndurante a execu¸c˜ao do la¸co de repeti¸c˜ao.\n\n(T´ermino)\n\nAp´os o t´ermino do la¸co de repeti¸c˜ao externo, onde i=1, ´e importante lembrar que o\nla¸co de repeti¸c˜ao interno foi executado, analisando os elementos do vetor A[0, ..i], logo\nA[0, ..., 1], e consequentemente posicionando o elemento de menor valor na posi¸c˜ao\n1 do vetor. Portanto, considerando que a inicializa¸c˜ao e manuten¸c˜ao foram v´alidas,\ntodos os n −i menores elementos do vetor A[0, ..., n −1] est˜ao nas posi¸c˜oes 1 at´e\nn −1, consequentemente o elemento a0 ´e o maior elemento do vetor A[0, ..., n −1].\n\nPage viii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p8.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 9,
+      "texto": "Portanto, a seguinte proposi¸c˜ao est´a correta:\n\na0 ≥a1 ≥... ≥an−2 ≥an−1\n\nConsequentemente, os elementos do vetor A[0, ..., n −1], est˜ao ordenados de maneira\ndecrescente.\n\n■\n\n6. Prove a corretude do algoritmo de Horner para a avalia¸c˜ao de polinˆomios.\nP(x) = anxn+ an−1xn−1+ ··· +a1x + a0.\n\n\n[OCR parcial do recorte p9-fig1.png; conferir símbolos na imagem]\n1: procedure ALGORITMO DE HORNER(vetor Al0,...,n], real x)\n2 p — Aln]\n\n3 for i—n-1—0do\n4: p-—p*x+Alil\n5 end for\n\n6 return p\n\n7: end procedure\n\n\nSolu¸c˜ao:\n\nTeorema: O algoritmo de Horner est´a correto, ou seja, retorna corretamente o\nc´alculo do polinˆomio para um valor real dado.\n\nProva:\n\nConsidere o seguinte invariante de la¸co:\n\nn\nX\n\np =\n\nAj xj−i\n\nj=i\n\nInicializa¸c˜ao: Neste caso, fica garantido, pela linha (2) que, antes de execu-\ntarmos o la¸co de itera¸c˜ao propriamento dito, p resulta no coeficiente do termo\nde maior grau do polinˆomio informado, isto ´e: A[n]. Assim, considerando que a\nopera¸c˜ao antes do la¸co de repeti¸c˜ao torna i = n (para fins de simplifica¸c˜ao), a\n2ª linha de c´odigo mostra que o invariante de la¸co est´a correto antes do loop for.\n\nManuten¸c˜ao: ´E poss´ıvel ent˜ao prosseguir para a execu¸c˜ao do la¸co nos passos\nseguintes, onde “i” ´e decrementado uma unidade em cada itera¸c˜ao e, de mesmo\nmodo, a linha (4) garante que o valor do pr´oximo termo do invariante ser´a\ninclu´ıdo na soma, assim como o valor do termo atual. Sendo que o resultado\n\nPage ix",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p9.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p9-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 10,
+      "texto": "da opera¸c˜ao do termo atual pelo valor real x, informado pelo usu´ario, vai sendo\nparcialmente computado em cada la¸co de itera¸c˜ao. Desse modo, para:\n\nn\nX\n\ni = n −1 :\n\nAj xj−i = An−1x0 + Anx1\n\nj= n−1\n\nn\nX\n\ni = n −2 :\n\nAj xj−i = An−2x0 + An−1x1 + Anx2\n\nj= n−2\n\n...\n...\n...\n\nn\nX\n\ni = 1 :\n\nAj xj−i = A1 x0 + A2 x1 + ... + AN−1 xN−2 + AN xN−1\n\nj=1\n\nSendo assim, ao longo da execu¸c˜ao dos la¸cos de repeti¸c˜ao\n\nn\nX\n\np =\n\nAj xj−i\n\nj=1\n\nT´ermino: Sabendo que a vari´avel “i” est´a sendo decrementada e avaliada de\nn−1 at´e 0, e considerando que a inicializa¸c˜ao e manuten¸c˜ao do la¸co de repeti¸c˜ao\ns˜ao v´alidas. Ap´os a execu¸c˜ao da ´ultima itera¸c˜ao “i = 0”, temos que o valor de p\n´e:\nn\nX\n\nAj xj−i = A0 x0 + A1 x1−0 + ... + AN−1 x(N−1)−0 + AN xN−0\n\nj=0\n\n= A0 x0 + A1 x1 + ... + AN−1 xN−1 + AN xN\n\nPortanto, conclui-se que o algoritmo de Horner est´a correto e ´e capaz de calcular\no valor do polinˆomio de Grau N dado para um determinado valor de x.\n\n■\n\nPage x",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p10.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 11,
+      "texto": "7. Prove a corretude do algoritmo Conversor Decimal-Bin´ario.\n\n\n[OCR parcial do recorte p11-fig1.png; conferir símbolos na imagem]\n1:\n2:\n3\n4:\n5:\n6\n7\n8\n\n9:\n\n10:\nll:\n\nprocedure CONVERSOR D-B(inteiro n)\nt—n\nk-0\nzere todos os bits de b\nwhile t > 0 do\nk—k+1\nb[k] — t mod 2\nt—t+2\nend while\nreturn b\nend procedure\n\n\nSolu¸c˜ao:\n\nTeorema: O algoritmo Conversor Decimal-Bin´ario est´a correto, ou seja, retorna\ncorretamente a convers˜ao em bin´ario para um n´umero natural dado.\n\nProva:\n\nSendo:\n- mk ´e o inteiro que representa o estado atual do vetor b, ap´os k itera¸c˜oes, tal que:\n\n0,\nse k = 0\n\n\n\n\n\nmk =\n\ni=k\nP\n\nb[i] 2i−1,\nse k ≥1\n\n\n\n\ni=1\n\n- tk representa o valor de t ao final do k-´esimo loop.\n\nConsidere o seguinte invariante de la¸co, onde na itera¸c˜ao k, o vetor b[1...k] re-\npresenta um inteiro mk tal que:\n\nn(k) = mk + tk.2k, ∀k\n\nInicializa¸c˜ao: Neste caso, a vari´avel t ´e inicializada com o n´umero natural a\nser convertido n, o contador k = 0 e o vetor b est´a vazio. Al´em disso, a itera¸c˜ao\nna inicializa¸c˜ao ´e:\n\npara k = 0:\nn(0) = t0.20 + m0 = n.1 + 0 ∴n(0) = n\n\nPage xi",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p11.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p11-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 12,
+      "texto": "Dessa forma, a defini¸c˜ao de invariante na inicializa¸c˜ao est´a satisfeita.\n\nManuten¸c˜ao: Prosseguimos ent˜ao para a execu¸c˜ao do la¸co nos passos seguintes,\nonde k ´e incrementado uma unidade a cada itera¸c˜ao e, dessa forma, o vetor b na\nposi¸c˜ao k ´e atualizado com o valor da opera¸c˜ao modular com 2, isto ´e, tk mod\n2. Dando prosseguimento com a atualiza¸c˜ao do valor de tk ao ser dividido por 2,\no que permite que haja o algoritmo continue para que a convers˜ao pare quando\no n´umero for menor ou igual a zero. Dessa forma, precisamos mostrar que se o\ninvariante de la¸co ´e v´alido para k, ele ser´a v´alido para k+1. Supomos, ent˜ao,\nque n(k) ´e v´alido, ent˜ao sabemos que n(k) = tk.2k + mk e a partir do corpo do\nloop deduzimos que:\n\nk’ = k + 1\nb[k’] = tk mod 2\n\ntk′ = tk ÷ 2\n\nAssim, temos dois casos a provar:\n\n• Quando tk ´e par, ent˜ao b[k’] = 0 e b[1...k’] ainda representa mk.\n\n∴\nmk′ = mk\n\nLogo\nn(k) = mk + tk.2k ⇒n(k′) = mk′ + tk′.2k′\n\n= mk + (tk/2).2k′ = mk + tk.2k = n\n\n, temos ent˜ao que n(k + 1) ´e v´alido ∀tk par\n( I )\n\n• Quando tk ´e ´ımpar, isso nos d´a ent˜ao que b[k’] = 1 e b[1...k’] representa\n2k + mk.\n\ni=k\nX\n\ni=k+1\nX\n\ni=k′\nX\n\nb[i] 2i−1 =\n\nb[i] 2i−1\n\nPois, mk =\n\nb[i] 2i−1 ⇒mk+1 =\n\ni=1\n\ni=1\n\ni=1\n\ni=k′\nX\n\ni=k\nX\n\n=\n\nb[i] 2i−1 = b[k′].2k +\n\nb[i] 2i−1\n\ni=1\n\ni=1\n\n∴mk′ = 2k + mk\n\nSabendo disso e que, quando tk ´e ´ımpar tk′ = tk−1\n\n2 , segue-se que:\n\nn(k) = mk + tk.2k ⇒n(k′) = mk′ + tk′.2k′\n\n= (mk + 2k) + tk −1\n\n2\n.2k′\n\n= (mk + 2k) + (tk −1).2k\n\n= mk + 2k + tk.2k −2k = mk + tk.2k = n\n\nPage xii",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p12.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 13,
+      "texto": "Temos ent˜ao que n(k + 1) ´e v´alido ∀tk ´ımpar.\n( II )\n\nLogo, de (I) e (II), temos que o invariante ´e v´alido ∀tk\n\nT´ermino: Sabemos que o la¸co de repeti¸c˜ao executa enquanto o nosso inteiro t\n´e maior do que zero, no entanto, isso acontece considerando que t inicializa com\nn e ´e decrementado dividindo seu valor por dois a cada intera¸c˜ao. Desse modo,\nna ´ultima itera¸c˜ao, quando “t ≤0”e “k = n”, o valor de n ´e:\n\nn = tn.2n + mn\n\nPortanto, conclui-se que o algoritmo Conversor D-B est´a correto e, de fato, con-\nverte para bin´ario um n´umero natural dado.\n\n■\n\n8. A sequˆencia de Fibonacci ´e definida da seguinte forma: f0 = 0; f1 = 1 e\nfi+2 = fi+1 + fi, ∀i ≥0. Prove que para todo n ≥1 temos:\n\n\n[OCR parcial do recorte p13-fig1.png; conferir símbolos na imagem]\n[ilegivel]\n\n\nem que o lado esquerdo representa n-´esima potˆencia de uma matriz 2 x 2.\n\nSolu¸c˜ao:\n\nA prova pode ser feita por indu¸c˜ao:\n\nPasso Base: (n = 1)\n\n\u00131\n\n\u0013\n\n\u0013\n\nAn =\n\n=\n\n=\n\n\u00121\n1\n1\n0\n\n\u0012f1+1\nf1\nf1\nf0\n\n\u0012f2\nf1\nf1\nf0\n\nConsiderando a sequˆencia de Fibonacci at´e os 3 primeiros termos, temos que:\n\nf0 = 0\nf1 = 1\nf2 = f0 + f1 = 1\n\n\u00131\n\n\u0013\n\ne, portanto, a matriz A =\n\n=\n\n, associa direta e corretamente a\n\n\u00121\n1\n1\n0\n\n\u0012f2\nf1\nf1\nf0\n\nsequˆencia de Fibonacci para os seus 3 primeiros elementos elementos.\n\nHip´otese de Indu¸c˜ao: (n ≤k)\n\n\u0013k\n\n\u0013\n\nSuponha que a hip´otese de indu¸c˜ao Ak =\n\n=\n\n,\n∀n ≤k.\n\n\u00121\n1\n1\n0\n\n\u0012fk+1\nfk\nfk\nfk−1\n\nPage xiii",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p13.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p13-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 14,
+      "texto": "Passo Indutivo: (n = k + 1)\n\nDeseja-se saber se a hip´otese ´e v´alida ∀n > k. Portanto, sabendo que\n\n\u0013k\n\nAk+1 = Ak · A1\n, por defini¸c˜ao, e\nAk =\n\n, por hip´otese.\n\n\u00121\n1\n1\n0\n\nSegue-se que:\n\n\u0013\n\n\u0013\n\n\u0013\n\nAk · A =\n\n=\n\n·\n\u00121\n1\n1\n0\n\n\u0012fk+1\nfk\nfk\nfk−1\n\n\u0012fk+1 + fk\nfk+1\nfk + fk−1\nfk\n\n\u0013\n\n\u0013\n\n∴\nAk · A =\n\n⇒\nAk+1 =\n\n\u0012fk+2\nfk+1\nfk+1\nfk\n\n\u0012fk+2\nfk+1\nfk+1\nfk\n\nPortanto, por indu¸c˜ao, se a hip´otese ´e v´alida para n = k ent˜ao ´e v´alida para n = k+1,\n\n\u0013n\n\nlogo a matriz An =\n\nprovˆe os {n + 1, n, n −1} -´esimos termos da\n\n\u00121\n1\n1\n0\n\nsequˆencia de Fibonacci, ∀n ≥1.\n\n■\n\n9. O BIN PACKING ´e um problema cuja entrada consiste em: n itens com\ntamanhos s1, s2, ..., sn em que si ∈[0, 1]. O objetivo ´e encontrar o menor n´umero\nde “bins” (caixas) unit´arias para armazenar os n itens. Dado os algoritmos\na seguir, mostre que eles n˜ao encontram a solu¸c˜ao ´otima do problema, ou\nseja, encontre contraexemplos para cada um dos seguinte algoritmos para o\nproblema.\n\n• (A) Coloque na bins os elementos em ordem da esquerda para a direita,\nse ele couber, caso contr´ario tente na pr´oxima bin;\n\n• (B) Coloque na bin mais livre o maior elemento;\n\n• (C) Coloque o menor elemento na bin mais livre.\n\nPage xiv",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p14.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 15,
+      "texto": "Solu¸c˜ao: Supondo que cada bin consiga armazenar o equivalente a um item de\ntamanho 1, temos que:\n\n(a) Caso de Entrada:\n(0.2, 0.8, 0.5, 0.5, 0.7, 1, 0.3)\nSa´ıda do Algoritmo A:\n[0.2, 0.8], [0.5, 0.5], [0.7], [1], [0.3]\nSa´ıda Otimizada:\n[0.2, 0.8], [0.5, 0.5], [0.7, 0.3], [1]\n\n(b) Caso de Entrada:\n(0.2, 0.8, 0.5, 0.5, 0.7, 1, 0.3)\nSa´ıda do Algoritmo B:\n[1], [0.8], [0.7], [0.5, 0.5], [0.3, 0.2]\nSa´ıda Otimizada:\n[0.2, 0.8], [0.5, 0.5], [0.7, 0.3], [1]\n\n(c) Caso de Entrada:\n(0.2, 0.8, 0.5, 0.5, 0.7, 1, 0.3)\nSa´ıda do Algoritmo C:\n[0.2, 0.3, 0.5], [0.5], [0.7], [0.8], [1]\nSa´ıda Otimizada:\n[0.2, 0.8], [0.5, 0.5], [0.7, 0.3], [1]\n\nPage xv",
+      "metodo": "texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p15.png",
+      "figuras": [],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 16,
+      "texto": "10. Considere o algoritmo de Ulam, ele termina?\nDe fato, conjectura-se que\nseguindo o algoritmo, sempre ser´a obtida a sequencia 4, 2, 1 (Conjectura\nde Collatz).\nEx:\nPara o valor a = 22, ser´a obtida a seguinte sequencia:\n22, 11, 34, 17, 52, 26, 13, 40, 20, 10, 5, 16, 8, 4, 2, 1.\nComo a prova do\nt´ermino do algoritmo consiste em um dif´ıcil problema matem´atico em aberto.\nImplemente um teste exaustivo mostrando que para qualquer unsigned shot\nint (1 a 65535) de entrada o algoritmo para.\nEscreva um pequeno relato\ninformando o tamanho da maior sequˆencia encontrada, o valor na qual a\nmaior sequˆencia foi obtida, a m´edia dos tamanhos das sequˆencias e o tempo\nde execu¸c˜ao.\n\n\n[OCR parcial do recorte p16-fig1.png; conferir símbolos na imagem]\n1: procedure ALGORITMO DE ULAM(inteiro positivo a)\n2: x—a\n\n3: while Os três últimos valores de x não for 4,2,1 do\n4: if x for par then\n\n5: x—x/2\n\n6: else\n\n7: x—3x+1\n\n8: end if\n\n9: end while\n\n10: end procedure\n\n\nSolu¸c˜ao: Ap´os a implementa¸c˜ao do algoritmo e da execu¸c˜ao de um teste exaustivo\ncontendo 65535 entradas, ou seja, cobrindo a possibilidade de entrada de qualquer\nunsigned short int, pudemos observar que, de fato, o algoritmo para de executar e ´e,\nportanto, finito. Al´em disso, assim como ilustra a figura abaixo, algumas informa¸c˜oes\nforam coletadas:\n\n• O tamanho da maior sequˆencia equivale a 340 n´umeros;\n• O valor de N para a maior sequˆencia ´e 52527;\n• A m´edia dos tamanhos das sequˆencias obtidas ´e 104,21 n´umeros;\n• O tempo de execu¸c˜ao do algoritmo ´e 0.06200 segundos.\n\nPage xvi",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p16.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p16-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    },
+    {
+      "pagina": 17,
+      "texto": "[OCR parcial do recorte p17-fig1.png; conferir símbolos na imagem]\nFincLude<stdio.h>\n#include<time.h>\nint maior num=0;\ndouble media tam=0;\nint maior seq=0;\nvoid ulam(int n){\nint x =n;\nint a3=0,a2=0,a1=0;\nint num_maior_seq=1;\n\nwhile((a3!=1) || (a2!=2) || (a1!=4)){\nif (x%2==0) x = x/2;\nelse x = 3*x +1;\nal = a2;\na2 = a3;\na3 =x;\n\nnum_maior_seq++;\nif(num_maior_seq >= maior_seq)\n\nmaior num = n;\nmaior seq = num maior seq;\n\n}\n\nmedia_tam+=num_maior_seq;\n\nint main(){\nint n,numeros=@;\nclock_t ini = clock();\n\nwhile(scanf(\"%d\", &n)!=EOF){\n\nulam(n);\n\nnumeros++;\n}\nmedia_tam/=numeros;\nclock_t fim = clock();\ndouble tempo = (double)(fim - ini)/ (double)CLOCKS_PER_SEC;\nprintf(\"Tamanho da Maior Sequencia -> %d numeros\\n\", maior_seq);\nprintf(\"Valor de N para a maior sequencia -> %d\\n\",maior_num);\nprintf(\"Media dos Tamanhos das Sequencias -> %.21f numeros\\n\", media tam);\nprintf(\"Tempo de Execucao -> %.51f segundo(s)”, tempo);\n\nTamanho da Maior Sequencia -> 349 numeros\nValor de N para a maior sequencia -> 52527\n\nMedia dos Tamanhos das Sequencias -> 104.21 numeros\nTempo de Execucao -> 0.06200 segundo(s)\n\n\nPage xvii",
+      "metodo": "tesseract-por+texto_pdf",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\7b4da6a8adf7\\p17.png",
+      "figuras": [
+        "01-extraido\\figuras\\7b4da6a8adf7\\p17-fig1.png"
+      ],
+      "visao_candidata": [],
+      "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+    }
+  ]
+}

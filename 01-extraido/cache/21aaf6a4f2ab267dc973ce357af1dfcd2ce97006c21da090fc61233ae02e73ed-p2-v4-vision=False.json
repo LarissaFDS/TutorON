@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "2. Algumas moedas s˜ao espalhadas nas c´elulas de um tabuleiro n × m, uma mo-\neda por c´elula. Um robˆo, localizado na c´elula superior esquerda do tabuleiro,\nprecisa coletar o m´aximo de moedas poss´ıvel e trazˆe-las para a c´elula inferior\ndireita. Em cada etapa, o robˆo pode mover uma c´elula para a direita ou uma\nc´elula para baixo de sua localiza¸c˜ao atual. Quando o robˆo visita uma c´elula\ncom uma moeda, ele pega a moeda. Elabore um algoritmo para encontrar o\nn´umero m´aximo de moedas que o robˆo pode coletar e um caminho que ele\nprecisa seguir para fazer isso.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\ndef robotPath(rows,cots,matrix):\n# matriz tem rows+1 linhas e cols+1 colunas\nrobotPath =[[e]*(rows+1) for _in range(cols+1)]\nfor i in range(1, rows+1):\nfor j in range(1, cols+1):\n# encontra o numero maximo e adc 1 se contem uma moeda\nrobotPath[i][j]= max(\nrobotpath[i-1][j],robotPath[i][j-1])+matrix[i-1][j-1]\nprint('As moedas coletadas pelo robo em cada nivel sao:\\n',np.matrix(robotPath))\nprint('Quantidade maxima de moedas coletadas:',robotPath[rows][cols])\n#imprime 0 caminho e o numero maximo\n# define uma matriz de exemplo\nrows=3\nco1s=3\nmatrix = [{o]*rows for _ in range(cols)]\nmatrix =[{1,1,1]\n[1,0,1],\n[1,1,1]]\n#envocaafuncaodorobo\nrobotPath(rows,cols,matrix)\n\n\n3. Projete um algoritmo eficiente para encontrar o comprimento do caminho\nmais longo em um DAG. (Este problema ´e importante como um prot´otipo de\nmuitos outros aplicativos de programa¸c˜ao dinˆamica, pois determina o tempo\nm´ınimo necess´ario para concluir um projeto que compreende tarefas de pre-\ncedˆencia restrita.)\n\nSolu¸c˜ao:\n\nPage ii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

@@ -1,0 +1,12 @@
+{
+  "pagina": 8,
+  "texto": "Se n = 4, a4 = a0 + a1 + a2 + a3 = 1 + 1 + 2 + 4 = 8 = 23\n\nSe n = 5, a5 = a0 + a1 + a2 + a3 + a4 = 1 + 1 + 2 + 4 + 8 = 16 = 24\n...\n...\n...\n...\n...\n...\n...\n...\nPortanto, se n = i, ai = a0 + a1 + a2 + a3 + a4+ ...ai−1 = 2i−1\n\nSendo assim, conclui-se atrav´es do padr˜ao observado que para i = n:\n\nan = a0 + a1 + a2 + a3 + a4+ ...+an−1 = 2n−1\n\nLogo, a solu¸c˜ao da recorrˆencia ´e 2n−1.\n\n8. Considere o seguinte trecho de c´odigo:\n\n\n[OCR parcial do recorte p8-fig1.png; conferir símbolos na imagem]\n1: procedure PRoG1(inteiro positivo k)\n2:\nifk==lthen\n3:\nPrint(\"Oi\")return\n4:\nelse\n5:\nfor i←1 →k do\n6:\nPrint(\"Oi\")\n7:\nendfor\n8:\nProgl(k-1)\n9:\nendif\n10:endprocedure\n\n\nSeja T (n) o n´umero de vezes que a palavra OI ´e impressa quando Prog1 ´e\nchamado com parˆametro n. Calcule T (1) e determine uma rela¸c˜ao entre T (n)\ne T (n −1) para n > 1. Com base na rela¸c˜ao encontrada, utilize indu¸c˜ao para\nmostrar que T (n) ≤n2, para todo n maior ou igual a 1.\n\nSolu¸c˜ao:\n\nPara n = 1, a palavra “OI” ´e impressa apenas uma vez, portanto, T(1) = 1.\n\nPara n > 1, a palavra “OI” ´e inicialmente impressa n vezes, atrav´es do loop for. Em\nseguida, ela ´e impressa T(n-1) vezes. Portanto, T(n) = n + T(n-1).\n\nSendo assim,\n\n(\n\nT(n) =\n\n1, se n = 1\nn + T(n −1), se n > 1\n\nDando continuidade, devemos mostrar que T(n) ≤n2, para todo n maior ou igual a\n1. Por indu¸c˜ao, temos:\n\nPage viii",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p8.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p8-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

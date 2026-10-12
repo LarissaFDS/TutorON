@@ -1,0 +1,61 @@
+{
+  "questao": "Q9",
+  "cenario": "rag_manual",
+  "fontes": [
+    "d455baef2cdf-q1-1"
+  ],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo, a estratégia é dividir a pilha em prefixos menores e maiores do tamanho da maior panqueca. Invertemos o prefixo maior para trás e depois o prefixo menor para a frente. Isso garante que a maior panqueca fique na base. Para cada inversão de prefixo, precisamos mover os elementos, o que custa O(m) tempo, onde m é o tamanho do prefixo. Como a maior panqueca pode ser de tamanho até n, e precisamos fazer isso para cada prefixo de tamanho de 1 até m, a complexidade total é O(n^2). Portanto, a quantidade de inversões é limitada a 2(n-1), mas o custo total de movimentar elementos é O(n^2).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 47.427641578000475,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "b3248f6c2d1c28b3eb25119d686269589eb84675248278ddfd60dd07225ba410"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

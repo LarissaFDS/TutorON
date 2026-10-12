@@ -1,0 +1,55 @@
+{
+  "questao": "Q12",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "23950cced864-q4-4",
+    "c461856d5688-q6-5",
+    "7b4da6a8adf7-q10-10"
+  ],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 3.1840394499995455,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Não há informações sobre datas, salas ou conteúdos específicos para provas de PAA em outubro de 2026 no material fornecido. As perguntas sobre datas e salas de provas são responsabilidade da instituição ou organização que administra o PAA, e não estão incluídas nos materiais disponibilizados.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 126.75668084399877,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "8331ea8969445ae9db0a0df9d6dd6fdc4fb4dcdad24b3aec039f0ddd8dc9f95c"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

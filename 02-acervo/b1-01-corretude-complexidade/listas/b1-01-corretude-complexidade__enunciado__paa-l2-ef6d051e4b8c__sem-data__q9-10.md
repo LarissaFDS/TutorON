@@ -1,0 +1,34 @@
+# ef6d051e4b8c-q9-10
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L2.pdf | página(s): 9, 10
+
+9. Considere o seguinte algoritmo recursivo, cujo argumento n  ´e um inteiro
+   positivo.
+
+
+
+
+
+  Para um dado valor de n, quantos asteriscos ser˜ao impressos em uma chamada
+  de ASTERISCO(n)?
+
+
+     Solu¸c˜ao:
+
+    Considerando A(n) como a quantidade de asteriscos impressos dado um valor n, temos
+     que:
+
+                   (                                    0, se n = 0
+                  A(n) =
+                              2n+1 −(n + 2), se n ≥1
+
+   Como exemplo, temos:
+
+
+
+                                  Page ixPara n = 1, 22 (1+2) = 4 - 3 = 1 asterisco impresso;
+                 Para n = 2, 23 - (2+2) = 8 - 4 = 4 asteriscos impressos;
+                Para n = 3, 24 - (3+2) = 16 - 5 = 11 asteriscos impressos;
+                Para n = 4, 25 - (4+2) = 32 - 6 = 26 asteriscos impressos;
+                                                                                                                                           ...                      ...                      ...                      ...                      ...                      ...                      ...                      ...
+                      Para n = i, 2i+1 - (i+2) asteriscos impressos.

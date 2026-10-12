@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresenta alguns erros matemáticos e de formatação. A equação (1) não está corretamente definida, e a restrição (2) contém um erro na notação. Além disso, há uma redundância na restrição (2) e a notação de somatório não está clara.",
+  "decisao": "suspeita",
+  "sha256": "c718d2863d7d0daa7f4a07a25dc9b6c38f77feecc660724a14d9c79be7bc40b7"
+}

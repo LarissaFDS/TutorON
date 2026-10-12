@@ -1,232 +1,143 @@
-"""
-Integration tests for the TutorOn backend API.
-
-Each test uses the FastAPI TestClient (backed by httpx) so the full
-request/response cycle — validation, dependency injection, exception
-handlers — is exercised without starting a real server.
-
-Test scenarios covered:
-- Valid request with question only → 200 with mock answer.
-- Valid request with question + context → 200 with context reflected in answer.
-- Missing ``question`` field → 422 validation error.
-- Empty ``question`` string → 422 validation error.
-- Blank (whitespace-only) ``question`` → 422 validation error.
-- AI service raising :class:`AIServiceError` → 502 clean error response.
-- AI service raising an unexpected exception → 500 clean error response.
-"""
-
-from __future__ import annotations
+"""Rotas do site com modelos e RAG falsos: nada sai para a rede."""
+import json
+import time
 
 import pytest
 from fastapi.testclient import TestClient
 
-from backend.ai_service import AIRequest, AIResponse, AIService, AIServiceError
-from backend.main import create_app
+from backend import tarefas
+from backend.rag import Trecho
+from backend.tests.test_llm import FakeLLM
 
 
-# ---------------------------------------------------------------------------
-# Helpers / stubs
-# ---------------------------------------------------------------------------
+def montar(tmp_path, monkeypatch, roteiro, **kw):
+    from backend import main
+
+    async def recuperar(pergunta, llm, settings):
+        return [Trecho("P1", "acervo", "Prova de PAA", "T(n)=2T(n/2)+n", "prova1.pdf")]
+    monkeypatch.setattr(tarefas, "recuperar", recuperar)
+    monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
+    llm = FakeLLM(roteiro, **kw)
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path, "rate_limit_per_10min": 5})
+    return main.create_app(settings=llm.settings, llm=llm, warm_up=False), llm
 
 
-class AlwaysFailAIService(AIService):
-    """
-    Stub that always raises :class:`AIServiceError`.
-
-    Used to verify that the route layer handles downstream failures gracefully
-    and never leaks internal details to the caller.
-    """
-
-    def ask(self, request: AIRequest) -> AIResponse:
-        """Unconditionally simulate a provider failure."""
-        raise AIServiceError("Simulated provider outage")
+_sleep_original = tarefas.asyncio.sleep
 
 
-class AlwaysCrashAIService(AIService):
-    """
-    Stub that raises a generic :class:`RuntimeError`.
-
-    Used to verify that the global catch-all exception handler returns a
-    clean 500 response even for completely unexpected errors.
-    """
-
-    def ask(self, request: AIRequest) -> AIResponse:
-        """Unconditionally simulate an unexpected crash."""
-        raise RuntimeError("Unexpected internal error")
+async def _sleep_curto(segundos, *a, **kw):
+    return await _sleep_original(min(segundos, 0.01), *a, **kw)
 
 
-# ---------------------------------------------------------------------------
-# Fixtures
-# ---------------------------------------------------------------------------
+@pytest.fixture
+def cliente(tmp_path, monkeypatch):
+    app, _ = montar(tmp_path, monkeypatch, {"g1": ("ok", "resposta $\\Theta(n \\log n)$")})
+    with TestClient(app) as c:
+        c.tmp = tmp_path
+        yield c
 
 
-@pytest.fixture()
-def client() -> TestClient:
-    """
-    Return a test client wired to the default MockAIService.
-
-    Using ``create_app()`` (the factory) rather than importing the module-level
-    ``app`` instance ensures each test starts with a clean application state.
-    """
-    return TestClient(create_app(), raise_server_exceptions=False)
-
-
-@pytest.fixture()
-def failing_client() -> TestClient:
-    """Return a test client whose AI service always raises AIServiceError."""
-    return TestClient(create_app(ai_service_override=AlwaysFailAIService()), raise_server_exceptions=False)
+def esperar(c, criada, limite=10):
+    fim = time.monotonic() + limite
+    while time.monotonic() < fim:
+        t = c.get(f"/api/tarefas/{criada['id']}").json()
+        if t["status"] in ("pronta", "erro"):
+            return t
+        time.sleep(0.02)
+    raise AssertionError("tarefa não terminou")
 
 
-@pytest.fixture()
-def crashing_client() -> TestClient:
-    """Return a test client whose AI service always raises RuntimeError."""
-    return TestClient(create_app(ai_service_override=AlwaysCrashAIService()), raise_server_exceptions=False)
+def test_pagina_e_status(cliente):
+    html = cliente.get("/").text
+    assert "Fase MVP" in html and "monitoria" not in html.lower() and "UFAL" not in html
+    assert cliente.get("/design.css").status_code == 200
+    assert cliente.get("/api/status").json()["gemini"]["habilitado"] is True
 
 
-# ---------------------------------------------------------------------------
-# Happy path
-# ---------------------------------------------------------------------------
+def test_perguntar_por_tarefa_registra(cliente):
+    criada = cliente.post("/api/perguntar", json={"pergunta": "Quanto custa o merge sort?"}).json()
+    assert criada["status"] in ("fila", "gerando")  # responde na hora, sem esperar a IA
+    t = esperar(cliente, criada)
+    assert t["status"] == "pronta" and t["texto"].startswith("resposta") and t["fontes"][0]["rotulo"] == "P1"
+    linha = json.loads((cliente.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert linha["modelo"] == "g1" and linha["id"] == t["id_resposta"]
+    assert cliente.post("/api/feedback", json={"id": t["id_resposta"], "util": False, "erro_matematico": True}).json()["salvo"]
 
 
-class TestAskQuestion:
-    """Tests for the POST /api/v1/questions happy path."""
-
-    def test_valid_question_returns_200_with_mock_answer(self, client: TestClient) -> None:
-        """A well-formed request returns HTTP 200 and a clearly labelled mock answer."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": "What is a binary search tree?"},
-        )
-
-        assert response.status_code == 200
-        body = response.json()
-        assert "answer" in body
-        assert "source" in body
-        assert "metadata" in body
-        # The mock must self-identify so it is never confused with a real response.
-        assert body["source"] == "mock"
-        assert "[MOCK RESPONSE" in body["answer"]
-
-    def test_valid_question_with_context_returns_200(self, client: TestClient) -> None:
-        """A request with both question and context is accepted and processed."""
-        response = client.post(
-            "/api/v1/questions",
-            json={
-                "question": "Why does this loop run forever?",
-                "context": "while True:\n    pass",
-            },
-        )
-
-        assert response.status_code == 200
-        body = response.json()
-        assert body["source"] == "mock"
-        # The mock echoes context length — verify context was forwarded.
-        assert "context provided" in body["answer"]
-
-    def test_response_schema_contains_expected_fields(self, client: TestClient) -> None:
-        """The response always contains answer, source, and metadata fields."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": "What is recursion?"},
-        )
-
-        body = response.json()
-        assert set(body.keys()) >= {"answer", "source", "metadata"}
-        assert isinstance(body["metadata"], dict)
+def test_comparar_e_avaliar_cegos(cliente):
+    criada = cliente.post("/api/comparar", json={"pergunta": "Explique o Teorema Mestre"}).json()
+    par = esperar(cliente, criada)
+    assert {"sessao", "pergunta", "A", "B"} <= set(par)
+    assert "tutoron" not in json.dumps(par) and "generico" not in json.dumps(par)  # nada revela os lados
+    notas = {"clareza": 4, "confianca": 5, "utilidade": 4, "erro_matematico": False}
+    corpo = {"sessao": par["sessao"], "preferida": "A", "A": notas, "B": {**notas, "erro_matematico": True}}
+    assert cliente.post("/api/avaliar", json=corpo).json() == {"salvo": True}
+    # Reenvio (rede caiu depois de gravar): não pode dar erro nem duplicar.
+    assert cliente.post("/api/avaliar", json=corpo).json() == {"salvo": True}
+    linhas = (cliente.tmp / "validacao" / "avaliacoes.jsonl").read_text(encoding="utf-8").splitlines()
+    assert len(linhas) == 1
+    linha = json.loads(linhas[0])
+    assert linha["preferida_condicao"] == ("tutoron" if linha["lado_tutoron"] == "A" else "generico")
+    assert set(linha["respostas"]) == {"tutoron", "generico"}
+    assert cliente.post("/api/avaliar", json={**corpo, "sessao": "inexistente"}).status_code == 400
 
 
-# ---------------------------------------------------------------------------
-# Validation errors
-# ---------------------------------------------------------------------------
+def test_todos_fora_tenta_de_novo_e_responde(tmp_path, monkeypatch):
+    """Primeira rodada sem nenhum modelo; na segunda o local volta (ex.: Ollama reiniciou)."""
+    app, llm = montar(tmp_path, monkeypatch, {})
+    original = llm._provider
+    chamadas = {"n": 0}
+
+    def provedor(model, system, prompt):
+        if model.provider == "ollama":
+            chamadas["n"] += 1
+            if chamadas["n"] >= 2:
+                llm.roteiro[model.name] = ("ok", "resposta do local")
+        return original(model, system, prompt)
+    llm._provider = provedor
+    with TestClient(app) as c:
+        t = esperar(c, c.post("/api/perguntar", json={"pergunta": "O que é DP?"}).json())
+        assert t["status"] == "pronta" and t["texto"] == "resposta do local"
+        par = esperar(c, c.post("/api/comparar", json={"pergunta": "O que é DP?"}).json())
+        assert par["status"] == "pronta" and par["A"] and par["B"]
 
 
-class TestValidation:
-    """Tests for input validation — all should return 422."""
-
-    def test_missing_question_field_returns_422(self, client: TestClient) -> None:
-        """A payload with no 'question' key must be rejected with 422."""
-        response = client.post("/api/v1/questions", json={})
-        assert response.status_code == 422
-
-    def test_empty_question_string_returns_422(self, client: TestClient) -> None:
-        """An empty string for 'question' must be rejected with 422."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": ""},
-        )
-        assert response.status_code == 422
-
-    def test_whitespace_only_question_returns_422(self, client: TestClient) -> None:
-        """A whitespace-only 'question' must be rejected with 422."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": "   "},
-        )
-        assert response.status_code == 422
-
-    def test_null_question_returns_422(self, client: TestClient) -> None:
-        """A null 'question' must be rejected with 422."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": None},
-        )
-        assert response.status_code == 422
-
-    def test_context_is_truly_optional(self, client: TestClient) -> None:
-        """A request without 'context' must succeed — it is always optional."""
-        response = client.post(
-            "/api/v1/questions",
-            json={"question": "What is polymorphism?"},
-        )
-        assert response.status_code == 200
+def test_nenhum_modelo_nunca_deixa_tarefa_pendurada(tmp_path, monkeypatch):
+    app, _ = montar(tmp_path, monkeypatch, {})
+    with TestClient(app) as c:
+        t = esperar(c, c.post("/api/perguntar", json={"pergunta": "O que é DP?"}).json())
+        assert t["status"] == "erro" and t["mensagem"]
+        t = esperar(c, c.post("/api/comparar", json={"pergunta": "O que é DP?"}).json())
+        assert t["status"] == "erro" and t["mensagem"]
 
 
-# ---------------------------------------------------------------------------
-# Error handling
-# ---------------------------------------------------------------------------
+def test_tarefa_inexistente(cliente):
+    r = cliente.get("/api/tarefas/naoexiste")
+    assert r.status_code == 404 and "erro" in r.json()
 
 
-class TestErrorHandling:
-    """Tests for downstream error scenarios."""
-
-    def test_ai_service_error_returns_502(self, failing_client: TestClient) -> None:
-        """An AIServiceError from the provider must surface as a clean 502."""
-        response = failing_client.post(
-            "/api/v1/questions",
-            json={"question": "What is a deadlock?"},
-        )
-
-        assert response.status_code == 502
-        body = response.json()
-        assert "error" in body
-        assert body["error"]["code"] == "AI_SERVICE_ERROR"
-        # Stack traces must never reach the caller.
-        assert "Traceback" not in body["error"]["message"]
-
-    def test_unexpected_exception_returns_500(self, crashing_client: TestClient) -> None:
-        """An unexpected RuntimeError must surface as a clean 500, not a raw traceback."""
-        response = crashing_client.post(
-            "/api/v1/questions",
-            json={"question": "What is a stack overflow?"},
-        )
-
-        assert response.status_code == 500
-        body = response.json()
-        assert "error" in body
-        assert body["error"]["code"] == "INTERNAL_ERROR"
-        assert "Traceback" not in body["error"]["message"]
+def test_validacao_de_entrada(cliente):
+    assert cliente.post("/api/perguntar", json={"pergunta": "  "}).status_code == 422
+    r = cliente.post("/api/avaliar", json={"sessao": "x", "preferida": "A", "A": {"clareza": 9}, "B": {}})
+    assert r.status_code == 422 and "erro" in r.json()
 
 
-# ---------------------------------------------------------------------------
-# Health check
-# ---------------------------------------------------------------------------
+def test_limite_por_cliente_nao_conta_consultas(cliente):
+    criada = cliente.post("/api/perguntar", json={"pergunta": "pergunta 0"}, headers={"cf-connecting-ip": "1.2.3.4"}).json()
+    for _ in range(20):  # consultar o andamento não gasta o limite
+        cliente.get(f"/api/tarefas/{criada['id']}")
+    codigos = [cliente.post("/api/perguntar", json={"pergunta": f"pergunta {i}"},
+                            headers={"cf-connecting-ip": "1.2.3.4"}).status_code for i in range(1, 6)]
+    assert codigos[:4] == [200] * 4 and codigos[-1] == 429
 
 
-class TestHealthCheck:
-    """Tests for the /health liveness probe."""
+def test_rotas_locais_bloqueadas_pelo_tunel(cliente):
+    assert cliente.get("/api/resultados").status_code == 200
+    assert cliente.get("/api/resultados", headers={"cf-connecting-ip": "1.2.3.4"}).status_code == 404
+    assert cliente.get("/resultados", headers={"x-forwarded-for": "1.2.3.4"}).status_code == 404
+    assert cliente.post("/api/reiniciar-modelos", headers={"cf-connecting-ip": "1.2.3.4"}).status_code == 404
 
-    def test_health_returns_200_ok(self, client: TestClient) -> None:
-        """The health endpoint must return 200 {"status": "ok"} when the service is up."""
-        response = client.get("/health")
-        assert response.status_code == 200
-        assert response.json() == {"status": "ok"}
+
+def test_cli_compativel(cliente):
+    r = cliente.post("/api/v1/questions", json={"question": "O que é DP?"})
+    assert r.status_code == 200 and r.json()["answer"].startswith("resposta")

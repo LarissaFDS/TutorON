@@ -1,0 +1,24 @@
+{
+  "id": "3ac1cffa14d8",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.31_(2).webp",
+  "copia": "00-originais\\ingestao\\795120b6d8ec88e7041efaf1ad828ea94c09a0e52e1039b7d4f609201f770dca\\WhatsApp_Image_2025-01-12_at_13.13.31_(2).webp",
+  "sha256": "795120b6d8ec88e7041efaf1ad828ea94c09a0e52e1039b7d4f609201f770dca",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "ae início + (a — 2\nii > A\n\na = RA, inicio, To\nE SA, meto +1, fim\nifa <bthen\n\nreturn b\n\nelse\n\nreturn\n\nend if\nprocedure\n\n2 e prove sna corretude\n\nExplique o que\n\nJustifiqu\n\n{2 pout\n\nfin) funções dos int nos reais\n\nQuestao 4\nSejam Tin) e)\n\nDefina formal\n\né OU\n\n1. O que si\ngon? + 10n Ig\n\n2. É verdade que\n\n3, E ve\n\n4, Q que 7 H\n5. O que significa “T(t) = aml\nQuestão 5 {i ponto):\n\nResolva a recorrel\n\nQuestão 6 [2 pontos\nlgoritnc\n\nCaicnle a complexidade de tempo\n\nlo seguinte é",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\3ac1cffa14d8\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

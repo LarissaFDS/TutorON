@@ -1,0 +1,35 @@
+# 2df6e1818523-q3-6
+
+Fonte: materiais\Disponiveis\RAG PAA\provaoaa.pdf | página(s): 1, 2
+
+3. E yerdade que n² é O(n)?
+4.Qual a definicao formal deO(f(n))?
+Questab4[2 pontos]:
+Para cada um dos seguintes algoritinos, indique (i) uma metrica de tamanho natural para sua entradas, (i) sua
+1.cafculando a soma de n numeros;
+2.cofnputacao de n!;
+3.entontrandoomaiorelementoemumalistadennumeros;
+4. algoritmo de lapis e papel para multiplicar dois inteiros decimais de n digitos.
+Questa5[1ponto]:
+Resolva h recorrencia:
+= (u)L
+[1,
+sen=1
+[2T(n/2) + cn, se n > 1.
+Questab 6 [1 ponto]:
+Suponha que voce queira encontrar o maior e o menor elemento em um conjunto de elementos inteiros S.Para cada
+e menorelemento e indique as classes de eficiencia de tempo desses algoritmos usando a notacao mais apropriada (O,
+θou S)
+1.Urma matriz nao ordenada.
+2. Urha matriz ordenada.
+
+
+1 
+1' 
+
+_' i 11a lista encadeada. 
+
+' 
+' 
+d b 
+b' ' .

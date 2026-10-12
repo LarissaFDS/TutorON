@@ -1,0 +1,41 @@
+{
+  "questao": "Q12",
+  "cenario": "rag_manual",
+  "fontes": [],
+  "esperadas": [],
+  "excluidas_baixa": [],
+  "top_k_acertou": null,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Não há informações disponíveis no contexto acadêmico fornecido sobre a data, sala e conteúdo da próxima prova de PAA em outubro de 2026. Para obter essas informações precisas, recomendo que você:\n\n1. Verifique o calendário oficial do curso.\n2. Acesse o sistema de gestão acadêmica da instituição.\n3. Consulte o professor responsável pela disciplina.\n4. Verifique anúncios ou comunicados recentes no canal oficial do curso.\n\nSem dados específicos, não posso fornecer a data exata, a sala ou o conteúdo da prova.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 2.625,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Admite ausência no acervo",
+        "regex": "nao (?:encontr|ha|tenho|possuo)|sem inform|nao consta|indisponivel",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não inventa sala",
+        "regex": "sala\\s+[0-9]+",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

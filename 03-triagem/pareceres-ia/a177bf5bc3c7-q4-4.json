@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há um erro de símbolo na linha 2, onde a função `input()` está incompleta, faltando um parêntese. Além disso, há um erro de digitação na linha 10, onde 'D(m)' e 'D（n)' são escritos de forma incorreta, o que pode indicar problemas de legibilidade ou digitação.",
+  "decisao": "suspeita",
+  "sha256": "cc2d6c20f26a7ef8f196a34032cc56454abda3b0571307ff61978962f404f694"
+}

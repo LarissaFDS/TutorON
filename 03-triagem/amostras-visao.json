@@ -1,0 +1,20 @@
+[
+  {
+    "fonte": "01-extraido/figuras/1a81ca283132/p1-fig3.png",
+    "modelo": "qwen2.5vl:3b",
+    "status": "incerto_revisao_humana",
+    "texto": "```markdown\nint min_tri_sum(vector<vector<int>>& triang) {\n    int n = triang.size();\n    vector<int> state(n, 0);\n    vector<int> new_state(n + 1, 0);\n    state[0] = triang[0][0];\n    for (int i = 1; i < n; i++) {\n        for (int j = 0; j < triang[i].size(); j++) {\n            if (j == 0) {\n                new_state[j] = triang[i][j] + state[j];\n            } else if (j == triang[i].size() - 1) {\n                new_state[j] = triang[i][j] + state[j - 1];\n            } else {\n                new_state[j] = triang[i][j] + min(state[j - 1], state[j]);\n            }\n        }\n        state = new_state;\n    }\n    int min_path = INT_MAX;\n\n    for (int i = 0; i < n; i++) {\n        min_path = min(min_path, state[i]);\n    }\n\n    return min_path;\n}\n```"
+  },
+  {
+    "fonte": "materiais/Disponiveis/RAG PAA/correcaoprof.webp",
+    "modelo": "qwen2.5vl:3b",
+    "status": "incerto_revisao_humana",
+    "texto": "```markdown\n# Problema 3\n\n1. O que significa por $\\lim_{n \\to \\infty} \\frac{1}{2} n^2 = \\frac{1}{2} \\frac{d}{dx} [n^2] = \\frac{1}{2} \\cdot \\frac{d}{dx} n^2 = n = \\infty$?\n\n2. É verdade que $\\lim_{n \\to \\infty} \\frac{1}{2} n^2 = \\frac{1}{2} \\frac{d}{dx} [n^2] = \\frac{1}{2} \\cdot \\frac{d}{dx} n^2 = n = \\infty$?\n\n3. Pedirosa significa por $\\lim_{n \\to \\infty} \\frac{1}{2} n^2 = \\frac{1}{2} \\frac{d}{dx} [n^2] = \\frac{1}{2} \\cdot \\frac{d}{dx} n^2 = n = \\infty$?\n\n4. Obtemos que $\\frac{1}{2} n^2$ é o infinito quando $n$ tende a infinito, o que nos leva a concluir que $\\frac{1}{2} n^2 \\geq n$. Isto, portanto, $\\frac{1}{2} n^2$ não pode ser $O(n)$, para ser contraditório com a definição da relação $O$.\n\n5. Segundo a definição formal, $T(n) = \\Omega(f(n))$, sendo $T(n)$ e $f(n)$ funções de valores reais, isto é, têm somente valores reais e não pertencem aos números, tal que $-n(f(n)) = \\{T(n) \\geq c f(n) | n \\geq n_0\\}$.\n\n6. Portanto, uma função $T(n)$ pertence ao conjunto $\\Omega(f(n))$ quando $p$ qualquer valor real de $n$ menor ou igual que $n_0$, $T(n)$ é maior ou igual a $c f(n)$.\n```"
+  },
+  {
+    "fonte": "materiais/Disponiveis/RAG PAA/gabaritoprova.webp",
+    "modelo": "qwen2.5vl:3b",
+    "status": "incerto_revisao_humana",
+    "texto": "```markdown\n# Questão 2\nO algoritmo X apresenta o maior elemento em um vetor. Fazemos a prova de sua raciocínio utilizando indução forte no tamanho do vetor (n).\n\nTeorema: O algoritmo X determina corretamente o maior elemento de um vetor.\n\nCaso base: Se tivermos um vetor de tamanho n = 1, então início = fim e o algoritmo entra na linha 3, ordenando o 1º e único elemento de A.\n\nHipótese de indução: O algoritmo X determina corretamente o maior elemento de um vetor de tamanho k ≤ n.\n\nPasso analítico: Provamos que X funciona p/ um vetor de tamanho k + 1. Para um vetor de tamanho k + 1, o algoritmo divide-o em duas partes a partir do cálculo do seu índice médio, não variável mais. Sendo assim, as duas partes do vetor são unidas em duas chamadas recursivas à X. Nessa forma, X calcula o maior valor em cada um dos subvetores A[1... meio + (fim - início) / 2] e A[meio + (fim - início) / 2 + 1... n], que são, portanto, menores que k. Assim, portanto, segundo a hipótese de indução, as chamadas recursivas à X funcionam corretamente. Na linha 8, o algoritmo retornará o maior dentre os dois valores retornados em a e b.\n\nAfirmação: Está provada.\n\n# Questão 3\n3.1 Segundo a definição formal, T(n) é O(f(n)), sendo T(n) e f(n) funções dos inteiros nos reais, se existem constantes c e no, pertencentes aos reais, tal que,\n\\[ O(f(n)) = \\left\\{ T(n) \\leq c \\cdot f(n) \\mid n \\geq no \\right\\} \\]\n\nPortanto, uma função T(n) pertence ao conjunto O(f(n)) quando p/ qualquer valor real de n maior que no, T(n) é no máximo igual a c \\cdot f(n).\n\n```"
+  }
+]

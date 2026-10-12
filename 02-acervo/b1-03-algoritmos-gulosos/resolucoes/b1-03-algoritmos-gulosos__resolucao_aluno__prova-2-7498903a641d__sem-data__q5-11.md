@@ -1,0 +1,30 @@
+# 7498903a641d-q5-11
+
+Fonte: materiais\Disponiveis\RAG PAA\prova_2.pdf | página(s): 1
+
+Questão 5 [2 ponto]:
+Considere os dois algoritmos gulosos para o CAIXEIRO VIAJANTE. Mostre que ambos não são exatos, isto é, não
+garantem retornar a solução ótima. =
+
+Algoritmo 1 (Algoritmo do vizinho mais préximo)
+
+1. Inicialize todos os vértices como não visitados.
+. Selecione um vértice arbitrário, defina-o como o vértice atual u. Marque u como visitado.
+. Descubra a aresta mais curta conectando o vértice atual u e um vértice não visitado v.
+
+. Defina v como o vértice atual u. Marque v como visitado.
+
+“aca
+
+. Se todos os vértices do domínio forem visitados, então termine. Caso contrário, vá para o passo 3.
+
+Algoritmo 2 (Algoritmo da inserção mais barata)
+1. Crie um ciclo C com três vértices quaisquer.
+
+. Escolha um vértice k qualquer fora de E
+. Encontre uma aresta (i,j) € C tal que di + dk; — dij é mínimo.
+. Adicione k a C, remova a aresta (i,j) e adicione as arestas (i,k) e (k, j).
+
+oP ON
+
+. Se C contiver todos os nós, pare. Caso contrário, vá para 2.

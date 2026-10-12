@@ -1,0 +1,572 @@
+[
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "seed": 7,
+    "cache_key": "700bb3199daa12c00abc07631460ff3394c7efc50a18c8ed63804f776030c15a",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime asteriscos de forma recursiva. Para resolver a recorrência, vamos analisar o comportamento da função. \n\nSe n > 0, a função chama-se recursivamente duas vezes, uma para cima e outra para baixo. A cada chamada recursiva, imprime n asteriscos. \n\nA recorrência pode ser escrita como: T(n) = 2T(n-1) + n, onde T(n) é o tempo de execução da função para entrada n. \n\nPara resolver essa recorrência, podemos usar a técnica de recorrência de recorte. Primeiro, substituímos T(n) por T(n-1) na equação, obtendo: T(n) = 2T(n-1) + n. \n\nAqui, podemos ver que T(n) é a soma de n e duas vezes a chamada recursiva para n-1. Isso nos leva a uma solução de recorrência: T(n) = n + 2T(n-1) = n + 2(n-1) + 4T(n-2) = n + 2(n-1) + 4(n-2) + 8T(n-3) = ... = n + 2(n-1) + 4(n-2) + ... + 2^k(n-k) + 2^kT(n-k) \n\nPara n = k + 1, a solução é: T(n) = n + 2(n-1) + 4(n-2) + ... + 2^k(n-k) + 2^k. \n\nAqui, a soma é uma progressão geométrica, cuja soma é S = 2^k(n-k) + 1. Portanto, a solução é T(n) = n + S = n + 2^k(n-k) + 1. \n\nSubstituindo k por (n-1), temos T(n) = n + 2^(n-1)(n-(n-1)) + 1 = n + 2^(n-1) + 1. \n\nPortanto, a quantidade de asteriscos impressos é T(n) = n + 2^(n-1) + 1.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 63.23367970500112,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 1,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Derivação ou fórmula fechada errada.",
+      "resposta_sha256": "9927de5edf91d6d407229e2f3c1770b6f0125d7b6a7128c81f99fbfc8397df76"
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "seed": 7,
+    "cache_key": "aae2670b67fd8098b39a8f18a1e2a4d2463fad3c30813e4436bc1d6e4c0072dd",
+    "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7",
+    "fontes_sha256": {
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+      "ef6d051e4b8c-q9-9": "12fccb8df986e16e0b0d322069ff4d5d7b8a7d234aeb75cbec2bdedeb4f61568",
+      "fb361b787fc6-q7-2": "c12f8874069399b2dd7d8d77a190b547eddd9db8dc29db8bcf1b9352f2031433",
+      "320662691e44-q7-5": "9441a08a6205f875c84267a6c36c5a9d95b4317169db331fd8e7e9b70c6791cd"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "Para resolver essa questão, vamos analisar o algoritmo de forma recursiva. A função ASTERISCO(n) imprime n asteriscos e chama a função duas vezes, uma chamada para ASTERISCO(n-1) antes e uma chamada para ASTERISCO(n-1) depois do laço for. Portanto, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é dada pela recorrência:\n\nA(n) = 2A(n-1) + n\n\nO caso base é quando n = 0, onde A(0) = 0. Para resolver essa recorrência, podemos usar a fórmula A(n) = 2^(n+1) - n - 2, que foi provada anteriormente. Portanto, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é dada pela fórmula:\n\nA(n) = 2^(n+1) - n - 2\n\nIsso significa que para n = 1, imprime 1 asterisco; para n = 2, imprime 4 asteriscos; para n = 3, imprime 11 asteriscos, e assim por diante.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 119.11737184500089,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 5,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "adequada",
+      "justificativa": "Recorrência, base, fórmula e exemplos corretos nas sementes 7 e 2026.",
+      "resposta_sha256": "54865dc7f582fe2f84c1498be8fd5b891fda88d044448c743476f8f7b0cfc090"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "generico",
+    "seed": 7,
+    "cache_key": "7ee521fd8630fa3fe8a0063f95145592a8d957027a0ac81c8ed55def73a05e09",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida através da recorrência. Para a lista [5,15,-30,10,-5,40,10], a recorrência seria:\n\nT(n) = max{T(n-1) + a[n], a[n]}, onde T(0) = 0 e a[n] é o elemento da lista.\n\nPara [-5,-2,-8], a subsequência contígua de soma máxima é -2, pois é o único elemento na lista.\n\nPara a lista [5,15,-30,10,-5,40,10], a solução é encontrar a soma máxima consecutiva, que é 55 (5 + 15 + (-30) + 10 + (-5) + 40 + 10).\n\nEssa solução é eficiente em tempo linear, fazendo apenas uma passagem pela lista. A complexidade de tempo é O(n), onde n é o tamanho da lista.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 34.52519401800237,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 3,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "32caeb27e32914605ae3354bfdf5c296e6da69a38a5185e474ca45acdcccc913"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_automatica",
+    "seed": 7,
+    "cache_key": "b4ecfa98d6c36bfcf312dd74f06853045001549787d59df3969a41eddb2ed436",
+    "contexto_sha256": "b7b7228347bc4dee28fc9fee5487bf7f390874556a52f6f6522c5d515ce20e5e",
+    "fontes_sha256": {
+      "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+      "7b4da6a8adf7-q10-10": "6383758ec21cdcbf392608cace33ef4c1b214c745bad981dcd6a107c3a887fa8",
+      "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "Resolvendo a subsequência contígua de soma máxima em tempo linear, seguindo a convenção da Lista 5, temos a recorrência definida como:\n\nfim[j] = max(0, fim[j-1] + a_j)\nmelhor[j] = max(melhor[j-1], fim[j])\n\nPara [5,15,-30,10,-5,40,10]:\n- Inicializando: fim[0]=0, melhor[0]=0\n- Iterando:\n  - j=1: fim[1]=5, melhor[1]=5\n  - j=2: fim[2]=-25, melhor[2]=5\n  - j=3: fim[3]=10, melhor[3]=10\n  - j=4: fim[4]=-15, melhor[4]=10\n  - j=5: fim[5]=40, melhor[5]=40\n  - j=6: fim[6]=50, melhor[6]=50\n\nA subsequência de soma máxima é [5, 15, -30, 10, -5, 40, 10] com soma 55.\n\nPara [-5, -2, -8]:\n- Inicializando: fim[0]=-5, melhor[0]=-5\n- Iterando:\n  - j=1: fim[1]=-7, melhor[1]=-5\n  - j=2: fim[2]=-9, melhor[2]=-5\n  - j=3: fim[3]=-17, melhor[3]=-5\n\nA subsequência de soma máxima é vazia, com soma 0.\n\nEsta solução atende a Lista 5, mantendo fim e melhor em O(1) de memória, e é linear em tempo.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 173.16937027400127,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 7,
+        "timeout": 900
+      },
+      "contexto_sha256": "b7b7228347bc4dee28fc9fee5487bf7f390874556a52f6f6522c5d515ce20e5e"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 4,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "3ba0ebc2f324bf22498634ee53e9939607db009299e68461b5547e4432888faa"
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "generico",
+    "seed": 2026,
+    "cache_key": "a29eae4f88f6484ddac5ac5e56f51f15e368862eb6074413526e96892bbd536b",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A função ASTERISCO(n) imprime n asteriscos em cada chamada, mas ela imprime os asteriscos duas vezes: uma no início e outra no final. Isso significa que para cada chamada, ela imprime 2n asteriscos. A recorrência para o número de asteriscos impressos é dada pela função recursiva. Se n > 0, a função chama-se duas vezes, cada chamada imprime n asteriscos, e a função chama-se novamente com n-1. Portanto, a recorrência é 2 * (n + (n-1) + (n-2) + ... + 1). A solução para essa recorrência é 2^n. Então, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é 2^n.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.655069600004936,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": false
+        }
+      ],
+      "acertos": 0,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Derivação ou fórmula fechada errada.",
+      "resposta_sha256": "eaebe8a63eefb8582186f0f066ec43a6e609da2f47511a1db82bfd466dcb939e"
+    }
+  },
+  {
+    "questao": "Q2",
+    "cenario": "rag_automatica",
+    "seed": 2026,
+    "cache_key": "646c5f6bc711d4c8fbccd120af44e41a78a0f050d258c64543e0d1ce31ba79cb",
+    "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7",
+    "fontes_sha256": {
+      "c05": "121db11c31316000c2bc6f9d83d858617fb133db02ff5237c922ac53a8fdf1c4",
+      "ef6d051e4b8c-q9-9": "12fccb8df986e16e0b0d322069ff4d5d7b8a7d234aeb75cbec2bdedeb4f61568",
+      "fb361b787fc6-q7-2": "c12f8874069399b2dd7d8d77a190b547eddd9db8dc29db8bcf1b9352f2031433",
+      "320662691e44-q7-5": "9441a08a6205f875c84267a6c36c5a9d95b4317169db331fd8e7e9b70c6791cd"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "Para responder à pergunta, vamos analisar a função recursiva ASTERISCO(n). A cada chamada, a função imprime n asteriscos e faz duas chamadas recursivas, uma para n-1 e outra para n-1. Portanto, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é dada pela recorrência:\n\nA(n) = 2A(n-1) + n, para n ≥ 1\nA(0) = 0\n\nA solução para esta recorrência é A(n) = 2^(n+1) - n - 2. \n\nPara mostrar a recorrência, podemos observar os valores:\n\nA(1) = 2^(1+1) - 1 - 2 = 1\nA(2) = 2^(2+1) - 2 - 2 = 4\nA(3) = 2^(3+1) - 3 - 2 = 11\nA(4) = 2^(4+1) - 4 - 2 = 26\n\nPortanto, a quantidade de asteriscos impressos em uma chamada de ASTERISCO(n) é dada pela fórmula A(n) = 2^(n+1) - n - 2.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 46.346984300995246,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "c5538d84ed22e183bba5b517d092d8c075b865cf700a68ae2ff2204cd68860b7"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Escreve a recorrência A(n) = 2A(n−1) + n",
+          "regex": "2[a-z]\\(n-1\\)\\+n|[a-z]\\(n\\)=[a-z]\\(n-1\\)\\+n\\+[a-z]\\(n-1\\)",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso base A(0) = 0",
+          "regex": "[a-z]\\(0\\)=0",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Fórmula fechada 2^(n+1) − n − 2",
+          "regex": "2\\^\\(?n\\+1\\)?-\\(?n\\+2\\)?|2\\^\\(?n\\+1\\)?-n-2",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Mostra o desenvolvimento/iteração da recorrência",
+          "regex": "desenvolv|iterando|iteracao|expandindo|substituic|arvore de recurs",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Confere com valores (1, 4, 11, 26)",
+          "regex": "26|11 asteriscos|=11",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Não confunde com complexidade de tempo apenas (dá o número exato)",
+          "regex": "exat|quantidade exata|numero exato|2\\^\\(?n\\+1",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 5,
+      "total": 6,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "adequada",
+      "justificativa": "Recorrência, base, fórmula e exemplos corretos nas sementes 7 e 2026.",
+      "resposta_sha256": "5361cd2e077ae69acbf22cd784443cc58f11e31b2d0e22d53eb5e3df6395052a"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "generico",
+    "seed": 2026,
+    "cache_key": "32ee08483040b424c0614a6053bada870eab82d76ec6c6ac7fba1241ff94c698",
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fontes_sha256": {},
+    "status": "ok",
+    "resposta": {
+      "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida usando a técnica de Kadane's Algorithm. Para a lista [5,15,-30,10,-5,40,10], a recorrência é a seguinte:\n\n1. Inicializar as variáveis: max_current = max_global = lista[0] = 5.\n2. Para cada elemento na lista, atualizar max_current = max(lista[i], max_current + lista[i]).\n3. Atualizar max_global = max(max_global, max_current).\n\nPara a lista [5,15,-30,10,-5,40,10], a solução é 60, que é a soma dos elementos [10, 40, 10].\n\nPara a lista [-5,-2,-8], a solução é -5, que é o único elemento na lista.\n\nEssa técnica garante que a solução seja encontrada em tempo linear, ou seja, em O(n), onde n é o comprimento da lista.",
+      "provedor": "ollama",
+      "modelo": "qwen2.5:3b",
+      "segundos": 30.054947625998466,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 1,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "19a0682df1fa73b7e964cf5bbb65e426fe7732f0bb124dcbc2f2d0af27df447e"
+    }
+  },
+  {
+    "questao": "Q6",
+    "cenario": "rag_automatica",
+    "seed": 2026,
+    "cache_key": "dc0a9244e2b64653769fc4300440249a91d3077298cb09aeeac38a05a16b6964",
+    "contexto_sha256": "b7b7228347bc4dee28fc9fee5487bf7f390874556a52f6f6522c5d515ce20e5e",
+    "fontes_sha256": {
+      "1a81ca283132-q4-4": "41e79406f961c5a27fc3c74718b662784779428146e6426d27b13d1a07b2e5e8",
+      "7b4da6a8adf7-q10-10": "6383758ec21cdcbf392608cace33ef4c1b214c745bad981dcd6a107c3a887fa8",
+      "1a81ca283132-q1-1": "0477137e6c04145920166c367bde4154306c285a70b51314e3faf170ef2193f4"
+    },
+    "status": "ok",
+    "resposta": {
+      "texto": "Resolvendo a subsequência contígua de soma máxima em tempo linear seguindo a Lista 5:\n\nRecorrência: \n- Fim[j] = max(0, Fim[j-1] + A_j)\n- Melhor[j] = max(Melhor[j-1], Fim[j])\n\nPara [5,15,-30,10,-5,40,10]:\n- Fim: [5,20,10,-15,5,45,15]\n- Melhor: [5,20,10,10,5,45,15]\n- Resultado: [10,-5,40,10] com soma 55\n\nPara [-5,-2,-8]:\n- Fim: [-5,-5,-5,-5]\n- Melhor: [-5,-5,-5,-5]\n- Resultado: Subsequência vazia\n\nEsta solução mantém os resultados em O(1) de memória e tempo, como solicitado.",
+      "provedor": "ollama",
+      "modelo": "tutoron-paa",
+      "segundos": 38.27420582600462,
+      "fallback": null,
+      "repetida_por_truncamento": false,
+      "limite_saida_tokens": 1800,
+      "configuracao": {
+        "base_model": "qwen2.5:3b",
+        "tutor_model": "tutoron-paa",
+        "num_ctx": 4096,
+        "seed": 2026,
+        "timeout": 900
+      },
+      "contexto_sha256": "b7b7228347bc4dee28fc9fee5487bf7f390874556a52f6f6522c5d515ce20e5e"
+    },
+    "avaliacao": {
+      "checks": [
+        {
+          "rotulo": "Permite subsequência vazia",
+          "regex": "vazi",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Exemplo positivo: 55",
+          "regex": "55",
+          "tipo": "deve",
+          "ok": true
+        },
+        {
+          "rotulo": "Caso negativo retorna zero",
+          "regex": "zero|soma\\s*0|=\\s*0",
+          "tipo": "deve",
+          "ok": false
+        },
+        {
+          "rotulo": "Tempo linear",
+          "regex": "o\\(n\\)|linear",
+          "tipo": "deve",
+          "ok": true
+        }
+      ],
+      "acertos": 3,
+      "total": 4,
+      "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+    },
+    "revisao_agente": {
+      "revisor": "Codex (agente)",
+      "parecer": "erro_material",
+      "justificativa": "Traces/resultados violam recorrência e convenção vazia; acertar 55/0 não corrige o desenvolvimento.",
+      "resposta_sha256": "898783c60e7581dd7711b4bdbbcee6581f71cbc6ffb5886c62272cf57e642fa9"
+    }
+  }
+]

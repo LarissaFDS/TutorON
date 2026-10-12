@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A resolução apresentada é clara e coerente, sem erros matemáticos ou ilegibilidades. A relação entre T(n) e T(n-1) foi corretamente estabelecida e a indução foi aplicada de forma lógica.",
+  "decisao": "sem_erro_detectado",
+  "sha256": "02480a6480d8ec06b65b557b871907bc93880d601aca55ace78fa0f08ffaf57e"
+}

@@ -1,0 +1,78 @@
+{
+  "verificacoes": [
+    {
+      "familia": "asterisco",
+      "casos": 13,
+      "ok": true
+    },
+    {
+      "familia": "panquecas",
+      "casos": 5913,
+      "ok": true
+    },
+    {
+      "familia": "soma_maxima_vazia",
+      "casos": 3280,
+      "ok": true
+    },
+    {
+      "familia": "quadrado_magico",
+      "casos": 362880,
+      "solucoes": 8,
+      "ok": true
+    },
+    {
+      "familia": "triangulo",
+      "casos": 250,
+      "ok": true
+    },
+    {
+      "familia": "subset_sum",
+      "casos": 250,
+      "ok": true
+    },
+    {
+      "familia": "numero_faltante",
+      "casos": 20100,
+      "ok": true
+    },
+    {
+      "familia": "contraexemplo_caminho",
+      "casos": 1,
+      "ok": true
+    },
+    {
+      "familia": "torneio",
+      "casos": 1099,
+      "ok": true
+    },
+    {
+      "familia": "selecao_duas_listas",
+      "casos": 250,
+      "ok": true
+    },
+    {
+      "familia": "hanoi_quatro_pinos_estrategia",
+      "casos": 11,
+      "ok": true
+    },
+    {
+      "familia": "oito_damas",
+      "casos": 40320,
+      "solucoes": 92,
+      "ok": true
+    },
+    {
+      "familia": "clique_modelo_inteiro",
+      "casos": 33866,
+      "ok": true
+    },
+    {
+      "familia": "racoes_vertices_lucro",
+      "casos": 5,
+      "ok": true
+    }
+  ],
+  "total_casos": 468238,
+  "limite": "Casos finitos verificam propriedades das versões derivadas; não certificam todas as provas nem respostas de IA."
+}

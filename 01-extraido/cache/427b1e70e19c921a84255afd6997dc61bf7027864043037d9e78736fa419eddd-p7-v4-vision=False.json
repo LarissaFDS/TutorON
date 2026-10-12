@@ -1,0 +1,10 @@
+{
+  "pagina": 7,
+  "texto": "Deseja-se, portanto, maximizar o valor dos itens recolhidos na mochila, de modo\nque o peso de cada item e disponibilidade dos mesmos esteja sujeita `a restri¸c˜ao da\ncapacidade da mochila.\n\n10. Modele o problema da CLIQUE M´AXIMA utilizando programa¸c˜ao linear\ninteira.\n\nSolu¸c˜ao: Como os problemas da CLIQUE M´AXIMA e CONJUNTO INDEPEN-\nDENTE M´AXIMO s˜ao complementares, podemos definir um problema em termos\ndo outro. Neste sentido, seja G=(V,E) um grafo simples, onde V = v1, v2, ..., vn.\nSeja ∆uma clique no grafo G e U o conjunto de v´ertices de ∆. Al´em disso, dada a\nexistˆencia da vari´avel bin´aria xi, onde i ∈{1, 2, . . . , n} tal que xi ∈{0, 1}\n\n(\n\nxi =\n\n0, se vi /∈U\n1, se vi ∈U\n\nDefinimos tamb´em a nota¸c˜ao NVj, que denota o conjunto dos v´ertices n˜ao-vizinhos\nao v´ertice j em G. De modo que vj /∈NVj, assim a cardinalidade de NVj pode ser\ndefinida por hj da seguinte maneira:\n\n(\n\nhj =\n\n|NVj|, se NVj̸ = ∅\n1, se NVj = 0\n\nDesse modo, o programa linear ´e dado pelas seguintes equa¸c˜oes e restri¸c˜oes:\n\ni=n\nX\n\nm´aximizar :\n\nxi\n\ni=1\n\nX\n\nxi ≤1, para cada 1 ≤j ≤n\n\nsujeita `a :\nhjxj +\n\ni ∈NVj\n\nLogo, a solu¸c˜ao do programa linear resolve o problema da clique m´axima.\n\nPage vii",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p7.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

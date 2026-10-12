@@ -1,0 +1,11 @@
+{
+  "pagina": 4,
+  "texto": "4. Uma subsequˆencia cont´ıgua de uma lista S  ´e uma subsequˆencia feita de\n  elementos consecutivos de S. Por exemplo, se S ´e\n\n                                       5, 15, −30, 10, −5, 40, 10,\n\n    ent˜ao, 15, -30, 10 ´e uma subsequˆencia cont´ıgua, mas 5, 15, 40 n˜ao ´e. Forne¸ca\n  um algoritmo de tempo linear para a seguinte tarefa:\n\n  Entrada: Uma lista de n´umeros a1, a2, ..., an .\n\n   Sa´ıda: A subsequˆencia cont´ıgua de soma m´axima (a subsequˆencia de tamanho\n  zero tem soma zero).\n\n  Para o exemplo anterior, a resposta seria 10, -5, 40, 10, com uma soma de 55.\n   (Dica: Para cada j ∈1, 2, ..., n considere subsequˆencias cont´ıguas terminando\n  exatamente na posi¸c˜ao j .\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n5. Dadas duas strings x = x1x2xney = y1y2ym, desejamos encontrar o comprimento\n  da maior substring comum delas, isto ´e, o maior k para o qual existem ´ındices\n    i e j com xi xi+1  xi+k1 = yj yj+1  yj+k1. Mostre como fazer isso em tempo O(mn)\n\n\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                  Page iv\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p4.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p4-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

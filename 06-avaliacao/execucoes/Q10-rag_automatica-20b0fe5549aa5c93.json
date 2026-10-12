@@ -1,0 +1,51 @@
+{
+  "questao": "Q10",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "7b4da6a8adf7-q4-4",
+    "c05",
+    "c02",
+    "fb361b787fc6-q6-1"
+  ],
+  "esperadas": [
+    "c04",
+    "c05"
+  ],
+  "excluidas_baixa": [
+    "c04"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0.09400000000096043,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Claro, vamos analisar o problema passo a passo para entender por que a conta não é simplesmente `n` vezes.\n\n### Análise do Algoritmo `ASTERISCO(n)`\n\nO algoritmo `ASTERISCO(n)` é definido da seguinte forma:\n\n```plaintext\nprocedure ASTERISCO(n)\n  if n > 0 then\n    ASTERISCO(n-1)\n    for i from 1 to n do\n      imprima *\n    end for\n    ASTERISCO(n-1)\n  endif\nend procedure\n```\n\n### Passo a Passo para `n = 3`\n\nVamos analisar o comportamento do algoritmo para `n = 3`:\n\n1. **Chamada inicial: `ASTERISCO(3)`**\n   - Chama `ASTERISCO(2)`\n   - Imprime 3 asteriscos\n   - Chama `ASTERISCO(2)`\n\n2. **Chamada `ASTERISCO(2)`**\n   - Chama `ASTERISCO(1)`\n   - Imprime 2 asteriscos\n   - Chama `ASTERISCO(1)`\n\n3. **Chamada `ASTERISCO(1)`**\n   - Chama `ASTERISCO(0)`\n   - Imprime 1 asterisco\n   - Chama `ASTERISCO(0)`\n\n4. **Chamada `ASTERISCO(0)`**\n   - Não faz nada (termina)\n\n### Contagem de Asteriscos\n\n- **Chamada `ASTERISCO(3)`**:\n  - Chama `ASTERISCO(2)` (2 chamadas)\n  - Imprime 3 asteriscos\n  - Chama `ASTERISCO(2)` (2 chamadas)\n\n- **Chamada `ASTERISCO(2)`**:\n  - Chama `ASTERISCO(1)` (2 chamadas)\n  - Imprime 2 asteriscos\n  - Chama `ASTERISCO(1)` (2 chamadas)\n\n- **Chamada `ASTERISCO(1)`**:\n  - Chama `ASTERISCO(0)` (2 chamadas)\n  - Imprime 1 asterisco\n  - Chama `ASTERISCO(0)` (2 chamadas)\n\n### Contagem Total\n\n- **Chamadas `ASTERISCO(2)` e `ASTERISCO(1)`**:\n  - `ASTERISCO(2)` faz 2 chamadas e imprime 2 asteriscos\n  - `ASTERISCO(1)` faz 2 chamadas e imprime 1 asterisco\n\n- **Chamadas `ASTERISCO(1)` e `ASTERISCO(0)`**:\n  - `ASTERISCO(1)` faz 2 chamadas e imprime 1 asterisco\n  - `ASTERISCO(0)` faz 2 chamadas e não imprime nada\n\n### Contagem Final\n\n- **Chamada `ASTERISCO(3)`**:\n  - 2 chamadas de `ASTERISCO(2)`\n  - 3 asteriscos\n  - 2 chamadas de `ASTERISCO(2)`\n  - 2 chamadas de `ASTERISCO(1)`\n  - 2 asteriscos\n  - 2 chamadas de `ASTERISCO(1)`\n  - 2 chamadas de `ASTERISCO(0)`\n  - 2 chamadas de `ASTERISCO(0)`\n\n### Contagem Total de Asteriscos\n\n- **Imprime 3 asteriscos**\n- **Imprime 2 asteriscos**\n- **Imprime 1 asterisco**\n\nTotal: `3 + 2 + 1 = 6` asteriscos\n\n### Recorrência\n\nA recorrência para o número de asteriscos impressos pode ser expressa como:\n\n\\[ A(n) = 2A(n-1) + n \\]\n\n### Verificação para `n = 3`\n\n- `A(3) = 2A(2) + 3`\n- `A(2) = 2A(1) + 2`\n- `A(1) = 2A(0) + 1`\n\n- `A(0) = 0`\n\n- `A(1) = 2 \\cdot 0 + 1 = 1`\n- `A(2) = 2 \\cdot 1 + 2 = 4`\n- `A(3) = 2 \\cdot 4 + 3 = 11`\n\nPortanto, para `n = 3`, o número de asteriscos impressos é `11`, não `3` vezes `3`.\n\n### Resposta Final\n\nO número de asteriscos impressos em uma chamada de `ASTERISCO(n)` não é simplesmente `n` vezes, pois há chamadas recursivas que também imprimem asteriscos. A conta total é dada pela recorrência `A(n) = 2A(n-1) + n`, e para `n = 3`, o número de asteriscos impressos é `11`.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 22.35900000000038,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Recorrência com duas chamadas",
+        "regex": "2\\s*\\*?\\s*[at]\\s*\\(n\\s*[-−]\\s*1\\)",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Onze asteriscos",
+        "regex": "11|onze",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 2,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

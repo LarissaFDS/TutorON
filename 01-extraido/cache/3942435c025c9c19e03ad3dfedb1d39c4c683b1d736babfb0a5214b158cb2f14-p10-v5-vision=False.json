@@ -1,0 +1,13 @@
+{
+  "pagina": 10,
+  "texto": "[OCR parcial do recorte p10-fig1.png; conferir símbolos na imagem]\ndef print solution kt(board\ni in range(s):\nJ in range(s):\n\nprint (board{iJ[jJ, end\"\nprint()\n\n):\no)\ndef is valid move(board, x, y):\n\nboard(x jy]\n\ndef solve kt bt(boara\n\n» CUM x, curry\npos 84:\n\n4 Next_x, next y, pos):\n\nTrue\n\nranga(s):\n\nX= cure x + next x[5]\n\n¥ = curry next y[i)\n\n(is valid move(board, x y)):\nbozrd[x][y] = pos\n\n(solve kt bt(board, X, Y, next x, next y, poss1)):\n\nrue\nboard{x} {fy} 1\n\ndef knights tour bt():\nboard = [7.3\n\ni range(8)}\nboard[@}(a} - q 2\n\nrange(a)J\n\nnext x\nnext y\n\n(2,1,\nU,2,2,1,\n\npos = 1\n\nsolve kt bt(board, 8,8, next x, next y, pos):\nPránt solution kt(boand)\n\nPrint(\"Tere's no solution for this problem\")\n\nknights tour bt()\n\n\n\n[OCR parcial do recorte p10-fig2.png; conferir símbolos na imagem]\nConsiderando a «\n\n8 37 58 35 42 47 56 5)\n59 34 1 48 57 59 43 ag\n38 32 36 41 2 45 52 55\n33 60 39 26 49 54 3 44\n38 9 32 61 40 25 29 53\n17 62 27 16 23 20 13 4\n8 29 18 15 6 12 24 7\n63 16 7 28 19 14 5 49\n\ndo primeiro movimento,\n\na solução se di a seguir\n\n\nO tempo em segundos decorrido para encontrar a solu¸c˜ao foi: 41.19298219680786s.\nImportante observar que o tempo decorrido varia de acordo com o caminho que se\npercorre, caso invertˆessemos a ordem entre next x e next y ter´ıamos encontrado uma\n\nPage x",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p10.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p10-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p10-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

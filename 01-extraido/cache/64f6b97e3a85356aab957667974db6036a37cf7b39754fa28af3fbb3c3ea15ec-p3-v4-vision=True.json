@@ -1,0 +1,18 @@
+{
+  "pagina": 3,
+  "texto": "[OCR parcial do recorte p3-fig1.png; conferir símbolos na imagem]\nSoautPara melhor\n[incerto] peahend\n[incerto] nosZplimeilosattoys\n10\n[incerto] tonhaSilomevge\n2utimoscmtinveetegue\n[incerto] tooososa1noys22\n[incerto] Ganreys\n[incerto] As...A\n[incerto] Com\n[incerto] mevg（CAs，Ae)cmevge(AsAe)\n[incerto] mange(AsAn)\n[incerto] paSso5=\nn.K\n[incerto] maicSiciente\n[incerto] alor/orsobtleossepate@mSngoscotesgondentes\n[incerto] （800\n[incerto] sulosd\n[incerto] pimenementeositecon\n[incerto] pegonds\n[incerto] mdiovvaloypoipeso.ate\n[incerto] quenaaameiscspaqonmochile\n[incerto] dissm（istoserebasicmenteordemeinOngn)\n[incerto] Prseudo-ceciygo\n[incerto] 0个",
+  "metodo": "rapidocr",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p3.png",
+  "figuras": [
+    "01-extraido\\figuras\\c616f5b14d1a\\p3-fig1.png"
+  ],
+  "visao_candidata": [
+    {
+      "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p3-fig1.png",
+      "status": "ilegivel",
+      "erro": "HTTPError"
+    }
+  ],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

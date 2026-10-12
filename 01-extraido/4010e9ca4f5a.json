@@ -1,0 +1,24 @@
+{
+  "id": "4010e9ca4f5a",
+  "arquivo": "materiais\\Disponiveis\\RAG PAA\\WhatsApp_Image_2025-01-12_at_13.13.32_(9).webp",
+  "copia": "00-originais\\ingestao\\dd089b5da661fa2bde06539ed6fc5366fdedce112bac7ba9769fb5bb85409724\\WhatsApp_Image_2025-01-12_at_13.13.32_(9).webp",
+  "sha256": "dd089b5da661fa2bde06539ed6fc5366fdedce112bac7ba9769fb5bb85409724",
+  "tipo": ".webp",
+  "paginas": 1,
+  "texto_extraivel": "n",
+  "assunto_provavel": "assunto_incerto",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": 1,
+      "texto": "+ rogerto e Anause Ge aigur:\n\n4º Prova\nProf. Rian Gabriel Pinheiro\n\n21 de março de 2024\n\nQuestão 1 [1,5 ponto):\nDefina as classes P, AP e N'P-completo.\n\nQuestão 2 [1,5 ponto):\nResponda cada um dos itens abaixo.\nestá em P?\n\n* Defina o que é uma transformação polinomial\ne Se um problema II pode ser polinomialmente reduzido a um problema Il’ e I’ está em P então Il\n\n® Se um problema II pode ser polinomialmente reduzido a um problema II’ e Il’ é NP-completo então Tl é NP-\n\ncompleto?\n\nQuestão 3 [2 pontos]:\n\nUma cobertura de ciclos de um digrafo D = (V, E) é um conjunto C de ciclos elementares, tal que cada vértice\npertence a exatamente um ciclo de C. Prove que o seguinte problema é N’P-completo:\n\nCOBERTURA DE CICLOS.\nEntada: um digrafo D = (V, E) e um número k € Z,.\n\nQuestão: D possui uma cobertura de ciclos formada por k ciclos ou menos?\n: Os vértices de G podem ser\n\nQuestão 4 [2 pontos]:\n\nCOBERTURA DE CLIQUE. Entrada: um grafo G = (V, E) e um inteiro K € |V|. Questão:\nparticionados em k < K conjuntos disjuntos Vj, V>,..., Vk, tais que, para todo 1 <i <k, o subgrafo induzido por Vi\né uma clique? Prove que o problema é N P-completo. Dica: use o problema de COLORAÇÃO DE GRAFOS.\n\nQuestão 5 [2 pontos):\nDescreva um algoritmo Backtracking para o problema da CICLO HAMILTONIANO.",
+      "metodo": "tesseract-por",
+      "qualidade": "parcial",
+      "imagem": "01-extraido\\figuras\\4010e9ca4f5a\\p1.png",
+      "figuras": [],
+      "visao_candidata": []
+    }
+  ]
+}

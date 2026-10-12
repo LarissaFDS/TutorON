@@ -1,0 +1,82 @@
+# f38bb8142136-q4-4
+
+Fonte: materiais\Disponiveis\RAG PAA\PAA_L7.pdf | página(s): 4, 5, 6
+
+4. Encontre 5 problemas NP-completos n˜ao estudados na disciplina (aula e lista).
+  Para cada um deles, descreva-o formalmente (entrada e quest˜ao) e apresente
+  uma ilustra¸c˜ao de uma instˆancia e uma solu¸c˜ao.
+
+
+     Solu¸c˜ao:
+
+       • Problema da Divis˜ao de Conjuntos
+          Entrada: Uma lista de conjuntos C de subconjuntos de S.
+            Sa´ıda: Existe uma parti¸c˜ao de S em dois subconjuntos S1 e S2 tais que nenhum
+         subconjunto da lista C estejam inteiramente contidos em S1 e S2 ?.
+
+             e.g.:
+          Entrada: S = {1, 2, 3}, C1 = {1, 2}, C2 = {2, 3}
+            Sa´ıda: SIM , S1 = {1, 3}, S2 = {2}
+
+       • D´ıgrafo M´ınimo Equivalente
+          Entrada: Um grafo direcionado G = (V,A) e um inteiro positivo K. Sa´ıda:
+          Existe um conjunto A′ ⊆A cujo |A′| ≤K tal que ∀u, v ∈V , G’=(V,A’)
+          cont´em um caminho de u para v se somente se G possui?
+
+             e.g.:
+          Entrada: G=({a,b,c}, {(a,b), (b,c), (a,c)}), K=2
+            Sa´ıda: SIM, G=({a,b,c},{(a,b), (b,c)})
+
+       • Problema do Grafo 3-Color´ıvel
+          Entrada: Um grafo G=(V,E)
+            Sa´ıda: O grafo G ´e 3-color´ıvel, isto ´e, existe uma fun¸c˜ao f : V →1, 2, 3 tal que
+            f(u)̸ = f(v) sempre que u, v ∈E?
+
+             e.g.:
+          Entrada:
+
+
+
+
+
+                                  Page ivSa´ıda: SIM
+   Solu¸c˜ao:
+
+
+
+
+
+• Problema da ´Arvore de Steiner em Grafos
+  Entrada: Um grafo G=(V,E), um subconjunto R ⊆V , um inteiro positivo
+ K ≤|V | −1
+   Sa´ıda: Existe uma sub´arvore de G que inclui todos os v´ertices de R e cont´em
+   n˜ao mais que K arestas?
+
+   e.g.:
+  Entrada: Considere o grafo G = (V,E)
+
+
+
+
+
+  Al´em disso R = 1,2,3,4, K=3.
+   Sa´ıda: SIM, solu¸c˜ao:
+
+
+
+                            Page v• Problema do Caminho com Pares Proibidos
+          Entrada: Um grafo direcionado G=(V,A), v´ertices s, t ∈V , uma lista de pares
+      C = {(a1, b1), (a2, b2), ..., (an, bn)} de v´ertices
+            Sa´ıda: Existe um caminho direcionado de s para t em G tal que contenha no
+         m´aximo um dos v´ertices para cada par de C.
+
+             e.g.:
+          Entrada: Um grafo direcionado G=(V,A)
+
+
+
+
+
+        Os v´ertices s=1,t=4, a lista de pares C = {(1,2), (2,3),(3,5),(1,4)}
+
+            Sa´ıda: SIM, Solu¸c˜ao: (1,2), (2,3),(3,5),(5,2),(1,4)

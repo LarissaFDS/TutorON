@@ -1,0 +1,78 @@
+{
+  "questao": "Q4",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c10-q1-1",
+    "c10-q2-2",
+    "f38bb8142136-q6-6",
+    "f38bb8142136-q8-8"
+  ],
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [
+    "c09"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0.04700000000048021,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "As classes P, NP e NP-completo são conceitos fundamentais na teoria da complexidade de computação. Aqui está a definição de cada uma delas:\n\n1. **Classe P**:\n   - **Definição**: A classe P contém todos os problemas que podem ser resolvidos pelo algoritmo de computação em tempo polinomial. Em outras palavras, para um problema em P, existe um algoritmo que pode resolver qualquer instância do problema em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Formalização**: Seja \\( L \\) um problema de decisão. \\( L \\in P \\) se e somente se existe um algoritmo determinístico \\( A \\) que, para qualquer entrada \\( x \\), decide \\( x \\in L \\) ou \\( x \\notin L \\) em tempo polinomial, ou seja, \\( A \\) resolve \\( x \\) em \\( O(n^k) \\) para algum inteiro \\( k \\), onde \\( n \\) é o tamanho da entrada \\( x \\).\n\n2. **Classe NP**:\n   - **Definição**: A classe NP contém todos os problemas de decisão para os quais uma solução pode ser verificada em tempo polinomial. Em outras palavras, se uma solução para um problema em NP é dada, pode-se verificar a validade dessa solução em um tempo que é polinomial em relação ao tamanho da entrada.\n   - **Formalização**: Seja \\( L \\) um problema de decisão. \\( L \\in NP \\) se e somente se existe um algoritmo verificador \\( V \\) que, para qualquer entrada \\( x \\) e qualquer certificado \\( y \\) (que é uma possível solução), \\( V \\) pode verificar em tempo polinomial se \\( x \\in L \\) e \\( y \\) é uma solução válida para \\( x \\).\n\n3. **Classe NP-completo**:\n   - **Definição**: A classe NP-completo contém os problemas mais difíceis dentro da classe NP. Um problema \\( L \\) é NP-completo se e somente se \\( L \\in NP \\) e todo problema em NP pode ser reduzido a \\( L \\) em tempo polinomial. Isso significa que se um problema NP-completo pode ser resolvido em tempo polinomial, então todos os problemas em NP podem ser resolvidos em tempo polinomial.\n   - **Formalização**: Seja \\( L \\) um problema de decisão. \\( L \\) é NP-completo se e somente se \\( L \\in NP \\) e para todo \\( M \\in NP \\), existe uma redução polinomial \\( f \\) tal que \\( x \\in M \\) se e somente se \\( f(x) \\in L \\).\n\nEssas definições são fundamentais para entender a hierarquia de complexidade de problemas computacionais e a importância do problema P vs NP.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 14.5,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": false
+      }
+    ],
+    "acertos": 4,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

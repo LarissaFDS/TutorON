@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "' \n\n_' i 11a lista encadeada. \n\n' \n' \nd b \nb' ' . \n4. U111a arvore e usca mana. \n\n1 \n! \n_ Questãb 7 [1 ponto): \n\nCalcule batamente quantas operações o algoritmo faz. \n\n1: procédure GE(matriz Anxn) \n2: \nro} i +- 1 -+ n do \n3: \n1 for j +- i + 1 -+ n - 1 do \n4: \nÍ \nOperação \n5: \n/ end for \n6: \nerid for \n7: end ~rocedure \n! \nl \nQuestã~ 8 [1 ponto): \nConsid~ o seguinte algoritmo recursivo, cujo argumento n é um inteiro positivo. \n\nf \n\nl: proc dure ASTERISCO(n} \n2: \nlf \n> O then \n3: \nfor i +- 1 -+ n do \n4: \nimprima \"*\" \n5: \nend for \n6: \nASTERISCO(ln/2J) \n7: \nend lf \n8: end rlrocedure \n\ni \nPa~al \ndado valor de n, quantos asteriscos serão impressos em uma chamada de ASTERISco(n)? Mostra a \nrecorrenra. \n\nCL+® \n\nL1l..:)<ltlp \n\n1 \n' \nJ . .}J~ \n.:{ \n..1-\nl ! e. \\ 1 < l1-q 1 , ,_ \n..:: \n;. 1 \na \nf>\",;I>-~ \nu. \n5: }J .. r_~ ,; \ntL L'? . \n\nÁo .w..-\nI v~ \n'\\-\" \nO \ne)&, \n,SI.._ \n1 \n4-~ \nC>. \n\n0./4 \n\nL~ \nL::i \n\nr . \nt \n_ \n· -\nr A-. \nf'9\" \ni \nc.e- r , li--, \n~-\n~ l \n,..R---. l \n\nLJ \n\nL \n= \nd..,,,_ L 1 \nL \n\n4 \n-\nr \n, \n\n.a,,;1,.:j \n·½, \n,,._ \nah L.1 - LJ. \ni \n\n. \n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\nmalistaencadeada.\n4.Umaarvoredebuscabinaria.\nQuestab 7 [1 ponto]:\nCalculeexatamente quantasoperacoes oalgoritmofaz.\n1:procedure GE（matriz Anxn)\n2:\nfori←1→ndo\n3:\nforj←i+1→n-1do\n4:\nOperacao\n5:\nendfor\n6:\nendfor\n7:endprocedure\nQuestap 8[1 ponto]:\nConsideteoseguintealgoritmorecursivo,cujoargumentonéuminteiropositivo.\n1:procqdure AsTERIsco（n)\n2:\nifn>0then\n3:\nfori←1→ndo\n4:\nimprimau*n\n5:\nendfor\n6:\nASTERISCO（[n/2])\n7:\nendif\n8:endprocedure\nParalum dado valor de n,quantos asteriscos serao impressos em uma chamada de AsTERisco(n)? Mostra a\nrecorrencia.\n[incerto] Quef\n[incerto] eledeLs.\n[incerto] 3.Noego\n[incerto] L]<L[j]MPP\n[incerto] LeteleL?.\n[incerto] A，Voamdip\n[incerto] p\n=L.a\noj>=L2.ta\n[incerto] Com\n[incerto] imo，fen\n[incerto] lgre\n[incerto] ↓LLp。.Ac\n[incerto] nmp\n[incerto] （？‘\n[incerto] csle.Dema Ferna\n[incerto] ef\ng\n[incerto] eCmt.oonraopdLs-L2cnomnt.",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\b582b17177a0\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\b582b17177a0\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

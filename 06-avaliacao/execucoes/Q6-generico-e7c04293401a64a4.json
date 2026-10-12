@@ -1,0 +1,65 @@
+{
+  "questao": "Q6",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "A solução para encontrar a subsequência contígua de soma máxima em tempo linear pode ser resumida usando a fórmula básica da dinâmica de recorrência. Para a sequência [5,15,-30,10,-5,40,10], a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100. Para [-5,-2,-8], a subsequência de soma máxima é [-5] com soma total de -5.\n\nA recorrência básica para encontrar a soma máxima subsequencial é:\n\nT(n) = max(T(n-1) + a[n], a[n])\n\nOnde T(n) é a soma máxima subsequencial até o índice n, e a[n] é o elemento na posição n. \n\nPara a sequência [5,15,-30,10,-5,40,10], a solução é:\n\nT(0) = 5\nT(1) = 5 + 15 = 20\nT(2) = 20 - 30 = -10\nT(3) = -10 + 10 = 0\nT(4) = 0 - 5 = -5\nT(5) = -5 + 40 = 35\nT(6) = 35 + 10 = 45\n\nPortanto, a subsequência de soma máxima é [5,15,10,40,10] com soma total de 100.\n\nPara a sequência [-5,-2,-8], a solução é:\n\nT(0) = -5\nT(1) = -5 - 2 = -7\nT(2) = -7 - 8 = -15\n\nPortanto, a subsequência de soma máxima é [-5] com soma total de -5.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 67.70393814900308,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "A fórmula apresentada (2n+1 - (n + 2)) não corresponde à execução do algoritmo. O algoritmo imprime n asteriscos em cada chamada recursiva, resultando em n * 2 chamadas recursivas, totalizando n * n = n² asteriscos.",
+  "decisao": "suspeita",
+  "sha256": "25fae87d8d4c1ae52c0d8d0ff2a56bdf5e1fcf73c228d04e15cb02a00f8314a3"
+}

@@ -1,0 +1,13 @@
+{
+  "pagina": 1,
+  "texto": "Lista de Exerc´ıcios 8\n\n8 de abril de 2022\n\nEngenharia de Computa¸c˜ao\n\nLilian Giselly Pereira Santos\nPedro Henrique de Brito Nascimento\nProjeto e An´alise de Algoritmos - Rian Gabriel Pinheiro\n\nCap´ıtulo 8 - Lidando com NP-Completude\n\n1. Um quadrado m´agico de ordem 3 ´e uma tabela 3 × 3 preenchida com nove\nn´umeros inteiros distintos de 1 a 9, de modo que a soma dos n´umeros em cada\nlinha, coluna e duas diagonais de ponta a ponta seja a mesma. Implemente\num algoritmo backtracking e encontre todos os quadrados m´agicos de ordem\n3.\n\nSolu¸c˜ao:",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\70d6475b28bf\\p1.png",
+  "figuras": [
+    "01-extraido\\figuras\\70d6475b28bf\\p1-fig1.png",
+    "01-extraido\\figuras\\70d6475b28bf\\p1-fig2.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

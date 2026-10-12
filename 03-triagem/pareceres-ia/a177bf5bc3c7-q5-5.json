@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "O código apresenta vários erros de sintaxe e lógica, além de incoerências na codificação (mistura de C++ e pseudocódigo). A lógica do algoritmo também não está clara, especialmente no tratamento dos requisitos de convidados. O tempo de execução O(n²) é suspeito, pois o código não reflete essa complexidade.",
+  "decisao": "suspeita",
+  "sha256": "1f927f919e06104b3012bb9d2ff8371242b4db8d2b59d3e2547b64f708fa45f9"
+}

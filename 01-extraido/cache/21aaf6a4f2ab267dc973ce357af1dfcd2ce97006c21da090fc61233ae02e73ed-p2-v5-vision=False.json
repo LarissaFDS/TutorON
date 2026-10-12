@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "2. Algumas moedas s˜ao espalhadas nas c´elulas de um tabuleiro n × m, uma mo-\neda por c´elula. Um robˆo, localizado na c´elula superior esquerda do tabuleiro,\nprecisa coletar o m´aximo de moedas poss´ıvel e trazˆe-las para a c´elula inferior\ndireita. Em cada etapa, o robˆo pode mover uma c´elula para a direita ou uma\nc´elula para baixo de sua localiza¸c˜ao atual. Quando o robˆo visita uma c´elula\ncom uma moeda, ele pega a moeda. Elabore um algoritmo para encontrar o\nn´umero m´aximo de moedas que o robˆo pode coletar e um caminho que ele\nprecisa seguir para fazer isso.\n\nSolu¸c˜ao:\n\n\n[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\ndef robatPath( ron. cols, matrix):\n\n' ct 4 colunas\nrobotpath ([9]\" Crows 1) for _ + range(cols 1)]\n\ni range(1, rows+ 1):\nji range(t, cals+1):\n1\n\npobotPath[ S13] max(\nrobotPath{i 105), roboteath[illi 11) matrix[i-1][5 1]\n\nprintÇ'As moedas coletadas pelo robô em cada nível s40:\\n\", NP- matrix(robotPath))\nprint(” Quantidade m máxima de moedas coletadas: \"> robotpathirows)[cols])\n\nNe jme\n\nmatrix = [{@]*rows For - range(cols) J\nmatrix = ({1, 1, 11,\n\n(1, 8, 11,\n\n(4, 4, 1]\n\nrobotPath(rous» cols, matrix)\n\n\n3. Projete um algoritmo eficiente para encontrar o comprimento do caminho\nmais longo em um DAG. (Este problema ´e importante como um prot´otipo de\nmuitos outros aplicativos de programa¸c˜ao dinˆamica, pois determina o tempo\nm´ınimo necess´ario para concluir um projeto que compreende tarefas de pre-\ncedˆencia restrita.)\n\nSolu¸c˜ao:\n\nPage ii",
+  "metodo": "tesseract-por+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

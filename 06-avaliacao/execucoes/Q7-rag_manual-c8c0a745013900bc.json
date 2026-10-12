@@ -1,0 +1,61 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_manual",
+  "fontes": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para encontrar o número faltante sem usar memória adicional, podemos utilizar a propriedade matemática fornecida: faltante = n(n+1)/2 - (soma dos números ouvidos), onde n é o número total de números que Maria ouviu. \n\nO tempo de execução é O(n), pois precisamos somar todos os números ouvidos. No entanto, para evitar overflow, podemos dividir um dos fatores de n(n+1) por 2 antes de multiplicar. Isso pode ser feito sem precisar de um tipo de memória adicional, mantendo a complexidade de memória em O(1).\n\nNo entanto, mesmo com essa otimização, a multiplicação de n e (n+1) pode ainda gerar um número muito grande, dependendo do tamanho do tipo de dados usado. Para tipos inteiros de tamanho fixo, isso pode causar overflow, especialmente para valores de n grandes. Portanto, é crucial garantir que o tipo de dados usado para representar n e (n+1) seja suficientemente grande para evitar overflow.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 57.79541014700226,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "4ef8f77d0bfedb44d93d2cfca516edd7f6c2692acdbbb35ba770bdf77fa78eb6"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "modelo": "qwen2.5:7b",
+    "segundos": 10.265000000000327,
+    "texto": "A função ASTERISCO(n) é uma função recursiva que imprime n asteriscos e chama a si mesma duas vezes com n-1. O caso base é ASTERISCO(0), que não faz nada. Para calcular A(3):\n\nASTERISCO(3) imprime 3 asteriscos e chama ASTERISCO(2) duas vezes. Cada chamada de ASTERISCO(2) imprime 2 asteriscos e chama ASTERISCO(1) duas vezes, e assim por diante até chegar ao caso base ASTERISCO(0).\n\nNP (número de chamadas) para A(3) é 7, pois há 1 inicial + 2 + 4 = 7 chamadas em total.\n\nPortanto, A(3) imprime 3 asteriscos e realiza 7 chamadas recursivas.",
+    "status": "ok"
+  },
+  {
+    "modelo": "gemma3:4b",
+    "segundos": 10.140999999999622,
+    "texto": "A recorrência de ASTERISCO(n) é definida como:\n\n*   A(0) = 0\n*   A(n) = A(n-1) + n\n\nPara calcular A(3):\n\n*   A(3) = A(2) + 3\n*   A(2) = A(1) + 2\n*   A(1) = A(0) + 1 = 0 + 1 = 1\n*   A(2) = 1 + 2 = 3\n*   A(3) = 3 + 3 = 6\n\nPortanto, A(3) = 6.\n\nA função ASTERISCO(n) imprime n símbolos.  A recorrência descreve a construção da sequência de impressão, onde cada termo é a soma do termo anterior e seu índice.",
+    "status": "ok"
+  }
+]

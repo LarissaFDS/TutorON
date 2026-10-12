@@ -1,0 +1,12 @@
+{
+  "pagina": 2,
+  "texto": "[OCR parcial do recorte p2-fig1.png; conferir símbolos na imagem]\n152) OSSARIUE Samp7] 2 = a\nop ew f Fel oa F'g apvo pego +\\5¥\\\n\nu 7 is uf 7 iss\nae os, + (ped? e (4 , é\n\nvA ead] ow) He oF\n; : a : “a = (2\n\n,\n\nT- amo 17h |",
+  "metodo": "tesseract-por",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\c616f5b14d1a\\p2.png",
+  "figuras": [
+    "01-extraido\\figuras\\c616f5b14d1a\\p2-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

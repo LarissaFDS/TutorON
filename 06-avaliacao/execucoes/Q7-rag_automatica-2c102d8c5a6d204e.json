@@ -1,0 +1,74 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "97254bb4a1b8-q1-1",
+    "d455baef2cdf-q6-6",
+    "d455baef2cdf-q9-9",
+    "ef6d051e4b8c-q6-6"
+  ],
+  "contexto_texto": "[97254bb4a1b8-q1-1] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L6.pdf | página(s): 1; confiabilidade: media; OCR: revisada_por_agente\nNúmero faltante entre 1 e n, ouvindo n-1 inteiros distintos válidos.\nInicialize faltante=n(n+1)/2 e subtraia cada número ouvido. Ao final, resta exatamente o omitido. São O(n) operações e O(1) palavras de memória no modelo RAM; representar os acumuladores exige O(log n) bits. Valide as hipóteses de intervalo e distinção se a entrada não for garantida.\nEm tipos inteiros de tamanho fixo, a multiplicação n(n+1) pode transbordar mesmo quando a soma final cabe: divida um dos fatores pares por 2 antes de multiplicar e use um tipo suficientemente largo. Uma alternativa é XOR de 1..n combinado com XOR dos números recebidos; todos os presentes cancelam, deixando o faltante. XOR evita a soma intermediária, mas ainda exige um tipo capaz de representar n.\n\n[d455baef2cdf-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 5; confiabilidade: media; OCR: revisada_por_agente\nPonto fixo A[i]=i em vetor ordenado de inteiros distintos, índices de 1 a n.\nFaça busca binária: m=floor((l+r)/2). Se A[m]=m, retorne m. Se A[m]<m, procure somente à direita; se A[m]>m, procure somente à esquerda. Se o intervalo ficar vazio, não há ponto fixo.\nComo os valores são inteiros estritamente crescentes, para i<m temos A[i]<=A[m]-(m-i), e para i>m temos A[i]>=A[m]+(i-m). Portanto A[m]<m elimina todos os índices à esquerda; A[m]>m elimina todos à direita. Tempo O(log n), memória O(1) na versão iterativa. Valores repetidos ou números reais eliminam essa justificativa.\n\n[d455baef2cdf-q9-9] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L3.pdf | página(s): 7, 8; confiabilidade: media; OCR: revisada_por_agente\nPico de vetor unimodal de valores distintos.\nMantenha l=1,r=n. Enquanto l<r, faça m=floor((l+r)/2). Se A[m]<A[m+1], faça l=m+1; caso contrário, faça r=m. Retorne l.\nO intervalo sempre contém o pico. Se a sequência cresce entre m e m+1, o pico fica à direita; se decresce, fica em m ou à esquerda. Enquanto l<r, m<r e portanto m+1 está no vetor. Tempo O(log n), memória O(1). Não é busca pelo máximo de vetor arbitrário; a hipótese de unimodalidade permite descartar uma metade.\n\n[ef6d051e4b8c-q6-6] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L2.pdf | página(s): 7; confiabilidade: media; OCR: revisada_por_agente\nEncontrar dois elementos distintos de S cuja soma é x em tempo Theta(n log n).\nOrdene S com um algoritmo de pior caso Theta(n log n), como merge sort. Use i=0 e j=n-1. Enquanto i<j, compare S[i]+S[j] com x. Se igual, encontrou o par; se menor, incremente i; se maior, decremente j. Quando i>=j sem igualdade, não há par.\nSe a soma é pequena, nenhum parceiro na posição atual de i com índice <=j a torna maior que S[i]+S[j]; descartar i é seguro. O argumento dual vale para descartar j quando a soma é grande. A varredura é O(n), dominada pela ordenação. i<j impede reutilizar o mesmo elemento. A memória depende da ordenação; merge sort usual requer O(n).",
+  "fontes_sha256": {
+    "97254bb4a1b8-q1-1": "773f529146d4ce2727388030e515748056b7b837eaf152bcc3ff263d887ae3eb",
+    "d455baef2cdf-q6-6": "011bc4df6e3b8f7c3e5dc487c21ab37395ec59ce3d813da36aafd58da277caf9",
+    "d455baef2cdf-q9-9": "f1641b56936dfacbab3389ba7fbf80aaa3c917b3f8bb9d4a8998c074938d574f",
+    "ef6d051e4b8c-q6-6": "ad26bcd43514b91eacffc282b00685bedf380d090494fe6f529276d79d371788"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.3919361689986545,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "Para encontrar o número faltante entre 1 e n, usando apenas O(1) de memória, Maria pode utilizar a fórmula n(n+1)/2. Ela começa atribuindo o valor inicial n(n+1)/2 à variável faltante. Em seguida, ao ouvir cada número ouvido, subtrai-se do faltante. Ao final, o valor restante será o número faltante. Este método requer apenas uma constante de memória, independentemente de n.\n\nNo entanto, há um problema potencial de overflow. Se n for muito grande, n(n+1)/2 pode exceder o limite de um tipo inteiro de tamanho fixo. Para evitar isso, é necessário usar um tipo de número que suporte grandes valores, como um tipo de ponto flutuante. No entanto, isso aumentaria o custo de memória para O(log n), não atendendo à condição de O(1) de memória solicitada.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 100.0843356559999,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "5b8cb1521fd1dfbde245823645122c208ddd6889c0e843c487e2db841bc678c7"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

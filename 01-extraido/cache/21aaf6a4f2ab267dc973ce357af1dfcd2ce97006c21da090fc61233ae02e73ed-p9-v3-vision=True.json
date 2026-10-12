@@ -1,0 +1,11 @@
+{
+  "pagina": 9,
+  "texto": "9. Dado um grafo simples G(V, E ) e dois v´ertices s, t ∈V  , projete um algoritmo\n  de programa¸c˜ao dinˆamica que encontre a quantidade de caminhos simples\n   distintos entre s e t\n\n\n     Solu¸c˜ao:\n\n\n\n\n\n                                  Page ix\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p9.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p9-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

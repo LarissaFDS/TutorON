@@ -1,0 +1,10 @@
+{
+  "pagina": 5,
+  "texto": "Considerando um sistema finito m1 < m2 < ... < mn de inteiros positivos que\nrepresentem n tipos de moedas e um inteiro positivo, desejamos determinar os inteiros\npositivos xi | 1 ≤i ≤t e, que minimizam a seguinte equa¸c˜ao:\n\nn\nX\n\nxi\n(1)\n\ni=1\n\nSujeita `as as seguintes restri¸c˜oes:\n\nn\nX\n\nn\nX\n\nx =\n\nxici\n\nxi ≤k\n(2)\n\ni=1\n\ni=1\n\nTendo em vista que uma representa¸c˜ao ´e a sequˆencia dos coeficientes x + 1, ..., xn,\npodemos consider´a-la ´otima se ela ´e de tamanho m´ınimo.\n\n7. Leia o artigo da wikipedia sobre o puzzle Kakuro https://en.wikipedia.org/wiki/Kakuro\ne modele exemplo dado utilizando Programa¸c˜ao por Restri¸c˜ao.\n\nSolu¸c˜ao: Neste caso, modelaremos Kakuro como um par < K, P >, no qual est˜ao\nrepresentadas as vari´aveis:\n- K: As c´elulas do Kakuro\n- P: O conjunto das dicas, definido como um par < K′, n >,\nonde K’ ´e um subconjunto de K (c´elulas) e n ´e um inteiro positivo que, para o\nsubconjunto K’, representa a soma dos elementos nas c´elulas de K’.\n\nVari´aveis:\n\nXk|∀k ∈K : Xk ∈[1, 9]\n\nDom´ınio:\n\n[1, 9]\n\nRestri¸c˜oes:\n\n-∀\n< K′, n >\n∈P : diferentes entre si({Xk | k ∈K′})\n\nX\n\n-∀\n< K′, n >\n∈P :\n\nXk = n\n\nk ∈K′\n\nOu seja, os elementos de K’ devem ser diferentes entre si e a soma dos elementos de\nK’ tem que ser igual ao inteiro n.\n\n8. O problema das 8 DAMAS consistem em colocar 8 damas em um tabuleiro\nde xadrez. Modele este problema utilizando Programa¸c˜ao por Restri¸c˜ao.\n\nPage v",
+  "metodo": "texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\97254bb4a1b8\\p5.png",
+  "figuras": [],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

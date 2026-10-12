@@ -1,0 +1,53 @@
+{
+  "questao": "Q7",
+  "cenario": "rag_manual",
+  "fontes": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "esperadas": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "excluidas_baixa": [
+    "97254bb4a1b8-q1-1"
+  ],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "lexical",
+  "status": "ok",
+  "manual_adversarial": true,
+  "resposta": {
+    "texto": "Para resolver o problema de encontrar o número faltante entre 1 e n, quando n-1 números são fornecidos, podemos utilizar a fórmula da soma dos primeiros n números naturais. A ideia é calcular a soma dos n números inteiros de 1 a n e subtrair a soma dos n-1 números fornecidos. A diferença entre essas duas somas será o número faltante.\n\n### Passos do Algoritmo:\n1. **Calcular a Soma Teórica**: A soma dos números de 1 a n pode ser calculada usando a fórmula:\n   \\[\n   \\text{Soma teórica} = \\frac{n \\times (n + 1)}{2}\n   \\]\n2. **Calcular a Soma dos Números Fornecidos**: Somar os n-1 números fornecidos.\n3. **Subtrair as Somas**: A diferença entre a soma teórica e a soma dos números fornecidos será o número faltante.\n\n### Implementação em C++:\n```cpp\n#include <iostream>\n\nint main() {\n    int n, sum = 0;\n    std::cin >> n;\n    \n    // Calcular a soma teórica\n    int soma_teorica = n * (n + 1) / 2;\n    \n    // Calcular a soma dos números fornecidos\n    for(int i = 1; i < n; i++) {\n        int x;\n        std::cin >> x;\n        sum += x;\n    }\n    \n    // O número faltante é a diferença entre a soma teórica e a soma dos números fornecidos\n    int missing_number = soma_teorica - sum;\n    \n    std::cout << missing_number;\n    \n    return 0;\n}\n```\n\n### Tempo de Execução:\n- **Tempo de execução**: O algoritmo realiza uma única passagem pelo loop `for` que percorre n-1 números, o que é O(n). No entanto, a operação de cálculo da soma teórica é constante, O(1). Portanto, o tempo de execução total é O(n).\n- **Espaço de Memória**: O algoritmo utiliza apenas variáveis de armazenamento (`n`, `sum`, `soma_teorica`), o que é O(1).\n\n### Problemas de Overflow:\n- **Overflow de Inteiros**: Se `n` for muito grande, a soma teórica pode causar overflow. No entanto, para valores de `n` razoáveis (por exemplo, até 65535), o overflow é improvável.\n- **Overflow na Soma**: Se a soma dos n-1 números fornecidos for muito grande, também pode ocorrer overflow. No entanto, a probabilidade disso ocorrer é baixa para valores de `n` normais.\n\n### Conclusão:\nO algoritmo proposto encontra o número faltante em O(n) tempo e O(1) espaço, respeitando as restrições do problema.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 13.233999999999469,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Soma ou XOR",
+        "regex": "soma|xor",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Espaço constante",
+        "regex": "o\\(1\\)|constante",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

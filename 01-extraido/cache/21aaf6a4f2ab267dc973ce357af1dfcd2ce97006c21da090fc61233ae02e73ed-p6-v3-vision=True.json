@@ -1,0 +1,11 @@
+{
+  "pagina": 6,
+  "texto": "7. Uma cobertura de v´ertices de um grafo G = (V, E ) ´e um subconjunto de\n   v´ertices S ⊇V que inclui ao menos uma extremidade de cada aresta de E .\n   Forne¸ca um algoritmo de tempo linear para a seguinte tarefa.\n\n  Entrada: Uma ´arvore n˜ao-direcionada T = (V, E).\n   Sa´ıda: O tamanho da menor cobertura de v´ertices de T.\n  Por exemplo, na ´arvore abaixo, as poss´ıveis coberturas de v´ertice incluem\n  {A, B, C, D, E, F, G} e {A, C, D, F}, mas n˜ao {C, E, F}. A menor cobertura de\n   v´ertice tem tamanho 3: B, E, G\n\n\n\n                                  Page vi\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\1a81ca283132\\p6.png",
+  "figuras": [
+    "01-extraido\\figuras\\1a81ca283132\\p6-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}

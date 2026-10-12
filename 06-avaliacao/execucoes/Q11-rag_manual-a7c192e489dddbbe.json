@@ -1,0 +1,64 @@
+{
+  "questao": "Q11",
+  "cenario": "rag_manual",
+  "fontes": [
+    "c07",
+    "c08"
+  ],
+  "esperadas": [
+    "c07",
+    "c08"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 0,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "O algoritmo força bruta para verificar números compostos é considerado não polinomial porque, embora teste apenas até o valor n/2, o número de testes cresce exponencialmente com o tamanho da entrada em bits. Mesmo que testar divisores de 2 até n/2 seja O(n), a representação binária de n pode ser muito maior, o que faz com que o número total de testes cresça exponencialmente em b = log2(n). Isso é crucial para entender por que o professor considera o problema fora de P. A complexidade em bits (b) é o que realmente importa, e isso cresce muito mais rápido do que o crescimento linear em n. Portanto, embora o teste em si seja polinomial em n, a complexidade total do algoritmo é exponencial em b, mantendo o problema fora de P.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 34.895117584997934,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "935efb41248299b393783bcbf4c8d7cf003d78f5444a90e760d3890b3428c9b0"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Mede entrada em bits",
+        "regex": "bits|binari",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Exponencial no tamanho da entrada",
+        "regex": "exponencial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Não afirma que COMPOSTO é NP-completo",
+        "regex": "composto (e|eh) np.completo",
+        "tipo": "nao_deve",
+        "ok": true
+      }
+    ],
+    "acertos": 3,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": [],
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc"
+}

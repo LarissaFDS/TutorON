@@ -1,0 +1,59 @@
+{
+  "questao": "Q9",
+  "cenario": "generico",
+  "fontes": [],
+  "esperadas": [
+    "d455baef2cdf-q1-1"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Ordenar uma pilha de panquecas de tamanhos distintos usando inversões de prefixo é uma tarefa complexa. A quantidade de inversões é a quantidade de panquecas que foram invertidas em relação ao seu tamanho original. O custo total de movimentar elementos é o número de trocas necessárias para colocar todas as panquecas no tamanho correto, sem considerar a distância entre elas.\n\nPara resolver essa tarefa, seria necessário um algoritmo que possa contar as inversões e movimentar os elementos de forma eficiente. Uma abordagem possível seria usar um algoritmo de ordenação que possa contar as inversões, como o Merge Sort, que tem uma complexidade de tempo de O(n log n). No entanto, o custo total de movimentação não pode ser calculado diretamente com o número de inversões, pois depende do tamanho das panquecas.\n\nPara calcular o custo total de movimentação, seria necessário um algoritmo adicional que possa contar as trocas necessárias para colocar todas as panquecas no tamanho correto. Este custo pode ser muito maior do que o número de inversões, especialmente se as panquecas estão muito desorganizadas.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 41.980978190000314,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Coloca a maior na base",
+        "regex": "maior",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Inversões lineares",
+        "regex": "2\\s*\\(?n|o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Custo quadrático ao mover elementos",
+        "regex": "quadratic|n\\^?2|n²",
+        "tipo": "deve",
+        "ok": false
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

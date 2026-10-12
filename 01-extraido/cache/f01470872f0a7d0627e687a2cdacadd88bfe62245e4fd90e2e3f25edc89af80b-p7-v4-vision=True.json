@@ -1,0 +1,12 @@
+{
+  "pagina": 7,
+  "texto": "Vale construir a RAG do TutorON, com curadoria\ndo material.\n\n1\n\n2\n\n3\n\n4\n\nDigitalizar e revisar o\nacervo (OCR)\n\nAutomatizar a busca\ndo trecho certo\n\nOrganizar por questão,\ncom fonte e\nconfiabilidade\n\nValidar com 10 a 20\nquestões e com o\nprofessor\n\n\n[OCR parcial do recorte p7-fig1.png; conferir símbolos na imagem]\nVale construir a RAG do TutorON, com curadoria\ndo material.\n2\n3\nDigitalizar e revisar 0\nOrganizar por questao,\nAutomatizar a busca\nValidar com 10 a 20\nacervo (OCR)\ncom fonte e\ndo trecho certo\nquestoes e com o\nconfiabilidade\nprofessor",
+  "metodo": "rapidocr+texto_pdf",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\24cd137836d0\\p7.png",
+  "figuras": [
+    "01-extraido\\figuras\\24cd137836d0\\p7-fig1.png"
+  ],
+  "visao_candidata": [],
+  "revisao_figuras": "pendente: candidatos de visão não entram automaticamente na transcrição nem no RAG"
+}

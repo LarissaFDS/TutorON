@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há ilegalidade na definição do conjunto de vértices V, que inclui 'cj' em vez de 'vj'. Além disso, a descrição da capacidade c(ui, vj) = 1 é ambígua, pois não está claro se 'vj' deve ser 'v1' a 'vq'.",
+  "decisao": "suspeita",
+  "sha256": "7e856e23f90aa3ef6a14888b874b231ddbbf7bf88707b6e9baad3b4168e31207"
+}

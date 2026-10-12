@@ -1,0 +1,65 @@
+{
+  "questao": "Q6",
+  "cenario": "controle_prompt",
+  "fontes": [],
+  "esperadas": [
+    "1a81ca283132-q4-4"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": false,
+  "segundos_busca": 0,
+  "ausencia_contexto": true,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para resolver a subsequência contígua de soma máxima em tempo linear, seguindo a convenção da Lista 5, podemos usar o algoritmo de Kadane. Este algoritmo é eficiente e resolve o problema em tempo linear, O(n).\n\nPara a sequência [5,15,-30,10,-5,40,10], a recorrência é a seguinte:\n\n1. `maxSoFar = 0` e `maxEndingHere = 0`\n2. Para cada elemento `num` na sequência:\n   - `maxEndingHere = max(0, maxEndingHere + num)`\n   - `maxSoFar = max(maxSoFar, maxEndingHere)`\n\nAplicando isso à sequência [5,15,-30,10,-5,40,10]:\n- `maxSoFar = 0` e `maxEndingHere = 0`\n- `maxEndingHere = max(0, 0 + 5) = 5`, `maxSoFar = max(0, 5) = 5`\n- `maxEndingHere = max(0, 5 + 15) = 20`, `maxSoFar = max(5, 20) = 20`\n- `maxEndingHere = max(0, 20 - 30) = 0`, `maxSoFar = max(20, 0) = 20`\n- `maxEndingHere = max(0, 0 + 10) = 10`, `maxSoFar = max(20, 10) = 20`\n- `maxEndingHere = max(0, 10 - 5) = 5`, `maxSoFar = max(20, 5) = 20`\n- `maxEndingHere = max(0, 5 + 40) = 45`, `maxSoFar = max(20, 45) = 45`\n- `maxEndingHere = max(0, 45 - 10) = 45`, `maxSoFar = max(45, 45) = 45`\n\nPortanto, a subsequência contígua de soma máxima é 45.\n\nPara a sequência [-5,-2,-8], a recorrência é a seguinte:\n\n1. `maxSoFar = -5` e `maxEndingHere = -5`\n2. Para cada elemento `num` na sequência:\n   - `maxEndingHere = max(0, maxEndingHere + num)`\n   - `maxSoFar = max(maxSoFar, maxEndingHere)`\n\nAplicando isso à sequência [-5,-2,-8]:\n- `maxSoFar = -5` e `maxEndingHere = -5`\n- `maxEndingHere = max(0, -5 - 2) = -7`, `maxSoFar = max(-5, -7) = -5`\n- `maxEndingHere = max(0, -7 - 8) = 0`, `maxSoFar = max(-5, 0) = 0`\n\nPortanto, a subsequência contígua de soma máxima é 0.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:3b",
+    "segundos": 112.68120064899995,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Permite subsequência vazia",
+        "regex": "vazi",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Exemplo positivo: 55",
+        "regex": "55",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caso negativo retorna zero",
+        "regex": "zero|soma\\s*0|=\\s*0",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Tempo linear",
+        "regex": "o\\(n\\)|linear",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 2,
+    "total": 4,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

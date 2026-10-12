@@ -1,0 +1,96 @@
+{
+  "questao": "Q4",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "c09",
+    "f38bb8142136-q3-3",
+    "f38bb8142136-q8-8",
+    "f38bb8142136-q5-5"
+  ],
+  "contexto_texto": "[c09] Fonte: materiais\\c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição; confiabilidade: media; OCR: revisada_por_agente\nDefina P, NP, NP-completo e redução polinomial.\nP é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada.\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Equivalentemente, são decididos em tempo polinomial por máquina não determinística. NP não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.\nUma redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.\nB é NP-completo se B pertence a NP e todo problema de NP se reduz polinomialmente a B. Para demonstrar NP-dificuldade, reduza um problema já NP-difícil para o problema novo. A direção contrária não basta.\nExemplos apropriados de decisão: SAT, CLIQUE (existe clique de tamanho pelo menos k?) e MOCHILA com limite de peso e alvo de valor. Distinguir essas versões das versões de otimização. Se algum NP-completo estiver em P, então P=NP. Esta redação corrige a resolução de alunos.\n\n[f38bb8142136-q3-3] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L7.pdf | página(s): 2, 3, 4; confiabilidade: media; OCR: revisada_por_agente\nImplicações de reduções polinomiais entre problemas de decisão A e B.\nSe A<=p B e B pertence a P, então A pertence a P: componha a transformação com o algoritmo de B.\nSe A<=p B e B é NP-completo, isso não torna A NP-completo. Para provar que B é NP-completo a partir de A NP-completo e A<=p B, ainda é necessário mostrar B pertence a NP; a redução prova somente NP-dificuldade.\nHá linguagens em NP que não são NP-completas, como a linguagem vazia e a linguagem universal sob reduções many-one usuais. Não atribua isso à hipótese não demonstrada P diferente de NP.\nNão se sabe se existe problema NP-completo em P: isso é equivalente a P=NP.\n\n[f38bb8142136-q8-8] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L7.pdf | página(s): 9, 10; confiabilidade: media; OCR: revisada_por_agente\nCONJUNTO INCIDENTE (Hitting Set).\nEntrada: universo U, conjuntos S_i subseteq U e limite b. Certificado: H subseteq U com |H|<=b. Verifique H intersection S_i não vazio para todo i. Não é necessário H subseteq S_i. Essa verificação é polinomial na representação explícita da entrada.\nRedução de COBERTURA DE VÉRTICES: para G=(V,E) e limite k, use U=V, S_e={u,v} para cada aresta e={u,v}, e b=k. Um H que intersecta todos os S_e é exatamente uma cobertura de vértices de tamanho no máximo k. A transformação é polinomial e preserva SIM/NÃO.\nLogo CONJUNTO INCIDENTE é NP-completo. Se P=NP, passa a haver algoritmo polinomial de decisão; se P diferente de NP, não existe tal algoritmo. O enunciado transcrito menciona afirmativas sem enumerá-las, então não se devem inventar itens ausentes.\n\n[f38bb8142136-q5-5] Fonte: materiais\\Disponiveis\\RAG PAA\\PAA_L7.pdf | página(s): 6, 7, 8; confiabilidade: media; OCR: revisada_por_agente\nTRI-PARTIÇÃO em três grupos de mesma soma: interpretação do enunciado.\nOs três grupos são I, J e o complemento de I union J, disjuntos. A expressão da transcrição envolvendo complemento de I intersection J é inconsistente com essa interpretação e precisa ser conferida na página original.\nSob a interpretação de três grupos iguais, o problema está em NP: o certificado atribui cada elemento a um dos três grupos e as somas são verificadas em tempo polinomial em bits.\nRedução de PARTIÇÃO: seja S a soma dos inteiros positivos. Se S é ímpar, envie uma instância NÃO fixa como [1,1,2]. Se S é par, acrescente o inteiro S/2. A soma nova é 3S/2; cada grupo deve somar S/2. Por positividade, o novo elemento ocupa sozinho seu grupo. Os dois grupos restantes particionam a entrada original em somas iguais, e vice-versa.\nA transformação usa somente a entrada, sem conhecer uma partição prévia. NP mais essa redução prova NP-completude; uma redução inversa não é necessária. Não confundir este problema com 3-PARTITION, que particiona 3m números em m trios e tem outra definição.",
+  "fontes_sha256": {
+    "c09": "0a724f23426927432db634aa2b53c1dee366bfdeac066edfe8170c6380fb860a",
+    "f38bb8142136-q3-3": "3c20b99d4f7747851d05a034df03387d5985a05d8bf0234c714e880c650bbf7d",
+    "f38bb8142136-q8-8": "77a246be27202a451cda11eae77b93ba6e78fa4cb0b74a6ce7e6daa2fbe61995",
+    "f38bb8142136-q5-5": "c6f251eaf32e07dd666b301ff062e71e32de65f2b1ece6e2fefcdda35588505d"
+  },
+  "indice_sha256": "0630119109c7f1afd213ef7d8bbc4b2288f81b67f4082678390197449f2149f4",
+  "limite_palavras_solicitado": 220,
+  "esperadas": [
+    "c09",
+    "c10-q1-1",
+    "c10-q2-2"
+  ],
+  "excluidas_baixa": [],
+  "top_k_acertou": true,
+  "segundos_busca": 3.1357920360023854,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "modelo_digest": "37419a7624630c13431d915e9618de57accad6e75ebc5c37b088ad18d4860fdc",
+  "resposta": {
+    "texto": "Claro, aqui está a definição das classes P, NP e NP-completo de acordo com o contexto fornecido:\n\nP é a classe dos problemas de decisão resolvidos por algoritmo determinístico em tempo polinomial no comprimento da entrada. Ou seja, um problema está em P se uma máquina de Turing determinística pode resolver-o em tempo polinomial.\n\nNP é a classe dos problemas de decisão cujas instâncias SIM possuem certificados de tamanho polinomial verificáveis em tempo polinomial. Esses problemas podem ser resolvidos em tempo polinomial por uma máquina não-determinística. Não é definida como problemas que ninguém conseguiu provar polinomiais ou intratáveis. P está contida em NP; não se sabe se P=NP.\n\nUm problema B é NP-completo se pertence a NP e todo problema de NP se reduz polinomialmente a B. Isso significa que se um problema NP-completo estiver em P, então P=NP. Redução many-one A<=p B é uma função f computável em tempo polinomial tal que x pertence a A se e somente se f(x) pertence a B.\n\nPor exemplo, problemas como SAT (verdadeira solução de uma expressão booleana), CLIQUE (existe um clique de tamanho pelo menos k) e MOCHILA com limite de peso e alvo de valor são NP-complexos. Não todos os problemas em NP são NP-complexos, como a linguagem vazia e a linguagem universal. Não se sabe se existe um problema NP-completo em P, equivalente a P=NP.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 139.95923534400208,
+    "fallback": null,
+    "repetida_por_truncamento": false,
+    "limite_saida_tokens": 1800,
+    "configuracao": {
+      "base_model": "qwen2.5:3b",
+      "tutor_model": "tutoron-paa",
+      "num_ctx": 4096,
+      "seed": 42,
+      "timeout": 900
+    },
+    "contexto_sha256": "e75fdf29ba53dc08348e8099ca70bcd8b3f72a7ecc35cc139f8503096dbb84d0"
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "P: problemas de decisão resolvíveis em tempo polinomial",
+        "regex": "tempo polinomial",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP via certificado verificável em tempo polinomial",
+        "regex": "certificado|verific",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NP-completo: ∈ NP E todo problema de NP se reduz a ele",
+        "regex": "(todo|qualquer|todos os) problemas? (de|em|da classe) np.{0,80}(reduz|reduc|transform)|(reduz|reduc|transform).{0,80}(todo|qualquer|todos os) problemas? (de|em|da classe) np",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "Menciona P ⊆ NP",
+        "regex": "p ?⊆ ?np|p esta contid|p e subconjunto|p c np",
+        "tipo": "deve",
+        "ok": true
+      },
+      {
+        "rotulo": "NÃO repete a definição errada de NP do material",
+        "regex": "ninguem conseguiu.{0,40}comprovar|nao se sabe se sao polinomiais",
+        "tipo": "nao_deve",
+        "exceto_se_proximo": "imprecis|incorret|equivocad|errad|atencao|cuidado|\\[c09\\]|material",
+        "ok": true
+      },
+      {
+        "rotulo": "Sinaliza a imprecisão do material",
+        "regex": "imprecis|incorret|equivocad|ressalva|cuidado|atencao|nao e a definicao",
+        "tipo": "deve",
+        "so_estruturado": true,
+        "ok": false
+      }
+    ],
+    "acertos": 5,
+    "total": 6,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

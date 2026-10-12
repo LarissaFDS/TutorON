@@ -1,0 +1,22 @@
+{
+  "id": "55f30500c856",
+  "arquivo": "materiais\\c10_provas4_classes_enunciados.md",
+  "copia": "00-originais\\ingestao\\7489b823b314c5149f69e2bdd5585714cd1e7b3d52076a39981308c83cd4b788\\c10_provas4_classes_enunciados.md",
+  "sha256": "7489b823b314c5149f69e2bdd5585714cd1e7b3d52076a39981308c83cd4b788",
+  "tipo": ".md",
+  "paginas": 1,
+  "texto_extraivel": "s",
+  "assunto_provavel": "b2-06-np-completude",
+  "escopo": "acervo",
+  "erro": "",
+  "pipeline": "v5-vision=False",
+  "paginas_extraidas": [
+    {
+      "pagina": null,
+      "texto": "---\nid: c10\nfonte: \"4ª Prova 25/05/2023 (Q1), 4ª Prova 16/10/2023 (Q1–Q2), 4ª Prova 21/03/2024 (Q1–Q2) — Prof. Rian Gabriel Pinheiro\"\ntipo: prova\ntopico: classes P, NP, NP-completo, redução polinomial\n---\nQuestão 1 [1,5 ponto]: Defina as classes P, NP e NP-completo.\n(Esta questão abre a 4ª prova em três semestres seguidos.)\n\nQuestão 2 [1,5 ponto]: Responda cada um dos itens abaixo.\n• Defina o que é uma transformação polinomial.\n• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ está em P, então Π está em P?\n• Se um problema Π pode ser polinomialmente reduzido a um problema Π′ e Π′ é NP-completo, então Π é NP-completo?\n",
+      "metodo": "texto_original",
+      "qualidade": "boa",
+      "figuras": []
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "questao": "Q5",
+  "cenario": "rag_automatica",
+  "fontes": [
+    "abfdf1a3da4e-q4-3",
+    "a177bf5bc3c7-q2-2",
+    "7498903a641d-q4-10",
+    "f38bb8142136-q6-6"
+  ],
+  "esperadas": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "excluidas_baixa": [
+    "a177bf5bc3c7-q1-1"
+  ],
+  "top_k_acertou": false,
+  "segundos_busca": 2.8439999999973224,
+  "ausencia_contexto": false,
+  "modo_busca": "hibrido",
+  "status": "ok",
+  "manual_adversarial": false,
+  "resposta": {
+    "texto": "Para responder à pergunta, vamos analisar o efeito de aumentar o peso de cada aresta em um grafo conexo e verificar se a árvore geradora mínima e os caminhos mínimos mudam.\n\n### Análise Teórica\n\n1. **Árvore Geradora Mínima (AGM):**\n   - A AGM de um grafo é a subgrafo que é uma árvore e tem o menor peso possível.\n   - Se o peso de cada aresta é aumentado em 1, o grau de importância relativa entre as arestas não muda. Portanto, a AGM original ainda será a AGM após o aumento de peso.\n\n2. **Caminhos Mínimos:**\n   - Os caminhos mínimos são aqueles que têm o menor peso entre dois vértices.\n   - Se o peso de cada aresta é aumentado em 1, o caminho mínimo entre dois vértices também será aumentado em 1. Portanto, os caminhos mínimos originais não mudarão em termos de estrutura, apenas em termos de peso.\n\n### Contraexemplo Numérico\n\nVamos considerar um grafo simples com 4 vértices (A, B, C, D) e as seguintes arestas com pesos originais:\n\n- A-B: 1\n- A-C: 2\n- B-C: 3\n- B-D: 4\n- C-D: 5\n\nA AGM original seria A-B (peso 1) e A-C (peso 2), com um total de peso 3.\n\nAgora, aumentamos o peso de cada aresta em 1:\n\n- A-B: 2\n- A-C: 3\n- B-C: 4\n- B-D: 5\n- C-D: 6\n\nA AGM agora seria A-B (peso 2) e A-C (peso 3), com um total de peso 5. No entanto, se considerarmos os caminhos mínimos, eles permanecem os mesmos em termos de estrutura, apenas com pesos aumentados.\n\n### Conclusão\n\n- **Árvore Geradora Mínima:** Sim, a AGM continua sendo a mesma, apenas com pesos aumentados.\n- **Caminhos Mínimos:** Não, os caminhos mínimos em termos de estrutura não mudam, apenas em termos de peso.\n\nPortanto, os caminhos mínimos em termos de estrutura não mudam, mas os pesos dos caminhos mínimos aumentam.",
+    "provedor": "ollama",
+    "modelo": "qwen2.5:7b",
+    "segundos": 12.312000000001717,
+    "fallback": null
+  },
+  "avaliacao": {
+    "checks": [
+      {
+        "rotulo": "Aumento n−1 por árvore",
+        "regex": "n\\s*[-−]\\s*1",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Caminho depende do número de arestas",
+        "regex": "numero de arestas|quantidade de arestas",
+        "tipo": "deve",
+        "ok": false
+      },
+      {
+        "rotulo": "Dá contraexemplo",
+        "regex": "contraexemplo|exemplo",
+        "tipo": "deve",
+        "ok": true
+      }
+    ],
+    "acertos": 1,
+    "total": 3,
+    "aviso": "Cobertura lexical de checklist; não equivale a correção matemática."
+  },
+  "citacoes_ids": [],
+  "citacoes_ids_invalidos": []
+}

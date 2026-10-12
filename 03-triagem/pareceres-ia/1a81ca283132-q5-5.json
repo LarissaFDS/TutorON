@@ -1,0 +1,6 @@
+{
+  "status": "executado",
+  "parecer": "Há ilegibilidade no código, como na linha `suff[i][j]=suff[i-1][j-1]+ 1;` onde há um erro de digitação (`max_len = max(max_len,suff[ij[j]);`). Além disso, a inicialização `suff[i][j]=0；` é incompleta e pode ser confusa.",
+  "decisao": "suspeita",
+  "sha256": "c36ceaf76b59991f43ffbe44a532dc838a9adf3dfe7f78a09875e7521919d366"
+}

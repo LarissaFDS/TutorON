@@ -1,0 +1,11 @@
+{
+  "pagina": 5,
+  "texto": "4. Em cada caso, indique se f(n) = O(g(n)) ou f(n) = Ω(g(n)), ou ambos\n   (neste caso f(n) = Θ(g(n))):\n\n\n\n\n\n     Solu¸c˜ao:\n\n        1. f(n) = Θ(g(n))\n\n        2. f(n) = O(g(n))\n\n        3. f(n) = Θ(g(n))\n\n        4. f(n) = O(g(n))\n\n        5. f(n) = Θ(g(n))\n\n        6. f(n) = O(g(n))\n\n        7. f(n) = Ω(g(n))\n\n        8. f(n) = Ω(g(n))\n\n        9. f(n) = O(g(n))\n\n       10. f(n) = Ω(g(n))\n\n       11. f(n) = O(g(n))\n\n\n\n                                   Page v\n[ilegivel] Visão pendente: HTTPError",
+  "metodo": "visao_falhou",
+  "qualidade": "parcial",
+  "imagem": "01-extraido\\figuras\\ef6d051e4b8c\\p5.png",
+  "figuras": [
+    "01-extraido\\figuras\\ef6d051e4b8c\\p5-fig1.png"
+  ],
+  "revisao_figuras": "pendente: desenhos vetoriais preservados na página inteira"
+}
