@@ -1,59 +1,109 @@
-import os
+"""Recuperação de contexto para o TutorON.
 
-import ollama
+Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
-from dotenv import load_dotenv
-from supabase import create_client
+1. Acervo curado local (provas, listas e resoluções de PAA em ``04-rag/indice.json``),
+   busca híbrida léxica + semântica. Só entram blocos de confiança média/alta.
+2. Livro-texto de PAA no Supabase/pgvector (``match_chunks``), indexado por
+   ``backend/ingest.py``. É opcional: sem SUPABASE_URL/KEY ou fora do ar, a
+   resposta segue só com o acervo local.
 
+Cada trecho recebe um rótulo curto ([P1], [L1]…) que o modelo usa para citar.
+"""
+from __future__ import annotations
 
-load_dotenv()
+import asyncio
+import logging
+from dataclasses import dataclass
 
+import httpx
 
-# ---------------------------------------------------------
-# Clientes
-# ---------------------------------------------------------
+from .config import Settings
 
-EMBEDDING_MODEL = "bge-m3"
+logger = logging.getLogger("tutoron.rag")
 
-supabase = create_client(
-    os.getenv("SUPABASE_URL"),
-    os.getenv("SUPABASE_KEY")
-)
-
-
-# ---------------------------------------------------------
-# Embeddings
-# ---------------------------------------------------------
-
-def generate_embedding(text: str) -> list[float]:
-
-    response = ollama.embeddings(
-        model=EMBEDDING_MODEL,
-        prompt=text,
-    )
-
-    return response["embedding"]
+ACERVO_K = 4
+LIVRO_K = 3
+MAX_CHARS_TRECHO = 2200
+TIPOS = {
+    "prova": "Prova", "lista": "Lista de exercícios", "resolucao_aluno": "Resolução de aluno",
+    "gabarito": "Gabarito", "material_estudo": "Material de estudo", "resolucao": "Resolução",
+}
 
 
-# ---------------------------------------------------------
-# Busca no Supabase
-# ---------------------------------------------------------
+@dataclass
+class Trecho:
+    rotulo: str
+    origem: str  # "acervo" | "livro"
+    titulo: str
+    texto: str
+    referencia: str
 
-def search_context(
-    question: str,
-    limit: int = 3
-) -> list[dict]:
+    def para_prompt(self) -> str:
+        return f"[{self.rotulo}] {self.titulo} — {self.referencia}\n{self.texto}"
 
-    # Embedding da pergunta
-    embedding = generate_embedding(question)
+    def publico(self) -> dict:
+        return {"rotulo": self.rotulo, "origem": self.origem, "titulo": self.titulo, "referencia": self.referencia}
 
-    # Busca os chunks semanticamente mais próximos
-    response = supabase.rpc(
-        "match_chunks",
-        {
-            "query_embedding": embedding,
-            "match_count": limit,
-        },
-    ).execute()
 
-    return response.data
+def _cortar(texto: str) -> str:
+    texto = texto.strip()
+    return texto if len(texto) <= MAX_CHARS_TRECHO else texto[:MAX_CHARS_TRECHO].rsplit("\n", 1)[0] + "\n[…]"
+
+
+def _acervo(pergunta: str, vetor: list[float] | None) -> list[Trecho]:
+    from acervo.retrieval import search
+
+    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor)
+    trechos = []
+    for n, item in enumerate(itens, 1):
+        fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
+        tipo = TIPOS.get(item.get("tipo", ""), "Material da disciplina")
+        trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=f"{tipo} de PAA",
+                              texto=_cortar(item["texto"]), referencia=fonte))
+    return trechos
+
+
+async def _livro(client: httpx.AsyncClient, settings: Settings, vetor: list[float]) -> list[Trecho]:
+    if not settings.supabase_enabled:
+        return []
+    headers = {"apikey": settings.supabase_key, "Authorization": f"Bearer {settings.supabase_key}"}
+    try:
+        response = await client.post(f"{settings.supabase_url}/rest/v1/rpc/match_chunks", headers=headers,
+                                     json={"query_embedding": vetor, "match_count": LIVRO_K}, timeout=8)
+        response.raise_for_status()
+        linhas = response.json()
+    except (httpx.HTTPError, ValueError) as exc:
+        logger.warning("Supabase indisponível: %s", type(exc).__name__)
+        return []
+    trechos = []
+    for linha in linhas if isinstance(linhas, list) else []:
+        if not isinstance(linha, dict) or not str(linha.get("content", "")).strip():
+            continue
+        if float(linha.get("similarity") or 0) < settings.supabase_min_similarity:
+            continue
+        nome = str(linha.get("document_name") or "Livro de PAA").removesuffix(".pdf")
+        pagina = linha.get("page_number")
+        trechos.append(Trecho(rotulo=f"L{len(trechos) + 1}", origem="livro", titulo=nome[:90],
+                              texto=_cortar(str(linha["content"])),
+                              referencia=f"página {pagina}" if pagina else "livro-texto"))
+    return trechos
+
+
+async def recuperar(pergunta: str, llm, settings: Settings) -> list[Trecho]:
+    """Busca acervo e livro em paralelo. Nunca lança: sem contexto, a lista vem vazia."""
+    vetor = await llm.embed(pergunta)
+    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor)
+    tarefa_livro = _livro(llm.client, settings, vetor) if vetor else asyncio.sleep(0, result=[])
+    acervo, livro = await asyncio.gather(tarefa_acervo, tarefa_livro, return_exceptions=True)
+    trechos: list[Trecho] = []
+    for parte, nome in ((acervo, "acervo"), (livro, "livro")):
+        if isinstance(parte, BaseException):
+            logger.warning("Falha na busca do %s: %s", nome, type(parte).__name__)
+        else:
+            trechos.extend(parte)
+    return trechos
+
+
+def contexto(trechos: list[Trecho]) -> str:
+    return "\n\n".join(t.para_prompt() for t in trechos) or "Nenhum trecho do material foi encontrado para esta pergunta."

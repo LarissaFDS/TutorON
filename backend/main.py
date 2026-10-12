@@ -1,536 +1,346 @@
+"""Servidor do TutorON: site único com modo Tutor e modo Validação A/B.
+
+Rotas públicas (podem ser acessadas pela internet via túnel):
+
+    GET  /                    site (modo Tutor e modo Validação)
+    POST /api/perguntar       modo Tutor, resposta em streaming (SSE)
+    POST /api/feedback        "ajudou?" / "tem erro" de uma resposta do modo Tutor
+    POST /api/comparar        modo Validação: gera as respostas A e B (cegas)
+    POST /api/avaliar         modo Validação: grava as notas do aluno
+    GET  /api/status          modelos disponíveis agora
+    POST /api/v1/questions    compatibilidade com a CLI (frontend/cli.py)
+
+Rotas só desta máquina (bloqueadas quando a requisição vem pelo túnel):
+
+    GET  /resultados          painel com o resumo das avaliações
+    GET  /api/resultados      o mesmo resumo em JSON
 """
-TutorOn backend — FastAPI application factory.
-
-Exposes a single endpoint:
-
-    POST /api/v1/questions
-
-The AI service implementation is injected via FastAPI's dependency-injection
-system, so tests and future integrations can swap implementations without
-touching this file.
-"""
-
 from __future__ import annotations
 
+import asyncio
+import json
 import logging
-import os
-from typing import Any
+import secrets
+from contextlib import asynccontextmanager
+from pathlib import Path
+from typing import Any, Literal
 
-from fastapi import Depends, FastAPI, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
-from .ai_service import AIRequest, AIResponse, AIService, AIServiceError, GeminiAIService, OllamaAIService
+from . import prompts
+from .config import Settings, load_settings
+from .dados import Limitador, Registro, agora, novo_id
+from .llm import LLM, AllUnavailable, Model
+from .rag import contexto, recuperar
+from .resultados import resumo
 
 logger = logging.getLogger("tutoron.backend")
+WEB = Path(__file__).resolve().parent / "web"
+
+MSG_INDISPONIVEL = ("Nenhum modelo conseguiu responder agora (Gemini sobrecarregado e TutorON local desligado). "
+                    "Tente de novo em alguns segundos.")
 
 
 # ---------------------------------------------------------------------------
-# Request / response schemas
+# Esquemas
 # ---------------------------------------------------------------------------
+
+class Pergunta(BaseModel):
+    pergunta: str = Field(..., min_length=3, max_length=4000)
+    contexto: str | None = Field(default=None, max_length=8000)
+
+    @field_validator("pergunta")
+    @classmethod
+    def nao_vazia(cls, valor: str) -> str:
+        if len(valor.strip()) < 3:
+            raise ValueError("Escreva a pergunta.")
+        return valor.strip()
+
+
+class Feedback(BaseModel):
+    id: str = Field(..., max_length=40)
+    util: bool | None = None
+    erro_matematico: bool = False
+    comentario: str = Field(default="", max_length=1500)
+
+
+Nota = Field(..., ge=1, le=5)
+
+
+class NotasLado(BaseModel):
+    clareza: int = Nota
+    confianca: int = Nota
+    utilidade: int = Nota
+    erro_matematico: bool = False
+
+
+class Avaliacao(BaseModel):
+    sessao: str = Field(..., max_length=60)
+    preferida: Literal["A", "B", "empate"]
+    A: NotasLado
+    B: NotasLado
+    comentario: str = Field(default="", max_length=1500)
+    curso: str = Field(default="", max_length=100)
+    periodo: str = Field(default="", max_length=30)
 
 
 class QuestionRequest(BaseModel):
-    """
-    Payload accepted by ``POST /api/v1/questions``.
-
-    Attributes:
-        question:   The academic question the student needs help with.
-                    Must be a non-empty string.
-        context:    Optional code snippet or surrounding text that provides
-                    additional context for the AI service.
-    """
-
-    question: str = Field(
-        ...,
-        description="The academic question to be answered. Must not be empty.",
-        examples=["Why does my binary search return -1 for a value that exists in the list?"],
-    )
-    context: str | None = Field(
-        default=None,
-        description="Optional code snippet or surrounding context.",
-        examples=["def binary_search(arr, target):\n    lo, hi = 0, len(arr)"],
-    )
+    """Contrato antigo de /api/v1/questions, usado pela CLI."""
+    question: str = Field(..., min_length=1, max_length=4000)
+    context: str | None = Field(default=None, max_length=8000)
 
     @field_validator("question")
     @classmethod
     def question_must_not_be_blank(cls, value: str) -> str:
-        """Reject whitespace-only questions early, before they reach the AI service."""
         if not value.strip():
             raise ValueError("question must not be blank")
         return value.strip()
 
 
-class ErrorDetail(BaseModel):
-    """Structured error payload returned for all non-2xx responses."""
-
-    code: str
-    message: str
-
-
-class ErrorResponse(BaseModel):
-    """Top-level error envelope."""
-
-    error: ErrorDetail
-
-
 class QuestionResponse(BaseModel):
-    """
-    Normalised response returned by ``POST /api/v1/questions``.
-
-    Attributes:
-        answer:   The textual answer produced by the AI service.
-        source:   Which backend produced the answer (``"mock"``, ``"openai"``,
-                  etc.).  Useful for the team to see during the demo whether a
-                  real model is wired in yet.
-        metadata: Arbitrary key/value extras from the provider (latency,
-                  token counts, model version, …).
-    """
-
     answer: str
     source: str
     metadata: dict[str, Any] = Field(default_factory=dict)
 
 
 # ---------------------------------------------------------------------------
-# Dependency injection
+# Utilidades
 # ---------------------------------------------------------------------------
 
-def get_ai_service() -> AIService:
-    """
-    FastAPI dependency that provides the active AIService implementation.
+def cliente(request: Request) -> str:
+    return (request.headers.get("cf-connecting-ip")
+            or request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+            or (request.client.host if request.client else "desconhecido"))
 
-    Use the local Ollama service by default; Gemini remains an explicit option.
 
-    Returns:
-        An instance of the currently active :class:`AIService` implementation.
-    """
-    provider = os.environ.get("TUTORON_AI_PROVIDER", "ollama").lower()
-    if provider == "gemini":
-        return GeminiAIService()
-    return OllamaAIService()
+def requisicao_local(request: Request) -> bool:
+    """Verdadeiro só para quem está nesta máquina. O túnel sempre envia cf-connecting-ip."""
+    if request.headers.get("cf-connecting-ip") or request.headers.get("x-forwarded-for"):
+        return False
+    return bool(request.client and request.client.host in ("127.0.0.1", "::1", "localhost", "testclient"))
+
+
+def sse(evento: dict) -> str:
+    return "data: " + json.dumps(evento, ensure_ascii=False) + "\n\n"
+
+
+def rotulo_modelo(provedor: str, modelo: str) -> str:
+    return Model(provedor, modelo).label
 
 
 # ---------------------------------------------------------------------------
-# Application factory
+# Aplicação
 # ---------------------------------------------------------------------------
 
+def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up: bool = True) -> FastAPI:
+    settings = settings or load_settings()
 
-def create_app(ai_service_override: AIService | None = None) -> FastAPI:
-    """
-    Build and return the FastAPI application.
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        app.state.llm = llm or LLM(settings)
+        app.state.registro = Registro(settings.data_dir)
+        app.state.limitador = Limitador(settings.rate_limit_per_10min)
+        tarefa = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
+        yield
+        if tarefa:
+            tarefa.cancel()
+        if llm is None:
+            await app.state.llm.client.aclose()
 
-    Accepts an optional ``ai_service_override`` so tests can inject a custom
-    (e.g. failing) service without monkey-patching global state.
+    app = FastAPI(title="TutorON", version="1.0.0", lifespan=lifespan,
+                  docs_url=None, redoc_url=None, openapi_url=None)
+    app.mount("/static", StaticFiles(directory=WEB), name="static")
 
-    Args:
-        ai_service_override: If provided, replaces the default
-                             :func:`get_ai_service` dependency for every
-                             request.  Intended for testing only.
+    def limitar(request: Request) -> None:
+        if not app.state.limitador.permitir(cliente(request)):
+            raise HTTPException(429, "Muitas perguntas em pouco tempo. Aguarde alguns minutos e tente de novo.")
 
-    Returns:
-        A configured :class:`FastAPI` instance ready to be served by Uvicorn.
-    """
-    app = FastAPI(
-        title="TutorOn Backend",
-        description=(
-            "Minimal backend for the TutorOn academic micro-tutoring platform. "
-            "Receives a student question, routes it through a pluggable AI service, "
-            "and returns a normalised answer."
-        ),
-        version="0.1.0",
-    )
-
-    # Override the AI service dependency when running tests.
-    if ai_service_override is not None:
-        app.dependency_overrides[get_ai_service] = lambda: ai_service_override
-
-    # Global exception handlers — ensure stack traces never reach the caller
-
-    @app.exception_handler(AIServiceError)
-    async def ai_service_error_handler(
-        request: Request, exc: AIServiceError
-    ) -> JSONResponse:
-        """
-        Convert an :class:`AIServiceError` into a clean 503 response.
-
-        The AI service is a downstream dependency; its failure should surface
-        as a 503 (Service Unavailable) rather than a 500, making it easier to
-        distinguish provider outages from application bugs.
-        """
-        logger.error("AI service error: %s", exc, exc_info=True)
-        return JSONResponse(
-            status_code=exc.status_code,
-            headers={"Retry-After": "5"} if exc.status_code == 503 else None,
-            content=ErrorResponse(
-                error=ErrorDetail(
-                    code=exc.code,
-                    message=exc.public_message,
-                )
-            ).model_dump(),
-        )
+    @app.exception_handler(HTTPException)
+    async def erro_http(request: Request, exc: HTTPException):
+        return JSONResponse({"erro": exc.detail}, status_code=exc.status_code)
 
     @app.exception_handler(Exception)
-    async def unhandled_exception_handler(
-        request: Request, exc: Exception
-    ) -> JSONResponse:
-        """
-        Catch-all handler for any unexpected exception.
+    async def erro_inesperado(request: Request, exc: Exception):
+        logger.exception("Erro inesperado em %s", request.url.path)
+        return JSONResponse({"erro": "Erro inesperado no servidor. Tente de novo."}, status_code=500)
 
-        Logs the full traceback server-side and returns a generic 500 to the
-        caller so internal details are never leaked.
-        """
-        logger.exception("Unhandled exception on %s %s", request.method, request.url)
-        return JSONResponse(
-            status_code=500,
-            content=ErrorResponse(
-                error=ErrorDetail(
-                    code="INTERNAL_ERROR",
-                    message="An unexpected error occurred. Please try again later.",
-                )
-            ).model_dump(),
-        )
+    from fastapi.exceptions import RequestValidationError
 
-    # ------------------------------------------------------------------
-    # Routes
-    # ------------------------------------------------------------------
+    @app.exception_handler(RequestValidationError)
+    async def erro_validacao(request: Request, exc: RequestValidationError):
+        detalhe = exc.errors()[0] if exc.errors() else {}
+        campo = ".".join(str(p) for p in detalhe.get("loc", [])[1:])
+        return JSONResponse({"erro": f"Dados inválidos ({campo}): {detalhe.get('msg', '')}"}, status_code=422)
 
-    FRONTEND_HTML = """<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TutorOn AI</title>
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --border-color: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
-            --error-color: #ef4444;
-            --font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        }
+    # ------------------------------------------------------------------ páginas
+    @app.get("/", include_in_schema=False)
+    async def pagina() -> FileResponse:
+        return FileResponse(WEB / "index.html", headers={"Cache-Control": "no-cache"})
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    @app.get("/design.css", include_in_schema=False)
+    async def design_css() -> Response:
+        from design import stylesheet
+        return Response(stylesheet(), media_type="text/css; charset=utf-8", headers={"Cache-Control": "no-cache"})
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            font-family: var(--font-family);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            background-color: var(--surface-color);
-            max-width: 800px;
-            width: 100%;
-            border-radius: 16px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border: 1px solid var(--border-color);
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        h1 {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(90deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-align: center;
-            font-weight: 800;
-        }
-
-        p.subtitle {
-            text-align: center;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-main);
-        }
-
-        textarea {
-            width: 100%;
-            background-color: #0f172a;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: inherit;
-            font-size: 1rem;
-            resize: vertical;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-        }
-
-        button {
-            width: 100%;
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem;
-            font-size: 1.125rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-
-        button:hover {
-            background-color: var(--primary-hover);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        button:disabled {
-            background-color: var(--border-color);
-            color: var(--text-muted);
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        #result-container {
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            display: none;
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .answer-box {
-            background-color: rgba(59, 130, 246, 0.05);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 8px;
-            padding: 1.5rem;
-            white-space: pre-wrap;
-            line-height: 1.7;
-        }
-
-        .source-tag {
-            margin-top: 1rem;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-align: right;
-            font-style: italic;
-        }
-
-        .error-message {
-            background-color: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: var(--error-color);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        .spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 8px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>TutorOn AI</h1>
-        <p class="subtitle">Seu assistente acadêmico disponível 24 horas por dia</p>
-
-        <form id="qa-form">
-            <div class="form-group">
-                <label for="question">Sua dúvida:</label>
-                <textarea id="question" rows="4" placeholder="Ex: O que é recursão e como evitar que ela rode para sempre?" required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label for="context">Código ou contexto adicional (opcional):</label>
-                <textarea id="context" rows="6" placeholder="Cole seu código ou mensagens de erro aqui..."></textarea>
-            </div>
-
-            <button type="submit" id="submit-btn">Perguntar</button>
-        </form>
-
-        <div id="error-box" class="error-message"></div>
-
-        <div id="result-container">
-            <h3 style="margin-bottom: 1rem; color: #60a5fa; font-weight: 600;">Resposta do Tutor:</h3>
-            <div id="answer" class="answer-box"></div>
-            <div id="source" class="source-tag"></div>
-        </div>
-    </div>
-
-    <script>
-        document.getElementById('qa-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const questionInput = document.getElementById('question').value.trim();
-            const contextInput = document.getElementById('context').value.trim();
-
-            const submitBtn = document.getElementById('submit-btn');
-            const resultContainer = document.getElementById('result-container');
-            const answerBox = document.getElementById('answer');
-            const sourceBox = document.getElementById('source');
-            const errorBox = document.getElementById('error-box');
-
-            if (!questionInput) return;
-
-            // Estado de carregamento
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span class="spinner"></span>Processando...';
-            errorBox.style.display = 'none';
-            resultContainer.style.display = 'none';
-
-            const payload = {
-                question: questionInput,
-                context: contextInput || null
-            };
-
-            try {
-                const response = await fetch('/api/v1/questions', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    let errMsg = 'Ocorreu um erro ao processar a requisição.';
-                    if (data.error && data.error.message) {
-                        errMsg = data.error.message;
-                    } else if (data.detail) {
-                        if (Array.isArray(data.detail) && data.detail.length > 0) {
-                            errMsg = data.detail[0].msg || JSON.stringify(data.detail);
-                        } else {
-                            errMsg = JSON.stringify(data.detail);
-                        }
-                    }
-                    throw new Error(errMsg);
-                }
-
-                // Sucesso
-                answerBox.textContent = data.answer;
-                sourceBox.textContent = `Respondido por: ${data.source}`;
-                resultContainer.style.display = 'block';
-
-            } catch (err) {
-                errorBox.textContent = err.message;
-                errorBox.style.display = 'block';
-            } finally {
-                // Reseta os estados visuais
-                submitBtn.disabled = false;
-                submitBtn.textContent = 'Perguntar';
-            }
-        });
-    </script>
-</body>
-</html>"""
-
-    @app.get("/", tags=["frontend"], response_class=HTMLResponse)
-    async def serve_frontend() -> HTMLResponse:
-        """
-        Rota principal servindo a interface web de MVP do TutorOn.
-        Retorna o HTML/CSS/JS estático numa única string.
-        """
-        return HTMLResponse(content=FRONTEND_HTML, status_code=200)
-
-    @app.get("/health", tags=["health"])
-    async def health_check() -> dict[str, str]:
-        """
-        Liveness probe.  Returns ``{"status": "ok"}`` when the service is up.
-        """
+    @app.get("/health")
+    async def health() -> dict[str, str]:
         return {"status": "ok"}
 
-    @app.post(
-        "/api/v1/questions",
-        response_model=QuestionResponse,
-        status_code=200,
-        tags=["questions"],
-        responses={
-            422: {"model": ErrorResponse, "description": "Validation error"},
-            503: {"model": ErrorResponse, "description": "AI service failure"},
-            500: {"model": ErrorResponse, "description": "Unexpected server error"},
-        },
-    )
-    def ask_question(
-        payload: QuestionRequest,
-        ai_service: AIService = Depends(get_ai_service),
-    ) -> QuestionResponse:
-        """
-        Accept a student question, route it through the AI service, and return
-        a normalised answer.
+    @app.get("/api/status")
+    async def status(request: Request) -> dict:
+        local = await app.state.llm.local_status()
+        dados = {
+            "gemini": {"habilitado": settings.gemini_enabled, "modelos": list(settings.gemini_models)},
+            "local": local,
+            "pausados": app.state.llm.breaker.state(),
+            "livro_supabase": settings.supabase_enabled,
+        }
+        if requisicao_local(request):
+            url = settings.data_dir / "url-publica.txt"
+            dados["url_publica"] = url.read_text(encoding="utf-8-sig").strip() if url.exists() else None
+        return dados
 
-        Args:
-            payload:    Validated request body containing ``question`` and
-                        optional ``context``.
-            ai_service: Injected :class:`AIService` implementation.  Swappable
-                        via FastAPI's dependency-override mechanism.
+    # ------------------------------------------------------------------ modo Tutor
+    @app.post("/api/perguntar")
+    async def perguntar(corpo: Pergunta, request: Request) -> StreamingResponse:
+        limitar(request)
+        llm_: LLM = app.state.llm
+        registro: Registro = app.state.registro
 
-        Returns:
-            A :class:`QuestionResponse` with the answer, source tag, and
-            provider metadata.
+        async def eventos():
+            ident = novo_id()
+            trechos = await recuperar(corpo.pergunta, llm_, settings)
+            yield sse({"tipo": "fontes", "fontes": [t.publico() for t in trechos]})
+            prompt = prompts.prompt_tutor(corpo.pergunta, contexto(trechos), corpo.contexto)
+            partes: list[str] = []
+            try:
+                async for evento in llm_.stream(prompts.SISTEMA_TUTOR, prompt):
+                    if await request.is_disconnected():
+                        return
+                    if evento["tipo"] == "texto":
+                        partes.append(evento["texto"])
+                    elif evento["tipo"] == "reiniciar":
+                        partes.clear()
+                    elif evento["tipo"] == "modelo":
+                        evento["rotulo"] = rotulo_modelo(evento["provedor"], evento["modelo"])
+                    elif evento["tipo"] == "fim":
+                        evento["id"] = ident
+                        registro.anexar("perguntas.jsonl", {
+                            "id": ident, "data": agora(), "pergunta": corpo.pergunta, "contexto": corpo.contexto,
+                            "resposta": "".join(partes), "provedor": evento["provedor"], "modelo": evento["modelo"],
+                            "segundos": evento["segundos"], "tentativas": evento["tentativas"],
+                            "fontes": [t.publico() for t in trechos]})
+                    yield sse(evento)
+            except AllUnavailable as exc:
+                registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "pergunta": corpo.pergunta,
+                                                    "erro": "nenhum_modelo", "tentativas": exc.attempts})
+                yield sse({"tipo": "erro", "mensagem": MSG_INDISPONIVEL})
 
-        Raises:
-            AIServiceError: Propagated from the service; caught by the global
-                            exception handler and returned as a 503.
-        """
-        ai_request = AIRequest(
-            question=payload.question,
-            context=payload.context,
-        )
+        return StreamingResponse(eventos(), media_type="text/event-stream",
+                                 headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
-        # AIServiceError bubbles up to the registered exception handler above.
-        ai_response: AIResponse = ai_service.ask(ai_request)
+    @app.post("/api/feedback")
+    async def feedback(corpo: Feedback) -> dict:
+        app.state.registro.anexar("feedback.jsonl", {"data": agora(), **corpo.model_dump()})
+        return {"salvo": True}
 
-        return QuestionResponse(
-            answer=ai_response.answer,
-            source=ai_response.source,
-            metadata=ai_response.metadata,
-        )
+    # ------------------------------------------------------------------ modo Validação
+    async def gerar_par(pergunta: str, contexto_aluno: str | None) -> dict:
+        llm_: LLM = app.state.llm
+        trechos = await recuperar(pergunta, llm_, settings)
+        prompt_tutor = prompts.prompt_tutor(pergunta, contexto(trechos), contexto_aluno)
+        prompt_gen = prompts.prompt_generico(pergunta, contexto_aluno)
+        modelos_genericos = llm_.cascade(local_model=settings.local_generic_model)
+        tutor, generico = await asyncio.gather(
+            llm_.complete(prompts.SISTEMA_TUTOR, prompt_tutor),
+            llm_.complete(None, prompt_gen, models=modelos_genericos),
+            return_exceptions=True)
+        if isinstance(tutor, BaseException):
+            raise tutor
+        # Comparação justa: o genérico deve usar o mesmo modelo de base do TutorON,
+        # só sem material e sem as instruções. Se a cascata caiu em outro, refaz.
+        alvo = tutor.model if tutor.model.provider == "gemini" else Model("ollama", settings.local_generic_model)
+        if isinstance(generico, BaseException) or generico.model != alvo:
+            try:
+                generico = await llm_.complete(None, prompt_gen, models=[alvo])
+            except AllUnavailable:
+                if isinstance(generico, BaseException):
+                    raise
+        return {
+            "tutoron": {"texto": tutor.text, "provedor": tutor.model.provider, "modelo": tutor.model.name,
+                        "segundos": tutor.seconds, "tentativas": tutor.attempts,
+                        "fontes": [t.publico() for t in trechos], "sistema": "TutorON (RAG + prompt)"},
+            "generico": {"texto": generico.text, "provedor": generico.model.provider, "modelo": generico.model.name,
+                         "segundos": generico.seconds, "tentativas": generico.attempts,
+                         "sistema": "Genérico (mesmo modelo, sem material nem instruções)"},
+        }
+
+    @app.post("/api/comparar")
+    async def comparar(corpo: Pergunta, request: Request) -> dict:
+        limitar(request)
+        try:
+            par = await gerar_par(corpo.pergunta, corpo.contexto)
+        except AllUnavailable:
+            raise HTTPException(503, MSG_INDISPONIVEL)
+        ordem = ["tutoron", "generico"]
+        secrets.SystemRandom().shuffle(ordem)
+        sessao = novo_id()
+        app.state.registro.nova_comparacao({
+            "sessao": sessao, "data": agora(), "pergunta": corpo.pergunta, "contexto": corpo.contexto,
+            "lados": {"A": ordem[0], "B": ordem[1]}, "respostas": par})
+        # A identidade de cada lado nunca sai do servidor.
+        return {"sessao": sessao, "pergunta": corpo.pergunta,
+                "A": par[ordem[0]]["texto"], "B": par[ordem[1]]["texto"]}
+
+    @app.post("/api/avaliar")
+    async def avaliar(corpo: Avaliacao) -> dict:
+        comparacao = app.state.registro.concluir_comparacao(corpo.sessao)
+        if not comparacao:
+            raise HTTPException(400, "Esta comparação já foi avaliada ou expirou. Gere uma nova.")
+        lados = comparacao["lados"]
+        notas = {lados["A"]: corpo.A.model_dump(), lados["B"]: corpo.B.model_dump()}
+        app.state.registro.anexar("validacao/avaliacoes.jsonl", {
+            "sessao": corpo.sessao, "data": agora(), "data_comparacao": comparacao["data"],
+            "pergunta": comparacao["pergunta"], "contexto": comparacao.get("contexto"),
+            "preferida": corpo.preferida,
+            "preferida_condicao": "empate" if corpo.preferida == "empate" else lados[corpo.preferida],
+            "lado_tutoron": "A" if lados["A"] == "tutoron" else "B",
+            "notas": notas, "notas_por_lado": {"A": corpo.A.model_dump(), "B": corpo.B.model_dump()},
+            "comentario": corpo.comentario, "curso": corpo.curso, "periodo": corpo.periodo,
+            "respostas": comparacao["respostas"]})
+        return {"salvo": True}
+
+    # ------------------------------------------------------------------ resultados (só local)
+    @app.get("/api/resultados")
+    async def api_resultados(request: Request) -> dict:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return resumo(app.state.registro)
+
+    @app.get("/resultados", include_in_schema=False)
+    async def pagina_resultados(request: Request) -> FileResponse:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return FileResponse(WEB / "resultados.html", headers={"Cache-Control": "no-cache"})
+
+    # ------------------------------------------------------------------ compatibilidade (CLI)
+    @app.post("/api/v1/questions", response_model=QuestionResponse)
+    async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
+        limitar(request)
+        trechos = await recuperar(payload.question, app.state.llm, settings)
+        try:
+            resultado = await app.state.llm.complete(
+                prompts.SISTEMA_TUTOR, prompts.prompt_tutor(payload.question, contexto(trechos), payload.context))
+        except AllUnavailable:
+            raise HTTPException(503, MSG_INDISPONIVEL)
+        return QuestionResponse(answer=resultado.text, source=f"{resultado.model.provider}-rag", metadata={
+            "model": resultado.model.name, "latency_ms": round(resultado.seconds * 1000),
+            "chunks_used": len(trechos), "sources": [t.publico() for t in trechos], "attempts": resultado.attempts})
 
     return app
+
 
 app = create_app()
