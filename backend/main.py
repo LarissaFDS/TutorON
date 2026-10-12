@@ -143,6 +143,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.llm = llm or LLM(settings)
         app.state.registro = Registro(settings.data_dir)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
+        app.state.limitador_gravacao = Limitador(max(60, 2 * settings.rate_limit_per_10min))
         tarefa = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
         if tarefa:
@@ -157,6 +158,10 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     def limitar(request: Request) -> None:
         if not app.state.limitador.permitir(cliente(request)):
             raise HTTPException(429, "Muitas perguntas em pouco tempo. Aguarde alguns minutos e tente de novo.")
+
+    def limitar_gravacao(request: Request) -> None:
+        if not app.state.limitador_gravacao.permitir(cliente(request)):
+            raise HTTPException(429, "Muitos envios em pouco tempo. Aguarde alguns minutos e tente de novo.")
 
     @app.exception_handler(HTTPException)
     async def erro_http(request: Request, exc: HTTPException):
@@ -243,7 +248,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
                                  headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
 
     @app.post("/api/feedback")
-    async def feedback(corpo: Feedback) -> dict:
+    async def feedback(corpo: Feedback, request: Request) -> dict:
+        limitar_gravacao(request)
         app.state.registro.anexar("feedback.jsonl", {"data": agora(), **corpo.model_dump()})
         return {"salvo": True}
 
@@ -296,7 +302,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
                 "A": par[ordem[0]]["texto"], "B": par[ordem[1]]["texto"]}
 
     @app.post("/api/avaliar")
-    async def avaliar(corpo: Avaliacao) -> dict:
+    async def avaliar(corpo: Avaliacao, request: Request) -> dict:
+        limitar_gravacao(request)
         comparacao = app.state.registro.concluir_comparacao(corpo.sessao)
         if not comparacao:
             raise HTTPException(400, "Esta comparação já foi avaliada ou expirou. Gere uma nova.")

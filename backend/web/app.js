@@ -70,7 +70,7 @@
       var pausados = Object.keys(s.pausados || {}).filter(function (k) { return k.indexOf('gemini:') === 0; }).length;
       var total = gemini ? s.gemini.modelos.length : 0;
       var partes = [];
-      if (gemini) partes.push('Gemini: ' + (total - pausados) + ' de ' + total + ' modelos disponíveis');
+      if (gemini) partes.push(pausados ? 'Gemini: ' + pausados + ' de ' + total + ' modelos sobrecarregados agora' : 'Gemini ativo');
       partes.push('TutorON local: ' + (s.local && s.local.online ? 'ligado' : 'desligado'));
       $('model-status').textContent = partes.join(' · ');
     } catch (e) {

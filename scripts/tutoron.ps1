@@ -5,7 +5,9 @@
 # Outras ações: Testar, Acervo (refaz OCR/curadoria/índice), Parar.
 param([ValidateSet('Servidor','Validacao','Treinar','Testar','Acervo','Parar')][string]$Acao = 'Servidor',
       [Parameter(ValueFromRemainingArguments = $true)][string[]]$Extra = @())
-$ErrorActionPreference = 'Stop'
+# 'Continue': no PowerShell 5.1, avisos que programas escrevem no stderr virariam erro fatal com 'Stop'.
+# Falhas de programas são checadas pelo código de saída (Falhou); cmdlets usam -ErrorAction Stop.
+$ErrorActionPreference = 'Continue'
 $Raiz = Split-Path -Parent $PSScriptRoot
 Set-Location -LiteralPath $Raiz
 $env:PYTHONUTF8 = '1'
@@ -66,29 +68,29 @@ function Iniciar-Ollama {
         Write-Host '   Baixando Ollama portátil oficial (sem administrador)...'
         $zip = Join-Path $Tools 'ollama-windows-amd64.zip'
         if (!(Test-Path $zip)) {
-            Invoke-WebRequest 'https://github.com/ollama/ollama/releases/download/v0.34.4/ollama-windows-amd64.zip' -OutFile $zip
+            Invoke-WebRequest -ErrorAction Stop 'https://github.com/ollama/ollama/releases/download/v0.34.4/ollama-windows-amd64.zip' -OutFile $zip
         }
         if ((Get-FileHash $zip -Algorithm SHA256).Hash -ne '535193F38F3344E5B08F5D1C171C31CE11AA17F0124FF69AE26D8EC7FE06FA62') {
             throw 'Hash inesperado no download do Ollama. Nada foi executado.'
         }
-        Expand-Archive $zip -DestinationPath (Join-Path $Tools 'ollama') -Force
+        Expand-Archive -ErrorAction Stop $zip -DestinationPath (Join-Path $Tools 'ollama') -Force
     }
     $env:OLLAMA_MODELS = Join-Path $Tools 'models'
     $env:OLLAMA_HOST = '127.0.0.1:11434'
     $env:OLLAMA_KEEP_ALIVE = '60m'
     $env:OLLAMA_NUM_PARALLEL = '1'
     $env:OLLAMA_FLASH_ATTENTION = '1'
-    try { $null = Invoke-RestMethod 'http://127.0.0.1:11434/api/tags' -TimeoutSec 3; Ok 'já estava rodando' }
+    try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 3; Ok 'já estava rodando' }
     catch {
         Start-Process -FilePath $Ollama -ArgumentList 'serve' -WindowStyle Hidden `
             -RedirectStandardOutput (Join-Path $Logs 'ollama.log') -RedirectStandardError (Join-Path $Logs 'ollama-erros.log')
         for ($i = 0; $i -lt 40; $i++) {
             Start-Sleep -Milliseconds 500
-            try { $null = Invoke-RestMethod 'http://127.0.0.1:11434/api/tags' -TimeoutSec 2; break } catch { }
+            try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 2; break } catch { }
         }
         Ok 'iniciado'
     }
-    $instalados = (Invoke-RestMethod 'http://127.0.0.1:11434/api/tags').models.name
+    $instalados = (Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags').models.name
     $base = if (Ler-Env 'TUTORON_MODELO_GENERICO_LOCAL') { Ler-Env 'TUTORON_MODELO_GENERICO_LOCAL' } else { 'qwen3:8b' }
     foreach ($modelo in @($base, 'bge-m3')) {
         $nome = if ($modelo -match ':') { $modelo } else { "${modelo}:latest" }
@@ -108,7 +110,7 @@ function Iniciar-Ollama {
 function Baixar-Cloudflared {
     if (!(Test-Path $Cloudflared)) {
         Write-Host '   Baixando cloudflared oficial (túnel público, sem administrador)...'
-        Invoke-WebRequest 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe' -OutFile $Cloudflared
+        Invoke-WebRequest -ErrorAction Stop 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe' -OutFile $Cloudflared
         $assinatura = Get-AuthenticodeSignature $Cloudflared
         if ($assinatura.Status -ne 'Valid' -or $assinatura.SignerCertificate.Subject -notmatch 'Cloudflare, Inc\.') {
             Remove-Item $Cloudflared -Force
@@ -138,7 +140,7 @@ function Iniciar-Servidor {
         -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $Logs 'servidor.log') -RedirectStandardError (Join-Path $Logs 'servidor-erros.log')
     for ($i = 0; $i -lt 60; $i++) {
         Start-Sleep -Milliseconds 500
-        try { $null = Invoke-RestMethod "$Local/health" -TimeoutSec 2; return $p } catch { }
+        try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 2; return $p } catch { }
         if ($p.HasExited) { break }
     }
     throw "O servidor não iniciou. Veja $Logs\servidor-erros.log"
@@ -206,7 +208,7 @@ function Servidor {
             Manter-Acordado
             Start-Sleep -Seconds 20
             $vivo = $true
-            try { $null = Invoke-RestMethod "$Local/health" -TimeoutSec 5 } catch { $vivo = $false }
+            try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 5 } catch { $vivo = $false }
             if (!$vivo -or $servidor.HasExited) {
                 Aviso "$(Get-Date -Format HH:mm:ss) servidor caiu; reiniciando..."
                 Get-NetTCPConnection -LocalPort $Porta -State Listen -ErrorAction SilentlyContinue |
@@ -220,7 +222,7 @@ function Servidor {
                 Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
                 Mostrar-Enderecos $tunel.url
             }
-            try { $null = Invoke-RestMethod 'http://127.0.0.1:11434/api/tags' -TimeoutSec 5 }
+            try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 5 }
             catch { Aviso 'Ollama parou; reiniciando...'; Iniciar-Ollama }
         }
     } finally {
@@ -231,13 +233,13 @@ function Servidor {
 
 function Validacao {
     $rodando = $true
-    try { $null = Invoke-RestMethod "$Local/health" -TimeoutSec 3 } catch { $rodando = $false }
+    try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 3 } catch { $rodando = $false }
     if (!$rodando) {
         Write-Host 'O servidor não está ligado. Abrindo 1-Iniciar-Servidor em outra janela...'
         Start-Process -FilePath (Join-Path $Raiz '1-Iniciar-Servidor.bat')
         for ($i = 0; $i -lt 600 -and !$rodando; $i++) {
             Start-Sleep -Seconds 1
-            try { $null = Invoke-RestMethod "$Local/health" -TimeoutSec 2; $rodando = $true } catch { }
+            try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 2; $rodando = $true } catch { }
         }
         if (!$rodando) { throw 'O servidor não respondeu. Veja a janela do servidor.' }
     }
@@ -267,7 +269,7 @@ function Treinar {
         & $Treino -m pip install --disable-pip-version-check torch --index-url $indice; Falhou
         & $Treino -c "import torch; assert torch.cuda.is_available(), 'PyTorch sem CUDA: confira o driver NVIDIA.'"; Falhou
     }
-    & $Treino -c "import transformers, peft, trl, datasets, bitsandbytes, safetensors" 2>$null
+    & $Treino -c "import transformers, peft, datasets, bitsandbytes, safetensors" 2>$null
     if ($LASTEXITCODE -ne 0) { & $Treino -m pip install --disable-pip-version-check -r 05-modelo\treino\requirements.txt; Falhou }
     & $Treino scripts\treinar.py @Extra; Falhou
 }
