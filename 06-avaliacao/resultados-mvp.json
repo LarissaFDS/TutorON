@@ -1,0 +1,1965 @@
+[
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11.",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 2"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 72"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 65"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 100"
+      }
+    ],
+    "data": "2026-10-11T23:57:53",
+    "texto": "A menor soma de um caminho do topo até a base é **$11$** [P1].\n\n### Recorrência da Programação Dinâmica\nSeja $DP[i][j]$ o custo mínimo para atingir a posição $(i, j)$ a partir do ápice $(0, 0)$ [P1]:\n- **Base:** $DP[0][0] = tri[0][0] = 2$\n- **Borda esquerda ($j = 0$):** $DP[i][0] = tri[i][0] + DP[i-1][0]$\n- **Borda direita ($j = i$):** $DP[i][i] = tri[i][i] + DP[i-1][i-1]$\n- **Interior ($0 < j < i$):** $DP[i][j] = tri[i][j] + \\min(DP[i-1][j-1], DP[i-1][j])$\n\n---\n\n### Preenchimento Passo a Passo da Tabela\n\n1. **Linha 0:** $[2]$\n   - $DP[0][0] = 2$\n   - Estado: $[2]$\n\n2. **Linha 1:** $[3, 4]$\n   - $DP[1][0] = 3 + DP[0][0] = 3 + 2 = 5$\n   - $DP[1][1] = 4 + DP[0][0] = 4 + 2 = 6$\n   - Estado: $[5, 6]$\n\n3. **Linha 2:** $[6, 5, 7]$\n   - $DP[2][0] = 6 + DP[1][0] = 6 + 5 = 11$\n   - $DP[2][1] = 5 + \\min(DP[1][0], DP[1][1]) = 5 + \\min(5, 6) = 5 + 5 = 10$\n   - $DP[2][2] = 7 + DP[1][1] = 7 + 6 = 13$\n   - Estado: $[11, 10, 13]$\n\n4. **Linha 3:** $[4, 1, 8, 3]$\n   - $DP[3][0] = 4 + DP[2][0] = 4 + 11 = 15$\n   - $DP[3][1] = 1 + \\min(DP[2][0], DP[2][1]) = 1 + \\min(11, 10) = 1 + 10 = 11$\n   - $DP[3][2] = 8 + \\min(DP[2][1], DP[2][2]) = 8 + \\min(10, 13) = 8 + 10 = 18$\n   - $DP[3][3] = 3 + DP[2][2] = 3 + 13 = 16$\n   - Estado: $[15, 11, 18, 16]$\n\nA resposta final é o menor valor da última linha:\n$$\\min(15, 11, 18, 16) = 11$$\n\n**Verificação:** Calculando de baixo para cima (bottom-up reverso):\n- Linha 2 com valores da Linha 3:\n  - Posição 0: $6 + \\min(4, 1) = 7$\n  - Posição 1: $5 + \\min(1, 8) = 6$\n  - Posição 2: $7 + \\min(8, 3) = 10$\n- Linha 1 com novos valores:\n  - Posição 0: $3 + \\min(7, 6) = 9$\n  - Posição 1: $4 + \\min(6, 10) = 10$\n- Topo:\n  - Posição 0: $2 + \\min(9, 10) = 11$\nO caminho ótimo é $2 \\to 3 \\to 5 \\to 1$, totalizando $2 + 3 + 5 + 1 = 11$.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.7-flash",
+    "segundos": 11.6,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "HTTP 503",
+        "segundos": 1.08
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "respondeu",
+        "segundos": 10.55
+      }
+    ]
+  },
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11.",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 2"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 72"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 65"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 100"
+      }
+    ],
+    "data": "2026-10-11T23:58:28",
+    "texto": "### Menor Soma de Caminho no Triângulo  \n**Triângulo:**  \n```  \n[2]  \n[3, 4]  \n[6, 5, 7]  \n[4, 1, 8, 3]  \n```  \n**Resposta:** `11`  \n\n---\n\n### **Tabela da Programação Dinâmica (DP)**  \nA DP armazena a menor soma para chegar a cada posição. Iniciamos com o topo e atualizamos linha por linha:  \n\n| Linha | Posição 0 | Posição 1 | Posição 2 | Posição 3 |  \n|-------|-----------|-----------|-----------|-----------|  \n| 0     | 2         |           |           |           |  \n| 1     | 5         | 6         |           |           |  \n| 2     | 11        | 10        | 13        |           |  \n| 3     | 15        | 11        | 18        | 16        |  \n\n**Passo a passo:**  \n1. **Linha 0:** `dp = [2]`.  \n2. **Linha 1:**  \n   - `new[0] = 3 + dp[0] = 5`  \n   - `new[1] = 4 + dp[0] = 6`  \n   - `dp = [5, 6]`.  \n3. **Linha 2:**  \n   - `new[0] = 6 + dp[0] = 11`  \n   - `new[1] = 5 + min(dp[0], dp[1]) = 5 + 5 = 10`  \n   - `new[2] = 7 + dp[1] = 13`  \n   - `dp = [11, 10, 13]`.  \n4. **Linha 3:**  \n   - `new[0] = 4 + dp[0] = 15`  \n   - `new[1] = 1 + min(dp[0], dp[1]) = 1 + 10 = 11`  \n   - `new[2] = 8 + min(dp[1], dp[2]) = 8 + 10 = 18`  \n   - `new[3] = 3 + dp[2] = 16`  \n   - `dp = [15, 11, 18, 16]`.  \n\n**Menor soma:** `min(dp) = 11`.  \n\n---\n\n### **Verificação:**  \nO caminho ótimo é `2 → 3 → 5 → 1`, que soma `2 + 3 + 5 + 1 = 11`. A DP garante que cada etapa escolhe o mínimo entre os dois vizinhos, como descrito em [P1]. O tempo é $ O(n^2) $, conforme a análise da resolução. ✅",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 35.4,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 35.35
+      }
+    ]
+  },
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11.",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 2"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 72"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 65"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 100"
+      }
+    ],
+    "data": "2026-10-11T23:58:53",
+    "texto": "### Resolução do Problema\n\nPara resolver o problema de encontrar a menor soma de um caminho do topo até a base em um triângulo de números, usaremos programação dinâmica. Vamos seguir o método descrito na [P1] do MATERIAL DA DISCIPLINA.\n\n### Passo a Passo\n\n1. **Inicialização da DP:**\n   - Inicializamos a DP com o valor do topo do triângulo, que é `dp = [2]`.\n\n2. **Preenchimento da DP:**\n   - Para cada linha `i > 0`, criamos um novo array `new` que será usado para atualizar `dp`.\n\n3. **Atualização da DP:**\n   - Para a primeira coluna da linha `i`, `new[0] = tri[i][0] + dp[0]`.\n   - Para a última coluna da linha `i`, `new[i] = tri[i][i] + dp[i-1]`.\n   - Para as colunas interiores, `new[j] = tri[i][j] + min(dp[j-1], dp[j])`.\n\n4. **Substituição de `dp` por `new`:**\n   - Após preencher `new`, substituímos `dp` por `new`.\n\n### Cálculo\n\nVamos calcular passo a passo para o triângulo dado: `[2]`, `[3, 4]`, `[6, 5, 7]`, `[4, 1, 8, 3]`.\n\n#### Passo 1: Inicialização\n- `dp = [2]`\n\n#### Passo 2: Primeira linha\n- `new = [3, 4]`\n- `new[0] = 3 + 2 = 5`\n- `new[1] = 4 + 2 = 6`\n- `dp = [5, 6]`\n\n#### Passo 3: Segunda linha\n- `new = [6, 5, 7]`\n- `new[0] = 6 + 5 = 11`\n- `new[1] = 5 + 6 = 11`\n- `new[2] = 7 + 6 = 13`\n- `dp = [11, 11, 13]`\n\n#### Passo 4: Terceira linha\n- `new = [4, 1, 8, 3]`\n- `new[0] = 4 + 11 = 15`\n- `new[1] = 1 + 11 = 12`\n- `new[2] = 8 + 11 = 19`\n- `new[3] = 3 + 13 = 16`\n- `dp = [15, 12, 19, 16]`\n\n### Resultado Final\n- A menor soma de um caminho do topo até a base é `min(dp) = 12`.\n\n### Tabela da Programação Dinâmica\n\n| Triângulo | 2  | 3  | 4  | 6  | 5  | 7  | 4  | 1  | 8  | 3  |\n|-----------|----|----|----|----|----|----|----|----|----|----|\n| dp        | 2  | 5  | 6  | 11 | 11 | 13 | 15 | 12 | 19 | 16 |\n\n### Verificação\n- Verificamos que a menor soma é `12`, que corresponde ao caminho `2 -> 3 -> 1 -> 12`.\n\n**Conclusão:**\nA menor soma de um caminho do topo até a base é `12`.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 25.2,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 25.16
+      }
+    ]
+  },
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11.",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:00:36",
+    "texto": "Para encontrar a menor soma de um caminho do topo até a base do triângulo, utilizamos programação dinâmica. A ideia é calcular a soma mínima para cada posição do triângulo, começando do topo e movendo-se para baixo, considerando os dois vizinhos possíveis em cada etapa.\n\n### Triângulo dado:\n```\nRow 0: [2]\nRow 1: [3, 4]\nRow 2: [6, 5, 7]\nRow 3: [4, 1, 8, 3]\n```\n\n### Tabela de Programação Dinâmica (DP):\nA tabela DP[i][j] representa a menor soma para chegar à posição (i, j) do triângulo. Iniciamos com o valor da primeira linha (2), e calculamos as demais linhas com base nas somas mínimas das posições acima.\n\n#### Passo a passo:\n1. **Row 0 (i=0):**\n   - DP[0][0] = 2\n\n2. **Row 1 (i=1):**\n   - DP[1][0] = DP[0][0] + 3 = 2 + 3 = 5\n   - DP[1][1] = DP[0][0] + 4 = 2 + 4 = 6\n\n3. **Row 2 (i=2):**\n   - DP[2][0] = DP[1][0] + 6 = 5 + 6 = 11\n   - DP[2][1] = min(DP[1][0], DP[1][1]) + 5 = min(5, 6) + 5 = 5 + 5 = 10\n   - DP[2][2] = DP[1][1] + 7 = 6 + 7 = 13\n\n4. **Row 3 (i=3):**\n   - DP[3][0] = DP[2][0] + 4 = 11 + 4 = 15\n   - DP[3][1] = min(DP[2][0], DP[2][1]) + 1 = min(11, 10) + 1 = 10 + 1 = 11\n   - DP[3][2] = min(DP[2][1], DP[2][2]) + 8 = min(10, 13) + 8 = 10 + 8 = 18\n   - DP[3][3] = DP[2][2] + 3 = 13 + 3 = 16\n\n### Tabela Final de DP:\n```\nRow 0: [2]\nRow 1: [5, 6]\nRow 2: [11, 10, 13]\nRow 3: [15, 11, 18, 16]\n```\n\n### Resposta:\nA menor soma de um caminho do topo até a base é o valor mínimo da última linha da tabela DP, que é **11**.\n\n**Resposta final:**  \n$$\n\\boxed{11}\n$$",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 102.9,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 102.88
+      }
+    ]
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²).",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 45"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 50"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 57"
+      }
+    ],
+    "data": "2026-10-12T00:00:51",
+    "texto": "A fórmula fechada exata é **$T(n) = n^2 + n + 1$**.\n\nSeguindo o método da iteração [P1]:\n\n### 1. Expansão das primeiras iterações\nDesenrolamos a chamada recursiva passo a passo:\n* $T(n) = T(n-1) + 2n$\n* Substituindo $T(n-1) = T(n-2) + 2(n-1)$:\n  $$T(n) = T(n-2) + 2(n-1) + 2n$$\n* Substituindo $T(n-2) = T(n-3) + 2(n-2)$:\n  $$T(n) = T(n-3) + 2(n-2) + 2(n-1) + 2n$$\n\n### 2. Forma geral após $k$ iterações\nApós iterar $k$ vezes, obtemos o padrão:\n$$T(n) = T(n-k) + 2 \\sum_{j=n-k+1}^{n} j$$\n\n### 3. Aplicação do caso base\nO caso base é atingido quando $n - k = 1$, ou seja, $k = n - 1$:\n$$T(n) = T(1) + 2 \\sum_{j=2}^{n} j$$\n\nDado que $T(1) = 3$:\n$$T(n) = 3 + 2 \\sum_{j=2}^{n} j$$\n\nPodemos reescrever $3$ como $1 + 2(1)$ para incluir o termo $j=1$ no somatório:\n$$T(n) = 1 + 2(1) + 2 \\sum_{j=2}^{n} j = 1 + 2 \\sum_{j=1}^{n} j$$\n\n### 4. Cálculo da fórmula fechada\nA soma dos primeiros $n$ inteiros é $S_1(n) = \\frac{n(n+1)}{2}$ [P2]:\n$$T(n) = 1 + 2 \\left( \\frac{n(n+1)}{2} \\right) = 1 + n(n+1) = n^2 + n + 1$$\n\nPortanto, a solução exata é $T(n) = n^2 + n + 1$ (e $T(n) = \\Theta(n^2)$).\n\n---\n**Verificação:**\nCalculando diretamente pela recorrência:\n* $T(1) = 3$\n* $T(2) = T(1) + 2(2) = 3 + 4 = 7$\n* $T(3) = T(2) + 2(3) = 7 + 6 = 13$\n\nPela fórmula obtida:\n* $T(1) = 1^2 + 1 + 1 = 3$\n* $T(2) = 2^2 + 2 + 1 = 7$\n* $T(3) = 3^2 + 3 + 1 = 13$\n\nOs valores coincidem perfeitamente.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.7-flash",
+    "segundos": 13.9,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "respondeu",
+        "segundos": 7.87
+      }
+    ]
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²).",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 45"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 50"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 57"
+      }
+    ],
+    "data": "2026-10-12T00:02:13",
+    "texto": "Para resolver $ T(n) = T(n-1) + 2n $ com $ T(1) = 3 $ pelo método da iteração, expandimos a recorrência passo a passo:\n\n$$\n\\begin{align*}\nT(n) &= T(n-1) + 2n \\\\\n&= T(n-2) + 2(n-1) + 2n \\\\\n&= T(n-3) + 2(n-2) + 2(n-1) + 2n \\\\\n&\\vdots \\\\\n&= T(1) + 2 \\cdot 2 + 2 \\cdot 3 + \\cdots + 2n.\n\\end{align*}\n$$\n\nSubstituindo $ T(1) = 3 $, temos:\n\n$$\nT(n) = 3 + 2 \\sum_{k=2}^n k.\n$$\n\nA soma $ \\sum_{k=2}^n k = \\sum_{k=1}^n k - 1 = \\frac{n(n+1)}{2} - 1 $. Substituindo:\n\n$$\nT(n) = 3 + 2\\left(\\frac{n(n+1)}{2} - 1\\right) = 3 + n(n+1) - 2 = n(n+1) + 1.\n$$\n\n**Fórmula fechada exata:**  \n$$\nT(n) = n^2 + n + 1.\n$$\n\n**Verificação:**  \nPara $ n = 1 $: $ T(1) = 1^2 + 1 + 1 = 3 $.  \nPara $ n = 2 $: $ T(2) = 4 + 2 + 1 = 7 $, que coincide com $ T(1) + 2 \\cdot 2 = 3 + 4 = 7 $.  \nPara $ n = 3 $: $ T(3) = 9 + 3 + 1 = 13 $, que coincide com $ T(2) + 2 \\cdot 3 = 7 + 6 = 13 $.  \n\nA fórmula é válida e exata.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 52.5,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 52.47
+      }
+    ]
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²).",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 45"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 50"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 57"
+      }
+    ],
+    "data": "2026-10-12T00:02:35",
+    "texto": "### Resolução pelo Método da Iteração\n\nVamos resolver a recorrência \\( T(n) = T(n-1) + 2n \\) com \\( T(1) = 3 \\) usando o método da iteração.\n\n#### Passo 1: Iteração\n\nComeçamos com a recorrência:\n\\[ T(n) = T(n-1) + 2n \\]\n\nIterando \\( k \\) vezes, temos:\n\\[ T(n) = T(n-k) + 2(n-1) + 2(n-2) + \\cdots + 2(n-k) \\]\n\nPara \\( k = n-1 \\), obtemos:\n\\[ T(n) = T(1) + 2(1) + 2(2) + \\cdots + 2(n-1) \\]\n\n#### Passo 2: Simplificação\n\nSubstituindo \\( T(1) = 3 \\):\n\\[ T(n) = 3 + 2(1 + 2 + \\cdots + (n-1)) \\]\n\nA soma \\( 1 + 2 + \\cdots + (n-1) \\) é uma soma aritmética:\n\\[ 1 + 2 + \\cdots + (n-1) = \\frac{(n-1)n}{2} \\]\n\nSubstituindo na fórmula:\n\\[ T(n) = 3 + 2 \\left( \\frac{(n-1)n}{2} \\right) \\]\n\\[ T(n) = 3 + (n-1)n \\]\n\\[ T(n) = 3 + n^2 - n \\]\n\\[ T(n) = n^2 - n + 3 \\]\n\n#### Verificação\n\nPara verificar a fórmula, vamos calcular \\( T(n) \\) para alguns valores de \\( n \\):\n\n- Para \\( n = 1 \\):\n  \\[ T(1) = 1^2 - 1 + 3 = 3 \\]\n  (Conforme dado na condição inicial)\n\n- Para \\( n = 2 \\):\n  \\[ T(2) = 2^2 - 2 + 3 = 4 - 2 + 3 = 5 \\]\n\n- Para \\( n = 3 \\):\n  \\[ T(3) = 3^2 - 3 + 3 = 9 - 3 + 3 = 9 \\]\n\n- Para \\( n = 4 \\):\n  \\[ T(4) = 4^2 - 4 + 3 = 16 - 4 + 3 = 15 \\]\n\nA fórmula \\( T(n) = n^2 - n + 3 \\) está correta.\n\n### Conclusão\n\nA fórmula fechada exata para \\( T(n) \\) é:\n\\[ T(n) = n^2 - n + 3 \\]\n\n### Complexidade\n\nPara determinar a complexidade assintótica, observamos que \\( T(n) \\) é um polinômio de grau 2:\n\\[ T(n) = \\Theta(n^2) \\]\n\nPortanto, a complexidade assintótica é \\( \\Theta(n^2) \\).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 21.7,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 21.74
+      }
+    ]
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²).",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:04:04",
+    "texto": "Para resolver a recorrência $ T(n) = T(n-1) + 2n $ com a condição inicial $ T(1) = 3 $, utilizamos o método da iteração. Esse método envolve expandir a recorrência passo a passo até identificar um padrão que possa ser generalizado em uma fórmula fechada.\n\n### Passo a Passo da Iteração\n\n1. **Expansão da Recorrência:**\n   $$\n   T(n) = T(n-1) + 2n\n   $$\n   Substituindo $ T(n-1) $ por sua definição:\n   $$\n   T(n) = T(n-2) + 2(n-1) + 2n\n   $$\n   Continuando o processo, obtemos:\n   $$\n   T(n) = T(n-3) + 2(n-2) + 2(n-1) + 2n\n   $$\n   Repeatedly substituindo, até chegar a $ T(1) $:\n   $$\n   T(n) = T(1) + 2 \\cdot 2 + 2 \\cdot 3 + \\cdots + 2 \\cdot n\n   $$\n\n2. **Simplificação:**\n   A partir da condição inicial $ T(1) = 3 $, temos:\n   $$\n   T(n) = 3 + 2 \\cdot (2 + 3 + \\cdots + n)\n   $$\n   O somatório $ 2 + 3 + \\cdots + n $ pode ser calculado como:\n   $$\n   \\sum_{k=2}^{n} k = \\sum_{k=1}^{n} k - 1 = \\frac{n(n+1)}{2} - 1\n   $$\n   Substituindo na expressão de $ T(n) $:\n   $$\n   T(n) = 3 + 2 \\left( \\frac{n(n+1)}{2} - 1 \\right)\n   $$\n\n3. **Redução da Expressão:**\n   Simplificando:\n   $$\n   T(n) = 3 + n(n+1) - 2 = n(n+1) + 1\n   $$\n\n### Fórmula Fechada\n\nA fórmula fechada exata para $ T(n) $ é:\n$$\nT(n) = n^2 + n + 1\n$$\n\n### Verificação\n\nPara confirmar, testamos os valores iniciais:\n- $ n = 1 $: $ 1^2 + 1 + 1 = 3 $\n- $ n = 2 $: $ 2^2 + 2 + 1 = 7 $\n- $ n = 3 $: $ 3^2 + 3 + 1 = 13 $\n- $ n = 4 $: $ 4^2 + 4 + 1 = 21 $\n- $ n = 5 $: $ 5^2 + 5 + 1 = 31 $\n\nTodos os valores coincidem com os calculados pela recorrência, confirmando a validade da fórmula.\n\n### Resposta Final\n\n$$\n\\boxed{T(n) = n^2 + n + 1}\n$$",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 89.3,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 89.32
+      }
+    ]
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³).",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 8, 9"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 18"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 70"
+      }
+    ],
+    "data": "2026-10-12T00:04:26",
+    "texto": "A palavra **OI** é impressa **$T(n) = \\frac{n(n+1)(n+2)}{6}$** vezes.\n\n---\n\n### Derivação da Fórmula Fechada\n\nA contagem total de impressões é dada pelo somatório triplo aninhado:\n\n$$T(n) = \\sum_{i=1}^{n} \\sum_{j=1}^{i} \\sum_{k=1}^{j} 1$$\n\n1. **Laço interno ($k$):**\n   $$\\sum_{k=1}^{j} 1 = j$$\n\n2. **Laço intermediário ($j$):**\n   $$\\sum_{j=1}^{i} j = \\frac{i(i+1)}{2}$$\n\n3. **Laço externo ($i$):**\n   $$T(n) = \\sum_{i=1}^{n} \\frac{i(i+1)}{2} = \\frac{1}{2} \\left( \\sum_{i=1}^{n} i^2 + \\sum_{i=1}^{n} i \\right)$$\n\nUtilizando as somas conhecidas $S_1(n) = \\frac{n(n+1)}{2}$ e $S_2(n) = \\frac{n(n+1)(2n+1)}{6}$ [P4]:\n\n$$T(n) = \\frac{1}{2} \\left[ \\frac{n(n+1)(2n+1)}{6} + \\frac{n(n+1)}{2} \\right]$$\n\nColocando $\\frac{n(n+1)}{2}$ em evidência:\n\n$$T(n) = \\frac{n(n+1)}{4} \\left( \\frac{2n+1}{3} + 1 \\right) = \\frac{n(n+1)}{4} \\left( \\frac{2n+4}{3} \\right)$$\n\n$$T(n) = \\frac{n(n+1) \\cdot 2(n+2)}{12} = \\frac{n(n+1)(n+2)}{6}$$\n\n---\n\n### Verificação para $n = 3$\n\nPela fórmula fechada:\n$$T(3) = \\frac{3 \\cdot (3+1) \\cdot (3+2)}{6} = \\frac{3 \\cdot 4 \\cdot 5}{6} = \\frac{60}{6} = 10$$\n\nPela contagem manual iterativa:\n- **$i = 1$:** $j$ vai de $1$ a $1 \\implies k$ roda $1$ vez (Total = $1$)\n- **$i = 2$:** $j$ vai de $1$ a $2 \\implies k$ roda $1 + 2 = 3$ vezes\n- **$i = 3$:** $j$ vai de $1$ a $3 \\implies k$ roda $1 + 2 + 3 = 6$ vezes\n\nSoma total: $1 + 3 + 6 = 10$.\n\n**Verificação:** A contagem manual ($1 + 3 + 6 = 10$) bate exatamente com a aplicação da fórmula fechada $T(3) = 10$.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.6-flash",
+    "segundos": 17.8,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "HTTP 503",
+        "segundos": 1.43
+      },
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "respondeu",
+        "segundos": 10.37
+      }
+    ]
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³).",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:04:36",
+    "texto": "A quantidade de vezes que a palavra **OI** é impressa pode ser representada pela seguinte somatório triplo, correspondente aos três laços (*loops*):\n\n$$S(n) = \\sum_{i=1}^{n} \\sum_{j=1}^{i} \\sum_{k=1}^{j} 1$$\n\n---\n\n### 1. Dedução da Fórmula Fechada\n\nVamos resolver o somatório de dentro para fora:\n\n1. **Somatório interno (em $k$):**\n   $$\\sum_{k=1}^{j} 1 = j$$\n\n2. **Somatório do meio (em $j$):**\n   $$\\sum_{j=1}^{i} j = \\frac{i(i+1)}{2}$$\n\n3. **Somatório externo (em $i$):**\n   $$S(n) = \\sum_{i=1}^{n} \\frac{i(i+1)}{2} = \\frac{1}{2} \\sum_{i=1}^{n} (i^2 + i)$$\n\n   Utilizando as fórmulas das somas notáveis ($\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}$ e $\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}$):\n\n   $$S(n) = \\frac{1}{2} \\left[ \\frac{n(n+1)(2n+1)}{6} + \\frac{n(n+1)}{2} \\right]$$\n\n   Colocando $\\frac{n(n+1)}{2}$ em evidência:\n\n   $$S(n) = \\frac{1}{2} \\cdot \\frac{n(n+1)}{2} \\left[ \\frac{2n+1}{3} + 1 \\right]$$\n   $$S(n) = \\frac{n(n+1)}{4} \\left[ \\frac{2n + 4}{3} \\right]$$\n   $$S(n) = \\frac{n(n+1) \\cdot 2(n+2)}{12}$$\n   $$S(n) = \\frac{n(n+1)(n+2)}{6}$$\n\n*(Nota: Esta fórmula também é equivalente à combinação $\\binom{n+2}{3}$, conhecida como os números tetraédricos).*\n\n---\n\n### **Fórmula Fechada:**\n$$\\text{Total de impressões} = \\frac{n(n+1)(n+2)}{6}$$\n\n---\n\n### 2. Verificação para $n = 3$\n\n#### **Pela Fórmula:**\n$$S(3) = \\frac{3 \\cdot (3+1) \\cdot (3+2)}{6} = \\frac{3 \\cdot 4 \\cdot 5}{6} = \\frac{60}{6} = \\mathbf{10}$$\n\n#### **Pela Execução Passo a Passo do Algoritmo:**\n\n* **Para $i = 1$:**\n  * $j = 1$:\n    * $k = 1 \\implies$ imprime **OI** (1 vez)\n  * *Subtotal para $i=1$: **1***\n\n* **Para $i = 2$:**\n  * $j = 1$:\n    * $k = 1 \\implies$ imprime **OI** (1 vez)\n  * $j = 2$:\n    * $k = 1, 2 \\implies$ imprime **OI** (2 vezes)\n  * *Subtotal para $i=2$: 1 + 2 = **3***\n\n* **Para $i = 3$:**\n  * $j = 1$:\n    * $k = 1 \\implies$ imprime **OI** (1 vez)\n  * $j = 2$:\n    * $k = 1, 2 \\implies$ imprime **OI** (2 vezes)\n  * $j = 3$:\n    * $k = 1, 2, 3 \\implies$ imprime **OI** (3 vezes)\n  * *Subtotal para $i=3$: 1 + 2 + 3 = **6***\n\n**Total Geral:** $1 + 3 + 6 = \\mathbf{10}$ impressões.\n\nA fórmula está **correta e confirmada**.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.6-flash",
+    "segundos": 10.4,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "respondeu",
+        "segundos": 10.42
+      }
+    ]
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³).",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 8, 9"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 18"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 70"
+      }
+    ],
+    "data": "2026-10-12T00:05:06",
+    "texto": "A palavra \"OI\" é impressa $ \\frac{n(n+1)(n+2)}{6} $ vezes. \n\n**Verificação:** Para $ n = 3 $:\n$$\n\\frac{3 \\cdot 4 \\cdot 5}{6} = \\frac{60}{6} = 10\n$$\nManualmente:\n- $ i=1 $: $ j=1 $ → $ k=1 $ → 1 impressão.\n- $ i=2 $: $ j=1 $ (1) + $ j=2 $ (2) → 3 impressões.\n- $ i=3 $: $ j=1 $ (1) + $ j=2 $ (2) + $ j=3 $ (3) → 6 impressões.\nTotal: $ 1 + 3 + 6 = 10 $, confirmando a fórmula.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 29.6,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 29.57
+      }
+    ]
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³).",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 8, 9"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 2, 3"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 18"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 70"
+      }
+    ],
+    "data": "2026-10-12T00:05:37",
+    "texto": "### Resolução da Contagem da Palavra OI\n\nA contagem da palavra \"OI\" no código dado pode ser analisada passo a passo. Vamos considerar o código:\n\n```plaintext\npara i de 1 até n,\n    para j de 1 até i,\n        para k de 1 até j:\n            imprima OI\n```\n\n#### Passo 1: Contagem de Chamadas\n\nVamos contar quantas vezes a palavra \"OI\" é impressa para um valor específico de `n`. Para isso, vamos analisar a estrutura das três laços.\n\n- O laço externo `i` vai de 1 a `n`.\n- O laço intermediário `j` vai de 1 a `i`.\n- O laço interno `k` vai de 1 a `j`.\n\nPara cada valor de `i`, o número de vezes que o laço `j` é executado é `i`. E para cada valor de `j`, o laço `k` é executado `j` vezes. Portanto, a palavra \"OI\" é impressa `i * j` vezes para cada `i`.\n\n#### Passo 2: Contagem Total\n\nPara calcular o número total de impressões de \"OI\", somamos o número de impressões para cada valor de `i`:\n\n\\[\nT(n) = \\sum_{i=1}^{n} \\sum_{j=1}^{i} j\n\\]\n\nA expressão interna \\(\\sum_{j=1}^{i} j\\) é a soma dos primeiros `i` números naturais, que é igual a \\(\\frac{i(i+1)}{2}\\). Portanto, a expressão total se torna:\n\n\\[\nT(n) = \\sum_{i=1}^{n} \\frac{i(i+1)}{2}\n\\]\n\n#### Passo 3: Simplificação da Soma\n\nPodemos simplificar a expressão:\n\n\\[\nT(n) = \\frac{1}{2} \\sum_{i=1}^{n} i(i+1) = \\frac{1}{2} \\sum_{i=1}^{n} (i^2 + i)\n\\]\n\nUsando as fórmulas para a soma dos quadrados e a soma dos primeiros `n` números naturais:\n\n\\[\n\\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6}\n\\]\n\\[\n\\sum_{i=1}^{n} i = \\frac{n(n+1)}{2}\n\\]\n\nEntão:\n\n\\[\nT(n) = \\frac{1}{2} \\left( \\frac{n(n+1)(2n+1)}{6} + \\frac{n(n+1)}{2} \\right)\n\\]\n\nCombinando os termos:\n\n\\[\nT(n) = \\frac{1}{2} \\left( \\frac{n(n+1)(2n+1) + 3n(n+1)}{6} \\right) = \\frac{1}{2} \\left( \\frac{n(n+1)(2n+1 + 3)}{6} \\right) = \\frac{1}{2} \\left( \\frac{n(n+1)(2n+4)}{6} \\right)\n\\]\n\nSimplificando:\n\n\\[\nT(n) = \\frac{n(n+1)(n+2)}{6}\n\\]\n\n#### Passo 4: Verificação para n = 3\n\nVamos verificar a fórmula para `n = 3`:\n\n\\[\nT(3) = \\frac{3(3+1)(3+2)}{6} = \\frac{3 \\cdot 4 \\cdot 5}{6} = \\frac{60}{6} = 10\n\\]\n\nPara `n = 3`, o laço externo `i` vai de 1 a 3. Vamos contar manualmente:\n\n- Para `i = 1`: `j` vai de 1 a 1, então `k` vai de 1 a 1. Impressões: 1.\n- Para `i = 2`: `j` vai de 1 a 2, então `k` vai de 1 a 1 e de 1 a 2. Impressões: 1 + 2 = 3.\n- Para `i = 3`: `j` vai de 1 a 3, então `k` vai de 1 a 1, 1 a 2, e 1 a 3. Impressões: 1 + 2 + 3 = 6.\n\nTotal: 1 + 3 + 6 = 10.\n\nA fórmula \\(\\frac{n(n+1)(n+2)}{6}\\) está correta.\n\n### Conclusão\n\nA fórmula exata para o número de vezes que a palavra \"OI\" é impressa é:\n\n\\[\nT(n) = \\frac{n(n+1)(n+2)}{6}\n\\]\n\nVerificação: Para `n = 3`, o número de impressões é 10.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 31.3,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 31.29
+      }
+    ]
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³).",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:06:42",
+    "texto": "Para determinar quantas vezes a palavra \"OI\" é impressa pelos loops aninhados, analisamos a estrutura das iterações. Os loops são:\n\n1. Para $ i $ de 1 até $ n $,\n2. Para $ j $ de 1 até $ i $,\n3. Para $ k $ de 1 até $ j $: imprima \"OI\".\n\nA quantidade total de impressões é equivalente ao número total de iterações do loop interno (sobre $ k $), que pode ser expresso como:\n\n$$\n\\text{Total} = \\sum_{i=1}^{n} \\sum_{j=1}^{i} \\sum_{k=1}^{j} 1\n$$\n\n**Passo a passo da simplificação:**\n\n1. A soma interna $ \\sum_{k=1}^{j} 1 $ é igual a $ j $, pois estamos somando $ 1 $ $ j $ vezes.\n2. Substituindo, temos:\n   $$\n   \\text{Total} = \\sum_{i=1}^{n} \\sum_{j=1}^{i} j\n   $$\n3. A soma $ \\sum_{j=1}^{i} j $ é a soma dos primeiros $ i $ inteiros, que é $ \\frac{i(i+1)}{2} $.\n4. Substituindo novamente:\n   $$\n   \\text{Total} = \\sum_{i=1}^{n} \\frac{i(i+1)}{2}\n   $$\n5. Expandindo $ i(i+1) $:\n   $$\n   \\text{Total} = \\frac{1}{2} \\sum_{i=1}^{n} (i^2 + i)\n   $$\n6. Separando as somas:\n   $$\n   \\text{Total} = \\frac{1}{2} \\left( \\sum_{i=1}^{n} i^2 + \\sum_{i=1}^{n} i \\right)\n   $$\n7. Usando as fórmulas conhecidas:\n   - $ \\sum_{i=1}^{n} i^2 = \\frac{n(n+1)(2n+1)}{6} $\n   - $ \\sum_{i=1}^{n} i = \\frac{n(n+1)}{2} $\n8. Substituindo e simplificando:\n   $$\n   \\text{Total} = \\frac{1}{2} \\left( \\frac{n(n+1)(2n+1)}{6} + \\frac{n(n+1)}{2} \\right)\n   $$\n   $$\n   \\text{Total} = \\frac{n(n+1)(n+2)}{6}\n   $$\n\n**Fórmula fechada:**  \n$$\n\\boxed{\\frac{n(n+1)(n+2)}{6}}\n$$\n\n**Verificação para $ n = 3 $:**  \nCalculando manualmente:\n- $ i = 1 $: $ j = 1 $, $ k = 1 $ → 1 vez.\n- $ i = 2 $: $ j = 1 $ (1 vez), $ j = 2 $ (2 vezes) → 3 vezes.\n- $ i = 3 $: $ j = 1 $ (1 vez), $ j = 2 $ (2 vezes), $ j = 3 $ (3 vezes) → 6 vezes.\n\nTotal: $ 1 + 3 + 6 = 10 $.\n\nUsando a fórmula:  \n$$\n\\frac{3 \\cdot 4 \\cdot 5}{6} = \\frac{60}{6} = 10\n$$\n\n**Resposta final:**  \nA palavra \"OI\" é impressa $ \\frac{n(n+1)(n+2)}{6} $ vezes. Para $ n = 3 $, o resultado é $ \\boxed{10} $.",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 64.8,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 64.8
+      }
+    ]
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral.",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 28"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 16"
+      }
+    ],
+    "data": "2026-10-12T00:09:36",
+    "texto": "### Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular $ a^{13} $?  \n**Resposta:** 5 multiplicações.  \n\n### Passo a passo das chamadas recursivas:  \n1. **Chamada: $ a^{13} $**  \n   - $ 13 $ é ímpar → Calcula $ a^6 $, depois multiplica por $ a $.  \n   - **Multiplicações:** 2 (1 para $ (a^6)^2 $, 1 para $ (a^6)^2 \\cdot a $).  \n\n2. **Chamada: $ a^6 $**  \n   - $ 6 $ é par → Calcula $ a^3 $, depois eleva ao quadrado.  \n   - **Multiplicações:** 1 (1 para $ (a^3)^2 $).  \n\n3. **Chamada: $ a^3 $**  \n   - $ 3 $ é ímpar → Calcula $ a^1 $, depois multiplica por $ a $.  \n   - **Multiplicações:** 2 (1 para $ (a^1)^2 $, 1 para $ (a^1)^2 \\cdot a $).  \n\n4. **Chamada: $ a^1 $**  \n   - Base do algoritmo → **0 multiplicações**.  \n\n### Total de multiplicações:  \n$ 2 + 1 + 2 = 5 $.  \n\n### Verificação:  \n- A exponenciação rápida reduz $ a^{13} $ para $ (a^6)^2 \\cdot a $, onde $ a^6 = (a^3)^2 $, e $ a^3 = (a^1)^2 \\cdot a $.  \n- Cada etapa de multiplicação (quadrado ou combinação) é contada, resultando em 5 operações.  \n\n**Conclusão:** A exponenciação rápida por divisão e conquista realiza **5 multiplicações** para calcular $ a^{13} $.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 98.7,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 98.66
+      }
+    ]
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral.",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 28"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 16"
+      }
+    ],
+    "data": "2026-10-12T00:10:50",
+    "texto": "### Resposta\n\nPara calcular \\( a^{13} \\) usando a exponenciação rápida por divisão e conquista, vamos seguir o algoritmo descrito no MATERIAL DA DISCIPLINA [P1]. Vamos detalhar cada chamada e contar as multiplicações.\n\n#### Passo 1: Definição do Algoritmo\nO algoritmo de exponenciação rápida é definido da seguinte forma:\n- **Base Case:** \\( \\text{potencia}(a, 0) = 1 \\)\n- **Caso Recursivo:** Para \\( n > 0 \\), calcule \\( r = \\text{potencia}(a, \\text{floor}(n/2)) \\). Se \\( n \\) for par, retorne \\( r \\times r \\); se for ímpar, retorne \\( r \\times r \\times a \\).\n\n#### Passo 2: Aplicação ao Cálculo de \\( a^{13} \\)\nVamos calcular \\( a^{13} \\) passo a passo.\n\n1. **Chamada inicial:** \\( \\text{potencia}(a, 13) \\)\n   - \\( n = 13 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(13/2)) = \\text{potencia}(a, 6) \\)\n\n2. **Chamada para \\( \\text{potencia}(a, 6) \\)**\n   - \\( n = 6 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(6/2)) = \\text{potencia}(a, 3) \\)\n\n3. **Chamada para \\( \\text{potencia}(a, 3) \\)**\n   - \\( n = 3 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(3/2)) = \\text{potencia}(a, 1) \\)\n\n4. **Chamada para \\( \\text{potencia}(a, 1) \\)**\n   - \\( n = 1 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(1/2)) = \\text{potencia}(a, 0) = 1 \\)\n\n5. **Retorno de \\( \\text{potencia}(a, 1) \\)**\n   - \\( r = 1 \\)\n   - \\( \\text{potencia}(a, 3) = 1 \\times a = a \\)\n\n6. **Retorno de \\( \\text{potencia}(a, 3) \\)**\n   - \\( r = a \\)\n   - \\( \\text{potencia}(a, 6) = a \\times a = a^2 \\)\n\n7. **Retorno de \\( \\text{potencia}(a, 6) \\)**\n   - \\( r = a^2 \\)\n   - \\( \\text{potencia}(a, 13) = a^2 \\times a^2 = a^4 \\)\n\n8. **Chamada para \\( \\text{potencia}(a, 4) \\)**\n   - \\( n = 4 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(4/2)) = \\text{potencia}(a, 2) \\)\n\n9. **Chamada para \\( \\text{potencia}(a, 2) \\)**\n   - \\( n = 2 \\)\n   - \\( r = \\text{potencia}(a, \\text{floor}(2/2)) = \\text{potencia}(a, 1) = a \\)\n\n10. **Retorno de \\( \\text{potencia}(a, 2) \\)**\n    - \\( r = a \\)\n    - \\( \\text{potencia}(a, 4) = a \\times a = a^2 \\)\n\n11. **Retorno de \\( \\text{potencia}(a, 4) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^4 \\times a^2 = a^6 \\)\n\n12. **Chamada para \\( \\text{potencia}(a, 12) \\)**\n    - \\( n = 12 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(12/2)) = \\text{potencia}(a, 6) = a^2 \\)\n\n13. **Retorno de \\( \\text{potencia}(a, 12) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^6 \\times a^2 = a^8 \\)\n\n14. **Chamada para \\( \\text{potencia}(a, 8) \\)**\n    - \\( n = 8 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(8/2)) = \\text{potencia}(a, 4) = a^2 \\)\n\n15. **Retorno de \\( \\text{potencia}(a, 8) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^8 \\times a^2 = a^{10} \\)\n\n16. **Chamada para \\( \\text{potencia}(a, 10) \\)**\n    - \\( n = 10 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(10/2)) = \\text{potencia}(a, 5) \\)\n\n17. **Chamada para \\( \\text{potencia}(a, 5) \\)**\n    - \\( n = 5 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(5/2)) = \\text{potencia}(a, 2) = a \\)\n\n18. **Retorno de \\( \\text{potencia}(a, 5) \\)**\n    - \\( r = a \\)\n    - \\( \\text{potencia}(a, 10) = a \\times a = a^2 \\)\n\n19. **Retorno de \\( \\text{potencia}(a, 10) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{10} \\times a^2 = a^{12} \\)\n\n20. **Chamada para \\( \\text{potencia}(a, 12) \\)**\n    - \\( n = 12 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(12/2)) = \\text{potencia}(a, 6) = a^2 \\)\n\n21. **Retorno de \\( \\text{potencia}(a, 12) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{12} \\times a^2 = a^{14} \\)\n\n22. **Chamada para \\( \\text{potencia}(a, 14) \\)**\n    - \\( n = 14 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(14/2)) = \\text{potencia}(a, 7) \\)\n\n23. **Chamada para \\( \\text{potencia}(a, 7) \\)**\n    - \\( n = 7 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(7/2)) = \\text{potencia}(a, 3) = a \\)\n\n24. **Retorno de \\( \\text{potencia}(a, 7) \\)**\n    - \\( r = a \\)\n    - \\( \\text{potencia}(a, 14) = a \\times a = a^2 \\)\n\n25. **Retorno de \\( \\text{potencia}(a, 14) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{14} \\times a = a^{15} \\)\n\n26. **Chamada para \\( \\text{potencia}(a, 15) \\)**\n    - \\( n = 15 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(15/2)) = \\text{potencia}(a, 7) = a \\)\n\n27. **Retorno de \\( \\text{potencia}(a, 15) \\)**\n    - \\( r = a \\)\n    - \\( \\text{potencia}(a, 13) = a^{15} \\times a = a^{16} \\)\n\n28. **Chamada para \\( \\text{potencia}(a, 16) \\)**\n    - \\( n = 16 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(16/2)) = \\text{potencia}(a, 8) = a^2 \\)\n\n29. **Retorno de \\( \\text{potencia}(a, 16) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{16} \\times a^2 = a^{18} \\)\n\n30. **Chamada para \\( \\text{potencia}(a, 18) \\)**\n    - \\( n = 18 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(18/2)) = \\text{potencia}(a, 9) \\)\n\n31. **Chamada para \\( \\text{potencia}(a, 9) \\)**\n    - \\( n = 9 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(9/2)) = \\text{potencia}(a, 4) = a^2 \\)\n\n32. **Retorno de \\( \\text{potencia}(a, 9) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 18) = a^2 \\times a^2 = a^4 \\)\n\n33. **Retorno de \\( \\text{potencia}(a, 18) \\)**\n    - \\( r = a^4 \\)\n    - \\( \\text{potencia}(a, 13) = a^{18} \\times a^4 = a^{22} \\)\n\n34. **Chamada para \\( \\text{potencia}(a, 22) \\)**\n    - \\( n = 22 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(22/2)) = \\text{potencia}(a, 11) \\)\n\n35. **Chamada para \\( \\text{potencia}(a, 11) \\)**\n    - \\( n = 11 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(11/2)) = \\text{potencia}(a, 5) = a \\)\n\n36. **Retorno de \\( \\text{potencia}(a, 11) \\)**\n    - \\( r = a \\)\n    - \\( \\text{potencia}(a, 22) = a \\times a = a^2 \\)\n\n37. **Retorno de \\( \\text{potencia}(a, 22) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{22} \\times a^2 = a^{24} \\)\n\n38. **Chamada para \\( \\text{potencia}(a, 24) \\)**\n    - \\( n = 24 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(24/2)) = \\text{potencia}(a, 12) = a^2 \\)\n\n39. **Retorno de \\( \\text{potencia}(a, 24) \\)**\n    - \\( r = a^2 \\)\n    - \\( \\text{potencia}(a, 13) = a^{24} \\times a^2 = a^{26} \\)\n\n40. **Chamada para \\( \\text{potencia}(a, 26) \\)**\n    - \\( n = 26 \\)\n    - \\( r = \\text{potencia}(a, \\text{floor}(26/2)) = \\text{potencia}(a, 13) = a^{13} \\)\n\n41. **Retorno de \\( \\text{potencia}(a, 26) \\)**\n    - \\( r = a^{13} \\)\n    - \\( \\text{potencia}(a, 13) = a^{26} \\times a^{13} = a^{39} \\)\n\n### Contagem de Multiplicações\n- **Multiplicações:** 13\n\n**Verificação:** Vamos verificar se o número de multiplicações é correto. Para \\( a^{13} \\), precisamos realizar 13 multiplicações, conforme mostrado no algoritmo.\n\n**Conclusão:** O algoritmo exponenciação rápida por divisão e conquista realiza 13 multiplicações para calcular \\( a^{13} \\).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 73.8,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 73.81
+      }
+    ]
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral.",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:12:32",
+    "texto": "Para calcular $ a^{13} $ usando a exponenciação rápida por divisão e conquista, o algoritmo divide o expoente em partes menores, reduzindo o número de multiplicações necessárias. Abaixo está o processo detalhado, mostrando cada chamada e o número de multiplicações:\n\n### Passos e Chamadas Recursivas\n1. **$ a^{13} $**  \n   - Como 13 é ímpar, escrevemos $ a^{13} = a^{12} \\cdot a $.\n   - **Multiplicações:** 1 (para multiplicar $ a^{12} $ por $ a $).\n\n2. **$ a^{12} $**  \n   - Como 12 é par, escrevemos $ a^{12} = (a^6)^2 $.\n   - **Multiplicações:** 1 (para elevar $ a^6 $ ao quadrado).\n\n3. **$ a^6 $**  \n   - Como 6 é par, escrevemos $ a^6 = (a^3)^2 $.\n   - **Multiplicações:** 1 (para elevar $ a^3 $ ao quadrado).\n\n4. **$ a^3 $**  \n   - Como 3 é ímpar, escrevemos $ a^3 = a^2 \\cdot a $.\n   - **Multiplicações:** 1 (para multiplicar $ a^2 $ por $ a $).\n\n5. **$ a^2 $**  \n   - Como 2 é par, escrevemos $ a^2 = (a^1)^2 $.\n   - **Multiplicações:** 1 (para elevar $ a^1 $ ao quadrado).\n\n### Total de Multiplicações\n- $ a^2 $: 1 multiplicação  \n- $ a^3 $: 1 multiplicação  \n- $ a^6 $: 1 multiplicação  \n- $ a^{12} $: 1 multiplicação  \n- $ a^{13} $: 1 multiplicação  \n\n**Total:** $ 1 + 1 + 1 + 1 + 1 = 5 $ multiplicações.\n\n### Resposta Final\nA exponenciação rápida por divisão e conquista calcula $ a^{13} $ com **5 multiplicações**.",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 101.7,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 101.66
+      }
+    ]
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca).",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c02_gabarito_algoritmo_x_nota_2.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 7, 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 123"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 120"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 73"
+      }
+    ],
+    "data": "2026-10-12T00:12:56",
+    "texto": "Para encontrar o maior número de intervalos compatíveis, utilizamos a estratégia gulosa de **seleção de intervalos** [P1].\n\n### 1. Execução do Algoritmo\nPrimeiro, ordenamos os intervalos pelo seu **término crescente** ($f_i$):\n\n1. $[1, 4]$\n2. $[3, 5]$\n3. $[0, 6]$\n4. $[5, 7]$\n5. $[3, 9]$\n6. $[5, 9]$\n7. $[6, 10]$\n8. $[8, 11]$\n9. $[8, 12]$\n10. $[2, 14]$\n11. $[12, 16]$\n\n**Passo a passo da seleção:**\n*   Escolhemos o primeiro: **$[1, 4]$** (fim = 4).\n*   Próximo compatível ($s_i \\geq 4$): **$[5, 7]$** (fim = 7).\n*   Próximo compatível ($s_i \\geq 7$): **$[8, 11]$** (fim = 11).\n*   Próximo compatível ($s_i \\geq 11$): **$[12, 16]$** (fim = 16).\n\nO número máximo de intervalos compatíveis é **4**. O conjunto escolhido é $\\{[1, 4], [5, 7], [8, 11], [12, 16]\\}$.\n\n### 2. Por que ordenar pelo término?\nA ordenação pelo término é a chave da otimalidade gulosa neste problema [P1]. Ao escolher o intervalo que termina mais cedo, você deixa o **máximo de espaço livre possível** para os intervalos subsequentes.\n\nMatematicamente, se você escolhesse um intervalo que termina mais tarde, você estaria restringindo desnecessariamente o tempo disponível para as próximas escolhas, sem ganhar vantagem na contagem total. Como demonstrado na teoria de algoritmos gulosos, essa escolha localmente ótima (menor término) não impede que alcancemos a solução ótima global [P1, L3].\n\n**Verificação:**\n*   Se tentássemos começar com $[0, 6]$, o próximo seria $[8, 11]$ e depois $[12, 16]$, totalizando apenas 3 intervalos.\n*   Se tentássemos incluir $[3, 5]$, ele conflitaria com $[1, 4]$ (se escolhido primeiro) ou reduziria o espaço para os próximos.\n*   A sequência $\\{[1, 4], [5, 7], [8, 11], [12, 16]\\}$ respeita a condição $f_i \\leq s_{i+1}$ (considerando intervalos fechados, a regra é $f_i \\leq s_{i+1}$ para não haver sobreposição). Como $4 \\leq 5$, $7 \\leq 8$ e $11 \\leq 12$, todos são compatíveis.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 20.7,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.42
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "HTTP 503",
+        "segundos": 1.06
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.27
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.64
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "HTTP 429",
+        "segundos": 0.26
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 18.06
+      }
+    ]
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca).",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:14:03",
+    "texto": "Para resolver este problema, utilizamos o **Algoritmo Guloso de Seleção de Intervalos**.\n\n### 1. Ordenação e Execução do Algoritmo\n\nO algoritmo consiste em:\n1. Ordenar os intervalos pelo **tempo de término** (crescente).\n2. Selecionar o primeiro intervalo.\n3. Para os próximos, selecionar apenas aqueles cujo **início seja maior ou igual ao término do último selecionado**.\n\n**Intervalos originais:**\n[1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14], [12,16]\n\n**Passo 1: Ordenar pelo término:**\n1. [1, 4] (termina em 4)\n2. [3, 5] (termina em 5)\n3. [0, 6] (termina em 6)\n4. [5, 7] (termina em 7)\n5. [3, 9] (termina em 9)\n6. [5, 9] (termina em 9)\n7. [6, 10] (termina em 10)\n8. [8, 11] (termina em 11)\n9. [8, 12] (termina em 12)\n10. [2, 14] (termina em 14)\n11. [12, 16] (termina em 16)\n\n**Passo 2: Seleção Gulosa:**\n*   Seleciona **[1, 4]**. (Fim: 4)\n*   Próximo é [3, 5]: Início (3) < 4. **Ignora**.\n*   Próximo é [0, 6]: Início (0) < 4. **Ignora**.\n*   Seleciona **[5, 7]**. (Início 5 ≥ 4). (Fim: 7)\n*   Próximo é [3, 9]: Início (3) < 7. **Ignora**.\n*   Próximo é [5, 9]: Início (5) < 7. **Ignora**.\n*   Próximo é [6, 10]: Início (6) < 7. **Ignora**.\n*   Seleciona **[8, 11]**. (Início 8 ≥ 7). (Fim: 11)\n*   Próximo é [8, 12]: Início (8) < 11. **Ignora**.\n*   Próximo é [2, 14]: Início (2) < 11. **Ignora**.\n*   Seleciona **[12, 16]**. (Início 12 ≥ 11). (Fim: 16)\n\n**Resultado:**\nO maior número de intervalos compatíveis é **4**.\nOs intervalos escolhidos são: **[1, 4], [5, 7], [8, 11] e [12, 16]**.\n\n---\n\n### 2. Por que ordenar pelo término?\n\nA ordenação pelo término é a chave para a **otimalidade** deste algoritmo guloso por dois motivos principais:\n\n1.  **Maximiza o espaço livre:** Ao escolher o intervalo que termina o mais cedo possível, você deixa o máximo de tempo disponível possível para os intervalos subsequentes. Se você escolhesse um intervalo que termina mais tarde, você estaria \"consumindo\" tempo que poderia ser usado por outros intervalos, sem ganhar vantagem alguma.\n2.  **Propriedade da Escolha Gulosa:** O problema da seleção de intervalos possui a propriedade de que uma escolha localmente ótima (o que termina primeiro) leva a uma solução globalmente ótima. \n    *   Se você ordenasse pelo **início**, um intervalo muito longo (ex: [0, 100]) poderia ser escolhido primeiro, bloqueando todos os outros, mesmo que existissem muitos intervalos curtos que poderiam ser encaixados.\n    *   Se você ordenasse pelo **menor tempo de duração**, você poderia escolher um intervalo curto que bloqueia dois outros intervalos (ex: um intervalo no meio de dois outros), reduzindo o total possível.\n\nEm resumo, ordenar pelo término garante que você sempre \"libere\" o recurso (o tempo) o mais rápido possível para a próxima tarefa.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 67.0,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 67.03
+      }
+    ]
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca).",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c02_gabarito_algoritmo_x_nota_2.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 7, 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 123"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 120"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 73"
+      }
+    ],
+    "data": "2026-10-12T00:15:05",
+    "texto": "### Resposta\n\nO maior número de intervalos compatíveis (sem sobreposição) é **4**, e o algoritmo guloso escolhe **[1,4], [5,7], [8,11], [12,16]** ou variações como **[3,5], [5,7], [8,11], [12,16]**.\n\n---\n\n### **Por que ordenar pelo término?**\n\nOrdenar os intervalos **por término crescente** é essencial para garantir que o algoritmo guloso escolha a **solução ótima**. A justificativa está no **teorema da subestrutura ótima**:  \n- Se um intervalo **termina mais cedo**, ele **deixa mais espaço** para outros intervalos.  \n- Escolher o intervalo com o menor término **não reduz o número de opções** para os intervalos subsequentes.  \n- Prova por indução: se o intervalo com o menor término é escolhido, o restante do problema se reduz a subintervalos não sobrepostos, que também podem ser resolvidos com a mesma estratégia.  \n\n---\n\n### **Passos do algoritmo guloso**\n\n1. **Ordenar** os intervalos por **término crescente**.  \n   - Exemplo: [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14], [12,16].  \n\n2. **Selecionar** o primeiro intervalo (menor término).  \n   - Exemplo: [1,4].  \n\n3. **Repetir** até que não haja mais intervalos compatíveis:  \n   - Escolher o próximo intervalo que **começa após o término do anterior**.  \n   - Exemplo: [5,7] (começa em 5 > 4), [8,11] (começa em 8 > 7), [12,16] (começa em 12 > 11).  \n\n---\n\n### **Verificação**\n\n- **Custo**: O algoritmo tem complexidade **O(n log n)** para ordenar e **O(n)** para selecionar.  \n- **Máximo de intervalos**: A resposta **4** é ótima, pois não há forma de escolher mais de 4 intervalos sem sobreposição.  \n- **Exemplo de seleção**: [3,5], [5,7], [8,11], [12,16] também é válido.  \n\n**Resposta final:** O algoritmo guloso escolhe **4 intervalos**, como [1,4], [5,7], [8,11], [12,16], e a ordenação pelo término garante a otimização.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 61.8,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 61.82
+      }
+    ]
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca).",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c02_gabarito_algoritmo_x_nota_2.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 7, 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 123"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 120"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 73"
+      }
+    ],
+    "data": "2026-10-12T00:15:30",
+    "texto": "### Resposta\n\nPara resolver o problema de agendamento de intervalos compatíveis, vamos seguir o algoritmo guloso proposto no MATERIAL DA DISCIPLINA [P1]. Vamos ordenar os intervalos pelo término crescente e selecionar os intervalos de forma a garantir que não haja sobreposição.\n\n#### Passos do Algoritmo\n\n1. **Ordenação dos Intervalos:**\n   - Ordenamos os intervalos pelo término crescente:\n     - [1,4] (termina em 4)\n     - [3,5] (termina em 5)\n     - [0,6] (termina em 6)\n     - [5,7] (termina em 7)\n     - [3,9] (termina em 9)\n     - [5,9] (termina em 9)\n     - [6,10] (termina em 10)\n     - [8,11] (termina em 11)\n     - [8,12] (termina em 12)\n     - [2,14] (termina em 14)\n     - [12,16] (termina em 16)\n\n2. **Seleção dos Intervalos:**\n   - Inicializamos `ultimo_fim` com -∞.\n   - Para cada intervalo, verificamos se o início é maior ou igual a `ultimo_fim`:\n     - [1,4]: `ultimo_fim` = 4\n     - [3,5]: `ultimo_fim` = 5\n     - [0,6]: `ultimo_fim` = 6\n     - [5,7]: `ultimo_fim` = 7\n     - [3,9]: `ultimo_fim` = 9\n     - [5,9]: `ultimo_fim` = 9\n     - [6,10]: `ultimo_fim` = 10\n     - [8,11]: `ultimo_fim` = 11\n     - [8,12]: `ultimo_fim` = 12\n     - [2,14]: `ultimo_fim` = 14\n     - [12,16]: `ultimo_fim` = 16\n\n3. **Intervalos Selecionados:**\n   - Os intervalos selecionados são: [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14], [12,16].\n\n#### Por que Ordenar pelo Término?\n\n- **Motivação:** Ordenar pelo término garante que, quando selecionamos um intervalo, todos os intervalos anteriores já foram considerados e não podem mais sobrepor-se. Isso simplifica a verificação de compatibilidade, pois basta verificar se o início do intervalo atual é maior ou igual ao término do último intervalo selecionado.\n\n#### Resultado\n\n- **Maior Número de Intervalos Compatíveis:** 11\n- **Intervalos Selecionados:** [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14], [12,16]\n\n### Verificação\n\n- **Verificação:** Podemos verificar que nenhum dos intervalos selecionados sobreposse outro. Por exemplo, o intervalo [1,4] termina em 4, então [3,5] pode ser selecionado, pois 3 > 4. Este processo se repete para todos os intervalos.\n\nEste algoritmo é eficiente com um custo de O(n log n) para ordenar os intervalos e O(n) para selecioná-los, totalizando O(n log n).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 25.4,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 25.45
+      }
+    ]
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca).",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:18:29",
+    "texto": "Para resolver o problema de selecionar o maior número de intervalos não sobrepostos (sem sobreposição), utilizamos o **algoritmo guloso**. Este algoritmo funciona ao **ordenar os intervalos pelo tempo de término** e, em seguida, selecionar o intervalo que termina mais cedo, seguido pelo próximo intervalo que começa após o término do anterior, e assim por diante. A razão para ordenar pelo término é que, ao escolher o intervalo que termina primeiro, **deixamos mais espaço para outros intervalos** serem selecionados, maximizando assim o número total.\n\n### Passos do Algoritmo:\n1. **Ordenar os intervalos pelo tempo de término** (e, em caso de empate, pelo tempo de início).\n2. **Selecionar o primeiro intervalo** (que termina mais cedo).\n3. **Repetir o processo**: escolher o próximo intervalo que começa após o término do anterior.\n\n### Intervalos Dados:\n```\n[1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14], [12,16]\n```\n\n### Ordenação pelos Tempos de Término:\n```\n[1,4] (4), [3,5] (5), [0,6] (6), [5,7] (7), [3,9] (9), [5,9] (9), [6,10] (10), [8,11] (11), [8,12] (12), [2,14] (14), [12,16] (16)\n```\n\n### Seleção pelo Algoritmo Guloso:\n1. **[1,4]** (termina em 4)\n2. **[5,7]** (começa em 5, após 4)\n3. **[8,11]** (começa em 8, após 7)\n4. **[12,16]** (começa em 12, após 11)\n\n### Resultado:\n- **Maior número de intervalos não sobrepostos:** **4**\n- **Intervalos escolhidos pelo algoritmo:** `[1,4]`, `[5,7]`, `[8,11]`, `[12,16]`\n\n### Por que Ordenar pelo Término?\n- Ao escolher o intervalo que termina mais cedo, **maximizamos o espaço disponível** para outros intervalos serem selecionados.\n- Isso é crucial para garantir que **o maior número possível de intervalos** possa ser escolhido, pois intervalos que terminam mais cedo permitem que mais intervalos sejam agendados após eles.\n\n### Resposta Final:\n- **Maior número de intervalos compatíveis:** **4**\n- **Intervalos escolhidos pelo algoritmo guloso:** `[1,4]`, `[5,7]`, `[8,11]`, `[12,16]`\n- **Razão para ordenar pelo término:** Para **maximizar o número de intervalos não sobrepostos**, garantindo que cada seleção deixa espaço para futuros intervalos.",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 178.8,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 178.8
+      }
+    ]
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C).",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 77"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 67"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 86"
+      }
+    ],
+    "data": "2026-10-12T00:18:55",
+    "texto": "Para responder à sua pergunta, vamos analisar separadamente o impacto dessas transformações na **Árvore Geradora Mínima (AGM)** e nos **Caminhos Mínimos**.\n\n### 1. Árvore Geradora Mínima (AGM)\n\nA AGM é definida pela escolha de um conjunto de arestas que conecta todos os vértices com o menor peso total [L1].\n\n*   **Multiplicação por 2:** Se multiplicarmos todos os pesos $w(e)$ por uma constante positiva $c=2$, o novo peso de qualquer árvore $T$ será $w'(T) = \\sum_{e \\in T} (2 \\cdot w(e)) = 2 \\cdot \\sum_{e \\in T} w(e) = 2 \\cdot w(T)$. Como a função $f(x) = 2x$ é estritamente crescente, a ordem relativa dos pesos das árvores geradoras é preservada. Se $w(T_1) < w(T_2)$, então $2w(T_1) < 2w(T_2)$. Portanto, **a AGM não muda**.\n*   **Elevação ao quadrado:** Como os pesos são positivos, a função $f(x) = x^2$ também é estritamente crescente para $x > 0$. Se $w(e_1) < w(e_2)$, então $w(e_1)^2 < w(e_2)^2$. A ordem de preferência das arestas (e, consequentemente, das árvores) permanece a mesma. Portanto, **a AGM não muda**.\n\n### 2. Caminhos Mínimos\n\nDiferente da AGM, o custo de um caminho é a soma dos pesos das arestas que o compõem, e caminhos diferentes podem ter números distintos de arestas [P1].\n\n*   **Multiplicação por 2:** Seja um caminho $P$ com custo $w(P) = \\sum_{e \\in P} w(e)$. O novo custo será $w'(P) = \\sum_{e \\in P} (2 \\cdot w(e)) = 2 \\cdot w(P)$. Como o fator 2 é aplicado a **todos** os caminhos independentemente do número de arestas, a relação de ordem entre dois caminhos $P_1$ e $P_2$ é mantida: se $w(P_1) < w(P_2)$, então $2w(P_1) < 2w(P_2)$. Portanto, **os caminhos mínimos não mudam**.\n*   **Elevação ao quadrado:** Aqui o resultado é diferente. O custo do caminho passa a ser $w'(P) = \\sum_{e \\in P} (w(e))^2$. Como a soma dos quadrados não é igual ao quadrado da soma, a ordem entre os caminhos pode ser alterada.\n    *   *Exemplo:* Considere um caminho $A$ com arestas de pesos $\\{1, 4\\}$ (soma = 5) e um caminho $B$ com arestas de pesos $\\{3, 3\\}$ (soma = 6). Originalmente, $A$ é o caminho mínimo.\n    *   Elevando ao quadrado: $A' = 1^2 + 4^2 = 17$ e $B' = 3^2 + 3^2 = 18$. Neste caso, a ordem se manteve.\n    *   Porém, se tivermos $A=\\{2, 2\\}$ (soma 4) e $B=\\{1, 3.5\\}$ (soma 4.5), originalmente $A < B$. Elevando ao quadrado: $A' = 4+4=8$ e $B' = 1+12.25=13.25$.\n    *   Se tivermos $A=\\{1, 1, 1\\}$ (soma 3) e $B=\\{2.5\\}$ (soma 2.5), originalmente $B < A$. Elevando ao quadrado: $A' = 1+1+1=3$ e $B' = 6.25$. Agora $A' < B'$.\n    *   **Conclusão:** Como o custo depende do número de arestas e dos valores individuais, **os caminhos mínimos podem mudar**.\n\n**Verificação:** A AGM depende apenas da comparação de pesos individuais (preservada por funções crescentes), enquanto o caminho mínimo depende da soma de pesos, que não é preservada sob transformações não lineares como o quadrado.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 22.2,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.51
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "HTTP 503",
+        "segundos": 5.67
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.26
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.62
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "HTTP 429",
+        "segundos": 0.27
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 14.83
+      }
+    ]
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C).",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 77"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 67"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 86"
+      }
+    ],
+    "data": "2026-10-12T00:19:45",
+    "texto": "### Resposta\n\n#### **Árvore Geradora Mínima (MST)**\n- **Multiplicar por 2**:  \n  A MST **não muda**, pois a ordem relativa dos pesos das arestas é preservada. Por exemplo, se uma aresta tinha peso $ w $, após multiplicar por 2, seu peso é $ 2w $. A relação entre arestas permanece a mesma, então a MST continua a mesma.  \n  **Verificação**: Se $ w_1 < w_2 $, então $ 2w_1 < 2w_2 $. A propriedade do corte [L3] garante que a MST é a mesma.  \n\n- **Elevar ao quadrado (todos os pesos positivos)**:  \n  A MST **não muda**, pois a ordem relativa das arestas também é preservada. Para pesos positivos, $ w_1 < w_2 \\Rightarrow w_1^2 < w_2^2 $. Assim, a MST continua a mesma.  \n  **Verificação**: Se $ w_1 < w_2 $, então $ w_1^2 < w_2^2 $. A propriedade do corte [L3] ainda se aplica.  \n\n#### **Caminhos Mínimos**\n- **Multiplicar por 2**:  \n  Os caminhos mínimos **não mudam**. O caminho que tinha menor soma de pesos $ \\sum w_i $ continua o caminho mínimo, pois $ 2\\sum w_i $ é o novo peso total.  \n  **Verificação**: Se $ \\sum w_i < \\sum w_j $, então $ 2\\sum w_i < 2\\sum w_j $. A estrutura do caminho mínimo é a mesma.  \n\n- **Elevar ao quadrado**:  \n  Os caminhos mínimos **podem mudar**. A soma dos pesos quadrados $ \\sum w_i^2 $ pode alterar a relação entre caminhos. Por exemplo:  \n  - Caminho A: $ w_1 = 1, w_2 = 3 \\Rightarrow \\sum = 1^2 + 3^2 = 10 $.  \n  - Caminho B: $ w_1 = 2, w_2 = 2 \\Rightarrow \\sum = 4 + 4 = 8 $.  \n  Aqui, o caminho B é o novo mínimo.  \n  **Verificação**: A soma de quadrados não preserva a ordem de caminhos, pois $ \\sum w_i^2 $ pode ser menor para caminhos com pesos maiores individualmente.  \n\n### **Conclusão**  \n- **MST**: Ambas as transformações preservam a MST.  \n- **Caminhos mínimos**: Multiplicar por 2 preserva os caminhos mínimos, mas elevar ao quadrado pode mudar os caminhos mínimos.  \n\n**Referências**: [L3] (propriedade do corte), [L1] (definição de MST).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 49.5,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 49.55
+      }
+    ]
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C).",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L4.pdf | página(s): 3"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 8"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 77"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 67"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 86"
+      }
+    ],
+    "data": "2026-10-12T00:20:14",
+    "texto": "### Resposta\n\n#### Árvore Geradora Mínima\n\n1. **Multiplicar por 2 o peso de todas as arestas:**\n   - Se multiplicarmos por 2 o peso de todas as arestas, a árvore geradora mínima não muda. Isso ocorre porque a proporção entre os pesos das arestas permanece a mesma. Se a árvore geradora mínima original é \\( T \\) com peso \\( w(T) \\), então a nova árvore geradora mínima será \\( T \\) com peso \\( 2 \\cdot w(T) \\). A ordem dos pesos não muda, apenas seu valor.\n\n2. **Elevar cada peso ao quadrado (todos os pesos positivos):**\n   - Se elevarmos cada peso ao quadrado, a árvore geradora mínima pode mudar. Isso ocorre porque a ordem dos pesos pode mudar. Por exemplo, se temos duas arestas \\( e_1 \\) e \\( e_2 \\) com pesos \\( w(e_1) = 2 \\) e \\( w(e_2) = 3 \\), respectivamente, na árvore geradora mínima original, a aresta \\( e_1 \\) era a escolhida. Agora, com os novos pesos \\( w(e_1)^2 = 4 \\) e \\( w(e_2)^2 = 9 \\), a aresta \\( e_2 \\) pode se tornar a escolhida, dependendo do grafo.\n\n#### Caminhos Mínimos\n\n1. **Multiplicar por 2 o peso de todas as arestas:**\n   - Se multiplicarmos por 2 o peso de todas as arestas, os caminhos mínimos não mudam. Isso ocorre porque a proporção entre os pesos das arestas permanece a mesma. Se o caminho mínimo original é \\( P \\) com peso \\( w(P) \\), então o novo caminho mínimo será \\( P \\) com peso \\( 2 \\cdot w(P) \\). A ordem dos pesos não muda, apenas seu valor.\n\n2. **Elevar cada peso ao quadrado (todos os pesos positivos):**\n   - Se elevarmos cada peso ao quadrado, os caminhos mínimos podem mudar. Isso ocorre porque a ordem dos pesos pode mudar. Por exemplo, se temos um caminho \\( P \\) com pesos \\( w(P) = 2 + 3 = 5 \\) e outro caminho \\( Q \\) com pesos \\( w(Q) = 1 + 4 = 5 \\), na árvore geradora mínima original, ambos podem ser caminhos mínimos. Agora, com os novos pesos \\( w(P)^2 = 4 + 9 = 13 \\) e \\( w(Q)^2 = 1 + 16 = 17 \\), o caminho \\( P \\) pode se tornar o caminho mínimo, dependendo do grafo.\n\n### Verificação\n\n- **Multiplicar por 2:**\n  - Verificação: Se \\( w(e_1) = 2 \\) e \\( w(e_2) = 3 \\), então \\( 2 \\cdot w(e_1) = 4 \\) e \\( 2 \\cdot w(e_2) = 6 \\). A ordem \\( 2 < 3 \\) permanece a mesma.\n  \n- **Elevar ao quadrado:**\n  - Verificação: Se \\( w(e_1) = 2 \\) e \\( w(e_2) = 3 \\), então \\( w(e_1)^2 = 4 \\) e \\( w(e_2)^2 = 9 \\). A ordem \\( 4 < 9 \\) pode mudar.\n\n- **Caminhos Mínimos:**\n  - Verificação: Se \\( w(P) = 2 + 3 = 5 \\) e \\( w(Q) = 1 + 4 = 5 \\), então \\( w(P)^2 = 13 \\) e \\( w(Q)^2 = 17 \\). A ordem \\( 13 < 17 \\) pode mudar.\n\nEssas verificações mostram que a multiplicação por 2 não altera a ordem dos pesos, mantendo os caminhos mínimos e a árvore geradora mínima, enquanto a elevação ao quadrado pode alterar a ordem dos pesos, mudando os caminhos mínimos e a árvore geradora mínima.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 28.6,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 28.62
+      }
+    ]
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C).",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:22:57",
+    "texto": "**Resposta:**\n\n1. **Árvore Geradora Mínima (AGM):**\n   - **Multiplicar por 2:** A AGM **não muda**. A ordem relativa dos pesos é preservada, pois a multiplicação por uma constante positiva não altera a comparação entre os pesos. A estrutura da AGM (conjunto de arestas) permanece a mesma, embora o peso total da AGM seja duplicado.\n   - **Elevando ao quadrado (pesos positivos):** A AGM **não muda**. A ordem dos pesos é preservada, pois para pesos positivos $ a < b $, temos $ a^2 < b^2 $. Assim, a seleção de arestas para a AGM permanece a mesma.\n\n2. **Caminhos Mínimos:**\n   - **Multiplicar por 2:** Os caminhos mínimos **não mudam**. A sequência de vértices no caminho mínimo permanece a mesma, mas o peso total do caminho é duplicado. A ordem dos caminhos (com base no peso total) é preservada.\n   - **Elevando ao quadrado:** Os caminhos mínimos **podem mudar**. A operação de quadrado é não-linear, e a ordem dos pesos totais dos caminhos pode ser alterada. Por exemplo, um caminho com peso total menor pode ter um peso total quadrado maior do que outro caminho com peso total maior, como mostrado em exemplos específicos. Portanto, o caminho mínimo pode ser diferente após a transformação.\n\n**Conclusão:**\n- **AGM:** Não muda em ambos os casos (multiplicar por 2 ou elevar ao quadrado).\n- **Caminhos mínimos:** \n  - **Multiplicar por 2:** Os caminhos mínimos permanecem os mesmos.\n  - **Elevar ao quadrado:** Os caminhos mínimos podem mudar, pois a transformação afeta a ordem dos pesos totais dos caminhos.",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 163.4,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 163.41
+      }
+    ]
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n.",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L6.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 19"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 7"
+      }
+    ],
+    "data": "2026-10-12T00:23:29",
+    "texto": "Para determinar se o algoritmo é polinomial, precisamos analisar sua complexidade em relação ao **tamanho da entrada**, que é o número de bits $b$ necessários para representar $n$.\n\n### 1. Tamanho da Entrada\nComo visto em [P2], para um número $n$, o número de bits $b$ é dado por:\n$$b = \\lfloor \\log_2 n \\rfloor + 1 \\implies n \\approx 2^b$$\nUm algoritmo é considerado **polinomial** se o seu tempo de execução for da forma $O(b^k)$ para alguma constante $k$.\n\n### 2. Complexidade do Algoritmo\nO algoritmo realiza divisões de 2 até $\\sqrt{n}$. O número de iterações é proporcional a $\\sqrt{n}$.\nSubstituindo $n$ pelo seu tamanho em bits ($2^b$):\n$$\\text{Número de iterações} \\approx \\sqrt{n} = \\sqrt{2^b} = (2^b)^{1/2} = 2^{b/2}$$\n\n### 3. Conclusão\nO tempo de execução é $O(2^{b/2})$, que é uma função **exponencial** em relação ao número de bits $b$. \n\nEmbora o algoritmo seja eficiente comparado a testar todos os números até $n$ (que seria $O(n) = O(2^b)$), ele não é polinomial. Em PAA, classificamos algoritmos cujo tempo de execução cresce exponencialmente com o tamanho da entrada como **pseudo-polinomiais** ou simplesmente exponenciais [P2]. Para que fosse polinomial, o tempo deveria ser limitado por um polinômio em $b$ (como $b^2$ ou $b^3$), e não por uma função onde o tamanho da entrada aparece no expoente.\n\n**Verificação:** Se $n = 2^{10} = 1024$ ($b=10$), o algoritmo faz $\\sqrt{1024} = 32$ divisões. Se dobrarmos o tamanho da entrada para $b=20$ ($n \\approx 10^6$), o número de divisões salta para $\\sqrt{10^6} = 1000$. O crescimento é de $2^{b/2}$, confirmando o comportamento exponencial.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 28.3,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.43
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.4
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.63
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "HTTP 429",
+        "segundos": 0.27
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 20.52
+      }
+    ]
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n.",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L6.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 19"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 7"
+      }
+    ],
+    "data": "2026-10-12T00:23:51",
+    "texto": "O algoritmo de teste de primalidade que verifica divisores de 2 até √n **não é polinomial em relação ao tamanho da entrada**. A razão está na **representação da entrada em bits**, que é a base para análise de complexidade em teoria da computação.\n\n### Passo a passo:\n1. **Tamanho da entrada (m)**: Se a entrada é um número $ n $, o tamanho da entrada em bits é $ m = \\log_2 n $. Por exemplo, $ n = 1000 $ tem $ m \\approx 10 $ bits.\n2. **Complexidade do algoritmo**: O algoritmo realiza $ O(\\sqrt{n}) $ divisões. Substituindo $ n = 2^m $, temos $ \\sqrt{n} = 2^{m/2} $.\n3. **Expressão em termos de $ m $**: A complexidade se torna $ O(2^{m/2}) $, que é **exponencial em $ m $** (tamanho da entrada), não polinomial.\n\n### Verificação:\n- Se o algoritmo fosse polinomial, sua complexidade seria $ O(m^k) $ para algum $ k $. Porém, $ 2^{m/2} $ cresce muito mais rapidamente do que qualquer polinômio em $ m $.\n- Exemplo numérico: Para $ m = 10 $ (n = 1024), o algoritmo realiza $ 2^{5} = 32 $ operações. Para $ m = 20 $ (n = 1 milhão), são $ 2^{10} = 1024 $ operações. A complexidade exponencial domina sobre polinomial.\n\n### Conclusão:\nO algoritmo é **pseudo-polinomial**, pois sua complexidade é polinomial no valor numérico de $ n $, mas **não é polinomial em relação ao tamanho da entrada em bits**. Isso é crucial para problemas como primalidade, onde algoritmos eficientes (como o AKS) são necessários para garantir tempo polinomial em $ m $.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 21.8,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 21.76
+      }
+    ]
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n.",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L6.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L7.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 19"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 7"
+      }
+    ],
+    "data": "2026-10-12T00:24:13",
+    "texto": "### Resposta\n\nO algoritmo que testa se um número \\( n \\) é primo tentando dividir \\( n \\) por todos os inteiros de 2 até a raiz quadrada de \\( n \\) é **não polinomial** em função do tamanho da entrada. Vamos detalhar por que isso ocorre.\n\n#### Tamanho da Entrada\nA entrada \\( n \\) é um número inteiro. Se representarmos \\( n \\) em notação binária, o tamanho da entrada \\( T \\) é dado por:\n\\[ T = \\lfloor \\log_2(n) \\rfloor + 1 \\]\n\n#### Análise do Algoritmo\n1. **Intervalo de Testes**: O algoritmo testa divisores de 2 até a raiz quadrada de \\( n \\). A raiz quadrada de \\( n \\) é \\( \\sqrt{n} \\).\n\n2. **Número de Testes**: O número de testes é aproximadamente \\( \\sqrt{n} \\). No pior caso, \\( \\sqrt{n} \\) pode ser aproximadamente \\( 2^{T/2} \\) (onde \\( T \\) é o tamanho da entrada).\n\n3. **Complexidade do Teste**: Cada teste de divisão envolve uma operação de divisão, que tem custo \\( O(\\log n) \\) no modelo de computação RAM.\n\n4. **Complexidade Total**: A complexidade total do algoritmo é dada pela multiplicação do número de testes pelo custo de cada teste:\n   \\[ \\text{Complexidade} = \\sqrt{n} \\times O(\\log n) \\]\n\n5. **Expressão em Termos do Tamanho da Entrada**: Substituindo \\( n \\) por \\( 2^T \\):\n   \\[ \\sqrt{n} = \\sqrt{2^T} = 2^{T/2} \\]\n   \\[ \\text{Complexidade} = 2^{T/2} \\times O(\\log 2^T) = 2^{T/2} \\times O(T) \\]\n\n6. **Simplificação**: A complexidade total é:\n   \\[ 2^{T/2} \\times O(T) = O(2^{T/2} \\times T) \\]\n\n#### Conclusão\nA complexidade \\( O(2^{T/2} \\times T) \\) não é polinomial em relação ao tamanho da entrada \\( T \\). Isso porque \\( 2^{T/2} \\) cresce exponencialmente com \\( T \\), enquanto \\( T \\) cresce apenas polinomialmente.\n\n### Verificação\nPara verificar, considere \\( T = 10 \\) (ou seja, \\( n \\approx 1024 \\)):\n- \\( \\sqrt{1024} = 32 \\)\n- \\( 32 \\times 10 = 320 \\)\n\nA complexidade \\( O(320) \\) é polinomial, mas a complexidade geral \\( O(2^{T/2} \\times T) \\) não é.\n\nPortanto, o algoritmo não é polinomial em função do tamanho da entrada.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 22.0,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 22.0
+      }
+    ]
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n.",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:24:44",
+    "texto": "O algoritmo que testa se um número $ n $ é primo dividindo-o por todos os inteiros de 2 até $ \\sqrt{n} $ tem uma complexidade de tempo $ O(\\sqrt{n}) $. No entanto, para determinar se ele é **polinomial**, devemos analisar sua performance em função do **tamanho da entrada**, que é o número de bits necessários para representar $ n $.\n\n### Passo a passo:\n1. **Representação da entrada**:  \n   O tamanho da entrada $ m $ é o número de bits necessários para representar $ n $ em binário. Assim, $ n $ pode ser expresso como $ n \\approx 2^m $.\n\n2. **Conversão da complexidade**:  \n   A complexidade do algoritmo é $ O(\\sqrt{n}) $. Substituindo $ n \\approx 2^m $, temos:  \n   $$\n   \\sqrt{n} = \\sqrt{2^m} = 2^{m/2}.\n   $$  \n   Portanto, a complexidade do algoritmo em função do tamanho da entrada é $ O(2^{m/2}) $, que é **exponencial** em $ m $.\n\n3. **Definição de algoritmo polinomial**:  \n   Um algoritmo é considerado **polinomial** se sua complexidade de tempo for $ O(m^k) $, onde $ k $ é uma constante. No entanto, $ 2^{m/2} $ cresce muito mais rapidamente do que qualquer polinômio em $ m $, o que torna o algoritmo **não polinomial**.\n\n### Conclusão:\nO algoritmo descrito **não é polinomial** em função do tamanho da entrada. Sua complexidade é **exponencial** em relação ao número de bits $ m $ necessários para representar $ n $. Portanto, ele não satisfaz a definição de algoritmo polinomial em teoria da complexidade computacional.",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 31.7,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 31.68
+      }
+    ]
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n).",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 5"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 48"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 44"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 20"
+      }
+    ],
+    "data": "2026-10-12T00:25:15",
+    "texto": "O Teorema Mestre **não se aplica** a essa recorrência.\n\n### Por que não se aplica?\nO Teorema Mestre, conforme definido em [L1] e [L2], exige que o termo de custo extra $g(n)$ seja da forma $c \\cdot n^d$ (ou $c \\cdot n^d \\log^k n$). No seu caso, $g(n) = \\frac{n}{\\log n} = n^1 \\log^{-1} n$. Embora se encaixe na forma geral com $d=1$ e $k=-1$, a condição para o uso do Teorema Mestre exige que $k \\geq 0$ [L1]. Como o expoente do logaritmo é negativo, o teorema não é aplicável.\n\n### Resolução por Árvore de Recursão\nPara resolver $T(n) = 2T(n/2) + \\frac{n}{\\log n}$, vamos analisar o custo por nível:\n\n1.  **Nível 0:** $n / \\log n$\n2.  **Nível 1:** $2 \\cdot \\left( \\frac{n/2}{\\log(n/2)} \\right) = \\frac{n}{\\log n - \\log 2} = \\frac{n}{\\log n - 1}$\n3.  **Nível 2:** $4 \\cdot \\left( \\frac{n/4}{\\log(n/4)} \\right) = \\frac{n}{\\log n - 2}$\n4.  **Nível $i$:** $2^i \\cdot \\left( \\frac{n/2^i}{\\log(n/2^i)} \\right) = \\frac{n}{\\log n - i}$\n\nA árvore possui altura $h = \\log_2 n$. O custo total é a soma dos custos de todos os níveis:\n$$T(n) = \\sum_{i=0}^{\\log_2 n - 1} \\frac{n}{\\log n - i} + \\Theta(n)$$\n*(O termo $\\Theta(n)$ representa o custo das folhas, onde $T(1)$ é constante).*\n\nFatorando o $n$:\n$$T(n) = n \\sum_{i=0}^{\\log_2 n - 1} \\frac{1}{\\log n - i} + \\Theta(n)$$\n\nFazendo a mudança de variável $j = \\log n - i$:\nQuando $i=0, j=\\log n$. Quando $i=\\log n - 1, j=1$.\n$$T(n) = n \\sum_{j=1}^{\\log n} \\frac{1}{j} + \\Theta(n)$$\n\nA somatória $\\sum_{j=1}^{\\log n} \\frac{1}{j}$ é a série harmônica $H_{\\log n}$, que possui comportamento assintótico de $\\Theta(\\log(\\log n))$.\n\nPortanto:\n$$T(n) = \\Theta(n \\log \\log n)$$\n\n**Verificação:**\nSe tivéssemos $T(n) = 2T(n/2) + n$ (Caso 2 do Teorema Mestre), o resultado seria $\\Theta(n \\log n)$. Como o seu termo de custo $n/\\log n$ é assintoticamente menor que $n$, é esperado que o resultado final seja menor que $n \\log n$. O resultado $\\Theta(n \\log \\log n)$ é consistente com essa redução.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 27.4,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "HTTP 429",
+        "segundos": 1.02
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.24
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "HTTP 429",
+        "segundos": 0.64
+      },
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "cancelado (outro respondeu antes)"
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 13.52
+      }
+    ]
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n).",
+    "condicao": "tutoron_local",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 5"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 48"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 44"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 20"
+      }
+    ],
+    "data": "2026-10-12T00:27:06",
+    "texto": "O Teorema Mestre **não se aplica** à recorrência $ T(n) = 2T(n/2) + \\frac{n}{\\log n} $, pois a função $ f(n) = \\frac{n}{\\log n} $ **não satisfaz as condições de crescimento** exigidas pelos três casos do teorema. Vamos analisar:\n\n---\n\n### **1. Aplicação do Teorema Mestre**\n- **Forma da recorrência**: $ T(n) = aT(n/b) + f(n) $, com $ a = 2 $, $ b = 2 $, $ f(n) = \\frac{n}{\\log n} $.\n- **Cálculo de $ n^{\\log_b a} $**: $ \\log_2 2 = 1 $, então $ n^{\\log_b a} = n^1 = n $.\n- **Comparação de $ f(n) $ com $ n $**:\n  - $ f(n) = \\frac{n}{\\log n} $ é **menor que $ n $** para $ n \\to \\infty $, mas **não é polinomialmente menor** (pois $ \\frac{n}{\\log n} \\not\\in O(n^{1 - \\varepsilon}) $ para qualquer $ \\varepsilon > 0 $).\n  - Portanto, **não se aplica o caso 1** (onde $ f(n) $ é polinomialmente menor que $ n $).\n  - **Caso 3** (onde $ f(n) $ é polinomialmente maior que $ n $) também não se aplica, pois $ \\frac{n}{\\log n} $ não é $ \\Omega(n^{1 + \\varepsilon}) $.\n\n---\n\n### **2. Resolução por outro método: Akra-Bazzi**\nO **Teorema Akra-Bazzi** generaliza o Teorema Mestre para recorrências como $ T(n) = aT(n/b) + f(n) $. A solução é dada por:\n$$\nT(n) = \\Theta\\left(n^p \\left(1 + \\int_1^n \\frac{f(u)}{u^p} \\, du \\right)\\right),\n$$\nonde $ p $ é a solução de $ a = b^p $.\n\n- **Resolvendo $ p $**: $ 2 = 2^p \\Rightarrow p = 1 $.\n- **Calculando a integral**: $ \\int_1^n \\frac{f(u)}{u^p} \\, du = \\int_1^n \\frac{u / \\log u}{u} \\, du = \\int_1^n \\frac{1}{\\log u} \\, du $.\n  - Esta integral é a **função logarítmica integral** $ \\text{li}(n) $, que cresce como $ \\frac{n}{\\log n} $.\n- **Resultado final**:\n  $$\n  T(n) = \\Theta\\left(n^1 \\cdot \\left(1 + \\frac{n}{\\log n} \\right)\\right) = \\Theta\\left(\\frac{n^2}{\\log n}\\right).\n  $$\n\n---\n\n### **3. Verificação com método de iteração**\nExpandindo a recorrência:\n$$\nT(n) = 2T(n/2) + \\frac{n}{\\log n} = 2\\left(2T(n/4) + \\frac{n/2}{\\log(n/2)}\\right) + \\frac{n}{\\log n} = 4T(n/4) + \\frac{n}{\\log(n/2)} + \\frac{n}{\\log n}.\n$$\nRepetindo o processo, a soma de termos se torna:\n$$\n\\sum_{k=0}^{\\log n} \\frac{n}{\\log(n/2^k)} = n \\sum_{k=0}^{\\log n} \\frac{1}{\\log(n/2^k)}.\n$$\nSubstituindo $ j = \\log(n/2^k) = \\log n - k $, a soma se reduz a:\n$$\nn \\sum_{j=1}^{\\log n} \\frac{1}{j} = n \\cdot O(\\log \\log n).\n$$\nNo entanto, isso contradiz o resultado do Akra-Bazzi. A discrepancia surge porque o método da iteração não captura a contribuição da recursão em toda a árvore. Portanto, o **Akra-Bazzi é mais preciso** nesse caso.\n\n---\n\n### **Conclusão**\n- **O Teorema Mestre não se aplica** devido a $ f(n) $ não ser polinomialmente menor ou maior que $ n^{\\log_b a} $.\n- **Solução final**: $ T(n) = \\Theta\\left(\\frac{n^2}{\\log n}\\right) $, obtida via o **Teorema Akra-Bazzi**.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 110.2,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 110.18
+      }
+    ]
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n).",
+    "condicao": "tutoron_antigo",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 5"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 6, 7"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L2.pdf | página(s): 7"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 48"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 44"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 20"
+      }
+    ],
+    "data": "2026-10-12T00:27:38",
+    "texto": "### Resposta\n\nO Teorema Mestre não se aplica diretamente à recorrência \\( T(n) = 2T(n/2) + \\frac{n}{\\log n} \\) porque a função \\( g(n) = \\frac{n}{\\log n} \\) não é uma função polinomial. Vamos verificar isso passo a passo.\n\n#### Verificação do Teorema Mestre\n\n1. **Identificação dos parâmetros:**\n   - \\( a = 2 \\)\n   - \\( b = 2 \\)\n   - \\( g(n) = \\frac{n}{\\log n} \\)\n\n2. **Cálculo de \\( n^{\\log_b a} \\):**\n   - \\( \\log_b a = \\log_2 2 = 1 \\)\n   - Portanto, \\( n^{\\log_b a} = n^1 = n \\)\n\n3. **Comparação de \\( g(n) \\) com \\( n \\):**\n   - \\( g(n) = \\frac{n}{\\log n} \\)\n   - Para \\( n \\to \\infty \\), \\( \\frac{n}{\\log n} \\) cresce mais lentamente que \\( n \\).\n\n4. **Conclusão:**\n   - \\( g(n) \\) não é uma função polinomial, pois não pode ser expressa na forma \\( c n^d \\) com \\( d \\geq 0 \\).\n   - Portanto, o Teorema Mestre não se aplica diretamente a essa recorrência.\n\n#### Resolução por Outro Método\n\nVamos resolver a recorrência \\( T(n) = 2T(n/2) + \\frac{n}{\\log n} \\) usando a **substituição iterativa**.\n\n1. **Substituição iterativa:**\n   - Suponha \\( T(n) \\leq c n \\log n \\) para algum constante \\( c \\).\n   - Então, \\( T(n) = 2T(n/2) + \\frac{n}{\\log n} \\leq 2 \\left( c \\frac{n}{2} \\log \\frac{n}{2} \\right) + \\frac{n}{\\log n} \\).\n\n2. **Simplificação:**\n   - \\( T(n) \\leq c n \\log \\frac{n}{2} + \\frac{n}{\\log n} \\)\n   - \\( \\log \\frac{n}{2} = \\log n - \\log 2 = \\log n - 1 \\)\n   - Portanto, \\( T(n) \\leq c n (\\log n - 1) + \\frac{n}{\\log n} \\)\n   - \\( T(n) \\leq c n \\log n - c n + \\frac{n}{\\log n} \\)\n\n3. **Análise do termo \\( \\frac{n}{\\log n} \\):**\n   - Para grandes \\( n \\), \\( \\frac{n}{\\log n} \\) é muito pequeno comparado a \\( c n \\log n \\).\n   - Portanto, \\( T(n) \\leq c n \\log n \\) para um \\( c \\) adequado.\n\n4. **Conclusão:**\n   - \\( T(n) = O(n \\log n) \\).\n\n### Verificação\n\nPara verificar, considere \\( T(n) = 2T(n/2) + \\frac{n}{\\log n} \\). Se \\( T(n) = O(n \\log n) \\), então \\( T(n) \\leq c n \\log n \\) para algum constante \\( c \\). Substituindo na recorrência:\n\n\\[ T(n) \\leq 2 \\left( c \\frac{n}{2} \\log \\frac{n}{2} \\right) + \\frac{n}{\\log n} \\]\n\\[ T(n) \\leq c n (\\log n - 1) + \\frac{n}{\\log n} \\]\n\\[ T(n) \\leq c n \\log n - c n + \\frac{n}{\\log n} \\]\n\nPara \\( n \\) suficientemente grande, \\( \\frac{n}{\\log n} \\) é pequeno comparado a \\( c n \\log n \\), então \\( T(n) \\leq c n \\log n \\) é verdadeiro.\n\n**Verificação:**\n- Para \\( n = 2 \\), \\( T(2) = 2T(1) + \\frac{2}{\\log 2} \\).\n- Se \\( T(1) = 1 \\), então \\( T(2) = 2 \\cdot 1 + \\frac{2}{\\log 2} \\approx 2 + 2.885 \\approx 4.885 \\).\n- \\( 4.885 \\leq c \\cdot 2 \\log 2 \\approx 2c \\cdot 1 = 2c \\).\n- Para \\( c = 5 \\), \\( 4.885 \\leq 10 \\).\n\nPortanto, \\( T(n) = O(n \\log n) \\) é uma boa estimativa.\n\n**Resposta Final:**\nA recorrência \\( T(n) = 2T(n/2) + \\frac{n}{\\log n} \\) não se encaixa no Teorema Mestre, mas pode ser resolvida por substituição iterativa, resultando em \\( T(n) = O(n \\log n) \\).",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa-qwen25",
+    "segundos": 32.2,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa-qwen25",
+        "resultado": "respondeu",
+        "segundos": 32.16
+      }
+    ]
+  },
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11.",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:31:28",
+    "texto": "A menor soma de um caminho do topo até a base é **11**.\n\nO caminho percorrido é: **$2 \\rightarrow 3 \\rightarrow 5 \\rightarrow 1$** ($2 + 3 + 5 + 1 = 11$).\n\n---\n\n### Resolução via Programação Dinâmica (Abordagem *Bottom-Up*)\n\nA maneira mais eficiente e elegante de resolver este problema é de baixo para cima (*bottom-up*). \n\nDefinimos $DP[i][j]$ como o menor custo para ir da posição $(i, j)$ até a base:\n$$DP[i][j] = \\text{triângulo}[i][j] + \\min(DP[i+1][j], DP[i+1][j+1])$$\n\n#### Passo a passo do preenchimento:\n\n1. **Linha 3 (Base):** Os valores são os próprios elementos da base:\n   * $[4, 1, 8, 3]$\n\n2. **Linha 2:**\n   * $DP[2][0] = 6 + \\min(4, 1) = 6 + 1 = 7$\n   * $DP[2][1] = 5 + \\min(1, 8) = 5 + 1 = 6$\n   * $DP[2][2] = 7 + \\min(8, 3) = 7 + 3 = 10$\n   * Resultado: $[7, 6, 10]$\n\n3. **Linha 1:**\n   * $DP[1][0] = 3 + \\min(7, 6) = 3 + 6 = 9$\n   * $DP[1][1] = 4 + \\min(6, 10) = 4 + 6 = 10$\n   * Resultado: $[9, 10]$\n\n4. **Linha 0 (Topo):**\n   * $DP[0][0] = 2 + \\min(9, 10) = 2 + 9 = 11$\n   * Resultado: $[11]$\n\n---\n\n### Tabela da Programação Dinâmica (*Bottom-Up*)\n\n| Linha | Valores da Tabela DP |\n| :---: | :--- |\n| **Linha 0** | $[11]$ *(menor soma total)* |\n| **Linha 1** | $[9, 10]$ |\n| **Linha 2** | $[7, 6, 10]$ |\n| **Linha 3** | $[4, 1, 8, 3]$ |\n\n---\n\n*(Nota: Se calculada de cima para baixo — Top-Down —, a linha final conteria os valores $[15, 11, 18, 16]$, cujo valor mínimo também é **11**).*",
+    "provedor": "gemini",
+    "modelo": "gemini-3.7-flash",
+    "segundos": 30.3,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "respondeu",
+        "segundos": 30.27
+      }
+    ]
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²).",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:32:32",
+    "texto": "Para resolver a recorrência $T(n) = T(n-1) + 2n$ com a condição inicial $T(1) = 3$ pelo método da iteração, vamos expandir os termos sucessivos:\n\n### 1. Expansão por iteração\n\n*   $T(n) = T(n-1) + 2n$\n*   $T(n-1) = T(n-2) + 2(n-1)$\n*   $T(n-2) = T(n-3) + 2(n-2)$\n*   ...\n*   $T(2) = T(1) + 2(2)$\n\nSubstituindo sucessivamente na primeira equação:\n$T(n) = [T(n-2) + 2(n-1)] + 2n$\n$T(n) = T(n-3) + 2(n-2) + 2(n-1) + 2n$\n\nGeneralizando para $k$ passos, temos:\n$T(n) = T(n-k) + \\sum_{i=0}^{k-1} 2(n-i)$\n\nQueremos chegar até $T(1)$, então definimos $n-k = 1$, o que implica $k = n-1$. Substituindo:\n$T(n) = T(1) + \\sum_{i=0}^{n-2} 2(n-i)$\n\n### 2. Simplificação do somatório\n\nVamos reescrever o somatório:\n$T(n) = 3 + 2 \\sum_{i=0}^{n-2} (n-i)$\n\nFazendo uma mudança de variável ou expandindo a soma:\n$\\sum_{i=0}^{n-2} (n-i) = n + (n-1) + (n-2) + \\dots + 2$\n\nEsta é uma progressão aritmética que vai de $2$ até $n$. Podemos completar a soma adicionando e subtraindo o termo $1$:\n$\\sum_{j=2}^{n} j = \\left( \\sum_{j=1}^{n} j \\right) - 1$\n\nSabemos que a soma dos primeiros $n$ números naturais é $\\frac{n(n+1)}{2}$. Portanto:\n$\\sum_{j=2}^{n} j = \\frac{n(n+1)}{2} - 1$\n\n### 3. Cálculo da fórmula fechada\n\nSubstituindo de volta na equação de $T(n)$:\n$T(n) = 3 + 2 \\left[ \\frac{n(n+1)}{2} - 1 \\right]$\n\nDistribuindo o $2$:\n$T(n) = 3 + n(n+1) - 2$\n$T(n) = 3 + n^2 + n - 2$\n$T(n) = n^2 + n + 1$\n\n### Verificação:\n*   Para $n=1$: $T(1) = 1^2 + 1 + 1 = 3$ (Correto)\n*   Para $n=2$: $T(2) = T(1) + 2(2) = 3 + 4 = 7$. Pela fórmula: $2^2 + 2 + 1 = 7$ (Correto)\n\n**Fórmula fechada exata:**\n$$T(n) = n^2 + n + 1$$",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 15.9,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.63
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.25
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "HTTP 429",
+        "segundos": 0.61
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "HTTP 429",
+        "segundos": 0.24
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 14.2
+      }
+    ]
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral.",
+    "condicao": "tutoron_gemini",
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L3.pdf | página(s): 4"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L1.pdf | página(s): 9, 10"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L8.pdf | página(s): 1, 2"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "c05_lista2_q9_asterisco_resolucao.md | página(s): não informada na transcrição"
+      },
+      {
+        "rotulo": "L1",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 26"
+      },
+      {
+        "rotulo": "L2",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 28"
+      },
+      {
+        "rotulo": "L3",
+        "origem": "livro",
+        "titulo": "Projeto e Análise de Algoritmos: Estratégias para análise, projeto de algoritmos e soluçõe",
+        "referencia": "página 16"
+      }
+    ],
+    "data": "2026-10-12T00:32:47",
+    "texto": "Para calcular $a^{13}$ usando a estratégia de divisão e conquista descrita em [P1], seguimos a lógica de que, para um expoente $n$, calculamos $r = a^{\\lfloor n/2 \\rfloor}$ e, dependendo da paridade de $n$, realizamos uma ou duas multiplicações.\n\nA recorrência é:\n- Se $n$ é par: $a^n = r \\cdot r$ (1 multiplicação)\n- Se $n$ é ímpar: $a^n = r \\cdot r \\cdot a$ (2 multiplicações)\n\n### Passo a passo das chamadas:\n\n1. **`potencia(a, 13)`**:\n   - Chama `potencia(a, 6)`.\n   - $n=13$ é ímpar: retorna $r \\cdot r \\cdot a$. (2 multiplicações)\n\n2. **`potencia(a, 6)`**:\n   - Chama `potencia(a, 3)`.\n   - $n=6$ é par: retorna $r \\cdot r$. (1 multiplicação)\n\n3. **`potencia(a, 3)`**:\n   - Chama `potencia(a, 1)`.\n   - $n=3$ é ímpar: retorna $r \\cdot r \\cdot a$. (2 multiplicações)\n\n4. **`potencia(a, 1)`**:\n   - Chama `potencia(a, 0)`.\n   - $n=1$ é ímpar: retorna $r \\cdot r \\cdot a$. (2 multiplicações)\n\n5. **`potencia(a, 0)`**:\n   - Retorna $1$. (0 multiplicações, caso base)\n\n### Contagem total:\n\n*   Em `potencia(a, 1)`: 2 multiplicações ($1 \\cdot 1 \\cdot a = a$)\n*   Em `potencia(a, 3)`: 2 multiplicações ($a \\cdot a \\cdot a = a^3$)\n*   Em `potencia(a, 6)`: 1 multiplicação ($a^3 \\cdot a^3 = a^6$)\n*   Em `potencia(a, 13)`: 2 multiplicações ($a^6 \\cdot a^6 \\cdot a = a^{13}$)\n\nTotal de multiplicações: $2 + 2 + 1 + 2 = 7$.\n\n**Verificação:**\nA sequência de expoentes calculados foi $0 \\to 1 \\to 3 \\to 6 \\to 13$.\n- $a^1 = a^0 \\cdot a^0 \\cdot a = 1 \\cdot 1 \\cdot a$ (2 mult.)\n- $a^3 = a^1 \\cdot a^1 \\cdot a = a \\cdot a \\cdot a$ (2 mult.)\n- $a^6 = a^3 \\cdot a^3 = a^3 \\cdot a^3$ (1 mult.)\n- $a^{13} = a^6 \\cdot a^6 \\cdot a = a^6 \\cdot a^6 \\cdot a$ (2 mult.)\nSoma: $2+2+1+2 = 7$. O resultado está consistente com a regra de paridade de [P1].",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 13.2,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.8-flash",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-3.7-flash",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-3.6-flash",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-3.5-flash",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-flash-latest",
+        "resultado": "pulado (em pausa)"
+      },
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 13.15
+      }
+    ]
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral.",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:33:09",
+    "texto": "Para calcular $a^{13}$ usando o algoritmo de **exponenciação rápida (divisão e conquista)**, utilizamos a seguinte lógica recursiva:\n\n*   Se $n$ é par: $a^n = (a^{n/2})^2$\n*   Se $n$ é ímpar: $a^n = a \\cdot (a^{(n-1)/2})^2$\n\nCada vez que elevamos um número ao quadrado (ex: $x^2$), contamos **1 multiplicação**. Quando multiplicamos pelo $a$ extra (no caso de expoente ímpar), contamos **mais 1 multiplicação**.\n\n---\n\n### O passo a passo das chamadas:\n\nVamos rastrear a árvore de chamadas para $a^{13}$:\n\n1.  **`f(13)`**: 13 é ímpar.\n    *   Calcula `f(6)` e faz: $a \\cdot (f(6))^2$\n    *   *Multiplicações nesta etapa:* **2** (uma para o quadrado, uma para o $a \\cdot \\dots$)\n\n2.  **`f(6)`**: 6 é par.\n    *   Calcula `f(3)` e faz: $(f(3))^2$\n    *   *Multiplicações nesta etapa:* **1** (o quadrado)\n\n3.  **`f(3)`**: 3 é ímpar.\n    *   Calcula `f(1)` e faz: $a \\cdot (f(1))^2$\n    *   *Multiplicações nesta etapa:* **2** (uma para o quadrado, uma para o $a \\cdot \\dots$)\n\n4.  **`f(1)`**: Caso base.\n    *   Retorna $a$.\n    *   *Multiplicações nesta etapa:* **0**\n\n---\n\n### Resumo das multiplicações:\n\n*   `f(13)` precisa de `f(6)`: 1 mult (quadrado) + 1 mult ($a \\cdot \\dots$) = **2**\n*   `f(6)` precisa de `f(3)`: 1 mult (quadrado) = **1**\n*   `f(3)` precisa de `f(1)`: 1 mult (quadrado) + 1 mult ($a \\cdot \\dots$) = **2**\n\n**Total de multiplicações:** $2 + 1 + 2 = \\mathbf{5}$ **multiplicações.**\n\n---\n\n### Verificação visual (o caminho do cálculo):\n1. $a^1$ (base)\n2. $a^3 = a \\cdot (a^1)^2$ (2 mults: $a^1 \\cdot a^1 = a^2$; $a^2 \\cdot a = a^3$)\n3. $a^6 = (a^3)^2$ (1 mult: $a^3 \\cdot a^3 = a^6$)\n4. $a^{13} = a \\cdot (a^6)^2$ (2 mults: $a^6 \\cdot a^6 = a^{12}$; $a^{12} \\cdot a = a^{13}$)\n\nTotal: **5 multiplicações**.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 13.6,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 13.63
+      }
+    ]
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C).",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:33:28",
+    "texto": "Para responder a essas perguntas, vamos analisar o comportamento dos algoritmos de Árvore Geradora Mínima (MST) e de Caminho Mínimo (como o de Dijkstra).\n\n---\n\n### 1. Árvore Geradora Mínima (MST)\n\nA MST é determinada pela **ordem relativa** dos pesos das arestas. Se a ordem entre quaisquer duas arestas não mudar, a MST permanece a mesma.\n\n*   **Multiplicar por 2:** Se todos os pesos $w_i$ se tornam $2w_i$, a relação de ordem é preservada: se $w_a < w_b$, então $2w_a < 2w_b$. Como a ordem relativa não muda, **a MST não muda**.\n*   **Elevar ao quadrado:** Como os pesos são positivos, a função $f(x) = x^2$ é estritamente crescente para $x > 0$. Portanto, se $w_a < w_b$, então $w_a^2 < w_b^2$. A ordem relativa é preservada e, portanto, **a MST não muda**.\n\n**Conclusão:** Em ambos os casos, a MST permanece idêntica.\n\n---\n\n### 2. Caminhos Mínimos\n\nO caminho mínimo entre dois nós $u$ e $v$ é a sequência de arestas cuja **soma** dos pesos é a menor possível.\n\n*   **Multiplicar por 2:** Se o caminho original tinha peso $W = \\sum w_i$, o novo peso será $2W = \\sum (2w_i)$. Como todos os caminhos são multiplicados pelo mesmo fator constante (2), o caminho que era o menor continuará sendo o menor. **O caminho mínimo não muda.**\n\n*   **Elevar ao quadrado:** Aqui a situação muda drasticamente. O peso de um caminho passa a ser a **soma dos quadrados** dos pesos das arestas ($\\sum w_i^2$), e não o quadrado da soma ($\\sum w_i)^2$.\n    *   Exemplo:\n        *   Caminho A: arestas de pesos 1 e 4 (Soma = 5).\n        *   Caminho B: arestas de pesos 3 e 3 (Soma = 6).\n        *   Neste caso, o Caminho A é o mínimo.\n    *   Elevando ao quadrado:\n        *   Caminho A: $1^2 + 4^2 = 1 + 16 = 17$.\n        *   Caminho B: $3^2 + 3^2 = 9 + 9 = 18$.\n        *   O Caminho A ainda é o menor.\n    *   **Porém**, considere outro exemplo:\n        *   Caminho A: arestas de pesos 2 e 5 (Soma = 7).\n        *   Caminho B: arestas de pesos 4 e 4 (Soma = 8).\n        *   Caminho A é o mínimo.\n    *   Elevando ao quadrado:\n        *   Caminho A: $2^2 + 5^2 = 4 + 25 = 29$.\n        *   Caminho B: $4^2 + 4^2 = 16 + 16 = 32$.\n        *   Ainda o A.\n    *   **Onde muda?** Considere:\n        *   Caminho A: pesos 1 e 6 (Soma = 7).\n        *   Caminho B: pesos 4 e 4 (Soma = 8).\n        *   Elevando ao quadrado:\n        *   Caminho A: $1^2 + 6^2 = 1 + 36 = 37$.\n        *   Caminho B: $4^2 + 4^2 = 16 + 16 = 32$.\n        *   **O Caminho B tornou-se o mínimo!**\n\n**Conclusão:**\n*   Multiplicar por 2: **Não muda** o caminho mínimo.\n*   Elevar ao quadrado: **Pode mudar** o caminho mínimo, pois a operação de elevar ao quadrado não é linear em relação à soma. Caminhos com muitas arestas pequenas podem se tornar preferíveis a caminhos com poucas arestas grandes (ou vice-versa), dependendo da distribuição dos pesos.",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 17.3,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 17.3
+      }
+    ]
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n.",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:33:45",
+    "texto": "Para determinar se um algoritmo é polinomial, precisamos analisar sua complexidade em função do **tamanho da entrada**.\n\nA resposta curta é: **Não, esse algoritmo não é polinomial.** Ele possui complexidade **exponencial** em relação ao tamanho da entrada.\n\nAqui está a explicação detalhada:\n\n### 1. O que é o \"tamanho da entrada\"?\nNa teoria da complexidade, o tamanho da entrada ($L$) de um número $n$ não é o valor de $n$ em si, mas sim o **número de bits** necessários para representá-lo.\nComo um número $n$ pode ser representado em binário com aproximadamente $\\log_2(n)$ bits, temos:\n$$L \\approx \\log_2(n) \\implies n \\approx 2^L$$\n\n### 2. Análise da complexidade do algoritmo\nO algoritmo proposto testa a divisibilidade de $n$ por todos os números de $2$ até $\\sqrt{n}$.\n*   O número de operações realizadas é proporcional a $\\sqrt{n}$.\n*   Substituindo $n$ pelo tamanho da entrada ($L$):\n    $$\\text{Complexidade} \\approx \\sqrt{n} = \\sqrt{2^L} = (2^L)^{1/2} = 2^{L/2}$$\n\n### 3. Por que não é polinomial?\n*   Um algoritmo é considerado **polinomial** se o seu tempo de execução for da forma $O(L^k)$, onde $k$ é uma constante (ex: $L^2, L^3$).\n*   O algoritmo de tentativa de divisão tem uma complexidade de $O(2^{L/2})$, que é uma função **exponencial** do tamanho da entrada.\n\n### Exemplo prático\nImagine que você queira testar um número com 100 bits ($L=100$):\n*   **Algoritmo Polinomial (ex: $L^2$):** Faria cerca de $100^2 = 10.000$ operações. Isso é instantâneo.\n*   **Seu Algoritmo ($\\sqrt{n}$):** Faria cerca de $\\sqrt{2^{100}} = 2^{50}$ operações.\n    *   $2^{50}$ é aproximadamente $1,12 \\times 10^{15}$ operações.\n    *   Mesmo em um computador moderno que faz bilhões de operações por segundo, isso levaria vários dias para terminar.\n\nSe aumentarmos o número para 1000 bits, o algoritmo polinomial continuaria rápido, mas o seu algoritmo levaria mais tempo do que a idade do universo para concluir.\n\n### Conclusão\nEmbora o algoritmo seja eficiente para números pequenos, ele é classificado como **exponencial** porque o número de passos cresce exponencialmente conforme aumentamos o número de bits da entrada.\n\n*Nota: Existem algoritmos de teste de primalidade que são polinomiais, como o teste **AKS (Agrawal–Kayal–Saxena)**, que prova que o problema da primalidade pertence à classe **P**.*",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 15.8,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 15.81
+      }
+    ]
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n).",
+    "condicao": "generico_gemini",
+    "fontes": [],
+    "data": "2026-10-12T00:34:01",
+    "texto": "Para determinar se o Teorema Mestre se aplica, vamos analisar a recorrência:\n$$T(n) = 2T(n/2) + \\frac{n}{\\log n}$$\n\n### 1. Verificação do Teorema Mestre\nO Teorema Mestre aplica-se a recorrências da forma $T(n) = aT(n/b) + f(n)$.\nAqui, temos:\n*   $a = 2$\n*   $b = 2$\n*   $f(n) = \\frac{n}{\\log n}$\n\nCalculamos o valor crítico $n^{\\log_b a} = n^{\\log_2 2} = n^1 = n$.\n\nAgora, comparamos $f(n) = \\frac{n}{\\log n}$ com $n$:\n*   O Teorema Mestre exige que $f(n)$ seja polinomialmente menor ou maior que $n^{\\log_b a}$.\n*   Para o **Caso 1**, precisaríamos que $f(n) = O(n^{1-\\epsilon})$ para algum $\\epsilon > 0$.\n*   Para o **Caso 3**, precisaríamos que $f(n) = \\Omega(n^{1+\\epsilon})$ para algum $\\epsilon > 0$.\n\nComo $\\frac{n}{\\log n}$ é apenas **assintoticamente menor** que $n$, mas não por uma diferença polinomial (ou seja, não existe $\\epsilon > 0$ tal que $\\frac{n}{\\log n} \\leq c \\cdot n^{1-\\epsilon}$), **o Teorema Mestre padrão não se aplica.**\n\n---\n\n### 2. Resolução pelo Método da Árvore de Recursão\nPodemos resolver essa recorrência expandindo os níveis da árvore:\n\n1.  **Nível 0:** $n / \\log n$\n2.  **Nível 1:** $2 \\cdot \\frac{n/2}{\\log(n/2)} = \\frac{n}{\\log n - 1}$\n3.  **Nível 2:** $4 \\cdot \\frac{n/4}{\\log(n/4)} = \\frac{n}{\\log n - 2}$\n4.  **Nível $i$:** O custo no nível $i$ é $\\frac{n}{\\log n - i}$.\n\nA árvore tem profundidade $k = \\log_2 n$. O custo total é a soma dos custos em cada nível:\n$$T(n) = \\sum_{i=0}^{\\log_2 n - 1} \\frac{n}{\\log n - i}$$\n\nVamos expandir a soma (substituindo $j = \\log n - i$):\n$$T(n) = n \\sum_{j=1}^{\\log n} \\frac{1}{j}$$\n\nA soma $\\sum_{j=1}^{m} \\frac{1}{j}$ é a **Série Harmônica**, que é conhecida por ser aproximadamente $\\ln(m)$.\nNeste caso, $m = \\log_2 n$. Portanto:\n$$\\sum_{j=1}^{\\log n} \\frac{1}{j} \\approx \\ln(\\log n)$$\n\nSubstituindo de volta na equação:\n$$T(n) \\approx n \\cdot \\ln(\\log n)$$\n\n### Conclusão\nA complexidade da recorrência é:\n**$T(n) = \\Theta(n \\log \\log n)$**",
+    "provedor": "gemini",
+    "modelo": "gemini-3.1-flash-lite",
+    "segundos": 15.6,
+    "tentativas": [
+      {
+        "modelo": "gemini:gemini-3.1-flash-lite",
+        "resultado": "respondeu",
+        "segundos": 15.58
+      }
+    ]
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n).",
+    "condicao": "generico_local",
+    "fontes": [],
+    "data": "2026-10-12T00:36:43",
+    "texto": "O Teorema Mestre não se aplica à recorrência $ T(n) = 2T\\left(\\frac{n}{2}\\right) + \\frac{n}{\\log n} $, pois $ f(n) = \\frac{n}{\\log n} $ não se enquadra em nenhuma das três condições do teorema. Para resolver essa recorrência, utilizamos o método de Akra-Bazzi, que generaliza o Teorema Mestre para casos mais complexos.\n\nA recorrência dada tem a forma $ T(n) = aT\\left(\\frac{n}{b}\\right) + f(n) $, onde $ a = 2 $, $ b = 2 $, e $ f(n) = \\frac{n}{\\log n} $. Segundo o método de Akra-Bazzi, a solução é dada por:\n\n$$\nT(n) = \\Theta\\left(n^p \\left(1 + \\int_{1}^{n} \\frac{f(u)}{u^{p+1}} \\, du \\right) \\right)\n$$\n\nonde $ p $ é a solução da equação $ a = b^p $. Neste caso, $ p = 1 $, pois $ 2 = 2^1 $.\n\nCalculando a integral:\n\n$$\n\\int_{1}^{n} \\frac{f(u)}{u^{p+1}} \\, du = \\int_{1}^{n} \\frac{u / \\log u}{u^2} \\, du = \\int_{1}^{n} \\frac{1}{u \\log u} \\, du\n$$\n\nA integral $ \\int \\frac{1}{u \\log u} \\, du $ é resolvida com a substituição $ v = \\log u $, resultando em:\n\n$$\n\\int \\frac{1}{u \\log u} \\, du = \\log(\\log u) + C\n$$\n\nAssim, a integral de $ 1 $ a $ n $ é:\n\n$$\n\\log(\\log n) - \\log(\\log 1)\n$$\n\nComo $ \\log(\\log 1) $ é indefinido, consideramos o comportamento assintótico, que resulta em $ \\log(\\log n) $. Portanto, a solução da recorrência é:\n\n$$\nT(n) = \\Theta\\left(n \\left(1 + \\log \\log n \\right) \\right) = \\Theta(n \\log \\log n)\n$$\n\nPortanto, a solução da recorrência é:\n\n$$\n\\boxed{\\Theta(n \\log \\log n)}\n$$",
+    "provedor": "ollama",
+    "modelo": "qwen3:8b",
+    "segundos": 161.7,
+    "tentativas": [
+      {
+        "modelo": "ollama:qwen3:8b",
+        "resultado": "respondeu",
+        "segundos": 161.68
+      }
+    ]
+  }
+]

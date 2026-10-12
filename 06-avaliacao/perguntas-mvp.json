@@ -1,0 +1,42 @@
+[
+  {
+    "id": "N1-pd-triangulo",
+    "pergunta": "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.",
+    "referencia": "De baixo para cima: linha 3 = [4,1,8,3]; linha 2 = [6+1, 5+1, 7+3] = [7,6,10]; linha 1 = [3+6, 4+6] = [9,10]; topo = 2+9 = 11. Caminho 2→3→5→1, soma 11."
+  },
+  {
+    "id": "N2-iteracao",
+    "pergunta": "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.",
+    "referencia": "T(n) = 3 + soma_{k=2}^{n} 2k = 3 + n(n+1) - 2 = n² + n + 1. Confere: T(1)=3, T(2)=7, T(3)=13. Θ(n²)."
+  },
+  {
+    "id": "N3-lacos-triplos",
+    "pergunta": "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.",
+    "referencia": "soma_{i=1}^{n} i(i+1)/2 = n(n+1)(n+2)/6. Para n=3: 1+3+6 = 10 = 3·4·5/6. Θ(n³)."
+  },
+  {
+    "id": "N4-exponenciacao",
+    "pergunta": "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.",
+    "referencia": "a^13 = a·(a^6)², a^6 = (a^3)², a^3 = a·(a^1)². Multiplicações: 2 + 1 + 2 = 5 (3 quadrados e 2 multiplicações por a; 13 = 1101 em binário). Θ(log n) no geral."
+  },
+  {
+    "id": "N5-intervalos",
+    "pergunta": "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?",
+    "referencia": "Ordenando pelo término, o guloso escolhe [1,4], [5,7], [8,11], [12,16]: 4 intervalos (ótimo). Ordenar pelo término deixa o maior espaço livre para os demais (argumento de troca)."
+  },
+  {
+    "id": "N6-agm-transformacao",
+    "pergunta": "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?",
+    "referencia": "AGM não muda em nenhum dos dois casos: ambas as transformações são estritamente crescentes para pesos positivos e Kruskal/Prim dependem só da ordem dos pesos. Caminhos mínimos: ×2 preserva (todo caminho é multiplicado por 2); elevar ao quadrado pode mudar. Ex.: A–C direto com peso 3 contra A–B–C com 2+2 = 4 (o direto é menor); ao quadrado, 9 contra 4+4 = 8 (passa a ser A–B–C)."
+  },
+  {
+    "id": "N7-primalidade",
+    "pergunta": "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.",
+    "referencia": "Não é polinomial no tamanho da entrada: com b = número de bits de n, √n = 2^{b/2}, então são Θ(2^{b/2}) divisões (exponencial em b; pseudo-polinomial). Polinomial seria em b, não em n."
+  },
+  {
+    "id": "N8-mestre-lacuna",
+    "pergunta": "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.",
+    "referencia": "Não se aplica: n^{log_2 2} = n e f(n) = n/log n é menor que n, mas não polinomialmente menor (lacuna entre os casos 1 e 2). Árvore de recursão: nível i custa n/(log n - i); soma = n·soma_{j=1}^{log n} 1/j = Θ(n log log n)."
+  }
+]
