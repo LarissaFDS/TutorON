@@ -1,49 +1,43 @@
-# Preparar e treinar TutorON — Linux e Windows
+# Treinar o TutorON
 
-## Estado desta máquina
+Um clique: **`3-Treinar.bat`**. Na primeira vez ele cria `.venv-treino`, instala PyTorch com CUDA (~3 GB) e baixa os pesos do Qwen3-8B do Hugging Face (~16 GB, em `.tools/hf`). Depois disso, cada treino leva poucos minutos.
 
-Ubuntu 24.04, Ryzen 7 3700U, aproximadamente 10 GiB de RAM, sem GPU NVIDIA detectada. Ollama executa inferência quantizada na CPU. Nenhum peso foi treinado nesta rodada. O perfil QLoRA fornecido exige GPU CUDA; use outra máquina, Linux nativo, Windows com CUDA ou WSL2 com suporte à GPU. Um notebook somente com CPU não é um ambiente prático para o perfil 3B proposto.
+## O que acontece
 
-Os arquivos do treino são pequenos e podem ser copiados com o repositório. Modelos e ambientes em `.tools/` e `.venv-treino/` não vão ao GitHub.
+| Etapa | O quê | Onde fica |
+|---|---|---|
+| 1. Dados | Soluções corrigidas do acervo viram pares pergunta → resposta, no mesmo formato de prompt do servidor. Questões do benchmark ficam de fora. | `05-modelo/treino/treino.jsonl`, `validacao.jsonl`, `manifesto.json` |
+| 2. Treino | QLoRA: modelo em 4 bits na GPU, adapter LoRA rank 16 em todas as projeções. Descarrega o Ollama da GPU antes. | `.tools/treino/adapter`, `.tools/treino/resultado-treino.json` |
+| 3. Mescla | Aplica o adapter nos pesos originais, um arquivo por vez (cabe em 16 GB de RAM). | temporário, apagado no fim |
+| 4. Ollama | Importa como `tutoron-paa-ft`, quantizado em Q4_K_M (mesmo tamanho do atual). | `.tools/models` |
+| 5. Avaliação | Perguntas de validação + sondas de matemática, respondidas pelo modelo atual e pelo novo; um juiz (Gemini) compara com a solução de referência. | `05-modelo/treino/avaliacao-AAAAMMDD-HHMM.md` |
 
-## Dados preparados
+O modelo em uso **não é trocado sozinho**. Leia o relatório; se o novo for melhor, coloque no `.env`:
 
-```bash
-./preparar_treino.sh
+```
+TUTORON_MODELO_LOCAL=tutoron-paa-ft
 ```
 
-No Windows, execute `preparar_treino.bat`. O dry-run verifica hashes, presença de dados e separação de famílias. Os arquivos `treino/treino.jsonl`, `treino/validacao.jsonl` e `treino/manifesto.json` registram fonte, hash, modelo base, revisão exata e famílias reservadas.
+e reinicie o `1-Iniciar-Servidor.bat`. Para voltar, apague a linha.
 
-São dados **silver**, corrigidos por agente; não estão aprovados por professor. O conjunto é pequeno, adequado a verificar a engenharia do treino, sem sustentar uma promessa de melhoria pedagógica. As questões e conceitos reservados do benchmark não entram no treino. A RAG pode consultar o material no protocolo aberto; isso é diferente de vazar questões para fine-tuning.
-
-O exportador antigo de alta confiança (`dataset-finetuning.jsonl`) continua exigindo aprovações verificáveis e pode estar vazio. Não renomeie revisão por agente como revisão humana.
-
-## Executar na máquina com GPU
-
-Instale Python 3.12, driver NVIDIA/CUDA compatível e copie o repositório. Comece com GPU de pelo menos 12–16 GB como margem prática; o consumo real depende do contexto e do backend e precisa ser medido. O perfil usa Qwen2.5 3B em NF4, LoRA rank 8, contexto 1024, batch 1 e acumulação 4.
-
-Linux:
-
-```bash
-./treinar_lora.sh --steps 30
-```
-
-Windows:
+## Opções
 
 ```bat
-treinar_lora.bat --steps 30
+3-Treinar.bat --passos 120          :: mais passos (padrão 60)
+3-Treinar.bat --so-dados            :: só exporta os dados, sem treinar
+3-Treinar.bat --pular-avaliacao     :: não gera o relatório
+3-Treinar.bat --base Qwen/Qwen3-4B  :: base menor (precisa trocar também o modelo servido)
 ```
 
-A instalação usa `treino/requirements.txt` com versões fixadas. A base Hugging Face também tem revisão fixada em `treino/manifesto.json`. O treino não envia dados a um serviço de geração: baixa os pesos e treina na máquina em que você executa o script. Resultados, versões efetivas e adapter ficam em `.tools/treino/`. O script interrompe quando não há CUDA, os hashes mudam, um split fica vazio ou há sobreposição de famílias.
+O servidor pode ficar ligado durante o treino: o Gemini continua respondendo, e o modelo local volta para a GPU sozinho na próxima vez que for usado.
 
-A instalação GPU e o treinamento real **não foram executados nem validados neste notebook**. O preparo dos dados, a sintaxe e o dry-run foram verificados. Consulte os requisitos da [quantização bitsandbytes](https://huggingface.co/docs/transformers/quantization/bitsandbytes), [PEFT/QLoRA](https://huggingface.co/docs/peft/main/en/developer_guides/quantization) e [SFTTrainer](https://huggingface.co/docs/trl/sft_trainer).
+## Limites (importante)
 
-Os wrappers instalam primeiro PyTorch 2.14.1 pelo índice oficial CUDA 12.6, com wheels Python 3.12 verificadas para Linux amd64 e Windows amd64. Isso evita selecionar silenciosamente uma distribuição CPU. Verificam `torch.cuda.is_available()` antes de instalar os demais pacotes. Para outra GPU/driver, escolha o índice no [seletor oficial do PyTorch](https://pytorch.org/get-started/locally/) e defina `TUTORON_TORCH_INDEX_URL` (por exemplo, o índice cu130 quando apropriado). A existência dos wheels e a resolução de dependências não equivalem a um treino executado.
+- **O dataset é pequeno** (26 exemplos de treino, 6 de validação) e foi corrigido por agente, não por professor. Ele prova que o processo funciona; não sustenta, sozinho, uma melhora pedagógica.
+- **Loss menor não significa tutor melhor.** Compare pelo relatório de avaliação e pela validação A/B com alunos.
+- O treino não ensina o conteúdo do livro: a RAG continua buscando o material em cada pergunta.
+- Para reduzir os erros de matemática, o que mais ajuda é ter **mais soluções corretas e revisadas**: cada resolução nova aprovada em `03-triagem/revisoes.json` e curada no acervo entra no próximo treino. As avaliações com "erro de matemática" marcadas pelos alunos (`dados/validacao/avaliacoes.jsonl`) mostram onde o modelo erra.
 
-## Avaliar e importar
+## Hardware desta máquina
 
-Guarde a base sem treinamento. Compare base e modelo ajustado no mesmo conjunto reservado, com as mesmas opções, medindo correção matemática, citações e abstenção. Loss menor não prova que o tutor melhorou.
-
-Não importe um adapter sobre outra base. Para uma rota portátil, mescle o adapter com a base Hugging Face de mesma revisão em uma máquina com memória suficiente, salve pesos/tokenizer e converta/quantize para GGUF usando llama.cpp. Importe o GGUF com `FROM ./tutoron-paa-lora.gguf` em um Modelfile e execute `ollama create tutoron-paa-lora -f Modelfile`. Verifique a [documentação atual de importação](https://docs.ollama.com/import); não se presume suporte a ADAPTER para toda arquitetura.
-
-O contexto acadêmico continua sendo recuperado pelo RAG após fine-tuning. Os pesos não são um banco atualizado de PDFs. Antes da implantação pública, conclua a validação cega, corrija os erros observados e registre desempenho/latência com o hardware escolhido.
+RTX 4060 (8 GB), i5-12400F, 16 GB de RAM. Inferência do Qwen3 8B Q4_K_M: ~45 tokens/s. Treino QLoRA do 8B com contexto de 1536 tokens cabe na VRAM com checkpointing.
