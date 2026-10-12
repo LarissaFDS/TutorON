@@ -123,6 +123,7 @@ Cada um existe por um motivo de uso. Antes de criar outro, veja se um destes res
 | `.confirmation` | Estado de sucesso com o próximo passo |
 | `.table` | Dados comparáveis. Números à direita, com `tabular-nums` |
 | `.prose` | Texto de resposta renderizado |
+| `.historico` | Perguntas anteriores do modo "Tirar dúvida", recolhidas atrás de um botão (`aria-expanded`). A tela mostra só a resposta atual; o histórico vive só na memória da página e não tem botões de retorno |
 
 ## Texto de interface
 
@@ -162,4 +163,5 @@ Capturas do redesign de 30/09/2026 em [`docs/redesign/`](docs/redesign/): escolh
 - que a escala tem cinco tamanhos;
 - que a página de validação não carrega nada da internet e só referencia arquivos servidos;
 - que o contrato com a API (`/api/questoes`, `/api/comparar`, `/api/votar`) continua igual;
+- que o histórico do modo "Tirar dúvida" existe na página, é acessível (`aria-expanded`/`aria-controls`) e não usa `localStorage`;
 - que o renderizador escapa HTML (precisa de Node.js; sem ele, o teste é pulado).

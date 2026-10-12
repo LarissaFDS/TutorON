@@ -130,7 +130,7 @@
     return d;
   }
 
-  function botoesFeedback(id) {
+  function botoesFeedback(id, registro) {
     var box = el('div', 'feedback');
     box.append(el('span', 'caption', 'Esta resposta ajudou?'));
     var status = el('span', 'caption feedback__status');
@@ -141,6 +141,7 @@
         box.querySelectorAll('button').forEach(function (x) { x.disabled = true; });
         try {
           await postJSON('/api/feedback', Object.assign({ id: id }, dados));
+          registro.voto = texto;
           status.textContent = 'Obrigado pelo retorno.';
         } catch (e) {
           status.textContent = e.message;
@@ -154,18 +155,76 @@
     return box;
   }
 
+  /* Perguntas anteriores: ficam só na memória da página (recarregar zera).
+   * A tela principal mostra apenas a pergunta atual; as anteriores vão para
+   * uma lista recolhida, sem botões de retorno, para não votar na resposta errada. */
+  var historico = [];  // da mais antiga para a mais recente
+  var atual = null;    // { pergunta, texto, meta, fontes, voto, pronta }
+
+  function rolarPara(node) {
+    var reduzir = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    node.scrollIntoView({ block: 'start', behavior: reduzir ? 'auto' : 'smooth' });
+  }
+
+  function abrirHistorico(abrir) {
+    $('historico').hidden = !abrir;
+    $('historico-botao').setAttribute('aria-expanded', String(abrir));
+    $('historico-botao').textContent = abrir ? 'Ocultar perguntas anteriores'
+      : 'Ver perguntas anteriores (' + historico.length + ')';
+  }
+  $('historico-botao').addEventListener('click', function () { abrirHistorico($('historico').hidden); });
+
+  function itemHistorico(r) {
+    var li = el('li', 'historico__item');
+    var d = el('details', 'disclosure');
+    var resumo = r.pergunta.length > 160 ? r.pergunta.slice(0, 157).trimEnd() + '…' : r.pergunta;
+    d.append(el('summary', null, resumo));
+    var corpo = el('div', 'troca');
+    // A resposta só é desenhada na primeira vez que o item é aberto.
+    d.addEventListener('toggle', function () {
+      if (!d.open || corpo.childElementCount) return;
+      var q = el('div', 'question prose');
+      R.renderPlain(q, r.pergunta);
+      var resposta = el('div', 'prose resposta');
+      R.render(resposta, r.texto);
+      corpo.append(q, resposta, el('p', 'caption', r.meta));
+      if (r.fontes && r.fontes.length) corpo.append(fontesDetalhe(r.fontes));
+      if (r.voto) corpo.append(el('p', 'caption', 'Seu retorno: ' + r.voto + '.'));
+    });
+    d.append(corpo);
+    li.append(d);
+    return li;
+  }
+
+  // Tira a pergunta atual da tela principal. Só respostas prontas entram no histórico.
+  function guardarAtualNoHistorico() {
+    if (atual && atual.pronta) historico.push(atual);
+    atual = null;
+    var lista = $('historico');
+    lista.replaceChildren.apply(lista, historico.slice().reverse().map(itemHistorico));
+    $('historico-box').hidden = historico.length === 0;
+    abrirHistorico(false);
+  }
+
   var enviando = false;
 
   async function perguntar(pergunta, contexto, retomarId) {
+    guardarAtualNoHistorico();
+    var registro = { pergunta: pergunta, texto: '', meta: '', fontes: [], voto: null, pronta: false };
+    atual = registro;
+
     var item = el('article', 'troca');
+    item.tabIndex = -1;
+    item.setAttribute('aria-label', 'Sua dúvida e a resposta');
     var q = el('div', 'question prose');
     R.renderPlain(q, pergunta);
     var resposta = el('div', 'prose resposta');
     var meta = el('p', 'caption troca__meta status', 'Enviando…');
     meta.dataset.tone = 'busy';
     item.append(q, resposta, meta);
-    $('conversa').append(item);
-    item.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    $('conversa').replaceChildren(item);
+    item.focus({ preventScroll: true });
+    rolarPara(item);
 
     var desenhado = '';
     var final;
@@ -203,7 +262,11 @@
       setStatus(meta, 'Respondido em ' + Math.max(1, Math.round((Date.now() - inicio) / 1000)) + ' s' +
         (final.rotulo ? ' · ' + final.rotulo : '') + '.');
       if (final.fontes && final.fontes.length) item.append(fontesDetalhe(final.fontes));
-      item.append(botoesFeedback(final.id_resposta));
+      item.append(botoesFeedback(final.id_resposta, registro));
+      registro.texto = final.texto;
+      registro.meta = meta.textContent;
+      registro.fontes = final.fontes || [];
+      registro.pronta = true;
       return true;
     }
     setStatus(meta, final.mensagem || 'Não foi possível gerar a resposta. Tente de novo.', 'error');

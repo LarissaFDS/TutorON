@@ -37,6 +37,13 @@
 
     <div id="conversa" class="conversa" aria-live="polite"></div>
 
+    <!-- Perguntas anteriores: só na memória da página; recarregar zera. -->
+    <div class="historico" id="historico-box" hidden>
+      <button class="button button--secondary" id="historico-botao" type="button"
+        aria-expanded="false" aria-controls="historico">Ver perguntas anteriores</button>
+      <ol class="historico__lista" id="historico" aria-label="Perguntas anteriores, da mais recente para a mais antiga" hidden></ol>
+    </div>
+
     <form id="form-tutor" class="composer" novalidate>
       <div class="field">
         <label class="field__label" for="pergunta">Sua dúvida</label>
