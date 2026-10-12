@@ -12,6 +12,7 @@ Como a troca é rápida:
 from __future__ import annotations
 
 import asyncio
+import contextvars
 import json
 import logging
 import time
@@ -23,6 +24,9 @@ import httpx
 from .config import Settings
 
 logger = logging.getLogger("tutoron.llm")
+
+# Desliga o raciocínio do modelo local na tentativa de resgate (responde em ~25 s em vez de ~60 s).
+SEM_RACIOCINIO: contextvars.ContextVar[bool] = contextvars.ContextVar("sem_raciocinio", default=False)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
@@ -66,6 +70,18 @@ def pause_for_status(status: int) -> float:
     return 20.0  # 500/502/503/504: sobrecarga momentânea
 
 
+def retry_delay(corpo: bytes) -> float:
+    """Espera informada pelo Google no 429 (cota diária esgotada pode ser de horas), limitada a 1 h."""
+    try:
+        detalhes = json.loads(corpo).get("error", {}).get("details", [])
+        for d in detalhes:
+            if "retryDelay" in d:
+                return min(3600.0, float(str(d["retryDelay"]).rstrip("s")))
+    except (ValueError, AttributeError, TypeError):
+        pass
+    return 0.0
+
+
 class Breaker:
     """Pausa modelos que acabaram de falhar."""
 
@@ -104,8 +120,9 @@ class LLM:
         self.settings = settings
         self.client = client or httpx.AsyncClient(timeout=httpx.Timeout(60, connect=5))
         self.breaker = Breaker()
-        # Uma geração local por vez: a GPU atende melhor em fila do que em paralelo.
-        self.local_lock = asyncio.Semaphore(1)
+        # Gerações locais simultâneas: o Ollama roda com OLLAMA_NUM_PARALLEL=2 (o melhor na RTX 4060).
+        self.local_lock = asyncio.Semaphore(settings.local_parallel)
+        self.local_waiting = 0  # pedidos esperando a GPU (mostrado ao aluno como posição na fila)
         self._thinking: dict[str, bool] = {}
 
     # ------------------------------------------------------------------ modelos
@@ -127,8 +144,11 @@ class LLM:
             async with self.client.stream("POST", GEMINI_URL.format(model=model.name), json=body, headers=headers,
                                           timeout=httpx.Timeout(self.settings.gemini_idle_s, connect=5)) as response:
                 if response.status_code != 200:
-                    await response.aread()
-                    raise Unavailable(f"HTTP {response.status_code}", pause_for_status(response.status_code))
+                    corpo = await response.aread()
+                    pausa = pause_for_status(response.status_code)
+                    if response.status_code == 429:
+                        pausa = max(pausa, retry_delay(corpo))
+                    raise Unavailable(f"HTTP {response.status_code}", pausa)
                 async for line in response.aiter_lines():
                     if not line.startswith("data:"):
                         continue
@@ -165,8 +185,10 @@ class LLM:
         body = {"model": model.name, "messages": messages, "stream": True, "keep_alive": "60m",
                 "options": {"temperature": 0.2, "num_ctx": self.settings.local_num_ctx, "num_predict": 8192}}
         if await self.supports_thinking(model.name):
-            body["think"] = self.settings.local_thinking
-            if self.settings.local_thinking:
+            # Com 2+ pedidos esperando a GPU (turma inteira usando), responde sem raciocínio para a fila andar.
+            pensar = self.settings.local_thinking and not SEM_RACIOCINIO.get() and self.local_waiting < 2
+            body["think"] = pensar
+            if pensar:
                 # Recomendação do Qwen3 para o modo com raciocínio (temperatura baixa demais causa repetição).
                 body["options"].update(temperature=0.6, top_p=0.95, top_k=20)
         try:
@@ -200,7 +222,11 @@ class LLM:
         timeout = self.settings.local_first_chunk_s if model.provider == "ollama" else self.settings.gemini_first_chunk_s
         lock = self.local_lock if model.provider == "ollama" else None
         if lock:
-            await lock.acquire()
+            self.local_waiting += 1
+            try:
+                await lock.acquire()
+            finally:
+                self.local_waiting -= 1
         generator = self._provider(model, system, prompt)
         try:
             first = await asyncio.wait_for(generator.__anext__(), timeout)

@@ -2,8 +2,9 @@
 #   1-Iniciar-Servidor.bat  -> -Acao Servidor   (IA ligada + site público)
 #   2-Validacao.bat         -> -Acao Validacao  (abre o modo validação e os resultados)
 #   3-Treinar.bat           -> -Acao Treinar    (fine-tuning QLoRA na GPU)
+#   4-Reiniciar.bat         -> -Acao Reiniciar  (religa modelos e site sem mudar o endereço público)
 # Outras ações: Testar, Acervo (refaz OCR/curadoria/índice), Parar.
-param([ValidateSet('Servidor','Validacao','Treinar','Testar','Acervo','Parar')][string]$Acao = 'Servidor',
+param([ValidateSet('Servidor','Validacao','Treinar','Reiniciar','Testar','Acervo','Parar')][string]$Acao = 'Servidor',
       [Parameter(ValueFromRemainingArguments = $true)][string[]]$Extra = @())
 # 'Continue': no PowerShell 5.1, avisos que programas escrevem no stderr virariam erro fatal com 'Stop'.
 # Falhas de programas são checadas pelo código de saída (Falhou); cmdlets usam -ErrorAction Stop.
@@ -78,8 +79,11 @@ function Iniciar-Ollama {
     $env:OLLAMA_MODELS = Join-Path $Tools 'models'
     $env:OLLAMA_HOST = '127.0.0.1:11434'
     $env:OLLAMA_KEEP_ALIVE = '60m'
-    $env:OLLAMA_NUM_PARALLEL = '1'
+    # 2 respostas ao mesmo tempo com cache em 8 bits: quase o dobro de vazão e ainda cabe nos 8 GB.
+    # Com 3, o modelo transborda para a CPU e fica mais lento (medido na RTX 4060).
+    $env:OLLAMA_NUM_PARALLEL = '2'
     $env:OLLAMA_FLASH_ATTENTION = '1'
+    $env:OLLAMA_KV_CACHE_TYPE = 'q8_0'
     try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 3; Ok 'já estava rodando' }
     catch {
         Start-Process -FilePath $Ollama -ArgumentList 'serve' -WindowStyle Hidden `
@@ -132,6 +136,10 @@ function Parar-Tudo {
     }
     Get-NetTCPConnection -LocalPort $Porta -State Listen -ErrorAction SilentlyContinue |
         ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+    # Túneis esquecidos de execuções anteriores (ex.: janela fechada à força).
+    Get-Process cloudflared -ErrorAction SilentlyContinue |
+        Where-Object { $_.Path -and $_.Path.StartsWith($Tools, [StringComparison]::OrdinalIgnoreCase) } |
+        Stop-Process -Force -ErrorAction SilentlyContinue
     Remove-Item (Join-Path $Dados 'url-publica.txt') -ErrorAction SilentlyContinue
 }
 
@@ -190,6 +198,20 @@ function Mostrar-Enderecos($url) {
     Write-Host '   Deixe esta janela aberta. Fechar a janela ou Ctrl+C desliga o site.' -ForegroundColor Yellow
 }
 
+$PedidoReinicio = Join-Path $Dados 'reiniciar.pedido'
+
+function Parar-Ollama {
+    Get-Process ollama, 'ollama app', llama-server -ErrorAction SilentlyContinue |
+        Where-Object { $_.Path -and $_.Path.StartsWith($Tools, [StringComparison]::OrdinalIgnoreCase) } |
+        Stop-Process -Force -ErrorAction SilentlyContinue
+    Start-Sleep -Seconds 2
+}
+
+function Parar-Servidor {
+    Get-NetTCPConnection -LocalPort $Porta -State Listen -ErrorAction SilentlyContinue |
+        ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
+}
+
 function Servidor {
     # Uma janela por vez: duas janelas vigiando o mesmo servidor ficariam reiniciando uma à outra.
     $trava = New-Object System.Threading.Mutex($false, 'Local\TutorON-Servidor')
@@ -206,38 +228,88 @@ function Servidor {
     Titulo 'Site e túnel público'
     Baixar-Cloudflared
     Parar-Tudo
+    Remove-Item $PedidoReinicio -ErrorAction SilentlyContinue
     $servidor = Iniciar-Servidor
     Ok "servidor em $Local"
     $tunel = Iniciar-Tunel
     Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
     Mostrar-Enderecos $tunel.url
     Start-Process "$Local/"
+    $falhas = 0
+    $ultimaVerificacao = [DateTime]::MinValue
     try {
         while ($true) {
             Manter-Acordado
-            Start-Sleep -Seconds 20
-            $vivo = $true
-            try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 5 } catch { $vivo = $false }
-            if (!$vivo -or $servidor.HasExited) {
-                Aviso "$(Get-Date -Format HH:mm:ss) servidor caiu; reiniciando..."
-                Get-NetTCPConnection -LocalPort $Porta -State Listen -ErrorAction SilentlyContinue |
-                    ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }
-                $servidor = Iniciar-Servidor
-                Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
+            Start-Sleep -Seconds 3
+            try {
+                # Pedido do 4-Reiniciar.bat: religa Ollama e site; o túnel (e o endereço público) continua.
+                if (Test-Path $PedidoReinicio) {
+                    Aviso "$(Get-Date -Format HH:mm:ss) reinício pedido: religando modelos e site..."
+                    Parar-Servidor
+                    Parar-Ollama
+                    Iniciar-Ollama
+                    $servidor = Iniciar-Servidor
+                    Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
+                    Remove-Item $PedidoReinicio -ErrorAction SilentlyContinue
+                    Ok "$(Get-Date -Format HH:mm:ss) reiniciado; o endereço público continua o mesmo"
+                    $falhas = 0
+                }
+                if (((Get-Date) - $ultimaVerificacao).TotalSeconds -lt 15) { continue }
+                $ultimaVerificacao = Get-Date
+                $vivo = $true
+                try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 10 } catch { $vivo = $false }
+                if ($vivo) { $falhas = 0 } else { $falhas++ }
+                # Três falhas seguidas (~45 s) antes de religar: um soluço não derruba respostas em andamento.
+                if ($servidor.HasExited -or $falhas -ge 3) {
+                    Aviso "$(Get-Date -Format HH:mm:ss) site sem resposta; religando..."
+                    Parar-Servidor
+                    $servidor = Iniciar-Servidor
+                    Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
+                    $falhas = 0
+                    Ok 'site religado'
+                }
+                if ($tunel.processo.HasExited) {
+                    Aviso "$(Get-Date -Format HH:mm:ss) túnel caiu; reabrindo (o endereço público pode mudar)..."
+                    $tunel = Iniciar-Tunel
+                    Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
+                    Mostrar-Enderecos $tunel.url
+                }
+                try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 10 }
+                catch { Aviso "$(Get-Date -Format HH:mm:ss) modelo local parou; religando..."; Parar-Ollama; Iniciar-Ollama }
+            } catch {
+                # Nunca sair do laço por causa de um erro ao religar: tenta de novo na próxima volta.
+                Aviso "$(Get-Date -Format HH:mm:ss) erro ao recuperar: $($_.Exception.Message). Tentando de novo..."
+                Start-Sleep -Seconds 5
             }
-            if ($tunel.processo.HasExited) {
-                Aviso "$(Get-Date -Format HH:mm:ss) túnel caiu; reabrindo (o endereço público pode mudar)..."
-                $tunel = Iniciar-Tunel
-                Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
-                Mostrar-Enderecos $tunel.url
-            }
-            try { $null = Invoke-RestMethod -ErrorAction Stop 'http://127.0.0.1:11434/api/tags' -TimeoutSec 5 }
-            catch { Aviso 'Ollama parou; reiniciando...'; Iniciar-Ollama }
         }
     } finally {
         Write-Host 'Desligando o TutorON...'
         Parar-Tudo
+        $trava.ReleaseMutex()
     }
+}
+
+function Reiniciar {
+    $trava = New-Object System.Threading.Mutex($false, 'Local\TutorON-Servidor')
+    if ($trava.WaitOne(0)) {
+        # Nenhuma janela de servidor aberta: só abrir uma.
+        $trava.ReleaseMutex()
+        Write-Host 'O servidor não estava ligado. Abrindo o 1-Iniciar-Servidor...'
+        Start-Process -FilePath (Join-Path $Raiz '1-Iniciar-Servidor.bat')
+        return
+    }
+    Titulo 'Reiniciando modelos e site (o endereço público continua o mesmo)'
+    Set-Content $PedidoReinicio (Get-Date -Format o) -Encoding utf8
+    for ($i = 0; $i -lt 300 -and (Test-Path $PedidoReinicio); $i++) { Start-Sleep -Seconds 1 }
+    if (Test-Path $PedidoReinicio) { throw 'A janela do servidor não respondeu ao pedido. Feche-a e abra o 1-Iniciar-Servidor.bat.' }
+    $ok = $false
+    for ($i = 0; $i -lt 60 -and !$ok; $i++) {
+        try { $null = Invoke-RestMethod -ErrorAction Stop "$Local/health" -TimeoutSec 5; $ok = $true } catch { Start-Sleep -Seconds 1 }
+    }
+    if (!$ok) { throw 'O site não voltou. Veja a janela do servidor.' }
+    $url = Join-Path $Dados 'url-publica.txt'
+    Ok 'TutorON reiniciado e respondendo.'
+    if (Test-Path $url) { Write-Host "   Endereço público: $((Get-Content $url -Raw).Trim())" -ForegroundColor Green }
 }
 
 function Validacao {
@@ -287,12 +359,13 @@ switch ($Acao) {
     'Servidor'  { Servidor }
     'Validacao' { Validacao }
     'Treinar'   { Treinar }
+    'Reiniciar' { Reiniciar }
     'Parar'     {
         # Fecha também a janela do 1-Iniciar-Servidor (senão ela religa o servidor).
         Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |
             Where-Object { $_.ProcessId -ne $PID -and $_.CommandLine -match 'tutoron\.ps1' -and $_.CommandLine -match 'Servidor' } |
             ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
-        Parar-Tudo; Ok 'servidor e túnel desligados'
+        Parar-Tudo; Parar-Ollama; Ok 'servidor, túnel e modelo local desligados'
     }
     'Testar'    {
         Preparar-Python

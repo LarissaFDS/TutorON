@@ -4,9 +4,11 @@ Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
 1. Acervo curado local (provas, listas e resoluções de PAA em ``04-rag/indice.json``),
    busca híbrida léxica + semântica. Só entram blocos de confiança média/alta.
+   É a FONTE PRINCIPAL: mostra como o professor cobra e é o material mais confiável.
 2. Livro-texto de PAA no Supabase/pgvector (``match_chunks``), indexado por
-   ``backend/ingest.py``. É opcional: sem SUPABASE_URL/KEY ou fora do ar, a
-   resposta segue só com o acervo local.
+   ``backend/ingest.py``. Complementar: entra depois do acervo, com menos trechos
+   e só quando bem parecido com a pergunta. Sem SUPABASE_URL/KEY ou fora do ar,
+   a resposta segue só com o acervo local.
 
 Cada trecho recebe um rótulo curto ([P1], [L1]…) que o modelo usa para citar.
 """
@@ -22,8 +24,8 @@ from .config import Settings
 
 logger = logging.getLogger("tutoron.rag")
 
-ACERVO_K = 4
-LIVRO_K = 3
+ACERVO_K = 4  # fonte principal
+LIVRO_K = 2   # complemento
 MAX_CHARS_TRECHO = 2200
 TIPOS = {
     "prova": "Prova", "lista": "Lista de exercícios", "resolucao_aluno": "Resolução de aluno",
@@ -105,5 +107,21 @@ async def recuperar(pergunta: str, llm, settings: Settings) -> list[Trecho]:
     return trechos
 
 
-def contexto(trechos: list[Trecho]) -> str:
-    return "\n\n".join(t.para_prompt() for t in trechos) or "Nenhum trecho do material foi encontrado para esta pergunta."
+# Orçamento de caracteres para pergunta + código do aluno + material. O modelo local tem janela
+# de 8192 tokens, compartilhada entre prompt, raciocínio e resposta; acima disso o Ollama cortaria o
+# início do prompt (as instruções do tutor). ~9000 caracteres deixam ~4000 tokens para responder.
+ORCAMENTO_CARACTERES = 9000
+MATERIAL_MINIMO = 2500
+
+
+def contexto(trechos: list[Trecho], ocupado: int = 0) -> str:
+    """Material na ordem de prioridade (acervo antes do livro), sem passar do orçamento."""
+    limite = max(MATERIAL_MINIMO, ORCAMENTO_CARACTERES - ocupado)
+    blocos, usado = [], 0
+    for t in trechos:
+        bloco = t.para_prompt()
+        if usado + len(bloco) > limite:
+            continue  # pula o trecho inteiro em vez de cortar uma fórmula no meio
+        blocos.append(bloco)
+        usado += len(bloco)
+    return "\n\n".join(blocos) or "Nenhum trecho do material foi encontrado para esta pergunta."

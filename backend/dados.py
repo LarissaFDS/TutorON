@@ -37,11 +37,13 @@ class Registro:
         # Comparações aguardando nota. Também ficam em disco: reiniciar o
         # servidor não invalida uma comparação que o aluno está lendo.
         self.comparacoes: dict[str, dict] = {}
+        self.avaliadas: set[str] = set()
         self._carregar_comparacoes()
 
     def _carregar_comparacoes(self) -> None:
         caminho = self.pasta / "validacao" / "comparacoes.jsonl"
         avaliadas = {r.get("sessao") for r in self.ler("validacao/avaliacoes.jsonl")}
+        self.avaliadas = set(avaliadas)
         if caminho.exists():
             for linha in caminho.read_text(encoding="utf-8").splitlines():
                 try:
@@ -79,7 +81,13 @@ class Registro:
 
     def concluir_comparacao(self, sessao: str) -> dict | None:
         with self.lock:
-            return self.comparacoes.pop(sessao, None)
+            comparacao = self.comparacoes.pop(sessao, None)
+            if comparacao:
+                self.avaliadas.add(sessao)
+            return comparacao
+
+    def ja_avaliada(self, sessao: str) -> bool:
+        return sessao in self.avaliadas
 
 
 class Limitador:
