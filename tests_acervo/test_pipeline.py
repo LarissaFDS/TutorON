@@ -1,7 +1,3 @@
-import csv
-import json
-from concurrent.futures import ThreadPoolExecutor
-
 import pytest
 
 from acervo.common import init, read_json, write_json, digest, TOPICS
@@ -9,7 +5,6 @@ from acervo.extract import inventory, extract, snapshot, topic_for
 from acervo.curate import rule_findings, split_questions, organize, triage, searchable
 from acervo.retrieval import build, search, context
 from acervo import models
-from acervo.app import Study, summarize
 
 
 @pytest.fixture
@@ -142,50 +137,6 @@ def test_generation_retries_truncation_once_without_serving_partial(monkeypatch,
         assert result['repetida_por_truncamento'] is True
         assert result['limite_saida_tokens'] == 3600
     assert budgets == [1800, 3600]
-
-
-def test_blind_vote_maps_scores_prevents_duplicate_and_csv_injection(workspace):
-    folder = workspace / '07-validacao-alunos'
-    write_json(folder / 'pares.json', [{'id': 'q1', 'pergunta': 'Pergunta?', 'origem': 'teste',
-                                       'generico': {'texto': 'gen'}, 'tutoron': {'texto': 'rag'}}])
-    study = Study(workspace)
-    response = study.start('q1')
-    assert set(response) == {'sessao', 'pergunta', 'A', 'B'}
-    order = study.sessions[response['sessao']]['ordem']
-    data = {'sessao': response['sessao'], 'preferida': 'A', 'comentario': '=HYPERLINK("x")',
-            **{key+'_'+side: 4 if side == 'a' else 2 for side in ['a', 'b'] for key in ['clareza', 'confianca', 'utilidade']}}
-    assert study.vote(data) == {'salvo': True}
-    with pytest.raises(ValueError):
-        study.vote(data)
-    summary = summarize(workspace)
-    assert summary['total'] == 1
-    assert summary['por_questao'][0]['preferencia_' + order[0]] == 100
-    with (folder / 'respostas.csv').open(encoding='utf-8-sig') as f:
-        saved = list(csv.DictReader(f))[0]
-    assert saved['comentario'].startswith("'=")
-
-
-def test_concurrent_double_submit_is_single_vote(workspace):
-    write_json(workspace / '07-validacao-alunos/pares.json', [{'id':'q','pergunta':'q','origem':'teste','generico':{'texto':'a'},'tutoron':{'texto':'b'}}])
-    study = Study(workspace)
-    pair = study.start('q')
-    data = {'sessao': pair['sessao'], 'preferida':'empate', **{key+'_'+s: 3 for s in ['a','b'] for key in ['clareza','confianca','utilidade']}}
-    def submit():
-        try: return study.vote(data)
-        except ValueError: return None
-    with ThreadPoolExecutor(2) as pool:
-        outcomes = list(pool.map(lambda _: submit(), range(2)))
-    assert sum(o is not None for o in outcomes) == 1
-    assert summarize(workspace)['total'] == 1
-
-
-def test_invalid_rating_does_not_save(workspace):
-    write_json(workspace / '07-validacao-alunos/pares.json', [{'id':'q','pergunta':'q','origem':'teste','generico':{'texto':'a'},'tutoron':{'texto':'b'}}])
-    study = Study(workspace)
-    pair = study.start('q')
-    with pytest.raises(ValueError):
-        study.vote({'sessao':pair['sessao'], 'preferida':'A','clareza_a':True})
-    assert not (workspace / '07-validacao-alunos/respostas.csv').exists()
 
 
 def test_cached_ai_suspicion_survives_non_ai_rerun(workspace):

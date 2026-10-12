@@ -66,7 +66,7 @@ def cosine(a, b):
     return sum(x*y for x,y in zip(a,b)) / (math.sqrt(sum(x*x for x in a)) * math.sqrt(sum(y*y for y in b)) or 1)
 
 
-def search(question, root=ROOT, k=4, semantic=True):
+def search(question, root=ROOT, k=4, semantic=True, vector=None):
     index = read_json(root / '04-rag/indice.json', {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
     live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
@@ -90,7 +90,8 @@ def search(question, root=ROOT, k=4, semantic=True):
     mode = 'lexical'
     if semantic and index.get('vectors') and query:
         try:
-            vector = models.embeddings([question], index['embedding_model'])[0]
+            if vector is None:
+                vector = models.embeddings([question], index['embedding_model'])[0]
             semantic_scores = [cosine(vector, v) for v in index['vectors']]
             mode = 'hibrido'
         except Exception:

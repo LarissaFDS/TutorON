@@ -1,74 +1,82 @@
-# TutorON — validação antes do MVP
+# TutorON
 
-O estágio atual é validar OCR, curadoria e RAG local antes de construir e publicar o MVP. A hipótese é que dados acadêmicos melhores ajudem o mesmo modelo a responder melhor. Resultados negativos também devem ser registrados.
+Monitoria de **Projeto e Análise de Algoritmos (PAA)** da UFAL com IA. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e responde passo a passo, com as fórmulas formatadas.
 
-## Abrir a validação
+O site tem dois modos:
 
-No Ubuntu, use `bash instalar_atalho.sh` uma vez para criar o atalho **TutorON — Validação** no menu de aplicativos e na área de trabalho. O duplo clique em `.sh` pode abrir o editor em vez de executar. Se os serviços já estiverem ativos, abra http://127.0.0.1:8765 diretamente.
+- **Tirar dúvida** — modo normal: pergunta e resposta, com as fontes consultadas e um botão para marcar "tem erro de conta".
+- **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
-Linux/Ubuntu:
+## Como usar (Windows)
 
-```bash
-./preparar_modelos.sh
-./iniciar_validacao.sh
-```
+Três atalhos na raiz. Nada mais é necessário no dia a dia.
 
-Windows: execute `preparar_modelos.bat` e depois `iniciar_validacao.bat`.
+| Atalho | O que faz |
+|---|---|
+| **`1-Iniciar-Servidor.bat`** | Liga tudo: modelo local na GPU, site e endereço público `https://….trycloudflare.com` para qualquer pessoa acessar. Instala o que faltar na primeira vez. Deixe a janela aberta. |
+| **`2-Validacao.bat`** | Abre o modo validação e o painel de resultados, e copia o link da validação para enviar aos alunos. |
+| **`3-Treinar.bat`** | Treina o modelo local na GPU (QLoRA), importa no Ollama como `tutoron-paa-ft` e gera um relatório comparando com o atual. Não troca o modelo sozinho. |
 
-A página fica em http://127.0.0.1:8765. Os pares offline abrem imediatamente; perguntas ao vivo usam o Ollama local e podem levar minutos nesta CPU. As notas A/B são sorteadas e os votos ficam somente no notebook.
+Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.example)) e preencha `GEMINI_API_KEY` e, para incluir o livro-texto na busca, `SUPABASE_URL` e `SUPABASE_KEY`. O `.env` não vai para o Git.
 
-## Acervo e OCR
+### O que fica nesta máquina
 
-São 57 arquivos de entrada, incluindo 16 PDFs e 30 fotos WebP, extraídos em 161 páginas/blocos. [Auditoria por arquivo](03-triagem/AUDITORIA.md) e [manifesto detalhado](03-triagem/auditoria.json) registram hashes, páginas, correções e exclusões. Há 53 blocos com versões corrigidas por agente; a recuperação automática usa somente confiança média/alta, atualmente esses 53 blocos; isso não representa aprovação do professor.
+- `dados/perguntas.jsonl` — perguntas do modo Tutor, resposta, modelo usado e fontes.
+- `dados/feedback.jsonl` — "ajudou / não ajudou / tem erro de conta".
+- `dados/validacao/avaliacoes.jsonl` — cada avaliação A/B completa: pergunta, as duas respostas, notas, preferência e **qual lado era o TutorON**.
+- `http://127.0.0.1:8000/resultados` — resumo das avaliações. Só abre nesta máquina; pelo endereço público responde 404.
 
-A extração usa texto nativo e Tesseract português/inglês, com RapidOCR como alternativa. PNG, JPEG, WebP, BMP, GIF e TIFF são aceitos; TIFF/GIF multipágina preservam os frames. PDF digitalizado passa pelo OCR. Handwriting, fórmulas e diagramas continuam sujeitos a falhas; candidatos de visão nunca substituem automaticamente a fonte. Não há promessa de ler qualquer imagem com fidelidade.
+Nenhum IP, nome ou matrícula é gravado.
 
-```bash
-./instalar_ocr.sh              # Ubuntu 24.04 amd64: Tesseract portátil
-./atualizar_acervo.sh           # inventário, extração, organização e busca
-./extrair_com_visao.sh          # candidatos visuais: lento na CPU
-./testar_acervo.sh
-```
+## Como a resposta é escolhida
 
-Os originais são preservados por hash. [Correções](03-triagem/correcoes.json) vinculam texto derivado ao hash exato do bloco original. Uma fonte alterada invalida sua correção. Os arquivos de setembro permanecem históricos e o índice só usa o inventário atual.
+1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca em duas fontes: o acervo curado de PAA ([`04-rag/`](04-rag/)) e o livro-texto no Supabase.
+2. O prompt do tutor ([`backend/prompts.py`](backend/prompts.py)) exige contas passo a passo, verificação no final, citação das fontes e Markdown com LaTeX.
+3. **Corrida entre modelos** ([`backend/llm.py`](backend/llm.py)): o primeiro Gemini da lista começa na hora; se não começar a responder em 6 s, ou der erro (503, 429…), o próximo começa também. O primeiro que responder vence e os outros são cancelados. Um modelo que falhou fica alguns segundos em pausa, então as perguntas seguintes nem tentam ele.
+4. Se nenhum Gemini responder em 20 s, entra o **TutorON local** (`tutoron-paa`, Qwen3 8B com raciocínio, na GPU desta máquina).
 
-## Comparação dos modelos
-
-```bash
-./avaliar_modelos.sh
-./resumo_validacao.sh
-```
-
-Quatro condições: genérico `qwen2.5:3b`; base com instruções TutorON sem contexto; `tutoron-paa` com contexto manual; `tutoron-paa` com RAG automático. Os pesos são [idênticos](05-modelo/pesos-validacao.json), com seed 42, temperatura 0,2, contexto de 4096 tokens e mesma orientação de até 220 palavras. O controle distingue o efeito das instruções do efeito dos dados.
-
-[Comparação atual](06-avaliacao/COMPARACAO_ATUAL.md), [respostas e fontes](06-avaliacao/resultados.json), [relatório de execução](RELATORIO_VALIDACAO.md). Cobertura lexical de checklist não equivale à acurácia; revisão técnica e votos humanos são evidências separadas. Não se deve concluir superioridade antes de analisar os erros.
-
-## Treinamento e hardware
-
-Este Ubuntu tem Ryzen 7 3700U, aproximadamente 10 GiB de RAM e nenhuma GPU NVIDIA detectada. Inferência quantizada de 3B funciona na CPU; o perfil QLoRA preparado requer outra máquina com GPU CUDA. [Hardware medido](05-modelo/ambiente.json).
-
-```bash
-./preparar_treino.sh           # dados de agente, famílias separadas, dry-run
-./treinar_lora.sh --steps 30   # executar na máquina com GPU, não neste notebook
-```
-
-No Windows, use os equivalentes `.bat`; WSL2 também pode usar os scripts Linux. [Guia completo](05-modelo/COMO_TREINAR.md). O dataset é pequeno e rotulado como revisão por agente; famílias do benchmark são excluídas do treino. Não houve ajuste de pesos nesta rodada. Criar o modelo Ollama e fornecer contexto por RAG não é fine-tuning.
+A ordem dos modelos, os tempos e o modelo local ficam no `.env` (veja os comentários em `.env.example`).
 
 ## Estrutura
 
-- `materiais/`: arquivos-fonte e transcrições anteriores.
-- `00-originais/`, `01-extraido/`: snapshots e OCR; imagens de conferência são locais.
-- `02-acervo/`, `03-triagem/`: blocos, alertas e correções derivadas.
-- `04-rag/`: recuperação lexical + embeddings BGE-M3.
-- `05-modelo/`: modelos, hardware e preparo do treinamento.
-- `06-avaliacao/`, `07-validacao-alunos/`: respostas e avaliação A/B.
-- `acervo/`: pipeline de validação local.
-- `backend/`: API FastAPI, Ollama local por padrão; Gemini opcional explícito.
+```
+1-Iniciar-Servidor.bat  2-Validacao.bat  3-Treinar.bat   atalhos
+backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
+scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
+acervo/           pipeline de OCR, curadoria e índice do material de PAA
+00-…06-           dados do pipeline: originais, extração, acervo, triagem, índice RAG, modelo, avaliação
+design/           design system (tokens e componentes CSS) — regras em docs/DESIGN.md
+frontend/         cliente de terminal (CLI) que usa a mesma API
+docs/             documentação, schema do Supabase, relatórios da validação pré-MVP
+legado/           prova de conceito antiga com Gemini (preservada)
+```
 
-No Ubuntu, `./scripts/instalar_servicos.sh` instala serviços da sua sessão de usuário; `systemctl --user start tutoron-ollama tutoron-validacao` inicia ambos após encerrar instâncias manuais. Eles reiniciam em falhas e no login; logout e suspensão podem encerrar/interromper a disponibilidade.
+## Comandos úteis
 
-A API pode ser aberta com `.venv/bin/python -m uvicorn backend.main:app --host 127.0.0.1 --port 8000` após instalar `backend/requirements.txt`. A interface A/B de validação é a de 8765. Não existe implantação pública nesta fase. Para manter o servidor local disponível, mantenha o notebook ligado e sem suspensão.
+```bat
+:: testes (backend + acervo)
+powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Testar
 
-A [PoC histórica com Gemini](docs/POC_HISTORICA.md) foi preservada. Seus resultados e o hardware Windows antigo não são a avaliação Linux atual.
+:: desligar servidor e túnel que ficaram abertos
+powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Parar
 
-Aprovações em `03-triagem/revisoes.json` exigem `sha256` (texto atual) e `sha256_fonte` (arquivo original), além de revisor, confiabilidade e justificativa. Mudanças no arquivo invalidam o parecer mesmo com OCR idêntico. Votos preservam o hash e snapshot de cada par; resumos não misturam versões.
+:: enviar mais PDFs de PAA para o Supabase (livro-texto na RAG); repetir não duplica
+.venv\Scripts\python -m backend.ingest "C:\caminho\para\pdfs"
+
+:: refazer OCR, curadoria e índice do acervo depois de adicionar material em materiais\
+powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
+
+:: comparar os modelos nas perguntas de 06-avaliacao\perguntas-mvp.json
+.venv\Scripts\python scripts\avaliar_modelos.py
+```
+
+## Treinamento
+
+Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Treinar.bat` usa as soluções curadas do acervo, treina um adapter LoRA sobre o Qwen3-8B na RTX 4060, mescla, importa no Ollama e avalia. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-paa-ft` no `.env` e reinicie o servidor.
+
+## Documentação
+
+- [Relatório do MVP](docs/RELATORIO_MVP.md): o que foi implementado, testes e avaliação dos modelos.
+- [Design system](docs/DESIGN.md) · [Schema do Supabase](docs/schema.sql)
+- [Validação pré-MVP](docs/validacao-pre-mvp/) (OCR, curadoria, comparação local, relatórios anteriores)
+- Issues: [#3 backend](docs/issue-3-backend-ai-service.md) · [#5 CLI](docs/issue-5-frontend-cli.md)

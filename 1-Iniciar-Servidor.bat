@@ -1,0 +1,8 @@
+@echo off
+rem Liga a IA (Gemini + TutorON local) e publica o site para qualquer pessoa acessar.
+title TutorON - Servidor
+cd /d "%~dp0"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\tutoron.ps1" -Acao Servidor %*
+set "TUTORON_EXIT=%errorlevel%"
+if not "%TUTORON_EXIT%"=="0" pause
+exit /b %TUTORON_EXIT%

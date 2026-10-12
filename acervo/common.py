@@ -15,7 +15,7 @@ TOPICS = [
     'b2-07-lidando-com-np-completude',
 ]
 DIRECTORIES = ['00-originais', '01-extraido', '02-acervo', '03-triagem/pacote-revisao',
-               '04-rag', '05-modelo', '06-avaliacao', '07-validacao-alunos']
+               '04-rag', '05-modelo', '06-avaliacao']
 
 
 # Os dados do acervo foram gerados no Windows e guardam caminhos com '\\'. O ID de
@@ -80,5 +80,7 @@ def write_csv(path, rows, fields):
 
 def progress(stage, message, root=ROOT):
     from datetime import datetime
-    with (root / 'PROGRESSO.md').open('a', encoding='utf-8', newline='\n') as f:
+    path = root / 'docs/validacao-pre-mvp/PROGRESSO.md'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('a', encoding='utf-8', newline='\n') as f:
         f.write(f'\n## {datetime.now().isoformat(timespec="seconds")} — {stage}\n\n{message}\n')
