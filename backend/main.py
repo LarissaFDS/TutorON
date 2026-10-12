@@ -3,9 +3,10 @@
 Rotas públicas (podem ser acessadas pela internet via túnel):
 
     GET  /                    site (modo Tutor e modo Validação)
-    POST /api/perguntar       modo Tutor, resposta em streaming (SSE)
+    POST /api/perguntar       modo Tutor: cria a tarefa e responde na hora com o id
+    POST /api/comparar        modo Validação: cria a tarefa que gera as respostas A e B (cegas)
+    GET  /api/tarefas/{id}    andamento da tarefa (o site consulta a cada segundo)
     POST /api/feedback        "ajudou?" / "tem erro" de uma resposta do modo Tutor
-    POST /api/comparar        modo Validação: gera as respostas A e B (cegas)
     POST /api/avaliar         modo Validação: grava as notas do aluno
     GET  /api/status          modelos disponíveis agora
     POST /api/v1/questions    compatibilidade com a CLI (frontend/cli.py)
@@ -14,34 +15,31 @@ Rotas só desta máquina (bloqueadas quando a requisição vem pelo túnel):
 
     GET  /resultados          painel com o resumo das avaliações
     GET  /api/resultados      o mesmo resumo em JSON
+    POST /api/reiniciar-modelos  libera os modelos em pausa e recarrega o modelo local
 """
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
-import secrets
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
-from . import prompts
 from .config import Settings, load_settings
-from .dados import Limitador, Registro, agora, novo_id
-from .llm import LLM, AllUnavailable, Model
-from .rag import contexto, recuperar
+from .dados import Limitador, Registro, agora
+from .llm import LLM, Model
 from .resultados import resumo
+from .tarefas import Tarefas
 
 logger = logging.getLogger("tutoron.backend")
 WEB = Path(__file__).resolve().parent / "web"
 
-MSG_INDISPONIVEL = ("Nenhum modelo conseguiu responder agora (Gemini sobrecarregado e TutorON local desligado). "
-                    "Tente de novo em alguns segundos.")
+MSG_INDISPONIVEL = "Não conseguimos gerar a resposta agora. Tente de novo em alguns instantes."
 
 
 # ---------------------------------------------------------------------------
@@ -50,7 +48,7 @@ MSG_INDISPONIVEL = ("Nenhum modelo conseguiu responder agora (Gemini sobrecarreg
 
 class Pergunta(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
-    contexto: str | None = Field(default=None, max_length=8000)
+    contexto: str | None = Field(default=None, max_length=6000)
 
     @field_validator("pergunta")
     @classmethod
@@ -123,10 +121,6 @@ def requisicao_local(request: Request) -> bool:
     return bool(request.client and request.client.host in ("127.0.0.1", "::1", "localhost", "testclient"))
 
 
-def sse(evento: dict) -> str:
-    return "data: " + json.dumps(evento, ensure_ascii=False) + "\n\n"
-
-
 def rotulo_modelo(provedor: str, modelo: str) -> str:
     return Model(provedor, modelo).label
 
@@ -143,11 +137,13 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.llm = llm or LLM(settings)
         app.state.registro = Registro(settings.data_dir)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
-        app.state.limitador_gravacao = Limitador(max(60, 2 * settings.rate_limit_per_10min))
-        tarefa = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
+        app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
+        app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
+        aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
-        if tarefa:
-            tarefa.cancel()
+        if aquecimento:
+            aquecimento.cancel()
+        await app.state.tarefas.encerrar()
         if llm is None:
             await app.state.llm.client.aclose()
 
@@ -208,44 +204,23 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             dados["url_publica"] = url.read_text(encoding="utf-8-sig").strip() if url.exists() else None
         return dados
 
-    # ------------------------------------------------------------------ modo Tutor
+    # ------------------------------------------------------------------ modo Tutor e Validação (tarefas)
     @app.post("/api/perguntar")
-    async def perguntar(corpo: Pergunta, request: Request) -> StreamingResponse:
+    async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        llm_: LLM = app.state.llm
-        registro: Registro = app.state.registro
+        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto).publico()
 
-        async def eventos():
-            ident = novo_id()
-            trechos = await recuperar(corpo.pergunta, llm_, settings)
-            yield sse({"tipo": "fontes", "fontes": [t.publico() for t in trechos]})
-            prompt = prompts.prompt_tutor(corpo.pergunta, contexto(trechos), corpo.contexto)
-            partes: list[str] = []
-            try:
-                async for evento in llm_.stream(prompts.SISTEMA_TUTOR, prompt):
-                    if await request.is_disconnected():
-                        return
-                    if evento["tipo"] == "texto":
-                        partes.append(evento["texto"])
-                    elif evento["tipo"] == "reiniciar":
-                        partes.clear()
-                    elif evento["tipo"] == "modelo":
-                        evento["rotulo"] = rotulo_modelo(evento["provedor"], evento["modelo"])
-                    elif evento["tipo"] == "fim":
-                        evento["id"] = ident
-                        registro.anexar("perguntas.jsonl", {
-                            "id": ident, "data": agora(), "pergunta": corpo.pergunta, "contexto": corpo.contexto,
-                            "resposta": "".join(partes), "provedor": evento["provedor"], "modelo": evento["modelo"],
-                            "segundos": evento["segundos"], "tentativas": evento["tentativas"],
-                            "fontes": [t.publico() for t in trechos]})
-                    yield sse(evento)
-            except AllUnavailable as exc:
-                registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "pergunta": corpo.pergunta,
-                                                    "erro": "nenhum_modelo", "tentativas": exc.attempts})
-                yield sse({"tipo": "erro", "mensagem": MSG_INDISPONIVEL})
+    @app.post("/api/comparar")
+    async def comparar(corpo: Pergunta, request: Request) -> dict:
+        limitar(request)
+        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto).publico()
 
-        return StreamingResponse(eventos(), media_type="text/event-stream",
-                                 headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+    @app.get("/api/tarefas/{ident}")
+    async def tarefa(ident: str) -> JSONResponse:
+        t = app.state.tarefas.obter(ident[:40])
+        if not t:
+            raise HTTPException(404, "Esta resposta expirou ou o servidor foi reiniciado. Envie a pergunta de novo.")
+        return JSONResponse(t.publico(), headers={"Cache-Control": "no-store"})
 
     @app.post("/api/feedback")
     async def feedback(corpo: Feedback, request: Request) -> dict:
@@ -253,60 +228,14 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.registro.anexar("feedback.jsonl", {"data": agora(), **corpo.model_dump()})
         return {"salvo": True}
 
-    # ------------------------------------------------------------------ modo Validação
-    async def gerar_par(pergunta: str, contexto_aluno: str | None) -> dict:
-        llm_: LLM = app.state.llm
-        trechos = await recuperar(pergunta, llm_, settings)
-        prompt_tutor = prompts.prompt_tutor(pergunta, contexto(trechos), contexto_aluno)
-        prompt_gen = prompts.prompt_generico(pergunta, contexto_aluno)
-        modelos_genericos = llm_.cascade(local_model=settings.local_generic_model)
-        tutor, generico = await asyncio.gather(
-            llm_.complete(prompts.SISTEMA_TUTOR, prompt_tutor),
-            llm_.complete(None, prompt_gen, models=modelos_genericos),
-            return_exceptions=True)
-        if isinstance(tutor, BaseException):
-            raise tutor
-        # Comparação justa: o genérico deve usar o mesmo modelo de base do TutorON,
-        # só sem material e sem as instruções. Se a cascata caiu em outro, refaz.
-        alvo = tutor.model if tutor.model.provider == "gemini" else Model("ollama", settings.local_generic_model)
-        if isinstance(generico, BaseException) or generico.model != alvo:
-            try:
-                generico = await llm_.complete(None, prompt_gen, models=[alvo])
-            except AllUnavailable:
-                if isinstance(generico, BaseException):
-                    raise
-        return {
-            "tutoron": {"texto": tutor.text, "provedor": tutor.model.provider, "modelo": tutor.model.name,
-                        "segundos": tutor.seconds, "tentativas": tutor.attempts,
-                        "fontes": [t.publico() for t in trechos], "sistema": "TutorON (RAG + prompt)"},
-            "generico": {"texto": generico.text, "provedor": generico.model.provider, "modelo": generico.model.name,
-                         "segundos": generico.seconds, "tentativas": generico.attempts,
-                         "sistema": "Genérico (mesmo modelo, sem material nem instruções)"},
-        }
-
-    @app.post("/api/comparar")
-    async def comparar(corpo: Pergunta, request: Request) -> dict:
-        limitar(request)
-        try:
-            par = await gerar_par(corpo.pergunta, corpo.contexto)
-        except AllUnavailable:
-            raise HTTPException(503, MSG_INDISPONIVEL)
-        ordem = ["tutoron", "generico"]
-        secrets.SystemRandom().shuffle(ordem)
-        sessao = novo_id()
-        app.state.registro.nova_comparacao({
-            "sessao": sessao, "data": agora(), "pergunta": corpo.pergunta, "contexto": corpo.contexto,
-            "lados": {"A": ordem[0], "B": ordem[1]}, "respostas": par})
-        # A identidade de cada lado nunca sai do servidor.
-        return {"sessao": sessao, "pergunta": corpo.pergunta,
-                "A": par[ordem[0]]["texto"], "B": par[ordem[1]]["texto"]}
-
     @app.post("/api/avaliar")
     async def avaliar(corpo: Avaliacao, request: Request) -> dict:
         limitar_gravacao(request)
         comparacao = app.state.registro.concluir_comparacao(corpo.sessao)
         if not comparacao:
-            raise HTTPException(400, "Esta comparação já foi avaliada ou expirou. Gere uma nova.")
+            if app.state.registro.ja_avaliada(corpo.sessao):
+                return {"salvo": True}  # reenvio após queda de rede: a avaliação já está gravada
+            raise HTTPException(400, "Esta comparação expirou. Gere uma nova.")
         lados = comparacao["lados"]
         notas = {lados["A"]: corpo.A.model_dump(), lados["B"]: corpo.B.model_dump()}
         app.state.registro.anexar("validacao/avaliacoes.jsonl", {
@@ -327,6 +256,14 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             raise HTTPException(404, "Não encontrado.")
         return resumo(app.state.registro)
 
+    @app.post("/api/reiniciar-modelos")
+    async def reiniciar_modelos(request: Request) -> dict:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        app.state.llm.breaker = type(app.state.llm.breaker)()
+        await app.state.llm.warm_up()
+        return {"ok": True, "local": await app.state.llm.local_status(), "tarefas_ativas": app.state.tarefas.ativas()}
+
     @app.get("/resultados", include_in_schema=False)
     async def pagina_resultados(request: Request) -> FileResponse:
         if not requisicao_local(request):
@@ -337,15 +274,14 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
-        trechos = await recuperar(payload.question, app.state.llm, settings)
-        try:
-            resultado = await app.state.llm.complete(
-                prompts.SISTEMA_TUTOR, prompts.prompt_tutor(payload.question, contexto(trechos), payload.context))
-        except AllUnavailable:
+        t = app.state.tarefas.perguntar(payload.question, payload.context)
+        while t.concluida is None:
+            await asyncio.sleep(0.5)
+        if t.status != "pronta":
             raise HTTPException(503, MSG_INDISPONIVEL)
-        return QuestionResponse(answer=resultado.text, source=f"{resultado.model.provider}-rag", metadata={
-            "model": resultado.model.name, "latency_ms": round(resultado.seconds * 1000),
-            "chunks_used": len(trechos), "sources": [t.publico() for t in trechos], "attempts": resultado.attempts})
+        return QuestionResponse(answer=t.texto, source="tutoron-rag", metadata={
+            "model": t.rotulo, "latency_ms": round(t.resultado.get("segundos", 0) * 1000),
+            "chunks_used": len(t.fontes), "sources": t.fontes})
 
     return app
 

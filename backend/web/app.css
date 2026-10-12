@@ -12,7 +12,7 @@
 .modes__tab[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-primary); }
 .modes__tab:hover { color: var(--color-ink); }
 
-.masthead__context { max-width: 46ch; }
+.masthead__nota { margin-top: var(--space-4); max-width: 68ch; font-size: var(--text-ui); color: var(--color-chalk); opacity: 0.9; }
 
 /* Modo Tutor: lista de perguntas e respostas. */
 .conversa { display: grid; gap: var(--space-7); margin-top: var(--space-5); }

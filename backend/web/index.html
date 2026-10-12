@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TutorON · Monitoria de PAA</title>
-<meta name="description" content="Tire dúvidas de Projeto e Análise de Algoritmos com o TutorON e ajude a avaliar as respostas.">
+<title>TutorON · IA para estudar as matérias da faculdade</title>
+<meta name="description" content="TutorON: uma IA que ajuda estudantes a entender as matérias da faculdade, começando por Computação.">
 <link rel="stylesheet" href="/design.css">
 <link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
 <link rel="stylesheet" href="/static/app.css">
@@ -14,11 +14,11 @@
 <header class="masthead">
   <div class="page masthead__bar">
     <div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div>
-    <p class="masthead__context" id="model-status" aria-live="polite"></p>
   </div>
   <div class="page masthead__intro">
-    <h1>Monitoria de Projeto e Análise de Algoritmos</h1>
-    <p class="masthead__lede">Pergunte sobre recorrências, complexidade, divisão e conquista, gulosos, programação dinâmica e NP-completude. As respostas usam provas, listas e o livro da disciplina.</p>
+    <h1>Entenda as matérias da faculdade, passo a passo</h1>
+    <p class="masthead__lede">O TutorON é uma IA que explica o conteúdo do jeito que ele é cobrado nas provas, com base no material das disciplinas. Começamos pelo curso de Computação.</p>
+    <p class="masthead__nota">Fase MVP: por enquanto, o TutorON responde sobre Projeto e Análise de Algoritmos (PAA), a disciplina mais difícil do curso.</p>
   </div>
 </header>
 
@@ -39,7 +39,7 @@
 
     <form id="form-tutor" class="composer" novalidate>
       <div class="field">
-        <label class="field__label" for="pergunta">Sua dúvida de PAA</label>
+        <label class="field__label" for="pergunta">Sua dúvida</label>
         <textarea class="input" id="pergunta" maxlength="4000" rows="4" required
           placeholder="Ex.: Como aplico o Teorema Mestre em T(n) = 3T(n/4) + n log n?" aria-describedby="pergunta-dica"></textarea>
         <span class="field__hint caption" id="pergunta-dica">Ctrl+Enter envia. Não escreva nome, matrícula ou contato.</span>
@@ -48,7 +48,7 @@
         <summary>Colar código ou enunciado (opcional)</summary>
         <div class="field">
           <label class="field__label" for="contexto">Código, pseudocódigo ou enunciado</label>
-          <textarea class="input input--code" id="contexto" maxlength="8000" rows="6"></textarea>
+          <textarea class="input input--code" id="contexto" maxlength="6000" rows="6"></textarea>
         </div>
       </details>
       <div class="sugestoes" id="sugestoes-tutor" aria-label="Exemplos de perguntas"></div>
@@ -64,12 +64,12 @@
     <p class="notice step">Validação cega: a mesma dúvida é respondida por dois sistemas diferentes. Você não sabe qual é qual; a ordem é sorteada. Dê notas às duas e escolha a que mais ajuda a estudar para a prova. Nenhum login, nome ou matrícula é pedido.</p>
 
     <section class="step" id="v-passo1" aria-labelledby="v-passo1-titulo">
-      <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="v-passo1-titulo">Escreva uma dúvida de PAA</h2></div>
+      <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="v-passo1-titulo">Escreva uma dúvida</h2></div>
       <div class="field">
         <label class="field__label" for="v-pergunta">Sua dúvida</label>
         <textarea class="input" id="v-pergunta" maxlength="4000" rows="4"
           placeholder="Ex.: Por que o algoritmo guloso de troco falha para moedas {1, 3, 4} e valor 6?" aria-describedby="v-dica"></textarea>
-        <span class="field__hint caption" id="v-dica">As duas respostas são geradas agora e podem levar até um minuto. Não escreva nome, matrícula ou contato.</span>
+        <span class="field__hint caption" id="v-dica">As duas respostas são geradas na hora; normalmente levam menos de um minuto. Não escreva nome, matrícula ou contato.</span>
       </div>
       <div class="sugestoes" id="sugestoes-validacao" aria-label="Exemplos de perguntas"></div>
       <div class="actions"><button class="button" id="v-gerar" type="button">Gerar as duas respostas</button></div>
@@ -126,14 +126,14 @@
 
     <section class="confirmation" id="v-feito" hidden tabindex="-1" aria-labelledby="v-feito-titulo">
       <h2 id="v-feito-titulo">Avaliação enviada</h2>
-      <p>Obrigado. Cada comparação ajuda a equipe do TutorON a corrigir os erros do modelo.</p>
+      <p>Obrigado. Cada avaliação ajuda a melhorar o TutorON.</p>
       <div class="actions"><button class="button" id="v-outra" type="button">Avaliar outra dúvida</button></div>
     </section>
   </section>
 </main>
 
 <footer class="site-footer page">
-  <p class="caption">TutorON — projeto de monitoria de PAA (UFAL). Perguntas e avaliações são guardadas sem identificação, para melhorar o tutor.</p>
+  <p class="caption">Perguntas e avaliações são guardadas sem identificação, apenas para melhorar o TutorON.</p>
 </footer>
 
 <script src="/static/vendor/marked.min.js"></script>

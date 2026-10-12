@@ -17,17 +17,57 @@
     if (tone) el.dataset.tone = tone; else delete el.dataset.tone;
   }
 
+  function esperar(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+
   async function postJSON(path, data) {
-    var res;
-    try {
-      res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
-    } catch (e) {
-      throw new Error('Sem conexão com o servidor do TutorON. Verifique sua internet e tente de novo.');
+    var res, ultimoErro;
+    // Até 3 tentativas para falhas de rede (celular trocando de antena, Wi-Fi da sala…).
+    for (var i = 0; i < 3; i++) {
+      try {
+        res = await fetch(path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        break;
+      } catch (e) {
+        ultimoErro = e;
+        await esperar(1500 * (i + 1));
+      }
     }
+    if (!res) throw new Error('Sem conexão com o TutorON. Verifique sua internet e tente de novo.');
     var payload = {};
     try { payload = await res.json(); } catch (e) { /* sem JSON */ }
-    if (!res.ok) throw new Error(payload.erro || 'O servidor respondeu com erro ' + res.status + '. Tente de novo.');
+    if (!res.ok) throw new Error(payload.erro || mensagemHttp(res.status));
     return payload;
+  }
+
+  function mensagemHttp(status) {
+    if (status === 429) return 'Muitas perguntas em pouco tempo. Aguarde um minuto e tente de novo.';
+    if (status >= 500) return 'O TutorON está reiniciando. Aguarde alguns segundos e tente de novo.';
+    return 'Não foi possível enviar. Tente de novo.';
+  }
+
+  /* Acompanha uma tarefa até terminar. A resposta é gerada no servidor; aqui só
+   * consultamos o andamento a cada segundo, com requisições curtas. Quedas de
+   * rede não perdem a resposta: a consulta seguinte continua de onde parou. */
+  async function acompanhar(id, aoAtualizar) {
+    var falhasSeguidas = 0;
+    for (;;) {
+      var t = null;
+      try {
+        var res = await fetch('/api/tarefas/' + encodeURIComponent(id), { cache: 'no-store' });
+        if (res.status === 404) {
+          // O servidor foi reiniciado e a tarefa se perdeu: quem chamou reenvia a pergunta.
+          return { status: 'perdida', mensagem: 'O TutorON foi reiniciado. Envie a pergunta de novo.' };
+        }
+        if (res.ok) t = await res.json();
+      } catch (e) { /* rede oscilando: tenta de novo */ }
+      if (t) {
+        falhasSeguidas = 0;
+        aoAtualizar(t);
+        if (t.status === 'pronta' || t.status === 'erro') return t;
+      } else if (++falhasSeguidas >= 120) {
+        return { status: 'erro', mensagem: 'A conexão com o TutorON caiu. Verifique sua internet e envie de novo.' };
+      }
+      await esperar(t && t.status !== 'fila' ? 900 : 1200);
+    }
   }
 
   function el(tag, cls, text) {
@@ -47,6 +87,18 @@
     });
   }
 
+  // Tarefa em andamento guardada na aba: recarregar a página retoma a resposta em vez de perdê-la.
+  var PENDENTE = 'tutoron-pendente';
+  function guardarPendente(dados) { try { sessionStorage.setItem(PENDENTE, JSON.stringify(dados)); } catch (e) { /* sem storage */ } }
+  function lerPendente() { try { return JSON.parse(sessionStorage.getItem(PENDENTE) || 'null'); } catch (e) { return null; } }
+  function limparPendente() { try { sessionStorage.removeItem(PENDENTE); } catch (e) { /* sem storage */ } }
+
+  // Avisa antes de sair da página no meio de uma geração.
+  var gerando = 0;
+  window.addEventListener('beforeunload', function (e) {
+    if (gerando > 0) { e.preventDefault(); e.returnValue = ''; }
+  });
+
   // ------------------------------------------------------------------ modos
   function mostrarModo(modo) {
     var validacao = modo === 'validacao';
@@ -61,24 +113,6 @@
   $('tab-tutor').addEventListener('click', function () { mostrarModo('tutor'); });
   $('tab-validacao').addEventListener('click', function () { mostrarModo('validacao'); });
   mostrarModo(new URL(location.href).searchParams.get('modo') === 'validacao' ? 'validacao' : 'tutor');
-
-  // ------------------------------------------------------------------ status dos modelos
-  async function atualizarStatus() {
-    try {
-      var s = await (await fetch('/api/status')).json();
-      var gemini = s.gemini && s.gemini.habilitado;
-      var pausados = Object.keys(s.pausados || {}).filter(function (k) { return k.indexOf('gemini:') === 0; }).length;
-      var total = gemini ? s.gemini.modelos.length : 0;
-      var partes = [];
-      if (gemini) partes.push(pausados ? 'Gemini: ' + pausados + ' de ' + total + ' modelos sobrecarregados agora' : 'Gemini ativo');
-      partes.push('TutorON local: ' + (s.local && s.local.online ? 'ligado' : 'desligado'));
-      $('model-status').textContent = partes.join(' · ');
-    } catch (e) {
-      $('model-status').textContent = '';
-    }
-  }
-  atualizarStatus();
-  setInterval(atualizarStatus, 30000);
 
   // ================================================================== MODO TUTOR
   sugestoes('sugestoes-tutor', 'pergunta');
@@ -122,95 +156,57 @@
 
   var enviando = false;
 
-  async function perguntar(pergunta, contexto) {
+  async function perguntar(pergunta, contexto, retomarId) {
     var item = el('article', 'troca');
     var q = el('div', 'question prose');
     R.renderPlain(q, pergunta);
     var resposta = el('div', 'prose resposta');
-    var meta = el('p', 'caption troca__meta', 'Procurando no material da disciplina…');
+    var meta = el('p', 'caption troca__meta status', 'Enviando…');
+    meta.dataset.tone = 'busy';
     item.append(q, resposta, meta);
     $('conversa').append(item);
     item.scrollIntoView({ block: 'start', behavior: 'smooth' });
 
-    var texto = '';
-    var agendado = false;
-    var fontes = [];
-    function desenhar() {
-      agendado = false;
-      R.render(resposta, texto);
-    }
-    function agendar() {
-      if (!agendado) { agendado = true; setTimeout(desenhar, 120); }
-    }
-
-    var res;
-    try {
-      res = await fetch('/api/perguntar', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pergunta: pergunta, contexto: contexto || null })
-      });
-    } catch (e) {
-      meta.textContent = 'Sem conexão com o servidor do TutorON. Tente de novo.';
-      meta.dataset.tone = 'error';
-      return false;
-    }
-    if (!res.ok) {
-      var erro = {};
-      try { erro = await res.json(); } catch (e) { /* sem JSON */ }
-      meta.textContent = erro.erro || ('Erro ' + res.status + '. Tente de novo.');
-      meta.dataset.tone = 'error';
-      return false;
-    }
-
-    var reader = res.body.getReader();
-    var decoder = new TextDecoder();
-    var buffer = '';
-    var fim = null;
-    var modelo = '';
-    for (;;) {
-      var lido = await reader.read();
-      if (lido.done) break;
-      buffer += decoder.decode(lido.value, { stream: true });
-      var blocos = buffer.split('\n\n');
-      buffer = blocos.pop();
-      blocos.forEach(function (bloco) {
-        if (bloco.indexOf('data: ') !== 0) return;
-        var ev;
-        try { ev = JSON.parse(bloco.slice(6)); } catch (e) { return; }
-        if (ev.tipo === 'fontes') {
-          fontes = ev.fontes || [];
-          meta.textContent = 'Escrevendo a resposta…';
-        } else if (ev.tipo === 'aguarde') {
-          meta.textContent = 'Os servidores do Gemini estão ocupados agora. O TutorON local está raciocinando sobre a resposta; pode levar cerca de um minuto.';
-        } else if (ev.tipo === 'modelo') {
-          modelo = ev.rotulo;
-          meta.textContent = 'Respondendo com ' + modelo + '…';
-        } else if (ev.tipo === 'texto') {
-          texto += ev.texto;
-          agendar();
-        } else if (ev.tipo === 'reiniciar') {
-          texto = '';
-          agendar();
-          meta.textContent = 'O modelo caiu no meio da resposta; tentando outro…';
-        } else if (ev.tipo === 'fim') {
-          fim = ev;
-        } else if (ev.tipo === 'erro') {
-          meta.textContent = ev.mensagem;
-          meta.dataset.tone = 'error';
+    var desenhado = '';
+    var final;
+    var inicio = Date.now();
+    for (var envio = 0; envio < 3; envio++) {
+      var tarefa;
+      if (retomarId && envio === 0) {
+        tarefa = { id: retomarId };
+      } else {
+        try {
+          tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contexto || null });
+        } catch (e) {
+          setStatus(meta, e.message, 'error');
+          return false;
+        }
+      }
+      guardarPendente({ tipo: 'tutor', id: tarefa.id, pergunta: pergunta, contexto: contexto || '' });
+      final = await acompanhar(tarefa.id, function (t) {
+        if (t.texto !== desenhado) {
+          desenhado = t.texto;
+          R.render(resposta, t.texto);
+        }
+        if (t.status !== 'pronta' && t.status !== 'erro') {
+          setStatus(meta, t.mensagem || 'Escrevendo a resposta…', 'busy');
         }
       });
+      if (final.status !== 'perdida') break;
+      setStatus(meta, 'Reenviando a pergunta…', 'busy');
+      await esperar(3000);
     }
-    desenhar();
-    if (fim) {
-      meta.textContent = 'Respondido por ' + modelo + ' em ' + Math.round(fim.segundos) + ' s.';
-      if (fontes.length) item.append(fontesDetalhe(fontes));
-      item.append(botoesFeedback(fim.id));
+
+    limparPendente();
+    if (final.status === 'pronta') {
+      R.render(resposta, final.texto);
+      setStatus(meta, 'Respondido em ' + Math.max(1, Math.round((Date.now() - inicio) / 1000)) + ' s' +
+        (final.rotulo ? ' · ' + final.rotulo : '') + '.');
+      if (final.fontes && final.fontes.length) item.append(fontesDetalhe(final.fontes));
+      item.append(botoesFeedback(final.id_resposta));
       return true;
     }
-    if (!meta.dataset.tone) {
-      meta.textContent = 'A conexão caiu antes do fim da resposta. Tente de novo.';
-      meta.dataset.tone = 'error';
-    }
+    setStatus(meta, final.mensagem || 'Não foi possível gerar a resposta. Tente de novo.', 'error');
     return false;
   }
 
@@ -224,6 +220,7 @@
       return;
     }
     enviando = true;
+    gerando++;
     $('enviar').disabled = true;
     setStatus($('status-tutor'), '');
     var contexto = $('contexto').value.trim();
@@ -231,12 +228,24 @@
     $('contexto').value = '';
     try {
       var ok = await perguntar(pergunta, contexto);
-      if (ok === false) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
+      if (!ok) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
     } finally {
       enviando = false;
+      gerando--;
       $('enviar').disabled = false;
     }
   });
+  async function retomarTutor(p) {
+    enviando = true;
+    gerando++;
+    $('enviar').disabled = true;
+    try { await perguntar(p.pergunta, p.contexto, p.id); } finally {
+      enviando = false;
+      gerando--;
+      $('enviar').disabled = false;
+    }
+  }
+
   $('pergunta').addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) $('form-tutor').requestSubmit();
   });
@@ -250,6 +259,7 @@
     ['utilidade', 'Utilidade para a prova', 'Me ajudaria numa questão parecida.']
   ];
   var sessao = null;
+  var gerandoPar = false;
 
   function montarNotas(lado) {
     var box = $('notas' + lado);
@@ -286,22 +296,44 @@
   montarNotas('A');
   montarNotas('B');
 
-  $('v-gerar').addEventListener('click', async function () {
+  $('v-gerar').addEventListener('click', function () { gerarPar(null); });
+
+  async function gerarPar(retomarId) {
+    if (gerandoPar) return;
     var pergunta = $('v-pergunta').value.trim();
     if (pergunta.length < 3) {
       setStatus($('v-status'), 'Escreva sua dúvida antes de gerar as respostas.', 'error');
       $('v-pergunta').focus();
       return;
     }
+    gerandoPar = true;
+    gerando++;
     sessao = null;
     $('v-form').hidden = true;
     $('v-feito').hidden = true;
     var botao = $('v-gerar');
     botao.disabled = true;
     botao.textContent = 'Gerando…';
-    setStatus($('v-status'), 'Gerando as duas respostas. Pode levar até um minuto; mantenha esta aba aberta.', 'busy');
+    setStatus($('v-status'), 'Gerando as duas respostas. Mantenha esta aba aberta.', 'busy');
     try {
-      var dados = await postJSON('/api/comparar', { pergunta: pergunta });
+      var inicio = Date.now();
+      var dados;
+      for (var envio = 0; envio < 3; envio++) {
+        var tarefa = (retomarId && envio === 0) ? { id: retomarId } : await postJSON('/api/comparar', { pergunta: pergunta });
+        guardarPendente({ tipo: 'validacao', id: tarefa.id, pergunta: pergunta });
+        dados = await acompanhar(tarefa.id, function (t) {
+          if (t.status === 'pronta' || t.status === 'erro') return;
+          var s = Math.round((Date.now() - inicio) / 1000);
+          setStatus($('v-status'), (t.mensagem || 'Gerando as duas respostas…') + ' (' + s + ' s)', 'busy');
+        });
+        if (dados.status !== 'perdida') break;
+        setStatus($('v-status'), 'Reenviando a pergunta…', 'busy');
+        await esperar(3000);
+      }
+      if (dados.status !== 'pronta') {
+        limparPendente();
+        throw new Error(dados.mensagem || 'Não foi possível gerar as respostas. Tente de novo.');
+      }
       sessao = dados.sessao;
       $('v-form').reset();
       R.renderPlain($('v-escolhida'), dados.pergunta);
@@ -316,10 +348,12 @@
     } catch (e) {
       setStatus($('v-status'), e.message, 'error');
     } finally {
+      gerandoPar = false;
+      gerando--;
       botao.disabled = false;
       botao.textContent = 'Gerar as duas respostas';
     }
-  });
+  }
 
   function faltando(form) {
     for (var lado of ['A', 'B']) {
@@ -360,6 +394,7 @@
     setStatus($('v-status-envio'), 'Enviando…', 'busy');
     try {
       await postJSON('/api/avaliar', dados);
+      limparPendente();
       sessao = null;
       form.hidden = true;
       setStatus($('v-status-envio'), '');
@@ -371,6 +406,19 @@
       $('v-enviar').disabled = false;
     }
   });
+
+  // Página recarregada no meio de uma geração (ou antes de votar): retoma de onde parou.
+  var pendente = lerPendente();
+  if (pendente && pendente.id) {
+    if (pendente.tipo === 'validacao') {
+      mostrarModo('validacao');
+      $('v-pergunta').value = pendente.pergunta || '';
+      gerarPar(pendente.id);
+    } else if (pendente.tipo === 'tutor') {
+      mostrarModo('tutor');
+      retomarTutor(pendente);
+    }
+  }
 
   $('v-outra').addEventListener('click', function () {
     $('v-feito').hidden = true;

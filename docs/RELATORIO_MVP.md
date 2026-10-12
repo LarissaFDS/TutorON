@@ -99,3 +99,44 @@ A diferença é pequena e está dentro do ruído: são 9 perguntas, dois casos f
 - A instabilidade do serviço do Gemini também limita quantas pessoas podem usar ao mesmo tempo. Quando o Gemini cai, cada resposta local leva cerca de 1 minuto e a GPU atende uma pessoa por vez.
 - Não enviei novos PDFs ao Supabase, porque isso altera o banco compartilhado do time. O comando está no README (`python -m backend.ingest <pasta>`).
 - Para reduzir os erros de matemática de verdade, o que mais ajuda é **ter mais soluções corretas revisadas** para treinar e usar as avaliações com "erro de matemática" marcadas pelos alunos para achar onde o modelo erra.
+
+## 7. Correções de estabilidade (12/10/2026, madrugada)
+
+**O erro 524.** O túnel da Cloudflare encerra qualquer requisição que passe de 100 s sem resposta. A validação esperava as duas respostas dentro de uma única requisição; com o Gemini sem cota, os dois lados rodaram no modelo local (63 s + 83 s) e a Cloudflare cortou antes. O servidor chegou a terminar as respostas; elas estão registradas em `dados/validacao/comparacoes.jsonl`. **Correção:** as respostas agora são geradas em segundo plano. O site cria a tarefa (resposta imediata) e consulta o andamento a cada segundo com requisições curtas. Nenhuma requisição espera a IA.
+
+Outros problemas encontrados na revisão e corrigidos:
+
+| Problema | Consequência | Correção |
+|---|---|---|
+| Limite de 30 perguntas por IP a cada 10 min | Numa sala, todos saem pelo mesmo IP da universidade: a turma seria bloqueada (429) | 300 por IP |
+| Cota gratuita do Gemini: 20 respostas/dia por modelo | Esgota em minutos numa turma; o servidor tentava o modelo esgotado a cada pedido | Respeita o tempo de espera informado pelo Google; o local assume |
+| GPU atendia 1 pedido por vez | Fila longa quando o Gemini está fora | 2 pedidos em paralelo com cache em 8 bits: quase o dobro de vazão, ainda na VRAM (3 transbordava para a CPU) |
+| Validação no local com raciocínio | Mais de 3 min de espera | Sem raciocínio nos dois lados na validação (comparação continua justa): ~1 min |
+| Pergunta longa + código + material | Estouraria a janela do modelo local e cortaria as instruções do tutor | Material limitado ao espaço disponível, acervo local primeiro |
+| Nenhum modelo responde (ex.: Ollama caiu) | Erro para o aluno | Até 4 tentativas em ~1 min; o vigia religa o Ollama nesse intervalo |
+| Site reiniciado no meio de uma resposta | Tarefa perdida | A página reenvia a pergunta sozinha |
+| Aluno recarrega a página no meio | Resposta perdida | A página retoma a mesma tarefa |
+| Rede do celular cai depois de votar | Reenvio dava erro "já avaliada" | Voto idempotente |
+| Vigia do servidor | Reiniciava o site no primeiro soluço; um erro ao religar desligava tudo; duas janelas abertas se derrubavam | 3 falhas seguidas antes de religar; erros ao religar são tentados de novo; uma janela por vez |
+| Reiniciar à mão | Não existia; fechar e abrir trocava o endereço público | `4-Reiniciar.bat` religa modelos e site mantendo o endereço; `5-Desligar.bat` desliga tudo |
+
+**Fonte principal.** O acervo local (provas, listas e resoluções) passou a ser explicitamente a fonte principal, no prompt e na busca. O livro do Supabase entra como complemento (no máximo 2 trechos, e só se bem parecidos com a pergunta).
+
+**Front-end.** Saiu "monitoria" e a menção à UFAL. O TutorON é apresentado como uma IA para entender as matérias da faculdade, começando por Computação, com a observação de que, no MVP, atende PAA.
+
+### Testes desta rodada
+
+| Teste | Resultado |
+|---|---|
+| Testes automatizados (backend + acervo) | 46 passaram |
+| 3 validações + 3 perguntas simultâneas pelo endereço público, Gemini quase sem cota | 0 erros |
+| Mesma carga com o Gemini desligado (só modelo local), pelo túnel | 0 erros; validações de até 179 s (antes: 524 a partir de 100 s) |
+| 8 validações + 6 perguntas simultâneas, só modelo local, pelo túnel | 0 erros; pior caso ~4 min |
+| 10 validações + 6 perguntas simultâneas, configuração real, pelo endereço público | 0 erros; mediana 22 s, pior caso 71 s |
+| Ollama derrubado no meio de uma geração | o vigia o religou; a resposta saiu na tentativa seguinte |
+| Servidor do site derrubado no meio de uma validação | religado em ~15 s; a página reenviou e as respostas chegaram |
+| Página recarregada no meio de uma validação | retomou a mesma tarefa |
+| `4-Reiniciar.bat` | modelos e site novos, mesmo endereço público |
+| Segunda janela do `1-Iniciar-Servidor.bat` | só mostra o endereço; não derruba a primeira |
+
+**O que continua fora do nosso controle:** se o PC desligar, perder a internet por muito tempo ou o processo do túnel morrer, o endereço `trycloudflare.com` muda (só um túnel com conta Cloudflare tem endereço fixo; veja o `.env.example`). Atualizações do Windows que reiniciam o PC também derrubam o site: vale adiar as atualizações no dia do teste.
