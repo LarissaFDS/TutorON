@@ -10,3 +10,5 @@
 # Espelhos de OCR mantêm espaços da transcrição; não reformatar o dado bruto.
 02-acervo/**/*.md whitespace=-blank-at-eol
 03-triagem/pacote-revisao/*.md whitespace=-blank-at-eol
+*.bat text eol=crlf
+*.ps1 text eol=crlf

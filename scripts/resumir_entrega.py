@@ -83,7 +83,7 @@ def main():
         'Antes do MVP: ampliar revisão matemática por professor, resolver manuscritos/diagramas pendentes, avaliar modelo de maior capacidade em mais questões e coletar avaliação cega real. '
         'Treinar somente após conferir o dataset e executar a receita na GPU; comparar base/ajustado com mesmas opções e conjunto reservado. Não converter checklist, preferência ou loss em alegação de superioridade.', '',
         '[Operação Linux/Windows](PASSO_A_PASSO.md) · [Guia de treino](05-modelo/COMO_TREINAR.md) · [Comparação](06-avaliacao/COMPARACAO_ATUAL.md)', '']
-    (ROOT / 'RELATORIO_VALIDACAO.md').write_text('\n'.join(lines), encoding='utf-8')
+    (ROOT / 'docs/validacao-pre-mvp/RELATORIO_VALIDACAO.md').write_text('\n'.join(lines), encoding='utf-8')
     print('Relatório gerado com respostas e pareceres conferidos por hash.')
 
 

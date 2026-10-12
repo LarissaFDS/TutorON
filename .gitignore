@@ -1,36 +1,31 @@
-# Python bytecode
+# Segredos: chaves de API ficam só nesta máquina.
+.env
+.env.*
+!.env.example
+
+# Python
 __pycache__/
 *.py[cod]
-*.pyo
-
-# Virtual environment
+.pytest_cache/
 .venv/
-.venv-hotfix/
-.uv-cache/
+.venv-*/
 venv/
 env/
+.uv-cache/
 
-# pytest cache
-.pytest_cache/
-
-# Editor / OS
+# Editor / SO
 .vscode/
 .idea/
 *.DS_Store
 
-.env
+# Dados recebidos dos alunos (perguntas, avaliações A/B, logs, endereço público).
+dados/
 
-# Pipeline local: originais, modelos, dados de alunos e ambientes não vão ao Git.
-.venv-acervo/
-.venv-treino/
+# Ferramentas e modelos locais (Ollama, cloudflared, pesos, treino, cache do Hugging Face).
 .tools/
+
+# Pipeline do acervo: originais e figuras ficam locais.
 00-originais/
 01-extraido/figuras/
-07-validacao-alunos/respostas.csv
-07-validacao-alunos/respostas-v1.csv
-07-validacao-alunos/respostas.tmp
-07-validacao-alunos/pares-sessoes/
-07-validacao-alunos/sessoes.json
-07-validacao-alunos/resumo.json
-07-validacao-alunos/resumo.csv
+07-validacao-alunos/
 tmp/

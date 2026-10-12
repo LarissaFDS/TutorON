@@ -1,4 +1,0 @@
-### (sem system instruction)
-
-### PROMPT
-Defina as classes P, NP e NP-completo.
