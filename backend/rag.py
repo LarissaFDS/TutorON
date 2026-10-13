@@ -3,7 +3,9 @@
 Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
 1. Acervo curado local (provas, listas e resoluções de PAA em ``04-rag/indice.json``),
-   busca híbrida léxica + semântica. Só entram blocos de confiança média/alta.
+   busca híbrida léxica + semântica. Só entram blocos de confiança média/alta e, com o
+   bge-m3 ligado, com similaridade acima de ACERVO_SIMILARIDADE_MINIMA (descontado o "hub").
+   Se nada passar, a lista vem vazia e a resposta não finge ter material.
    É a FONTE PRINCIPAL: mostra como o professor cobra e é o material mais confiável.
 2. Livro-texto de PAA no Supabase/pgvector (``match_chunks``), indexado por
    ``backend/ingest.py``. Complementar: entra depois do acervo, com menos trechos
@@ -53,10 +55,13 @@ def _cortar(texto: str) -> str:
     return texto if len(texto) <= MAX_CHARS_TRECHO else texto[:MAX_CHARS_TRECHO].rsplit("\n", 1)[0] + "\n[…]"
 
 
-def _acervo(pergunta: str, vetor: list[float] | None) -> list[Trecho]:
+def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None = None) -> list[Trecho]:
     from acervo.retrieval import search
 
-    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor)
+    corte = settings.acervo_min_similarity if settings else None
+    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor,
+                   min_similarity=corte if corte is not None and corte >= 0 else None,
+                   hub_penalty=bool(settings and settings.acervo_hub_penalty))
     trechos = []
     for n, item in enumerate(itens, 1):
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
@@ -95,7 +100,7 @@ async def _livro(client: httpx.AsyncClient, settings: Settings, vetor: list[floa
 async def recuperar(pergunta: str, llm, settings: Settings) -> list[Trecho]:
     """Busca acervo e livro em paralelo. Nunca lança: sem contexto, a lista vem vazia."""
     vetor = await llm.embed(pergunta)
-    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor)
+    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor, settings)
     tarefa_livro = _livro(llm.client, settings, vetor) if vetor else asyncio.sleep(0, result=[])
     acervo, livro = await asyncio.gather(tarefa_acervo, tarefa_livro, return_exceptions=True)
     trechos: list[Trecho] = []
