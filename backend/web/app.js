@@ -123,7 +123,8 @@
     var ul = el('ul', 'fontes__lista');
     fontes.forEach(function (f) {
       var li = el('li');
-      li.append(el('strong', null, '[' + f.rotulo + '] '), document.createTextNode(f.titulo + ' — ' + f.referencia));
+      // Mesmo nome que a resposta cita entre parênteses ("Lista 5, p. 7-8"); [P1] só se o servidor for antigo.
+      li.append(el('strong', null, f.nome ? f.nome + ' ' : '[' + f.rotulo + '] '), document.createTextNode('— ' + f.titulo));
       ul.append(li);
     });
     d.append(ul);

@@ -323,7 +323,7 @@ async def avaliar(grupos: dict, nome: str) -> Path:
         linhas += [f'## {i}. {caso["pergunta"]}', '', f'*Origem: {caso["origem"]}*', '', '**Referência:**', '',
                    caso['referencia'], '']
         for modelo in ('tutoron-paa', nome):
-            prompt = prompt_tutor(caso['pergunta'], 'Nenhum trecho do material foi encontrado para esta pergunta.')
+            prompt = prompt_tutor(caso['pergunta'], '')  # sem material: igual à produção
             try:
                 r = await llm.complete(SISTEMA_TUTOR, prompt, models=[Model('ollama', modelo)])
                 resposta, segundos = r.text, r.seconds
