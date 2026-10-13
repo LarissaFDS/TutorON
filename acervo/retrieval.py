@@ -66,8 +66,39 @@ def cosine(a, b):
     return sum(x*y for x,y in zip(a,b)) / (math.sqrt(sum(x*x for x in a)) * math.sqrt(sum(y*y for y in b)) or 1)
 
 
-def search(question, root=ROOT, k=4, semantic=True, vector=None):
-    index = read_json(root / '04-rag/indice.json', {'chunks': [], 'vectors': []})
+HUB_VIZINHOS = 10
+_hub_cache = {}
+
+
+def hub_scores(vectors, cache_key=None):
+    """Quanto cada bloco é "hub": média do cosseno com seus HUB_VIZINHOS vizinhos mais próximos no
+    acervo, menos a média geral. Hubs ficam perto de quase tudo e entram em perguntas sem relação
+    (ex.: PAA_L3 p. 4). Subtrair isso da similaridade é a correção CSLS (Conneau et al., 2018)."""
+    if cache_key is not None and cache_key in _hub_cache:
+        return _hub_cache[cache_key]
+    k = min(HUB_VIZINHOS, len(vectors) - 1)
+    if k < 1:
+        return [0.0] * len(vectors)
+    vizinhanca = []
+    for i, v in enumerate(vectors):
+        sims = sorted((cosine(v, w) for j, w in enumerate(vectors) if j != i), reverse=True)[:k]
+        vizinhanca.append(sum(sims) / k)
+    media = sum(vizinhanca) / len(vizinhanca)
+    hubs = [r - media for r in vizinhanca]
+    if cache_key is not None:
+        _hub_cache.clear()
+        _hub_cache[cache_key] = hubs
+    return hubs
+
+
+def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=None, hub_penalty=False):
+    """Busca híbrida (BM25 + bge-m3, fundidos por RRF).
+
+    min_similarity: com embeddings, só entram blocos com similaridade (já descontada a de hub, se
+    hub_penalty) maior ou igual a ela; palavra em comum sozinha não basta. Pode devolver lista vazia.
+    Sem embeddings (busca só léxica), o filtro antigo continua valendo. None mantém o comportamento antigo."""
+    index_path = root / '04-rag/indice.json'
+    index = read_json(index_path, {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
     live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
     chunks = index['chunks']
@@ -96,6 +127,10 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None):
             mode = 'hibrido'
         except Exception:
             mode = 'lexical_fallback'
+    raw_scores = list(semantic_scores)
+    if semantic_scores and hub_penalty:
+        chave = (str(index_path), index_path.stat().st_mtime_ns if index_path.exists() else 0)
+        semantic_scores = [s - h for s, h in zip(semantic_scores, hub_scores(index['vectors'], chave))]
     result = []
     lexical_order = sorted(range(len(chunks)), key=lambda i: scores[i], reverse=True)
     ranks = {i: rank for rank, i in enumerate(lexical_order, 1)}
@@ -104,13 +139,20 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None):
         current = live.get(item['id'])
         if not current or current['sha256'] != item['sha256'] or current['confiabilidade'] not in ('media', 'alta'):
             continue
-        if scores[i] <= 0 and (not semantic_scores or semantic_scores[i] < 0.55):
+        exato = any(e in searchable(question) and e in searchable(item['texto']) for e in ['asterisco', 'algoritmo x', 'composto'])
+        if semantic_scores and min_similarity is not None:
+            if semantic_scores[i] < min_similarity and not exato:
+                continue  # corte absoluto: só similaridade, não posição no ranking
+        elif scores[i] <= 0 and (not semantic_scores or semantic_scores[i] < 0.55):
             continue
         score = 1 / (60 + ranks[i]) if scores[i] else 0
         if semantic_scores:
             score += 1 / (60 + semantic_ranks[i])
         score *= {'alta': 1.25, 'media': 1.1}.get(current['confiabilidade'], 1)
-        result.append({**current, 'score': score, 'busca': mode})
+        # score_lexico e similaridade(_ajustada) informam o diagnóstico (eval/); a ordem usa só score.
+        result.append({**current, 'score': score, 'busca': mode, 'score_lexico': round(scores[i], 3),
+                       'similaridade': round(raw_scores[i], 3) if raw_scores else None,
+                       'similaridade_ajustada': round(semantic_scores[i], 3) if semantic_scores else None})
     unique, seen = [], set()
     for item in sorted(result, key=lambda r: r['score'], reverse=True):
         signature = searchable(item['texto'])
