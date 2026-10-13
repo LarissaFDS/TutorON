@@ -59,6 +59,7 @@ def test_perguntar_por_tarefa_registra(cliente):
     assert criada["status"] in ("fila", "gerando")  # responde na hora, sem esperar a IA
     t = esperar(cliente, criada)
     assert t["status"] == "pronta" and t["texto"].startswith("resposta") and t["fontes"][0]["rotulo"] == "P1"
+    assert t["fontes"][0]["nome"] == "Material da disciplina"
     linha = json.loads((cliente.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
     assert linha["modelo"] == "g1" and linha["id"] == t["id_resposta"]
     assert cliente.post("/api/feedback", json={"id": t["id_resposta"], "util": False, "erro_matematico": True}).json()["salvo"]

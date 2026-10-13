@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from dataclasses import dataclass
 
 import httpx
@@ -41,11 +42,39 @@ class Trecho:
     texto: str
     referencia: str
 
+    @property
+    def nome(self) -> str:
+        return nome_legivel(self.referencia, self.origem)
+
     def para_prompt(self) -> str:
-        return f"[{self.rotulo}] {self.titulo} — {self.referencia}\n{self.texto}"
+        # O modelo cita pelo nome entre colchetes ("(Lista 5, p. 7-8)"), o mesmo que o site mostra.
+        return f"[{self.nome}] ({self.titulo})\n{self.texto}"
 
     def publico(self) -> dict:
-        return {"rotulo": self.rotulo, "origem": self.origem, "titulo": self.titulo, "referencia": self.referencia}
+        return {"rotulo": self.rotulo, "nome": self.nome, "origem": self.origem, "titulo": self.titulo,
+                "referencia": self.referencia}
+
+
+def nome_legivel(referencia: str, origem: str) -> str:
+    """'PAA_L5.pdf | página(s): 7, 8' -> 'Lista 5, p. 7-8'; 'página 48' (livro) -> 'Livro, p. 48'."""
+    if origem == "livro":
+        pagina = re.search(r"\d+", referencia)
+        return f"Livro, p. {pagina.group()}" if pagina else "Livro"
+    arquivo, _, resto = referencia.partition("|")
+    arquivo = arquivo.strip()
+    paginas = re.findall(r"\d+", resto)
+    lista = re.match(r"PAA_L(\d+)", arquivo)
+    if lista:
+        nome = f"Lista {lista.group(1)}"
+    elif re.match(r"c\d+_prova", arquivo):
+        nome = "Prova"
+    elif re.match(r"e\d+_", arquivo):
+        nome = "Material da equipe"
+    else:
+        nome = "Material da disciplina"
+    if paginas:
+        nome += f", p. {paginas[0]}" + (f"-{paginas[-1]}" if len(paginas) > 1 else "")
+    return nome
 
 
 def _cortar(texto: str) -> str:
@@ -124,4 +153,4 @@ def contexto(trechos: list[Trecho], ocupado: int = 0) -> str:
             continue  # pula o trecho inteiro em vez de cortar uma fórmula no meio
         blocos.append(bloco)
         usado += len(bloco)
-    return "\n\n".join(blocos) or "Nenhum trecho do material foi encontrado para esta pergunta."
+    return "\n\n".join(blocos)  # vazio: o prompt omite o bloco de material
