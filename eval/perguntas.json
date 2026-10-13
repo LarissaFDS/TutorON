@@ -1,0 +1,137 @@
+[
+  {
+    "id": "A1-mochila-01",
+    "original_aluno": true,
+    "tema": "pd",
+    "origem": "validação cega do aluno (texto reconstruído a partir do relato; notas TutorON 3/3/4 x genérica 5/5/5)",
+    "pergunta": "Como montar a recorrência da mochila 0/1 em programação dinâmica?",
+    "pedido_formato": null,
+    "referencia": "V[i][w] = maior valor usando só os itens 1..i com capacidade w. Casos base: V[0][w]=0 e V[i][0]=0. Se w_i > w: V[i][w]=V[i-1][w]; senão V[i][w]=max(V[i-1][w], v_i + V[i-1][w-w_i]). O i-1 nas duas opções garante que cada item é usado no máximo uma vez. Resposta em V[n][W]. Tempo e espaço Θ(nW), pseudo-polinomial."
+  },
+  {
+    "id": "A2-subset-sum",
+    "original_aluno": true,
+    "tema": "pd",
+    "origem": "Lista 5, questão 8 (PAA_L5.pdf p. 7-8); validação cega do aluno (TutorON 1/1/2 x genérica 4/5/4)",
+    "pergunta": "Forneça um algoritmo de programação dinâmica (note que será pseudo-polinomial) para o problema SUBSET SUM. Entrada: um conjunto A com valores inteiros positivos e um inteiro t. Questão: existe um subconjunto de A cuja soma dos valores seja exatamente t?",
+    "pedido_formato": null,
+    "referencia": "S[i][s] = existe subconjunto dos i primeiros elementos com soma exatamente s. S[0][0]=verdadeiro, S[0][s]=falso para s>0. S[i][s] = S[i-1][s] OU (a_i <= s E S[i-1][s-a_i]). Resposta S[n][t]. Tempo Θ(nt), espaço Θ(nt) ou Θ(t) percorrendo s de t até a_i em ordem decrescente. Pseudo-polinomial porque t pode ser exponencial no número de bits da entrada. Exemplo: A={3,34,4,12,5,2}, t=9 -> sim (4+5)."
+  },
+  {
+    "id": "A3-substring-comum",
+    "original_aluno": true,
+    "tema": "pd",
+    "origem": "Lista 5, questão 5 (PAA_L5.pdf p. 4-5); validação cega do aluno (TutorON 1/1/1 x genérica 5/5/5)",
+    "pergunta": "Dadas duas strings x = x1x2...xn e y = y1y2...ym, desejamos encontrar o comprimento da maior substring comum delas, isto é, o maior k para o qual existem índices i e j com xi xi+1 ... xi+k-1 = yj yj+1 ... yj+k-1. Mostre como fazer isso em tempo O(mn).",
+    "pedido_formato": null,
+    "referencia": "L[i][j] = comprimento do maior sufixo comum de x1..xi e y1..yj (substring que TERMINA em xi e em yj). L[0][j]=L[i][0]=0. Se xi = yj: L[i][j] = L[i-1][j-1] + 1 (estende a substring que terminava uma posição antes nas duas strings); senão L[i][j]=0 (quebra a contiguidade). Resposta = maior valor da tabela, não L[n][m]. Tempo e espaço Θ(mn); espaço Θ(m) com duas linhas. Exemplo: x=ABABC, y=BABCA -> 4 (BABC). Diferente da maior SUBSEQUÊNCIA comum, que usa max(L[i-1][j], L[i][j-1]) no desencontro."
+  },
+  {
+    "id": "P1-robo-matriz-facil",
+    "original_aluno": false,
+    "tema": "pd",
+    "origem": "dados/perguntas.jsonl (gi6Gtcxg_K9UABlH), pedido de formato",
+    "pergunta": "Me explique como resolver a questão de PD do robo na matriz de forma mais fácil.",
+    "pedido_formato": "explicação mais fácil, passo a passo",
+    "referencia": "Robô coletor de moedas em matriz r x c, movendo só para direita ou para baixo. F[i][j] = máximo de moedas ao chegar em (i,j). F[i][j] = moeda[i][j] + max(F[i-1][j], F[i][j-1]), com só o vizinho válido na primeira linha/coluna; F[1][1]=moeda[1][1]. O i-1 é a célula de cima, o j-1 a da esquerda: as duas únicas origens possíveis. Resposta F[r][c]. Θ(rc)."
+  },
+  {
+    "id": "P2-troco-guloso-esquema",
+    "original_aluno": false,
+    "tema": "guloso",
+    "origem": "dados/perguntas.jsonl (55mTIdWOwZjs7KaC), pedido de formato",
+    "pergunta": "Por que o guloso de troco falha para moedas {1, 3, 4} e valor 6? faça um esqueminha para eu entender",
+    "pedido_formato": "esquema visual (tabela ou diagrama)",
+    "referencia": "Guloso: 4 -> resta 2 -> 1 -> 1: 3 moedas. Ótimo: 3+3: 2 moedas. Falha porque o sistema {1,3,4} não é canônico: a escolha gulosa não tem a propriedade de escolha gulosa. PD: C[v] = 1 + min C[v - d] sobre moedas d <= v; C[6]=2."
+  },
+  {
+    "id": "P3-troco-pd",
+    "original_aluno": false,
+    "tema": "pd",
+    "origem": "conjunto dourado (cobertura de PD)",
+    "pergunta": "Monte a programação dinâmica para o menor número de moedas que somam um valor V, com moedas d1, ..., dk. Mostre a tabela para moedas {1, 3, 4} e V = 6.",
+    "pedido_formato": "tabela preenchida",
+    "referencia": "C[0]=0; C[v] = 1 + min{C[v-d_i] : d_i <= v}; infinito se não houver moeda. Para {1,3,4}: C[0..6] = 0,1,2,1,1,2,2. Θ(kV), pseudo-polinomial."
+  },
+  {
+    "id": "P4-lis",
+    "original_aluno": false,
+    "tema": "pd",
+    "origem": "conjunto dourado (cobertura de PD)",
+    "pergunta": "Como encontrar o tamanho da maior subsequência crescente de um vetor em O(n²) com programação dinâmica? Mostre para [3, 1, 4, 1, 5, 9, 2, 6].",
+    "pedido_formato": null,
+    "referencia": "L[i] = tamanho da maior subsequência crescente que TERMINA em a_i. L[i] = 1 + max{L[j] : j < i e a_j < a_i} (ou 1 se não houver). Resposta = max L[i]. Para o exemplo: L = 1,1,2,1,3,4,2,4 -> 4 (ex.: 3,4,5,9 ou 1,4,5,6). Θ(n²)."
+  },
+  {
+    "id": "R1-mestre-nlogn",
+    "original_aluno": false,
+    "tema": "recorrencia",
+    "origem": "dados/perguntas.jsonl (J3D1ubZWYyyMN-z1, 5Un9lkzHLYNoLWFL)",
+    "pergunta": "Resolva T(n) = 2T(n/2) + n log n. O Teorema Mestre se aplica?",
+    "pedido_formato": null,
+    "referencia": "a=2, b=2, n^{log_b a}=n. f(n)=n log n não é polinomialmente maior que n: os três casos clássicos não se aplicam (lacuna entre caso 2 e 3). A versão estendida (f = Θ(n^{log_b a} log^k n), k=1) dá Θ(n log² n). Árvore de recursão: nível i custa n(log n - i), soma Θ(n log² n)."
+  },
+  {
+    "id": "R2-lacos-dependentes",
+    "original_aluno": false,
+    "tema": "lacos",
+    "origem": "dados/perguntas.jsonl (DInmI487AFPARK1j)",
+    "pergunta": "Como calcular a complexidade de dois laços aninhados quando o segundo depende de i?",
+    "pedido_formato": null,
+    "referencia": "Escrever como somatório duplo e resolver de dentro para fora. Ex.: para i=1..n, j=i..n: sum_{i=1}^{n} (n-i+1) = n(n+1)/2 = Θ(n²). Se o interno for j=1..i também Θ(n²); se dobrar (j=1; j<i; j*=2) dá Θ(n log n)."
+  },
+  {
+    "id": "R3-laco-multiplicativo",
+    "original_aluno": false,
+    "tema": "lacos",
+    "origem": "conjunto dourado (análise de laços)",
+    "pergunta": "Quantas vezes o corpo executa em: i = 1; enquanto i < n faça { i = i * 3 }? Dê a contagem exata e a ordem de crescimento.",
+    "pedido_formato": null,
+    "referencia": "Após k iterações i = 3^k. Executa enquanto 3^k < n: k = ceil(log_3 n) iterações para n > 1 (0 para n <= 1). Θ(log n). Ex.: n=10 -> i=1,3,9 -> 3 iterações = ceil(log_3 10)."
+  },
+  {
+    "id": "D1-algoritmo-x",
+    "original_aluno": false,
+    "tema": "dc",
+    "origem": "dados/perguntas.jsonl (5sUxzZfHdkKDlDTX); acervo curado c01/c02",
+    "pergunta": "Não entendi como resolve a questão do algoritmo X;",
+    "pedido_formato": null,
+    "referencia": "Algoritmo X(A, inicio, fim): se inicio=fim retorna A[inicio]; meio = inicio + floor((fim-inicio)/2); retorna max(X(A,inicio,meio), X(A,meio+1,fim)). Retorna o máximo. Corretude por indução forte no tamanho m. T(m)=2T(m/2)+Θ(1)=Θ(m); m-1 comparações."
+  },
+  {
+    "id": "D2-inversoes",
+    "original_aluno": false,
+    "tema": "dc",
+    "origem": "conjunto dourado (divisão e conquista)",
+    "pergunta": "Como contar o número de inversões de um vetor em O(n log n) usando divisão e conquista?",
+    "pedido_formato": null,
+    "referencia": "Adaptar o merge sort: inversões = esquerda + direita + cruzadas. No merge, quando um elemento da metade direita é copiado antes dos que restam na esquerda, soma-se o número de elementos restantes na esquerda. T(n)=2T(n/2)+Θ(n)=Θ(n log n). Ex.: [2,4,1,3,5] tem 3 inversões."
+  },
+  {
+    "id": "G1-atividades",
+    "original_aluno": false,
+    "tema": "guloso",
+    "origem": "conjunto dourado (guloso, prova de escolha gulosa)",
+    "pergunta": "Por que escolher sempre a atividade que termina primeiro dá a solução ótima no problema de seleção de atividades? Como provar?",
+    "pedido_formato": null,
+    "referencia": "Argumento de troca: seja a1 a atividade com menor término e O uma solução ótima; troque a primeira atividade de O por a1: continua compatível (a1 termina antes) e tem o mesmo tamanho. Subestrutura ótima: o resto é o problema restrito às atividades que começam depois de a1. Indução no número de escolhas. Θ(n log n) pela ordenação."
+  },
+  {
+    "id": "N1-np-reducao",
+    "original_aluno": false,
+    "tema": "np",
+    "origem": "dados/perguntas.jsonl (c2VhO8iMW6z7YbMu); acervo curado c09",
+    "pergunta": "Como provar que um problema é NP-completo por redução?",
+    "pedido_formato": null,
+    "referencia": "(1) B ∈ NP: certificado polinomial verificável em tempo polinomial. (2) Escolher A NP-completo conhecido e reduzir A ≤p B: função f polinomial com x ∈ A ⇔ f(x) ∈ B (provar as duas direções). Direção certa: do conhecido para o novo. Trabalhar com a versão de decisão."
+  },
+  {
+    "id": "N2-clique-vc",
+    "original_aluno": false,
+    "tema": "np",
+    "origem": "conjunto dourado (NP, redução concreta)",
+    "pergunta": "Mostre a redução de CLIQUE para COBERTURA DE VÉRTICES e prove as duas direções.",
+    "pedido_formato": null,
+    "referencia": "Dado (G, k), construir (complemento de G, |V|-k). G tem clique C de tamanho k ⇔ V-C é cobertura de vértices de tamanho |V|-k no complemento: toda aresta (u,v) do complemento não está em G, então u e v não estão ambos em C. Volta: se V-C cobre o complemento, nenhum par de C é aresta do complemento, logo C é clique em G. Construção O(|V|²)."
+  }
+]
