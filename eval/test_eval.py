@@ -85,3 +85,60 @@ def test_relatorio_calcula_efeitos_pareados(tmp_path, monkeypatch):
     assert resumo["efeitos"]["modelo (forte - lite): generico"]["dif"] == 1.0
     assert resumo["criterio_sucesso"]["lite"]["iguala_ou_supera"] is True
     assert (tmp_path / "relatorio.md").read_text(encoding="utf-8").startswith("# Matriz")
+
+
+def test_filtro_por_prefixo_pega_so_as_tres_originais():
+    assert [q["id"].split("-")[0] for q in matriz.perguntas("A1,A2,A3")] == ["A1", "A2", "A3"]
+
+
+def _nota(q, papel, condicao, nota, juiz="juiz-neutro", modelo=None):
+    return {"id": q["id"], "papel": papel, "modelo": modelo or f"gemini:{papel}", "condicao": condicao, "juiz": juiz,
+            "notas": {c: {"nota": nota, "motivo": ""} for c in matriz.criterios(q)}}
+
+
+def test_relatorio_parcial_so_com_as_tres_originais(tmp_path, monkeypatch):
+    monkeypatch.setattr(matriz, "RESULTS", tmp_path)
+    originais = matriz.perguntas("A1,A2,A3")
+    linhas = [_nota(q, "forte", c, n) for q in originais for c, n in (("generico", 4), ("novo_rag", 5))]
+    linhas.append(_nota(originais[0], "forte", "atual_rag", 2))
+    (tmp_path / "notas.jsonl").write_text("\n".join(json.dumps(x) for x in linhas), encoding="utf-8")
+    resumo = matriz.relatorio(None)
+    md = (tmp_path / "relatorio.md").read_text(encoding="utf-8")
+    assert "resultado parcial" in md and "em 3 de 15 perguntas" in md
+    assert "| forte novo_rag | 5 | 5 | 5 | 5 | 5 | 5.00 |" in md  # nota por critério a-e nas originais
+    assert resumo["criterio_sucesso"]["forte"] == {"novo_rag": 5.0, "generico": 4.0, "perguntas": 3,
+                                                   "iguala_ou_supera": True, "originais_a_b_d_ao_menos_4": True}
+    assert resumo["efeitos"]["forte: TutorON atual - genérico"]["n"] == 1
+
+
+def test_relatorio_mede_autopreferencia_quando_juiz_tambem_e_avaliado(tmp_path, monkeypatch):
+    monkeypatch.setattr(matriz, "RESULTS", tmp_path)
+    q = matriz.perguntas("A1")[0]
+    linhas = []
+    for papel, modelo in (("forte", "gemini:g-forte"), ("lite", "gemini:g-lite")):
+        linhas.append(_nota(q, papel, "generico", 3, juiz="g-neutro", modelo=modelo))
+        # O juiz g-forte dá +2 às próprias respostas e +0 às do lite, em relação ao juiz neutro.
+        linhas.append(_nota(q, papel, "generico", 5 if papel == "forte" else 3, juiz="g-forte", modelo=modelo))
+    (tmp_path / "notas.jsonl").write_text("\n".join(json.dumps(x) for x in linhas), encoding="utf-8")
+    resumo = matriz.relatorio(None)
+    assert resumo["juiz"] == "g-neutro"  # tabelas principais usam o juiz que não é avaliado
+    assert resumo["vies_do_juiz"]["g-forte vs g-neutro"]["autopreferencia"] == 2.0
+    assert "Viés do juiz" in (tmp_path / "relatorio.md").read_text(encoding="utf-8")
+
+
+def test_folha_cega_embaralha_esconde_bracos_e_tira_citacoes():
+    import folha_cega
+
+    respostas = []
+    for q in matriz.perguntas("A1,A2,A3"):
+        for braco in folha_cega.BRACOS:
+            texto = f"Resposta do braço {braco}. Ver (Lista 5, p. 7-8) e [P1, L2]." if braco != "generico" \
+                else f"Resposta do braço {braco}."
+            respostas.append({"id": q["id"], "papel": "forte", "modelo": "gemini:x", "condicao": braco, "texto": texto})
+    folha, mapa = folha_cega.montar(respostas, "forte", semente=1, manter_citacoes=False)
+    assert folha == folha_cega.montar(respostas, "forte", semente=1, manter_citacoes=False)[0]  # reproduzível
+    assert "Lista 5" not in folha and "[P1" not in folha and "atual_rag" not in folha.split("Resposta do braço")[0]
+    assert all(sorted(v["condicao"] for v in p.values()) == sorted(folha_cega.BRACOS) for p in mapa["perguntas"].values())
+    assert folha.count("### Resposta ") == 9 and "Qual resposta você prefere?" in folha
+    with pytest.raises(SystemExit):
+        folha_cega.montar(respostas[:-1], "forte", semente=1, manter_citacoes=False)

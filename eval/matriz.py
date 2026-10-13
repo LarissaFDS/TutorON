@@ -22,6 +22,7 @@ import json
 import statistics
 import sys
 import time
+from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
@@ -70,7 +71,10 @@ def anexar(caminho: Path, registro: dict) -> None:
 
 def perguntas(filtro: str | None = None) -> list[dict]:
     todas = json.loads((EVAL / "perguntas.json").read_text(encoding="utf-8"))
-    return [q for q in todas if not filtro or any(f in q["id"] for f in filtro.split(","))]
+    if not filtro:
+        return todas
+    prefixos = tuple(f.strip() + "-" for f in filtro.split(",") if f.strip())
+    return [q for q in todas if q["id"].startswith(prefixos) or q["id"] in filtro.split(",")]
 
 
 def modelo(spec: str) -> Model:
@@ -210,9 +214,15 @@ async def julgar(args) -> None:
     llm = LLM(settings)
     qs = {q["id"]: q for q in perguntas()}
     saida = RESULTS / "notas.jsonl"
-    feitos = {(n["id"], n["papel"], n["condicao"]) for n in ler_jsonl(saida)}
-    for r in ler_jsonl(RESULTS / "respostas.jsonl"):
-        chave = (r["id"], r["papel"], r["condicao"])
+    # A mesma resposta pode ter nota de mais de um juiz: é assim que se mede a autopreferência.
+    feitos = {(n["id"], n["papel"], n["condicao"], n.get("juiz")) for n in ler_jsonl(saida)}
+    respostas = ler_jsonl(RESULTS / "respostas.jsonl")
+    proprias = sum(r["modelo"] == f"gemini:{args.juiz}" for r in respostas if r.get("texto"))
+    if proprias:
+        print(f"Aviso: o juiz {args.juiz} também é um dos modelos avaliados ({proprias} respostas dele). "
+              "Rode também com outro juiz (--juiz) para o relatório medir a autopreferência.")
+    for r in respostas:
+        chave = (r["id"], r["papel"], r["condicao"], args.juiz)
         if not r.get("texto") or chave in feitos or r["id"] not in qs:
             continue
         q = qs[r["id"]]
@@ -249,16 +259,59 @@ def diferenca_pareada(notas: dict, a: tuple, b: tuple, ids: list[str]) -> dict:
     return {"dif": media(difs), "n": len(difs), "vence": sum(d > 0 for d in difs), "perde": sum(d < 0 for d in difs)}
 
 
+def escolher_juiz(todas: list[dict], pedido: str | None) -> str | None:
+    """Juiz das tabelas principais: o pedido; senão, um que não seja modelo avaliado; senão, o mais usado."""
+    juizes = Counter(n.get("juiz") for n in todas)
+    if pedido or not juizes:
+        return pedido
+    avaliados = {n["modelo"] for n in todas}
+    neutros = [j for j, _ in juizes.most_common() if f"gemini:{j}" not in avaliados]
+    return neutros[0] if neutros else juizes.most_common(1)[0][0]
+
+
+def vies_do_juiz(todas: list[dict]) -> tuple[list[str], dict]:
+    """Autopreferência: quanto um juiz que também é modelo avaliado dá a mais às PRÓPRIAS respostas,
+    comparado a outro juiz, descontando a diferença que ele já tem nas respostas dos outros modelos."""
+    por_resposta = defaultdict(dict)
+    for n in todas:
+        por_resposta[(n["id"], n["papel"], n["condicao"], n["modelo"])][n.get("juiz")] = nota_resposta(n)
+    juizes = sorted({n.get("juiz") for n in todas})
+    avaliados = {n["modelo"] for n in todas}
+    linhas, dados = [], {}
+    for j in juizes:
+        if f"gemini:{j}" not in avaliados:
+            continue
+        for outro in juizes:
+            if outro == j:
+                continue
+            proprias = [v[j] - v[outro] for k, v in por_resposta.items() if j in v and outro in v and k[3] == f"gemini:{j}"]
+            alheias = [v[j] - v[outro] for k, v in por_resposta.items() if j in v and outro in v and k[3] != f"gemini:{j}"]
+            vies = None if not proprias or not alheias else round(media(proprias) - media(alheias), 2)
+            dados[f"{j} vs {outro}"] = {"proprias": media(proprias), "n_proprias": len(proprias),
+                                        "alheias": media(alheias), "n_alheias": len(alheias), "autopreferencia": vies}
+            linhas.append(f"| {j} | {outro} | {fmt(media(proprias))} (n={len(proprias)}) | "
+                          f"{fmt(media(alheias))} (n={len(alheias)}) | {fmt(vies)} |")
+    if not linhas and any(f"gemini:{j}" in avaliados for j in juizes):
+        linhas.append("| " + ", ".join(j for j in juizes if f"gemini:{j}" in avaliados) +
+                      " | (só um juiz) | – | – | rode `julgar --juiz <outro modelo>` para medir |")
+    return linhas, dados
+
+
 def relatorio(args) -> dict:
     qs = {q["id"]: q for q in perguntas()}
-    brutas = [n for n in ler_jsonl(RESULTS / "notas.jsonl") if n["id"] in qs]
+    todas = [n for n in ler_jsonl(RESULTS / "notas.jsonl") if n["id"] in qs]
+    juiz = escolher_juiz(todas, getattr(args, "juiz", None))
+    brutas = [n for n in todas if n.get("juiz") == juiz]
     notas = {(n["id"], n["papel"], n["condicao"]): nota_resposta(n) for n in brutas}
     por_criterio = {(n["id"], n["papel"], n["condicao"]): {c: v["nota"] for c, v in n["notas"].items()} for n in brutas}
     modelos = {n["papel"]: n["modelo"] for n in brutas}
     papeis = [p for p in ("forte", "lite") if p in modelos]
     ids = list(qs)
+    com_resposta = sorted({n["id"] for n in brutas}, key=ids.index)
     linhas = ["# Matriz de avaliação do TutorON", "",
-              f"Gerado em {datetime.now():%d/%m/%Y %H:%M}. {len(brutas)} respostas julgadas, {len(ids)} perguntas. "
+              f"Gerado em {datetime.now():%d/%m/%Y %H:%M}. Juiz das tabelas: {juiz or '–'}. {len(brutas)} respostas "
+              f"julgadas, em {len(com_resposta)} de {len(ids)} perguntas"
+              + (" (resultado parcial)" if len(com_resposta) < len(ids) else "") + ". "
               "Nota = média dos critérios aplicáveis (1 a 5). Rubrica em `eval/rubrica.md`.", "",
               "## Média por braço", "", "| Braço | " + " | ".join(f"{p} ({modelos[p]})" for p in papeis) + " |",
               "|---|" + "---:|" * len(papeis)]
@@ -297,21 +350,35 @@ def relatorio(args) -> dict:
 
     criterio_sucesso = {}
     for p in papeis:
-        gen = media(notas.get((i, p, "generico")) for i in ids)
-        novo = media(notas.get((i, p, "novo_rag")) for i in ids)
-        originais_ok = all(por_criterio.get((i, p, "novo_rag"), {}).get(c, 0) >= 4
-                           for i in ids if qs[i].get("original_aluno") for c in "abd")
-        criterio_sucesso[p] = {"novo_rag": novo, "generico": gen,
+        # Só perguntas com os dois braços julgados: com resultado parcial, médias de conjuntos diferentes enganam.
+        pares = [i for i in ids if (i, p, "generico") in notas and (i, p, "novo_rag") in notas]
+        gen = media(notas[(i, p, "generico")] for i in pares)
+        novo = media(notas[(i, p, "novo_rag")] for i in pares)
+        originais = [i for i in ids if qs[i].get("original_aluno") and (i, p, "novo_rag") in por_criterio]
+        originais_ok = None if not originais else all(
+            por_criterio[(i, p, "novo_rag")].get(c, 0) >= 4 for i in originais for c in "abd")
+        criterio_sucesso[p] = {"novo_rag": novo, "generico": gen, "perguntas": len(pares),
                                "iguala_ou_supera": None if gen is None or novo is None else novo >= gen,
                                "originais_a_b_d_ao_menos_4": originais_ok}
     linhas += ["## Critério de sucesso (braço novo_rag)", ""]
     for p, v in criterio_sucesso.items():
-        linhas.append(f"- {p}: novo_rag {fmt(v['novo_rag'])} x genérico {fmt(v['generico'])} -> "
-                      f"{'iguala ou supera' if v['iguala_ou_supera'] else 'abaixo'}; "
-                      f"perguntas originais com a, b e d >= 4: {'sim' if v['originais_a_b_d_ao_menos_4'] else 'não'}.")
+        linhas.append(f"- {p} ({v['perguntas']} perguntas com os dois braços): novo_rag {fmt(v['novo_rag'])} "
+                      f"x genérico {fmt(v['generico'])} -> "
+                      f"{ {True: 'iguala ou supera', False: 'abaixo', None: 'sem dados'}[v['iguala_ou_supera']] }; "
+                      f"perguntas originais com a, b e d >= 4: "
+                      f"{ {True: 'sim', False: 'não', None: 'sem dados'}[v['originais_a_b_d_ao_menos_4']] }.")
+    vies_linhas, vies = vies_do_juiz(todas)
+    if vies_linhas:
+        linhas += ["", "## Viés do juiz (autopreferência)", "",
+                   "Diferença média de nota (juiz - outro juiz) nas mesmas respostas. Autopreferência = diferença nas "
+                   "respostas do próprio juiz menos a diferença nas respostas dos outros modelos. Positivo = o juiz "
+                   "favorece o próprio texto.", "",
+                   "| Juiz (também avaliado) | Outro juiz | Nas próprias | Nas alheias | Autopreferência |",
+                   "|---|---|---:|---:|---:|"] + vies_linhas
     RESULTS.mkdir(parents=True, exist_ok=True)
     (RESULTS / "relatorio.md").write_text("\n".join(linhas) + "\n", encoding="utf-8")
-    resumo = {"modelos": modelos, "efeitos": efeitos, "criterio_sucesso": criterio_sucesso}
+    resumo = {"juiz": juiz, "perguntas_com_nota": com_resposta, "modelos": modelos, "efeitos": efeitos,
+              "criterio_sucesso": criterio_sucesso, "vies_do_juiz": vies}
     (RESULTS / "resumo.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
     print("\n".join(linhas))
     return resumo
@@ -329,7 +396,8 @@ def main() -> None:
     j = sub.add_parser("julgar")
     j.add_argument("--juiz", default="gemini-3.8-flash")
     j.add_argument("--intervalo", type=float, default=4.0)
-    sub.add_parser("relatorio")
+    rel = sub.add_parser("relatorio")
+    rel.add_argument("--juiz", help="juiz das tabelas principais (padrão: um que não seja modelo avaliado)")
     args = parser.parse_args()
     inicio = time.monotonic()
     if args.etapa == "gerar":
