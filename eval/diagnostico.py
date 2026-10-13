@@ -2,6 +2,7 @@
 
     python eval/diagnostico.py roteamento [--logs dados/perguntas.jsonl ...]
     python eval/diagnostico.py recuperacao
+    python eval/diagnostico.py calibrar      # limiar ACERVO_SIMILARIDADE_MINIMA (precisa do bge-m3)
 
 Não chama nenhum modelo de resposta. A recuperação usa o bge-m3 do Ollama se estiver
 ligado; sem ele, cai para a busca léxica (como a produção faria) e o relatório diz isso.
@@ -99,6 +100,28 @@ def roteamento(caminhos: list[Path]) -> str:
     linhas += ["", "## Papel do modelo local na corrida", "",
                f"Tentativas do `ollama:*` nestes logs: {dict(ollama) or 'nenhuma'}. "
                f"Respostas servidas pelo local: {sum(1 for r in regs if r.get('provedor') == 'ollama')}."]
+
+    # Campos gravados a partir do PR de observabilidade (retry_delay_s, cota, degradado).
+    cotas = defaultdict(list)
+    for r in regs:
+        for t in r.get("tentativas", []):
+            if t["resultado"] == "HTTP 429":
+                cotas[t["modelo"]].append((t.get("cota") or "não informada", t.get("retry_delay_s")))
+    com_campo = [r for r in regs if "degradado" in r]
+    linhas += ["", "## Cota esgotada e respostas degradadas", ""]
+    if not com_campo and not any(c != "não informada" for lista in cotas.values() for c, _ in lista):
+        linhas.append("Estes logs são anteriores ao registro de cota e de degradação (`cota`, `retry_delay_s`, "
+                      "`degradado`). Rode de novo com um log novo.")
+    else:
+        linhas += [f"Respostas degradadas (lite depois de falha dos melhores): "
+                   f"{sum(bool(r['degradado']) for r in com_campo)} de {len(com_campo)}.", "",
+                   "| Modelo | 429 por dia | 429 por minuto | sem informação | retryDelay máximo (s) |",
+                   "|---|---:|---:|---:|---:|"]
+        for m, lista in cotas.items():
+            tipos = Counter(c for c, _ in lista)
+            esperas = [d for _, d in lista if d is not None]
+            linhas.append(f"| {m} | {tipos['por_dia']} | {tipos['por_minuto']} | {tipos['não informada']} | "
+                          f"{max(esperas) if esperas else '–'} |")
     return "\n".join(linhas) + "\n"
 
 
@@ -168,6 +191,86 @@ def recuperacao() -> str:
     return "\n".join(linhas) + "\n"
 
 
+# ---------------------------------------------------------------------- calibração do corte
+# Blocos que hoje acertam (ou que foram criados para a pergunta) e não podem sumir com o corte.
+# Ids ausentes do índice são ignorados (os e0x só existem depois de reindexar com o PR de curadoria).
+ESPERADOS = {
+    "A1-mochila-01": ["e01"],
+    "A2-subset-sum": ["e02", "1a81ca283132-q8-8"],
+    "A3-substring-comum": ["e03", "1a81ca283132-q5-5"],
+    "P1-robo-matriz-facil": ["e05", "1a81ca283132-q2-2"],
+    "P3-troco-pd": ["e04"],
+    "D1-algoritmo-x": ["c01", "c02"],
+    "N1-np-reducao": ["c09"],
+}
+LIMIARES = [round(0.40 + 0.025 * i, 3) for i in range(13)]  # 0,40 a 0,70
+
+
+def tabela_calibracao(sims: dict, temas: dict, esperados: dict, limiares=LIMIARES, k: int = 4) -> list[dict]:
+    """sims: {pergunta: [(id_bloco, assunto, similaridade_ajustada)]}. Para cada limiar, simula o corte
+    e o top-k por similaridade (aproximação do RRF, que também usa o BM25)."""
+    linhas = []
+    for limiar in limiares:
+        passam = mesmo = vazias = 0
+        perdidos = []
+        for qid, blocos in sims.items():
+            acima = sorted((b for b in blocos if b[2] >= limiar), key=lambda b: -b[2])
+            top = acima[:k]
+            passam += len(top)
+            mesmo += sum(b[1] in ASSUNTO_POR_TEMA[temas[qid]] for b in top)
+            vazias += not top
+            presentes = {b[0] for b in blocos}
+            ids_acima = {b[0] for b in acima}
+            perdidos += [f"{qid}:{e}" for e in esperados.get(qid, []) if e in presentes and e not in ids_acima]
+        linhas.append({"limiar": limiar, "blocos": passam, "mesmo_assunto": mesmo, "vazias": vazias,
+                       "esperados_perdidos": perdidos})
+    return linhas
+
+
+def recomendar(linhas: list[dict]) -> float | None:
+    seguros = [l["limiar"] for l in linhas if not l["esperados_perdidos"]]
+    return max(seguros) if seguros else None
+
+
+def calibrar() -> str:
+    from acervo import models
+    from acervo.retrieval import cosine
+
+    indice = json.loads((ROOT / "04-rag/indice.json").read_text(encoding="utf-8"))
+    if not indice.get("vectors"):
+        raise SystemExit("O índice não tem embeddings: rode `python -m acervo indexar --embeddings` antes.")
+    try:
+        from acervo.retrieval import hub_scores
+        hubs, com_hub = hub_scores(indice["vectors"]), True
+    except ImportError:  # sem o PR de recuperação: calibra sem a penalidade
+        hubs, com_hub = [0.0] * len(indice["vectors"]), False
+    qs = json.loads((ROOT / "eval/perguntas.json").read_text(encoding="utf-8"))
+    try:
+        vetores = [models.embeddings([q["pergunta"]], indice["embedding_model"])[0] for q in qs]
+    except Exception as exc:  # noqa: BLE001
+        raise SystemExit(f"bge-m3 indisponível ({type(exc).__name__}): rode no servidor com o Ollama ligado.")
+    sims = {q["id"]: [(c["id"], c["assunto"], cosine(v, w) - h)
+                      for c, w, h in zip(indice["chunks"], indice["vectors"], hubs)] for q, v in zip(qs, vetores)}
+    temas = {q["id"]: q["tema"] for q in qs}
+    linhas = tabela_calibracao(sims, temas, ESPERADOS)
+    sugestao = recomendar(linhas)
+    texto = ["# Calibração do corte de relevância", "",
+             f"{len(qs)} perguntas do conjunto dourado, {len(indice['chunks'])} blocos, "
+             f"penalidade de hub {'ligada' if com_hub else 'DESLIGADA (sem o PR de recuperação)'}. "
+             "Top 4 por similaridade ajustada (aproximação: a produção também usa o BM25 na ordem).", "",
+             "| Limiar | Blocos que entram | Do mesmo assunto | Perguntas sem material | Acertos conhecidos perdidos |",
+             "|---:|---:|---:|---:|---|"]
+    for l in linhas:
+        pct = f"{100 * l['mesmo_assunto'] / l['blocos']:.0f}%" if l["blocos"] else "–"
+        texto.append(f"| {l['limiar']:.3f} | {l['blocos']} | {l['mesmo_assunto']} ({pct}) | {l['vazias']} | "
+                     f"{', '.join(l['esperados_perdidos']) or '–'} |")
+    texto += ["", f"**Sugestão:** ACERVO_SIMILARIDADE_MINIMA={sugestao:.3f} (o maior limiar sem perder acertos conhecidos)."
+              if sugestao is not None else "**Sem sugestão:** todo limiar testado perde algum acerto conhecido.",
+              "Antes de fixar no .env, confira a coluna de perguntas sem material: uma pergunta de PAA sem nenhum "
+              "bloco é aceitável quando o acervo não cobre o assunto, mas não para PD, que agora tem material."]
+    return "\n".join(texto) + "\n"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="etapa", required=True)
@@ -175,10 +278,13 @@ def main() -> None:
     r.add_argument("--logs", nargs="+", default=[str(ROOT / "dados/perguntas.jsonl"),
                                                  str(ROOT / "06-avaliacao/resultados-mvp.json")])
     sub.add_parser("recuperacao")
+    sub.add_parser("calibrar")
     args = parser.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
     if args.etapa == "roteamento":
         texto = roteamento([Path(c) for c in args.logs if Path(c).exists()])
+    elif args.etapa == "calibrar":
+        texto = calibrar()
     else:
         texto = recuperacao()
     RESULTS.mkdir(parents=True, exist_ok=True)

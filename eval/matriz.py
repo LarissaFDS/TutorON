@@ -33,7 +33,8 @@ sys.path.insert(0, str(ROOT / "eval"))
 from backend import prompts  # noqa: E402
 from backend.config import load_settings  # noqa: E402
 from backend.llm import LLM, AllUnavailable, Model  # noqa: E402
-from backend.rag import contexto, recuperar  # noqa: E402
+from backend.rag import recuperar  # noqa: E402
+import prompt_anterior  # noqa: E402
 from prompt_candidato import SISTEMA_NOVO, prompt_novo  # noqa: E402
 
 EVAL = ROOT / "eval"
@@ -88,9 +89,10 @@ def planos(q: dict, trechos) -> dict[str, tuple[str | None, str]]:
     texto = q["pergunta"]
     return {
         "generico": (None, prompts.prompt_generico(texto)),
-        # Sem RAG = o que a produção envia quando a busca não acha nada.
-        "atual_sem_rag": (prompts.SISTEMA_TUTOR, prompts.prompt_tutor(texto, contexto([]))),
-        "atual_rag": (prompts.SISTEMA_TUTOR, prompts.prompt_tutor(texto, contexto(trechos, len(texto)))),
+        # "Atual" = prompt de produção de 12/10, congelado em prompt_anterior.py.
+        # Sem RAG = o que aquela versão enviava quando a busca não achava nada.
+        "atual_sem_rag": (prompt_anterior.SISTEMA, prompt_anterior.prompt(texto, [])),
+        "atual_rag": (prompt_anterior.SISTEMA, prompt_anterior.prompt(texto, trechos)),
         "novo_sem_rag": (SISTEMA_NOVO, prompt_novo(texto, [])),
         "novo_rag": (SISTEMA_NOVO, prompt_novo(texto, trechos)),
     }
@@ -140,6 +142,8 @@ async def gerar(args) -> None:
                 r = await gerar_uma(llm, m, sistema, prompt)
                 anexar(saida, {"id": q["id"], "papel": papel, "modelo": m.key, "condicao": condicao,
                                "busca": busca if condicao.endswith("_rag") and "sem" not in condicao else None,
+                               "prompt": {"generico": None, "atual_sem_rag": prompt_anterior.VERSAO,
+                                          "atual_rag": prompt_anterior.VERSAO}.get(condicao, "candidato (eval)"),
                                "data": datetime.now().isoformat(timespec="seconds"), **r})
                 print(f"    -> {'ok' if r.get('texto') else r.get('erro')} ({r.get('segundos', '-')} s)", flush=True)
                 await asyncio.sleep(args.intervalo)

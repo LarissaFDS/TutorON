@@ -142,3 +142,41 @@ def test_folha_cega_embaralha_esconde_bracos_e_tira_citacoes():
     assert folha.count("### Resposta ") == 9 and "Qual resposta você prefere?" in folha
     with pytest.raises(SystemExit):
         folha_cega.montar(respostas[:-1], "forte", semente=1, manter_citacoes=False)
+
+
+def test_calibracao_recomenda_o_maior_limiar_sem_perder_acerto_conhecido():
+    import diagnostico
+
+    sims = {"Q1": [("bom", "b2-04-programacao-dinamica", 0.62), ("ruido", "b1-02-divisao-e-conquista", 0.57)],
+            "Q2": [("c09", "b2-06-np-completude", 0.66), ("hub", "b1-02-divisao-e-conquista", 0.60)]}
+    temas = {"Q1": "pd", "Q2": "np"}
+    linhas = diagnostico.tabela_calibracao(sims, temas, {"Q1": ["bom"], "Q2": ["c09", "nao_indexado"]},
+                                           limiares=[0.55, 0.60, 0.625, 0.65])
+    por = {l["limiar"]: l for l in linhas}
+    assert por[0.55]["blocos"] == 4 and por[0.55]["mesmo_assunto"] == 2
+    assert por[0.60]["blocos"] == 3 and por[0.625]["esperados_perdidos"] == ["Q1:bom"]
+    assert por[0.65]["vazias"] == 1
+    assert diagnostico.recomendar(linhas) == 0.60  # "nao_indexado" não conta como perdido
+
+
+def test_roteamento_resume_cota_e_degradacao_quando_o_log_tem(tmp_path):
+    import diagnostico
+
+    log = tmp_path / "perguntas.jsonl"
+    log.write_text(json.dumps({"data": "2026-10-13T10:00:00+00:00", "modelo": "lite", "degradado": True,
+                               "tentativas": [{"modelo": "gemini:forte", "resultado": "HTTP 429", "cota": "por_dia",
+                                               "retry_delay_s": 7200.0},
+                                              {"modelo": "gemini:lite", "resultado": "respondeu"}]}) + "\n",
+                   encoding="utf-8")
+    md = diagnostico.roteamento([log])
+    assert "Respostas degradadas (lite depois de falha dos melhores): 1 de 1" in md
+    assert "| gemini:forte | 1 | 0 | 0 | 7200.0 |" in md
+
+
+def test_braco_atual_da_matriz_fica_congelado_no_prompt_de_12_10():
+    import prompt_anterior
+
+    assert '"**Verificação:**"' in prompt_anterior.SISTEMA  # o prompt antigo exigia a linha
+    p = prompt_anterior.prompt("Q?", [Trecho("P1", "acervo", "Lista", "texto", "PAA_L5.pdf | página(s): 4")])
+    assert "[P1] Lista — PAA_L5.pdf" in p
+    assert "Nenhum trecho do material" in prompt_anterior.prompt("Q?", [])

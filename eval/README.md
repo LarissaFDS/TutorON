@@ -5,7 +5,8 @@
 | `RELATORIO.md` | Conclusões das Fases 0 e 1 (comece por aqui) |
 | `perguntas.json` | Conjunto dourado: as 3 perguntas da validação cega do aluno + 12 de PAA, com gabarito curto |
 | `rubrica.md` | Critérios a–f do juiz e por que existem |
-| `prompt_candidato.py` | "Prompt novo" testado na matriz (ainda não usado em produção) |
+| `prompt_candidato.py` | "Prompt novo" testado na matriz (vai para produção no PR #25, em rascunho) |
+| `prompt_anterior.py` | Prompt de produção de 12/10 congelado: o braço "atual" mede sempre a mesma coisa |
 | `matriz.py` | Gera respostas, julga (um ou mais juízes) e monta o relatório da matriz |
 | `folha_cega.py` | Folha A/B/C anônima das 3 perguntas originais para o aluno reavaliar |
 | `diagnostico.py` | Roteamento (pelos logs) e recuperação do acervo |
@@ -30,6 +31,7 @@
 ```bash
 python eval/diagnostico.py roteamento --logs dados/perguntas.jsonl 06-avaliacao/resultados-mvp.json
 python eval/diagnostico.py recuperacao
+python eval/diagnostico.py calibrar   # limiar ACERVO_SIMILARIDADE_MINIMA (PR #23), precisa do bge-m3
 ```
 
 `--perguntas` aceita prefixos de id separados por vírgula (`A1,A2,A3`, `P1`, `N2`…).

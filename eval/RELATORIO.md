@@ -1,6 +1,24 @@
-# TutorON x IA genérica: relatório das Fases 0 e 1
+# TutorON x IA genérica: relatório das Fases 0, 1 e 2
 
-Situação em 13/10/2026: o harness está pronto e testado. Os diagnósticos de roteamento, recuperação e prompt foram medidos. **A matriz de modelos ainda não rodou**: esta máquina não tem `GEMINI_API_KEY` nem o `bge-m3` no Ollama. Por isso este relatório **ainda não diz qual alavanca explica mais a diferença**; ele diz o que os logs já provam e o que só a matriz pode decidir.
+Situação em 13/10/2026:
+- O harness (`eval/`) está pronto e testado.
+- Os diagnósticos de roteamento, recuperação e prompt foram medidos.
+- As correções que **não dependem da matriz** estão em PRs separados (tabela abaixo).
+- **A matriz de modelos ainda não rodou**: esta máquina não tem `GEMINI_API_KEY` nem o `bge-m3`. Ela vai rodar no servidor.
+
+Por isso este relatório **ainda não diz qual alavanca (modelo, prompt ou recuperação) explica mais a diferença**. Diz o que os logs e o índice já provam, o que foi corrigido e o que só a matriz decide.
+
+## Status dos PRs (todos para `dev`, nenhum mesclado)
+
+| PR | Tema | Depende da matriz? | Situação |
+|---|---|---|---|
+| [#21](https://github.com/LarissaFDS/TutorON/pull/21) | Harness `eval/`: conjunto dourado, rubrica, matriz, juiz, folha cega, diagnósticos | Não | Pronto para revisão |
+| [#22](https://github.com/LarissaFDS/TutorON/pull/22) | Roteamento: registrar `retry_delay_s`, cota por dia/minuto e `degradado` | Não (só registra) | Pronto para revisão |
+| [#23](https://github.com/LarissaFDS/TutorON/pull/23) | Recuperação: corte absoluto de similaridade, penalidade de hub, lista vazia | O **limiar** depende da calibração | Pronto; limiar padrão conservador (0,5) |
+| [#24](https://github.com/LarissaFDS/TutorON/pull/24) | Curadoria: 5 materiais de PD da equipe (`revisado: false`) | Não | Precisa de revisão humana do conteúdo e de reindexar no servidor |
+| [#25](https://github.com/LarissaFDS/TutorON/pull/25) | Prompt novo + citações legíveis | **Sim** | **Rascunho**: só entra se a matriz aprovar |
+
+Os PRs #22 a #25 foram mesclados juntos numa cópia local, sem conflito, e os 75 testes passaram.
 
 ## Números já medidos
 
@@ -46,6 +64,7 @@ Detalhes em [`results/diagnostico-recuperacao.md`](results/diagnostico-recuperac
 - **O acervo indexado tem só 53 blocos**, 10 de PD, todos "resolução de aluno" com mediana de ~650 caracteres. Mochila 0/1, troco por PD e LIS **não existem**.
 - **SUBSET SUM e substring comum existem** (Lista 5, q. 8 e q. 5), mas são telegráficos. O de SUBSET SUM traz só a versão compactada em 1D (`possivel[s]`), sem `dp[i][s]` nem recorrência com casos base. O de substring comum usa `x[i-1]=y[j-1]` sem explicar o deslocamento entre a string (base 0) e a tabela (base 1). **É exatamente a confusão do aluno com "i-1" e "j-1".** Então o problema não é só falta de cobertura: os blocos de PD que existem ensinam mal.
 - **Sem corte de relevância.** A fusão por ranking (RRF) dá a todos scores entre 0,017 e 0,018, e qualquer palavra em comum (BM25 > 0) passa o filtro. A busca **sempre** devolve 4 blocos: só **28 de 60** são do mesmo assunto da pergunta. Mochila 0/1 recebeu "Oito damas", "ASTERISCO" e "duas rações"; troco por PD recebeu 4 blocos de outros assuntos.
+- **Correção em relação à versão anterior deste relatório:** medi o cosseno do bge-m3 **entre blocos diferentes** do acervo: mediana **0,556**, p90 0,634. O filtro semântico antigo (0,55) fica praticamente na mediana, então deixa entrar metade do acervo em qualquer pergunta. Isso pesa tanto quanto o RRF.
 - **Por que PAA_L3 p. 4 domina:** os dois blocos dessa página (a^n e k-ésimo menor) são **hubs do embedding**. O de a^n está entre os 4 vizinhos mais próximos de 12 dos outros 52 blocos, 3 vezes o esperado. Na busca híbrida, o filtro semântico (cosseno ≥ 0,55) é baixo para o bge-m3, e o RRF dá pontos pela posição no ranking, não pela similaridade. Um hub entra no top 4 de perguntas sem relação (robô, laços). O chunking é por questão, não por página; a "página 4" aparece duas vezes porque tem duas questões curtas.
 - **Os curados c01, c02 e c09 funcionam onde existem.** O Algoritmo X recupera c01 e c02 em 1º e 2º, e NP recupera c09 em 2º.
 
@@ -53,31 +72,61 @@ Detalhes em [`results/diagnostico-recuperacao.md`](results/diagnostico-recuperac
 
 Os logs só mostram sintomas (citações a material irrelevante). A diferença com e sem RAG, no mesmo modelo e com o mesmo prompt, só aparece na matriz.
 
-## O que a matriz vai decidir
+## Fase 2: o que já foi feito sem depender da matriz
 
-`python eval/matriz.py gerar && python eval/matriz.py julgar && python eval/matriz.py relatorio`. São 15 perguntas × 2 modelos × 5 braços (genérico, atual sem/com RAG, novo sem/com RAG), julgadas pela rubrica [`rubrica.md`](rubrica.md).
+### #22 Roteamento (só observabilidade)
+Cada 429 passa a gravar `retry_delay_s` (o valor real; a pausa continua limitada a 1 h), `quota_ids` e `cota` (`por_dia`/`por_minuto`). Cada resposta grava `degradado: true` quando vem do último Gemini depois de falha ou pausa dos melhores. A lógica da cascata e a interface não mudaram. Com um dia de log novo, `python eval/diagnostico.py roteamento --logs dados/perguntas.jsonl` mostra se a cota que acaba é a diária (esperar não adianta) ou a por minuto (esperar adianta).
 
-| Pergunta | Comparação no relatório |
+### #23 Recuperação
+
+| Medida (vetores do índice, bloco como consulta) | Antes | Depois |
+|---|---:|---:|
+| k-ocorrência do PAA_L3 p. 4 (a^n / k-ésimo) | 12 / 9 | **7 / 3** |
+| Maior k-ocorrência do acervo (esperado: 4) | 12 | 8 |
+| Vizinhos do mesmo assunto | 42% | 44% |
+
+A penalidade de hub resolve o PAA_L3 p. 4, mas melhora pouco a precisão por assunto. O ganho maior deve vir do **corte absoluto**, e o limiar dele **não foi inventado**: o padrão de 0,5 é o mesmo do livro (mesmo bge-m3) e é conservador, porque corta pouco, dado que a mediana entre blocos é 0,556. O valor certo sai de `python eval/diagnostico.py calibrar` no servidor. O comando recomenda o maior limiar que não perde nenhum acerto conhecido (c01/c02 no Algoritmo X, c09 em NP, os novos e01–e05).
+
+### #24 Curadoria de PD
+Cinco materiais (mochila 0/1, SUBSET SUM com `S[i][s]` antes da versão 1D, substring comum com a explicação base 0/base 1, troco, robô). Cada rastreio é conferido por um teste que implementa a recorrência. Na busca léxica (índice refeito numa cópia temporária), o material novo ficou em **1º lugar** nas três perguntas do aluno; antes, a mochila recebia "Oito damas", "ASTERISCO" e "duas rações". Rotulados como material da equipe, `revisado: false`.
+
+### #25 Prompt (rascunho)
+Leva `eval/prompt_candidato.py` para produção e troca os rótulos [P1]/[L1] por nomes legíveis ("Lista 5, p. 7-8"), também na lista "Material consultado" do site. A matriz mede o prompt antigo congelado em `eval/prompt_anterior.py`, então o resultado não muda se o #25 entrar antes, mas o ideal é rodar a matriz primeiro.
+
+## O que o usuário roda no servidor
+
+Com uma chave Gemini separada ou fora do horário de uso, o Ollama ligado com `bge-m3` e o PR #21 (para os passos 3 e 4, também os #23 e #24):
+
+1. `python eval/matriz.py gerar --perguntas A1,A2,A3`. É a rodada rápida, só com as 3 perguntas do aluno.
+2. `python eval/matriz.py julgar`, depois `python eval/matriz.py julgar --juiz gemini-3.7-flash` (segundo juiz, para medir a autopreferência), depois `python eval/matriz.py relatorio`.
+3. `python -m acervo indexar --embeddings`, para pôr os 5 materiais de PD no índice.
+4. `python eval/diagnostico.py calibrar`. Ajuste `ACERVO_SIMILARIDADE_MINIMA` no `.env` com o valor sugerido.
+5. Se a rodada rápida der certo, repita os passos 1 e 2 sem `--perguntas`, para a matriz completa.
+6. `python eval/folha_cega.py`. Envie `results/folha_cega.md` ao aluno; o `folha_cega_mapa.json` fica com a equipe.
+7. Devolva a pasta `eval/results/`.
+
+Detalhes no [`README.md`](README.md).
+
+## O que depende da matriz, e o que muda conforme o resultado
+
+| Resultado da matriz | O que fazer |
 |---|---|
-| O modelo explica a diferença? | `modelo (forte - lite)` em cada braço |
-| O prompt explica? | `prompt (novo - atual)`, com e sem RAG |
-| O RAG ajuda ou atrapalha (H4)? | `RAG (com - sem)` com o prompt atual |
-| Reproduz a queixa do aluno? | `TutorON atual - genérico` (deve dar negativo) |
-| Critério de sucesso | `novo_rag` ≥ `generico`, e a, b e d ≥ 4 nas 3 perguntas originais |
+| `prompt (novo - atual)` > 0 e critério de sucesso atingido (`novo_rag` ≥ genérico; a, b, d ≥ 4 nas 3 originais) | Tirar o **#25** de rascunho e mesclar. |
+| `prompt (novo - atual)` ≈ 0 ou < 0 | Não mesclar o #25. Olhar as notas por critério (a–f) e as justificativas do juiz para ajustar o prompt candidato e rodar de novo só as 3 originais. |
+| `modelo (forte - lite)` grande, sobretudo em PD | Abrir o PR de roteamento que ficou de fora: esperar o modelo forte antes do lite em perguntas de raciocínio e avisar o aluno quando houver degradação. A decisão entre esperar e trocar de chave/plano depende da coluna de cota do #22. |
+| `modelo (forte - lite)` ≈ 0 | Não mexer no roteamento; o lite basta e é mais rápido. O #22 continua útil para monitorar. |
+| `RAG (com - sem)` < 0 com o prompt atual (H4 confirmada) | Priorizar o #23 com o limiar calibrado, e rodar a matriz de novo **depois** do #23 e do #24. Se continuar negativo, reduzir `ACERVO_K` ou usar o RAG só em PD/listas. |
+| `RAG (com - sem)` > 0 | O #23 continua recomendado (limpeza), mas sem urgência. |
+| Juiz com autopreferência alta | Usar como juiz principal o que não é avaliado (o relatório já escolhe sozinho) e dar mais peso à folha cega do aluno. |
 
-Custo: cerca de 300 chamadas ao Gemini. **Rode com uma chave separada ou fora do horário de uso**: a cota compartilhada com o site é exatamente o que derruba o roteamento (H1).
+Em todos os casos, **a nota do aluno na folha cega é a validação final**; o juiz Gemini é só triagem.
 
-## Plano da Fase 2 (só depois da matriz)
-
-Cada item vira um PR separado. A ordem depende da matriz:
-
-1. **Prompt**: levar `eval/prompt_candidato.py` para `backend/prompts.py` se `prompt (novo - atual)` for positivo.
-2. **Roteamento**: registrar a degradação e o `retryDelay` no log; aviso ao aluno quando cair no lite; para perguntas de raciocínio, esperar curto pelo modelo forte antes do lite. Este PR só vem se `modelo (forte - lite)` for relevante.
-3. **Recuperação**: corte por similaridade absoluta (e não só RRF), penalidade a hubs, e não citar nada quando nada for relevante.
-4. **Curadoria**: .md revisados para mochila 0/1, SUBSET SUM, LCS/substring, troco e robô, no padrão dos c01/c02/c09.
-
-## Riscos e limites desta fase
+## O que não resolvi / riscos
 
 - As três perguntas do aluno foram **reconstruídas** a partir do relato (as respostas originais da validação cega não estavam nos arquivos enviados). As duas de lista usam o enunciado real da Lista 5.
 - O juiz é um Gemini: mesma família dos modelos avaliados. Confira à mão as 3 perguntas originais.
 - O diagnóstico de recuperação desta máquina foi só léxico. O de hubness usa os vetores salvos no índice e vale para a produção.
+- Os 5 materiais de PD foram escritos por agente e conferidos por teste (contas e rastreios), **não por um professor**. Precisam de revisão humana antes de uso amplo.
+- O corte de relevância, com o limiar padrão, corta pouco. Sem a calibração no servidor, o ganho do #23 em produção vem quase só da penalidade de hub.
+- A matriz não mede citações nem latência. O prompt novo é ~35% mais longo; vale olhar o tempo de resposta e o modelo local (janela de 8k).
+- O roteamento continua descendo para o lite sem aviso até a matriz justificar a mudança. O #22 só passa a medir isso.
