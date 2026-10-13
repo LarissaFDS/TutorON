@@ -110,7 +110,9 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None):
         if semantic_scores:
             score += 1 / (60 + semantic_ranks[i])
         score *= {'alta': 1.25, 'media': 1.1}.get(current['confiabilidade'], 1)
-        result.append({**current, 'score': score, 'busca': mode})
+        # score_lexico e similaridade só informam o diagnóstico (eval/); a ordem usa apenas score.
+        result.append({**current, 'score': score, 'busca': mode, 'score_lexico': round(scores[i], 3),
+                       'similaridade': round(semantic_scores[i], 3) if semantic_scores else None})
     unique, seen = [], set()
     for item in sorted(result, key=lambda r: r['score'], reverse=True):
         signature = searchable(item['texto'])
