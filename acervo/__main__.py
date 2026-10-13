@@ -5,6 +5,7 @@ from .common import ROOT, init, read_json
 from .extract import inventory, extract
 from .curate import organize, triage
 from .retrieval import build, search
+from . import equipe
 from .evaluate import make_questions, evaluate
 
 
@@ -76,7 +77,7 @@ def dataset(root=ROOT):
 
 def main():
     parser = argparse.ArgumentParser(description='TutorON — acervo local de PAA')
-    parser.add_argument('acao', choices=['inventario', 'extrair', 'organizar', 'triar', 'indexar', 'avaliar', 'pipeline', 'relatorio', 'buscar'])
+    parser.add_argument('acao', choices=['inventario', 'extrair', 'organizar', 'triar', 'equipe', 'indexar', 'avaliar', 'pipeline', 'relatorio', 'buscar'])
     parser.add_argument('--visao', action='store_true')
     parser.add_argument('--reprocessar', action='store_true')
     parser.add_argument('--ia', action='store_true')
@@ -93,6 +94,7 @@ def main():
     if args.acao in ('extrair', 'pipeline'): extract(vision=args.visao, retry=args.reprocessar)
     if args.acao in ('organizar', 'pipeline'): organize()
     if args.acao in ('triar', 'pipeline'): triage(use_ai=args.ia, limit=args.limite_ia)
+    if args.acao == 'equipe': print(f"{sum(r.get('origem') == 'equipe' for r in equipe.sincronizar())} itens da equipe no acervo")
     if args.acao in ('indexar', 'pipeline'): build(embed=args.embeddings)
     if args.acao in ('avaliar', 'pipeline'):
         make_questions()
