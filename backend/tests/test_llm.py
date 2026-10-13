@@ -109,3 +109,55 @@ def test_modelos_fixos():
     llm = FakeLLM({"g2": ("ok", "fixo")})
     r = run(llm.complete(None, "p", models=[Model("gemini", "g2")]))
     assert r.model.name == "g2" and llm.iniciados == ["g2"]
+
+
+# ---------------------------------------------------------------------- observabilidade do roteamento
+import json  # noqa: E402
+
+import httpx  # noqa: E402
+
+from backend.llm import degradado, detalhes_429, retry_delay  # noqa: E402
+
+
+def corpo_429(quota_id, espera="36s"):
+    return json.dumps({"error": {"code": 429, "status": "RESOURCE_EXHAUSTED", "details": [
+        {"@type": "type.googleapis.com/google.rpc.QuotaFailure", "violations": [
+            {"quotaMetric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+             "quotaId": quota_id, "quotaValue": "20"}]},
+        {"@type": "type.googleapis.com/google.rpc.RetryInfo", "retryDelay": espera}]}}).encode()
+
+
+def test_detalhes_do_429_distinguem_cota_por_dia_e_por_minuto():
+    dia = detalhes_429(corpo_429("GenerateRequestsPerDayPerProjectPerModel-FreeTier", "7200s"))
+    assert dia == {"retry_delay_s": 7200.0, "quota_ids": ["GenerateRequestsPerDayPerProjectPerModel-FreeTier"],
+                   "cota": "por_dia"}
+    assert detalhes_429(corpo_429("GenerateRequestsPerMinutePerProjectPerModel-FreeTier"))["cota"] == "por_minuto"
+    assert retry_delay(corpo_429("x", "7200s")) == 3600.0  # a pausa continua limitada a 1 h; o log guarda o valor real
+    assert detalhes_429(b"nao e json") == {} and detalhes_429(b'{"error": {}}') == {}
+
+
+def test_429_do_gemini_vai_para_as_tentativas_com_retry_e_cota():
+    def responder(request):
+        if "/g1:" in str(request.url):
+            return httpx.Response(429, content=corpo_429("GenerateRequestsPerDayPerProjectPerModel-FreeTier"))
+        dados = {"candidates": [{"content": {"parts": [{"text": "ok"}]}, "finishReason": "STOP"}]}
+        return httpx.Response(200, content=f"data: {json.dumps(dados)}\n\n".encode(),
+                              headers={"content-type": "text/event-stream"})
+
+    llm = LLM(settings(gemini_models=("g1", "g2")), client=httpx.AsyncClient(transport=httpx.MockTransport(responder)))
+    r = run(llm.complete(None, "p", models=[Model("gemini", "g1"), Model("gemini", "g2")]))
+    falha = r.attempts[0]
+    assert r.model.name == "g2" and falha["modelo"] == "gemini:g1" and falha["resultado"] == "HTTP 429"
+    assert falha["retry_delay_s"] == 36.0 and falha["cota"] == "por_dia" and falha["quota_ids"]
+
+
+def test_degradado_so_quando_o_piso_responde_depois_de_falha_dos_melhores():
+    cascata = [Model("gemini", "forte"), Model("gemini", "medio"), Model("gemini", "lite"), Model("ollama", "local")]
+    lite = Model("gemini", "lite")
+    assert degradado(lite, [{"modelo": "gemini:forte", "resultado": "HTTP 429"},
+                            {"modelo": "gemini:lite", "resultado": "respondeu"}], cascata)
+    assert degradado(lite, [{"modelo": "gemini:forte", "resultado": "pulado (em pausa)"}], cascata)
+    assert not degradado(lite, [{"modelo": "gemini:forte", "resultado": "cancelado (outro respondeu antes)"}], cascata)
+    assert not degradado(Model("gemini", "medio"), [{"modelo": "gemini:forte", "resultado": "HTTP 503"}], cascata)
+    assert not degradado(lite, [{"modelo": "ollama:local", "resultado": "Ollama local desligado"}], cascata)
+    assert not degradado(lite, [], [lite])  # sem modelo melhor, não há o que degradar
