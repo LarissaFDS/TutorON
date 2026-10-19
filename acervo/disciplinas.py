@@ -24,6 +24,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .common import ROOT, caminho_guardado, digest, read_json, write_json
+from .curate import searchable
 
 REGISTRO = ROOT / 'disciplinas' / 'disciplinas.json'
 CAMPOS = ('id', 'titulo', 'assunto', 'tipo', 'fonte', 'autoria', 'licenca', 'curadoria')
@@ -53,9 +54,14 @@ class Disciplina:
     exemplos: tuple[str, ...] = ()
     situacao: str = ''
 
+    @property
+    def em_validacao(self) -> bool:
+        """Situação "em validação" no cadastro: fora do atendimento normal (backend/main.py)."""
+        return 'validacao' in re.sub(r'[^a-z]', '', searchable(self.situacao))
+
     def publico(self) -> dict:
         return {'id': self.id, 'nome': self.nome, 'sigla': self.sigla,
-                'exemplos': list(self.exemplos), 'situacao': self.situacao}
+                'exemplos': list(self.exemplos), 'situacao': self.situacao, 'em_validacao': self.em_validacao}
 
 
 @lru_cache(maxsize=None)

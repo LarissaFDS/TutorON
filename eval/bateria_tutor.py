@@ -53,7 +53,8 @@ def main() -> None:
 
     settings = load_settings()
     dados = Path(tempfile.mkdtemp(prefix="bateria-"))
-    settings = dataclasses.replace(settings, data_dir=dados, **({"local_model": args.modelo} if args.modelo else {}))
+    # Validação autorizada: libera as disciplinas "em validação" só neste processo.
+    settings = dataclasses.replace(settings, data_dir=dados, disciplinas_em_validacao_liberadas=("todas",), **({"local_model": args.modelo} if args.modelo else {}))
     linhas = []
     with TestClient(app_main.create_app(settings=settings, warm_up=False)) as c:
         for ident, d, pergunta, esperado in PERGUNTAS:
