@@ -72,11 +72,12 @@ class Settings:
     supabase_url: str = ""
     supabase_key: str = field(repr=False, default="")
     supabase_min_similarity: float = 0.5
-    # Corte absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Padrão = o mesmo 0,5
-    # que o livro já usa com o mesmo embedding; calibrar no servidor com
-    # `python eval/diagnostico.py calibrar`. Valor negativo desliga o corte E a penalidade de hub
+    # Piso absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Quem separa pergunta
+    # fora do tema é o destaque sobre a mediana (acervo/retrieval.py); o piso de 0,45 só descarta o
+    # que é distante de tudo. Com 0,5, perguntas legítimas de SD (Moore/Mealy, 0,50) e de PAA (PD)
+    # ficavam sem material: veja `python eval/relevancia.py`. Valor negativo desliga o corte E a penalidade de hub
     # (a busca volta a ser exatamente a de antes). A penalidade de hub só vale com o corte ligado.
-    acervo_min_similarity: float = 0.5
+    acervo_min_similarity: float = 0.45
     acervo_hub_penalty: bool = True
 
     rate_limit_per_10min: int = 300
@@ -113,7 +114,7 @@ def load_settings() -> Settings:
         supabase_url=_env("SUPABASE_URL").rstrip("/"),
         supabase_key=_env("SUPABASE_KEY"),
         supabase_min_similarity=_float("SUPABASE_SIMILARIDADE_MINIMA", 0.5),
-        acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.5),
+        acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.45),
         acervo_hub_penalty=_env("ACERVO_PENALIDADE_HUB", "1") not in ("0", "false", "nao", "não"),
         rate_limit_per_10min=_int("TUTORON_LIMITE_PERGUNTAS_10MIN", 300),
         data_dir=Path(data_dir) if data_dir else ROOT_DIR / "dados",
