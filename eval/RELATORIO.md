@@ -95,17 +95,16 @@ Leva `eval/prompt_candidato.py` para produção e troca os rótulos [P1]/[L1] po
 
 ## O que o usuário roda no servidor
 
-Com uma chave Gemini separada ou fora do horário de uso, o Ollama ligado com `bge-m3` e o PR #21 (para os passos 3 e 4, também os #23 e #24):
+O roteiro exato está em [`rodar_servidor.md`](rodar_servidor.md). Ele roda numa worktree separada da pasta do site, em duas rodadas com pastas de resultado próprias:
 
-1. `python eval/matriz.py gerar --perguntas A1,A2,A3`. É a rodada rápida, só com as 3 perguntas do aluno.
-2. `python eval/matriz.py julgar`, depois `python eval/matriz.py julgar --juiz gemini-3.7-flash` (segundo juiz, para medir a autopreferência), depois `python eval/matriz.py relatorio`.
-3. `python -m acervo indexar --embeddings`, para pôr os 5 materiais de PD no índice.
-4. `python eval/diagnostico.py calibrar`. Ajuste `ACERVO_SIMILARIDADE_MINIMA` no `.env` com o valor sugerido.
-5. Se a rodada rápida der certo, repita os passos 1 e 2 sem `--perguntas`, para a matriz completa.
-6. `python eval/folha_cega.py`. Envie `results/folha_cega.md` ao aluno; o `folha_cega_mapa.json` fica com a equipe.
-7. Devolva a pasta `eval/results/`.
-
-Detalhes no [`README.md`](README.md).
+1. **Rodada 1, baseline (só o #21).**
+   - `preflight.py --rodada 1` confere chave, `bge-m3`, índice com vetores, e que o #23/#24 **não** estão no checkout. Também estima chamadas e tempo.
+   - Depois: `gerar` nas 3 perguntas do aluno, `julgar` com dois juízes, `relatorio` e `folha_cega`, tudo em `eval/results/rodada1`.
+2. **Rodada 2, integração (#21 + #23 + #24).**
+   - Preflight, depois **backup do índice** com data, `python -m acervo indexar --embeddings` e `preflight --pos-indexacao`.
+   - `diagnostico.py calibrar`, com o limiar passado por variável de ambiente para não mexer no site.
+   - `gerar` só de `atual_rag` e `novo_rag`, com `--incluir-nao-revisados`, depois `julgar` com os mesmos dois juízes e `relatorio`, em `eval/results/rodada2`.
+3. **Decisão.** `python eval/decidir.py --rodada1 ... --rodada2 ...` imprime as decisões (a)–(d) da tabela abaixo e grava `eval/results/decisao.md`.
 
 ## O que depende da matriz, e o que muda conforme o resultado
 

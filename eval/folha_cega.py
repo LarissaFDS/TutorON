@@ -84,13 +84,14 @@ def main() -> None:
     parser.add_argument("--papel", default="forte", help="forte ou lite")
     parser.add_argument("--semente", type=int, help="semente do sorteio (para reproduzir a mesma folha)")
     parser.add_argument("--manter-citacoes", action="store_true")
+    parser.add_argument("--saida", help="pasta da rodada (padrão: eval/results), ex.: eval/results/rodada1")
     args = parser.parse_args()
-    folha, mapa = montar(matriz.ler_jsonl(matriz.RESULTS / "respostas.jsonl"), args.papel, args.semente,
-                         args.manter_citacoes)
-    matriz.RESULTS.mkdir(parents=True, exist_ok=True)
-    (matriz.RESULTS / "folha_cega.md").write_text(folha, encoding="utf-8")
-    (matriz.RESULTS / "folha_cega_mapa.json").write_text(json.dumps(mapa, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"Folha: {matriz.RESULTS / 'folha_cega.md'}\nMapa (não enviar ao aluno): {matriz.RESULTS / 'folha_cega_mapa.json'}")
+    pasta = matriz.usar_saida(args.saida)
+    folha, mapa = montar(matriz.ler_jsonl(pasta / "respostas.jsonl"), args.papel, args.semente, args.manter_citacoes)
+    pasta.mkdir(parents=True, exist_ok=True)
+    (pasta / "folha_cega.md").write_text(folha, encoding="utf-8")
+    (pasta / "folha_cega_mapa.json").write_text(json.dumps(mapa, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Folha: {pasta / 'folha_cega.md'}\nMapa (não enviar ao aluno): {pasta / 'folha_cega_mapa.json'}")
 
 
 if __name__ == "__main__":

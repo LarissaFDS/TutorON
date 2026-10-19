@@ -8,6 +8,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+import decidir  # noqa: E402
 import matriz  # noqa: E402
 from backend.llm import AllUnavailable, Model, Result  # noqa: E402
 from backend.rag import Trecho  # noqa: E402
@@ -180,3 +181,104 @@ def test_braco_atual_da_matriz_fica_congelado_no_prompt_de_12_10():
     p = prompt_anterior.prompt("Q?", [Trecho("P1", "acervo", "Lista", "texto", "PAA_L5.pdf | página(s): 4")])
     assert "[P1] Lista — PAA_L5.pdf" in p
     assert "Nenhum trecho do material" in prompt_anterior.prompt("Q?", [])
+
+
+def test_saida_separa_as_rodadas(tmp_path, monkeypatch):
+    monkeypatch.setattr(matriz, "RESULTS", matriz.RESULTS)  # restaura depois do teste
+    q = matriz.perguntas("A1")[0]
+    for rodada, nota in (("rodada1", 3), ("rodada2", 5)):
+        pasta = matriz.usar_saida(str(tmp_path / rodada))
+        pasta.mkdir()
+        (pasta / "notas.jsonl").write_text(json.dumps(_nota(q, "forte", "atual_rag", nota)), encoding="utf-8")
+        matriz.relatorio(None)
+    r1 = json.loads((tmp_path / "rodada1" / "resumo.json").read_text(encoding="utf-8"))
+    r2 = json.loads((tmp_path / "rodada2" / "resumo.json").read_text(encoding="utf-8"))
+    assert r1["notas"]["juiz-neutro"] == {f"{q['id']}|forte|atual_rag": 3.0}
+    assert r2["medias"]["forte|atual_rag"] == 5.0
+    assert not (tmp_path / "relatorio.md").exists()
+
+
+# ---------------------------------------------------------------------- decidir.py e preflight.py
+
+def _rodada(tmp_path, monkeypatch, nome, notas_por_braco, criterio=None, juizes=("juiz-neutro",)):
+    """Resumo sintético pelo próprio relatorio(): notas_por_braco = {(papel, condicao): nota}."""
+    monkeypatch.setattr(matriz, "RESULTS", tmp_path / nome)
+    (tmp_path / nome).mkdir()
+    linhas = []
+    for q in matriz.perguntas("A1,A2,A3"):
+        for (papel, condicao), nota in notas_por_braco.items():
+            for juiz in juizes:
+                n = _nota(q, papel, condicao, nota, juiz=juiz)
+                if criterio and (papel, condicao) == criterio[0]:
+                    n["notas"][criterio[1]]["nota"] = criterio[2]
+                linhas.append(n)
+    (tmp_path / nome / "notas.jsonl").write_text("\n".join(json.dumps(x) for x in linhas), encoding="utf-8")
+    return matriz.relatorio(None)
+
+
+BASE = {("forte", "generico"): 4, ("forte", "atual_sem_rag"): 4, ("forte", "atual_rag"): 4, ("forte", "novo_rag"): 4,
+        ("lite", "generico"): 4, ("lite", "atual_sem_rag"): 4, ("lite", "atual_rag"): 4, ("lite", "novo_rag"): 4}
+
+
+def test_decidir_aprova_prompt_so_se_todos_os_modelos_passam(tmp_path, monkeypatch):
+    r1 = _rodada(tmp_path, monkeypatch, "ok", BASE)
+    assert decidir.decidir(r1)["a"]["aprovado"] is True
+    # Um critério b = 3 numa original do lite basta para manter o #25 em rascunho.
+    r1 = _rodada(tmp_path, monkeypatch, "b3", BASE, criterio=(("lite", "novo_rag"), "b", 3))
+    d = decidir.decidir(r1)
+    assert d["a"]["aprovado"] is False and d["a"]["por_papel"]["forte"]["ok"] is True
+    # novo_rag abaixo do genérico também reprova.
+    r1 = _rodada(tmp_path, monkeypatch, "abaixo", {**BASE, ("forte", "generico"): 5})
+    assert decidir.decidir(r1)["a"]["aprovado"] is False
+
+
+def test_decidir_roteamento_usa_o_braco_que_vai_a_producao_e_limiar_0_5(tmp_path, monkeypatch):
+    assert decidir.LIMIAR_ROTEAMENTO == 0.5
+    # Prompt reprovado (novo < genérico) -> roteamento olha atual_rag: forte - lite = 1.0.
+    r1 = _rodada(tmp_path, monkeypatch, "r1", {**BASE, ("forte", "generico"): 5, ("lite", "atual_rag"): 3})
+    b = decidir.decidir(r1)["b"]
+    assert b == {"braco": "atual_rag", "dif": 1.0, "abrir_pr": True}
+    # Prompt aprovado -> olha novo_rag, onde forte e lite empatam.
+    r1 = _rodada(tmp_path, monkeypatch, "r2", {**BASE, ("lite", "atual_rag"): 3})
+    assert decidir.decidir(r1)["b"] == {"braco": "novo_rag", "dif": 0.0, "abrir_pr": False}
+
+
+def test_decidir_h4_no_limiar_menos_0_3(tmp_path, monkeypatch):
+    assert decidir.LIMIAR_H4 == -0.3
+    sintetico = {"modelos": {"forte": "x", "lite": "y"},
+                 "efeitos": {"forte: RAG (com - sem), prompt atual": {"dif": -0.3},
+                             "lite: RAG (com - sem), prompt atual": {"dif": 0.5}}}
+    assert decidir.h4(sintetico)["confirmada"] is True
+    sintetico["efeitos"]["forte: RAG (com - sem), prompt atual"]["dif"] = -0.29
+    assert decidir.h4(sintetico)["confirmada"] is False
+    assert decidir.h4({"modelos": {"forte": "x"}, "efeitos": {}})["confirmada"] is None
+
+
+def test_decidir_curadoria_e_pareada_com_o_mesmo_juiz(tmp_path, monkeypatch):
+    r1 = _rodada(tmp_path, monkeypatch, "rodada1", BASE, juizes=("juiz-neutro", "outro"))
+    r2 = _rodada(tmp_path, monkeypatch, "rodada2",
+                 {("forte", "atual_rag"): 5, ("forte", "novo_rag"): 4, ("lite", "atual_rag"): 3, ("lite", "novo_rag"): 4},
+                 juizes=("outro",))
+    d = decidir.decidir(r1, r2)
+    assert d["d"]["juiz"] == "outro"  # o juiz da rodada 1 não julgou a rodada 2
+    assert d["d"]["bracos"]["forte|atual_rag"] == {"dif": 1.0, "n": 3, "vence": 3, "perde": 0, "efeito": "ajudou"}
+    assert d["d"]["bracos"]["lite|atual_rag"]["efeito"] == "piorou"
+    assert d["d"]["bracos"]["forte|novo_rag"]["efeito"] == "sem efeito claro"
+    assert d["a_curadoria"]["por_papel"]["forte"]["iguala_ou_supera"] is True
+    texto = decidir.texto(d)
+    assert "(d) Efeito da curadoria" in texto and "heurísticos" in texto
+
+
+def test_decidir_sem_juiz_comum_nao_inventa_efeito(tmp_path, monkeypatch):
+    r1 = _rodada(tmp_path, monkeypatch, "rodada1", BASE, juizes=("a",))
+    r2 = _rodada(tmp_path, monkeypatch, "rodada2", {("forte", "atual_rag"): 5}, juizes=("b",))
+    d = decidir.decidir(r1, r2)
+    assert d["d"] == {"juiz": None, "bracos": {}} and d["a_curadoria"]["aprovado"] is None
+
+
+def test_preflight_estima_chamadas_das_duas_rodadas():
+    import preflight
+
+    assert preflight.estimar(3, ["generico", "atual_sem_rag", "atual_rag", "novo_sem_rag", "novo_rag"], 2, 4)[
+        "chamadas"] == 90
+    assert preflight.estimar(3, ["atual_rag", "novo_rag"], 2, 4)["chamadas"] == 36

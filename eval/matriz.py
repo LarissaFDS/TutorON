@@ -9,6 +9,9 @@ Etapas (cada uma retoma de onde parou; rodar de novo só faz o que falta):
     python eval/matriz.py julgar     # notas do juiz -> eval/results/notas.jsonl
     python eval/matriz.py relatorio  # eval/results/relatorio.md e resumo.json
 
+Com --saida eval/results/rodada1 (antes da etapa), cada rodada fica na sua pasta e uma não
+reaproveita respostas ou trechos recuperados da outra.
+
 Precisa de GEMINI_API_KEY no .env. Cada pergunta gera 10 respostas (2 modelos x 5 braços) e 10
 julgamentos: 300 chamadas para 15 perguntas. Use outra chave, ou rode fora do horário de uso,
 para não esgotar a cota do site. Um 429 aqui espera e tenta de novo no MESMO modelo: a matriz
@@ -19,6 +22,7 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 import statistics
 import sys
 import time
@@ -116,6 +120,9 @@ async def gerar_uma(llm: LLM, m: Model, sistema: str | None, prompt: str, espera
 
 
 async def gerar(args) -> None:
+    if args.incluir_nao_revisados:
+        # Lido por load_settings no #24; sem o #24 no checkout, não há material não revisado e nada muda.
+        os.environ["ACERVO_USAR_NAO_REVISADOS"] = "1"
     settings = load_settings()
     llm = LLM(settings)
     modelos = {"forte": modelo(args.forte), "lite": modelo(args.lite)}
@@ -144,6 +151,7 @@ async def gerar(args) -> None:
                                "busca": busca if condicao.endswith("_rag") and "sem" not in condicao else None,
                                "prompt": {"generico": None, "atual_sem_rag": prompt_anterior.VERSAO,
                                           "atual_rag": prompt_anterior.VERSAO}.get(condicao, "candidato (eval)"),
+                               "nao_revisados": bool(args.incluir_nao_revisados),
                                "data": datetime.now().isoformat(timespec="seconds"), **r})
                 print(f"    -> {'ok' if r.get('texto') else r.get('erro')} ({r.get('segundos', '-')} s)", flush=True)
                 await asyncio.sleep(args.intervalo)
@@ -381,28 +389,48 @@ def relatorio(args) -> dict:
                    "|---|---|---:|---:|---:|"] + vies_linhas
     RESULTS.mkdir(parents=True, exist_ok=True)
     (RESULTS / "relatorio.md").write_text("\n".join(linhas) + "\n", encoding="utf-8")
+    # Notas por resposta e por juiz: o decidir.py compara rodadas pergunta a pergunta, com o mesmo juiz.
+    por_juiz = defaultdict(dict)
+    for n in todas:
+        por_juiz[n.get("juiz")][f"{n['id']}|{n['papel']}|{n['condicao']}"] = round(nota_resposta(n), 3)
     resumo = {"juiz": juiz, "perguntas_com_nota": com_resposta, "modelos": modelos, "efeitos": efeitos,
-              "criterio_sucesso": criterio_sucesso, "vies_do_juiz": vies}
+              "criterio_sucesso": criterio_sucesso, "vies_do_juiz": vies,
+              "medias": {f"{p}|{c}": media(notas.get((i, p, c)) for i in ids) for p in papeis for c in CONDICOES},
+              "notas": dict(por_juiz),
+              "por_criterio": {"|".join(k): v for k, v in por_criterio.items()}}
     (RESULTS / "resumo.json").write_text(json.dumps(resumo, ensure_ascii=False, indent=2), encoding="utf-8")
     print("\n".join(linhas))
     return resumo
 
 
+def usar_saida(pasta: str | None) -> Path:
+    """Troca a pasta de resultados (relativa ao diretório atual, como qualquer caminho de linha de comando)."""
+    global RESULTS
+    if pasta:
+        RESULTS = Path(pasta).resolve()
+    return RESULTS
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    comum = argparse.ArgumentParser(add_help=False)
+    comum.add_argument("--saida", help="pasta de resultados (padrão: eval/results), ex.: eval/results/rodada1")
     sub = parser.add_subparsers(dest="etapa", required=True)
-    g = sub.add_parser("gerar")
+    g = sub.add_parser("gerar", parents=[comum])
     g.add_argument("--forte", default="gemini-3.8-flash")
     g.add_argument("--lite", default="gemini-3.1-flash-lite")
     g.add_argument("--condicoes", default=",".join(CONDICOES))
     g.add_argument("--perguntas", help="filtro por id, separado por vírgula (ex.: A1,A2)")
     g.add_argument("--intervalo", type=float, default=4.0, help="segundos entre chamadas (poupa a cota)")
-    j = sub.add_parser("julgar")
+    g.add_argument("--incluir-nao-revisados", action="store_true",
+                   help="usa no RAG os materiais da equipe ainda com revisado: false (só para medir o #24)")
+    j = sub.add_parser("julgar", parents=[comum])
     j.add_argument("--juiz", default="gemini-3.8-flash")
     j.add_argument("--intervalo", type=float, default=4.0)
-    rel = sub.add_parser("relatorio")
+    rel = sub.add_parser("relatorio", parents=[comum])
     rel.add_argument("--juiz", help="juiz das tabelas principais (padrão: um que não seja modelo avaliado)")
     args = parser.parse_args()
+    print(f"Resultados em: {usar_saida(args.saida)}")
     inicio = time.monotonic()
     if args.etapa == "gerar":
         asyncio.run(gerar(args))

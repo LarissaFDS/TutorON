@@ -279,6 +279,7 @@ def main() -> None:
                                                  str(ROOT / "06-avaliacao/resultados-mvp.json")])
     sub.add_parser("recuperacao")
     sub.add_parser("calibrar")
+    parser.add_argument("--saida", help="pasta do relatório (padrão: eval/results); vem antes da etapa")
     args = parser.parse_args()
     sys.stdout.reconfigure(encoding="utf-8")
     if args.etapa == "roteamento":
@@ -287,8 +288,9 @@ def main() -> None:
         texto = calibrar()
     else:
         texto = recuperacao()
-    RESULTS.mkdir(parents=True, exist_ok=True)
-    (RESULTS / f"diagnostico-{args.etapa}.md").write_text(texto, encoding="utf-8")
+    pasta = Path(args.saida).resolve() if args.saida else RESULTS
+    pasta.mkdir(parents=True, exist_ok=True)
+    (pasta / f"diagnostico-{args.etapa}.md").write_text(texto, encoding="utf-8")
     print(texto)
 
 
