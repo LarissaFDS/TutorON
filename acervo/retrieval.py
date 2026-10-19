@@ -14,7 +14,32 @@ STOP = set('a o e de da do das dos um uma que em no na os as para por com se ao 
 
 
 def tokens(text):
-    return [t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
+    return ([t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
+            + estruturais(text))
+
+
+def estruturais(text):
+    """Tokens de notação booleana que as palavras soltas perdem (números e letras de um caractere):
+    a lista de mintermos, maxtermos ou irrelevâncias ("Σm(0,1,3,5,7)" → "m:0,1,3,5,7"), as variáveis
+    de uma função ("S(A,B,C)" → "vars:a,b,c") e os termos com negação ("A'B'" → "termo:a'b'").
+    Lidos no texto original: variáveis booleanas vêm em maiúsculas, o que separa "S(A,B)" de
+    "d(a,c)", e a lista exige o prefixo m/M/d, o que separa mintermos de decimais como "1,40".
+    Só pontuam quando pergunta e trecho os compartilham; texto sem essa notação não muda."""
+    texto = text.replace('’', "'").replace('′', "'")
+    achados = []
+    for produto, letra, lista in re.findall(r'(?<![A-Za-z])([Σ∑Π∏]?)\s*([mMd])\s*\(\s*(\d+(?:\s*,\s*\d+)+)\s*\)', texto):
+        if letra == 'd':
+            tipo = 'irrelevantes'
+        elif letra == 'M' or produto in ('Π', '∏'):
+            tipo = 'maxtermos'
+        else:
+            tipo = 'mintermos'
+        achados.append(f'{tipo}:' + re.sub(r'\s+', '', lista))
+    achados += ['vars:' + re.sub(r'\s+', '', v).lower() for v in
+                re.findall(r'(?<![A-Za-z])[A-Z]\s*\(\s*([A-Z](?:\s*,\s*[A-Z])+)\s*\)', texto)]
+    achados += ['termo:' + t.lower() for t in re.findall(r"(?<![A-Za-z0-9'])((?:[A-Z]'?){1,4})(?![A-Za-z0-9'])", texto)
+                if "'" in t]
+    return achados
 
 
 def embed_document(text, model):
@@ -89,6 +114,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, itens=ITENS, in
         for exact in ['asterisco', 'algoritmo x', 'composto']:
             if exact in searchable(question) and exact in searchable(item['texto']):
                 score += 5
+        # Mesma lista de mintermos ou mesmo termo booleano: indica a mesma questão, como as frases acima.
+        score += 5 * len({t for t in query if ':' in t} & set(word_list))
         scores.append(score)
     semantic_scores = []
     mode = 'lexical'
