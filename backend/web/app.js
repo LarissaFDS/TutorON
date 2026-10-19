@@ -77,9 +77,10 @@
     return node;
   }
 
-  function sugestoes(boxId, textareaId) {
+  function sugestoes(boxId, textareaId, lista) {
     var box = $(boxId);
-    SUGESTOES.forEach(function (s) {
+    box.replaceChildren();
+    (lista || SUGESTOES).forEach(function (s) {
       var b = el('button', 'sugestao', s);
       b.type = 'button';
       b.addEventListener('click', function () { $(textareaId).value = s; $(textareaId).focus(); });
@@ -116,6 +117,40 @@
 
   // ================================================================== MODO TUTOR
   sugestoes('sugestoes-tutor', 'pergunta');
+
+  /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado.
+   * Sem resposta do servidor, o seletor fica oculto e vale a disciplina padrão (PAA). */
+  var disciplinas = {};
+  function escolherDisciplina(id) {
+    var d = disciplinas[id];
+    if (!d) return;
+    $('disciplina').value = id;
+    sugestoes('sugestoes-tutor', 'pergunta', d.exemplos.length ? d.exemplos : null);
+    if (d.exemplos.length) $('pergunta').placeholder = 'Ex.: ' + d.exemplos[0];
+  }
+  (async function carregarDisciplinas() {
+    try {
+      var res = await fetch('/api/disciplinas', { cache: 'no-store' });
+      if (!res.ok) return;
+      var dados = await res.json();
+      dados.disciplinas.forEach(function (d) {
+        disciplinas[d.id] = d;
+        var nome = d.nome + ' (' + d.sigla + ')' + (d.situacao && d.situacao !== 'MVP' ? ' · ' + d.situacao : '');
+        var opcao = el('option', null, nome);
+        opcao.value = d.id;
+        $('disciplina').append(opcao);
+      });
+      $('disciplina-campo').hidden = dados.disciplinas.length < 2;
+      var pedida = new URL(location.href).searchParams.get('disciplina');
+      escolherDisciplina(disciplinas[pedida] ? pedida : dados.padrao);
+    } catch (e) { /* servidor antigo ou fora do ar: segue com a padrão */ }
+  })();
+  $('disciplina').addEventListener('change', function () {
+    escolherDisciplina($('disciplina').value);
+    var url = new URL(location.href);
+    url.searchParams.set('disciplina', $('disciplina').value);
+    history.replaceState(null, '', url);
+  });
 
   function fontesDetalhe(fontes) {
     var d = el('details', 'fontes disclosure');
@@ -208,7 +243,7 @@
 
   var enviando = false;
 
-  async function perguntar(pergunta, contexto, retomarId) {
+  async function perguntar(pergunta, contexto, retomarId, disciplina) {
     guardarAtualNoHistorico();
     var registro = { pergunta: pergunta, texto: '', meta: '', fontes: [], voto: null, pronta: false };
     atual = registro;
@@ -235,13 +270,13 @@
         tarefa = { id: retomarId };
       } else {
         try {
-          tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contexto || null });
+          tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contexto || null, disciplina: disciplina || null });
         } catch (e) {
           setStatus(meta, e.message, 'error');
           return false;
         }
       }
-      guardarPendente({ tipo: 'tutor', id: tarefa.id, pergunta: pergunta, contexto: contexto || '' });
+      guardarPendente({ tipo: 'tutor', id: tarefa.id, pergunta: pergunta, contexto: contexto || '', disciplina: disciplina || '' });
       final = await acompanhar(tarefa.id, function (t) {
         if (t.texto !== desenhado) {
           desenhado = t.texto;
@@ -287,10 +322,11 @@
     $('enviar').disabled = true;
     setStatus($('status-tutor'), '');
     var contexto = $('contexto').value.trim();
+    var disciplina = $('disciplina').value;
     $('pergunta').value = '';
     $('contexto').value = '';
     try {
-      var ok = await perguntar(pergunta, contexto);
+      var ok = await perguntar(pergunta, contexto, null, disciplina);
       if (!ok) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
     } finally {
       enviando = false;
@@ -302,7 +338,7 @@
     enviando = true;
     gerando++;
     $('enviar').disabled = true;
-    try { await perguntar(p.pergunta, p.contexto, p.id); } finally {
+    try { await perguntar(p.pergunta, p.contexto, p.id, p.disciplina); } finally {
       enviando = false;
       gerando--;
       $('enviar').disabled = false;

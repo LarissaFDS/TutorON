@@ -1,8 +1,10 @@
 """Recuperação de contexto para o TutorON.
 
+Cada disciplina tem o próprio acervo (cadastro em ``disciplinas/disciplinas.json``): a busca
+só olha o acervo da disciplina escolhida, então material de uma nunca aparece na outra.
 Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
-1. Acervo curado local (provas, listas e resoluções de PAA em ``04-rag/indice.json``),
+1. Acervo curado local (de PAA: provas, listas e resoluções em ``04-rag/indice.json``),
    busca híbrida léxica + semântica. Só entram blocos de confiança média/alta e, com o
    bge-m3 ligado, com similaridade acima de ACERVO_SIMILARIDADE_MINIMA (descontado o "hub").
    Se nada passar, a lista vem vazia e a resposta não finge ter material.
@@ -10,7 +12,8 @@ Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 2. Livro-texto de PAA no Supabase/pgvector (``match_chunks``), indexado por
    ``backend/ingest.py``. Complementar: entra depois do acervo, com menos trechos
    e só quando bem parecido com a pergunta. Sem SUPABASE_URL/KEY ou fora do ar,
-   a resposta segue só com o acervo local.
+   a resposta segue só com o acervo local. Só entra nas disciplinas com ``livro_supabase``
+   no cadastro: a tabela não separa disciplinas, e hoje só tem o livro de PAA.
 
 Cada trecho recebe um rótulo curto ([P1], [L1]…) que o modelo usa para citar.
 """
@@ -21,6 +24,8 @@ import logging
 from dataclasses import dataclass
 
 import httpx
+
+from acervo.disciplinas import Disciplina, obter
 
 from .config import Settings
 
@@ -56,19 +61,22 @@ def _cortar(texto: str) -> str:
     return texto if len(texto) <= MAX_CHARS_TRECHO else texto[:MAX_CHARS_TRECHO].rsplit("\n", 1)[0] + "\n[…]"
 
 
-def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None = None) -> list[Trecho]:
+def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None = None,
+            disciplina: Disciplina | None = None) -> list[Trecho]:
     from acervo.retrieval import search
 
+    disciplina = disciplina or obter()
     corte = settings.acervo_min_similarity if settings else None
     corte = corte if corte is not None and corte >= 0 else None
     # Corte negativo = busca exatamente como antes do #23: sem corte e sem penalidade de hub.
     itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor, min_similarity=corte,
-                   hub_penalty=bool(corte is not None and settings.acervo_hub_penalty))
+                   hub_penalty=bool(corte is not None and settings.acervo_hub_penalty),
+                   itens=disciplina.itens, indice=disciplina.indice)
     trechos = []
     for n, item in enumerate(itens, 1):
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
         tipo = TIPOS.get(item.get("tipo", ""), "Material da disciplina")
-        titulo = tipo if item.get("tipo") == "material_equipe" else f"{tipo} de PAA"
+        titulo = tipo if item.get("tipo") == "material_equipe" else f"{tipo} de {disciplina.sigla}"
         trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=titulo,
                               texto=_cortar(item["texto"]), referencia=fonte))
     return trechos
@@ -100,11 +108,14 @@ async def _livro(client: httpx.AsyncClient, settings: Settings, vetor: list[floa
     return trechos
 
 
-async def recuperar(pergunta: str, llm, settings: Settings) -> list[Trecho]:
-    """Busca acervo e livro em paralelo. Nunca lança: sem contexto, a lista vem vazia."""
+async def recuperar(pergunta: str, llm, settings: Settings, disciplina: Disciplina | None = None) -> list[Trecho]:
+    """Busca acervo e livro em paralelo. Nunca lança: sem contexto, a lista vem vazia.
+    Sem disciplina, usa a padrão (PAA), como antes do cadastro de disciplinas."""
+    disciplina = disciplina or obter()
     vetor = await llm.embed(pergunta)
-    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor, settings)
-    tarefa_livro = _livro(llm.client, settings, vetor) if vetor else asyncio.sleep(0, result=[])
+    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor, settings, disciplina)
+    usar_livro = vetor and disciplina.livro_supabase
+    tarefa_livro = _livro(llm.client, settings, vetor) if usar_livro else asyncio.sleep(0, result=[])
     acervo, livro = await asyncio.gather(tarefa_acervo, tarefa_livro, return_exceptions=True)
     trechos: list[Trecho] = []
     for parte, nome in ((acervo, "acervo"), (livro, "livro")):

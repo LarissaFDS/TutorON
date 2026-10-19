@@ -1,0 +1,120 @@
+{
+ "Como eu explico o que esse algoritmo faz e provo a corretude dele?\n\nprocedure ALGORITMO X(vetor A[1..n], inicio, fim)\n  if inicio = fim then return A[inicio]\n  meio ← inicio + (fim − inicio)/2\n  a ← X(A, inicio, meio)\n  b ← X(A, meio + 1, fim)\n  if a < b then return b else return a\nend procedure": [
+  "c01",
+  "c02",
+  "1a81ca283132-q4-4",
+  "d455baef2cdf-q9-9"
+ ],
+ "Quantos asteriscos são impressos em uma chamada de ASTERISCO(n)? O professor pede para mostrar a recorrência.\n\nprocedure ASTERISCO(n)\n  if n > 0 then\n    ASTERISCO(n − 1)\n    for i ← 1 → n do imprima \"*\"\n    ASTERISCO(n − 1)\n  end if\nend procedure": [
+  "c05",
+  "d455baef2cdf-q3-3",
+  "f38bb8142136-q3-3",
+  "1a81ca283132-q5-5"
+ ],
+ "Por que o algoritmo força bruta do problema COMPOSTO (testar os divisores de 2 até ⌊n/2⌋) não é considerado polinomial, se ele faz só O(n) divisões?": [
+  "c08",
+  "1a81ca283132-q8-8",
+  "c01",
+  "a177bf5bc3c7-q2-2"
+ ],
+ "Defina as classes P, NP e NP-completo.": [
+  "c09",
+  "f38bb8142136-q3-3",
+  "f38bb8142136-q8-8",
+  "f38bb8142136-q9-9"
+ ],
+ "Se eu somar 1 ao peso de cada aresta de um grafo conexo, a árvore geradora mínima continua mínima? E os caminhos mínimos? Justifique com um contraexemplo numérico.": [
+  "a177bf5bc3c7-q1-1",
+  "a177bf5bc3c7-q2-2",
+  "1a81ca283132-q9-9",
+  "f38bb8142136-q6-6"
+ ],
+ "Como resolver a subsequência contígua de soma máxima em tempo linear, seguindo a convenção da Lista 5? Mostre a recorrência e os resultados para [5,15,-30,10,-5,40,10] e [-5,-2,-8].": [
+  "1a81ca283132-q4-4",
+  "1a81ca283132-q6-6",
+  "1a81ca283132-q2-2",
+  "d455baef2cdf-q2-2"
+ ],
+ "Maria ouve n−1 números distintos de 1 a n. Como encontrar o número faltante usando O(1) de memória? Explique tempo e possíveis problemas de overflow.": [
+  "97254bb4a1b8-q1-1",
+  "d455baef2cdf-q6-6",
+  "ef6d051e4b8c-q6-6",
+  "70d6475b28bf-q1-1"
+ ],
+ "Como usar backtracking para encontrar todos os quadrados mágicos de ordem 3 com os números distintos de 1 a 9? Explique os testes e as podas.": [
+  "70d6475b28bf-q1-1",
+  "d455baef2cdf-q6-6",
+  "c08",
+  "97254bb4a1b8-q1-1"
+ ],
+ "Como ordenar a pilha de panquecas de tamanhos distintos usando inversões de prefixo? Diferencie quantidade de inversões e custo total de movimentar elementos.": [
+  "d455baef2cdf-q1-1",
+  "d455baef2cdf-q7-7",
+  "c02",
+  "a177bf5bc3c7-q3-3"
+ ],
+ "Me perdi nos asteriscos: por que não é só n vezes? Tem duas chamadas com n menos 1 e um laço que imprime n. Pode montar a conta e conferir n=3?": [
+  "c05",
+  "70d6475b28bf-q7-7",
+  "a177bf5bc3c7-q2-2",
+  "c06"
+ ],
+ "Se testar divisores faz só O(n) testes, por que o professor fala que COMPOSTO não ficou polinomial? O que muda quando a entrada está escrita em binário?": [
+  "c08",
+  "7b4da6a8adf7-q7-7",
+  "a177bf5bc3c7-q2-2",
+  "70d6475b28bf-q4-4"
+ ],
+ "Qual será a data, a sala e o conteúdo exato da próxima prova de PAA em outubro de 2026?": [
+  "7b4da6a8adf7-q6-6",
+  "97254bb4a1b8-q6-6"
+ ],
+ "Num triângulo de números com as linhas [2], [3, 4], [6, 5, 7] e [4, 1, 8, 3], qual é a menor soma de um caminho do topo até a base, descendo sempre para um dos dois vizinhos de baixo? Mostre a tabela da programação dinâmica.": [
+  "1a81ca283132-q1-1",
+  "1a81ca283132-q2-2",
+  "70d6475b28bf-q1-1",
+  "d455baef2cdf-q1-1"
+ ],
+ "Resolva T(n) = T(n-1) + 2n, com T(1) = 3, pelo método da iteração e dê a fórmula fechada exata.": [
+  "c06",
+  "7b4da6a8adf7-q2-2",
+  "7b4da6a8adf7-q6-6",
+  "c05"
+ ],
+ "Quantas vezes a palavra OI é impressa por: para i de 1 até n, para j de 1 até i, para k de 1 até j: imprima OI? Dê a fórmula fechada e confira para n = 3.": [
+  "ef6d051e4b8c-q8-8",
+  "c05",
+  "c06",
+  "70d6475b28bf-q7-7"
+ ],
+ "Quantas multiplicações a exponenciação rápida por divisão e conquista faz para calcular a^13? Mostre cada chamada.": [
+  "d455baef2cdf-q3-3",
+  "c01",
+  "c05",
+  "d455baef2cdf-q10-10"
+ ],
+ "Dados os intervalos [1,4], [3,5], [0,6], [5,7], [3,9], [5,9], [6,10], [8,11], [8,12], [2,14] e [12,16], qual é o maior número de intervalos compatíveis (sem sobreposição) e quais o algoritmo guloso escolhe? Por que ordenar pelo término?": [
+  "a177bf5bc3c7-q3-3",
+  "1a81ca283132-q6-6",
+  "c02",
+  "1a81ca283132-q4-4"
+ ],
+ "Se multiplicarmos por 2 o peso de todas as arestas de um grafo, a árvore geradora mínima muda? E se elevarmos cada peso ao quadrado (todos os pesos positivos)? O que acontece com os caminhos mínimos nos dois casos?": [
+  "a177bf5bc3c7-q1-1",
+  "a177bf5bc3c7-q2-2",
+  "f38bb8142136-q6-6",
+  "1a81ca283132-q7-7"
+ ],
+ "Um algoritmo testa se n é primo tentando dividir n por todos os inteiros de 2 até a raiz quadrada de n. Esse algoritmo é polinomial? Explique em função do tamanho da entrada.": [
+  "c09",
+  "f38bb8142136-q8-8",
+  "97254bb4a1b8-q1-1",
+  "1a81ca283132-q7-7"
+ ],
+ "O Teorema Mestre se aplica a T(n) = 2T(n/2) + n/log n? Se não se aplicar, resolva por outro método.": [
+  "d455baef2cdf-q5-5",
+  "d455baef2cdf-q10-10",
+  "d455baef2cdf-q7-7",
+  "c06"
+ ]
+}

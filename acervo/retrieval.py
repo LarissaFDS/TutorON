@@ -7,11 +7,39 @@ from .common import ROOT, progress, read_json, write_json
 from .curate import searchable
 from . import models
 
+# Acervo de PAA; as outras disciplinas passam os próprios caminhos (acervo/disciplinas.py).
+ITENS = '02-acervo/itens.json'
+INDICE = '04-rag/indice.json'
 STOP = set('a o e de da do das dos um uma que em no na os as para por com se ao ou qual como quais explique mostre prova professor algoritmo problema'.split())
 
 
 def tokens(text):
-    return [t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
+    return ([t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
+            + estruturais(text))
+
+
+def estruturais(text):
+    """Tokens de notação booleana que as palavras soltas perdem (números e letras de um caractere):
+    a lista de mintermos, maxtermos ou irrelevâncias ("Σm(0,1,3,5,7)" → "m:0,1,3,5,7"), as variáveis
+    de uma função ("S(A,B,C)" → "vars:a,b,c") e os termos com negação ("A'B'" → "termo:a'b'").
+    Lidos no texto original: variáveis booleanas vêm em maiúsculas, o que separa "S(A,B)" de
+    "d(a,c)", e a lista exige o prefixo m/M/d, o que separa mintermos de decimais como "1,40".
+    Só pontuam quando pergunta e trecho os compartilham; texto sem essa notação não muda."""
+    texto = text.replace('’', "'").replace('′', "'")
+    achados = []
+    for produto, letra, lista in re.findall(r'(?<![A-Za-z])([Σ∑Π∏]?)\s*([mMd])\s*\(\s*(\d+(?:\s*,\s*\d+)+)\s*\)', texto):
+        if letra == 'd':
+            tipo = 'irrelevantes'
+        elif letra == 'M' or produto in ('Π', '∏'):
+            tipo = 'maxtermos'
+        else:
+            tipo = 'mintermos'
+        achados.append(f'{tipo}:' + re.sub(r'\s+', '', lista))
+    achados += ['vars:' + re.sub(r'\s+', '', v).lower() for v in
+                re.findall(r'(?<![A-Za-z])[A-Z]\s*\(\s*([A-Z](?:\s*,\s*[A-Z])+)\s*\)', texto)]
+    achados += ['termo:' + t.lower() for t in re.findall(r"(?<![A-Za-z0-9'])((?:[A-Z]'?){1,4})(?![A-Za-z0-9'])", texto)
+                if "'" in t]
+    return achados
 
 
 def usar_nao_revisados():
@@ -30,12 +58,12 @@ def embed_document(text, model):
     return [v / norm for v in average]
 
 
-def build(root=ROOT, embed=False):
-    items = read_json(root / '02-acervo/itens.json', [])
+def build(root=ROOT, embed=False, itens=ITENS, indice=INDICE):
+    items = read_json(root / itens, [])
     chunks = [r for r in items if r['confiabilidade'] in ('media', 'alta') and r['qualidade_ocr'] != 'ilegivel'
               and r['assunto'] != 'assunto_incerto' and r['segmentacao'] != 'pendente']
     model, error, vectors = os.environ.get('TUTORON_EMBED_MODEL', 'bge-m3'), None, []
-    previous = read_json(root / '04-rag/indice.json', {})
+    previous = read_json(root / indice, {})
     reusable = {}
     if previous.get('embedding_model') == model and previous.get('embedding_janelas_caracteres') == 1000:
         reusable = {i['sha256']: v for i, v in zip(previous.get('chunks', []), previous.get('vectors', []))}
@@ -60,8 +88,9 @@ def build(root=ROOT, embed=False):
     index = {'versao': 1, 'modo': 'hibrido' if vectors else 'lexical',
              'embedding_model': model if vectors else None, 'erro_embeddings': error,
              'embedding_janelas_caracteres': 1000, 'chunks': chunks, 'vectors': vectors}
-    write_json(root / '04-rag/indice.json', index)
-    progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Somente confiança média/alta. Não verificados, baixa confiança, ilegíveis e segmentação incerta excluídos.', root)
+    write_json(root / indice, index)
+    if indice == INDICE:
+        progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Somente confiança média/alta. Não verificados, baixa confiança, ilegíveis e segmentação incerta excluídos.', root)
     return index
 
 
@@ -96,18 +125,19 @@ def hub_scores(vectors, cache_key=None):
     return hubs
 
 
-def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=None, hub_penalty=False):
+def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=None, hub_penalty=False,
+           itens=ITENS, indice=INDICE):
     """Busca híbrida (BM25 + bge-m3, fundidos por RRF).
 
     min_similarity: com embeddings, só entram blocos com similaridade (já descontada a de hub, se
     hub_penalty) maior ou igual a ela; palavra em comum sozinha não basta. Pode devolver lista vazia.
     Sem embeddings (busca só léxica), o filtro antigo continua valendo. None mantém o comportamento antigo."""
-    index_path = root / '04-rag/indice.json'
+    index_path = root / indice
     # mtime antes de ler: se o índice for refeito no meio, a próxima consulta vê outro mtime.
     mtime = index_path.stat().st_mtime_ns if index_path.exists() else 0
     index = read_json(index_path, {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
-    live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
+    live = {r['id']: r for r in read_json(root / itens, [])}
     incluir_nao_revisados = usar_nao_revisados()
     chunks = index['chunks']
     query = tokens(question)
@@ -124,6 +154,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
         for exact in ['asterisco', 'algoritmo x', 'composto']:
             if exact in searchable(question) and exact in searchable(item['texto']):
                 score += 5
+        # Mesma lista de mintermos ou mesmo termo booleano: indica a mesma questão, como as frases acima.
+        score += 5 * len({t for t in query if ':' in t} & set(word_list))
         scores.append(score)
     semantic_scores = []
     mode = 'lexical'

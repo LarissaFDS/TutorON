@@ -1,0 +1,54 @@
+{
+  "padrao": "paa",
+  "disciplinas": [
+    {
+      "id": "paa",
+      "nome": "Projeto e Análise de Algoritmos",
+      "sigla": "PAA",
+      "situacao": "MVP",
+      "itens": "02-acervo/itens.json",
+      "indice": "04-rag/indice.json",
+      "rigor": "disciplinas/paa/rigor.md",
+      "livro_supabase": true,
+      "exemplos": [
+        "Resolva T(n) = 2T(n/2) + n log n. O Teorema Mestre se aplica?",
+        "Qual a diferença entre O, Ω e Θ? Dê um exemplo com 3n² + 5n.",
+        "Por que o guloso de troco falha para moedas {1, 3, 4} e valor 6?",
+        "Como montar a recorrência da mochila 0/1 em programação dinâmica?",
+        "Como provar que um problema é NP-completo por redução?"
+      ]
+    },
+    {
+      "id": "sd",
+      "nome": "Sistemas Digitais",
+      "sigla": "SD",
+      "situacao": "em validação",
+      "itens": "disciplinas/sd/acervo/itens.json",
+      "indice": "disciplinas/sd/acervo/indice.json",
+      "materiais": "disciplinas/sd/materiais",
+      "rigor": "disciplinas/sd/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "sd-01-numeracao-aritmetica",
+        "sd-02-algebra-booleana-portas",
+        "sd-03-simplificacao-karnaugh",
+        "sd-04-blocos-combinacionais",
+        "sd-05-circuitos-aritmeticos",
+        "sd-06-analise-temporal",
+        "sd-07-latches-flip-flops",
+        "sd-08-registradores-contadores",
+        "sd-09-maquinas-de-estados",
+        "sd-10-projeto-rtl",
+        "sd-11-hdl-vhdl",
+        "sd-12-conversores-memorias"
+      ],
+      "exemplos": [
+        "Como simplifico S(A,B,C) = Σm(0,1,3,5,7) com mapa de Karnaugh?",
+        "Qual o complemento de 2 de 101010? E como detecto overflow na soma?",
+        "Como fazer um subtrator de 4 bits usando somadores?",
+        "Como desenhar a saída Q de um flip-flop D a partir do diagrama de tempo?",
+        "Como separar bloco operacional e bloco de controle no projeto RTL de Fibonacci?"
+      ]
+    }
+  ]
+}

@@ -13,7 +13,7 @@ from backend.tests.test_llm import FakeLLM
 def montar(tmp_path, monkeypatch, roteiro, **kw):
     from backend import main
 
-    async def recuperar(pergunta, llm, settings):
+    async def recuperar(pergunta, llm, settings, disciplina=None):
         return [Trecho("P1", "acervo", "Prova de PAA", "T(n)=2T(n/2)+n", "prova1.pdf")]
     monkeypatch.setattr(tarefas, "recuperar", recuperar)
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)

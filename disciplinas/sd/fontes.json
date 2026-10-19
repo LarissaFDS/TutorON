@@ -1,0 +1,259 @@
+{
+  "disciplina": "sd",
+  "atualizado_em": "2026-10-19",
+  "legenda": {
+    "prioridade": "alta = compõe o acervo inicial; media = complementa ou preenche lacunas; referencia = consulta e comparação, não é ingerida",
+    "uso": "acervo = transcrito ou resumido em disciplinas/sd/materiais; citada = indicada como leitura nas notas da equipe; referencia = só catálogo; candidato = aguarda transcrição ou conferência; indisponivel = não localizado",
+    "notas": "1 a 5 em autoridade, cobertura, profundidade, didatica, aderencia, acessibilidade, reutilizacao, tutoria"
+  },
+  "fontes": [
+    {
+      "id": "ufal-sd-lista-av1", "nome": "Lista de Exercícios de Sistemas Digitais — AV1",
+      "autoria": "Disciplina de Sistemas Digitais, UFAL (lista de monitoria; autor não identificado no arquivo)",
+      "url": null, "arquivo_local": "Lista de SD AV1.pdf",
+      "sha256": "8e3ff6ff97d8d86a3fe8210e322a66bdf14f27a0da6a0d81aa14f729b67aaa4a",
+      "idioma": "pt-BR", "formato": "PDF, 7 páginas (texto + figuras)",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-06-analise-temporal"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 5, "cobertura": 4, "profundidade": 4, "didatica": 4, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta", "uso": "acervo",
+      "justificativa": "Mostra exatamente como a disciplina cobra a parte combinacional da AV1. Enunciados transcritos; figuras (Q5, Q9, Q21–Q25) ainda não descritas."
+    },
+    {
+      "id": "ufal-sd-lista-av2", "nome": "Lista de Exercícios de Sistemas Digitais — AV2",
+      "autoria": "Disciplina de Sistemas Digitais, UFAL (lista de monitoria)", "url": null, "arquivo_local": "Lista de SD AV2.pdf",
+      "sha256": "fdc5536c46219b9972d90a8996d993f0b9b290f4802951ced2fc8fd76d79984f",
+      "idioma": "pt-BR", "formato": "PDF, 3 páginas (texto + figuras)",
+      "topicos": ["sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 5, "cobertura": 4, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 3, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta", "uso": "acervo",
+      "justificativa": "Cobre a parte sequencial e o projeto RTL da AV2. Várias questões dependem de figuras, descritas só onde a equipe conseguiu conferir."
+    },
+    {
+      "id": "ufal-sd-prova1", "nome": "Prova 1 — Sistemas Digitais",
+      "autoria": "Disciplina de Sistemas Digitais, UFAL", "url": null, "arquivo_local": "prova1.docx",
+      "sha256": "6ad29d2257c92f442cb71e96c329dc507e3e4920d8663be43939841f726f2b1e",
+      "idioma": "pt-BR", "formato": "DOCX (texto + 2 imagens)",
+      "topicos": ["sd-12-conversores-memorias", "sd-06-analise-temporal", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta", "uso": "acervo", "justificativa": "Prova real com pesos por questão; resoluções da equipe conferidas por código."
+    },
+    {
+      "id": "ufal-sd-prova2", "nome": "Prova 2 — Sistemas Digitais",
+      "autoria": "Disciplina de Sistemas Digitais, UFAL", "url": null, "arquivo_local": "Prova 2.pdf",
+      "sha256": "4ad7477c8b650cf36409be35ad731aafbf90a445cac5ec52056c114765b2d9a5",
+      "idioma": "pt-BR", "formato": "PDF, 1 página (texto + figuras)",
+      "topicos": ["sd-07-latches-flip-flops", "sd-09-maquinas-de-estados", "sd-08-registradores-contadores", "sd-10-projeto-rtl"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 3, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta", "uso": "acervo", "justificativa": "Prova real; a FSM da Q2 foi lida da figura e a resolução foi verificada por simulação."
+    },
+    {
+      "id": "ufal-sd-reav", "nome": "Reavaliação (REAV) — Sistemas Digitais",
+      "autoria": "Disciplina de Sistemas Digitais, UFAL (fotos montadas no Canva; metadado de autor: Plácido de Oliveira)", "url": null, "arquivo_local": "REAV.pdf",
+      "sha256": "0816b85a99aba718e8532e831791592af9adef38af10a6912d6eaa6ef16a0b09",
+      "idioma": "pt-BR", "formato": "PDF de imagens, 3 páginas (sem camada de texto)",
+      "topicos": ["sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-10-projeto-rtl"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 2, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta", "uso": "acervo",
+      "justificativa": "Transcrito da imagem pela equipe. A constante 25 do bloco operacional da Q2 diverge do enunciado (endereço 26) e está sinalizada."
+    },
+    {
+      "id": "ufal-sd-somadores", "nome": "Somador (material de monitoria)",
+      "autoria": "Monitoria de Sistemas Digitais, UFAL (LaTeX, 2025)", "url": null, "arquivo_local": "Somadores.pdf",
+      "sha256": "cb4e792150361fe01ed890b6abda393d35e2ab3dfb4a3736b2057ead7b50525d",
+      "idioma": "pt-BR", "formato": "PDF, 6 páginas",
+      "topicos": ["sd-05-circuitos-aritmeticos", "sd-03-simplificacao-karnaugh"],
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 4, "cobertura": 2, "profundidade": 3, "didatica": 4, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 4},
+      "prioridade": "alta", "uso": "acervo", "justificativa": "Explicação curta e alinhada à notação da disciplina; as barras de negação perdidas na extração foram recuperadas pela tabela-verdade."
+    },
+    {
+      "id": "ufal-sd-fibonacci-vhdl", "nome": "fibonacci_vhdl.vhd — controlador do Fibonacci em VHDL",
+      "autoria": "Arquivo de resolução recebido pela equipe; autor não identificado", "url": null, "arquivo_local": "fibonacci_vhdl.vhd",
+      "sha256": "73b96aaa9efef2d5d9e9b3331c56179e27760d2e8b669f6e441a9a8cbea2bdf5",
+      "idioma": "VHDL, comentários em pt-BR", "formato": "Código-fonte VHDL (144 linhas)",
+      "topicos": ["sd-11-hdl-vhdl", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl"],
+      "licenca": "Não declarada", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 2, "cobertura": 2, "profundidade": 3, "didatica": 3, "aderencia": 5, "acessibilidade": 5, "reutilizacao": 2, "tutoria": 4},
+      "prioridade": "media", "uso": "acervo",
+      "justificativa": "Útil como exemplo real de FSM em VHDL. Tem saídas registradas (um ciclo de atraso), apontadas no bloco; não deve ser tratado como gabarito."
+    },
+    {
+      "id": "ufal-sd-resolucao-prova2", "nome": "Resolução da Prova 2 (quadro do Microsoft Whiteboard, 12-11)",
+      "autoria": "Monitoria de Sistemas Digitais, UFAL", "url": null, "arquivo_local": "Resolução prova 2.pdf",
+      "sha256": "e03d5bea9ca7aa5c4a573e1e9bf30e281a9907a75c8d7d34d8eae11f60731d57",
+      "idioma": "pt-BR (manuscrito)", "formato": "PDF de uma imagem de quadro (7841 × 12482 px)",
+      "topicos": ["sd-07-latches-flip-flops", "sd-09-maquinas-de-estados"],
+      "licenca": "Não declarada", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "notas": {"autoridade": 4, "cobertura": 2, "profundidade": 3, "didatica": 3, "aderencia": 5, "acessibilidade": 1, "reutilizacao": 2, "tutoria": 4},
+      "prioridade": "media", "uso": "candidato",
+      "justificativa": "Manuscrito: a transcrição fiel exige conferência humana. Só a codificação de estados (A = 00, B = 01, C = 10, D = 11) foi lida, e coincide com a resolução da equipe."
+    },
+    {
+      "id": "ufal-sd-monitorias-video", "nome": "Gravações de monitoria (Monitoria 18_03, Monitoria de RTL, Questão 2 e 1 - reav, Monitoria 12-11-25 ab2, monitoria_06_04-Revisao_Prova, Bloco comparador de magnitude)",
+      "autoria": "Monitoria de Sistemas Digitais, UFAL", "url": null, "arquivo_local": "Arquivos .mkv/.mp4 locais (≈ 4 GB no total)",
+      "sha256": null, "idioma": "pt-BR (áudio)", "formato": "Vídeo",
+      "topicos": ["sd-10-projeto-rtl", "sd-05-circuitos-aritmeticos", "sd-09-maquinas-de-estados"],
+      "licenca": "Não declarada; contêm voz de pessoas (exigem consentimento para publicação)", "acesso": "Somente na máquina local",
+      "notas": {"autoridade": 4, "cobertura": 3, "profundidade": 3, "didatica": 4, "aderencia": 5, "acessibilidade": 1, "reutilizacao": 1, "tutoria": 4},
+      "prioridade": "media", "uso": "candidato",
+      "justificativa": "Grande valor didático, mas precisa de transcrição (por exemplo, Whisper local) e de revisão antes de entrar no acervo. Nenhum vídeo foi processado nesta entrega."
+    },
+    {
+      "id": "ufal-sd-lista4-projetos", "nome": "lista 4 - projeto 1, 1.2, 5 e 6 (.docx)",
+      "autoria": "Desconhecida", "url": null, "arquivo_local": "Downloads/lista 4 - projeto *.docx",
+      "sha256": null, "idioma": "pt-BR", "formato": "DOCX",
+      "topicos": [], "licenca": "Não determinada", "acesso": "Arquivos citados no pedido, mas não encontrados na pasta Downloads em 2026-10-19",
+      "notas": null, "prioridade": "referencia", "uso": "indisponivel", "justificativa": "Não foi possível abrir; reavaliar quando os arquivos estiverem disponíveis."
+    },
+    {
+      "id": "ufal-ppc-cc-2011", "nome": "Projeto Pedagógico — Ciência da Computação (matriz 2011), ementa CCOM019 Circuitos Digitais",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf/@@download/file/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "sha256": null, "idioma": "pt-BR", "formato": "PDF, 51 páginas (ementa na p. 27)",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-07-latches-flip-flops", "sd-12-conversores-memorias"],
+      "licenca": "Documento institucional público", "acesso": "Aberto (conferido em 2026-10-19)",
+      "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 1, "didatica": 1, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 3, "tutoria": 1},
+      "prioridade": "referencia", "uso": "referencia",
+      "justificativa": "Ementa oficial: sistemas numéricos e códigos; portas lógicas e álgebra booleana; circuitos combinacionais e sequenciais; aritmética binária; conversão D/A e A/D. É de 2011 e usa o nome Circuitos Digitais."
+    },
+    {
+      "id": "ufal-ppc-ecomp-2011", "nome": "Projeto Pedagógico — Engenharia de Computação (2011), ementa ECOM019 Sistemas Digitais",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/PPC%20ENGCOMP_pre.pdf",
+      "sha256": null, "idioma": "pt-BR", "formato": "PDF, 59 páginas (ementa na p. 26)",
+      "topicos": ["sd-07-latches-flip-flops", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl", "sd-11-hdl-vhdl", "sd-12-conversores-memorias"],
+      "licenca": "Documento institucional público", "acesso": "Aberto (conferido em 2026-10-19)",
+      "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 1, "didatica": 1, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 3, "tutoria": 1},
+      "prioridade": "referencia", "uso": "referencia",
+      "justificativa": "Ementa oficial com circuitos sequenciais, FSM, HDL, lógica programável, conversores, teorema da amostragem e controladores. Bibliografia: Tocci, Idoeta, Carro, D'Amore, Wakerly, Taub."
+    },
+    {
+      "id": "vahid-sistemas-digitais", "nome": "Sistemas Digitais: Projeto, Otimização e HDLs (Digital Design)",
+      "autoria": "Frank Vahid; tradução brasileira (Bookman)", "url": null, "arquivo_local": "Sistemas Digitais - Projetos de Otimização e HDLs - VAHID.pdf (digitalização, 534 páginas, sem texto)",
+      "sha256": "7eba8d14fe265d5af8cc95d4a3a557ac2178ec7f5dfb45a1bf38d4d60b62683f",
+      "idioma": "pt-BR", "formato": "Livro",
+      "topicos": ["sd-02-algebra-booleana-portas", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl", "sd-11-hdl-vhdl"],
+      "licenca": "Protegido por direitos autorais (todos os direitos reservados)", "acesso": "Venda/biblioteca; a cópia local não pode ser publicada nem ingerida no repositório",
+      "notas": {"autoridade": 5, "cobertura": 5, "profundidade": 5, "didatica": 5, "aderencia": 5, "acessibilidade": 2, "reutilizacao": 1, "tutoria": 5},
+      "prioridade": "referencia", "uso": "referencia",
+      "justificativa": "O vocabulário das listas (FSM de alto nível, bloco operacional e de controle, RTL) sugere que é o texto-base de fato. Pode ir para o Supabase privado, como o livro de PAA, se a equipe tiver autorização."
+    },
+    {
+      "id": "tocci-sistemas-digitais", "nome": "Sistemas Digitais: Princípios e Aplicações",
+      "autoria": "Ronald J. Tocci, Neal S. Widmer, Gregory L. Moss (Pearson)", "url": null, "sha256": null,
+      "idioma": "pt-BR", "formato": "Livro",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-12-conversores-memorias"],
+      "licenca": "Protegido por direitos autorais", "acesso": "Biblioteca", "notas": null,
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Primeiro título da bibliografia da ementa ECOM019; só registrado, não consultado nesta curadoria."
+    },
+    {
+      "id": "kuphaldt-lec-vol4", "nome": "Lessons In Electric Circuits, Volume IV — Digital (4ª ed.)",
+      "autoria": "Tony R. Kuphaldt", "url": "https://ibiblio.org/kuphaldt/electricCircuits/index.htm", "sha256": null,
+      "idioma": "en", "formato": "Livro web/PDF",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-12-conversores-memorias"],
+      "licenca": "Creative Commons, segundo a página oficial (\"published under the terms and conditions of the Creative Commons License\"); edições antigas usavam a Design Science License. Confirmar a versão exata no apêndice do PDF antes de ingerir.",
+      "acesso": "Aberto (página oficial conferida em 2026-10-19)",
+      "notas": {"autoridade": 4, "cobertura": 5, "profundidade": 3, "didatica": 5, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 4, "tutoria": 4},
+      "prioridade": "alta", "uso": "citada",
+      "justificativa": "O livro aberto mais completo da parte combinacional, sequencial e de conversores, com explicações intuitivas. Licença permite reutilização com atribuição; candidato à primeira ingestão de capítulos."
+    },
+    {
+      "id": "free-range-vhdl", "nome": "Free Range VHDL",
+      "autoria": "Bryan Mealy e Fabrizio Tappero", "url": "https://github.com/fabriziotappero/Free-Range-VHDL-book", "sha256": null,
+      "idioma": "en", "formato": "Livro (LaTeX/PDF), 14 capítulos",
+      "topicos": ["sd-11-hdl-vhdl", "sd-09-maquinas-de-estados"],
+      "licenca": "CC BY-SA 3.0 (LICENSE.txt do repositório, conferido em 2026-10-19)", "acesso": "Aberto",
+      "notas": {"autoridade": 4, "cobertura": 2, "profundidade": 4, "didatica": 5, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 5, "tutoria": 4},
+      "prioridade": "alta", "uso": "citada", "justificativa": "Melhor fonte aberta para VHDL sintetizável e FSM em VHDL; preenche a lacuna de HDL das notas."
+    },
+    {
+      "id": "wikibooks-digital-circuits", "nome": "Digital Circuits (Wikibooks)",
+      "autoria": "Colaboradores do Wikibooks", "url": "https://en.wikibooks.org/wiki/Digital_Circuits", "sha256": null,
+      "idioma": "en", "formato": "Livro wiki",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-09-maquinas-de-estados"],
+      "licenca": "CC BY-SA (rodapé da página, conferido em 2026-10-19)", "acesso": "Aberto",
+      "notas": {"autoridade": 3, "cobertura": 4, "profundidade": 3, "didatica": 3, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 5, "tutoria": 3},
+      "prioridade": "media", "uso": "citada", "justificativa": "Boa cobertura e licença livre, mas qualidade irregular entre capítulos; usar para complementar."
+    },
+    {
+      "id": "wikilivros-eletronica-digital", "nome": "Eletrônica Digital (Wikilivros)",
+      "autoria": "Colaboradores do Wikilivros", "url": "https://pt.wikibooks.org/wiki/Eletr%C3%B4nica_Digital", "sha256": null,
+      "idioma": "pt-BR", "formato": "Livro wiki (etapa de desenvolvimento 2)",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-12-conversores-memorias"],
+      "licenca": "CC BY-SA 4.0 (rodapé, conferido em 2026-10-19)", "acesso": "Aberto",
+      "notas": {"autoridade": 2, "cobertura": 4, "profundidade": 2, "didatica": 3, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 5, "tutoria": 3},
+      "prioridade": "media", "uso": "citada", "justificativa": "Única fonte aberta em português com índice completo, mas o livro está incompleto (etapa 2); conferir cada capítulo antes de usar."
+    },
+    {
+      "id": "mit-ocw-6004", "nome": "6.004 Computation Structures (Spring 2017)",
+      "autoria": "Chris Terman, MIT OpenCourseWare", "url": "https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/", "sha256": null,
+      "idioma": "en", "formato": "Curso: notas de aula, vídeos, exercícios",
+      "topicos": ["sd-02-algebra-booleana-portas", "sd-05-circuitos-aritmeticos", "sd-06-analise-temporal", "sd-07-latches-flip-flops", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl"],
+      "licenca": "CC BY-NC-SA 4.0", "acesso": "Aberto",
+      "notas": {"autoridade": 5, "cobertura": 4, "profundidade": 5, "didatica": 4, "aderencia": 3, "acessibilidade": 4, "reutilizacao": 3, "tutoria": 3},
+      "prioridade": "media", "uso": "citada",
+      "justificativa": "Autoridade alta e ótimo em temporização e FSM, mas em inglês, voltado a arquitetura de computadores e com licença não comercial."
+    },
+    {
+      "id": "uff-apostila-circuitos-digitais", "nome": "Apostila de Teoria para Circuitos Digitais (versão A2026M09D25)",
+      "autoria": "Alexandre Santos de la Vega, TET/UFF", "url": "http://www.telecom.uff.br/~delavega/public/CircDig/apostila_teo_cd.pdf", "sha256": null,
+      "idioma": "pt-BR", "formato": "PDF, 401 páginas",
+      "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-07-latches-flip-flops", "sd-09-maquinas-de-estados"],
+      "licenca": "Não declarada no PDF (nenhuma menção a licença); tratar como todos os direitos reservados", "acesso": "Aberto para leitura",
+      "notas": {"autoridade": 4, "cobertura": 5, "profundidade": 4, "didatica": 4, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 1, "tutoria": 4},
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Material universitário extenso e atualizado em português; ótimo para consulta da equipe, mas sem licença de reutilização."
+    },
+    {
+      "id": "ufrgs-circuitos-digitais", "nome": "Circuitos Digitais (apostila, 2009)",
+      "autoria": "Alberto Bastos do Canto Filho, Departamento de Engenharia Elétrica, UFRGS", "url": "https://www.ufrgs.br/eng04075/downloads/Circuitos_Digitais.pdf", "sha256": null,
+      "idioma": "pt-BR", "formato": "PDF, 168 páginas",
+      "topicos": ["sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-07-latches-flip-flops"],
+      "licenca": "Não declarada no PDF", "acesso": "Aberto para leitura",
+      "notas": {"autoridade": 4, "cobertura": 3, "profundidade": 3, "didatica": 4, "aderencia": 4, "acessibilidade": 5, "reutilizacao": 1, "tutoria": 3},
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Boa referência em português para a parte combinacional; sem licença de reutilização."
+    },
+    {
+      "id": "ufpr-ci1068", "nome": "Ficha da disciplina CI1068 Circuitos Digitais (2021-1)",
+      "autoria": "Bacharelado em Ciência da Computação, UFPR", "url": "https://www.inf.ufpr.br/bcc/periodos/2021-1/CI1068.pdf", "sha256": null,
+      "idioma": "pt-BR", "formato": "PDF, 4 páginas", "topicos": [],
+      "licenca": "Documento institucional público", "acesso": "Aberto",
+      "notas": null, "prioridade": "referencia", "uso": "referencia", "justificativa": "Ementa de outra universidade, usada só para comparar a lista de tópicos fundamentais."
+    },
+    {
+      "id": "nand2tetris", "nome": "Nand2Tetris — projetos 1 a 3 (lógica booleana, aritmética, memória)",
+      "autoria": "Shimon Schocken e Noam Nisan", "url": "https://www.nand2tetris.org/course", "sha256": null,
+      "idioma": "en", "formato": "Curso com projetos e slides",
+      "topicos": ["sd-02-algebra-booleana-portas", "sd-05-circuitos-aritmeticos", "sd-12-conversores-memorias"],
+      "licenca": "Não determinada (página de licença carregada por script; não foi possível ler)", "acesso": "Aberto para leitura",
+      "notas": {"autoridade": 4, "cobertura": 2, "profundidade": 3, "didatica": 5, "aderencia": 2, "acessibilidade": 4, "reutilizacao": 1, "tutoria": 2},
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Excelente para motivação (da NAND ao computador), mas com abordagem e HDL próprios, distantes da disciplina."
+    },
+    {
+      "id": "sim-digital-hneemann", "nome": "Digital — simulador de circuitos lógicos",
+      "autoria": "Helmut Neemann", "url": "https://github.com/hneemann/Digital", "sha256": null,
+      "idioma": "en (interface com tradução para português)", "formato": "Ferramenta (Java)",
+      "topicos": ["sd-04-blocos-combinacionais", "sd-07-latches-flip-flops", "sd-09-maquinas-de-estados", "sd-11-hdl-vhdl"],
+      "licenca": "GPL-3.0", "acesso": "Aberto",
+      "notas": null, "prioridade": "media", "uso": "citada", "justificativa": "Feito para ensino: editor de FSM que gera o circuito, diagramas de tempo e exportação para VHDL/Verilog. Bom para o tutor sugerir verificação."
+    },
+    {
+      "id": "sim-logisim-evolution", "nome": "Logisim-evolution",
+      "autoria": "Comunidade logisim-evolution", "url": "https://github.com/logisim-evolution/logisim-evolution", "sha256": null,
+      "idioma": "en (multilíngue)", "formato": "Ferramenta (Java)", "topicos": ["sd-04-blocos-combinacionais", "sd-07-latches-flip-flops", "sd-08-registradores-contadores"],
+      "licenca": "GPL-3.0", "acesso": "Aberto", "notas": null,
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Simulador educacional muito usado em universidades; alternativa ao Digital."
+    },
+    {
+      "id": "sim-circuitverse", "nome": "CircuitVerse",
+      "autoria": "Comunidade CircuitVerse", "url": "https://circuitverse.org/", "sha256": null,
+      "idioma": "en", "formato": "Simulador no navegador", "topicos": ["sd-04-blocos-combinacionais", "sd-07-latches-flip-flops"],
+      "licenca": "Código MIT (repositório CircuitVerse/CircuitVerse)", "acesso": "Aberto (requer conta para salvar)", "notas": null,
+      "prioridade": "referencia", "uso": "referencia", "justificativa": "Simulador sem instalação, útil para o aluno testar um circuito sugerido pelo tutor."
+    }
+  ]
+}
