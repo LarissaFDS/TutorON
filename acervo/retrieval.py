@@ -66,10 +66,16 @@ def cosine(a, b):
     return sum(x*y for x,y in zip(a,b)) / (math.sqrt(sum(x*x for x in a)) * math.sqrt(sum(y*y for y in b)) or 1)
 
 
+def usar_nao_revisados():
+    # Mesma variável de backend/config.py (o .env já foi carregado no ambiente pelo backend).
+    return os.environ.get('ACERVO_USAR_NAO_REVISADOS', '0').strip().lower() in ('1', 'true', 'sim')
+
+
 def search(question, root=ROOT, k=4, semantic=True, vector=None):
     index = read_json(root / '04-rag/indice.json', {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
     live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
+    incluir_nao_revisados = usar_nao_revisados()
     chunks = index['chunks']
     query = tokens(question)
     words = [tokens(c['texto']) for c in chunks]
@@ -102,6 +108,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None):
     semantic_ranks = {i: rank for rank, i in enumerate(sorted(range(len(chunks)), key=lambda i: semantic_scores[i], reverse=True), 1)} if semantic_scores else {}
     for i, item in enumerate(chunks):
         current = live.get(item['id'])
+        if current and current.get('revisado') is False and not incluir_nao_revisados:
+            continue  # material da equipe ainda sem revisão humana (acervo/equipe.py)
         if not current or current['sha256'] != item['sha256'] or current['confiabilidade'] not in ('media', 'alta'):
             continue
         if scores[i] <= 0 and (not semantic_scores or semantic_scores[i] < 0.55):

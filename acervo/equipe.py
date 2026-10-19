@@ -4,6 +4,8 @@ Não é material do professor nem resolução de aluno: cada arquivo declara `au
 `revisado: false` até uma revisão humana. Entra no acervo com confiabilidade média,
 como as correções derivadas (c01, c02, c09…), e pode ser rebaixado pela triagem por
 regras ou promovido por revisão humana em 03-triagem/revisoes.json.
+Enquanto `revisado: false`, a busca de produção ignora o bloco (ACERVO_USAR_NAO_REVISADOS);
+como revisar: docs/curadoria-equipe.md.
 
 Atualizar o acervo sem rodar o pipeline inteiro:
     python -m acervo equipe                 # itens.json
