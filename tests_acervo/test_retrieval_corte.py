@@ -44,7 +44,9 @@ def ids(itens):
 
 def test_hub_tem_vizinhanca_mais_alta_que_os_outros():
     hubs = hub_scores([_norm(v) for _, v in BLOCOS.values()])
-    assert max(range(4), key=hubs.__getitem__) == 2 and abs(sum(hubs)) < 1e-9
+    assert max(range(4), key=hubs.__getitem__) == 2 and hubs[2] > 0
+    # Relatório de 19/10: penalidade negativa aumentava a nota de blocos isolados. Agora só penaliza.
+    assert min(hubs) == 0
 
 
 def test_comportamento_antigo_sem_corte(acervo):
@@ -58,11 +60,19 @@ def test_corte_absoluto_tira_quem_so_tem_palavra_em_comum(acervo):
     assert achados[0]["similaridade"] == pytest.approx(0.902, abs=0.01)
 
 
-def test_penalidade_de_hub_tira_o_bloco_que_parece_com_tudo(acervo):
+def test_penalidade_de_hub_tira_o_bloco_que_parece_com_tudo(acervo, monkeypatch):
+    from acervo import retrieval
+    monkeypatch.setattr(retrieval, "DESTAQUE_COM_PALAVRA", 0)  # isola o efeito da penalidade
+    monkeypatch.setattr(retrieval, "DESTAQUE_SO_SEMANTICO", 0)
     sem = search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.6)
     com = search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.6, hub_penalty=True)
     assert "hub" in ids(sem) and ids(com) == ["mochila"]
-    assert com[0]["similaridade_ajustada"] > com[0]["similaridade"]  # bloco comum ganha um pouco
+    assert com[0]["similaridade_ajustada"] == com[0]["similaridade"]  # bloco comum não ganha bônus
+
+
+def test_penalidade_de_hub_nunca_aumenta_a_similaridade(acervo):
+    for item in search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.0, hub_penalty=True, k=10):
+        assert item["similaridade_ajustada"] <= item["similaridade"]
 
 
 def test_nada_relevante_devolve_lista_vazia(acervo):

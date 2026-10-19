@@ -102,6 +102,14 @@ def cosine(a, b):
 
 HUB_VIZINHOS = 10
 _hub_cache = {}
+# Destaque mínimo do bloco sobre a mediana da similaridade da pergunta com o próprio acervo.
+# Pergunta sem relação fica "igualmente parecida" com tudo (destaque baixo); pergunta do assunto
+# fica bem mais perto de poucos blocos. Calibrado em eval/relevancia.py com perguntas reais de PAA e SD.
+DESTAQUE_COM_PALAVRA = 0.06   # bloco que também compartilha palavras com a pergunta
+DESTAQUE_SO_SEMANTICO = 0.12  # bloco sem nenhuma palavra em comum: exige destaque bem maior
+# BM25 alto (termos raros do assunto, como "gray" ou "karnaugh") basta sozinho, como as frases exatas.
+# Palavras genéricas que casam por acaso ("sistema", "caminhos") ficaram abaixo de 3,5 na calibração.
+LEXICO_FORTE = 6.0
 
 
 def hub_scores(vectors, cache_key=None):
@@ -118,7 +126,8 @@ def hub_scores(vectors, cache_key=None):
         sims = sorted((cosine(v, w) for j, w in enumerate(vectors) if j != i), reverse=True)[:k]
         vizinhanca.append(sum(sims) / k)
     media = sum(vizinhanca) / len(vizinhanca)
-    hubs = [r - media for r in vizinhanca]
+    # Só penaliza: bloco isolado (abaixo da média) não ganha bônus por ser isolado.
+    hubs = [max(0.0, r - media) for r in vizinhanca]
     if cache_key is not None:
         _hub_cache.clear()
         _hub_cache[cache_key] = hubs
@@ -130,7 +139,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
     """Busca híbrida (BM25 + bge-m3, fundidos por RRF).
 
     min_similarity: com embeddings, só entram blocos com similaridade (já descontada a de hub, se
-    hub_penalty) maior ou igual a ela; palavra em comum sozinha não basta. Pode devolver lista vazia.
+    hub_penalty) maior ou igual a ela E que se destaquem da mediana da pergunta no acervo
+    (DESTAQUE_*); palavra em comum sozinha não basta. Pode devolver lista vazia.
     Sem embeddings (busca só léxica), o filtro antigo continua valendo. None mantém o comportamento antigo."""
     index_path = root / indice
     # mtime antes de ler: se o índice for refeito no meio, a próxima consulta vê outro mtime.
@@ -171,6 +181,7 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
     if semantic_scores and hub_penalty:
         chave = (str(index_path), mtime, len(index['vectors']))
         semantic_scores = [s - h for s, h in zip(semantic_scores, hub_scores(index['vectors'], chave))]
+    base = sorted(raw_scores)[len(raw_scores) // 2] if raw_scores else 0
     result = []
     lexical_order = sorted(range(len(chunks)), key=lambda i: scores[i], reverse=True)
     ranks = {i: rank for rank, i in enumerate(lexical_order, 1)}
@@ -183,8 +194,9 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
             continue
         exato = any(e in searchable(question) and e in searchable(item['texto']) for e in ['asterisco', 'algoritmo x', 'composto'])
         if semantic_scores and min_similarity is not None:
-            if semantic_scores[i] < min_similarity and not exato:
-                continue  # corte absoluto: só similaridade, não posição no ranking
+            exige = DESTAQUE_COM_PALAVRA if scores[i] > 0 else DESTAQUE_SO_SEMANTICO
+            if not exato and scores[i] < LEXICO_FORTE and (semantic_scores[i] < min_similarity or raw_scores[i] - base < exige):
+                continue  # sem evidência de assunto: melhor nada do que preencher os k lugares
         elif scores[i] <= 0 and (not semantic_scores or semantic_scores[i] < 0.55):
             continue
         score = 1 / (60 + ranks[i]) if scores[i] else 0

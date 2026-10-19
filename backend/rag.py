@@ -41,6 +41,9 @@ TIPOS = {
 }
 
 
+NOTA_EQUIPE = "Nota da equipe TutorON (escrita com IA, não é material do professor)"
+
+
 @dataclass
 class Trecho:
     rotulo: str
@@ -77,6 +80,8 @@ def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None 
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
         tipo = TIPOS.get(item.get("tipo", ""), "Material da disciplina")
         titulo = tipo if item.get("tipo") == "material_equipe" else f"{tipo} de {disciplina.sigla}"
+        if item.get("natureza") == "nota_da_equipe_ia":  # o prompt usa este título: não é do professor
+            titulo = f"{NOTA_EQUIPE} de {disciplina.sigla}"
         trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=titulo,
                               texto=_cortar(item["texto"]), referencia=fonte))
     return trechos
