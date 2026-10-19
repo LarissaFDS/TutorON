@@ -9,6 +9,9 @@ fontes_catalogo: ufal-sd-somadores
 autoria: Material de monitoria da disciplina (UFAL); transcrição da equipe TutorON, com as barras de negação recuperadas e conferidas pela tabela-verdade
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: conferida_por_codigo
+revisao_humana: pendente
 ---
 SOMADOR — Universidade Federal de Alagoas (material de monitoria)
 

@@ -189,3 +189,57 @@ def test_contas_da_prova1_e_av2():
         proximo = (1 - s0) | (ligada & (1 - s1))
         assert proximo == (1 if not s0 else 0 if s1 else ligada)
     assert int('0001001111101000', 2) == 5096
+
+
+def test_blocos_combinacionais_e_aritmeticos_da_av1():
+    def deslocador(e, op1, op0):  # Q10: estágio de 1 bit (op0) e depois de 2 bits (op1)
+        e = e >> 1 if op0 else e
+        return e >> 2 if op1 else e
+    assert all(deslocador(e, i >> 1, i & 1) == e >> i for e in range(16) for i in range(4))
+    assert all(deslocador(a, b >> 1, b & 1) == a // 2 ** b for a in range(9) for b in range(4))  # Q11
+    assert all(int(x1 and not x0) == int(2 * x1 + x0 == 2) for x1, x0 in bits(2))  # Q8
+    for a, b in product(range(16), repeat=2):  # Q17: comparador de magnitude de 4 bits
+        ab, bb = [(a >> i) & 1 for i in range(4)], [(b >> i) & 1 for i in range(4)]
+        e = [1 - (x ^ y) for x, y in zip(ab, bb)]
+        maior = (ab[3] & 1 - bb[3]) | (e[3] & ab[2] & 1 - bb[2]) | (e[3] & e[2] & ab[1] & 1 - bb[1]) | (
+            e[3] & e[2] & e[1] & ab[0] & 1 - bb[0])
+        igual = e[0] & e[1] & e[2] & e[3]
+        assert (maior, igual, 1 - (maior | igual)) == (int(a > b), int(a == b), int(a < b))
+    for a, b in product(range(-16, 16), repeat=2):  # Q14/Q16: subtrator de 5 bits e overflow
+        s = (a - b) & 0x1F
+        a4, b4, s4 = (a >> 4) & 1, (b >> 4) & 1, s >> 4
+        v = (a4 & (1 - b4) & (1 - s4)) | ((1 - a4) & b4 & s4)
+        assert v == int(not -16 <= a - b <= 15)
+        if not v:  # Q15: MAX(0, X − Y) zera quando o bit de sinal da diferença é 1
+            assert (0 if s4 else s) == max(0, a - b)
+
+
+def test_somador_completo_da_monitoria():
+    for a, b, c in bits(3):
+        assert (a ^ b ^ c, (a & b) | (c & a) | (c & b)) == ((a + b + c) & 1, (a + b + c) >> 1)
+
+
+def test_exemplos_das_notas():
+    assert format((-6) & 0xF, '04b') == '1010' and format((-6) & 0xFF, '08b') == '11111010'
+    assert int('10110110', 2) == 0xB6 and (0b0101, 0b1001) == (5, 9)
+    assert ((0b0101 + 0b0100) & 0xF) == 0b1001 and 0b1001 - 16 == -7  # 5 + 4 estoura em 4 bits
+    for s1, s0, x in bits(3):  # detector de "11" da nota de FSM (S0 = 00, S1 = 01, S2 = 10)
+        if (s1, s0) == (1, 1):
+            continue
+        estado = {(0, 0): 0, (0, 1): 1, (1, 0): 2}[(s1, s0)]
+        proximo = min(estado + 1, 2) if x else 0
+        assert (x & (s1 | s0), x & (1 - s1) & (1 - s0)) == ((proximo >> 1) & 1, proximo & 1)
+
+
+def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
+    itens = {i['id']: i for i in read_json(SD.itens)}
+    assert all(i['revisao_humana'] == 'pendente' for i in itens.values())  # ninguém revisou ainda
+    assert all(i['confiabilidade'] != 'alta' for i in itens.values())
+    notas = {i for i, x in itens.items() if x['natureza'] == 'nota_da_equipe_ia'}
+    assert notas == {i for i in itens if i.startswith('sd-nota')}
+    # "conferida_por_codigo" só vale para blocos cujas resoluções têm teste neste arquivo.
+    conferidos = {i for i, x in itens.items() if x['verificacao'] == 'conferida_por_codigo'}
+    assert conferidos == {'sd-av1-q01-07', 'sd-av1-q14-18', 'sd-prova2-q1-2', 'sd-reav-q1-q3', 'sd-somadores-monitoria'}
+    # Esboços que dependem de figura não conferida ficam fora da busca.
+    fora = {c['id'] for c in read_json(SD.indice)['chunks']} ^ set(itens)
+    assert fora == {'sd-prova2-q3-4', 'sd-reav-q2-q4'}

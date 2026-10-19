@@ -80,30 +80,72 @@ Prioridades: **alta** compõe o acervo inicial; **média** complementa ou preenc
 - **Apostilas universitárias sem licença** (UFF, UFRGS) são de ótima qualidade em português, mas ficam como referência para a equipe consultar.
 - **Duplicações evitadas:** REAV Q3 e Prova 1 Q5 são a mesma questão (o bloco da REAV remete à Prova 1), e AV2 Q1–Q4 repetem a Prova 2 (o bloco da AV2 remete ao da Prova 2).
 
-## 3. Inventário do acervo (blocos)
+## 3. Inventário do acervo (blocos) e confiabilidade
 
-Situação da curadoria: `aprovado` entra na busca com confiabilidade **média** (como as correções derivadas de PAA); `candidato` e `rejeitado` ficam fora. Nenhum bloco está com `revisao_professor: sim`, então nenhum tem confiabilidade alta.
+Cada bloco declara no cabeçalho quatro coisas, gravadas também em `acervo/itens.json`:
+- **`natureza`**: `material_da_disciplina` (enunciado transcrito de lista, prova ou monitoria, às vezes com resolução da equipe) ou `nota_da_equipe_ia` (texto escrito pela equipe com auxílio de IA, que **não é material do professor**);
+- **`verificacao`**:
+  - `conferida_por_codigo`: todas as resoluções com resultado afirmado têm teste por enumeração em `tests_acervo/test_disciplinas.py`;
+  - `parcial`: só parte das resoluções tem teste;
+  - `exemplos_conferidos`: nota cujos exemplos numéricos têm teste;
+  - `sem_resolucao`: só enunciado;
+  - `nao_verificada`: nenhuma conferência objetiva;
+- **`curadoria`**: `aprovado` entra na busca com confiabilidade **média**, como as correções derivadas de PAA; `candidato` fica fora;
+- **`revisao_humana`**: hoje é `pendente` em **todos** os blocos.
 
-| Arquivo | id | Assunto | Tipo | Curadoria | Observação |
+**Teste automatizado não é revisão humana.** Ele confere contas e equações, não a fidelidade da transcrição às figuras nem a qualidade didática. Nenhum bloco tem confiabilidade alta. Para promover um bloco, um professor ou monitor revisa e marca `revisao_professor: sim` e `revisao_humana: feita`.
+
+| Arquivo | id | Natureza | Verificação | Curadoria | O que falta |
 |---|---|---|---|---|---|
-| m01 | `sd-av1-q01-07` | numeração/booleana/Karnaugh | lista | aprovado | figura da Q5 não transcrita |
-| m02 | `sd-av1-q08-13` | blocos combinacionais | lista | aprovado | figura da Q9 não transcrita |
-| m03 | `sd-av1-q14-18` | aritméticos/display | lista | aprovado | — |
-| m04 | `sd-av1-q19-25` | aplicações/temporal | lista | aprovado | Q21–Q25 dependem de figuras; só enunciados |
-| m05 | `sd-av2-q01-04-07` | sequenciais | lista | aprovado | figuras não transcritas |
-| m06 | `sd-av2-q05-06-08` | RTL | lista | aprovado | posição dos sensores da Q6 suposta (sinalizada) |
-| m07 | `sd-prova1` | aritméticos | prova | aprovado | circuito da Q2 em figura |
-| m08 | `sd-prova2-q1-2` | FSM | prova | aprovado | transições lidas da figura |
-| m09 | `sd-prova2-q3-4` | RTL | prova | aprovado | esboço; Q3 depende da figura |
-| m10 | `sd-reav-q1-q3` | combinacionais | prova | aprovado | — |
-| m11 | `sd-reav-q2-q4` | RTL | prova | aprovado | divergência 25 × 26 sinalizada |
-| m12 | `sd-somadores-monitoria` | aritméticos | material de estudo | aprovado | — |
-| m13 | `sd-vhdl-fibonacci-controle` | VHDL | resolução | aprovado | ressalvas sobre saídas registradas |
-| n01–n12 | `sd-nota-*` | um por tópico | material de estudo | aprovado | notas da equipe; revisão humana pendente |
+| m01 | `sd-av1-q01-07` | material da disciplina | conferida por código (Q1–Q4, Q6, Q7) | aprovado | figura da Q5 |
+| m02 | `sd-av1-q08-13` | material da disciplina | parcial (Q8, Q10, Q11, Q13 conferidas; Q9 e Q12 são só ideia) | aprovado | figura da Q9 |
+| m03 | `sd-av1-q14-18` | material da disciplina | conferida por código (overflow, MAX, comparador, display) | aprovado | — |
+| m04 | `sd-av1-q19-25` | material da disciplina | sem resolução | aprovado | figuras de Q21–Q25 |
+| m05 | `sd-av2-q01-04-07` | material da disciplina | sem resolução (só método) | aprovado | figuras |
+| m06 | `sd-av2-q05-06-08` | material da disciplina | parcial (Q5 e Q6 conferidas; Q8 é esboço) | aprovado | posição dos sensores da Q6 é suposição |
+| m07 | `sd-prova1` | material da disciplina | parcial (Q1, Q3, Q5 conferidas; Q4 é projeto) | aprovado | figura da Q2 |
+| m08 | `sd-prova2-q1-2` | material da disciplina | conferida por código (equações = figura, por simulação) | aprovado | conferir a leitura da figura no original |
+| m09 | `sd-prova2-q3-4` | material da disciplina | não verificada (esboço) | **candidato** | figura da Q3 e atribuição de S na Q4 |
+| m10 | `sd-reav-q1-q3` | material da disciplina | conferida por código | aprovado | — |
+| m11 | `sd-reav-q2-q4` | material da disciplina | não verificada (esboço) | **candidato** | divergência 25 × 26 e condição de parada |
+| m12 | `sd-somadores-monitoria` | material da disciplina | conferida por código | aprovado | — |
+| m13 | `sd-vhdl-fibonacci-controle` | material da disciplina (código de autor não identificado) | não verificada (análise lida do código, sem simulação) | aprovado | simular em GHDL |
+| n01, n03, n09, n12 | `sd-nota-numeracao`, `sd-nota-karnaugh`, `sd-nota-fsm`, `sd-nota-conversores-memorias` | nota da equipe (IA) | exemplos conferidos | aprovado | revisão do texto |
+| n02, n04–n08, n10, n11 | demais `sd-nota-*` | nota da equipe (IA) | não verificada | aprovado | revisão do texto |
+
+Prioridade de revisão humana, pelo peso nas avaliações:
+1. m08, m10 e m01 (questões de prova com resolução);
+2. m06 e m09 (RTL da AV2);
+3. m11 (REAV);
+4. notas n09 e n10 (FSM e RTL).
+
+## 3.1 Validação funcional (19/10/2026)
+
+**Busca.** Tokens de um caractere eram descartados, então "Σm(0,1,3,5,7)" virava só "simplifico, mapa, karnaugh". Agora a busca léxica também gera tokens de notação booleana: lista de mintermos, maxtermos e irrelevâncias, variáveis da função e termos com negação. Esses tokens recebem o mesmo bônus das frases exatas que PAA já usava. Resultado, na mesma pergunta:
+
+| Busca | Posição do bloco da AV1 (`sd-av1-q01-07`) |
+|---|---|
+| Antes (e102e22) | 5º (fora dos 4 enviados ao modelo) |
+| Depois | 1º |
+
+Na busca léxica, as 20 perguntas de avaliação de PAA (`06-avaliacao`) devolvem exatamente os mesmos blocos, na mesma ordem (teste `test_ranking_lexico_de_paa_preservado`). O número de trechos enviados continua 4.
+
+**Índice de SD:** continua **léxico**. O `bge-m3` não está instalado no Ollama desta máquina (`model 'bge-m3' not found`), e não foi baixado. O índice híbrido de SD ainda não foi gerado nem testado.
+
+**Teste no site real.** Servidor local na porta 8765, com dados temporários e a mesma pergunta: "Como simplifico S(A,B,C) = Σm(0,1,3,5,7) com mapa de Karnaugh?", disciplina SD.
+
+| Configuração | Executada? | Fontes recuperadas | Resposta | Correta? |
+|---|---|---|---|---|
+| Gemini | **Não**: não há `.env` nem `GEMINI_API_KEY` nesta máquina | — | — | pendente |
+| `tutoron-paa` (modelo local habitual) | **Não**: não está instalado no Ollama | — | — | pendente |
+| `qwen2.5:7b` local, antes da correção | sim | 2 notas, Somadores, nota (sem a AV1) | S = A'B + AC | **errada** |
+| `qwen2.5:7b` local, depois da correção | sim (110 s) | **P1 = Lista AV1 Q1–Q7**, nota de Karnaugh, Somadores, nota | S = C' | **errada**: ignorou a resolução de P1 (S = C + A'B') e não citou fontes |
+
+Conclusão: a recuperação foi corrigida, mas **a disciplina não está validada para uso**. O modelo que de fato rodou (`qwen2.5:7b`) não usou o trecho certo que recebeu. Falta repetir o teste com o Gemini e com o `tutoron-paa`. Controle de PAA no mesmo servidor e modelo ("Teorema Mestre em T(n) = 3T(n/4) + n log n"): fontes só de PAA; conclusão correta, Θ(n log n), com erros no meio da justificativa ("log n é Θ(n)").
 
 ## 4. Licenças e restrições
 
-- **Materiais da disciplina (UFAL):** sem licença declarada. O repositório é público, por isso **os PDFs/DOCX/vídeos originais não foram versionados**; só entram as transcrições necessárias para a busca. Assim como no acervo de PAA, a equipe precisa **confirmar com o professor e os monitores** que pode publicar essas transcrições. Se não puder, mova `materiais/m*.md` para fora do Git e gere os índices localmente.
+- **Materiais da disciplina (UFAL) — pendência de publicação, ainda aberta:** sem licença declarada. O repositório é público, por isso **os PDFs/DOCX/vídeos originais não foram versionados**; só entram as transcrições necessárias para a busca. Assim como no acervo de PAA, a equipe precisa **confirmar com o professor e os monitores** que pode publicar essas transcrições. Se não puder, mova `materiais/m*.md` para fora do Git e gere os índices localmente.
 - **Vídeos de monitoria:** contêm voz de pessoas; não publicar sem consentimento.
 - **Notas da equipe:** texto original do TutorON.
 - **CC BY-SA (Wikibooks, Wikilivros, Free Range VHDL):** ao ingerir trechos, manter atribuição e a mesma licença no trecho derivado.
@@ -112,12 +154,13 @@ Situação da curadoria: `aprovado` entra na busca com confiabilidade **média**
 
 ## 5. Pendências
 
-1. Revisão do professor (ou de monitor) dos 25 blocos, sobretudo das resoluções e das notas. Ao revisar, marque `revisao_professor: sim` no cabeçalho para promover o bloco a confiabilidade alta.
-2. Descrever as figuras que faltam (AV1 Q5, Q9, Q21–Q25; AV2 Q3, Q4, Q7; Prova 1 Q2; Prova 2 Q1 e Q3).
-3. Transcrever a resolução manuscrita da Prova 2 e as gravações de monitoria (candidatos).
-4. Confirmar o plano de ensino atual e o livro adotado.
-5. Gerar o índice com embeddings (`python -m acervo.disciplinas sd --embeddings`, com o `bge-m3` no Ollama). Hoje o índice é **léxico**, porque o `bge-m3` não estava instalado nesta máquina.
-6. Avaliar a ingestão de capítulos de Kuphaldt (vol. IV) e Free Range VHDL, com atribuição.
+1. Revisão humana (professor ou monitor) dos 25 blocos, na ordem de prioridade da seção 3. Os blocos m09 e m11 só voltam à busca depois dela.
+2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. Até lá, SD fica "em validação".
+3. Descrever as figuras que faltam (AV1 Q5, Q9, Q21–Q25; AV2 Q3, Q4, Q7; Prova 1 Q2; Prova 2 Q1 e Q3).
+4. Transcrever a resolução manuscrita da Prova 2 e as gravações de monitoria (candidatos).
+5. Confirmar o plano de ensino atual e o livro adotado.
+6. Instalar o `bge-m3` no Ollama (`ollama pull bge-m3`), gerar o índice híbrido (`python -m acervo.disciplinas sd --embeddings`) e repetir os testes de recuperação.
+7. Avaliar a ingestão de capítulos de Kuphaldt (vol. IV) e Free Range VHDL, com atribuição.
 
 ## 6. Como atualizar
 

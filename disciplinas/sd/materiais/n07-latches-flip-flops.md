@@ -9,6 +9,9 @@ fontes_catalogo: wikibooks-digital-circuits,kuphaldt-lec-vol4,wikilivros-eletron
 autoria: Equipe TutorON, redigida com auxílio de IA; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: nao_verificada
+revisao_humana: pendente
 ---
 Latches e flip-flops
 

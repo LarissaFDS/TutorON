@@ -9,6 +9,9 @@ fontes_catalogo: mit-ocw-6004,wikibooks-digital-circuits,free-range-vhdl
 autoria: Equipe TutorON, redigida com auxílio de IA; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: exemplos_conferidos
+revisao_humana: pendente
 ---
 Máquinas de estados finitos (FSM) — controladores
 

@@ -10,6 +10,9 @@ fontes_catalogo: ufal-sd-reav
 autoria: Enunciados: reavaliação da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: conferida_por_codigo
+revisao_humana: pendente
 ---
 Reavaliação (REAV) — Sistemas Digitais
 

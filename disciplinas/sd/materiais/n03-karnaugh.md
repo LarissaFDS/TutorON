@@ -9,6 +9,9 @@ fontes_catalogo: wikibooks-digital-circuits,wikilivros-eletronica-digital,kuphal
 autoria: Equipe TutorON, redigida com auxílio de IA; exemplo conferido por código; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: exemplos_conferidos
+revisao_humana: pendente
 ---
 Mapa de Karnaugh (diagrama de Veitch-Karnaugh)
 

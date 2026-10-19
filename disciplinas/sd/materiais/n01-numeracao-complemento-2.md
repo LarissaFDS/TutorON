@@ -9,6 +9,9 @@ fontes_catalogo: kuphaldt-lec-vol4,wikilivros-eletronica-digital,wikibooks-digit
 autoria: Equipe TutorON, redigida com auxílio de IA; exemplos conferidos por código; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: exemplos_conferidos
+revisao_humana: pendente
 ---
 Sistemas de numeração e aritmética binária
 

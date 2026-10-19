@@ -9,6 +9,9 @@ fontes_catalogo: ufal-sd-fibonacci-vhdl
 autoria: Código: arquivo de resolução recebido pela equipe (autor não identificado). Resumo e análise: equipe TutorON
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: nao_verificada
+revisao_humana: pendente
 ---
 Controlador VHDL do Fibonacci (questão 8 da Lista AV2)
 

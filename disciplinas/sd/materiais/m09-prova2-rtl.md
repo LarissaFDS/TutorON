@@ -9,7 +9,10 @@ fonte: Prova 2.pdf | página 1 | questões 3 e 4 (figuras descritas pela equipe)
 fontes_catalogo: ufal-sd-prova2
 autoria: Enunciado: prova da disciplina (UFAL). Descrição das figuras e esboço de resolução: equipe TutorON
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
-curadoria: aprovado
+curadoria: candidato
+natureza: material_da_disciplina
+verificacao: nao_verificada
+revisao_humana: pendente
 ---
 Prova 2 — Sistemas Digitais (continuação)
 

@@ -29,6 +29,9 @@ REGISTRO = ROOT / 'disciplinas' / 'disciplinas.json'
 CAMPOS = ('id', 'titulo', 'assunto', 'tipo', 'fonte', 'autoria', 'licenca', 'curadoria')
 # Situação da curadoria -> confiabilidade usada pela busca (só média/alta entram no índice).
 CONFIABILIDADE = {'aprovado': 'media', 'candidato': 'nao_verificada', 'rejeitado': 'baixa'}
+# O que o bloco é e quanto dele foi conferido: a curadoria não trata tudo como validado.
+NATUREZA = ('material_da_disciplina', 'nota_da_equipe_ia')
+VERIFICACAO = ('conferida_por_codigo', 'exemplos_conferidos', 'parcial', 'sem_resolucao', 'nao_verificada')
 MOTIVO = {
     'aprovado': 'Aprovado na curadoria (fonte e transcrição conferidas); revisão do professor pendente.',
     'candidato': 'Candidato: aguarda conferência da fonte ou do conteúdo; fora da busca.',
@@ -104,6 +107,8 @@ def ler(caminho: Path) -> tuple[dict, str, str]:
         raise ValueError(f'{caminho.name}: falta {", ".join(faltando)} no cabeçalho')
     if meta['curadoria'] not in CONFIABILIDADE:
         raise ValueError(f'{caminho.name}: curadoria deve ser aprovado, candidato ou rejeitado')
+    if meta.get('natureza', NATUREZA[0]) not in NATUREZA or meta.get('verificacao', 'nao_verificada') not in VERIFICACAO:
+        raise ValueError(f'{caminho.name}: natureza ou verificacao fora dos valores de acervo/disciplinas.py')
     return meta, partes[2].strip(), digest(bruto)
 
 
@@ -133,6 +138,8 @@ def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
             'questao': meta.get('questao', '1'), 'segmentacao': 'manual', 'grupo': meta['id'],
             'texto': texto, 'documento_id': meta['id'], 'sha256_fonte': sha_fonte,
             'status_curadoria': status, 'autoria': meta['autoria'], 'licenca': meta['licenca'],
+            'natureza': meta.get('natureza', NATUREZA[0]), 'verificacao': meta.get('verificacao', 'nao_verificada'),
+            'revisao_humana': meta.get('revisao_humana', 'pendente'),
             'fontes_catalogo': [f.strip() for f in meta.get('fontes_catalogo', '').split(',') if f.strip()],
         })
     return itens

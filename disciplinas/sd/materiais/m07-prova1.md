@@ -10,6 +10,9 @@ fontes_catalogo: ufal-sd-prova1
 autoria: Enunciados: prova da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: parcial
+revisao_humana: pendente
 ---
 Prova 1 — Sistemas Digitais
 

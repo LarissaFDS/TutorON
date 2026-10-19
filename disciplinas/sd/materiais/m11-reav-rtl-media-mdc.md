@@ -9,7 +9,10 @@ fonte: REAV.pdf | páginas 1–3 | questões 2 e 4 (prova fotografada; figura do
 fontes_catalogo: ufal-sd-reav
 autoria: Enunciados: reavaliação da disciplina (UFAL). Descrição da figura e esboços: equipe TutorON
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
-curadoria: aprovado
+curadoria: candidato
+natureza: material_da_disciplina
+verificacao: nao_verificada
+revisao_humana: pendente
 ---
 Reavaliação (REAV) — continuação
 

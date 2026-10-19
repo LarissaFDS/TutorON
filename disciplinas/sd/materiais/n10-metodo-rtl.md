@@ -9,6 +9,9 @@ fontes_catalogo: vahid-sistemas-digitais,mit-ocw-6004,free-range-vhdl
 autoria: Equipe TutorON, redigida com auxílio de IA, com texto próprio; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: nao_verificada
+revisao_humana: pendente
 ---
 Projeto RTL (nível de transferência entre registradores)
 

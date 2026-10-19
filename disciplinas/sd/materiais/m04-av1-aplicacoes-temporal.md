@@ -10,6 +10,9 @@ fontes_catalogo: ufal-sd-lista-av1
 autoria: Enunciados: lista de exercícios da disciplina (UFAL); figuras não transcritas
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: sem_resolucao
+revisao_humana: pendente
 ---
 Lista de SD AV1 — Circuitos de Aplicações, Análise Temporal e Identificação de Circuitos
 

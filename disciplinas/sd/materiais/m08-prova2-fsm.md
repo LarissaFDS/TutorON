@@ -10,6 +10,9 @@ fontes_catalogo: ufal-sd-prova2
 autoria: Enunciado: prova da disciplina (UFAL). Descrição da figura e resolução: equipe TutorON, conferidas por simulação em código
 licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
 curadoria: aprovado
+natureza: material_da_disciplina
+verificacao: conferida_por_codigo
+revisao_humana: pendente
 ---
 Prova 2 — Sistemas Digitais
 

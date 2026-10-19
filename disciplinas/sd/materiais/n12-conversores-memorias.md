@@ -9,6 +9,9 @@ fontes_catalogo: ufal-ppc-cc-2011,ufal-ppc-ecomp-2011,kuphaldt-lec-vol4,wikilivr
 autoria: Equipe TutorON, redigida com auxílio de IA; exemplo conferido por código; revisão humana pendente
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
+natureza: nota_da_equipe_ia
+verificacao: exemplos_conferidos
+revisao_humana: pendente
 ---
 Conversores e memórias
 
