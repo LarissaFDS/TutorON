@@ -25,7 +25,7 @@ pergunta + disciplina ──► acervo da disciplina (itens.json + indice.json) 
 |---|---|---|
 | `disciplinas/disciplinas.json` | Cadastro: id, nome, sigla, caminhos do acervo, regras de rigor, uso do livro do Supabase, exemplos. `padrao: paa`. | Nenhum: aponta para `02-acervo` e `04-rag` de sempre. |
 | `acervo/disciplinas.py` | Lê o cadastro (`obter`, `todas`) e gera `itens.json`/`indice.json` de disciplinas cujo acervo é Markdown curado. | Nenhum. |
-| `acervo/retrieval.py` | `search` e `build` aceitam os caminhos `itens`/`indice` (padrão = PAA). | Mesmo comportamento com os valores padrão. |
+| `acervo/retrieval.py` | `search` e `build` aceitam os caminhos `itens`/`indice` (padrão = PAA). Na busca léxica, tokens de notação booleana (Σm(...), ΠM(...), d(...), variáveis S(A,B,C), termos negados A'B') recebem o mesmo bônus das frases exatas. | Mesmos caminhos; o ranking léxico das 20 perguntas de avaliação de PAA é idêntico (teste com instantâneo). |
 | `backend/rag.py` | `recuperar(..., disciplina)` busca só no acervo da disciplina; o livro do Supabase entra só se `livro_supabase` for verdadeiro (hoje, só PAA). | Sem disciplina, usa PAA. |
 | `backend/prompts.py` | `sistema_tutor(disciplina)`: um texto comum, com nome, sigla e `disciplinas/<id>/rigor.md`. `SISTEMA_TUTOR` continua existindo e é **idêntico byte a byte** ao anterior (teste com SHA-256). | Nenhum. |
 | `backend/tarefas.py`, `backend/main.py` | Campo opcional `disciplina` em `/api/perguntar` e `/api/comparar` (`subject` em `/api/v1/questions`); `GET /api/disciplinas`; a disciplina é gravada nos registros. Disciplina desconhecida → 422. | Sem o campo, PAA. |
@@ -55,4 +55,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
-| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos) | em validação: [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice léxico) | em validação, ainda não liberada (falta testar com Gemini e `tutoron-paa`): [curadoria](../disciplinas/sd/CURADORIA.md) |
