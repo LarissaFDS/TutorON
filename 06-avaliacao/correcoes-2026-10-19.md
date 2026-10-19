@@ -163,3 +163,16 @@ Testes antigos ajustados, com motivo:
 3. Repetir o pedido indireto de prompt com o `tutoron-paa`; o código só pega cópia literal.
 4. Revisão humana dos 25 blocos e autorização das transcrições (pendências da [curadoria](../disciplinas/sd/CURADORIA.md)).
 5. Falso positivo conhecido: "busca binária" em SD recebe a nota de numeração.
+
+## 8. Barreira para disciplina em validação (atualização do PR #27)
+
+SD continua "em validação" no cadastro e agora é **recusada pelo servidor** (403) no site, na CLI e na validação A/B, a menos que `TUTORON_LIBERAR_EM_VALIDACAO=sd` (ou `todas`) esteja no ambiente. Padrão: desligado. Testes em `backend/tests/test_barreira.py`, com IA simulada:
+
+- PAA continua disponível;
+- SD é recusada nas três rotas sem liberação, sem busca nem chamada à IA;
+- SD funciona com a liberação;
+- disciplina desconhecida continua 422;
+- a chamada direta à API é barrada, sem passar pelo site;
+- uma disciplina futura "em validação" é barrada sem código novo.
+
+Os problemas conhecidos das seções 1 a 7 continuam valendo: falso positivo de "busca binária", `tutoron-paa` e Gemini não testados, erros de cálculo do `qwen2.5:7b`, revisão humana e autorização das transcrições. A barreira não muda a qualidade das respostas: SD **não** está pronta para alunos.

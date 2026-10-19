@@ -79,6 +79,9 @@ class Settings:
     # (a busca volta a ser exatamente a de antes). A penalidade de hub só vale com o corte ligado.
     acervo_min_similarity: float = 0.45
     acervo_hub_penalty: bool = True
+    # Disciplinas "em validação" no cadastro ficam fora do atendimento normal. Liberação explícita,
+    # só para testes e validações autorizadas: ids separados por vírgula ou "todas". Vazio = nenhuma.
+    disciplinas_em_validacao_liberadas: tuple[str, ...] = ()
 
     rate_limit_per_10min: int = 300
     data_dir: Path = ROOT_DIR / "dados"
@@ -115,6 +118,8 @@ def load_settings() -> Settings:
         supabase_key=_env("SUPABASE_KEY"),
         supabase_min_similarity=_float("SUPABASE_SIMILARIDADE_MINIMA", 0.5),
         acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.45),
+        disciplinas_em_validacao_liberadas=tuple(
+            i.strip().lower() for i in _env("TUTORON_LIBERAR_EM_VALIDACAO").split(",") if i.strip()),
         acervo_hub_penalty=_env("ACERVO_PENALIDADE_HUB", "1") not in ("0", "false", "nao", "não"),
         rate_limit_per_10min=_int("TUTORON_LIMITE_PERGUNTAS_10MIN", 300),
         data_dir=Path(data_dir) if data_dir else ROOT_DIR / "dados",

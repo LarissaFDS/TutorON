@@ -135,13 +135,22 @@
       var dados = await res.json();
       dados.disciplinas.forEach(function (d) {
         disciplinas[d.id] = d;
-        var nome = d.nome + ' (' + d.sigla + ')' + (d.situacao && d.situacao !== 'MVP' ? ' · ' + d.situacao : '');
+        var indisponivel = d.disponivel === false;
+        var nome = d.nome + ' (' + d.sigla + ')' + (indisponivel ? ' · em validação, indisponível'
+          : (d.situacao && d.situacao !== 'MVP' ? ' · ' + d.situacao : ''));
         var opcao = el('option', null, nome);
         opcao.value = d.id;
+        opcao.disabled = indisponivel;  // o servidor também recusa (403): isto só evita o clique
         $('disciplina').append(opcao);
       });
       $('disciplina-campo').hidden = dados.disciplinas.length < 2;
       var pedida = new URL(location.href).searchParams.get('disciplina');
+      var aviso = $('disciplina-aviso');
+      if (disciplinas[pedida] && disciplinas[pedida].disponivel === false) {
+        aviso.textContent = disciplinas[pedida].nome + ' ainda está em validação e não está disponível para uso normal.';
+        aviso.hidden = false;
+        pedida = null;
+      }
       escolherDisciplina(disciplinas[pedida] ? pedida : dados.padrao);
     } catch (e) { /* servidor antigo ou fora do ar: segue com a padrão */ }
   })();
