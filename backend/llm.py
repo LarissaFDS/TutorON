@@ -15,6 +15,7 @@ import asyncio
 import contextvars
 import json
 import logging
+import math
 import time
 from collections.abc import AsyncIterator
 from dataclasses import dataclass, field
@@ -34,10 +35,11 @@ GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:st
 class Unavailable(Exception):
     """O modelo não pôde responder agora; tentar o próximo da cascata."""
 
-    def __init__(self, reason: str, pause_s: float):
+    def __init__(self, reason: str, pause_s: float, info: dict | None = None):
         super().__init__(reason)
         self.reason = reason
         self.pause_s = pause_s
+        self.info = info or {}  # detalhes para o log (ex.: retryDelay e cota do 429)
 
 
 class AllUnavailable(Exception):
@@ -72,14 +74,39 @@ def pause_for_status(status: int) -> float:
 
 def retry_delay(corpo: bytes) -> float:
     """Espera informada pelo Google no 429 (cota diária esgotada pode ser de horas), limitada a 1 h."""
+    espera = detalhes_429(corpo).get("retry_delay_s")
+    return min(3600.0, espera) if espera else 0.0
+
+
+def detalhes_429(corpo: bytes) -> dict:
+    """O que o corpo do 429 diz sobre a cota, para o log: retryDelay (sem limite), quotaId das
+    violações e se a cota esgotada é por dia ou por minuto. Campos ausentes ficam de fora."""
+    info: dict = {}
     try:
         detalhes = json.loads(corpo).get("error", {}).get("details", [])
-        for d in detalhes:
-            if "retryDelay" in d:
-                return min(3600.0, float(str(d["retryDelay"]).rstrip("s")))
     except (ValueError, AttributeError, TypeError):
-        pass
-    return 0.0
+        return info
+    for d in detalhes if isinstance(detalhes, list) else []:
+        if not isinstance(d, dict):
+            continue
+        # Um campo estranho não pode apagar o resto: cada detalhe é lido por conta própria.
+        if "retryDelay" in d and "retry_delay_s" not in info:  # o primeiro, como o código anterior
+            try:
+                espera = float(str(d["retryDelay"]).rstrip("s"))
+            except ValueError:
+                espera = None
+            if espera is not None and math.isfinite(espera) and espera >= 0:
+                info["retry_delay_s"] = espera
+        violacoes = d.get("violations")
+        for v in violacoes if isinstance(violacoes, list) else []:
+            if isinstance(v, dict) and v.get("quotaId"):
+                info.setdefault("quota_ids", []).append(str(v["quotaId"]))
+    ids = " ".join(info.get("quota_ids", []))
+    if "PerDay" in ids:
+        info["cota"] = "por_dia"
+    elif "PerMinute" in ids:
+        info["cota"] = "por_minuto"
+    return info
 
 
 class Breaker:
@@ -115,6 +142,17 @@ class Result:
     finish: str = ""
 
 
+def degradado(modelo: Model, tentativas: list[dict], cascata: list[Model]) -> bool:
+    """A resposta veio do último Gemini da cascata (o flash-lite, o "piso") porque os modelos
+    melhores falharam ou estavam em pausa? Cancelado por outro ter respondido não conta como falha."""
+    gemini = [m for m in cascata if m.provider == "gemini"]
+    if len(gemini) < 2 or modelo != gemini[-1]:
+        return False
+    melhores = {m.key for m in gemini[:-1]}
+    return any(t["modelo"] in melhores and t["resultado"] != "respondeu"
+               and not t["resultado"].startswith("cancelado") for t in tentativas)
+
+
 class LLM:
     def __init__(self, settings: Settings, client: httpx.AsyncClient | None = None):
         self.settings = settings
@@ -146,9 +184,11 @@ class LLM:
                 if response.status_code != 200:
                     corpo = await response.aread()
                     pausa = pause_for_status(response.status_code)
+                    info = {}
                     if response.status_code == 429:
+                        info = detalhes_429(corpo)
                         pausa = max(pausa, retry_delay(corpo))
-                    raise Unavailable(f"HTTP {response.status_code}", pausa)
+                    raise Unavailable(f"HTTP {response.status_code}", pausa, info)
                 async for line in response.aiter_lines():
                     if not line.startswith("data:"):
                         continue
@@ -327,7 +367,7 @@ class LLM:
                         exc = result["error"]
                         self.breaker.trip(model, exc.reason, exc.pause_s)
                         attempts.append({"modelo": model.key, "resultado": exc.reason,
-                                         "segundos": round(time.monotonic() - result["t0"], 2)})
+                                         "segundos": round(time.monotonic() - result["t0"], 2), **exc.info})
                         logger.warning("Modelo %s indisponível: %s", model.key, exc.reason)
                     elif winner is None:
                         winner = result
@@ -367,7 +407,7 @@ class LLM:
                 except Unavailable as exc:
                     self.breaker.trip(model, exc.reason, exc.pause_s)
                     attempts.append({"modelo": model.key, "resultado": exc.reason,
-                                     "segundos": round(time.monotonic() - winner["t0"], 2)})
+                                     "segundos": round(time.monotonic() - winner["t0"], 2), **exc.info})
                     if emitted:
                         yield {"tipo": "reiniciar", "motivo": f"{model.name} parou no meio da resposta"}
                 finally:
