@@ -15,6 +15,7 @@ import asyncio
 import contextvars
 import json
 import logging
+import math
 import time
 from collections.abc import AsyncIterator
 from dataclasses import dataclass, field
@@ -83,16 +84,23 @@ def detalhes_429(corpo: bytes) -> dict:
     info: dict = {}
     try:
         detalhes = json.loads(corpo).get("error", {}).get("details", [])
-        for d in detalhes if isinstance(detalhes, list) else []:
-            if not isinstance(d, dict):
-                continue
-            if "retryDelay" in d:
-                info["retry_delay_s"] = float(str(d["retryDelay"]).rstrip("s"))
-            for v in d.get("violations", []) or []:
-                if isinstance(v, dict) and v.get("quotaId"):
-                    info.setdefault("quota_ids", []).append(str(v["quotaId"]))
     except (ValueError, AttributeError, TypeError):
         return info
+    for d in detalhes if isinstance(detalhes, list) else []:
+        if not isinstance(d, dict):
+            continue
+        # Um campo estranho não pode apagar o resto: cada detalhe é lido por conta própria.
+        if "retryDelay" in d and "retry_delay_s" not in info:  # o primeiro, como o código anterior
+            try:
+                espera = float(str(d["retryDelay"]).rstrip("s"))
+            except ValueError:
+                espera = None
+            if espera is not None and math.isfinite(espera) and espera >= 0:
+                info["retry_delay_s"] = espera
+        violacoes = d.get("violations")
+        for v in violacoes if isinstance(violacoes, list) else []:
+            if isinstance(v, dict) and v.get("quotaId"):
+                info.setdefault("quota_ids", []).append(str(v["quotaId"]))
     ids = " ".join(info.get("quota_ids", []))
     if "PerDay" in ids:
         info["cota"] = "por_dia"

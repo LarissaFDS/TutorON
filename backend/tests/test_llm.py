@@ -161,3 +161,18 @@ def test_degradado_so_quando_o_piso_responde_depois_de_falha_dos_melhores():
     assert not degradado(Model("gemini", "medio"), [{"modelo": "gemini:forte", "resultado": "HTTP 503"}], cascata)
     assert not degradado(lite, [{"modelo": "ollama:local", "resultado": "Ollama local desligado"}], cascata)
     assert not degradado(lite, [], [lite])  # sem modelo melhor, não há o que degradar
+
+
+def test_detalhe_estranho_no_429_nao_apaga_o_resto():
+    def corpo(*detalhes):
+        return json.dumps({"error": {"details": list(detalhes)}}).encode()
+
+    retry = {"@type": "type.googleapis.com/google.rpc.RetryInfo"}
+    assert retry_delay(corpo({"violations": 5}, {**retry, "retryDelay": "40s"})) == 40
+    # Vale o primeiro retryDelay, como antes do registro de cota.
+    assert retry_delay(corpo({**retry, "retryDelay": "10s"}, {**retry, "retryDelay": "99999s"})) == 10
+    # Valores que viram Infinity/NaN no log (JSON inválido) ou negativos são descartados.
+    for ruim in ("1e400s", "nans", "-5s", "abc"):
+        assert "retry_delay_s" not in detalhes_429(corpo({**retry, "retryDelay": ruim}))
+    info = detalhes_429(corpo({"violations": "x"}, {"violations": [{"quotaId": "PerDayX"}]}))
+    assert info == {"quota_ids": ["PerDayX"], "cota": "por_dia"}
