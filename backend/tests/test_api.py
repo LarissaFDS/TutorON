@@ -61,7 +61,17 @@ def test_perguntar_por_tarefa_registra(cliente):
     assert t["status"] == "pronta" and t["texto"].startswith("resposta") and t["fontes"][0]["rotulo"] == "P1"
     linha = json.loads((cliente.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
     assert linha["modelo"] == "g1" and linha["id"] == t["id_resposta"]
+    assert linha["degradado"] is False and t["degradado"] is False
     assert cliente.post("/api/feedback", json={"id": t["id_resposta"], "util": False, "erro_matematico": True}).json()["salvo"]
+
+
+def test_resposta_do_ultimo_gemini_apos_falhas_sai_marcada_como_degradada(tmp_path, monkeypatch):
+    app, _ = montar(tmp_path, monkeypatch, {"g1": ("erro", 429), "g2": ("erro", 503), "g3": ("ok", "resposta lite")})
+    with TestClient(app) as c:
+        t = esperar(c, c.post("/api/perguntar", json={"pergunta": "Quanto custa o merge sort?"}).json())
+        assert t["status"] == "pronta" and t["degradado"] is True
+        linha = json.loads((tmp_path / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
+        assert linha["modelo"] == "g3" and linha["degradado"] is True
 
 
 def test_comparar_e_avaliar_cegos(cliente):

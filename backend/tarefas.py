@@ -23,7 +23,7 @@ from acervo.disciplinas import obter
 
 from . import prompts
 from .dados import Registro, agora, novo_id
-from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result
+from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
 from .rag import contexto, recuperar
 
 logger = logging.getLogger("tutoron.tarefas")
@@ -175,12 +175,17 @@ class Tarefas:
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
             t.texto = r.text
+            # Respondeu o flash-lite porque os modelos melhores falharam ou estavam em pausa.
+            # Só registro e payload por enquanto; a interface não muda.
+            caiu = degradado(r.model, r.attempts, self.llm.cascade())
+            if caiu:
+                logger.warning("Resposta degradada para %s", r.model.key)
             self.registro.anexar("perguntas.jsonl", {
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
                 "resposta": r.text,
-                "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds,
+                "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds, "degradado": caiu,
                 "tentativas": r.attempts, "fontes": t.fontes})
-            t.resultado = {"id_resposta": ident, "segundos": r.seconds}
+            t.resultado = {"id_resposta": ident, "segundos": r.seconds, "degradado": caiu}
             t.status, t.mensagem = "pronta", ""
 
         return self._criar("tutor", trabalho)

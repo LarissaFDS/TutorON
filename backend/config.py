@@ -65,10 +65,19 @@ class Settings:
     local_num_ctx: int = 8192
     local_parallel: int = 2
     embed_model: str = "bge-m3"
+    # Material da equipe com `revisado: false` fica fora da busca em produção. Liga só para medir
+    # (eval/matriz.py gerar --incluir-nao-revisados). A busca lê a mesma variável a cada consulta.
+    acervo_usar_nao_revisados: bool = False
 
     supabase_url: str = ""
     supabase_key: str = field(repr=False, default="")
     supabase_min_similarity: float = 0.5
+    # Corte absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Padrão = o mesmo 0,5
+    # que o livro já usa com o mesmo embedding; calibrar no servidor com
+    # `python eval/diagnostico.py calibrar`. Valor negativo desliga o corte E a penalidade de hub
+    # (a busca volta a ser exatamente a de antes). A penalidade de hub só vale com o corte ligado.
+    acervo_min_similarity: float = 0.5
+    acervo_hub_penalty: bool = True
 
     rate_limit_per_10min: int = 300
     data_dir: Path = ROOT_DIR / "dados"
@@ -100,9 +109,12 @@ def load_settings() -> Settings:
         local_num_ctx=_int("TUTORON_NUM_CTX", 8192),
         local_parallel=max(1, _int("TUTORON_LOCAL_PARALELO", 2)),
         embed_model=_env("TUTORON_EMBED_MODEL", "bge-m3"),
+        acervo_usar_nao_revisados=_env("ACERVO_USAR_NAO_REVISADOS", "0").lower() in ("1", "true", "sim"),
         supabase_url=_env("SUPABASE_URL").rstrip("/"),
         supabase_key=_env("SUPABASE_KEY"),
         supabase_min_similarity=_float("SUPABASE_SIMILARIDADE_MINIMA", 0.5),
+        acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.5),
+        acervo_hub_penalty=_env("ACERVO_PENALIDADE_HUB", "1") not in ("0", "false", "nao", "não"),
         rate_limit_per_10min=_int("TUTORON_LIMITE_PERGUNTAS_10MIN", 300),
         data_dir=Path(data_dir) if data_dir else ROOT_DIR / "dados",
     )

@@ -5,7 +5,9 @@ só olha o acervo da disciplina escolhida, então material de uma nunca aparece 
 Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
 1. Acervo curado local (de PAA: provas, listas e resoluções em ``04-rag/indice.json``),
-   busca híbrida léxica + semântica. Só entram blocos de confiança média/alta.
+   busca híbrida léxica + semântica. Só entram blocos de confiança média/alta e, com o
+   bge-m3 ligado, com similaridade acima de ACERVO_SIMILARIDADE_MINIMA (descontado o "hub").
+   Se nada passar, a lista vem vazia e a resposta não finge ter material.
    É a FONTE PRINCIPAL: mostra como o professor cobra e é o material mais confiável.
 2. Livro-texto de PAA no Supabase/pgvector (``match_chunks``), indexado por
    ``backend/ingest.py``. Complementar: entra depois do acervo, com menos trechos
@@ -35,6 +37,7 @@ MAX_CHARS_TRECHO = 2200
 TIPOS = {
     "prova": "Prova", "lista": "Lista de exercícios", "resolucao_aluno": "Resolução de aluno",
     "gabarito": "Gabarito", "material_estudo": "Material de estudo", "resolucao": "Resolução",
+    "material_equipe": "Material de PAA elaborado pela equipe TutorON",  # não é do professor
 }
 
 
@@ -58,16 +61,23 @@ def _cortar(texto: str) -> str:
     return texto if len(texto) <= MAX_CHARS_TRECHO else texto[:MAX_CHARS_TRECHO].rsplit("\n", 1)[0] + "\n[…]"
 
 
-def _acervo(pergunta: str, vetor: list[float] | None, disciplina: Disciplina) -> list[Trecho]:
+def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None = None,
+            disciplina: Disciplina | None = None) -> list[Trecho]:
     from acervo.retrieval import search
 
-    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor,
+    disciplina = disciplina or obter()
+    corte = settings.acervo_min_similarity if settings else None
+    corte = corte if corte is not None and corte >= 0 else None
+    # Corte negativo = busca exatamente como antes do #23: sem corte e sem penalidade de hub.
+    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor, min_similarity=corte,
+                   hub_penalty=bool(corte is not None and settings.acervo_hub_penalty),
                    itens=disciplina.itens, indice=disciplina.indice)
     trechos = []
     for n, item in enumerate(itens, 1):
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
         tipo = TIPOS.get(item.get("tipo", ""), "Material da disciplina")
-        trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=f"{tipo} de {disciplina.sigla}",
+        titulo = tipo if item.get("tipo") == "material_equipe" else f"{tipo} de {disciplina.sigla}"
+        trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=titulo,
                               texto=_cortar(item["texto"]), referencia=fonte))
     return trechos
 
@@ -103,7 +113,7 @@ async def recuperar(pergunta: str, llm, settings: Settings, disciplina: Discipli
     Sem disciplina, usa a padrão (PAA), como antes do cadastro de disciplinas."""
     disciplina = disciplina or obter()
     vetor = await llm.embed(pergunta)
-    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor, disciplina)
+    tarefa_acervo = asyncio.to_thread(_acervo, pergunta, vetor, settings, disciplina)
     usar_livro = vetor and disciplina.livro_supabase
     tarefa_livro = _livro(llm.client, settings, vetor) if usar_livro else asyncio.sleep(0, result=[])
     acervo, livro = await asyncio.gather(tarefa_acervo, tarefa_livro, return_exceptions=True)
