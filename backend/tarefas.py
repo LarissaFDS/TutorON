@@ -19,6 +19,8 @@ import time
 from collections.abc import Awaitable, Callable
 from dataclasses import dataclass, field
 
+from acervo.disciplinas import obter
+
 from . import prompts
 from .dados import Registro, agora, novo_id
 from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result
@@ -151,9 +153,11 @@ class Tarefas:
         raise AllUnavailable(tentativas)
 
     # ------------------------------------------------------------------ modo Tutor
-    def perguntar(self, pergunta: str, contexto_aluno: str | None) -> Tarefa:
+    def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None) -> Tarefa:
+        d = obter(disciplina)  # antes da tarefa: disciplina desconhecida falha na hora, não em segundo plano
+
         async def trabalho(t: Tarefa) -> None:
-            trechos = await recuperar(pergunta, self.llm, self.settings)
+            trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.fontes = [x.publico() for x in trechos]
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
             prompt = prompts.prompt_tutor(pergunta, contexto(trechos, len(pergunta) + len(contexto_aluno or "")), contexto_aluno)
@@ -163,15 +167,17 @@ class Tarefas:
 
             ident = novo_id()
             try:
-                r = await self._gerar(prompts.SISTEMA_TUTOR, prompt, t, ao_texto=ao_texto)
+                r = await self._gerar(prompts.sistema_tutor(d), prompt, t, ao_texto=ao_texto)
             except AllUnavailable as exc:
-                self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "pergunta": pergunta,
-                                                         "erro": "nenhum_modelo", "tentativas": exc.attempts})
+                self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                         "pergunta": pergunta, "erro": "nenhum_modelo",
+                                                         "tentativas": exc.attempts})
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
             t.texto = r.text
             self.registro.anexar("perguntas.jsonl", {
-                "id": ident, "data": agora(), "pergunta": pergunta, "contexto": contexto_aluno, "resposta": r.text,
+                "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
+                "resposta": r.text,
                 "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds,
                 "tentativas": r.attempts, "fontes": t.fontes})
             t.resultado = {"id_resposta": ident, "segundos": r.seconds}
@@ -180,9 +186,11 @@ class Tarefas:
         return self._criar("tutor", trabalho)
 
     # ------------------------------------------------------------------ modo Validação
-    def comparar(self, pergunta: str, contexto_aluno: str | None) -> Tarefa:
+    def comparar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None) -> Tarefa:
+        d = obter(disciplina)
+
         async def trabalho(t: Tarefa) -> None:
-            trechos = await recuperar(pergunta, self.llm, self.settings)
+            trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.status, t.mensagem = "gerando", "Gerando as duas respostas…"
             prompt_tutor = prompts.prompt_tutor(pergunta, contexto(trechos, len(pergunta) + len(contexto_aluno or "")), contexto_aluno)
             prompt_gen = prompts.prompt_generico(pergunta, contexto_aluno)
@@ -192,7 +200,7 @@ class Tarefas:
                 # de ~3 min para ~1 min. Os dois lados usam a mesma configuração (comparação justa).
                 pensar = self.settings.local_thinking_validacao
                 tutor, generico = await asyncio.gather(
-                    self._gerar(prompts.SISTEMA_TUTOR, prompt_tutor, t, raciocinio=pensar),
+                    self._gerar(prompts.sistema_tutor(d), prompt_tutor, t, raciocinio=pensar),
                     self._gerar(None, prompt_gen, t, models=modelos_gen, raciocinio=pensar))
             except AllUnavailable:
                 t.status, t.mensagem = "erro", MSG_ERRO
@@ -221,7 +229,7 @@ class Tarefas:
                              "sistema": "Genérico (mesmo modelo, sem material nem instruções)"},
             }
             sessao = novo_id()
-            self.registro.nova_comparacao({"sessao": sessao, "data": agora(), "pergunta": pergunta,
+            self.registro.nova_comparacao({"sessao": sessao, "data": agora(), "disciplina": d.id, "pergunta": pergunta,
                                            "contexto": contexto_aluno, "lados": {"A": ordem[0], "B": ordem[1]},
                                            "respostas": par})
             t.resultado = {"sessao": sessao, "pergunta": pergunta, "A": par[ordem[0]]["texto"], "B": par[ordem[1]]["texto"]}

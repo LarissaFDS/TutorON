@@ -18,7 +18,7 @@
   <div class="page masthead__intro">
     <h1>Entenda as matérias da faculdade, passo a passo</h1>
     <p class="masthead__lede">O TutorON é uma IA que explica o conteúdo do jeito que ele é cobrado nas provas, com base no material das disciplinas. Começamos pelo curso de Computação.</p>
-    <p class="masthead__nota">Fase MVP: por enquanto, o TutorON responde sobre Projeto e Análise de Algoritmos (PAA), a disciplina mais difícil do curso.</p>
+    <p class="masthead__nota">Fase MVP: o TutorON responde sobre Projeto e Análise de Algoritmos (PAA), a disciplina mais difícil do curso. Sistemas Digitais (SD) está em validação.</p>
   </div>
 </header>
 
@@ -45,6 +45,10 @@
     </div>
 
     <form id="form-tutor" class="composer" novalidate>
+      <div class="field estreito" id="disciplina-campo" hidden>
+        <label class="field__label" for="disciplina">Disciplina</label>
+        <select class="input" id="disciplina"></select>
+      </div>
       <div class="field">
         <label class="field__label" for="pergunta">Sua dúvida</label>
         <textarea class="input" id="pergunta" maxlength="4000" rows="4" required

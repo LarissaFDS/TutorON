@@ -9,6 +9,7 @@ Rotas públicas (podem ser acessadas pela internet via túnel):
     POST /api/feedback        "ajudou?" / "tem erro" de uma resposta do modo Tutor
     POST /api/avaliar         modo Validação: grava as notas do aluno
     GET  /api/status          modelos disponíveis agora
+    GET  /api/disciplinas     disciplinas cadastradas (mesma IA, acervos separados)
     POST /api/v1/questions    compatibilidade com a CLI (frontend/cli.py)
 
 Rotas só desta máquina (bloqueadas quando a requisição vem pelo túnel):
@@ -30,6 +31,8 @@ from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
+from acervo import disciplinas
+
 from .config import Settings, load_settings
 from .dados import Limitador, Registro, agora
 from .llm import LLM, Model
@@ -46,9 +49,25 @@ MSG_INDISPONIVEL = "Não conseguimos gerar a resposta agora. Tente de novo em al
 # Esquemas
 # ---------------------------------------------------------------------------
 
+def disciplina_cadastrada(valor: str | None) -> str | None:
+    """Sem disciplina, vale a padrão (PAA). Disciplina desconhecida é erro do pedido, não do servidor."""
+    if valor is None or not valor.strip():
+        return None
+    try:
+        return disciplinas.obter(valor).id
+    except KeyError:
+        raise ValueError("Disciplina não cadastrada.") from None
+
+
 class Pergunta(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
     contexto: str | None = Field(default=None, max_length=6000)
+    disciplina: str | None = Field(default=None, max_length=40)
+
+    @field_validator("disciplina")
+    @classmethod
+    def disciplina_valida(cls, valor: str | None) -> str | None:
+        return disciplina_cadastrada(valor)
 
     @field_validator("pergunta")
     @classmethod
@@ -89,6 +108,12 @@ class QuestionRequest(BaseModel):
     """Contrato antigo de /api/v1/questions, usado pela CLI."""
     question: str = Field(..., min_length=1, max_length=4000)
     context: str | None = Field(default=None, max_length=8000)
+    subject: str | None = Field(default=None, max_length=40)
+
+    @field_validator("subject")
+    @classmethod
+    def subject_valido(cls, valor: str | None) -> str | None:
+        return disciplina_cadastrada(valor)
 
     @field_validator("question")
     @classmethod
@@ -204,16 +229,20 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             dados["url_publica"] = url.read_text(encoding="utf-8-sig").strip() if url.exists() else None
         return dados
 
+    @app.get("/api/disciplinas")
+    async def lista_disciplinas() -> dict:
+        return {"padrao": disciplinas.obter().id, "disciplinas": [d.publico() for d in disciplinas.todas()]}
+
     # ------------------------------------------------------------------ modo Tutor e Validação (tarefas)
     @app.post("/api/perguntar")
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto).publico()
+        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
 
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto).publico()
+        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
 
     @app.get("/api/tarefas/{ident}")
     async def tarefa(ident: str) -> JSONResponse:
@@ -240,6 +269,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         notas = {lados["A"]: corpo.A.model_dump(), lados["B"]: corpo.B.model_dump()}
         app.state.registro.anexar("validacao/avaliacoes.jsonl", {
             "sessao": corpo.sessao, "data": agora(), "data_comparacao": comparacao["data"],
+            "disciplina": comparacao.get("disciplina", disciplinas.obter().id),
             "pergunta": comparacao["pergunta"], "contexto": comparacao.get("contexto"),
             "preferida": corpo.preferida,
             "preferida_condicao": "empate" if corpo.preferida == "empate" else lados[corpo.preferida],
@@ -274,14 +304,14 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
-        t = app.state.tarefas.perguntar(payload.question, payload.context)
+        t = app.state.tarefas.perguntar(payload.question, payload.context, payload.subject)
         while t.concluida is None:
             await asyncio.sleep(0.5)
         if t.status != "pronta":
             raise HTTPException(503, MSG_INDISPONIVEL)
         return QuestionResponse(answer=t.texto, source="tutoron-rag", metadata={
             "model": t.rotulo, "latency_ms": round(t.resultado.get("segundos", 0) * 1000),
-            "chunks_used": len(t.fontes), "sources": t.fontes})
+            "chunks_used": len(t.fontes), "sources": t.fontes, "subject": disciplinas.obter(payload.subject).id})
 
     return app
 

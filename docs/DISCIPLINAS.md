@@ -1,0 +1,58 @@
+# Disciplinas no TutorON: uma IA, acervos separados
+
+O TutorON tem **um** tutor: o mesmo serviço de IA (corrida Gemini → modelo local em `backend/llm.py`), o mesmo fluxo de tarefas (`backend/tarefas.py`), a mesma busca (`acervo/retrieval.py`) e o mesmo texto de instruções (`backend/prompts.py`). Uma disciplina só acrescenta **conhecimento**: o acervo, as regras de rigor da área e exemplos de pergunta. Não existe modelo, chave, rota ou prompt independente por disciplina.
+
+```
+pergunta + disciplina ──► acervo da disciplina (itens.json + indice.json) ──► trechos [P1]…
+                                                                                  │
+          disciplinas/<id>/rigor.md ──► prompt do tutor (texto comum) ◄───────────┘
+                                                │
+                                   mesma IA (Gemini → local) ──► resposta com fontes
+```
+
+## Diagnóstico de como PAA funcionava (auditoria de 19/10/2026, a partir de `dev` em 29ce773)
+
+- **Interface → API → IA.** O site (`backend/web/app.js`) envia `POST /api/perguntar` com `{pergunta, contexto}`. `backend/tarefas.py` cria uma tarefa em segundo plano: `rag.recuperar()` → `rag.contexto()` → `prompts.prompt_tutor()` → `LLM.stream()` com `SISTEMA_TUTOR`. O site consulta `GET /api/tarefas/{id}` a cada segundo. A CLI usa `POST /api/v1/questions`, que passa pelo mesmo fluxo.
+- **RAG real, híbrido.** `acervo/retrieval.search` combina BM25 simplificado e similaridade de embeddings `bge-m3` (reciprocal rank fusion) sobre `04-rag/indice.json`. Ele revalida cada bloco contra `02-acervo/itens.json` (hash e confiabilidade) e só aceita blocos de confiança média ou alta. Sem Ollama, cai para a busca léxica.
+- **Segunda fonte:** o livro-texto de PAA no Supabase/pgvector (`match_chunks`), consultado em paralelo e só como complemento. **A tabela não tem coluna de disciplina.**
+- **Acervo de PAA:** gerado pelo pipeline de OCR (`python -m acervo pipeline`), que varre **toda** a pasta `materiais/`, segmenta por questão (`02-acervo`), faz triagem de confiabilidade (`03-triagem`) e indexa (`04-rag`).
+- **Acoplamentos a PAA encontrados:** caminhos fixos do índice em `retrieval.py`; título "… de PAA" em `rag.py`; nome da disciplina e regras do Teorema Mestre no `SISTEMA_TUTOR`; exemplos de pergunta no `app.js`; o livro do Supabase sem filtro; a lista `TOPICS` e os bônus léxicos do pipeline de OCR. Não havia nenhum mecanismo de escolha de disciplina.
+- **Testes existentes:** `backend/tests` (API, cascata de modelos, erros do site) e `tests_acervo` (pipeline, confiança, cache, design).
+
+## O que mudou (a menor evolução que separa os acervos)
+
+| Peça | Mudança | Efeito em PAA |
+|---|---|---|
+| `disciplinas/disciplinas.json` | Cadastro: id, nome, sigla, caminhos do acervo, regras de rigor, uso do livro do Supabase, exemplos. `padrao: paa`. | Nenhum: aponta para `02-acervo` e `04-rag` de sempre. |
+| `acervo/disciplinas.py` | Lê o cadastro (`obter`, `todas`) e gera `itens.json`/`indice.json` de disciplinas cujo acervo é Markdown curado. | Nenhum. |
+| `acervo/retrieval.py` | `search` e `build` aceitam os caminhos `itens`/`indice` (padrão = PAA). | Mesmo comportamento com os valores padrão. |
+| `backend/rag.py` | `recuperar(..., disciplina)` busca só no acervo da disciplina; o livro do Supabase entra só se `livro_supabase` for verdadeiro (hoje, só PAA). | Sem disciplina, usa PAA. |
+| `backend/prompts.py` | `sistema_tutor(disciplina)`: um texto comum, com nome, sigla e `disciplinas/<id>/rigor.md`. `SISTEMA_TUTOR` continua existindo e é **idêntico byte a byte** ao anterior (teste com SHA-256). | Nenhum. |
+| `backend/tarefas.py`, `backend/main.py` | Campo opcional `disciplina` em `/api/perguntar` e `/api/comparar` (`subject` em `/api/v1/questions`); `GET /api/disciplinas`; a disciplina é gravada nos registros. Disciplina desconhecida → 422. | Sem o campo, PAA. |
+| `backend/web` | Seletor "Disciplina" no modo Tutor (só aparece com 2 ou mais disciplinas); exemplos por disciplina; `?disciplina=sd` na URL. O modo Validação continua em PAA. | Mesma tela, com o seletor. |
+
+**Isolamento:** cada disciplina tem índice próprio, então uma pergunta sobre Karnaugh nunca recebe blocos de PAA por palavras em comum, nem vice-versa. O livro de PAA no Supabase não é consultado em SD.
+
+**Sem material relevante:** a busca não devolve nada, o prompt recebe "Nenhum trecho do material foi encontrado para esta pergunta." e nenhum rótulo [P]; o tutor deve dizer que a resposta não veio do material (regra do prompt comum).
+
+## Como cadastrar uma nova disciplina
+
+1. Crie `disciplinas/<id>/` com:
+   - `rigor.md`: a seção "# Rigor …" com as regras da área (veja `disciplinas/sd/rigor.md`). É o único texto de instrução específico da disciplina.
+   - `materiais/*.md`: um bloco por arquivo, com cabeçalho entre `---`:
+     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `fontes_catalogo` e `revisao_professor`.
+   - `fontes.json` e `CURADORIA.md`: catálogo e justificativa da curadoria (modelo: `disciplinas/sd`).
+2. Acrescente a disciplina em `disciplinas/disciplinas.json` (`itens`, `indice`, `materiais`, `rigor`, `assuntos`, `exemplos`, `livro_supabase: false`).
+3. Gere o acervo: `python -m acervo.disciplinas <id> --embeddings` (sem `--embeddings`, ou sem o `bge-m3`, o índice fica só léxico).
+4. Rode os testes. Nada no backend, no prompt ou no site precisa mudar; `backend/tests/test_disciplinas.py::test_nova_disciplina_so_com_cadastro_e_acervo` comprova isso.
+
+Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de OCR de PAA varre essa pasta inteira.
+
+**Livro-texto no Supabase para outra disciplina:** primeiro acrescente uma coluna `disciplina` em `documents` e um parâmetro de filtro em `match_chunks` (`docs/schema.sql`), e só depois ative `livro_supabase`. Sem isso, a busca misturaria livros de disciplinas diferentes.
+
+## Disciplinas cadastradas
+
+| id | Disciplina | Acervo | Situação |
+|---|---|---|---|
+| `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos) | em validação: [curadoria](../disciplinas/sd/CURADORIA.md) |
