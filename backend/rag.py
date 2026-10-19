@@ -59,9 +59,10 @@ def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None 
     from acervo.retrieval import search
 
     corte = settings.acervo_min_similarity if settings else None
-    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor,
-                   min_similarity=corte if corte is not None and corte >= 0 else None,
-                   hub_penalty=bool(settings and settings.acervo_hub_penalty))
+    corte = corte if corte is not None and corte >= 0 else None
+    # Corte negativo = busca exatamente como antes do #23: sem corte e sem penalidade de hub.
+    itens = search(pergunta, k=ACERVO_K, semantic=vetor is not None, vector=vetor, min_similarity=corte,
+                   hub_penalty=bool(corte is not None and settings.acervo_hub_penalty))
     trechos = []
     for n, item in enumerate(itens, 1):
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]

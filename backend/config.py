@@ -71,7 +71,8 @@ class Settings:
     supabase_min_similarity: float = 0.5
     # Corte absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Padrão = o mesmo 0,5
     # que o livro já usa com o mesmo embedding; calibrar no servidor com
-    # `python eval/diagnostico.py calibrar`. Valor negativo desliga o corte (volta ao filtro antigo).
+    # `python eval/diagnostico.py calibrar`. Valor negativo desliga o corte E a penalidade de hub
+    # (a busca volta a ser exatamente a de antes). A penalidade de hub só vale com o corte ligado.
     acervo_min_similarity: float = 0.5
     acervo_hub_penalty: bool = True
 
