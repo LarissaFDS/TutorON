@@ -18,7 +18,7 @@ Por isso este relatório **ainda não diz qual alavanca (modelo, prompt ou recup
 | [#24](https://github.com/LarissaFDS/TutorON/pull/24) | Curadoria: 5 materiais de PD da equipe (`revisado: false`) | Não | Precisa de revisão humana do conteúdo e de reindexar no servidor |
 | [#25](https://github.com/LarissaFDS/TutorON/pull/25) | Prompt novo + citações legíveis | **Sim** | **Rascunho**: só entra se a matriz aprovar |
 
-Os PRs #21 a #25 foram mesclados juntos numa cópia local, sem conflito: 102 testes passam (a única falha é a conhecida do pymupdf). Material da equipe com `revisado: false` fica fora da busca de produção (#24).
+Os PRs #21 a #25 foram mesclados juntos numa cópia local, sem conflito: 104 testes passam (a única falha é a conhecida do pymupdf). Material da equipe com `revisado: false` fica fora da busca de produção (#24).
 
 ## Números já medidos
 
