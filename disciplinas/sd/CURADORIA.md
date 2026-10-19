@@ -155,7 +155,7 @@ Conclusão: a recuperação foi corrigida, mas **a disciplina não está validad
 ## 5. Pendências
 
 1. Revisão humana (professor ou monitor) dos 25 blocos, na ordem de prioridade da seção 3. Os blocos m09 e m11 só voltam à busca depois dela.
-2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. Até lá, SD fica "em validação".
+2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. Até lá, SD fica "em validação". Teste de 19/10: Gemini acertou a pergunta básica; o modelo local errou Karnaugh com irrelevâncias. Depois das correções, o `qwen2.5:7b` errou as 4 questões de cálculo da bateria `eval/bateria_tutor.py`: SD continua **bloqueada para o modelo local** ([correções e pendências](../../06-avaliacao/correcoes-2026-10-19.md)).
 3. Descrever as figuras que faltam (AV1 Q5, Q9, Q21–Q25; AV2 Q3, Q4, Q7; Prova 1 Q2; Prova 2 Q1 e Q3).
 4. Transcrever a resolução manuscrita da Prova 2 e as gravações de monitoria (candidatos).
 5. Confirmar o plano de ensino atual e o livro adotado.

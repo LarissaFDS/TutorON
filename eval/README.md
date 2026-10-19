@@ -35,3 +35,13 @@ python eval/diagnostico.py --saida eval/results/rodada2 calibrar   # limiar ACER
 ```
 
 `--perguntas` aceita prefixos de id separados por vírgula (`A1,A2,A3`, `P1`, `N2`…).
+
+## Relevância da busca e bateria do tutor (19/10/2026)
+
+```bash
+python eval/relevancia.py             # 52 perguntas rotuladas (PAA e SD): bloco certo ou nenhum bloco
+python eval/relevancia.py --vetores   # grava os embeddings das perguntas novas (precisa do bge-m3)
+python eval/bateria_tutor.py --modelo tutoron-paa --saida eval/results/bateria-tutor-tutoron-paa.json
+```
+
+A bateria do tutor passa pelo fluxo real do site e grava fontes, resposta, rótulos citados e ajustes; a correção é avaliada à mão com os gabaritos de `tests_acervo/test_casos_sd.py`. Resultados: `06-avaliacao/correcoes-2026-10-19.md`.
