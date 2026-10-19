@@ -32,6 +32,7 @@ MAX_CHARS_TRECHO = 2200
 TIPOS = {
     "prova": "Prova", "lista": "Lista de exercícios", "resolucao_aluno": "Resolução de aluno",
     "gabarito": "Gabarito", "material_estudo": "Material de estudo", "resolucao": "Resolução",
+    "material_equipe": "Material de PAA elaborado pela equipe TutorON",  # não é do professor
 }
 
 
@@ -67,7 +68,8 @@ def _acervo(pergunta: str, vetor: list[float] | None, settings: Settings | None 
     for n, item in enumerate(itens, 1):
         fonte = item["fonte_original"].replace("\\", "/").split("/")[-1]
         tipo = TIPOS.get(item.get("tipo", ""), "Material da disciplina")
-        trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=f"{tipo} de PAA",
+        titulo = tipo if item.get("tipo") == "material_equipe" else f"{tipo} de PAA"
+        trechos.append(Trecho(rotulo=f"P{n}", origem="acervo", titulo=titulo,
                               texto=_cortar(item["texto"]), referencia=fonte))
     return trechos
 

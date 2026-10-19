@@ -14,6 +14,11 @@ def tokens(text):
     return [t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
 
 
+def usar_nao_revisados():
+    # Mesma variável de backend/config.py (o .env já foi carregado no ambiente pelo backend).
+    return os.environ.get('ACERVO_USAR_NAO_REVISADOS', '0').strip().lower() in ('1', 'true', 'sim')
+
+
 def embed_document(text, model):
     # Mantém uma questão por chunk, mas representa todo o texto por janelas
     # menores. OCR ruidoso pode ultrapassar limites do tokenizer antes de 8k caracteres.
@@ -103,6 +108,7 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
     index = read_json(index_path, {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
     live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
+    incluir_nao_revisados = usar_nao_revisados()
     chunks = index['chunks']
     query = tokens(question)
     words = [tokens(c['texto']) for c in chunks]
@@ -139,6 +145,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
     semantic_ranks = {i: rank for rank, i in enumerate(sorted(range(len(chunks)), key=lambda i: semantic_scores[i], reverse=True), 1)} if semantic_scores else {}
     for i, item in enumerate(chunks):
         current = live.get(item['id'])
+        if current and current.get('revisado') is False and not incluir_nao_revisados:
+            continue  # material da equipe ainda sem revisão humana (acervo/equipe.py)
         if not current or current['sha256'] != item['sha256'] or current['confiabilidade'] not in ('media', 'alta'):
             continue
         exato = any(e in searchable(question) and e in searchable(item['texto']) for e in ['asterisco', 'algoritmo x', 'composto'])
