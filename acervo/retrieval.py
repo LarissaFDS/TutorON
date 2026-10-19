@@ -98,6 +98,8 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
     hub_penalty) maior ou igual a ela; palavra em comum sozinha não basta. Pode devolver lista vazia.
     Sem embeddings (busca só léxica), o filtro antigo continua valendo. None mantém o comportamento antigo."""
     index_path = root / '04-rag/indice.json'
+    # mtime antes de ler: se o índice for refeito no meio, a próxima consulta vê outro mtime.
+    mtime = index_path.stat().st_mtime_ns if index_path.exists() else 0
     index = read_json(index_path, {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
     live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
@@ -129,7 +131,7 @@ def search(question, root=ROOT, k=4, semantic=True, vector=None, min_similarity=
             mode = 'lexical_fallback'
     raw_scores = list(semantic_scores)
     if semantic_scores and hub_penalty:
-        chave = (str(index_path), index_path.stat().st_mtime_ns if index_path.exists() else 0)
+        chave = (str(index_path), mtime, len(index['vectors']))
         semantic_scores = [s - h for s, h in zip(semantic_scores, hub_scores(index['vectors'], chave))]
     result = []
     lexical_order = sorted(range(len(chunks)), key=lambda i: scores[i], reverse=True)

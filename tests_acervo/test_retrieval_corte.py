@@ -99,5 +99,27 @@ def test_backend_passa_o_corte_da_configuracao(monkeypatch):
     monkeypatch.setattr(retrieval, "search", lambda *a, **kw: chamadas.append(kw) or [])
     rag._acervo("p", [0.1], Settings(acervo_min_similarity=0.62))
     rag._acervo("p", [0.1], dataclasses.replace(Settings(), acervo_min_similarity=-1, acervo_hub_penalty=False))
+    rag._acervo("p", [0.1], Settings(acervo_min_similarity=-1))  # penalidade ligada, mas corte desligado
     assert chamadas[0]["min_similarity"] == 0.62 and chamadas[0]["hub_penalty"] is True
     assert chamadas[1]["min_similarity"] is None and chamadas[1]["hub_penalty"] is False
+    assert chamadas[2]["min_similarity"] is None and chamadas[2]["hub_penalty"] is False
+
+
+def test_indice_refeito_com_o_mesmo_mtime_nao_reusa_hub_antigo(acervo):
+    import os
+
+    caminho = acervo / "04-rag/indice.json"
+    search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.0, hub_penalty=True)
+    mtime = caminho.stat().st_mtime_ns
+    novo = {"id": "lis", "sha256": "lis", "confiabilidade": "media", "texto": "Mochila e LIS.",
+            "fonte_original": "lis.pdf", "tipo": "lista", "assunto": "x"}
+    for nome in ("02-acervo/itens.json", "04-rag/indice.json"):
+        dados = json.loads((acervo / nome).read_text(encoding="utf-8"))
+        if nome.startswith("04"):
+            dados["chunks"].append(novo)
+            dados["vectors"].append(_norm([0.95, 0.05, 0.3]))
+        else:
+            dados.append(novo)
+        (acervo / nome).write_text(json.dumps(dados), encoding="utf-8")
+    os.utime(caminho, ns=(mtime, mtime))  # sistemas de arquivo com mtime grosso
+    assert "lis" in ids(search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.0, hub_penalty=True))
