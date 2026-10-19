@@ -14,6 +14,11 @@ def tokens(text):
     return [t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
 
 
+def usar_nao_revisados():
+    # Mesma variável de backend/config.py (o .env já foi carregado no ambiente pelo backend).
+    return os.environ.get('ACERVO_USAR_NAO_REVISADOS', '0').strip().lower() in ('1', 'true', 'sim')
+
+
 def embed_document(text, model):
     # Mantém uma questão por chunk, mas representa todo o texto por janelas
     # menores. OCR ruidoso pode ultrapassar limites do tokenizer antes de 8k caracteres.
@@ -64,11 +69,6 @@ def cosine(a, b):
     if len(a) != len(b):
         raise ValueError('Dimensões de embeddings divergentes')
     return sum(x*y for x,y in zip(a,b)) / (math.sqrt(sum(x*x for x in a)) * math.sqrt(sum(y*y for y in b)) or 1)
-
-
-def usar_nao_revisados():
-    # Mesma variável de backend/config.py (o .env já foi carregado no ambiente pelo backend).
-    return os.environ.get('ACERVO_USAR_NAO_REVISADOS', '0').strip().lower() in ('1', 'true', 'sim')
 
 
 def search(question, root=ROOT, k=4, semantic=True, vector=None):
