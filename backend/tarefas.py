@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 
 from acervo.disciplinas import obter
 
-from . import prompts
+from . import prompts, seguranca
 from .dados import Registro, agora, novo_id
 from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
 from .rag import contexto, recuperar
@@ -157,6 +157,16 @@ class Tarefas:
         d = obter(disciplina)  # antes da tarefa: disciplina desconhecida falha na hora, não em segundo plano
 
         async def trabalho(t: Tarefa) -> None:
+            if seguranca.pedido_de_instrucoes(pergunta):
+                # Não chega à IA: a recusa não depende de o modelo obedecer ao prompt.
+                ident = novo_id()
+                t.texto = seguranca.recusa(d.nome)
+                self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                         "pergunta": pergunta, "contexto": contexto_aluno,
+                                                         "resposta": t.texto, "bloqueio": "pedido_de_instrucoes"})
+                t.resultado = {"id_resposta": ident, "segundos": 0, "degradado": False}
+                t.status, t.mensagem = "pronta", ""
+                return
             trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.fontes = [x.publico() for x in trechos]
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
@@ -166,15 +176,17 @@ class Tarefas:
                 t.texto = texto
 
             ident = novo_id()
+            sistema = prompts.sistema_tutor(d)
             try:
-                r = await self._gerar(prompts.sistema_tutor(d), prompt, t, ao_texto=ao_texto)
+                r = await self._gerar(sistema, prompt, t, ao_texto=ao_texto)
             except AllUnavailable as exc:
                 self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                          "pergunta": pergunta, "erro": "nenhum_modelo",
                                                          "tentativas": exc.attempts})
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
-            t.texto = r.text
+            texto, ajustes = seguranca.revisar(r.text, sistema, {x.rotulo for x in trechos}, d.nome)
+            t.texto = texto
             # Respondeu o flash-lite porque os modelos melhores falharam ou estavam em pausa.
             # Só registro e payload por enquanto; a interface não muda.
             caiu = degradado(r.model, r.attempts, self.llm.cascade())
@@ -182,7 +194,7 @@ class Tarefas:
                 logger.warning("Resposta degradada para %s", r.model.key)
             self.registro.anexar("perguntas.jsonl", {
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
-                "resposta": r.text,
+                "resposta": texto, **({"resposta_original": r.text, "ajustes": ajustes} if ajustes else {}),
                 "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds, "degradado": caiu,
                 "tentativas": r.attempts, "fontes": t.fontes})
             t.resultado = {"id_resposta": ident, "segundos": r.seconds, "degradado": caiu}
@@ -204,8 +216,9 @@ class Tarefas:
                 # No local, os dois lados rodam um depois do outro na GPU; sem raciocínio a espera cai
                 # de ~3 min para ~1 min. Os dois lados usam a mesma configuração (comparação justa).
                 pensar = self.settings.local_thinking_validacao
+                sistema = prompts.sistema_tutor(d)
                 tutor, generico = await asyncio.gather(
-                    self._gerar(prompts.sistema_tutor(d), prompt_tutor, t, raciocinio=pensar),
+                    self._gerar(sistema, prompt_tutor, t, raciocinio=pensar),
                     self._gerar(None, prompt_gen, t, models=modelos_gen, raciocinio=pensar))
             except AllUnavailable:
                 t.status, t.mensagem = "erro", MSG_ERRO
@@ -222,10 +235,12 @@ class Tarefas:
                     pass
                 finally:
                     SEM_RACIOCINIO.reset(marca)
+            # O lado TutorON passa pela mesma revisão do modo Tutor (o genérico é o controle, sem revisão).
+            texto_tutor, _ = seguranca.revisar(tutor.text, sistema, {x.rotulo for x in trechos}, d.nome)
             ordem = ["tutoron", "generico"]
             secrets.SystemRandom().shuffle(ordem)
             par = {
-                "tutoron": {"texto": tutor.text, "provedor": tutor.model.provider, "modelo": tutor.model.name,
+                "tutoron": {"texto": texto_tutor, "provedor": tutor.model.provider, "modelo": tutor.model.name,
                             "segundos": tutor.seconds, "tentativas": tutor.attempts,
                             "fontes": [x.publico() for x in trechos], "sistema": "TutorON (RAG + prompt)"},
                 "generico": {"texto": generico.text, "provedor": generico.model.provider,

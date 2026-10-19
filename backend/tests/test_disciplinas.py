@@ -15,6 +15,9 @@ from backend import tarefas
 
 # SHA-256 do prompt de PAA antes do cadastro de disciplinas (commit 29ce773): PAA não pode mudar.
 PROMPT_PAA_ORIGINAL = "d83b5fc5b9ea78fa605e1d29bc87a2d11979b9f02c28cfa9e7be709127def749"
+# Única linha acrescentada ao rigor de PAA depois do teste de 19/10 (mochila sem casos base).
+LINHA_PD = ("\n- Em programação dinâmica, defina o subproblema, os casos base, a recorrência com todas as "
+            "condições (ex.: na mochila 0/1, só considerar o item i quando wᵢ ≤ w) e a ordem de preenchimento da tabela.")
 
 
 async def sem_embedding(texto):
@@ -58,7 +61,11 @@ def ids_sd():
 # ---------------------------------------------------------------- PAA preservado
 
 def test_prompt_de_paa_identico_ao_do_mvp():
-    assert hashlib.sha256(prompts.SISTEMA_TUTOR.encode()).hexdigest() == PROMPT_PAA_ORIGINAL
+    """O cadastro de disciplinas não mudou o prompt de PAA. Depois do teste de 19/10, o prompt ganhou
+    seções novas (instruções internas, citações, outra disciplina); o texto do MVP continua dentro
+    dele sem alteração: backend/tests/test_seguranca.py::test_prompt_novo_so_acrescenta_secoes_ao_de_paa."""
+    anterior = prompts.SISTEMA_TUTOR_ANTERIOR.replace(LINHA_PD, "")
+    assert hashlib.sha256(anterior.encode()).hexdigest() == PROMPT_PAA_ORIGINAL
     assert prompts.sistema_tutor() == prompts.sistema_tutor(disciplinas.obter("paa")) == prompts.SISTEMA_TUTOR
 
 
@@ -102,7 +109,8 @@ def test_acervos_nao_se_misturam():
         return vistos
 
     assert asyncio.run(buscar("paa")) <= {f"{t} de PAA" for t in rag.TIPOS.values()} | {"Material da disciplina de PAA"}
-    assert asyncio.run(buscar("sd")) <= {f"{t} de SD" for t in rag.TIPOS.values()} | {"Material da disciplina de SD"}
+    assert asyncio.run(buscar("sd")) <= ({f"{t} de SD" for t in rag.TIPOS.values()}
+                                         | {"Material da disciplina de SD", f"{rag.NOTA_EQUIPE} de SD"})
     assert ids_paa().isdisjoint(ids_sd())
 
 
@@ -144,7 +152,8 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
     assert modelo_paa == modelo_sd  # mesma cascata de modelos, mesmo serviço
     # O prompt de sistema é o mesmo texto do tutor; só mudam o nome da disciplina e as regras de rigor.
     paa, sd = disciplinas.obter("paa"), disciplinas.obter("sd")
-    comum = lambda s, d: s.replace(d.rigor, "").replace(d.nome, "").replace(d.sigla, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
     assert comum(sistema_paa, paa) == comum(sistema_sd, sd)
 
 
