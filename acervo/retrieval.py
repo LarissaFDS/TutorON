@@ -7,6 +7,9 @@ from .common import ROOT, progress, read_json, write_json
 from .curate import searchable
 from . import models
 
+# Acervo de PAA; as outras disciplinas passam os próprios caminhos (acervo/disciplinas.py).
+ITENS = '02-acervo/itens.json'
+INDICE = '04-rag/indice.json'
 STOP = set('a o e de da do das dos um uma que em no na os as para por com se ao ou qual como quais explique mostre prova professor algoritmo problema'.split())
 
 
@@ -25,12 +28,12 @@ def embed_document(text, model):
     return [v / norm for v in average]
 
 
-def build(root=ROOT, embed=False):
-    items = read_json(root / '02-acervo/itens.json', [])
+def build(root=ROOT, embed=False, itens=ITENS, indice=INDICE):
+    items = read_json(root / itens, [])
     chunks = [r for r in items if r['confiabilidade'] in ('media', 'alta') and r['qualidade_ocr'] != 'ilegivel'
               and r['assunto'] != 'assunto_incerto' and r['segmentacao'] != 'pendente']
     model, error, vectors = os.environ.get('TUTORON_EMBED_MODEL', 'bge-m3'), None, []
-    previous = read_json(root / '04-rag/indice.json', {})
+    previous = read_json(root / indice, {})
     reusable = {}
     if previous.get('embedding_model') == model and previous.get('embedding_janelas_caracteres') == 1000:
         reusable = {i['sha256']: v for i, v in zip(previous.get('chunks', []), previous.get('vectors', []))}
@@ -55,8 +58,9 @@ def build(root=ROOT, embed=False):
     index = {'versao': 1, 'modo': 'hibrido' if vectors else 'lexical',
              'embedding_model': model if vectors else None, 'erro_embeddings': error,
              'embedding_janelas_caracteres': 1000, 'chunks': chunks, 'vectors': vectors}
-    write_json(root / '04-rag/indice.json', index)
-    progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Somente confiança média/alta. Não verificados, baixa confiança, ilegíveis e segmentação incerta excluídos.', root)
+    write_json(root / indice, index)
+    if indice == INDICE:
+        progress('5. Busca', f'{len(chunks)} blocos indexados; modo {index["modo"]}. Somente confiança média/alta. Não verificados, baixa confiança, ilegíveis e segmentação incerta excluídos.', root)
     return index
 
 
@@ -66,10 +70,10 @@ def cosine(a, b):
     return sum(x*y for x,y in zip(a,b)) / (math.sqrt(sum(x*x for x in a)) * math.sqrt(sum(y*y for y in b)) or 1)
 
 
-def search(question, root=ROOT, k=4, semantic=True, vector=None):
-    index = read_json(root / '04-rag/indice.json', {'chunks': [], 'vectors': []})
+def search(question, root=ROOT, k=4, semantic=True, vector=None, itens=ITENS, indice=INDICE):
+    index = read_json(root / indice, {'chunks': [], 'vectors': []})
     # Revalidar confiança em cada consulta: uma revisão baixa invalida índice antigo.
-    live = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
+    live = {r['id']: r for r in read_json(root / itens, [])}
     chunks = index['chunks']
     query = tokens(question)
     words = [tokens(c['texto']) for c in chunks]

@@ -1,0 +1,22 @@
+{
+  "padrao": "paa",
+  "disciplinas": [
+    {
+      "id": "paa",
+      "nome": "Projeto e Análise de Algoritmos",
+      "sigla": "PAA",
+      "situacao": "MVP",
+      "itens": "02-acervo/itens.json",
+      "indice": "04-rag/indice.json",
+      "rigor": "disciplinas/paa/rigor.md",
+      "livro_supabase": true,
+      "exemplos": [
+        "Resolva T(n) = 2T(n/2) + n log n. O Teorema Mestre se aplica?",
+        "Qual a diferença entre O, Ω e Θ? Dê um exemplo com 3n² + 5n.",
+        "Por que o guloso de troco falha para moedas {1, 3, 4} e valor 6?",
+        "Como montar a recorrência da mochila 0/1 em programação dinâmica?",
+        "Como provar que um problema é NP-completo por redução?"
+      ]
+    }
+  ]
+}
