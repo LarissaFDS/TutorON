@@ -24,6 +24,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .common import ROOT, caminho_guardado, digest, read_json, write_json
+from .curate import searchable
 
 REGISTRO = ROOT / 'disciplinas' / 'disciplinas.json'
 CAMPOS = ('id', 'titulo', 'assunto', 'tipo', 'fonte', 'autoria', 'licenca', 'curadoria')
@@ -52,10 +53,17 @@ class Disciplina:
     assuntos: tuple[str, ...] = ()
     exemplos: tuple[str, ...] = ()
     situacao: str = ''
+    aviso: str = ''  # mostrado ao aluno quando a disciplina é escolhida (ex.: versão beta)
+
+    @property
+    def em_validacao(self) -> bool:
+        """Situação "em validação" no cadastro: fora do atendimento normal (backend/main.py)."""
+        return 'validacao' in re.sub(r'[^a-z]', '', searchable(self.situacao))
 
     def publico(self) -> dict:
         return {'id': self.id, 'nome': self.nome, 'sigla': self.sigla,
-                'exemplos': list(self.exemplos), 'situacao': self.situacao}
+                'exemplos': list(self.exemplos), 'situacao': self.situacao, 'em_validacao': self.em_validacao,
+                'aviso': self.aviso}
 
 
 @lru_cache(maxsize=None)
@@ -71,7 +79,7 @@ def _carregar(caminho: Path) -> tuple[str, dict[str, Disciplina]]:
             livro_supabase=bool(d.get('livro_supabase')),
             materiais=base / d['materiais'] if d.get('materiais') else None,
             assuntos=tuple(d.get('assuntos', ())), exemplos=tuple(d.get('exemplos', ())),
-            situacao=d.get('situacao', ''))
+            situacao=d.get('situacao', ''), aviso=d.get('aviso', ''))
     if dados['padrao'] not in disciplinas:
         raise ValueError(f'Disciplina padrão {dados["padrao"]!r} não está cadastrada')
     return dados['padrao'], disciplinas
@@ -139,7 +147,11 @@ def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
             'texto': texto, 'documento_id': meta['id'], 'sha256_fonte': sha_fonte,
             'status_curadoria': status, 'autoria': meta['autoria'], 'licenca': meta['licenca'],
             'natureza': meta.get('natureza', NATUREZA[0]), 'verificacao': meta.get('verificacao', 'nao_verificada'),
+            # Revisão interna da curadoria. Não promove a confiabilidade: só revisao_professor faz isso.
             'revisao_humana': meta.get('revisao_humana', 'pendente'),
+            'revisao_humana_em': meta.get('revisao_humana_em'), 'revisao_humana_por': meta.get('revisao_humana_por'),
+            # Autorização para publicar a transcrição; "licenca" continua sendo só a licença do original.
+            'publicacao_transcricao': meta.get('publicacao_transcricao'),
             'fontes_catalogo': [f.strip() for f in meta.get('fontes_catalogo', '').split(',') if f.strip()],
         })
     return itens

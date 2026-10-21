@@ -8,11 +8,14 @@ questao: 1-7
 fonte: Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7
 fontes_catalogo: ufal-sd-lista-av1
 autoria: Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código (tests_acervo/test_disciplinas.py)
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: conferida_por_codigo
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Lista de Exercícios de Sistemas Digitais — AV1 (operações com números binários; álgebra booleana e expressões lógicas)
 

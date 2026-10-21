@@ -42,6 +42,8 @@ from .tarefas import Tarefas
 logger = logging.getLogger("tutoron.backend")
 WEB = Path(__file__).resolve().parent / "web"
 
+MSG_EM_VALIDACAO = ("{nome} ainda está em validação e não está disponível para uso normal. "
+                    "Escolha outra disciplina.")
 MSG_INDISPONIVEL = "Não conseguimos gerar a resposta agora. Tente de novo em alguns instantes."
 
 
@@ -229,19 +231,32 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             dados["url_publica"] = url.read_text(encoding="utf-8-sig").strip() if url.exists() else None
         return dados
 
+    def liberada(d: disciplinas.Disciplina) -> bool:
+        lista = settings.disciplinas_em_validacao_liberadas
+        return not d.em_validacao or d.id in lista or "todas" in lista
+
+    def exigir_liberada(ident: str | None) -> None:
+        """Barreira no servidor: o site esconde a opção, mas quem chama a API direto também é barrado."""
+        d = disciplinas.obter(ident)
+        if not liberada(d):
+            raise HTTPException(403, MSG_EM_VALIDACAO.replace("{nome}", d.nome))
+
     @app.get("/api/disciplinas")
     async def lista_disciplinas() -> dict:
-        return {"padrao": disciplinas.obter().id, "disciplinas": [d.publico() for d in disciplinas.todas()]}
+        return {"padrao": disciplinas.obter().id,
+                "disciplinas": [d.publico() | {"disponivel": liberada(d)} for d in disciplinas.todas()]}
 
     # ------------------------------------------------------------------ modo Tutor e Validação (tarefas)
     @app.post("/api/perguntar")
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
+        exigir_liberada(corpo.disciplina)
         return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
 
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
+        exigir_liberada(corpo.disciplina)
         return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
 
     @app.get("/api/tarefas/{ident}")
@@ -304,6 +319,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
+        exigir_liberada(payload.subject)
         t = app.state.tarefas.perguntar(payload.question, payload.context, payload.subject)
         while t.concluida is None:
             await asyncio.sleep(0.5)

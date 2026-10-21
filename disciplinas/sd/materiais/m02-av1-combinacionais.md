@@ -8,11 +8,14 @@ questao: 8-13
 fonte: Lista de SD AV1.pdf | páginas 2–3 | questões 8 a 13
 fontes_catalogo: ufal-sd-lista-av1
 autoria: Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: parcial
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Lista de SD AV1 — Circuitos Combinacionais
 

@@ -8,11 +8,14 @@ questao: 2,4
 fonte: REAV.pdf | páginas 1–3 | questões 2 e 4 (prova fotografada; figura do bloco operacional descrita pela equipe)
 fontes_catalogo: ufal-sd-reav
 autoria: Enunciados: reavaliação da disciplina (UFAL). Descrição da figura e esboços: equipe TutorON
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: candidato
 natureza: material_da_disciplina
 verificacao: nao_verificada
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Reavaliação (REAV) — continuação
 

@@ -124,7 +124,7 @@ O texto anterior do prompt ficou igual: o teste remove as seções novas e confe
 | Mochila 0/1 (PAA) | casos base + wᵢ ≤ w | Correta, com casos base e condição; não diz que o material não tem mochila | ~ |
 | "Quanto é 2+2?" (SD) | sem fontes e sem rótulos | 4, sem rótulos | ✔ |
 
-**Conclusão:** as regras de rigor **não** tornaram o `qwen2.5:7b` confiável em SD: 0 de 4 questões de cálculo certas, e a verificação continua "confirmando" respostas erradas. Não dá para concluir nada sobre o `tutoron-paa` ou o Gemini a partir disso. **SD fica bloqueada para o modelo local** até que a mesma bateria (`python eval/bateria_tutor.py --modelo tutoron-paa`) passe no servidor.
+**Conclusão:** as regras de rigor **não** tornaram o `qwen2.5:7b` confiável em SD: 0 de 4 questões de cálculo certas, e a verificação continua "confirmando" respostas erradas. Não dá para concluir nada sobre o `tutoron-paa` ou o Gemini a partir disso. Recomendação desta rodada: não liberar SD com o modelo local até que a mesma bateria (`python eval/bateria_tutor.py --modelo tutoron-paa`) passe no servidor. Em 21/10/2026 a equipe decidiu liberar SD em **beta** mesmo assim, com aviso de possíveis erros (seção 9).
 
 ## 5. Desempenho
 
@@ -161,5 +161,29 @@ Testes antigos ajustados, com motivo:
 1. Rodar `eval/bateria_tutor.py` com o `tutoron-paa` e com o Gemini no servidor, e avaliar à mão a correção e as citações.
 2. Se o `tutoron-paa` errar Karnaugh como o `qwen2.5:7b`, manter SD só com o Gemini garantido (faturamento) ou com uma estratégia nova validada.
 3. Repetir o pedido indireto de prompt com o `tutoron-paa`; o código só pega cópia literal.
-4. Revisão humana dos 25 blocos e autorização das transcrições (pendências da [curadoria](../disciplinas/sd/CURADORIA.md)).
+4. ~~Revisão humana dos 25 blocos e autorização das transcrições~~: registradas em 21/10/2026 pela responsável pela curadoria ([curadoria](../disciplinas/sd/CURADORIA.md)). Continuam pendentes as figuras de m09 e m11 (candidatos, fora da busca); aprovação formal do professor/monitor não foi declarada.
 5. Falso positivo conhecido: "busca binária" em SD recebe a nota de numeração.
+
+## 8. Barreira para disciplina em validação (atualização do PR #27)
+
+SD continua "em validação" no cadastro e agora é **recusada pelo servidor** (403) no site, na CLI e na validação A/B, a menos que `TUTORON_LIBERAR_EM_VALIDACAO=sd` (ou `todas`) esteja no ambiente. Padrão: desligado. Testes em `backend/tests/test_barreira.py`, com IA simulada:
+
+- PAA continua disponível;
+- SD é recusada nas três rotas sem liberação, sem busca nem chamada à IA;
+- SD funciona com a liberação;
+- disciplina desconhecida continua 422;
+- a chamada direta à API é barrada, sem passar pelo site;
+- uma disciplina futura "em validação" é barrada sem código novo.
+
+Os problemas conhecidos das seções 1 a 7 continuam valendo: falso positivo de "busca binária", `tutoron-paa` e Gemini não testados, erros de cálculo do `qwen2.5:7b` e figuras ausentes de m09/m11. A revisão interna e a autorização das transcrições foram registradas em 21/10/2026. A barreira não muda a qualidade das respostas.
+
+## 9. SD em beta para os alunos (21/10/2026)
+
+Decisão da equipe: SD passou de `em validação` para `beta` no cadastro e é atendida sem nenhuma variável de exceção (`TUTORON_LIBERAR_EM_VALIDACAO` continua vazia por padrão). O site mostra, quando SD é escolhida: "Sistemas Digitais — versão beta. As respostas podem conter erros, inclusive em cálculos e projetos de circuitos. Confira os resultados com o material da disciplina e, quando necessário, com o professor ou monitor." A barreira continua valendo para qualquer disciplina cadastrada como "em validação" (teste com uma disciplina fictícia em `backend/tests/test_barreira.py`).
+
+Beta **não** é validação: tudo o que está nas seções 1 a 7 continua pendente:
+- bateria `eval/bateria_tutor.py` com `tutoron-paa` e Gemini;
+- erros de cálculo do `qwen2.5:7b` (0 de 4);
+- paráfrase do prompt em pedido indireto não detectada pelo código;
+- falso positivo de "busca binária";
+- figuras e informações ausentes em m09, m11 e outras questões.

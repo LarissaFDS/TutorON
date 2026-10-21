@@ -6,12 +6,14 @@ tipo: material_estudo
 resolucao: sim
 fonte: Nota da equipe TutorON (não é material do professor); organiza o método usado nas listas e provas da disciplina
 fontes_catalogo: vahid-sistemas-digitais,mit-ocw-6004,free-range-vhdl
-autoria: Equipe TutorON, redigida com auxílio de IA, com texto próprio; revisão humana pendente
+autoria: Equipe TutorON, redigida com auxílio de IA, com texto próprio; revisada pela responsável pela curadoria em 21/10/2026
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
 natureza: nota_da_equipe_ia
 verificacao: nao_verificada
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Projeto RTL (nível de transferência entre registradores)
 
