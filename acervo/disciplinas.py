@@ -53,6 +53,7 @@ class Disciplina:
     assuntos: tuple[str, ...] = ()
     exemplos: tuple[str, ...] = ()
     situacao: str = ''
+    aviso: str = ''  # mostrado ao aluno quando a disciplina é escolhida (ex.: versão beta)
 
     @property
     def em_validacao(self) -> bool:
@@ -61,7 +62,8 @@ class Disciplina:
 
     def publico(self) -> dict:
         return {'id': self.id, 'nome': self.nome, 'sigla': self.sigla,
-                'exemplos': list(self.exemplos), 'situacao': self.situacao, 'em_validacao': self.em_validacao}
+                'exemplos': list(self.exemplos), 'situacao': self.situacao, 'em_validacao': self.em_validacao,
+                'aviso': self.aviso}
 
 
 @lru_cache(maxsize=None)
@@ -77,7 +79,7 @@ def _carregar(caminho: Path) -> tuple[str, dict[str, Disciplina]]:
             livro_supabase=bool(d.get('livro_supabase')),
             materiais=base / d['materiais'] if d.get('materiais') else None,
             assuntos=tuple(d.get('assuntos', ())), exemplos=tuple(d.get('exemplos', ())),
-            situacao=d.get('situacao', ''))
+            situacao=d.get('situacao', ''), aviso=d.get('aviso', ''))
     if dados['padrao'] not in disciplinas:
         raise ValueError(f'Disciplina padrão {dados["padrao"]!r} não está cadastrada')
     return dados['padrao'], disciplinas

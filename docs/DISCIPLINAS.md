@@ -55,7 +55,7 @@ Para testes e validações autorizadas, libere explicitamente no ambiente (padr�
 TUTORON_LIBERAR_EM_VALIDACAO=sd      # ids separados por vírgula, ou "todas"
 ```
 
-`eval/bateria_tutor.py` libera só no próprio processo. Para liberar SD aos alunos, mude a `situacao` no cadastro depois da validação de qualidade (veja `06-avaliacao/correcoes-2026-10-19.md`), não deixe a variável ligada no servidor público.
+`eval/bateria_tutor.py` libera só no próprio processo. Para liberar uma disciplina aos alunos, mude a `situacao` no cadastro (por exemplo para `beta`) e, se quiser, preencha `aviso`, um texto mostrado no site quando ela é escolhida; não deixe a variável ligada no servidor público. Foi assim que SD passou a beta em 21/10/2026, sem variável de exceção.
 
 ### Instruções internas, citações e outra disciplina
 
@@ -81,4 +81,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
-| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | em validação, **bloqueada para alunos** (curadoria revisada internamente e transcrições autorizadas em 21/10/2026; falta a validação técnica da IA): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |

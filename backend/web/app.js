@@ -125,6 +125,10 @@
     var d = disciplinas[id];
     if (!d) return;
     $('disciplina').value = id;
+    // Aviso do cadastro (ex.: versão beta): some ao trocar para uma disciplina sem aviso.
+    var beta = $('disciplina-beta');
+    beta.textContent = d.aviso || '';
+    beta.hidden = !d.aviso;
     sugestoes('sugestoes-tutor', 'pergunta', d.exemplos.length ? d.exemplos : null);
     if (d.exemplos.length) $('pergunta').placeholder = 'Ex.: ' + d.exemplos[0];
   }

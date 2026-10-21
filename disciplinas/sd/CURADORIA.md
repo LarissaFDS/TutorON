@@ -1,6 +1,6 @@
 # Sistemas Digitais — curadoria do acervo
 
-Situação: **em validação** (a validação técnica da IA ainda está pendente; o servidor bloqueia SD no atendimento normal).
+Situação: **beta** desde 21/10/2026: disponível aos alunos, com aviso no site de que as respostas podem conter erros, inclusive em cálculos e projetos de circuitos. A validação técnica completa das respostas da IA **continua pendente** (seção 5); beta não significa validada.
 
 Estado da curadoria em 21/10/2026, cinco coisas diferentes:
 
@@ -165,7 +165,7 @@ Conclusão: a recuperação foi corrigida, mas **a disciplina não está validad
 ## 5. Pendências
 
 1. ~~Revisão interna dos 25 blocos~~ e ~~autorização de publicação das transcrições~~: feitas em 21/10/2026. Os blocos m09 e m11 continuam candidatos até que as figuras e informações que faltam sejam transcritas. Aprovação formal do professor ou monitor: não declarada (opcional; é o que levaria um bloco à confiabilidade alta).
-2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. Até lá, SD fica "em validação". Teste de 19/10: Gemini acertou a pergunta básica; o modelo local errou Karnaugh com irrelevâncias. Depois das correções, o `qwen2.5:7b` errou as 4 questões de cálculo da bateria `eval/bateria_tutor.py`: SD continua **bloqueada para o modelo local** ([correções e pendências](../../06-avaliacao/correcoes-2026-10-19.md)).
+2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. SD foi liberada em beta antes disso, por decisão da equipe, com aviso aos alunos; esta validação continua pendente. Teste de 19/10: Gemini acertou a pergunta básica; o modelo local errou Karnaugh com irrelevâncias. Depois das correções, o `qwen2.5:7b` errou as 4 questões de cálculo da bateria `eval/bateria_tutor.py`: o modelo local não é confiável em cálculos de SD ([correções e pendências](../../06-avaliacao/correcoes-2026-10-19.md)).
 3. Descrever as figuras que faltam (AV1 Q5, Q9, Q21–Q25; AV2 Q3, Q4, Q7; Prova 1 Q2; Prova 2 Q1 e Q3).
 4. Transcrever a resolução manuscrita da Prova 2 e as gravações de monitoria (candidatos).
 5. Confirmar o plano de ensino atual e o livro adotado.

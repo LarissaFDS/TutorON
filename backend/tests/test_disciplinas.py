@@ -31,9 +31,8 @@ def site(tmp_path, monkeypatch):
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
-    # SD está "em validação": estes testes são a validação autorizada (liberação explícita).
-    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
-                                             "disciplinas_em_validacao_liberadas": ("sd",)})
+    # Sem liberação explícita: SD está em beta, disponível no atendimento normal.
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path})
     llm.embed = sem_embedding
     llm.chamadas = []
     original = llm._provider
