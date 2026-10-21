@@ -8,7 +8,8 @@ questao: 5,6,8
 fonte: Lista de SD AV2.pdf | páginas 2–3 | questões 5, 6 e 8
 fontes_catalogo: ufal-sd-lista-av2
 autoria: Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: parcial

@@ -25,15 +25,16 @@
       "grupo": "sd-av1-q01-07",
       "texto": "Lista de Exercícios de Sistemas Digitais — AV1 (operações com números binários; álgebra booleana e expressões lógicas)\n\n1. Efetue com números binários: a) 11001 + 1011; b) 10010 − 10001; c) 1100 × 011.\nResolução: a) 25 + 11 = 36 = 100100₂. b) 18 − 17 = 1 = 00001₂. c) 12 × 3 = 36 = 100100₂.\n\n2. Determine o complemento de 2 do número 101010.\nResolução (6 bits): inverter os bits → 010101; somar 1 → 010110. Conferência: 101010₂ = 42 e 2⁶ − 42 = 22 = 010110₂.\n\n3. Determine o complemento de 2 do número −16.\nResolução: depende do número de bits, que a questão não fixa. Em 5 bits, −16 = 10000 (o menor valor representável, de −16 a 15); em 6 bits, 110000; em 8 bits, 11110000. Caminho: 16 = 010000 (6 bits) → inverte 101111 → soma 1 → 110000.\n\n4. Quantas entradas diferentes podemos ter com 4 bits? Resolução: 2⁴ = 16 combinações (0000 a 1111).\n\n5. Determine a expressão do circuito da figura e monte a tabela-verdade. (A figura do circuito não foi transcrita; conferir no original.)\n\n6. Simplifique S = (A⊕B)[B(A + C) + D(A + B + C)] e desenhe o circuito simplificado.\nResolução: S = 1 só nos mintermos 5, 6, 7, 9 e 11 (ordem ABCD). Com A⊕B = 1: se A = 0 e B = 1, o colchete vale C + D; se A = 1 e B = 0, vale D. Logo S = A'B(C + D) + AB'D = **(A⊕B)·D + A'BC**.\n\n7. Simplifique por Veitch-Karnaugh:\na) S = 1 nas linhas ABC = 000, 001, 011, 101, 111 → S = Σm(0,1,3,5,7). Grupos: coluna C = 1 (m1, m3, m5, m7) e par A'B' (m0, m1). **S = C + A'B'**.\nb) S = 1 em 000, 011, 101; irrelevante (x) em 001, 100, 110, 111. Usando x: B' cobre m0, m1, m4, m5 e C cobre m1, m3, m5, m7. **S = B' + C** (m2 = 010 continua 0).",
       "documento_id": "sd-av1-q01-07",
-      "sha256_fonte": "24ae4791b6ffadb420a8078c8ce4903fb2c4ce73bd55978b21013dd7523ead6b",
+      "sha256_fonte": "216478887d31a99ace50f3cc3aac352891ce1119c284de98d60db6a58adc9c41",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código (tests_acervo/test_disciplinas.py)",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "conferida_por_codigo",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av1"
       ]
@@ -58,15 +59,16 @@
       "grupo": "sd-av1-q08-13",
       "texto": "Lista de SD AV1 — Circuitos Combinacionais\n\n8. Um circuito tem entradas x1 (mais significativo) e x0 (menos significativo), que representam inteiros de 0 a 3, e uma saída que é 0 para todos os valores, exceto 2. Qual expressão representa o circuito? (As alternativas estão em figura no original.)\nResolução: 2 = 10₂ → x1 = 1 e x0 = 0. **S = x1·x0'**.\n\n9. Faça o circuito da figura com multiplexadores 2:1. (Figura não transcrita.) Ideia geral: um MUX 2:1 faz S = s'·I0 + s·I1; escolhendo uma variável como seleção (expansão de Shannon), F = x'·F(x=0) + x·F(x=1), e cada cofator vira entrada do MUX ou de outro MUX.\n\n10. Usando MUX 2:1 e, se preciso, portas lógicas, desenhe um deslocador programável de 4 bits E que desloca para a direita i ∈ {0,1,2,3} bits, conforme op1 op0: 00 → S = E; 01 → S = E >> 1; 10 → S = E >> 2; 11 → S = E >> 3.\nResolução: deslocador em dois estágios (barrel shifter). Estágio 1, controlado por op0: desloca 0 ou 1 bit. Estágio 2, controlado por op1: desloca 0 ou 2 bits. Cada estágio tem 4 MUX 2:1; na posição em que o bit \"sai\" pela esquerda entra 0. Total: 8 MUX 2:1.\n\n11. Faça um circuito que calcule S = A / 2^B, com 0 ≤ B ≤ 3 e 0 ≤ A ≤ 8, arredondando para baixo (ex.: 3/2 = 1).\nResolução: dividir por 2^B é deslocar A para a direita B posições. A precisa de 4 bits (8 = 1000), B de 2 bits; usa-se o deslocador da Q10 com op = B.\n\n12. Implemente S = |A − B| com A e B de 4 bits. Ideia: calcular A − B e B − A (ou usar um comparador A ≥ B) e escolher por MUX o resultado não negativo.\n\n13. Implemente S = (A + B)/2 com A e B de 4 bits.\nResolução: somador de 4 bits gera 5 bits (Cout S3 S2 S1 S0); dividir por 2 é descartar S0: **resultado = Cout S3 S2 S1** (4 bits, sem perder o vai-um).",
       "documento_id": "sd-av1-q08-13",
-      "sha256_fonte": "15fa07520ca7450750bcd5e1022d39ef0a4b68da9e75aed00e473e903c5c6b80",
+      "sha256_fonte": "c1d6af7c82b6948fd91d74fa5769715282748f5aabdd933742cdf37e23725561",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "parcial",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av1"
       ]
@@ -91,15 +93,16 @@
       "grupo": "sd-av1-q14-18",
       "texto": "Lista de SD AV1 — Circuitos Lógico-Aritméticos e Decodificadores\n\n14. Com um somador de 5 bits pronto, faça um subtrator e acrescente um detector de overflow na saída.\nResolução: A − B = A + B' + 1: inverter cada bit de B (5 portas NOT, ou XOR com o sinal de subtração) e pôr Cin = 1. Em complemento de 2, há overflow quando A e B' têm o mesmo sinal e o resultado tem sinal diferente: V = C4 ⊕ C5 (vai-um que entra e que sai do bit de sinal), ou V = a4·b4'·s4' + a4'·b4·s4.\n\n15. Com um subtrator pronto, crie um circuito para MAX(0, X − Y), com X e Y em complemento de 2.\nResolução: calcular D = X − Y; se o bit de sinal de D for 1 (negativo), a saída é 0. Saída = D AND (sinal de D)' bit a bit, ou MUX 2:1 escolhendo entre D e 0. Se puder haver overflow, o sinal correto é d_n ⊕ V.\n\n16. Desenvolva um subtrator de 5 bits com somadores de 5 bits e portas lógicas. Mesmo esquema da Q14: B passa por inversores e Cin = 1.\n\n17. Comparador de magnitude para A e B positivos de 4 bits, com saídas A = B, A > B e A < B.\nResolução: igualdade bit a bit eᵢ = (aᵢ ⊕ bᵢ)'; A = B = e3·e2·e1·e0. A > B = a3b3' + e3·a2b2' + e3e2·a1b1' + e3e2e1·a0b0'. A < B = (A > B + A = B)'.\n\n18. Decodificador para display de 7 segmentos que recebe 2 bits (0 a 3) e mostra o número. Para o 1 acendem os segmentos b e c.\nResolução (x1 x0 → número): 0 = a,b,c,d,e,f; 1 = b,c; 2 = a,b,d,e,g; 3 = a,b,c,d,g. Equações: b = 1; a = d = x1 + x0'; c = x1' + x0; e = x0'; f = x1'·x0'; g = x1.",
       "documento_id": "sd-av1-q14-18",
-      "sha256_fonte": "e87c915b04c85a7cd419e7f47ef4af63967a56cd652045e28187464442973ba4",
+      "sha256_fonte": "3e4b543ec7eced79183c7ed6116ea892cd529e7ba291d55ce16a454bad9267f9",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "conferida_por_codigo",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av1"
       ]
@@ -124,15 +127,16 @@
       "grupo": "sd-av1-q19-25",
       "texto": "Lista de SD AV1 — Circuitos de Aplicações, Análise Temporal e Identificação de Circuitos\n\n19. (Tanques da Embraer) Os tanques A e B têm sensores que enviam, em binário, de 0 a 10 a porcentagem de combustível (0 vazio, 10 cheio). O circuito deve acender LEDs indicando: A desbalanceado em relação a B (A < B); B desbalanceado em relação a A (B < A); A cheio; B cheio.\nIdeia: 0 a 10 cabe em 4 bits; um comparador de magnitude de 4 bits fornece A < B e A > B; \"cheio\" é A = 10 = 1010₂, ou seja, a3·a2'·a1·a0'.\n\n20. Implemente um sistema que recebe 4 números de 5 bits e garante que cada número fique no intervalo [Y1, Y2]: se for menor ou igual a Y1, a saída é Y1; se for maior ou igual a Y2, a saída é Y2; senão, o valor original.\nIdeia: para cada número, dois comparadores (com Y1 e com Y2) e dois níveis de MUX 2:1 (saturação/clamp).\n\n21. A partir dos sinais aplicados às entradas da figura, desenhe a forma de onda da saída. (Figura não transcrita.)\n\n22. Um circuito de acionamento de alarme tem atrasos de propagação por porta (tabela na figura). a) Calcule o atraso de propagação do circuito. b) Simplificando o circuito, obtenha outro com menor atraso, mostrando como chegou nele e o novo atraso. Método: o atraso é o do caminho mais longo (caminho crítico) da entrada até a saída; simplificar a expressão reduz níveis de portas.\n\n23. Em uma usina nuclear, Ta, Tb e Tc vêm de termômetros e S aciona o resfriamento. Pelo diagrama de tempo de t1 a t8 (figura), indique em que tempos o sistema foi acionado.\n\n24 e 25. Diga, de forma resumida e direta, qual a função dos circuitos das figuras e explique como funcionam. (Figuras não transcritas.)",
       "documento_id": "sd-av1-q19-25",
-      "sha256_fonte": "df672e367a7e03b703aefc4e0aec514d7ef99e5507add1b0f9e6a05f7d077a40",
+      "sha256_fonte": "d54474d710afda043bb70aa10e451866886b375a1c6571aa0535a379550825ed",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL); figuras não transcritas",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "sem_resolucao",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av1"
       ]
@@ -157,15 +161,16 @@
       "grupo": "sd-av2-q01-04-07",
       "texto": "Lista de Exercícios de Sistemas Digitais — AV2 (circuitos sequenciais)\n\n1. Dado o diagrama de tempo de entrada (CLK e D, na figura), mostre o diagrama de tempo da saída Q de um flip-flop D.\nComo resolver: o flip-flop D só muda na borda ativa do clock (normalmente a de subida). Em cada borda, Q passa a valer o D daquele instante e fica constante até a próxima borda, mesmo que D mude no meio do ciclo. Pulsos de D que começam e terminam entre duas bordas não aparecem em Q. Antes da primeira borda, Q é desconhecido, a menos que haja reset.\n\n2. Implemente o circuito da máquina de estados da figura. (A mesma questão caiu na Prova 2; ver o bloco sd-prova2-q1-2, que descreve a máquina e traz a resolução.)\n\n3. Explique o funcionamento do circuito da figura em função do controle T, das entradas x e das saídas a. O sinal clock controla o momento em que ocorre o fluxo de dados. (Figura: flip-flops D com MUX na entrada de cada um, selecionados por T; igual à questão 3 da Prova 2.)\nComo analisar: para cada valor de T, veja qual entrada do MUX chega ao D de cada flip-flop: a própria saída (manter), a saída do vizinho (deslocar) ou x (carregar). Monte uma tabela T → operação do registrador.\n\n4. Dada a máquina de estados de alto nível da figura, apresente os blocos de controle e operacional e a máquina de estados de baixo nível para implementá-la. (Método RTL: ver os blocos sobre projeto RTL.)\n\n7. Explique resumidamente o que faz o circuito da figura em função da entrada ld e das saídas tc e C. A entrada no triângulo é o clock.\nPista: ld (load) costuma carregar um valor no registrador; tc (terminal count) indica que um contador chegou ao valor final; C é o valor de contagem. Descreva o que acontece em cada borda de clock com ld = 1 e com ld = 0.",
       "documento_id": "sd-av2-q01-04-07",
-      "sha256_fonte": "e373dea936c689e0009b69a58d3a05d311e2936928c9b8623b84b5562e1eadbe",
+      "sha256_fonte": "585d91d19c1a6d0ea9e11bc3beb1ddea97de58c14e4ca1b8aaed0d52c30fc66a",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL); figuras não transcritas",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "sem_resolucao",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av2"
       ]
@@ -190,15 +195,16 @@
       "grupo": "sd-av2-q05-06-08",
       "texto": "Lista de SD AV2\n\n5. Implemente um circuito que calcula a média de dois números A e B de 4 bits, (A + B)/2. A divisão por dois pode ser feita por deslocamento de bits (shift right). Todos os blocos devem ser implementados e mostrados.\nResolução: somador de 4 bits feito com somadores completos (ripple-carry), gerando Cout S3 S2 S1 S0. O deslocamento à direita é só fiação: média = Cout S3 S2 S1. Não descarte o Cout: 15 + 15 = 30 e 30/2 = 15 = 1111.\n\n6. A mãe de Marquinhos quer um circuito que encha a caixa d'água sozinho. S0 e S1 são sensores de nível (1 quando detectam água). A bomba deve ligar quando a caixa estiver vazia e desligar quando estiver cheia; dois LEDs indicam bomba ligada e bomba desligada.\nResolução: precisa de memória, porque entre \"vazia\" e \"cheia\" a bomba mantém o estado anterior (histerese). Supondo S0 o sensor de baixo e S1 o de cima: liga quando S0 = 0 (vazia), desliga quando S1 = 1 (cheia) e mantém nos outros casos. Com um flip-flop B (bomba): B+ = S0' + B·S1'. LED_ligada = B; LED_desligada = B'. Confira a posição dos sensores no esquema do original.\n\n8. Dada a máquina de estados de alto nível que implementa Fibonacci, apresente os blocos de controle e operacional e a máquina de estados de baixo nível. Entradas: N (16 bits), comece (1 bit). Saída: c (16 bits). Registradores: a, b, c (16 bits cada).\nResolução (esboço): bloco operacional com registradores a, b, c e um contador i, somador de 16 bits a + b, comparador i < N e MUX nas entradas dos registradores para escolher entre valor inicial e valor calculado. A FSM de baixo nível troca cada atribuição por sinais de controle (a_ld, a_sel, b_ld, i_ld, i_clr, c_ld) e cada condição por um sinal de status (i_lt_n). Implementação em VHDL do controlador: bloco sd-vhdl-fibonacci-controle.",
       "documento_id": "sd-av2-q05-06-08",
-      "sha256_fonte": "cde35acc12bb144ea54c7e685f09a50ff0b1c787b25b8c15bd727e717a161dd2",
+      "sha256_fonte": "6c319f2ecaac5de998103ca25f8229730bda8c72363a1acf6fc372db2a429e1b",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: lista de exercícios da disciplina (UFAL). Resoluções: equipe TutorON",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "parcial",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-lista-av2"
       ]
@@ -223,15 +229,16 @@
       "grupo": "sd-prova1",
       "texto": "Prova 1 — Sistemas Digitais\n\n1. (1,5) Um conversor D/A de cinco bits tem saída em corrente. Para a entrada 10100₂ produz 10 mA. Qual a corrente para 11101₂?\nResolução: a saída é proporcional ao valor digital. 10100₂ = 20 → 10 mA, logo 0,5 mA por degrau. 11101₂ = 29 → 29 × 0,5 = **14,5 mA**.\n\n2. (1,5) Circuito de alarme de um sistema de tempo real com atrasos típicos AND = 3, OR = 4 e NOT = 1 (u.t.). Após simplificar o circuito, qual o atraso máximo? (O circuito está em figura não transcrita.) Método: simplificar a expressão e somar os atrasos das portas no caminho mais longo da entrada à saída.\n\n3. (2,0) Jogo BATALHA: palavras A (A1A0) e B (B1B0) de 2 bits, botão Enable E e LEDs LEDA e LEDB. Com E = 0 os LEDs ficam apagados. Com E = 1, acende o LED de quem tiver a maior carta; no empate, os dois.\nResolução: comparador de 2 bits. LEDA = E·(A ≥ B) e LEDB = E·(B ≥ A), com A > B = A1B1' + (A1 ⊙ B1)·A0B0' e A = B = (A1 ⊙ B1)(A0 ⊙ B0), onde ⊙ é XNOR.\n\n4. (2,5) Projete o circuito de: if (F == G) result = y + x; else result = z + w; com x, y, w, z de 4 bits e F, G de 8 bits. Não é preciso detalhar MUX e comparadores; indique a largura de cada linha.\nResolução: comparador de igualdade de 8 bits (F, G → eq). Opção econômica: dois MUX 2:1 de 4 bits escolhem os operandos (y ou z; x ou w) com seleção eq, e um único somador de 4 bits gera result com 5 bits (4 + vai-um). Opção direta: dois somadores e um MUX 2:1 de 5 bits na saída.\n\n5. (2,5) Subtrator de 4 bits para números SEM SINAL, com o segundo número sempre menor que o primeiro (resultado positivo).\nResolução: S = A + B' + 1, com somador de 4 bits, inversores em B e Cin = 1. O vai-um final é descartado (vale 1 sempre que A ≥ B). Como A ≥ B, não há resultado negativo.",
       "documento_id": "sd-prova1",
-      "sha256_fonte": "1ed047fe0ed952dee385ac618a54daf47c34aa2d454700f6e018f26f119e5a10",
+      "sha256_fonte": "0bb69eb84a250178bc6214ef2c5cfe9a5f5ba41780c8cec04b7a7bf8d3d94bd5",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: prova da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "parcial",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-prova1"
       ]
@@ -256,15 +263,16 @@
       "grupo": "sd-prova2-q1-2",
       "texto": "Prova 2 — Sistemas Digitais\n\n1. (1,0) Dado o diagrama de tempo (CLK e D), mostre o diagrama da saída Q de um flip-flop D. Método: Q copia D em cada borda de subida do clock e fica constante até a próxima borda.\n\n2. (2,0) Implemente o circuito da máquina de estados. Entradas a, b; saída y.\nMáquina da figura (Moore): estado inicial A (y = 0). Em A: a → fica em A; a'b → B; a'b' → C. Em B (y = 1): a' → fica em B; a → C. Em C (y = 1): b' → fica em C; b → D. Em D (y = 0): vai para A no próximo clock.\n\nResolução. Codificação s1s0: A = 00, B = 01, C = 10, D = 11 (dois flip-flops D).\nTabela de próximo estado (n1 n0):\n- A (00): a = 1 → 00; a = 0, b = 1 → 01; a = 0, b = 0 → 10.\n- B (01): a = 0 → 01; a = 1 → 10.\n- C (10): b = 0 → 10; b = 1 → 11.\n- D (11): → 00.\n\nEquações:\n- n1 = s1'·s0'·a'·b' + s1'·s0·a + s1·s0'\n- n0 = s1'·s0'·a'·b + s1'·s0·a' + s1·s0'·b\n- y = s1'·s0 + s1·s0' = s1 ⊕ s0 (vale 1 só em B e C)\n\nCircuito: registrador de estado com 2 flip-flops D (clock comum e reset para 00), lógica combinacional de n1 e n0 nas entradas D e uma XOR para y.\n\n**Verificação:** simulando as 16 combinações (estado, a, b), as equações reproduzem todas as transições da figura (teste automatizado em tests_acervo/test_disciplinas.py).",
       "documento_id": "sd-prova2-q1-2",
-      "sha256_fonte": "c73f6149002fc8987f28e14794abbcd874a36f78761749e6f852127757e3f53f",
+      "sha256_fonte": "68e0e27e29ad09d684fd9f3d462ffd1c86f248c31d910cddb145d1f6210b08b9",
       "status_curadoria": "aprovado",
       "autoria": "Enunciado: prova da disciplina (UFAL). Descrição da figura e resolução: equipe TutorON, conferidas por simulação em código",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "conferida_por_codigo",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-prova2"
       ]
@@ -289,15 +297,16 @@
       "grupo": "sd-reav-q1-q3",
       "texto": "Reavaliação (REAV) — Sistemas Digitais\n\n1. (2,0) O restaurante de uma universidade terá catracas eletrônicas com circuitos combinatórios: (i) quatro filas A, B, C e D; (ii) sensores valem 1 quando há cliente na fila e 0 quando está vazia; (iii) fila vazia tem a catraca travada, com prioridade A > B > C > D; (iv) no máximo duas catracas abertas ao mesmo tempo, respeitando a prioridade; (v) as catracas de A, B, C e D são C1, C2, C3 e C4; (vi) saída 1 = catraca aberta, 0 = fechada. Crie o circuito.\n\nResolução: abrem as duas filas não vazias de maior prioridade.\n- C1 = A (A nunca tem ninguém à frente).\n- C2 = B (à frente de B só pode haver A: no máximo uma catraca aberta antes).\n- C3 = C·(A·B)' (C abre se A e B não estiverem as duas ocupadas).\n- C4 = D·(A'B' + A'C' + B'C') (D abre se no máximo uma entre A, B e C estiver ocupada).\n**Verificação:** comparando com a regra \"abrir as duas primeiras filas ocupadas\" nas 16 combinações de A, B, C, D, as equações coincidem (teste automatizado).\n\n3. (3,0) Construa um subtrator de 4 bits que recebe dois números de 4 bits e retorna um número de 4 bits. Os números NÃO têm sinal (não estão em complemento de 2) e o segundo é sempre menor que o primeiro, então o resultado é sempre positivo.\nResolução: S = A + B' + 1 com somador de 4 bits, inversores em B e Cin = 1; o vai-um final é descartado. Mesma questão da Prova 1 (questão 5).",
       "documento_id": "sd-reav-q1-q3",
-      "sha256_fonte": "ce4a5cf2c0d12eab5bdeb5da2c11e19bde802be63c99c59befc8148ab20e85c6",
+      "sha256_fonte": "f73557bf368f5d03959bcb2b82178fd239493066ac2036cae51a706c93106ea1",
       "status_curadoria": "aprovado",
       "autoria": "Enunciados: reavaliação da disciplina (UFAL). Resoluções: equipe TutorON, conferidas por código",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "conferida_por_codigo",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-reav"
       ]
@@ -322,15 +331,16 @@
       "grupo": "sd-somadores-monitoria",
       "texto": "SOMADOR — Universidade Federal de Alagoas (material de monitoria)\n\nO somador é um circuito combinacional que realiza a soma de bits. Há o meio somador e o somador completo.\n\n1. Meio somador. Soma dois bits A e B sem considerar vai-um anterior. Serve, por exemplo, para os bits menos significativos de um somador de N bits.\nTabela-verdade (A B → S Cout): 00 → 0 0; 01 → 1 0; 10 → 1 0; 11 → 0 1.\nPelos mapas de Karnaugh de cada saída: S = A'B + AB' = **A ⊕ B** e **Cout = A·B**. O circuito é uma porta XOR e uma AND.\n\n2. Somador completo. Forma geral: soma A, B e o vai-um da soma anterior (Cin), e pode ser usado em qualquer posição.\nTabela-verdade (A B Cin → S Cout): 000 → 0 0; 001 → 1 0; 010 → 1 0; 011 → 0 1; 100 → 1 0; 101 → 0 1; 110 → 0 1; 111 → 1 1.\nSaída S: S = Cin'·A'·B + Cin'·A·B' + Cin·A'·B' + Cin·A·B = Cin'·(A ⊕ B) + Cin·(A ⊕ B)' = **A ⊕ B ⊕ Cin**.\nSaída Cout pelo mapa de Karnaugh: **Cout = A·B + Cin·A + Cin·B** (vale 1 quando pelo menos duas entradas são 1).\n\n3. Somador de N bits. Vários somadores ligados em cascata: o Cout de cada estágio vai para o Cin do seguinte (ripple-carry). O primeiro estágio pode ser um meio somador ou um somador completo com Cin = 0. O atraso cresce com N, porque o vai-um precisa atravessar todos os estágios.",
       "documento_id": "sd-somadores-monitoria",
-      "sha256_fonte": "519ef2e45faf9c43ec6502192d0a8d3785021af2f1bb3bb620c16e6c04664225",
+      "sha256_fonte": "d2c79f7490585db890f9e2b6ab49714d000559aba50d74c067737d1a70a5bd2b",
       "status_curadoria": "aprovado",
       "autoria": "Material de monitoria da disciplina (UFAL); transcrição da equipe TutorON, com as barras de negação recuperadas e conferidas pela tabela-verdade",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "conferida_por_codigo",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-somadores"
       ]
@@ -355,15 +365,16 @@
       "grupo": "sd-vhdl-fibonacci-controle",
       "texto": "Controlador VHDL do Fibonacci (questão 8 da Lista AV2)\n\nEntidade FibonacciControl: entradas clk, reset, comece e o status i_lt_n (i < N, vindo do bloco operacional); saídas de controle load_a, load_b, load_i, load_a_initial, load_b_initial, load_i_initial, load_counter_initial, load_counter_increment, load_temp, load_resultado.\n\nEstados (type state_type): IDLE, INIT, COMPUTE1, COMPUTE2, COMPUTE3, DONE.\n\nEstrutura em três processos:\n1. Registrador de estado: process(clk, reset) com reset assíncrono para IDLE; em rising_edge(clk), state <= next_state.\n2. Próximo estado (combinacional), process(state, comece, i_lt_n): IDLE → INIT se comece = '1'; INIT → COMPUTE1 → COMPUTE2 → COMPUTE3; COMPUTE3 → COMPUTE1 se i_lt_n = '1', senão DONE; DONE → IDLE; when others → IDLE.\n3. Saídas: em rising_edge(clk), todas as saídas vão a '0' e depois o case liga as do estado: IDLE carrega os valores iniciais (load_*_initial, load_a, load_b, load_i); COMPUTE1: load_temp (temp = a + b); COMPUTE2: load_a; COMPUTE3: load_b e load_counter_increment; DONE: load_resultado.\n\nPontos de atenção (análise da equipe; confira com o professor):\n- As saídas são geradas dentro de rising_edge(clk), então ficam registradas: cada sinal sai um ciclo depois de o estado mudar. Em uma FSM de Moore comum, as saídas dependem só de state em um processo combinacional (process(state)). Do jeito que está, o bloco operacional recebe load_temp quando a FSM já está em COMPUTE2, e assim por diante.\n- O estado IDLE ativa as cargas iniciais em todo ciclo de espera. Funciona, mas é mais claro inicializar só no estado INIT, que hoje só repete zeros já atribuídos.\n- use ieee.std_logic_unsigned não é padrão IEEE; em código novo prefira ieee.numeric_std.",
       "documento_id": "sd-vhdl-fibonacci-controle",
-      "sha256_fonte": "e3b4866ef3538392b0313e8de0120b6932df6b516062c9eadac768af549a071d",
+      "sha256_fonte": "b0e62457a79bedb93d484121867a97b27b39fdc0602559ed82d89d9da49594ac",
       "status_curadoria": "aprovado",
       "autoria": "Código: arquivo de resolução recebido pela equipe (autor não identificado). Resumo e análise: equipe TutorON",
-      "licenca": "Material da disciplina; uso no TutorON pendente de confirmação com o professor",
+      "licenca": "Não declarada (material original da disciplina)",
       "natureza": "material_da_disciplina",
       "verificacao": "nao_verificada",
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": "autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada",
       "fontes_catalogo": [
         "ufal-sd-fibonacci-vhdl"
       ]
@@ -397,6 +408,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "kuphaldt-lec-vol4",
         "wikilivros-eletronica-digital",
@@ -432,6 +444,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "kuphaldt-lec-vol4",
         "wikilivros-eletronica-digital",
@@ -467,6 +480,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "wikibooks-digital-circuits",
         "wikilivros-eletronica-digital",
@@ -502,6 +516,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "wikibooks-digital-circuits",
         "kuphaldt-lec-vol4",
@@ -537,6 +552,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "wikibooks-digital-circuits",
         "kuphaldt-lec-vol4",
@@ -572,6 +588,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "kuphaldt-lec-vol4",
         "mit-ocw-6004"
@@ -606,6 +623,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "wikibooks-digital-circuits",
         "kuphaldt-lec-vol4",
@@ -641,6 +659,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "wikibooks-digital-circuits",
         "wikilivros-eletronica-digital",
@@ -676,6 +695,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "mit-ocw-6004",
         "wikibooks-digital-circuits",
@@ -711,6 +731,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "vahid-sistemas-digitais",
         "mit-ocw-6004",
@@ -746,6 +767,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "free-range-vhdl",
         "sim-digital-hneemann"
@@ -780,6 +802,7 @@
       "revisao_humana": "feita",
       "revisao_humana_em": "2026-10-21",
       "revisao_humana_por": "responsável pela curadoria (revisão interna; não é aprovação do professor)",
+      "publicacao_transcricao": null,
       "fontes_catalogo": [
         "ufal-ppc-cc-2011",
         "ufal-ppc-ecomp-2011",

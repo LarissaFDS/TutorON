@@ -242,6 +242,12 @@ def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     assert len(candidatos) == 2 and all(itens[i]['confiabilidade'] == 'nao_verificada' for i in candidatos)
     indexados = {c['id'] for c in json.loads(SD.indice.read_text(encoding='utf-8'))['chunks']}
     assert candidatos.isdisjoint(indexados) and len(indexados) == 23
+    # Licença do original e autorização da transcrição não se confundem nem dizem "pendente".
+    for x in itens.values():
+        assert 'pendente' not in x['licenca']
+        if x['natureza'] == 'material_da_disciplina':
+            assert x['licenca'].startswith('Não declarada') and '2026-10-21' in x['publicacao_transcricao']
+            assert 'não declarada' in x['publicacao_transcricao']
     notas = {i for i, x in itens.items() if x['natureza'] == 'nota_da_equipe_ia'}
     assert notas == {i for i in itens if i.startswith('sd-nota')}
     # "conferida_por_codigo" só vale para blocos cujas resoluções têm teste neste arquivo.

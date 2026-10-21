@@ -148,6 +148,8 @@ def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
             # Revisão interna da curadoria. Não promove a confiabilidade: só revisao_professor faz isso.
             'revisao_humana': meta.get('revisao_humana', 'pendente'),
             'revisao_humana_em': meta.get('revisao_humana_em'), 'revisao_humana_por': meta.get('revisao_humana_por'),
+            # Autorização para publicar a transcrição; "licenca" continua sendo só a licença do original.
+            'publicacao_transcricao': meta.get('publicacao_transcricao'),
             'fontes_catalogo': [f.strip() for f in meta.get('fontes_catalogo', '').split(',') if f.strip()],
         })
     return itens

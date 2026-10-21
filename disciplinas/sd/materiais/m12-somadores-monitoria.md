@@ -7,7 +7,8 @@ resolucao: sim
 fonte: Somadores.pdf | páginas 1–6
 fontes_catalogo: ufal-sd-somadores
 autoria: Material de monitoria da disciplina (UFAL); transcrição da equipe TutorON, com as barras de negação recuperadas e conferidas pela tabela-verdade
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: conferida_por_codigo

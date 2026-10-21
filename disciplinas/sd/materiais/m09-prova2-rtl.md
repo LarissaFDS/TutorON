@@ -8,7 +8,8 @@ questao: 3-4
 fonte: Prova 2.pdf | página 1 | questões 3 e 4 (figuras descritas pela equipe)
 fontes_catalogo: ufal-sd-prova2
 autoria: Enunciado: prova da disciplina (UFAL). Descrição das figuras e esboço de resolução: equipe TutorON
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: candidato
 natureza: material_da_disciplina
 verificacao: nao_verificada

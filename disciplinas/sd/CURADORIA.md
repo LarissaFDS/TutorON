@@ -7,9 +7,9 @@ Estado da curadoria em 21/10/2026, cinco coisas diferentes:
 | Item | Estado |
 |---|---|
 | Revisão interna da curadoria (25 blocos) | **Feita** pela responsável pela curadoria, registrada em 21/10/2026 (`revisao_humana: feita`) |
-| Autorização para publicar as transcrições Markdown | **Dada** pela responsável pela curadoria em 21/10/2026 (`fontes.json`, `autorizacao_transcricao`) |
+| Autorização para publicar as transcrições Markdown | **Dada** pela responsável pela curadoria em 21/10/2026 (`fontes.json`, `autorizacao_transcricao`; nos blocos, `publicacao_transcricao`) |
 | Aprovação formal do professor ou monitor | **Não declarada**: nenhum bloco tem `revisao_professor: sim` |
-| Licença dos documentos originais da disciplina | **Não declarada**; os originais (PDF, DOCX, vídeos) continuam fora do repositório |
+| Licença dos documentos originais da disciplina | **Não declarada** (campo `licenca` dos blocos e de `fontes.json`); os originais (PDF, DOCX, vídeos) continuam fora do repositório |
 | Validação técnica das respostas da IA em SD | **Pendente** (seção 5) |
 
 - Catálogo legível por máquina (fonte da verdade): [`fontes.json`](fontes.json)

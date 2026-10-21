@@ -7,7 +7,8 @@ resolucao: sim
 fonte: fibonacci_vhdl.vhd | entidade FibonacciControl (resumo do código; autoria do arquivo não identificada)
 fontes_catalogo: ufal-sd-fibonacci-vhdl
 autoria: Código: arquivo de resolução recebido pela equipe (autor não identificado). Resumo e análise: equipe TutorON
-licenca: Material da disciplina; uso no TutorON pendente de confirmação com o professor
+licenca: Não declarada (material original da disciplina)
+publicacao_transcricao: autorizada pela responsável pela curadoria em 2026-10-21, só para esta transcrição Markdown; não é licença aberta; arquivo original fora do repositório; aprovação do professor ou monitor não declarada
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: nao_verificada
