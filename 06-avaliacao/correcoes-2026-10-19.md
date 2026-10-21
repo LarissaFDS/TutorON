@@ -161,7 +161,7 @@ Testes antigos ajustados, com motivo:
 1. Rodar `eval/bateria_tutor.py` com o `tutoron-paa` e com o Gemini no servidor, e avaliar à mão a correção e as citações.
 2. Se o `tutoron-paa` errar Karnaugh como o `qwen2.5:7b`, manter SD só com o Gemini garantido (faturamento) ou com uma estratégia nova validada.
 3. Repetir o pedido indireto de prompt com o `tutoron-paa`; o código só pega cópia literal.
-4. Revisão humana dos 25 blocos e autorização das transcrições (pendências da [curadoria](../disciplinas/sd/CURADORIA.md)).
+4. ~~Revisão humana dos 25 blocos e autorização das transcrições~~: registradas em 21/10/2026 pela responsável pela curadoria ([curadoria](../disciplinas/sd/CURADORIA.md)). Continuam pendentes as figuras de m09 e m11 (candidatos, fora da busca); aprovação formal do professor/monitor não foi declarada.
 5. Falso positivo conhecido: "busca binária" em SD recebe a nota de numeração.
 
 ## 8. Barreira para disciplina em validação (atualização do PR #27)
@@ -175,4 +175,4 @@ SD continua "em validação" no cadastro e agora é **recusada pelo servidor** (
 - a chamada direta à API é barrada, sem passar pelo site;
 - uma disciplina futura "em validação" é barrada sem código novo.
 
-Os problemas conhecidos das seções 1 a 7 continuam valendo: falso positivo de "busca binária", `tutoron-paa` e Gemini não testados, erros de cálculo do `qwen2.5:7b`, revisão humana e autorização das transcrições. A barreira não muda a qualidade das respostas: SD **não** está pronta para alunos.
+Os problemas conhecidos das seções 1 a 7 continuam valendo: falso positivo de "busca binária", `tutoron-paa` e Gemini não testados, erros de cálculo do `qwen2.5:7b` e figuras ausentes de m09/m11. A revisão interna e a autorização das transcrições foram registradas em 21/10/2026. A barreira não muda a qualidade das respostas: SD **não** está pronta para alunos.

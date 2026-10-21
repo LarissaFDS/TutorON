@@ -1,9 +1,10 @@
 {
   "disciplina": "sd",
-  "atualizado_em": "2026-10-19",
+  "atualizado_em": "2026-10-21",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa ou preenche lacunas; referencia = consulta e comparação, não é ingerida",
     "uso": "acervo = transcrito ou resumido em disciplinas/sd/materiais; citada = indicada como leitura nas notas da equipe; referencia = só catálogo; candidato = aguarda transcrição ou conferência; indisponivel = não localizado",
+    "autorizacao_transcricao": "registro da autorização, dada pela responsável pela curadoria, para publicar a transcrição Markdown revisada em disciplinas/sd/materiais. Não é licença aberta nem aprovação do professor; os originais (PDF, DOCX, vídeo) continuam fora do repositório",
     "notas": "1 a 5 em autoridade, cobertura, profundidade, didatica, aderencia, acessibilidade, reutilizacao, tutoria"
   },
   "fontes": [
@@ -14,8 +15,9 @@
       "sha256": "8e3ff6ff97d8d86a3fe8210e322a66bdf14f27a0da6a0d81aa14f729b67aaa4a",
       "idioma": "pt-BR", "formato": "PDF, 7 páginas (texto + figuras)",
       "topicos": ["sd-01-numeracao-aritmetica", "sd-02-algebra-booleana-portas", "sd-03-simplificacao-karnaugh", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-06-analise-temporal"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 5, "cobertura": 4, "profundidade": 4, "didatica": 4, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 5},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo",
       "justificativa": "Mostra exatamente como a disciplina cobra a parte combinacional da AV1. Enunciados transcritos; figuras (Q5, Q9, Q21–Q25) ainda não descritas."
     },
@@ -25,8 +27,9 @@
       "sha256": "fdc5536c46219b9972d90a8996d993f0b9b290f4802951ced2fc8fd76d79984f",
       "idioma": "pt-BR", "formato": "PDF, 3 páginas (texto + figuras)",
       "topicos": ["sd-07-latches-flip-flops", "sd-08-registradores-contadores", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 5, "cobertura": 4, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 3, "reutilizacao": 2, "tutoria": 5},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo",
       "justificativa": "Cobre a parte sequencial e o projeto RTL da AV2. Várias questões dependem de figuras, descritas só onde a equipe conseguiu conferir."
     },
@@ -36,8 +39,9 @@
       "sha256": "6ad29d2257c92f442cb71e96c329dc507e3e4920d8663be43939841f726f2b1e",
       "idioma": "pt-BR", "formato": "DOCX (texto + 2 imagens)",
       "topicos": ["sd-12-conversores-memorias", "sd-06-analise-temporal", "sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 5},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo", "justificativa": "Prova real com pesos por questão; resoluções da equipe conferidas por código."
     },
     {
@@ -46,8 +50,9 @@
       "sha256": "4ad7477c8b650cf36409be35ad731aafbf90a445cac5ec52056c114765b2d9a5",
       "idioma": "pt-BR", "formato": "PDF, 1 página (texto + figuras)",
       "topicos": ["sd-07-latches-flip-flops", "sd-09-maquinas-de-estados", "sd-08-registradores-contadores", "sd-10-projeto-rtl"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 3, "reutilizacao": 2, "tutoria": 5},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo", "justificativa": "Prova real; a FSM da Q2 foi lida da figura e a resolução foi verificada por simulação."
     },
     {
@@ -56,8 +61,9 @@
       "sha256": "0816b85a99aba718e8532e831791592af9adef38af10a6912d6eaa6ef16a0b09",
       "idioma": "pt-BR", "formato": "PDF de imagens, 3 páginas (sem camada de texto)",
       "topicos": ["sd-04-blocos-combinacionais", "sd-05-circuitos-aritmeticos", "sd-10-projeto-rtl"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 5, "cobertura": 3, "profundidade": 4, "didatica": 3, "aderencia": 5, "acessibilidade": 2, "reutilizacao": 2, "tutoria": 5},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo",
       "justificativa": "Transcrito da imagem pela equipe. A constante 25 do bloco operacional da Q2 diverge do enunciado (endereço 26) e está sinalizada."
     },
@@ -67,8 +73,9 @@
       "sha256": "cb4e792150361fe01ed890b6abda393d35e2ab3dfb4a3736b2057ead7b50525d",
       "idioma": "pt-BR", "formato": "PDF, 6 páginas",
       "topicos": ["sd-05-circuitos-aritmeticos", "sd-03-simplificacao-karnaugh"],
-      "licenca": "Não declarada; material interno da disciplina", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada; material interno da disciplina", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 4, "cobertura": 2, "profundidade": 3, "didatica": 4, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 4},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "alta", "uso": "acervo", "justificativa": "Explicação curta e alinhada à notação da disciplina; as barras de negação perdidas na extração foram recuperadas pela tabela-verdade."
     },
     {
@@ -77,8 +84,9 @@
       "sha256": "73b96aaa9efef2d5d9e9b3331c56179e27760d2e8b669f6e441a9a8cbea2bdf5",
       "idioma": "VHDL, comentários em pt-BR", "formato": "Código-fonte VHDL (144 linhas)",
       "topicos": ["sd-11-hdl-vhdl", "sd-09-maquinas-de-estados", "sd-10-projeto-rtl"],
-      "licenca": "Não declarada", "acesso": "Arquivo fornecido pela equipe; não publicado no repositório",
+      "licenca": "Não declarada", "acesso": "Original fornecido pela equipe, não publicado no repositório; transcrição revisada publicada em disciplinas/sd/materiais",
       "notas": {"autoridade": 2, "cobertura": 2, "profundidade": 3, "didatica": 3, "aderencia": 5, "acessibilidade": 5, "reutilizacao": 2, "tutoria": 4},
+      "autorizacao_transcricao": {"data": "2026-10-21", "por": "responsável pela curadoria", "escopo": "transcrição Markdown revisada, sem o arquivo original", "aprovacao_professor": "não declarada"},
       "prioridade": "media", "uso": "acervo",
       "justificativa": "Útil como exemplo real de FSM em VHDL. Tem saídas registradas (um ciclo de atraso), apontadas no bloco; não deve ser tratado como gabarito."
     },

@@ -1,6 +1,16 @@
 # Sistemas Digitais — curadoria do acervo
 
-Situação: **em validação**. A curadoria inicial (19/10/2026) **não foi validada pelo professor**. Toda a seleção abaixo é uma proposta da equipe para revisão.
+Situação: **em validação** (a validação técnica da IA ainda está pendente; o servidor bloqueia SD no atendimento normal).
+
+Estado da curadoria em 21/10/2026, cinco coisas diferentes:
+
+| Item | Estado |
+|---|---|
+| Revisão interna da curadoria (25 blocos) | **Feita** pela responsável pela curadoria, registrada em 21/10/2026 (`revisao_humana: feita`) |
+| Autorização para publicar as transcrições Markdown | **Dada** pela responsável pela curadoria em 21/10/2026 (`fontes.json`, `autorizacao_transcricao`) |
+| Aprovação formal do professor ou monitor | **Não declarada**: nenhum bloco tem `revisao_professor: sim` |
+| Licença dos documentos originais da disciplina | **Não declarada**; os originais (PDF, DOCX, vídeos) continuam fora do repositório |
+| Validação técnica das respostas da IA em SD | **Pendente** (seção 5) |
 
 - Catálogo legível por máquina (fonte da verdade): [`fontes.json`](fontes.json)
 - Blocos do acervo (um arquivo por bloco): [`materiais/`](materiais/)
@@ -91,9 +101,9 @@ Cada bloco declara no cabeçalho quatro coisas, gravadas também em `acervo/iten
   - `sem_resolucao`: só enunciado;
   - `nao_verificada`: nenhuma conferência objetiva;
 - **`curadoria`**: `aprovado` entra na busca com confiabilidade **média**, como as correções derivadas de PAA; `candidato` fica fora;
-- **`revisao_humana`**: hoje é `pendente` em **todos** os blocos.
+- **`revisao_humana`**: `feita` em **todos** os 25 blocos (revisão interna da responsável pela curadoria, 21/10/2026, campos `revisao_humana_em` e `revisao_humana_por`). A revisão não muda a `curadoria` nem a confiabilidade: m09 e m11 foram revisados e **continuam candidatos**, fora da busca, porque dependem de figuras e informações não transcritas.
 
-**Teste automatizado não é revisão humana.** Ele confere contas e equações, não a fidelidade da transcrição às figuras nem a qualidade didática. Nenhum bloco tem confiabilidade alta. Para promover um bloco, um professor ou monitor revisa e marca `revisao_professor: sim` e `revisao_humana: feita`.
+**Teste automatizado não é revisão humana.** Ele confere contas e equações, não a fidelidade da transcrição às figuras nem a qualidade didática. Nenhum bloco tem confiabilidade alta: só a aprovação de um professor ou monitor (`revisao_professor: sim`) promove um bloco aprovado, e ela não aconteceu.
 
 | Arquivo | id | Natureza | Verificação | Curadoria | O que falta |
 |---|---|---|---|---|---|
@@ -113,7 +123,7 @@ Cada bloco declara no cabeçalho quatro coisas, gravadas também em `acervo/iten
 | n01, n03, n09, n12 | `sd-nota-numeracao`, `sd-nota-karnaugh`, `sd-nota-fsm`, `sd-nota-conversores-memorias` | nota da equipe (IA) | exemplos conferidos | aprovado | revisão do texto |
 | n02, n04–n08, n10, n11 | demais `sd-nota-*` | nota da equipe (IA) | não verificada | aprovado | revisão do texto |
 
-Prioridade de revisão humana, pelo peso nas avaliações:
+Prioridade para uma eventual revisão do professor ou monitor (a revisão interna já foi feita), pelo peso nas avaliações:
 1. m08, m10 e m01 (questões de prova com resolução);
 2. m06 e m09 (RTL da AV2);
 3. m11 (REAV);
@@ -130,7 +140,7 @@ Prioridade de revisão humana, pelo peso nas avaliações:
 
 Na busca léxica, as 20 perguntas de avaliação de PAA (`06-avaliacao`) devolvem exatamente os mesmos blocos, na mesma ordem (teste `test_ranking_lexico_de_paa_preservado`). O número de trechos enviados continua 4.
 
-**Índice de SD:** continua **léxico**. O `bge-m3` não está instalado no Ollama desta máquina (`model 'bge-m3' not found`), e não foi baixado. O índice híbrido de SD ainda não foi gerado nem testado.
+**Índice de SD (na época deste teste):** léxico, porque o `bge-m3` não estava instalado. Desde então o índice é híbrido (23 blocos, 23 vetores).
 
 **Teste no site real.** Servidor local na porta 8765, com dados temporários e a mesma pergunta: "Como simplifico S(A,B,C) = Σm(0,1,3,5,7) com mapa de Karnaugh?", disciplina SD.
 
@@ -145,7 +155,7 @@ Conclusão: a recuperação foi corrigida, mas **a disciplina não está validad
 
 ## 4. Licenças e restrições
 
-- **Materiais da disciplina (UFAL) — pendência de publicação, ainda aberta:** sem licença declarada. O repositório é público, por isso **os PDFs/DOCX/vídeos originais não foram versionados**; só entram as transcrições necessárias para a busca. Assim como no acervo de PAA, a equipe precisa **confirmar com o professor e os monitores** que pode publicar essas transcrições. Se não puder, mova `materiais/m*.md` para fora do Git e gere os índices localmente.
+- **Materiais da disciplina (UFAL):** a licença dos originais **não foi declarada**. A responsável pela curadoria **autorizou em 21/10/2026 a publicação das transcrições Markdown revisadas** (`materiais/m*.md`), que ficam no repositório. A autorização não é uma licença aberta e não vale para os originais: os **PDFs, DOCX e vídeos continuam fora do repositório**, salvo decisão específica posterior. Não há registro de aprovação formal do professor ou dos monitores.
 - **Vídeos de monitoria:** contêm voz de pessoas; não publicar sem consentimento.
 - **Notas da equipe:** texto original do TutorON.
 - **CC BY-SA (Wikibooks, Wikilivros, Free Range VHDL):** ao ingerir trechos, manter atribuição e a mesma licença no trecho derivado.
@@ -154,12 +164,12 @@ Conclusão: a recuperação foi corrigida, mas **a disciplina não está validad
 
 ## 5. Pendências
 
-1. Revisão humana (professor ou monitor) dos 25 blocos, na ordem de prioridade da seção 3. Os blocos m09 e m11 só voltam à busca depois dela.
+1. ~~Revisão interna dos 25 blocos~~ e ~~autorização de publicação das transcrições~~: feitas em 21/10/2026. Os blocos m09 e m11 continuam candidatos até que as figuras e informações que faltam sejam transcritas. Aprovação formal do professor ou monitor: não declarada (opcional; é o que levaria um bloco à confiabilidade alta).
 2. Repetir a pergunta de Karnaugh (e as de `tests_acervo/test_recuperacao_notacao.py`) com o Gemini e com o `tutoron-paa`, e registrar fontes, resposta e correção. Até lá, SD fica "em validação". Teste de 19/10: Gemini acertou a pergunta básica; o modelo local errou Karnaugh com irrelevâncias. Depois das correções, o `qwen2.5:7b` errou as 4 questões de cálculo da bateria `eval/bateria_tutor.py`: SD continua **bloqueada para o modelo local** ([correções e pendências](../../06-avaliacao/correcoes-2026-10-19.md)).
 3. Descrever as figuras que faltam (AV1 Q5, Q9, Q21–Q25; AV2 Q3, Q4, Q7; Prova 1 Q2; Prova 2 Q1 e Q3).
 4. Transcrever a resolução manuscrita da Prova 2 e as gravações de monitoria (candidatos).
 5. Confirmar o plano de ensino atual e o livro adotado.
-6. Instalar o `bge-m3` no Ollama (`ollama pull bge-m3`), gerar o índice híbrido (`python -m acervo.disciplinas sd --embeddings`) e repetir os testes de recuperação.
+6. ~~Índice híbrido~~: gerado com o `bge-m3` (23 blocos, 23 vetores). Falso positivo conhecido: "busca binária" recebe a nota de numeração.
 7. Avaliar a ingestão de capítulos de Kuphaldt (vol. IV) e Free Range VHDL, com atribuição.
 
 ## 6. Como atualizar

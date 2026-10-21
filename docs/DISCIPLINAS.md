@@ -66,7 +66,7 @@ O prompt comum ganhou três seções (o texto anterior continua igual; teste em 
 1. Crie `disciplinas/<id>/` com:
    - `rigor.md`: a seção "# Rigor …" com as regras da área (veja `disciplinas/sd/rigor.md`). É o único texto de instrução específico da disciplina.
    - `materiais/*.md`: um bloco por arquivo, com cabeçalho entre `---`:
-     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `fontes_catalogo` e `revisao_professor`.
+     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `fontes_catalogo`, `revisao_humana` (`pendente` | `feita`, com `revisao_humana_em` e `revisao_humana_por`) e `revisao_professor`. A revisão humana interna não muda a confiabilidade; só `revisao_professor: sim` leva um bloco aprovado a confiabilidade alta.
    - `fontes.json` e `CURADORIA.md`: catálogo e justificativa da curadoria (modelo: `disciplinas/sd`).
 2. Acrescente a disciplina em `disciplinas/disciplinas.json` (`itens`, `indice`, `materiais`, `rigor`, `assuntos`, `exemplos`, `livro_supabase: false`).
 3. Gere o acervo: `python -m acervo.disciplinas <id> --embeddings` (sem `--embeddings`, ou sem o `bge-m3`, o índice fica só léxico).
@@ -81,4 +81,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
-| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | em validação, **bloqueada para alunos**: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | em validação, **bloqueada para alunos** (curadoria revisada internamente e transcrições autorizadas em 21/10/2026; falta a validação técnica da IA): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
