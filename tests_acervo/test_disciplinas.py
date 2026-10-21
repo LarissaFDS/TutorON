@@ -1,3 +1,4 @@
+import json
 """Cadastro de disciplinas, acervo de Sistemas Digitais e catálogo de fontes.
 
 As resoluções do acervo de SD afirmam resultados (expressões mínimas, equações de FSM);
@@ -233,8 +234,14 @@ def test_exemplos_das_notas():
 
 def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     itens = {i['id']: i for i in read_json(SD.itens)}
-    assert all(i['revisao_humana'] == 'pendente' for i in itens.values())  # ninguém revisou ainda
+    # Revisão interna feita em 21/10/2026 pela responsável pela curadoria; o professor não aprovou,
+    # então nada vira "alta" e os candidatos (figuras ausentes) continuam fora da busca.
+    assert all(i['revisao_humana'] == 'feita' and i['revisao_humana_em'] == '2026-10-21' for i in itens.values())
     assert all(i['confiabilidade'] != 'alta' for i in itens.values())
+    candidatos = {i for i, x in itens.items() if x['status_curadoria'] == 'candidato'}
+    assert len(candidatos) == 2 and all(itens[i]['confiabilidade'] == 'nao_verificada' for i in candidatos)
+    indexados = {c['id'] for c in json.loads(SD.indice.read_text(encoding='utf-8'))['chunks']}
+    assert candidatos.isdisjoint(indexados) and len(indexados) == 23
     notas = {i for i, x in itens.items() if x['natureza'] == 'nota_da_equipe_ia'}
     assert notas == {i for i in itens if i.startswith('sd-nota')}
     # "conferida_por_codigo" só vale para blocos cujas resoluções têm teste neste arquivo.

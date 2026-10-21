@@ -6,12 +6,14 @@ tipo: material_estudo
 resolucao: sim
 fonte: Nota da equipe TutorON (não é material do professor)
 fontes_catalogo: wikibooks-digital-circuits,wikilivros-eletronica-digital,kuphaldt-lec-vol4
-autoria: Equipe TutorON, redigida com auxílio de IA; exemplo conferido por código; revisão humana pendente
+autoria: Equipe TutorON, redigida com auxílio de IA; exemplo conferido por código; revisada pela responsável pela curadoria em 21/10/2026
 licenca: Texto original da equipe TutorON
 curadoria: aprovado
 natureza: nota_da_equipe_ia
 verificacao: exemplos_conferidos
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Mapa de Karnaugh (diagrama de Veitch-Karnaugh)
 

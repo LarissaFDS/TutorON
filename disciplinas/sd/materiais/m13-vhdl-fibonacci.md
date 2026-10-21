@@ -11,7 +11,9 @@ licenca: Material da disciplina; uso no TutorON pendente de confirmação com o 
 curadoria: aprovado
 natureza: material_da_disciplina
 verificacao: nao_verificada
-revisao_humana: pendente
+revisao_humana: feita
+revisao_humana_em: 2026-10-21
+revisao_humana_por: responsável pela curadoria (revisão interna; não é aprovação do professor)
 ---
 Controlador VHDL do Fibonacci (questão 8 da Lista AV2)
 

@@ -145,7 +145,9 @@ def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
             'texto': texto, 'documento_id': meta['id'], 'sha256_fonte': sha_fonte,
             'status_curadoria': status, 'autoria': meta['autoria'], 'licenca': meta['licenca'],
             'natureza': meta.get('natureza', NATUREZA[0]), 'verificacao': meta.get('verificacao', 'nao_verificada'),
+            # Revisão interna da curadoria. Não promove a confiabilidade: só revisao_professor faz isso.
             'revisao_humana': meta.get('revisao_humana', 'pendente'),
+            'revisao_humana_em': meta.get('revisao_humana_em'), 'revisao_humana_por': meta.get('revisao_humana_por'),
             'fontes_catalogo': [f.strip() for f in meta.get('fontes_catalogo', '').split(',') if f.strip()],
         })
     return itens
