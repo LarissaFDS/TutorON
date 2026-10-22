@@ -21,9 +21,10 @@ from dataclasses import dataclass, field
 
 from acervo.disciplinas import obter
 
-from . import prompts, seguranca
+from . import animacao, foto, prompts, seguranca
 from .dados import Registro, agora, novo_id
 from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
+from .animacao.roteiro import extrair_json
 from .rag import contexto, recuperar
 
 logger = logging.getLogger("tutoron.tarefas")
@@ -45,7 +46,7 @@ def msg_fila(posicao: int) -> str:
 
 @dataclass
 class Tarefa:
-    tipo: str  # "tutor" | "comparacao"
+    tipo: str  # "tutor" | "comparacao" | "foto" | "animacao"
     id: str = field(default_factory=lambda: secrets.token_urlsafe(16))
     status: str = "fila"  # fila | gerando | pronta | erro
     mensagem: str = "Procurando no material da disciplina…"
@@ -60,6 +61,8 @@ class Tarefa:
         dados = {"id": self.id, "status": self.status, "mensagem": self.mensagem}
         if self.tipo == "tutor":
             dados.update(texto=self.texto, rotulo=self.rotulo, fontes=self.fontes, **self.resultado)
+        elif self.tipo in ("foto", "animacao"):
+            dados.update(self.resultado)
         elif self.status == "pronta":
             dados.update(self.resultado)  # sessao, pergunta, A, B: sem identidade dos lados
         return dados
@@ -153,8 +156,15 @@ class Tarefas:
         raise AllUnavailable(tentativas)
 
     # ------------------------------------------------------------------ modo Tutor
-    def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None) -> Tarefa:
+    def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None,
+                  ajuda: str = "auto", leitura_foto: str | None = None, historico: list[dict] | None = None,
+                  travou: str | None = None) -> Tarefa:
         d = obter(disciplina)  # antes da tarefa: disciplina desconhecida falha na hora, não em segundo plano
+        ajuda = prompts.ajuda_valida(ajuda)
+        historico = historico or []
+        if historico and ajuda == "auto":
+            # "Ainda não consegui" com o tutor escolhendo: troca a forma de explicar a cada rodada.
+            ajuda = prompts.proxima_ajuda([prompts.ajuda_valida(h.get("ajuda")) for h in historico])
 
         async def trabalho(t: Tarefa) -> None:
             if seguranca.pedido_de_instrucoes(pergunta):
@@ -170,13 +180,15 @@ class Tarefas:
             trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.fontes = [x.publico() for x in trechos]
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
-            prompt = prompts.prompt_tutor(pergunta, contexto(trechos, len(pergunta) + len(contexto_aluno or "")), contexto_aluno)
+            tamanho = len(pergunta) + len(contexto_aluno or "") + len(leitura_foto or "")
+            prompt = prompts.prompt_socratico(pergunta, contexto(trechos, tamanho), contexto_aluno, ajuda, leitura_foto,
+                                              historico, travou)
 
             def ao_texto(texto: str) -> None:
                 t.texto = texto
 
             ident = novo_id()
-            sistema = prompts.sistema_tutor(d)
+            sistema = prompts.sistema_socratico(d)
             try:
                 r = await self._gerar(sistema, prompt, t, ao_texto=ao_texto)
             except AllUnavailable as exc:
@@ -186,6 +198,25 @@ class Tarefas:
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
             texto, ajustes = seguranca.revisar(r.text, sistema, {x.rotulo for x in trechos}, d.nome)
+            if seguranca.entrega_resposta(texto):
+                # Entregou a solução: refaz uma vez com o reforço. Se ainda entregar, fica a segunda
+                # versão (o registro marca) para não deixar o aluno sem nada.
+                t.mensagem, t.texto = "Revisando a ajuda para não entregar a resposta…", ""
+                ajustes.append("entregou_resposta")
+                refazer = (prompt + "\n\nRESPOSTA ANTERIOR (proibida, entregou a solução):\n<<<\n"
+                           + texto[:3000] + "\n>>>\n" + prompts.SISTEMA_REFORCO)
+                try:
+                    r2 = await self._gerar(sistema, refazer, t, ao_texto=ao_texto)
+                    texto, mais = seguranca.revisar(r2.text, sistema, {x.rotulo for x in trechos}, d.nome)
+                    ajustes += mais + (["entregou_resposta_de_novo"] if seguranca.entrega_resposta(texto) else [])
+                    r = Result(text=r2.text, model=r2.model, seconds=round(r.seconds + r2.seconds, 2),
+                               attempts=r.attempts + r2.attempts)
+                except AllUnavailable:
+                    ajustes.append("reforco_indisponivel")
+            if texto != seguranca.recusa(d.nome):
+                texto, faltou = seguranca.garantir_sua_vez(texto)
+                if faltou:
+                    ajustes.append("sua_vez_acrescentada")
             t.texto = texto
             # Respondeu o flash-lite porque os modelos melhores falharam ou estavam em pausa.
             # Só registro e payload por enquanto; a interface não muda.
@@ -194,10 +225,12 @@ class Tarefas:
                 logger.warning("Resposta degradada para %s", r.model.key)
             self.registro.anexar("perguntas.jsonl", {
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
+                "modo": "socratico", "ajuda": ajuda, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
+                **({"rodada": len(historico) + 1, "travou": travou} if historico else {}),
                 "resposta": texto, **({"resposta_original": r.text, "ajustes": ajustes} if ajustes else {}),
                 "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds, "degradado": caiu,
                 "tentativas": r.attempts, "fontes": t.fontes})
-            t.resultado = {"id_resposta": ident, "segundos": r.seconds, "degradado": caiu}
+            t.resultado = {"id_resposta": ident, "segundos": r.seconds, "degradado": caiu, "ajuda": ajuda}
             t.status, t.mensagem = "pronta", ""
 
         return self._criar("tutor", trabalho)
@@ -256,3 +289,78 @@ class Tarefas:
             t.status, t.mensagem = "pronta", ""
 
         return self._criar("comparacao", trabalho)
+
+    # ------------------------------------------------------------------ foto do papel
+    def ler_foto(self, imagem: bytes, disciplina: str | None = None, observacao: str | None = None) -> Tarefa:
+        """Transcreve a foto para o aluno conferir. Não responde nada: só lê."""
+        d = obter(disciplina)
+        preparada = foto.preparar(imagem)  # antes da tarefa: imagem inválida falha na hora (400)
+
+        async def trabalho(t: Tarefa) -> None:
+            t.status, t.mensagem = "gerando", "Lendo a foto inteira e os recortes ampliados…"
+            imagens = [preparada["inteira"], *preparada["recortes"]]
+            texto = prompts.prompt_foto(d, len(preparada["recortes"]), observacao)
+            ident = novo_id()
+            try:
+                r = await self.llm.ver_imagens(prompts.SISTEMA_FOTO, texto, imagens)
+                leitura = foto.normalizar(extrair_json(r.text))
+            except AllUnavailable as exc:
+                self.registro.anexar("fotos.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                     "erro": "nenhum_modelo", "tentativas": exc.attempts})
+                t.status = "erro"
+                t.mensagem = "Não consegui ler a foto agora. Tente de novo em instantes ou digite o enunciado."
+                return
+            except ValueError:
+                t.status, t.mensagem = "erro", "A leitura da foto veio incompleta. Tente de novo ou digite o enunciado."
+                return
+            # A foto não é guardada; só a leitura, sem identificação (para medir a qualidade da leitura).
+            self.registro.anexar("fotos.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                 "preparo": preparada["info"], "leitura": leitura,
+                                                 "modelo": r.model.key, "segundos": r.seconds})
+            t.resultado = {"id_leitura": ident, "leitura": leitura, "modelo": r.model.label, "segundos": r.seconds}
+            t.status, t.mensagem = "pronta", ""
+
+        return self._criar("foto", trabalho)
+
+    # ------------------------------------------------------------------ animação (Manim, protótipo)
+    def animar(self, pergunta: str, resposta_tutor: str | None, disciplina: str | None = None) -> Tarefa:
+        d = obter(disciplina)
+
+        async def trabalho(t: Tarefa) -> None:
+            t.status, t.mensagem = "gerando", "Planejando a animação…"
+            prompt = prompts.prompt_animacao(pergunta, resposta_tutor, d)
+            roteiro, erro, r = None, "", None
+            for _ in range(2):  # a IA tem uma chance de corrigir um roteiro inválido
+                try:
+                    r = await self._gerar(prompts.SISTEMA_ANIMACAO, prompt + erro, t, raciocinio=False)
+                except AllUnavailable:
+                    t.status, t.mensagem = "erro", MSG_ERRO
+                    return
+                try:
+                    roteiro = animacao.roteiro_valido(r.text)
+                    break
+                except animacao.FalhaAnimacao as exc:
+                    erro = f"\n\nO roteiro anterior era inválido ({exc}). Devolva um JSON válido de um dos modelos."
+            ident = novo_id()
+            if roteiro is None:
+                self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                         "pergunta": pergunta, "erro": erro.strip()[:300]})
+                t.status, t.mensagem = "erro", "Não consegui montar uma animação para esta dúvida. Tente reformular."
+                return
+            t.mensagem = "Desenhando a animação (leva uns 10 segundos)…"
+            try:
+                video = await animacao.renderizar(roteiro, self.settings.data_dir / "animacoes")
+            except animacao.FalhaAnimacao as exc:
+                logger.warning("Animação falhou: %s", exc)
+                self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                         "pergunta": pergunta, "roteiro": roteiro, "erro": str(exc)})
+                t.status, t.mensagem = "erro", "A animação falhou ao ser desenhada. Tente de novo."
+                return
+            self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                                                     "pergunta": pergunta, "roteiro": roteiro, "video": video,
+                                                     "modelo": r.model.key})
+            t.resultado = {"video": f"/api/animacoes/{video}.mp4", "modelo_cena": roteiro["modelo"],
+                           "titulo": roteiro.get("titulo", ""), "pergunta_final": roteiro.get("pergunta_final", "")}
+            t.status, t.mensagem = "pronta", ""
+
+        return self._criar("animacao", trabalho)

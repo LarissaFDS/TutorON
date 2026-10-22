@@ -6,7 +6,7 @@ O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, c
 
 O site tem dois modos:
 
-- **Tirar dúvida** — modo normal: pergunta e resposta, com as fontes consultadas e um botão para marcar "tem erro de conta".
+- **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
 ## Como usar (Windows)
@@ -27,6 +27,8 @@ Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.exa
 
 - `dados/perguntas.jsonl` — perguntas do modo Tutor, resposta, modelo usado e fontes.
 - `dados/feedback.jsonl` — "ajudou / não ajudou / tem erro de conta".
+- `dados/fotos.jsonl` — a leitura de cada foto do papel (a foto em si não é guardada).
+- `dados/animacoes.jsonl` e `dados/animacoes/*.mp4` — roteiros e vídeos das animações.
 - `dados/validacao/avaliacoes.jsonl` — cada avaliação A/B completa: pergunta, as duas respostas, notas, preferência e **qual lado era o TutorON**.
 - `http://127.0.0.1:8000/resultados` — resumo das avaliações. Só abre nesta máquina; pelo endereço público responde 404.
 

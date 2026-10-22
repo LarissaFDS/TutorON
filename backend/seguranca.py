@@ -77,3 +77,32 @@ def revisar(resposta: str, sistema: str | None, validos: set[str], nome: str) ->
         resposta = limpar_rotulos(resposta, validos)
         ajustes.append("rotulos_inexistentes:" + ",".join(sorted(invalidos)))
     return resposta, ajustes
+
+
+# ---------------------------------------------------------------------------
+# Modo Tutor socrático: a resposta não pode entregar a solução (reunião de 21/10/2026)
+# ---------------------------------------------------------------------------
+# O prompt proíbe; aqui fica o que dá para conferir no texto. Frases típicas de quem fecha o
+# exercício ("a resposta final é", "gabarito:", "portanto, T(n) = Θ(...)"). Não pega tudo:
+# uma resolução sem nenhuma dessas frases passa. Por isso o modo também pede "### Sua vez".
+_ENTREGA = re.compile(
+    r"(\b(resposta|resultado|solucao) (final|correta|do exercicio|da questao)\b"
+    r"|\bgabarito\b\s*[:=]"
+    r"|\b(a resposta|o resultado) (e|eh|sera)\s*[:=]?\s*[$*\\]*\s*[a-z0-9(θΘ]"
+    r"|\bportanto,? (a resposta|o resultado|t\s*\(\s*n\s*\)\s*(=|e|∈)|a complexidade (e|final))"
+    r"|\blogo,? [$]?t\s*\(\s*n\s*\)\s*(=|∈|e)\s*[$\\]*\s*(θ|ω|o\(|theta|omega|\d|n\b)"
+    r"|\bresposta\s*:\s*[$\\]*[a-z0-9θΘ])")
+_SUA_VEZ = re.compile(r"#+\s*sua vez", re.I)
+SUA_VEZ_PADRAO = ("\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa "
+                  "(por texto ou foto) que eu confiro com você.")
+
+
+def entrega_resposta(texto: str) -> bool:
+    return bool(_ENTREGA.search(searchable(texto or "")))
+
+
+def garantir_sua_vez(texto: str) -> tuple[str, bool]:
+    """Toda ajuda termina devolvendo a vez ao aluno. Acrescenta a seção se a IA esqueceu."""
+    if _SUA_VEZ.search(texto or ""):
+        return texto, False
+    return (texto or "").rstrip() + SUA_VEZ_PADRAO, True

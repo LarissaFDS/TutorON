@@ -118,6 +118,195 @@
   // ================================================================== MODO TUTOR
   sugestoes('sugestoes-tutor', 'pergunta');
 
+  /* Tipo de ajuda: o TutorON não entrega a resposta; o aluno escolhe COMO quer ser ajudado. */
+  var AJUDAS_PADRAO = [['auto', 'O tutor escolhe'], ['pista', 'Uma pista'], ['perguntas', 'Perguntas-guia'],
+    ['conceito', 'Explicar o conceito'], ['exemplo', 'Exemplo parecido'], ['conferir', 'Conferir meu raciocínio'],
+    ['visual', 'Desenho/esquema']];
+  var animacaoDisponivel = false;
+  function montarAjudas(lista) {
+    var box = $('ajudas-opcoes');
+    box.replaceChildren();
+    lista.forEach(function (a, i) {
+      var label = el('label', 'pick');
+      var input = document.createElement('input');
+      input.type = 'radio';
+      input.name = 'ajuda';
+      input.value = a[0];
+      input.checked = i === 0;
+      label.append(input, el('span', null, a[1]));
+      box.append(label);
+    });
+  }
+  montarAjudas(AJUDAS_PADRAO);
+  (async function carregarAjudas() {
+    try {
+      var res = await fetch('/api/ajudas', { cache: 'no-store' });
+      if (!res.ok) return;
+      var dados = await res.json();
+      montarAjudas(dados.ajudas.map(function (a) { return [a.id, a.nome]; }));
+      animacaoDisponivel = !!dados.animacao;
+    } catch (e) { /* servidor antigo: fica a lista padrão */ }
+  })();
+  function ajudaEscolhida() {
+    var marcado = document.querySelector('input[name="ajuda"]:checked');
+    return marcado ? marcado.value : 'auto';
+  }
+
+  /* Foto do papel: a IA transcreve, o aluno CONFERE e corrige, e só então a leitura vai para o tutor. */
+  var fotoConfirmada = null;  // texto que acompanha a próxima pergunta
+
+  // Reduz no celular antes de enviar (fotos de 12 MP passam de 5 MB); 2400 px mantém a letra legível.
+  function comprimir(arquivo) {
+    return new Promise(function (ok, falha) {
+      var url = URL.createObjectURL(arquivo);
+      var img = new Image();
+      img.onload = function () {
+        var escala = Math.min(1, 2400 / Math.max(img.naturalWidth, img.naturalHeight));
+        var c = document.createElement('canvas');
+        c.width = Math.round(img.naturalWidth * escala);
+        c.height = Math.round(img.naturalHeight * escala);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(url);
+        ok(c.toDataURL('image/jpeg', 0.9));
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); falha(new Error('Não consegui abrir esta imagem.')); };
+      img.src = url;
+    });
+  }
+
+  function mostrarLeitura(leitura, dataUrl) {
+    $('foto-previa').src = dataUrl;
+    var conf = $('foto-confianca');
+    var nomes = { alta: 'alta', media: 'média', baixa: 'baixa' };
+    conf.textContent = 'Confiança da leitura: ' + (nomes[leitura.confianca] || 'baixa') +
+      (leitura.legivel ? '' : ' — a foto parece ilegível; tente outra com mais luz e o papel inteiro no quadro.');
+    conf.className = 'caption' + (leitura.confianca === 'baixa' ? ' confianca--baixa' : '');
+    $('foto-enunciado').value = leitura.enunciado || '';
+    $('foto-tentativa').value = leitura.tentativa || '';
+    var duvidas = $('foto-duvidas-lista');
+    duvidas.replaceChildren.apply(duvidas, (leitura.duvidas || []).map(function (d) { return el('li', null, d); }));
+    $('foto-duvidas').hidden = !(leitura.duvidas || []).length;
+    var subs = $('foto-subtopicos');
+    subs.replaceChildren();
+    (leitura.subtopicos || []).forEach(function (s, i) {
+      var label = el('label', 'check');
+      var cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = true;
+      cb.value = s;
+      cb.id = 'sub-' + i;
+      label.append(cb, el('span', null, s));
+      subs.append(label);
+    });
+    $('foto-subtopicos-box').hidden = !(leitura.subtopicos || []).length;
+    var reg = $('foto-regioes');
+    reg.replaceChildren.apply(reg, (leitura.regioes || []).map(function (r) {
+      var li = el('li');
+      li.append(el('strong', null, r.onde + ': '), document.createTextNode(r.conteudo));
+      return li;
+    }));
+    $('foto-regioes-box').hidden = !(leitura.regioes || []).length;
+    $('foto-conferir').hidden = false;
+    $('foto-conferir').focus({ preventScroll: true });
+    rolarPara($('foto-conferir'));
+  }
+
+  function textoDaFoto() {
+    var subs = Array.prototype.map.call(document.querySelectorAll('#foto-subtopicos input:checked'),
+      function (cb) { return cb.value; });
+    var partes = [];
+    var enunciado = $('foto-enunciado').value.trim();
+    var tentativa = $('foto-tentativa').value.trim();
+    if (enunciado) partes.push('Enunciado (lido da foto e conferido pelo aluno):', enunciado);
+    if (subs.length) partes.push('Subtópicos:', subs.map(function (s) { return '- ' + s; }).join('\n'));
+    if (tentativa) partes.push('Tentativa do aluno no papel:', tentativa);
+    return partes.join('\n').slice(0, 8000);
+  }
+
+  function limparFoto() {
+    fotoConfirmada = null;
+    $('foto-conferir').hidden = true;
+    $('foto-confirmada').hidden = true;
+    $('foto-arquivo').value = '';
+    setStatus($('foto-status'), '');
+  }
+
+  $('foto-arquivo').addEventListener('change', async function () {
+    var arquivo = this.files && this.files[0];
+    if (!arquivo) return;
+    limparFoto();
+    setStatus($('foto-status'), 'Preparando a foto…', 'busy');
+    try {
+      var dataUrl = await comprimir(arquivo);
+      var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
+      var t = await acompanhar(criada.id, function (x) {
+        if (x.status !== 'pronta' && x.status !== 'erro') setStatus($('foto-status'), x.mensagem || 'Lendo a foto…', 'busy');
+      });
+      if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler a foto.');
+      setStatus($('foto-status'), '');
+      mostrarLeitura(t.leitura, dataUrl);
+    } catch (e) {
+      setStatus($('foto-status'), e.message, 'error');
+    }
+  });
+
+  $('foto-ok').addEventListener('click', function () {
+    var texto = textoDaFoto();
+    if (!texto) {
+      setStatus($('foto-status'), 'A leitura está vazia. Escreva o enunciado ou descarte a foto.', 'error');
+      return;
+    }
+    fotoConfirmada = texto;
+    $('foto-conferir').hidden = true;
+    var aviso = $('foto-confirmada');
+    aviso.replaceChildren(document.createTextNode('Foto conferida: vai junto com a sua dúvida.'));
+    var editar = el('button', 'button button--secondary button--small', 'Rever leitura');
+    editar.type = 'button';
+    editar.addEventListener('click', function () { $('foto-conferir').hidden = false; aviso.hidden = true; fotoConfirmada = null; });
+    var remover = el('button', 'button button--secondary button--small', 'Remover foto');
+    remover.type = 'button';
+    remover.addEventListener('click', limparFoto);
+    aviso.append(editar, remover);
+    aviso.hidden = false;
+    setStatus($('foto-status'), '');
+    if (!$('pergunta').value.trim()) $('pergunta').focus();
+  });
+  $('foto-descartar').addEventListener('click', limparFoto);
+
+  /* Animação (Manim): pista visual da dúvida, gerada sob demanda. Para antes da resposta. */
+  function botaoAnimacao(pergunta, resposta, disciplina) {
+    var box = el('div', 'animacao');
+    var b = el('button', 'button button--secondary button--small', 'Ver em animação (beta)');
+    b.type = 'button';
+    var status = el('p', 'caption status');
+    b.addEventListener('click', async function () {
+      b.disabled = true;
+      setStatus(status, 'Pedindo a animação…', 'busy');
+      try {
+        var criada = await postJSON('/api/animar', { pergunta: pergunta, resposta: resposta, disciplina: disciplina || null });
+        var t = await acompanhar(criada.id, function (x) {
+          if (x.status !== 'pronta' && x.status !== 'erro') setStatus(status, x.mensagem || 'Gerando…', 'busy');
+        });
+        if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não foi possível gerar a animação.');
+        var video = document.createElement('video');
+        video.src = t.video;
+        video.controls = true;
+        video.autoplay = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.setAttribute('aria-label', 'Animação: ' + (t.titulo || 'pista visual'));
+        b.remove();
+        box.prepend(video);
+        setStatus(status, t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : '');
+      } catch (e) {
+        setStatus(status, e.message, 'error');
+        b.disabled = false;
+      }
+    });
+    box.append(b, status);
+    return box;
+  }
+
   /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado.
    * Sem resposta do servidor, o seletor fica oculto e vale a disciplina padrão (PAA). */
   var disciplinas = {};
@@ -256,7 +445,46 @@
 
   var enviando = false;
 
-  async function perguntar(pergunta, contexto, retomarId, disciplina) {
+  /* Ciclo "ainda não consegui": o aluno tentou no papel e não saiu. O tutor recebe as ajudas
+   * anteriores deste exercício e tenta outra forma (outro exemplo, desenho, analogia), sem a resposta. */
+  function cicloTentativa(pergunta, contexto, disciplina, foto, historico) {
+    var box = el('div', 'ciclo');
+    box.append(el('p', 'ciclo__titulo', 'Tentou no papel? Conseguiu fazer o passo pedido?'));
+    var campo = el('textarea', 'input');
+    campo.rows = 2;
+    campo.maxLength = 1500;
+    campo.placeholder = 'Opcional: o que você tentou ou onde travou. Ex.: não sei achar o log de 4 na base 2.';
+    campo.setAttribute('aria-label', 'O que você tentou ou onde travou (opcional)');
+    var acoes = el('div', 'actions');
+    var nao = el('button', 'button button--small', 'Ainda não consegui, explica de outro jeito');
+    nao.type = 'button';
+    var sim = el('button', 'button button--secondary button--small', 'Consegui!');
+    sim.type = 'button';
+    var status = el('p', 'caption status');
+    nao.addEventListener('click', async function () {
+      if (enviando) return;
+      enviando = true;
+      gerando++;
+      $('enviar').disabled = true;
+      try {
+        await perguntar(pergunta, contexto, null, disciplina, 'auto', foto,
+          { historico: historico, travou: campo.value.trim() });
+      } finally {
+        enviando = false;
+        gerando--;
+        $('enviar').disabled = false;
+      }
+    });
+    sim.addEventListener('click', function () {
+      box.replaceChildren(el('p', 'caption ciclo__ok', 'Boa! Você chegou lá pelo próprio raciocínio. Mande a próxima dúvida quando quiser.'));
+    });
+    acoes.append(nao, sim);
+    box.append(campo, acoes, status);
+    return box;
+  }
+
+  async function perguntar(pergunta, contexto, retomarId, disciplina, ajuda, foto, ciclo) {
+    ciclo = ciclo || { historico: [], travou: '' };
     guardarAtualNoHistorico();
     var registro = { pergunta: pergunta, texto: '', meta: '', fontes: [], voto: null, pronta: false };
     atual = registro;
@@ -266,6 +494,10 @@
     item.setAttribute('aria-label', 'Sua dúvida e a resposta');
     var q = el('div', 'question prose');
     R.renderPlain(q, pergunta);
+    if (ciclo.historico.length) {
+      q.prepend(el('p', 'caption', 'Outra forma de explicar (tentativa ' + (ciclo.historico.length + 1) + ')' +
+        (ciclo.travou ? ' · onde você travou: ' + ciclo.travou : '')));
+    }
     var resposta = el('div', 'prose resposta');
     var meta = el('p', 'caption troca__meta status', 'Enviando…');
     meta.dataset.tone = 'busy';
@@ -283,13 +515,16 @@
         tarefa = { id: retomarId };
       } else {
         try {
-          tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contexto || null, disciplina: disciplina || null });
+          tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contexto || null,
+            disciplina: disciplina || null, ajuda: ajuda || 'auto', foto: foto || null,
+            historico: ciclo.historico, travou: ciclo.travou || null });
         } catch (e) {
           setStatus(meta, e.message, 'error');
           return false;
         }
       }
-      guardarPendente({ tipo: 'tutor', id: tarefa.id, pergunta: pergunta, contexto: contexto || '', disciplina: disciplina || '' });
+      guardarPendente({ tipo: 'tutor', id: tarefa.id, pergunta: pergunta, contexto: contexto || '', disciplina: disciplina || '',
+        ajuda: ajuda || 'auto', foto: foto || '', historico: ciclo.historico, travou: ciclo.travou || '' });
       final = await acompanhar(tarefa.id, function (t) {
         if (t.texto !== desenhado) {
           desenhado = t.texto;
@@ -309,6 +544,10 @@
       R.render(resposta, final.texto);
       setStatus(meta, 'Respondido em ' + Math.max(1, Math.round((Date.now() - inicio) / 1000)) + ' s' +
         (final.rotulo ? ' · ' + final.rotulo : '') + '.');
+      // Mantém só as últimas ajudas (o servidor aceita até 8) para o prompt não crescer sem limite.
+      var historicoNovo = ciclo.historico.concat([{ ajuda: final.ajuda || ajuda || 'auto', texto: final.texto.slice(0, 6000) }]).slice(-6);
+      item.append(cicloTentativa(pergunta, contexto, disciplina, foto, historicoNovo));
+      if (animacaoDisponivel) item.append(botaoAnimacao(pergunta + (foto ? '\n\n' + foto : ''), final.texto, disciplina));
       if (final.fontes && final.fontes.length) item.append(fontesDetalhe(final.fontes));
       item.append(botoesFeedback(final.id_resposta, registro));
       registro.texto = final.texto;
@@ -325,6 +564,13 @@
     e.preventDefault();
     if (enviando) return;
     var pergunta = $('pergunta').value.trim();
+    var foto = fotoConfirmada;
+    if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o exercício da foto, sem me dar a resposta.';
+    if (!foto && !$('foto-conferir').hidden) {
+      setStatus($('status-tutor'), 'Confira a leitura da foto (botão “Está certo”) ou descarte-a antes de enviar.', 'error');
+      $('foto-conferir').focus();
+      return;
+    }
     if (pergunta.length < 3) {
       setStatus($('status-tutor'), 'Escreva sua dúvida antes de enviar.', 'error');
       $('pergunta').focus();
@@ -338,8 +584,10 @@
     var disciplina = $('disciplina').value;
     $('pergunta').value = '';
     $('contexto').value = '';
+    var ajuda = ajudaEscolhida();
     try {
-      var ok = await perguntar(pergunta, contexto, null, disciplina);
+      var ok = await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
+      if (ok && foto) limparFoto();  // a foto já foi usada; a próxima dúvida começa limpa
       if (!ok) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
     } finally {
       enviando = false;
@@ -351,7 +599,10 @@
     enviando = true;
     gerando++;
     $('enviar').disabled = true;
-    try { await perguntar(p.pergunta, p.contexto, p.id, p.disciplina); } finally {
+    try {
+      await perguntar(p.pergunta, p.contexto, p.id, p.disciplina, p.ajuda, p.foto,
+        { historico: p.historico || [], travou: p.travou || '' });
+    } finally {
       enviando = false;
       gerando--;
       $('enviar').disabled = false;
