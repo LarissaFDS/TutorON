@@ -9,3 +9,7 @@ pypdf==6.19.0
 # Testes
 pytest==8.3.5
 pytest-asyncio==0.26.0
+# Foto do papel: rotação, corte da borda e recortes ampliados (backend/foto.py)
+pillow==12.3.0
+# Animações do modo Tutor (backend/animacao). Usa PyAV e Pango das wheels: sem ffmpeg nem LaTeX.
+manim==0.19.0

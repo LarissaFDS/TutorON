@@ -33,7 +33,7 @@
 
   <!-- ============================================================ MODO TUTOR -->
   <section id="modo-tutor" role="tabpanel" aria-labelledby="tab-tutor">
-    <p class="notice step">As respostas são geradas por IA e podem conter erros, principalmente em contas. Confira os passos e marque “Tem erro” quando encontrar um problema.</p>
+    <p class="notice step"><strong>O TutorON não entrega respostas: ele ajuda você a chegar lá.</strong> Resolva no papel e peça ideias, pistas, perguntas-guia ou a conferência do seu raciocínio. Pode mandar uma foto do papel. As ajudas são geradas por IA e podem conter erros; marque “Tem erro” quando encontrar um. <a href="/demo">Veja exemplos de como funciona</a>.</p>
 
     <div id="conversa" class="conversa" aria-live="polite"></div>
 
@@ -57,6 +57,50 @@
           placeholder="Ex.: Como aplico o Teorema Mestre em T(n) = 3T(n/4) + n log n?" aria-describedby="pergunta-dica"></textarea>
         <span class="field__hint caption" id="pergunta-dica">Ctrl+Enter envia. Não escreva nome, matrícula ou contato.</span>
       </div>
+      <fieldset class="ajudas" id="ajudas">
+        <legend class="field__label">Que tipo de ajuda você quer?</legend>
+        <div class="ajudas__opcoes" id="ajudas-opcoes"></div>
+      </fieldset>
+
+      <div class="foto" id="foto-box">
+        <div class="foto__acoes">
+          <label class="button button--secondary" for="foto-arquivo">Enviar foto do papel</label>
+          <input class="visually-hidden" type="file" id="foto-arquivo" accept="image/*" capture="environment">
+          <span class="caption">Enunciado ou sua tentativa. Você confere a leitura antes de perguntar.</span>
+        </div>
+        <p class="status" id="foto-status" role="status" aria-live="polite"></p>
+        <section class="foto__conferir" id="foto-conferir" hidden aria-labelledby="foto-conferir-titulo" tabindex="-1">
+          <h3 class="foto__titulo" id="foto-conferir-titulo">Confira o que o TutorON leu da sua foto</h3>
+          <div class="foto__previa"><img id="foto-previa" alt="Sua foto"></div>
+          <p class="caption" id="foto-confianca"></p>
+          <div class="foto__duvidas" id="foto-duvidas" hidden>
+            <p class="foto__duvidas-titulo">Não tenho certeza destes trechos. Corrija abaixo se estiver errado:</p>
+            <ul id="foto-duvidas-lista"></ul>
+          </div>
+          <div class="field">
+            <label class="field__label" for="foto-enunciado">Enunciado lido</label>
+            <textarea class="input input--code" id="foto-enunciado" rows="5" maxlength="6000"></textarea>
+          </div>
+          <fieldset class="field" id="foto-subtopicos-box" hidden>
+            <legend class="field__label">Subtópicos encontrados (desmarque os que não são do exercício)</legend>
+            <div id="foto-subtopicos"></div>
+          </fieldset>
+          <div class="field">
+            <label class="field__label" for="foto-tentativa">Sua tentativa lida <span class="caption">(vazio se não houver)</span></label>
+            <textarea class="input input--code" id="foto-tentativa" rows="4" maxlength="6000"></textarea>
+          </div>
+          <details class="disclosure" id="foto-regioes-box" hidden>
+            <summary>O que foi visto em cada parte da folha</summary>
+            <ul class="fontes__lista" id="foto-regioes"></ul>
+          </details>
+          <div class="actions">
+            <button class="button" id="foto-ok" type="button">Está certo, usar esta leitura</button>
+            <button class="button button--secondary" id="foto-descartar" type="button">Descartar foto</button>
+          </div>
+        </section>
+        <p class="foto__confirmada caption" id="foto-confirmada" hidden></p>
+      </div>
+
       <details class="disclosure">
         <summary>Colar código ou enunciado (opcional)</summary>
         <div class="field">
@@ -66,7 +110,7 @@
       </details>
       <div class="sugestoes" id="sugestoes-tutor" aria-label="Exemplos de perguntas"></div>
       <div class="actions">
-        <button class="button" id="enviar" type="submit">Perguntar</button>
+        <button class="button" id="enviar" type="submit">Pedir ajuda</button>
       </div>
       <p class="status" id="status-tutor" role="status" aria-live="polite"></p>
     </form>
