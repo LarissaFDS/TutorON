@@ -67,6 +67,11 @@ def test_detecta_entrega_de_resposta(texto):
     "Na sua resposta anterior, o segundo passo trocou n/2 por n.",
     "Logo, T(n) = ? Complete no papel.",
     "### Sua vez\nQuantos níveis tem a árvore?",
+    # Falsos positivos do teste de 21/10: o aluno chamou a variável dele de `resposta`.
+    "2. **Resposta final:** A expressão `dp[n-1][0]` considera apenas a ponta esquerda da base.",
+    "Para entender a resposta final, vamos olhar para o que a sua tabela `dp` representa.",
+    "Sobre a resposta final, imagine que você calculou a soma mínima.",
+    "A resposta é: depende de qual caso do Teorema Mestre se aplica.",
 ])
 def test_nao_acusa_ajuda_socratica(texto):
     assert not seguranca.entrega_resposta(texto)
@@ -95,6 +100,7 @@ def test_resposta_entregue_e_refeita_com_reforco(site):  # noqa: F811
     assert "RESPOSTA ANTERIOR (proibida" in prompt_refeito and prompts.SISTEMA_REFORCO in prompt_refeito
     linha = ultima(site)
     assert linha["ajustes"] == ["entregou_resposta"] and linha["modo"] == "socratico"
+    assert linha["resposta_bloqueada"].startswith("Portanto, T(n)")  # para auditar o filtro
 
 
 def test_tipo_de_ajuda_e_foto_confirmada_chegam_a_ia(site):  # noqa: F811

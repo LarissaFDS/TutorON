@@ -198,11 +198,13 @@ class Tarefas:
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
             texto, ajustes = seguranca.revisar(r.text, sistema, {x.rotulo for x in trechos}, d.nome)
+            bloqueada = None
             if seguranca.entrega_resposta(texto):
                 # Entregou a solução: refaz uma vez com o reforço. Se ainda entregar, fica a segunda
                 # versão (o registro marca) para não deixar o aluno sem nada.
                 t.mensagem, t.texto = "Revisando a ajuda para não entregar a resposta…", ""
                 ajustes.append("entregou_resposta")
+                bloqueada = texto  # vai para o registro: dá para auditar falso positivo do filtro
                 refazer = (prompt + "\n\nRESPOSTA ANTERIOR (proibida, entregou a solução):\n<<<\n"
                            + texto[:3000] + "\n>>>\n" + prompts.SISTEMA_REFORCO)
                 try:
@@ -227,6 +229,7 @@ class Tarefas:
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
                 "modo": "socratico", "ajuda": ajuda, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
                 **({"rodada": len(historico) + 1, "travou": travou} if historico else {}),
+                **({"resposta_bloqueada": bloqueada} if bloqueada else {}),
                 "resposta": texto, **({"resposta_original": r.text, "ajustes": ajustes} if ajustes else {}),
                 "provedor": r.model.provider, "modelo": r.model.name, "segundos": r.seconds, "degradado": caiu,
                 "tentativas": r.attempts, "fontes": t.fontes})

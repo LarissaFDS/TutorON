@@ -18,7 +18,9 @@ Servidor local de teste (porta separada, dados em pasta temporária, sem tocar e
 
 \* O exemplo parecido chegou perto: mostrou que o caso do aluno vira $\sum_{i=1}^n i$ e lembrou a fórmula do somatório. Não escreveu $T(n) = \Theta(n^2)$, mas um aluno atento junta as duas coisas. É o tipo de caso para acompanhar no teste com alunos.
 
-O filtro `entrega_resposta` não precisou refazer nenhuma ajuda nesta bateria: o prompt sozinho segurou os 9 casos com o Gemini.
+O filtro `entrega_resposta` refez uma ajuda nesta bateria (a do Teorema Mestre); o texto bloqueado não foi guardado, então não dá para saber se era resposta ou falso positivo. Desde 22/10, o registro guarda `resposta_bloqueada`.
+
+**Falso positivo corrigido em 22/10:** nas 3 rodadas do ciclo abaixo o aluno chamou a variável dele de `resposta`, e frases como "a resposta final `dp[n-1][0]` considera só a ponta" fizeram o filtro refazer as 3 ajudas à toa (5 chamadas extras ao Gemini). Agora a frase só conta se **afirmar** um valor ou uma fórmula ("a resposta final é 42", "resposta: Θ(n²)").
 
 ## Ciclo "Ainda não consegui" (foto conferida + 3 rodadas)
 

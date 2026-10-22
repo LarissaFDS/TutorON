@@ -28,6 +28,18 @@ Toda ajuda termina com **"### Sua vez"**: uma tarefa curta para o aluno fazer no
 
 A **Validação A/B** continua com o prompt anterior (`SISTEMA_TUTOR`), para não invalidar as avaliações já coletadas. O treino e a avaliação de modelos também.
 
+### Demonstração: `/demo`
+
+A página **`/demo`** (link "Veja exemplos de como funciona" no modo Tutor) mostra respostas **reais** do tutor socrático com o Gemini, gravadas em 21 e 22/10/2026 e sem edição:
+
+- 9 exemplos: todos os tipos de ajuda, PAA e SD, o aluno pedindo "só a resposta" e uma tentativa de burlar as regras;
+- o ciclo foto → conferência → "Ainda não consegui" em 3 rodadas, cada uma de uma forma diferente;
+- as 3 animações Manim.
+
+A página **não chama nenhuma IA**: funciona sem cota do Gemini e sem o modelo local, então serve para apresentar ao professor enquanto o modelo local ainda não foi treinado para o modo socrático. Os dados ficam em `backend/web/demo/demo.json`. O `backend/tests/test_demo.py` garante que a página carrega, que todos os tipos de ajuda estão lá e que nenhuma resposta da vitrine passa no filtro de "entregou a resposta".
+
+**Modelo local:** o `tutoron-paa` atual foi treinado para responder direto. O modo socrático com ele depende só do prompt e ainda não foi testado. O treino novo, com exemplos socráticos, fica para depois.
+
 ## 2. Do papel para o prompt sem a IA entender errado
 
 Botão **Enviar foto do papel** no modo Tutor ([backend/foto.py](../backend/foto.py)):

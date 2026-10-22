@@ -79,3 +79,14 @@
   background: var(--color-surface-sunken); border-radius: var(--radius); max-width: 860px; }
 .ciclo__titulo { margin: 0; font-weight: var(--weight-bold); font-size: var(--text-ui); }
 .ciclo__ok { color: var(--color-success); margin: 0; }
+
+/* Página de demonstração (/demo) */
+.demo__secao { margin-top: var(--space-6); }
+.demo__escolha { margin: var(--space-3) 0 var(--space-4); }
+.demo__card { min-height: 200px; }
+.demo__contexto { white-space: pre-wrap; font-family: var(--font-code); font-size: var(--text-caption); margin-top: var(--space-2); }
+.demo__foto { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.demo__foto img { width: 100%; max-height: 420px; object-fit: contain; border: var(--border); border-radius: var(--radius); background: var(--color-surface-sunken); }
+@media (min-width: 820px) { .demo__foto { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
+.demo__aluno { margin: 0; font-weight: var(--weight-bold); color: var(--color-primary); }
+.demo__videos { display: grid; gap: var(--space-5); max-width: 860px; }

@@ -3,6 +3,7 @@
 Rotas públicas (podem ser acessadas pela internet via túnel):
 
     GET  /                    site (modo Tutor e modo Validação)
+    GET  /demo                demonstração do tutor socrático (respostas gravadas, sem IA)
     POST /api/perguntar       modo Tutor (socrático): cria a tarefa e responde na hora com o id
     GET  /api/ajudas          tipos de ajuda do modo Tutor e se há animações
     POST /api/foto            lê a foto do papel (o aluno confere antes de perguntar)
@@ -246,6 +247,11 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.get("/", include_in_schema=False)
     async def pagina() -> FileResponse:
         return FileResponse(WEB / "index.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/demo", include_in_schema=False)
+    async def demo() -> FileResponse:
+        """Demonstração do tutor socrático com respostas reais gravadas: não chama nenhuma IA."""
+        return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
 
     @app.get("/design.css", include_in_schema=False)
     async def design_css() -> Response:

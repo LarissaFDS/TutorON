@@ -85,13 +85,17 @@ def revisar(resposta: str, sistema: str | None, validos: set[str], nome: str) ->
 # O prompt proíbe; aqui fica o que dá para conferir no texto. Frases típicas de quem fecha o
 # exercício ("a resposta final é", "gabarito:", "portanto, T(n) = Θ(...)"). Não pega tudo:
 # uma resolução sem nenhuma dessas frases passa. Por isso o modo também pede "### Sua vez".
+# "Resposta final" sozinha não basta: a frase precisa AFIRMAR um valor, uma fórmula ou uma expressão
+# ("a resposta final é 42", "resposta: Θ(n²)", "a solução fica F = AB + C"). No teste de 21/10, com o
+# aluno chamando a variável dele de `resposta`, "a resposta final dp[n-1][0] considera só..." fazia
+# a ajuda ser refeita à toa (5 chamadas extras ao Gemini em 3 rodadas).
+_VALOR = r"\s*[*_`]*\s*(?:[$\\θωΩ]|\d|[a-z]\s*[=(]|o\s*\()"
 _ENTREGA = re.compile(
-    r"(\b(resposta|resultado|solucao) (final|correta|do exercicio|da questao)\b"
+    rf"(\b(resposta|resultado|solucao)( final| correta| do exercicio| da questao)?"
+    rf"(\s+(e|eh|sera|fica)\b\s*[:=]?|\s*[:=]){_VALOR}"
     r"|\bgabarito\b\s*[:=]"
-    r"|\b(a resposta|o resultado) (e|eh|sera)\s*[:=]?\s*[$*\\]*\s*[a-z0-9(θΘ]"
     r"|\bportanto,? (a resposta|o resultado|t\s*\(\s*n\s*\)\s*(=|e|∈)|a complexidade (e|final))"
-    r"|\blogo,? [$]?t\s*\(\s*n\s*\)\s*(=|∈|e)\s*[$\\]*\s*(θ|ω|o\(|theta|omega|\d|n\b)"
-    r"|\bresposta\s*:\s*[$\\]*[a-z0-9θΘ])")
+    r"|\blogo,? [$]?t\s*\(\s*n\s*\)\s*(=|∈|e)\s*[$\\]*\s*(θ|ω|o\(|theta|omega|\d|n\b))")
 _SUA_VEZ = re.compile(r"#+\s*sua vez", re.I)
 SUA_VEZ_PADRAO = ("\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa "
                   "(por texto ou foto) que eu confiro com você.")

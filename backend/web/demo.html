@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Demonstração do tutor socrático</title>
+<meta name="description" content="Como o TutorON ajuda o aluno a construir o raciocínio sem entregar a resposta.">
+<link rel="stylesheet" href="/design.css">
+<link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="page masthead__bar">
+    <div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div>
+  </div>
+  <div class="page masthead__intro">
+    <h1>O TutorON não dá a resposta: ajuda você a chegar nela</h1>
+    <p class="masthead__lede">O aluno resolve no papel e pede ao tutor só ideias: uma pista, perguntas-guia, o conceito, um exemplo parecido, a conferência do raciocínio ou um desenho. Se não conseguir, o tutor explica de outro jeito, quantas vezes precisar.</p>
+    <p class="masthead__nota" id="sobre"></p>
+  </div>
+</header>
+
+<main class="page">
+
+  <section class="step demo__secao" aria-labelledby="s1">
+    <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="s1">Formas de ajudar sem entregar a resposta</h2></div>
+    <p class="step__lede">Escolha um exemplo. Todas as ajudas terminam com “Sua vez”: uma tarefa para o aluno fazer no papel.</p>
+    <div class="ajudas__opcoes demo__escolha" id="demo-escolha" role="radiogroup" aria-label="Exemplos de ajuda"></div>
+    <article class="troca demo__card" id="demo-card" aria-live="polite"></article>
+  </section>
+
+  <section class="step demo__secao" aria-labelledby="s2">
+    <div class="step__head"><span class="step__number" aria-hidden="true">2</span><h2 class="step__title" id="s2">Do papel ao raciocínio: foto, conferência e “ainda não consegui”</h2></div>
+    <p class="step__lede">O aluno fotografa a folha com a tentativa dele. O TutorON lê a foto, o aluno confere a leitura e pede para o tutor conferir o raciocínio.</p>
+    <div class="demo__foto">
+      <img id="ciclo-foto" alt="Foto de celular de uma lista de PAA com a tentativa do aluno escrita à mão no rodapé">
+      <div class="foto__conferir" id="ciclo-leitura"></div>
+    </div>
+    <div class="conversa" id="ciclo-conversa"></div>
+    <div class="actions"><button class="button" id="ciclo-proximo" type="button">Ainda não consegui, explica de outro jeito</button></div>
+  </section>
+
+  <section class="step demo__secao" aria-labelledby="s3">
+    <div class="step__head"><span class="step__number" aria-hidden="true">3</span><h2 class="step__title" id="s3">Animações (beta)</h2></div>
+    <p class="step__lede">A IA escolhe um modelo de cena e preenche um roteiro; o TutorON desenha com Manim. A animação mostra a estrutura e para antes da resposta.</p>
+    <div class="demo__videos" id="demo-videos"></div>
+  </section>
+
+  <p class="caption"><a href="/">Ir para o TutorON</a></p>
+</main>
+
+<footer class="site-footer page">
+  <p class="caption">Demonstração com respostas reais gravadas; esta página não chama nenhuma IA.</p>
+</footer>
+
+<script src="/static/vendor/marked.min.js"></script>
+<script src="/static/vendor/purify.min.js"></script>
+<script src="/static/vendor/katex/katex.min.js"></script>
+<script src="/static/render.js"></script>
+<script src="/static/demo.js"></script>
+</body>
+</html>
