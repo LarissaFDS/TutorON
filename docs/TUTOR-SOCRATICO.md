@@ -38,6 +38,8 @@ A página **`/demo`** (link "Veja exemplos de como funciona" no modo Tutor) most
 
 A página **não chama nenhuma IA**: funciona sem cota do Gemini e sem o modelo local, então serve para apresentar ao professor enquanto o modelo local ainda não foi treinado para o modo socrático. Os dados ficam em `backend/web/demo/demo.json`. O `backend/tests/test_demo.py` garante que a página carrega, que todos os tipos de ajuda estão lá e que nenhuma resposta da vitrine passa no filtro de "entregou a resposta".
 
+**Plano B para apresentação, sem servidor:** [`demo-offline/TutorON-demo.html`](../demo-offline/TutorON-demo.html) é a mesma demonstração num único arquivo de 2,7 MB, com CSS, fórmulas, foto e vídeos embutidos. Abre com duplo clique em qualquer navegador (Windows ou Linux), sem internet. Os vídeos vão em WebM e MP4, porque o Firefox em alguns Linux não toca MP4; se nenhum tocar, aparece o quadro final como imagem. Depois de mudar a demo, gere de novo com `python scripts/demo_offline.py`; o `test_demo.py` falha se o arquivo ficar desatualizado.
+
 **Modelo local:** o `tutoron-paa` atual foi treinado para responder direto. O modo socrático com ele depende só do prompt e ainda não foi testado. O treino novo, com exemplos socráticos, fica para depois.
 
 ## 2. Do papel para o prompt sem a IA entender errado

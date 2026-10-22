@@ -42,3 +42,17 @@ def test_roteiros_das_animacoes_sao_validos_e_param_antes_da_resposta():
         r = animacao.roteiro_valido(v["roteiro"])
         assert r["pergunta_final"] and r["pergunta_final"] == v["pergunta_final"]
     assert {v["modelo_cena"] for v in DEMO["animacoes"]} == {"arvore_recursao", "tabela", "grafo"}
+
+
+def test_html_offline_esta_atualizado_e_nao_depende_de_servidor():
+    """demo-offline/TutorON-demo.html: arquivo único para apresentar sem servidor nem internet.
+    Se este teste falhar, gere de novo: python scripts/demo_offline.py"""
+    import re
+    from backend.main import WEB as web
+    html = (web.parents[1] / "demo-offline" / "TutorON-demo.html").read_text(encoding="utf-8")
+    embutido = json.loads(re.search(r"window\.TUTORON_DEMO = (\{.*?\});\n", html).group(1))
+    assert embutido == DEMO
+    assert 'src="/' not in html and 'href="/' not in html and "url(fonts/" not in html
+    for v in DEMO["animacoes"]:
+        for nome in (v["arquivo"], v["arquivo"].replace(".mp4", ".webm"), v["arquivo"].replace(".mp4", ".png")):
+            assert f'"{nome}": "data:' in html

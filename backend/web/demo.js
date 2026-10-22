@@ -3,6 +3,9 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var R = window.TutorONRender;
+  // Versão offline (scripts/demo_offline.py): dados e arquivos vêm embutidos no próprio HTML.
+  var EMBUTIDOS = window.TUTORON_DEMO_ARQUIVOS || {};
+  function arquivo(nome) { return EMBUTIDOS[nome] || '/static/demo/' + nome; }
   var NOMES = { auto: 'O tutor escolhe', pista: 'Uma pista', perguntas: 'Perguntas-guia', conceito: 'Explicar o conceito',
     exemplo: 'Exemplo parecido', conferir: 'Conferir meu raciocínio', visual: 'Desenho/esquema' };
 
@@ -53,7 +56,7 @@
 
   // ------------------------------------------------------------------ 2. foto + ciclo
   function montarCiclo(ciclo) {
-    $('ciclo-foto').src = '/static/demo/' + ciclo.foto;
+    $('ciclo-foto').src = arquivo(ciclo.foto);
     var l = ciclo.leitura;
     var leitura = $('ciclo-leitura');
     leitura.append(el('h3', 'foto__titulo', 'O que o TutorON leu (o aluno confere e confirma)'),
@@ -88,7 +91,20 @@
     videos.forEach(function (v) {
       var fig = el('figure', 'animacao');
       var video = document.createElement('video');
-      video.src = '/static/demo/' + v.arquivo;
+      // WebM (VP9) primeiro: toca em qualquer navegador no Linux, mesmo sem codec H.264.
+      var webm = v.arquivo.replace(/\.mp4$/, '.webm');
+      if (EMBUTIDOS[webm]) {
+        var s = document.createElement('source');
+        s.src = EMBUTIDOS[webm];
+        s.type = 'video/webm';
+        video.append(s);
+      }
+      var mp4 = document.createElement('source');
+      mp4.src = arquivo(v.arquivo);
+      mp4.type = 'video/mp4';
+      video.append(mp4);
+      var poster = v.arquivo.replace(/\.mp4$/, '.png');
+      if (EMBUTIDOS[poster]) video.poster = EMBUTIDOS[poster];
       video.controls = true;
       video.muted = true;
       video.playsInline = true;
@@ -102,7 +118,9 @@
     });
   }
 
-  fetch('/static/demo/demo.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (demo) {
+  var dados = window.TUTORON_DEMO ? Promise.resolve(window.TUTORON_DEMO)
+    : fetch('/static/demo/demo.json', { cache: 'no-cache' }).then(function (r) { return r.json(); });
+  dados.then(function (demo) {
     $('sobre').textContent = demo.sobre;
     montarAjudas(demo.ajudas);
     montarCiclo(demo.ciclo);
