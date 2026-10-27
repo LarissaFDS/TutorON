@@ -50,6 +50,42 @@
         "Como desenhar a saída Q de um flip-flop D a partir do diagrama de tempo?",
         "Como separar bloco operacional e bloco de controle no projeto RTL de Fibonacci?"
       ]
+    },
+    {
+      "id": "oac",
+      "nome": "Organização e Arquitetura de Computadores",
+      "sigla": "OAC",
+      "situacao": "em validação",
+      "itens": "disciplinas/oac/acervo/itens.json",
+      "indice": "disciplinas/oac/acervo/indice.json",
+      "materiais": "disciplinas/oac/materiais",
+      "rigor": "disciplinas/oac/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "oac-01-abstracoes-hierarquia",
+        "oac-02-desempenho",
+        "oac-03-custo-ci",
+        "oac-04-risc-cisc",
+        "oac-05-isa-registradores-memoria",
+        "oac-06-representacao-numeros",
+        "oac-07-formatos-codificacao",
+        "oac-08-logicas-deslocamentos",
+        "oac-09-desvios-lacos-vetores",
+        "oac-10-procedimentos",
+        "oac-11-constantes-enderecamento-traducao",
+        "oac-12-aritmetica",
+        "oac-13-datapath-controle",
+        "oac-14-pipeline-hazards",
+        "oac-15-hierarquia-memoria",
+        "oac-16-paralelismo"
+      ],
+      "exemplos": [
+        "Por que lw x9, 32(x22) acessa A[8]?",
+        "Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
+        "Qual a diferença entre blt e bltu?",
+        "Quais sinais de controle ficam ativos numa instrução sw?",
+        "Como traduzir um laço while em C para RISC-V?"
+      ]
     }
   ]
 }

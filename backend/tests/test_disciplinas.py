@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -202,3 +202,97 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
     assert "Cálculo 1 (CALC)" in prompts.sistema_tutor(calc)
     r = asyncio.run(llm.complete(prompts.sistema_tutor(calc), prompts.prompt_tutor("p", rag.contexto(trechos))))
     assert r.text == "resposta"  # o mesmo serviço de IA, sem nenhuma classe ou rota nova
+
+
+# ---------------------------------------------------------------- OAC: terceira disciplina só com cadastro
+
+@pytest.fixture
+def site_oac(tmp_path, monkeypatch):
+    """O mesmo site, com OAC liberada só neste teste (no cadastro ela está "em validação")."""
+    from backend import main
+
+    monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
+    llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
+                                             "disciplinas_em_validacao_liberadas": ("oac",)})
+    llm.embed = sem_embedding
+    llm.chamadas = []
+    original = llm._provider
+    llm._provider = lambda m, s, p: llm.chamadas.append((m, s, p)) or original(m, s, p)
+    with TestClient(main.create_app(settings=llm.settings, llm=llm, warm_up=False)) as c:
+        c.llm, c.tmp = llm, tmp_path
+        yield c
+
+
+def ids_oac():
+    return {i["id"] for i in json.loads(disciplinas.obter("oac").indice.read_text(encoding="utf-8"))["chunks"]}
+
+
+@pytest.mark.parametrize("pergunta, trecho", [
+    ("Por que lw x9, 32(x22) acessa A[8]?", "endereçada por **byte**"),
+    ("Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
+     "0,5×5 + 0,3×2 + 0,2×10"),
+    ("Qual a diferença entre blt e bltu?", "bltu x22, x23 não desvia"),
+    ("Quais sinais de controle ficam ativos numa instrução sw?", "| sw | 1 | X | 0 | 0 | 1 | 0 | 00 |"),
+])
+def test_pergunta_de_oac_usa_material_de_oac(site_oac, pergunta, trecho):
+    t = perguntar(site_oac, pergunta, "oac")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de OAC") for f in t["fontes"])
+    _, sistema, prompt = site_oac.llm.chamadas[-1]
+    assert "Organização e Arquitetura de Computadores (OAC)" in sistema and "RISC-V RV32" in sistema
+    assert "Teorema Mestre" not in sistema and "Karnaugh" not in sistema.split("# Rigor")[-1]
+    assert trecho in prompt  # o trecho recuperado chegou ao prompt da IA
+    linha = json.loads((site_oac.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert linha["disciplina"] == "oac"
+
+
+def test_oac_em_validacao_fica_fora_do_atendimento_normal(site):
+    r = site.post("/api/perguntar", json={"pergunta": "Qual a diferença entre blt e bltu?", "disciplina": "oac"})
+    assert r.status_code == 403 and "em validação" in r.json()["erro"]
+    assert site.llm.chamadas == []  # a IA nem foi chamada
+    assert perguntar(site, "Teorema Mestre para T(n) = 2T(n/2) + n")["status"] == "pronta"  # PAA continua
+
+
+def test_vocabulario_comum_so_recupera_a_disciplina_escolhida():
+    """OAC e SD falam de somador, registradores, overflow e ALU: quem decide o acervo é a disciplina escolhida."""
+    llm = FakeLLM({})
+    llm.embed = sem_embedding
+    perguntas = ["Como funciona um somador completo?", "O que são registradores?",
+                 "Como detectar overflow em complemento de 2?", "O que a ALU faz?", "Multiplexador e memória"]
+
+    async def titulos(d):
+        vistos = set()
+        for p in perguntas:
+            vistos |= {t.titulo for t in await rag.recuperar(p, llm, llm.settings, disciplinas.obter(d))}
+        return vistos
+
+    oac, sd = asyncio.run(titulos("oac")), asyncio.run(titulos("sd"))
+    assert oac and sd
+    assert all(t.endswith(" de OAC") for t in oac) and all(t.endswith(" de SD") for t in sd)
+    assert ids_oac().isdisjoint(ids_sd() | ids_paa())
+
+
+def test_mesma_ia_para_as_tres_disciplinas(site_oac):
+    perguntar(site_oac, "Teorema Mestre para T(n) = 2T(n/2) + n", "paa")
+    perguntar(site_oac, "Complemento de 2 de 101010", "sd")
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    chamadas = site_oac.llm.chamadas[-3:]
+    assert len({m for m, _, _ in chamadas}) == 1  # mesmo modelo, mesmo serviço
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    textos = {comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "oac"))}
+    assert len(textos) == 1  # um único texto de tutor
+
+
+def test_oac_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Explique a heurística de Dijkstra para grafos esparsos", "oac")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in site_oac.llm.chamadas[-1][2]
+
+
+def test_resolucao_corrigida_chega_ao_tutor_marcada_como_nao_oficial(site_oac):
+    perguntar(site_oac, "ENADE 2005: M1 a 1 GHz e M2 a 500 MHz, qual é mais rápida?", "oac")
+    _, sistema, prompt = site_oac.llm.chamadas[-1]
+    assert "Status da resolução: corrigida" in prompt
+    assert "nunca é o gabarito oficial" in sistema
