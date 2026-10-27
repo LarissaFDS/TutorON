@@ -2,7 +2,7 @@
 
 O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e responde passo a passo, do jeito que o conteúdo é cobrado, com as fórmulas formatadas.
 
-**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD) está em **beta** (as respostas podem conter erros; a validação técnica da IA continua pendente), com a mesma IA e um acervo próprio; o aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
+**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD) está em **beta** (as respostas podem conter erros; a validação técnica da IA continua pendente), com a mesma IA e um acervo próprio; Organização e Arquitetura de Computadores (OAC) já está cadastrada, com acervo próprio, mas fica **em validação**, fora do atendimento até ser validada. O aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
 
 O site tem dois modos:
 
@@ -51,7 +51,7 @@ A ordem dos modelos, os tempos e o modelo local ficam no `.env` (veja os coment�
 backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
 scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
 acervo/           pipeline de OCR, curadoria e índice do material de PAA; cadastro de disciplinas (disciplinas.py)
-disciplinas/      cadastro das disciplinas e acervos das novas (sd/: Sistemas Digitais)
+disciplinas/      cadastro das disciplinas e acervos das novas (sd/: Sistemas Digitais; oac/: Organização e Arquitetura)
 00-…06-           dados do pipeline: originais, extração, acervo, triagem, índice RAG, modelo, avaliação
 design/           design system (tokens e componentes CSS) — regras em docs/DESIGN.md
 frontend/         cliente de terminal (CLI) que usa a mesma API
@@ -88,7 +88,7 @@ Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Trei
 ## Documentação
 
 - [Relatório do MVP](docs/RELATORIO_MVP.md): o que foi implementado, testes e avaliação dos modelos.
-- [Disciplinas](docs/DISCIPLINAS.md): uma IA, acervos separados; como cadastrar uma disciplina. Curadoria de [Sistemas Digitais](disciplinas/sd/CURADORIA.md).
+- [Disciplinas](docs/DISCIPLINAS.md): uma IA, acervos separados; como cadastrar uma disciplina. Curadoria de [Sistemas Digitais](disciplinas/sd/CURADORIA.md) e de [OAC](disciplinas/oac/CURADORIA.md).
 - [Design system](docs/DESIGN.md) · [Schema do Supabase](docs/schema.sql)
 - [Validação pré-MVP](docs/validacao-pre-mvp/) (OCR, curadoria, comparação local, relatórios anteriores)
 - Issues: [#3 backend](docs/issue-3-backend-ai-service.md) · [#5 CLI](docs/issue-5-frontend-cli.md)
