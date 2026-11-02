@@ -104,7 +104,8 @@ def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     for ident in corrigidas:  # diz o que diverge do gabarito ou das anotações da turma
         texto = ITENS[ident]['texto'].lower()
         assert ('gabarito' if ident.startswith('oac-prova') or ident == 'oac-compiladores' else 'correç') in texto, ident
-    assert {'oac-notion-cap2-instrucoes', 'oac-notion-projeto1-monociclo', 'oac-notion-cap6-paralelismo'} <= corrigidas
+    assert {'oac-notion-cap2-instrucoes', 'oac-notion-projeto1-monociclo', 'oac-notion-projeto2-pipeline',
+     'oac-notion-cap6-paralelismo'} <= corrigidas
     assert all(i['natureza'] == 'nota_da_equipe_ia' and 'status_resolucao' not in i
                for i in ITENS.values() if i['id'].startswith('oac-nota'))
 
@@ -295,6 +296,9 @@ def test_contas_das_anotacoes_da_turma():
     assert (110 / (10 + 100 / 10), 110 / (10 + 100 / 100)) == (5.5, 10)  # Ex. 1 do livro, não 9 somas
     texto = ITENS['oac-notion-cap2-instrucoes']['texto']
     assert 'A[12] = x9' in texto and 'lli' in texto and '12 bits' in texto
+    assert 'ALUOp = 11 no addi está certo' in ITENS['oac-notion-projeto1-monociclo']['texto']
+    assert 'x0' in ITENS['oac-notion-projeto2-pipeline']['texto']  # forwarding sem teste de x0
+    assert 'linguagem de programação do domínio' in ITENS['oac-notion-cap6-paralelismo']['texto']
 
 
 def test_if_else_e_while_da_nota():

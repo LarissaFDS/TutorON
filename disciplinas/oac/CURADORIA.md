@@ -130,12 +130,12 @@ A página `ufal-oac-notion` (Engenharia de Computação / Quarto Período) foi l
 | s01 | `oac-notion-cap1-desempenho` | Capítulo 1 | "aumento proporcional do clock": o certo é × 1,714 (+71,4%) | **corrigida** |
 | s02 | `oac-notion-cap2-instrucoes` | Capítulo 2 | `sw` anotado ao contrário; imediato do `beq` de 12 bits, não 16; `lli` não existe; sintaxe MIPS `$s1`; `srli` só divide sem sinal | **corrigida** |
 | s03 | `oac-notion-cap2-procedimentos` | Capítulo 2 | nada: fatorial e laço simulados | validada |
-| s04 | `oac-notion-projeto1-monociclo` | Projeto 1 | extend recebe 25 bits (Instr[31:7]); WE da memória vem de MemWrite; ALUOp do addi diverge do código-base de Harris & Harris | **corrigida** |
-| s05 | `oac-notion-projeto2-pipeline` | Projeto 2 | nada (falta a condição RdE ≠ 0, citada no bloco) | validada |
+| s04 | `oac-notion-projeto1-monociclo` | Projeto 1 + anexos `.sv` e `.s` | extend recebe 25 bits (Instr[31:7]); WE da memória vem de MemWrite. ALUOp = 11 no addi conferido no `.sv`: está certo | **corrigida** |
+| s05 | `oac-notion-projeto2-pipeline` | Projeto 2 + subpágina Code | hazards e forwarding não testam x0; saídas do hazard_unit com nomes trocados (lógica certa) | **corrigida** |
 | s06 | `oac-notion-cap5-memoria` | Capítulo 5 | nada: exemplo de tag/índice/offset e CPI com L2 conferidos | validada |
-| s07 | `oac-notion-cap6-paralelismo` | Capítulo 6 | Ex. 1 contava 9 somas escalares; o exemplo do livro conta 10 (speedups 5,5 e 10) | **corrigida** |
+| s07 | `oac-notion-cap6-paralelismo` | Capítulo 6 + subpágina Perplexity | Ex. 1 contava 9 somas escalares (o livro conta 10; speedups 5,5 e 10); a lista de princípios de DSA da página principal não é a do livro (a da Perplexity é) | **corrigida** |
 
-Não incorporados: os anexos da página (o PDF do livro e as imagens de slides, protegidos; o PDF de exercícios e o gabarito da Prova 1, já resumidos nos blocos `t*`; os arquivos `.sv`, `.s` e `.txt` do Projeto 1 e a animação do Projeto 2, que não foram baixados); as sub-subpáginas "Perplexity" e "Code", que não foram lidas; e o curso da Softex incorporado na página, cuja licença não foi avaliada. Com os blocos s05–s07, pipeline, cache e paralelismo deixam de ser só notas da equipe.
+Em 02/11/2026 também foram lidos, com autorização da responsável, os anexos `riscvsingle_p1.sv` (original e modificado) e `riscvtest.s` do Projeto 1 e as subpáginas "Code" (Projeto 2) e "Perplexity" (caps. 5 e 6). Os arquivos ficaram fora do repositório: o código-base e o programa de teste são de Harris & Harris. A Perplexity do cap. 5 não acrescenta nada aos blocos. O projeto não foi simulado (não há Icarus Verilog nesta máquina). Não incorporados: o PDF do livro e as imagens de slides (protegidos); o PDF de exercícios e o gabarito da Prova 1 (já resumidos nos blocos `t*`); a animação do Projeto 2; e o curso da Softex incorporado na página, cuja licença não foi avaliada. Com os blocos s05–s07, pipeline, cache e paralelismo deixam de ser só notas da equipe.
 
 ## 5. Blocos do acervo
 
@@ -188,11 +188,11 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 
 ## 7. Pendências
 
-1. Revisão humana interna dos 28 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s07) e pela tabela de sinais (n07).
+1. Revisão humana interna dos 28 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s05, s07) e pela tabela de sinais (n07).
 2. Confirmar com o professor o item d da versão A e a leitura do riscado da versão B (t06, t07), e se a disciplina aceita as correções de t03, t04, t05 e t09.
 3. Autorização da equipe para publicar transcrições literais da prova e da lista (hoje, parafraseadas).
 4. Validar respostas reais com o Gemini e com o modelo local (as quatro perguntas de `backend/tests/test_disciplinas.py` e as de `tests_acervo/test_disciplina_oac.py`). Só depois mudar a `situacao` no cadastro para `beta`.
-5. Notion: ler as sub-subpáginas "Perplexity" e "Code" e, com permissão, os arquivos do Projeto 1, para confirmar a codificação de ALUOp (s04).
+5. Simular os Projetos 1 e 2 no Icarus Verilog para confirmar "Simulation succeeded" (s04, s05).
 6. Confirmar o plano de ensino atual: E/S, barramentos, microprogramação e paralelismo estão na ementa de 2011 e não têm bloco.
 7. Avaliar a ingestão do cartão de referência e de trechos do manual RISC-V (CC BY 4.0) e dos slides de MC404 (CC BY-SA 4.0), com atribuição.
 8. Rodar a bateria de relevância (`eval/relevancia.py`) com perguntas de OAC rotuladas. Hoje ela só tem PAA e SD.
