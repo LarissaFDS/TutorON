@@ -18,14 +18,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 Para resolver essa recorrência, comece identificando os parâmetros do Teorema Mestre. A forma padrão é $ T(n) = aT\left(\frac{n}{b}\right) + f(n) $. No seu caso, $ a = 4 $, $ b = 2 $, e $ f(n) = n^2 $. Agora, calcule $ n^{\log_b a} $ e compare com $ f(n) $.
 
-### Sua vez  
+### Sua vez
 Calcule $ n^{\log_2 4} $ e compare com $ n^2 $. Qual caso do Teorema Mestre se aplica?
 
 ### Ajuda publicada
 
 Para resolver essa recorrência, comece identificando os parâmetros do Teorema Mestre. A forma padrão é $ T(n) = aT\left(\frac{n}{b}\right) + f(n) $. No seu caso, $ a = 4 $, $ b = 2 $, e $ f(n) = n^2 $. Agora, calcule $ n^{\log_b a} $ e compare com $ f(n) $.
 
-### Sua vez  
+### Sua vez
 Calcule $ n^{\log_2 4} $ e compare com $ n^2 $. Qual caso do Teorema Mestre se aplica?
 
 **Revisão humana:** pendente.
@@ -40,14 +40,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) com x. Observe quais grupos de 1 ou x podem ser formados, priorizando os maiores grupos possíveis.
 
-### Sua vez  
+### Sua vez
 Identifique os grupos de 1 e x no mapa e escreva quais variáveis permanecem constantes em cada grupo.
 
 ### Ajuda publicada
 
 Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) com x. Observe quais grupos de 1 ou x podem ser formados, priorizando os maiores grupos possíveis.
 
-### Sua vez  
+### Sua vez
 Identifique os grupos de 1 e x no mapa e escreva quais variáveis permanecem constantes em cada grupo.
 
 **Revisão humana:** pendente.
@@ -69,7 +69,7 @@ O teorema tem três casos principais:
 
 O caso mais comum é o **Caso 1** ou **Caso 3**, dependendo da relação entre $ f(n) $ e $ n^{\log_b a} $.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 4T(n/2) + n^2 $. Depois, calcule $ n^{\log_b a} $.
 
 ### Ajuda publicada
@@ -83,7 +83,7 @@ O teorema tem três casos principais:
 
 O caso mais comum é o **Caso 1** ou **Caso 3**, dependendo da relação entre $ f(n) $ e $ n^{\log_b a} $.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 4T(n/2) + n^2 $. Depois, calcule $ n^{\log_b a} $.
 
 **Revisão humana:** pendente.
@@ -104,7 +104,7 @@ O mapa de Karnaugh é uma representação gráfica da tabela-verdade, organizada
 
 A simplificação envolve identificar os **implicantes primos essenciais** (aqueles que cobrem um 1 que nenhum outro grupo cobre) e, em seguida, formular a expressão lógica com base nos grupos escolhidos.
 
-### Sua vez  
+### Sua vez
 Desenhe o mapa de Karnaugh para a função $ F(A,B,C,D) = \Sigma m(0,2,5,7,8,10,13,15) + d(1) $ e marque os mintermos e as irrelevâncias. Em seguida, identifique os grupos possíveis.
 
 ### Ajuda publicada
@@ -131,9 +131,9 @@ O que está certo: você identificou os parâmetros da recorrência e está no c
 O que está errado: você não comparou corretamente $ f(n) $ com $ n^{\log_b a} $, que é o termo que define o caso do teorema.
 
 ### Pergunta para você:
-Qual é o valor de $ \log_b a $ nesse caso? E como se compara $ f(n) = n^2 $ com $ n^{\log_b a} $? 
+Qual é o valor de $ \log_b a $ nesse caso? E como se compara $ f(n) = n^2 $ com $ n^{\log_b a} $?
 
-### Sua vez  
+### Sua vez
 Calcule $ \log_2 4 $ e compare $ n^2 $ com $ n^{\log_2 4} $. Isso vai te ajudar a identificar qual caso do Teorema Mestre se aplica.
 
 ### Ajuda publicada
@@ -145,9 +145,9 @@ O que está certo: você identificou os parâmetros da recorrência e está no c
 O que está errado: você não comparou corretamente $ f(n) $ com $ n^{\log_b a} $, que é o termo que define o caso do teorema.
 
 ### Pergunta para você:
-Qual é o valor de $ \log_b a $ nesse caso? E como se compara $ f(n) = n^2 $ com $ n^{\log_b a} $? 
+Qual é o valor de $ \log_b a $ nesse caso? E como se compara $ f(n) = n^2 $ com $ n^{\log_b a} $?
 
-### Sua vez  
+### Sua vez
 Calcule $ \log_2 4 $ e compare $ n^2 $ com $ n^{\log_2 4} $. Isso vai te ajudar a identificar qual caso do Teorema Mestre se aplica.
 
 **Revisão humana:** pendente.
@@ -164,7 +164,7 @@ Você mencionou que marcou todas as irrelevâncias como obrigatórias — isso �
 
 O que está correto é que você está usando o mapa de Karnaugh para simplificar a função, e o procedimento de agrupar os 1 e usar os x de forma estratégica é o caminho certo. Mas, para garantir que o resultado seja mínimo, é importante que você analise se todos os grupos que você formou são realmente necessários e se há grupos maiores que poderiam cobrir mais células.
 
-### Sua vez  
+### Sua vez
 Tente desenhar o mapa de Karnaugh para F(A,B,C,D)=Σm(0,2,5,7,8,10,13,15)+d(1) e marque os 1 e os x. Depois, identifique os grupos que você formou. Qual é o primeiro grupo que você formou?
 
 ### Ajuda publicada
@@ -173,7 +173,7 @@ Você mencionou que marcou todas as irrelevâncias como obrigatórias — isso �
 
 O que está correto é que você está usando o mapa de Karnaugh para simplificar a função, e o procedimento de agrupar os 1 e usar os x de forma estratégica é o caminho certo. Mas, para garantir que o resultado seja mínimo, é importante que você analise se todos os grupos que você formou são realmente necessários e se há grupos maiores que poderiam cobrir mais células.
 
-### Sua vez  
+### Sua vez
 Tente desenhar o mapa de Karnaugh para F(A,B,C,D)=Σm(0,2,5,7,8,10,13,15)+d(1) e marque os 1 e os x. Depois, identifique os grupos que você formou. Qual é o primeiro grupo que você formou?
 
 **Revisão humana:** pendente.
@@ -210,7 +210,7 @@ $$ T(n) = 3T\left(\frac{n}{3}\right) + n $$
 5. **Conclusão**:
    - A complexidade é $ \Theta(n^{\log_b a} \log n) = \Theta(n \log n) $
 
-### Sua vez  
+### Sua vez
 Agora, aplique o mesmo raciocínio ao seu exercício: $ T(n) = 4T(n/2) + n^2 $. Identifique os parâmetros $ a $, $ b $, e $ f(n) $, calcule $ n^{\log_b a} $, compare com $ f(n) $, e determine o caso do Teorema Mestre. Não esqueça de justificar a sua escolha.
 
 ### Ajuda publicada
@@ -239,7 +239,7 @@ $$ T(n) = 3T\left(\frac{n}{3}\right) + n $$
 5. **Conclusão**:
    - A complexidade é $ \Theta(n^{\log_b a} \log n) = \Theta(n \log n) $
 
-### Sua vez  
+### Sua vez
 Agora, aplique o mesmo raciocínio ao seu exercício: $ T(n) = 4T(n/2) + n^2 $. Identifique os parâmetros $ a $, $ b $, e $ f(n) $, calcule $ n^{\log_b a} $, compare com $ f(n) $, e determine o caso do Teorema Mestre. Não esqueça de justificar a sua escolha.
 
 **Revisão humana:** pendente.
@@ -252,7 +252,7 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos resolver um exemplo similar, mas com uma função diferente, para que você possa aplicar a mesma técnica ao seu exercício. 
+Vamos resolver um exemplo similar, mas com uma função diferente, para que você possa aplicar a mesma técnica ao seu exercício.
 
 **Exemplo:** Simplifique $ F(A,B,C,D) = \Sigma m(1,2,4,7,8,9,10,12) + d(5) $.
 
@@ -263,8 +263,8 @@ Vamos resolver um exemplo similar, mas com uma função diferente, para que voc�
 4. **Escolha os grupos mínimos** que cubram todos os 1, priorizando os implicantes primos essenciais.
 5. **Transforme cada grupo em uma expressão booleana**, identificando as variáveis que não mudam dentro do grupo.
 
-### Sua vez  
-Faça o mapa de Karnaugh para o exemplo acima e identifique **um grupo de 4 células** que possa ser formado. Qual é o mintermo que **não está em nenhum outro grupo**?  
+### Sua vez
+Faça o mapa de Karnaugh para o exemplo acima e identifique **um grupo de 4 células** que possa ser formado. Qual é o mintermo que **não está em nenhum outro grupo**?
 
 (Se quiser, envie uma foto do mapa com o grupo que você identificou.)
 

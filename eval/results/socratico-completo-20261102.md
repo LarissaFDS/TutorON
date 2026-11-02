@@ -18,14 +18,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 Para resolver essa recorrência, comece identificando os parâmetros do Teorema Mestre: a constante $ a = 4 $, a divisão $ b = 2 $ e a função $ f(n) = n^2 $. Calcule $ \log_b a = \log_2 4 $ e compare com o grau de $ f(n) $.
 
-### Sua vez  
+### Sua vez
 Calcule $ \log_2 4 $ e compare com o grau de $ f(n) = n^2 $. Qual caso do Teorema Mestre você acha que se aplica?
 
 ### Ajuda publicada
 
 Para resolver essa recorrência, comece identificando os parâmetros do Teorema Mestre: a constante $ a = 4 $, a divisão $ b = 2 $ e a função $ f(n) = n^2 $. Calcule $ \log_b a = \log_2 4 $ e compare com o grau de $ f(n) $.
 
-### Sua vez  
+### Sua vez
 Calcule $ \log_2 4 $ e compare com o grau de $ f(n) = n^2 $. Qual caso do Teorema Mestre você acha que se aplica?
 
 **Revisão humana:** pendente.
@@ -47,7 +47,7 @@ O teorema tem três casos principais:
 
 O caso mais comum é o **Caso 1** ou **Caso 3**, dependendo da relação entre $ f(n) $ e $ n^{\log_b a} $.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 4T(n/2) + n^2 $. Depois, calcule $ n^{\log_b a} $ e compare com $ f(n) $.
 
 ### Ajuda publicada
@@ -61,7 +61,7 @@ O teorema tem três casos principais:
 
 O caso mais comum é o **Caso 1** ou **Caso 3**, dependendo da relação entre $ f(n) $ e $ n^{\log_b a} $.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 4T(n/2) + n^2 $. Depois, calcule $ n^{\log_b a} $ e compare com $ f(n) $.
 
 **Revisão humana:** pendente.
@@ -79,9 +79,9 @@ A recorrência $ T(n) = 4T(n/2) + n^2 $ está no formato do **Teorema Mestre**, 
 Agora, o que está **certo** é que o aluno identificou os parâmetros $ a $, $ b $ e $ f(n) $. O que está **errado** é a comparação entre $ n^{\log_b a} $ e $ f(n) $. Você mencionou o divisor do argumento como número de chamadas e o número de chamadas como divisor, mas não explicou como isso se relaciona com a comparação entre $ n^{\log_b a} $ e $ f(n) $.
 
 ### Pergunta:
-Como você calcula $ n^{\log_b a} $ para esta recorrência? E como isso se compara com $ f(n) = n^2 $?  
+Como você calcula $ n^{\log_b a} $ para esta recorrência? E como isso se compara com $ f(n) = n^2 $?
 
-### Sua vez  
+### Sua vez
 Calcule $ n^{\log_2 4} $ e compare com $ n^2 $. O que você observa?
 
 ### Ajuda publicada
@@ -91,9 +91,9 @@ A recorrência $ T(n) = 4T(n/2) + n^2 $ está no formato do **Teorema Mestre**, 
 Agora, o que está **certo** é que o aluno identificou os parâmetros $ a $, $ b $ e $ f(n) $. O que está **errado** é a comparação entre $ n^{\log_b a} $ e $ f(n) $. Você mencionou o divisor do argumento como número de chamadas e o número de chamadas como divisor, mas não explicou como isso se relaciona com a comparação entre $ n^{\log_b a} $ e $ f(n) $.
 
 ### Pergunta:
-Como você calcula $ n^{\log_b a} $ para esta recorrência? E como isso se compara com $ f(n) = n^2 $?  
+Como você calcula $ n^{\log_b a} $ para esta recorrência? E como isso se compara com $ f(n) = n^2 $?
 
-### Sua vez  
+### Sua vez
 Calcule $ n^{\log_2 4} $ e compare com $ n^2 $. O que você observa?
 
 **Revisão humana:** pendente.
@@ -106,56 +106,56 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos resolver juntos um exemplo similar, mas com números diferentes, para que você possa aplicar a mesma técnica ao seu exercício. 
+Vamos resolver juntos um exemplo similar, mas com números diferentes, para que você possa aplicar a mesma técnica ao seu exercício.
 
-Considere a recorrência:  
+Considere a recorrência:
 $$ T(n) = 3T\left(\frac{n}{3}\right) + n $$
 
-**Passo 1:** Identifique os parâmetros do Teorema Mestre.  
-- $ a = 3 $ (número de subproblemas)  
-- $ b = 3 $ (tamanho do subproblema)  
+**Passo 1:** Identifique os parâmetros do Teorema Mestre.
+- $ a = 3 $ (número de subproblemas)
+- $ b = 3 $ (tamanho do subproblema)
 - $ f(n) = n $ (custo combinatório)
 
-**Passo 2:** Calcule $ n^{\log_b a} $.  
+**Passo 2:** Calcule $ n^{\log_b a} $.
 - $ \log_3 3 = 1 $, então $ n^{\log_b a} = n^1 = n $
 
-**Passo 3:** Compare $ f(n) $ com $ n^{\log_b a} $.  
+**Passo 3:** Compare $ f(n) $ com $ n^{\log_b a} $.
 - $ f(n) = n $ e $ n^{\log_b a} = n $, então $ f(n) = \Theta(n^{\log_b a}) $
 
-**Passo 4:** Determine o caso do Teorema Mestre.  
+**Passo 4:** Determine o caso do Teorema Mestre.
 - Como $ f(n) = \Theta(n^{\log_b a}) $, estamos no **caso 2** do Teorema Mestre.
 
-**Passo 5:** Conclua a complexidade.  
+**Passo 5:** Conclua a complexidade.
 - No caso 2, a complexidade é $ \Theta(n^{\log_b a} \log n) $, ou seja, $ \Theta(n \log n) $
 
-### Sua vez  
+### Sua vez
 Agora, aplique o mesmo raciocínio ao seu exercício: $ T(n) = 4T(n/2) + n^2 $. Identifique os parâmetros $ a $, $ b $, $ f(n) $, calcule $ n^{\log_b a} $, compare com $ f(n) $, e determine o caso do Teorema Mestre.
 
 ### Ajuda publicada
 
-Vamos resolver juntos um exemplo similar, mas com números diferentes, para que você possa aplicar a mesma técnica ao seu exercício. 
+Vamos resolver juntos um exemplo similar, mas com números diferentes, para que você possa aplicar a mesma técnica ao seu exercício.
 
-Considere a recorrência:  
+Considere a recorrência:
 $$ T(n) = 3T\left(\frac{n}{3}\right) + n $$
 
-**Passo 1:** Identifique os parâmetros do Teorema Mestre.  
-- $ a = 3 $ (número de subproblemas)  
-- $ b = 3 $ (tamanho do subproblema)  
+**Passo 1:** Identifique os parâmetros do Teorema Mestre.
+- $ a = 3 $ (número de subproblemas)
+- $ b = 3 $ (tamanho do subproblema)
 - $ f(n) = n $ (custo combinatório)
 
-**Passo 2:** Calcule $ n^{\log_b a} $.  
+**Passo 2:** Calcule $ n^{\log_b a} $.
 - $ \log_3 3 = 1 $, então $ n^{\log_b a} = n^1 = n $
 
-**Passo 3:** Compare $ f(n) $ com $ n^{\log_b a} $.  
+**Passo 3:** Compare $ f(n) $ com $ n^{\log_b a} $.
 - $ f(n) = n $ e $ n^{\log_b a} = n $, então $ f(n) = \Theta(n^{\log_b a}) $
 
-**Passo 4:** Determine o caso do Teorema Mestre.  
+**Passo 4:** Determine o caso do Teorema Mestre.
 - Como $ f(n) = \Theta(n^{\log_b a}) $, estamos no **caso 2** do Teorema Mestre.
 
-**Passo 5:** Conclua a complexidade.  
+**Passo 5:** Conclua a complexidade.
 - No caso 2, a complexidade é $ \Theta(n^{\log_b a} \log n) $, ou seja, $ \Theta(n \log n) $
 
-### Sua vez  
+### Sua vez
 Agora, aplique o mesmo raciocínio ao seu exercício: $ T(n) = 4T(n/2) + n^2 $. Identifique os parâmetros $ a $, $ b $, $ f(n) $, calcule $ n^{\log_b a} $, compare com $ f(n) $, e determine o caso do Teorema Mestre.
 
 **Revisão humana:** pendente.
@@ -182,7 +182,7 @@ Agora, para cada nível, calcule o custo total daquele nível, que é o número 
 - Nível 2: $ 16 \times (n/4)^2 = 16 \times n^2 / 16 = n^2 $
 - ...
 
-### Sua vez  
+### Sua vez
 Desenhe a árvore de recursão para $ T(n) = 4T(n/2) + n^2 $, escrevendo o custo de cada nível. Depois, some os custos dos níveis para encontrar a complexidade total. Qual é o comportamento da soma?
 
 ### Ajuda publicada
@@ -201,7 +201,7 @@ Agora, para cada nível, calcule o custo total daquele nível, que é o número 
 - Nível 2: $ 16 \times (n/4)^2 = 16 \times n^2 / 16 = n^2 $
 - ...
 
-### Sua vez  
+### Sua vez
 Desenhe a árvore de recursão para $ T(n) = 4T(n/2) + n^2 $, escrevendo o custo de cada nível. Depois, some os custos dos níveis para encontrar a complexidade total. Qual é o comportamento da soma?
 
 **Revisão humana:** pendente.
@@ -214,26 +214,26 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos analisar a recorrência passo a passo. Primeiro, identifique os parâmetros da recorrência.  
-Qual é o valor de *a* na recorrência *T(n) = aT(n/b) + f(n)*?  
+Vamos analisar a recorrência passo a passo. Primeiro, identifique os parâmetros da recorrência.
+Qual é o valor de *a* na recorrência *T(n) = aT(n/b) + f(n)*?
 
-Agora, determine o valor de *b* e a forma de *f(n)*.  
+Agora, determine o valor de *b* e a forma de *f(n)*.
 
-Com base nos valores de *a*, *b* e *f(n)*, qual é o valor de *log_b a*?  
+Com base nos valores de *a*, *b* e *f(n)*, qual é o valor de *log_b a*?
 
-### Sua vez  
+### Sua vez
 Calcule *log_2 4* e compare com o grau de *f(n)*, que é *n^2*. Qual caso do Teorema Mestre você acha que se aplica?
 
 ### Ajuda publicada
 
-Vamos analisar a recorrência passo a passo. Primeiro, identifique os parâmetros da recorrência.  
-Qual é o valor de *a* na recorrência *T(n) = aT(n/b) + f(n)*?  
+Vamos analisar a recorrência passo a passo. Primeiro, identifique os parâmetros da recorrência.
+Qual é o valor de *a* na recorrência *T(n) = aT(n/b) + f(n)*?
 
-Agora, determine o valor de *b* e a forma de *f(n)*.  
+Agora, determine o valor de *b* e a forma de *f(n)*.
 
-Com base nos valores de *a*, *b* e *f(n)*, qual é o valor de *log_b a*?  
+Com base nos valores de *a*, *b* e *f(n)*, qual é o valor de *log_b a*?
 
-### Sua vez  
+### Sua vez
 Calcule *log_2 4* e compare com o grau de *f(n)*, que é *n^2*. Qual caso do Teorema Mestre você acha que se aplica?
 
 **Revisão humana:** pendente.
@@ -250,26 +250,26 @@ Vamos resolver um exemplo novo, mas com a mesma técnica do Teorema Mestre. Cons
 
 $$ T(n) = 8T\left(\frac{n}{4}\right) + n^3 $$
 
-**Passo 1:** Identifique os parâmetros do Teorema Mestre.  
-- $ a = 8 $ (número de subproblemas)  
-- $ b = 4 $ (tamanho do subproblema)  
+**Passo 1:** Identifique os parâmetros do Teorema Mestre.
+- $ a = 8 $ (número de subproblemas)
+- $ b = 4 $ (tamanho do subproblema)
 - $ f(n) = n^3 $ (custo combinatório)
 
-**Passo 2:** Calcule $ n^{\log_b a} $.  
-- $ \log_4 8 = \log_4 (4 \cdot 2) = 1 + \log_4 2 = 1 + \frac{1}{2} = 1.5 $  
+**Passo 2:** Calcule $ n^{\log_b a} $.
+- $ \log_4 8 = \log_4 (4 \cdot 2) = 1 + \log_4 2 = 1 + \frac{1}{2} = 1.5 $
 - Portanto, $ n^{\log_b a} = n^{1.5} $
 
-**Passo 3:** Compare $ f(n) = n^3 $ com $ n^{1.5} $.  
+**Passo 3:** Compare $ f(n) = n^3 $ com $ n^{1.5} $.
 - $ n^3 $ é maior que $ n^{1.5} $, então $ f(n) = \Omega(n^{\log_b a + \epsilon}) $, com $ \epsilon = 1.5 $.
 
-**Passo 4:** Verifique a condição do Caso 3 do Teorema Mestre.  
-- Precisamos garantir que $ a f\left(\frac{n}{b}\right) \leq c f(n) $ para algum $ c < 1 $ e para $ n $ suficientemente grande.  
+**Passo 4:** Verifique a condição do Caso 3 do Teorema Mestre.
+- Precisamos garantir que $ a f\left(\frac{n}{b}\right) \leq c f(n) $ para algum $ c < 1 $ e para $ n $ suficientemente grande.
 - Substituindo: $ 8 \cdot \left(\frac{n}{4}\right)^3 = 8 \cdot \frac{n^3}{64} = \frac{n^3}{8} $, que é $ \frac{1}{8} f(n) $, ou seja, $ c = \frac{1}{8} < 1 $.
 
-**Passo 5:** Conclua o caso do Teorema Mestre.  
+**Passo 5:** Conclua o caso do Teorema Mestre.
 - Como $ f(n) $ domina $ n^{\log_b a} $ e a condição do Caso 3 é satisfeita, a complexidade é $ \Theta(f(n)) = \Theta(n^3) $.
 
-### Sua vez  
+### Sua vez
 Agora, aplique o mesmo raciocínio ao seu exercício: $ T(n) = 4T(n/2) + n^2 $. Identifique os parâmetros $ a $, $ b $, $ f(n) $, calcule $ n^{\log_b a} $, compare com $ f(n) $, e determine o caso do Teorema Mestre.
 
 ### Ajuda publicada
@@ -291,14 +291,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 A programação dinâmica para o troco mínimo envolve definir um estado que represente o mínimo de moedas para atingir um valor específico. A ideia é construir uma tabela onde cada posição `dp[v]` armazena o número mínimo de moedas para formar o valor `v`. Comece com `dp[0] = 0` e inicialize os demais como infinito. Em seguida, para cada valor `v` de 1 até o alvo, e para cada moeda `c`, atualize `dp[v] = min(dp[v], dp[v - c] + 1)` se `v >= c`.
 
-### Sua vez  
+### Sua vez
 Construa a tabela `dp` para o alvo 12 e moedas {2, 3, 7}. Inicialize `dp[0] = 0` e os demais como infinito. Comece com `v = 1` e avance até `v = 12`. Para cada `v`, atualize `dp[v]` com base nas moedas. Qual será o valor de `dp[12]` após esse processo?
 
 ### Ajuda publicada
 
 A programação dinâmica para o troco mínimo envolve definir um estado que represente o mínimo de moedas para atingir um valor específico. A ideia é construir uma tabela onde cada posição `dp[v]` armazena o número mínimo de moedas para formar o valor `v`. Comece com `dp[0] = 0` e inicialize os demais como infinito. Em seguida, para cada valor `v` de 1 até o alvo, e para cada moeda `c`, atualize `dp[v] = min(dp[v], dp[v - c] + 1)` se `v >= c`.
 
-### Sua vez  
+### Sua vez
 Construa a tabela `dp` para o alvo 12 e moedas {2, 3, 7}. Inicialize `dp[0] = 0` e os demais como infinito. Comece com `v = 1` e avance até `v = 12`. Para cada `v`, atualize `dp[v]` com base nas moedas. Qual será o valor de `dp[12]` após esse processo?
 
 **Revisão humana:** pendente.
@@ -319,7 +319,7 @@ A **armadilha comum** é garantir que o algoritmo não use moedas mais de uma ve
 
 A **complexidade** do algoritmo é `O(n * v)`, onde `n` é o número de moedas e `v` é o alvo. A memória é `O(v)` se você usar uma tabela unidimensional, ou `O(n * v)` se usar uma tabela bidimensional.
 
-### Sua vez  
+### Sua vez
 Explique por que, no troco, a restrição de usar no máximo `k` moedas exige uma abordagem diferente da versão sem limites.
 
 ### Ajuda publicada
@@ -332,7 +332,7 @@ A **armadilha comum** é garantir que o algoritmo não use moedas mais de uma ve
 
 A **complexidade** do algoritmo é `O(n * v)`, onde `n` é o número de moedas e `v` é o alvo. A memória é `O(v)` se você usar uma tabela unidimensional, ou `O(n * v)` se usar uma tabela bidimensional.
 
-### Sua vez  
+### Sua vez
 Explique por que, no troco, a restrição de usar no máximo `k` moedas exige uma abordagem diferente da versão sem limites.
 
 **Revisão humana:** pendente.
@@ -460,7 +460,7 @@ Para visualizar o problema do **troco mínimo** com moedas `{2, 3, 7}` e alvo `1
 
 ### Sua vez
 
-Desenhe a tabela no papel com as dimensões `13 x 4` (valores de `0` a `12` e moedas `0`, `2`, `3`, `7`). Preencha as primeiras linhas com `0` e `∞` conforme descrito. Depois, calcule `dp[i][j]` para cada `i` e `j`, usando a fórmula acima. 
+Desenhe a tabela no papel com as dimensões `13 x 4` (valores de `0` a `12` e moedas `0`, `2`, `3`, `7`). Preencha as primeiras linhas com `0` e `∞` conforme descrito. Depois, calcule `dp[i][j]` para cada `i` e `j`, usando a fórmula acima.
 
 **Qual é o valor de `dp[12][3]`?**
 
@@ -483,14 +483,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 Qual é a estrutura básica de um problema de programação dinâmica para o troco mínimo?
 
-### Sua vez  
+### Sua vez
 Escreva a definição do estado `dp[i]` para o problema do troco mínimo com moedas {2,3,7} e alvo 12. O que significa cada valor de `dp[i]`?
 
 ### Ajuda publicada
 
 Qual é a estrutura básica de um problema de programação dinâmica para o troco mínimo?
 
-### Sua vez  
+### Sua vez
 Escreva a definição do estado `dp[i]` para o problema do troco mínimo com moedas {2,3,7} e alvo 12. O que significa cada valor de `dp[i]`?
 
 **Revisão humana:** pendente.
@@ -518,7 +518,7 @@ Vamos resolver um exemplo **muito simples** para ilustrar a técnica de programa
 |-------|---|---|---|---|---|
 | dp    | 0 | ∞ | 1 | ∞ | ? |
 
-### Sua vez  
+### Sua vez
 Reproduza o exemplo acima no papel, completando a tabela para o valor 4. Use moedas {2, 5} e siga o algoritmo descrito. Depois, mostre a tabela completa e diga qual é o valor de `dp[4]`.
 
 ### Ajuda publicada
@@ -538,16 +538,16 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) como x. Agrupe os 1 em blocos de 2, 4 ou 8 células, priorizando os grupos maiores e os que cobrem apenas 1s (não os x).  
+Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) como x. Agrupe os 1 em blocos de 2, 4 ou 8 células, priorizando os grupos maiores e os que cobrem apenas 1s (não os x).
 
-### Sua vez  
+### Sua vez
 Faça o mapa de Karnaugh e identifique os grupos de 1s. Qual é o primeiro grupo que você consegue formar?
 
 ### Ajuda publicada
 
-Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) como x. Agrupe os 1 em blocos de 2, 4 ou 8 células, priorizando os grupos maiores e os que cobrem apenas 1s (não os x).  
+Comece desenhando o mapa de Karnaugh com 4 variáveis (AB nas linhas, CD nas colunas) e marque os mintermos 0, 2, 5, 7, 8, 10, 13, 15 com 1 e o d(1) como x. Agrupe os 1 em blocos de 2, 4 ou 8 células, priorizando os grupos maiores e os que cobrem apenas 1s (não os x).
 
-### Sua vez  
+### Sua vez
 Faça o mapa de Karnaugh e identifique os grupos de 1s. Qual é o primeiro grupo que você consegue formar?
 
 **Revisão humana:** pendente.
@@ -621,7 +621,7 @@ O que está certo: você já identificou os mintermos da função e os *don't ca
 ### Pergunta para você:
 Ao agrupar os 1s, você usou algum *don't care* para formar um grupo maior? Se sim, qual foi o grupo e como ele ajudou a simplificar a função? Se não, por que você acha que os *don't care* não foram úteis nesse caso?
 
-### Sua vez  
+### Sua vez
 Tente desenhar o mapa de Karnaugh para F(A,B,C,D)=Σm(0,2,5,7,8,10,13,15)+d(1) e marque os 1s e os *don't care*. Depois, tente formar os grupos maiores possíveis. Envie a sua tentativa.
 
 ### Ajuda publicada
@@ -633,7 +633,7 @@ O que está certo: você já identificou os mintermos da função e os *don't ca
 ### Pergunta para você:
 Ao agrupar os 1s, você usou algum *don't care* para formar um grupo maior? Se sim, qual foi o grupo e como ele ajudou a simplificar a função? Se não, por que você acha que os *don't care* não foram úteis nesse caso?
 
-### Sua vez  
+### Sua vez
 Tente desenhar o mapa de Karnaugh para F(A,B,C,D)=Σm(0,2,5,7,8,10,13,15)+d(1) e marque os 1s e os *don't care*. Depois, tente formar os grupos maiores possíveis. Envie a sua tentativa.
 
 **Revisão humana:** pendente.
@@ -646,7 +646,7 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos resolver um exemplo similar, mas com uma função diferente, para que você possa aplicar o mesmo método ao seu exercício. 
+Vamos resolver um exemplo similar, mas com uma função diferente, para que você possa aplicar o mesmo método ao seu exercício.
 
 **Exemplo:** Simplifique $ F(A,B,C,D) = \Sigma m(1,2,4,7,8,9,10,12) + d(5) $.
 
@@ -662,7 +662,7 @@ Faça o mapa de Karnaugh para o exemplo acima e identifique **um grupo de 4 cél
 
 ### Ajuda publicada
 
-Vamos explorar uma técnica similar, mas com uma função ligeiramente diferente, para que você possa aplicar o mesmo método ao seu exercício. 
+Vamos explorar uma técnica similar, mas com uma função ligeiramente diferente, para que você possa aplicar o mesmo método ao seu exercício.
 
 **Exemplo:** Simplifique $ F(A,B,C,D) = \Sigma m(1,3,4,6,8,9,11,12) + d(7) $.
 
@@ -686,22 +686,22 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 
 Para simplificar visualmente a função $ F(A,B,C,D) = \Sigma m(0,2,5,7,8,10,13,15) + d(1) $, você pode desenhar um **mapa de Karnaugh** no papel. Aqui está como fazer isso passo a passo:
 
-1. **Monte o mapa de Karnaugh** com 4 variáveis:  
-   - Linhas: $ AB $ em ordem Gray (00, 01, 11, 10).  
-   - Colunas: $ CD $ em ordem Gray (00, 01, 11, 10).  
+1. **Monte o mapa de Karnaugh** com 4 variáveis:
+   - Linhas: $ AB $ em ordem Gray (00, 01, 11, 10).
+   - Colunas: $ CD $ em ordem Gray (00, 01, 11, 10).
    - Células: $ AB $ nas linhas e $ CD $ nas colunas. Por exemplo, a célula $ AB = 00 $ e $ CD = 00 $ é o mintermo $ m0 $.
 
-2. **Preencha as células com 1** nos mintermos da função: $ m0, m2, m5, m7, m8, m10, m13, m15 $.  
+2. **Preencha as células com 1** nos mintermos da função: $ m0, m2, m5, m7, m8, m10, m13, m15 $.
    - Coloque **x** (ou um sinal de irrelevância) na célula $ m1 $, pois é uma entrada irrelevante.
 
-3. **Agrupe os 1** em retângulos de 1, 2, 4, 8 ou 16 células, sempre que possível.  
-   - Lembre-se de que as bordas são vizinhas e os quatro cantos formam um grupo.  
+3. **Agrupe os 1** em retângulos de 1, 2, 4, 8 ou 16 células, sempre que possível.
+   - Lembre-se de que as bordas são vizinhas e os quatro cantos formam um grupo.
    - Priorize os grupos maiores, pois eles cobrem mais 1s e reduzem o número de termos.
 
-4. **Identifique os grupos essenciais** (aqueles que cobrem um 1 que nenhum outro grupo cobre).  
+4. **Identifique os grupos essenciais** (aqueles que cobrem um 1 que nenhum outro grupo cobre).
    - Esse é o primeiro passo para encontrar a expressão mínima.
 
-### Sua vez  
+### Sua vez
 Desenhe o mapa de Karnaugh no papel com as variáveis $ AB $ nas linhas e $ CD $ nas colunas. Marque as células com 1 e a célula $ m1 $ com x. Agora, tente agrupar os 1s em retângulos. Qual é o primeiro grupo que você identifica?
 
 ### Ajuda publicada
@@ -721,26 +721,26 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos começar com uma pergunta mais simples.  
-**1. Como você identificaria os mintermos e as irrelevâncias no mapa de Karnaugh para essa função?**  
+Vamos começar com uma pergunta mais simples.
+**1. Como você identificaria os mintermos e as irrelevâncias no mapa de Karnaugh para essa função?**
 
-**2. Após montar o mapa, como você agruparia os 1s e os x para formar os grupos maiores possíveis?**  
+**2. Após montar o mapa, como você agruparia os 1s e os x para formar os grupos maiores possíveis?**
 
-**3. Com base nos grupos que você formou, como você determinaria as variáveis que permanecem constantes em cada grupo e escreveria a expressão resultante?**  
+**3. Com base nos grupos que você formou, como você determinaria as variáveis que permanecem constantes em cada grupo e escreveria a expressão resultante?**
 
-### Sua vez  
+### Sua vez
 Desenhe o mapa de Karnaugh para $ F(A,B,C,D) = \Sigma m(0,2,5,7,8,10,13,15) + d(1) $ e marque os grupos que você acha que devem ser formados.
 
 ### Ajuda publicada
 
-Vamos começar com uma pergunta mais simples.  
-**1. Como você identificaria os mintermos e as irrelevâncias no mapa de Karnaugh para essa função?**  
+Vamos começar com uma pergunta mais simples.
+**1. Como você identificaria os mintermos e as irrelevâncias no mapa de Karnaugh para essa função?**
 
-**2. Após montar o mapa, como você agruparia os 1s e os x para formar os grupos maiores possíveis?**  
+**2. Após montar o mapa, como você agruparia os 1s e os x para formar os grupos maiores possíveis?**
 
-**3. Com base nos grupos que você formou, como você determinaria as variáveis que permanecem constantes em cada grupo e escreveria a expressão resultante?**  
+**3. Com base nos grupos que você formou, como você determinaria as variáveis que permanecem constantes em cada grupo e escreveria a expressão resultante?**
 
-### Sua vez  
+### Sua vez
 Desenhe o mapa de Karnaugh para $ F(A,B,C,D) = \Sigma m(0,2,5,7,8,10,13,15) + d(1) $ e marque os grupos que você acha que devem ser formados.
 
 **Revisão humana:** pendente.
@@ -753,19 +753,19 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos usar um exemplo mais simples, mas que usa a mesma técnica de simplificação com o mapa de Karnaugh. Suponha que você precise simplificar a função $ F(A,B,C) = \Sigma m(0,1,2,4,5) $.  
+Vamos usar um exemplo mais simples, mas que usa a mesma técnica de simplificação com o mapa de Karnaugh. Suponha que você precise simplificar a função $ F(A,B,C) = \Sigma m(0,1,2,4,5) $.
 
 ### Passo a passo:
-1. **Monte o mapa de Karnaugh** com 3 variáveis (A e B nas linhas, C nas colunas).  
-2. **Marque os mintermos** 0, 1, 2, 4 e 5 com 1.  
-3. **Agrupe os 1s** em blocos de 2 ou 4 células, sempre que possível.  
-4. **Identifique as variáveis que não mudam** dentro de cada grupo.  
+1. **Monte o mapa de Karnaugh** com 3 variáveis (A e B nas linhas, C nas colunas).
+2. **Marque os mintermos** 0, 1, 2, 4 e 5 com 1.
+3. **Agrupe os 1s** em blocos de 2 ou 4 células, sempre que possível.
+4. **Identifique as variáveis que não mudam** dentro de cada grupo.
 5. **Escreva a expressão lógica** com base nos grupos formados.
 
 ### Exemplo de grupo:
 - Se você agrupar os mintermos 0, 1, 4 e 5, você notará que A = 0 e C = 0 ou 1, mas B varia. Isso forma um grupo de 4 células, e a expressão seria $ A' $.
 
-### Sua vez  
+### Sua vez
 Tente aplicar esse raciocínio ao seu exercício. Desenhe o mapa de Karnaugh para $ F(A,B,C,D) = \Sigma m(0,2,5,7,8,10,13,15) + d(1) $ e tente formar **um grupo de 4 células**. Qual é a expressão lógica desse grupo?
 
 ### Ajuda publicada
@@ -787,14 +787,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 Para calcular a subtração 001101 − 010011 em complemento de 2 com 6 bits, você precisa converter a subtração em uma soma: A + (complemento de 2 de B). Comece invertendo os bits de 010011 e somando 1.
 
-### Sua vez  
+### Sua vez
 Inverta os bits de 010011 e some 1. Qual é o resultado do complemento de 2 de 010011?
 
 ### Ajuda publicada
 
 Para calcular a subtração 001101 − 010011 em complemento de 2 com 6 bits, você precisa converter a subtração em uma soma: A + (complemento de 2 de B). Comece invertendo os bits de 010011 e somando 1.
 
-### Sua vez  
+### Sua vez
 Inverta os bits de 010011 e some 1. Qual é o resultado do complemento de 2 de 010011?
 
 **Revisão humana:** pendente.
@@ -813,7 +813,7 @@ O processo envolve converter o subtraendo (o número que você está subtraindo)
 
 Um ponto importante é o overflow, que ocorre quando o resultado da subtração excede o intervalo de representação dos números com sinal em complemento de 2. O overflow pode ser detectado observando os bits de saída do somador, especialmente o bit de sinal e o carry final.
 
-### Sua vez  
+### Sua vez
 Explique como o complemento de 2 é usado para representar números negativos em binário. Dê um exemplo com 4 bits.
 
 ### Ajuda publicada
@@ -824,7 +824,7 @@ O processo envolve converter o subtraendo (o número que você está subtraindo)
 
 Um ponto importante é o overflow, que ocorre quando o resultado da subtração excede o intervalo de representação dos números com sinal em complemento de 2. O overflow pode ser detectado observando os bits de saída do somador, especialmente o bit de sinal e o carry final.
 
-### Sua vez  
+### Sua vez
 Explique como o complemento de 2 é usado para representar números negativos em binário. Dê um exemplo com 4 bits.
 
 **Revisão humana:** pendente.
@@ -865,32 +865,32 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Vamos resolver um exemplo similar, mas com números diferentes, para que você possa aplicar o mesmo método ao seu exercício. 
+Vamos resolver um exemplo similar, mas com números diferentes, para que você possa aplicar o mesmo método ao seu exercício.
 
 ### Exemplo: Calcule 011010 − 001101 em complemento de 2 com 6 bits.
 
-**Passo 1:** Converta o subtraendo (001101) para o complemento de 2.  
-- Inverta os bits: 110010  
+**Passo 1:** Converta o subtraendo (001101) para o complemento de 2.
+- Inverta os bits: 110010
 - Some 1: 110010 + 000001 = **110011**
 
-**Passo 2:** Some o minuendo (011010) com o complemento de 2 do subtraendo (110011).  
+**Passo 2:** Some o minuendo (011010) com o complemento de 2 do subtraendo (110011).
 - 011010 + 110011 = **1001100**
 
-**Passo 3:** Verifique o overflow.  
-- O resultado tem 7 bits. O bit de sinal (o primeiro) é 1, e o carry final (Cout) é 1.  
+**Passo 3:** Verifique o overflow.
+- O resultado tem 7 bits. O bit de sinal (o primeiro) é 1, e o carry final (Cout) é 1.
 - Como os dois números têm o mesmo sinal (positivo), e o resultado tem sinal negativo, há **overflow**.
 
-**Passo 4:** Se houver overflow, o resultado é negativo.  
-- O resultado final é o complemento de 2 do valor obtido (1001100).  
-- Inverta os bits: 0110011  
+**Passo 4:** Se houver overflow, o resultado é negativo.
+- O resultado final é o complemento de 2 do valor obtido (1001100).
+- Inverta os bits: 0110011
 - Some 1: 0110011 + 0000001 = **0110100**
 
-### Sua vez  
-Calcule 010101 − 001110 em complemento de 2 com 6 bits.  
-- Converta o subtraendo para complemento de 2.  
-- Some com o minuendo.  
-- Verifique se há overflow.  
-- Se houver, converta o resultado para decimal negativo.  
+### Sua vez
+Calcule 010101 − 001110 em complemento de 2 com 6 bits.
+- Converta o subtraendo para complemento de 2.
+- Some com o minuendo.
+- Verifique se há overflow.
+- Se houver, converta o resultado para decimal negativo.
 
 Dê o passo a passo no papel e envie a resposta.
 
@@ -921,7 +921,7 @@ Para visualizar o cálculo de $ 001101 - 010011 $ em complemento de 2 com 6 bits
 | 4           | Verificar carry final       |                     |              |
 | 5           | Verificar overflow (V)     |                     |              |
 
-### Sua vez  
+### Sua vez
 Desenhe essa tabela no papel e preencha os campos com os valores de cada passo. Lembre-se de que a subtração em complemento de 2 é feita somando o minuendo com o complemento de 2 do subtraendo. O que você acha que será o resultado da soma no passo 3?
 
 ### Ajuda publicada
@@ -936,7 +936,7 @@ Para visualizar o cálculo de $ 001101 - 010011 $ em complemento de 2 com 6 bits
 | 4           | Verificar carry final       |                     |              |
 | 5           | Verificar overflow (V)     |                     |              |
 
-### Sua vez  
+### Sua vez
 Desenhe essa tabela no papel e preencha os campos com os valores de cada passo. Lembre-se de que a subtração em complemento de 2 é feita somando o minuendo com o complemento de 2 do subtraendo. O que você acha que será o resultado da soma no passo 3?
 
 **Revisão humana:** pendente.
@@ -951,11 +951,11 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 
 Para resolver essa subtração em complemento de 2, você precisa seguir alguns passos. Comece com a pergunta mais simples:
 
-1. **Qual é o complemento de 2 do subtraendo (010011)?**  
-2. **Como você soma o minuendo (001101) com o complemento de 2 do subtraendo?**  
-3. **O que acontece com o bit de sinal (o sexto bit) após a soma?**  
+1. **Qual é o complemento de 2 do subtraendo (010011)?**
+2. **Como você soma o minuendo (001101) com o complemento de 2 do subtraendo?**
+3. **O que acontece com o bit de sinal (o sexto bit) após a soma?**
 
-### Sua vez  
+### Sua vez
 Calcule o complemento de 2 do número 010011 (com 6 bits) e escreva o resultado no papel.
 
 ### Ajuda publicada
@@ -978,19 +978,19 @@ Status: pronta; reserva: True; modelo efetivo: ollama/tutoron-paa
 Vamos usar um exemplo mais simples para ilustrar a técnica. Suponha que você queira calcular $ 0110 - 0011 $ em complemento de 2 com 4 bits.
 
 ### Passo a passo:
-1. **Inverte os bits do subtraendo (0011):**  
+1. **Inverte os bits do subtraendo (0011):**
    $ 0011 \rightarrow 1100 $
 
-2. **Some 1 ao resultado:**  
+2. **Some 1 ao resultado:**
    $ 1100 + 1 = 1101 $ (esse é o complemento de 2 de 0011)
 
-3. **Some o minuendo (0110) com o complemento de 2 do subtraendo (1101):**  
+3. **Some o minuendo (0110) com o complemento de 2 do subtraendo (1101):**
    $ 0110 + 1101 = 10011 $
 
-4. **Ignore o carry final (o bit mais à esquerda):**  
+4. **Ignore o carry final (o bit mais à esquerda):**
    $ 0011 $ (o resultado da subtração)
 
-### Sua vez  
+### Sua vez
 Aplique o mesmo processo ao seu exercício: $ 001101 - 010011 $. Inverta os bits de 010011, some 1, e some com 001101. Anote o resultado da soma e o carry final. O que você acha que será o resultado da subtração?
 
 ### Ajuda publicada
@@ -1010,20 +1010,20 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 ### Primeira versão bruta
 
-Lembre que o Teorema Mestre diz que, se $ T(n) = aT(n/b) + f(n) $, e $ f(n) = O(n^{\log_b a - \epsilon}) $ para algum $ \epsilon > 0 $, então $ T(n) = \Theta(n^{\log_b a}) $. 
+Lembre que o Teorema Mestre diz que, se $ T(n) = aT(n/b) + f(n) $, e $ f(n) = O(n^{\log_b a - \epsilon}) $ para algum $ \epsilon > 0 $, então $ T(n) = \Theta(n^{\log_b a}) $.
 
 Agora, identifique $ a $, $ b $ e $ f(n) $ na recorrência dada.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 2T(n/2) + n $.
 
 ### Ajuda publicada
 
-Lembre que o Teorema Mestre diz que, se $ T(n) = aT(n/b) + f(n) $, e $ f(n) = O(n^{\log_b a - \epsilon}) $ para algum $ \epsilon > 0 $, então $ T(n) = \Theta(n^{\log_b a}) $. 
+Lembre que o Teorema Mestre diz que, se $ T(n) = aT(n/b) + f(n) $, e $ f(n) = O(n^{\log_b a - \epsilon}) $ para algum $ \epsilon > 0 $, então $ T(n) = \Theta(n^{\log_b a}) $.
 
 Agora, identifique $ a $, $ b $ e $ f(n) $ na recorrência dada.
 
-### Sua vez  
+### Sua vez
 Identifique os valores de $ a $, $ b $ e $ f(n) $ na recorrência $ T(n) = 2T(n/2) + n $.
 
 **Revisão humana:** pendente.
@@ -1038,14 +1038,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 A expressão $ A + AB $ pode ser simplificada usando uma das propriedades da álgebra booleana. Qual propriedade você acha que pode ser aplicada aqui? Lembre-se de que $ A + AB $ é um caso de absorção.
 
-### Sua vez  
+### Sua vez
 Aplique a propriedade de absorção na expressão $ A + AB $ e escreva o resultado.
 
 ### Ajuda publicada
 
 A expressão $ A + AB $ pode ser simplificada usando uma das propriedades da álgebra booleana. Qual propriedade você acha que pode ser aplicada aqui? Lembre-se de que $ A + AB $ é um caso de absorção.
 
-### Sua vez  
+### Sua vez
 Aplique a propriedade de absorção na expressão $ A + AB $ e escreva o resultado.
 
 **Revisão humana:** pendente.
@@ -1060,14 +1060,14 @@ Status: pronta; reserva: False; modelo efetivo: ollama/tutoron-paa
 
 A porta AND produz 1 **só se** ambas as entradas forem 1. Se uma das entradas for 0, a saída será 0.
 
-### Sua vez  
+### Sua vez
 Escreva o valor da saída da porta AND com entradas 1 e 0.
 
 ### Ajuda publicada
 
 A porta AND produz 1 **só se** ambas as entradas forem 1. Se uma das entradas for 0, a saída será 0.
 
-### Sua vez  
+### Sua vez
 Escreva o valor da saída da porta AND com entradas 1 e 0.
 
 **Revisão humana:** pendente.

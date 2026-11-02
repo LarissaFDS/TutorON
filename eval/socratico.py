@@ -76,7 +76,9 @@ def salvar(destino: Path, registros: list[dict], modelos: list[str], completa: b
                f"Status: {r['status']}; reserva: {r.get('reserva', False)}; modelo efetivo: {r.get('modelo_efetivo', 'nenhum')}",
                "", "### Primeira versão bruta", "", r.get("primeira_resposta_bruta") or "(sem geração de modelo)",
                "", "### Ajuda publicada", "", r.get("publicada", "(sem resposta)"), "", "**Revisão humana:** pendente."]
-    destino.with_suffix(".md").write_text("\n".join(md) + "\n", encoding="utf-8")
+    # O JSON preserva o texto exato. O espelho Markdown normaliza espaços de fim de linha.
+    texto_md = "\n".join(l.rstrip() for l in "\n".join(md).splitlines()) + "\n"
+    destino.with_suffix(".md").write_text(texto_md, encoding="utf-8", newline="\n")
 
 
 async def executar(modelos: list[str], destino: Path, *, limite: int | None = None, ids: list[str] | None = None) -> dict:

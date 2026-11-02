@@ -24,11 +24,11 @@ A recorrência $ T(n) = 4T\left(\frac{n}{2}\right) + n^2 $ pode ser analisada us
 
 Agora, vamos comparar $ f(n) $ com $ n^{\log_b a} $, que é $ n^{\log_2 4} = n^2 $.
 
-### Sua vez  
-Desenhe uma árvore de recursão com 3 níveis. No nível 0, coloque $ T(n) $. No nível 1, coloque $ 4 $ nós com $ T(n/2) $. No nível 2, coloque $ 4^2 = 16 $ nós com $ T(n/4) $. Preencha os campos com os custos de cada nível:  
-- Nível 0: $ n^2 $  
-- Nível 1: $ 4 \times \left(\frac{n}{2}\right)^2 $  
-- Nível 2: $ 16 \times \left(\frac{n}{4}\right)^2 $  
+### Sua vez
+Desenhe uma árvore de recursão com 3 níveis. No nível 0, coloque $ T(n) $. No nível 1, coloque $ 4 $ nós com $ T(n/2) $. No nível 2, coloque $ 4^2 = 16 $ nós com $ T(n/4) $. Preencha os campos com os custos de cada nível:
+- Nível 0: $ n^2 $
+- Nível 1: $ 4 \times \left(\frac{n}{2}\right)^2 $
+- Nível 2: $ 16 \times \left(\frac{n}{4}\right)^2 $
 
 Calcule o custo total de cada nível e compare com $ n^2 $. Qual caso do Teorema Mestre você identifica?
 
@@ -57,20 +57,20 @@ Como você representaria o estado da DP para esse problema? Qual seria a defini�
 ### Dica:
 Pense em como o valor `v` pode ser formado com as moedas disponíveis. Qual é a relação entre `dp[v]` e os valores menores que `v`?
 
-### Sua vez  
+### Sua vez
 Defina o estado da DP para o caso de moedas {1, 2, 5} e alvo 6. Qual seria a fórmula para `dp[v]`?
 
 ### Ajuda publicada
 
 Vamos explorar uma variação do problema do troco mínimo, mas com uma estrutura diferente. Suponha que você precise formar o valor 8 usando moedas de {2, 5}, e o objetivo é minimizar o número de moedas usadas.
 
-### Pergunta-chave:  
+### Pergunta-chave:
 Como você representaria o estado da DP para esse problema? Qual seria a definição de `dp[v]`?
 
-### Pista:  
+### Pista:
 Pense em como o valor `v` pode ser alcançado a partir de valores menores. Se você já sabe a menor quantidade de moedas para formar `v - c`, como isso ajuda a calcular `dp[v]`?
 
-### Sua vez  
+### Sua vez
 Defina o estado da DP para o caso de moedas {2, 5} e alvo 8. Qual seria a fórmula para `dp[v]`?
 
 **Revisão humana:** pendente.
@@ -101,7 +101,7 @@ Vamos esboçar a estrutura da operação em uma **tabela de passos** para que vo
 | 6     | Verifique o **overflow** (V = C₅ ⊕ C₄) | `????`         |
 | 7     | Converta o resultado para decimal (se positivo) ou complemento de 2 (se negativo) | `??`           |
 
-### Sua vez  
+### Sua vez
 Preencha os valores da tabela acima, começando pelo passo 3. Lembre-se: o complemento de 2 de um número é obtido invertendo os bits e somando 1. Depois, some com A e verifique o overflow.
 
 ### Ajuda publicada
@@ -124,7 +124,7 @@ Vamos esboçar a estrutura da operação em uma **tabela de passos** para que vo
 | 6     | Verifique o **overflow** (V = C₅ ⊕ C₄) | `????`         |
 | 7     | Converta o resultado para decimal (se positivo) ou complemento de 2 (se negativo) | `??`           |
 
-### Sua vez  
+### Sua vez
 Preencha os valores da tabela acima, começando pelo passo 3. Lembre-se: o complemento de 2 de um número é obtido invertendo os bits e somando 1. Depois, some com A e verifique o overflow.
 
 **Revisão humana:** pendente.
