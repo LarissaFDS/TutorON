@@ -11,7 +11,7 @@ Etapas:
 O modelo novo NÃO substitui o atual automaticamente. Depois de ler o relatório, para usar:
   TUTORON_MODELO_LOCAL=tutoron-socratico-ft  no .env, e reinicie o 1-Iniciar-Servidor.bat.
 
-Uso: python scripts/treinar.py [--passos 60] [--base Qwen/Qwen3-8B] [--so-dados] [--verificar]
+Uso: python scripts/treinar.py [--passos 60] [--base Qwen/Qwen3-8B] [--so-dados] [--verificar] [--so-avaliar]
 """
 from __future__ import annotations
 
@@ -295,11 +295,29 @@ def importar_no_ollama(pasta: Path, nome: str) -> None:
 
 
 # ---------------------------------------------------------------------------- 5. avaliação
-async def avaliar(grupos: dict, nome: str) -> Path:
+def verificar_dependencias_avaliacao() -> None:
+    """Falha antes do treino caro se o ambiente não consegue importar o atendimento."""
+    try:
+        from eval.socratico import executar  # noqa: F401
+    except ModuleNotFoundError as exc:
+        raise SystemExit(
+            f'Falta a dependência {exc.name!r} da avaliação. Execute novamente 3-Treinar.bat '
+            'para instalar as dependências antes de treinar. Nenhum treino foi iniciado.'
+        ) from exc
+
+
+async def avaliar(nome: str) -> Path:
     titulo('5/5 Avaliação socrática pelo fluxo real do site')
+    import httpx
     from eval.socratico import executar
     from backend.config import load_settings
-    atual = load_settings().local_model
+    settings = load_settings()
+    # Não gastar a bateria do modelo atual para só depois descobrir que falta o candidato.
+    resposta = httpx.post(settings.ollama_url + '/api/show', json={'model': nome}, timeout=15)
+    if resposta.status_code == 404:
+        raise SystemExit(f'O modelo {nome!r} não está instalado no Ollama. Execute o treino completo primeiro.')
+    resposta.raise_for_status()
+    atual = settings.local_model
     destino = PASTA_DADOS / f'avaliacao-socratica-{datetime.now():%Y%m%d-%H%M%S}.json'
     await executar(list(dict.fromkeys([atual, nome])), destino)
     return destino.with_suffix('.md')
@@ -316,18 +334,30 @@ def main() -> None:
     parser.add_argument('--verificar', action='store_true', help='dados e tokenização, sem carregar pesos ou treinar')
     parser.add_argument('--teste-gpu', action='store_true', help='um passo real e avaliação de loss; sem mesclar/importar')
     parser.add_argument('--pular-avaliacao', action='store_true')
+    parser.add_argument('--so-avaliar', action='store_true',
+                        help='avalia o candidato já instalado; não treina, mescla nem importa pesos')
     args = parser.parse_args()
 
     if min(args.passos, args.rank, args.seq) < 1:
         parser.error('--passos, --rank e --seq precisam ser positivos')
     if args.nome in ('tutoron-paa', 'qwen3:8b'):
         parser.error('use um nome novo para preservar o modelo base e permitir comparação')
+    if args.so_avaliar:
+        if args.so_dados or args.verificar or args.teste_gpu or args.pular_avaliacao:
+            parser.error('--so-avaliar não combina com modos de preparação ou --pular-avaliacao')
+        verificar_dependencias_avaliacao()
+        print('Reaproveitando o modelo instalado. Nenhum passo de treino será repetido.', flush=True)
+        relatorio = asyncio.run(avaliar(args.nome))
+        print(f'\nAvaliação concluída. Relatório: {relatorio}\nO modelo em uso no servidor não foi alterado.')
+        return
     grupos = preparar_dados()
     if args.so_dados:
         return
     if args.verificar:
         verificar_tokenizacao(grupos, args.base, args.seq)
         return
+    if not args.teste_gpu and not args.pular_avaliacao:
+        verificar_dependencias_avaliacao()
     global PASTA_TRABALHO
     PASTA_TRABALHO = PASTA_TRABALHO / datetime.now().strftime('%Y%m%d-%H%M%S-%f')
     PASTA_TRABALHO.mkdir(parents=True, exist_ok=True)
@@ -353,7 +383,13 @@ def main() -> None:
             raise SystemExit('Pasta temporária fora do diretório de treino; limpeza cancelada.')
         shutil.rmtree(alvo)  # o Ollama já guardou a versão quantizada
     if not args.pular_avaliacao:
-        relatorio = asyncio.run(avaliar(grupos, args.nome))
+        print('Treino: 100% concluído. Modelo instalado; falta apenas a avaliação.', flush=True)
+        try:
+            relatorio = asyncio.run(avaliar(args.nome))
+        except (Exception, SystemExit):
+            print(f'\nO treino e o modelo instalado foram preservados em {PASTA_TRABALHO}.\n'
+                  f'Para repetir só a avaliação: 3-Treinar.bat --so-avaliar --nome {args.nome}', flush=True)
+            raise
         print(f'\nRelatório: {relatorio}')
     print(f'\nPronto. O modelo atual não foi alterado. Para usar o novo, coloque no .env:\n'
           f'   TUTORON_MODELO_LOCAL={args.nome}\ne reinicie o 1-Iniciar-Servidor.bat.')

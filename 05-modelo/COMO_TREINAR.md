@@ -20,6 +20,8 @@ Famílias inteiras ficam num único split. O teste não entra na loss nem na esc
 
 Cada execução guarda configuração, cópia dos dados, manifesto, adapter e métricas em `.tools/treino-socratico/<execução>/`. A avaliação fica em `05-modelo/socratico/preparado/avaliacao-socratica-*.md`. A resposta de reserva não conta como sucesso do modelo. O revisor automático usa o mesmo modelo e pode errar; leia também as respostas brutas.
 
+O atalho também salva a saída do terminal em `dados/logs/treino-*.log` e verifica as dependências da avaliação antes de iniciar o treino. Se o treino e a instalação terminarem, mas a avaliação falhar, execute **`3-Treinar.bat --so-avaliar`**. Isso reaproveita o candidato instalado e refaz apenas a avaliação, sem repetir o treino. Dar duplo clique no atalho sem argumentos inicia um treino novo.
+
 Na primeira execução, o atalho instala o ambiente de treino e baixa os pesos se necessário. O tempo depende do hardware e das cotas; o teste de um passo não estima sozinho a duração do treino completo. O servidor bloqueia novas inferências locais durante treino e mescla para não recarregar o Ollama na mesma GPU; Gemini continua disponível. A reserva é liberada pelo sistema operacional mesmo se o processo cair. Feche aplicações que ocupem muita VRAM.
 
 ## Ativar depois de avaliar
@@ -40,6 +42,7 @@ Para voltar, use o nome anterior (nesta máquina, `tutoron-paa`). Loss menor nã
 3-Treinar.bat --teste-gpu         :: um passo real, sem mesclar nem instalar o adapter de teste
 3-Treinar.bat --passos 30         :: altera a duração do treino
 3-Treinar.bat --pular-avaliacao   :: instala o candidato sem rodar a bateria; revisão continua necessária
+3-Treinar.bat --so-avaliar        :: recupera a avaliação do modelo já instalado, sem treinar novamente
 .venv\Scripts\python eval\socratico.py --modelos tutoron-paa tutoron-socratico-ft
 ```
 

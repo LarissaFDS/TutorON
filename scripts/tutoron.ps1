@@ -337,29 +337,45 @@ function Validacao {
 
 function Treinar {
     Titulo 'Treinamento socrático do TutorON (PAA + SD, QLoRA na GPU)'
-    # Exportar dados não baixa PyTorch, não liga modelos e não exige CUDA.
-    if ($Extra -contains '--so-dados') {
-        & $Python scripts\treinar.py @Extra; Falhou
-        return
+    $LogTreino = Join-Path $Logs ("treino-{0}.log" -f (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
+    Start-Transcript -Path $LogTreino -ErrorAction Stop | Out-Null
+    try {
+        Ok "log desta execução: $LogTreino"
+        # Exportar dados não baixa PyTorch, não liga modelos e não exige CUDA.
+        if ($Extra -contains '--so-dados') {
+            & $Python scripts\treinar.py @Extra 2>&1 | Out-Default; Falhou
+            return
+        }
+        # Recupera a última etapa sem precisar de CUDA nem recarregar os pesos de treino.
+        if ($Extra -contains '--so-avaliar') {
+            Preparar-Python
+            Iniciar-Ollama
+            & $Python scripts\treinar.py @Extra 2>&1 | Out-Default; Falhou
+            return
+        }
+        if ($Extra -notcontains '--verificar' -and $Extra -notcontains '--teste-gpu') { Iniciar-Ollama }
+        $Treino = Join-Path $Raiz '.venv-treino\Scripts\python.exe'
+        if (!(Test-Path $Treino)) {
+            Write-Host '   Criando ambiente de treino (.venv-treino) — só na primeira vez, baixa ~3 GB...'
+            if (Get-Command py -ErrorAction SilentlyContinue) { & py -3 -m venv .venv-treino } else { & python -m venv .venv-treino }
+            Falhou
+        }
+        if ($Extra -notcontains '--verificar') {
+            & $Treino -c "import torch, sys; sys.exit(0 if torch.cuda.is_available() else 1)" 2>$null
+            if ($LASTEXITCODE -ne 0) {
+                $indice = if ($env:TUTORON_TORCH_INDEX_URL) { $env:TUTORON_TORCH_INDEX_URL } else { 'https://download.pytorch.org/whl/cu128' }
+                & $Treino -m pip install --disable-pip-version-check torch --index-url $indice; Falhou
+                & $Treino -c "import torch; assert torch.cuda.is_available(), 'PyTorch sem CUDA: confira o driver NVIDIA.'"; Falhou
+            }
+        }
+        & $Treino -c "import transformers, peft, datasets, bitsandbytes, safetensors; from eval.socratico import executar" 2>$null
+        if ($LASTEXITCODE -ne 0) { & $Treino -m pip install --disable-pip-version-check -r 05-modelo\treino\requirements.txt; Falhou }
+        # Verifica a cadeia real de imports antes de ocupar a GPU por dezenas de minutos.
+        & $Treino -c "from eval.socratico import executar"; Falhou
+        & $Treino scripts\treinar.py @Extra 2>&1 | Out-Default; Falhou
+    } finally {
+        Stop-Transcript | Out-Null
     }
-    if ($Extra -notcontains '--verificar' -and $Extra -notcontains '--teste-gpu') { Iniciar-Ollama }
-    $Treino = Join-Path $Raiz '.venv-treino\Scripts\python.exe'
-    if (!(Test-Path $Treino)) {
-        Write-Host '   Criando ambiente de treino (.venv-treino) — só na primeira vez, baixa ~3 GB...'
-        if (Get-Command py -ErrorAction SilentlyContinue) { & py -3 -m venv .venv-treino } else { & python -m venv .venv-treino }
-        Falhou
-    }
-    if ($Extra -notcontains '--verificar') {
-      & $Treino -c "import torch, sys; sys.exit(0 if torch.cuda.is_available() else 1)" 2>$null
-      if ($LASTEXITCODE -ne 0) {
-        $indice = if ($env:TUTORON_TORCH_INDEX_URL) { $env:TUTORON_TORCH_INDEX_URL } else { 'https://download.pytorch.org/whl/cu128' }
-        & $Treino -m pip install --disable-pip-version-check torch --index-url $indice; Falhou
-        & $Treino -c "import torch; assert torch.cuda.is_available(), 'PyTorch sem CUDA: confira o driver NVIDIA.'"; Falhou
-      }
-    }
-    & $Treino -c "import transformers, peft, datasets, bitsandbytes, safetensors" 2>$null
-    if ($LASTEXITCODE -ne 0) { & $Treino -m pip install --disable-pip-version-check -r 05-modelo\treino\requirements.txt; Falhou }
-    & $Treino scripts\treinar.py @Extra; Falhou
 }
 
 switch ($Acao) {
