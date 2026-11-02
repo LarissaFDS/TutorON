@@ -207,14 +207,22 @@
    "idioma": "pt-BR",
    "formato": "Página do Notion",
    "isa": "—",
-   "topicos": [],
+   "topicos": [
+    "oac-02-desempenho",
+    "oac-05-isa-registradores-memoria",
+    "oac-10-procedimentos",
+    "oac-13-datapath-controle",
+    "oac-14-pipeline-hazards",
+    "oac-15-hierarquia-memoria",
+    "oac-16-paralelismo"
+   ],
    "licenca": "Desconhecida",
-   "acesso": "Inacessível em 2026-10-27: a integração do Notion deste ambiente respondeu 404 (object_not_found); a página não está compartilhada com ela",
-   "notas": null,
+   "acesso": "Lida pela integração do Notion em 2026-11-02 (página raiz e 6 subpáginas: Capítulos 1, 2, 5 e 6, Projeto 1 e Projeto 2). Imagens, PDFs e arquivos anexos não foram baixados; as sub-subpáginas Perplexity e Code não foram lidas",
+   "notas": "Anotações de alunos, parte delas geradas com assistente de IA. Erros encontrados e corrigidos nos blocos s01, s02, s04 e s07",
    "prioridade": "referencia",
-   "uso": "indisponivel",
+   "uso": "acervo",
    "origem": "material de turma",
-   "justificativa": "Não inventariada. É preciso compartilhar a página com a integração ou exportar o conteúdo."
+   "justificativa": "Resumida com texto próprio em 7 blocos (s01–s07), com status de resolução. Anexos (livro, slides, exercícios, gabarito da prova 1) não foram versionados: o livro e os slides são protegidos e a prova e a lista já estão nos blocos t*. O curso Softex incorporado na página não foi avaliado (licença desconhecida)"
   },
   {
    "id": "ufal-ppc-ecomp-2011-oac",

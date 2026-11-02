@@ -13,7 +13,7 @@ natureza: nota_da_equipe_ia
 verificacao: nao_verificada
 revisao_humana: pendente
 ---
-Pipeline do RISC-V (Patterson & Hennessy, seções 4.5 a 4.9). Tópico fundamental do livro; ainda não confirmado nos materiais da turma.
+Pipeline do RISC-V (Patterson & Hennessy, seções 4.5 a 4.9). Tópico fundamental do livro; confirmado no Projeto 2 da turma (bloco oac-notion-projeto2-pipeline).
 
 Estágios: IF (busca), ID (decodificação e leitura de registradores), EX (ALU), MEM (memória de dados), WB (escrita no registrador). Em regime, termina uma instrução por ciclo; o tempo de cada instrução não diminui, a vazão aumenta. Speedup ideal ≈ número de estágios, se os estágios forem equilibrados.
 

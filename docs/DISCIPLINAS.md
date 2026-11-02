@@ -67,7 +67,7 @@ OAC foi a primeira disciplina incluída depois do mecanismo pronto, a partir de 
 
 | O quê | Tipo |
 |---|---|
-| Entrada em `disciplinas/disciplinas.json`, `disciplinas/oac/rigor.md`, 21 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
+| Entrada em `disciplinas/disciplinas.json`, `disciplinas/oac/rigor.md`, 28 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
 | Campo opcional `status_resolucao` (`validada`, `corrigida`, `pendente_professor`) no cabeçalho dos blocos, validado em `acervo/disciplinas.py::ler` e copiado para `itens.json` só quando presente | **mudança de código, 6 linhas** |
 | Teste da lista de disciplinas (`{"paa", "sd"}` → `{"paa", "sd", "oac"}`) e testes novos de OAC | testes |
 
@@ -96,4 +96,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
-| `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (21 blocos, 21 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
+| `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (28 blocos, 28 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |

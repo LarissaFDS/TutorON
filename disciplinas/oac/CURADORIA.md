@@ -4,17 +4,17 @@ Situação: **em validação** desde 27/10/2026. A disciplina está cadastrada, 
 
 | Item | Estado em 27/10/2026 |
 |---|---|
-| Cadastro, acervo (21 blocos) e índice híbrido (`bge-m3`) | **Feitos** |
+| Cadastro, acervo (28 blocos) e índice híbrido (`bge-m3`) | **Feitos** |
 | Contas, codificações e código RISC-V das resoluções | **Conferidos por código** (`tests_acervo/test_disciplina_oac.py`) |
-| Revisão humana interna dos 21 blocos | **Pendente** (`revisao_humana: pendente` em todos) |
+| Revisão humana interna dos 28 blocos | **Pendente** (`revisao_humana: pendente` em todos) |
 | Autorização para publicar transcrições literais da prova e da lista | **Não dada**: os blocos trazem enunciados parafraseados e os dados, não a transcrição |
 | Aprovação do professor | **Não declarada**; nenhum bloco tem `revisao_professor: sim` |
 | Plano de ensino atual | **Não localizado**; só a ementa de 2011 (seção 1) |
-| Página do Notion da turma | **Inacessível** neste ambiente (seção 4) |
+| Página do Notion da turma | **Inventariada** em 02/11/2026: 7 blocos `s*` (seção 4.1) |
 | Validação das respostas da IA | **Parcial**: 4 perguntas com o Gemini, todas corretas (seção 5.1); modelo local não testado |
 
 - Catálogo legível por máquina (fonte da verdade): [`fontes.json`](fontes.json)
-- Blocos do acervo (um arquivo por bloco): [`materiais/`](materiais/). `t*` são materiais da turma; `n*` são notas da equipe
+- Blocos do acervo (um arquivo por bloco): [`materiais/`](materiais/). `t*` são materiais da turma; `s*` são anotações da turma no Notion; `n*` são notas da equipe
 - Gerados a partir dos blocos (não editar à mão): [`acervo/itens.json`](acervo/itens.json) e [`acervo/indice.json`](acervo/indice.json)
 - Regras de rigor que o tutor segue em OAC: [`rigor.md`](rigor.md)
 
@@ -87,7 +87,7 @@ Mesma escala de SD: notas de 1 a 5 em **autoridade**, **cobertura**, **profundid
 | `pattersonhennessy-cod-riscv` Livro-texto | RISC-V | 5 | 5 | 5 | 5 | 5 | 2 | 1 | 5 | referência | protegido |
 | `ufal-oac-slides-editora` Slides do livro | RISC-V | 5 | 3 | 4 | 4 | 5 | 3 | 1 | 4 | referência | protegido |
 | `ufal-ppc-ecomp-2011-oac` Ementa ECOM025 | — | 5 | 3 | 1 | 1 | 3 | 5 | 3 | 1 | referência | ementa |
-| `ufal-oac-notion` Notion da turma | — | — | — | — | — | — | — | — | — | referência | indisponível |
+| `ufal-oac-notion` Notion da turma | RISC-V | 4 | 3 | 3 | 3 | 4 | 4 | 1 | 2 | referência | resumida (s01–s07) |
 
 ### Por que esta seleção
 
@@ -121,7 +121,21 @@ Cada bloco tem `status_resolucao` no cabeçalho, e o texto também diz o status,
 
 Correspondência MIPS × RISC-V nos comentários: no gabarito da Q5, "t0" e "t1" são x5 e x6, o que confere com a convenção do RISC-V. Na Q4, os nomes vêm do exemplo MIPS do livro e estavam trocados.
 
-Não inventariados: a **página do Notion da turma** (`ufal-oac-notion`), que respondeu 404 à integração do Notion deste ambiente em 27/10/2026. Para incluí-la, compartilhe a página com a integração ou exporte o conteúdo em Markdown.
+## 4.1 Notion da turma (lido em 02/11/2026)
+
+A página `ufal-oac-notion` (Engenharia de Computação / Quarto Período) foi lida pela integração do Notion: a raiz e as subpáginas Capítulo 1, Capítulo 2, Capítulo 5, Capítulo 6, Projeto 1 e Projeto 2. São anotações de alunos; as dos caps. 5 e 6 e parte do Projeto 2 foram feitas com assistente de IA. Os blocos `s*` resumem esse conteúdo **com texto próprio**, e cada um tem `status_resolucao`.
+
+| Arquivo | id | Página | O que foi corrigido | Status |
+|---|---|---|---|---|
+| s01 | `oac-notion-cap1-desempenho` | Capítulo 1 | "aumento proporcional do clock": o certo é × 1,714 (+71,4%) | **corrigida** |
+| s02 | `oac-notion-cap2-instrucoes` | Capítulo 2 | `sw` anotado ao contrário; imediato do `beq` de 12 bits, não 16; `lli` não existe; sintaxe MIPS `$s1`; `srli` só divide sem sinal | **corrigida** |
+| s03 | `oac-notion-cap2-procedimentos` | Capítulo 2 | nada: fatorial e laço simulados | validada |
+| s04 | `oac-notion-projeto1-monociclo` | Projeto 1 | extend recebe 25 bits (Instr[31:7]); WE da memória vem de MemWrite; ALUOp do addi diverge do código-base de Harris & Harris | **corrigida** |
+| s05 | `oac-notion-projeto2-pipeline` | Projeto 2 | nada (falta a condição RdE ≠ 0, citada no bloco) | validada |
+| s06 | `oac-notion-cap5-memoria` | Capítulo 5 | nada: exemplo de tag/índice/offset e CPI com L2 conferidos | validada |
+| s07 | `oac-notion-cap6-paralelismo` | Capítulo 6 | Ex. 1 contava 9 somas escalares; o exemplo do livro conta 10 (speedups 5,5 e 10) | **corrigida** |
+
+Não incorporados: os anexos da página (o PDF do livro e as imagens de slides, protegidos; o PDF de exercícios e o gabarito da Prova 1, já resumidos nos blocos `t*`; os arquivos `.sv`, `.s` e `.txt` do Projeto 1 e a animação do Projeto 2, que não foram baixados); as sub-subpáginas "Perplexity" e "Code", que não foram lidas; e o curso da Softex incorporado na página, cuja licença não foi avaliada. Com os blocos s05–s07, pipeline, cache e paralelismo deixam de ser só notas da equipe.
 
 ## 5. Blocos do acervo
 
@@ -141,6 +155,8 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 | n08 | `oac-nota-pipeline-hazards` | nota da equipe (IA) | não verificada |
 | n09 | `oac-nota-hierarquia-memoria` | nota da equipe (IA) | exemplos conferidos |
 | n10 | `oac-nota-aritmetica-constantes` | nota da equipe (IA) | exemplos conferidos |
+| s01, s02, s04–s07 | anotações do Notion (seção 4.1) | material da disciplina | exemplos conferidos (contas e afirmações) |
+| s03 | `oac-notion-cap2-procedimentos` | material da disciplina | conferida por código (fatorial e laço simulados) |
 
 **Código assembly e fórmulas.** Cada bloco cabe inteiro num trecho (menos de 2.000 caracteres; `backend/rag.py` corta acima de 2.200), então nenhum bloco de código é partido na indexação. O teste confere que os blocos ```` ``` ```` estão fechados. Fórmulas estão em texto legível (o tutor responde em Markdown com LaTeX). O datapath do cap. 4 foi transcrito em texto: componentes, campos da instrução usados e tabela de sinais (n07).
 
@@ -172,11 +188,11 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 
 ## 7. Pendências
 
-1. Revisão humana interna dos 21 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09) e pela tabela de sinais (n07).
+1. Revisão humana interna dos 28 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s07) e pela tabela de sinais (n07).
 2. Confirmar com o professor o item d da versão A e a leitura do riscado da versão B (t06, t07), e se a disciplina aceita as correções de t03, t04, t05 e t09.
 3. Autorização da equipe para publicar transcrições literais da prova e da lista (hoje, parafraseadas).
 4. Validar respostas reais com o Gemini e com o modelo local (as quatro perguntas de `backend/tests/test_disciplinas.py` e as de `tests_acervo/test_disciplina_oac.py`). Só depois mudar a `situacao` no cadastro para `beta`.
-5. Inventariar a página do Notion da turma (compartilhar com a integração ou exportar).
+5. Notion: ler as sub-subpáginas "Perplexity" e "Code" e, com permissão, os arquivos do Projeto 1, para confirmar a codificação de ALUOp (s04).
 6. Confirmar o plano de ensino atual: E/S, barramentos, microprogramação e paralelismo estão na ementa de 2011 e não têm bloco.
 7. Avaliar a ingestão do cartão de referência e de trechos do manual RISC-V (CC BY 4.0) e dos slides de MC404 (CC BY-SA 4.0), com atribuição.
 8. Rodar a bateria de relevância (`eval/relevancia.py`) com perguntas de OAC rotuladas. Hoje ela só tem PAA e SD.

@@ -66,6 +66,8 @@ def test_status_de_resolucao_invalido(tmp_path):
     ('Quais sinais de controle ficam ativos numa instrução sw?', 'oac-nota-datapath-controle'),
     ('Como escrever a sub-rotina swap em RISC-V?', 'oac-prova1-q4-swap'),
     ('Como calcular o yield e o custo por die de um wafer?', 'oac-nota-custo-ci'),
+    ('Por que o PCSrc do monociclo precisa de OR Jump para o jal no SystemVerilog?', 'oac-notion-projeto1-monociclo'),
+    ('Qual a diferença entre SIMD, MIMD e multithreading SMT?', 'oac-notion-cap6-paralelismo'),
 ])
 def test_pergunta_de_oac_encontra_material_pertinente(pergunta, esperado):
     ids = buscar(pergunta)
@@ -91,7 +93,7 @@ def test_pergunta_fora_do_acervo_nao_inventa_material():
 
 def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 11
+    assert len(turma) == 18  # 11 da prova, lista e aula + 7 das anotações do Notion
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert i.get('status_resolucao') in rotulo, i['id']
@@ -99,8 +101,10 @@ def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
             f"Status: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
     corrigidas = {i['id'] for i in turma if i['status_resolucao'] == 'corrigida'}
     assert {'oac-prova1-a-q2-enade', 'oac-prova1-b-q2-enade', 'oac-compiladores', 'oac-prova1-q4-swap'} <= corrigidas
-    for ident in corrigidas:
-        assert 'gabarito' in ITENS[ident]['texto'].lower()  # diz o que diverge do gabarito
+    for ident in corrigidas:  # diz o que diverge do gabarito ou das anotações da turma
+        texto = ITENS[ident]['texto'].lower()
+        assert ('gabarito' if ident.startswith('oac-prova') or ident == 'oac-compiladores' else 'correç') in texto, ident
+    assert {'oac-notion-cap2-instrucoes', 'oac-notion-projeto1-monociclo', 'oac-notion-cap6-paralelismo'} <= corrigidas
     assert all(i['natureza'] == 'nota_da_equipe_ia' and 'status_resolucao' not in i
                for i in ITENS.values() if i['id'].startswith('oac-nota'))
 
@@ -201,16 +205,17 @@ def executar(asm, regs=None, mem=None, limite=200000):
         if linha:
             linhas.append(linha)
     x, mem = [0] * 32, dict(mem or {})
+    x[1], x[2] = -1, 1 << 20  # retorno para fora do programa; pilha no alto da memória
     for r, v in (regs or {}).items():
         x[r] = v
     pc, passos = 0, 0
     while 0 <= pc < len(linhas) and passos < limite:
         nome, resto = linhas[pc].split(None, 1)
         a = [t.strip() for t in resto.split(',')]
-        reg = lambda t: int(t.lstrip('x'))
+        reg = lambda t: 2 if t == 'sp' else int(t.lstrip('x'))
         pc, passos = pc + 1, passos + 1
         if nome in ('lw', 'sw'):
-            imm, base = re.fullmatch(r'(-?\d+)\((x\d+)\)', a[1]).groups()
+            imm, base = re.fullmatch(r'(-?\d+)\((x\d+|sp)\)', a[1]).groups()
             ender = x[reg(base)] + int(imm)
             if nome == 'lw':
                 x[reg(a[0])] = mem.get(ender, 0)
@@ -222,11 +227,19 @@ def executar(asm, regs=None, mem=None, limite=200000):
             x[reg(a[0])] = x[reg(a[1])] + int(a[2])
         elif nome == 'slli':
             x[reg(a[0])] = x[reg(a[1])] << int(a[2])
+        elif nome == 'mul':
+            x[reg(a[0])] = x[reg(a[1])] * x[reg(a[2])]
         elif nome in ('beq', 'bne'):
             if (x[reg(a[0])] == x[reg(a[1])]) == (nome == 'beq'):
                 pc = rotulos[a[2]]
+        elif nome == 'bge':
+            if x[reg(a[0])] >= x[reg(a[1])]:
+                pc = rotulos[a[2]]
+        elif nome == 'jal':  # endereços de retorno são índices de linha
+            x[reg(a[0])], pc = pc, rotulos[a[1]]
         elif nome == 'jalr':
-            break  # retorno ao chamador
+            imm, base = re.fullmatch(r'(-?\d+)\((x\d+)\)', a[1]).groups()
+            pc = x[reg(base)] + int(imm)  # x1 = -1 encerra no retorno ao chamador externo
         else:
             raise ValueError(nome)
         x[0] = 0
@@ -261,6 +274,27 @@ def test_operando_em_memoria_da_aula():
     x, mem = executar(codigo('oac-aula-operando-memoria'), {21: 7, 22: 4}, vetor(4, a))
     assert mem[4 + 48] == 7 + a[8]  # A[12] = h + A[8]
     assert 4 + 32 == 36
+
+
+def test_fatorial_e_laco_das_anotacoes_da_turma():
+    laco, fact = re.findall(r'```asm\n(.*?)```', ITENS['oac-notion-cap2-procedimentos']['texto'], re.S)
+    for n, esperado in ((0, 1), (1, 1), (5, 120), (7, 5040)):
+        x, _ = executar(fact, {10: n})
+        assert x[10] == esperado and x[2] == 1 << 20  # pilha volta ao topo
+    x, _ = executar(laco, {10: 0, 11: 7}, vetor(0, [7, 7, 3]))
+    assert x[10] == 8  # parou no primeiro elemento diferente de k
+
+
+def test_contas_das_anotacoes_da_turma():
+    assert round(1.2 / 0.7, 3) == 1.714  # cap. 1: aumento de clock, não "proporcional"
+    linhas = 8 * 1024 // 32
+    assert (linhas, linhas // 2, 32 - 7 - 5) == (256, 128, 20)  # cap. 5: tag/índice/offset
+    for p, f_min in ((10, .988), (100, .9989)):  # cap. 6: eficiência >= 0,9
+        f = (p - 1 / .9) / (p - 1)
+        assert round(f, len(str(f_min)) - 2) == f_min and 1 / ((1 - f) + f / p) / p == pytest.approx(.9)
+    assert (110 / (10 + 100 / 10), 110 / (10 + 100 / 100)) == (5.5, 10)  # Ex. 1 do livro, não 9 somas
+    texto = ITENS['oac-notion-cap2-instrucoes']['texto']
+    assert 'A[12] = x9' in texto and 'lli' in texto and '12 bits' in texto
 
 
 def test_if_else_e_while_da_nota():

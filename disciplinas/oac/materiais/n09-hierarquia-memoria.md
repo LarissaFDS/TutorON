@@ -13,7 +13,7 @@ natureza: nota_da_equipe_ia
 verificacao: exemplos_conferidos
 revisao_humana: pendente
 ---
-Hierarquia de memória (Patterson & Hennessy, cap. 5). Tópico fundamental do livro; ainda não confirmado nos materiais da turma.
+Hierarquia de memória (Patterson & Hennessy, cap. 5). Tópico fundamental do livro; confirmado nas anotações da turma do cap. 5 (bloco oac-notion-cap5-memoria).
 
 Localidade temporal (o mesmo dado volta a ser usado) e espacial (dados vizinhos são usados em seguida) justificam a hierarquia: registradores → caches → memória principal → disco, cada nível maior, mais lento e mais barato por byte.
 
