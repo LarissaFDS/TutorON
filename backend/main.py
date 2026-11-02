@@ -3,7 +3,12 @@
 Rotas públicas (podem ser acessadas pela internet via túnel):
 
     GET  /                    site (modo Tutor e modo Validação)
-    POST /api/perguntar       modo Tutor: cria a tarefa e responde na hora com o id
+    GET  /demo                demonstração do tutor socrático (respostas gravadas, sem IA)
+    POST /api/perguntar       modo Tutor (socrático): cria a tarefa e responde na hora com o id
+    GET  /api/ajudas          tipos de ajuda do modo Tutor e se há animações
+    POST /api/foto            lê a foto do papel (o aluno confere antes de perguntar)
+    POST /api/animar          animação Manim da dúvida (protótipo)
+    GET  /api/animacoes/{id}.mp4  vídeo gerado
     POST /api/comparar        modo Validação: cria a tarefa que gera as respostas A e B (cegas)
     GET  /api/tarefas/{id}    andamento da tarefa (o site consulta a cada segundo)
     POST /api/feedback        "ajudou?" / "tem erro" de uma resposta do modo Tutor
@@ -22,6 +27,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Any, Literal
@@ -33,6 +39,7 @@ from pydantic import BaseModel, Field, field_validator
 
 from acervo import disciplinas
 
+from . import animacao, foto, prompts
 from .config import Settings, load_settings
 from .dados import Limitador, Registro, agora
 from .llm import LLM, Model
@@ -61,10 +68,21 @@ def disciplina_cadastrada(valor: str | None) -> str | None:
         raise ValueError("Disciplina não cadastrada.") from None
 
 
+class AjudaAnterior(BaseModel):
+    ajuda: str = Field(default="auto", max_length=20)
+    texto: str = Field(default="", max_length=6000)
+
+
 class Pergunta(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
     contexto: str | None = Field(default=None, max_length=6000)
     disciplina: str | None = Field(default=None, max_length=40)
+    # Modo Tutor: tipo de ajuda (prompts.AJUDAS) e a leitura da foto já conferida pelo aluno.
+    ajuda: str = Field(default="auto", max_length=20)
+    foto: str | None = Field(default=None, max_length=8000)
+    # "Ainda não consegui": ajudas anteriores deste exercício e onde o aluno travou.
+    historico: list[AjudaAnterior] = Field(default_factory=list, max_length=8)
+    travou: str | None = Field(default=None, max_length=1500)
 
     @field_validator("disciplina")
     @classmethod
@@ -77,6 +95,28 @@ class Pergunta(BaseModel):
         if len(valor.strip()) < 3:
             raise ValueError("Escreva a pergunta.")
         return valor.strip()
+
+
+class FotoPedido(BaseModel):
+    imagem: str = Field(..., min_length=30, max_length=12_000_000)  # data URL (base64)
+    disciplina: str | None = Field(default=None, max_length=40)
+    observacao: str | None = Field(default=None, max_length=500)
+
+    @field_validator("disciplina")
+    @classmethod
+    def disciplina_valida(cls, valor: str | None) -> str | None:
+        return disciplina_cadastrada(valor)
+
+
+class AnimarPedido(BaseModel):
+    pergunta: str = Field(..., min_length=3, max_length=4000)
+    resposta: str | None = Field(default=None, max_length=12000)
+    disciplina: str | None = Field(default=None, max_length=40)
+
+    @field_validator("disciplina")
+    @classmethod
+    def disciplina_valida(cls, valor: str | None) -> str | None:
+        return disciplina_cadastrada(valor)
 
 
 class Feedback(BaseModel):
@@ -208,6 +248,11 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     async def pagina() -> FileResponse:
         return FileResponse(WEB / "index.html", headers={"Cache-Control": "no-cache"})
 
+    @app.get("/demo", include_in_schema=False)
+    async def demo() -> FileResponse:
+        """Demonstração do tutor socrático com respostas reais gravadas: não chama nenhuma IA."""
+        return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
+
     @app.get("/design.css", include_in_schema=False)
     async def design_css() -> Response:
         from design import stylesheet
@@ -251,7 +296,42 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
         exigir_liberada(corpo.disciplina)
-        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
+        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina,
+                                           ajuda=corpo.ajuda, leitura_foto=corpo.foto,
+                                           historico=[h.model_dump() for h in corpo.historico],
+                                           travou=corpo.travou).publico()
+
+    @app.get("/api/ajudas")
+    async def ajudas() -> dict:
+        return {"ajudas": [{"id": k, "nome": v[0]} for k, v in prompts.AJUDAS.items()],
+                "animacao": animacao.disponivel()}
+
+    @app.post("/api/foto")
+    async def ler_foto(corpo: FotoPedido, request: Request) -> dict:
+        limitar(request)
+        exigir_liberada(corpo.disciplina)
+        try:
+            imagem = foto.decodificar(corpo.imagem)
+            return app.state.tarefas.ler_foto(imagem, corpo.disciplina, corpo.observacao).publico()
+        except foto.FotoInvalida as exc:
+            raise HTTPException(400, str(exc)) from None
+
+    @app.post("/api/animar")
+    async def animar(corpo: AnimarPedido, request: Request) -> dict:
+        limitar(request)
+        exigir_liberada(corpo.disciplina)
+        if not animacao.disponivel():
+            raise HTTPException(503, "As animações não estão instaladas neste servidor.")
+        return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, corpo.disciplina).publico()
+
+    @app.get("/api/animacoes/{ident}.mp4", include_in_schema=False)
+    async def video(ident: str) -> FileResponse:
+        if not re.fullmatch(r"[A-Za-z0-9_-]{8,40}", ident):
+            raise HTTPException(404, "Não encontrado.")
+        caminho = settings.data_dir / "animacoes" / f"{ident}.mp4"
+        if not caminho.is_file():
+            raise HTTPException(404, "Esta animação expirou. Gere de novo.")
+        return FileResponse(caminho, media_type="video/mp4", headers={"Cache-Control": "private, max-age=3600"})
 
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:

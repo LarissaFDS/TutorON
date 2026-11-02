@@ -134,7 +134,7 @@ def test_rotulo_inexistente_e_removido_da_resposta(site):
     validos = {f["rotulo"] for f in t["fontes"]}
     assert "P1" in validos and "P7" not in validos
     assert "[P1]" in t["texto"] and "[P7]" not in t["texto"] and "[L3]" not in t["texto"]
-    assert ultima_linha(site)["ajustes"] == ["rotulos_inexistentes:L3,P7"]
+    assert ultima_linha(site)["ajustes"] == ["rotulos_inexistentes:L3,P7", "sua_vez_acrescentada"]
 
 
 def test_sem_material_nenhum_rotulo_sobrevive(site):
@@ -146,7 +146,7 @@ def test_sem_material_nenhum_rotulo_sobrevive(site):
 
 
 def test_resposta_com_rotulos_validos_nao_muda(site):
-    texto = "Agrupe os quatro cantos [P1]; a verificação linha a linha fecha."
+    texto = "Agrupe os quatro cantos [P1]; a verificação linha a linha fecha.\n\n### Sua vez\nQuais cantos são vizinhos?"
     site.llm.roteiro["g1"] = ("ok", texto)
     t = perguntar(site, "Como simplificar com mapa de Karnaugh usando irrelevâncias?", "sd")
     assert t["texto"] == texto and "ajustes" not in ultima_linha(site)

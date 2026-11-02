@@ -74,7 +74,7 @@ def test_sem_disciplina_continua_respondendo_com_paa(site):
     t = perguntar(site, "Como aplicar o Teorema Mestre em T(n) = 2T(n/2) + n?")
     assert t["status"] == "pronta"
     _, sistema, prompt = site.llm.chamadas[-1]
-    assert sistema == prompts.SISTEMA_TUTOR
+    assert sistema == prompts.sistema_socratico()  # modo Tutor: socrático, com o rigor de PAA
     assert t["fontes"] and all(f["titulo"].endswith("de PAA") for f in t["fontes"])
     linha = json.loads((site.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[-1])
     assert linha["disciplina"] == "paa"
