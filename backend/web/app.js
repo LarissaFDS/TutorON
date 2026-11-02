@@ -158,6 +158,26 @@
     return marcado ? marcado.value : 'auto';
   }
 
+  // Recomendações apenas preenchem um rascunho editável; nunca enviam a pergunta.
+  (async function carregarTemasVisuais() {
+    try {
+      var res = await fetch('/api/visuais', { cache: 'no-store' });
+      if (!res.ok) return;
+      var dados = await res.json();
+      (dados.exemplos || []).forEach(function (tema) {
+        var b = el('button', 'sugestao', tema.titulo);
+        b.type = 'button';
+        b.addEventListener('click', function () {
+          $('pergunta').value = tema.pergunta;
+          document.querySelector('input[name="ajuda"][value="animacao"]').checked = true;
+          $('pergunta').focus();
+        });
+        $('sugestoes-visuais').append(b);
+      });
+      $('temas-visuais').hidden = !$('sugestoes-visuais').children.length;
+    } catch (e) { /* as sugestões são opcionais; o campo livre continua disponível */ }
+  })();
+
   /* Foto do papel: a IA transcreve, o aluno CONFERE e corrige, e só então a leitura vai para o tutor. */
   var fotoConfirmada = null;  // texto que acompanha a próxima pergunta
 

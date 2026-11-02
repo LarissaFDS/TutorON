@@ -32,6 +32,9 @@
   padding: var(--space-2) var(--space-3); cursor: pointer; min-height: 36px;
 }
 .sugestao:hover { border-color: var(--color-hairline-strong); }
+.temas-visuais { margin-top: var(--space-4); }
+.temas-visuais h3 { margin-bottom: var(--space-2); }
+.temas-visuais .sugestoes { margin-top: var(--space-2); }
 
 .fontes__lista { margin-top: var(--space-2); padding-left: 1.2em; font-size: var(--text-caption); color: var(--color-ink-muted); }
 .fontes__lista li + li { margin-top: var(--space-1); }

@@ -32,3 +32,7 @@ As evidências estão em `eval/results/visual-contextual-v1/`: execuções inici
 ## Modelo e treinamento
 
 Este ajuste não treinou nem promoveu novos pesos. O servidor continua com o modelo atual. A comparação anterior que recusou a promoção do candidato continua válida e separada deste teste de interface e animação.
+
+## Adendo: recomendações opcionais
+
+Os sete temas anteriores voltaram ao formulário em **Aprender com desenhos**, como sugestões opcionais. Cada botão preenche uma pergunta editável e seleciona **Só animação**, sem enviar. O campo livre permanece disponível para qualquer outra dúvida. Conferido no navegador: selecionar Karnaugh e depois substituir o texto por uma pergunta sobre pilha de chamadas, sem iniciar tarefa. Os 23 testes direcionados de interface/API visual e design passaram; a sintaxe do JavaScript também foi verificada.

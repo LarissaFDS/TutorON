@@ -2,6 +2,8 @@
 
 Escreva sua dúvida normalmente. Você pode escolher **Só animação** antes de enviar ou pedir ajuda textual e, depois da resposta, clicar em **Quer entender visualmente?**. O vídeo aparece na mesma conversa, sem escolher um tema de catálogo.
 
+Em **Aprender com desenhos**, os sete temas anteriores aparecem como recomendações opcionais: robô/DP, fluxo residual, Karnaugh, circuito/tabela-verdade, BFS, certificados em grafos e reduções. Clicar só preenche um rascunho editável e seleciona **Só animação**; não envia nem restringe a pergunta. O aluno pode escrever qualquer outra dúvida diretamente.
+
 A foto já conferida e o código/tentativa colados acompanham o pedido visual em campos separados. A animação direta não precisa gerar antes uma resposta textual. Depois de uma resposta, a ajuda já recebida também acompanha o planejamento do desenho.
 
 ## Disciplina opcional
@@ -22,7 +24,7 @@ Se as duas propostas falharem, o sistema explica que não conseguiu montar o des
 
 ## Onde ficou o catálogo anterior
 
-A aba “Aprender com desenhos” e os links para escolher temas saíram do atendimento. `/visuais` redireciona para a conversa com “Só animação” selecionado. Os exemplos controlados anteriores permanecem apenas na demonstração técnica `/demo/visuais`; não são usados como alternativa automática para uma pergunta.
+A aba separada de temas saiu do atendimento. As recomendações opcionais ficam junto ao formulário livre. `/visuais` redireciona para a conversa com “Só animação” selecionado. Os vídeos controlados anteriores permanecem na demonstração técnica `/demo/visuais`; não são usados como alternativa automática para uma pergunta.
 
 Os scripts e as evidências da demonstração anterior foram preservados. O arquivo offline alterado pelo usuário não foi modificado.
 

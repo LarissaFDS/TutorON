@@ -66,7 +66,9 @@ def test_animacao_recebe_tentativa_e_foto_em_campos_separados(site, monkeypatch)
 
 def test_navegacao_nao_tem_galeria_e_link_antigo_abre_compositor_visual(site):  # noqa: F811
     html = site.get('/').text
-    assert 'Fase MVP' not in html and 'Aprender com desenhos' not in html
+    assert 'Fase MVP' not in html and 'href="/visuais"' not in html
+    assert 'Temas recomendados, opcionais.' in html
+    assert 'Você não precisa usar estes temas.' in html
     assert 'Disciplina (opcional)' in html
     r = site.get('/visuais', follow_redirects=False)
     assert r.status_code == 307 and r.headers['location'] == '/?visual=1'
