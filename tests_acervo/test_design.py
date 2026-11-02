@@ -27,7 +27,8 @@ def test_site_loads_only_local_assets():
         html = (WEB / page).read_text(encoding='utf-8')
         assert not re.search(r'(src|href)="https?://', html), 'O site precisa funcionar sem CDN.'
         for asset in re.findall(r'(?:src|href)="/static/([^"]*)"', html):
-            assert (WEB / asset).is_file(), asset
+            from urllib.parse import urlsplit
+            assert (WEB / urlsplit(asset).path).is_file(), asset
 
 
 def test_site_keeps_api_contract():

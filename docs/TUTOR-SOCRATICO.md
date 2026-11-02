@@ -60,7 +60,7 @@ Com a cota do Gemini esgotada, a leitura falha com uma mensagem amigável ("digi
 
 ## 3. Animações com Manim (protótipo)
 
-**Atualização de 02/11:** a base do PR #29 foi ampliada com cinco cenas e uma área de estudo em `/visuais`, com sete exemplos controlados. Há grade de robô e DP, rede de fluxo, Karnaugh com validação de grupos, circuito com tabela em branco e direção de reduções, além de BFS e certificado em grafo. Veja [VISUAIS.md](VISUAIS.md) para apresentação, limites e o caminho alternativo quando a personalização por IA falha. As quatro cenas descritas abaixo são a base anterior, preservada.
+**Fluxo atual:** o aluno pede **Só animação** ou clica em **Quer entender visualmente?** após a ajuda textual. O desenho nasce da dúvida e aparece na mesma conversa. Há um esquema aberto de blocos para conceitos, além das cenas de grade, fluxo, Karnaugh, circuito e redução. Não há alternativa automática de catálogo; propostas que falham pedem reformulação. Veja [VISUAIS.md](VISUAIS.md). As quatro cenas descritas abaixo são a base anterior, preservada.
 
 **O que é o Manim:** a biblioteca Python de animações matemáticas criada pelo 3Blue1Brown. Usamos a versão da comunidade (Manim CE 0.19). Pela pip no Windows, ela já vem com PyAV (vídeo) e Pango (texto), então **não precisa de ffmpeg nem LaTeX**: só não usamos `MathTex`.
 

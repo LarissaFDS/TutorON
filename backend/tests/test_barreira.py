@@ -137,7 +137,7 @@ def test_site_mostra_e_troca_o_aviso_beta():
     html = (WEB / "index.html").read_text(encoding="utf-8")
     corpo = js[js.index("function escolherDisciplina"):js.index("(async function carregarDisciplinas")]
     assert "beta.textContent = d.aviso || ''" in corpo and "beta.hidden = !d.aviso" in corpo
-    assert "escolherDisciplina(disciplinas[pedida] ? pedida : dados.padrao)" in js
+    assert "escolherDisciplina(disciplinas[pedida] ? pedida : 'auto')" in js
     assert "escolherDisciplina($('disciplina').value)" in js
-    nota = html.split("masthead__nota")[1].split("</p>")[0]
-    assert 'id="disciplina-beta"' in html and "em validação" not in nota and "beta" in nota
+    cabecalho = html.split('</header>')[0]
+    assert 'id="disciplina-beta"' in html and 'masthead__nota' not in cabecalho

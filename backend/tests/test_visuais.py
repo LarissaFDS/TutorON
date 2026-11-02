@@ -137,19 +137,17 @@ def test_galeria_indisponivel_retorna_erro_claro(site, monkeypatch):  # noqa: F8
     ('Como desenhar a grade de um robô?', 'paa', 'robo-dp'),
     ('Como enxergar adjacência no Karnaugh?', 'sd', 'karnaugh-bordas'),
 ])
-def test_roteiro_invalido_oferece_outro_exercicio_sem_fingir_personalizacao(site, monkeypatch, pergunta, disciplina, ident):  # noqa: F811
+def test_roteiro_invalido_nao_substitui_duvida_por_tema_fixo(site, monkeypatch, pergunta, disciplina, ident):  # noqa: F811
     site.llm.roteiro['g1'] = ('ok', 'roteiro inválido')
 
     async def preparar(e, pasta):
-        assert e['id'] == ident
-        return 'visual_' + 'a' * 32
+        pytest.fail('A animação contextual não pode ser substituída pelo catálogo')
 
     monkeypatch.setattr(animacao, 'disponivel', lambda: True)
     monkeypatch.setattr(galeria, 'preparar', preparar)
     t = esperar(site, site.post('/api/animar', json={'pergunta': pergunta, 'disciplina': disciplina}).json())
-    assert t['status'] == 'pronta' and t['origem'] == 'exemplo_relacionado'
-    assert t['exemplo'] == ident and 'outro exercício' in t['observacao']
-    assert t['pergunta_final'] == galeria.obter(ident)['roteiro']['pergunta_final']
+    assert t['status'] == 'erro' and 'video' not in t
+    assert 'Diga qual relação' in t['mensagem']
 
 
 def test_sugestao_visual_nao_cruza_disciplinas_nem_inventa_cobertura():

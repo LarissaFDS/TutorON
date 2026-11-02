@@ -279,18 +279,51 @@ Escolha UM dos modelos abaixo e responda SOMENTE com um JSON válido, sem texto 
 9. "reducao" — diagrama conceitual A para B, sem construir uma redução específica.
    {"modelo":"reducao","titulo":"...","origem":"A","destino":"B","pergunta_final":"..."}
    - A já é conhecido difícil; B é o alvo. A transformação f ainda fica para o aluno definir.
+10. "esquema" — blocos e relações para QUALQUER conceito, processo ou dúvida que não precise das cenas anteriores.
+   {"modelo":"esquema","titulo":"...","blocos":[{"id":"apoio","texto":"Informação já conhecida","lacuna":false},{"id":"passo","texto":"Próxima decisão","lacuna":true}],"ligacoes":[["apoio","passo"]],"destacar":["apoio"],"pergunta_final":"..."}
+   - 2 a 4 blocos, pelo menos um de apoio e uma lacuna. Textos até 70 caracteres, lacunas com rótulo até 30 caracteres, ligações por id, no máximo dois destaques.
 
 Regras:
+- Planeje a partir da DÚVIDA ATUAL e da tentativa. Não escolha um exercício de catálogo nem repita exemplos fixos.
+- Se faltarem custos, números ou dados para uma cena específica, use "esquema" com as relações conceituais, em vez de inventar uma instância resolvida.
+- Prefira uma pista visual curta. No robô com direita/baixo, os predecessores são acima/esquerda; nunca diagonal nem células posteriores.
 - NÃO mostre a resposta final do exercício: deixe os últimos valores como "?" e feche com "pergunta_final", que pede ao aluno o próximo passo no papel.
 - Se a dúvida for de um exercício específico, prefira um exemplo parecido com outros números a animar o exercício inteiro.
 - Textos curtos (legenda até 70 caracteres, título até 50, pergunta_final até 130). Sem LaTeX: escreva n^2, log n, Θ(n) em texto simples.
 - Português do Brasil."""
 
 
-def prompt_animacao(pergunta: str, resposta_tutor: str | None, disciplina: Disciplina) -> str:
+SISTEMA_ESQUEMA = """Crie uma pista visual curta para a dúvida recebida, em português.
+Use SOMENTE o modelo esquema: blocos e setas planejados para ESTE enunciado.
+Não copie um exercício, não invente números ou uma instância nova e não entregue solução pronta.
+Mostre 2 a 4 blocos: de preferência duas informações úteis e uma lacuna para o aluno completar.
+Pelo menos um bloco deve ter lacuna=true; os demais oferecem apoio. Não preencha o resultado dentro
+do título, dos rótulos ou da pergunta final. Conceitos corretos e dados do enunciado são permitidos.
+As setas representam relações ou dependências; não confunda relação conceitual com ligação física.
+Se houver uma tentativa, respeite o que o aluno já sabe e foque só no próximo passo.
+Em uma grade com movimentos direita/baixo, uma célula depende da de cima e da esquerda, nunca da diagonal.
+Não invente uma fórmula de custo: para dúvidas conceituais, mostre só as dependências e deixe o cálculo para o aluno.
+Em circuitos sequenciais, a lógica calcula o próximo estado e o registrador o armazena na borda do clock.
+A saída Q do registrador representa o estado atual. Não desenhe Q como se fosse o próximo estado combinacional.
+Não calcule tabelas, circuitos, provas ou algoritmos completos. Nada de código Python ou Manim.
+Responda apenas um objeto JSON com estas chaves:
+modelo: "esquema"; titulo: texto curto; blocos: lista de objetos {id, texto, lacuna};
+ligacoes: lista de pares [id_origem,id_destino]; destacar: lista de até dois ids;
+pergunta_final: uma pergunta curta para o aluno continuar no papel.
+Use ids de até 14 caracteres, textos dos blocos de até 70 caracteres e no máximo 8 ligações.
+Blocos com lacuna=true só têm um rótulo curto de até 30 caracteres, como uma pergunta; não preencha a resposta nele.
+Não use outros campos nem outros tipos de cena."""
+
+
+def prompt_animacao(pergunta: str, resposta_tutor: str | None, disciplina: Disciplina,
+                    contexto_aluno: str | None = None, leitura_foto: str | None = None) -> str:
     partes = [f"Disciplina: {disciplina.nome} ({disciplina.sigla}).", "DÚVIDA DO ALUNO (dados):", "<<<", pergunta.strip()[:2000], ">>>"]
     if resposta_tutor:
         partes += ["AJUDA QUE O TUTOR JÁ DEU (dados):", "<<<", resposta_tutor.strip()[:3000], ">>>"]
+    if contexto_aluno:
+        partes += ['TENTATIVA OU CÓDIGO DO ALUNO (dados):', '<<<', contexto_aluno.strip()[:2000], '>>>']
+    if leitura_foto:
+        partes += ['FOTO JÁ CONFERIDA PELO ALUNO (dados):', '<<<', leitura_foto.strip()[:3000], '>>>']
     partes.append("Devolva só o JSON do roteiro.")
     return "\n".join(partes)
 

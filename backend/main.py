@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, JSONResponse, Response, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
@@ -49,6 +49,14 @@ from .tarefas import Tarefas
 logger = logging.getLogger("tutoron.backend")
 WEB = Path(__file__).resolve().parent / "web"
 
+
+class AppStaticFiles(StaticFiles):
+    async def get_response(self, path, scope):
+        resposta = await super().get_response(path, scope)
+        if path in ('app.js', 'app.css', 'render.js'):
+            resposta.headers['Cache-Control'] = 'no-cache'
+        return resposta
+
 MSG_EM_VALIDACAO = ("{nome} ainda está em validação e não está disponível para uso normal. "
                     "Escolha outra disciplina.")
 MSG_INDISPONIVEL = "Não conseguimos gerar a resposta agora. Tente de novo em alguns instantes."
@@ -62,6 +70,8 @@ def disciplina_cadastrada(valor: str | None) -> str | None:
     """Sem disciplina, vale a padrão (PAA). Disciplina desconhecida é erro do pedido, não do servidor."""
     if valor is None or not valor.strip():
         return None
+    if valor.strip().lower() == 'auto':
+        return 'auto'
     try:
         return disciplinas.obter(valor).id
     except KeyError:
@@ -112,6 +122,8 @@ class AnimarPedido(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
     resposta: str | None = Field(default=None, max_length=12000)
     disciplina: str | None = Field(default=None, max_length=40)
+    contexto: str | None = Field(default=None, max_length=6000)
+    foto: str | None = Field(default=None, max_length=8000)
 
     @field_validator("disciplina")
     @classmethod
@@ -216,7 +228,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
 
     app = FastAPI(title="TutorON", version="1.0.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/static", StaticFiles(directory=WEB), name="static")
+    app.mount("/static", AppStaticFiles(directory=WEB), name="static")
 
     def limitar(request: Request) -> None:
         if not app.state.limitador.permitir(cliente(request)):
@@ -254,7 +266,11 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
 
     @app.get('/visuais', include_in_schema=False)
-    async def pagina_visuais() -> FileResponse:
+    async def pagina_visuais() -> RedirectResponse:
+        return RedirectResponse('/?visual=1', status_code=307)
+
+    @app.get('/demo/visuais', include_in_schema=False)
+    async def demo_visuais() -> FileResponse:
         return FileResponse(WEB / 'visuais.html', headers={'Cache-Control': 'no-cache'})
 
     @app.get("/design.css", include_in_schema=False)
@@ -290,6 +306,16 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not liberada(d):
             raise HTTPException(403, MSG_EM_VALIDACAO.replace("{nome}", d.nome))
 
+    def resolver_disciplina(ident, pergunta, contexto=''):
+        if ident == 'auto':
+            from .disciplina_auto import identificar
+            ident = identificar(pergunta, contexto or '')
+            if ident is None:
+                raise HTTPException(409, 'Não consegui identificar a disciplina com segurança. '
+                                    'Escolha a disciplina no campo opcional ou detalhe melhor o assunto.')
+        exigir_liberada(ident)
+        return disciplinas.obter(ident).id
+
     @app.get("/api/disciplinas")
     async def lista_disciplinas() -> dict:
         return {"padrao": disciplinas.obter().id,
@@ -299,8 +325,9 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/perguntar")
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
-        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina,
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
+            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x))
+        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
                                            ajuda=corpo.ajuda, leitura_foto=corpo.foto,
                                            historico=[h.model_dump() for h in corpo.historico],
                                            travou=corpo.travou).publico()
@@ -313,20 +340,25 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/foto")
     async def ler_foto(corpo: FotoPedido, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
+        # A foto precisa ser lida antes de inferir sua disciplina. A escolha auto
+        # só roteia a pergunta depois que o aluno confere a transcrição.
+        disciplina = None if corpo.disciplina == 'auto' else corpo.disciplina
+        exigir_liberada(disciplina)
         try:
             imagem = foto.decodificar(corpo.imagem)
-            return app.state.tarefas.ler_foto(imagem, corpo.disciplina, corpo.observacao).publico()
+            return app.state.tarefas.ler_foto(imagem, disciplina, corpo.observacao).publico()
         except foto.FotoInvalida as exc:
             raise HTTPException(400, str(exc)) from None
 
     @app.post("/api/animar")
     async def animar(corpo: AnimarPedido, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
+            x for x in (corpo.contexto, corpo.foto) if x))
         if not animacao.disponivel():
             raise HTTPException(503, "As animações não estão instaladas neste servidor.")
-        return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, corpo.disciplina).publico()
+        return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, disciplina,
+                                       contexto_aluno=corpo.contexto, leitura_foto=corpo.foto).publico()
 
     @app.get('/api/visuais')
     async def exemplos_visuais() -> dict:
@@ -369,8 +401,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
-        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, corpo.contexto)
+        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, disciplina).publico()
 
     @app.get("/api/tarefas/{ident}")
     async def tarefa(ident: str) -> JSONResponse:
@@ -432,15 +464,15 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
-        exigir_liberada(payload.subject)
-        t = app.state.tarefas.perguntar(payload.question, payload.context, payload.subject)
+        disciplina = resolver_disciplina(payload.subject, payload.question, payload.context)
+        t = app.state.tarefas.perguntar(payload.question, payload.context, disciplina)
         while t.concluida is None:
             await asyncio.sleep(0.5)
         if t.status != "pronta":
             raise HTTPException(503, MSG_INDISPONIVEL)
         return QuestionResponse(answer=t.texto, source="tutoron-rag", metadata={
             "model": t.rotulo, "latency_ms": round(t.resultado.get("segundos", 0) * 1000),
-            "chunks_used": len(t.fontes), "sources": t.fontes, "subject": disciplinas.obter(payload.subject).id})
+            "chunks_used": len(t.fontes), "sources": t.fontes, "subject": disciplina})
 
     return app
 

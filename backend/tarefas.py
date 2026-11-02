@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 import secrets
 import time
 from collections.abc import Awaitable, Callable
@@ -23,7 +24,7 @@ from acervo.disciplinas import obter
 
 from . import animacao, foto, prompts, seguranca, tutoria
 from .dados import Registro, agora, novo_id
-from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
+from .llm import LLM, SEM_RACIOCINIO, PLANEJAMENTO_JSON, AllUnavailable, Model, Result, degradado
 from .animacao.roteiro import extrair_json
 from .rag import contexto, recuperar
 
@@ -56,9 +57,12 @@ class Tarefa:
     resultado: dict = field(default_factory=dict)
     criada: float = field(default_factory=time.monotonic)
     concluida: float | None = None
+    disciplina: str | None = None
 
     def publico(self) -> dict:
         dados = {"id": self.id, "status": self.status, "mensagem": self.mensagem}
+        if self.disciplina:
+            dados['disciplina'] = self.disciplina
         if self.tipo == "tutor":
             dados.update(texto=self.texto, rotulo=self.rotulo, fontes=self.fontes, **self.resultado)
         elif self.tipo in ("foto", "animacao"):
@@ -77,9 +81,9 @@ class Tarefas:
         self._tarefas_async: set[asyncio.Task] = set()
 
     # ------------------------------------------------------------------ ciclo de vida
-    def _criar(self, tipo: str, trabalho: Callable[[Tarefa], Awaitable[None]]) -> Tarefa:
+    def _criar(self, tipo: str, trabalho: Callable[[Tarefa], Awaitable[None]], *, disciplina=None) -> Tarefa:
         self._limpar()
-        t = Tarefa(tipo)
+        t = Tarefa(tipo, disciplina=disciplina)
         self.itens[t.id] = t
         tarefa = asyncio.create_task(self._executar(t, trabalho))
         self._tarefas_async.add(tarefa)
@@ -260,7 +264,7 @@ class Tarefas:
             t.resultado = {"id_resposta": ident, "segundos": r.seconds, "degradado": caiu, "ajuda": ajuda}
             t.status, t.mensagem = "pronta", ""
 
-        return self._criar("tutor", trabalho)
+        return self._criar("tutor", trabalho, disciplina=d.id)
 
     # ------------------------------------------------------------------ modo Validação
     def comparar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None) -> Tarefa:
@@ -317,7 +321,7 @@ class Tarefas:
             t.resultado = {"sessao": sessao, "pergunta": pergunta, "A": par[ordem[0]]["texto"], "B": par[ordem[1]]["texto"]}
             t.status, t.mensagem = "pronta", ""
 
-        return self._criar("comparacao", trabalho)
+        return self._criar("comparacao", trabalho, disciplina=d.id)
 
     # ------------------------------------------------------------------ foto do papel
     def ler_foto(self, imagem: bytes, disciplina: str | None = None, observacao: str | None = None) -> Tarefa:
@@ -349,30 +353,9 @@ class Tarefas:
             t.resultado = {"id_leitura": ident, "leitura": leitura, "modelo": r.model.label, "segundos": r.seconds}
             t.status, t.mensagem = "pronta", ""
 
-        return self._criar("foto", trabalho)
+        return self._criar("foto", trabalho, disciplina=disciplina)
 
     # ------------------------------------------------------------------ animação (Manim, protótipo)
-    async def _visual_relacionado(self, t: Tarefa, pergunta: str, disciplina: str, causa: str) -> bool:
-        from .animacao import galeria
-        exemplo = galeria.sugerir(pergunta, disciplina)
-        if exemplo is None:
-            return False
-        t.mensagem = 'Preparando um exemplo relacionado para você aplicar à sua dúvida…'
-        try:
-            video = await galeria.preparar(exemplo, self.settings.data_dir / 'animacoes')
-        except (animacao.FalhaAnimacao, OSError):
-            return False
-        aviso = 'Este vídeo usa outro exercício para explicar a ideia. Aplique o raciocínio à sua questão.'
-        self.registro.anexar('animacoes.jsonl', {'id': novo_id(), 'data': agora(), 'disciplina': disciplina,
-            'pergunta': pergunta, 'origem': 'exemplo_relacionado', 'exemplo': exemplo['id'],
-            'causa_alternativa': causa[:500], 'roteiro': exemplo['roteiro'], 'video': video})
-        t.resultado = {'video': f'/api/animacoes/{video}.mp4', 'poster': f'/api/animacoes/{video}.jpg',
-                       'origem': 'exemplo_relacionado', 'observacao': aviso, 'exemplo': exemplo['id'],
-                       'titulo': exemplo['titulo'], 'pergunta_final': exemplo['roteiro']['pergunta_final'],
-                       'modelo_cena': exemplo['roteiro']['modelo']}
-        t.status, t.mensagem = 'pronta', ''
-        return True
-
     def animar_exemplo(self, ident: str) -> Tarefa:
         from .animacao import galeria
         exemplo = galeria.obter(ident)
@@ -394,33 +377,48 @@ class Tarefas:
                            'modelo_cena': exemplo['roteiro']['modelo'], 'exemplo': ident}
             t.status, t.mensagem = 'pronta', ''
 
-        return self._criar('animacao', trabalho)
+        return self._criar('animacao', trabalho, disciplina=exemplo['disciplina'])
 
-    def animar(self, pergunta: str, resposta_tutor: str | None, disciplina: str | None = None) -> Tarefa:
+    def animar(self, pergunta: str, resposta_tutor: str | None, disciplina: str | None = None,
+               *, contexto_aluno: str | None = None, leitura_foto: str | None = None) -> Tarefa:
         d = obter(disciplina)
 
         async def trabalho(t: Tarefa) -> None:
             t.status, t.mensagem = "gerando", "Planejando a animação…"
-            prompt = prompts.prompt_animacao(pergunta, resposta_tutor, d)
+            prompt = prompts.prompt_animacao(pergunta, resposta_tutor, d, contexto_aluno, leitura_foto)
             roteiro, erro, r = None, "", None
-            for _ in range(2):  # a IA tem uma chance de corrigir um roteiro inválido
+            tentativas_roteiro = []
+            dados_numericos = bool(re.search(r'\d', pergunta + (contexto_aluno or '') + (leitura_foto or '')))
+            for rodada in range(2):  # a segunda tentativa simplifica a forma, preservando a dúvida
+                formato = PLANEJAMENTO_JSON.set(True)
                 try:
-                    r = await self._gerar(prompts.SISTEMA_ANIMACAO, prompt + erro, t, raciocinio=False)
+                    sistema = prompts.SISTEMA_ANIMACAO if rodada == 0 and dados_numericos else prompts.SISTEMA_ESQUEMA
+                    # Uma ajuda textual incorreta não pode ancorar as duas propostas.
+                    # A revisão continua recebendo o contexto completo para checar a combinação.
+                    planejamento = prompts.prompt_animacao(pergunta, None, d, contexto_aluno, leitura_foto) \
+                        if rodada and resposta_tutor else prompt
+                    r = await self._gerar(sistema, planejamento + erro, t, raciocinio=False)
                 except AllUnavailable:
-                    if await self._visual_relacionado(t, pergunta, d.id, 'planejamento_indisponivel'):
-                        return
                     t.status, t.mensagem = "erro", MSG_ERRO
                     return
+                finally:
+                    PLANEJAMENTO_JSON.reset(formato)
+                tentativa = {'texto': r.text, 'modelo': r.model.key}
+                tentativas_roteiro.append(tentativa)
                 try:
                     roteiro = animacao.roteiro_valido(r.text)
+                    if (rodada or not dados_numericos) and roteiro['modelo'] != 'esquema':
+                        raise animacao.FalhaAnimacao('esta pista deve usar esquema, sem inventar dados ou mudar de enunciado')
                 except animacao.FalhaAnimacao as exc:
-                    erro = f"\n\nO roteiro anterior era inválido ({exc}). Devolva um JSON válido de um dos modelos."
+                    tentativa['erro_validacao'] = str(exc)
+                    erro = f"\n\nO roteiro anterior era inválido ({exc}). Refaça um esquema de blocos para a mesma dúvida."
                     continue
                 if not roteiro.get("pergunta_final", "").strip():
                     roteiro = None
                     erro = "\n\nInclua pergunta_final com uma tarefa curta e sem a resposta embutida."
                     continue
-                parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, str(roteiro))
+                parecer = await tutoria.avaliar_roteiro(self.llm, pergunta, prompt, roteiro)
+                tentativa['revisao'] = parecer
                 if parecer["aprovada"]:
                     break
                 roteiro = None
@@ -428,10 +426,10 @@ class Tarefas:
             ident = novo_id()
             if roteiro is None:
                 self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
-                                                         "pergunta": pergunta, "erro": erro.strip()[:300]})
-                if await self._visual_relacionado(t, pergunta, d.id, erro.strip()):
-                    return
-                t.status, t.mensagem = "erro", "Não consegui montar uma animação para esta dúvida. Tente reformular."
+                                                         "pergunta": pergunta, "erro": erro.strip()[:300],
+                                                         'tentativas_roteiro': tentativas_roteiro})
+                t.status, t.mensagem = "erro", "Não consegui preparar um desenho correto para esta dúvida. " \
+                    "Diga qual relação ou passo você quer enxergar e tente novamente."
                 return
             t.mensagem = "Desenhando a animação (leva uns 10 segundos)…"
             try:
@@ -444,9 +442,9 @@ class Tarefas:
                 return
             self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                      "pergunta": pergunta, "roteiro": roteiro, "video": video,
-                                                     "modelo": r.model.key})
+                                                     "modelo": r.model.key, 'tentativas_roteiro': tentativas_roteiro})
             t.resultado = {"video": f"/api/animacoes/{video}.mp4", "modelo_cena": roteiro["modelo"],
                            "titulo": roteiro.get("titulo", ""), "pergunta_final": roteiro.get("pergunta_final", "")}
             t.status, t.mensagem = "pronta", ""
 
-        return self._criar("animacao", trabalho)
+        return self._criar("animacao", trabalho, disciplina=d.id)

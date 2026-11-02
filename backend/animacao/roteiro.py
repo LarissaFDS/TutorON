@@ -296,7 +296,45 @@ class Reducao(_Parcial):
     destino: Curto = 'Problema B'
 
 
-Roteiro = Annotated[Union[ArvoreRecursao, Vetor, Grafo, Tabela, GradeDP, Fluxo, Karnaugh, Circuito, Reducao],
+class BlocoEsquema(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    id: Curto
+    texto: Annotated[str, Field(min_length=1, max_length=70)]
+    lacuna: bool = False
+
+    @field_validator('texto', mode='before')
+    @classmethod
+    def limpar(cls, valor):
+        return _limpar(str(valor or ''))
+
+    @model_validator(mode='after')
+    def deixar_em_branco(self):
+        if self.lacuna:
+            self.texto = 'Você completa'
+        return self
+
+
+class Esquema(_Parcial):
+    modelo: Literal['esquema']
+    blocos: list[BlocoEsquema] = Field(min_length=2, max_length=4)
+    ligacoes: list[list[Curto]] = Field(default_factory=list, max_length=8)
+    destacar: list[Curto] = Field(default_factory=list, max_length=2)
+
+    @model_validator(mode='after')
+    def relacoes(self):
+        ids = {b.id for b in self.blocos}
+        if len(ids) != len(self.blocos) or '' in ids:
+            raise ValueError('identificadores de blocos únicos e não vazios')
+        if not any(b.lacuna for b in self.blocos) or all(b.lacuna for b in self.blocos):
+            raise ValueError('inclua informação de apoio e uma lacuna para o aluno completar')
+        if any(len(a) != 2 or a[0] not in ids or a[1] not in ids or a[0] == a[1] for a in self.ligacoes):
+            raise ValueError('ligações devem apontar para dois blocos existentes e distintos')
+        if any(n not in ids for n in self.destacar):
+            raise ValueError('destaque deve apontar para um bloco existente')
+        return self
+
+
+Roteiro = Annotated[Union[ArvoreRecursao, Vetor, Grafo, Tabela, GradeDP, Fluxo, Karnaugh, Circuito, Reducao, Esquema],
                    Field(discriminator="modelo")]
 _ADAPTADOR = TypeAdapter(Roteiro)
 
@@ -313,7 +351,7 @@ def extrair_json(texto: str) -> dict:
     return obj
 
 
-def validar(dados: dict | str) -> ArvoreRecursao | Vetor | Grafo | Tabela | GradeDP | Fluxo | Karnaugh | Circuito | Reducao:
+def validar(dados: dict | str) -> ArvoreRecursao | Vetor | Grafo | Tabela | GradeDP | Fluxo | Karnaugh | Circuito | Reducao | Esquema:
     if isinstance(dados, str):
         dados = extrair_json(dados)
     return _ADAPTADOR.validate_python(dados)

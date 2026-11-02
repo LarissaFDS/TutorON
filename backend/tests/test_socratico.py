@@ -282,8 +282,9 @@ def test_roteiro_invalido_e_recusado(ruim):
 
 
 def test_rota_animar_tenta_corrigir_roteiro_e_serve_o_video(site, monkeypatch):  # noqa: F811
-    roteiros = iter(["isto não é json", '{"modelo": "vetor", "titulo": "Bolha", "valores": [3, 1, 2], '
-                                       '"pergunta_final": "Qual a próxima troca?"}'])
+    roteiros = iter(["isto não é json", '{"modelo":"esquema","titulo":"Bolha",'
+        '"blocos":[{"id":"par","texto":"Par de vizinhos"},{"id":"troca","texto":"Trocar?","lacuna":true}],'
+        '"ligacoes":[["par","troca"]],"pergunta_final":"Qual a próxima comparação?"}'])
     original = site.llm._provider
 
     def provedor(model, system, prompt):
@@ -299,11 +300,11 @@ def test_rota_animar_tenta_corrigir_roteiro_e_serve_o_video(site, monkeypatch): 
     monkeypatch.setattr(tarefas.animacao, "renderizar", renderizar)
     t = esperar(site, site.post("/api/animar", json={"pergunta": "Como funciona o bubble sort?"}).json())
     assert t["status"] == "pronta" and t["video"] == "/api/animacoes/VIDEOteste123.mp4"
-    assert t["pergunta_final"] == "Qual a próxima troca?"
+    assert t["pergunta_final"] == "Qual a próxima comparação?"
     _, sistema, prompt = site.llm.chamadas[-1]
-    assert sistema == prompts.SISTEMA_ANIMACAO and "roteiro anterior era inválido" in prompt
+    assert sistema == prompts.SISTEMA_ESQUEMA and "roteiro anterior era inválido" in prompt
     assert site.get(t["video"]).content == b"mp4"
-    assert ultima(site, "animacoes.jsonl")["roteiro"]["modelo"] == "vetor"
+    assert ultima(site, "animacoes.jsonl")["roteiro"]["modelo"] == "esquema"
 
 
 @pytest.mark.parametrize("caminho", ["/api/animacoes/..%2F..%2Fsegredo.mp4", "/api/animacoes/x.mp4",

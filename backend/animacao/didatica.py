@@ -6,7 +6,7 @@ import math
 from manim import (DOWN, LEFT, RIGHT, UP, Arrow, Circle, Create, FadeIn, Indicate, Line,
                    Rectangle, SurroundingRectangle, Text, VGroup, config)
 
-from .roteiro import Circuito, Fluxo, GradeDP, Karnaugh, Reducao
+from .roteiro import Circuito, Esquema, Fluxo, GradeDP, Karnaugh, Reducao
 
 FUNDO, TINTA, CINZA = '#FBFAF7', '#14213D', '#4F5868'
 AZUL, AMARELO = '#066D83', '#E8A317'
@@ -206,5 +206,66 @@ def reducao(cena, r: Reducao):
     cena.wait(1.4)
 
 
+def esquema(cena, r: Esquema):
+    import textwrap
+    n = len(r.blocos)
+    graus = {b.id: 0 for b in r.blocos}
+    saidas = {b.id: [] for b in r.blocos}
+    for a, b in r.ligacoes:
+        graus[b] += 1
+        saidas[a].append(b)
+    fila = [ident for ident, grau in graus.items() if grau == 0]
+    nivel = dict.fromkeys(graus, 0)
+    processados = 0
+    for ident in fila:
+        processados += 1
+        for destino in saidas[ident]:
+            nivel[destino] = max(nivel[destino], nivel[ident] + 1)
+            graus[destino] -= 1
+            if graus[destino] == 0:
+                fila.append(destino)
+    if processados != n:
+        nivel = {b.id: i % 2 for i, b in enumerate(r.blocos)}
+    colunas = max(nivel.values()) + 1
+    largura_caixa = min(3.25, (config.frame_width - 1.2) / colunas - .3)
+    distancia = min(4.1, largura_caixa + .65)
+    posicoes = {}
+    objetos, caixas = {}, {}
+    for i, b in enumerate(r.blocos):
+        coluna = nivel[b.id]
+        colegas = [bloco.id for bloco in r.blocos if nivel[bloco.id] == coluna]
+        linha = colegas.index(b.id)
+        x = (coluna - (colunas - 1) / 2) * distancia
+        y = ((len(colegas) - 1) / 2 - linha) * 1.6
+        posicoes[b.id] = [x, y, 0]
+        caixa = Rectangle(width=largura_caixa, height=1.25, color=AZUL,
+                          fill_color=FUNDO, fill_opacity=1).move_to(posicoes[b.id])
+        conteudo = '\n'.join(textwrap.wrap(b.texto, width=23))
+        if b.lacuna:
+            conteudo += '\n?'
+        rotulo = txt(conteudo, 23, AZUL if b.lacuna else TINTA, largura=largura_caixa - .3)
+        if rotulo.height > 1.05:
+            rotulo.scale_to_fit_height(1.05)
+        objetos[b.id] = VGroup(caixa, rotulo.move_to(caixa))
+        caixas[b.id] = caixa
+    for a, b in r.ligacoes:
+        dx, dy = posicoes[b][0] - posicoes[a][0], posicoes[b][1] - posicoes[a][1]
+        if abs(dx) >= abs(dy):
+            inicio = caixas[a].get_right() if dx > 0 else caixas[a].get_left()
+            fim = caixas[b].get_left() if dx > 0 else caixas[b].get_right()
+        else:
+            inicio = caixas[a].get_top() if dy > 0 else caixas[a].get_bottom()
+            fim = caixas[b].get_bottom() if dy > 0 else caixas[b].get_top()
+        seta = Arrow(inicio, fim, color=CINZA, buff=.08, stroke_width=2.5,
+                     max_tip_length_to_length_ratio=.2)
+        cena.play(Create(seta), run_time=.35)
+    cena.play(*[FadeIn(o) for o in objetos.values()], run_time=1)
+    cena.legendar('Observe como as partes se relacionam. O bloco com ? fica para você completar.')
+    for ident in r.destacar:
+        cena.play(Indicate(caixas[ident], color=AMARELO), run_time=.7)
+    cena.wait(1.2)
+
+
 def desenhar(cena, roteiro):
-    {GradeDP: grade_dp, Fluxo: fluxo, Karnaugh: karnaugh, Circuito: circuito, Reducao: reducao}[type(roteiro)](cena, roteiro)
+    {GradeDP: grade_dp, Fluxo: fluxo, Karnaugh: karnaugh, Circuito: circuito, Reducao: reducao,
+     Esquema: esquema}[type(roteiro)](cena, roteiro)

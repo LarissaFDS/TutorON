@@ -122,8 +122,9 @@
   var AJUDAS_PADRAO = [['auto', 'O tutor escolhe'], ['pista', 'Uma pista'], ['perguntas', 'Perguntas-guia'],
     ['conceito', 'Explicar o conceito'], ['exemplo', 'Exemplo parecido'], ['conferir', 'Conferir meu raciocínio'],
     ['visual', 'Desenho/esquema']];
-  var animacaoDisponivel = false;
+  var animacaoDisponivel = null;
   function montarAjudas(lista) {
+    lista = lista.filter(function (a) { return a[0] !== 'animacao'; }).concat([['animacao', 'Só animação']]);
     var box = $('ajudas-opcoes');
     var anterior = document.querySelector('input[name="ajuda"]:checked');
     var escolhida = anterior ? anterior.value : null;
@@ -140,6 +141,9 @@
     });
   }
   montarAjudas(AJUDAS_PADRAO);
+  if (new URL(location.href).searchParams.get('visual') === '1') {
+    document.querySelector('input[name="ajuda"][value="animacao"]').checked = true;
+  }
   (async function carregarAjudas() {
     try {
       var res = await fetch('/api/ajudas', { cache: 'no-store' });
@@ -276,21 +280,30 @@
   $('foto-descartar').addEventListener('click', limparFoto);
 
   /* Animação (Manim): pista visual da dúvida, gerada sob demanda. Para antes da resposta. */
-  function botaoAnimacao(pergunta, resposta, disciplina) {
+  function botaoAnimacao(pergunta, resposta, disciplina, contexto, foto, opcoes) {
+    opcoes = opcoes || {};
     var box = el('div', 'animacao');
-    var b = el('button', 'button button--secondary button--small', 'Ver em animação (beta)');
+    var b = el('button', 'button button--secondary', 'Quer entender visualmente?');
     b.type = 'button';
     var status = el('p', 'caption status');
-    b.addEventListener('click', async function () {
+    b.disabled = animacaoDisponivel === false;
+    if (b.disabled) setStatus(status, 'As animações estão indisponíveis neste servidor.');
+    box.iniciar = async function (retomarId) {
       b.disabled = true;
-      setStatus(status, 'Pedindo a animação…', 'busy');
+      gerando++;
+      var id;
+      setStatus(status, 'Preparando uma pista visual para esta dúvida…', 'busy');
       try {
-        var criada = await postJSON('/api/animar', { pergunta: pergunta, resposta: resposta, disciplina: disciplina || null });
-        var t = await acompanhar(criada.id, function (x) {
+        var criada = retomarId ? { id: retomarId } : await postJSON('/api/animar', {
+          pergunta: pergunta, resposta: resposta || null, disciplina: disciplina || 'auto',
+          contexto: contexto || null, foto: foto || null });
+        id = criada.id;
+        if (opcoes.pendente) guardarPendente({ tipo: 'animacao', id: id, pergunta: pergunta,
+          contexto: contexto || '', disciplina: disciplina || 'auto', foto: foto || '' });
+        var t = await acompanhar(id, function (x) {
           if (x.status !== 'pronta' && x.status !== 'erro') setStatus(status, x.mensagem || 'Gerando…', 'busy');
         });
         if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não foi possível gerar a animação.');
-        if (t.exemplo) exemplosVisuais.href = '/visuais?exemplo=' + encodeURIComponent(t.exemplo);
         var video = document.createElement('video');
         video.src = t.video;
         video.controls = true;
@@ -301,22 +314,58 @@
         video.setAttribute('aria-label', 'Animação: ' + (t.titulo || 'pista visual'));
         b.remove();
         box.prepend(video);
-        setStatus(status, (t.observacao ? t.observacao + ' ' : '') + (t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : ''));
+        var materia = disciplinas[t.disciplina];
+        setStatus(status, (materia ? materia.sigla + ' · ' : '') + (t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : ''));
+        if (opcoes.aoConcluir) opcoes.aoConcluir(t);
+        return true;
       } catch (e) {
         setStatus(status, e.message, 'error');
-        b.disabled = false;
+        b.disabled = animacaoDisponivel === false;
+        return false;
+      } finally {
+        gerando--;
+        if (opcoes.pendente) {
+          var p = lerPendente();
+          if (p && p.id === id) limparPendente();
+        }
       }
-    });
-    var exemplosVisuais = el('a', 'caption', 'Explorar exemplos visuais');
-    exemplosVisuais.href = '/visuais';
-    box.append(b, status, exemplosVisuais);
+    };
+    b.addEventListener('click', function () { box.iniciar(); });
+    box.append(b, status);
     return box;
+  }
+
+  async function perguntarVisual(pergunta, contexto, disciplina, foto, retomarId) {
+    guardarAtualNoHistorico();
+    var registro = { pergunta: pergunta, texto: '', meta: 'Pista visual', fontes: [], voto: null, pronta: false };
+    atual = registro;
+    var item = el('article', 'troca');
+    item.tabIndex = -1;
+    item.setAttribute('aria-label', 'Sua dúvida e a animação');
+    var q = el('div', 'question prose');
+    R.renderPlain(q, pergunta);
+    var painel = botaoAnimacao(pergunta, null, disciplina, contexto, foto, { pendente: true, aoConcluir: function (t) {
+      registro.texto = 'Sua vez: ' + (t.pergunta_final || 'Tente o próximo passo no papel.');
+      registro.pronta = true;
+    } });
+    item.append(q, painel);
+    $('conversa').replaceChildren(item);
+    item.focus({ preventScroll: true });
+    rolarPara(item);
+    return await painel.iniciar(retomarId);
   }
 
   /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado.
    * Sem resposta do servidor, o seletor fica oculto e vale a disciplina padrão (PAA). */
   var disciplinas = {};
   function escolherDisciplina(id) {
+    if (id === 'auto') {
+      $('disciplina').value = 'auto';
+      $('disciplina-beta').hidden = true;
+      sugestoes('sugestoes-tutor', 'pergunta');
+      $('pergunta').placeholder = 'Escreva o assunto e a parte em que você travou.';
+      return;
+    }
     var d = disciplinas[id];
     if (!d) return;
     $('disciplina').value = id;
@@ -342,7 +391,10 @@
         opcao.disabled = indisponivel;  // o servidor também recusa (403): isto só evita o clique
         $('disciplina').append(opcao);
       });
-      $('disciplina-campo').hidden = dados.disciplinas.length < 2;
+      var opcaoAuto = el('option', null, 'Identificar automaticamente');
+      opcaoAuto.value = 'auto';
+      $('disciplina').prepend(opcaoAuto);
+      $('disciplina-campo').hidden = false;
       var pedida = new URL(location.href).searchParams.get('disciplina');
       var aviso = $('disciplina-aviso');
       if (disciplinas[pedida] && disciplinas[pedida].disponivel === false) {
@@ -350,7 +402,7 @@
         aviso.hidden = false;
         pedida = null;
       }
-      escolherDisciplina(disciplinas[pedida] ? pedida : dados.padrao);
+      escolherDisciplina(disciplinas[pedida] ? pedida : 'auto');
     } catch (e) { /* servidor antigo ou fora do ar: segue com a padrão */ }
   })();
   $('disciplina').addEventListener('change', function () {
@@ -548,12 +600,14 @@
     limparPendente();
     if (final.status === 'pronta') {
       R.render(resposta, final.texto);
+      var materia = disciplinas[final.disciplina];
       setStatus(meta, 'Respondido em ' + Math.max(1, Math.round((Date.now() - inicio) / 1000)) + ' s' +
-        (final.rotulo ? ' · ' + final.rotulo : '') + '.');
+        (materia ? ' · ' + materia.sigla : '') + (final.rotulo ? ' · ' + final.rotulo : '') + '.');
       // Mantém só as últimas ajudas (o servidor aceita até 8) para o prompt não crescer sem limite.
       var historicoNovo = ciclo.historico.concat([{ ajuda: final.ajuda || ajuda || 'auto', texto: final.texto.slice(0, 6000) }]).slice(-6);
-      item.append(cicloTentativa(pergunta, contexto, disciplina, foto, historicoNovo));
-      if (animacaoDisponivel) item.append(botaoAnimacao(pergunta + (foto ? '\n\n' + foto : ''), final.texto, disciplina));
+      var disciplinaDaPergunta = final.disciplina || disciplina;
+      item.append(botaoAnimacao(pergunta, final.texto, disciplinaDaPergunta, contexto, foto));
+      item.append(cicloTentativa(pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo));
       if (final.fontes && final.fontes.length) item.append(fontesDetalhe(final.fontes));
       item.append(botoesFeedback(final.id_resposta, registro));
       registro.texto = final.texto;
@@ -587,12 +641,13 @@
     $('enviar').disabled = true;
     setStatus($('status-tutor'), '');
     var contexto = $('contexto').value.trim();
-    var disciplina = $('disciplina').value;
+    var disciplina = $('disciplina').value || 'auto';
     $('pergunta').value = '';
     $('contexto').value = '';
     var ajuda = ajudaEscolhida();
     try {
-      var ok = await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
+      var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
+        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
       if (ok && foto) limparFoto();  // a foto já foi usada; a próxima dúvida começa limpa
       if (!ok) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
     } finally {
@@ -613,6 +668,13 @@
       gerando--;
       $('enviar').disabled = false;
     }
+  }
+
+  async function retomarVisual(p) {
+    enviando = true;
+    $('enviar').disabled = true;
+    try { await perguntarVisual(p.pergunta, p.contexto, p.disciplina, p.foto, p.id); }
+    finally { enviando = false; $('enviar').disabled = false; }
   }
 
   $('pergunta').addEventListener('keydown', function (e) {
@@ -802,6 +864,9 @@
     } else if (pendente.tipo === 'tutor') {
       mostrarModo('tutor');
       retomarTutor(pendente);
+    } else if (pendente.tipo === 'animacao') {
+      mostrarModo('tutor');
+      retomarVisual(pendente);
     }
   }
 

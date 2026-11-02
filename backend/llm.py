@@ -30,6 +30,7 @@ logger = logging.getLogger("tutoron.llm")
 # Desliga o raciocínio do modelo local na tentativa de resgate (responde em ~25 s em vez de ~60 s).
 SEM_RACIOCINIO: contextvars.ContextVar[bool] = contextvars.ContextVar("sem_raciocinio", default=False)
 REVISAO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar("revisao_json", default=False)
+PLANEJAMENTO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar('planejamento_json', default=False)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
@@ -179,6 +180,8 @@ class LLM:
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
             "generationConfig": {"temperature": 0.3, "maxOutputTokens": 8192},
         }
+        if PLANEJAMENTO_JSON.get():
+            body['generationConfig'].update(temperature=0.1, maxOutputTokens=2048, responseMimeType='application/json')
         if REVISAO_JSON.get():
             body["generationConfig"].update(temperature=0.0, maxOutputTokens=512, responseMimeType="application/json")
         if system:
@@ -239,6 +242,9 @@ class LLM:
             if pensar:
                 # Recomendação do Qwen3 para o modo com raciocínio (temperatura baixa demais causa repetição).
                 body["options"].update(temperature=0.6, top_p=0.95, top_k=20, num_predict=8192)
+        if PLANEJAMENTO_JSON.get():
+            body['format'] = 'json'
+            body['options'].update(temperature=0.1, num_predict=2048)
         if REVISAO_JSON.get():
             body["format"] = "json"
             body["options"].update(temperature=0.0, num_predict=256)

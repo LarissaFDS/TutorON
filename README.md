@@ -9,7 +9,7 @@ O site tem dois modos:
 - **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
-**Aprender com desenhos:** a área [`/visuais`](http://127.0.0.1:8000/visuais) traz sete exemplos Manim de DP, fluxo, grafos, reduções e Sistemas Digitais, deixando etapas para o aluno completar. A tentativa pode ser levada ao tutor. Prepare os vídeos com `.venv\Scripts\python scripts\preparar_visuais.py`; detalhes em [VISUAIS.md](docs/VISUAIS.md).
+**Visuais na conversa:** escolha **Só animação** ao escrever a dúvida ou clique em **Quer entender visualmente?** depois da resposta. O desenho é planejado a partir do enunciado e aparece na própria conversa. A disciplina é identificada automaticamente quando há sinais claros, com escolha manual opcional. Não há escolha obrigatória de tema. Detalhes em [VISUAIS.md](docs/VISUAIS.md).
 
 ## Como usar (Windows)
 

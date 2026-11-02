@@ -49,7 +49,7 @@ def esperar(c, criada, limite=10):
 
 def test_pagina_e_status(cliente):
     html = cliente.get("/").text
-    assert "Fase MVP" in html and "monitoria" not in html.lower() and "UFAL" not in html
+    assert "Fase MVP" not in html and "monitoria" not in html.lower() and "UFAL" not in html
     assert cliente.get("/design.css").status_code == 200
     assert cliente.get("/api/status").json()["gemini"]["habilitado"] is True
 
