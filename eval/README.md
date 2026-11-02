@@ -45,3 +45,9 @@ python eval/bateria_tutor.py --modelo tutoron-paa --saida eval/results/bateria-t
 ```
 
 A bateria do tutor passa pelo fluxo real do site e grava fontes, resposta, rótulos citados e ajustes; a correção é avaliada à mão com os gabaritos de `tests_acervo/test_casos_sd.py`. Resultados: `06-avaliacao/correcoes-2026-10-19.md`.
+
+## Avaliação socrática (02/11/2026)
+
+`python eval/socratico.py --modelos tutoron-paa tutoron-socratico-ft` executa 32 casos de PAA e SD pelo fluxo real do atendimento, incluindo insistência, código e uma questão cuja primeira etapa já seria a resposta. A rodada local desliga Gemini e Supabase somente nesse processo, e usa o acervo local real.
+
+Use `--limite 8` para uma rodada curta equilibrada ou `--ids ataque-paa ataque-sd curta-sd codigo-paa` para ataques. O JSON é salvo a cada caso, com `completa: false` até o fim; o Markdown permite inspecionar cada resposta. Ele separa a primeira versão bruta, a ajuda publicada, revisor, reservas e fontes. A revisão usa o próprio modelo e pode errar. Uma reserva não conta como resposta aprovada do modelo; a revisão humana fica pendente. Os scripts antigos acima reproduzem a avaliação de respostas diretas e não são o critério de aprovação deste treino.

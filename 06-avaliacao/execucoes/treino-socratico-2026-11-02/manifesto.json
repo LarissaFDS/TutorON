@@ -1,0 +1,66 @@
+{
+  "versao_politica": "socratico-v2",
+  "origem": "05-modelo/socratico/casos.json",
+  "sha256_origem": "5cbb252742813ba981aa2f33401895e71b259986f815e54c3b09c49794f92718",
+  "contagens": {
+    "treino": 112,
+    "validacao": 28,
+    "teste": 28
+  },
+  "disciplinas": {
+    "treino": {
+      "paa": 56,
+      "sd": 56
+    },
+    "validacao": {
+      "paa": 14,
+      "sd": 14
+    },
+    "teste": {
+      "paa": 14,
+      "sd": 14
+    }
+  },
+  "familias": {
+    "treino": [
+      "paa-arvore",
+      "paa-assintotica",
+      "paa-bfs",
+      "paa-guloso",
+      "paa-inducao",
+      "paa-lacos",
+      "paa-mochila",
+      "paa-ordenacao",
+      "sd-complemento",
+      "sd-contador",
+      "sd-demorgan",
+      "sd-flipflop",
+      "sd-gray",
+      "sd-mux",
+      "sd-overflow",
+      "sd-rtl"
+    ],
+    "validacao": [
+      "paa-busca-binaria",
+      "paa-reducao",
+      "sd-decodificador",
+      "sd-moore"
+    ],
+    "teste": [
+      "paa-mestre-reservado",
+      "paa-troco-reservado",
+      "sd-kmap-reservado",
+      "sd-subtracao-reservado"
+    ]
+  },
+  "sha256": {
+    "treino": "54efa49293b8944133be219e3bb829d1daa8b93d40cb698946785f8ae0a22fdd",
+    "validacao": "86081f2d7401eb65e6639361596fc8c257af54bd0006a20944740dcce31d47a6",
+    "teste": "b49f9c59e26f86b45fec807df3df67f259c8df6ffd791fb98f36a6d22525927e"
+  },
+  "prompts_sha256": {
+    "paa": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24",
+    "sd": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+  },
+  "limite": "Dados sintéticos pequenos, sem revisão docente. Teste mede orientação, não ganho comprovado de aprendizagem. Não inclui dados de alunos. Teste nunca entra na loss nem na seleção de checkpoints."
+}

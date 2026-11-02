@@ -1,0 +1,59 @@
+{
+  "base": "Qwen/Qwen3-8B",
+  "passos": 1,
+  "rank": 8,
+  "max_length": 2048,
+  "minutos": 0.9,
+  "gradient_accumulation_steps": 2,
+  "metricas_treino": {
+    "train_runtime": 32.7088,
+    "train_samples_per_second": 0.061,
+    "train_steps_per_second": 0.031,
+    "total_flos": 178157854900224.0,
+    "train_loss": 2.4837498664855957,
+    "epoch": 1.0
+  },
+  "metricas_validacao": {
+    "eval_loss": 2.2764248847961426,
+    "eval_runtime": 21.018,
+    "eval_samples_per_second": 0.095,
+    "eval_steps_per_second": 0.095,
+    "epoch": 1.0
+  },
+  "historico": [
+    {
+      "loss": 2.4837498664855957,
+      "grad_norm": 4.514063835144043,
+      "learning_rate": 5e-05,
+      "epoch": 1.0,
+      "step": 1
+    },
+    {
+      "eval_loss": 2.2764248847961426,
+      "eval_runtime": 21.5456,
+      "eval_samples_per_second": 0.093,
+      "eval_steps_per_second": 0.093,
+      "epoch": 1.0,
+      "step": 1
+    },
+    {
+      "train_runtime": 32.7088,
+      "train_samples_per_second": 0.061,
+      "train_steps_per_second": 0.031,
+      "total_flos": 178157854900224.0,
+      "train_loss": 2.4837498664855957,
+      "epoch": 1.0,
+      "step": 1
+    },
+    {
+      "eval_loss": 2.2764248847961426,
+      "eval_runtime": 21.018,
+      "eval_samples_per_second": 0.095,
+      "eval_steps_per_second": 0.095,
+      "epoch": 1.0,
+      "step": 1
+    }
+  ],
+  "pico_vram_gb": 7.08,
+  "aviso": "Loss menor não prova que o tutor melhorou: leia o relatório de avaliação."
+}

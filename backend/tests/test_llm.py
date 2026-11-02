@@ -23,6 +23,11 @@ class FakeLLM(LLM):
         self.iniciados = []
         self.fechados = []
 
+    async def revisar_ajuda(self, pergunta, contexto, resposta):
+        # A revisão semântica é simulada nos testes de rotas. O contrato real e as
+        # reprovações são exercitados separadamente em test_tutoria.py.
+        return {"aprovada": True, "motivo": "revisor simulado"}
+
     def _provider(self, model, system, prompt):
         self.iniciados.append(model.name)
         plano = self.roteiro.get(model.name, ("erro", 503))

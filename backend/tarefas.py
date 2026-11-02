@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 
 from acervo.disciplinas import obter
 
-from . import animacao, foto, prompts, seguranca
+from . import animacao, foto, prompts, seguranca, tutoria
 from .dados import Registro, agora, novo_id
 from .llm import LLM, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
 from .animacao.roteiro import extrair_json
@@ -155,6 +155,43 @@ class Tarefas:
                 SEM_RACIOCINIO.reset(marca)
         raise AllUnavailable(tentativas)
 
+    async def _orientar(self, sistema, prompt, pergunta, d, trechos, t, *, raciocinio=True):
+        """Só publica texto completo e revisado. No máximo uma reformulação."""
+        atomica = tutoria.ajuda_atomica(pergunta, d.id)
+        if atomica:
+            r = Result(text=atomica, model=Model("codigo", "orientacao-atomica"), seconds=0, attempts=[])
+            return atomica, r, ["orientacao_atomica"], None, []
+        r = await self._gerar(sistema, prompt, t, raciocinio=raciocinio)
+        ajustes, pareceres, bloqueada = [], [], None
+        validos = {x.rotulo for x in trechos}
+        for rodada in range(2):
+            texto, mais = seguranca.revisar(r.text, sistema, validos, d.nome)
+            ajustes += mais
+            if texto == seguranca.recusa(d.nome):
+                return texto, r, ajustes, bloqueada, pareceres
+            t.mensagem = "Revisando a ajuda antes de mostrar…"
+            parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, texto)
+            pareceres.append(parecer)
+            if parecer["aprovada"]:
+                texto, faltou = seguranca.garantir_sua_vez(texto)
+                if faltou:
+                    ajustes.append("sua_vez_acrescentada")
+                return texto, r, ajustes, bloqueada, pareceres
+            bloqueada = bloqueada or texto
+            ajustes.append("entregou_resposta" if rodada == 0 else "entregou_resposta_de_novo")
+            if rodada == 0:
+                refazer = (prompt + "\n\nRESPOSTA ANTERIOR (proibida, reprovada na revisão):\n<<<\n"
+                           + texto[:4000] + "\n>>>\n" + prompts.SISTEMA_REFORCO)
+                try:
+                    r2 = await self._gerar(sistema, refazer, t, raciocinio=raciocinio)
+                    r = Result(text=r2.text, model=r2.model, seconds=round(r.seconds + r2.seconds, 2),
+                               attempts=r.attempts + r2.attempts)
+                except AllUnavailable:
+                    ajustes.append("reforco_indisponivel")
+                    break
+        ajustes.append("ajuda_de_reserva")
+        return tutoria.ajuda_de_reserva(d.id), r, ajustes, bloqueada, pareceres
+
     # ------------------------------------------------------------------ modo Tutor
     def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None,
                   ajuda: str = "auto", leitura_foto: str | None = None, historico: list[dict] | None = None,
@@ -177,6 +214,16 @@ class Tarefas:
                 t.resultado = {"id_resposta": ident, "segundos": 0, "degradado": False}
                 t.status, t.mensagem = "pronta", ""
                 return
+            atomica = tutoria.ajuda_atomica(pergunta, d.id, len(historico))
+            if atomica:
+                ident = novo_id()
+                t.texto = atomica
+                self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
+                    "pergunta": pergunta, "contexto": contexto_aluno, "resposta": atomica,
+                    "modo": "socratico", "versao_politica": "socratico-v2", "bloqueio": "questao_atomica"})
+                t.resultado = {"id_resposta": ident, "segundos": 0, "degradado": False, "ajuda": ajuda}
+                t.status, t.mensagem = "pronta", ""
+                return
             trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.fontes = [x.publico() for x in trechos]
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
@@ -184,41 +231,17 @@ class Tarefas:
             prompt = prompts.prompt_socratico(pergunta, contexto(trechos, tamanho), contexto_aluno, ajuda, leitura_foto,
                                               historico, travou)
 
-            def ao_texto(texto: str) -> None:
-                t.texto = texto
-
             ident = novo_id()
             sistema = prompts.sistema_socratico(d)
             try:
-                r = await self._gerar(sistema, prompt, t, ao_texto=ao_texto)
+                texto, r, ajustes, bloqueada, pareceres = await self._orientar(
+                    sistema, prompt, pergunta, d, trechos, t)
             except AllUnavailable as exc:
                 self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                          "pergunta": pergunta, "erro": "nenhum_modelo",
                                                          "tentativas": exc.attempts})
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
-            texto, ajustes = seguranca.revisar(r.text, sistema, {x.rotulo for x in trechos}, d.nome)
-            bloqueada = None
-            if seguranca.entrega_resposta(texto):
-                # Entregou a solução: refaz uma vez com o reforço. Se ainda entregar, fica a segunda
-                # versão (o registro marca) para não deixar o aluno sem nada.
-                t.mensagem, t.texto = "Revisando a ajuda para não entregar a resposta…", ""
-                ajustes.append("entregou_resposta")
-                bloqueada = texto  # vai para o registro: dá para auditar falso positivo do filtro
-                refazer = (prompt + "\n\nRESPOSTA ANTERIOR (proibida, entregou a solução):\n<<<\n"
-                           + texto[:3000] + "\n>>>\n" + prompts.SISTEMA_REFORCO)
-                try:
-                    r2 = await self._gerar(sistema, refazer, t, ao_texto=ao_texto)
-                    texto, mais = seguranca.revisar(r2.text, sistema, {x.rotulo for x in trechos}, d.nome)
-                    ajustes += mais + (["entregou_resposta_de_novo"] if seguranca.entrega_resposta(texto) else [])
-                    r = Result(text=r2.text, model=r2.model, seconds=round(r.seconds + r2.seconds, 2),
-                               attempts=r.attempts + r2.attempts)
-                except AllUnavailable:
-                    ajustes.append("reforco_indisponivel")
-            if texto != seguranca.recusa(d.nome):
-                texto, faltou = seguranca.garantir_sua_vez(texto)
-                if faltou:
-                    ajustes.append("sua_vez_acrescentada")
             t.texto = texto
             # Respondeu o flash-lite porque os modelos melhores falharam ou estavam em pausa.
             # Só registro e payload por enquanto; a interface não muda.
@@ -227,7 +250,8 @@ class Tarefas:
                 logger.warning("Resposta degradada para %s", r.model.key)
             self.registro.anexar("perguntas.jsonl", {
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
-                "modo": "socratico", "ajuda": ajuda, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
+                "modo": "socratico", "versao_politica": "socratico-v2", "revisoes_pedagogicas": pareceres,
+                "ajuda": ajuda, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
                 **({"rodada": len(historico) + 1, "travou": travou} if historico else {}),
                 **({"resposta_bloqueada": bloqueada} if bloqueada else {}),
                 "resposta": texto, **({"resposta_original": r.text, "ajustes": ajustes} if ajustes else {}),
@@ -245,17 +269,18 @@ class Tarefas:
         async def trabalho(t: Tarefa) -> None:
             trechos = await recuperar(pergunta, self.llm, self.settings, d)
             t.status, t.mensagem = "gerando", "Gerando as duas respostas…"
-            prompt_tutor = prompts.prompt_tutor(pergunta, contexto(trechos, len(pergunta) + len(contexto_aluno or "")), contexto_aluno)
+            prompt_tutor = prompts.prompt_socratico(pergunta, contexto(trechos, len(pergunta) + len(contexto_aluno or "")), contexto_aluno)
             prompt_gen = prompts.prompt_generico(pergunta, contexto_aluno)
             modelos_gen = self.llm.cascade(local_model=self.settings.local_generic_model)
             try:
                 # No local, os dois lados rodam um depois do outro na GPU; sem raciocínio a espera cai
                 # de ~3 min para ~1 min. Os dois lados usam a mesma configuração (comparação justa).
                 pensar = self.settings.local_thinking_validacao
-                sistema = prompts.sistema_tutor(d)
-                tutor, generico = await asyncio.gather(
-                    self._gerar(sistema, prompt_tutor, t, raciocinio=pensar),
+                sistema = prompts.sistema_socratico(d)
+                orientacao, generico = await asyncio.gather(
+                    self._orientar(sistema, prompt_tutor, pergunta, d, trechos, t, raciocinio=pensar),
                     self._gerar(None, prompt_gen, t, models=modelos_gen, raciocinio=pensar))
+                texto_tutor, tutor, ajustes, bloqueada, pareceres = orientacao
             except AllUnavailable:
                 t.status, t.mensagem = "erro", MSG_ERRO
                 return
@@ -272,13 +297,14 @@ class Tarefas:
                 finally:
                     SEM_RACIOCINIO.reset(marca)
             # O lado TutorON passa pela mesma revisão do modo Tutor (o genérico é o controle, sem revisão).
-            texto_tutor, _ = seguranca.revisar(tutor.text, sistema, {x.rotulo for x in trechos}, d.nome)
             ordem = ["tutoron", "generico"]
             secrets.SystemRandom().shuffle(ordem)
             par = {
                 "tutoron": {"texto": texto_tutor, "provedor": tutor.model.provider, "modelo": tutor.model.name,
                             "segundos": tutor.seconds, "tentativas": tutor.attempts,
-                            "fontes": [x.publico() for x in trechos], "sistema": "TutorON (RAG + prompt)"},
+                            "fontes": [x.publico() for x in trechos], "sistema": "TutorON socrático (RAG + prompt)",
+                            "versao_politica": "socratico-v2", "ajustes": ajustes,
+                            "revisoes_pedagogicas": pareceres, "resposta_bloqueada": bloqueada},
                 "generico": {"texto": generico.text, "provedor": generico.model.provider,
                              "modelo": generico.model.name, "segundos": generico.seconds,
                              "tentativas": generico.attempts,
@@ -341,9 +367,18 @@ class Tarefas:
                     return
                 try:
                     roteiro = animacao.roteiro_valido(r.text)
-                    break
                 except animacao.FalhaAnimacao as exc:
                     erro = f"\n\nO roteiro anterior era inválido ({exc}). Devolva um JSON válido de um dos modelos."
+                    continue
+                if not roteiro.get("pergunta_final", "").strip():
+                    roteiro = None
+                    erro = "\n\nInclua pergunta_final com uma tarefa curta e sem a resposta embutida."
+                    continue
+                parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, str(roteiro))
+                if parecer["aprovada"]:
+                    break
+                roteiro = None
+                erro = "\n\nO roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial."
             ident = novo_id()
             if roteiro is None:
                 self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,

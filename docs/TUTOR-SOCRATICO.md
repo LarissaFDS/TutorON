@@ -20,13 +20,17 @@ Toda ajuda termina com **"### Sua vez"**: uma tarefa curta para o aluno fazer no
 
 **Ciclo "Ainda não consegui".** Depois de cada ajuda, o aluno diz se conseguiu. Se não conseguiu (e, se quiser, escreve onde travou), o tutor recebe as ajudas anteriores daquele exercício e explica de **outro jeito**: outra abordagem, outra analogia ou um exemplo novo e mais simples, com um passo menor que o anterior. Nunca dá a resposta, e o ciclo se repete enquanto o aluno precisar. Quando o aluno deixa o tutor escolher, a forma muda a cada rodada (pista → perguntas → exemplo → desenho → conceito → mais exemplos).
 
-### Onde está a garantia
+### Política e revisão antes de publicar (atualização de 02/11/2026)
 
-- **Prompt** ([backend/prompts.py](../backend/prompts.py), `sistema_socratico`): o mesmo prompt de fontes, citações, rigor e segurança, com o objetivo trocado e a regra "nunca entregue a resposta final" acima de tudo.
-- **Código** ([backend/seguranca.py](../backend/seguranca.py)): `entrega_resposta` reconhece frases de quem fecha o exercício ("a resposta final é", "gabarito:", "portanto, T(n) = Θ(…)"). Se aparecerem, a ajuda é **refeita uma vez** com um reforço. `garantir_sua_vez` acrescenta a seção "Sua vez" se a IA esqueceu. O registro (`dados/perguntas.jsonl`) marca `entregou_resposta`, `sua_vez_acrescentada`, a `ajuda` e a `rodada`.
-- **Limite conhecido:** uma resolução completa escrita sem nenhuma daquelas frases passa pelo filtro. Por isso o teste com alunos deve acompanhar o campo `ajustes` do registro.
+O prompt socrático tem regras de rigor próprias para orientar em PAA e SD, sem herdar as ordens do prompt antigo para mostrar todas as contas ou a tabela completa. Questões curtas, exemplos copiáveis e soluções distribuídas pelo histórico também são proibidos.
 
-A **Validação A/B** continua com o prompt anterior (`SISTEMA_TUTOR`), para não invalidar as avaliações já coletadas. O treino e a avaliação de modelos também.
+O atendimento acumula o texto no servidor e só o publica depois da revisão. `seguranca.entrega_resposta` faz uma checagem de frases; o revisor em `backend/tutoria.py` lê também a tarefa, o contexto e o histórico para identificar soluções sem essas frases. Se reprovar, há uma reformulação; se ela reprovar novamente ou a revisão falhar, o aluno recebe uma tarefa curta de reserva. Nenhuma versão reprovada é publicada pelo código. Isso não garante ausência de falhas semânticas: o revisor também é IA e pode aprovar algo indevido.
+
+A mesma revisão vale para o lado TutorON da validação A/B e para os roteiros Manim antes do render. O genérico continua como controle sem instruções. Registros novos recebem `versao_politica: socratico-v2`; não agregue suas notas às avaliações antigas sem separar as versões. Os prompts legados continuam disponíveis para reproduzir experimentos históricos.
+
+O registro guarda `revisoes_pedagogicas`, `resposta_bloqueada`, `resposta_original`, `ajustes`, `ajuda` e `rodada`. `ajuda_de_reserva` deve ser contada como falha do candidato ao avaliar sua qualidade.
+
+Treinamento em um clique: [COMO_TREINAR.md](../05-modelo/COMO_TREINAR.md). A bateria nova é `eval/socratico.py`: salva versões brutas e publicadas e não chama Gemini no modo local.
 
 ### Demonstração: `/demo`
 
@@ -40,7 +44,7 @@ A página **não chama nenhuma IA**: funciona sem cota do Gemini e sem o modelo 
 
 **Plano B para apresentação, sem servidor:** [`demo-offline/TutorON-demo.html`](../demo-offline/TutorON-demo.html) é a mesma demonstração num único arquivo de 2,7 MB, com CSS, fórmulas, foto e vídeos embutidos. Abre com duplo clique em qualquer navegador (Windows ou Linux), sem internet. Os vídeos vão em WebM e MP4, porque o Firefox em alguns Linux não toca MP4; se nenhum tocar, aparece o quadro final como imagem. Depois de mudar a demo, gere de novo com `python scripts/demo_offline.py`; o `test_demo.py` falha se o arquivo ficar desatualizado.
 
-**Modelo local:** o `tutoron-paa` atual foi treinado para responder direto. O modo socrático com ele depende só do prompt e ainda não foi testado. O treino novo, com exemplos socráticos, fica para depois.
+**Modelo local:** o atendimento usa agora o prompt socrático e a revisão mesmo antes do fine-tuning. O fluxo de treinamento novo instala um candidato separado, `tutoron-socratico-ft`; o relatório desta entrega registra o que foi efetivamente testado, sem confundir mudança de prompt com adaptação dos pesos.
 
 ## 2. Do papel para o prompt sem a IA entender errado
 
@@ -73,6 +77,6 @@ Motivos: (1) num servidor aberto na internet, executar código gerado pela IA pe
 
 A animação também é uma **pista**: mostra a estrutura e os primeiros passos, deixa `?` nas últimas células e fecha com "Sua vez: …".
 
-**Custo:** 1 chamada de IA, mais 5 a 15 s de render na CPU (480p, 24 fps, ~10 s de vídeo). Os renders rodam um de cada vez, em processo separado, com limite de 90 s. Os vídeos ficam em `dados/animacoes/`.
+**Custo:** geração do roteiro e revisão pedagógica (com até uma reformulação), mais 5 a 15 s de render na CPU (480p, 24 fps, ~10 s de vídeo). Os renders rodam um de cada vez, em processo separado, com limite de 90 s. Os vídeos ficam em `dados/animacoes/`.
 
 **Próximos passos possíveis:** mais modelos de cena (circuito com portas lógicas, linha do tempo de flip-flop, pilha de chamadas), narração por texto passo a passo sincronizada e, para o ensino superior, modelos de cena por área.

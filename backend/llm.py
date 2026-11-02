@@ -23,11 +23,13 @@ from dataclasses import dataclass, field
 import httpx
 
 from .config import Settings
+from .recursos import gpu_reservada
 
 logger = logging.getLogger("tutoron.llm")
 
 # Desliga o raciocínio do modelo local na tentativa de resgate (responde em ~25 s em vez de ~60 s).
 SEM_RACIOCINIO: contextvars.ContextVar[bool] = contextvars.ContextVar("sem_raciocinio", default=False)
+REVISAO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar("revisao_json", default=False)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
@@ -50,7 +52,7 @@ class AllUnavailable(Exception):
 
 @dataclass(frozen=True)
 class Model:
-    provider: str  # "gemini" | "ollama"
+    provider: str  # "gemini" | "ollama" | "codigo" (orientação fixa, sem inferência)
     name: str
 
     @property
@@ -59,6 +61,8 @@ class Model:
 
     @property
     def label(self) -> str:
+        if self.provider == "codigo":
+            return "Orientação estruturada do TutorON"
         if self.provider == "gemini":
             return " ".join(part.capitalize() for part in self.name.split("-"))
         return f"{self.name} (local)"
@@ -175,6 +179,8 @@ class LLM:
             "contents": [{"role": "user", "parts": [{"text": prompt}]}],
             "generationConfig": {"temperature": 0.3, "maxOutputTokens": 8192},
         }
+        if REVISAO_JSON.get():
+            body["generationConfig"].update(temperature=0.0, maxOutputTokens=512, responseMimeType="application/json")
         if system:
             body["systemInstruction"] = {"parts": [{"text": system}]}
         headers = {"x-goog-api-key": self.settings.gemini_api_key}
@@ -221,6 +227,8 @@ class LLM:
         return self._thinking[name]
 
     async def _ollama(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
+        if gpu_reservada():
+            raise Unavailable("GPU reservada para treinamento", 10.0)
         messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
         body = {"model": model.name, "messages": messages, "stream": True, "keep_alive": "60m",
                 "options": {"temperature": 0.2, "num_ctx": self.settings.local_num_ctx, "num_predict": 8192}}
@@ -231,6 +239,9 @@ class LLM:
             if pensar:
                 # Recomendação do Qwen3 para o modo com raciocínio (temperatura baixa demais causa repetição).
                 body["options"].update(temperature=0.6, top_p=0.95, top_k=20)
+        if REVISAO_JSON.get():
+            body["format"] = "json"
+            body["options"].update(temperature=0.0, num_predict=256)
         try:
             async with self.client.stream("POST", self.settings.ollama_url + "/api/chat", json=body,
                                           timeout=httpx.Timeout(self.settings.local_first_chunk_s, connect=3)) as response:
@@ -429,6 +440,10 @@ class LLM:
                               seconds=event["segundos"], attempts=event["tentativas"])
         raise AllUnavailable([])
 
+    async def revisar_ajuda(self, pergunta: str, contexto: str, resposta: str) -> dict:
+        from .tutoria import revisar_com_modelo
+        return await revisar_com_modelo(self, pergunta, contexto, resposta)
+
     # ------------------------------------------------------------------ imagens (leitura de foto)
     async def ver_imagens(self, system: str, texto: str, imagens: list[bytes]) -> Result:
         """Pedido multimodal que devolve JSON: Gemini em ordem (pulando os em pausa) e, se houver
@@ -482,6 +497,8 @@ class LLM:
             raise Unavailable("resposta sem texto", 5.0) from exc
 
     async def _ollama_imagens(self, model: Model, system: str, texto: str, b64: list[str]) -> str:
+        if gpu_reservada():
+            raise Unavailable("GPU reservada para treinamento", 10.0)
         body = {"model": model.name, "stream": False, "format": "json", "keep_alive": "10m",
                 "messages": [{"role": "system", "content": system}, {"role": "user", "content": texto, "images": b64}],
                 "options": {"temperature": 0.1, "num_ctx": self.settings.local_num_ctx}}
@@ -525,6 +542,8 @@ class LLM:
         for payload, path in (({"model": self.settings.embed_model, "input": ["aquecimento"], "keep_alive": "60m",
                                 "options": {"num_gpu": 0}}, "/api/embed"),
                               ({"model": self.settings.local_model, "keep_alive": "60m"}, "/api/generate")):
+            if path == "/api/generate" and gpu_reservada():
+                continue
             try:
                 await self.client.post(self.settings.ollama_url + path, json=payload, timeout=180)
             except httpx.HTTPError:

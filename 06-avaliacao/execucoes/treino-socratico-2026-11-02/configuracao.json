@@ -1,0 +1,11 @@
+{
+  "passos": 60,
+  "base": "Qwen/Qwen3-8B",
+  "nome": "tutoron-socratico-ft",
+  "rank": 8,
+  "seq": 2048,
+  "so_dados": false,
+  "verificar": false,
+  "teste_gpu": true,
+  "pular_avaliacao": false
+}

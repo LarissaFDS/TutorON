@@ -27,7 +27,7 @@ def test_prompt_socratico_proibe_resposta_e_mantem_o_resto():
     # Fontes, citações, rigor de PAA e proteção das instruções continuam iguais.
     for trecho in ("# Fontes", "# Citações e fidelidade", "# Instruções internas", "Teorema Mestre"):
         assert trecho in s
-    # A Validação A/B e o treino continuam com o prompt de antes.
+    # O prompt legado continua disponível para reproduzir avaliações históricas.
     assert prompts.SISTEMA_TUTOR == prompts.sistema_tutor() != s
 
 
@@ -143,11 +143,11 @@ def test_ciclo_respeita_ajuda_escolhida_pelo_aluno(site):  # noqa: F811
     assert t["ajuda"] == "visual"
 
 
-def test_validacao_continua_com_o_prompt_anterior(site):  # noqa: F811
+def test_validacao_usa_tutor_socratico(site):  # noqa: F811
     par = esperar(site, site.post("/api/comparar", json={"pergunta": "Como aplicar o Teorema Mestre?"}).json())
     assert par["status"] == "pronta"
     sistemas = [s for _, s, _ in site.llm.chamadas if s]
-    assert sistemas and all(s == prompts.SISTEMA_TUTOR for s in sistemas)
+    assert sistemas and all(s == prompts.sistema_socratico() for s in sistemas)
 
 
 def test_lista_de_ajudas(site):  # noqa: F811
