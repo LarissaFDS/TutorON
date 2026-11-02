@@ -1,0 +1,303 @@
+{
+  "fases_completas": {
+    "local-pensar": true,
+    "local-pensar-restante": true,
+    "dialogos": true,
+    "rapido": true,
+    "servidor-normal": true,
+    "repeticoes": true,
+    "carga4": true,
+    "carga8": true
+  },
+  "operacao": {
+    "local-serial": {
+      "pedidos": 44,
+      "prontas": 44,
+      "mediana_s": 22.59,
+      "p95_s": 82.63,
+      "max_s": 122.54,
+      "mediana_sem_fixas_s": 23.61,
+      "post_mediano_s": 0.007,
+      "reservas": 2,
+      "fixas": 2,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 42,
+        "questao_atomica": 1,
+        "pedido_de_instrucoes": 1
+      }
+    },
+    "dialogos": {
+      "pedidos": 16,
+      "prontas": 16,
+      "mediana_s": 32.23,
+      "p95_s": 102.2,
+      "max_s": 102.2,
+      "mediana_sem_fixas_s": 44.17,
+      "post_mediano_s": 0.007,
+      "reservas": 6,
+      "fixas": 4,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 12,
+        "questao_atomica": 4
+      }
+    },
+    "rapido": {
+      "pedidos": 12,
+      "prontas": 12,
+      "mediana_s": 12.32,
+      "p95_s": 18.49,
+      "max_s": 18.49,
+      "mediana_sem_fixas_s": 12.32,
+      "post_mediano_s": 0.007,
+      "reservas": 1,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 12
+      }
+    },
+    "servidor-normal": {
+      "pedidos": 8,
+      "prontas": 8,
+      "mediana_s": 47.58,
+      "p95_s": 74.51,
+      "max_s": 74.51,
+      "mediana_sem_fixas_s": 47.58,
+      "post_mediano_s": 0.008,
+      "reservas": 5,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "gemini-3.6-flash": 3,
+        "gemini-3.1-flash-lite": 4,
+        "tutoron-paa": 1
+      }
+    },
+    "repeticoes": {
+      "pedidos": 12,
+      "prontas": 12,
+      "mediana_s": 7.98,
+      "p95_s": 21.64,
+      "max_s": 21.64,
+      "mediana_sem_fixas_s": 7.98,
+      "post_mediano_s": 0.007,
+      "reservas": 4,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 12
+      }
+    },
+    "carga4": {
+      "pedidos": 4,
+      "prontas": 4,
+      "mediana_s": 35.41,
+      "p95_s": 44.27,
+      "max_s": 44.27,
+      "mediana_sem_fixas_s": 35.41,
+      "post_mediano_s": 0.021,
+      "reservas": 0,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 4
+      }
+    },
+    "carga8": {
+      "pedidos": 8,
+      "prontas": 8,
+      "mediana_s": 50.59,
+      "p95_s": 70.92,
+      "max_s": 70.92,
+      "mediana_sem_fixas_s": 50.59,
+      "post_mediano_s": 0.054,
+      "reservas": 1,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 8
+      }
+    }
+  },
+  "pareceres_por_fase": {
+    "local-pensar": {
+      "avaliados": 8,
+      "total": 8,
+      "potencial_ajuda": {
+        "1": 4,
+        "0": 1,
+        "2": 3
+      },
+      "correcao": {
+        "correta": 7,
+        "incorreta": 1
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "local-pensar-restante": {
+      "avaliados": 36,
+      "total": 36,
+      "potencial_ajuda": {
+        "1": 16,
+        "0": 10,
+        "2": 8,
+        "nao_aplicavel": 2
+      },
+      "correcao": {
+        "correta": 22,
+        "nao_aplicavel": 6,
+        "parcial": 4,
+        "incorreta": 4
+      },
+      "entregas_explicitas": 2,
+      "entregas_por_exclusao": 1,
+      "revelacoes_instrucoes": 1
+    },
+    "dialogos": {
+      "avaliados": 16,
+      "total": 16,
+      "potencial_ajuda": {
+        "1": 4,
+        "0": 11,
+        "2": 1
+      },
+      "correcao": {
+        "correta": 3,
+        "nao_aplicavel": 10,
+        "parcial": 2,
+        "incorreta": 1
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "rapido": {
+      "avaliados": 12,
+      "total": 12,
+      "potencial_ajuda": {
+        "1": 4,
+        "2": 2,
+        "0": 6
+      },
+      "correcao": {
+        "correta": 7,
+        "incorreta": 3,
+        "parcial": 1,
+        "nao_aplicavel": 1
+      },
+      "entregas_explicitas": 2,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "servidor-normal": {
+      "avaliados": 8,
+      "total": 8,
+      "potencial_ajuda": {
+        "0": 5,
+        "2": 2,
+        "1": 1
+      },
+      "correcao": {
+        "nao_aplicavel": 5,
+        "correta": 3
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "repeticoes": {
+      "avaliados": 12,
+      "total": 12,
+      "potencial_ajuda": {
+        "0": 6,
+        "2": 4,
+        "1": 2
+      },
+      "correcao": {
+        "nao_aplicavel": 4,
+        "correta": 4,
+        "parcial": 2,
+        "incorreta": 2
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "carga4": {
+      "avaliados": 4,
+      "total": 4,
+      "potencial_ajuda": {
+        "1": 1,
+        "0": 1,
+        "2": 2
+      },
+      "correcao": {
+        "correta": 3,
+        "incorreta": 1
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    },
+    "carga8": {
+      "avaliados": 8,
+      "total": 8,
+      "potencial_ajuda": {
+        "1": 4,
+        "2": 3,
+        "0": 1
+      },
+      "correcao": {
+        "correta": 7,
+        "nao_aplicavel": 1
+      },
+      "entregas_explicitas": 0,
+      "entregas_por_exclusao": 0,
+      "revelacoes_instrucoes": 0
+    }
+  },
+  "total_pedidos_ajuda": 104,
+  "infra_passaram": 13,
+  "infra_total": 13,
+  "contraprovas_revisor": {
+    "casos": 16,
+    "falsas_aprovacoes": 1,
+    "falsas_reprovacoes": 2
+  },
+  "subconjunto_pareado": {
+    "local_pensar": {
+      "pedidos": 12,
+      "prontas": 12,
+      "mediana_s": 23.62,
+      "p95_s": 82.63,
+      "max_s": 82.63,
+      "mediana_sem_fixas_s": 23.62,
+      "post_mediano_s": 0.007,
+      "reservas": 2,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 12
+      }
+    },
+    "rapido": {
+      "pedidos": 12,
+      "prontas": 12,
+      "mediana_s": 12.32,
+      "p95_s": 18.49,
+      "max_s": 18.49,
+      "mediana_sem_fixas_s": 12.32,
+      "post_mediano_s": 0.007,
+      "reservas": 1,
+      "fixas": 0,
+      "texto_antes_revisao": 0,
+      "modelos": {
+        "tutoron-paa": 12
+      }
+    }
+  }
+}

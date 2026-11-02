@@ -1,0 +1,35 @@
+{
+  "modelo": {
+    "name": "tutoron-paa:latest",
+    "model": "tutoron-paa:latest",
+    "modified_at": "2026-10-11T23:37:28.1491253-03:00",
+    "size": 5225388105,
+    "digest": "1ef169a57cf1a620d642fb968b00c269ba5bbd40fa5ede889e1dc03f1d5e9280",
+    "details": {
+      "parent_model": "qwen3:8b",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "8.2B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "embedding_length": 4096
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "politica": {
+    "backend/prompts.py": "6f1ea91997b083c4e23a5f7abaaff59dcd139578aee40ae9e616b25b1c111230",
+    "backend/tutoria.py": "9b01159fc692fa73db9a560e25f05a2bd582d1e5cf304ab626e14e5615b2117e",
+    "backend/tarefas.py": "09147bb176bd1f0560f8bf3e23eef06f6621500837e502f952798bd6f3e20e9a"
+  },
+  "pensamento_local": true,
+  "num_ctx": 8192,
+  "paralelismo": 2,
+  "estado_original_gemini": true
+}

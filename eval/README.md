@@ -51,3 +51,27 @@ A bateria do tutor passa pelo fluxo real do site e grava fontes, resposta, rótu
 `python eval/socratico.py --modelos tutoron-paa tutoron-socratico-ft` executa 32 casos de PAA e SD pelo fluxo real do atendimento, incluindo insistência, código e uma questão cuja primeira etapa já seria a resposta. A rodada local desliga Gemini e Supabase somente nesse processo, e usa o acervo local real.
 
 Use `--limite 8` para uma rodada curta equilibrada ou `--ids ataque-paa ataque-sd curta-sd codigo-paa` para ataques. O JSON é salvo a cada caso, com `completa: false` até o fim; o Markdown permite inspecionar cada resposta. Ele separa a primeira versão bruta, a ajuda publicada, revisor, reservas e fontes. A revisão usa o próprio modelo e pode errar. Uma reserva não conta como resposta aprovada do modelo; a revisão humana fica pendente. Os scripts antigos acima reproduzem a avaliação de respostas diretas e não são o critério de aprovação deste treino.
+
+## Auditoria do servidor por HTTP (02/11/2026)
+
+[Relatório e conclusão](../06-avaliacao/auditoria-servidor-2026-11-02.md): 104 pedidos reais, 16 contraprovas do revisor, variantes de perguntas, quatro diálogos com histórico real, repetição, comparação de modos e cargas de 4/8 pedidos simultâneos. [Rubrica](RUBRICA_AUDITORIA.md). Os critérios não são enviados ao modelo; os pareceres técnicos ficam separados da aprovação interna.
+
+Para repetir em novas pastas, mantenha o servidor normal em 8000 e abra as instâncias isoladas em terminais separados:
+
+```powershell
+.venv/Scripts/python -m uvicorn eval.servidor_auditoria:criar --factory --host 127.0.0.1 --port 8001 --no-access-log
+.venv/Scripts/python -m uvicorn eval.servidor_auditoria:criar_rapido --factory --host 127.0.0.1 --port 8002 --no-access-log
+```
+
+Elas usam o mesmo modelo e aplicação, forçam Gemini desligado sem modificar o `.env`, guardam registros separados em `dados/auditoria-local` e `dados/auditoria-rapido` e preservam a configuração do Supabase. A primeira usa raciocínio; a segunda o desliga. Não exponha essas portas no túnel do servidor principal.
+
+```powershell
+.venv/Scripts/python eval/auditoria_http.py --url http://127.0.0.1:8001 --logs dados/auditoria-local --saida eval/results/nova-auditoria/local
+.venv/Scripts/python eval/auditoria_http.py --url http://127.0.0.1:8001 --logs dados/auditoria-local --saida eval/results/nova-auditoria/dialogos --dialogos
+.venv/Scripts/python eval/auditoria_http.py --url http://127.0.0.1:8002 --logs dados/auditoria-rapido --saida eval/results/nova-auditoria/repeticoes --ids p02-mestre-erro s14-and-variavel --repeticoes 3
+.venv/Scripts/python eval/auditoria_http.py --url http://127.0.0.1:8001 --logs dados/auditoria-local --saida eval/results/nova-auditoria/carga --ids p01-mestre-pista s01-kmap p07-assintotica s09-moore --concorrencia 4
+```
+
+`casos_auditoria.json` cobre 44 casos independentes; `dialogos_auditoria.json` cobre 16 turnos. As saídas registram o modelo efetivo, versões candidatas/publicadas, bloqueios, fila, tempos e texto observado antes da revisão. `testar_revisor_real.py` contém as contraprovas rotuladas; ele faz chamadas reais quando executado diretamente, não na suíte do pytest. `relatorio_auditoria.py` consolida a rodada histórica e os pareceres em `results/auditoria-20261102/pareceres.json`, sem inventar notas para casos não inspecionados.
+
+A auditoria não grava votos nem feedback fictício de alunos. Se apontar para 8000, os pedidos sintéticos entram no registro normal de perguntas, com os IDs preservados na saída para posterior identificação. Não reutilize as respostas erradas como alvos de treino e mantenha essa bateria fora do treinamento ao comparar candidatos.
