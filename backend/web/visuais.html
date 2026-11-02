@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Aprender com desenhos</title>
+<link rel="stylesheet" href="/design.css">
+<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/visuais.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="page masthead__bar"><a class="wordmark" href="/">TutorON</a><a class="visual-voltar" href="/">Voltar ao tutor</a></div>
+  <div class="page masthead__intro">
+    <h1>Aprender com desenhos</h1>
+    <p class="masthead__lede">Veja as relações, pause na dúvida e tente o próximo passo. Cada exemplo deixa uma parte para você construir.</p>
+  </div>
+</header>
+<main class="page visual-pagina">
+  <p id="catalogo-status" class="status" role="status">Carregando os exemplos…</p>
+  <div class="visual-layout" id="visual-layout" hidden>
+    <nav class="visual-temas" aria-label="Escolher um exemplo">
+      <h2 class="visual-subtitulo">Escolha um tema</h2>
+      <div id="exemplos"></div>
+    </nav>
+    <article class="visual-estudo" aria-labelledby="exemplo-titulo">
+      <p id="exemplo-disciplina" class="caption"></p>
+      <h2 id="exemplo-titulo" class="visual-titulo" tabindex="-1"></h2>
+      <p id="exemplo-resumo" class="visual-resumo"></p>
+      <div class="visual-palco">
+        <video id="video" controls playsinline preload="metadata" aria-label="Pista visual do exemplo" hidden></video>
+        <div id="video-vazio" class="visual-vazio"><p>Abra o desenho e observe uma etapa de cada vez.</p></div>
+      </div>
+      <div class="visual-controles">
+        <button id="preparar" class="button" type="button">Preparar animação</button>
+        <button id="pausar-pergunta" class="button button--secondary" type="button" disabled>Pausar na pergunta</button>
+      </div>
+      <p id="video-status" class="status caption" role="status"></p>
+      <section class="visual-observar" aria-labelledby="observar-titulo">
+        <h3 id="observar-titulo" class="visual-subtitulo">O que observar</h3>
+        <p id="observar"></p>
+      </section>
+      <section class="visual-tarefa" aria-labelledby="tarefa-titulo">
+        <h3 id="tarefa-titulo" class="visual-subtitulo">Sua vez</h3>
+        <p id="tarefa"></p>
+        <form id="tentativa-form">
+          <div class="field">
+            <label class="field__label" for="tentativa">Como você continuaria?</label>
+            <textarea id="tentativa" class="input" rows="3" maxlength="4000" required aria-describedby="tentativa-dica"></textarea>
+            <p id="tentativa-dica" class="caption">Escreva sua tentativa ou a parte em que travou. Você poderá conferir antes de enviar ao tutor.</p>
+          </div>
+          <button class="button" type="submit">Continuar com o tutor</button>
+        </form>
+      </section>
+    </article>
+  </div>
+  <noscript>Ative o JavaScript para escolher e reproduzir os exemplos.</noscript>
+</main>
+<script src="/static/visuais.js"></script>
+</body>
+</html>

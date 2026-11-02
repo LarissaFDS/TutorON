@@ -1,0 +1,122 @@
+{
+  "1": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-mestre"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-mestre"
+    }
+  },
+  "2": {
+    "A": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-reducao"
+    },
+    "B": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-reducao"
+    }
+  },
+  "3": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-robo"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-robo"
+    }
+  },
+  "4": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-mochila"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-mochila"
+    }
+  },
+  "5": {
+    "A": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-fluxo"
+    },
+    "B": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-fluxo"
+    }
+  },
+  "6": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-bfs"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-bfs"
+    }
+  },
+  "7": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-gray"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-gray"
+    }
+  },
+  "8": {
+    "A": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-zero"
+    },
+    "B": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-zero"
+    }
+  },
+  "9": {
+    "A": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-atomica"
+    },
+    "B": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-atomica"
+    }
+  },
+  "10": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-binario"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-binario"
+    }
+  },
+  "11": {
+    "A": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-progresso"
+    },
+    "B": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-progresso"
+    }
+  },
+  "12": {
+    "A": {
+      "modelo": "tutoron-paa",
+      "caso": "promo-npdificil"
+    },
+    "B": {
+      "modelo": "tutoron-socratico-ft",
+      "caso": "promo-npdificil"
+    }
+  }
+}

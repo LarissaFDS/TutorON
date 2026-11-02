@@ -352,6 +352,50 @@ class Tarefas:
         return self._criar("foto", trabalho)
 
     # ------------------------------------------------------------------ animação (Manim, protótipo)
+    async def _visual_relacionado(self, t: Tarefa, pergunta: str, disciplina: str, causa: str) -> bool:
+        from .animacao import galeria
+        exemplo = galeria.sugerir(pergunta, disciplina)
+        if exemplo is None:
+            return False
+        t.mensagem = 'Preparando um exemplo relacionado para você aplicar à sua dúvida…'
+        try:
+            video = await galeria.preparar(exemplo, self.settings.data_dir / 'animacoes')
+        except (animacao.FalhaAnimacao, OSError):
+            return False
+        aviso = 'Este vídeo usa outro exercício para explicar a ideia. Aplique o raciocínio à sua questão.'
+        self.registro.anexar('animacoes.jsonl', {'id': novo_id(), 'data': agora(), 'disciplina': disciplina,
+            'pergunta': pergunta, 'origem': 'exemplo_relacionado', 'exemplo': exemplo['id'],
+            'causa_alternativa': causa[:500], 'roteiro': exemplo['roteiro'], 'video': video})
+        t.resultado = {'video': f'/api/animacoes/{video}.mp4', 'poster': f'/api/animacoes/{video}.jpg',
+                       'origem': 'exemplo_relacionado', 'observacao': aviso, 'exemplo': exemplo['id'],
+                       'titulo': exemplo['titulo'], 'pergunta_final': exemplo['roteiro']['pergunta_final'],
+                       'modelo_cena': exemplo['roteiro']['modelo']}
+        t.status, t.mensagem = 'pronta', ''
+        return True
+
+    def animar_exemplo(self, ident: str) -> Tarefa:
+        from .animacao import galeria
+        exemplo = galeria.obter(ident)
+
+        async def trabalho(t: Tarefa) -> None:
+            t.status, t.mensagem = 'gerando', 'Preparando o desenho. Na primeira vez pode levar até 90 segundos…'
+            try:
+                video = await galeria.preparar(exemplo, self.settings.data_dir / 'animacoes')
+            except (animacao.FalhaAnimacao, OSError) as exc:
+                logger.warning('Exemplo visual falhou: %s', exc)
+                t.status, t.mensagem = 'erro', 'Não foi possível desenhar este exemplo. Tente novamente.'
+                return
+            self.registro.anexar('animacoes.jsonl', {'id': novo_id(), 'data': agora(),
+                'disciplina': exemplo['disciplina'], 'exemplo': ident, 'video': video,
+                'origem': 'roteiro_didatico_controlado', 'roteiro': exemplo['roteiro']})
+            t.resultado = {'video': f'/api/animacoes/{video}.mp4', 'titulo': exemplo['titulo'],
+                           'poster': f'/api/animacoes/{video}.jpg',
+                           'pergunta_final': exemplo['roteiro']['pergunta_final'],
+                           'modelo_cena': exemplo['roteiro']['modelo'], 'exemplo': ident}
+            t.status, t.mensagem = 'pronta', ''
+
+        return self._criar('animacao', trabalho)
+
     def animar(self, pergunta: str, resposta_tutor: str | None, disciplina: str | None = None) -> Tarefa:
         d = obter(disciplina)
 
@@ -363,6 +407,8 @@ class Tarefas:
                 try:
                     r = await self._gerar(prompts.SISTEMA_ANIMACAO, prompt + erro, t, raciocinio=False)
                 except AllUnavailable:
+                    if await self._visual_relacionado(t, pergunta, d.id, 'planejamento_indisponivel'):
+                        return
                     t.status, t.mensagem = "erro", MSG_ERRO
                     return
                 try:
@@ -383,6 +429,8 @@ class Tarefas:
             if roteiro is None:
                 self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                          "pergunta": pergunta, "erro": erro.strip()[:300]})
+                if await self._visual_relacionado(t, pergunta, d.id, erro.strip()):
+                    return
                 t.status, t.mensagem = "erro", "Não consegui montar uma animação para esta dúvida. Tente reformular."
                 return
             t.mensagem = "Desenhando a animação (leva uns 10 segundos)…"

@@ -125,6 +125,8 @@
   var animacaoDisponivel = false;
   function montarAjudas(lista) {
     var box = $('ajudas-opcoes');
+    var anterior = document.querySelector('input[name="ajuda"]:checked');
+    var escolhida = anterior ? anterior.value : null;
     box.replaceChildren();
     lista.forEach(function (a, i) {
       var label = el('label', 'pick');
@@ -132,7 +134,7 @@
       input.type = 'radio';
       input.name = 'ajuda';
       input.value = a[0];
-      input.checked = i === 0;
+      input.checked = escolhida ? a[0] === escolhida : i === 0;
       label.append(input, el('span', null, a[1]));
       box.append(label);
     });
@@ -288,22 +290,26 @@
           if (x.status !== 'pronta' && x.status !== 'erro') setStatus(status, x.mensagem || 'Gerando…', 'busy');
         });
         if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não foi possível gerar a animação.');
+        if (t.exemplo) exemplosVisuais.href = '/visuais?exemplo=' + encodeURIComponent(t.exemplo);
         var video = document.createElement('video');
         video.src = t.video;
         video.controls = true;
         video.autoplay = true;
         video.muted = true;
         video.playsInline = true;
+        if (t.poster) video.poster = t.poster;
         video.setAttribute('aria-label', 'Animação: ' + (t.titulo || 'pista visual'));
         b.remove();
         box.prepend(video);
-        setStatus(status, t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : '');
+        setStatus(status, (t.observacao ? t.observacao + ' ' : '') + (t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : ''));
       } catch (e) {
         setStatus(status, e.message, 'error');
         b.disabled = false;
       }
     });
-    box.append(b, status);
+    var exemplosVisuais = el('a', 'caption', 'Explorar exemplos visuais');
+    exemplosVisuais.href = '/visuais';
+    box.append(b, status, exemplosVisuais);
     return box;
   }
 
@@ -772,6 +778,22 @@
 
   // Página recarregada no meio de uma geração (ou antes de votar): retoma de onde parou.
   var pendente = lerPendente();
+  if (!pendente) {
+    try {
+      var tentativaVisual = JSON.parse(sessionStorage.getItem('tutoron-tentativa-visual') || 'null');
+      if (tentativaVisual && typeof tentativaVisual.pergunta === 'string' && typeof tentativaVisual.contexto === 'string') {
+        mostrarModo('tutor');
+        $('pergunta').value = tentativaVisual.pergunta.slice(0, 4000);
+        $('contexto').value = tentativaVisual.contexto.slice(0, 6000);
+        var detalhes = $('contexto').closest('details');
+        if (detalhes) detalhes.open = true;
+        var conferir = document.querySelector('input[name="ajuda"][value="conferir"]');
+        if (conferir) conferir.checked = true;
+        sessionStorage.removeItem('tutoron-tentativa-visual');
+        $('pergunta').focus({ preventScroll: true });
+      }
+    } catch (e) { /* Sem storage, a pergunta continua podendo ser escrita manualmente. */ }
+  }
   if (pendente && pendente.id) {
     if (pendente.tipo === 'validacao') {
       mostrarModo('validacao');

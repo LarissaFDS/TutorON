@@ -1,0 +1,58 @@
+{
+  "completa": true,
+  "resumo": {
+    "tutoron-socratico-ft": {
+      "casos": 1,
+      "erros": 0,
+      "primeira_ajuda_reprovada": 0,
+      "ajudas_de_reserva": 0,
+      "orientacoes_deterministicas": 0,
+      "publicadas_aprovadas_pelo_revisor": 1
+    }
+  },
+  "revisao_humana": "pendente",
+  "limite": "O mesmo modelo revisa a própria ajuda; aprovação automática não comprova ausência de vazamento nem aprendizagem.",
+  "casos": [
+    {
+      "id": "paa-mestre-reservado/visual",
+      "disciplina": "paa",
+      "pergunta": "Resolva T(n)=4T(n/2)+n^2 e diga o caso do Mestre e a complexidade.",
+      "ajuda": "visual",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 6.6,
+      "primeira_resposta_bruta": "A estrutura da árvore de recursão é formada por níveis. Cada nó representa uma chamada recursiva. O nível 0 tem um nó com custo n². O nível 1 tem 4 nós com custo (n/2)². O nível 2 tem 4² nós com custo (n/4)². O nível k tem 4^k nós com custo (n/2^k)². A soma dos custos dos níveis é a complexidade.\n\n### Sua vez\nQuantos níveis tem a árvore de recursão? Qual é o custo total dos níveis?",
+      "ultima_resposta_bruta": "A estrutura da árvore de recursão é formada por níveis. Cada nó representa uma chamada recursiva. O nível 0 tem um nó com custo n². O nível 1 tem 4 nós com custo (n/2)². O nível 2 tem 4² nós com custo (n/4)². O nível k tem 4^k nós com custo (n/2^k)². A soma dos custos dos níveis é a complexidade.\n\n### Sua vez\nQuantos níveis tem a árvore de recursão? Qual é o custo total dos níveis?",
+      "publicada": "A estrutura da árvore de recursão é formada por níveis. Cada nó representa uma chamada recursiva. O nível 0 tem um nó com custo n². O nível 1 tem 4 nós com custo (n/2)². O nível 2 tem 4² nós com custo (n/4)². O nível k tem 4^k nós com custo (n/2^k)². A soma dos custos dos níveis é a complexidade.\n\n### Sua vez\nQuantos níveis tem a árvore de recursão? Qual é o custo total dos níveis?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda é visual e deixa os valores e passos para o aluno preencher",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.22
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    }
+  ]
+}

@@ -39,6 +39,13 @@ def test_revisor_indisponivel_bloqueia():
     assert not r["aprovada"] and "indisponivel" in r["motivo"]
 
 
+def test_ajuda_extensa_nao_e_aprovada_por_revisao_de_um_prefixo():
+    async def proibido(*args):
+        pytest.fail('Uma resposta extensa não pode chegar cortada ao revisor e depois ser publicada inteira')
+    r = asyncio.run(tutoria.revisar_com_modelo(SimpleNamespace(complete=proibido), 'p', 'c', 'x' * 6001))
+    assert not r['aprovada'] and r['motivo'] == 'ajuda_extensa_demais_para_revisao'
+
+
 @pytest.mark.parametrize('porta', ['AND', 'OR', 'XOR', 'NAND', 'NOR', 'XNOR', 'NOT'])
 def test_pergunta_de_um_bit_nao_revela_regra_que_ja_entrega_resposta(site, porta):  # noqa: F811
     antes = len(site.llm.chamadas)

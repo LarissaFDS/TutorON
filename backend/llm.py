@@ -231,14 +231,14 @@ class LLM:
             raise Unavailable("GPU reservada para treinamento", 10.0)
         messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
         body = {"model": model.name, "messages": messages, "stream": True, "keep_alive": "60m",
-                "options": {"temperature": 0.2, "num_ctx": self.settings.local_num_ctx, "num_predict": 8192}}
+                "options": {"temperature": 0.2, "num_ctx": self.settings.local_num_ctx, "num_predict": 2048}}
         if await self.supports_thinking(model.name):
             # Com 2+ pedidos esperando a GPU (turma inteira usando), responde sem raciocínio para a fila andar.
             pensar = self.settings.local_thinking and not SEM_RACIOCINIO.get() and self.local_waiting < 2
             body["think"] = pensar
             if pensar:
                 # Recomendação do Qwen3 para o modo com raciocínio (temperatura baixa demais causa repetição).
-                body["options"].update(temperature=0.6, top_p=0.95, top_k=20)
+                body["options"].update(temperature=0.6, top_p=0.95, top_k=20, num_predict=8192)
         if REVISAO_JSON.get():
             body["format"] = "json"
             body["options"].update(temperature=0.0, num_predict=256)

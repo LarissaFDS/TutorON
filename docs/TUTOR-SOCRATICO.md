@@ -60,6 +60,8 @@ Com a cota do Gemini esgotada, a leitura falha com uma mensagem amigável ("digi
 
 ## 3. Animações com Manim (protótipo)
 
+**Atualização de 02/11:** a base do PR #29 foi ampliada com cinco cenas e uma área de estudo em `/visuais`, com sete exemplos controlados. Há grade de robô e DP, rede de fluxo, Karnaugh com validação de grupos, circuito com tabela em branco e direção de reduções, além de BFS e certificado em grafo. Veja [VISUAIS.md](VISUAIS.md) para apresentação, limites e o caminho alternativo quando a personalização por IA falha. As quatro cenas descritas abaixo são a base anterior, preservada.
+
 **O que é o Manim:** a biblioteca Python de animações matemáticas criada pelo 3Blue1Brown. Usamos a versão da comunidade (Manim CE 0.19). Pela pip no Windows, ela já vem com PyAV (vídeo) e Pango (texto), então **não precisa de ffmpeg nem LaTeX**: só não usamos `MathTex`.
 
 **O que existe na pesquisa:** o TheoremExplainAgent (Ku et al., ACL 2025) faz a IA escrever código Manim direto e chega a ~94% de vídeos que renderizam com o3-mini, mas com problemas de layout frequentes, vários minutos por vídeo e LaTeX instalado.

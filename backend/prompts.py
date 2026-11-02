@@ -263,7 +263,22 @@ Escolha UM dos modelos abaixo e responda SOMENTE com um JSON válido, sem texto 
    - até 10 nós; o terceiro item da aresta é o rótulo (peso ou entrada/saída), pode ser "".
 4. "tabela" — tabela preenchida célula a célula (programação dinâmica, tabela verdade, mapa de Karnaugh).
    {"modelo":"tabela","titulo":"...","linhas":["0","1"],"colunas":["00","01","11","10"],"celulas":[["0","1","1","0"],["0","1","?","?"]],"ordem":[[0,0],[0,1]],"grupos":[{"celulas":[[0,1],[0,2]],"legenda":"..."}],"pergunta_final":"..."}
-   - até 8x8; "ordem" é a sequência de preenchimento; células "?" ficam para o aluno; "grupos" é opcional (agrupamentos do Karnaugh).
+   - até 8x8; "ordem" é a sequência de preenchimento; células "?" ficam para o aluno; "grupos" é opcional.
+5. "grade_dp" — robô que só anda para direita/baixo; terreno e tabela DP em branco, lado a lado.
+   {"modelo":"grade_dp","titulo":"...","custos":[[2,1,3],[1,4,2],[3,2,1]],"bloqueios":[[0,2]],"foco":[1,1],"pergunta_final":"..."}
+   - grade retangular de 2 a 5 por lado, custos de 0 a 99; foco com linha e coluna maiores que zero; início/destino livres. Não aceita rota nem tabela resolvida.
+6. "fluxo" — rede com fluxo atual/capacidade, sem calcular máximo nem completar caminho.
+   {"modelo":"fluxo","titulo":"...","nos":["s","a","t"],"fonte":"s","destino":"t","arestas":[{"de":"s","para":"a","capacidade":5,"fluxo":2},{"de":"a","para":"t","capacidade":5,"fluxo":2}],"primeiro_passo":["s","a"],"pergunta_final":"..."}
+   - de 3 a 6 nós; fluxo válido, conservado nos nós internos. Mostra apenas uma aresta disponível saindo da fonte.
+7. "karnaugh" — mapa com ordem Gray fixa e no máximo um grupo parcial válido.
+   {"modelo":"karnaugh","titulo":"...","celulas":[["1","0","0","1"],["0","1","1","0"]],"grupo":[[0,0],[0,3]],"pergunta_final":"..."}
+   - 2 ou 4 linhas/colunas; grupo retangular com lados potência de dois, pode atravessar bordas; nunca inclui 0 ou ?. Deve deixar outros uns sem grupo. Não aceita expressão final.
+8. "circuito" — portas AND/OR/XOR/NAND/NOR/NOT com tabela de sinais em branco.
+   {"modelo":"circuito","titulo":"...","entradas":["A","B"],"portas":[{"id":"X","tipo":"AND","entradas":["A","B"]}],"linha_foco":1,"pergunta_final":"..."}
+   - 2 ou 3 entradas e até 3 portas em ordem de dependência; todos os sinais calculados permanecem ?. Sem campos com saídas prontas.
+9. "reducao" — diagrama conceitual A para B, sem construir uma redução específica.
+   {"modelo":"reducao","titulo":"...","origem":"A","destino":"B","pergunta_final":"..."}
+   - A já é conhecido difícil; B é o alvo. A transformação f ainda fica para o aluno definir.
 
 Regras:
 - NÃO mostre a resposta final do exercício: deixe os últimos valores como "?" e feche com "pergunta_final", que pede ao aluno o próximo passo no papel.

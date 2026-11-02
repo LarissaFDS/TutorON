@@ -253,6 +253,10 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         """Demonstração do tutor socrático com respostas reais gravadas: não chama nenhuma IA."""
         return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
 
+    @app.get('/visuais', include_in_schema=False)
+    async def pagina_visuais() -> FileResponse:
+        return FileResponse(WEB / 'visuais.html', headers={'Cache-Control': 'no-cache'})
+
     @app.get("/design.css", include_in_schema=False)
     async def design_css() -> Response:
         from design import stylesheet
@@ -324,6 +328,26 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             raise HTTPException(503, "As animações não estão instaladas neste servidor.")
         return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, corpo.disciplina).publico()
 
+    @app.get('/api/visuais')
+    async def exemplos_visuais() -> dict:
+        from .animacao import galeria
+        pasta = settings.data_dir / 'animacoes'
+        return {'disponivel': animacao.disponivel(), 'exemplos': [galeria.resumo(e, pasta)
+                for e in galeria.exemplos() if liberada(disciplinas.obter(e['disciplina']))]}
+
+    @app.post('/api/visuais/{ident}')
+    async def preparar_visual(ident: str, request: Request) -> dict:
+        from .animacao import galeria
+        limitar(request)
+        try:
+            exemplo = galeria.obter(ident)
+        except KeyError:
+            raise HTTPException(404, 'Exemplo não encontrado.') from None
+        exigir_liberada(exemplo['disciplina'])
+        if not animacao.disponivel():
+            raise HTTPException(503, 'As animações não estão instaladas neste servidor.')
+        return app.state.tarefas.animar_exemplo(ident).publico()
+
     @app.get("/api/animacoes/{ident}.mp4", include_in_schema=False)
     async def video(ident: str) -> FileResponse:
         if not re.fullmatch(r"[A-Za-z0-9_-]{8,40}", ident):
@@ -332,6 +356,15 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not caminho.is_file():
             raise HTTPException(404, "Esta animação expirou. Gere de novo.")
         return FileResponse(caminho, media_type="video/mp4", headers={"Cache-Control": "private, max-age=3600"})
+
+    @app.get('/api/animacoes/{ident}.jpg', include_in_schema=False)
+    async def poster_visual(ident: str) -> FileResponse:
+        if not re.fullmatch(r'visual_[a-f0-9]{32}', ident):
+            raise HTTPException(404, 'Não encontrado.')
+        caminho = settings.data_dir / 'animacoes' / f'{ident}.jpg'
+        if not caminho.is_file():
+            raise HTTPException(404, 'Imagem não encontrada.')
+        return FileResponse(caminho, media_type='image/jpeg', headers={'Cache-Control': 'private, max-age=3600'})
 
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:

@@ -81,8 +81,9 @@ def salvar(destino: Path, registros: list[dict], modelos: list[str], completa: b
     destino.with_suffix(".md").write_text(texto_md, encoding="utf-8", newline="\n")
 
 
-async def executar(modelos: list[str], destino: Path, *, limite: int | None = None, ids: list[str] | None = None) -> dict:
-    casos = casos_de_teste()
+async def executar(modelos: list[str], destino: Path, *, limite: int | None = None, ids: list[str] | None = None,
+                   casos: list[dict] | None = None) -> dict:
+    casos = list(casos) if casos is not None else casos_de_teste()
     if ids:
         casos = [c for c in casos if c["id"] in ids]
         if {c["id"] for c in casos} != set(ids):
@@ -146,10 +147,12 @@ def main():
     p.add_argument("--saida", type=Path, default=ROOT / "eval/results/socratico-local.json")
     p.add_argument("--limite", type=int)
     p.add_argument("--ids", nargs="+")
+    p.add_argument("--casos", type=Path, help="bateria adicional; critérios não são enviados ao modelo")
     a = p.parse_args()
     if a.limite is not None and a.limite < 1:
         p.error('--limite precisa ser positivo')
-    print(asyncio.run(executar(a.modelos, a.saida, limite=a.limite, ids=a.ids)))
+    casos = json.loads(a.casos.read_text(encoding='utf-8')) if a.casos else None
+    print(asyncio.run(executar(a.modelos, a.saida, limite=a.limite, ids=a.ids, casos=casos)))
 
 
 if __name__ == "__main__":

@@ -1,0 +1,33 @@
+/* Escolha do exemplo à esquerda; o desenho e a tentativa ocupam o espaço de estudo. */
+.visual-voltar { color: var(--color-chalk); font-size: var(--text-ui); }
+.masthead .wordmark { color: var(--color-chalk); text-decoration: none; }
+.visual-pagina { margin-top: var(--space-6); margin-bottom: var(--space-8); }
+.visual-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.visual-temas { border-right: var(--border); padding-right: var(--space-5); }
+.visual-subtitulo { font-size: var(--text-ui); font-weight: var(--weight-bold); margin-bottom: var(--space-2); }
+.visual-tema {
+  display: block; width: 100%; padding: var(--space-3); margin-top: var(--space-2);
+  background: transparent; border: 0; border-left: 3px solid transparent;
+  color: var(--color-ink); font: inherit; font-size: var(--text-ui); text-align: left;
+  min-height: 44px; cursor: pointer;
+}
+.visual-tema small { display: block; font-size: var(--text-caption); color: var(--color-ink-muted); }
+.visual-tema[aria-current="true"] { border-left-color: var(--color-primary); background: var(--color-surface-sunken); font-weight: var(--weight-bold); }
+.visual-tema:hover { background: var(--color-surface-sunken); }
+.visual-estudo { min-width: 0; }
+.visual-titulo { font-size: var(--text-title); font-weight: var(--weight-bold); line-height: 1.3; margin-top: var(--space-1); }
+.visual-resumo { color: var(--color-ink-muted); margin-top: var(--space-2); margin-bottom: var(--space-4); }
+.visual-palco { background: var(--color-surface-sunken); border: var(--border); border-radius: var(--radius); aspect-ratio: 16 / 9; display: grid; place-items: center; overflow: hidden; }
+.visual-palco video { display: block; width: 100%; max-height: 100%; }
+.visual-vazio { padding: var(--space-5); text-align: center; max-width: 40ch; color: var(--color-ink-muted); }
+.visual-controles { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-3); }
+.visual-observar { margin-top: var(--space-5); max-width: var(--measure); }
+.visual-tarefa { margin-top: var(--space-5); border-top: var(--border); padding-top: var(--space-5); max-width: var(--measure); }
+.visual-tarefa form { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
+.visual-tarefa form .button { justify-self: start; }
+@media (max-width: 760px) {
+  .visual-layout { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
+  .visual-temas { border-right: 0; border-bottom: var(--border); padding-right: 0; padding-bottom: var(--space-4); }
+  #exemplos { display: flex; overflow-x: auto; gap: var(--space-2); padding-bottom: var(--space-2); }
+  .visual-tema { flex: 0 0 190px; }
+}

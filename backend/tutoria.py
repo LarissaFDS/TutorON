@@ -41,6 +41,10 @@ Em dúvida sobre entrega da solução, reprove. Nunca inclua a solução no moti
 
 
 async def revisar_com_modelo(llm, pergunta: str, contexto: str, resposta: str) -> dict:
+    # Não aprovar só um prefixo e publicar o restante sem revisão. A avaliação do
+    # candidato encontrou uma repetição de 17 mil caracteres que estourava o contexto.
+    if len(resposta) > 6000:
+        return {"aprovada": False, "motivo": "ajuda_extensa_demais_para_revisao"}
     marca = SEM_RACIOCINIO.set(True)
     formato = REVISAO_JSON.set(True)
     try:

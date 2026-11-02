@@ -9,6 +9,8 @@ O site tem dois modos:
 - **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
+**Aprender com desenhos:** a área [`/visuais`](http://127.0.0.1:8000/visuais) traz sete exemplos Manim de DP, fluxo, grafos, reduções e Sistemas Digitais, deixando etapas para o aluno completar. A tentativa pode ser levada ao tutor. Prepare os vídeos com `.venv\Scripts\python scripts\preparar_visuais.py`; detalhes em [VISUAIS.md](docs/VISUAIS.md).
+
 ## Como usar (Windows)
 
 Cinco atalhos na raiz. Nada mais é necessário no dia a dia.
@@ -86,6 +88,8 @@ powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
 ## Treinamento
 
 Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Treinar.bat` usa 112 exemplos socráticos de PAA e SD, com famílias separadas de validação e teste, treina um adapter LoRA sobre o Qwen3-8B na RTX 4060, mescla, importa no Ollama e avalia pelo fluxo do site. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-socratico-ft` no `.env` e reinicie o servidor.
+
+O treino de 02/11 terminou, mas o candidato não passou na [comparação de promoção](06-avaliacao/comparacao-modelo-2026-11-02.md); o servidor mantém o modelo atual. [Resumo para apresentação e origem dos dados](06-avaliacao/resumo-apresentacao-treino-e-visuais-2026-11-02.md).
 
 ## Documentação
 
