@@ -75,6 +75,14 @@ Nenhuma mudança em `backend/llm.py`, `backend/tarefas.py`, `backend/rag.py`, `b
 
 Como em SD, a nova disciplina entrou **em validação**: o seletor a mostra desabilitada e o servidor responde 403 até a `situacao` mudar no cadastro.
 
+## Física 2: primeira disciplina de física (02/11/2026)
+
+Física 2 entrou só com cadastro e acervo, sem nenhuma linha de código: entrada em `disciplinas/disciplinas.json`, `disciplinas/fis2/` (rigor, 34 blocos, `fontes.json`, `CURADORIA.md`, índice gerado), `tests_acervo/test_disciplina_fis2.py`, a lista de disciplinas do teste da API (`{"paa", "sd", "oac", "fis2"}`) e perguntas rotuladas em `eval/relevancia.py`.
+
+Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a-z0-9]` depois de tirar acentos, então letras gregas somem (`ρgh` → `gh`, `ω = 2πf` → nada) e unidades viram fragmentos (`1,01×10^5 Pa` → `01 10 pa`). O tokenizador **não** foi mudado, porque isso alteraria o ranking de PAA. Os blocos de Física 2 escrevem o nome das grandezas por extenso ("rô, rho", "ômega") e as conversões em mais de uma forma (1 atm, 1,01×10⁵ Pa, 760 torr); a parte semântica (`bge-m3`) cobre o resto. Os testes conferem `ho g h`, "rô g h" e `ρgh`, e `1.01e5 Pa` contra "1 atm".
+
+O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `	ext{N·m}`, que o KaTeX do site não aceita.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -97,3 +105,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (28 blocos, 28 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
+| `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
