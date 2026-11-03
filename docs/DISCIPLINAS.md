@@ -61,12 +61,26 @@ TUTORON_LIBERAR_EM_VALIDACAO=sd      # ids separados por vírgula, ou "todas"
 
 O prompt comum ganhou três seções (o texto anterior continua igual; teste em `backend/tests/test_seguranca.py`): citar junto da afirmação e só rótulos existentes, não atribuir ao professor o que só está numa nota da equipe, dizer quando a pergunta é de outra disciplina cadastrada e sugerir trocá-la, e nunca revelar ou parafrasear as instruções. Como isso depende de o modelo obedecer, `backend/seguranca.py` garante no código o que dá para garantir: pedido explícito das instruções recebe recusa fixa sem chamar a IA; rótulos [P]/[L] que não existem no material da pergunta são tirados da resposta; resposta que copia 12 palavras seguidas das instruções é trocada pela recusa. Paráfrase em resposta a um pedido indireto **não** é detectada pelo código.
 
+## OAC: o teste da arquitetura multidisciplina (27/10/2026)
+
+OAC foi a primeira disciplina incluída depois do mecanismo pronto, a partir de `dev` em ac44410. Ela exigiu:
+
+| O quê | Tipo |
+|---|---|
+| Entrada em `disciplinas/disciplinas.json`, `disciplinas/oac/rigor.md`, 28 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
+| Campo opcional `status_resolucao` (`validada`, `corrigida`, `pendente_professor`) no cabeçalho dos blocos, validado em `acervo/disciplinas.py::ler` e copiado para `itens.json` só quando presente | **mudança de código, 6 linhas** |
+| Teste da lista de disciplinas (`{"paa", "sd"}` → `{"paa", "sd", "oac"}`) e testes novos de OAC | testes |
+
+Nenhuma mudança em `backend/llm.py`, `backend/tarefas.py`, `backend/rag.py`, `backend/prompts.py`, `acervo/retrieval.py` nem no site. A única mudança de código fica no esquema do acervo: OAC trouxe gabaritos que precisam ser marcados como corrigidos ou pendentes, e o esquema não tinha onde registrar isso (`verificacao` diz se a conta foi conferida, não se o gabarito do professor estava certo). O campo é opcional, então PAA e SD não mudam: os `itens.json` deles continuam idênticos.
+
+Como em SD, a nova disciplina entrou **em validação**: o seletor a mostra desabilitada e o servidor responde 403 até a `situacao` mudar no cadastro.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
    - `rigor.md`: a seção "# Rigor …" com as regras da área (veja `disciplinas/sd/rigor.md`). É o único texto de instrução específico da disciplina.
    - `materiais/*.md`: um bloco por arquivo, com cabeçalho entre `---`:
-     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `fontes_catalogo`, `publicacao_transcricao` (quem autorizou publicar a transcrição e quando; `licenca` fica só para a licença do original), `revisao_humana` (`pendente` | `feita`, com `revisao_humana_em` e `revisao_humana_por`) e `revisao_professor`. A revisão humana interna não muda a confiabilidade; só `revisao_professor: sim` leva um bloco aprovado a confiabilidade alta.
+     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `status_resolucao` (`validada` | `corrigida` | `pendente_professor`, para exercícios da turma comparados ao gabarito), `fontes_catalogo`, `publicacao_transcricao` (quem autorizou publicar a transcrição e quando; `licenca` fica só para a licença do original), `revisao_humana` (`pendente` | `feita`, com `revisao_humana_em` e `revisao_humana_por`) e `revisao_professor`. A revisão humana interna não muda a confiabilidade; só `revisao_professor: sim` leva um bloco aprovado a confiabilidade alta.
    - `fontes.json` e `CURADORIA.md`: catálogo e justificativa da curadoria (modelo: `disciplinas/sd`).
 2. Acrescente a disciplina em `disciplinas/disciplinas.json` (`itens`, `indice`, `materiais`, `rigor`, `assuntos`, `exemplos`, `livro_supabase: false`).
 3. Gere o acervo: `python -m acervo.disciplinas <id> --embeddings` (sem `--embeddings`, ou sem o `bge-m3`, o índice fica só léxico).
@@ -82,3 +96,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (28 blocos, 28 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
