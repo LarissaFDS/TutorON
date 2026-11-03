@@ -1,8 +1,10 @@
 # Visuais na própria conversa
 
-Escreva sua dúvida normalmente. Você pode escolher **Só animação** antes de enviar ou pedir ajuda textual e, depois da resposta, clicar em **Quer entender visualmente?**. O vídeo aparece na mesma conversa, sem escolher um tema de catálogo.
+Há duas entradas separadas. Em **Tirar dúvida**, o tipo de ajuda começa em **O tutor escolhe**, inclusive ao abrir links antigos com `?visual=1`. Depois da ajuda em texto, **Quer entender visualmente?** usa a pergunta, a tentativa e a explicação já recebida para gerar um vídeo na própria conversa. O aluno pode escolher outro tipo de ajuda manualmente.
 
-Em **Aprender com desenhos**, os sete temas anteriores aparecem como recomendações opcionais: robô/DP, fluxo residual, Karnaugh, circuito/tabela-verdade, BFS, certificados em grafos e reduções. Clicar só preenche um rascunho editável e seleciona **Só animação**; não envia nem restringe a pergunta. O aluno pode escrever qualquer outra dúvida diretamente.
+Na aba **Aprender com desenhos** (`/visuais`), o aluno escreve uma pergunta livre e pode adicionar código, enunciado ou tentativa. **Explicar com um desenho** pede uma pista visual diretamente, sem gerar uma resposta textual antes. A disciplina é automática por padrão, com correção manual opcional.
+
+Os sete temas anteriores ficam abaixo do formulário como recomendações opcionais: robô/DP, fluxo residual, Karnaugh, circuito/tabela-verdade, BFS, certificados em grafos e reduções. Nenhum é selecionado por padrão. Clicar abre o exemplo controlado; **Usar como ponto de partida** copia uma pergunta editável para o formulário livre, sem enviar. As recomendações não aparecem no formulário de **Tirar dúvida** e não alteram seu tipo de ajuda.
 
 A foto já conferida e o código/tentativa colados acompanham o pedido visual em campos separados. A animação direta não precisa gerar antes uma resposta textual. Depois de uma resposta, a ajuda já recebida também acompanha o planejamento do desenho.
 
@@ -24,7 +26,7 @@ Se as duas propostas falharem, o sistema explica que não conseguiu montar o des
 
 ## Onde ficou o catálogo anterior
 
-A aba separada de temas saiu do atendimento. As recomendações opcionais ficam junto ao formulário livre. `/visuais` redireciona para a conversa com “Só animação” selecionado. Os vídeos controlados anteriores permanecem na demonstração técnica `/demo/visuais`; não são usados como alternativa automática para uma pergunta.
+A aba **Aprender com desenhos** foi mantida como uma área separada. Os exemplos controlados acompanham o formulário livre em `/visuais`; a rota técnica `/demo/visuais` também continua disponível. Não são usados como alternativa automática quando uma pergunta livre falha.
 
 Os scripts e as evidências da demonstração anterior foram preservados. O arquivo offline alterado pelo usuário não foi modificado.
 

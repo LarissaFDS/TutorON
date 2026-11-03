@@ -17,6 +17,8 @@
   }
   function escolher(e) {
     atual = e;
+    $('visual-layout').classList.remove('visual-layout--recomendacoes');
+    $('exemplo-estudo').hidden = false;
     versao++;
     video.pause();
     video.removeAttribute('src');
@@ -103,6 +105,107 @@
       location.href = '/?disciplina=' + encodeURIComponent(atual.disciplina);
     } catch (e) { status('video-status', 'Não consegui guardar a tentativa nesta aba. Copie seu texto e abra o tutor.', 'error'); }
   });
+  $('usar-pergunta').addEventListener('click', function () {
+    if (!atual) return;
+    $('livre-pergunta').value = atual.pergunta;
+    $('livre-pergunta').focus();
+    $('livre-pergunta').scrollIntoView({ block: 'center', behavior: 'smooth' });
+  });
+
+  // O formulário livre independe do catálogo e usa a mesma revisão visual da conversa.
+  var gerandoLivre = false;
+  var PENDENTE_LIVRE = 'tutoron-desenho-livre';
+  function guardarLivre(dados) {
+    try { sessionStorage.setItem(PENDENTE_LIVRE, JSON.stringify(dados)); } catch (e) { /* armazenamento opcional */ }
+  }
+  function limparLivre() {
+    try { sessionStorage.removeItem(PENDENTE_LIVRE); } catch (e) { /* armazenamento opcional */ }
+  }
+  async function desenharLivre(pendente) {
+    if (gerandoLivre) return;
+    var pergunta = pendente ? pendente.pergunta : $('livre-pergunta').value.trim();
+    if (!pergunta || pergunta.length < 3) {
+      status('livre-status', 'Escreva a dúvida que você quer entender visualmente.', 'error');
+      $('livre-pergunta').focus();
+      return;
+    }
+    var pedido = pendente || { pergunta: pergunta, contexto: $('livre-contexto').value.trim(),
+      disciplina: $('livre-disciplina').value || 'auto' };
+    gerandoLivre = true;
+    $('livre-enviar').disabled = true;
+    $('livre-resultado').hidden = true;
+    $('livre-video').pause();
+    status('livre-status', 'Planejando uma pista visual para a sua dúvida…', 'busy');
+    try {
+      if (!pedido.id) {
+        var resposta = await fetch('/api/animar', { method: 'POST',
+          headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(pedido) });
+        var criada = await resposta.json();
+        if (!resposta.ok) throw new Error(criada.erro || 'Não foi possível pedir o desenho.');
+        pedido.id = criada.id;
+        guardarLivre(pedido);
+      }
+      var falhas = 0, tarefa;
+      for (;;) {
+        var consulta;
+        try { consulta = await fetch('/api/tarefas/' + encodeURIComponent(pedido.id), { cache: 'no-store' }); }
+        catch (e) { consulta = null; }
+        if (consulta && consulta.status === 404) {
+          limparLivre();
+          throw new Error('O servidor foi reiniciado. Envie a dúvida novamente.');
+        }
+        if (consulta && consulta.ok) {
+          tarefa = await consulta.json();
+          falhas = 0;
+          if (tarefa.status === 'pronta' || tarefa.status === 'erro') break;
+          status('livre-status', tarefa.mensagem || 'Preparando o desenho…', 'busy');
+        } else if (++falhas >= 10) {
+          throw new Error('A conexão caiu. Recarregue esta página para retomar o desenho.');
+        }
+        await new Promise(function (resolve) { setTimeout(resolve, 1000); });
+      }
+      limparLivre();
+      if (tarefa.status !== 'pronta') throw new Error(tarefa.mensagem || 'Não consegui preparar esse desenho.');
+      $('livre-video-titulo').textContent = tarefa.titulo || 'Pista visual da sua dúvida';
+      $('livre-video').src = tarefa.video;
+      $('livre-video').setAttribute('aria-label', 'Animação: ' + (tarefa.titulo || 'sua dúvida'));
+      $('livre-video').muted = true;
+      $('livre-pergunta-final').textContent = tarefa.pergunta_final ? 'Sua vez: ' + tarefa.pergunta_final : '';
+      $('livre-resultado').hidden = false;
+      $('livre-video').play().catch(function () {});
+      status('livre-status', 'Desenho preparado a partir da sua pergunta. Observe e tente continuar no papel.');
+    } catch (e) { status('livre-status', e.message || 'Não foi possível gerar o desenho.', 'error'); }
+    finally { gerandoLivre = false; $('livre-enviar').disabled = false; }
+  }
+  $('livre-form').addEventListener('submit', function (e) { e.preventDefault(); desenharLivre(); });
+  $('livre-pergunta').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) $('livre-form').requestSubmit();
+  });
+  window.addEventListener('beforeunload', function (e) {
+    if (gerandoLivre) { e.preventDefault(); e.returnValue = ''; }
+  });
+  (async function disciplinasLivres() {
+    try {
+      var r = await fetch('/api/disciplinas', { cache: 'no-store' });
+      if (!r.ok) return;
+      var dados = await r.json();
+      dados.disciplinas.filter(function (d) { return d.disponivel !== false; }).forEach(function (d) {
+        var opcao = document.createElement('option');
+        opcao.value = d.id;
+        opcao.textContent = d.nome + ' (' + d.sigla + ')';
+        $('livre-disciplina').append(opcao);
+      });
+    } catch (e) { /* identificação automática continua disponível */ }
+  })();
+  try {
+    var pendente = JSON.parse(sessionStorage.getItem(PENDENTE_LIVRE) || 'null');
+    if (pendente && typeof pendente.id === 'string' && typeof pendente.pergunta === 'string') {
+      $('livre-pergunta').value = pendente.pergunta;
+      $('livre-contexto').value = pendente.contexto || '';
+      desenharLivre(pendente);
+    }
+  } catch (e) { /* sem armazenamento, o formulário continua livre */ }
+
   (async function carregar() {
     try {
       var r = await fetch('/api/visuais', { cache: 'no-store' });
@@ -123,7 +226,8 @@
       $('visual-layout').hidden = false;
       status('catalogo-status', '');
       var id = new URL(location.href).searchParams.get('exemplo');
-      escolher(dados.exemplos.find(function (e) { return e.id === id; }) || dados.exemplos[0]);
+      var recomendado = dados.exemplos.find(function (e) { return e.id === id; });
+      if (recomendado) escolher(recomendado);
     } catch (e) { status('catalogo-status', e.message || 'Sem conexão. Recarregue a página para tentar novamente.', 'error'); }
   })();
 })();

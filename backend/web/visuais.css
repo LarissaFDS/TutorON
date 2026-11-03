@@ -2,7 +2,15 @@
 .visual-voltar { color: var(--color-chalk); font-size: var(--text-ui); }
 .masthead .wordmark { color: var(--color-chalk); text-decoration: none; }
 .visual-pagina { margin-top: var(--space-6); margin-bottom: var(--space-8); }
+.visual-livre { max-width: 860px; }
+.visual-livre form { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+.visual-livre form > .button { justify-self: start; }
+.visual-recomendados { margin-top: var(--space-7); padding-top: var(--space-5); border-top: var(--border); }
 .visual-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: var(--space-6); align-items: start; }
+.visual-layout--recomendacoes { grid-template-columns: minmax(0, 1fr); }
+.visual-layout--recomendacoes .visual-temas { border: 0; padding: 0; }
+.visual-layout--recomendacoes #exemplos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: var(--space-2); }
+.visual-layout--recomendacoes .visual-tema { margin: 0; border: var(--border); border-radius: var(--radius); }
 .visual-temas { border-right: var(--border); padding-right: var(--space-5); }
 .visual-subtitulo { font-size: var(--text-ui); font-weight: var(--weight-bold); margin-bottom: var(--space-2); }
 .visual-tema {

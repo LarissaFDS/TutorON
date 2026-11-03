@@ -9,7 +9,7 @@ O site tem dois modos:
 - **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
-**Visuais na conversa:** escolha **Só animação** ao escrever a dúvida ou clique em **Quer entender visualmente?** depois da resposta. O desenho é planejado a partir do enunciado e aparece na própria conversa. A disciplina é identificada automaticamente quando há sinais claros, com escolha manual opcional. Não há escolha obrigatória de tema. Detalhes em [VISUAIS.md](docs/VISUAIS.md).
+**Aprender com desenhos:** a aba separada permite escrever uma dúvida livre ou explorar temas recomendados opcionais. Em **Tirar dúvida**, a seleção inicial é **O tutor escolhe**; depois da resposta em texto, **Quer entender visualmente?** gera uma pista na mesma conversa, com base na pergunta e na explicação. A disciplina é identificada automaticamente quando há sinais claros, com escolha manual opcional. Detalhes em [VISUAIS.md](docs/VISUAIS.md).
 
 ## Como usar (Windows)
 

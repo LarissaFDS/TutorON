@@ -22,6 +22,9 @@ Permita conceitos corretos, definições, relações, dados fornecidos no enunci
 Uma dúvida conceitual pode receber uma explicação parcial: explicar o que faz uma pilha ou um registrador
 não é resolver uma tarefa numérica. Não reprove apenas por o desenho transmitir informação útil.
 No modelo esquema, blocos lacuna=true são desenhados como 'Você completa ?'. Eles ficam em branco.
+Essa lacuna é intencional: não reprove por o bloco estar vazio, incompleto ou não explicar a resposta.
+A pergunta final é uma tarefa para o aluno, não algo que o desenho deva responder ou preencher.
+Exija que os apoios e as relações façam sentido para tentar a tarefa; não exija o conteúdo da lacuna.
 Não exija que os blocos de apoio também estejam vazios. Setas representam relações ou dependências.
 Reprove se houver erro técnico, confirmação de tentativa errada, resultado final solicitado, cálculo
 completo, expressão simplificada, código/algoritmo/prova completos ou exemplo copiável que resolva a tarefa.

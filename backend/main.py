@@ -33,7 +33,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response, RedirectResponse
+from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
@@ -53,7 +53,7 @@ WEB = Path(__file__).resolve().parent / "web"
 class AppStaticFiles(StaticFiles):
     async def get_response(self, path, scope):
         resposta = await super().get_response(path, scope)
-        if path in ('app.js', 'app.css', 'render.js'):
+        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css'):
             resposta.headers['Cache-Control'] = 'no-cache'
         return resposta
 
@@ -266,8 +266,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
 
     @app.get('/visuais', include_in_schema=False)
-    async def pagina_visuais() -> RedirectResponse:
-        return RedirectResponse('/?visual=1', status_code=307)
+    async def pagina_visuais() -> FileResponse:
+        return FileResponse(WEB / 'visuais.html', headers={'Cache-Control': 'no-cache'})
 
     @app.get('/demo/visuais', include_in_schema=False)
     async def demo_visuais() -> FileResponse:

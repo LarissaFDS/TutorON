@@ -1,5 +1,7 @@
 # Ajustes após o teste da interface — 02/11/2026
 
+**Registro histórico:** a organização descrita abaixo foi corrigida após esclarecimento do usuário. A versão atual mantém **Aprender com desenhos** em aba separada, com pergunta livre e recomendações opcionais. **Tirar dúvida** começa em **O tutor escolhe** e oferece desenho depois da resposta textual. Consulte `docs/VISUAIS.md` e `06-avaliacao/abas-visuais-v2.md`.
+
 ## O que mudou
 
 - A introdução “Fase MVP” e a aba de temas visuais fixos saíram da interface principal.

@@ -60,7 +60,7 @@ Com a cota do Gemini esgotada, a leitura falha com uma mensagem amigável ("digi
 
 ## 3. Animações com Manim (protótipo)
 
-**Fluxo atual:** o aluno pede **Só animação** ou clica em **Quer entender visualmente?** após a ajuda textual. O desenho nasce da dúvida e aparece na mesma conversa. Há um esquema aberto de blocos para conceitos, além das cenas de grade, fluxo, Karnaugh, circuito e redução. Não há alternativa automática de catálogo; propostas que falham pedem reformulação. Veja [VISUAIS.md](VISUAIS.md). As quatro cenas descritas abaixo são a base anterior, preservada.
+**Fluxo atual:** **Aprender com desenhos** é uma aba separada com pergunta livre e exemplos recomendados opcionais. Em **Tirar dúvida**, a seleção inicial é **O tutor escolhe**; **Quer entender visualmente?** aparece após a ajuda textual e usa a pergunta e a explicação para gerar um desenho na própria conversa. Há um esquema aberto de blocos para conceitos, além das cenas de grade, fluxo, Karnaugh, circuito e redução. Propostas que falham pedem reformulação. Veja [VISUAIS.md](VISUAIS.md). As quatro cenas descritas abaixo são a base anterior, preservada.
 
 **O que é o Manim:** a biblioteca Python de animações matemáticas criada pelo 3Blue1Brown. Usamos a versão da comunidade (Manim CE 0.19). Pela pip no Windows, ela já vem com PyAV (vídeo) e Pango (texto), então **não precisa de ffmpeg nem LaTeX**: só não usamos `MathTex`.
 
