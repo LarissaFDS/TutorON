@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "fis2"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -208,13 +208,13 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
 
 @pytest.fixture
 def site_oac(tmp_path, monkeypatch):
-    """O mesmo site, com OAC liberada só neste teste (no cadastro ela está "em validação")."""
+    """O mesmo site, com OAC e Física 2 liberadas só neste teste (no cadastro elas estão "em validação")."""
     from backend import main
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
-                                             "disciplinas_em_validacao_liberadas": ("oac",)})
+                                             "disciplinas_em_validacao_liberadas": ("oac", "fis2")})
     llm.embed = sem_embedding
     llm.chamadas = []
     original = llm._provider
@@ -296,3 +296,32 @@ def test_resolucao_corrigida_chega_ao_tutor_marcada_como_nao_oficial(site_oac):
     _, sistema, prompt = site_oac.llm.chamadas[-1]
     assert "Status da resolução: corrigida" in prompt
     assert "nunca é o gabarito oficial" in sistema
+
+
+# ---------------------------------------------------------------- Física 2: quarta disciplina, só cadastro
+
+def test_fis2_em_validacao_fica_fora_do_atendimento_normal(site):
+    r = site.post("/api/perguntar", json={"pergunta": "Qual o período de um pêndulo simples de 1 m?", "disciplina": "fis2"})
+    assert r.status_code == 403 and "em validação" in r.json()["erro"]
+    assert site.llm.chamadas == []
+
+
+def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    t = perguntar(site_oac, "Qual o período de um pêndulo simples de 1 m?", "fis2")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de Física 2") for f in t["fontes"])
+    (m_oac, s_oac, _), (m_fis, s_fis, prompt) = site_oac.llm.chamadas[-2:]
+    assert m_oac == m_fis
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert comum(s_oac, disciplinas.obter("oac")) == comum(s_fis, disciplinas.obter("fis2"))
+    assert "ΔE_int = Q − W" in s_fis and "RISC-V" not in s_fis.split("# Rigor")[-1]
+    assert r"T = 2\pi\sqrt{L/g}" in prompt
+
+
+def test_fis2_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Explique a heurística de Dijkstra para grafos esparsos", "fis2")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    _, _, prompt = site_oac.llm.chamadas[-1]
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
