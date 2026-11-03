@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -208,13 +208,13 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
 
 @pytest.fixture
 def site_oac(tmp_path, monkeypatch):
-    """O mesmo site, com OAC e Física 2 liberadas só neste teste (no cadastro elas estão "em validação")."""
+    """O mesmo site, com OAC, Física 2 e ED liberadas só neste teste (no cadastro elas estão "em validação")."""
     from backend import main
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
-                                             "disciplinas_em_validacao_liberadas": ("oac", "fis2")})
+                                             "disciplinas_em_validacao_liberadas": ("oac", "fis2", "ed")})
     llm.embed = sem_embedding
     llm.chamadas = []
     original = llm._provider
@@ -384,6 +384,35 @@ def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
 
 def test_fis2_sem_material_relevante_nao_inventa_fonte(site_oac):
     t = perguntar(site_oac, "Explique a heurística de Dijkstra para grafos esparsos", "fis2")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    _, _, prompt = site_oac.llm.chamadas[-1]
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
+
+
+# ---------------------------------------------------------------- Estrutura de Dados: código C, só cadastro
+
+def test_ed_em_validacao_fica_fora_do_atendimento_normal(site):
+    r = site.post("/api/perguntar", json={"pergunta": "Como remover o último nó de uma lista encadeada?", "disciplina": "ed"})
+    assert r.status_code == 403 and "em validação" in r.json()["erro"]
+    assert site.llm.chamadas == []
+
+
+def test_pergunta_de_ed_usa_material_de_ed_e_a_mesma_ia(site_oac):
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    t = perguntar(site_oac, "Por que meu heap escreve fora do vetor quando fica cheio?", "ed")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de ED") for f in t["fontes"])
+    (m_oac, s_oac, _), (m_ed, s_ed, prompt) = site_oac.llm.chamadas[-2:]
+    assert m_oac == m_ed
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert comum(s_oac, disciplinas.obter("oac")) == comum(s_ed, disciplinas.obter("ed"))
+    assert "Não escreva o projeto completo" in s_ed and "RISC-V" not in s_ed.split("# Rigor")[-1]
+    assert "MAX_HEAP_SIZE + 1" in prompt
+
+
+def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Qual o período de um pêndulo simples de 1 m?", "ed")
     assert t["status"] == "pronta" and t["fontes"] == []
     _, _, prompt = site_oac.llm.chamadas[-1]
     assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
