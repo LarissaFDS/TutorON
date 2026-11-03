@@ -341,7 +341,11 @@ class Tarefas:
                 self.registro.anexar("fotos.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                      "erro": "nenhum_modelo", "tentativas": exc.attempts})
                 t.status = "erro"
-                t.mensagem = "Não consegui ler a foto agora. Tente de novo em instantes ou digite o enunciado."
+                if any(a.get("cota") == "por_dia" for a in exc.attempts):
+                    t.mensagem = ("O serviço de leitura de fotos atingiu a cota diária e nenhuma alternativa respondeu. "
+                                  "Tente mais tarde ou digite o enunciado.")
+                else:
+                    t.mensagem = "Não consegui ler a foto agora. Tente de novo em instantes ou digite o enunciado."
                 return
             except ValueError:
                 t.status, t.mensagem = "erro", "A leitura da foto veio incompleta. Tente de novo ou digite o enunciado."

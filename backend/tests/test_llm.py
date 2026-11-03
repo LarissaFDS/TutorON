@@ -82,6 +82,48 @@ def run(coro):
     return asyncio.run(coro)
 
 
+def test_foto_usa_visao_local_quando_gemini_esgota_cota():
+    import httpx
+    chamadas = []
+
+    def responder(req):
+        chamadas.append(req.url.path)
+        if req.url.host == 'generativelanguage.googleapis.com':
+            return httpx.Response(429, json={'error': {'details': [
+                {'violations': [{'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier'}]}]}})
+        corpo = json.loads(req.content)
+        assert corpo['model'] == 'visao' and corpo['messages'][1]['images']
+        return httpx.Response(200, json={'message': {'content': '{"enunciado":"T(n)=2T(n/2)+n"}'}})
+
+    async def executar():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as c:
+            llm = LLM(settings(gemini_models=('g1',), local_vision_model='visao'), client=c)
+            r = await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert r.model == Model('ollama', 'visao')
+            assert r.attempts[0]['cota'] == 'por_dia'
+            # A segunda foto pula o Gemini em pausa e vai direto para o local.
+            r = await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert r.attempts[0]['resultado'] == 'pulado (em pausa)'
+
+    run(executar())
+    assert len(chamadas) == 3
+
+
+def test_foto_nao_repete_ultimo_modelo_em_pausa_sem_visao_local():
+    llm = LLM(settings(gemini_models=('g1',)))
+    llm.breaker.trip(Model('gemini', 'g1'), 'HTTP 429', 60)
+
+    async def executar():
+        try:
+            with pytest.raises(AllUnavailable) as erro:
+                await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert erro.value.attempts == [{'modelo': 'gemini:g1', 'resultado': 'pulado (em pausa)'}]
+        finally:
+            await llm.client.aclose()
+
+    run(executar())
+
+
 def test_primeiro_modelo_responde():
     llm = FakeLLM({"g1": ("ok", "resposta um")})
     r = run(llm.complete("s", "p"))
