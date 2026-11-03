@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -296,3 +296,65 @@ def test_resolucao_corrigida_chega_ao_tutor_marcada_como_nao_oficial(site_oac):
     _, sistema, prompt = site_oac.llm.chamadas[-1]
     assert "Status da resolução: corrigida" in prompt
     assert "nunca é o gabarito oficial" in sistema
+
+
+# ---------------------------------------------------------------- Cálculo 3: disciplina de matemática só com cadastro
+
+@pytest.fixture
+def site_calc3(tmp_path, monkeypatch):
+    """O mesmo site, com Cálculo 3 liberada só neste teste (no cadastro ela está "em validação")."""
+    from backend import main
+
+    monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
+    llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
+                                             "disciplinas_em_validacao_liberadas": ("calc3",)})
+    llm.embed = sem_embedding
+    llm.chamadas = []
+    original = llm._provider
+    llm._provider = lambda m, s, p: llm.chamadas.append((m, s, p)) or original(m, s, p)
+    with TestClient(main.create_app(settings=llm.settings, llm=llm, warm_up=False)) as c:
+        c.llm, c.tmp = llm, tmp_path
+        yield c
+
+
+def test_calc3_em_validacao_fica_fora_do_atendimento_normal(site):
+    r = site.post("/api/perguntar", json={"pergunta": "Onde a cardioide r = 1 + sen θ tem tangente horizontal?",
+                                          "disciplina": "calc3"})
+    assert r.status_code == 403 and "em validação" in r.json()["erro"]
+    assert site.llm.chamadas == []
+
+
+def test_pergunta_de_calc3_usa_material_de_calc3_com_latex(site_calc3):
+    t = perguntar(site_calc3, "Onde a cardioide r = 1 + sen θ tem tangente horizontal?", "calc3")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de Cálculo 3") for f in t["fontes"])
+    _, sistema, prompt = site_calc3.llm.chamadas[-1]
+    assert "Cálculo 3" in sistema and "notação do Stewart" in sistema
+    assert r"\operatorname{sen}" in prompt  # a fórmula chega em LaTeX, que o render.js entrega ao KaTeX
+    assert "Status da resolução: pendente de confirmação do professor" in prompt
+    assert "nunca é o gabarito oficial" in sistema
+
+
+def test_mesma_ia_para_as_quatro_disciplinas(site_calc3):
+    perguntar(site_calc3, "Teorema Mestre para T(n) = 2T(n/2) + n", "paa")
+    perguntar(site_calc3, "Complemento de 2 de 101010", "sd")
+    perguntar(site_calc3, "Como calcular o comprimento de arco de uma curva paramétrica?", "calc3")
+    chamadas = site_calc3.llm.chamadas[-3:]
+    assert len({m for m, _, _ in chamadas}) == 1
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert len({comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "calc3"))}) == 1
+
+
+def test_calc3_sem_material_relevante_nao_inventa_fonte(site_calc3):
+    t = perguntar(site_calc3, "Explique a heurística de Dijkstra para grafos esparsos", "calc3")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in site_calc3.llm.chamadas[-1][2]
+
+
+def test_resolucao_corrigida_de_calc3_chega_marcada(site_calc3):
+    perguntar(site_calc3, "O limite de |x|/(|x|+|y|) na origem existe? Usei y = mx", "calc3")
+    _, _, prompt = site_calc3.llm.chamadas[-1]
+    assert "Status da resolução: corrigida" in prompt and "o original escreveu" in prompt
+    assert r"\dfrac{1}{1+|m|}" in prompt

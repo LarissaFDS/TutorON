@@ -75,6 +75,31 @@ Nenhuma mudança em `backend/llm.py`, `backend/tarefas.py`, `backend/rag.py`, `b
 
 Como em SD, a nova disciplina entrou **em validação**: o seletor a mostra desabilitada e o servidor responde 403 até a `situacao` mudar no cadastro.
 
+## Cálculo 3: uma disciplina de matemática (02/11/2026)
+
+Cálculo 3 (ECOM017, UFAL) foi a primeira disciplina de matemática, a partir de `codex/oac-acervo` (depende do campo `status_resolucao` do PR de OAC). Ela exigiu:
+
+| O quê | Tipo |
+|---|---|
+| Entrada em `disciplinas/disciplinas.json`, `disciplinas/calc3/rigor.md`, 21 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
+| `acervo/retrieval.tokens`: `x^2` e `x^{2}` viram o mesmo token de `x²`, e comandos de diagramação do LaTeX (`\frac`, `\langle`, `\mathbf`…) são ignorados | **mudança de código, 4 linhas** |
+| SymPy em `requirements-acervo.txt`, só para os testes que conferem as resoluções | dependência de teste |
+| Lista de disciplinas nos testes e testes novos de Cálculo 3 | testes |
+
+**Diagnóstico.** A arquitetura serviu sem mudança no backend, no prompt comum, na IA nem no site:
+- KaTeX já renderizava `$…$` e `$$…$$`, então as fórmulas vão aos blocos em LaTeX, com descrição em palavras.
+- `status_resolucao` cobriu o caso mais comum aqui: provas sem gabarito (`pendente_professor`).
+- A barreira de "em validação" funcionou igual.
+
+O ponto fraco foi a **busca léxica com notação matemática**: o tokenizador só guarda palavras de duas letras ou mais, então `x^2y` (LaTeX) e `x²y` (Unicode) davam tokens diferentes, e `\langle`/`\frac` casavam blocos de outro assunto. A correção é genérica e não mudou PAA nem SD (`eval/relevancia.py` com a saída idêntica antes e depois; ranking léxico de PAA igual). `∇f`, `∂f/∂x` e `r'(t)` continuam sem token, e a busca depende das palavras ("gradiente", "derivada parcial").
+
+Outras lacunas, que não são da arquitetura:
+- A ementa não foi conferida literalmente.
+- Gradiente, plano tangente, regra da cadeia e Lagrange não têm material da turma. As 5 notas da equipe estão como `candidato`, fora da busca, até revisão humana.
+- Não há modelos Manim para curvas e superfícies; nenhum foi criado.
+- Não há `foto.py` nem envio de imagem no backend desta base (`codex/oac-acervo`), então nada foi testado com foto.
+- O Gemini acertou as 5 perguntas de exemplo, mas não repetiu o aviso de resolução pendente. O modelo local não foi testado.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -97,3 +122,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (28 blocos, 28 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
+| `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
