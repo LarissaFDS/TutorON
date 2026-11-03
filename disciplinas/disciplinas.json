@@ -149,6 +149,40 @@
         "Quantos nós tem o terceiro harmônico de uma corda presa nas duas pontas?",
         "Como calcular a variação de entropia numa expansão livre?"
       ]
+    },
+    {
+      "id": "ed",
+      "nome": "Estrutura de Dados",
+      "sigla": "ED",
+      "situacao": "em validação",
+      "itens": "disciplinas/ed/acervo/itens.json",
+      "indice": "disciplinas/ed/acervo/indice.json",
+      "materiais": "disciplinas/ed/materiais",
+      "rigor": "disciplinas/ed/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ed-01-ponteiros-memoria",
+        "ed-02-structs-funcoes",
+        "ed-03-busca",
+        "ed-04-complexidade-recorrencias",
+        "ed-05-ordenacao",
+        "ed-06-listas",
+        "ed-07-pilhas-filas",
+        "ed-08-heap-fila-prioridade",
+        "ed-09-hash",
+        "ed-10-arvores",
+        "ed-11-grafos",
+        "ed-12-huffman",
+        "ed-13-sat",
+        "ed-14-projetos-depuracao"
+      ],
+      "exemplos": [
+        "Como remover o último nó de uma lista encadeada em C sem perder a referência?",
+        "Por que meu heap escreve fora do vetor quando fica cheio?",
+        "Como tratar colisões numa tabela hash com endereçamento aberto?",
+        "Quando a AVL faz rotação dupla?",
+        "Qual a diferença entre BFS e DFS na implementação?"
+      ]
     }
   ]
 }
