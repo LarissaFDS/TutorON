@@ -120,6 +120,35 @@
         "Como achar a equação do plano que passa por (1,0,0), (0,2,0) e (0,0,3)?",
         "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"
       ]
+    },
+    {
+      "id": "fis2",
+      "nome": "Física 2",
+      "sigla": "Física 2",
+      "situacao": "em validação",
+      "itens": "disciplinas/fis2/acervo/itens.json",
+      "indice": "disciplinas/fis2/acervo/indice.json",
+      "materiais": "disciplinas/fis2/materiais",
+      "rigor": "disciplinas/fis2/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "fis2-01-equilibrio-elasticidade",
+        "fis2-02-gravitacao",
+        "fis2-03-fluidos",
+        "fis2-04-oscilacoes",
+        "fis2-05-ondas-i",
+        "fis2-06-ondas-ii-som",
+        "fis2-07-temperatura-calor-primeira-lei",
+        "fis2-08-teoria-cinetica",
+        "fis2-09-entropia-segunda-lei"
+      ],
+      "exemplos": [
+        "Por que um bloco de madeira flutua e uma pedra do mesmo volume afunda?",
+        "Como calcular o trabalho de um gás ideal numa expansão isotérmica?",
+        "Qual o período de um pêndulo simples de 1 m?",
+        "Quantos nós tem o terceiro harmônico de uma corda presa nas duas pontas?",
+        "Como calcular a variação de entropia numa expansão livre?"
+      ]
     }
   ]
 }
