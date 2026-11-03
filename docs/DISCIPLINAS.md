@@ -108,6 +108,25 @@ Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a
 
 O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `\text{N·m}`, que o KaTeX do site não aceita.
 
+## Estrutura de Dados: primeira disciplina de programação em C (03/11/2026)
+
+ED entrou só com cadastro e acervo, como Física 2, e com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/ed/`: rigor, 20 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_ed.py` e os programas `tests_acervo/c_ed/*.c`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py`.
+
+Código C no acervo:
+- Cada função que aparece num bloco é cópia exata de um programa de `tests_acervo/c_ed/`. Os programas compilam com `gcc -std=c99 -Wall -Wextra -pedantic -Werror` e cobrem estrutura vazia, um elemento, remoção do primeiro e do último, colisões na hash e as rotações simples e duplas da AVL.
+- Rodam com AddressSanitizer e UBSan quando o gcc local tem os sanitizadores. Senão, usam a imagem `gcc:14` do Docker. Senão, o teste é pulado com o motivo; o MinGW 6.3 não tem `-fsanitize`.
+- Sem gcc, os testes de compilação também são pulados com mensagem.
+- O servidor **não** compila nem executa código de aluno.
+
+Notação de código na busca léxica: `tokens` descarta `->`, `*` e `;`, então `p->prox = NULL;` vira `prox null` e `sizeof(int*)` vira `sizeof int`. O tokenizador não foi mudado. Os blocos escrevem o nome do campo e a frase em português ("ponteiro para o próximo"), e os testes conferem as duas formas.
+
+Fronteira com PAA: os resultados são os mesmos; ED trata implementação e depuração, PAA trata prova formal. O isolamento vem dos índices separados, sem filtro por palavra-chave. Uma pergunta de prova (Teorema Mestre) com ED selecionada usa o material de ED, e `rigor.md` manda dizer que a prova completa é de PAA. Huffman e SAT são projetos avaliados: o acervo tem conceitos e regras, nunca a implementação completa.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -132,3 +151,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (28 blocos, 28 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
 | `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
 | `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
+| `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (20 blocos, 18 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | **em validação**: barrada no servidor até a validação; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
