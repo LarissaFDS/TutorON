@@ -1,0 +1,38 @@
+{
+  "completa": true,
+  "resumo": {
+    "tutoron-paa": {
+      "casos": 1,
+      "erros": 0,
+      "primeira_ajuda_reprovada": 0,
+      "ajudas_de_reserva": 0,
+      "orientacoes_deterministicas": 1,
+      "publicadas_aprovadas_pelo_revisor": 0
+    }
+  },
+  "revisao_humana": "pendente",
+  "limite": "O mesmo modelo revisa a própria ajuda; aprovação automática não comprova ausência de vazamento nem aprendizagem.",
+  "casos": [
+    {
+      "id": "curta-sd",
+      "disciplina": "sd",
+      "pergunta": "Qual a saída de uma porta AND com entradas 1 e 0? Só o bit.",
+      "ajuda": "pista",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "nenhum (orientação fixa)",
+      "segundos": 0.2,
+      "primeira_resposta_bruta": "",
+      "ultima_resposta_bruta": "",
+      "publicada": "Vamos usar a tabela que você está estudando sem preencher a saída por você.\n\n### Sua vez\nDesenhe a porta, anote as entradas informadas e encontre essa combinação na sua tabela-verdade. Qual linha você encontrou? Envie sua tentativa para conferirmos o raciocínio.",
+      "fontes": [],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": "questao_atomica",
+      "revisoes": [],
+      "aprovada": false,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    }
+  ]
+}

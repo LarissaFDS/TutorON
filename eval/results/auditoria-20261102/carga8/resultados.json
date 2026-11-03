@@ -1,0 +1,938 @@
+{
+  "completa": true,
+  "meta": {
+    "url": "http://127.0.0.1:8001",
+    "logs": "dados\\auditoria-local",
+    "inicio": "2026-11-02T14:32:07.650585-03:00",
+    "sha256_casos": "96794fa1ec82e9e489e44e2a1f88f86454e7dfc28489c2ee373a6b8a08de8f97",
+    "repeticoes": 1,
+    "concorrencia": 8,
+    "gpu_inicial": {
+      "memoria_mib": 7514,
+      "uso_pct": 4
+    },
+    "politica_sha256": {
+      "backend/prompts.py": "6f1ea91997b083c4e23a5f7abaaff59dcd139578aee40ae9e616b25b1c111230",
+      "backend/tutoria.py": "9b01159fc692fa73db9a560e25f05a2bd582d1e5cf304ab626e14e5615b2117e",
+      "backend/tarefas.py": "09147bb176bd1f0560f8bf3e23eef06f6621500837e502f952798bd6f3e20e9a"
+    },
+    "git_revision": "855e38f93051644259d1ba7314e3030d0d727038",
+    "status_servidor": {
+      "gemini": {
+        "habilitado": false,
+        "modelos": []
+      },
+      "local": {
+        "online": true,
+        "modelo": "tutoron-paa",
+        "instalado": true,
+        "carregado": true
+      },
+      "pausados": {},
+      "livro_supabase": true,
+      "url_publica": null
+    }
+  },
+  "resumo_operacional": {
+    "casos": 8,
+    "prontas": 8,
+    "erros": 0,
+    "reservas": 1,
+    "fixas": 0,
+    "recusas_instrucoes": 0,
+    "primeiras_versoes_reprovadas": 1,
+    "texto_publicado_antes_de_revisao": 0,
+    "mediana_s": 50.59,
+    "p95_s": 70.92,
+    "max_s": 70.92
+  },
+  "avaliacao_pedagogica": "ver parecer separado, não inferir das aprovações do revisor",
+  "casos": [
+    {
+      "id": "p01-mestre-pista",
+      "tema": "Mestre",
+      "criterio": "Identificar parâmetros sem complexidade final; caso 1 ficaria apenas na referência do avaliador.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "pista",
+        "pergunta": "Estou travado em T(n)=3T(n/2)+n. Não sei por onde começar."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.027,
+      "segundos_total": 50.08,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.03,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.43,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON (2 pedido(s) à sua frente). Pode levar alguns minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 22.19,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 26.34,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A recorrência $ T(n) = 3T(n/2) + n $ pode ser resolvida usando o **Teorema Mestre**. Comece identificando os parâmetros $ a = 3 $, $ b = 2 $ e $ f(n) = n $. Em seguida, compare $ n^{\\log_b a} $ com $ f(n) $.\n\n### Sua vez  \nCalcule $ n^{\\log_2 3} $ e compare com $ f(n) = n $. Qual caso do Teorema Mestre se aplica?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        }
+      ],
+      "registro": {
+        "id": "fwh4BhBSYpRF5-D6",
+        "data": "2026-11-02T17:32:58+00:00",
+        "disciplina": "paa",
+        "pergunta": "Estou travado em T(n)=3T(n/2)+n. Não sei por onde começar.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada para iniciar a resolução da recorrência, sem entregar a solução completa ou a resposta final.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 23.53
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "A recorrência $ T(n) = 3T(n/2) + n $ pode ser resolvida usando o **Teorema Mestre**. Comece identificando os parâmetros $ a = 3 $, $ b = 2 $ e $ f(n) = n $. Em seguida, compare $ n^{\\log_b a} $ com $ f(n) $.\n\n### Sua vez  \nCalcule $ n^{\\log_2 3} $ e compare com $ f(n) = n $. Qual caso do Teorema Mestre se aplica?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 23.17,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 23.17
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 6, 7"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7544,
+        "uso_pct": 24
+      }
+    },
+    {
+      "id": "p04-mestre-naoaplica",
+      "tema": "Mestre",
+      "criterio": "Mestre clássico não se aplica diretamente a tamanhos desiguais; sugerir analisar árvore ou outro método sem resolver.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conceito",
+        "pergunta": "T(n)=T(n/2)+T(n/3)+n parece divisão e conquista. Posso aplicar diretamente o Mestre clássico?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.048,
+      "segundos_total": 51.1,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.05,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.43,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON (2 pedido(s) à sua frente). Pode levar alguns minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 24.27,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 35.09,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A recorrência $ T(n) = T(n/2) + T(n/3) + n $ é de fato uma recorrência de **divisão e conquista**, mas **não se aplica diretamente ao Teorema Mestre clássico**. O Teorema Mestre é útil para recorrências da forma $ T(n) = a \\cdot T(n/b) + f(n) $, onde $ a \\geq 1 $, $ b > 1 $, e $ f(n) $ é uma função que representa o custo da divisão e da combinação. \n\nNo entanto, a recorrência do aluno tem uma particularidade: **os subproblemas não são do mesmo tamanho**. Enquanto $ n/2 $ e $ n/3 $ são diferentes, e não há uma forma direta de expressar a recorrência como $ a \\cdot T(n/b) + f(n) $ com uma única constante $ b $. Isso complica a aplicação direta do Teorema Mestre, que assume que todos os subproblemas têm o mesmo tamanho.\n\nAlém disso, a soma de dois termos recursivos — $ T(n/2) $ e $ T(n/3) $ — exige uma análise mais cuidadosa, pois não se pode simplesmente comparar com $ n^{\\log_b a} $, como no primeiro caso do Teorema Mestre.\n\n### Sua vez  \nTente identificar qual é o maior entre $ n/2 $ e $ n/3 $, e como isso afeta a complexidade da recorrência. Isso pode ajudar a entender melhor a estrutura da recursão.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        }
+      ],
+      "registro": {
+        "id": "aPIWmP-hhAtHFMG9",
+        "data": "2026-11-02T17:32:59+00:00",
+        "disciplina": "paa",
+        "pergunta": "T(n)=T(n/2)+T(n/3)+n parece divisão e conquista. Posso aplicar diretamente o Mestre clássico?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda explica corretamente o conceito e a aplicação do Teorema Mestre, sem entregar a solução ou a resposta final. Mantém a estrutura pedida com uma pergunta aberta no final.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 15.96
+          }
+        ],
+        "ajuda": "conceito",
+        "resposta": "A recorrência $ T(n) = T(n/2) + T(n/3) + n $ é de fato uma recorrência de **divisão e conquista**, mas **não se aplica diretamente ao Teorema Mestre clássico**. O Teorema Mestre é útil para recorrências da forma $ T(n) = a \\cdot T(n/b) + f(n) $, onde $ a \\geq 1 $, $ b > 1 $, e $ f(n) $ é uma função que representa o custo da divisão e da combinação. \n\nNo entanto, a recorrência do aluno tem uma particularidade: **os subproblemas não são do mesmo tamanho**. Enquanto $ n/2 $ e $ n/3 $ são diferentes, e não há uma forma direta de expressar a recorrência como $ a \\cdot T(n/b) + f(n) $ com uma única constante $ b $. Isso complica a aplicação direta do Teorema Mestre, que assume que todos os subproblemas têm o mesmo tamanho.\n\nAlém disso, a soma de dois termos recursivos — $ T(n/2) $ e $ T(n/3) $ — exige uma análise mais cuidadosa, pois não se pode simplesmente comparar com $ n^{\\log_b a} $, como no primeiro caso do Teorema Mestre.\n\n### Sua vez  \nTente identificar qual é o maior entre $ n/2 $ e $ n/3 $, e como isso afeta a complexidade da recorrência. Isso pode ajudar a entender melhor a estrutura da recursão.",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 31.67,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 31.67
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7539,
+        "uso_pct": 100
+      }
+    },
+    {
+      "id": "p07-assintotica",
+      "tema": "Assintótica",
+      "criterio": "Explicar superior, inferior e apertado; corrigir igualdade exata; conceitos não exigem recusa.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conceito",
+        "pergunta": "Qual é a diferença entre O, Omega e Theta? Eu sempre trato O como uma igualdade exata."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.049,
+      "segundos_total": 52.69,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.05,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.45,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON (2 pedido(s) à sua frente). Pode levar alguns minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 27.39,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 39.21,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A notação **O**, **Ω** e **Θ** são usadas para descrever o comportamento assintótico de funções, especialmente em análise de algoritmos. Elas nos ajudam a entender o **limite superior**, **limite inferior** e **limite exato** da complexidade de um algoritmo, respectivamente.\n\n- **O(f(n))** (Big O): Representa o **limite superior** da complexidade. Dizemos que $ T(n) \\in O(f(n)) $ se, para algum $ n_0 $ e $ c > 0 $, $ T(n) \\leq c \\cdot f(n) $ para todo $ n \\geq n_0 $. É usado para garantir que o algoritmo **não exceda** uma certa complexidade em tempo assintótico.\n\n- **Ω(f(n))** (Big Omega): Representa o **limite inferior** da complexidade. Dizemos que $ T(n) \\in \\Omega(f(n)) $ se, para algum $ n_0 $ e $ c > 0 $, $ T(n) \\geq c \\cdot f(n) $ para todo $ n \\geq n_0 $. É usado para garantir que o algoritmo **não seja melhor** que uma certa complexidade em tempo assintótico.\n\n- **Θ(f(n))** (Theta): Representa o **limite exato** da complexidade. Dizemos que $ T(n) \\in \\Theta(f(n)) $ se $ T(n) \\in O(f(n)) $ **e** $ T(n) \\in \\Omega(f(n)) $. Ou seja, $ T(n) $ é **proporcional** a $ f(n) $ para grandes valores de $ n $.\n\n### Sua vez  \nEscreva uma frase que defina **Θ(f(n))** e explique por que não é correto tratar **O** como uma igualdade exata.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+        }
+      ],
+      "registro": {
+        "id": "--Z_LM2lmz2W8RxI",
+        "data": "2026-11-02T17:33:00+00:00",
+        "disciplina": "paa",
+        "pergunta": "Qual é a diferença entre O, Omega e Theta? Eu sempre trato O como uma igualdade exata.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda explica corretamente os conceitos de O, Ω e Θ, sem entregar a resposta final ou resolver o exercício. Mantém a estrutura adequada com a pergunta final aberta e sem resultado embutido.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 13.55
+          }
+        ],
+        "ajuda": "conceito",
+        "resposta": "A notação **O**, **Ω** e **Θ** são usadas para descrever o comportamento assintótico de funções, especialmente em análise de algoritmos. Elas nos ajudam a entender o **limite superior**, **limite inferior** e **limite exato** da complexidade de um algoritmo, respectivamente.\n\n- **O(f(n))** (Big O): Representa o **limite superior** da complexidade. Dizemos que $ T(n) \\in O(f(n)) $ se, para algum $ n_0 $ e $ c > 0 $, $ T(n) \\leq c \\cdot f(n) $ para todo $ n \\geq n_0 $. É usado para garantir que o algoritmo **não exceda** uma certa complexidade em tempo assintótico.\n\n- **Ω(f(n))** (Big Omega): Representa o **limite inferior** da complexidade. Dizemos que $ T(n) \\in \\Omega(f(n)) $ se, para algum $ n_0 $ e $ c > 0 $, $ T(n) \\geq c \\cdot f(n) $ para todo $ n \\geq n_0 $. É usado para garantir que o algoritmo **não seja melhor** que uma certa complexidade em tempo assintótico.\n\n- **Θ(f(n))** (Theta): Representa o **limite exato** da complexidade. Dizemos que $ T(n) \\in \\Theta(f(n)) $ se $ T(n) \\in O(f(n)) $ **e** $ T(n) \\in \\Omega(f(n)) $. Ou seja, $ T(n) $ é **proporcional** a $ f(n) $ para grandes valores de $ n $.\n\n### Sua vez  \nEscreva uma frase que defina **Θ(f(n))** e explique por que não é correto tratar **O** como uma igualdade exata.",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 35.89,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 35.89
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 7"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7544,
+        "uso_pct": 96
+      }
+    },
+    {
+      "id": "p12-bfs",
+      "tema": "Grafos",
+      "criterio": "Apontar violação FIFO, não aprovar avanço em profundidade; não listar percurso inteiro.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conferir",
+        "pergunta": "Minha BFS de A está correta?",
+        "contexto": "Grafo não dirigido A-B, A-C, B-D. Descobri B e fui direto para D antes de retirar C da fila."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.052,
+      "segundos_total": 54.05,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.05,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.46,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON (2 pedido(s) à sua frente). Pode levar alguns minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 35.21,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 42.63,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A sua descrição da BFS está interessante. Vamos analisar passo a passo. \n\nVocê mencionou que começou com o nó A, descobriu B e foi direto para D antes de retirar C da fila. Isso sugere que você está usando uma fila para armazenar os nós a serem visitados. \n\nO que está correto até agora é que, em uma BFS, você começa com o nó inicial (A), e adiciona seus vizinhos à fila. A ordem de processamento é FIFO (primeiro a entrar, primeiro a sair). \n\nAgora, o primeiro passo que pode estar errado é a ordem em que você está visitando os nós. Em uma BFS, você deve visitar todos os vizinhos de um nó antes de avançar para os vizinhos dos vizinhos. \n\n### Sua vez  \nRevele a ordem em que você visitou os nós e a ordem em que eles foram adicionados à fila. Isso vai ajudar a identificar se houve um erro na lógica da BFS.",
+      "fontes": [],
+      "registro": {
+        "id": "Wf8HqQwuYzM9cCc-",
+        "data": "2026-11-02T17:33:01+00:00",
+        "disciplina": "paa",
+        "pergunta": "Minha BFS de A está correta?",
+        "contexto": "Grafo não dirigido A-B, A-C, B-D. Descobri B e fui direto para D antes de retirar C da fila.",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda mantém a estrutura adequada, aponta o primeiro passo potencialmente errado e pede ao aluno que revele mais informações para continuar a análise. Não entrega a resposta final nem a resolução completa.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 10.95
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "A sua descrição da BFS está interessante. Vamos analisar passo a passo. \n\nVocê mencionou que começou com o nó A, descobriu B e foi direto para D antes de retirar C da fila. Isso sugere que você está usando uma fila para armazenar os nós a serem visitados. \n\nO que está correto até agora é que, em uma BFS, você começa com o nó inicial (A), e adiciona seus vizinhos à fila. A ordem de processamento é FIFO (primeiro a entrar, primeiro a sair). \n\nAgora, o primeiro passo que pode estar errado é a ordem em que você está visitando os nós. Em uma BFS, você deve visitar todos os vizinhos de um nó antes de avançar para os vizinhos dos vizinhos. \n\n### Sua vez  \nRevele a ordem em que você visitou os nós e a ordem em que eles foram adicionados à fila. Isso vai ajudar a identificar se houve um erro na lógica da BFS.",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 39.47,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 39.47
+          }
+        ],
+        "fontes": []
+      },
+      "gpu_depois": {
+        "memoria_mib": 7544,
+        "uso_pct": 97
+      }
+    },
+    {
+      "id": "s01-kmap",
+      "tema": "Karnaugh",
+      "criterio": "Orientar rótulos Gray e marcação; sem expressão final B'D'+BD.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Como começo F(A,B,C,D)=Soma m(0,2,5,7,8,10,13,15)? Não quero gabarito."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.057,
+      "segundos_total": 41.0,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.06,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 1.87,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 12.2,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 16.87,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Para começar, monte o mapa de Karnaugh com **AB nas linhas** e **CD nas colunas**, seguindo a ordem Gray (00, 01, 11, 10). Coloque **1** nas células correspondentes aos mintermos **0, 2, 5, 7, 8, 10, 13, 15**. Observe se há grupos de 4 células adjacentes (incluindo as bordas, que são vizinhas) que cobrem os 1s.  \n\n### Sua vez  \nIdentifique **um grupo de 4 células** que contenha os mintermos 0, 2, 8, 10. Qual variável permanece constante nesse grupo?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Material de estudo de SD",
+          "referencia": "Somadores.pdf | páginas 1–6"
+        }
+      ],
+      "registro": {
+        "id": "GHSqbA2lluiCb7gw",
+        "data": "2026-11-02T17:32:48+00:00",
+        "disciplina": "sd",
+        "pergunta": "Como começo F(A,B,C,D)=Soma m(0,2,5,7,8,10,13,15)? Não quero gabarito.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada para iniciar o processo de mapeamento de Karnaugh sem entregar a solução completa.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 23.93
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "Para começar, monte o mapa de Karnaugh com **AB nas linhas** e **CD nas colunas**, seguindo a ordem Gray (00, 01, 11, 10). Coloque **1** nas células correspondentes aos mintermos **0, 2, 5, 7, 8, 10, 13, 15**. Observe se há grupos de 4 células adjacentes (incluindo as bordas, que são vizinhas) que cobrem os 1s.  \n\n### Sua vez  \nIdentifique **um grupo de 4 células** que contenha os mintermos 0, 2, 8, 10. Qual variável permanece constante nesse grupo?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 15.14,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 15.14
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Material de estudo de SD",
+            "referencia": "Somadores.pdf | páginas 1–6"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7540,
+        "uso_pct": 94
+      }
+    },
+    {
+      "id": "s05-c2",
+      "tema": "Complemento de dois",
+      "criterio": "Fixar representação e largura, sinal/peso; não fornecer -22.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Quero interpretar 11101010 em complemento de dois com 8 bits. Não sei como começar."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.062,
+      "segundos_total": 47.81,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.06,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 2.42,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 20.53,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 23.76,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Para interpretar o número **11101010** em complemento de dois com 8 bits, comece verificando se o bit mais significativo (MSB) é **1**. Se for, o número é negativo, e você precisa calcular o seu valor absoluto invertendo os bits e somando 1.\n\n### Sua vez  \nInverta os bits de **11101010** e some 1. Qual é o resultado?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 2–3 | questões 8 a 13"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "registro": {
+        "id": "qvw-9lLWJhSwPxV7",
+        "data": "2026-11-02T17:32:55+00:00",
+        "disciplina": "sd",
+        "pergunta": "Quero interpretar 11101010 em complemento de dois com 8 bits. Não sei como começar.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista correta e destrava o próximo passo sem entregar a solução completa.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 24.18
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "Para interpretar o número **11101010** em complemento de dois com 8 bits, comece verificando se o bit mais significativo (MSB) é **1**. Se for, o número é negativo, e você precisa calcular o seu valor absoluto invertendo os bits e somando 1.\n\n### Sua vez  \nInverta os bits de **11101010** e some 1. Qual é o resultado?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 21.46,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 21.46
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Lista de exercícios de SD",
+            "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Lista de exercícios de SD",
+            "referencia": "Lista de SD AV1.pdf | páginas 2–3 | questões 8 a 13"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Prova de SD",
+            "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7542,
+        "uso_pct": 80
+      }
+    },
+    {
+      "id": "s09-moore",
+      "tema": "Máquinas de estados",
+      "criterio": "Moore estado; Mealy estado+entrada; explicar conceito diretamente, sem recusa inútil.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "conceito",
+        "pergunta": "Qual a diferença entre Moore e Mealy? Em qual delas a saída depende também da entrada corrente?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.067,
+      "segundos_total": 70.92,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.07,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 2.41,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 12.81,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 18.47,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        },
+        {
+          "s": 44.62,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON (5 pedido(s) à sua frente). Pode levar alguns minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 63.71,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 68.85,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de SD",
+          "referencia": "fibonacci_vhdl.vhd | entidade FibonacciControl (resumo do código; autoria do arquivo não identificada)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        }
+      ],
+      "registro": {
+        "id": "mTDdTLYb7BcWqkCJ",
+        "data": "2026-11-02T17:33:19+00:00",
+        "disciplina": "sd",
+        "pergunta": "Qual a diferença entre Moore e Mealy? Em qual delas a saída depende também da entrada corrente?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": false,
+            "motivo": "A ajuda entrega a resposta solicitada de forma indireta, explicando que a saída de Mealy depende da entrada corrente, o que responde diretamente à pergunta do aluno.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 26.27
+          },
+          {
+            "aprovada": false,
+            "motivo": "A ajuda entrega a resposta solicitada de forma indireta, explicando que a saída de Mealy depende da entrada corrente, o que é a resposta final da pergunta.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 2.5
+          }
+        ],
+        "ajuda": "conceito",
+        "resposta_bloqueada": "A diferença entre Moore e Mealy está na dependência das saídas. Em **Moore**, a saída é calculada **apenas com base no estado atual** (não importa o valor das entradas no ciclo atual). Em **Mealy**, a saída depende **do estado atual **e **da entrada corrente**. \n\nA pergunta pede para identificar qual delas **depende da entrada corrente**. Isso sugere que a resposta está ligada a como a saída é calculada: em um, a entrada não influencia (Moore), em outro, a entrada é um fator (Mealy). \n\n### Sua vez  \nQual das duas máquinas (Moore ou Mealy) tem saída que pode mudar **imediatamente** ao receber uma entrada nova, mesmo sem alterar o estado? Explique por quê.",
+        "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+        "resposta_original": "A diferença entre Moore e Mealy está na relação entre as saídas e as entradas. Em **Moore**, a saída é determinada apenas pelo estado atual, independentemente do valor das entradas no ciclo atual. Já em **Mealy**, a saída pode variar tanto pelo estado quanto pelas entradas. \n\nA pergunta pede para identificar **qual delas depende da entrada corrente**. Isso sugere que a resposta está ligada a como a saída é calculada: em um caso, a entrada não influencia (Moore), em outro, a entrada é um fator (Mealy). \n\n### Sua vez  \nImagine que um sistema está em um estado fixo, mas a entrada muda. Em qual caso a saída pode mudar **sem que o estado altere**? Explique como isso acontece com base na dependência das entradas.",
+        "ajustes": [
+          "entregou_resposta",
+          "entregou_resposta_de_novo",
+          "ajuda_de_reserva"
+        ],
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 40.22,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 16.09
+          },
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 24.13
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de SD",
+            "referencia": "fibonacci_vhdl.vhd | entidade FibonacciControl (resumo do código; autoria do arquivo não identificada)"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7538,
+        "uso_pct": 97
+      }
+    },
+    {
+      "id": "s10-jk",
+      "tema": "Contadores",
+      "criterio": "Sequência de estados e excitação JK; não trocar por reset de contador maior sem explicar, não dar todas equações.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Por onde começo um contador módulo 5 com JK? Não me dê as equações finais."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.069,
+      "segundos_total": 47.21,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.07,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 2.41,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 17.4,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 22.18,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Para começar um contador módulo 5 com flip-flops JK, você precisa determinar **quantos flip-flops são necessários**. Pense: um contador módulo 5 conta de 0 a 4, então ele precisa de **3 bits** (pois $2^3 = 8$ e 8 é maior que 5).  \n\n### Sua vez  \nQuantos flip-flops JK você precisa para construir um contador módulo 5?",
+      "fontes": [],
+      "registro": {
+        "id": "Dni6mIKm4agj75m2",
+        "data": "2026-11-02T17:32:55+00:00",
+        "disciplina": "sd",
+        "pergunta": "Por onde começo um contador módulo 5 com JK? Não me dê as equações finais.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada sobre a quantidade de flip-flops necessários para um contador módulo 5, sem entregar a resposta final ou resolver o problema.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 25.44
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "Para começar um contador módulo 5 com flip-flops JK, você precisa determinar **quantos flip-flops são necessários**. Pense: um contador módulo 5 conta de 0 a 4, então ele precisa de **3 bits** (pois $2^3 = 8$ e 8 é maior que 5).  \n\n### Sua vez  \nQuantos flip-flops JK você precisa para construir um contador módulo 5?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 19.87,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 19.87
+          }
+        ],
+        "fontes": []
+      },
+      "gpu_depois": {
+        "memoria_mib": 7538,
+        "uso_pct": 97
+      }
+    }
+  ]
+}

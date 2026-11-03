@@ -1,0 +1,91 @@
+[
+  {
+    "caso": "robo",
+    "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+    "segundos": 11.21,
+    "id": "XTv50bUOcYFLbsXiHkW9fA",
+    "status": "erro",
+    "mensagem": "Não consegui preparar um desenho correto para esta dúvida. Diga qual relação ou passo você quer enxergar e tente novamente.",
+    "disciplina": "paa",
+    "registro": {
+      "id": "4ZOOLEbqdnqI2LqC",
+      "data": "2026-11-02T23:19:34+00:00",
+      "disciplina": "paa",
+      "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+      "erro": "O roteiro anterior era inválido (roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?; Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?). Refaça um esquema de blocos para a mesma dúvida.",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Dependências da célula (i,j)\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"dp[i][j] depende de dp[i-1][j] e dp[i][j-1]\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Se dp[i-1][j] está bloqueado, o que acontece com dp[i][j]?\", \"lacuna\": true},\n    {\"id\": \"bloco3\", \"texto\": \"Se dp[i][j-1] está bloqueado, o que acontece com dp[i][j]?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco1\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Como a ausência de um vizinho afeta a definição do custo mínimo?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "erro_validacao": "roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?; Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?"
+        },
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Dependência do dp[i][j]\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"dp[i][j] depende de células acima e à esquerda\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"Se a célula acima está bloqueada, o que acontece com dp[i][j]?\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Se a célula à esquerda está bloqueada, o que acontece com dp[i][j]?\",\n      \"lacuna\": true\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco1\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Como a dependência muda se um vizinho está bloqueado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "erro_validacao": "roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?; Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?"
+        }
+      ]
+    }
+  },
+  {
+    "caso": "pilha",
+    "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+    "segundos": 9.75,
+    "id": "p-4TEigY3FI0AXxrYynMlA",
+    "status": "erro",
+    "mensagem": "Não consegui preparar um desenho correto para esta dúvida. Diga qual relação ou passo você quer enxergar e tente novamente.",
+    "disciplina": "paa",
+    "registro": {
+      "id": "HW9AV45N-TKmMr1Q",
+      "data": "2026-11-02T23:19:44+00:00",
+      "disciplina": "paa",
+      "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+      "erro": "O roteiro anterior era inválido (roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?). Refaça um esquema de blocos para a mesma dúvida.",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Chamadas recursivas e pilha\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Chamada inicial\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Chamada recursiva\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Retorno da chamada\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Como a pilha se comporta ao retornar da chamada recursiva?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": false,
+            "motivo": "A ajuda entrega uma estrutura que pode ser usada para visualizar o processo de chamada e retorno, mas não deixa a pilha em branco, o que contraria a regra de não preencher as lacunas.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.67
+          }
+        },
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Chamada e Retorno em Recursão\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Chamada recursiva é empilhada na pilha\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"A pilha espera o retorno da chamada\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Qual é o próximo passo após o retorno?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Como a pilha retoma a execução após o retorno?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "erro_validacao": "roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?"
+        }
+      ]
+    }
+  },
+  {
+    "caso": "estado",
+    "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+    "segundos": 7.72,
+    "id": "un5HpneWAkJnoa8WkEKDJg",
+    "status": "erro",
+    "mensagem": "Não consegui preparar um desenho correto para esta dúvida. Diga qual relação ou passo você quer enxergar e tente novamente.",
+    "disciplina": "sd",
+    "registro": {
+      "id": "3aq6X8WEm-iBIhbZ",
+      "data": "2026-11-02T23:19:51+00:00",
+      "disciplina": "sd",
+      "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+      "erro": "O roteiro anterior era inválido (roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?). Refaça um esquema de blocos para a mesma dúvida.",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Registrador de Estado\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Entrada da máquina de estados\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Saída combinacional calcula próximo estado\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Próximo estado é armazenado no registrador\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Qual informação é armazenada no registrador de estado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "erro_validacao": "roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?"
+        },
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Registrador de Estado\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Entrada da máquina de estados\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Informações do estado atual\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Qual informação vai para o próximo estado?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco3\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Qual informação do estado atual é usada para calcular o próximo estado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "erro_validacao": "roteiro inválido: Value error, a lacuna precisa de um rótulo curto, não de uma resposta seguida de ?"
+        }
+      ]
+    }
+  }
+]

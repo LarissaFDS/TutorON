@@ -27,7 +27,7 @@ def test_prompt_socratico_proibe_resposta_e_mantem_o_resto():
     # Fontes, citações, rigor de PAA e proteção das instruções continuam iguais.
     for trecho in ("# Fontes", "# Citações e fidelidade", "# Instruções internas", "Teorema Mestre"):
         assert trecho in s
-    # A Validação A/B e o treino continuam com o prompt de antes.
+    # O prompt legado continua disponível para reproduzir avaliações históricas.
     assert prompts.SISTEMA_TUTOR == prompts.sistema_tutor() != s
 
 
@@ -143,11 +143,11 @@ def test_ciclo_respeita_ajuda_escolhida_pelo_aluno(site):  # noqa: F811
     assert t["ajuda"] == "visual"
 
 
-def test_validacao_continua_com_o_prompt_anterior(site):  # noqa: F811
+def test_validacao_usa_tutor_socratico(site):  # noqa: F811
     par = esperar(site, site.post("/api/comparar", json={"pergunta": "Como aplicar o Teorema Mestre?"}).json())
     assert par["status"] == "pronta"
     sistemas = [s for _, s, _ in site.llm.chamadas if s]
-    assert sistemas and all(s == prompts.SISTEMA_TUTOR for s in sistemas)
+    assert sistemas and all(s == prompts.sistema_socratico() for s in sistemas)
 
 
 def test_lista_de_ajudas(site):  # noqa: F811
@@ -282,8 +282,9 @@ def test_roteiro_invalido_e_recusado(ruim):
 
 
 def test_rota_animar_tenta_corrigir_roteiro_e_serve_o_video(site, monkeypatch):  # noqa: F811
-    roteiros = iter(["isto não é json", '{"modelo": "vetor", "titulo": "Bolha", "valores": [3, 1, 2], '
-                                       '"pergunta_final": "Qual a próxima troca?"}'])
+    roteiros = iter(["isto não é json", '{"modelo":"esquema","titulo":"Bolha",'
+        '"blocos":[{"id":"par","texto":"Par de vizinhos"},{"id":"troca","texto":"Trocar?","lacuna":true}],'
+        '"ligacoes":[["par","troca"]],"pergunta_final":"Qual a próxima comparação?"}'])
     original = site.llm._provider
 
     def provedor(model, system, prompt):
@@ -299,11 +300,11 @@ def test_rota_animar_tenta_corrigir_roteiro_e_serve_o_video(site, monkeypatch): 
     monkeypatch.setattr(tarefas.animacao, "renderizar", renderizar)
     t = esperar(site, site.post("/api/animar", json={"pergunta": "Como funciona o bubble sort?"}).json())
     assert t["status"] == "pronta" and t["video"] == "/api/animacoes/VIDEOteste123.mp4"
-    assert t["pergunta_final"] == "Qual a próxima troca?"
+    assert t["pergunta_final"] == "Qual a próxima comparação?"
     _, sistema, prompt = site.llm.chamadas[-1]
-    assert sistema == prompts.SISTEMA_ANIMACAO and "roteiro anterior era inválido" in prompt
+    assert sistema == prompts.SISTEMA_ESQUEMA and "roteiro anterior era inválido" in prompt
     assert site.get(t["video"]).content == b"mp4"
-    assert ultima(site, "animacoes.jsonl")["roteiro"]["modelo"] == "vetor"
+    assert ultima(site, "animacoes.jsonl")["roteiro"]["modelo"] == "esquema"
 
 
 @pytest.mark.parametrize("caminho", ["/api/animacoes/..%2F..%2Fsegredo.mp4", "/api/animacoes/x.mp4",

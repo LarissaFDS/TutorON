@@ -1,0 +1,185 @@
+{
+  "metodo": "Inspeção técnica pelo agente, separada do revisor interno. Sem revisão docente ou estudo de aprendizagem. Notas atribuídas manualmente, não inferidas da aprovação automática.",
+  "casos": [
+    {
+      "id": "promo-mestre",
+      "atual": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Troca a tentativa a=2,b=5 por a=5,b=2 e elogia um acerto inexistente; aponta erro em f(n), ausente na tentativa."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Confirma parâmetros trocados e afirma que a base do logaritmo é 5, embora o divisor da recorrência seja 2."
+      }
+    },
+    {
+      "id": "promo-reducao",
+      "atual": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Reserva genérica pede novamente dados e tentativa já fornecidos."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Afirma que Novo para Cobertura de Vértices pode provar a NP-dificuldade desejada; não corrige a direção."
+      }
+    },
+    {
+      "id": "promo-robo",
+      "atual": {
+        "ajuda": 1,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Exclui a diagonal corretamente, mas atribui o erro à diferença entre caminho mínimo e máximo, que não determina movimentos permitidos."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Não identifica a diagonal proibida e pede a fórmula inteira, apesar da tentativa concreta."
+      }
+    },
+    {
+      "id": "promo-mochila",
+      "atual": {
+        "ajuda": 1,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Aponta a ordem correta, mas especula causas incorretas e termina com tarefa vaga."
+      },
+      "candidato": {
+        "ajuda": 1,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Explica o reaproveitamento do item na mesma iteração, mas pede uma condição abstrata em vez de uma checagem pequena."
+      }
+    },
+    {
+      "id": "promo-fluxo",
+      "atual": {
+        "ajuda": 2,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Distingue capacidade total e fluxo usado; deixa a subtração e seu significado para o aluno."
+      },
+      "candidato": {
+        "ajuda": 2,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Explica diferença entre capacidade e fluxo; pede ao aluno a conta sem entregar o residual."
+      }
+    },
+    {
+      "id": "promo-bfs",
+      "atual": {
+        "ajuda": 1,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Distingue arestas e pesos, mas pede construir e resolver um contraexemplo completo, um salto grande."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Reescreve a crença errada como se o aluno já soubesse que pesos mudam a conclusão e não explica a distinção."
+      }
+    },
+    {
+      "id": "promo-gray",
+      "atual": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Afirma que 01 e 10 são vizinhos válidos, contradizendo a própria ordem Gray correta que apresenta."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Confirma que 01 e 10 são vizinhos válidos e não localiza a mudança de dois bits."
+      }
+    },
+    {
+      "id": "promo-zero",
+      "atual": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Reserva sem explicar a diferença entre zero obrigatório e irrelevância."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Define zero obrigatório como valor que não importa para a função, confundindo-o com X, embora proíba sua inclusão."
+      }
+    },
+    {
+      "id": "promo-atomica",
+      "atual": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Diz que a porta E recebe um único bit e pede descobrir qual porta ela é, apesar das duas entradas já informadas."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Reserva evita o bit, mas não ensina o pré-requisito nem localiza uma dificuldade."
+      }
+    },
+    {
+      "id": "promo-binario",
+      "atual": {
+        "ajuda": 1,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Localiza o empréstimo e pede reescrever o passo, mas sem mostrar como representar o empréstimo."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Reserva pede dados e tentativa, embora o primeiro passo errado já tenha sido descrito."
+      }
+    },
+    {
+      "id": "promo-progresso",
+      "atual": {
+        "ajuda": 1,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Dá um pequeno desenho de obstáculo, mas volta ao estado que o aluno já definiu."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Repete a pergunta de como representar o bloqueio, sem ensinar uma convenção ou consequência útil."
+      }
+    },
+    {
+      "id": "promo-npdificil",
+      "atual": {
+        "ajuda": 2,
+        "erro_tecnico_claro": false,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Distingue corretamente NP-difícil e NP-completo e a direção das reduções; a pergunta final sobre P versus NP é dispensável."
+      },
+      "candidato": {
+        "ajuda": 0,
+        "erro_tecnico_claro": true,
+        "entrega_resultado_solicitado": false,
+        "motivo": "Afirma que qualquer B que se reduz a um A NP-difícil também é NP-difícil. A dificuldade não se transfere nessa direção."
+      }
+    }
+  ]
+}

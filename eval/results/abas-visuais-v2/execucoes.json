@@ -1,0 +1,134 @@
+[
+  {
+    "id": "t0QHdWTAK0rDv7cj",
+    "data": "2026-11-02T23:52:35+00:00",
+    "disciplina": "sd",
+    "pergunta": "Qual é o papel do clock em um flip-flop D? Eu conheço a entrada D, mas não entendo quando Q pode mudar. Quero enxergar essa relação sem montar uma tabela completa.",
+    "roteiro": {
+      "titulo": "Relação entre clock e Q",
+      "pergunta_final": "Como D influencia Q no instante do clock?",
+      "modelo": "esquema",
+      "blocos": [
+        {
+          "id": "bloco1",
+          "texto": "Clock ativa a atualização do estado.",
+          "lacuna": false
+        },
+        {
+          "id": "bloco2",
+          "texto": "Q muda apenas quando o clock é aplicado.",
+          "lacuna": false
+        },
+        {
+          "id": "bloco3",
+          "texto": "Você completa",
+          "lacuna": true
+        }
+      ],
+      "ligacoes": [
+        [
+          "bloco1",
+          "bloco2"
+        ],
+        [
+          "bloco2",
+          "bloco3"
+        ]
+      ],
+      "destacar": [
+        "bloco3"
+      ]
+    },
+    "video": "wvwpcd9qBWpyEEuc",
+    "modelo": "ollama:tutoron-paa",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Relação entre clock e Q\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Clock ativa a atualização do estado.\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Q muda apenas quando o clock é aplicado.\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Qual é a relação entre D e Q no momento do clock?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Como D influencia Q no instante do clock?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": true,
+          "motivo": "A relação entre clock e Q está clara, mas o bloco lacuna pode ser mais específico.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.32
+        }
+      }
+    ]
+  },
+  {
+    "id": "jrvQP3xG6_5dUEYk",
+    "data": "2026-11-02T23:53:33+00:00",
+    "disciplina": "paa",
+    "pergunta": "Estou estudando recursão e pilha de chamadas. Entendo que uma chamada espera a outra, mas não sei como ela retoma depois do retorno. Pode me ajudar a pensar nisso sem escrever um programa completo?",
+    "erro": "O roteiro anterior era inválido (roteiro inválido: String should have at most 70 characters). Refaça um esquema de blocos para a mesma dúvida.",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Retorno em recursão\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Chamada fatorial(3) espera fatorial(2)\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"Chamada fatorial(2) espera fatorial(1)\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Chamada fatorial(1) retorna 1\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco4\",\n      \"texto\": \"Resultado de fatorial(1) usado em fatorial(2)\",\n      \"lacuna\": false\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"],\n    [\"bloco3\", \"bloco4\"]\n  ],\n  \"destacar\": [\"bloco3\", \"bloco4\"],\n  \"pergunta_final\": \"Qual é o próximo passo após fatorial(2) ser resolvido?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "O bloco3 está incompleto e não explica como o retorno ocorre. A explicação deve abordar o mecanismo de como a chamada anterior retoma sua execução após o retorno da chamada recursiva.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.82
+        }
+      },
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Retorno de chamada recursiva\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Chamada recursiva espera a chamada inferior.\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Quando a chamada inferior termina, ela retorna para a chamada superior.\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"O que acontece com a pilha após o retorno?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Como a pilha é modificada após o retorno de uma chamada recursiva?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "erro_validacao": "roteiro inválido: String should have at most 70 characters"
+      }
+    ]
+  },
+  {
+    "id": "lS-QJVl8tCGaMBbB",
+    "data": "2026-11-02T23:55:45+00:00",
+    "disciplina": "sd",
+    "pergunta": "Qual é o papel do clock em um flip-flop D? Eu conheço a entrada D, mas não entendo quando Q pode mudar.",
+    "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Papel do clock no flip-flop D\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Clock atua como gatilho para atualização de Q.\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"Q muda quando clock muda de nível para borda (ex: subida).\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"D é capturado durante a borda do clock.\",\n      \"lacuna\": false\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco1\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Qual é a diferença entre latch e flip-flop em relação ao momento de atualização de Q?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "O bloco2 está vazio e não está claro o que está sendo solicitado. A pergunta final não está alinhada com o conteúdo do roteiro.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.43
+        }
+      },
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Papel do clock no flip-flop D\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Entrada D é o dado a ser armazenado.\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Clock controla quando o dado é transferido para Q.\", \"lacuna\": true},\n    {\"id\": \"bloco3\", \"texto\": \"Q representa o estado atual do flip-flop.\", \"lacuna\": false}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Qual é a relação entre o clock e a mudança de Q?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "O bloco2 está vazio e não explica a relação entre o clock e a mudança de Q, o que é essencial para a resposta da pergunta final.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.27
+        }
+      }
+    ]
+  },
+  {
+    "id": "s-QXCjYQdRP7Ny1g",
+    "data": "2026-11-02T23:58:02+00:00",
+    "disciplina": "sd",
+    "pergunta": "Qual é o papel do clock em um flip-flop D? Eu conheço a entrada D, mas não entendo quando Q pode mudar.",
+    "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Papel do clock no flip-flop D\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Clock atua como gatilho para atualização do estado.\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"Valor de D é capturado quando clock está em nível alto ou em borda.\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Quando o clock muda de nível, Q atualiza? (resposta: em borda de subida)\",\n      \"lacuna\": true\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Qual é a diferença entre latch e flip-flop D em relação ao momento de atualização de Q?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "erro_validacao": "roteiro inválido: String should have at most 70 characters"
+      },
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Papel do clock no flip-flop D\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Entrada D é o dado a ser armazenado.\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Clock controla quando Q atualiza.\", \"lacuna\": true},\n    {\"id\": \"bloco3\", \"texto\": \"Q só muda na borda do clock.\", \"lacuna\": false}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Qual borda do clock faz Q atualizar?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "O bloco2 está vazio e não está claro o que ele representa. A lacuna deve ser preenchida com uma explicação sobre o momento exato em que Q muda, como a borda de subida ou descida do clock.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.06
+        }
+      }
+    ]
+  }
+]

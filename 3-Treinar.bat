@@ -1,5 +1,5 @@
 @echo off
-rem Treina o modelo local do TutorON na GPU (QLoRA), avalia e instala no Ollama.
+rem Treina o tutor socratico de PAA e SD na GPU (QLoRA), avalia e instala no Ollama.
 title TutorON - Treinamento
 cd /d "%~dp0"
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%~dp0scripts\tutoron.ps1" -Acao Treinar %*

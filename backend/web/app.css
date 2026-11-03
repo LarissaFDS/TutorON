@@ -11,6 +11,8 @@
 }
 .modes__tab[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-primary); }
 .modes__tab:hover { color: var(--color-ink); }
+.modes__list a.modes__tab { display: inline-flex; align-items: center; text-decoration: none; }
+.modes__tab[aria-current="page"] { color: var(--color-ink); border-bottom-color: var(--color-primary); }
 
 .masthead__nota { margin-top: var(--space-4); max-width: 68ch; font-size: var(--text-ui); color: var(--color-chalk); opacity: 0.9; }
 

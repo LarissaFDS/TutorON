@@ -1,0 +1,9 @@
+{
+  "testes_aprovados": 372,
+  "testes_ignorados": 1,
+  "videos_renderizados_e_decodificados": 7,
+  "largura_mobile": 390,
+  "sem_scroll_horizontal_da_pagina": true,
+  "tentativa_visual_transferida_sem_envio_automatico": true,
+  "limite": "Inspeção técnica do agente, sem estudo de aprendizagem ou revisão docente. Personalização por IA falhou em dois testes iniciais; caminho alternativo entregou exemplos relacionados em ambos."
+}

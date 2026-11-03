@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Aprender com desenhos</title>
+<link rel="stylesheet" href="/design.css">
+<link rel="stylesheet" href="/static/app.css?v=abas-visuais-2">
+<link rel="stylesheet" href="/static/visuais.css?v=pergunta-livre-2">
+</head>
+<body>
+<header class="masthead">
+  <div class="page masthead__bar"><a class="wordmark" href="/">TutorON</a><a class="visual-voltar" href="/">Voltar ao tutor</a></div>
+  <div class="page masthead__intro">
+    <h1>Aprender com desenhos</h1>
+    <p class="masthead__lede">Escreva sua dúvida e explore uma pista visual. Os temas recomendados são apenas pontos de partida.</p>
+  </div>
+</header>
+<nav class="page modes" aria-label="Modo">
+  <div class="modes__list">
+    <a class="modes__tab" href="/">Tirar dúvida</a>
+    <a class="modes__tab" href="/visuais" aria-current="page">Aprender com desenhos</a>
+    <a class="modes__tab" href="/?modo=validacao">Avaliar respostas (validação)</a>
+  </div>
+</nav>
+<main class="page visual-pagina">
+  <section class="visual-livre" aria-labelledby="livre-titulo">
+    <h2 class="visual-titulo" id="livre-titulo">O que você quer entender visualmente?</h2>
+    <p>Escreva sua própria pergunta. Você não precisa escolher um dos temas recomendados.</p>
+    <form id="livre-form" novalidate>
+      <div class="field">
+        <label class="field__label" for="livre-pergunta">Sua dúvida</label>
+        <textarea class="input" id="livre-pergunta" rows="4" maxlength="4000" required placeholder="Qual ideia, relação ou etapa você quer enxergar?"></textarea>
+      </div>
+      <div class="field">
+        <label class="field__label" for="livre-disciplina">Disciplina (opcional)</label>
+        <select class="input" id="livre-disciplina"><option value="auto">Identificar automaticamente</option></select>
+      </div>
+      <details class="disclosure">
+        <summary>Adicionar código, enunciado ou tentativa (opcional)</summary>
+        <div class="field">
+          <label class="field__label" for="livre-contexto">Contexto da sua dúvida</label>
+          <textarea class="input input--code" id="livre-contexto" rows="4" maxlength="6000"></textarea>
+        </div>
+      </details>
+      <button class="button" id="livre-enviar" type="submit">Explicar com um desenho</button>
+    </form>
+    <p class="status" id="livre-status" role="status" aria-live="polite"></p>
+    <div class="animacao" id="livre-resultado" hidden>
+      <h3 class="visual-subtitulo" id="livre-video-titulo"></h3>
+      <video id="livre-video" controls playsinline preload="metadata" aria-label="Pista visual da sua dúvida"></video>
+      <p class="caption" id="livre-pergunta-final"></p>
+    </div>
+  </section>
+  <section class="visual-recomendados" aria-labelledby="recomendados-titulo">
+  <h2 class="visual-titulo" id="recomendados-titulo">Temas recomendados (opcional)</h2>
+  <p>Explore um exemplo pronto ou use a pergunta como ponto de partida para criar a sua.</p>
+  <p id="catalogo-status" class="status" role="status">Carregando os exemplos…</p>
+  <div class="visual-layout visual-layout--recomendacoes" id="visual-layout" hidden>
+    <nav class="visual-temas" aria-label="Temas recomendados opcionais">
+      <h3 class="visual-subtitulo">Sugestões para explorar</h3>
+      <div id="exemplos"></div>
+    </nav>
+    <article class="visual-estudo" id="exemplo-estudo" aria-labelledby="exemplo-titulo" hidden>
+      <p id="exemplo-disciplina" class="caption"></p>
+      <h2 id="exemplo-titulo" class="visual-titulo" tabindex="-1"></h2>
+      <p id="exemplo-resumo" class="visual-resumo"></p>
+      <div class="visual-palco">
+        <video id="video" controls playsinline preload="metadata" aria-label="Pista visual do exemplo" hidden></video>
+        <div id="video-vazio" class="visual-vazio"><p>Abra o desenho e observe uma etapa de cada vez.</p></div>
+      </div>
+      <div class="visual-controles">
+        <button id="preparar" class="button" type="button">Preparar animação</button>
+        <button id="pausar-pergunta" class="button button--secondary" type="button" disabled>Pausar na pergunta</button>
+        <button id="usar-pergunta" class="button button--secondary" type="button">Usar como ponto de partida</button>
+      </div>
+      <p id="video-status" class="status caption" role="status"></p>
+      <section class="visual-observar" aria-labelledby="observar-titulo">
+        <h3 id="observar-titulo" class="visual-subtitulo">O que observar</h3>
+        <p id="observar"></p>
+      </section>
+      <section class="visual-tarefa" aria-labelledby="tarefa-titulo">
+        <h3 id="tarefa-titulo" class="visual-subtitulo">Sua vez</h3>
+        <p id="tarefa"></p>
+        <form id="tentativa-form">
+          <div class="field">
+            <label class="field__label" for="tentativa">Como você continuaria?</label>
+            <textarea id="tentativa" class="input" rows="3" maxlength="4000" required aria-describedby="tentativa-dica"></textarea>
+            <p id="tentativa-dica" class="caption">Escreva sua tentativa ou a parte em que travou. Você poderá conferir antes de enviar ao tutor.</p>
+          </div>
+          <button class="button" type="submit">Continuar com o tutor</button>
+        </form>
+      </section>
+    </article>
+  </div>
+  </section>
+  <noscript>Ative o JavaScript para escolher e reproduzir os exemplos.</noscript>
+</main>
+<script src="/static/visuais.js?v=pergunta-livre-2"></script>
+</body>
+</html>

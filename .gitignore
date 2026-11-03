@@ -24,6 +24,9 @@ dados/
 # Ferramentas e modelos locais (Ollama, cloudflared, pesos, treino, cache do Hugging Face).
 .tools/
 
+# Exportações reproduzíveis; casos autorais, manifesto e preflight ficam versionados.
+05-modelo/socratico/preparado/*.jsonl
+
 # Pipeline do acervo: originais e figuras ficam locais.
 00-originais/
 01-extraido/figuras/

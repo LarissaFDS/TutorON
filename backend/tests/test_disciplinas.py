@@ -153,7 +153,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
     assert modelo_paa == modelo_sd  # mesma cascata de modelos, mesmo serviço
     # O prompt de sistema é o mesmo texto do tutor; só mudam o nome da disciplina e as regras de rigor.
     paa, sd = disciplinas.obter("paa"), disciplinas.obter("sd")
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts._RIGOR_SOCRATICO[d.id], "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(sistema_paa, paa) == comum(sistema_sd, sd)
 

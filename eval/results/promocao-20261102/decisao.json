@@ -1,0 +1,48 @@
+{
+  "promover": false,
+  "criterios": {
+    "sem_erro_tecnico": false,
+    "sem_entrega": true,
+    "tres_pares_melhores": false,
+    "no_maximo_um_par_pior": false,
+    "reservas_nao_aumentam": true,
+    "ate_120_s": true,
+    "sem_regressao_operacional_anterior": false
+  },
+  "resumo": {
+    "atual": {
+      "modelo": "tutoron-paa",
+      "casos": 12,
+      "prontas": 12,
+      "reservas": 2,
+      "mediana_s": 9.1,
+      "max_s": 24.6,
+      "erros_tecnicos": 3,
+      "entregas": 0,
+      "ajuda": {
+        "0": 5,
+        "1": 5,
+        "2": 2
+      }
+    },
+    "candidato": {
+      "modelo": "tutoron-socratico-ft",
+      "casos": 12,
+      "prontas": 12,
+      "reservas": 2,
+      "mediana_s": 5.7,
+      "max_s": 12.2,
+      "erros_tecnicos": 5,
+      "entregas": 0,
+      "ajuda": {
+        "0": 10,
+        "1": 1,
+        "2": 1
+      }
+    }
+  },
+  "pares_melhores": 0,
+  "pares_piores": 5,
+  "revisao": "Inspeção técnica pelo agente, separada do revisor interno. Sem revisão docente ou estudo de aprendizagem. Notas atribuídas manualmente, não inferidas da aprovação automática.",
+  "avaliacao_antes_dos_limites_novos": true
+}

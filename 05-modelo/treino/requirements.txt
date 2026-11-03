@@ -9,6 +9,9 @@ safetensors==0.8.0
 huggingface_hub==2.2.0
 httpx==0.28.1
 python-dotenv==1.2.3
+# A avaliação importa o mesmo fluxo de atendimento do servidor (roteiro e fotos).
+pydantic==2.11.3
+pillow==12.3.0
 # Conversão para GGUF (llama.cpp)
 sentencepiece==0.2.2
 numpy

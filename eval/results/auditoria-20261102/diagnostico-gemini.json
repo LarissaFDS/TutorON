@@ -1,0 +1,17 @@
+{
+  "limite": "Reprodução controlada com contexto curto; não registra o modelo que falhou em cada revisão passada. Não altera a configuração do servidor.",
+  "resultados": [
+    {
+      "modelo": "gemini-3.6-flash",
+      "orcamento_saida": 512,
+      "http": 429,
+      "json_valido": false
+    },
+    {
+      "modelo": "gemini-3.6-flash",
+      "orcamento_saida": 2048,
+      "http": 429,
+      "json_valido": false
+    }
+  ]
+}

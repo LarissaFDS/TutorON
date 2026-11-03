@@ -1,0 +1,234 @@
+{
+  "completa": true,
+  "resumo": {
+    "casos": 16,
+    "falsas_aprovacoes": 1,
+    "falsas_reprovacoes": 2
+  },
+  "casos": [
+    {
+      "id": "ruim-final",
+      "esperado_aprovada": false,
+      "pergunta": "Resolva T(n)=2T(n/2)+n.",
+      "contexto": "",
+      "candidata": "T(n) = Θ(n log n).\n\n### Sua vez\nCopie no papel.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "Entrega da solução final",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 1.0
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-kmap",
+      "esperado_aprovada": false,
+      "pergunta": "Confira meu grupo no Karnaugh.",
+      "contexto": "O grupo inclui um zero obrigatório.",
+      "candidata": "Incluir uma célula de zero obrigatório num grupo de uns pode ser uma estratégia válida.\n\n### Sua vez\nMantenha esse grupo.",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda oferece uma pista correta e deixa a pergunta aberta para o aluno.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.9
+      },
+      "acertou": false
+    },
+    {
+      "id": "ruim-parametros",
+      "esperado_aprovada": false,
+      "pergunta": "Onde errei em T(n)=4T(n/2)+n²?",
+      "contexto": "O aluno usou a=2 e b=4.",
+      "candidata": "Está correto: a representa por quanto dividimos o argumento, e b é a quantidade de chamadas.\n\n### Sua vez\nCalcule log_4(2).",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a resposta solicitada",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.59
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-bit",
+      "esperado_aprovada": false,
+      "pergunta": "Qual a saída de AND com 1 e 0?",
+      "contexto": "",
+      "candidata": "Uma porta AND tem saída zero sempre que alguma entrada é zero.\n\n### Sua vez\nEscreva a saída para 1 e 0.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a resposta solicitada",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.56
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-recorrencia-copiavel",
+      "esperado_aprovada": false,
+      "pergunta": "Escreva a recorrência completa de PD para troco mínimo com moedas {2,3,7}.",
+      "contexto": "",
+      "candidata": "Num exemplo com moedas {1,4}, use dp[0]=0, demais infinito; para v de 1 até o alvo e cada moeda c<=v, faça dp[v]=min(dp[v],dp[v-c]+1).\n\n### Sua vez\nTroque as moedas.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a recorrência completa para o problema, mesmo que com um exemplo diferente.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.85
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-inducao",
+      "esperado_aprovada": false,
+      "pergunta": "Minha prova da soma dos ímpares está circular?",
+      "contexto": "Assumi o caso k+1 para provar k+1.",
+      "candidata": "Para corrigir a soma dos ímpares, acrescente (k+1)^3 à hipótese e simplifique.\n\n### Sua vez\nSome o próximo cubo.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a solução completa da tarefa.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.68
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-np",
+      "esperado_aprovada": false,
+      "pergunta": "Reduzi X para SAT. Isso prova que X é NP-difícil?",
+      "contexto": "",
+      "candidata": "Sim. Como SAT é NP-completo, qualquer redução de X para SAT prova a NP-dificuldade de X.\n\n### Sua vez\nEscreva essa conclusão.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a resposta solicitada",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.56
+      },
+      "acertou": true
+    },
+    {
+      "id": "ruim-binaria",
+      "esperado_aprovada": false,
+      "pergunta": "Posso garantir busca binária em vetor desordenado?",
+      "contexto": "",
+      "candidata": "Sim, basta comparar com o elemento do meio para descartar metade de qualquer vetor, mesmo desordenado.\n\n### Sua vez\nFaça esse descarte.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a resposta solicitada ao garantir que a busca binária pode ser aplicada a um vetor desordenado, o que é incorreto.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 1.19
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-pista",
+      "esperado_aprovada": true,
+      "pergunta": "Estou começando T(n)=3T(n/2)+n.",
+      "contexto": "",
+      "candidata": "Separe quantidade de chamadas e tamanho de cada chamada.\n\n### Sua vez\nQual trecho multiplica a chamada recursiva?",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda oferece uma pista correta e deixa a aplicação ao aluno.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.84
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-gray",
+      "esperado_aprovada": true,
+      "pergunta": "Agrupei colunas 01 e 10 no meu mapa.",
+      "contexto": "",
+      "candidata": "Confira a mudança de bits entre os rótulos que você considerou vizinhos.\n\n### Sua vez\nQuantas posições mudam entre 01 e 10?",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega a resposta solicitada indiretamente ao fornecer uma pergunta que já contém a resposta.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 1.01
+      },
+      "acertou": false
+    },
+    {
+      "id": "boa-inicializacao",
+      "esperado_aprovada": true,
+      "pergunta": "Meu troco mínimo dá zero em todo alvo.",
+      "contexto": "Inicializei todos os estados com zero.",
+      "candidata": "Observe a inicialização: alvo não alcançado e alvo resolvido sem moedas não são a mesma situação.\n\n### Sua vez\nComo distinguir essas duas situações na sua tabela?",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda questiona o aluno sobre a distinção entre dois estados, sem fornecer a resposta direta ou completar a solução.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 1.12
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-conceito",
+      "esperado_aprovada": true,
+      "pergunta": "O que distingue O de Theta?",
+      "contexto": "",
+      "candidata": "O é uma cota superior assintótica. Theta exige cotas superior e inferior da mesma ordem, para entradas suficientemente grandes.\n\n### Sua vez\nQuais dos dois lados você já justificou na sua tentativa?",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "Explicação correta e pergunta aberta para aprofundar o entendimento.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.83
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-desenho",
+      "esperado_aprovada": true,
+      "pergunta": "Como organizo uma subtração binária sem resolver?",
+      "contexto": "",
+      "candidata": "| Operando | Bits |\n|---|---|\n| A | fornecidos no enunciado |\n| B | fornecidos no enunciado |\n| Transformação necessária | ? |\n| Soma | ? |\n\n### Sua vez\nIdentifique o subtraendo antes de preencher a transformação.",
+      "parecer": {
+        "aprovada": false,
+        "motivo": "A ajuda entrega uma estrutura que sugere a solução, deixando a aplicação do aluno limitada.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.96
+      },
+      "acertou": false
+    },
+    {
+      "id": "boa-hipotese",
+      "esperado_aprovada": true,
+      "pergunta": "Assumi k+1 para provar k+1 na indução. Onde olhar?",
+      "contexto": "",
+      "candidata": "Sua hipótese já está supondo a própria conclusão do passo.\n\n### Sua vez\nPara qual índice anterior você deveria assumir a afirmação antes de justificar k+1?",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda oferece uma pista conceitual sobre a indução matemática, sem entregar a solução direta ou completar o raciocínio do aluno.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 1.29
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-aresta",
+      "esperado_aprovada": true,
+      "pergunta": "Por que Dijkstra exige pesos não negativos?",
+      "contexto": "",
+      "candidata": "A garantia gulosa depende de não surgir depois um caminho mais curto para um vértice já finalizado. Um peso negativo pode quebrar essa garantia, mesmo sem ciclo negativo.\n\n### Sua vez\nQue hipótese permitiria confiar na distância quando um vértice é retirado da fila?",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda explica o conceito de forma clara e deixa a pergunta final aberta para o aluno.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.99
+      },
+      "acertou": true
+    },
+    {
+      "id": "boa-sem-dados",
+      "esperado_aprovada": true,
+      "pergunta": "Qual a saída da figura?",
+      "contexto": "Nenhuma figura foi enviada.",
+      "candidata": "Preciso da figura ou da descrição das portas e conexões para conferir.\n\n### Sua vez\nListe as entradas e descreva a primeira conexão que aparece no circuito.",
+      "parecer": {
+        "aprovada": true,
+        "motivo": "A ajuda pede informações adicionais e não entrega a resposta solicitada.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 0.76
+      },
+      "acertou": true
+    }
+  ]
+}

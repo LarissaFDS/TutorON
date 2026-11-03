@@ -1,43 +1,51 @@
-# Treinar o TutorON
+# Treinar o TutorON socrático
 
-Um clique: **`3-Treinar.bat`**. Na primeira vez ele cria `.venv-treino`, instala PyTorch com CUDA (~3 GB) e baixa os pesos do Qwen3-8B do Hugging Face (~16 GB, em `.tools/hf`). Depois disso, cada treino leva poucos minutos.
+Dê duplo clique em **`3-Treinar.bat`** para treinar PAA e Sistemas Digitais. O fluxo prepara os dados, treina um adapter QLoRA sobre `Qwen/Qwen3-8B`, mescla, converte para GGUF Q4_K_M, instala como **`tutoron-socratico-ft`** e compara com o modelo configurado no servidor. O modelo em uso só muda depois que você revisar o relatório e ativá-lo.
 
-## O que acontece
+## O que o modelo aprende
 
-| Etapa | O quê | Onde fica |
-|---|---|---|
-| 1. Dados | Soluções corrigidas do acervo viram pares pergunta → resposta, no mesmo formato de prompt do servidor. Questões do benchmark ficam de fora. | `05-modelo/treino/treino.jsonl`, `validacao.jsonl`, `manifesto.json` |
-| 2. Treino | QLoRA: modelo em 4 bits na GPU, adapter LoRA rank 16 em todas as projeções. Descarrega o Ollama da GPU antes. | `.tools/treino/adapter`, `.tools/treino/resultado-treino.json` |
-| 3. Mescla | Aplica o adapter nos pesos originais, um arquivo por vez (cabe em 16 GB de RAM). | temporário, apagado no fim |
-| 4. Ollama | Converte para GGUF (conversor do llama.cpp), quantiza em Q4_K_M e importa como `tutoron-paa-ft` (mesmo tamanho do atual). | `.tools/models` |
-| 5. Avaliação | Perguntas de validação + sondas de matemática, respondidas pelo modelo atual e pelo novo; um juiz (Gemini) compara com a solução de referência. | `05-modelo/treino/avaliacao-AAAAMMDD-HHMM.md` |
+O dataset anterior de soluções completas não é usado neste fluxo. A fonte agora é [`socratico/casos.json`](socratico/casos.json): 24 famílias autorais, com sete formas de ajuda por família. São **112 exemplos de treino, 28 de validação e 28 de teste**, equilibrados entre PAA e SD. Cada exemplo orienta sem completar o exercício e devolve a vez ao aluno. Há pistas, conceitos, exemplos, desenhos, perguntas, conferência de erro e insistência depois de uma ajuda anterior.
 
-O modelo em uso **não é trocado sozinho**. Leia o relatório; se o novo for melhor, coloque no `.env`:
+Famílias inteiras ficam num único split. O teste não entra na loss nem na escolha de checkpoints. Conversas e avaliações dos alunos não são importadas automaticamente. Os dados são sintéticos, escritos com auxílio de IA e com revisão docente pendente; esta versão é um ponto de partida, sem ganho pedagógico comprovado.
 
+## Um clique, cinco etapas
+
+| Etapa | Resultado |
+|---|---|
+| Dados e checagem | `05-modelo/socratico/preparado/`: JSONL, manifesto com hashes e contagens. O tokenizer real verifica todos os exemplos. Se algum exceder o contexto, o fluxo para sem cortar a resposta. |
+| Treino | QLoRA rank 8, contexto máximo 2048, 60 passos, batch 1 e acumulação 4. Prompt mascarado com -100: a loss conta apenas a ajuda do tutor. |
+| Mescla e conversão | Pesos mesclados por arquivo e conversão pelo llama.cpp. Requer pelo menos 35 GB livres, além dos pesos já baixados. |
+| Instalação | Modelo `tutoron-socratico-ft` no Ollama, com instruções socráticas também para uso direto. |
+| Avaliação | 32 casos reservados pelo fluxo real de busca e atendimento, para modelo atual e candidato. JSON e Markdown com primeira versão bruta, ajuda publicada, bloqueios, reservas, fontes e tempos. |
+
+Cada execução guarda configuração, cópia dos dados, manifesto, adapter e métricas em `.tools/treino-socratico/<execução>/`. A avaliação fica em `05-modelo/socratico/preparado/avaliacao-socratica-*.md`. A resposta de reserva não conta como sucesso do modelo. O revisor automático usa o mesmo modelo e pode errar; leia também as respostas brutas.
+
+O atalho também salva a saída do terminal em `dados/logs/treino-*.log` e verifica as dependências da avaliação antes de iniciar o treino. Se o treino e a instalação terminarem, mas a avaliação falhar, execute **`3-Treinar.bat --so-avaliar`**. Isso reaproveita o candidato instalado e refaz apenas a avaliação, sem repetir o treino. Dar duplo clique no atalho sem argumentos inicia um treino novo.
+
+Na primeira execução, o atalho instala o ambiente de treino e baixa os pesos se necessário. O tempo depende do hardware e das cotas; o teste de um passo não estima sozinho a duração do treino completo. O servidor bloqueia novas inferências locais durante treino e mescla para não recarregar o Ollama na mesma GPU; Gemini continua disponível. A reserva é liberada pelo sistema operacional mesmo se o processo cair. Feche aplicações que ocupem muita VRAM.
+
+## Ativar depois de avaliar
+
+Edite o `.env` e reinicie o servidor:
+
+```ini
+TUTORON_MODELO_LOCAL=tutoron-socratico-ft
 ```
-TUTORON_MODELO_LOCAL=tutoron-paa-ft
-```
 
-e reinicie o `1-Iniciar-Servidor.bat`. Para voltar, apague a linha.
+Para voltar, use o nome anterior (nesta máquina, `tutoron-paa`). Loss menor não prova que o tutor orienta melhor. Não há troca automática nem publicação de pesos em serviços externos.
 
-## Opções
+## Comandos opcionais
 
 ```bat
-3-Treinar.bat --passos 60           :: mais passos (padrão 30; com poucos dados, mais passos sobreajustam)
-3-Treinar.bat --so-dados            :: só exporta os dados, sem treinar
-3-Treinar.bat --pular-avaliacao     :: não gera o relatório
-3-Treinar.bat --base Qwen/Qwen3-4B  :: base menor (precisa trocar também o modelo servido)
+3-Treinar.bat --so-dados          :: exporta sem CUDA, sem baixar pesos nem ligar o Ollama
+3-Treinar.bat --verificar         :: exporta e confere tokens, sem carregar pesos
+3-Treinar.bat --teste-gpu         :: um passo real, sem mesclar nem instalar o adapter de teste
+3-Treinar.bat --passos 30         :: altera a duração do treino
+3-Treinar.bat --pular-avaliacao   :: instala o candidato sem rodar a bateria; revisão continua necessária
+3-Treinar.bat --so-avaliar        :: recupera a avaliação do modelo já instalado, sem treinar novamente
+.venv\Scripts\python eval\socratico.py --modelos tutoron-paa tutoron-socratico-ft
 ```
 
-O servidor pode ficar ligado durante o treino: o Gemini continua respondendo, e o modelo local volta para a GPU sozinho na próxima vez que for usado.
+A política do servidor já é socrática antes do fine-tuning. O treino adapta os pesos para reforçar esse comportamento; a barreira de publicação continua necessária. O uso direto no Ollama não passa pela barreira do site.
 
-## Limites (importante)
-
-- **O dataset é pequeno** (26 exemplos de treino, 6 de validação) e foi corrigido por agente, não por professor. Ele prova que o processo funciona; não sustenta, sozinho, uma melhora pedagógica.
-- **Loss menor não significa tutor melhor.** Compare pelo relatório de avaliação e pela validação A/B com alunos.
-- O treino não ensina o conteúdo do livro: a RAG continua buscando o material em cada pergunta.
-- Para reduzir os erros de matemática, o que mais ajuda é ter **mais soluções corretas e revisadas**: cada resolução nova aprovada em `03-triagem/revisoes.json` e curada no acervo entra no próximo treino. As avaliações com "erro de matemática" marcadas pelos alunos (`dados/validacao/avaliacoes.jsonl`) mostram onde o modelo erra.
-
-## Hardware desta máquina
-
-RTX 4060 (8 GB), i5-12400F, 16 GB de RAM. Inferência do Qwen3 8B Q4_K_M: ~45 tokens/s. Treino QLoRA do 8B com contexto de 1536 tokens cabe na VRAM com checkpointing.
+Detalhes técnicos do método: [quantização e LoRA no PEFT](https://huggingface.co/docs/peft/developer_guides/quantization) e [mascaramento de labels no Transformers](https://huggingface.co/docs/transformers/main_classes/data_collator). A implementação mantém embeddings em BF16 para caber na GPU de 8 GB e usa checkpointing de gradientes.

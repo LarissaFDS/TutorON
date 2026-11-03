@@ -1,11 +1,40 @@
 """Corrida escalonada entre modelos, com provedores falsos (sem rede)."""
 import asyncio
 import dataclasses
+import json
 
 import pytest
 
 from backend.config import Settings
 from backend.llm import LLM, AllUnavailable, Model, Unavailable
+
+
+@pytest.mark.parametrize('pensar,revisao,limite', [(False, False, 2048), (True, False, 8192),
+                                                  (False, True, 256), (True, True, 256)])
+def test_orcamento_de_saida_preserva_raciocinio_e_limita_repeticao(pensar, revisao, limite):
+    import httpx
+    from backend.llm import REVISAO_JSON, SEM_RACIOCINIO
+    corpos = []
+
+    def responder(request):
+        if request.url.path == '/api/show':
+            return httpx.Response(200, json={'capabilities': ['completion', 'thinking']})
+        corpos.append(json.loads(request.content))
+        return httpx.Response(200, text='{"message":{"content":"pista"},"done":true}\n')
+
+    async def chamada():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as client:
+            llm = LLM(Settings(local_thinking=pensar), client=client)
+            formato, sem = REVISAO_JSON.set(revisao), SEM_RACIOCINIO.set(revisao)
+            try:
+                return ''.join([x async for x in llm._ollama(Model('ollama', 'teste'), 's', 'p')])
+            finally:
+                REVISAO_JSON.reset(formato)
+                SEM_RACIOCINIO.reset(sem)
+
+    assert asyncio.run(chamada()) == 'pista'
+    assert corpos[0]['options']['num_predict'] == limite
+    assert corpos[0]['think'] is (pensar and not revisao)
 
 
 def settings(**kw):
@@ -22,6 +51,11 @@ class FakeLLM(LLM):
         self.roteiro = roteiro
         self.iniciados = []
         self.fechados = []
+
+    async def revisar_ajuda(self, pergunta, contexto, resposta):
+        # A revisão semântica é simulada nos testes de rotas. O contrato real e as
+        # reprovações são exercitados separadamente em test_tutoria.py.
+        return {"aprovada": True, "motivo": "revisor simulado"}
 
     def _provider(self, model, system, prompt):
         self.iniciados.append(model.name)

@@ -1,0 +1,55 @@
+[
+  {
+    "id": "otEGxhM81TNn84g_",
+    "data": "2026-11-02T23:31:34+00:00",
+    "disciplina": "paa",
+    "pergunta": "Em programação dinâmica, como escolher o que uma célula da tabela representa antes de tentar escrever uma fórmula?",
+    "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Definindo dp[i][j] em contagem de caminhos\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Qual é o menor problema que ajuda a resolver o maior?\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"dp[i][j] representa o número de caminhos para chegar em (i,j)\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Cada caminho chega de (i-1,j) ou (i,j-1)\",\n      \"lacuna\": false\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Como você define dp[i][j] se cada célula pode ser atravessada apenas uma vez?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "A célula dp[i][j] não pode ser definida apenas com base em caminhos que chegam de (i-1,j) ou (i,j-1), pois o problema exige que cada célula seja atravessada apenas uma vez, o que complica a definição da fórmula e a relação entre células.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.5
+        }
+      },
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Definindo dp[i][j]\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Qual é o menor problema que ajuda a resolver o maior?\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"dp[i][j] representa o número de caminhos para chegar em (i,j)\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Cada caminho chega de (i-1,j) ou (i,j-1)\",\n      \"lacuna\": false\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Como você define dp[i][j] para o problema de contagem de caminhos?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "A célula dp[i][j] não pode ser definida apenas com base em (i-1,j) ou (i,j-1), pois o problema menciona que cada célula pode ser atravessada apenas uma vez, o que exige uma definição mais complexa que envolva restrições de caminho únicos.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.06
+        }
+      }
+    ]
+  },
+  {
+    "id": "1l_XbbugV8eXONNy",
+    "data": "2026-11-02T23:35:58+00:00",
+    "disciplina": "paa",
+    "pergunta": "Em programação dinâmica, como escolher o que uma célula da tabela representa antes de tentar escrever uma fórmula?",
+    "erro": "O roteiro anterior era inválido (roteiro inválido: String should have at most 70 characters; String should have at most 70 characters). Refaça um esquema de blocos para a mesma dúvida.",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Definindo dp[i][j] em contagem de caminhos\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"Qual é o menor problema que ajuda a resolver o maior?\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"dp[i][j] representa o número de caminhos para chegar em (i,j)\",\n      \"lacuna\": true\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Cada caminho chega de (i-1,j) ou (i,j-1)\",\n      \"lacuna\": false\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Como você define dp[i][j] se cada célula pode ser atravessada apenas uma vez?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": false,
+          "motivo": "A célula dp[i][j] não pode ser definida apenas com base em caminhos que chegam de (i-1,j) ou (i,j-1), pois o problema exige que cada célula seja atravessada apenas uma vez, o que complica a definição direta de subproblemas.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.29
+        }
+      },
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Representação da célula na tabela\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"A célula (i,j) representa o melhor valor para subproblema de tamanho i e j.\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Qual é o significado da célula (i,j) no contexto do problema?\", \"lacuna\": true},\n    {\"id\": \"bloco3\", \"texto\": \"A fórmula depende da definição da célula e da relação entre subproblemas.\", \"lacuna\": false}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"], [\"bloco1\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\"],\n  \"pergunta_final\": \"Como essa definição afeta a fórmula de recorrência?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "erro_validacao": "roteiro inválido: String should have at most 70 characters; String should have at most 70 characters"
+      }
+    ]
+  }
+]

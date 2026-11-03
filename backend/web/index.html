@@ -7,7 +7,7 @@
 <meta name="description" content="TutorON: uma IA que ajuda estudantes a entender as matérias da faculdade, começando por Computação.">
 <link rel="stylesheet" href="/design.css">
 <link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="/static/app.css">
+<link rel="stylesheet" href="/static/app.css?v=abas-visuais-2">
 </head>
 <body>
 
@@ -17,14 +17,14 @@
   </div>
   <div class="page masthead__intro">
     <h1>Entenda as matérias da faculdade, passo a passo</h1>
-    <p class="masthead__lede">O TutorON é uma IA que explica o conteúdo do jeito que ele é cobrado nas provas, com base no material das disciplinas. Começamos pelo curso de Computação.</p>
-    <p class="masthead__nota">Fase MVP: o TutorON responde sobre Projeto e Análise de Algoritmos (PAA), a disciplina mais difícil do curso. Sistemas Digitais (SD) está disponível em versão beta.</p>
+    <p class="masthead__lede">Peça uma pista, confira sua tentativa ou entenda o problema com uma animação.</p>
   </div>
 </header>
 
 <nav class="page modes" aria-label="Modo">
   <div class="modes__list" role="tablist">
     <button class="modes__tab" role="tab" id="tab-tutor" aria-controls="modo-tutor" aria-selected="true" type="button">Tirar dúvida</button>
+    <a class="modes__tab" href="/visuais">Aprender com desenhos</a>
     <button class="modes__tab" role="tab" id="tab-validacao" aria-controls="modo-validacao" aria-selected="false" type="button">Avaliar respostas (validação)</button>
   </div>
 </nav>
@@ -46,8 +46,9 @@
 
     <form id="form-tutor" class="composer" novalidate>
       <div class="field estreito" id="disciplina-campo" hidden>
-        <label class="field__label" for="disciplina">Disciplina</label>
+        <label class="field__label" for="disciplina">Disciplina (opcional)</label>
         <select class="input" id="disciplina"></select>
+        <span class="field__hint caption">O tutor tenta identificar pela dúvida. Você pode corrigir a escolha.</span>
         <span class="field__hint caption" id="disciplina-aviso" role="status" hidden></span>
         <p class="field__hint caption" id="disciplina-beta" role="note" aria-live="polite" hidden></p>
       </div>
@@ -197,6 +198,6 @@
 <script src="/static/vendor/purify.min.js"></script>
 <script src="/static/vendor/katex/katex.min.js"></script>
 <script src="/static/render.js"></script>
-<script src="/static/app.js"></script>
+<script src="/static/app.js?v=abas-visuais-2"></script>
 </body>
 </html>

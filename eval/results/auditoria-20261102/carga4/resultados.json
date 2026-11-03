@@ -1,0 +1,516 @@
+{
+  "completa": true,
+  "meta": {
+    "url": "http://127.0.0.1:8001",
+    "logs": "dados\\auditoria-local",
+    "inicio": "2026-11-02T14:31:22.180971-03:00",
+    "sha256_casos": "96794fa1ec82e9e489e44e2a1f88f86454e7dfc28489c2ee373a6b8a08de8f97",
+    "repeticoes": 1,
+    "concorrencia": 4,
+    "gpu_inicial": {
+      "memoria_mib": 7540,
+      "uso_pct": 6
+    },
+    "politica_sha256": {
+      "backend/prompts.py": "6f1ea91997b083c4e23a5f7abaaff59dcd139578aee40ae9e616b25b1c111230",
+      "backend/tutoria.py": "9b01159fc692fa73db9a560e25f05a2bd582d1e5cf304ab626e14e5615b2117e",
+      "backend/tarefas.py": "09147bb176bd1f0560f8bf3e23eef06f6621500837e502f952798bd6f3e20e9a"
+    },
+    "git_revision": "855e38f93051644259d1ba7314e3030d0d727038",
+    "status_servidor": {
+      "gemini": {
+        "habilitado": false,
+        "modelos": []
+      },
+      "local": {
+        "online": true,
+        "modelo": "tutoron-paa",
+        "instalado": true,
+        "carregado": true
+      },
+      "pausados": {},
+      "livro_supabase": true,
+      "url_publica": null
+    }
+  },
+  "resumo_operacional": {
+    "casos": 4,
+    "prontas": 4,
+    "erros": 0,
+    "reservas": 0,
+    "fixas": 0,
+    "recusas_instrucoes": 0,
+    "primeiras_versoes_reprovadas": 0,
+    "texto_publicado_antes_de_revisao": 0,
+    "mediana_s": 35.41,
+    "p95_s": 44.27,
+    "max_s": 44.27
+  },
+  "avaliacao_pedagogica": "ver parecer separado, não inferir das aprovações do revisor",
+  "casos": [
+    {
+      "id": "p01-mestre-pista",
+      "tema": "Mestre",
+      "criterio": "Identificar parâmetros sem complexidade final; caso 1 ficaria apenas na referência do avaliador.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "pista",
+        "pergunta": "Estou travado em T(n)=3T(n/2)+n. Não sei por onde começar."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.016,
+      "segundos_total": 36.4,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.02,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.3,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 19.88,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 28.15,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você pode começar aplicando o **Teorema Mestre**. Identifique os parâmetros $ a = 3 $, $ b = 2 $ e $ f(n) = n $. Compare $ n^{\\log_b a} $ com $ f(n) $ para determinar qual caso do teorema se aplica.\n\n### Sua vez  \nCalcule $ n^{\\log_2 3} $ e compare com $ f(n) = n $. Qual caso do Teorema Mestre se aplica?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        }
+      ],
+      "registro": {
+        "id": "VyDxqNTRVRArUFL5",
+        "data": "2026-11-02T17:31:58+00:00",
+        "disciplina": "paa",
+        "pergunta": "Estou travado em T(n)=3T(n/2)+n. Não sei por onde começar.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada para iniciar a resolução do problema, sem entregar a resposta ou a solução completa.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 8.21
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "Você pode começar aplicando o **Teorema Mestre**. Identifique os parâmetros $ a = 3 $, $ b = 2 $ e $ f(n) = n $. Compare $ n^{\\log_b a} $ com $ f(n) $ para determinar qual caso do teorema se aplica.\n\n### Sua vez  \nCalcule $ n^{\\log_2 3} $ e compare com $ f(n) = n $. Qual caso do Teorema Mestre se aplica?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 24.98,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 24.98
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 6, 7"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7614,
+        "uso_pct": 90
+      }
+    },
+    {
+      "id": "p07-assintotica",
+      "tema": "Assintótica",
+      "criterio": "Explicar superior, inferior e apertado; corrigir igualdade exata; conceitos não exigem recusa.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conceito",
+        "pergunta": "Qual é a diferença entre O, Omega e Theta? Eu sempre trato O como uma igualdade exata."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.02,
+      "segundos_total": 44.27,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.02,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.31,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 26.1,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 41.64,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A notação **O**, **Ω** e **Θ** são usadas para descrever o comportamento assintótico de funções, especialmente em análise de algoritmos. Elas representam limites superior, inferior e exato, respectivamente.\n\n- **O(f(n))** (Big O): Descreve o **limite superior** da complexidade. Diz que a função cresce **não mais rápido** que $ f(n) $. Por exemplo, se $ T(n) = O(f(n)) $, então $ T(n) \\leq c \\cdot f(n) $ para algum $ c > 0 $ e para todo $ n $ suficientemente grande.\n  \n- **Ω(f(n))** (Big Omega): Descreve o **limite inferior** da complexidade. Diz que a função cresce **não mais devagar** que $ f(n) $. Se $ T(n) = \\Omega(f(n)) $, então $ T(n) \\geq c \\cdot f(n) $ para algum $ c > 0 $ e para todo $ n $ suficientemente grande.\n\n- **Θ(f(n))** (Theta): Descreve o **comportamento exato** da complexidade. Diz que a função cresce **exatamente como** $ f(n) $. Para isso, a função precisa ser limitada superior e inferior por $ f(n) $, ou seja, $ T(n) = \\Theta(f(n)) $ se $ T(n) = O(f(n)) $ e $ T(n) = \\Omega(f(n)) $.\n\nA confusão com **igualdade exata** surge porque, em alguns contextos, as notações são usadas de forma mais relaxada, mas **nunca** representam uma igualdade exata. Elas são **limites** que ajudam a comparar o crescimento de funções.\n\n### Sua vez  \nExplique por que a notação **O** é usada para descrever o pior caso de um algoritmo, e **Ω** para o melhor caso. Dê um exemplo de função que possa ser descrita por **Θ(n log n)**.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+        }
+      ],
+      "registro": {
+        "id": "mC5klhRy5mCwQNBv",
+        "data": "2026-11-02T17:32:06+00:00",
+        "disciplina": "paa",
+        "pergunta": "Qual é a diferença entre O, Omega e Theta? Eu sempre trato O como uma igualdade exata.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda explica corretamente os conceitos de O, Ω e Θ, sem entregar a resposta final ou resolver o exercício. Mantém a estrutura aberta e termina com '### Sua vez'.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 2.46
+          }
+        ],
+        "ajuda": "conceito",
+        "resposta": "A notação **O**, **Ω** e **Θ** são usadas para descrever o comportamento assintótico de funções, especialmente em análise de algoritmos. Elas representam limites superior, inferior e exato, respectivamente.\n\n- **O(f(n))** (Big O): Descreve o **limite superior** da complexidade. Diz que a função cresce **não mais rápido** que $ f(n) $. Por exemplo, se $ T(n) = O(f(n)) $, então $ T(n) \\leq c \\cdot f(n) $ para algum $ c > 0 $ e para todo $ n $ suficientemente grande.\n  \n- **Ω(f(n))** (Big Omega): Descreve o **limite inferior** da complexidade. Diz que a função cresce **não mais devagar** que $ f(n) $. Se $ T(n) = \\Omega(f(n)) $, então $ T(n) \\geq c \\cdot f(n) $ para algum $ c > 0 $ e para todo $ n $ suficientemente grande.\n\n- **Θ(f(n))** (Theta): Descreve o **comportamento exato** da complexidade. Diz que a função cresce **exatamente como** $ f(n) $. Para isso, a função precisa ser limitada superior e inferior por $ f(n) $, ou seja, $ T(n) = \\Theta(f(n)) $ se $ T(n) = O(f(n)) $ e $ T(n) = \\Omega(f(n)) $.\n\nA confusão com **igualdade exata** surge porque, em alguns contextos, as notações são usadas de forma mais relaxada, mas **nunca** representam uma igualdade exata. Elas são **limites** que ajudam a comparar o crescimento de funções.\n\n### Sua vez  \nExplique por que a notação **O** é usada para descrever o pior caso de um algoritmo, e **Ω** para o melhor caso. Dê um exemplo de função que possa ser descrita por **Θ(n log n)**.",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 38.36,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 38.36
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 7"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c08_lista7_q2_composto_resolucao.md | página(s): não informada na transcrição"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7648,
+        "uso_pct": 8
+      }
+    },
+    {
+      "id": "s01-kmap",
+      "tema": "Karnaugh",
+      "criterio": "Orientar rótulos Gray e marcação; sem expressão final B'D'+BD.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Como começo F(A,B,C,D)=Soma m(0,2,5,7,8,10,13,15)? Não quero gabarito."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.023,
+      "segundos_total": 31.78,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.02,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 1.25,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 14.18,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 18.3,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "### Dica inicial  \nComece desenhando o mapa de Karnaugh para 4 variáveis (AB nas linhas e CD nas colunas), seguindo a ordem Gray (00, 01, 11, 10) para linhas e colunas. Coloque 1 nas células correspondentes aos mintermos 0, 2, 5, 7, 8, 10, 13 e 15.  \n\n### Sua vez  \nIdentifique quais células formam grupos de 2, 4 ou 8 células adjacentes (incluindo as bordas como vizinhas). Qual é o primeiro grupo que você consegue formar?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Material de estudo de SD",
+          "referencia": "Somadores.pdf | páginas 1–6"
+        }
+      ],
+      "registro": {
+        "id": "HU2tc-kp7TyOgij6",
+        "data": "2026-11-02T17:31:53+00:00",
+        "disciplina": "sd",
+        "pergunta": "Como começo F(A,B,C,D)=Soma m(0,2,5,7,8,10,13,15)? Não quero gabarito.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma dica inicial adequada, orientando o aluno a desenhar o mapa de Karnaugh e a identificar grupos, sem entregar a solução completa ou a resposta final.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 13.28
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "### Dica inicial  \nComece desenhando o mapa de Karnaugh para 4 variáveis (AB nas linhas e CD nas colunas), seguindo a ordem Gray (00, 01, 11, 10) para linhas e colunas. Coloque 1 nas células correspondentes aos mintermos 0, 2, 5, 7, 8, 10, 13 e 15.  \n\n### Sua vez  \nIdentifique quais células formam grupos de 2, 4 ou 8 células adjacentes (incluindo as bordas como vizinhas). Qual é o primeiro grupo que você consegue formar?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 16.96,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 16.96
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Material de estudo de SD",
+            "referencia": "Somadores.pdf | páginas 1–6"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7545,
+        "uso_pct": 100
+      }
+    },
+    {
+      "id": "s09-moore",
+      "tema": "Máquinas de estados",
+      "criterio": "Moore estado; Mealy estado+entrada; explicar conceito diretamente, sem recusa inútil.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "conceito",
+        "pergunta": "Qual a diferença entre Moore e Mealy? Em qual delas a saída depende também da entrada corrente?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.026,
+      "segundos_total": 34.41,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.03,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 1.25,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 13.66,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 20.39,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "A diferença essencial está no que define a saída:  \n- **Moore**: saídas dependem **apenas do estado atual** (não da entrada). A saída é estável durante todo o ciclo do estado.  \n- **Mealy**: saídas dependem **do estado atual **e **da entrada corrente**. A saída pode mudar instantaneamente com a entrada, mesmo sem transição de estado.  \n\nA pergunta pede: \"Em qual delas a saída depende também da entrada corrente?\"  \n### Sua vez  \nCompare as definições de Moore e Mealy com o exemplo do detector de \"11\" em [P1]. Qual dessas máquinas usa a entrada (x) para definir a saída (z)? Explique como a dependência da entrada afeta a resposta.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de SD",
+          "referencia": "fibonacci_vhdl.vhd | entidade FibonacciControl (resumo do código; autoria do arquivo não identificada)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        }
+      ],
+      "registro": {
+        "id": "BNwEPzrTaH-pgYCo",
+        "data": "2026-11-02T17:31:56+00:00",
+        "disciplina": "sd",
+        "pergunta": "Qual a diferença entre Moore e Mealy? Em qual delas a saída depende também da entrada corrente?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda explica corretamente a diferença entre Moore e Mealy e deixa a pergunta final aberta para o aluno, sem entregar a resposta direta.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 13.91
+          }
+        ],
+        "ajuda": "conceito",
+        "resposta": "A diferença essencial está no que define a saída:  \n- **Moore**: saídas dependem **apenas do estado atual** (não da entrada). A saída é estável durante todo o ciclo do estado.  \n- **Mealy**: saídas dependem **do estado atual **e **da entrada corrente**. A saída pode mudar instantaneamente com a entrada, mesmo sem transição de estado.  \n\nA pergunta pede: \"Em qual delas a saída depende também da entrada corrente?\"  \n### Sua vez  \nCompare as definições de Moore e Mealy com o exemplo do detector de \"11\" em [P1]. Qual dessas máquinas usa a entrada (x) para definir a saída (z)? Explique como a dependência da entrada afeta a resposta.",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 18.94,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 18.94
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de SD",
+            "referencia": "fibonacci_vhdl.vhd | entidade FibonacciControl (resumo do código; autoria do arquivo não identificada)"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7546,
+        "uso_pct": 100
+      }
+    }
+  ]
+}

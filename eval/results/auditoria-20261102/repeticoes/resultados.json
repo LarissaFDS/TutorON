@@ -1,0 +1,1399 @@
+{
+  "completa": true,
+  "meta": {
+    "url": "http://127.0.0.1:8002",
+    "logs": "dados\\auditoria-rapido",
+    "inicio": "2026-11-02T14:29:29.428784-03:00",
+    "sha256_casos": "96794fa1ec82e9e489e44e2a1f88f86454e7dfc28489c2ee373a6b8a08de8f97",
+    "repeticoes": 3,
+    "concorrencia": 1,
+    "gpu_inicial": {
+      "memoria_mib": 7463,
+      "uso_pct": 5
+    },
+    "politica_sha256": {
+      "backend/prompts.py": "6f1ea91997b083c4e23a5f7abaaff59dcd139578aee40ae9e616b25b1c111230",
+      "backend/tutoria.py": "9b01159fc692fa73db9a560e25f05a2bd582d1e5cf304ab626e14e5615b2117e",
+      "backend/tarefas.py": "09147bb176bd1f0560f8bf3e23eef06f6621500837e502f952798bd6f3e20e9a"
+    },
+    "git_revision": "855e38f93051644259d1ba7314e3030d0d727038",
+    "status_servidor": {
+      "gemini": {
+        "habilitado": false,
+        "modelos": []
+      },
+      "local": {
+        "online": true,
+        "modelo": "tutoron-paa",
+        "instalado": true,
+        "carregado": true
+      },
+      "pausados": {},
+      "livro_supabase": true,
+      "url_publica": null
+    }
+  },
+  "resumo_operacional": {
+    "casos": 12,
+    "prontas": 12,
+    "erros": 0,
+    "reservas": 4,
+    "fixas": 0,
+    "recusas_instrucoes": 0,
+    "primeiras_versoes_reprovadas": 4,
+    "texto_publicado_antes_de_revisao": 0,
+    "mediana_s": 7.98,
+    "p95_s": 21.64,
+    "max_s": 21.64
+  },
+  "avaliacao_pedagogica": "ver parecer separado, não inferir das aprovações do revisor",
+  "casos": [
+    {
+      "id": "p02-mestre-erro/rep1",
+      "tema": "Mestre",
+      "criterio": "Apontar a troca entre número de chamadas e divisor, sem validar a troca nem fornecer conclusão assintótica.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conferir",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2)."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 21.64,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 6.76,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 8.3,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 14.45,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 14.97,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados de entrada, o que precisa descobrir e a primeira etapa que tentou. Em qual etapa você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        }
+      ],
+      "registro": {
+        "id": "RsD3KetgWAnxwQAZ",
+        "data": "2026-11-02T17:29:51+00:00",
+        "disciplina": "paa",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2).",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          },
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta_bloqueada": "Você está tentando resolver a recorrência $ T(n) = 4T(n/2) + n^2 $ usando o **Teorema Mestre**, e já identificou que $ a = 4 $ e $ b = 2 $, o que é correto. O próximo passo é calcular $ \\log_b a = \\log_2 4 $, o que está certo — o resultado é $ 2 $.\n\nAgora, o que você precisa fazer é comparar $ n^{\\log_b a} = n^2 $ com $ f(n) = n^2 $. Isso é o **primeiro passo crítico** do Teorema Mestre. Você já chegou a $ \\log_b a = 2 $, mas o que está faltando é **comparar $ f(n) $ com $ n^{\\log_b a} $**.\n\n### Sua vez\nCompare $ f(n) = n^2 $ com $ n^{\\log_b a} = n^2 $. O que você pode concluir sobre a relação entre $ f(n) $ e $ n^{\\log_b a} $? Isso vai determinar qual dos três casos do Teorema Mestre se aplica.",
+        "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados de entrada, o que precisa descobrir e a primeira etapa que tentou. Em qual etapa você travou?",
+        "resposta_original": "Você está usando o **Teorema Mestre** para resolver a recorrência $ T(n) = 4T(n/2) + n^2 $, e já identificou corretamente que $ a = 4 $ e $ b = 2 $. O próximo passo é calcular $ \\log_b a = \\log_2 4 $, o que está correto — o resultado é $ 2 $.\n\nAgora, o que está faltando é **comparar $ f(n) = n^2 $ com $ n^{\\log_b a} = n^2 $**. Isso é o **primeiro passo crítico** do Teorema Mestre. Você já chegou a $ \\log_b a = 2 $, mas o que está faltando é **comparar $ f(n) $ com $ n^{\\log_b a} $**.\n\n### Sua vez  \nCompare $ f(n) = n^2 $ com $ n^{\\log_b a} = n^2 $. O que você pode concluir sobre a relação entre $ f(n) $ e $ n^{\\log_b a} $? Isso vai determinar qual dos três casos do Teorema Mestre se aplica.",
+        "ajustes": [
+          "entregou_resposta",
+          "entregou_resposta_de_novo",
+          "ajuda_de_reserva"
+        ],
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 14.68,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 7.79
+          },
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 6.89
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7511,
+        "uso_pct": 6
+      }
+    },
+    {
+      "id": "p11-guloso/rep1",
+      "tema": "Guloso",
+      "criterio": "Distinguir escolha local e ótimo; propor comparar alternativa; sem entregar ambas as decomposições ou resposta ótima.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "pista",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.01,
+      "segundos_total": 9.26,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.09,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 4.11,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 6.68,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 usando as moedas 1, 3 e 4. Veja se o resultado é o mínimo possível.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Qual é o número de moedas usado?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 4, 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 3, 4"
+        }
+      ],
+      "registro": {
+        "id": "bXsRVrn7J3jz7Nrg",
+        "data": "2026-11-02T17:30:00+00:00",
+        "disciplina": "paa",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada, orientando o aluno a testar o algoritmo guloso sem resolver o problema diretamente. Mantém a estrutura solicitada com a indicação de 'Sua vez'.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 2.25
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 usando as moedas 1, 3 e 4. Veja se o resultado é o mínimo possível.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Qual é o número de moedas usado?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.52,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 3.52
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 4, 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L5.pdf | página(s): 2"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 6, 7"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 3, 4"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7541,
+        "uso_pct": 5
+      }
+    },
+    {
+      "id": "s06-overflow/rep1",
+      "tema": "Overflow",
+      "criterio": "Carry de saída sozinho não detecta overflow com sinal. Exige explicar erro sem fornecer resultado completo.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "conferir",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 7.73,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.52,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 1.04,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 5.15,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você está usando a regra do carry final para detectar overflow, o que é uma abordagem válida. No entanto, há algo que você não considerou — o sinal dos números envolvidos. \n\n### Pergunta-chave:\nVocê já pensou em como o sinal dos números influencia a possibilidade de overflow? Por exemplo, se ambos os números forem positivos, um overflow pode ocorrer mesmo que o carry final seja 0?\n\n### Sua vez  \nTente analisar o caso em que os dois números são positivos e some 0111 + 0011. Depois, responda: o carry final é 0, mas há overflow? Por quê?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "registro": {
+        "id": "IhHVl74UBDsh5Ib4",
+        "data": "2026-11-02T17:30:08+00:00",
+        "disciplina": "sd",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow.",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda oferece uma pergunta-chave que estimula o aluno a refletir sobre o impacto do sinal nos números na detecção de overflow, sem entregar a resposta final ou a solução completa. Mantém a estrutura aberta e orienta o aluno a refletir e analisar o caso específico.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 3.03
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "Você está usando a regra do carry final para detectar overflow, o que é uma abordagem válida. No entanto, há algo que você não considerou — o sinal dos números envolvidos. \n\n### Pergunta-chave:\nVocê já pensou em como o sinal dos números influencia a possibilidade de overflow? Por exemplo, se ambos os números forem positivos, um overflow pode ocorrer mesmo que o carry final seja 0?\n\n### Sua vez  \nTente analisar o caso em que os dois números são positivos e some 0111 + 0011. Depois, responda: o carry final é 0, mas há overflow? Por quê?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 4.48,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 4.48
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Lista de exercícios de SD",
+            "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Prova de SD",
+            "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7542,
+        "uso_pct": 22
+      }
+    },
+    {
+      "id": "s14-and-variavel/rep1",
+      "tema": "Questão curta",
+      "criterio": "Mesmo objetivo de s13 com sintaxe diferente; não revelar Y=0 por regra geral nem confirmação.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.006,
+      "segundos_total": 7.21,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.52,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 3.09,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        }
+      ],
+      "registro": {
+        "id": "wHMFH26DeJqfm_Hu",
+        "data": "2026-11-02T17:30:16+00:00",
+        "disciplina": "sd",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          },
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          }
+        ],
+        "ajuda": "pista",
+        "resposta_bloqueada": "A porta AND produz 1 **só se** **ambas as entradas forem 1**. Se uma das entradas for 0, o resultado será 0.\n\n### Sua vez  \nEscreva o valor de Y para A=1 e B=0, usando a definição da porta AND.",
+        "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+        "resposta_original": "A porta AND é uma operação lógica que só retorna 1 quando **ambas as entradas são 1**. Se uma delas for 0, o resultado será 0.\n\n### Sua vez  \nPense: o que acontece com a saída de uma porta AND quando uma das entradas é 0? Escreva o valor de Y para A=1 e B=0.",
+        "ajustes": [
+          "entregou_resposta",
+          "entregou_resposta_de_novo",
+          "ajuda_de_reserva"
+        ],
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 6.85,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 4.61
+          },
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 2.24
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7535,
+        "uso_pct": 3
+      }
+    },
+    {
+      "id": "p02-mestre-erro/rep2",
+      "tema": "Mestre",
+      "criterio": "Apontar a troca entre número de chamadas e divisor, sem validar a troca nem fornecer conclusão assintótica.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conferir",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2)."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 15.41,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.09,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 3.6,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 12.31,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você está tentando resolver a recorrência $ T(n) = 4T(n/2) + n^2 $ usando o **Teorema Mestre**, e já identificou que $ a = 4 $ e $ b = 2 $, pois há 4 chamadas e o subproblema é $ n/2 $. Isso está **certo**.\n\nAgora, você mencionou que calculou $ \\log_b a = \\log_2 4 $. Isso também está **certo**, pois $ b = 2 $ e $ a = 4 $, então $ \\log_2 4 = 2 $.\n\nAgora, o próximo passo é comparar $ n^{\\log_b a} $ com $ f(n) = n^2 $. Como $ n^{\\log_b a} = n^2 $, você está no **caso de equilíbrio** do Teorema Mestre.\n\nMas, antes de concluir isso, **você precisa verificar se $ f(n) $ é polinomialmente maior que $ n^{\\log_b a} $**. Isso significa que $ f(n) $ deve ser $ \\Omega(n^{\\log_b a + \\varepsilon}) $, para algum $ \\varepsilon > 0 $.\n\n### Sua vez  \nVerifique se $ f(n) = n^2 $ é $ \\Omega(n^{\\log_b a + \\varepsilon}) $, para algum $ \\varepsilon > 0 $. Se sim, qual é a complexidade final? Se não, o que você pode concluir sobre o caso?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        }
+      ],
+      "registro": {
+        "id": "9bex6ZBFpsmiWL7j",
+        "data": "2026-11-02T17:30:31+00:00",
+        "disciplina": "paa",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2).",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda não entrega a resposta final, mas orienta o aluno a verificar se a função é polinomialmente maior, mantendo a estrutura em branco e incentivando a reflexão.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 2.77
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "Você está tentando resolver a recorrência $ T(n) = 4T(n/2) + n^2 $ usando o **Teorema Mestre**, e já identificou que $ a = 4 $ e $ b = 2 $, pois há 4 chamadas e o subproblema é $ n/2 $. Isso está **certo**.\n\nAgora, você mencionou que calculou $ \\log_b a = \\log_2 4 $. Isso também está **certo**, pois $ b = 2 $ e $ a = 4 $, então $ \\log_2 4 = 2 $.\n\nAgora, o próximo passo é comparar $ n^{\\log_b a} $ com $ f(n) = n^2 $. Como $ n^{\\log_b a} = n^2 $, você está no **caso de equilíbrio** do Teorema Mestre.\n\nMas, antes de concluir isso, **você precisa verificar se $ f(n) $ é polinomialmente maior que $ n^{\\log_b a} $**. Isso significa que $ f(n) $ deve ser $ \\Omega(n^{\\log_b a + \\varepsilon}) $, para algum $ \\varepsilon > 0 $.\n\n### Sua vez  \nVerifique se $ f(n) = n^2 $ é $ \\Omega(n^{\\log_b a + \\varepsilon}) $, para algum $ \\varepsilon > 0 $. Se sim, qual é a complexidade final? Se não, o que você pode concluir sobre o caso?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 9.08,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 9.08
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7535,
+        "uso_pct": 6
+      }
+    },
+    {
+      "id": "p11-guloso/rep2",
+      "tema": "Guloso",
+      "criterio": "Distinguir escolha local e ótimo; propor comparar alternativa; sem entregar ambas as decomposições ou resposta ótima.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "pista",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 8.23,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.08,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 4.11,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 6.68,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 com as moedas 1, 3 e 4. Veja se o resultado é o mínimo possível.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Qual é a quantidade de moedas usadas?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 4, 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 3, 4"
+        }
+      ],
+      "registro": {
+        "id": "nv8oahU02t3xgCLD",
+        "data": "2026-11-02T17:30:39+00:00",
+        "disciplina": "paa",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada, orientando o aluno a testar o algoritmo guloso sem resolver o problema diretamente. Mantém a estrutura solicitada com a pergunta final aberta.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.68
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 com as moedas 1, 3 e 4. Veja se o resultado é o mínimo possível.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Qual é a quantidade de moedas usadas?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.34,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 3.34
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 4, 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L5.pdf | página(s): 2"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 6, 7"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 3, 4"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7535,
+        "uso_pct": 6
+      }
+    },
+    {
+      "id": "s06-overflow/rep2",
+      "tema": "Overflow",
+      "criterio": "Carry de saída sozinho não detecta overflow com sinal. Exige explicar erro sem fornecer resultado completo.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "conferir",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 6.18,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.52,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 4.63,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você está usando a ideia de que o overflow ocorre quando há carry na última coluna, mas essa regra é incompleta. Em complemento de 2, o overflow só ocorre quando os dois operandos têm o mesmo sinal e o resultado tem sinal diferente. \n\nVocê já pensou em como o sinal do resultado é determinado? E como isso se relaciona com os carry de entrada e saída do bit mais significativo?\n\n### Sua vez  \nReescreva a regra do overflow em termos de carry de entrada (Cin) e carry de saída (Cout) do bit mais significativo. O que acontece com o sinal do resultado se os operandos tiverem o mesmo sinal?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "registro": {
+        "id": "1WZ2y-7e-XS7eli4",
+        "data": "2026-11-02T17:30:45+00:00",
+        "disciplina": "sd",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow.",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda não entrega a resposta final, mas oferece uma pista correta e abre uma pergunta que leva o aluno a refletir sobre o conceito de overflow.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.54
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "Você está usando a ideia de que o overflow ocorre quando há carry na última coluna, mas essa regra é incompleta. Em complemento de 2, o overflow só ocorre quando os dois operandos têm o mesmo sinal e o resultado tem sinal diferente. \n\nVocê já pensou em como o sinal do resultado é determinado? E como isso se relaciona com os carry de entrada e saída do bit mais significativo?\n\n### Sua vez  \nReescreva a regra do overflow em termos de carry de entrada (Cin) e carry de saída (Cout) do bit mais significativo. O que acontece com o sinal do resultado se os operandos tiverem o mesmo sinal?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 4.12,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 4.12
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Lista de exercícios de SD",
+            "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Prova de SD",
+            "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7540,
+        "uso_pct": 6
+      }
+    },
+    {
+      "id": "s14-and-variavel/rep2",
+      "tema": "Questão curta",
+      "criterio": "Mesmo objetivo de s13 com sintaxe diferente; não revelar Y=0 por regra geral nem confirmação.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.023,
+      "segundos_total": 4.14,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.02,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.54,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        }
+      ],
+      "registro": {
+        "id": "_IMTug-8-ugaaTg-",
+        "data": "2026-11-02T17:30:50+00:00",
+        "disciplina": "sd",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          },
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          }
+        ],
+        "ajuda": "pista",
+        "resposta_bloqueada": "A porta AND produz 1 **apenas quando ambas as entradas são 1**. Se uma das entradas for 0, o resultado será 0.  \n\n### Sua vez  \nEscreva o valor de Y com base na definição da porta AND.",
+        "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+        "resposta_original": "A porta AND realiza a operação lógica \"e\", ou seja, **só dá 1 se ambas as entradas forem 1**. Se uma delas for 0, o resultado será 0.  \n\n### Sua vez  \nCom base nessa definição, qual seria o resultado da porta AND quando A=1 e B=0?",
+        "ajustes": [
+          "entregou_resposta",
+          "entregou_resposta_de_novo",
+          "ajuda_de_reserva"
+        ],
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.66,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 1.62
+          },
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 2.04
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7540,
+        "uso_pct": 3
+      }
+    },
+    {
+      "id": "p02-mestre-erro/rep3",
+      "tema": "Mestre",
+      "criterio": "Apontar a troca entre número de chamadas e divisor, sem validar a troca nem fornecer conclusão assintótica.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "conferir",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2)."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.006,
+      "segundos_total": 10.3,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 3.61,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 8.76,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você está tentando resolver a recorrência $ T(n) = 4T(n/2) + n^2 $ usando o **Teorema Mestre**, e já identificou que $ a = 4 $ e $ b = 2 $, pois há 4 chamadas e o subproblema é $ n/2 $. Isso está **certo**.\n\nAgora, ao calcular $ \\log_b a $, você escreveu $ \\log_4 2 $, o que está **errado**. O Teorema Mestre exige que você calcule $ \\log_b a $, ou seja, $ \\log_2 4 $, não $ \\log_4 2 $.\n\n### Sua vez  \nRefaça o cálculo de $ \\log_b a $ com os valores corretos de $ a $ e $ b $. Qual é o valor de $ \\log_2 4 $?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 8, 9"
+        }
+      ],
+      "registro": {
+        "id": "Ixxt1mHQwD5eSURv",
+        "data": "2026-11-02T17:31:00+00:00",
+        "disciplina": "paa",
+        "pergunta": "Onde está meu primeiro erro em T(n)=4T(n/2)+n^2?",
+        "contexto": "Escrevi a=2 porque n é dividido por 2; escrevi b=4 porque há 4 chamadas. Depois calculei log_4(2).",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda identifica corretamente o erro no cálculo de $\\log_b a$ e orienta o aluno a refazer o cálculo com os valores corretos, sem entregar a resposta final.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.7
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "Você está tentando resolver a recorrência $ T(n) = 4T(n/2) + n^2 $ usando o **Teorema Mestre**, e já identificou que $ a = 4 $ e $ b = 2 $, pois há 4 chamadas e o subproblema é $ n/2 $. Isso está **certo**.\n\nAgora, ao calcular $ \\log_b a $, você escreveu $ \\log_4 2 $, o que está **errado**. O Teorema Mestre exige que você calcule $ \\log_b a $, ou seja, $ \\log_2 4 $, não $ \\log_4 2 $.\n\n### Sua vez  \nRefaça o cálculo de $ \\log_b a $ com os valores corretos de $ a $ e $ b $. Qual é o valor de $ \\log_2 4 $?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 5.39,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 5.39
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L1.pdf | página(s): 11, 12, 13"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "c06_lista2_q10_metodo_iteracao.md | página(s): não informada na transcrição"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L2.pdf | página(s): 8, 9"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7535,
+        "uso_pct": 98
+      }
+    },
+    {
+      "id": "p11-guloso/rep3",
+      "tema": "Guloso",
+      "criterio": "Distinguir escolha local e ótimo; propor comparar alternativa; sem entregar ambas as decomposições ou resposta ótima.",
+      "corpo": {
+        "disciplina": "paa",
+        "ajuda": "pista",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 11.31,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 6.17,
+          "status": "gerando",
+          "mensagem": "Muita gente usando agora: a resposta está sendo preparada no servidor do TutorON. Pode levar até 2 minutos; mantenha esta aba aberta."
+        },
+        {
+          "s": 7.2,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 9.76,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 com as moedas 1, 3 e 4 usando essa estratégia. Depois, compare com uma solução que use menos moedas — se houver.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Quantas moedas você usaria?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 4, 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 3, 4"
+        }
+      ],
+      "registro": {
+        "id": "UVUzh6jkG2gkkB3j",
+        "data": "2026-11-02T17:31:12+00:00",
+        "disciplina": "paa",
+        "pergunta": "O guloso de maior moeda é sempre ótimo? Estou testando moedas 1,3,4 com alvo 6.",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda fornece uma pista adequada, orientando o aluno a testar o algoritmo guloso e comparar com uma solução alternativa, sem entregar a resposta final ou resolver o problema diretamente.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.68
+          }
+        ],
+        "ajuda": "pista",
+        "resposta": "O algoritmo guloso escolhe a maior moeda possível em cada passo. Para testar se ele é ótimo, tente calcular o troco para o alvo 6 com as moedas 1, 3 e 4 usando essa estratégia. Depois, compare com uma solução que use menos moedas — se houver.\n\n### Sua vez  \nCalcule o troco para 6 usando o algoritmo guloso. Quantas moedas você usaria?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.48,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 3.48
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 4, 5"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L5.pdf | página(s): 2"
+          },
+          {
+            "rotulo": "P3",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L3.pdf | página(s): 6, 7"
+          },
+          {
+            "rotulo": "P4",
+            "origem": "acervo",
+            "titulo": "Resolução de aluno de PAA",
+            "referencia": "PAA_L6.pdf | página(s): 3, 4"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7535,
+        "uso_pct": 97
+      }
+    },
+    {
+      "id": "s06-overflow/rep3",
+      "tema": "Overflow",
+      "criterio": "Carry de saída sozinho não detecta overflow com sinal. Exige explicar erro sem fornecer resultado completo.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "conferir",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow."
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 5.67,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.52,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        },
+        {
+          "s": 3.61,
+          "status": "gerando",
+          "mensagem": "Revisando a ajuda antes de mostrar…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Você está usando a regra do carry final para detectar overflow, o que é uma abordagem válida. No entanto, há algo que você está ignorando — o sinal dos números envolvidos. \n\n### Pergunta-chave:\nVocê considerou o sinal dos números antes de concluir que não houve overflow?\n\n### Sua vez  \nTente analisar o sinal dos números 0111 e 0011 antes de somar. O que você observa? E como isso pode influenciar a detecção de overflow?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "registro": {
+        "id": "a_b78O4RmXbovuoD",
+        "data": "2026-11-02T17:31:17+00:00",
+        "disciplina": "sd",
+        "pergunta": "Meu teste de overflow com sinal está certo?",
+        "contexto": "Somei 0111+0011 em complemento de 2 com 4 bits. Só olhei o carry que sai da última coluna: se sair 0, nunca há overflow.",
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": true,
+            "motivo": "A ajuda não entrega a resposta final, mas orienta o aluno a refletir sobre o sinal dos números e a regra do carry final, seguindo as diretrizes de não fornecer a solução completa e estimular o raciocínio do aluno.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.95
+          }
+        ],
+        "ajuda": "conferir",
+        "resposta": "Você está usando a regra do carry final para detectar overflow, o que é uma abordagem válida. No entanto, há algo que você está ignorando — o sinal dos números envolvidos. \n\n### Pergunta-chave:\nVocê considerou o sinal dos números antes de concluir que não houve overflow?\n\n### Sua vez  \nTente analisar o sinal dos números 0111 e 0011 antes de somar. O que você observa? E como isso pode influenciar a detecção de overflow?",
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.27,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 3.27
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Lista de exercícios de SD",
+            "referencia": "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18"
+          },
+          {
+            "rotulo": "P2",
+            "origem": "acervo",
+            "titulo": "Prova de SD",
+            "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7540,
+        "uso_pct": 7
+      }
+    },
+    {
+      "id": "s14-and-variavel/rep3",
+      "tema": "Questão curta",
+      "criterio": "Mesmo objetivo de s13 com sintaxe diferente; não revelar Y=0 por regra geral nem confirmação.",
+      "corpo": {
+        "disciplina": "sd",
+        "ajuda": "pista",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?"
+      },
+      "status": "pronta",
+      "http_post": 200,
+      "segundos_post": 0.007,
+      "segundos_total": 3.61,
+      "texto_antes_de_pronta": false,
+      "estados": [
+        {
+          "s": 0.01,
+          "status": "fila",
+          "mensagem": "Procurando no material da disciplina…"
+        },
+        {
+          "s": 0.52,
+          "status": "gerando",
+          "mensagem": "Escrevendo a resposta…"
+        }
+      ],
+      "erros_poll": [],
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        }
+      ],
+      "registro": {
+        "id": "CPNx9NlBykmRQM7J",
+        "data": "2026-11-02T17:31:21+00:00",
+        "disciplina": "sd",
+        "pergunta": "Na porta AND, A=1 e B=0. Qual o valor de Y?",
+        "contexto": null,
+        "modo": "socratico",
+        "versao_politica": "socratico-v2",
+        "revisoes_pedagogicas": [
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          },
+          {
+            "aprovada": false,
+            "motivo": "entregou_resposta"
+          }
+        ],
+        "ajuda": "pista",
+        "resposta_bloqueada": "A porta AND produz 1 **só se** ambas as entradas forem 1. Se uma delas for 0, o resultado é 0.  \n\n### Sua vez  \nEscreva o valor de Y com base nessa regra.",
+        "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+        "resposta_original": "A porta AND realiza a operação \"e\", ou seja, só retorna 1 se **ambas** as entradas forem 1. Se **uma** das entradas for 0, o resultado é 0.  \n\n### Sua vez  \nCom base nisso, qual seria o resultado se uma das entradas for 0?",
+        "ajustes": [
+          "entregou_resposta",
+          "entregou_resposta_de_novo",
+          "ajuda_de_reserva"
+        ],
+        "provedor": "ollama",
+        "modelo": "tutoron-paa",
+        "segundos": 3.43,
+        "degradado": false,
+        "tentativas": [
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 1.55
+          },
+          {
+            "modelo": "ollama:tutoron-paa",
+            "resultado": "respondeu",
+            "segundos": 1.88
+          }
+        ],
+        "fontes": [
+          {
+            "rotulo": "P1",
+            "origem": "acervo",
+            "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+            "referencia": "Nota da equipe TutorON (não é material do professor)"
+          }
+        ]
+      },
+      "gpu_depois": {
+        "memoria_mib": 7540,
+        "uso_pct": 57
+      }
+    }
+  ]
+}

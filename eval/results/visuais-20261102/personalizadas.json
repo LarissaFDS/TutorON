@@ -1,0 +1,34 @@
+[
+  {
+    "id": "yrxH3b0faWy5l2lPPjFURA",
+    "disciplina": "paa",
+    "pergunta": "Faça uma pista visual para um robô que só anda à direita e abaixo. Use uma grade 3x3 de custos [[1,3,2],[2,1,4],[3,2,1]], sem obstáculos. Mostre a tabela DP em branco e destaque só os predecessores da célula (1,1). Não calcule a rota.",
+    "modelo": "tutoron-paa",
+    "segundos": 13.19,
+    "status": "erro",
+    "mensagem": "Não consegui montar uma animação para esta dúvida. Tente reformular.",
+    "registro": {
+      "id": "d0vB99n1NqOmIQqq",
+      "data": "2026-11-02T22:13:44+00:00",
+      "disciplina": "paa",
+      "pergunta": "Faça uma pista visual para um robô que só anda à direita e abaixo. Use uma grade 3x3 de custos [[1,3,2],[2,1,4],[3,2,1]], sem obstáculos. Mostre a tabela DP em branco e destaque só os predecessores da célula (1,1). Não calcule a rota.",
+      "erro": "O roteiro anterior era inválido (roteiro inválido: Value error, foco interno livre, com vizinhos acima e à esquerda). Devolva um JSON válido de um dos modelos."
+    }
+  },
+  {
+    "id": "ywe534JvhnWawj4t_NAvRw",
+    "disciplina": "sd",
+    "pergunta": "Quero enxergar a adjacência entre bordas do Karnaugh. Use um exemplo 2x4 com valores [[1,0,0,1],[0,1,1,0]], ordem Gray fixa. Destaque apenas o par da linha 0 nas colunas 0 e 3. Deixe os outros uns sem grupo e não dê expressão final.",
+    "modelo": "tutoron-paa",
+    "segundos": 7.31,
+    "status": "erro",
+    "mensagem": "Não consegui montar uma animação para esta dúvida. Tente reformular.",
+    "registro": {
+      "id": "hM_KDSppSwVeCifj",
+      "data": "2026-11-02T22:13:51+00:00",
+      "disciplina": "sd",
+      "pergunta": "Quero enxergar a adjacência entre bordas do Karnaugh. Use um exemplo 2x4 com valores [[1,0,0,1],[0,1,1,0]], ordem Gray fixa. Destaque apenas o par da linha 0 nas colunas 0 e 3. Deixe os outros uns sem grupo e não dê expressão final.",
+      "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial."
+    }
+  }
+]

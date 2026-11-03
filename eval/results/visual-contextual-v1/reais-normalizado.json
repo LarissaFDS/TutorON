@@ -1,0 +1,208 @@
+[
+  {
+    "caso": "robo",
+    "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+    "segundos": 10.98,
+    "id": "BubF8OZhI2IY9bQOMb2f1A",
+    "status": "pronta",
+    "mensagem": "",
+    "disciplina": "paa",
+    "video": "/api/animacoes/BfKoJ-U7vyI5zoA5.mp4",
+    "modelo_cena": "esquema",
+    "titulo": "Dependências do dp[i][j]",
+    "pergunta_final": "Como a ausência de dp[i-1][j] afeta o cálculo de dp[i][j]?",
+    "registro": {
+      "id": "XX9537VM8aKtDgJC",
+      "data": "2026-11-02T23:22:57+00:00",
+      "disciplina": "paa",
+      "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+      "roteiro": {
+        "titulo": "Dependências do dp[i][j]",
+        "pergunta_final": "Como a ausência de dp[i-1][j] afeta o cálculo de dp[i][j]?",
+        "modelo": "esquema",
+        "blocos": [
+          {
+            "id": "bloco1",
+            "texto": "dp[i][j] depende de dp[i-1][j]",
+            "lacuna": false
+          },
+          {
+            "id": "bloco2",
+            "texto": "dp[i][j] depende de dp[i][j-1]",
+            "lacuna": false
+          },
+          {
+            "id": "bloco3",
+            "texto": "Você completa",
+            "lacuna": true
+          }
+        ],
+        "ligacoes": [
+          [
+            "bloco1",
+            "bloco3"
+          ],
+          [
+            "bloco2",
+            "bloco3"
+          ]
+        ],
+        "destacar": [
+          "bloco3"
+        ]
+      },
+      "video": "BfKoJ-U7vyI5zoA5",
+      "modelo": "ollama:tutoron-paa",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Dependências do dp[i][j]\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"dp[i][j] depende de dp[i-1][j]\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"dp[i][j] depende de dp[i][j-1]\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Se dp[i-1][j] está bloqueado, o que acontece?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco3\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Como a ausência de dp[i-1][j] afeta o cálculo de dp[i][j]?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": true,
+            "motivo": "A dependência de dp[i][j] está correta, mas o bloco lacuna não está posicionado de forma a refletir a necessidade de completar a lógica de dependência.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.62
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "pilha",
+    "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+    "segundos": 10.15,
+    "id": "aYGvEWueMcehVJwxz7LsJA",
+    "status": "pronta",
+    "mensagem": "",
+    "disciplina": "paa",
+    "video": "/api/animacoes/MBeh0CW58A5bi7MB.mp4",
+    "modelo_cena": "esquema",
+    "titulo": "Chamadas recursivas e pilha",
+    "pergunta_final": "Como a pilha se comporta ao retornar da chamada recursiva?",
+    "registro": {
+      "id": "Kb4MQHVA46CJBSKt",
+      "data": "2026-11-02T23:23:07+00:00",
+      "disciplina": "paa",
+      "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+      "roteiro": {
+        "titulo": "Chamadas recursivas e pilha",
+        "pergunta_final": "Como a pilha se comporta ao retornar da chamada recursiva?",
+        "modelo": "esquema",
+        "blocos": [
+          {
+            "id": "bloco1",
+            "texto": "Chamada inicial",
+            "lacuna": false
+          },
+          {
+            "id": "bloco2",
+            "texto": "Chamada recursiva",
+            "lacuna": false
+          },
+          {
+            "id": "bloco3",
+            "texto": "Você completa",
+            "lacuna": true
+          }
+        ],
+        "ligacoes": [
+          [
+            "bloco1",
+            "bloco2"
+          ],
+          [
+            "bloco2",
+            "bloco3"
+          ]
+        ],
+        "destacar": [
+          "bloco2",
+          "bloco3"
+        ]
+      },
+      "video": "MBeh0CW58A5bi7MB",
+      "modelo": "ollama:tutoron-paa",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Chamadas recursivas e pilha\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Chamada inicial\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Chamada recursiva\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Retorno da chamada\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Como a pilha se comporta ao retornar da chamada recursiva?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": true,
+            "motivo": "A pista visual está adequada, mas o bloco3 deveria ser preenchido com uma descrição que explique o retorno da chamada recursiva, como 'Retorno da chamada recursiva'.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.42
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "estado",
+    "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+    "segundos": 9.95,
+    "id": "hB6puUaW_2adnDhVe6DgoQ",
+    "status": "pronta",
+    "mensagem": "",
+    "disciplina": "sd",
+    "video": "/api/animacoes/h-JpjfGh4CtR-NWK.mp4",
+    "modelo_cena": "esquema",
+    "titulo": "Registrador de Estado",
+    "pergunta_final": "Qual informação é armazenada no registrador de estado?",
+    "registro": {
+      "id": "CB0ZRaswI2ctvn7K",
+      "data": "2026-11-02T23:23:17+00:00",
+      "disciplina": "sd",
+      "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+      "roteiro": {
+        "titulo": "Registrador de Estado",
+        "pergunta_final": "Qual informação é armazenada no registrador de estado?",
+        "modelo": "esquema",
+        "blocos": [
+          {
+            "id": "bloco1",
+            "texto": "Entrada da máquina de estados",
+            "lacuna": false
+          },
+          {
+            "id": "bloco2",
+            "texto": "Saída combinacional calcula próximo estado",
+            "lacuna": false
+          },
+          {
+            "id": "bloco3",
+            "texto": "Você completa",
+            "lacuna": true
+          }
+        ],
+        "ligacoes": [
+          [
+            "bloco1",
+            "bloco2"
+          ],
+          [
+            "bloco2",
+            "bloco3"
+          ]
+        ],
+        "destacar": [
+          "bloco2",
+          "bloco3"
+        ]
+      },
+      "video": "h-JpjfGh4CtR-NWK",
+      "modelo": "ollama:tutoron-paa",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Registrador de Estado\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"Entrada da máquina de estados\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"Saída combinacional calcula próximo estado\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Próximo estado é armazenado no registrador\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco2\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco2\", \"bloco3\"],\n  \"pergunta_final\": \"Qual informação é armazenada no registrador de estado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": true,
+            "motivo": "Roteiro adequado, destaca blocos relevantes e mantém lacuna para complementação visual.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 0.92
+          }
+        }
+      ]
+    }
+  }
+]

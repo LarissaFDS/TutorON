@@ -1,0 +1,155 @@
+[
+  {
+    "caso": "robo",
+    "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+    "segundos": 9.14,
+    "id": "HCyG8lnciHwVdzflRSx6zA",
+    "status": "erro",
+    "mensagem": "Não consegui preparar um desenho correto para esta dúvida. Diga qual relação ou passo você quer enxergar e tente novamente.",
+    "disciplina": "paa",
+    "registro": {
+      "id": "e3EdjKAwt3XgeHwb",
+      "data": "2026-11-02T23:13:30+00:00",
+      "disciplina": "paa",
+      "pergunta": "Um robô anda numa grade só para direita ou para baixo, com custos e obstáculos. Já defini dp[i][j] como o custo mínimo para chegar à célula. Quero enxergar de quais vizinhos ela depende e o que muda se um deles está bloqueado. Não tenho valores para preencher uma tabela.",
+      "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"grade_dp\",\n  \"titulo\": \"Robô na grade com custos e obstáculos\",\n  \"custos\": [[2, 1, 3], [1, 4, 2], [3, 2, 1]],\n  \"bloqueios\": [[0, 2]],\n  \"foco\": [1, 1],\n  \"pergunta_final\": \"Qual é o custo mínimo para chegar à célula (1,1), considerando que a célula (0,2) está bloqueada?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": false,
+            "motivo": "A ajuda entrega uma tabela completa com valores e uma pergunta que já contém a resposta.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.33
+          }
+        },
+        {
+          "texto": "{\n  \"modelo\": \"grade_dp\",\n  \"titulo\": \"Robô na grade\",\n  \"custos\": [[2, 1, 3], [1, 4, 2], [3, 2, 1]],\n  \"bloqueios\": [[0, 2]],\n  \"foco\": [1, 1],\n  \"pergunta_final\": \"Qual célula é o predecessor de [1][1] se [0][2] está bloqueado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": false,
+            "motivo": "A ajuda entrega uma pergunta com resposta embutida e valores específicos que não foram fornecidos pelo aluno.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 0.98
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "pilha",
+    "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+    "segundos": 7.3,
+    "id": "oZIvu7LdLjdE-BkVj53yuw",
+    "status": "erro",
+    "mensagem": "Não consegui preparar um desenho correto para esta dúvida. Diga qual relação ou passo você quer enxergar e tente novamente.",
+    "disciplina": "paa",
+    "registro": {
+      "id": "ct3F2zzYMDWeb-os",
+      "data": "2026-11-02T23:13:38+00:00",
+      "disciplina": "paa",
+      "pergunta": "Estou estudando recursão e pilha de chamadas. Entendi a ideia de empilhar, mas não visualizo como uma chamada espera a outra e retoma depois do retorno. Faça uma pista visual sem escrever código nem simular um programa inteiro.",
+      "erro": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"arvore_recursao\",\n  \"titulo\": \"Chamadas recursivas e pilha\",\n  \"a\": 2,\n  \"b\": 2,\n  \"f\": \"1\",\n  \"niveis\": 3,\n  \"custos_nivel\": [\"1\", \"2·(n/2)\", \"4·(n/4)\"],\n  \"pergunta_final\": \"Como a pilha se comporta ao retornar da chamada mais profunda?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": false,
+            "motivo": "A ajuda entrega uma estrutura de exemplo com cálculos já feitos, o que não é permitido.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.05
+          }
+        },
+        {
+          "texto": "{\n  \"modelo\": \"arvore_recursao\",\n  \"titulo\": \"Chamadas recursivas e pilha\",\n  \"a\": 2,\n  \"b\": 2,\n  \"f\": \"1\",\n  \"niveis\": 3,\n  \"custos_nivel\": [\"1\", \"2·(n/2)\", \"4·(n/4)\"],\n  \"pergunta_final\": \"Como a pilha se comporta ao retornar da chamada mais profunda?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": false,
+            "motivo": "A ajuda entrega uma estrutura de exemplo com cálculos já feitos, o que não é permitido.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 0.92
+          }
+        }
+      ]
+    }
+  },
+  {
+    "caso": "estado",
+    "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+    "segundos": 10.97,
+    "id": "DsCZJsBVUAAXR1zmiL6xzw",
+    "status": "pronta",
+    "mensagem": "",
+    "disciplina": "sd",
+    "video": "/api/animacoes/bJ8snkIQgnktri__.mp4",
+    "modelo_cena": "esquema",
+    "titulo": "Registrador de estado em máquina de estados",
+    "pergunta_final": "Quais informações do registrador são usadas para determinar o próximo estado?",
+    "registro": {
+      "id": "LT_1Bn2bgbDoi2tg",
+      "data": "2026-11-02T23:13:49+00:00",
+      "disciplina": "sd",
+      "pergunta": "Para que serve o registrador de estado numa máquina de estados e como ele se relaciona com a entrada? Quero identificar visualmente quais informações chegam ao próximo estado, sem projetar uma máquina completa.",
+      "roteiro": {
+        "titulo": "Registrador de estado em máquina de estados",
+        "pergunta_final": "Quais informações do registrador são usadas para determinar o próximo estado?",
+        "modelo": "esquema",
+        "blocos": [
+          {
+            "id": "entrada",
+            "texto": "Entrada externa",
+            "lacuna": false
+          },
+          {
+            "id": "estado_atual",
+            "texto": "Estado atual",
+            "lacuna": false
+          },
+          {
+            "id": "registrador",
+            "texto": "Registrador de estado",
+            "lacuna": true
+          },
+          {
+            "id": "saida",
+            "texto": "Próximo estado",
+            "lacuna": false
+          }
+        ],
+        "ligacoes": [
+          [
+            "entrada",
+            "registrador"
+          ],
+          [
+            "registrador",
+            "saida"
+          ],
+          [
+            "estado_atual",
+            "registrador"
+          ]
+        ],
+        "destacar": [
+          "registrador"
+        ]
+      },
+      "video": "bJ8snkIQgnktri__",
+      "modelo": "ollama:tutoron-paa",
+      "tentativas_roteiro": [
+        {
+          "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Registrador de estado em máquina de estados\",\n  \"blocos\": [\n    {\"id\": \"entrada\", \"texto\": \"Entrada externa\", \"lacuna\": false},\n    {\"id\": \"estado_atual\", \"texto\": \"Estado atual\", \"lacuna\": false},\n    {\"id\": \"registrador\", \"texto\": \"Registrador de estado\", \"lacuna\": true},\n    {\"id\": \"saida\", \"texto\": \"Próximo estado\", \"lacuna\": false}\n  ],\n  \"ligacoes\": [[\"entrada\", \"registrador\"], [\"registrador\", \"saida\"], [\"estado_atual\", \"registrador\"]],\n  \"destacar\": [\"registrador\"],\n  \"pergunta_final\": \"Quais informações do registrador são usadas para determinar o próximo estado?\"\n}",
+          "modelo": "ollama:tutoron-paa",
+          "revisao": {
+            "aprovada": true,
+            "motivo": "A ajuda oferece uma estrutura visual adequada para identificar as informações que chegam ao próximo estado, sem entregar a solução completa.",
+            "modelo": "ollama:tutoron-paa",
+            "segundos": 1.18
+          }
+        }
+      ]
+    }
+  }
+]
