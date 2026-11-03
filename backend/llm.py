@@ -429,6 +429,72 @@ class LLM:
                               seconds=event["segundos"], attempts=event["tentativas"])
         raise AllUnavailable([])
 
+    # ------------------------------------------------------------------ imagens (leitura de foto)
+    async def ver_imagens(self, system: str, texto: str, imagens: list[bytes]) -> Result:
+        """Pedido multimodal que devolve JSON: Gemini em ordem (pulando os em pausa) e, se houver
+        modelo de visão local configurado, ele por último. Sem streaming: a leitura é curta."""
+        import base64
+
+        tentativas: list[dict] = []
+        b64 = [base64.b64encode(i).decode() for i in imagens]
+        modelos = [m for m in self.cascade() if m.provider == "gemini"]
+        if self.settings.local_vision_model:
+            modelos.append(Model("ollama", self.settings.local_vision_model))
+        for m in modelos:
+            if self.breaker.is_paused(m) and m != modelos[-1]:
+                tentativas.append({"modelo": m.key, "resultado": "pulado (em pausa)"})
+                continue
+            inicio = time.monotonic()
+            try:
+                texto_r = await (self._gemini_imagens(m, system, texto, b64) if m.provider == "gemini"
+                                 else self._ollama_imagens(m, system, texto, b64))
+            except Unavailable as exc:
+                self.breaker.trip(m, exc.reason, exc.pause_s)
+                tentativas.append({"modelo": m.key, "resultado": exc.reason, **exc.info})
+                continue
+            segundos = round(time.monotonic() - inicio, 2)
+            tentativas.append({"modelo": m.key, "resultado": "respondeu", "segundos": segundos})
+            return Result(text=texto_r, model=m, seconds=segundos, attempts=tentativas)
+        raise AllUnavailable(tentativas)
+
+    async def _gemini_imagens(self, model: Model, system: str, texto: str, b64: list[str]) -> str:
+        url = GEMINI_URL.format(model=model.name).replace(":streamGenerateContent?alt=sse", ":generateContent")
+        partes = [{"text": texto}] + [{"inline_data": {"mime_type": "image/jpeg", "data": d}} for d in b64]
+        body = {"contents": [{"role": "user", "parts": partes}], "systemInstruction": {"parts": [{"text": system}]},
+                "generationConfig": {"temperature": 0.1, "maxOutputTokens": 8192, "responseMimeType": "application/json"}}
+        try:
+            r = await self.client.post(url, json=body, headers={"x-goog-api-key": self.settings.gemini_api_key},
+                                       timeout=httpx.Timeout(90, connect=5))
+        except httpx.TimeoutException as exc:
+            raise Unavailable("tempo esgotado", 30.0) from exc
+        except httpx.HTTPError as exc:
+            raise Unavailable(f"rede: {type(exc).__name__}", 15.0) from exc
+        if r.status_code != 200:
+            pausa = pause_for_status(r.status_code)
+            info = detalhes_429(r.content) if r.status_code == 429 else {}
+            if r.status_code == 429:
+                pausa = max(pausa, retry_delay(r.content))
+            raise Unavailable(f"HTTP {r.status_code}", pausa, info)
+        try:
+            cand = r.json()["candidates"][0]
+            return "".join(p.get("text", "") for p in cand["content"]["parts"] if not p.get("thought"))
+        except (ValueError, KeyError, IndexError) as exc:
+            raise Unavailable("resposta sem texto", 5.0) from exc
+
+    async def _ollama_imagens(self, model: Model, system: str, texto: str, b64: list[str]) -> str:
+        body = {"model": model.name, "stream": False, "format": "json", "keep_alive": "10m",
+                "messages": [{"role": "system", "content": system}, {"role": "user", "content": texto, "images": b64}],
+                "options": {"temperature": 0.1, "num_ctx": self.settings.local_num_ctx}}
+        async with self.local_lock:
+            try:
+                r = await self.client.post(self.settings.ollama_url + "/api/chat", json=body,
+                                           timeout=httpx.Timeout(self.settings.local_first_chunk_s, connect=3))
+            except httpx.HTTPError as exc:
+                raise Unavailable("Ollama visão indisponível", 10.0) from exc
+        if r.status_code != 200:
+            raise Unavailable(f"Ollama HTTP {r.status_code}", 10.0)
+        return r.json().get("message", {}).get("content", "")
+
     # ------------------------------------------------------------------ utilidades
     async def embed(self, text: str) -> list[float] | None:
         """Embedding bge-m3 da pergunta, na CPU (0,3 s): assim o modelo de resposta não sai da GPU.

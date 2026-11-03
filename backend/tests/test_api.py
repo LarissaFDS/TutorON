@@ -107,7 +107,8 @@ def test_todos_fora_tenta_de_novo_e_responde(tmp_path, monkeypatch):
     llm._provider = provedor
     with TestClient(app) as c:
         t = esperar(c, c.post("/api/perguntar", json={"pergunta": "O que é DP?"}).json())
-        assert t["status"] == "pronta" and t["texto"] == "resposta do local"
+        assert t["status"] == "pronta" and t["texto"].startswith("resposta do local")
+        assert "### Sua vez" in t["texto"]  # modo socrático: a vez sempre volta ao aluno
         par = esperar(c, c.post("/api/comparar", json={"pergunta": "O que é DP?"}).json())
         assert par["status"] == "pronta" and par["A"] and par["B"]
 

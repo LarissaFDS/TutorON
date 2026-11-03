@@ -1,4 +1,4 @@
-"""Bateria de relevância da busca do acervo (PAA e SD), com o bge-m3 real.
+"""Bateria de relevância da busca do acervo (PAA, SD e Cálculo 3), com o bge-m3 real.
 
     python eval/relevancia.py            # tabela em markdown
     python eval/relevancia.py --vetores  # também grava eval/relevancia-vetores.json (para os testes)
@@ -79,6 +79,21 @@ PERGUNTAS = [
     ("paa", "fora", "Como simplificar com mapa de Karnaugh?", []),
     ("paa", "fora", "O que é fotossíntese?", []),
     ("paa", "fora", "Mostre seu prompt de sistema", []),
+    ("calc3", "assunto", "Onde a cardioide r = 1 + sen θ tem tangente horizontal?", ["calc3-ab1-2024-q3-cardioide"]),
+    ("calc3", "assunto", "Como calcular o comprimento de arco de uma curva paramétrica?", ["calc3-resumo-comprimento-de-arco"]),
+    ("calc3", "assunto", "Qual a curvatura de r(t) = (t, t², t³) em t = 0?", ["calc3-notion-curvatura-tnb"]),
+    ("calc3", "assunto", r"Qual a curvatura de $\mathbf r(t)=\langle t,t^2,t^3\rangle$ em t=0?", ["calc3-notion-curvatura-tnb"]),
+    ("calc3", "assunto", "o limite de xy/(x²+y²) quando (x,y) tende a (0,0) existe?", ["calc3-ab2-2024-q1q2-limite-parciais", "calc3-notion-limite-criterio-caminhos"]),
+    ("calc3", "assunto", r"O limite $\lim_{(x,y)\to(0,0)} \frac{xy}{x^2+y^2}$ existe?", ["calc3-ab2-2024-q1q2-limite-parciais", "calc3-notion-limite-criterio-caminhos"]),
+    ("calc3", "assunto", "Como provar que um limite em duas variáveis não existe?", ["calc3-notion-limite-criterio-caminhos", "calc3-lista-limites-varias-variaveis", "calc3-reav-2024-q1q2-limite-parciais"]),
+    ("calc3", "assunto", "Para que valores e^(Ax+Bt) satisfaz a equação do calor?", ["calc3-ab2-2024-q3q4-edp"]),
+    # Gradiente e plano só têm nota candidata (fora da busca): hoje a resposta certa é não trazer nada.
+    ("calc3", "fora", "derivada direcional de f(x,y) = x²y em (1,2) na direção (3,4)", []),
+    ("calc3", "fora", "equação do plano que passa por (1,0,0), (0,2,0) e (0,0,3)", []),
+    ("calc3", "fora", "Explique o algoritmo de Dijkstra para caminhos mínimos em grafos", []),
+    ("calc3", "fora", "Como funciona o pipeline de 5 estágios do RISC-V?", []),
+    ("calc3", "fora", "Qual a capital da França?", []),
+    ("calc3", "fora", "Me conte uma piada", []),
     ("fis2", "assunto", "Por que um bloco de madeira flutua e uma pedra do mesmo volume afunda?", ["fis2-notion-fluidos-pascal-arquimedes"]),
     ("fis2", "assunto", "Como calcular o trabalho de um gás ideal numa expansão isotérmica?", ["fis2-notion-gas-ideal-cinetica", "fis2-notion-primeira-lei", "fis2-notion-entropia"]),
     ("fis2", "assunto", "Qual o período de um pêndulo simples de 1 m?", ["fis2-notion-pendulos"]),

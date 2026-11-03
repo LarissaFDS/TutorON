@@ -44,7 +44,7 @@ function Preparar-Python {
         if ($py) { & py -3 -m venv .venv } else { & python -m venv .venv }
         Falhou
     }
-    & $Python -c "import fastapi, uvicorn, httpx, dotenv" 2>$null
+    & $Python -c "import fastapi, uvicorn, httpx, dotenv, PIL, manim" 2>$null
     if ($LASTEXITCODE -ne 0) {
         & $Python -m pip install --disable-pip-version-check -q -r requirements.txt
         Falhou

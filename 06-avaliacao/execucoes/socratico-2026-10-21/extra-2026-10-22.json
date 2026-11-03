@@ -1,0 +1,20 @@
+[
+ {
+  "caso": "conceito",
+  "ajuda": "conceito",
+  "disciplina": "paa",
+  "pergunta": "Não entendo quando usar programação dinâmica em vez de dividir e conquistar.",
+  "status": "pronta",
+  "modelo": "Gemini 3.7 Flash",
+  "texto": "Essa comparação direta entre os paradigmas não está explícita no material da disciplina, então vamos analisar com a teoria geral de PAA.\n\nA diferença fundamental entre eles está na **relação entre os subproblemas**:\n\n1. **Divisão e Conquista (D&C):**\n   * **Subproblemas independentes:** O problema original é dividido em partes menores e totalmente disjuntas.\n   * Não há cálculo repetido: resolve-se cada subproblema uma única vez e junta-se as respostas (como na exponenciação rápida [P3] ou no *Mergesort*).\n\n2. **Programação Dinâmica (PD):**\n   * **Subproblemas sobrepostos:** Diferentes partes da recursão geram exatamente os mesmos subproblemas repetidas vezes.\n   * **Subestrutura ótima:** A solução ótima do problema depende de soluções ótimas dos subproblemas.\n   * Se usássemos recursão ingênua, haveria uma explosão combinatória/exponencial. A PD resolve isso guardando os resultados calculados em uma tabela ou vetor para consulta imediata, como visto no *Subset Sum* [P1].\n\n**Regra prática:** desenhe mentalmente a árvore de recursão. Se nós idênticos aparecem em ramos diferentes, você tem sobreposição: use **Programação Dinâmica**. Se cada ramo cuida de dados estritamente separados sem nunca repetir um estado, use **Divisão e Conquista**.\n\n---\n\n### Sua vez\nDesenhe no papel a árvore de recursão para calcular $F(4)$ pela fórmula recursiva clássica:\n$$F(n) = F(n-1) + F(n-2)$$\n\nAo olhar para os nós da árvore desenhada, você nota subproblemas independentes ou sobrepostos? A partir disso, qual dos dois métodos faz sentido para resolver Fibonacci eficientemente?"
+ },
+ {
+  "caso": "exemplo2",
+  "ajuda": "exemplo",
+  "disciplina": "paa",
+  "pergunta": "Como faço a análise do pior caso da busca binária?",
+  "status": "pronta",
+  "modelo": "Gemini 3.6 Flash",
+  "texto": "Para analisar o pior caso de um algoritmo de divisão e conquista, o método clássico é **escrever a equação de recorrência** e determinar quantas vezes dividimos o problema até chegar ao caso base [P4].\n\nVeja um **exemplo parecido**: a **Busca Ternária** em um vetor ordenado, em que dividimos o intervalo em 3 partes iguais e fazemos $c=2$ comparações para descartar duas das partes.\n\n### Exemplo: Análise do Pior Caso da Busca Ternária\n\n1. **Equação de Recorrência:**  \n   No pior caso, reduzimos o problema de tamanho $n$ a 1 subproblema de tamanho $n/3$, com custo constante $c$:\n   $$T(n) = T\\left(\\frac{n}{3}\\right) + c$$\n\n2. **Número de Passos (Altura):**  \n   Após $k$ divisões, o tamanho do subarray é $\\frac{n}{3^k}$. O processo para no caso base quando o tamanho atinge $1$:\n   $$\\frac{n}{3^k} = 1 \\implies 3^k = n \\implies k = \\log_3 n$$\n\n3. **Custo Total:**  \n   Somando o custo $c$ ao longo de todos os $k$ níveis:\n   $$T(n) = c \\cdot k = c \\cdot \\log_3 n = O(\\log n)$$\n\n**Verificação:** Para $n = 27$, temos os tamanhos $27 \\to 9 \\to 3 \\to 1$, totalizando $k = 3$ passos, o que confirma $\\log_3(27) = 3$.\n\n---\n\n### Sua vez\n\nNo seu caderno, aplique esses mesmos passos para a **Busca Binária**:\n\n1. Escreva a equação de recorrência $T(n)$ considerando que o vetor é dividido pela metade em cada passo com custo constante $c$.\n2. Encontre o número de divisões $k$ resolvendo $\\frac{n}{2^k} = 1$.\n3. Escreva a complexidade final em notação $O(\\cdot)$."
+ }
+]

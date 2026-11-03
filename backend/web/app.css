@@ -51,3 +51,42 @@
 .prose table { border-collapse: collapse; display: block; overflow-x: auto; }
 .prose th, .prose td { border: var(--border); padding: var(--space-1) var(--space-2); text-align: left; }
 .prose pre { overflow-x: auto; }
+
+/* Modo Tutor socrático: tipo de ajuda, foto do papel e animação. */
+.ajudas { border: 0; padding: 0; margin: var(--space-4) 0 0; }
+.ajudas__opcoes { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+.ajudas .pick span { padding: 0 var(--space-3); font-size: var(--text-caption); }
+
+.foto { margin-top: var(--space-4); }
+.foto__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.foto__acoes label.button { cursor: pointer; }
+.foto__conferir { margin-top: var(--space-3); padding: var(--space-4); border: var(--border); border-radius: var(--radius);
+  background: var(--color-surface-sunken); display: grid; gap: var(--space-3); }
+.foto__titulo { font-size: var(--text-ui); margin: 0; }
+.foto__previa img { max-width: 100%; max-height: 260px; border: var(--border); border-radius: var(--radius); }
+.foto__duvidas { background: var(--color-warning-soft); border-radius: var(--radius); padding: var(--space-2) var(--space-3); }
+.foto__duvidas-titulo { margin: 0; font-size: var(--text-caption); font-weight: var(--weight-bold); }
+.foto__duvidas ul { margin: var(--space-1) 0 0; padding-left: 1.2em; font-size: var(--text-caption); }
+.foto__confirmada { margin-top: var(--space-2); color: var(--color-success); }
+.foto__confirmada button { margin-left: var(--space-2); }
+.confianca--baixa { color: var(--color-danger); font-weight: var(--weight-bold); }
+
+.animacao { display: grid; gap: var(--space-2); }
+.animacao video { width: 100%; max-width: 860px; border: var(--border); border-radius: var(--radius); background: #FBFAF7; }
+
+/* Ciclo "ainda não consegui": o tutor tenta outra forma de explicar. */
+.ciclo { display: grid; gap: var(--space-2); padding: var(--space-3) var(--space-4); border-left: 3px solid var(--color-primary);
+  background: var(--color-surface-sunken); border-radius: var(--radius); max-width: 860px; }
+.ciclo__titulo { margin: 0; font-weight: var(--weight-bold); font-size: var(--text-ui); }
+.ciclo__ok { color: var(--color-success); margin: 0; }
+
+/* Página de demonstração (/demo) */
+.demo__secao { margin-top: var(--space-6); }
+.demo__escolha { margin: var(--space-3) 0 var(--space-4); }
+.demo__card { min-height: 200px; }
+.demo__contexto { white-space: pre-wrap; font-family: var(--font-code); font-size: var(--text-caption); margin-top: var(--space-2); }
+.demo__foto { display: grid; gap: var(--space-4); grid-template-columns: minmax(0, 1fr); max-width: 860px; }
+.demo__foto img { width: 100%; max-height: 420px; object-fit: contain; border: var(--border); border-radius: var(--radius); background: var(--color-surface-sunken); }
+@media (min-width: 820px) { .demo__foto { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
+.demo__aluno { margin: 0; font-weight: var(--weight-bold); color: var(--color-primary); }
+.demo__videos { display: grid; gap: var(--space-5); max-width: 860px; }

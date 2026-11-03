@@ -88,6 +88,40 @@
       ]
     },
     {
+      "id": "calc3",
+      "nome": "Cálculo 3",
+      "sigla": "Cálculo 3",
+      "situacao": "em validação",
+      "itens": "disciplinas/calc3/acervo/itens.json",
+      "indice": "disciplinas/calc3/acervo/indice.json",
+      "materiais": "disciplinas/calc3/materiais",
+      "rigor": "disciplinas/calc3/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "calc3-01-curvas-parametricas",
+        "calc3-02-coordenadas-polares",
+        "calc3-03-vetores-retas-planos",
+        "calc3-04-funcoes-vetoriais",
+        "calc3-05-comprimento-de-arco",
+        "calc3-06-curvatura-movimento",
+        "calc3-07-funcoes-varias-variaveis",
+        "calc3-08-limites-derivadas-parciais",
+        "calc3-09-derivada-direcional-gradiente",
+        "calc3-10-plano-tangente-regra-da-cadeia",
+        "calc3-11-maximos-minimos-lagrange",
+        "calc3-12-integrais-multiplas",
+        "calc3-13-campos-integrais-de-linha-green",
+        "calc3-14-stokes-gauss"
+      ],
+      "exemplos": [
+        "Qual a curvatura de r(t) = (t, t², t³) em t = 0?",
+        "Como calculo a derivada direcional de f(x, y) = x²y em (1, 2) na direção (3, 4)?",
+        "O limite de xy/(x² + y²) quando (x, y) → (0, 0) existe?",
+        "Como achar a equação do plano que passa por (1,0,0), (0,2,0) e (0,0,3)?",
+        "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"
+      ]
+    },
+    {
       "id": "fis2",
       "nome": "Física 2",
       "sigla": "Física 2",

@@ -64,6 +64,9 @@ class Settings:
     local_first_chunk_s: float = 150.0
     local_num_ctx: int = 8192
     local_parallel: int = 2
+    # Modelo de visão no Ollama para ler fotos quando nenhum Gemini responder (ex.: qwen2.5vl:7b).
+    # Vazio = só Gemini lê fotos.
+    local_vision_model: str = ""
     embed_model: str = "bge-m3"
     # Material da equipe com `revisado: false` fica fora da busca em produção. Liga só para medir
     # (eval/matriz.py gerar --incluir-nao-revisados). A busca lê a mesma variável a cada consulta.
@@ -112,6 +115,7 @@ def load_settings() -> Settings:
         local_first_chunk_s=_float("TUTORON_TIMEOUT_LOCAL", 150.0),
         local_num_ctx=_int("TUTORON_NUM_CTX", 8192),
         local_parallel=max(1, _int("TUTORON_LOCAL_PARALELO", 2)),
+        local_vision_model=_env("TUTORON_MODELO_VISAO_LOCAL"),
         embed_model=_env("TUTORON_EMBED_MODEL", "bge-m3"),
         acervo_usar_nao_revisados=_env("ACERVO_USAR_NAO_REVISADOS", "0").lower() in ("1", "true", "sim"),
         supabase_url=_env("SUPABASE_URL").rstrip("/"),
