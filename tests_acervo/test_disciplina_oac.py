@@ -27,7 +27,7 @@ def buscar(pergunta, d=OAC):
 def test_oac_cadastrada_com_acervo_proprio():
     assert OAC.nome == 'Organização e Arquitetura de Computadores' and OAC.sigla == 'OAC'
     assert OAC.itens.exists() and OAC.indice.exists() and not OAC.livro_supabase
-    assert OAC.em_validacao  # fora do atendimento normal até a validação com o modelo real
+    assert OAC.situacao == 'beta' and not OAC.em_validacao and 'não foi validado pelo professor' in OAC.aviso
     outros = [disciplinas.obter(i) for i in ('paa', 'sd')]
     assert {OAC.itens, OAC.indice}.isdisjoint({p for d in outros for p in (d.itens, d.indice)})
     ids = {c['id'] for c in read_json(OAC.indice)['chunks']}
@@ -62,10 +62,8 @@ def test_status_de_resolucao_invalido(tmp_path):
 @pytest.mark.parametrize('pergunta, esperado', [
     ('Por que lw x9, 32(x22) acessa A[8]?', 'oac-aula-operando-memoria'),
     ('Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?', None),
-    ('Qual a diferença entre blt e bltu?', 'oac-nota-desvios-lacos'),
-    ('Quais sinais de controle ficam ativos numa instrução sw?', 'oac-nota-datapath-controle'),
+    ('Qual a diferença entre blt e bltu?', 'oac-notion-cap2-instrucoes'),
     ('Como escrever a sub-rotina swap em RISC-V?', 'oac-prova1-q4-swap'),
-    ('Como calcular o yield e o custo por die de um wafer?', 'oac-nota-custo-ci'),
     ('Por que o PCSrc do monociclo precisa de OR Jump para o jal no SystemVerilog?', 'oac-notion-projeto1-monociclo'),
     ('Qual a diferença entre SIMD, MIMD e multithreading SMT?', 'oac-notion-cap6-paralelismo'),
 ])
@@ -75,6 +73,19 @@ def test_pergunta_de_oac_encontra_material_pertinente(pergunta, esperado):
         assert ids[0] in {'oac-prova1-a-q2-enade', 'oac-prova1-b-q2-enade', 'oac-nota-desempenho', 'oac-lista-ex2'}
     else:
         assert ids[0] == esperado
+
+
+def test_sinais_de_controle_do_sw_vem_dos_projetos_revisados():
+    # A tabela de sinais por instrução está numa nota de IA sem revisão humana, fora da busca.
+    assert buscar('Quais sinais de controle ficam ativos numa instrução sw?')[0] in {
+        'oac-notion-projeto2-pipeline', 'oac-notion-projeto1-monociclo'}
+
+
+def test_notas_de_ia_sem_revisao_ficam_fora_da_busca_de_oac():
+    # Lacuna registrada: custo de CI (yield, die) só tinha a nota n02, que saiu da busca.
+    ids = buscar('Como calcular o yield e o custo por die de um wafer?')
+    assert not any(i.startswith('oac-nota-') for i in ids)
+    assert not any(i.startswith('oac-nota-') for i in (c['id'] for c in read_json(OAC.indice)['chunks']))
 
 
 def test_vocabulario_comum_fica_na_disciplina_escolhida():

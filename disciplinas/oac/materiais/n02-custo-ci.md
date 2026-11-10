@@ -8,7 +8,7 @@ fonte: Nota da equipe TutorON (não é material do professor)
 fontes_catalogo: pattersonhennessy-cod-riscv
 autoria: Equipe TutorON, redigida com auxílio de IA; revisão humana pendente
 licenca: Texto original da equipe TutorON
-curadoria: aprovado
+curadoria: candidato
 natureza: nota_da_equipe_ia
 verificacao: exemplos_conferidos
 revisao_humana: pendente

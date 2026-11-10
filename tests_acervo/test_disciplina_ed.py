@@ -40,7 +40,7 @@ def texto(ident):
 
 def test_ed_cadastrada_com_acervo_proprio():
     assert ED.nome == 'Estrutura de Dados' and ED.itens.exists() and ED.indice.exists() and not ED.livro_supabase
-    assert ED.em_validacao
+    assert ED.situacao == 'beta' and not ED.em_validacao and 'não foi validado pelo professor' in ED.aviso
     ids = {c['id'] for c in read_json(ED.indice)['chunks']}
     for d in map(disciplinas.obter, OUTRAS):
         assert {d.itens, d.indice}.isdisjoint({ED.itens, ED.indice})

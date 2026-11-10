@@ -208,13 +208,13 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
 
 @pytest.fixture
 def site_oac(tmp_path, monkeypatch):
-    """O mesmo site, com OAC, Física 2 e ED liberadas só neste teste (no cadastro elas estão "em validação")."""
+    """O mesmo site, sem nenhuma liberação: OAC, Física 2 e ED estão em beta no cadastro."""
     from backend import main
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
-                                             "disciplinas_em_validacao_liberadas": ("oac", "fis2", "ed")})
+                                             "disciplinas_em_validacao_liberadas": ()})
     llm.embed = sem_embedding
     llm.chamadas = []
     original = llm._provider
@@ -232,8 +232,8 @@ def ids_oac():
     ("Por que lw x9, 32(x22) acessa A[8]?", "endereçada por **byte**"),
     ("Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
      "0,5×5 + 0,3×2 + 0,2×10"),
-    ("Qual a diferença entre blt e bltu?", "bltu x22, x23 não desvia"),
-    ("Quais sinais de controle ficam ativos numa instrução sw?", "| sw | 1 | X | 0 | 0 | 1 | 0 | 00 |"),
+    ("Qual a diferença entre blt e bltu?", "bltu, bgeu (sem sinal)"),
+    ("Quais sinais de controle ficam ativos numa instrução sw?", "MemWrite"),
 ])
 def test_pergunta_de_oac_usa_material_de_oac(site_oac, pergunta, trecho):
     t = perguntar(site_oac, pergunta, "oac")
@@ -245,13 +245,6 @@ def test_pergunta_de_oac_usa_material_de_oac(site_oac, pergunta, trecho):
     assert trecho in prompt  # o trecho recuperado chegou ao prompt da IA
     linha = json.loads((site_oac.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[-1])
     assert linha["disciplina"] == "oac"
-
-
-def test_oac_em_validacao_fica_fora_do_atendimento_normal(site):
-    r = site.post("/api/perguntar", json={"pergunta": "Qual a diferença entre blt e bltu?", "disciplina": "oac"})
-    assert r.status_code == 403 and "em validação" in r.json()["erro"]
-    assert site.llm.chamadas == []  # a IA nem foi chamada
-    assert perguntar(site, "Teorema Mestre para T(n) = 2T(n/2) + n")["status"] == "pronta"  # PAA continua
 
 
 def test_vocabulario_comum_so_recupera_a_disciplina_escolhida():
@@ -308,7 +301,7 @@ def site_calc3(tmp_path, monkeypatch):
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
-                                             "disciplinas_em_validacao_liberadas": ("calc3",)})
+                                             "disciplinas_em_validacao_liberadas": ()})
     llm.embed = sem_embedding
     llm.chamadas = []
     original = llm._provider
@@ -316,13 +309,6 @@ def site_calc3(tmp_path, monkeypatch):
     with TestClient(main.create_app(settings=llm.settings, llm=llm, warm_up=False)) as c:
         c.llm, c.tmp = llm, tmp_path
         yield c
-
-
-def test_calc3_em_validacao_fica_fora_do_atendimento_normal(site):
-    r = site.post("/api/perguntar", json={"pergunta": "Onde a cardioide r = 1 + sen θ tem tangente horizontal?",
-                                          "disciplina": "calc3"})
-    assert r.status_code == 403 and "em validação" in r.json()["erro"]
-    assert site.llm.chamadas == []
 
 
 def test_pergunta_de_calc3_usa_material_de_calc3_com_latex(site_calc3):
@@ -362,12 +348,6 @@ def test_resolucao_corrigida_de_calc3_chega_marcada(site_calc3):
 
 # ---------------------------------------------------------------- Física 2: quarta disciplina, só cadastro
 
-def test_fis2_em_validacao_fica_fora_do_atendimento_normal(site):
-    r = site.post("/api/perguntar", json={"pergunta": "Qual o período de um pêndulo simples de 1 m?", "disciplina": "fis2"})
-    assert r.status_code == 403 and "em validação" in r.json()["erro"]
-    assert site.llm.chamadas == []
-
-
 def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
     perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
     t = perguntar(site_oac, "Qual o período de um pêndulo simples de 1 m?", "fis2")
@@ -391,12 +371,6 @@ def test_fis2_sem_material_relevante_nao_inventa_fonte(site_oac):
 
 # ---------------------------------------------------------------- Estrutura de Dados: código C, só cadastro
 
-def test_ed_em_validacao_fica_fora_do_atendimento_normal(site):
-    r = site.post("/api/perguntar", json={"pergunta": "Como remover o último nó de uma lista encadeada?", "disciplina": "ed"})
-    assert r.status_code == 403 and "em validação" in r.json()["erro"]
-    assert site.llm.chamadas == []
-
-
 def test_pergunta_de_ed_usa_material_de_ed_e_a_mesma_ia(site_oac):
     perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
     t = perguntar(site_oac, "Por que meu heap escreve fora do vetor quando fica cheio?", "ed")
@@ -416,3 +390,18 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     assert t["status"] == "pronta" and t["fontes"] == []
     _, _, prompt = site_oac.llm.chamadas[-1]
     assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
+
+
+@pytest.mark.parametrize("disciplina, pergunta", [
+    ("oac", "Qual a diferença entre blt e bltu?"),
+    ("calc3", "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"),
+    ("fis2", "Qual o período de um pêndulo simples de 1 m?"),
+    ("ed", "Como remover o último nó de uma lista encadeada?"),
+])
+def test_disciplina_em_beta_e_atendida_sem_liberacao(site, disciplina, pergunta):
+    """Beta não é validação: atende sem TUTORON_LIBERAR_EM_VALIDACAO, com o aviso do cadastro."""
+    assert site.llm.settings.disciplinas_em_validacao_liberadas == ()
+    t = perguntar(site, pergunta, disciplina)
+    assert t["status"] == "pronta" and t["fontes"]
+    d = disciplinas.obter(disciplina)
+    assert d.situacao == "beta" and not d.em_validacao and "versão beta" in d.aviso
