@@ -108,6 +108,22 @@ PERGUNTAS = [
     ("fis2", "fora", "Como simplificar com mapa de Karnaugh?", []),
     ("fis2", "fora", "O que é fotossíntese?", []),
     ("fis2", "fora", "Me conte uma piada", []),
+    ("ed", "assunto", "Como remover o último nó de uma lista encadeada em C?", ["ed-notion-ponteiros-lista", "ed-notion-listas-genericas"]),
+    ("ed", "assunto", "p->prox = NULL;", ["ed-notion-ponteiros-lista"]),
+    ("ed", "assunto", "Por que meu heap escreve fora do vetor quando fica cheio?", ["ed-notion-heap"]),
+    ("ed", "assunto", "Como tratar colisões numa tabela hash com endereçamento aberto?", ["ed-notion-hash"]),
+    ("ed", "assunto", "Qual a diferença entre BFS e DFS na implementação?", ["ed-notion-grafos"]),
+    ("ed", "assunto", "Como implementar o merge sort em C sem ler fora do vetor?", ["ed-notion-quick-merge"]),
+    ("ed", "assunto", "printf com %zu ou %lu para size_t?", ["ed-notion-sizeof-alocacao"]),
+    ("ed", "assunto", "Como ler um arquivo DIMACS no SAT solver?", ["ed-prof-sat", "ed-prof-projetos-ab2"]),
+    # Fronteira com PAA: a prova formal com ED selecionada usa o material de ED (rigor.md manda indicar PAA).
+    ("ed", "assunto", "Prove pelo Teorema Mestre que o merge sort é O(n log n)", ["ed-notion-recorrencias", "ed-notion-quick-merge"]),
+    # A prova de NP-completude é de PAA; em ED vem o bloco de SAT, que diz isso.
+    ("ed", "assunto", "Como provar que um problema é NP-completo por redução?", ["ed-prof-sat"]),
+    ("ed", "fora", "Qual a diferença entre blt e bltu?", []),
+    ("ed", "fora", "Qual o período de um pêndulo simples de 1 m?", []),
+    ("ed", "fora", "O que é fotossíntese?", []),
+    ("ed", "fora", "Me conte uma piada", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
