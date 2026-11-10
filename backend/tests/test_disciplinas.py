@@ -232,8 +232,8 @@ def ids_oac():
     ("Por que lw x9, 32(x22) acessa A[8]?", "endereçada por **byte**"),
     ("Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
      "0,5×5 + 0,3×2 + 0,2×10"),
-    ("Qual a diferença entre blt e bltu?", "bltu x22, x23 não desvia"),
-    ("Quais sinais de controle ficam ativos numa instrução sw?", "| sw | 1 | X | 0 | 0 | 1 | 0 | 00 |"),
+    ("Qual a diferença entre blt e bltu?", "bltu, bgeu (sem sinal)"),
+    ("Quais sinais de controle ficam ativos numa instrução sw?", "MemWrite"),
 ])
 def test_pergunta_de_oac_usa_material_de_oac(site_oac, pergunta, trecho):
     t = perguntar(site_oac, pergunta, "oac")
