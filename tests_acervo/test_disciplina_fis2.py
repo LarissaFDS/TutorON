@@ -35,7 +35,7 @@ def texto(ident):
 
 def test_fis2_cadastrada_com_acervo_proprio():
     assert FIS2.nome == 'Física 2' and FIS2.itens.exists() and FIS2.indice.exists() and not FIS2.livro_supabase
-    assert FIS2.em_validacao
+    assert FIS2.situacao == 'beta' and not FIS2.em_validacao and 'não foi validado pelo professor' in FIS2.aviso
     outros = [disciplinas.obter(i) for i in ('paa', 'sd', 'oac')]
     ids = {c['id'] for c in read_json(FIS2.indice)['chunks']}
     for d in outros:

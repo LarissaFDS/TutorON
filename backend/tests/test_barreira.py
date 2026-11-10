@@ -127,6 +127,23 @@ def test_lista_informa_disponibilidade_e_aviso_beta(producao):
     assert lista["sd"]["situacao"] == "beta" and not lista["sd"]["em_validacao"]
     assert lista["sd"]["aviso"].startswith("Sistemas Digitais — versão beta.")
     assert "podem conter erros" in lista["sd"]["aviso"] and lista["paa"]["aviso"] == ""
+    for d in ("oac", "calc3", "fis2", "ed"):
+        assert lista[d]["disponivel"] and lista[d]["situacao"] == "beta" and not lista[d]["em_validacao"]
+        assert "versão beta" in lista[d]["aviso"] and "não foi validado pelo professor" in lista[d]["aviso"]
+    assert "não entrega projetos avaliativos prontos" in lista["ed"]["aviso"]
+
+
+def test_nenhuma_nota_de_ia_sem_revisao_humana_entra_na_busca():
+    """Genérico: vale para toda disciplina cadastrada, inclusive as que vierem depois."""
+    from acervo.common import read_json
+    for d in disciplinas.todas():
+        if not d.indice or not d.indice.exists():
+            continue
+        itens = {i["id"]: i for i in read_json(d.indice.with_name("itens.json"), [])} if d.itens is None else             {i["id"]: i for i in read_json(d.itens, [])}
+        for c in read_json(d.indice)["chunks"]:
+            i = itens.get(c["id"], {})
+            if i.get("natureza") == "nota_da_equipe_ia":
+                assert i.get("revisao_humana") == "feita", (d.id, c["id"])
 
 
 def test_site_mostra_e_troca_o_aviso_beta():

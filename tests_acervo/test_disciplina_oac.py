@@ -27,7 +27,7 @@ def buscar(pergunta, d=OAC):
 def test_oac_cadastrada_com_acervo_proprio():
     assert OAC.nome == 'Organização e Arquitetura de Computadores' and OAC.sigla == 'OAC'
     assert OAC.itens.exists() and OAC.indice.exists() and not OAC.livro_supabase
-    assert OAC.em_validacao  # fora do atendimento normal até a validação com o modelo real
+    assert OAC.situacao == 'beta' and not OAC.em_validacao and 'não foi validado pelo professor' in OAC.aviso
     outros = [disciplinas.obter(i) for i in ('paa', 'sd')]
     assert {OAC.itens, OAC.indice}.isdisjoint({p for d in outros for p in (d.itens, d.indice)})
     ids = {c['id'] for c in read_json(OAC.indice)['chunks']}

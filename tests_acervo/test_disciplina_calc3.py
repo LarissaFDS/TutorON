@@ -42,7 +42,7 @@ def notas_aprovadas(tmp_path_factory):
 
 def test_calc3_cadastrada_com_acervo_proprio():
     assert CALC3.nome == 'Cálculo 3' and CALC3.itens.exists() and CALC3.indice.exists()
-    assert CALC3.em_validacao and not CALC3.livro_supabase
+    assert CALC3.situacao == 'beta' and not CALC3.em_validacao and 'não foi validado pelo professor' in CALC3.aviso and not CALC3.livro_supabase
     outros = [disciplinas.obter(i) for i in ('paa', 'sd', 'oac')]
     ids = {c['id'] for c in read_json(CALC3.indice)['chunks']}
     for d in outros:
