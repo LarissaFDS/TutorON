@@ -2,7 +2,7 @@
 
 O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e responde passo a passo, do jeito que o conteúdo é cobrado, com as fórmulas formatadas.
 
-**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD) está em **beta** (as respostas podem conter erros; a validação técnica da IA continua pendente), com a mesma IA e um acervo próprio; Organização e Arquitetura de Computadores (OAC) já está cadastrada, com acervo próprio, mas fica **em validação**, fora do atendimento até ser validada. O aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
+**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD), Organização e Arquitetura de Computadores (OAC), Cálculo 3, Física 2 e Estrutura de Dados (ED) estão em **beta**: disponíveis aos alunos, com a mesma IA e um acervo próprio por disciplina, e com um aviso de que as respostas podem conter erros e o material ainda não foi validado pelo professor. Beta não é validação: a revisão humana dos blocos e a validação técnica das respostas continuam pendentes. O aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
 
 O site tem dois modos:
 

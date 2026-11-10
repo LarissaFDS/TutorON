@@ -187,3 +187,38 @@ Beta **não** é validação: tudo o que está nas seções 1 a 7 continua pende
 - paráfrase do prompt em pedido indireto não detectada pelo código;
 - falso positivo de "busca binária";
 - figuras e informações ausentes em m09, m11 e outras questões.
+
+## 10. OAC, Cálculo 3, Física 2 e ED em beta (10/11/2026)
+
+Decisão da equipe: as quatro disciplinas passaram de `em validação` para `beta` no cadastro e são atendidas sem variável de exceção (`TUTORON_LIBERAR_EM_VALIDACAO` continua vazia por padrão). Cada uma mostra um aviso ao ser escolhida: versão beta, as respostas podem conter erros e o material ainda não foi validado pelo professor; o de ED acrescenta que o tutor não entrega projetos avaliativos prontos. A barreira continua para qualquer disciplina "em validação" (disciplina fictícia em `backend/tests/test_barreira.py`).
+
+### Liberado
+
+| Disciplina | Blocos | Na busca | Resoluções (validada / corrigida / pendente do professor) |
+|---|---|---|---|
+| OAC | 28 | 18 | 6 / 10 / 2 |
+| Cálculo 3 | 21 | 16 | 6 / 3 / 7 |
+| Física 2 | 34 | 30 | 8 / 3 / 2 |
+| ED | 20 | 18 | 4 / 12 / 1 |
+
+Correção feita nesta liberação: as 10 notas da equipe escritas com IA em OAC (`n01`–`n10`, `revisao_humana: pendente`) estavam na busca; passaram a `curadoria: candidato` e saíram. Um teste genérico garante que nenhuma `nota_da_equipe_ia` sem revisão humana entra na busca de qualquer disciplina (hoje só SD tem notas assim na busca, todas com revisão feita).
+
+### Continua pendente (beta não é validação)
+
+- Revisão humana em todos os blocos das quatro disciplinas; aprovação do professor não declarada; transcrição literal não autorizada (os blocos parafraseiam).
+- OAC: tópicos 03 (custo/CI), 04, 06, 07, 08, 11 e 12 ficaram sem nenhum bloco na busca; a pergunta de yield/custo por die traz só um bloco pouco relacionado. Plano de ensino atual não encontrado.
+- Cálculo 3: sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca (derivada direcional e plano por três pontos respondem com conhecimento geral, avisando).
+- Física 2: ementa não encontrada.
+- ED: páginas vazias no Notion, formato do cabeçalho .huff, casos SAT 1–8, Manim não testado.
+
+### Checagem com o modelo real (Gemini, chave local, sem liberação)
+
+24 perguntas: as 5 de exemplo de cada disciplina e 4 cruzadas. Muitos HTTP 429/503; responderam `gemini-3.5-flash`, `gemini-3.6-flash`, `gemini-3.1-flash-lite` (degradado, 11 respostas) e, em 3 casos, o modelo local `tutoron-paa` por fallback.
+
+- Correção: nenhuma afirmação errada. Conferido à parte: SymPy (curvatura em t=0 é 2; D_u f = 16/5; normal (6, 3, 2); tangente horizontal em π/2, 7π/6, 11π/6, com 3π/2 excluído porque dx/dθ = 0, como a resposta exigia; limite 0 × 1/2 não existe); unidades (T ≈ 2,01 s; W = nRT ln(V_f/V_i)); OAC por cálculo em Python (blt desvia, bltu não; A[15] → 60; sw com MemWrite=1, RegWrite=0, ALUSrc=1); ED (h(10)=h(17)=3, sondagem → 4; 10, 5, 8 é caso esquerda-direita). As respostas de ED não trouxeram código, então não houve o que compilar com gcc.
+- Material citado: 19 de 20 exemplos trouxeram fontes da própria disciplina. Sem material: blt × bltu (OAC; a nota que tratava disso saiu da busca, o bloco do Notion só lista as instruções), derivada direcional e plano (Cálculo 3), while → RISC-V com fontes mas avisando que o tema não estava no trecho. Nos casos sem material, o tutor disse isso e não inventou fonte.
+- `rigor.md` e modo socrático: todas terminam em "Sua vez" sem entregar o resultado final.
+- Pergunta de outra disciplina: OAC ← pêndulo e Física 2 ← cardioide avisaram que a pergunta é de outra disciplina; ED ← blt citou OAC de passagem; **Cálculo 3 ← AVL (respondida pelo `tutoron-paa`) não avisou**.
+- Modelo local: não foi testado de propósito; entrou só por fallback em 3 respostas. O `tutoron-paa` respondeu de forma correta, mas não avisou a disciplina errada e escreveu "menor ou maior" na pista de empuxo.
+
+Nenhuma disciplina mostrou problema grave o bastante para continuar em validação. Fica registrado: o aviso de "pergunta de outra disciplina" depende do modelo e falhou no modelo local.
