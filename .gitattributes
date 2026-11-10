@@ -12,3 +12,6 @@
 03-triagem/pacote-revisao/*.md whitespace=-blank-at-eol
 *.bat text eol=crlf
 *.ps1 text eol=crlf
+
+# Demo offline: arquivo único gerado (scripts/demo_offline.py), com base64 embutido; sem diff de texto.
+demo-offline/*.html -diff linguist-generated

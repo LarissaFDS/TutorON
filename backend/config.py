@@ -64,11 +64,27 @@ class Settings:
     local_first_chunk_s: float = 150.0
     local_num_ctx: int = 8192
     local_parallel: int = 2
+    # Modelo de visão no Ollama para ler fotos quando nenhum Gemini responder (ex.: qwen2.5vl:7b).
+    # Vazio = só Gemini lê fotos.
+    local_vision_model: str = ""
     embed_model: str = "bge-m3"
+    # Material da equipe com `revisado: false` fica fora da busca em produção. Liga só para medir
+    # (eval/matriz.py gerar --incluir-nao-revisados). A busca lê a mesma variável a cada consulta.
+    acervo_usar_nao_revisados: bool = False
 
     supabase_url: str = ""
     supabase_key: str = field(repr=False, default="")
     supabase_min_similarity: float = 0.5
+    # Piso absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Quem separa pergunta
+    # fora do tema é o destaque sobre a mediana (acervo/retrieval.py); o piso de 0,45 só descarta o
+    # que é distante de tudo. Com 0,5, perguntas legítimas de SD (Moore/Mealy, 0,50) e de PAA (PD)
+    # ficavam sem material: veja `python eval/relevancia.py`. Valor negativo desliga o corte E a penalidade de hub
+    # (a busca volta a ser exatamente a de antes). A penalidade de hub só vale com o corte ligado.
+    acervo_min_similarity: float = 0.45
+    acervo_hub_penalty: bool = True
+    # Disciplinas "em validação" no cadastro ficam fora do atendimento normal. Liberação explícita,
+    # só para testes e validações autorizadas: ids separados por vírgula ou "todas". Vazio = nenhuma.
+    disciplinas_em_validacao_liberadas: tuple[str, ...] = ()
 
     rate_limit_per_10min: int = 300
     data_dir: Path = ROOT_DIR / "dados"
@@ -99,10 +115,16 @@ def load_settings() -> Settings:
         local_first_chunk_s=_float("TUTORON_TIMEOUT_LOCAL", 150.0),
         local_num_ctx=_int("TUTORON_NUM_CTX", 8192),
         local_parallel=max(1, _int("TUTORON_LOCAL_PARALELO", 2)),
+        local_vision_model=_env("TUTORON_MODELO_VISAO_LOCAL"),
         embed_model=_env("TUTORON_EMBED_MODEL", "bge-m3"),
+        acervo_usar_nao_revisados=_env("ACERVO_USAR_NAO_REVISADOS", "0").lower() in ("1", "true", "sim"),
         supabase_url=_env("SUPABASE_URL").rstrip("/"),
         supabase_key=_env("SUPABASE_KEY"),
         supabase_min_similarity=_float("SUPABASE_SIMILARIDADE_MINIMA", 0.5),
+        acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.45),
+        disciplinas_em_validacao_liberadas=tuple(
+            i.strip().lower() for i in _env("TUTORON_LIBERAR_EM_VALIDACAO").split(",") if i.strip()),
+        acervo_hub_penalty=_env("ACERVO_PENALIDADE_HUB", "1") not in ("0", "false", "nao", "não"),
         rate_limit_per_10min=_int("TUTORON_LIMITE_PERGUNTAS_10MIN", 300),
         data_dir=Path(data_dir) if data_dir else ROOT_DIR / "dados",
     )

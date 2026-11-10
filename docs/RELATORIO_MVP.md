@@ -85,6 +85,23 @@ Resultado (relatório completo em [`05-modelo/treino/avaliacao-20261012-0154.md`
 
 A diferença é pequena e está dentro do ruído: são 9 perguntas, dois casos ficaram sem juiz (cota do Gemini esgotada) e os dois modelos erram em pontos diferentes (o treinado escreveu `dp[i][3]` no lugar de `dp[i][j]` numa recorrência; o atual confundiu cobertura de vértices com o teorema de König). **O modelo em uso continua sendo o `tutoron-paa`.** O treino serve hoje para provar que o processo funciona de ponta a ponta nesta máquina; ganho real depende de mais dados revisados (ver seção 6).
 
+### Atualizar o servidor (Windows)
+
+Feito no PC do servidor, na pasta do TutorON, depois que o PR `dev` → `main` for integrado.
+
+1. Anote o commit atual, para poder voltar: `git rev-parse HEAD` (antes das disciplinas em beta era `a83a03f`).
+2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` (ou rode `5-Desligar.bat`).
+3. Atualize: `git checkout main` e `git pull --ff-only origin main`.
+4. Dependências novas (Pillow e Manim 0.19, que no Windows vem em wheels com PyAV e Pango, sem ffmpeg nem LaTeX): `.venv\Scripts\python -m pip install -r requirements.txt`. O `1-Iniciar-Servidor.bat` também instala sozinho se faltar `PIL` ou `manim`.
+5. Modelos do Ollama: os de antes continuam (`tutoron-paa`, `qwen3:8b`, `bge-m3`); confira com `ollama list` e, se faltar, `ollama pull bge-m3` e `ollama pull qwen3:8b`. Opcional, para ler fotos sem Gemini: `ollama pull qwen2.5vl:7b` e `TUTORON_MODELO_VISAO_LOCAL=qwen2.5vl:7b` no `.env`.
+6. `.env`: nada obrigatório de novo. **Não** coloque `TUTORON_LIBERAR_EM_VALIDACAO` no servidor público.
+7. Reinicie com dois cliques em `1-Iniciar-Servidor.bat`.
+8. Confira no endereço público:
+   - aparecem as seis disciplinas (PAA, SD, OAC, Cálculo 3, Física 2, ED);
+   - OAC, Cálculo 3, Física 2 e ED mostram o aviso de versão beta ao serem escolhidas, e o aviso some ao voltar para PAA;
+   - uma pergunta de exemplo de cada uma (as sugestões da tela) responde com material citado da própria disciplina.
+9. Se algo der errado, volte: feche o servidor, `git checkout <commit anotado no passo 1>` (ex.: `git checkout a83a03f`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
+
 ## 5. Como usar agora
 
 1. Dois cliques em `1-Iniciar-Servidor.bat`. A janela mostra o endereço público; deixe-a aberta.

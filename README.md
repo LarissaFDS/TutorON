@@ -2,11 +2,11 @@
 
 O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e responde passo a passo, do jeito que o conteúdo é cobrado, com as fórmulas formatadas.
 
-**Fase MVP:** por enquanto, o TutorON atende Projeto e Análise de Algoritmos (PAA).
+**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD), Organização e Arquitetura de Computadores (OAC), Cálculo 3, Física 2 e Estrutura de Dados (ED) estão em **beta**: disponíveis aos alunos, com a mesma IA e um acervo próprio por disciplina, e com um aviso de que as respostas podem conter erros e o material ainda não foi validado pelo professor. Beta não é validação: a revisão humana dos blocos e a validação técnica das respostas continuam pendentes. O aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
 
 O site tem dois modos:
 
-- **Tirar dúvida** — modo normal: pergunta e resposta, com as fontes consultadas e um botão para marcar "tem erro de conta".
+- **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
 ## Como usar (Windows)
@@ -27,6 +27,8 @@ Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.exa
 
 - `dados/perguntas.jsonl` — perguntas do modo Tutor, resposta, modelo usado e fontes.
 - `dados/feedback.jsonl` — "ajudou / não ajudou / tem erro de conta".
+- `dados/fotos.jsonl` — a leitura de cada foto do papel (a foto em si não é guardada).
+- `dados/animacoes.jsonl` e `dados/animacoes/*.mp4` — roteiros e vídeos das animações.
 - `dados/validacao/avaliacoes.jsonl` — cada avaliação A/B completa: pergunta, as duas respostas, notas, preferência e **qual lado era o TutorON**.
 - `http://127.0.0.1:8000/resultados` — resumo das avaliações. Só abre nesta máquina; pelo endereço público responde 404.
 
@@ -34,7 +36,7 @@ Nenhum IP, nome ou matrícula é gravado.
 
 ## Como a resposta é escolhida
 
-1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca em duas fontes: o **acervo curado local** de provas, listas e resoluções ([`04-rag/`](04-rag/)), que é a fonte principal porque mostra como o professor cobra, e o livro-texto no Supabase, como complemento.
+1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca **no acervo da disciplina escolhida** (sem escolha, PAA). Em PAA, são duas fontes: o **acervo curado local** de provas, listas e resoluções ([`04-rag/`](04-rag/)), que é a fonte principal porque mostra como o professor cobra, e o livro-texto no Supabase, como complemento.
 2. O prompt do tutor ([`backend/prompts.py`](backend/prompts.py)) exige contas passo a passo, verificação no final, citação das fontes e Markdown com LaTeX.
 3. **Corrida entre modelos** ([`backend/llm.py`](backend/llm.py)): o primeiro Gemini da lista começa na hora; se não começar a responder em 6 s, ou der erro (503, 429…), o próximo começa também. O primeiro que responder vence e os outros são cancelados. Um modelo que falhou fica alguns segundos em pausa, então as perguntas seguintes nem tentam ele.
 4. Se nenhum Gemini responder em 20 s, entra o **TutorON local** (`tutoron-paa`, Qwen3 8B com raciocínio, na GPU desta máquina). Ele é a última instância: se nem ele responder, a geração é repetida até 4 vezes ao longo de quase 1 minuto (tempo para o `1-Iniciar-Servidor` religar o que caiu).
@@ -50,7 +52,8 @@ A ordem dos modelos, os tempos e o modelo local ficam no `.env` (veja os coment�
 1-Iniciar-Servidor.bat … 5-Desligar.bat   atalhos
 backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
 scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
-acervo/           pipeline de OCR, curadoria e índice do material de PAA
+acervo/           pipeline de OCR, curadoria e índice do material de PAA; cadastro de disciplinas (disciplinas.py)
+disciplinas/      cadastro das disciplinas e acervos das novas (sd/: Sistemas Digitais; oac/: Organização e Arquitetura)
 00-…06-           dados do pipeline: originais, extração, acervo, triagem, índice RAG, modelo, avaliação
 design/           design system (tokens e componentes CSS) — regras em docs/DESIGN.md
 frontend/         cliente de terminal (CLI) que usa a mesma API
@@ -73,6 +76,9 @@ powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Testar
 :: refazer OCR, curadoria e índice do acervo depois de adicionar material em materiais\
 powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
 
+:: refazer o acervo de Sistemas Digitais depois de editar disciplinas\sd\materiais
+.venv\Scripts\python -m acervo.disciplinas sd --embeddings
+
 :: comparar os modelos nas perguntas de 06-avaliacao\perguntas-mvp.json
 .venv\Scripts\python scripts\avaliar_modelos.py
 ```
@@ -84,6 +90,7 @@ Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Trei
 ## Documentação
 
 - [Relatório do MVP](docs/RELATORIO_MVP.md): o que foi implementado, testes e avaliação dos modelos.
+- [Disciplinas](docs/DISCIPLINAS.md): uma IA, acervos separados; como cadastrar uma disciplina. Curadoria de [Sistemas Digitais](disciplinas/sd/CURADORIA.md) e de [OAC](disciplinas/oac/CURADORIA.md).
 - [Design system](docs/DESIGN.md) · [Schema do Supabase](docs/schema.sql)
 - [Validação pré-MVP](docs/validacao-pre-mvp/) (OCR, curadoria, comparação local, relatórios anteriores)
 - Issues: [#3 backend](docs/issue-3-backend-ai-service.md) · [#5 CLI](docs/issue-5-frontend-cli.md)

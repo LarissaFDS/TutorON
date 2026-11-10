@@ -13,7 +13,7 @@ from backend.tests.test_llm import FakeLLM
 def montar(tmp_path, monkeypatch, roteiro, **kw):
     from backend import main
 
-    async def recuperar(pergunta, llm, settings):
+    async def recuperar(pergunta, llm, settings, disciplina=None):
         return [Trecho("P1", "acervo", "Prova de PAA", "T(n)=2T(n/2)+n", "prova1.pdf")]
     monkeypatch.setattr(tarefas, "recuperar", recuperar)
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
@@ -61,7 +61,17 @@ def test_perguntar_por_tarefa_registra(cliente):
     assert t["status"] == "pronta" and t["texto"].startswith("resposta") and t["fontes"][0]["rotulo"] == "P1"
     linha = json.loads((cliente.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
     assert linha["modelo"] == "g1" and linha["id"] == t["id_resposta"]
+    assert linha["degradado"] is False and t["degradado"] is False
     assert cliente.post("/api/feedback", json={"id": t["id_resposta"], "util": False, "erro_matematico": True}).json()["salvo"]
+
+
+def test_resposta_do_ultimo_gemini_apos_falhas_sai_marcada_como_degradada(tmp_path, monkeypatch):
+    app, _ = montar(tmp_path, monkeypatch, {"g1": ("erro", 429), "g2": ("erro", 503), "g3": ("ok", "resposta lite")})
+    with TestClient(app) as c:
+        t = esperar(c, c.post("/api/perguntar", json={"pergunta": "Quanto custa o merge sort?"}).json())
+        assert t["status"] == "pronta" and t["degradado"] is True
+        linha = json.loads((tmp_path / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[0])
+        assert linha["modelo"] == "g3" and linha["degradado"] is True
 
 
 def test_comparar_e_avaliar_cegos(cliente):
@@ -97,7 +107,8 @@ def test_todos_fora_tenta_de_novo_e_responde(tmp_path, monkeypatch):
     llm._provider = provedor
     with TestClient(app) as c:
         t = esperar(c, c.post("/api/perguntar", json={"pergunta": "O que é DP?"}).json())
-        assert t["status"] == "pronta" and t["texto"] == "resposta do local"
+        assert t["status"] == "pronta" and t["texto"].startswith("resposta do local")
+        assert "### Sua vez" in t["texto"]  # modo socrático: a vez sempre volta ao aluno
         par = esperar(c, c.post("/api/comparar", json={"pergunta": "O que é DP?"}).json())
         assert par["status"] == "pronta" and par["A"] and par["B"]
 

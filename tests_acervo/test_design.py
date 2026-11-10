@@ -37,3 +37,14 @@ def test_site_keeps_api_contract():
         assert fragment in js
     for criterion in ['clareza', 'confianca', 'utilidade']:
         assert f"'{criterion}'" in js
+
+
+def test_tutor_history_markup_is_local_and_accessible():
+    html = (WEB / 'index.html').read_text(encoding='utf-8')
+    js = (WEB / 'app.js').read_text(encoding='utf-8')
+    assert 'id="historico-botao"' in html and 'aria-controls="historico"' in html and 'aria-expanded="false"' in html
+    assert re.search(r'<ol[^>]*id="historico"[^>]*hidden', html), 'Histórico começa fechado.'
+    assert 'Ver perguntas anteriores (' in js and 'Ocultar perguntas anteriores' in js
+    # Histórico só em memória: recarregar a página zera. Nada novo vem da internet.
+    assert 'localStorage' not in js
+    assert not re.search(r'https?://', js), 'app.js não pode buscar nada fora do TutorON.'

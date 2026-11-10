@@ -12,7 +12,7 @@ Este relatório separa execução técnica de validação pedagógica. Os result
 
 ## 2. Organizar por questão, fonte e confiabilidade
 
-- 220 blocos no índice; 15 sem segmentação segura.
+- 225 blocos no índice; 15 sem segmentação segura.
 - 10 classificados como baixa confiança, incluindo ilegíveis.
 - Pareceres locais: 16 concluídos; 0 falhas; os demais não foram solicitados ou não tinham resolução identificada.
 - Contagens por assunto (blocos candidatos, não questões únicas certificadas):
@@ -21,7 +21,7 @@ Este relatório separa execução técnica de validação pedagógica. Os result
   - b1-01-corretude-complexidade: 40
   - b1-02-divisao-e-conquista: 15
   - b1-03-algoritmos-gulosos: 24
-  - b2-04-programacao-dinamica: 13
+  - b2-04-programacao-dinamica: 18
   - b2-05-transformacao-de-problemas: 10
   - b2-06-np-completude: 18
   - b2-07-lidando-com-np-completude: 10
@@ -35,7 +35,7 @@ Este relatório separa execução técnica de validação pedagógica. Os result
 ## 4. Validar com questões, alunos e professor
 
 - 12 questões no conjunto; 48 respostas reais concluídas na rodada atual.
-- 12 pares offline; 0 registros de avaliação salvos (não equivalem, por si, a um estudo com alunos).
+- Avaliações de alunos: coletadas pelo site (modo Validação) em dados/validacao/avaliacoes.jsonl.
 - Comparação A/B sorteada no servidor; notas separadas para clareza, confiança e utilidade.
 - Professor: pendente. As expressões regulares medem cobertura lexical, não prova de correção.
 
@@ -48,7 +48,7 @@ Este relatório separa execução técnica de validação pedagógica. Os result
 - A comparação rápida antiga em 05-modelo/comparacao.json pertence ao hardware Windows de setembro; não é o resultado desta validação Linux.
 - Inferência e acervo são locais; GitHub recebe código e artefatos de validação. Não há publicação do servidor nem envio a Gemini nesta rodada.
 
-Execução: iniciar_validacao.sh (Linux) ou iniciar_validacao.bat (Windows). avaliar_modelos executa quatro condições, incluindo controle somente com instruções.
+Execução: python -m acervo pipeline --embeddings refaz OCR, curadoria e índice; python -m acervo avaliar --gerar executa as quatro condições.
 
 ## Resultados técnicos do checklist
 

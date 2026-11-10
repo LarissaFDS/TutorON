@@ -7,7 +7,7 @@ from pathlib import PureWindowsPath
 from .common import (ROOT, TOPICS, caminho_guardado, caminho_local, digest, init, normalize, progress, read_json, slug,
                      write_csv, write_json)
 from .extract import topic_for
-from . import models
+from . import equipe, models
 
 FIELDS = ['id', 'bloco', 'assunto', 'tipo', 'fonte_original', 'semestre', 'tem_resposta',
           'confiabilidade', 'motivo_confiabilidade', 'qualidade_ocr', 'arquivo', 'sha256',
@@ -116,6 +116,7 @@ def organize(root=ROOT):
             path.write_text(f'# {item_id}\n\nFonte: {source}\n\n{text}\n', encoding='utf-8', newline='\n')
             records.append(record)
     apply_corrections(records, root)
+    records = equipe.mesclar(records, root)  # material da equipe não vem da extração
     write_json(root / '02-acervo/itens.json', records)
     write_csv(root / '02-acervo/indice.csv', records, FIELDS)
     progress('3. Organização', f'{len(records)} blocos segmentados; {sum(r["segmentacao"] == "pendente" for r in records)} sem separação segura. Metadados e texto separados em itens.json e indice.csv; confirmar cortes nas páginas originais.', root)
@@ -205,6 +206,9 @@ def triage(root=ROOT, use_ai=False, limit=None):
         if item.get('curadoria', {}).get('status') == 'corrigido_por_agente' and not findings:
             item['confiabilidade'] = 'media'
             reason = 'Correção derivada por agente com fonte e hash; revisão do professor pendente.'
+        if item.get('origem') == 'equipe' and not findings:
+            item['confiabilidade'] = 'media'
+            reason = equipe.MOTIVO
         verdict = {'status': 'nao_executado'}
         if use_ai and item['tem_resposta'] == 's' and (limit is None or ai_count < limit):
             cache = root / '03-triagem/pareceres-ia' / (item['id'] + '.json')

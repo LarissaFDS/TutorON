@@ -1,0 +1,192 @@
+{
+  "padrao": "paa",
+  "disciplinas": [
+    {
+      "id": "paa",
+      "nome": "Projeto e Análise de Algoritmos",
+      "sigla": "PAA",
+      "situacao": "MVP",
+      "itens": "02-acervo/itens.json",
+      "indice": "04-rag/indice.json",
+      "rigor": "disciplinas/paa/rigor.md",
+      "livro_supabase": true,
+      "exemplos": [
+        "Resolva T(n) = 2T(n/2) + n log n. O Teorema Mestre se aplica?",
+        "Qual a diferença entre O, Ω e Θ? Dê um exemplo com 3n² + 5n.",
+        "Por que o guloso de troco falha para moedas {1, 3, 4} e valor 6?",
+        "Como montar a recorrência da mochila 0/1 em programação dinâmica?",
+        "Como provar que um problema é NP-completo por redução?"
+      ]
+    },
+    {
+      "id": "sd",
+      "nome": "Sistemas Digitais",
+      "sigla": "SD",
+      "situacao": "beta",
+      "aviso": "Sistemas Digitais — versão beta. As respostas podem conter erros, inclusive em cálculos e projetos de circuitos. Confira os resultados com o material da disciplina e, quando necessário, com o professor ou monitor.",
+      "itens": "disciplinas/sd/acervo/itens.json",
+      "indice": "disciplinas/sd/acervo/indice.json",
+      "materiais": "disciplinas/sd/materiais",
+      "rigor": "disciplinas/sd/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "sd-01-numeracao-aritmetica",
+        "sd-02-algebra-booleana-portas",
+        "sd-03-simplificacao-karnaugh",
+        "sd-04-blocos-combinacionais",
+        "sd-05-circuitos-aritmeticos",
+        "sd-06-analise-temporal",
+        "sd-07-latches-flip-flops",
+        "sd-08-registradores-contadores",
+        "sd-09-maquinas-de-estados",
+        "sd-10-projeto-rtl",
+        "sd-11-hdl-vhdl",
+        "sd-12-conversores-memorias"
+      ],
+      "exemplos": [
+        "Como simplifico S(A,B,C) = Σm(0,1,3,5,7) com mapa de Karnaugh?",
+        "Qual o complemento de 2 de 101010? E como detecto overflow na soma?",
+        "Como fazer um subtrator de 4 bits usando somadores?",
+        "Como desenhar a saída Q de um flip-flop D a partir do diagrama de tempo?",
+        "Como separar bloco operacional e bloco de controle no projeto RTL de Fibonacci?"
+      ]
+    },
+    {
+      "id": "oac",
+      "nome": "Organização e Arquitetura de Computadores",
+      "sigla": "OAC",
+      "situacao": "beta",
+      "aviso": "Organização e Arquitetura de Computadores — versão beta. As respostas podem conter erros, inclusive em código RISC-V e cálculos de desempenho, e o material ainda não foi validado pelo professor; confira com o material da disciplina e, quando necessário, com o professor ou monitor.",
+      "itens": "disciplinas/oac/acervo/itens.json",
+      "indice": "disciplinas/oac/acervo/indice.json",
+      "materiais": "disciplinas/oac/materiais",
+      "rigor": "disciplinas/oac/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "oac-01-abstracoes-hierarquia",
+        "oac-02-desempenho",
+        "oac-03-custo-ci",
+        "oac-04-risc-cisc",
+        "oac-05-isa-registradores-memoria",
+        "oac-06-representacao-numeros",
+        "oac-07-formatos-codificacao",
+        "oac-08-logicas-deslocamentos",
+        "oac-09-desvios-lacos-vetores",
+        "oac-10-procedimentos",
+        "oac-11-constantes-enderecamento-traducao",
+        "oac-12-aritmetica",
+        "oac-13-datapath-controle",
+        "oac-14-pipeline-hazards",
+        "oac-15-hierarquia-memoria",
+        "oac-16-paralelismo"
+      ],
+      "exemplos": [
+        "Por que lw x9, 32(x22) acessa A[8]?",
+        "Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
+        "Qual a diferença entre blt e bltu?",
+        "Quais sinais de controle ficam ativos numa instrução sw?",
+        "Como traduzir um laço while em C para RISC-V?"
+      ]
+    },
+    {
+      "id": "calc3",
+      "nome": "Cálculo 3",
+      "sigla": "Cálculo 3",
+      "situacao": "beta",
+      "aviso": "Cálculo 3 — versão beta. As respostas podem conter erros, inclusive em contas e demonstrações, e o material ainda não foi validado pelo professor; confira com o material da disciplina e, quando necessário, com o professor ou monitor.",
+      "itens": "disciplinas/calc3/acervo/itens.json",
+      "indice": "disciplinas/calc3/acervo/indice.json",
+      "materiais": "disciplinas/calc3/materiais",
+      "rigor": "disciplinas/calc3/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "calc3-01-curvas-parametricas",
+        "calc3-02-coordenadas-polares",
+        "calc3-03-vetores-retas-planos",
+        "calc3-04-funcoes-vetoriais",
+        "calc3-05-comprimento-de-arco",
+        "calc3-06-curvatura-movimento",
+        "calc3-07-funcoes-varias-variaveis",
+        "calc3-08-limites-derivadas-parciais",
+        "calc3-09-derivada-direcional-gradiente",
+        "calc3-10-plano-tangente-regra-da-cadeia",
+        "calc3-11-maximos-minimos-lagrange",
+        "calc3-12-integrais-multiplas",
+        "calc3-13-campos-integrais-de-linha-green",
+        "calc3-14-stokes-gauss"
+      ],
+      "exemplos": [
+        "Qual a curvatura de r(t) = (t, t², t³) em t = 0?",
+        "Como calculo a derivada direcional de f(x, y) = x²y em (1, 2) na direção (3, 4)?",
+        "O limite de xy/(x² + y²) quando (x, y) → (0, 0) existe?",
+        "Como achar a equação do plano que passa por (1,0,0), (0,2,0) e (0,0,3)?",
+        "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"
+      ]
+    },
+    {
+      "id": "fis2",
+      "nome": "Física 2",
+      "sigla": "Física 2",
+      "situacao": "beta",
+      "aviso": "Física 2 — versão beta. As respostas podem conter erros, inclusive em cálculos e unidades, e o material ainda não foi validado pelo professor; confira com o material da disciplina e, quando necessário, com o professor ou monitor.",
+      "itens": "disciplinas/fis2/acervo/itens.json",
+      "indice": "disciplinas/fis2/acervo/indice.json",
+      "materiais": "disciplinas/fis2/materiais",
+      "rigor": "disciplinas/fis2/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "fis2-01-equilibrio-elasticidade",
+        "fis2-02-gravitacao",
+        "fis2-03-fluidos",
+        "fis2-04-oscilacoes",
+        "fis2-05-ondas-i",
+        "fis2-06-ondas-ii-som",
+        "fis2-07-temperatura-calor-primeira-lei",
+        "fis2-08-teoria-cinetica",
+        "fis2-09-entropia-segunda-lei"
+      ],
+      "exemplos": [
+        "Por que um bloco de madeira flutua e uma pedra do mesmo volume afunda?",
+        "Como calcular o trabalho de um gás ideal numa expansão isotérmica?",
+        "Qual o período de um pêndulo simples de 1 m?",
+        "Quantos nós tem o terceiro harmônico de uma corda presa nas duas pontas?",
+        "Como calcular a variação de entropia numa expansão livre?"
+      ]
+    },
+    {
+      "id": "ed",
+      "nome": "Estrutura de Dados",
+      "sigla": "ED",
+      "situacao": "beta",
+      "aviso": "Estrutura de Dados — versão beta. As respostas podem conter erros, inclusive em código C, e o material ainda não foi validado pelo professor; confira com o material da disciplina e com o professor ou monitor. O tutor não entrega projetos avaliativos prontos.",
+      "itens": "disciplinas/ed/acervo/itens.json",
+      "indice": "disciplinas/ed/acervo/indice.json",
+      "materiais": "disciplinas/ed/materiais",
+      "rigor": "disciplinas/ed/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ed-01-ponteiros-memoria",
+        "ed-02-structs-funcoes",
+        "ed-03-busca",
+        "ed-04-complexidade-recorrencias",
+        "ed-05-ordenacao",
+        "ed-06-listas",
+        "ed-07-pilhas-filas",
+        "ed-08-heap-fila-prioridade",
+        "ed-09-hash",
+        "ed-10-arvores",
+        "ed-11-grafos",
+        "ed-12-huffman",
+        "ed-13-sat",
+        "ed-14-projetos-depuracao"
+      ],
+      "exemplos": [
+        "Como remover o último nó de uma lista encadeada em C sem perder a referência?",
+        "Por que meu heap escreve fora do vetor quando fica cheio?",
+        "Como tratar colisões numa tabela hash com endereçamento aberto?",
+        "Quando a AVL faz rotação dupla?",
+        "Qual a diferença entre BFS e DFS na implementação?"
+      ]
+    }
+  ]
+}

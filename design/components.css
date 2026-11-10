@@ -306,3 +306,22 @@ textarea.input { min-height: 96px; resize: vertical; line-height: var(--leading-
   color: var(--color-ink-muted);
   white-space: nowrap;
 }
+
+/* ---------------------------------------------------------------- historico
+   Perguntas anteriores no modo "Tirar dúvida". A tela mostra só a pergunta
+   atual; as anteriores ficam recolhidas aqui, da mais recente para a mais antiga.
+   Lista com fios divisórios, sem cards: os itens não são comparados lado a lado. */
+.historico { margin-top: var(--space-6); max-width: 860px; }
+.historico__lista { list-style: none; margin: var(--space-4) 0 0; padding: 0; border-top: var(--border); }
+.historico__item { border-bottom: var(--border); }
+.historico__item > .disclosure { margin-top: 0; }
+.historico__item > .disclosure > summary {
+  width: auto;
+  min-height: 44px;
+  padding: var(--space-3) 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-ui);
+  overflow-wrap: anywhere;
+}
+.historico__item > .disclosure[open] > summary { margin-bottom: 0; }
+.historico__item .troca { padding-bottom: var(--space-5); }
