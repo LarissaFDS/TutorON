@@ -87,20 +87,23 @@ A diferença é pequena e está dentro do ruído: são 9 perguntas, dois casos f
 
 ### Atualizar o servidor (Windows)
 
-Feito no PC do servidor, na pasta do TutorON, depois que o PR `dev` → `main` for integrado.
+As instruções abaixo estão prontas para usar. O servidor público ainda não foi atualizado com Banco de Dados e com as disciplinas fora do beta (18/11/2026); quem tem acesso ao PC do servidor faz isso seguindo os passos.
 
-1. Anote o commit atual, para poder voltar: `git rev-parse HEAD` (antes das disciplinas em beta era `a83a03f`).
-2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` (ou rode `5-Desligar.bat`).
+Faça no PC do servidor, na pasta do TutorON, depois que o PR `dev` → `main` for integrado (LarissaFDS/TutorON#40).
+
+1. Anote o commit atual, para poder voltar: `git rev-parse HEAD`. Antes desta atualização era `ef5ed69`; antes das disciplinas em beta era `a83a03f`.
+2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` ou rode `5-Desligar.bat`.
 3. Atualize: `git checkout main` e `git pull --ff-only origin main`.
-4. Dependências novas (Pillow e Manim 0.19, que no Windows vem em wheels com PyAV e Pango, sem ffmpeg nem LaTeX): `.venv\Scripts\python -m pip install -r requirements.txt`. O `1-Iniciar-Servidor.bat` também instala sozinho se faltar `PIL` ou `manim`.
-5. Modelos do Ollama: os de antes continuam (`tutoron-paa`, `qwen3:8b`, `bge-m3`); confira com `ollama list` e, se faltar, `ollama pull bge-m3` e `ollama pull qwen3:8b`. Opcional, para ler fotos sem Gemini: `ollama pull qwen2.5vl:7b` e `TUTORON_MODELO_VISAO_LOCAL=qwen2.5vl:7b` no `.env`.
+4. Dependências: nada novo para o servidor. O `duckdb` entrou só em `requirements-acervo.txt`, para os testes de SQL, e não precisa ser instalado no servidor.
+5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. O índice de BD já vem gerado no repositório.
 6. `.env`: nada obrigatório de novo. **Não** coloque `TUTORON_LIBERAR_EM_VALIDACAO` no servidor público.
 7. Reinicie com dois cliques em `1-Iniciar-Servidor.bat`.
 8. Confira no endereço público:
-   - aparecem as seis disciplinas (PAA, SD, OAC, Cálculo 3, Física 2, ED);
-   - OAC, Cálculo 3, Física 2 e ED mostram o aviso de versão beta ao serem escolhidas, e o aviso some ao voltar para PAA;
-   - uma pergunta de exemplo de cada uma (as sugestões da tela) responde com material citado da própria disciplina.
-9. Se algo der errado, volte: feche o servidor, `git checkout <commit anotado no passo 1>` (ex.: `git checkout a83a03f`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
+   - aparecem as sete disciplinas: PAA, SD, OAC, Cálculo 3, Física 2, ED e BD;
+   - nenhuma mostra " · beta" no seletor nem aviso ao ser escolhida;
+   - `?disciplina=bd` abre com Banco de Dados selecionada;
+   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN.
+9. Se algo der errado, volte: feche o servidor, rode `git checkout <commit anotado no passo 1>` (ex.: `git checkout ef5ed69`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
 
 ## 5. Como usar agora
 
