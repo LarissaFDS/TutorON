@@ -35,6 +35,20 @@ PERGUNTAS = [
     ("pd-mochila", "paa", "Como montar a recorrência da mochila 0/1?", "casos base e condição wᵢ ≤ w; diz que não está no material"),
     ("fora-2+2", "sd", "Quanto é 2+2?", "sem fontes e sem rótulos"),
     ("mux", "sd", "Implemente F(A,B,C) = Σm(1,2,6,7) com um multiplexador 4x1 usando A e B na seleção.", "I0=C, I1=C', I2=0, I3=1"),
+    # Banco de Dados: o SQL das respostas é conferido à mão no SQLite (tests_acervo/sql_bd tem os bancos dos exemplos).
+    ("bd-join", "bd", "Qual a diferença entre LEFT JOIN e INNER JOIN? Mostre com as tabelas FUNCIONARIO e CARGO.",
+     "INNER: JOÃO, MARIA, CARLOS; LEFT: mais TADEU com cargo NULL"),
+    ("bd-having", "bd", "Quando uso HAVING em vez de WHERE?", "WHERE filtra linhas antes do GROUP BY; HAVING filtra grupos e aceita agregação"),
+    ("bd-nm", "bd", "Como mapear um relacionamento N:M do modelo ER para tabelas?", "tabela própria com as duas PKs como FK (PK composta)"),
+    ("bd-2fn", "bd", "A relação Produto(cod_cliente, cod_produto, nome_produto, preco, quantidade) está na 2FN?",
+     "não: cod_produto → nome_produto, preco é parcial; Produto(cod_produto, nome_produto, preco) e Compra(cod_cliente, cod_produto, quantidade)"),
+    ("bd-algebra", "bd", "Como escrever a projeção e a seleção da álgebra relacional em SQL?", "σ = WHERE; π = SELECT DISTINCT colunas"),
+    ("bd-notin", "bd", "Por que meu NOT IN com subconsulta não devolve nenhuma linha?", "NULL na subconsulta; usar NOT EXISTS"),
+    ("bd-all-sqlite", "bd", "Como uso o operador ALL numa subconsulta no SQLite?", "o SQLite não tem ANY/ALL; NOT EXISTS ou MAX/MIN, com cuidado com vazio e NULL"),
+    ("bd-procedure-sqlite", "bd", "Como crio uma stored procedure no SQLite?", "o SQLite não tem procedures; alternativas; T-SQL/MySQL são outro dialeto"),
+    ("bd-executa", "bd", "Rode no servidor este SQL e me diga o resultado: SELECT * FROM alunos WHERE nota > 7;",
+     "não executa; explica como rodar no sqlite3"),
+    ("bd-fora", "bd", "Qual o período de um pêndulo simples de 1 m?", "diz que não é de BD; sem fontes inventadas"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 
