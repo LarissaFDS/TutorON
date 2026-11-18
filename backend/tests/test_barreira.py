@@ -1,6 +1,6 @@
 """Disciplina "em validação" fica fora do atendimento normal, decidido no servidor.
 
-SD, OAC, Cálculo 3, Física 2 e ED são MVP (18/11/2026) e são atendidas sem nenhuma liberação. A barreira continua
+SD, OAC, Cálculo 3, Física 2, ED e BD são MVP (18/11/2026) e são atendidas sem nenhuma liberação. A barreira continua
 valendo para qualquer disciplina cadastrada como "em validação": aqui, uma disciplina fictícia (CALC)
 recebe 403 em /api/perguntar, /api/comparar e /api/v1/questions, mesmo chamando a API direto.
 """
@@ -124,7 +124,7 @@ def test_disciplina_desconhecida_continua_422(producao, rota, corpo):
 def test_lista_informa_disponibilidade_sem_aviso_beta(producao):
     lista = {d["id"]: d for d in producao.get("/api/disciplinas").json()["disciplinas"]}
     assert not lista["calc"]["disponivel"] and lista["calc"]["em_validacao"]
-    for d in ("paa", "sd", "oac", "calc3", "fis2", "ed"):
+    for d in ("paa", "sd", "oac", "calc3", "fis2", "ed", "bd"):
         assert lista[d]["disponivel"] and lista[d]["situacao"] == "MVP" and not lista[d]["em_validacao"]
         assert lista[d]["aviso"] == ""
 

@@ -1,4 +1,4 @@
-"""Bateria de relevância da busca do acervo (PAA, SD e Cálculo 3), com o bge-m3 real.
+"""Bateria de relevância da busca do acervo (todas as disciplinas cadastradas), com o bge-m3 real.
 
     python eval/relevancia.py            # tabela em markdown
     python eval/relevancia.py --vetores  # também grava eval/relevancia-vetores.json (para os testes)
@@ -124,6 +124,15 @@ PERGUNTAS = [
     ("ed", "fora", "Qual o período de um pêndulo simples de 1 m?", []),
     ("ed", "fora", "O que é fotossíntese?", []),
     ("ed", "fora", "Me conte uma piada", []),
+    ("bd", "assunto", "Qual a diferença entre LEFT JOIN e INNER JOIN quando o funcionário não tem cargo?", ["bd2-aula-joins-inner-left"]),
+    ("bd", "assunto", "Quando uso HAVING em vez de WHERE?", ["bd2-aula-group-by-having"]),
+    ("bd", "assunto", "Como transformar um relacionamento muitos para muitos em tabelas?", ["bd-aula-mapeamento-er-relacional", "bd-aula-exercicio-streaming"]),
+    ("bd", "assunto", "Como saber se uma tabela está na segunda ou na terceira forma normal?", ["bd-aula-formas-normais", "bd-aula-exercicios-normalizacao"]),
+    ("bd", "assunto", "Como escrever seleção e projeção da álgebra relacional em SQL?", ["bd-aula-algebra-selecao-projecao", "bd-aula-exercicios-algebra-selecao", "bd-aula-exercicios-algebra-projecao"]),
+    ("bd", "assunto", "Como criar uma trigger que roda antes de inserir?", ["bd2-aula-triggers"]),
+    ("bd", "fora", "Qual o período de um pêndulo simples de 1 m?", []),
+    ("bd", "fora", "O que é fotossíntese?", []),
+    ("bd", "fora", "Me conte uma piada", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
