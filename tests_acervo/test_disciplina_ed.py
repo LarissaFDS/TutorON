@@ -40,7 +40,7 @@ def texto(ident):
 
 def test_ed_cadastrada_com_acervo_proprio():
     assert ED.nome == 'Estrutura de Dados' and ED.itens.exists() and ED.indice.exists() and not ED.livro_supabase
-    assert ED.situacao == 'beta' and not ED.em_validacao and 'não foi validado pelo professor' in ED.aviso
+    assert ED.situacao == 'MVP' and not ED.em_validacao and not ED.aviso
     ids = {c['id'] for c in read_json(ED.indice)['chunks']}
     for d in map(disciplinas.obter, OUTRAS):
         assert {d.itens, d.indice}.isdisjoint({ED.itens, ED.indice})
@@ -216,7 +216,7 @@ def test_projetos_avaliativos_nao_tem_implementacao_completa():
         assert 'fopen' not in p.read_text(encoding='utf-8'), p.name  # nada de compactar arquivo ou ler DIMACS
     versionados = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, check=True).stdout
     assert not re.search(r'(?i)(huff|sat_?solver|dimacs)[^/\n]*\.(c|h)$', versionados, re.M)
-    assert 'Não escreva o projeto completo' in ED.rigor
+    assert 'Não escreva o projeto completo' in ED.rigor and 'não entrega projetos avaliativos prontos' in ED.rigor
 
 
 # ---------------------------------------------------------------- código C: compilar e rodar
