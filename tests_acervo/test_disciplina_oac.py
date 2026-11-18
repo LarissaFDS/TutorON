@@ -64,13 +64,20 @@ def test_status_de_resolucao_invalido(tmp_path):
     ('Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?', None),
     ('Qual a diferença entre blt e bltu?', 'oac-notion-cap2-instrucoes'),
     ('Como escrever a sub-rotina swap em RISC-V?', 'oac-prova1-q4-swap'),
-    ('Por que o PCSrc do monociclo precisa de OR Jump para o jal no SystemVerilog?', 'oac-notion-projeto1-monociclo'),
+    ('Por que o PCSrc do monociclo precisa de OR Jump para o jal no SystemVerilog?', 'projeto1'),
     ('Qual a diferença entre SIMD, MIMD e multithreading SMT?', 'oac-notion-cap6-paralelismo'),
+    ('Quantos misses tem a sequência 1, 4, 8, 5, 20, 17 numa cache de mapeamento direto com 16 blocos?',
+     'oac-otavio-ab2-q1-cache'),
+    ('O que é um hazard de dados e quando o forwarding não resolve?', 'oac-otavio-projeto2-hazards'),
+    ('Qual a diferença entre cache associativa por conjunto e mapeamento direto?', 'oac-otavio-ab2-q1-cache'),
+    ('Como fica o datapath monociclo numa instrução beq?', 'oac-otavio-projeto1-monociclo'),
 ])
 def test_pergunta_de_oac_encontra_material_pertinente(pergunta, esperado):
     ids = buscar(pergunta)
     if esperado is None:  # CPI médio: qualquer bloco de desempenho com CPI médio por classe serve
         assert ids[0] in {'oac-prova1-a-q2-enade', 'oac-prova1-b-q2-enade', 'oac-nota-desempenho', 'oac-lista-ex2'}
+    elif esperado == 'projeto1':  # as anotações do Notion e as manuscritas tratam o mesmo projeto
+        assert ids[0] in {'oac-notion-projeto1-monociclo', 'oac-otavio-projeto1-monociclo'}
     else:
         assert ids[0] == esperado
 
@@ -78,7 +85,7 @@ def test_pergunta_de_oac_encontra_material_pertinente(pergunta, esperado):
 def test_sinais_de_controle_do_sw_vem_dos_projetos_revisados():
     # A tabela de sinais por instrução está numa nota de IA sem revisão humana, fora da busca.
     assert buscar('Quais sinais de controle ficam ativos numa instrução sw?')[0] in {
-        'oac-notion-projeto2-pipeline', 'oac-notion-projeto1-monociclo'}
+        'oac-notion-projeto2-pipeline', 'oac-notion-projeto1-monociclo', 'oac-otavio-projeto1-monociclo'}
 
 
 def test_notas_de_ia_sem_revisao_ficam_fora_da_busca_de_oac():
@@ -104,7 +111,7 @@ def test_pergunta_fora_do_acervo_nao_inventa_material():
 
 def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 18  # 11 da prova, lista e aula + 7 das anotações do Notion
+    assert len(turma) == 24  # 11 da prova, lista e aula + 7 do Notion + 6 das anotações manuscritas (u*)
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert i.get('status_resolucao') in rotulo, i['id']
@@ -116,7 +123,8 @@ def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
         texto = ITENS[ident]['texto'].lower()
         assert ('gabarito' if ident.startswith('oac-prova') or ident == 'oac-compiladores' else 'correç') in texto, ident
     assert {'oac-notion-cap2-instrucoes', 'oac-notion-projeto1-monociclo', 'oac-notion-projeto2-pipeline',
-     'oac-notion-cap6-paralelismo'} <= corrigidas
+     'oac-notion-cap6-paralelismo', 'oac-otavio-projeto1-monociclo', 'oac-otavio-projeto2-hazards',
+     'oac-otavio-hierarquia-memoria', 'oac-otavio-ab2-q2-q7'} <= corrigidas
     assert all(i['natureza'] == 'nota_da_equipe_ia' and 'status_resolucao' not in i
                for i in ITENS.values() if i['id'].startswith('oac-nota'))
 
@@ -318,6 +326,110 @@ def test_if_else_e_while_da_nota():
         assert executar(if_else.replace('...', ''), {20: 2, 21: 3, 22: i, 23: j})[0][19] == f
     x, _ = executar(laco.replace('...', ''), {22: 0, 24: 7, 25: 0}, vetor(0, [7, 7, 7, 2]))
     assert x[22] == 3
+
+
+# ---------------------------------------------------------------- anotações manuscritas (u*): cache e pipeline
+
+def simular_cache(enderecos, blocos, vias, bytes_bloco=1):
+    """Cache com LRU; devolve 'H', 'compulsoria' ou 'conflito' (inclui capacidade) por acesso.
+
+    O índice sai do endereço do bloco (endereço ÷ bytes por bloco), nunca do endereço em bytes."""
+    conjuntos = [[] for _ in range(blocos // vias)]
+    vistos, saida = set(), []
+    for e in enderecos:
+        b = e // bytes_bloco
+        c = conjuntos[b % len(conjuntos)]
+        if b in c:
+            c.remove(b)
+            saida.append('H')
+        else:
+            saida.append('conflito' if b in vistos else 'compulsoria')
+            if len(c) == vias:
+                c.pop(0)
+        c.append(b)
+        vistos.add(b)
+    return saida
+
+
+AB2_Q1 = [1, 4, 8, 5, 20, 17, 19, 58, 9, 11, 4, 43, 5, 6, 9, 17]
+
+
+def faltas(r):
+    return sum(x != 'H' for x in r)
+
+
+def test_ab2_q1_misses_conferidos_por_simulador():
+    texto = ITENS['oac-otavio-ab2-q1-cache']['texto']
+    direto, duas_vias, total = (simular_cache(AB2_Q1, 16, v) for v in (1, 2, 16))
+    assert (faltas(direto), faltas(duas_vias), faltas(total)) == (13, 12, 12)
+    assert '13 misses' in texto and texto.count('12 misses') == 2
+    assert direto[10] == 'conflito' and duas_vias[10] == 'H'  # o 4 volta: 20 o tirou só no direto
+    assert set(total) <= {'H', 'compulsoria'}  # 12 blocos distintos cabem em 16 vias
+    pergunta = simular_cache([1, 4, 8, 5, 20, 17], 16, 1)
+    assert pergunta == ['compulsoria'] * 6 and '6 misses, todos compulsórios' in texto
+
+
+def test_cache_usa_endereco_do_bloco_e_nao_do_byte():
+    # Blocos de 4 bytes: bytes 0..3 são o mesmo bloco; índice pelo byte daria 4 faltas.
+    assert simular_cache([0, 1, 2, 3], 16, 1, bytes_bloco=4) == ['compulsoria', 'H', 'H', 'H']
+    assert simular_cache([0, 64], 16, 1, bytes_bloco=4) == ['compulsoria'] * 2  # blocos 0 e 16: mesmo índice
+    assert simular_cache([0, 64, 0], 16, 1, bytes_bloco=4)[2] == 'conflito'
+    assert 101 % 8 == 5 and 101 // 8 == 12
+    assert '101 mod 8 = 5' in ITENS['oac-otavio-hierarquia-memoria']['texto']
+
+
+def ciclos_pipeline(instrs, forwarding=True, estagios=5):
+    """Ciclo de término de cada instrução (WB) no pipeline de 5 estágios, sem previsão de desvio.
+
+    instrs: (destino, fontes, eh_load). Sem forwarding, o banco escreve na 1ª metade e lê na 2ª."""
+    ex_anterior, pronto, wb = 0, {}, []
+    for i, (rd, fontes, load) in enumerate(instrs):
+        # EX no ciclo i + 3 (IF em i + 1), em ordem, e só quando os operandos estão prontos
+        ex = max([i + 3, ex_anterior + 1] + [pronto[f] for f in fontes if f in pronto and f != 0])
+        ex_anterior = ex
+        w = ex + estagios - 3
+        wb.append(w)
+        if rd:  # primeiro ciclo em que um consumidor pode estar em EX
+            pronto[rd] = (ex + 2 if load else ex + 1) if forwarding else w + 1
+    return wb
+
+
+def test_load_use_tem_bolha_mesmo_com_forwarding():
+    lw_add = [(1, [2], True), (3, [1, 4], False)]
+    assert ciclos_pipeline(lw_add) == [5, 7]  # 5 de enchimento + 1 + 1 bolha
+    assert '5 + 1 + 1 = 7' in ITENS['oac-otavio-projeto2-hazards']['texto']
+    add_add = [(1, [2], False), (3, [1, 4], False)]
+    assert ciclos_pipeline(add_add) == [5, 6]  # forwarding de EX/MEM resolve sem bolha
+    assert ciclos_pipeline(add_add, forwarding=False) == [5, 8]  # sem forwarding: 2 bolhas
+
+
+def test_sequencia_sub_and_or_add_sw_das_anotacoes():
+    seq = [(2, [1, 3], False), (12, [2, 5], False), (13, [6, 2], False), (14, [2, 2], False), (None, [15, 2], False)]
+    assert ciclos_pipeline(seq)[-1] == 5 + 4  # com forwarding, nenhuma bolha: k + (n − 1)
+    assert ciclos_pipeline(seq, forwarding=False)[-1] == 11  # sub em WB no ciclo 5: and e or esperam
+
+
+def test_contas_da_revisao_ab2():
+    assert round(2 + 0.02 * 100 + 0.36 * 0.04 * 100, 2) == 5.44
+    ciclos_mem = 100 / 0.25
+    assert ciclos_mem == 400 and 1 + 0.02 * ciclos_mem == 9
+    cpi_l2 = 1 + 0.02 * (5 / 0.25) + 0.005 * ciclos_mem
+    assert round(cpi_l2, 2) == 3.4 and round(9 / cpi_l2, 1) == 2.6
+    offset = (16 * 1024).bit_length() - 1
+    assert (offset, 40 - offset, 36 - offset) == (14, 26, 22)
+    assert 2 ** 26 * 4 == 256 * 2 ** 20
+    texto = ITENS['oac-otavio-ab2-q2-q7']['texto']
+    for trecho in ('= 3,4', '2,6', '26 bits', '22 bits', '256 MiB', '5,44'):
+        assert trecho in texto, trecho
+
+
+def test_anotacoes_de_projeto_nao_trazem_implementacao():
+    for ident in ('oac-otavio-projeto1-monociclo', 'oac-otavio-projeto2-hazards'):
+        texto = ITENS[ident]['texto']
+        assert 'module' not in texto and 'assign' not in texto and 'always' not in texto, ident
+        assert 'sem implementação' in texto or 'não traz a implementação' in texto, ident
+    regra = (ROOT / 'disciplinas/oac/rigor.md').read_text(encoding='utf-8')
+    assert 'não entrega projetos avaliativos prontos' in regra and 'compulsória, nunca de conflito' in regra
 
 
 # ---------------------------------------------------------------- catálogo e restrições

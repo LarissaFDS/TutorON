@@ -4,7 +4,7 @@ Situação: **em validação** desde 27/10/2026. A disciplina está cadastrada, 
 
 | Item | Estado em 27/10/2026 |
 |---|---|
-| Cadastro, acervo (28 blocos) e índice híbrido (`bge-m3`) | **Feitos** |
+| Cadastro, acervo (34 blocos desde 18/11/2026; eram 28) e índice híbrido (`bge-m3`) | **Feitos** |
 | Contas, codificações e código RISC-V das resoluções | **Conferidos por código** (`tests_acervo/test_disciplina_oac.py`) |
 | Revisão humana interna dos 28 blocos | **Pendente** (`revisao_humana: pendente` em todos) |
 | Autorização para publicar transcrições literais da prova e da lista | **Não dada**: os blocos trazem enunciados parafraseados e os dados, não a transcrição |
@@ -42,10 +42,10 @@ A bibliografia de 2011 (Tanenbaum, Stallings, Weber, Murdocca, Hennessy) **não*
 | `oac-10-procedimentos`: jal/jalr, pilha, registradores salvos | Confirmado pela turma | Prova 1 Q4 (swap) | 2.8, 2.13 | t08, n06 |
 | `oac-11-constantes-enderecamento-traducao`: lui, modos de endereçamento, ligação | Fundamental no livro, não confirmado | — | 2.10, 2.12 | n10 (lui) |
 | `oac-12-aritmetica`: overflow, multiplicação, IEEE 754 | Fundamental no livro, não confirmado | — | 3.2–3.5 | n10 |
-| `oac-13-datapath-controle`: monociclo, unidade de controle | Confirmado pela turma | Slide do cap. 4; ementa ("organização interna do processador") | 4.3, 4.4 | n07 |
-| `oac-14-pipeline-hazards` | Fundamental no livro, não confirmado | Ementa ("microarquiteturas") | 4.5–4.9 | n08 |
-| `oac-15-hierarquia-memoria`: cache, memória virtual, TLB | Fundamental; está na ementa | Ementa ("hierarquia de memória") | 5.1–5.8 | n09 |
-| `oac-16-paralelismo` | Complementar ou dependente da ementa | Ementa ("arquiteturas não convencionais") | 6 | nenhum |
+| `oac-13-datapath-controle`: monociclo, unidade de controle | Confirmado pela turma | Slide do cap. 4; ementa ("organização interna do processador") | 4.3, 4.4 | n07, s04, u01 |
+| `oac-14-pipeline-hazards` | Fundamental no livro, não confirmado | Ementa ("microarquiteturas") | 4.5–4.9 | n08, s05, u02 |
+| `oac-15-hierarquia-memoria`: cache, memória virtual, TLB | Fundamental; está na ementa | Ementa ("hierarquia de memória") | 5.1–5.8 | n09, s06, u03–u05 |
+| `oac-16-paralelismo` | Complementar ou dependente da ementa | Ementa ("arquiteturas não convencionais") | 6 | s07, u06 |
 
 Lacunas da ementa sem bloco: dispositivos de E/S, barramentos e microprogramação. O livro RISC-V trata pouco desses temas. Fica para depois de confirmar o plano de ensino.
 
@@ -88,6 +88,7 @@ Mesma escala de SD: notas de 1 a 5 em **autoridade**, **cobertura**, **profundid
 | `ufal-oac-slides-editora` Slides do livro | RISC-V | 5 | 3 | 4 | 4 | 5 | 3 | 1 | 4 | referência | protegido |
 | `ufal-ppc-ecomp-2011-oac` Ementa ECOM025 | — | 5 | 3 | 1 | 1 | 3 | 5 | 3 | 1 | referência | ementa |
 | `ufal-oac-notion` Notion da turma | RISC-V | 4 | 3 | 3 | 3 | 4 | 4 | 1 | 2 | referência | resumida (s01–s07) |
+| `ufal-oac-anotacoes-otavio-2025-2` Anotações manuscritas de aluno (2025.2) | RISC-V | 2 | 3 | 3 | 4 | 5 | 3 | 1 | 4 | média | resumida (u01–u06) |
 
 ### Por que esta seleção
 
@@ -137,6 +138,21 @@ A página `ufal-oac-notion` (Engenharia de Computação / Quarto Período) foi l
 
 Em 02/11/2026 também foram lidos, com autorização da responsável, os anexos `riscvsingle_p1.sv` (original e modificado) e `riscvtest.s` do Projeto 1 e as subpáginas "Code" (Projeto 2) e "Perplexity" (caps. 5 e 6). Os arquivos ficaram fora do repositório: o código-base e o programa de teste são de Harris & Harris. A Perplexity do cap. 5 não acrescenta nada aos blocos. O projeto não foi simulado (não há Icarus Verilog nesta máquina). Não incorporados: o PDF do livro e as imagens de slides (protegidos); o PDF de exercícios e o gabarito da Prova 1 (já resumidos nos blocos `t*`); a animação do Projeto 2; e o curso da Softex incorporado na página, cuja licença não foi avaliada. Com os blocos s05–s07, pipeline, cache e paralelismo deixam de ser só notas da equipe.
 
+## 4.2 Anotações manuscritas de aluno, 2025.2 (lidas em 18/11/2026)
+
+`ufal-oac-anotacoes-otavio-2025-2`: quatro PDFs de anotações manuscritas de Otávio Joshua Costa Brandão Menezes (turma 2025.2 do Prof. Erick de Andrade Barboza). Os arquivos são: Projeto 1 SingleCycle (5 págs.), Projeto 2 Pipeline (11), Hierarquia de Memória (3) e Revisão AB2 (7). Os PDFs não têm texto extraível; foram lidos página a página como imagem. Ficaram **fora do repositório**, assim como as figuras, que são slides da editora (protegidos) e foram descritas em texto. São anotações de um aluno, não gabarito, e a publicação não foi confirmada pelo autor: os blocos `u*` parafraseiam com texto próprio. Os Projetos 1 e 2 são avaliados, então os blocos explicam conceitos e não trazem implementação (regra acrescentada ao `rigor.md`).
+
+| Arquivo | id | Origem | Erros encontrados | Status |
+|---|---|---|---|---|
+| u01 | `oac-otavio-projeto1-monociclo` | Projeto 1 | MemtoReg = 00 no beq (é X, porque RegWrite = 0); "extend sem ImmSrc para B e I" não confirmado no código | **corrigida** |
+| u02 | `oac-otavio-projeto2-hazards` | Projeto 2 | forwarding e hazard sem teste de x0; valor do banco (00) chamado de "mais recente"; nomes Reg_ControlWB_E/M para RegWrite de M e W; `sd` é RV64 | **corrigida** |
+| u03 | `oac-otavio-hierarquia-memoria` | Hierarquia de Memória | "DRAM síncrona transfere na subida e na descida" é a DDR, não toda SDRAM; QDR é de SRAM | **corrigida** |
+| u04 | `oac-otavio-ab2-q1-cache` | Revisão AB2, Q1 | nada: 13, 12 e 12 misses conferidos por simulador (LRU) | validada |
+| u05 | `oac-otavio-ab2-q2-q7` | Revisão AB2, Q2–Q7 | Q5a: endereço virtual dividido em 4 + 36 bits (o certo é offset de 14, página virtual de 26 e física de 22 bits; tabela de 2^26 entradas); Q7b: CPI 3,3 e ganho 2,73 (o certo é 3,4 e ≈ 2,6, porque toda falta da L1 paga a L2) | **corrigida** |
+| u06 | `oac-otavio-ab2-cpu-gpu` | Revisão AB2, cap. 6 | nada | validada |
+
+Conferências em `tests_acervo/test_disciplina_oac.py`: simulador de cache (mapeamento direto, associativa por conjunto, LRU, índice pelo endereço do bloco, falta compulsória × conflito) e diagrama de pipeline ciclo a ciclo (enchimento, bolha de load-use mesmo com forwarding, sequência sub/and/or/add/sw com e sem forwarding). O enunciado original da Q5b (tamanho da PTE) não está nas anotações; o bloco avisa que o tamanho depende dele. As questões 1–3 do cap. 6 que a anotação marca como foco não estão resolvidas no PDF.
+
 ## 5. Blocos do acervo
 
 Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum bloco tem confiabilidade alta.
@@ -157,6 +173,7 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 | n10 | `oac-nota-aritmetica-constantes` | nota da equipe (IA) | exemplos conferidos |
 | s01, s02, s04–s07 | anotações do Notion (seção 4.1) | material da disciplina | exemplos conferidos (contas e afirmações) |
 | s03 | `oac-notion-cap2-procedimentos` | material da disciplina | conferida por código (fatorial e laço simulados) |
+| u01–u06 | anotações manuscritas de aluno, 2025.2 (seção 4.2) | material da disciplina | u04 e u05 conferidos por simulador e contas; u02 por diagrama ciclo a ciclo; u01, u03 e u06 conceituais |
 
 **Código assembly e fórmulas.** Cada bloco cabe inteiro num trecho (menos de 2.000 caracteres; `backend/rag.py` corta acima de 2.200), então nenhum bloco de código é partido na indexação. O teste confere que os blocos ```` ``` ```` estão fechados. Fórmulas estão em texto legível (o tutor responde em Markdown com LaTeX). O datapath do cap. 4 foi transcrito em texto: componentes, campos da instrução usados e tabela de sinais (n07).
 
@@ -175,6 +192,19 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 
 **Limites deste teste:** 4 perguntas, uma execução, avaliadas só pela equipe. O modelo local (`tutoron-paa`) não foi testado em OAC (em SD, ele errou cálculos). Por isso a disciplina continua **em validação**.
 
+## 5.2 Teste com a IA real das anotações de 2025.2 (18/11/2026)
+
+`python eval/bateria_tutor.py --so oac-cache-misses oac-forwarding oac-associativa oac-beq`, pelo fluxo completo do site. A resposta crua está em `eval/results/bateria-oac-2026-11-18.json`. O gemini-3.6-flash e o gemini-flash-latest deram 503; respondeu o gemini-3.1-flash-lite (modo socrático, que não entrega o resultado final).
+
+| Pergunta | Fontes recuperadas | Resultado (leitura da equipe) |
+|---|---|---|
+| Misses de 1, 4, 8, 5, 20, 17 em 16 blocos | u04, u03, s06, u05 | Correta: índice = bloco mod 16, primeira referência é compulsória; pede a tabela ao aluno, sem dar o 6 |
+| Hazard de dados e quando o forwarding não resolve | u02, s05, s07 | Correta: load-use, dado só no fim do MEM; pede o diagrama do lw/add |
+| Associativa por conjunto × mapeamento direto | u04, s06, u03, s07 | Correta: um lugar por bloco × qualquer via do conjunto; falta de conflito com cache vazia |
+| Datapath monociclo no beq | u01, s04 | Correta: comparação na ULA (Zero), somador de desvio, porta Branch·Zero no mux do PC, nada escrito |
+
+**Limites:** uma execução por pergunta, avaliadas só pela equipe, com o modelo de reserva. O modelo local não foi testado. Nas referências exibidas, a `fonte` dos blocos s04 e s05 aparece partida ("2026"; "2026; a animação anexa não foi aberta"); o problema já existia e não foi corrigido aqui.
+
 ## 6. Licenças e restrições
 
 - **Prova, lista, foto e anotações (material de turma):** licença não declarada. Originais fora do repositório; enunciados só parafraseados. Para publicar a transcrição literal, registre a autorização em `fontes.json` (`autorizacao_transcricao`, como em SD) e no campo `publicacao_transcricao` dos blocos.
@@ -188,14 +218,15 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 
 ## 7. Pendências
 
-1. Revisão humana interna dos 28 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s05, s07) e pela tabela de sinais (n07).
+1. Revisão humana interna dos 34 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s05, s07) e pela tabela de sinais (n07); das anotações de 2025.2, primeiro u01, u02, u03 e u05 (corrigidas).
 2. Confirmar com o professor o item d da versão A e a leitura do riscado da versão B (t06, t07), e se a disciplina aceita as correções de t03, t04, t05 e t09.
 3. Autorização da equipe para publicar transcrições literais da prova e da lista (hoje, parafraseadas).
 4. Validar respostas reais com o Gemini e com o modelo local (as quatro perguntas de `backend/tests/test_disciplinas.py` e as de `tests_acervo/test_disciplina_oac.py`). Só depois mudar a `situacao` no cadastro para `beta`.
 5. Simular os Projetos 1 e 2 no Icarus Verilog para confirmar "Simulation succeeded" (s04, s05).
 6. Confirmar o plano de ensino atual: E/S, barramentos, microprogramação e paralelismo estão na ementa de 2011 e não têm bloco.
 7. Avaliar a ingestão do cartão de referência e de trechos do manual RISC-V (CC BY 4.0) e dos slides de MC404 (CC BY-SA 4.0), com atribuição.
-8. Rodar a bateria de relevância (`eval/relevancia.py`) com perguntas de OAC rotuladas. Hoje ela só tem PAA e SD.
+8. Bateria de relevância: desde 18/11/2026 tem 4 perguntas de OAC (cache, hazard, associatividade, beq). Ampliar para os tópicos 02, 05, 09 e 10.
+9. Confirmar com o autor das anotações de 2025.2 se elas podem ser publicadas (hoje, só paráfrase).
 
 ## 8. Como atualizar
 
