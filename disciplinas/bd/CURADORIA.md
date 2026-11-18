@@ -1,6 +1,6 @@
 # Banco de Dados — curadoria do acervo
 
-Situação: **em validação** desde 18/11/2026. BD tem cadastro, acervo e índice próprios. Usa o mesmo fluxo da IA das outras disciplinas: o mesmo modelo, o mesmo backend e o mesmo prompt de sistema, mais as regras de [`rigor.md`](rigor.md). Enquanto BD estiver em validação, o servidor recusa as perguntas dela no atendimento normal (403). Para testes autorizados, use `TUTORON_LIBERAR_EM_VALIDACAO=bd` (veja [`docs/DISCIPLINAS.md`](../../docs/DISCIPLINAS.md)).
+Situação: **MVP** desde 18/11/2026, sem aviso, depois de passar nos quatro critérios de liberação (suíte e bateria de relevância verdes; nenhuma nota de IA sem revisão humana na busca; perguntas de exemplo conferidas com a IA real; todo tópico confirmado pelos slides com bloco na busca). Antes disso ficou em validação. BD tem cadastro, acervo e índice próprios. Usa o mesmo fluxo da IA das outras disciplinas: o mesmo modelo, o mesmo backend e o mesmo prompt de sistema, mais as regras de [`rigor.md`](rigor.md). Revisão humana, aprovação do professor e confirmação das resoluções continuam pendentes (tabela abaixo).
 
 | Item | Estado em 18/11/2026 |
 |---|---|

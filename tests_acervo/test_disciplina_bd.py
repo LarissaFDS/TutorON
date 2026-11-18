@@ -39,7 +39,7 @@ def texto(ident):
 
 def test_bd_cadastrado_com_acervo_proprio():
     assert BD.nome == 'Banco de Dados' and BD.itens.exists() and BD.indice.exists() and not BD.livro_supabase
-    assert BD.situacao == 'em validação' and BD.em_validacao
+    assert BD.situacao == 'MVP' and not BD.em_validacao and not BD.aviso
     ids = {c['id'] for c in read_json(BD.indice)['chunks']}
     for d in map(disciplinas.obter, OUTRAS):
         assert {d.itens, d.indice}.isdisjoint({BD.itens, BD.indice})

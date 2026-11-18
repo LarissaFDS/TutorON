@@ -192,7 +192,7 @@
       "id": "bd",
       "nome": "Banco de Dados",
       "sigla": "BD",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/bd/acervo/itens.json",
       "indice": "disciplinas/bd/acervo/indice.json",
       "materiais": "disciplinas/bd/materiais",
