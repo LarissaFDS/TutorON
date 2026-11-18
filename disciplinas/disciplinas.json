@@ -187,6 +187,41 @@
         "Quando a AVL faz rotação dupla?",
         "Qual a diferença entre BFS e DFS na implementação?"
       ]
+    },
+    {
+      "id": "bd",
+      "nome": "Banco de Dados",
+      "sigla": "BD",
+      "situacao": "MVP",
+      "itens": "disciplinas/bd/acervo/itens.json",
+      "indice": "disciplinas/bd/acervo/indice.json",
+      "materiais": "disciplinas/bd/materiais",
+      "rigor": "disciplinas/bd/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "bd-01-conceitos-sgbd",
+        "bd-02-modelos-arquitetura",
+        "bd-03-modelo-er",
+        "bd-04-er-estendido",
+        "bd-05-mapeamento-er-relacional",
+        "bd-06-algebra-relacional",
+        "bd-07-dependencia-normalizacao",
+        "bd-08-sql-ddl-dml",
+        "bd-09-consultas-agregacao",
+        "bd-10-juncoes-uniao",
+        "bd-11-subconsultas",
+        "bd-12-visoes-procedures-triggers",
+        "bd-13-indices-acesso",
+        "bd-14-transacoes-concorrencia-recuperacao",
+        "bd-15-avancados"
+      ],
+      "exemplos": [
+        "Qual a diferença entre LEFT JOIN e INNER JOIN? Mostre com as tabelas FUNCIONARIO e CARGO.",
+        "Quando uso HAVING em vez de WHERE?",
+        "Como mapear um relacionamento N:M do modelo ER para tabelas?",
+        "Como sei se uma tabela está na 2FN ou na 3FN?",
+        "Como escrever a projeção e a seleção da álgebra relacional em SQL?"
+      ]
     }
   ]
 }

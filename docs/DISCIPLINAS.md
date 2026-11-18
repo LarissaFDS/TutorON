@@ -127,6 +127,26 @@ Notação de código na busca léxica: `tokens` descarta `->`, `*` e `;`, então
 
 Fronteira com PAA: os resultados são os mesmos; ED trata implementação e depuração, PAA trata prova formal. O isolamento vem dos índices separados, sem filtro por palavra-chave. Uma pergunta de prova (Teorema Mestre) com ED selecionada usa o material de ED, e `rigor.md` manda dizer que a prova completa é de PAA. Huffman e SAT são projetos avaliados: o acervo tem conceitos e regras, nunca a implementação completa.
 
+## Banco de Dados: SQL executado nos testes (18/11/2026)
+
+BD entrou só com cadastro e acervo, como ED, e com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/bd/`: rigor, 32 blocos (26 na busca; 6 notas da equipe candidatas), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_bd.py` e os bancos de teste `tests_acervo/sql_bd/*.sql`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py`.
+
+O acervo usa os slides de BD (aulas 1 a 5 e 8) e os de BD2, que cobrem o SQL da ementa de ECOM041.
+
+SQL no acervo:
+- Cada bloco ```sql roda num SQLite em memória com o banco indicado no campo `banco_teste`. Quando o bloco traz "Resultado:", as linhas são comparadas.
+- Trechos marcados `-- dialeto: postgresql` rodam no DuckDB (dependência só de teste, em `requirements-acervo.txt`), e o teste confere que o SQLite os rejeita.
+- MySQL e T-SQL não são executados. O bloco tem que estar marcado como `verificacao: parcial`.
+- A normalização é conferida com fecho de atributos.
+- O servidor **não** executa SQL de aluno.
+
+Notação na busca léxica: `tokens` descarta σ, π e ρ, então os blocos escrevem "sigma", "pi" e "rho" por extenso.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -152,3 +172,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | **beta** desde 10/11/2026, com aviso; sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
 | `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | **beta** desde 10/11/2026, com aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
 | `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (20 blocos, 18 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | **beta** desde 10/11/2026, com aviso (inclui que o tutor não entrega projetos avaliativos prontos); revisão humana e aprovação do professor pendentes; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
+| `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |
