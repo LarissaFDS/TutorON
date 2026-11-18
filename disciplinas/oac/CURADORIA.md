@@ -140,7 +140,7 @@ Em 02/11/2026 também foram lidos, com autorização da responsável, os anexos 
 
 ## 4.2 Anotações manuscritas de aluno, 2025.2 (lidas em 18/11/2026)
 
-`ufal-oac-anotacoes-otavio-2025-2`: quatro PDFs de anotações manuscritas de Otávio Joshua Costa Brandão Menezes (turma 2025.2 do Prof. Erick de Andrade Barboza). Os arquivos são: Projeto 1 SingleCycle (5 págs.), Projeto 2 Pipeline (11), Hierarquia de Memória (3) e Revisão AB2 (7). Os PDFs não têm texto extraível; foram lidos página a página como imagem. Ficaram **fora do repositório**, assim como as figuras, que são slides da editora (protegidos) e foram descritas em texto. São anotações de um aluno, não gabarito, e a publicação não foi confirmada pelo autor: os blocos `u*` parafraseiam com texto próprio. Os Projetos 1 e 2 são avaliados, então os blocos explicam conceitos e não trazem implementação (regra acrescentada ao `rigor.md`).
+`ufal-oac-anotacoes-otavio-2025-2`: quatro PDFs de anotações manuscritas de Otávio Joshua Costa Brandão Menezes (turma 2025.2 do Prof. Erick de Andrade Barboza). Os arquivos são: Projeto 1 SingleCycle (5 págs.), Projeto 2 Pipeline (11), Hierarquia de Memória (3) e Revisão AB2 (7). Os PDFs não têm texto extraível; foram lidos página a página como imagem. Ficaram **fora do repositório**, assim como as figuras, que são slides da editora (protegidos) e foram descritas em texto. São anotações de um aluno, não gabarito, e o autor, integrante da equipe TutorON, autorizou a publicação em 18/11/2026 (`autorizacao_transcricao` em `fontes.json`). Os blocos `u*` parafraseiam com texto próprio, e a autorização não cobre os slides da editora. Os Projetos 1 e 2 são avaliados, então os blocos explicam conceitos e não trazem implementação (regra acrescentada ao `rigor.md`).
 
 | Arquivo | id | Origem | Erros encontrados | Status |
 |---|---|---|---|---|
@@ -226,7 +226,6 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 6. Confirmar o plano de ensino atual: E/S, barramentos, microprogramação e paralelismo estão na ementa de 2011 e não têm bloco.
 7. Avaliar a ingestão do cartão de referência e de trechos do manual RISC-V (CC BY 4.0) e dos slides de MC404 (CC BY-SA 4.0), com atribuição.
 8. Bateria de relevância: desde 18/11/2026 tem 4 perguntas de OAC (cache, hazard, associatividade, beq). Ampliar para os tópicos 02, 05, 09 e 10.
-9. Confirmar com o autor das anotações de 2025.2 se elas podem ser publicadas (hoje, só paráfrase).
 
 ## 8. Como atualizar
 
