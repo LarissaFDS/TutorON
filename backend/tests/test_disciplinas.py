@@ -31,7 +31,7 @@ def site(tmp_path, monkeypatch):
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
-    # Sem liberação explícita: SD está em beta, disponível no atendimento normal.
+    # Sem liberação explícita: SD é MVP, disponível no atendimento normal.
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path})
     llm.embed = sem_embedding
     llm.chamadas = []
@@ -208,7 +208,7 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
 
 @pytest.fixture
 def site_oac(tmp_path, monkeypatch):
-    """O mesmo site, sem nenhuma liberação: OAC, Física 2 e ED estão em beta no cadastro."""
+    """O mesmo site, sem nenhuma liberação: OAC, Física 2 e ED são MVP no cadastro."""
     from backend import main
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
@@ -398,10 +398,10 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     ("fis2", "Qual o período de um pêndulo simples de 1 m?"),
     ("ed", "Como remover o último nó de uma lista encadeada?"),
 ])
-def test_disciplina_em_beta_e_atendida_sem_liberacao(site, disciplina, pergunta):
-    """Beta não é validação: atende sem TUTORON_LIBERAR_EM_VALIDACAO, com o aviso do cadastro."""
+def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
+    """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""
     assert site.llm.settings.disciplinas_em_validacao_liberadas == ()
     t = perguntar(site, pergunta, disciplina)
     assert t["status"] == "pronta" and t["fontes"]
     d = disciplinas.obter(disciplina)
-    assert d.situacao == "beta" and not d.em_validacao and "versão beta" in d.aviso
+    assert d.situacao == "MVP" and not d.em_validacao and not d.aviso
