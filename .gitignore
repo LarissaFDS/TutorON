@@ -32,3 +32,6 @@ dados/
 01-extraido/figuras/
 07-validacao-alunos/
 tmp/
+
+# Dados novos para treino (só a explicação vai para o Git).
+dados-treino/*/

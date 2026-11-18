@@ -34,9 +34,29 @@
     if (!res) throw new Error('Sem conexão com o TutorON. Verifique sua internet e tente de novo.');
     var payload = {};
     try { payload = await res.json(); } catch (e) { /* sem JSON */ }
+    atualizarCota();
     if (!res.ok) throw new Error(payload.erro || mensagemHttp(res.status));
     return payload;
   }
+
+  /* Saldo da cota gratuita no topo (protótipo de planos, ver /planos). */
+  async function atualizarCota() {
+    try {
+      var c = await (await fetch('/api/cota', { cache: 'no-store' })).json();
+      var el = document.getElementById('cota');
+      if (!el) return;
+      el.hidden = false;
+      if (c.ilimitado) { el.textContent = c.plano === 'dev' ? 'Conta dev · sem limite' : 'Sem limite'; return; }
+      var pct = Math.round(100 * c.restantes / c.limite);
+      var hora = new Date(c.renova_em * 1000).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+      el.textContent = c.restantes > 0 ? ('Plano grátis · ' + pct + '% restante · renova às ' + hora)
+                                       : ('Cota esgotada · renova às ' + hora + ' · ver planos');
+      el.classList.toggle('cota--fim', c.restantes <= 0);
+    } catch (e) { /* sem cota: segue normal */ }
+  }
+  window.TutorONCota = atualizarCota;
+  atualizarCota();
+  setInterval(atualizarCota, 20000);
 
   function mensagemHttp(status) {
     if (status === 429) return 'Muitas perguntas em pouco tempo. Aguarde um minuto e tente de novo.';

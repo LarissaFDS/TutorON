@@ -218,8 +218,9 @@ function Servidor {
     if (!$trava.WaitOne(0)) {
         $url = Join-Path $Dados 'url-publica.txt'
         Aviso 'O TutorON já está rodando em outra janela.'
-        if (Test-Path $url) { Mostrar-Enderecos ((Get-Content $url -Raw).Trim()) }
-        Start-Process "$Local/"
+        $publico = if (Test-Path $url) { (Get-Content $url -Raw).Trim() } else { $null }
+        Mostrar-Enderecos $publico
+        Start-Process "$(if ($publico) { $publico } else { $Local })/"
         return
     }
     Preparar-Python
@@ -234,7 +235,7 @@ function Servidor {
     $tunel = Iniciar-Tunel
     Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
     Mostrar-Enderecos $tunel.url
-    Start-Process "$Local/"
+    Start-Process "$(if ($tunel.url) { $tunel.url } else { $Local })/"
     $falhas = 0
     $ultimaVerificacao = [DateTime]::MinValue
     try {
@@ -331,7 +332,7 @@ function Validacao {
     Write-Host "  Resultados (só nesta máquina):     $Local/resultados"
     Write-Host '  Avaliações completas (JSON):       dados\validacao\avaliacoes.jsonl'
     try { Set-Clipboard "$publico/?modo=validacao"; Write-Host '  (link copiado para a área de transferência)' } catch { }
-    Start-Process "$Local/?modo=validacao"
+    Start-Process "$publico/?modo=validacao"
     Start-Process "$Local/resultados"
 }
 

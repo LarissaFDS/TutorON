@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Planos</title>
+<link rel="stylesheet" href="/design.css">
+<style>
+  body { max-width: 980px; margin: 0 auto; padding: 24px 16px; font-family: system-ui, sans-serif; }
+  .aviso { background: #fff7e0; color: #5c4300; padding: 10px 14px; border-radius: 8px; margin: 12px 0 20px; }
+  .grade { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .plano { border: 1px solid #ccc; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .plano.atual { border: 2px solid #2563eb; }
+  .preco { font-size: 1.6rem; font-weight: 700; }
+  button { margin-top: auto; padding: 8px; border-radius: 8px; cursor: pointer; }
+  #saldo { margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<p><a href="/">← Voltar ao TutorON</a></p>
+<h1>Planos</h1>
+<p id="saldo">Carregando seu saldo…</p>
+<div class="aviso">Protótipo: a compra ainda não está ativa. Os preços são estimativas para estudo.</div>
+<div class="grade" id="grade"></div>
+<script>
+(async function () {
+  var c = await (await fetch('/api/cota', { cache: 'no-store' })).json();
+  var saldo = document.getElementById('saldo');
+  if (c.ilimitado) saldo.textContent = c.plano === 'dev' ? 'Você está na conta de desenvolvedor: sem limite.' : 'Cota desligada neste servidor.';
+  else saldo.textContent = 'Você usou ' + c.usados.toLocaleString('pt-BR') + ' de ' + c.limite.toLocaleString('pt-BR') +
+    ' tokens. Renova às ' + new Date(c.renova_em * 1000).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.';
+  var grade = document.getElementById('grade');
+  c.planos.forEach(function (p) {
+    var d = document.createElement('div');
+    d.className = 'plano' + (p.id === 'gratis' && !c.ilimitado ? ' atual' : '');
+    var preco = p.preco_mes === null ? 'Sob consulta' : p.preco_mes === 0 ? 'R$ 0' : 'R$ ' + p.preco_mes.toFixed(2).replace('.', ',') + '/mês';
+    var cota = p.tokens_janela ? p.tokens_janela.toLocaleString('pt-BR') + ' tokens a cada ' + p.janela_h + ' h' : 'Cota combinada';
+    d.innerHTML = '<h2></h2><div class="preco"></div><div class="cota"></div><p class="desc"></p><button type="button"></button>';
+    d.querySelector('h2').textContent = p.nome;
+    d.querySelector('.preco').textContent = preco;
+    d.querySelector('.cota').textContent = cota;
+    d.querySelector('.desc').textContent = p.descricao;
+    var b = d.querySelector('button');
+    b.textContent = p.id === 'gratis' ? 'Plano atual' : 'Assinar (em breve)';
+    b.disabled = true;
+    grade.appendChild(d);
+  });
+})();
+</script>
+</body>
+</html>

@@ -41,6 +41,7 @@ from acervo import disciplinas
 
 from . import animacao, foto, prompts
 from .config import Settings, load_settings
+from .cota import PLANOS, Cota, estimar_tokens
 from .dados import Limitador, Registro, agora
 from .llm import LLM, Model
 from .resultados import resumo
@@ -217,6 +218,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.registro = Registro(settings.data_dir)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
         app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
+        app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
+                              settings.cota_janela_h, settings.dev_chave)
         app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
         aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
@@ -233,6 +236,34 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     def limitar(request: Request) -> None:
         if not app.state.limitador.permitir(cliente(request)):
             raise HTTPException(429, "Muitas perguntas em pouco tempo. Aguarde alguns minutos e tente de novo.")
+
+    def usuario(request: Request) -> tuple[str, bool]:
+        """(id do usuário, é desenvolvedor?). Convidado = cookie anônimo; sem cookie, o IP."""
+        dev = requisicao_local(request) or app.state.cota.eh_dev(
+            request.cookies.get("tutoron_dev") or request.headers.get("x-tutoron-dev"))
+        return (request.cookies.get("tutoron_id") or "ip:" + cliente(request))[:64], dev
+
+    def exigir_cota(request: Request) -> None:
+        quem, dev = usuario(request)
+        if not app.state.cota.pode(quem, dev):
+            s = app.state.cota.situacao(quem)
+            import datetime
+            hora = datetime.datetime.fromtimestamp(s["renova_em"]).strftime("%H:%M")
+            raise HTTPException(429, f"Você usou toda a cota gratuita ({s['limite']:,} tokens). "
+                                f"Ela renova às {hora}. Veja os planos em /planos.".replace(",", "."))
+
+    def cobrar_entrada(request: Request, *textos, tipo: str = "pergunta") -> None:
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, estimar_tokens(*textos), dev, tipo)
+
+    @app.middleware("http")
+    async def cookie_convidado(request: Request, call_next):
+        resposta = await call_next(request)
+        if not request.cookies.get("tutoron_id"):
+            import secrets as _s
+            resposta.set_cookie("tutoron_id", "c_" + _s.token_urlsafe(12), max_age=365 * 86400,
+                                httponly=True, samesite="lax")
+        return resposta
 
     def limitar_gravacao(request: Request) -> None:
         if not app.state.limitador_gravacao.permitir(cliente(request)):
@@ -277,6 +308,24 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     async def design_css() -> Response:
         from design import stylesheet
         return Response(stylesheet(), media_type="text/css; charset=utf-8", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/planos", include_in_schema=False)
+    async def pagina_planos() -> FileResponse:
+        return FileResponse(WEB / "planos.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/api/cota")
+    async def api_cota(request: Request) -> dict:
+        quem, dev = usuario(request)
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.get("/dev", include_in_schema=False)
+    async def entrar_dev(chave: str = "") -> Response:
+        """Abre uma vez /dev?chave=SUA_CHAVE: o navegador guarda o cookie e fica sem limite."""
+        if not app.state.cota.eh_dev(chave):
+            raise HTTPException(404, "Não encontrado.")
+        r = Response(status_code=303, headers={"Location": "/"})
+        r.set_cookie("tutoron_dev", chave, max_age=180 * 86400, httponly=True, samesite="lax")
+        return r
 
     @app.get("/health")
     async def health() -> dict[str, str]:
@@ -325,12 +374,17 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/perguntar")
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
+        exigir_cota(request)
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
             x for x in (corpo.contexto, corpo.foto, corpo.travou) if x))
-        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
+        cobrar_entrada(request, corpo.pergunta, corpo.contexto, corpo.foto, corpo.travou,
+                       *[str(h.model_dump()) for h in corpo.historico], tipo="pergunta")
+        t = app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
                                            ajuda=corpo.ajuda, leitura_foto=corpo.foto,
                                            historico=[h.model_dump() for h in corpo.historico],
-                                           travou=corpo.travou).publico()
+                                           travou=corpo.travou)
+        t.dono = usuario(request)
+        return t.publico()
 
     @app.get("/api/ajudas")
     async def ajudas() -> dict:
@@ -340,6 +394,9 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/foto")
     async def ler_foto(corpo: FotoPedido, request: Request) -> dict:
         limitar(request)
+        exigir_cota(request)
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, 1500, dev, "foto")  # imagem + transcrição (estimativa fixa)
         # A foto precisa ser lida antes de inferir sua disciplina. A escolha auto
         # só roteia a pergunta depois que o aluno confere a transcrição.
         disciplina = None if corpo.disciplina == 'auto' else corpo.disciplina
@@ -353,6 +410,9 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/animar")
     async def animar(corpo: AnimarPedido, request: Request) -> dict:
         limitar(request)
+        exigir_cota(request)
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, 3000, dev, "animacao")  # roteiro da animação (estimativa fixa)
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
             x for x in (corpo.contexto, corpo.foto) if x))
         if not animacao.disponivel():
@@ -401,6 +461,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
+        exigir_cota(request)
+        cobrar_entrada(request, corpo.pergunta, corpo.contexto, tipo="comparacao")
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, corpo.contexto)
         return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, disciplina).publico()
 
@@ -409,6 +471,10 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         t = app.state.tarefas.obter(ident[:40])
         if not t:
             raise HTTPException(404, "Esta resposta expirou ou o servidor foi reiniciado. Envie a pergunta de novo.")
+        dono = getattr(t, "dono", None)
+        if dono and t.concluida is not None and not getattr(t, "cobrada", False):
+            t.cobrada = True  # cobra a resposta uma vez só, quando fica pronta
+            app.state.cota.cobrar(dono[0], estimar_tokens(t.texto, str(t.resultado)), dono[1], "resposta")
         return JSONResponse(t.publico(), headers={"Cache-Control": "no-store"})
 
     @app.post("/api/feedback")
@@ -454,6 +520,19 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         await app.state.llm.warm_up()
         return {"ok": True, "local": await app.state.llm.local_status(), "tarefas_ativas": app.state.tarefas.ativas()}
 
+    @app.get("/api/uso")
+    async def api_uso(request: Request) -> dict:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return {"limite": settings.cota_tokens, "janela_h": settings.cota_janela_h,
+                "alunos": app.state.cota.relatorio()}
+
+    @app.get("/uso", include_in_schema=False)
+    async def pagina_uso(request: Request) -> FileResponse:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return FileResponse(WEB / "uso.html", headers={"Cache-Control": "no-cache"})
+
     @app.get("/resultados", include_in_schema=False)
     async def pagina_resultados(request: Request) -> FileResponse:
         if not requisicao_local(request):
@@ -464,6 +543,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
+        exigir_cota(request)
         disciplina = resolver_disciplina(payload.subject, payload.question, payload.context)
         t = app.state.tarefas.perguntar(payload.question, payload.context, disciplina)
         while t.concluida is None:
