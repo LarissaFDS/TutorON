@@ -31,7 +31,7 @@ def site(tmp_path, monkeypatch):
 
     monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
     llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
-    # Sem liberação explícita: SD está em beta, disponível no atendimento normal.
+    # Sem liberação explícita: SD é MVP, disponível no atendimento normal.
     llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path})
     llm.embed = sem_embedding
     llm.chamadas = []
@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -202,3 +202,206 @@ def test_nova_disciplina_so_com_cadastro_e_acervo(tmp_path, monkeypatch):
     assert "Cálculo 1 (CALC)" in prompts.sistema_tutor(calc)
     r = asyncio.run(llm.complete(prompts.sistema_tutor(calc), prompts.prompt_tutor("p", rag.contexto(trechos))))
     assert r.text == "resposta"  # o mesmo serviço de IA, sem nenhuma classe ou rota nova
+
+
+# ---------------------------------------------------------------- OAC: terceira disciplina só com cadastro
+
+@pytest.fixture
+def site_oac(tmp_path, monkeypatch):
+    """O mesmo site, sem nenhuma liberação: OAC, Física 2 e ED são MVP no cadastro."""
+    from backend import main
+
+    monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
+    llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
+                                             "disciplinas_em_validacao_liberadas": ()})
+    llm.embed = sem_embedding
+    llm.chamadas = []
+    original = llm._provider
+    llm._provider = lambda m, s, p: llm.chamadas.append((m, s, p)) or original(m, s, p)
+    with TestClient(main.create_app(settings=llm.settings, llm=llm, warm_up=False)) as c:
+        c.llm, c.tmp = llm, tmp_path
+        yield c
+
+
+def ids_oac():
+    return {i["id"] for i in json.loads(disciplinas.obter("oac").indice.read_text(encoding="utf-8"))["chunks"]}
+
+
+@pytest.mark.parametrize("pergunta, trecho", [
+    ("Por que lw x9, 32(x22) acessa A[8]?", "endereçada por **byte**"),
+    ("Como calculo o CPI médio de um programa com 50% de instruções tipo A, 30% tipo B e 20% tipo C?",
+     "0,5×5 + 0,3×2 + 0,2×10"),
+    ("Qual a diferença entre blt e bltu?", "bltu, bgeu (sem sinal)"),
+    ("Quais sinais de controle ficam ativos numa instrução sw?", "MemWrite"),
+])
+def test_pergunta_de_oac_usa_material_de_oac(site_oac, pergunta, trecho):
+    t = perguntar(site_oac, pergunta, "oac")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de OAC") for f in t["fontes"])
+    _, sistema, prompt = site_oac.llm.chamadas[-1]
+    assert "Organização e Arquitetura de Computadores (OAC)" in sistema and "RISC-V RV32" in sistema
+    assert "Teorema Mestre" not in sistema and "Karnaugh" not in sistema.split("# Rigor")[-1]
+    assert trecho in prompt  # o trecho recuperado chegou ao prompt da IA
+    linha = json.loads((site_oac.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert linha["disciplina"] == "oac"
+
+
+def test_vocabulario_comum_so_recupera_a_disciplina_escolhida():
+    """OAC e SD falam de somador, registradores, overflow e ALU: quem decide o acervo é a disciplina escolhida."""
+    llm = FakeLLM({})
+    llm.embed = sem_embedding
+    perguntas = ["Como funciona um somador completo?", "O que são registradores?",
+                 "Como detectar overflow em complemento de 2?", "O que a ALU faz?", "Multiplexador e memória"]
+
+    async def titulos(d):
+        vistos = set()
+        for p in perguntas:
+            vistos |= {t.titulo for t in await rag.recuperar(p, llm, llm.settings, disciplinas.obter(d))}
+        return vistos
+
+    oac, sd = asyncio.run(titulos("oac")), asyncio.run(titulos("sd"))
+    assert oac and sd
+    assert all(t.endswith(" de OAC") for t in oac) and all(t.endswith(" de SD") for t in sd)
+    assert ids_oac().isdisjoint(ids_sd() | ids_paa())
+
+
+def test_mesma_ia_para_as_tres_disciplinas(site_oac):
+    perguntar(site_oac, "Teorema Mestre para T(n) = 2T(n/2) + n", "paa")
+    perguntar(site_oac, "Complemento de 2 de 101010", "sd")
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    chamadas = site_oac.llm.chamadas[-3:]
+    assert len({m for m, _, _ in chamadas}) == 1  # mesmo modelo, mesmo serviço
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    textos = {comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "oac"))}
+    assert len(textos) == 1  # um único texto de tutor
+
+
+def test_oac_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Explique a heurística de Dijkstra para grafos esparsos", "oac")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in site_oac.llm.chamadas[-1][2]
+
+
+def test_resolucao_corrigida_chega_ao_tutor_marcada_como_nao_oficial(site_oac):
+    perguntar(site_oac, "ENADE 2005: M1 a 1 GHz e M2 a 500 MHz, qual é mais rápida?", "oac")
+    _, sistema, prompt = site_oac.llm.chamadas[-1]
+    assert "Status da resolução: corrigida" in prompt
+    assert "nunca é o gabarito oficial" in sistema
+
+
+# ---------------------------------------------------------------- Cálculo 3: disciplina de matemática só com cadastro
+
+@pytest.fixture
+def site_calc3(tmp_path, monkeypatch):
+    """O mesmo site, com Cálculo 3 liberada só neste teste (no cadastro ela está "em validação")."""
+    from backend import main
+
+    monkeypatch.setattr(tarefas.asyncio, "sleep", _sleep_curto)
+    llm = FakeLLM({"g1": ("ok", "resposta do tutor")})
+    llm.settings = llm.settings.__class__(**{**llm.settings.__dict__, "data_dir": tmp_path,
+                                             "disciplinas_em_validacao_liberadas": ()})
+    llm.embed = sem_embedding
+    llm.chamadas = []
+    original = llm._provider
+    llm._provider = lambda m, s, p: llm.chamadas.append((m, s, p)) or original(m, s, p)
+    with TestClient(main.create_app(settings=llm.settings, llm=llm, warm_up=False)) as c:
+        c.llm, c.tmp = llm, tmp_path
+        yield c
+
+
+def test_pergunta_de_calc3_usa_material_de_calc3_com_latex(site_calc3):
+    t = perguntar(site_calc3, "Onde a cardioide r = 1 + sen θ tem tangente horizontal?", "calc3")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de Cálculo 3") for f in t["fontes"])
+    _, sistema, prompt = site_calc3.llm.chamadas[-1]
+    assert "Cálculo 3" in sistema and "notação do Stewart" in sistema
+    assert r"\operatorname{sen}" in prompt  # a fórmula chega em LaTeX, que o render.js entrega ao KaTeX
+    assert "Status da resolução: pendente de confirmação do professor" in prompt
+    assert "nunca é o gabarito oficial" in sistema
+
+
+def test_mesma_ia_para_as_quatro_disciplinas(site_calc3):
+    perguntar(site_calc3, "Teorema Mestre para T(n) = 2T(n/2) + n", "paa")
+    perguntar(site_calc3, "Complemento de 2 de 101010", "sd")
+    perguntar(site_calc3, "Como calcular o comprimento de arco de uma curva paramétrica?", "calc3")
+    chamadas = site_calc3.llm.chamadas[-3:]
+    assert len({m for m, _, _ in chamadas}) == 1
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert len({comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "calc3"))}) == 1
+
+
+def test_calc3_sem_material_relevante_nao_inventa_fonte(site_calc3):
+    t = perguntar(site_calc3, "Explique a heurística de Dijkstra para grafos esparsos", "calc3")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in site_calc3.llm.chamadas[-1][2]
+
+
+def test_resolucao_corrigida_de_calc3_chega_marcada(site_calc3):
+    perguntar(site_calc3, "O limite de |x|/(|x|+|y|) na origem existe? Usei y = mx", "calc3")
+    _, _, prompt = site_calc3.llm.chamadas[-1]
+    assert "Status da resolução: corrigida" in prompt and "o original escreveu" in prompt
+    assert r"\dfrac{1}{1+|m|}" in prompt
+
+
+# ---------------------------------------------------------------- Física 2: quarta disciplina, só cadastro
+
+def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    t = perguntar(site_oac, "Qual o período de um pêndulo simples de 1 m?", "fis2")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de Física 2") for f in t["fontes"])
+    (m_oac, s_oac, _), (m_fis, s_fis, prompt) = site_oac.llm.chamadas[-2:]
+    assert m_oac == m_fis
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert comum(s_oac, disciplinas.obter("oac")) == comum(s_fis, disciplinas.obter("fis2"))
+    assert "ΔE_int = Q − W" in s_fis and "RISC-V" not in s_fis.split("# Rigor")[-1]
+    assert r"T = 2\pi\sqrt{L/g}" in prompt
+
+
+def test_fis2_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Explique a heurística de Dijkstra para grafos esparsos", "fis2")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    _, _, prompt = site_oac.llm.chamadas[-1]
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
+
+
+# ---------------------------------------------------------------- Estrutura de Dados: código C, só cadastro
+
+def test_pergunta_de_ed_usa_material_de_ed_e_a_mesma_ia(site_oac):
+    perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
+    t = perguntar(site_oac, "Por que meu heap escreve fora do vetor quando fica cheio?", "ed")
+    assert t["status"] == "pronta" and t["fontes"]
+    assert all(f["titulo"].endswith("de ED") for f in t["fontes"])
+    (m_oac, s_oac, _), (m_ed, s_ed, prompt) = site_oac.llm.chamadas[-2:]
+    assert m_oac == m_ed
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+                          .replace(d.sigla, ""))
+    assert comum(s_oac, disciplinas.obter("oac")) == comum(s_ed, disciplinas.obter("ed"))
+    assert "Não escreva o projeto completo" in s_ed and "RISC-V" not in s_ed.split("# Rigor")[-1]
+    assert "MAX_HEAP_SIZE + 1" in prompt
+
+
+def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
+    t = perguntar(site_oac, "Qual o período de um pêndulo simples de 1 m?", "ed")
+    assert t["status"] == "pronta" and t["fontes"] == []
+    _, _, prompt = site_oac.llm.chamadas[-1]
+    assert "Nenhum trecho do material foi encontrado para esta pergunta." in prompt
+
+
+@pytest.mark.parametrize("disciplina, pergunta", [
+    ("oac", "Qual a diferença entre blt e bltu?"),
+    ("calc3", "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"),
+    ("fis2", "Qual o período de um pêndulo simples de 1 m?"),
+    ("ed", "Como remover o último nó de uma lista encadeada?"),
+])
+def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
+    """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""
+    assert site.llm.settings.disciplinas_em_validacao_liberadas == ()
+    t = perguntar(site, pergunta, disciplina)
+    assert t["status"] == "pronta" and t["fontes"]
+    d = disciplinas.obter(disciplina)
+    assert d.situacao == "MVP" and not d.em_validacao and not d.aviso

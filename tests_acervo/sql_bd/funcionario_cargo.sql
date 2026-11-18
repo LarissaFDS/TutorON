@@ -1,0 +1,13 @@
+-- Exemplo dos slides de JOIN (BD2): CARGO e FUNCIONARIO. ValorCargo era MONEY (SQL Server); aqui NUMERIC.
+CREATE TABLE CARGO (
+    CodCargo   CHAR(2)      NOT NULL PRIMARY KEY,
+    NomeCargo  VARCHAR(50)  NOT NULL,
+    ValorCargo NUMERIC(10,2) NOT NULL
+);
+CREATE TABLE FUNCIONARIO (
+    Matricula       INTEGER     NOT NULL PRIMARY KEY,
+    NomeFuncionario VARCHAR(80) NOT NULL,
+    CodCargo        CHAR(2)     NULL REFERENCES CARGO (CodCargo)
+);
+INSERT INTO CARGO VALUES ('C1', 'CAIXA', 800), ('C2', 'VENDEDOR', 1200), ('C3', 'GERENTE', 2400);
+INSERT INTO FUNCIONARIO VALUES (100, 'JOÃO', 'C1'), (110, 'MARIA', 'C2'), (120, 'CARLOS', 'C1'), (130, 'TADEU', NULL);

@@ -85,6 +85,29 @@ Resultado (relatório completo em [`05-modelo/treino/avaliacao-20261012-0154.md`
 
 A diferença é pequena e está dentro do ruído: são 9 perguntas, dois casos ficaram sem juiz (cota do Gemini esgotada) e os dois modelos erram em pontos diferentes (o treinado escreveu `dp[i][3]` no lugar de `dp[i][j]` numa recorrência; o atual confundiu cobertura de vértices com o teorema de König). **O modelo em uso continua sendo o `tutoron-paa`.** O treino serve hoje para provar que o processo funciona de ponta a ponta nesta máquina; ganho real depende de mais dados revisados (ver seção 6).
 
+### Atualizar o servidor (Windows)
+
+As instruções abaixo estão prontas para usar. O servidor público só tem estas mudanças depois que alguém com acesso ao PC do servidor seguir os passos. Até 18/11/2026, `main` traz:
+
+- Banco de Dados e as disciplinas fora do beta (LarissaFDS/TutorON#40 e LarissaFDS/TutorON#42);
+- os 6 blocos novos de OAC, das anotações manuscritas de 2025.2 (LarissaFDS/TutorON#44, commit `14f967d`).
+
+Faça os passos no PC do servidor, na pasta do TutorON.
+
+1. Anote o commit atual, para poder voltar: `git rev-parse HEAD`. Antes desta atualização era `ef5ed69`; antes das disciplinas em beta era `a83a03f`.
+2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` ou rode `5-Desligar.bat`.
+3. Atualize: `git checkout main` e `git pull --ff-only origin main`.
+4. Dependências: nada novo para o servidor. O `duckdb` entrou só em `requirements-acervo.txt`, para os testes de SQL, e não precisa ser instalado no servidor.
+5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. Os índices de BD e de OAC (34 blocos, 24 na busca) já vêm gerados no repositório.
+6. `.env`: nada obrigatório de novo. **Não** coloque `TUTORON_LIBERAR_EM_VALIDACAO` no servidor público.
+7. Reinicie com dois cliques em `1-Iniciar-Servidor.bat`.
+8. Confira no endereço público:
+   - aparecem as sete disciplinas: PAA, SD, OAC, Cálculo 3, Física 2, ED e BD;
+   - nenhuma mostra " · beta" no seletor nem aviso ao ser escolhida;
+   - `?disciplina=bd` abre com Banco de Dados selecionada;
+   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN. Em OAC, "Como fica o datapath monociclo numa instrução beq?" deve citar as anotações do Projeto 1.
+9. Se algo der errado, volte: feche o servidor, rode `git checkout <commit anotado no passo 1>` (ex.: `git checkout ef5ed69`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
+
 ## 5. Como usar agora
 
 1. Dois cliques em `1-Iniciar-Servidor.bat`. A janela mostra o endereço público; deixe-a aberta.

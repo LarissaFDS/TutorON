@@ -33,6 +33,8 @@ CONFIABILIDADE = {'aprovado': 'media', 'candidato': 'nao_verificada', 'rejeitado
 # O que o bloco é e quanto dele foi conferido: a curadoria não trata tudo como validado.
 NATUREZA = ('material_da_disciplina', 'nota_da_equipe_ia')
 VERIFICACAO = ('conferida_por_codigo', 'exemplos_conferidos', 'parcial', 'sem_resolucao', 'nao_verificada')
+# Resolução de exercício da turma comparada ao gabarito original (opcional; o texto do bloco também diz).
+STATUS_RESOLUCAO = ('validada', 'corrigida', 'pendente_professor')
 MOTIVO = {
     'aprovado': 'Aprovado na curadoria (fonte e transcrição conferidas); revisão do professor pendente.',
     'candidato': 'Candidato: aguarda conferência da fonte ou do conteúdo; fora da busca.',
@@ -117,6 +119,8 @@ def ler(caminho: Path) -> tuple[dict, str, str]:
         raise ValueError(f'{caminho.name}: curadoria deve ser aprovado, candidato ou rejeitado')
     if meta.get('natureza', NATUREZA[0]) not in NATUREZA or meta.get('verificacao', 'nao_verificada') not in VERIFICACAO:
         raise ValueError(f'{caminho.name}: natureza ou verificacao fora dos valores de acervo/disciplinas.py')
+    if meta.get('status_resolucao', STATUS_RESOLUCAO[0]) not in STATUS_RESOLUCAO:
+        raise ValueError(f'{caminho.name}: status_resolucao deve ser validada, corrigida ou pendente_professor')
     return meta, partes[2].strip(), digest(bruto)
 
 
@@ -154,6 +158,8 @@ def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
             'publicacao_transcricao': meta.get('publicacao_transcricao'),
             'fontes_catalogo': [f.strip() for f in meta.get('fontes_catalogo', '').split(',') if f.strip()],
         })
+        if 'status_resolucao' in meta:  # só nos exercícios da turma; os acervos sem o campo não mudam
+            itens[-1]['status_resolucao'] = meta['status_resolucao']
     return itens
 
 

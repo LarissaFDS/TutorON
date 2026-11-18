@@ -55,18 +55,104 @@ Para testes e validações autorizadas, libere explicitamente no ambiente (padr�
 TUTORON_LIBERAR_EM_VALIDACAO=sd      # ids separados por vírgula, ou "todas"
 ```
 
-`eval/bateria_tutor.py` libera só no próprio processo. Para liberar uma disciplina aos alunos, mude a `situacao` no cadastro (por exemplo para `beta`) e, se quiser, preencha `aviso`, um texto mostrado no site quando ela é escolhida; não deixe a variável ligada no servidor público. Foi assim que SD passou a beta em 21/10/2026, sem variável de exceção.
+`eval/bateria_tutor.py` libera só no próprio processo. Para liberar uma disciplina aos alunos, mude a `situacao` no cadastro (por exemplo para `beta`) e, se quiser, preencha `aviso`, um texto mostrado no site quando ela é escolhida; não deixe a variável ligada no servidor público. Foi assim que SD passou a beta em 21/10/2026, sem variável de exceção. Em 18/11/2026, SD, OAC, Cálculo 3, Física 2 e ED passaram a `MVP` e tiveram o `aviso` removido.
 
 ### Instruções internas, citações e outra disciplina
 
 O prompt comum ganhou três seções (o texto anterior continua igual; teste em `backend/tests/test_seguranca.py`): citar junto da afirmação e só rótulos existentes, não atribuir ao professor o que só está numa nota da equipe, dizer quando a pergunta é de outra disciplina cadastrada e sugerir trocá-la, e nunca revelar ou parafrasear as instruções. Como isso depende de o modelo obedecer, `backend/seguranca.py` garante no código o que dá para garantir: pedido explícito das instruções recebe recusa fixa sem chamar a IA; rótulos [P]/[L] que não existem no material da pergunta são tirados da resposta; resposta que copia 12 palavras seguidas das instruções é trocada pela recusa. Paráfrase em resposta a um pedido indireto **não** é detectada pelo código.
+
+## OAC: o teste da arquitetura multidisciplina (27/10/2026)
+
+OAC foi a primeira disciplina incluída depois do mecanismo pronto, a partir de `dev` em ac44410. Ela exigiu:
+
+| O quê | Tipo |
+|---|---|
+| Entrada em `disciplinas/disciplinas.json`, `disciplinas/oac/rigor.md`, 28 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
+| Campo opcional `status_resolucao` (`validada`, `corrigida`, `pendente_professor`) no cabeçalho dos blocos, validado em `acervo/disciplinas.py::ler` e copiado para `itens.json` só quando presente | **mudança de código, 6 linhas** |
+| Teste da lista de disciplinas (`{"paa", "sd"}` → `{"paa", "sd", "oac"}`) e testes novos de OAC | testes |
+
+Nenhuma mudança em `backend/llm.py`, `backend/tarefas.py`, `backend/rag.py`, `backend/prompts.py`, `acervo/retrieval.py` nem no site. A única mudança de código fica no esquema do acervo: OAC trouxe gabaritos que precisam ser marcados como corrigidos ou pendentes, e o esquema não tinha onde registrar isso (`verificacao` diz se a conta foi conferida, não se o gabarito do professor estava certo). O campo é opcional, então PAA e SD não mudam: os `itens.json` deles continuam idênticos.
+
+Como em SD, a nova disciplina entrou **em validação**: o seletor a mostra desabilitada e o servidor responde 403 até a `situacao` mudar no cadastro.
+
+## Cálculo 3: uma disciplina de matemática (02/11/2026)
+
+Cálculo 3 (ECOM017, UFAL) foi a primeira disciplina de matemática, a partir de `codex/oac-acervo` (depende do campo `status_resolucao` do PR de OAC). Ela exigiu:
+
+| O quê | Tipo |
+|---|---|
+| Entrada em `disciplinas/disciplinas.json`, `disciplinas/calc3/rigor.md`, 21 blocos em `materiais/`, `fontes.json`, `CURADORIA.md` e o índice gerado | **cadastro e acervo** |
+| `acervo/retrieval.tokens`: `x^2` e `x^{2}` viram o mesmo token de `x²`, e comandos de diagramação do LaTeX (`\frac`, `\langle`, `\mathbf`…) são ignorados | **mudança de código, 4 linhas** |
+| SymPy em `requirements-acervo.txt`, só para os testes que conferem as resoluções | dependência de teste |
+| Lista de disciplinas nos testes e testes novos de Cálculo 3 | testes |
+
+**Diagnóstico.** A arquitetura serviu sem mudança no backend, no prompt comum, na IA nem no site:
+- KaTeX já renderizava `$…$` e `$$…$$`, então as fórmulas vão aos blocos em LaTeX, com descrição em palavras.
+- `status_resolucao` cobriu o caso mais comum aqui: provas sem gabarito (`pendente_professor`).
+- A barreira de "em validação" funcionou igual.
+
+O ponto fraco foi a **busca léxica com notação matemática**: o tokenizador só guarda palavras de duas letras ou mais, então `x^2y` (LaTeX) e `x²y` (Unicode) davam tokens diferentes, e `\langle`/`\frac` casavam blocos de outro assunto. A correção é genérica e não mudou PAA nem SD (`eval/relevancia.py` com a saída idêntica antes e depois; ranking léxico de PAA igual). `∇f`, `∂f/∂x` e `r'(t)` continuam sem token, e a busca depende das palavras ("gradiente", "derivada parcial").
+
+Outras lacunas, que não são da arquitetura:
+- A ementa não foi conferida literalmente.
+- Gradiente, plano tangente, regra da cadeia e Lagrange não têm material da turma. As 5 notas da equipe estão como `candidato`, fora da busca, até revisão humana.
+- Não há modelos Manim para curvas e superfícies; nenhum foi criado.
+- Não há `foto.py` nem envio de imagem no backend desta base (`codex/oac-acervo`), então nada foi testado com foto.
+- O Gemini acertou as 5 perguntas de exemplo, mas não repetiu o aviso de resolução pendente. O modelo local não foi testado.
+
+## Física 2: primeira disciplina de física (02/11/2026)
+
+Física 2 entrou só com cadastro e acervo, sem nenhuma linha de código: entrada em `disciplinas/disciplinas.json`, `disciplinas/fis2/` (rigor, 34 blocos, `fontes.json`, `CURADORIA.md`, índice gerado), `tests_acervo/test_disciplina_fis2.py`, a lista de disciplinas do teste da API (`{"paa", "sd", "oac", "fis2"}`) e perguntas rotuladas em `eval/relevancia.py`.
+
+Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a-z0-9]` depois de tirar acentos, então letras gregas somem (`ρgh` → `gh`, `ω = 2πf` → nada) e unidades viram fragmentos (`1,01×10^5 Pa` → `01 10 pa`). O tokenizador **não** foi mudado, porque isso alteraria o ranking de PAA. Os blocos de Física 2 escrevem o nome das grandezas por extenso ("rô, rho", "ômega") e as conversões em mais de uma forma (1 atm, 1,01×10⁵ Pa, 760 torr); a parte semântica (`bge-m3`) cobre o resto. Os testes conferem `\rho g h`, "rô g h" e `ρgh`, e `1.01e5 Pa` contra "1 atm".
+
+O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `\text{N·m}`, que o KaTeX do site não aceita.
+
+## Estrutura de Dados: primeira disciplina de programação em C (03/11/2026)
+
+ED entrou só com cadastro e acervo, como Física 2, e com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/ed/`: rigor, 20 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_ed.py` e os programas `tests_acervo/c_ed/*.c`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py`.
+
+Código C no acervo:
+- Cada função que aparece num bloco é cópia exata de um programa de `tests_acervo/c_ed/`. Os programas compilam com `gcc -std=c99 -Wall -Wextra -pedantic -Werror` e cobrem estrutura vazia, um elemento, remoção do primeiro e do último, colisões na hash e as rotações simples e duplas da AVL.
+- Rodam com AddressSanitizer e UBSan quando o gcc local tem os sanitizadores. Senão, usam a imagem `gcc:14` do Docker. Senão, o teste é pulado com o motivo; o MinGW 6.3 não tem `-fsanitize`.
+- Sem gcc, os testes de compilação também são pulados com mensagem.
+- O servidor **não** compila nem executa código de aluno.
+
+Notação de código na busca léxica: `tokens` descarta `->`, `*` e `;`, então `p->prox = NULL;` vira `prox null` e `sizeof(int*)` vira `sizeof int`. O tokenizador não foi mudado. Os blocos escrevem o nome do campo e a frase em português ("ponteiro para o próximo"), e os testes conferem as duas formas.
+
+Fronteira com PAA: os resultados são os mesmos; ED trata implementação e depuração, PAA trata prova formal. O isolamento vem dos índices separados, sem filtro por palavra-chave. Uma pergunta de prova (Teorema Mestre) com ED selecionada usa o material de ED, e `rigor.md` manda dizer que a prova completa é de PAA. Huffman e SAT são projetos avaliados: o acervo tem conceitos e regras, nunca a implementação completa.
+
+## Banco de Dados: SQL executado nos testes (18/11/2026)
+
+BD entrou só com cadastro e acervo, como ED, e com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/bd/`: rigor, 32 blocos (26 na busca; 6 notas da equipe candidatas), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_bd.py` e os bancos de teste `tests_acervo/sql_bd/*.sql`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py`.
+
+O acervo usa os slides de BD (aulas 1 a 5 e 8) e os de BD2, que cobrem o SQL da ementa de ECOM041.
+
+SQL no acervo:
+- Cada bloco ```sql roda num SQLite em memória com o banco indicado no campo `banco_teste`. Quando o bloco traz "Resultado:", as linhas são comparadas.
+- Trechos marcados `-- dialeto: postgresql` rodam no DuckDB (dependência só de teste, em `requirements-acervo.txt`), e o teste confere que o SQLite os rejeita.
+- MySQL e T-SQL não são executados. O bloco tem que estar marcado como `verificacao: parcial`.
+- A normalização é conferida com fecho de atributos.
+- O servidor **não** executa SQL de aluno.
+
+Notação na busca léxica: `tokens` descarta σ, π e ρ, então os blocos escrevem "sigma", "pi" e "rho" por extenso.
 
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
    - `rigor.md`: a seção "# Rigor …" com as regras da área (veja `disciplinas/sd/rigor.md`). É o único texto de instrução específico da disciplina.
    - `materiais/*.md`: um bloco por arquivo, com cabeçalho entre `---`:
-     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `fontes_catalogo`, `publicacao_transcricao` (quem autorizou publicar a transcrição e quando; `licenca` fica só para a licença do original), `revisao_humana` (`pendente` | `feita`, com `revisao_humana_em` e `revisao_humana_por`) e `revisao_professor`. A revisão humana interna não muda a confiabilidade; só `revisao_professor: sim` leva um bloco aprovado a confiabilidade alta.
+     `id`, `titulo`, `assunto` (um dos `assuntos` cadastrados), `tipo` (`prova`, `lista`, `resolucao`, `gabarito`, `material_estudo`), `fonte`, `autoria`, `licenca`, `curadoria` (`aprovado` | `candidato` | `rejeitado`) e, opcionalmente, `resolucao`, `questao`, `status_resolucao` (`validada` | `corrigida` | `pendente_professor`, para exercícios da turma comparados ao gabarito), `fontes_catalogo`, `publicacao_transcricao` (quem autorizou publicar a transcrição e quando; `licenca` fica só para a licença do original), `revisao_humana` (`pendente` | `feita`, com `revisao_humana_em` e `revisao_humana_por`) e `revisao_professor`. A revisão humana interna não muda a confiabilidade; só `revisao_professor: sim` leva um bloco aprovado a confiabilidade alta.
    - `fontes.json` e `CURADORIA.md`: catálogo e justificativa da curadoria (modelo: `disciplinas/sd`).
 2. Acrescente a disciplina em `disciplinas/disciplinas.json` (`itens`, `indice`, `materiais`, `rigor`, `assuntos`, `exemplos`, `livro_supabase: false`).
 3. Gere o acervo: `python -m acervo.disciplinas <id> --embeddings` (sem `--embeddings`, ou sem o `bge-m3`, o índice fica só léxico).
@@ -81,4 +167,9 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
-| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | **beta**, disponível aos alunos com aviso de que as respostas podem conter erros (revisão interna da curadoria concluída e publicação das transcrições autorizada pela responsável pela curadoria em 21/10/2026; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente): veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (34 blocos, 24 na busca; as 10 notas da equipe com IA sem revisão humana saíram da busca em 10/11/2026; 6 blocos de anotações manuscritas de 2025.2 entraram em 18/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana e aprovação do professor pendentes; tópicos 03, 04, 06, 07, 08, 11 e 12 sem bloco na busca; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
+| `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
+| `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
+| `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (20 blocos, 18 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; o tutor não entrega projetos avaliativos prontos (regra em `rigor.md`); revisão humana e aprovação do professor pendentes; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
+| `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |

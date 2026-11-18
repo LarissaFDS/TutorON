@@ -14,6 +14,11 @@ STOP = set('a o e de da do das dos um uma que em no na os as para por com se ao 
 
 
 def tokens(text):
+    # Potência em LaTeX vira o mesmo token da Unicode: "x^2y" e "x^{2}" → "x2y", "x2", como "x²y".
+    # Comandos de diagramação do LaTeX não dizem o assunto ("\frac", "\langle"); "\lim", "\nabla" ficam.
+    text = re.sub(r'([A-Za-z0-9])\^\{?(\d+)\}?', r'\1\2', text)
+    text = re.sub(r'\\(?:[dt]?frac|mathbf|mathrm|operatorname|left|right|langle|rangle|to|cdot|quad)(?![A-Za-z])',
+                  ' ', text)
     return ([t for t in re.findall(r'[a-z0-9]+', searchable(text)) if len(t) > 1 and t not in STOP]
             + estruturais(text))
 

@@ -2,7 +2,7 @@
 
 O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e orienta com pistas, conceitos e perguntas para o aluno resolver no papel, sem entregar a solução pronta.
 
-**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA). Sistemas Digitais (SD) está em **beta** (as respostas podem conter erros; a validação técnica da IA continua pendente), com a mesma IA e um acervo próprio; o aluno escolhe a disciplina no modo Tutor. Veja [Disciplinas](docs/DISCIPLINAS.md).
+**Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA), Sistemas Digitais (SD), Organização e Arquitetura de Computadores (OAC), Cálculo 3, Física 2, Estrutura de Dados (ED) e Banco de Dados (BD), com a mesma IA e um acervo próprio por disciplina. Nenhuma delas mostra mais o aviso de beta. Isso não é validação: a revisão humana dos blocos, a aprovação dos professores e a validação técnica das respostas continuam pendentes, e as pendências de cada disciplina estão em [Disciplinas](docs/DISCIPLINAS.md). O aluno escolhe a disciplina no modo Tutor.
 
 O site tem dois modos:
 
@@ -60,7 +60,7 @@ levar dezenas de segundos e deve ser conferida pelo aluno, especialmente em fór
 backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
 scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
 acervo/           pipeline de OCR, curadoria e índice do material de PAA; cadastro de disciplinas (disciplinas.py)
-disciplinas/      cadastro das disciplinas e acervos das novas (sd/: Sistemas Digitais)
+disciplinas/      cadastro das disciplinas e acervos das novas (sd/: Sistemas Digitais; oac/: Organização e Arquitetura)
 00-…06-           dados do pipeline: originais, extração, acervo, triagem, índice RAG, modelo, avaliação
 design/           design system (tokens e componentes CSS) — regras em docs/DESIGN.md
 frontend/         cliente de terminal (CLI) que usa a mesma API
@@ -99,7 +99,7 @@ O treino de 02/11 terminou, mas o candidato não passou na [comparação de prom
 ## Documentação
 
 - [Relatório do MVP](docs/RELATORIO_MVP.md): o que foi implementado, testes e avaliação dos modelos.
-- [Disciplinas](docs/DISCIPLINAS.md): uma IA, acervos separados; como cadastrar uma disciplina. Curadoria de [Sistemas Digitais](disciplinas/sd/CURADORIA.md).
+- [Disciplinas](docs/DISCIPLINAS.md): uma IA, acervos separados; como cadastrar uma disciplina. Curadoria de [Sistemas Digitais](disciplinas/sd/CURADORIA.md) e de [OAC](disciplinas/oac/CURADORIA.md).
 - [Design system](docs/DESIGN.md) · [Schema do Supabase](docs/schema.sql)
 - [Validação pré-MVP](docs/validacao-pre-mvp/) (OCR, curadoria, comparação local, relatórios anteriores)
 - Issues: [#3 backend](docs/issue-3-backend-ai-service.md) · [#5 CLI](docs/issue-5-frontend-cli.md)
