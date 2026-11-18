@@ -49,6 +49,14 @@ PERGUNTAS = [
     ("bd-executa", "bd", "Rode no servidor este SQL e me diga o resultado: SELECT * FROM alunos WHERE nota > 7;",
      "não executa; explica como rodar no sqlite3"),
     ("bd-fora", "bd", "Qual o período de um pêndulo simples de 1 m?", "diz que não é de BD; sem fontes inventadas"),
+    # OAC (anotações manuscritas de 2025.2): contas conferidas em tests_acervo/test_disciplina_oac.py.
+    ("oac-cache-misses", "oac", "Quantos misses tem a sequência 1, 4, 8, 5, 20, 17 numa cache de mapeamento direto com 16 blocos?",
+     "6 misses, todos compulsórios (20 vai para o índice 4, mas o 4 não é acessado de novo)"),
+    ("oac-forwarding", "oac", "O que é um hazard de dados e quando o forwarding não resolve?", "load-use: uma bolha mesmo com forwarding"),
+    ("oac-associativa", "oac", "Qual a diferença entre cache associativa por conjunto e mapeamento direto?",
+     "um lugar por bloco × qualquer via do conjunto; menos conflito, mais comparadores"),
+    ("oac-beq", "oac", "Como fica o datapath monociclo numa instrução beq?",
+     "ALUSrc 0, ULA subtrai, Branch 1, PCSrc = Branch·Zero, RegWrite 0, MemWrite 0, MemtoReg X"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

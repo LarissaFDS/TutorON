@@ -133,6 +133,12 @@ PERGUNTAS = [
     ("bd", "fora", "Qual o período de um pêndulo simples de 1 m?", []),
     ("bd", "fora", "O que é fotossíntese?", []),
     ("bd", "fora", "Me conte uma piada", []),
+    ("oac", "assunto", "Quantos misses tem a sequência 1, 4, 8, 5, 20, 17 numa cache de mapeamento direto com 16 blocos?", ["oac-otavio-ab2-q1-cache", "oac-otavio-hierarquia-memoria", "oac-notion-cap5-memoria"]),
+    ("oac", "assunto", "O que é um hazard de dados e quando o forwarding não resolve?", ["oac-otavio-projeto2-hazards", "oac-notion-projeto2-pipeline"]),
+    ("oac", "assunto", "Qual a diferença entre cache associativa por conjunto e mapeamento direto?", ["oac-otavio-ab2-q1-cache", "oac-otavio-hierarquia-memoria", "oac-notion-cap5-memoria"]),
+    ("oac", "assunto", "Como fica o datapath monociclo numa instrução beq?", ["oac-otavio-projeto1-monociclo", "oac-notion-projeto1-monociclo"]),
+    ("oac", "fora", "Qual o período de um pêndulo simples de 1 m?", []),
+    ("oac", "fora", "O que é fotossíntese?", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.

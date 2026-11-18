@@ -1,0 +1,86 @@
+[
+ {
+  "id": "oac-cache-misses",
+  "disciplina": "oac",
+  "pergunta": "Quantos misses tem a sequência 1, 4, 8, 5, 20, 17 numa cache de mapeamento direto com 16 blocos?",
+  "esperado": "6 misses, todos compulsórios (20 vai para o índice 4, mas o 4 não é acessado de novo)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 20.1,
+  "fontes": [
+   "Anotações manuscritas \"Revisão AB2\" (7 páginas), turma 2025.2, questão 1",
+   "Anotações manuscritas \"Hierarquia de Memória\" (3 páginas), turma 2025.2",
+   "Notion da turma, página \"Capítulo 5\" (resumo feito com assistente de IA a partir dos slides e da prova 2016.2)",
+   "Anotações manuscritas \"Revisão AB2\" (7 páginas), turma 2025.2, questões 2 a 7"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para resolver esse problema, precisamos entender como o **mapeamento direto** decide em qual posição da cache cada bloco será colocado.\n\nComo o material indica [P1, P2], em uma cache de mapeamento direto, o índice onde um bloco será armazenado é calculado pela fórmula:\n$$\\text{Índice} = (\\text{Endereço do bloco}) \\pmod{\\text{Número de blocos da cache}}$$\n\nNeste caso, temos 16 blocos na cache. Portanto, para cada número da sua sequência, você deve calcular o resto da divisão por 16. Lembre-se de que, como o tamanho do bloco é de 1 palavra, o endereço da palavra já é o endereço do bloco.\n\nUma dica importante: a primeira vez que um bloco é acessado, ele sempre gera uma **falta compulsória** (miss), pois a cache está vazia. A partir da segunda vez, você precisa verificar se o bloco ainda está na posição calculada ou se foi substituído por outro bloco que possuía o mesmo índice.\n\n### Sua vez\nTente montar uma tabela com 3 colunas: **Endereço do Bloco**, **Índice (Endereço mod 16)** e **Resultado (Hit ou Miss)**. Comece calculando o índice para os primeiros três números (1, 4 e 8) e me diga: qual é o índice de cada um deles e por que os três primeiros acessos são considerados misses?"
+ },
+ {
+  "id": "oac-forwarding",
+  "disciplina": "oac",
+  "pergunta": "O que é um hazard de dados e quando o forwarding não resolve?",
+  "esperado": "load-use: uma bolha mesmo com forwarding",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Anotações manuscritas \"Projeto 2 - Pipeline\" (11 páginas), turma 2025.2",
+   "2026; a animação anexa não foi aberta",
+   "Notion da turma, página \"Capítulo 6\" e subpágina \"Perplexity\" (resumos feitos com assistente de IA para a lista do cap. 6)"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Um **hazard de dados** ocorre no pipeline quando uma instrução precisa de um valor que ainda não foi escrito no banco de registradores por uma instrução anterior que ainda está em execução [P1]. Em um processador com pipeline de 5 estágios, o valor calculado pela ULA só é escrito no banco de registradores no estágio de *Write Back* (WB), mas instruções subsequentes podem precisar desse dado muito antes [P2].\n\nO **forwarding** (ou encaminhamento) é a técnica que resolve a maioria desses conflitos, \"puxando\" o resultado diretamente da saída da ULA (estágio EX/MEM) ou do buffer de memória (estágio MEM/WB) para a entrada da ULA, evitando que a instrução precise esperar o estágio WB terminar [P1].\n\nNo entanto, existe um caso específico onde o dado simplesmente não está disponível a tempo, mesmo com o forwarding. Pense no fluxo de uma instrução que busca um dado na memória:\n1. O dado só é lido da memória no estágio **MEM**.\n2. Uma instrução aritmética que vem logo em seguida precisa desse dado no início do seu estágio **EX**.\n\nSe você desenhar o diagrama de pipeline (como o exemplo em [P1]), verá que o estágio EX da segunda instrução acontece no mesmo ciclo que o estágio MEM da primeira. Como o dado do `lw` só sai da memória no final do ciclo, ele não consegue \"voltar no tempo\" para entrar na ULA da instrução anterior.\n\n### Sua vez\nTente desenhar no papel o diagrama de pipeline para a sequência abaixo e identifique em qual ciclo a instrução `add` precisa do valor de `x3` e em qual ciclo o `lw` finalmente o obtém da memória:\n```asm\nlw  x3, 0(x1)\nadd x5, x3, x4\n```\nOnde exatamente o forwarding falha e por que precisamos inserir uma \"bolha\" (stall) ali?"
+ },
+ {
+  "id": "oac-associativa",
+  "disciplina": "oac",
+  "pergunta": "Qual a diferença entre cache associativa por conjunto e mapeamento direto?",
+  "esperado": "um lugar por bloco × qualquer via do conjunto; menos conflito, mais comparadores",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 16.1,
+  "fontes": [
+   "Anotações manuscritas \"Revisão AB2\" (7 páginas), turma 2025.2, questão 1",
+   "Notion da turma, página \"Capítulo 5\" (resumo feito com assistente de IA a partir dos slides e da prova 2016.2)",
+   "Anotações manuscritas \"Hierarquia de Memória\" (3 páginas), turma 2025.2",
+   "Notion da turma, página \"Capítulo 6\" e subpágina \"Perplexity\" (resumos feitos com assistente de IA para a lista do cap. 6)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre esses dois tipos de mapeamento, imagine a cache como um estacionamento onde os blocos da memória principal precisam parar.\n\nNo **mapeamento direto**, cada bloco da memória tem uma \"vaga marcada\" exclusiva na cache. Se o bloco 0 e o bloco 16 (em uma cache de 16 blocos) tentarem estacionar, ambos vão querer a mesma vaga (a vaga 0). Se o bloco 0 já estiver lá, o bloco 16 obrigatoriamente expulsará o bloco 0, mesmo que todas as outras 15 vagas da cache estejam vazias. Isso gera o que chamamos de **falta de conflito** [P1].\n\nJá na **associativa por conjunto**, dividimos a cache em grupos (conjuntos). Um bloco da memória agora tem um conjunto específico para ir, mas dentro desse conjunto, ele pode escolher qualquer uma das \"vagas\" (vias) disponíveis [P1, P2].\n\nPense nisso: se você tem um conjunto com 2 vias, você pode ter dois blocos que mapeiam para o mesmo índice estacionados ao mesmo tempo, sem que um precise expulsar o outro.\n\nPara consolidar, tente visualizar o seguinte cenário:\nSe você tem uma cache de 8 blocos:\n1. No mapeamento direto, onde o bloco 10 deve ser colocado?\n2. Se você mudasse essa mesma cache para ser associativa por conjunto de 2 vias, o que mudaria na forma como você calcula o \"endereço\" desse bloco na cache? (Dica: pense em quantos conjuntos você teria agora) [P2, P3].\n\n### Sua vez\nConsiderando uma cache de 8 blocos, calcule o índice para o bloco 10 no mapeamento direto e, depois, quantos conjuntos existiriam se ela fosse associativa por conjunto de 2 vias. O que acontece com o bloco 10 nesse segundo caso?"
+ },
+ {
+  "id": "oac-beq",
+  "disciplina": "oac",
+  "pergunta": "Como fica o datapath monociclo numa instrução beq?",
+  "esperado": "ALUSrc 0, ULA subtrai, Branch 1, PCSrc = Branch·Zero, RegWrite 0, MemWrite 0, MemtoReg X",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 24.1,
+  "fontes": [
+   "Anotações manuscritas \"Projeto 1 - SingleCycle\" (5 páginas), turma 2025.2",
+   "2026"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender o caminho de uma instrução `beq` no datapath monociclo, pense nela como um fluxo de dados que se divide em duas tarefas principais: a **comparação** (para decidir se o desvio ocorre) e o **cálculo do destino** (para saber para onde ir, caso o desvio ocorra).\n\nImagine o sinal percorrendo o hardware:\n1.  **Busca e Decodificação:** O PC aponta para a instrução, que é lida da memória. O controlador identifica que é um `beq` e ativa os sinais necessários.\n2.  **Comparação:** O banco de registradores fornece os dois valores a serem comparados. Qual componente do datapath é responsável por realizar essa subtração e gerar a flag `Zero`?\n3.  **Cálculo do Destino:** Em paralelo à comparação, o gerador de imediato (`ImmGen`) extrai o deslocamento da instrução. Onde esse valor é somado ao PC atual para calcular o endereço de destino?\n4.  **Decisão:** O sinal `Branch` (vindo do controlador) e a flag `Zero` (vindo da ULA) se encontram em uma porta lógica. O que essa porta controla e como ela define o próximo valor do PC?\n\nLembre-se que, no `beq`, nenhum dado é escrito na memória ou no banco de registradores. O objetivo é apenas atualizar o PC.\n\n### Sua vez\nDesenhe um esboço simplificado do datapath focando apenas nos blocos que mencionei acima (ULA, banco de registradores, somador de desvio e o mux do PC). Com base no material [P1], quais são os valores dos sinais `ALUSrc` e `MemWrite` para essa instrução e por que eles são assim?"
+ }
+]
