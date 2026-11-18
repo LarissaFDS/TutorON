@@ -48,6 +48,11 @@ Nenhum IP, nome ou matrícula é gravado.
 
 A ordem dos modelos, os tempos e o modelo local ficam no `.env` (veja os comentários em `.env.example`).
 
+A leitura de fotos usa modelos de visão. Para continuar lendo quando o Gemini estiver sem cota,
+instale `qwen2.5vl:3b` no Ollama e defina `TUTORON_MODELO_VISAO_LOCAL=qwen2.5vl:3b` no `.env`;
+depois reinicie o servidor. O modelo de texto `tutoron-paa` não lê imagens. A leitura local pode
+levar dezenas de segundos e deve ser conferida pelo aluno, especialmente em fórmulas e manuscritos.
+
 ## Estrutura
 
 ```

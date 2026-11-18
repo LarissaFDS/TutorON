@@ -462,7 +462,7 @@ class LLM:
         if self.settings.local_vision_model:
             modelos.append(Model("ollama", self.settings.local_vision_model))
         for m in modelos:
-            if self.breaker.is_paused(m) and m != modelos[-1]:
+            if self.breaker.is_paused(m):
                 tentativas.append({"modelo": m.key, "resultado": "pulado (em pausa)"})
                 continue
             inicio = time.monotonic()
@@ -474,6 +474,7 @@ class LLM:
                 tentativas.append({"modelo": m.key, "resultado": exc.reason, **exc.info})
                 continue
             segundos = round(time.monotonic() - inicio, 2)
+            self.breaker.reset(m)
             tentativas.append({"modelo": m.key, "resultado": "respondeu", "segundos": segundos})
             return Result(text=texto_r, model=m, seconds=segundos, attempts=tentativas)
         raise AllUnavailable(tentativas)

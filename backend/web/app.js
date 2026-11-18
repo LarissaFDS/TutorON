@@ -157,6 +157,8 @@
 
   /* Foto do papel: a IA transcreve, o aluno CONFERE e corrige, e só então a leitura vai para o tutor. */
   var fotoConfirmada = null;  // texto que acompanha a próxima pergunta
+  var versaoFoto = 0;
+  var lendoFoto = false;
 
   // Reduz no celular antes de enviar (fotos de 12 MP passam de 5 MB); 2400 px mantém a letra legível.
   function comprimir(arquivo) {
@@ -168,9 +170,18 @@
         var c = document.createElement('canvas');
         c.width = Math.round(img.naturalWidth * escala);
         c.height = Math.round(img.naturalHeight * escala);
-        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
-        URL.revokeObjectURL(url);
-        ok(c.toDataURL('image/jpeg', 0.9));
+        try {
+          var ctx = c.getContext('2d');
+          // Capturas PNG podem ter fundo transparente; JPEG precisa de um fundo branco.
+          ctx.fillStyle = '#fff';
+          ctx.fillRect(0, 0, c.width, c.height);
+          ctx.drawImage(img, 0, 0, c.width, c.height);
+          ok(c.toDataURL('image/jpeg', 0.9));
+        } catch (e) {
+          falha(new Error('Não consegui preparar esta imagem. Tente outra foto.'));
+        } finally {
+          URL.revokeObjectURL(url);
+        }
       };
       img.onerror = function () { URL.revokeObjectURL(url); falha(new Error('Não consegui abrir esta imagem.')); };
       img.src = url;
@@ -227,6 +238,8 @@
   }
 
   function limparFoto() {
+    versaoFoto++;
+    lendoFoto = false;
     fotoConfirmada = null;
     $('foto-conferir').hidden = true;
     $('foto-confirmada').hidden = true;
@@ -238,18 +251,28 @@
     var arquivo = this.files && this.files[0];
     if (!arquivo) return;
     limparFoto();
+    var versao = versaoFoto;
+    lendoFoto = true;
+    gerando++;
     setStatus($('foto-status'), 'Preparando a foto…', 'busy');
     try {
       var dataUrl = await comprimir(arquivo);
+      if (versao !== versaoFoto) return;
       var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
       var t = await acompanhar(criada.id, function (x) {
-        if (x.status !== 'pronta' && x.status !== 'erro') setStatus($('foto-status'), x.mensagem || 'Lendo a foto…', 'busy');
+        if (versao === versaoFoto && x.status !== 'pronta' && x.status !== 'erro') {
+          setStatus($('foto-status'), x.mensagem || 'Lendo a foto…', 'busy');
+        }
       });
+      if (versao !== versaoFoto) return;
       if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler a foto.');
       setStatus($('foto-status'), '');
       mostrarLeitura(t.leitura, dataUrl);
     } catch (e) {
-      setStatus($('foto-status'), e.message, 'error');
+      if (versao === versaoFoto) setStatus($('foto-status'), e.message, 'error');
+    } finally {
+      if (versao === versaoFoto) lendoFoto = false;
+      gerando--;
     }
   });
 
@@ -620,8 +643,13 @@
   $('form-tutor').addEventListener('submit', async function (e) {
     e.preventDefault();
     if (enviando) return;
+    if (lendoFoto) {
+      setStatus($('status-tutor'), 'Aguarde a leitura da foto terminar e confira o texto antes de enviar.', 'error');
+      return;
+    }
     var pergunta = $('pergunta').value.trim();
     var foto = fotoConfirmada;
+    var versaoEnviada = versaoFoto;
     if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o exercício da foto, sem me dar a resposta.';
     if (!foto && !$('foto-conferir').hidden) {
       setStatus($('status-tutor'), 'Confira a leitura da foto (botão “Está certo”) ou descarte-a antes de enviar.', 'error');
@@ -645,7 +673,7 @@
     try {
       var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
         await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
-      if (ok && foto) limparFoto();  // a foto já foi usada; a próxima dúvida começa limpa
+      if (ok && foto && versaoEnviada === versaoFoto) limparFoto();
       if (!ok) { $('pergunta').value = pergunta; $('contexto').value = contexto; }
     } finally {
       enviando = false;

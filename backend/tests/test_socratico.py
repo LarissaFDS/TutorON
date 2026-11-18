@@ -248,6 +248,15 @@ def test_rota_foto_sem_modelo_da_erro_amigavel(site):  # noqa: F811
     assert t["status"] == "erro" and "digite o enunciado" in t["mensagem"]
 
 
+def test_rota_foto_informa_cota_diaria_sem_sugerir_tentar_em_instantes(site):  # noqa: F811
+    async def ver_imagens(*a):
+        raise AllUnavailable([{"modelo": "gemini:g1", "resultado": "HTTP 429", "cota": "por_dia"}])
+    site.llm.ver_imagens = ver_imagens
+    t = esperar(site, site.post('/api/foto', json={'imagem': data_url(folha())}).json())
+    assert t['status'] == 'erro' and 'cota diária' in t['mensagem']
+    assert 'digite o enunciado' in t['mensagem'] and 'instantes' not in t['mensagem']
+
+
 def test_rota_foto_recusa_arquivo_que_nao_e_imagem(site):  # noqa: F811
     r = site.post("/api/foto", json={"imagem": "data:image/png;base64," + base64.b64encode(b"x" * 40).decode()})
     assert r.status_code == 400 and "imagem" in r.json()["erro"].lower()
