@@ -577,7 +577,7 @@
     "oac-16-paralelismo"
    ],
    "licenca": "Material de turma; licença não declarada",
-   "acesso": "Fornecido pela equipe em 18/11/2026; PDFs fora do repositório. Publicação das anotações não confirmada pelo autor: no acervo, só paráfrase com texto próprio. As figuras são slides da editora (protegidos) e foram descritas em texto, não copiadas",
+   "acesso": "Fornecido pela equipe em 18/11/2026; PDFs fora do repositório. O autor é integrante da equipe TutorON e autorizou a publicação das anotações (registrado em 18/11/2026). No acervo, os blocos usam paráfrase com texto próprio. As figuras são slides da editora (protegidos), foram descritas em texto e não fazem parte da autorização",
    "notas": {
     "autoridade": 2,
     "cobertura": 3,
@@ -591,7 +591,13 @@
    "prioridade": "media",
    "uso": "acervo",
    "origem": "material de turma",
-   "justificativa": "Resumidas em 6 blocos (u01–u06) com status de resolução. Contas de cache refeitas por simulador e diagrama de pipeline ciclo a ciclo nos testes. Erros corrigidos: MemtoReg do beq, forwarding sem teste de x0 e rótulo de 'mais recente', DDR/QDR, memória virtual da Q5 e CPI com L2 da Q7b. Projetos avaliados: os blocos explicam conceitos e não trazem implementação"
+   "justificativa": "Resumidas em 6 blocos (u01–u06) com status de resolução. Contas de cache refeitas por simulador e diagrama de pipeline ciclo a ciclo nos testes. Erros corrigidos: MemtoReg do beq, forwarding sem teste de x0 e rótulo de 'mais recente', DDR/QDR, memória virtual da Q5 e CPI com L2 da Q7b. Projetos avaliados: os blocos explicam conceitos e não trazem implementação",
+   "autorizacao_transcricao": {
+    "data": "2026-11-18",
+    "por": "o autor (integrante da equipe TutorON), informado pela responsável pela curadoria",
+    "escopo": "anotações manuscritas do autor; não inclui os slides da editora reproduzidos nelas",
+    "aprovacao_professor": "não declarada"
+   }
   }
  ]
 }
