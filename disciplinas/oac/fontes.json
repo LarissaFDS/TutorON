@@ -1,6 +1,6 @@
 {
  "disciplina": "oac",
- "atualizado_em": "2026-10-27",
+ "atualizado_em": "2026-11-18",
  "legenda": {
   "prioridade": "alta = compõe o acervo inicial; media = complementa ou preenche lacunas; referencia = consulta e comparação, não é ingerida",
   "uso": "acervo = resumido ou parafraseado em disciplinas/oac/materiais; citada = indicada como leitura nas notas da equipe; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -549,6 +549,49 @@
    "prioridade": "referencia",
    "uso": "referencia",
    "justificativa": "Livro-texto adotado de fato (slides da aula com rodapé \"Chapter N\" e logo da Morgan Kaufmann). As notas citam \"Patterson & Hennessy, seção X.Y\" como referência externa."
+  },
+  {
+   "id": "ufal-oac-anotacoes-otavio-2025-2",
+   "nome": "Anotações manuscritas de aluno, 2025.2: Projeto 1 (SingleCycle), Projeto 2 (Pipeline), Hierarquia de Memória e Revisão AB2",
+   "autoria": "Otávio Joshua Costa Brandão Menezes (aluno), turma de OAC 2025.2 do Prof. Erick de Andrade Barboza",
+   "url": null,
+   "arquivo_local": [
+    "Hierarquia de Memória _251029_164539.pdf",
+    "Projeto 1 - SingleCycle_250929_145822.pdf",
+    "Projeto 2 - Pipeline_251004_155821.pdf",
+    "Revisão AB2_251112_100437.pdf"
+   ],
+   "sha256": {
+    "Hierarquia de Memória _251029_164539.pdf": "ea38b14e63187f0ec05bf1a11097edbcaa12608ed437fb24a9b472c3736e6aee",
+    "Projeto 1 - SingleCycle_250929_145822.pdf": "4d67aa65b192bfbbd4e1a2c9247bd3dfc1354735e755ffefb4864da9bbf2bf8d",
+    "Projeto 2 - Pipeline_251004_155821.pdf": "593e59e0a2e442ecd978b19c7828b35012ce5924853d51fa2a1286a6f37147e4",
+    "Revisão AB2_251112_100437.pdf": "79f53f0297cdda66fa107d1072df101eace8c127c9bd019e05c1da244cc733c1"
+   },
+   "idioma": "pt-BR",
+   "formato": "4 PDFs de anotações manuscritas digitalizadas (5 + 11 + 3 + 7 páginas), sem texto extraível; lidos página a página como imagem",
+   "isa": "RISC-V (um exemplo usa sd, do RV64)",
+   "topicos": [
+    "oac-13-datapath-controle",
+    "oac-14-pipeline-hazards",
+    "oac-15-hierarquia-memoria",
+    "oac-16-paralelismo"
+   ],
+   "licenca": "Material de turma; licença não declarada",
+   "acesso": "Fornecido pela equipe em 18/11/2026; PDFs fora do repositório. Publicação das anotações não confirmada pelo autor: no acervo, só paráfrase com texto próprio. As figuras são slides da editora (protegidos) e foram descritas em texto, não copiadas",
+   "notas": {
+    "autoridade": 2,
+    "cobertura": 3,
+    "profundidade": 3,
+    "didatica": 4,
+    "aderencia": 5,
+    "acessibilidade": 3,
+    "reutilizacao": 1,
+    "tutoria": 4
+   },
+   "prioridade": "media",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Resumidas em 6 blocos (u01–u06) com status de resolução. Contas de cache refeitas por simulador e diagrama de pipeline ciclo a ciclo nos testes. Erros corrigidos: MemtoReg do beq, forwarding sem teste de x0 e rótulo de 'mais recente', DDR/QDR, memória virtual da Q5 e CPI com L2 da Q7b. Projetos avaliados: os blocos explicam conceitos e não trazem implementação"
   }
  ]
 }
