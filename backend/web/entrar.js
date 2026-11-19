@@ -47,13 +47,6 @@
     });
     if (!recuperando && (await auth.getSession()).data.session) { location.replace(voltar); return; }
 
-    $('google').addEventListener('click', async function () {
-      status('Abrindo o Google…');
-      var r = await auth.signInWithOAuth({ provider: 'google',
-        options: { redirectTo: location.origin + '/entrar?voltar=' + encodeURIComponent(voltar) } });
-      if (r.error) status(traduzir(r.error.message), true);
-    });
-
     $('form-email').addEventListener('submit', async function (e) {
       e.preventDefault();
       var email = $('email').value.trim(), senha = $('senha').value;

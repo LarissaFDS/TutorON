@@ -58,7 +58,7 @@
       if ($('admin-link')) $('admin-link').hidden = !eu.admin;
     } else {
       nome.textContent = 'Entrar ou criar conta';
-      sub.textContent = cfg.exigir_login ? 'Necessário para perguntar' : 'Google ou e-mail · limite próprio';
+      sub.textContent = cfg.exigir_login ? 'Necessário para perguntar' : 'Com e-mail · limite próprio';
       chip.href = '/entrar?voltar=' + encodeURIComponent(location.pathname + location.search);
       chip.onclick = null;
     }

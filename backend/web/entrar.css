@@ -7,14 +7,3 @@ body.pagina-entrar { background: var(--bg-lateral); min-height: 100%; }
 }
 .entrar__cartao h1 { font-size: 22px; margin: 0; }
 .entrar__cartao form { display: grid; gap: 8px; }
-.entrar__google {
-  width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  background: var(--bg); color: var(--tinta); border: 1px solid var(--linha-forte);
-}
-.entrar__google:hover { background: var(--bg-hover); }
-.entrar__ou { display: flex; align-items: center; gap: 10px; color: var(--tinta-3); font-size: 13px; margin: 6px 0; }
-.entrar__ou::before, .entrar__ou::after { content: ""; flex: 1; height: 1px; background: var(--linha); }
-.entrar__abas { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-suave); border-radius: 999px; padding: 3px; margin-bottom: 6px; }
-.entrar__abas button { border: 0; background: transparent; padding: 7px; border-radius: 999px; font: inherit; color: var(--tinta-2); cursor: pointer; }
-.entrar__abas button[aria-selected="true"] { background: var(--bg); color: var(--tinta); font-weight: 600; box-shadow: var(--sombra); }
-#entrar-status[data-tone="error"] { color: var(--vermelho); }

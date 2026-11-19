@@ -33,7 +33,7 @@ partir do repositório privado.
 
 ## Passo a passo
 
-1. **Supabase**: siga `docs/supabase/CONFIGURAR.md` (banco, login Google e e-mail).
+1. **Supabase**: siga `docs/supabase/CONFIGURAR.md` (banco e login por e-mail).
 2. **Groq**: crie a chave em https://console.groq.com/keys.
 3. **Render**: https://render.com → entre com o GitHub de quem é dono do repositório
    (`LarissaFDS/TutorON`, ou dê acesso a quem for publicar) → **New → Blueprint** → escolha o repositório.
@@ -47,7 +47,7 @@ partir do repositório privado.
    `TUTORON_WORKER_TOKEN`. Abra `1-Iniciar-Servidor.bat` (liga o Ollama) e depois `7-Ligar-IA-Local.bat`.
    A janela mostra `servidor: ok` a cada minuto.
 6. **Conferir**: `https://<endereço>/api/status` mostra `"pc_conectado": true` e o Groq habilitado.
-   Entre em `/entrar` com o Google e faça uma pergunta; em `/admin` aparece sua conta e o uso.
+   Crie uma conta em `/entrar` com seu e-mail e faça uma pergunta; em `/admin` aparece sua conta e o uso.
 
 Cada `git push` na branch configurada no Render publica de novo (o CI do GitHub roda os testes antes).
 

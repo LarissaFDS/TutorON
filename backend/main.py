@@ -280,7 +280,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
 
     def exigir_cota(request: Request) -> None:
         if settings.exigir_login and app.state.contas.ativas and not conta(request) and not usuario(request)[1]:
-            raise HTTPException(401, "Entre com sua conta (Google ou e-mail) para usar o TutorON.")
+            raise HTTPException(401, "Entre com sua conta para usar o TutorON.")
         quem, dev = usuario(request)
         if not app.state.cota.pode(quem, dev):
             s = app.state.cota.situacao(quem)
