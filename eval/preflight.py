@@ -104,7 +104,7 @@ def checar_ollama(c: Checagem, settings) -> None:
 
 
 def checar_indice(c: Checagem, settings, rodada: int, pos_indexacao: bool) -> None:
-    caminho = ROOT / "04-rag" / "indice.json"
+    caminho = ROOT / "pipeline/04-rag" / "indice.json"
     try:
         indice = json.loads(caminho.read_text(encoding="utf-8"))
     except (OSError, ValueError) as exc:
@@ -123,7 +123,7 @@ def checar_indice(c: Checagem, settings, rodada: int, pos_indexacao: bool) -> No
         c.ok(f"índice com {len(chunks)} blocos e {len(vetores)} vetores ({indice.get('embedding_model')})")
     if rodada == 1 and equipe:
         c.falha(f"o índice já tem {len(equipe)} materiais da equipe: a rodada 1 precisa do índice do #21 "
-                "(restaure o backup ou `git checkout -- 04-rag/indice.json`)")
+                "(restaure o backup ou `git checkout -- pipeline/04-rag/indice.json`)")
     if rodada == 2:
         if len(equipe) >= MATERIAIS_EQUIPE:
             c.ok(f"{len(equipe)} materiais da equipe no índice")
@@ -132,8 +132,8 @@ def checar_indice(c: Checagem, settings, rodada: int, pos_indexacao: bool) -> No
         else:
             c.aviso(f"{len(equipe)} materiais da equipe no índice; normal antes de reindexar "
                     "(rode de novo com --pos-indexacao depois)")
-    if git("status", "--porcelain", "--", "04-rag/indice.json"):
-        msg = "04-rag/indice.json difere do commit"
+    if git("status", "--porcelain", "--", "pipeline/04-rag/indice.json"):
+        msg = "pipeline/04-rag/indice.json difere do commit"
         if rodada == 1:
             c.falha(msg + ": a rodada 1 mede o índice versionado; restaure-o antes")
         else:

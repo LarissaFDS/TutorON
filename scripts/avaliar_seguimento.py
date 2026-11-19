@@ -15,9 +15,9 @@ from acervo.runtime import settings
 
 
 def main():
-    questions = read_json(ROOT / '06-avaliacao/questoes.json', [])
-    baseline = {(r['questao'], r['cenario']): r for r in read_json(ROOT / '06-avaliacao/resultados.json', [])}
-    path = ROOT / '06-avaliacao/seguimento-7b.json'
+    questions = read_json(ROOT / 'pipeline/06-avaliacao/questoes.json', [])
+    baseline = {(r['questao'], r['cenario']): r for r in read_json(ROOT / 'pipeline/06-avaliacao/resultados.json', [])}
+    path = ROOT / 'pipeline/06-avaliacao/seguimento-7b.json'
     previous = read_json(path, [])
     rows = []
     for q in questions:

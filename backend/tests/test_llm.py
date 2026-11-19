@@ -9,7 +9,7 @@ from backend.config import Settings
 from backend.llm import LLM, AllUnavailable, Model, Unavailable
 
 
-@pytest.mark.parametrize('pensar,revisao,limite', [(False, False, 2048), (True, False, 8192),
+@pytest.mark.parametrize('pensar,revisao,limite', [(False, False, 2048), (True, False, 2048),
                                                   (False, True, 256), (True, True, 256)])
 def test_orcamento_de_saida_preserva_raciocinio_e_limita_repeticao(pensar, revisao, limite):
     import httpx

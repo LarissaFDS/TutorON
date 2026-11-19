@@ -130,13 +130,13 @@ def test_atribuir_ao_professor_e_recusado(tmp_path):
 
 
 def test_sincronizar_e_idempotente_e_preserva_o_resto(tmp_path):
-    (tmp_path / "02-acervo").mkdir()
+    (tmp_path / "pipeline/02-acervo").mkdir(parents=True, exist_ok=True)
     shutil.copytree(PASTA, tmp_path / equipe.PASTA)
-    write_json(tmp_path / "02-acervo/itens.json", [{"id": "c01", "texto": "outro", "origem": None}])
+    write_json(tmp_path / "pipeline/02-acervo/itens.json", [{"id": "c01", "texto": "outro", "origem": None}])
     equipe.sincronizar(tmp_path)
     itens = equipe.sincronizar(tmp_path)
     assert [i["id"] for i in itens] == ["c01", "e01", "e02", "e03", "e04", "e05"]
     novos = [i for i in itens if i.get("origem") == "equipe"]
     assert all(i["revisado"] is False and i["confiabilidade"] == "media" and i["tipo"] == "material_equipe"
                for i in novos)
-    assert read_json(tmp_path / "02-acervo/itens.json", []) == json.loads(json.dumps(itens))
+    assert read_json(tmp_path / "pipeline/02-acervo/itens.json", []) == json.loads(json.dumps(itens))

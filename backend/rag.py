@@ -4,7 +4,7 @@ Cada disciplina tem o próprio acervo (cadastro em ``disciplinas/disciplinas.jso
 só olha o acervo da disciplina escolhida, então material de uma nunca aparece na outra.
 Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
-1. Acervo curado local (de PAA: provas, listas e resoluções em ``04-rag/indice.json``),
+1. Acervo curado local (de PAA: provas, listas e resoluções em ``pipeline/04-rag/indice.json``),
    busca híbrida léxica + semântica. Só entram blocos de confiança média/alta e, com o
    bge-m3 ligado, com similaridade acima de ACERVO_SIMILARIDADE_MINIMA (descontado o "hub").
    Se nada passar, a lista vem vazia e a resposta não finge ter material.
@@ -31,7 +31,7 @@ from .config import Settings
 
 logger = logging.getLogger("tutoron.rag")
 
-ACERVO_K = 4  # fonte principal
+ACERVO_K = 3  # fonte principal (custo: docs/CUSTO-POR-PERGUNTA.md)
 LIVRO_K = 2   # complemento
 MAX_CHARS_TRECHO = 2200
 TIPOS = {
@@ -134,7 +134,7 @@ async def recuperar(pergunta: str, llm, settings: Settings, disciplina: Discipli
 # Orçamento de caracteres para pergunta + código do aluno + material. O modelo local tem janela
 # de 8192 tokens, compartilhada entre prompt, raciocínio e resposta; acima disso o Ollama cortaria o
 # início do prompt (as instruções do tutor). ~9000 caracteres deixam ~4000 tokens para responder.
-ORCAMENTO_CARACTERES = 9000
+ORCAMENTO_CARACTERES = 5000
 MATERIAL_MINIMO = 2500
 
 

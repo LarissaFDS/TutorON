@@ -34,7 +34,7 @@ def main():
     except Exception as exc:
         result.update(status='falhou', erro=type(exc).__name__ + ': ' + str(exc)[:180])
     result['segundos'] = time.monotonic()-begin
-    write_json(ROOT / '06-avaliacao/visao-impressa.json', result)
+    write_json(ROOT / 'pipeline/06-avaliacao/visao-impressa.json', result)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 
 

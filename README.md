@@ -42,7 +42,7 @@ Nenhum IP, nome ou matrícula é gravado.
 
 ## Como a resposta é escolhida
 
-1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca **no acervo da disciplina escolhida** (sem escolha, PAA). Em PAA, são duas fontes: o **acervo curado local** de provas, listas e resoluções ([`04-rag/`](04-rag/)), que é a fonte principal porque mostra como o professor cobra, e o livro-texto no Supabase, como complemento.
+1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca **no acervo da disciplina escolhida** (sem escolha, PAA). Em PAA, são duas fontes: o **acervo curado local** de provas, listas e resoluções ([`pipeline/04-rag/`](pipeline/04-rag/)), que é a fonte principal porque mostra como o professor cobra, e o livro-texto no Supabase, como complemento.
 2. O prompt do tutor ([`backend/prompts.py`](backend/prompts.py)) orienta sem gabarito, preserva o rigor da disciplina e pede uma tarefa curta ao aluno. O texto só é publicado depois de uma revisão pedagógica; uma segunda versão reprovada é substituída por uma ajuda de reserva. A revisão por IA também pode errar.
 3. **Corrida entre modelos** ([`backend/llm.py`](backend/llm.py)): o primeiro Gemini da lista começa na hora; se não começar a responder em 6 s, ou der erro (503, 429…), o próximo começa também. O primeiro que responder vence e os outros são cancelados. Um modelo que falhou fica alguns segundos em pausa, então as perguntas seguintes nem tentam ele.
 4. Se nenhum Gemini responder em 20 s, entra o **TutorON local** (`tutoron-paa`, Qwen3 8B com raciocínio, na GPU desta máquina). Ele é a última instância: se nem ele responder, a geração é repetida até 4 vezes ao longo de quase 1 minuto (tempo para o `1-Iniciar-Servidor` religar o que caiu).
@@ -90,16 +90,16 @@ powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
 :: refazer o acervo de Sistemas Digitais depois de editar disciplinas\sd\materiais
 .venv\Scripts\python -m acervo.disciplinas sd --embeddings
 
-:: comparar os modelos nas perguntas de 06-avaliacao\perguntas-mvp.json
+:: comparar os modelos nas perguntas de pipeline/06-avaliacao\perguntas-mvp.json
 .venv\Scripts\python scripts\avaliar_modelos.py
 ```
 
 ## Treinamento
 
-Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: um clique no `3-Treinar.bat` faz tudo.
+Veja [`pipeline/05-modelo/COMO_TREINAR.md`](pipeline/05-modelo/COMO_TREINAR.md). Resumo: um clique no `3-Treinar.bat` faz tudo.
 
-0. **Casos de todas as disciplinas:** `scripts/gerar_casos_acervo.py` lê os acervos curados de PAA, SD, OAC, Cálculo 3, Física 2, ED e BD e pede ao modelo professor (Gemini → local) um caso socrático por bloco (conceito, pista, perguntas-guia, exemplo, conferência). Casos que entregam a resposta são descartados. É retomável: rodar de novo só gera o que falta (`05-modelo/socratico/gerados/`). Linhas revisadas à mão em `dados-treino/curados/*.jsonl` entram também.
-1. Junta com os 24 casos autorais de `05-modelo/socratico/casos.json`, separando treino, validação e teste por família.
+0. **Casos de todas as disciplinas:** `scripts/gerar_casos_acervo.py` lê os acervos curados de PAA, SD, OAC, Cálculo 3, Física 2, ED e BD e pede ao modelo professor (Gemini → local) um caso socrático por bloco (conceito, pista, perguntas-guia, exemplo, conferência). Casos que entregam a resposta são descartados. É retomável: rodar de novo só gera o que falta (`pipeline/05-modelo/socratico/gerados/`). Linhas revisadas à mão em `dados-treino/curados/*.jsonl` entram também.
+1. Junta com os 24 casos autorais de `pipeline/05-modelo/socratico/casos.json`, separando treino, validação e teste por família.
 2. Treina um adapter LoRA sobre o Qwen3-8B na RTX 4060 (passos automáticos: ~2 épocas, entre 60 e 600), mescla, importa no Ollama como `tutoron-socratico-ft` e avalia pelo fluxo do site.
 
 Só preparar os dados, sem GPU: `3-Treinar.bat --so-dados`. Pular a geração: `--sem-gerar`. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-socratico-ft` no `.env` e reinicie o servidor.

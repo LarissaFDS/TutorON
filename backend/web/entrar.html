@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TutorON · Entrar</title>
+<meta name="theme-color" content="#4D6BFE">
+<link rel="icon" href="/static/marca/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/chat.css?v=final-1">
+<link rel="stylesheet" href="/static/entrar.css?v=1">
+</head>
+<body class="pagina-entrar">
+<main class="entrar">
+  <a class="marca entrar__marca" href="/" aria-label="TutorON, início">
+    <img src="/static/marca/logo.svg" alt="" width="40" height="40">
+    <span class="marca__nome">Tutor<b>ON</b></span>
+  </a>
+  <section class="entrar__cartao" aria-labelledby="entrar-titulo">
+    <h1 id="entrar-titulo">Entre para usar o TutorON</h1>
+    <p class="dica">Cada conta tem o seu limite diário. Não pedimos matrícula nem dados da faculdade.</p>
+
+    <p class="status" id="entrar-indisponivel" role="status" hidden>O login ainda não foi configurado neste servidor. Você pode usar o TutorON como convidado.</p>
+
+    <div id="entrar-opcoes">
+      <form id="form-email" novalidate>
+        <div class="entrar__abas" role="tablist" aria-label="Entrar ou criar conta">
+          <button type="button" role="tab" id="aba-entrar" aria-selected="true">Entrar</button>
+          <button type="button" role="tab" id="aba-criar" aria-selected="false">Criar conta</button>
+        </div>
+        <label class="rotulo" for="email">E-mail</label>
+        <input class="campo" id="email" type="email" autocomplete="email" required maxlength="200">
+        <label class="rotulo" for="senha">Senha</label>
+        <input class="campo" id="senha" type="password" autocomplete="current-password" required minlength="8" maxlength="200">
+        <p class="dica" id="senha-dica" hidden>Use pelo menos 8 caracteres.</p>
+        <div class="acoes">
+          <button class="botao" id="enviar-email" type="submit">Entrar</button>
+          <button class="botao botao--leve" id="esqueci" type="button">Esqueci a senha</button>
+        </div>
+      </form>
+    </div>
+    <p class="status" id="entrar-status" role="status" aria-live="polite"></p>
+    <p class="dica"><a href="/">Voltar ao TutorON</a></p>
+  </section>
+</main>
+<script src="/static/conta.js?v=1"></script>
+<script src="/static/entrar.js?v=1"></script>
+</body>
+</html>

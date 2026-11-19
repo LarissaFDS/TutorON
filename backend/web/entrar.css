@@ -1,0 +1,9 @@
+body.pagina-entrar { background: var(--bg-lateral); min-height: 100%; }
+.entrar { min-height: 100vh; display: grid; place-content: center; gap: 20px; padding: 24px 16px; }
+.entrar__marca { justify-self: center; text-decoration: none; }
+.entrar__cartao {
+  width: min(420px, 100%); background: var(--bg); border: 1px solid var(--linha); border-radius: var(--raio-grande);
+  box-shadow: var(--sombra); padding: 28px 24px; display: grid; gap: 12px;
+}
+.entrar__cartao h1 { font-size: 22px; margin: 0; }
+.entrar__cartao form { display: grid; gap: 8px; }

@@ -6,8 +6,8 @@
       "nome": "Projeto e Análise de Algoritmos",
       "sigla": "PAA",
       "situacao": "MVP",
-      "itens": "02-acervo/itens.json",
-      "indice": "04-rag/indice.json",
+      "itens": "pipeline/02-acervo/itens.json",
+      "indice": "pipeline/04-rag/indice.json",
       "rigor": "disciplinas/paa/rigor.md",
       "livro_supabase": true,
       "exemplos": [

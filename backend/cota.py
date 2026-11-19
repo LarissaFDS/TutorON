@@ -12,7 +12,9 @@
   aberto uma vez em /dev?chave=...) não tem limite e sempre usa o modo completo.
 - Tokens são ESTIMADOS (caracteres / 4) da pergunta + contexto + resposta.
 
-Estado em dados/cota.json (uso do dia) e dados/planos.json (assinaturas simuladas).
+Estado em dados/cota.json (uso do dia) e dados/planos.json (assinaturas simuladas). Com o banco
+configurado (backend/banco.py), o uso do dia, os planos, o histórico e o limite próprio de cada conta
+(perfis.limite_tokens, definido no painel /admin) ficam no Supabase; os arquivos viram só cópia local.
 """
 from __future__ import annotations
 
@@ -20,8 +22,11 @@ import datetime as dt
 import json
 import secrets
 import threading
+import logging
 import time
 from pathlib import Path
+
+logger = logging.getLogger("tutoron.cota")
 
 PLANOS = [
     {"id": "gratis", "nome": "Grátis", "preco_mes": 0, "tokens_dia": 40_000, "modo": "padrao",
@@ -46,8 +51,10 @@ def estimar_tokens(*textos: str | None) -> int:
 
 
 class Cota:
-    def __init__(self, arquivo: Path, limite: int, janela_h: float = 24, chave_dev: str = ""):
+    def __init__(self, arquivo: Path, limite: int, janela_h: float = 24, chave_dev: str = "", banco=None):
         self.arquivo = arquivo
+        self.banco = banco
+        self._limites: dict[str, int | None] = {}  # limite próprio da conta (None = o do plano)
         self.limite = limite
         self.janela_s = janela_h * 3600
         self.diaria = janela_h == 24
@@ -55,6 +62,11 @@ class Cota:
         self._trava = threading.Lock()
         self._uso: dict[str, dict] = self._ler(arquivo)
         self._planos: dict[str, dict] = self._ler(arquivo.with_name("planos.json"))
+        if banco:
+            try:
+                self._planos = {p["quem"]: p for p in banco.selecionar("planos", {"select": "*"})}
+            except Exception as exc:  # noqa: BLE001 - banco fora do ar não derruba o servidor
+                logger.warning("Planos não carregados do banco: %s", exc)
 
     @staticmethod
     def _ler(arquivo: Path) -> dict:
@@ -92,9 +104,60 @@ class Cota:
         agora = time.time()
         r = self._uso.get(quem)
         if not r or self._expirou(r, agora):
-            r = {"inicio": self._inicio_janela(agora), "usados": 0}
+            r = {"inicio": self._inicio_janela(agora), "usados": self._usados_no_banco(quem, agora)}
             self._uso[quem] = r
         return r
+
+    def _dia(self, inicio: float) -> str:
+        return dt.date.fromtimestamp(inicio).isoformat()
+
+    def _usados_no_banco(self, quem: str, agora: float) -> int:
+        """Outro servidor (ou um reinício) pode já ter cobrado hoje: o banco é a fonte de verdade."""
+        if not (self.banco and self.diaria):
+            return 0
+        try:
+            linhas = self.banco.selecionar("cota_diaria", {"quem": "eq." + quem,
+                                                           "dia": "eq." + self._dia(self._inicio_janela(agora)),
+                                                           "select": "usados"})
+            return int(linhas[0]["usados"]) if linhas else 0
+        except Exception as exc:  # noqa: BLE001
+            logger.warning("Uso do dia não lido do banco: %s", exc)
+            return 0
+
+    # ------------------------------------------------------------------ limite por conta (admin)
+    def limite_proprio(self, quem: str) -> int | None:
+        if quem not in self._limites:
+            self._limites[quem] = None
+            if self.banco and quem.startswith("u:"):
+                try:
+                    linhas = self.banco.selecionar("perfis", {"id": "eq." + quem[2:], "select": "limite_tokens"})
+                    self._limites[quem] = linhas[0].get("limite_tokens") if linhas else None
+                except Exception as exc:  # noqa: BLE001
+                    logger.warning("Limite da conta não lido do banco: %s", exc)
+                    self._limites.pop(quem, None)
+                    return None
+        return self._limites[quem]
+
+    def definir_limite(self, quem: str, limite: int | None) -> None:
+        """Limite diário próprio da conta (None volta ao do plano). Usado no painel /admin."""
+        if limite is not None and limite < 0:
+            raise ValueError("Limite inválido.")
+        self._limites[quem] = limite
+        if self.banco and quem.startswith("u:"):
+            self.banco.atualizar("perfis", {"id": "eq." + quem[2:]}, {"limite_tokens": limite})
+
+    def zerar(self, quem: str) -> None:
+        """Devolve o limite de hoje (para testes da equipe)."""
+        with self._trava:
+            r = self._registro(quem)
+            r["usados"] = 0
+            self._salvar()
+        self._gravar_dia(quem, r)
+
+    def _gravar_dia(self, quem: str, r: dict) -> None:
+        if self.banco and self.diaria:
+            self.banco.inserir("cota_diaria", {"quem": quem, "dia": self._dia(r["inicio"]), "usados": r["usados"]},
+                               upsert="quem,dia")
 
     # ------------------------------------------------------------------ planos (simulados)
     def plano(self, quem: str) -> dict:
@@ -108,6 +171,8 @@ class Cota:
             self._planos[quem] = {"plano": plano_id, "desde": time.strftime("%Y-%m-%dT%H:%M:%S"),
                                   "cartao": final_cartao[-4:], "simulado": True}
             self._salvar_planos()
+        if self.banco:
+            self.banco.inserir("planos", {"quem": quem} | self._planos[quem], upsert="quem")
         self._registrar(quem, 0, False, "plano:" + plano_id)
         return self._planos[quem]
 
@@ -115,8 +180,16 @@ class Cota:
         with self._trava:
             if self._planos.pop(quem, None) is not None:
                 self._salvar_planos()
+        if self.banco:
+            try:
+                self.banco.apagar("planos", {"quem": "eq." + quem})
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Plano não cancelado no banco: %s", exc)
 
     def limite_de(self, quem: str) -> int:
+        proprio = self.limite_proprio(quem)
+        if proprio is not None:
+            return proprio
         p = self.plano(quem)
         return self.limite if p["id"] == "gratis" else int(p["tokens_dia"])
 
@@ -149,13 +222,17 @@ class Cota:
         if dev or not self.ativa:
             return
         with self._trava:
-            self._registro(quem)["usados"] += tokens
+            r = self._registro(quem)
+            r["usados"] += tokens
             self._salvar()
+        self._gravar_dia(quem, r)
 
     def _registrar(self, quem: str, tokens: int, dev: bool, tipo: str) -> None:
         """Histórico permanente no PC (dados/uso.jsonl): uma linha por cobrança, inclusive dev."""
         linha = {"data": time.strftime("%Y-%m-%dT%H:%M:%S"), "quem": quem, "tokens": tokens,
                  "dev": dev, "tipo": tipo, "plano": self.plano(quem)["id"]}
+        if self.banco:
+            self.banco.inserir("uso_tokens", linha)
         try:
             with self._trava, open(self.arquivo.with_name("uso.jsonl"), "a", encoding="utf-8") as f:
                 f.write(json.dumps(linha, ensure_ascii=False) + "\n")
@@ -163,7 +240,19 @@ class Cota:
             pass
 
     def relatorio(self) -> list[dict]:
-        """Uso por aluno (cookie anônimo ou IP), do maior para o menor."""
+        """Uso por aluno (conta, cookie anônimo ou IP), do maior para o menor."""
+        if self.banco:
+            try:
+                por = {r["quem"]: dict(r) for r in self.banco.selecionar("uso_por_usuario", {"select": "*"})}
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Relatório não lido do banco: %s", exc)
+                por = {}
+            for r in por.values():
+                s = self.situacao(r["quem"])
+                r["plano"] = s["plano"]
+                r["limite"] = None if s["ilimitado"] else s["limite"]
+                r["restantes_agora"] = None if s["ilimitado"] else s["restantes"]
+            return sorted(por.values(), key=lambda r: -r["tokens"])
         por: dict[str, dict] = {}
         caminho = self.arquivo.with_name("uso.jsonl")
         if caminho.exists():

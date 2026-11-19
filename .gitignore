@@ -25,12 +25,12 @@ dados/
 .tools/
 
 # Exportações reproduzíveis; casos autorais, manifesto e preflight ficam versionados.
-05-modelo/socratico/preparado/*.jsonl
+pipeline/05-modelo/socratico/preparado/*.jsonl
 
 # Pipeline do acervo: originais e figuras ficam locais.
-00-originais/
-01-extraido/figuras/
-07-validacao-alunos/
+pipeline/00-originais/
+pipeline/01-extraido/figuras/
+pipeline/07-validacao-alunos/
 tmp/
 
 # Dados novos para treino (só a explicação vai para o Git).

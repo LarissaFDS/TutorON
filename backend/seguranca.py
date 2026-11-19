@@ -101,6 +101,20 @@ SUA_VEZ_PADRAO = ("\n\n### Sua vez\nTente o próximo passo no papel. Depois me m
                   "(por texto ou foto) que eu confiro com você.")
 
 
+# Sinais mais fracos de que a ajuda pode estar fechando o exercício. Sem nenhum deles, a ajuda é
+# aprovada sem a segunda chamada (o revisor por IA): economiza ~4.500 tokens por pergunta
+# (docs/CUSTO-POR-PERGUNTA.md). Com qualquer um, o revisor confere como antes.
+_SUSPEITA = re.compile(
+    r"\b(portanto|logo|conclui|concluimos|assim,|entao,? a|chegamos|obtemos|o valor (e|fica)|da como resultado)\b"
+    r"|[=≈∈≡]"  # qualquer igualdade: "F = A." fecha um exercício de Sistemas Digitais
+    r"|boxed\{|```")
+
+
+def precisa_revisor(texto: str) -> bool:
+    """A ajuda tem algo que lembre uma conclusão? Só então vale gastar a chamada do revisor por IA."""
+    return bool(_SUSPEITA.search(searchable(texto or "")))
+
+
 def entrega_resposta(texto: str) -> bool:
     return bool(_ENTREGA.search(searchable(texto or "")))
 

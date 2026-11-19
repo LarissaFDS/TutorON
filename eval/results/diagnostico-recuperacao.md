@@ -1,6 +1,6 @@
 # Diagnóstico de recuperação
 
-Índice `04-rag/indice.json`: 53 blocos, modo hibrido. Consulta desta execução: SÓ LÉXICA (bge-m3 indisponível nesta máquina).
+Índice `pipeline/04-rag/indice.json`: 53 blocos, modo hibrido. Consulta desta execução: SÓ LÉXICA (bge-m3 indisponível nesta máquina).
 
 Relevância por assunto: o bloco é do mesmo assunto da pergunta (b2-04 para PD etc.). É um critério grosseiro: um bloco do assunto certo ainda pode tratar de outro problema.
 

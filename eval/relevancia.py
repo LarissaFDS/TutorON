@@ -24,7 +24,7 @@ from acervo.retrieval import search  # noqa: E402
 VETORES = ROOT / "eval" / "relevancia-vetores.json"
 CORTE = 0.45  # ACERVO_SIMILARIDADE_MINIMA padrão (backend/config.py)
 
-# (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório 06-avaliacao/teste-2026-10-19.md,
+# (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório pipeline/06-avaliacao/teste-2026-10-19.md,
 # eval/perguntas.json e paráfrases sem as palavras do acervo.
 PERGUNTAS = [
     ("sd", "assunto", "Como simplificar F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15) com mapa de Karnaugh?", ["sd-nota-karnaugh"]),

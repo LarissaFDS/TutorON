@@ -9,7 +9,7 @@ from acervo.common import digest
 from acervo.disciplinas import obter
 from backend import prompts, seguranca
 
-CASOS = Path(__file__).resolve().parents[1] / "05-modelo/socratico/casos.json"
+CASOS = Path(__file__).resolve().parents[1] / "pipeline/05-modelo/socratico/casos.json"
 VERSAO = "socratico-v2"
 AJUDAS = ("pista", "perguntas", "conceito", "exemplo", "conferir", "visual", "auto")
 
@@ -82,7 +82,7 @@ def preparar(destino: Path, caminho: Path = CASOS, *, acervos: bool = True) -> d
         (destino / f"{nome}.jsonl").write_text(
             "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in linhas), encoding="utf-8", newline="\n")
     manifesto = {
-        "versao_politica": VERSAO, "origem": "05-modelo/socratico/casos.json + gerados/*.json + dados-treino/curados", "casos": len(casos), "sha256_origem": digest(caminho.read_bytes()),
+        "versao_politica": VERSAO, "origem": "pipeline/05-modelo/socratico/casos.json + gerados/*.json + dados-treino/curados", "casos": len(casos), "sha256_origem": digest(caminho.read_bytes()),
         "contagens": {n: len(rs) for n, rs in grupos.items()},
         "disciplinas": {n: dict(Counter(r["disciplina"] for r in rs)) for n, rs in grupos.items()},
         "familias": {n: sorted({r["family"] for r in rs}) for n, rs in grupos.items()},

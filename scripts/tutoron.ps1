@@ -107,7 +107,7 @@ function Iniciar-Ollama {
     $tutor = if (Ler-Env 'TUTORON_MODELO_LOCAL') { Ler-Env 'TUTORON_MODELO_LOCAL' } else { 'tutoron-paa' }
     $nomeTutor = if ($tutor -match ':') { $tutor } else { "${tutor}:latest" }
     if ($instalados -notcontains $nomeTutor -and $tutor -eq 'tutoron-paa') {
-        & $Ollama create tutoron-paa -f 05-modelo\Modelfile; Falhou
+        & $Ollama create tutoron-paa -f pipeline/05-modelo\Modelfile; Falhou
     }
     Ok "modelos: $tutor (tutor) e $base (genérico), embeddings bge-m3"
 }
@@ -422,7 +422,7 @@ function Treinar {
             }
         }
         & $Treino -c "import transformers, peft, datasets, bitsandbytes, safetensors; from eval.socratico import executar" 2>$null
-        if ($LASTEXITCODE -ne 0) { & $Treino -m pip install --disable-pip-version-check -r 05-modelo\treino\requirements.txt; Falhou }
+        if ($LASTEXITCODE -ne 0) { & $Treino -m pip install --disable-pip-version-check -r pipeline/05-modelo\treino\requirements.txt; Falhou }
         # Verifica a cadeia real de imports antes de ocupar a GPU por dezenas de minutos.
         & $Treino -c "from eval.socratico import executar"; Falhou
         & $Treino scripts\treinar.py @Extra 2>&1 | Out-Default; Falhou

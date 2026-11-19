@@ -138,7 +138,7 @@ Prioridade para uma eventual revisão do professor ou monitor (a revisão intern
 | Antes (e102e22) | 5º (fora dos 4 enviados ao modelo) |
 | Depois | 1º |
 
-Na busca léxica, as 20 perguntas de avaliação de PAA (`06-avaliacao`) devolvem exatamente os mesmos blocos, na mesma ordem (teste `test_ranking_lexico_de_paa_preservado`). O número de trechos enviados continua 4.
+Na busca léxica, as 20 perguntas de avaliação de PAA (`pipeline/06-avaliacao`) devolvem exatamente os mesmos blocos, na mesma ordem (teste `test_ranking_lexico_de_paa_preservado`). O número de trechos enviados continua 4.
 
 **Índice de SD (na época deste teste):** léxico, porque o `bge-m3` não estava instalado. Desde então o índice é híbrido (23 blocos, 23 vetores).
 

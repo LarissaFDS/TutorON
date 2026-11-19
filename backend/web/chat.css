@@ -427,3 +427,7 @@ textarea.campo { resize: vertical; }
   .cursos, .duas-colunas { grid-template-columns: 1fr; }
   .msg--tutor .avatar { display: none; }
 }
+
+/* links com cara de botão na barra lateral (conta, nova conversa, itens) */
+a.perfil, a.nova, a.lateral__item { text-decoration: none; color: inherit; }
+.conta-chip { margin-bottom: 8px; }
