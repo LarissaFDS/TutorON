@@ -20,7 +20,7 @@ ligado por padrão, e a segunda chamada de revisão sempre.
 ## O que mudou
 
 1. **Raciocínio desligado por padrão** (`TUTORON_RACIOCINIO_LOCAL=0`) e, quando ligado, limitado
-   a 1.024 tokens (`TUTORON_RACIOCINIO_MAX`).
+   a 2.048 tokens de saída (`TUTORON_RACIOCINIO_MAX`).
 2. **Acervo menor**: 3 trechos e 5.000 caracteres (`ACERVO_K`, `ORCAMENTO_CARACTERES` em `backend/rag.py`).
 3. **Revisão só quando precisa**: o filtro de código (`seguranca.entrega_resposta`) roda sempre; o revisor
    por IA só roda se o texto tiver sinais de solução (números finais, "a resposta é", fórmulas resolvidas).
@@ -36,7 +36,7 @@ Meta: **~3–4 mil tokens por pergunta típica** (limite grátis de 40 mil ≈ 1
 
 ## Como medir
 
-`/uso` (admin) mostra tokens por pergunta e por modelo. Compare a média antes/depois na tabela `uso_tokens`.
+O painel `/admin` mostra tokens por conta. Compare a média antes/depois na tabela `uso_tokens`.
 
 ## Limites do Groq (plano grátis, nov/2026 — confira em console.groq.com/settings/limits)
 
