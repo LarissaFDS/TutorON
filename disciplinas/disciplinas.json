@@ -255,7 +255,7 @@
       "id": "circ",
       "nome": "Circuitos Elétricos",
       "sigla": "CE",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/circ/acervo/itens.json",
       "indice": "disciplinas/circ/acervo/indice.json",
       "materiais": "disciplinas/circ/materiais",
