@@ -65,31 +65,15 @@ def testar(v: dict[str, str]) -> None:
             print("Groq: sem conexão (" + type(exc).__name__ + ")")
 
 
-def area_de_transferencia() -> str:
-    """Lê e depois limpa a área de transferência do Windows (a chave não fica lá à toa)."""
-    import subprocess
-    try:
-        r = subprocess.run(["powershell", "-NoProfile", "-Command", "Get-Clipboard -Raw"],
-                           capture_output=True, text=True, timeout=10)
-        subprocess.run(["powershell", "-NoProfile", "-Command", "Set-Clipboard -Value $null"], timeout=10)
-        return r.stdout.strip()
-    except (OSError, subprocess.SubprocessError):
-        return ""
-
-
 def main() -> None:
     linhas = ler_env()
     valores = {}
-    print("Chaves secretas: clique no botão de COPIAR no site e digite c + Enter aqui (lê da área de")
-    print("transferência, nada aparece na tela). Ou cole com o botão direito e Enter.")
+    print("Cole cada valor e aperte Enter. Chaves secretas não aparecem enquanto você cola.")
     print("Enter vazio mantém o que já está no .env.\n")
     for nome, pergunta, secreta in CAMPOS:
         atual = valor_atual(linhas, nome)
         marca = " [já configurado]" if atual else ""
         novo = (getpass.getpass if secreta else input)(f"{pergunta}{marca}: ").strip()
-        if secreta and novo.lower() == "c":
-            novo = area_de_transferencia()
-            print("   lida da área de transferência" if novo else "   área de transferência vazia; mantido")
         if novo:
             linhas = gravar(linhas, nome, novo)
         valores[nome] = novo or atual
