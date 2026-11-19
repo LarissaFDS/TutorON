@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd", "prob", "circ"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd", "prob", "circ", "sinais"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -399,6 +399,7 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     ("ed", "Como remover o último nó de uma lista encadeada?"),
     ("prob", "O que significa a falta de memória da distribuição exponencial?"),
     ("circ", "Qual a condição para máxima transferência de potência?"),
+    ("sinais", "Qual a transformada de Fourier de um pulso retangular?"),
 ])
 def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
     """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""

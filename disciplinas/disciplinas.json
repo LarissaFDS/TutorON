@@ -279,6 +279,37 @@
         "Quando uso um supernó na análise nodal?",
         "Como achar as condições iniciais do capacitor depois que a chave abre?"
       ]
+    },
+    {
+      "id": "sinais",
+      "nome": "Sinais e Sistemas",
+      "sigla": "SS",
+      "situacao": "MVP",
+      "itens": "disciplinas/sinais/acervo/itens.json",
+      "indice": "disciplinas/sinais/acervo/indice.json",
+      "materiais": "disciplinas/sinais/materiais",
+      "rigor": "disciplinas/sinais/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "sinais-01-complexos",
+        "sinais-02-operacoes-tempo",
+        "sinais-03-sinais-elementares",
+        "sinais-04-propriedades-sistemas",
+        "sinais-05-convolucao",
+        "sinais-06-edo",
+        "sinais-07-serie-fourier",
+        "sinais-08-transformada-fourier",
+        "sinais-09-laplace",
+        "sinais-10-funcao-transferencia",
+        "sinais-11-tempo-discreto"
+      ],
+      "exemplos": [
+        "Como saber se y(t) = x(2t) é invariante no tempo?",
+        "Como calcular a convolução de dois pulsos retangulares?",
+        "Quais os coeficientes da série de Fourier de uma onda quadrada?",
+        "Como saber se G(s) = (s+1)/(s²+3s−4) é BIBO estável?",
+        "Qual a transformada de Fourier de um pulso retangular?"
+      ]
     }
   ]
 }

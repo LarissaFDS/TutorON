@@ -1,0 +1,120 @@
+[
+ {
+  "id": "sinais-invariancia",
+  "disciplina": "sinais",
+  "pergunta": "Como saber se y(t) = x(2t) é invariante no tempo?",
+  "esperado": "compara y(t−T) = x(2t−2T) com T[x(t−T)] = x(2t−T): diferentes, logo variante; contraexemplo",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 30.1,
+  "fontes": [
+   "Anotações manuscritas \"Propriedades de Sistemas\" (8 abr. 2026)",
+   "Anotações manuscritas \"Modelos por equações diferenciais\" (1 maio 2026)",
+   "Anotações manuscritas \"Propriedades de Sistemas\" (8 abr. 2026)",
+   "Anotações manuscritas \"Escalonamento e Deslocamento de tempo\" (13 mar. 2026)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para testar a **invariância no tempo** de um sistema, utilizamos o método dos dois caminhos (conforme descrito em `[P1]`):\n\n1. **Caminho 1 (Atrasar a saída):** Pegamos a expressão da saída $y(t)$ e substituímos toda ocorrência da variável livre $t$ por $(t - T)$. Isso nos dá $y(t - T)$.\n2. **Caminho 2 (Atrasar a entrada):** Definimos uma nova entrada atrasada $x_1(t) = x(t - T)$ e aplicamos essa entrada à regra do sistema para obter a resposta $y_2(t)$.\n\nSe os dois caminhos resultarem na mesma expressão para qualquer entrada e qualquer atraso $T$, o sistema é **invariante no tempo**. Caso contrário, é **variante**.\n\n---\n\n### Sua vez\n\nNo seu caderno, monte as duas expressões para $y(t) = x(2t)$:\n\n1. **Caminho 1:** Substitua $t$ por $(t - T)$ na saída $y(t)$. O que resulta $y(t - T)$?\n2. **Caminho 2:** Aplicando a entrada atrasada $x(t - T)$ no lugar da entrada original dentro da regra do sistema, o que resulta $y_2(t)$?\n\nEscreva os dois resultados e me diga: as duas expressões ficaram iguais?"
+ },
+ {
+  "id": "sinais-conv-pulsos",
+  "disciplina": "sinais",
+  "pergunta": "Como calcular a convolução de dois pulsos retangulares?",
+  "esperado": "reflete e desloca; intervalos de sobreposição; dois pulsos de largura T dão triângulo em [0, 2T] com pico T",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Anotações manuscritas \"Descrição matemática de sistemas de tempo contínuo\" (29 abr. 2026)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular a convolução de dois sinais, o método mais seguro é seguir o passo a passo da integral de convolução: $y(t) = \\int_{-\\infty}^{\\infty} x(\\tau) g(t - \\tau) d\\tau$.\n\nComo você quer convoluir dois pulsos retangulares, o primeiro passo é definir matematicamente esses sinais. Imagine dois pulsos, $x(t)$ e $g(t)$, ambos com amplitude 1, mas com larguras diferentes, por exemplo, $T_1$ e $T_2$.\n\nAo refletir e deslocar um deles (digamos, $g(t - \\tau)$), você verá que a sobreposição entre os dois sinais muda conforme o valor de $t$ aumenta. O segredo é identificar os \"pontos críticos\" onde a sobreposição começa, muda de comportamento ou termina.\n\nPara começar, tente desenhar os dois sinais no papel:\n1. Desenhe $x(\\tau)$ fixo.\n2. Desenhe $g(t - \\tau)$ para um valor de $t$ muito pequeno (onde não há sobreposição).\n3. Vá aumentando $t$ e observe em qual valor de $t$ o pulso $g$ começa a \"tocar\" o pulso $x$.\n\n### Sua vez\nSe $x(\\tau)$ é um pulso de 0 a $T_1$ e $g(t-\\tau)$ é um pulso de largura $T_2$ que começa em $t - T_2$ e termina em $t$, quais são os quatro valores de $t$ que marcam o início e o fim da entrada e da saída da sobreposição entre eles?"
+ },
+ {
+  "id": "sinais-fourier-quadrada",
+  "disciplina": "sinais",
+  "pergunta": "Quais os coeficientes da série de Fourier de uma onda quadrada?",
+  "esperado": "onda ±V: c0 = 0, ck = −j2V/(kπ) para k ímpar e 0 para k par; x = Σ 4V/(kπ) sen(kω0t)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 20.0,
+  "fontes": [
+   "Anotações manuscritas \"Represen em Série de Fourier de Sinais Periódicos\" (13 maio 2026)",
+   "Anotações manuscritas \"Transformada de Fourier\" (28 maio 2026)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar os coeficientes da série de Fourier de um sinal periódico, o primeiro passo é definir a expressão matemática do sinal dentro de um período $T_0$ e identificar sua frequência fundamental $\\omega_0 = 2\\pi/T_0$.\n\nComo vimos em [P1], para uma onda quadrada, o sinal é definido por trechos. A fórmula geral para os coeficientes complexos $c_k$ é:\n$$c_k = \\frac{1}{T_0} \\int_{0}^{T_0} x(t) e^{-jk\\omega_0t} dt$$\n\nSe você dividir essa integral nos intervalos onde o sinal assume valores constantes (por exemplo, de $0$ a $T_0/2$ e de $T_0/2$ a $T_0$), você conseguirá resolver a integral da exponencial. Lembre-se de que, para sinais ímpares, esperamos que os coeficientes sejam puramente imaginários.\n\n### Sua vez\nTente montar a integral para o intervalo $[0, T_0/2]$ onde $x(t) = V$ e para o intervalo $[T_0/2, T_0]$ onde $x(t) = -V$. Qual expressão você obtém ao integrar o termo $e^{-jk\\omega_0t}$ nesses dois intervalos?"
+ },
+ {
+  "id": "sinais-bibo",
+  "disciplina": "sinais",
+  "pergunta": "Como saber se G(s) = (s+1)/(s²+3s−4) é BIBO estável?",
+  "esperado": "polos 1 e −4 (zero −1): polo com parte real positiva, não é BIBO estável; regra: todos os polos com Re < 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 168.3,
+  "fontes": [
+   "Anotações manuscritas \"Revisão Prova 2\" (30 jun. 2026), questão 1",
+   "Anotações manuscritas \"Revisão Prova 2\" (30 jun. 2026), questões 2 e 3",
+   "Anotações manuscritas \"Representação por função de transferência\" (19 jun. 2026)",
+   "Anotações manuscritas \"Propriedades de Sistemas\" (8 abr. 2026)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para verificar a estabilidade BIBO de um sistema linear e invariante no tempo (LIT) a partir de sua função de transferência $G(s)$, o ponto de partida é sempre o denominador.\n\nComo discutido no material [P1], a estabilidade está relacionada à localização dos polos no plano complexo. Lembre-se que um sistema causal é BIBO estável se, e somente se, todos os seus polos estiverem estritamente no semiplano esquerdo (ou seja, com parte real negativa).\n\nPara o seu caso, $G(s) = \\frac{s + 1}{s^2 + 3s - 4}$, o primeiro passo é identificar onde o sistema \"explode\", ou seja, onde o denominador se anula.\n\n1. Como você pode encontrar as raízes do polinômio $s^2 + 3s - 4$?\n2. Uma vez encontradas as raízes, observe o sinal da parte real de cada uma delas. Alguma delas está no semiplano direito (parte real positiva) ou sobre o eixo imaginário?\n\n### Sua vez\nTente fatorar o denominador $s^2 + 3s - 4$ no papel e liste os valores dos polos. Com base na regra de estabilidade BIBO, o que esses polos indicam sobre o comportamento do sistema?"
+ },
+ {
+  "id": "sinais-tf-pulso",
+  "disciplina": "sinais",
+  "pergunta": "Qual a transformada de Fourier de um pulso retangular?",
+  "esperado": "V rect(t/T) ↔ VT sinc(ωT/2) = (2V/ω) sen(ωT/2); zeros em ω = 2πn/T; X(0) = VT",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 42.1,
+  "fontes": [
+   "Anotações manuscritas \"Transformada de Fourier\" (28 maio 2026)",
+   "Anotações manuscritas \"Descrição matemática de sistemas de tempo contínuo\" (29 abr. 2026)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar a transformada de Fourier de um pulso retangular, o caminho é aplicar a definição fundamental da transformada, que você encontra em **[P1]**.\n\nLembre-se que a transformada de Fourier de um sinal $x(t)$ é dada pela integral:\n$$X(\\omega) = \\int_{-\\infty}^{\\infty} x(t) e^{-j\\omega t} dt$$\n\nSe o seu pulso tem amplitude $V$ e largura $T$, e está centrado na origem (ou seja, definido de $-T/2$ até $T/2$), os limites da sua integral serão justamente esses valores. O sinal $x(t)$ dentro desse intervalo vale $V$, e fora dele vale $0$.\n\nO segredo para resolver é substituir $x(t) = V$ na integral e integrar a exponencial complexa em relação a $t$. Ao final, você chegará a uma expressão com $e^{j\\theta}$ e $e^{-j\\theta}$, que você pode simplificar usando a identidade de Euler para o seno: $\\text{sen}(\\theta) = \\frac{e^{j\\theta} - e^{-j\\theta}}{2j}$.\n\n### Sua vez\nTente montar a integral com os limites $-T/2$ e $T/2$ e realizar a integração de $V e^{-j\\omega t}$ no papel. Qual expressão você obtém antes de aplicar a identidade do seno?"
+ },
+ {
+  "id": "sinais-fora",
+  "disciplina": "sinais",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O mapa de Karnaugh é uma ferramenta visual poderosa para simplificar expressões booleanas, baseada na ideia de agrupar termos adjacentes que diferem por apenas uma variável.\n\nPara começar, imagine que você tem uma tabela-verdade com $n$ variáveis de entrada. O mapa terá $2^n$ células, organizadas de forma que células vizinhas (incluindo as bordas, como se fosse um cilindro ou toro) representem estados que mudam apenas um bit (código de Gray).\n\nO processo segue estes passos lógicos:\n1. **Mapeamento:** Preencha o mapa com os valores da saída da sua tabela-verdade (geralmente focamos nos \"1\"s para a forma de soma de produtos).\n2. **Agrupamento:** Você deve formar grupos de 1s com tamanhos que sejam potências de 2 (1, 2, 4, 8...). O objetivo é fazer os maiores grupos possíveis.\n3. **Eliminação:** Dentro de cada grupo, observe quais variáveis mantêm o mesmo valor (0 ou 1) e quais mudam. As variáveis que mudam são eliminadas, pois não afetam o resultado daquele grupo.\n\nVocê já montou o mapa para a sua expressão específica? Se sim, como você está pensando em agrupar os \"1\"s que estão presentes?\n\n### Sua vez\nDesenhe o mapa de Karnaugh para uma função de 3 variáveis ($A, B, C$) e identifique quais células são consideradas \"adjacentes\" à célula onde $A=0, B=1, C=0$."
+ }
+]
