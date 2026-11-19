@@ -250,6 +250,35 @@
         "Se X e Y são normais independentes, qual a distribuição de 2X − Y?",
         "Como padronizar uma normal e usar a tabela?"
       ]
+    },
+    {
+      "id": "circ",
+      "nome": "Circuitos Elétricos",
+      "sigla": "CE",
+      "situacao": "em validação",
+      "itens": "disciplinas/circ/acervo/itens.json",
+      "indice": "disciplinas/circ/acervo/indice.json",
+      "materiais": "disciplinas/circ/materiais",
+      "rigor": "disciplinas/circ/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "circ-01-grandezas-potencia",
+        "circ-02-kirchhoff-nodal-malhas",
+        "circ-03-superposicao-transformacao",
+        "circ-04-thevenin-norton",
+        "circ-05-maxima-transferencia",
+        "circ-06-amp-op",
+        "circ-07-primeira-ordem",
+        "circ-08-segunda-ordem",
+        "circ-09-fasores"
+      ],
+      "exemplos": [
+        "Como calcular o equivalente de Thévenin com uma fonte dependente?",
+        "Qual a condição para máxima transferência de potência?",
+        "Como resolver um circuito RLC série subamortecido?",
+        "Quando uso um supernó na análise nodal?",
+        "Como achar as condições iniciais do capacitor depois que a chave abre?"
+      ]
     }
   ]
 }

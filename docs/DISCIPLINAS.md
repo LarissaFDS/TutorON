@@ -162,6 +162,36 @@ Busca: o exemplo do pêndulo (Física 2) tinha falso positivo semântico no bloc
 
 Instruções internas: a regra da variância em `rigor.md` estava escrita como a fórmula em LaTeX, e a resposta da IA que repetia a mesma fórmula padrão caiu na recusa de `copia_instrucoes` (12 palavras). A regra passou a ser escrita por extenso; a verificação de segurança não mudou.
 
+## Circuitos Elétricos: circuitos remontados e resolvidos por MNA (19/11/2026)
+
+Circuitos entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/circ/`: rigor, 26 blocos (23 na busca; 3 notas da equipe candidatas), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_circ.py` e o resolvedor `tests_acervo/circ_mna.py`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 9 PDFs de anotações de 2026.1, todas de aluno e nenhuma do professor, parafraseadas. A turma era do Prof. Jobson de Araújo Nascimento (IC/UFAL), conforme as listas AB1 e AB2. O autor autorizou publicar a transcrição em 18/11/2026; as fotos e os enunciados de livro e de prova não foram copiados. A ementa de ECOM028 veio do PPC de 2014 (p. 39). Segunda ordem não está nessa ementa, mas a turma estudou o tema.
+
+Conferência: cada circuito descrito num bloco é remontado nos testes a partir da própria descrição em palavras. A análise nodal modificada é exata (SymPy): Thévenin com fonte de teste e balanço de potências que dá zero. As respostas RLC são refeitas com `dsolve`. Foram corrigidos 5 blocos:
+- $R_{Th}$ de 40 Ω para 25 Ω;
+- a solução homogênea, que estava chamada de particular;
+- $V_i = IR_i$, que estava chamada de corrente;
+- uma superposição com o denominador errado;
+- uma resolução que parou antes da segunda constante.
+
+Amp-op, primeira ordem e fasores só têm notas IA fora da busca.
+
+Fonte e busca:
+- `backend/rag.py` usa como referência só o trecho de `fonte_original` depois da última `/`. Por isso, as datas do campo `fonte` são escritas por extenso ("28 abr. 2026"): com "28/04/2026", a referência mostrava só "2026), exercício 5".
+- O bloco de Thévenin com fonte dependente ganhou uma frase de abertura em linguagem de aluno. Sem ela, a similaridade ficava abaixo do corte (0,55) para a pergunta de exemplo.
+- Em Física 2, perguntas de circuitos trazem blocos de ondas e de Carnot: "nó" é palavra de ondas estacionárias, e "como calcular" atrai os dois. Isso é da busca de Física 2, não vazamento de Circuitos. A bateria usa Sistemas Digitais como fronteira, e os testes conferem que os índices não têm blocos em comum.
+
+IA real (Gemini, 19/11/2026, `eval/results/bateria-circ-2026-11-19.json`): o `gemini-3.8-flash` deu HTTP 429 e tempo esgotado, e as respostas vieram do `gemini-3.1-flash-lite` (degradado). Cada resposta foi conferida contra os valores dos testes:
+- Thévenin com dependente, supernó, condições iniciais depois da chave e RLC subamortecido saíram corretos, sem rótulo inexistente.
+- Máxima transferência: na primeira execução, a resposta foi socrática e correta (montou $p(R_L)$ e pediu a derivada). Na segunda, a verificação de "entregou a resposta" trocou duas vezes a saída pela ajuda de reserva genérica.
+- Karnaugh com Circuitos selecionada: a IA citou "Sistemas Digitais", mas respondeu o assunto sem sugerir trocar a disciplina.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -189,3 +219,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (20 blocos, 18 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; o tutor não entrega projetos avaliativos prontos (regra em `rigor.md`); revisão humana e aprovação do professor pendentes; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
 | `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |
 | `prob` | Probabilidade e Estatística | Markdown curado em `disciplinas/prob` (25 blocos, 19 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; anotações de aluno sem autorização de publicar a transcrição (só paráfrases); professor, instituição e enunciados das provas não identificados; revisão humana e do professor pendentes; tópicos 10–13 só em notas fora da busca; veja a [curadoria](../disciplinas/prob/CURADORIA.md) |
+| `circ` | Circuitos Elétricos | Markdown curado em `disciplinas/circ` (26 blocos, 23 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; amp-op, primeira ordem e fasores só em notas fora da busca; veja a [curadoria](../disciplinas/circ/CURADORIA.md) |

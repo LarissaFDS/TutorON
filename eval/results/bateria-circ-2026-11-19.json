@@ -1,0 +1,121 @@
+[
+ {
+  "id": "circ-thevenin-dep",
+  "disciplina": "circ",
+  "pergunta": "Como calcular o equivalente de Thévenin com uma fonte dependente?",
+  "esperado": "não desliga a dependente; fonte de teste, Rth = VT/IT (ou Voc/Icc); ex. 3ix: Vth = 8 V, Rth = 1 Ω",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 40.1,
+  "fontes": [
+   "Anotações manuscritas \"Teorema de Thévenin e Norton\" (28 abr. 2026), exercício 5",
+   "Anotações manuscritas \"Máxima Transferência de Potência\" (28 abr. 2026), lista 4, questão 4; Anotações manuscritas \"Lista para AB1\" (1 maio 2026), lista do Prof. Jobson de Araújo Nascimento, questão 5",
+   "Anotações manuscritas \"Lista para AB 2\" (16 jun. 2026), lista do Prof. Jobson de Araújo Nascimento, questão 1",
+   "Anotações manuscritas \"Teorema de Thévenin e Norton\" (28 abr. 2026), exercício 2"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular o equivalente de Thévenin em circuitos com fontes dependentes, o passo fundamental é entender que **você não pode simplesmente \"desligar\" a fonte controlada**, pois ela depende de uma variável do circuito que pode mudar quando você altera as condições dos terminais.\n\nO procedimento padrão, conforme vimos no material [P1], consiste em dois cálculos separados:\n\n1.  **Tensão de Thévenin ($V_{Th}$):** Você calcula a tensão de circuito aberto nos terminais, mantendo a fonte dependente ativa e expressando a variável de controle dela em função das tensões ou correntes do circuito.\n2.  **Resistência de Thévenin ($R_{Th}$):** Como não podemos somar resistências diretamente, aplicamos uma **fonte de teste** ($V_T$ ou $I_T$) nos terminais de saída. Com as fontes independentes desligadas (tensão vira curto, corrente vira aberto), a fonte dependente permanece lá, \"sentindo\" o efeito da fonte de teste. A relação entre a tensão e a corrente da fonte de teste nos dará a resistência: $R_{Th} = V_T / I_T$.\n\nLembre-se: a fonte dependente deve ser tratada como um elemento comum, mas cujo valor é uma função de outra grandeza do circuito.\n\n### Sua vez\nSe você tiver um exercício específico em mãos, descreva o circuito (quais elementos estão conectados a quais nós) e tente montar a equação de LKC ou LKT para encontrar a tensão de circuito aberto. Qual é a variável que controla a sua fonte dependente e como ela se relaciona com as tensões ou correntes do seu circuito?"
+ },
+ {
+  "id": "circ-mtp",
+  "disciplina": "circ",
+  "pergunta": "Qual a condição para máxima transferência de potência?",
+  "esperado": "RL = Rth; Pmax = Vth²/(4Rth); eficiência 50%",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Anotações manuscritas \"Máxima Transferência de Potência\" (28 abr. 2026), lista 4, questão 4; Anotações manuscritas \"Lista para AB1\" (1 maio 2026), lista do Prof. Jobson de Araújo Nascimento, questão 5",
+   "Anotações manuscritas \"Potência e Leis de Kirchoff\" (12 mar. 2026), pág. 1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "circ-rlc-sub",
+  "disciplina": "circ",
+  "pergunta": "Como resolver um circuito RLC série subamortecido?",
+  "esperado": "α = R/2L < ω0 = 1/√(LC); ωd = √(ω0² − α²); e^{−αt}(B1 cos ωd t + B2 sen ωd t) + valor final; CI vC e iL",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.1,
+  "fontes": [
+   "Anotações manuscritas \"Circuitos de Segunda Ordem\" (18 jun. 2026), lista de revisão",
+   "Anotações manuscritas \"Circuitos de Segunda Ordem\" (18 jun. 2026), lista de revisão, revisão questão 2",
+   "Anotações manuscritas \"Lista para AB 2\" (16 jun. 2026), lista do Prof. Jobson de Araújo Nascimento, questão 1",
+   "Anotações manuscritas \"Lista para AB 2\" (16 jun. 2026), lista do Prof. Jobson de Araújo Nascimento, questão 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para resolver um circuito RLC série subamortecido, o caminho é seguir uma sequência lógica de passos que transformam a física do circuito em uma equação diferencial.\n\nO primeiro passo é sempre garantir que você conhece o estado do circuito no instante exato da comutação ($t=0$). Como o indutor e o capacitor possuem \"memória\", você deve calcular a tensão no capacitor $v_C(0^-)$ e a corrente no indutor $i_L(0^-)$ em regime permanente CC (antes da chave mudar). Esses valores serão os mesmos em $t=0^+$.\n\nDepois, para o tempo $t > 0$, você deve:\n1. **Escrever a equação diferencial:** Use a Lei de Kirchhoff das Tensões (LKT) na malha série. A soma das tensões no resistor ($Ri$), no indutor ($L \\frac{di}{dt}$) e no capacitor ($\\frac{1}{C} \\int i dt + v_C(0)$) deve ser igual à fonte.\n2. **Identificar os parâmetros:** Determine $\\alpha$ e $\\omega_0$ conforme as fórmulas do seu material. Se $\\alpha < \\omega_0$, você confirmou que o sistema é subamortecido.\n3. **Montar a solução geral:** A resposta será a soma da parte natural (a exponencial multiplicada por senos e cossenos, com a frequência de amortecimento $\\omega_d$) com a parte particular (o valor final em regime permanente).\n4. **Aplicar as condições iniciais:** Use $v_C(0)$ e $i_L(0)$ para encontrar as constantes ($B_1, B_2$) da sua solução.\n\nLembre-se: a derivada da corrente no indutor em $t=0^+$ está relacionada à tensão nele, e a derivada da tensão no capacitor está relacionada à corrente que passa por ele.\n\n### Sua vez\nPara começarmos, descreva o seu circuito: quais são os valores de $R$, $L$ e $C$ e qual é a fonte de tensão aplicada? Se preferir, descreva como a chave altera o circuito em $t=0$."
+ },
+ {
+  "id": "circ-superno",
+  "disciplina": "circ",
+  "pergunta": "Quando uso um supernó na análise nodal?",
+  "esperado": "fonte de tensão entre dois nós sem ser a referência; uma LKC para a superfície + equação de restrição",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Anotações manuscritas \"Lista para AB1\" (1 maio 2026), lista do Prof. Jobson de Araújo Nascimento, págs. 3–4; segunda tentativa em \"Questões circuitos\", págs. 8–11",
+   "Anotações manuscritas \"Questões circuitos\" (1 maio 2026), pág. 6 (exercício de livro-texto, enunciado parafraseado)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "O supernó é uma estratégia essencial na análise nodal quando você encontra uma **fonte de tensão** conectada entre dois nós que não são o nó de referência (o terra).\n\nPense no desafio: a Lei de Kirchhoff das Correntes (LKC) baseia-se em somar as correntes que saem de um nó. Se você tentar aplicar a LKC em um nó conectado a uma fonte de tensão ideal, você encontrará um problema: a corrente que atravessa essa fonte não é determinada apenas pela Lei de Ohm, mas sim pelo restante do circuito. Ela se torna uma incógnita adicional que você não consegue expressar facilmente em função das tensões nodais.\n\nPara contornar isso, \"envelopamos\" os dois nós conectados pela fonte em uma única superfície fechada. Como a corrente que sai de um nó entra diretamente no outro através da fonte, ao somar todas as correntes que cruzam a fronteira dessa superfície, a corrente da fonte se cancela.\n\nComo você reduziu o número de equações ao agrupar os nós, você precisa de uma equação extra para manter o sistema resolvível. Essa equação extra descreve exatamente o que a fonte de tensão está impondo entre esses dois pontos.\n\n### Sua vez\nImagine que você tem dois nós, $A$ e $C$, com uma fonte de tensão de $10\\text{ V}$ conectada entre eles, sendo que o terminal positivo (+) está em $A$ e o negativo (-) em $C$. Como você escreveria a **equação de restrição** que relaciona as tensões $v_A$ e $v_C$ a esse valor da fonte?"
+ },
+ {
+  "id": "circ-ci-chave",
+  "disciplina": "circ",
+  "pergunta": "Como achar as condições iniciais do capacitor depois que a chave abre?",
+  "esperado": "regime CC antes (C aberto, L curto); vC(0+) = vC(0−), iL(0+) = iL(0−); derivada por iC = C dv/dt",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Anotações manuscritas \"Circuitos de Segunda Ordem\" (18 jun. 2026), lista de revisão, revisão questão 1",
+   "Anotações manuscritas \"Lista para AB 2\" (16 jun. 2026), lista do Prof. Jobson de Araújo Nascimento, questão 2",
+   "Anotações manuscritas \"Circuitos de Segunda Ordem\" (18 jun. 2026), lista de revisão, revisão questão 2",
+   "Anotações manuscritas \"Circuitos de Segunda Ordem\" (18 jun. 2026), lista de revisão"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar as condições iniciais de um circuito de segunda ordem após uma comutação (como a abertura ou fechamento de uma chave), o segredo é entender o comportamento dos elementos armazenadores de energia nos dois instantes críticos: $t = 0^-$ (imediatamente antes) e $t = 0^+$ (imediatamente depois).\n\nComo o capacitor não permite uma variação instantânea de tensão, temos a continuidade: $v_C(0^+) = v_C(0^-)$.\n\nAqui está o roteiro para você seguir no papel:\n\n1.  **Em $t = 0^-$ (Regime Permanente CC):** Com a chave na posição original, o circuito está em regime permanente. Substitua o capacitor por um **circuito aberto** e o indutor por um **curto-circuito**. Calcule a tensão nos terminais do capacitor ($v_C(0^-)$) usando análise de malhas ou nós.\n2.  **A transição:** A chave muda de estado em $t = 0$. Como a tensão no capacitor não salta, o valor que você encontrou em $0^-$ é exatamente o valor inicial para a nova configuração do circuito em $0^+$.\n3.  **A derivada inicial:** Se você precisar da derivada da tensão ($dv_C/dt(0^+)$), use a relação fundamental do capacitor: $i_C(0^+) = C \\cdot \\frac{dv_C}{dt}(0^+)$. Você precisará descobrir qual é a corrente que atravessa o capacitor exatamente no instante $0^+$ (após a chave mudar), usando o novo circuito.\n\nVocê tem o desenho do circuito antes e depois da chave mudar? Se tiver, tente identificar qual é a tensão sobre o capacitor no estado estacionário inicial.\n\n### Sua vez\nDesenhe o circuito na configuração de $t = 0^-$ (com o capacitor aberto) e calcule o valor de $v_C(0^-)$. Qual valor você encontrou?"
+ },
+ {
+  "id": "circ-fora",
+  "disciplina": "circ",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O uso de mapas de Karnaugh (K-map) é uma técnica visual para simplificar expressões booleanas baseada na adjacência de termos. Como o seu tema é **Sistemas Digitais**, lembre-se que o objetivo é agrupar os \"1s\" da tabela verdade de forma que possamos eliminar variáveis que mudam de estado dentro de um mesmo grupo.\n\nPara começar, você precisa montar a tabela de acordo com o número de variáveis (entradas). O segredo está na ordem das colunas e linhas: usamos o **Código de Gray**, onde apenas um bit muda de uma célula para a próxima (ex: 00, 01, 11, 10). Isso garante que células adjacentes sejam, de fato, adjacentes logicamente.\n\nOs passos fundamentais são:\n1. Preencher o mapa com os valores da função (os \"1s\" ou \"0s\", dependendo se você quer a forma SOP ou POS).\n2. Agrupar os valores em potências de 2 (grupos de 1, 2, 4, 8...).\n3. O grupo deve ser o maior possível.\n4. Identificar quais variáveis permanecem constantes dentro de cada grupo; essas são as que comporão o termo simplificado.\n\nVocê já tem uma função específica ou uma tabela verdade que gostaria de tentar simplificar? Se tiver, descreva quais são os mintermos (os valores de entrada onde a saída é 1).\n\n### Sua vez\nDesenhe um mapa de Karnaugh para 3 variáveis ($A, B, C$) e escreva a sequência correta de colunas usando o Código de Gray para as variáveis $B$ e $C$."
+ }
+]
