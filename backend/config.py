@@ -50,6 +50,13 @@ class Settings:
     # Tempo máximo até o primeiro trecho da resposta. Um modelo que não
     # começa a responder nesse prazo é considerado indisponível.
     gemini_first_chunk_s: float = 40.0
+    # Groq (API compatível com OpenAI, plano grátis): reserva do modelo local, antes do Gemini.
+    groq_api_key: str = field(repr=False, default="")
+    groq_models: tuple[str, ...] = ("openai/gpt-oss-120b", "openai/gpt-oss-20b")
+    groq_vision_model: str = "qwen/qwen3.8-27b"
+    # Worker: com a chave definida, o servidor hospedado usa o modelo local do PC só enquanto o PC
+    # se registra (scripts/worker_pc.py). Sem ela, usa OLLAMA_URL direto (servidor no próprio PC).
+    worker_token: str = field(repr=False, default="")
     gemini_idle_s: float = 30.0
     # Corrida escalonada: intervalo para iniciar o próximo modelo se o atual
     # ainda não começou a responder, e espera máxima antes de acionar o local.
@@ -107,6 +114,10 @@ class Settings:
         return bool(self.supabase_url and self.supabase_key)
 
     @property
+    def groq_enabled(self) -> bool:
+        return bool(self.groq_api_key and self.groq_models)
+
+    @property
     def gemini_enabled(self) -> bool:
         return bool(self.gemini_api_key and self.gemini_models)
 
@@ -117,6 +128,10 @@ def load_settings() -> Settings:
         gemini_api_key=_env("GEMINI_API_KEY") or _env("GOOGLE_API_KEY"),
         gemini_models=tuple(_list("GEMINI_MODELS", DEFAULT_GEMINI_MODELS)),
         gemini_first_chunk_s=_float("GEMINI_TIMEOUT_PRIMEIRO_TRECHO", 40.0),
+        groq_api_key=_env("GROQ_API_KEY"),
+        groq_models=tuple(_list("GROQ_MODELS", "openai/gpt-oss-120b,openai/gpt-oss-20b")),
+        groq_vision_model=_env("GROQ_MODELO_VISAO", "qwen/qwen3.8-27b"),
+        worker_token=_env("TUTORON_WORKER_TOKEN"),
         gemini_idle_s=_float("GEMINI_TIMEOUT_ENTRE_TRECHOS", 30.0),
         stagger_s=_float("TUTORON_ESCALONAMENTO_S", 6.0),
         local_wait_s=_float("TUTORON_ESPERA_LOCAL_S", 20.0),

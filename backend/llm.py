@@ -1,4 +1,9 @@
-"""Cascata de modelos: Gemini (vários modelos, em ordem) e, por último, o TutorON local.
+"""Cascata de modelos: o TutorON local (PC da equipe), o Groq e o Gemini.
+
+Ordem: plano grátis ("modo padrão") começa pelo modelo local; se ele não estiver ligado ou não
+começar a responder em TUTORON_ESPERA_LOCAL_S, entra o Groq e depois o Gemini. Plano pago e
+administrador ("modo completo") começam pelo Groq/Gemini. No servidor hospedado, o modelo local só
+existe enquanto o PC estiver registrado como worker (scripts/worker_pc.py).
 
 Como a troca é rápida:
 
@@ -35,6 +40,8 @@ PLANEJAMENTO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar('planej
 # Plano pago e administrador ("modo completo"): Gemini primeiro, como sempre foi.
 PREFERIR_LOCAL: contextvars.ContextVar[bool] = contextvars.ContextVar('preferir_local', default=False)
 
+GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+WORKER_TTL_S = 150  # o PC avisa a cada minuto; sem aviso por 2,5 min, o modelo local sai da cascata
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
 
@@ -56,7 +63,7 @@ class AllUnavailable(Exception):
 
 @dataclass(frozen=True)
 class Model:
-    provider: str  # "gemini" | "ollama" | "codigo" (orientação fixa, sem inferência)
+    provider: str  # "gemini" | "groq" | "ollama" | "codigo" (orientação fixa, sem inferência)
     name: str
 
     @property
@@ -69,6 +76,8 @@ class Model:
             return "Orientação estruturada do TutorON"
         if self.provider == "gemini":
             return " ".join(part.capitalize() for part in self.name.split("-"))
+        if self.provider == "groq":
+            return self.name.split("/")[-1] + " (Groq)"
         return f"{self.name} (local)"
 
 
@@ -170,12 +179,45 @@ class LLM:
         self.local_lock = asyncio.Semaphore(settings.local_parallel)
         self.local_waiting = 0  # pedidos esperando a GPU (mostrado ao aluno como posição na fila)
         self._thinking: dict[str, bool] = {}
+        self.worker_url: str | None = None
+        self.worker_visto = 0.0
+
+    # ------------------------------------------------------------------ PC como worker
+    @property
+    def ollama_url(self) -> str | None:
+        """Endereço do Ollama: o do .env (servidor no PC) ou o que o PC registrou (servidor hospedado)."""
+        if not self.settings.worker_token:
+            return self.settings.ollama_url
+        if self.worker_url and time.monotonic() - self.worker_visto < WORKER_TTL_S:
+            return self.worker_url
+        return None
+
+    def registrar_worker(self, url: str) -> None:
+        nova = url.rstrip("/") != (self.worker_url or "")
+        self.worker_url, self.worker_visto = url.rstrip("/"), time.monotonic()
+        if nova:
+            logger.info("PC do TutorON registrado: %s", self.worker_url)
+            for chave in list(self.breaker._until):
+                if chave.startswith("ollama:"):
+                    self.breaker.reset(Model(*chave.split(":", 1)))
+
+    def _url_local(self) -> str:
+        url = self.ollama_url
+        if not url:
+            raise Unavailable("PC do TutorON desligado", 30.0)
+        return url
+
+    def _cab_local(self) -> dict:
+        return {"x-tutoron-worker": self.settings.worker_token} if self.settings.worker_token else {}
 
     # ------------------------------------------------------------------ modelos
     def cascade(self, *, local_model: str | None = None) -> list[Model]:
-        models = [Model("gemini", name) for name in self.settings.gemini_models] if self.settings.gemini_enabled else []
-        local = Model("ollama", local_model or self.settings.local_model)
-        return [local, *models] if PREFERIR_LOCAL.get() else [*models, local]
+        nuvem = [Model("groq", n) for n in self.settings.groq_models] if self.settings.groq_enabled else []
+        nuvem += [Model("gemini", n) for n in self.settings.gemini_models] if self.settings.gemini_enabled else []
+        local = [Model("ollama", local_model or self.settings.local_model)]
+        if self.settings.worker_token and not self.ollama_url and nuvem:
+            local = []  # PC desligado: nem tenta (sem esperar o prazo do local)
+        return [*local, *nuvem] if PREFERIR_LOCAL.get() else [*nuvem, *local]
 
     # ------------------------------------------------------------------ provedores
     async def _gemini(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
@@ -226,9 +268,9 @@ class LLM:
         """Modelos com raciocínio (qwen3…) erram bem menos contas com ele ligado."""
         if name not in self._thinking:
             try:
-                info = (await self.client.post(self.settings.ollama_url + "/api/show", json={"model": name}, timeout=5)).json()
+                info = (await self.client.post(self._url_local() + "/api/show", headers=self._cab_local(), json={"model": name}, timeout=5)).json()
                 self._thinking[name] = "thinking" in info.get("capabilities", [])
-            except (httpx.HTTPError, ValueError):
+            except (httpx.HTTPError, ValueError, Unavailable):
                 return False
         return self._thinking[name]
 
@@ -252,7 +294,7 @@ class LLM:
             body["format"] = "json"
             body["options"].update(temperature=0.0, num_predict=256)
         try:
-            async with self.client.stream("POST", self.settings.ollama_url + "/api/chat", json=body,
+            async with self.client.stream("POST", self._url_local() + "/api/chat", headers=self._cab_local(), json=body,
                                           timeout=httpx.Timeout(self.settings.local_first_chunk_s, connect=3)) as response:
                 if response.status_code != 200:
                     await response.aread()
@@ -274,7 +316,54 @@ class LLM:
             raise Unavailable("Ollama local desligado", 10.0) from exc
 
     def _provider(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
+        if model.provider == "groq":
+            return self._groq(model, system, prompt)
         return self._gemini(model, system, prompt) if model.provider == "gemini" else self._ollama(model, system, prompt)
+
+    async def _groq(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
+        """Groq: API no formato da OpenAI, com streaming (SSE)."""
+        messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
+        body: dict = {"model": model.name, "messages": messages, "stream": True, "temperature": 0.3,
+                      "max_completion_tokens": 2048}
+        if "gpt-oss" in model.name:
+            body["reasoning_effort"] = "low"  # raciocínio curto: menos tokens e mais rápido
+        if PLANEJAMENTO_JSON.get():
+            body.update(temperature=0.1, response_format={"type": "json_object"})
+        if REVISAO_JSON.get():
+            body.update(temperature=0.0, max_completion_tokens=512, response_format={"type": "json_object"})
+        headers = {"Authorization": "Bearer " + self.settings.groq_api_key}
+        try:
+            async with self.client.stream("POST", GROQ_URL, json=body, headers=headers,
+                                          timeout=httpx.Timeout(self.settings.gemini_idle_s, connect=5)) as response:
+                if response.status_code != 200:
+                    corpo = await response.aread()
+                    pausa = pause_for_status(response.status_code)
+                    if response.status_code == 429:
+                        try:
+                            pausa = max(pausa, min(3600.0, float(response.headers.get("retry-after", 0))))
+                        except ValueError:
+                            pass
+                    raise Unavailable(f"HTTP {response.status_code}", pausa, {"corpo": corpo[:200].decode("utf-8", "replace")})
+                async for line in response.aiter_lines():
+                    if not line.startswith("data:"):
+                        continue
+                    dado = line[5:].strip()
+                    if dado == "[DONE]":
+                        break
+                    try:
+                        payload = json.loads(dado)
+                    except json.JSONDecodeError:
+                        continue
+                    if "error" in payload:
+                        raise Unavailable("erro no stream do Groq", 20.0)
+                    for escolha in payload.get("choices", [])[:1]:
+                        texto = (escolha.get("delta") or {}).get("content")
+                        if texto:
+                            yield texto
+        except httpx.TimeoutException as exc:
+            raise Unavailable("tempo esgotado", 30.0) from exc
+        except httpx.HTTPError as exc:
+            raise Unavailable(f"rede: {type(exc).__name__}", 15.0) from exc
 
     # ------------------------------------------------------------------ cascata
     async def _start(self, model: Model, system: str | None, prompt: str, started: float) -> dict:
@@ -351,6 +440,9 @@ class LLM:
             if queue[0].provider == "ollama":
                 # O local entra depois de todos os Gemini, ou após a espera máxima.
                 return start + self.settings.local_wait_s
+            if any(m.provider == "ollama" for m in running.values()):
+                # Local primeiro (plano grátis): a nuvem só entra se ele não começar no prazo.
+                return last_launch + self.settings.local_wait_s
             return last_launch + self.settings.stagger_s
 
         async def cancel_all() -> None:
@@ -404,7 +496,7 @@ class LLM:
 
                 await cancel_all()
                 model, generator = winner["model"], winner["generator"]
-                idle = self.settings.gemini_idle_s if model.provider == "gemini" else self.settings.local_first_chunk_s
+                idle = self.settings.local_first_chunk_s if model.provider == "ollama" else self.settings.gemini_idle_s
                 emitted = False
                 try:
                     yield {"tipo": "modelo", "provedor": model.provider, "modelo": model.name}
@@ -461,7 +553,9 @@ class LLM:
 
         tentativas: list[dict] = []
         b64 = [base64.b64encode(i).decode() for i in imagens]
-        modelos = [m for m in self.cascade() if m.provider == "gemini"]
+        modelos = [Model("groq", self.settings.groq_vision_model)] if (
+            self.settings.groq_api_key and self.settings.groq_vision_model) else []
+        modelos += [m for m in self.cascade() if m.provider == "gemini"]
         if self.settings.local_vision_model:
             modelos.append(Model("ollama", self.settings.local_vision_model))
         for m in modelos:
@@ -470,8 +564,8 @@ class LLM:
                 continue
             inicio = time.monotonic()
             try:
-                texto_r = await (self._gemini_imagens(m, system, texto, b64) if m.provider == "gemini"
-                                 else self._ollama_imagens(m, system, texto, b64))
+                leitor = {"gemini": self._gemini_imagens, "groq": self._groq_imagens}.get(m.provider, self._ollama_imagens)
+                texto_r = await leitor(m, system, texto, b64)
             except Unavailable as exc:
                 self.breaker.trip(m, exc.reason, exc.pause_s)
                 tentativas.append({"modelo": m.key, "resultado": exc.reason, **exc.info})
@@ -506,6 +600,26 @@ class LLM:
         except (ValueError, KeyError, IndexError) as exc:
             raise Unavailable("resposta sem texto", 5.0) from exc
 
+    async def _groq_imagens(self, model: Model, system: str, texto: str, b64: list[str]) -> str:
+        partes = [{"type": "text", "text": texto}] + [
+            {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + d}} for d in b64[:3]]
+        body = {"model": model.name, "temperature": 0.1, "max_completion_tokens": 4096,
+                "response_format": {"type": "json_object"},
+                "messages": [{"role": "system", "content": system}, {"role": "user", "content": partes}]}
+        try:
+            r = await self.client.post(GROQ_URL, json=body, headers={"Authorization": "Bearer " + self.settings.groq_api_key},
+                                       timeout=httpx.Timeout(90, connect=5))
+        except httpx.TimeoutException as exc:
+            raise Unavailable("tempo esgotado", 30.0) from exc
+        except httpx.HTTPError as exc:
+            raise Unavailable(f"rede: {type(exc).__name__}", 15.0) from exc
+        if r.status_code != 200:
+            raise Unavailable(f"HTTP {r.status_code}", pause_for_status(r.status_code))
+        try:
+            return r.json()["choices"][0]["message"]["content"] or ""
+        except (ValueError, KeyError, IndexError) as exc:
+            raise Unavailable("resposta sem texto", 5.0) from exc
+
     async def _ollama_imagens(self, model: Model, system: str, texto: str, b64: list[str]) -> str:
         if gpu_reservada():
             raise Unavailable("GPU reservada para treinamento", 10.0)
@@ -514,7 +628,7 @@ class LLM:
                 "options": {"temperature": 0.1, "num_ctx": self.settings.local_num_ctx}}
         async with self.local_lock:
             try:
-                r = await self.client.post(self.settings.ollama_url + "/api/chat", json=body,
+                r = await self.client.post(self._url_local() + "/api/chat", headers=self._cab_local(), json=body,
                                            timeout=httpx.Timeout(self.settings.local_first_chunk_s, connect=3))
             except httpx.HTTPError as exc:
                 raise Unavailable("Ollama visão indisponível", 10.0) from exc
@@ -527,21 +641,21 @@ class LLM:
         """Embedding bge-m3 da pergunta, na CPU (0,3 s): assim o modelo de resposta não sai da GPU.
         None se o Ollama estiver desligado."""
         try:
-            response = await self.client.post(self.settings.ollama_url + "/api/embed",
+            response = await self.client.post(self._url_local() + "/api/embed", headers=self._cab_local(),
                                               json={"model": self.settings.embed_model, "input": [text],
                                                     "keep_alive": "60m", "options": {"num_gpu": 0}}, timeout=httpx.Timeout(30, connect=3))
             response.raise_for_status()
             return response.json()["embeddings"][0]
-        except (httpx.HTTPError, KeyError, IndexError) as exc:
+        except (httpx.HTTPError, KeyError, IndexError, Unavailable) as exc:
             logger.warning("Embedding indisponível: %s", type(exc).__name__)
             return None
 
     async def local_status(self) -> dict:
         try:
-            tags = (await self.client.get(self.settings.ollama_url + "/api/tags", timeout=3)).json()
-            loaded = (await self.client.get(self.settings.ollama_url + "/api/ps", timeout=3)).json()
-        except (httpx.HTTPError, ValueError):
-            return {"online": False}
+            tags = (await self.client.get(self._url_local() + "/api/tags", headers=self._cab_local(), timeout=3)).json()
+            loaded = (await self.client.get(self._url_local() + "/api/ps", headers=self._cab_local(), timeout=3)).json()
+        except (httpx.HTTPError, ValueError, Unavailable):
+            return {"online": False, "worker": bool(self.settings.worker_token)}
         names = {m["name"] for m in tags.get("models", [])}
         wanted = self.settings.local_model if ":" in self.settings.local_model else self.settings.local_model + ":latest"
         return {"online": True, "modelo": self.settings.local_model, "instalado": wanted in names,
@@ -555,6 +669,6 @@ class LLM:
             if path == "/api/generate" and gpu_reservada():
                 continue
             try:
-                await self.client.post(self.settings.ollama_url + path, json=payload, timeout=180)
-            except httpx.HTTPError:
+                await self.client.post(self._url_local() + path, headers=self._cab_local(), json=payload, timeout=180)
+            except (httpx.HTTPError, Unavailable):
                 logger.warning("Não foi possível pré-carregar %s", payload["model"])

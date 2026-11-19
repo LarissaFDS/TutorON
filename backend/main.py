@@ -116,6 +116,10 @@ class LimiteConta(BaseModel):
     limite: int | None = Field(default=None, ge=0, le=100_000_000)  # None = volta ao limite do plano
 
 
+class RegistroWorker(BaseModel):
+    url: str = Field(..., max_length=300, pattern=r"^https://[A-Za-z0-9.-]+(:[0-9]+)?/?$")
+
+
 class AtivarPlano(BaseModel):
     plano: str = Field(..., max_length=20)
     final_cartao: str = Field(default="", max_length=4, pattern=r"^[0-9]{0,4}$")
@@ -401,6 +405,16 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
                 "supabase_url": settings.supabase_url if app.state.contas.ativas else "",
                 "supabase_anon_key": settings.supabase_anon_key if app.state.contas.ativas else ""}
 
+    @app.post("/api/worker/registrar")
+    async def registrar_worker(corpo: RegistroWorker, request: Request) -> dict:
+        """O PC da equipe (scripts/worker_pc.py) avisa a cada minuto onde o modelo local está."""
+        import secrets as _s
+        token = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
+        if not (settings.worker_token and token and _s.compare_digest(token, settings.worker_token)):
+            raise HTTPException(403, "Token do worker inválido.")
+        app.state.llm.registrar_worker(corpo.url)
+        return {"ok": True, "ttl_s": 150}
+
     @app.get("/api/eu")
     async def api_eu(request: Request) -> dict:
         quem, dev = usuario(request)
@@ -488,7 +502,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         local = await app.state.llm.local_status()
         dados = {
             "gemini": {"habilitado": settings.gemini_enabled, "modelos": list(settings.gemini_models)},
-            "local": local,
+            "groq": {"habilitado": settings.groq_enabled, "modelos": list(settings.groq_models)},
+            "local": local | {"pc_conectado": bool(app.state.llm.ollama_url)},
             "pausados": app.state.llm.breaker.state(),
             "livro_supabase": settings.supabase_enabled,
         }

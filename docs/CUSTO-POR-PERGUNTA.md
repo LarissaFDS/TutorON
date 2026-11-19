@@ -25,8 +25,11 @@ ligado por padrão, e a segunda chamada de revisão sempre.
 3. **Revisão só quando precisa**: o filtro de código (`seguranca.entrega_resposta`) roda sempre; o revisor
    por IA só roda se o texto tiver sinais de solução (números finais, "a resposta é", fórmulas resolvidas).
 4. **Histórico curto**: só as 2 últimas ajudas entram no prompt.
-5. **Contagem real**: a cota usa os tokens que o modelo/API devolve (`prompt_eval_count`/`eval_count` no
-   Ollama, `usage` no Groq/Gemini), não mais caracteres ÷ 4.
+5. **Groq como reserva**: quando o PC está desligado ou ocupado, responde o Groq (`gpt-oss-120b` com
+   `reasoning_effort: low`), antes do Gemini.
+
+Ainda pendente: a cota continua **estimando** tokens (caracteres ÷ 4). O próximo passo é usar o número
+que o modelo devolve (`eval_count` no Ollama, `usage` no Groq/Gemini).
 
 Meta: **~3–4 mil tokens por pergunta típica** (limite grátis de 40 mil ≈ 10–13 dúvidas reais; ajuste
 `tokens_dia` em `backend/cota.py` depois de medir com usuários).
@@ -34,3 +37,15 @@ Meta: **~3–4 mil tokens por pergunta típica** (limite grátis de 40 mil ≈ 1
 ## Como medir
 
 `/uso` (admin) mostra tokens por pergunta e por modelo. Compare a média antes/depois na tabela `uso_tokens`.
+
+## Limites do Groq (plano grátis, nov/2026 — confira em console.groq.com/settings/limits)
+
+| Modelo | Pedidos/min | Pedidos/dia | Tokens/min | Tokens/dia |
+|---|---|---|---|---|
+| openai/gpt-oss-120b | 30 | 1.000 | 8.000 | 200.000 |
+| openai/gpt-oss-20b | 30 | 1.000 | 8.000 | 200.000 |
+| qwen/qwen3.8-27b (fotos) | 30 | 1.000 | 8.000 | 200.000 |
+
+O gargalo é **8 mil tokens por minuto**: com ~3,5 mil por pergunta, só ~2 perguntas por minuto por modelo.
+Numa aula com a turma toda, o modelo local e o Gemini precisam segurar o resto. O disjuntor de
+`backend/llm.py` pausa o modelo pelo tempo do `retry-after` e passa para o próximo.
