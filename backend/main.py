@@ -54,7 +54,7 @@ WEB = Path(__file__).resolve().parent / "web"
 class AppStaticFiles(StaticFiles):
     async def get_response(self, path, scope):
         resposta = await super().get_response(path, scope)
-        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css'):
+        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css', 'shell.js', 'chat.css'):
             resposta.headers['Cache-Control'] = 'no-cache'
         return resposta
 

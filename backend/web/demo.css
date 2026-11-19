@@ -1,0 +1,36 @@
+/* Página "Como funciona" (demo.js) no layout do chat. */
+.visual-intro h1 b { color: var(--azul); }
+.step__head { display: flex; align-items: center; gap: 10px; }
+.step__number {
+  display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--azul-suave); color: var(--azul); font-weight: 700; font-size: 14px; flex: none;
+}
+.step__title { font-size: 18px; margin: 0; }
+.step__lede, .caption { color: var(--tinta-2); font-size: 14px; margin: 0; }
+.demo__escolha { display: flex; flex-wrap: wrap; gap: 8px; }
+.demo__escolha .pick { position: relative; }
+.demo__escolha .pick input { position: absolute; opacity: 0; pointer-events: none; }
+.demo__escolha .pick span {
+  display: inline-block; padding: 7px 14px; border: 1px solid var(--linha-forte); border-radius: 999px;
+  cursor: pointer; font-size: 14px; background: var(--bg);
+}
+.demo__escolha .pick input:checked + span { background: var(--azul); border-color: var(--azul); color: #fff; }
+.demo__escolha .pick input:focus-visible + span { outline: 2px solid var(--azul); outline-offset: 2px; }
+.troca { display: grid; gap: 10px; padding: 14px; border-radius: var(--raio); background: var(--bg-suave); }
+.question {
+  justify-self: end; max-width: 90%; background: var(--bg-aluno); padding: 10px 14px;
+  border-radius: 18px 18px 4px 18px;
+}
+.demo__contexto, .troca pre { font-family: var(--fonte-codigo); font-size: 13px; white-space: pre-wrap; margin: 6px 0 0; }
+.demo__aluno { font-weight: 600; margin: 0; }
+.demo__foto { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: 14px; align-items: start; }
+.demo__foto img { width: 100%; border-radius: var(--raio); border: 1px solid var(--linha); }
+.foto__conferir { display: grid; gap: 8px; }
+.foto__titulo { font-size: 15px; margin: 0; }
+.field__label { font-weight: 600; font-size: 14px; margin: 0; }
+.disclosure summary { cursor: pointer; color: var(--azul); font-size: 14px; }
+.conversa { display: grid; gap: 10px; }
+.demo__videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.animacao { margin: 0; display: grid; gap: 6px; }
+.animacao video { width: 100%; border-radius: var(--raio); background: var(--bg-suave); }
+@media (max-width: 760px) { .demo__foto { grid-template-columns: 1fr; } }
