@@ -222,7 +222,7 @@
       "id": "prob",
       "nome": "Probabilidade e Estatística",
       "sigla": "PE",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/prob/acervo/itens.json",
       "indice": "disciplinas/prob/acervo/indice.json",
       "materiais": "disciplinas/prob/materiais",

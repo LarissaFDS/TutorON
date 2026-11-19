@@ -397,6 +397,7 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     ("calc3", "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"),
     ("fis2", "Qual o período de um pêndulo simples de 1 m?"),
     ("ed", "Como remover o último nó de uma lista encadeada?"),
+    ("prob", "O que significa a falta de memória da distribuição exponencial?"),
 ])
 def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
     """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""
