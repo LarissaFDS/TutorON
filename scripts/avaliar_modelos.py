@@ -91,8 +91,8 @@ async def rodar(perguntas: list[dict], saida: Path, condicoes: list[str]) -> Non
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--perguntas", default=str(ROOT / "06-avaliacao/perguntas-mvp.json"))
-    parser.add_argument("--saida", default=str(ROOT / "06-avaliacao/resultados-mvp.json"))
+    parser.add_argument("--perguntas", default=str(ROOT / "pipeline/06-avaliacao/perguntas-mvp.json"))
+    parser.add_argument("--saida", default=str(ROOT / "pipeline/06-avaliacao/resultados-mvp.json"))
     parser.add_argument("--condicoes", default="tutoron_gemini,generico_gemini,tutoron_local,tutoron_antigo,generico_local")
     args = parser.parse_args()
     perguntas = json.loads(Path(args.perguntas).read_text(encoding="utf-8"))

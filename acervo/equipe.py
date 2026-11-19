@@ -3,7 +3,7 @@
 Não é material do professor nem resolução de aluno: cada arquivo declara `autoria` e
 `revisado: false` até uma revisão humana. Entra no acervo com confiabilidade média,
 como as correções derivadas (c01, c02, c09…), e pode ser rebaixado pela triagem por
-regras ou promovido por revisão humana em 03-triagem/revisoes.json.
+regras ou promovido por revisão humana em pipeline/03-triagem/revisoes.json.
 Enquanto `revisado: false`, a busca de produção ignora o bloco (ACERVO_USAR_NAO_REVISADOS);
 como revisar: docs/curadoria-equipe.md.
 
@@ -59,7 +59,7 @@ def mesclar(records, root=ROOT):
 def sincronizar(root=ROOT):
     from .curate import FIELDS
 
-    records = mesclar(read_json(root / '02-acervo/itens.json', []), root)
-    write_json(root / '02-acervo/itens.json', records)
-    write_csv(root / '02-acervo/indice.csv', records, FIELDS)
+    records = mesclar(read_json(root / 'pipeline/02-acervo/itens.json', []), root)
+    write_json(root / 'pipeline/02-acervo/itens.json', records)
+    write_csv(root / 'pipeline/02-acervo/indice.csv', records, FIELDS)
     return records

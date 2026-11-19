@@ -29,7 +29,7 @@ Regras que valem para qualquer rodada:
 ## Comandos de diagnóstico
 
 ```bash
-python eval/diagnostico.py roteamento --logs dados/perguntas.jsonl 06-avaliacao/resultados-mvp.json
+python eval/diagnostico.py roteamento --logs dados/perguntas.jsonl pipeline/06-avaliacao/resultados-mvp.json
 python eval/diagnostico.py recuperacao
 python eval/diagnostico.py --saida eval/results/rodada2 calibrar   # limiar ACERVO_SIMILARIDADE_MINIMA (PR #23), precisa do bge-m3
 ```
@@ -44,7 +44,7 @@ python eval/relevancia.py --vetores   # grava os embeddings das perguntas novas 
 python eval/bateria_tutor.py --modelo tutoron-paa --saida eval/results/bateria-tutor-tutoron-paa.json
 ```
 
-A bateria do tutor passa pelo fluxo real do site e grava fontes, resposta, rótulos citados e ajustes; a correção é avaliada à mão com os gabaritos de `tests_acervo/test_casos_sd.py`. Resultados: `06-avaliacao/correcoes-2026-10-19.md`.
+A bateria do tutor passa pelo fluxo real do site e grava fontes, resposta, rótulos citados e ajustes; a correção é avaliada à mão com os gabaritos de `tests_acervo/test_casos_sd.py`. Resultados: `pipeline/06-avaliacao/correcoes-2026-10-19.md`.
 
 ## Avaliação socrática (02/11/2026)
 

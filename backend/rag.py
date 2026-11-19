@@ -4,7 +4,7 @@ Cada disciplina tem o próprio acervo (cadastro em ``disciplinas/disciplinas.jso
 só olha o acervo da disciplina escolhida, então material de uma nunca aparece na outra.
 Duas fontes, consultadas com o mesmo embedding bge-m3 da pergunta:
 
-1. Acervo curado local (de PAA: provas, listas e resoluções em ``04-rag/indice.json``),
+1. Acervo curado local (de PAA: provas, listas e resoluções em ``pipeline/04-rag/indice.json``),
    busca híbrida léxica + semântica. Só entram blocos de confiança média/alta e, com o
    bge-m3 ligado, com similaridade acima de ACERVO_SIMILARIDADE_MINIMA (descontado o "hub").
    Se nada passar, a lista vem vazia e a resposta não finge ter material.

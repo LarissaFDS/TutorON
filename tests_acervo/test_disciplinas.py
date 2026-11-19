@@ -26,7 +26,7 @@ def buscar_sd(pergunta):
 def test_sem_disciplina_vale_paa_e_caminhos_de_paa_nao_mudam():
     paa = disciplinas.obter()
     assert paa.id == 'paa' and disciplinas.obter('PAA') == paa
-    assert paa.itens == ROOT / '02-acervo/itens.json' and paa.indice == ROOT / '04-rag/indice.json'
+    assert paa.itens == ROOT / 'pipeline/02-acervo/itens.json' and paa.indice == ROOT / 'pipeline/04-rag/indice.json'
     assert paa.livro_supabase and not SD.livro_supabase  # o livro do Supabase é só de PAA
 
 
@@ -64,7 +64,7 @@ def test_cabecalho_obrigatorio_e_curadoria(tmp_path):
 
 
 def test_candidato_e_rejeitado_ficam_fora_da_busca(tmp_path):
-    (tmp_path / 'materiais').mkdir()
+    (tmp_path / 'materiais').mkdir(parents=True, exist_ok=True)
     base = 'titulo: t\nassunto: a\ntipo: lista\nfonte: f\nautoria: a\nlicenca: l\n'
     for ident, status in (('ok', 'aprovado'), ('cand', 'candidato'), ('rej', 'rejeitado')):
         (tmp_path / 'materiais' / f'{ident}.md').write_text(

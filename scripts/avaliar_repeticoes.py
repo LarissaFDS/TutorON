@@ -12,9 +12,9 @@ from acervo.runtime import settings
 
 
 def main():
-    questions = {q['id']: q for q in read_json(ROOT / '06-avaliacao/questoes.json', [])}
-    baseline = {(r['questao'], r['cenario']): r for r in read_json(ROOT / '06-avaliacao/resultados.json', [])}
-    path = ROOT / '06-avaliacao/repeticoes.json'
+    questions = {q['id']: q for q in read_json(ROOT / 'pipeline/06-avaliacao/questoes.json', [])}
+    baseline = {(r['questao'], r['cenario']): r for r in read_json(ROOT / 'pipeline/06-avaliacao/resultados.json', [])}
+    path = ROOT / 'pipeline/06-avaliacao/repeticoes.json'
     previous = read_json(path, [])
     rows = []
     for seed in (7, 2026):

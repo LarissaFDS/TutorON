@@ -43,7 +43,7 @@ Os PDFs anexados no Notion trazem "Estruturas de Dados - ECOM008" e "Márcio Rib
 
 Os resultados são os mesmos nas duas disciplinas; o ângulo muda. Os blocos de ED não copiam blocos de PAA, e a busca de cada disciplina usa só o próprio acervo, sem filtro por palavra-chave (`tests_acervo/test_disciplina_ed.py`).
 
-| Assunto | ED (este acervo) | PAA (`02-acervo`) |
+| Assunto | ED (este acervo) | PAA (`pipeline/02-acervo`) |
 |---|---|---|
 | Merge sort, Quick sort | implementação em C, índices, memória auxiliar, testes; O(n log n), Quick O(n²) no pior caso | recorrência e prova (Teorema Mestre, divisão e conquista) |
 | Big-O e recorrências | contar laços, expansão até o caso-base | definição formal, provas, Teorema Mestre |

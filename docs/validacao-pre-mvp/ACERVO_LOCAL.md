@@ -45,18 +45,18 @@ Prepare modelos antes de embeddings/geração. `--questoes Q1,Q2` limita a amost
 
 ## Arquivos e confiança
 
-- `00-originais/ingestao/<sha256>/`: snapshots imutáveis locais, fora do Git.
-- `03-triagem/inventario.csv`: fontes atuais e referências.
-- `01-extraido/<id>.json/.md`: fonte, página, método, qualidade e texto bruto. `figuras/` contém páginas/recortes locais.
-- `02-acervo/itens.json`: manifesto atual; arquivos históricos na pasta não entram na busca por simples presença.
-- `03-triagem/correcoes.json` e `correcoes/`: versões por agente vinculadas ao SHA-256 original.
-- `03-triagem/auditoria.json` e `AUDITORIA.md`: conferência por arquivo/página/bloco. Integridade não certifica qualidade pedagógica.
-- `03-triagem/verificacoes-curadoria.json`: propriedades verificadas em casos finitos por código independente.
-- `03-triagem/revisoes.json`: pareceres humanos explícitos; hashes antigos não aprovam textos novos.
-- `04-rag/indice.json`: recuperação lexical + BGE-M3, exigindo confiança média/alta e filtrando ilegibilidade/assunto/cortes pendentes.
-- `05-modelo/treino/`: 26 exemplos de agente para treino e seis para validação, benchmark reservado.
-- `06-avaliacao/`: questões, quatro condições, respostas reais, hashes, latências e revisão técnica.
-- `07-validacao-alunos/pares.json`: pares reais atuais; votos/sessões são locais e ignorados pelo Git.
+- `pipeline/00-originais/ingestao/<sha256>/`: snapshots imutáveis locais, fora do Git.
+- `pipeline/03-triagem/inventario.csv`: fontes atuais e referências.
+- `pipeline/01-extraido/<id>.json/.md`: fonte, página, método, qualidade e texto bruto. `figuras/` contém páginas/recortes locais.
+- `pipeline/02-acervo/itens.json`: manifesto atual; arquivos históricos na pasta não entram na busca por simples presença.
+- `pipeline/03-triagem/correcoes.json` e `correcoes/`: versões por agente vinculadas ao SHA-256 original.
+- `pipeline/03-triagem/auditoria.json` e `AUDITORIA.md`: conferência por arquivo/página/bloco. Integridade não certifica qualidade pedagógica.
+- `pipeline/03-triagem/verificacoes-curadoria.json`: propriedades verificadas em casos finitos por código independente.
+- `pipeline/03-triagem/revisoes.json`: pareceres humanos explícitos; hashes antigos não aprovam textos novos.
+- `pipeline/04-rag/indice.json`: recuperação lexical + BGE-M3, exigindo confiança média/alta e filtrando ilegibilidade/assunto/cortes pendentes.
+- `pipeline/05-modelo/treino/`: 26 exemplos de agente para treino e seis para validação, benchmark reservado.
+- `pipeline/06-avaliacao/`: questões, quatro condições, respostas reais, hashes, latências e revisão técnica.
+- `pipeline/07-validacao-alunos/pares.json`: pares reais atuais; votos/sessões são locais e ignorados pelo Git.
 
 OCR foi testado em PNG, JPEG, WebP, BMP, GIF e TIFF, inclusive TIFF com múltiplos frames. Manuscritos, fórmulas e diagramas ainda exigem conferência. Visão é interpretação incerta separada e não substitui automaticamente a transcrição. Código extraído nunca é executado.
 
@@ -70,4 +70,4 @@ Backend usa Ollama por padrão. Gemini exige `TUTORON_AI_PROVIDER=gemini` e cred
 
 A/B oculta condições, mas estilo/citações podem sugeri-las. O CSV não registra nome, matrícula ou IP; comentários devem evitar identificação. Preferência não demonstra ganho de aprendizagem. Somente avaliações humanas reais alimentam os votos.
 
-Aprovações em `03-triagem/revisoes.json` exigem `sha256` (texto atual) e `sha256_fonte` (arquivo original), além de revisor, confiabilidade e justificativa. Mudanças no arquivo invalidam o parecer mesmo com OCR idêntico. Votos preservam o hash e snapshot de cada par; resumos não misturam versões.
+Aprovações em `pipeline/03-triagem/revisoes.json` exigem `sha256` (texto atual) e `sha256_fonte` (arquivo original), além de revisor, confiabilidade e justificativa. Mudanças no arquivo invalidam o parecer mesmo com OCR idêntico. Votos preservam o hash e snapshot de cada par; resumos não misturam versões.

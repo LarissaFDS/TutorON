@@ -3,10 +3,10 @@
 Chamado pelo 3-Treinar.bat antes do treino (etapa "0/5"). Para cada bloco curado
 (confiabilidade média ou alta) de cada disciplina do cadastro, pede ao modelo professor
 (a mesma cascata do site: Gemini → modelo local) um caso no formato de
-05-modelo/socratico/casos.json: conceito, pista, perguntas-guia, exemplo, visual,
+pipeline/05-modelo/socratico/casos.json: conceito, pista, perguntas-guia, exemplo, visual,
 conferência de uma tentativa e a próxima tarefa do aluno, sem nunca entregar a resposta.
 
-- Retomável: cada caso aceito fica em 05-modelo/socratico/gerados/<disciplina>.json; rodar de
+- Retomável: cada caso aceito fica em pipeline/05-modelo/socratico/gerados/<disciplina>.json; rodar de
   novo só pede os blocos que faltam (ou que mudaram, pelo sha256 do bloco).
 - Seguro: casos que entregam a resposta (backend.seguranca.entrega_resposta) são descartados.
 - Divisão estável por família (hash do id): ~80% treino, 10% validação, 10% teste; cada
@@ -30,7 +30,7 @@ sys.path.insert(0, str(ROOT))
 
 from acervo.disciplinas import obter, todas  # noqa: E402
 
-PASTA = ROOT / "05-modelo/socratico/gerados"
+PASTA = ROOT / "pipeline/05-modelo/socratico/gerados"
 CURADOS = ROOT / "dados-treino/curados"
 CAMPOS = ("pergunta", "tema", "conceito", "pista", "tarefa", "tentativa", "conferir", "perguntas", "visual", "exemplo")
 

@@ -25,12 +25,12 @@ BLOCOS = {
 def acervo(tmp_path):
     itens = [{"id": i, "sha256": i, "confiabilidade": "media", "texto": t, "fonte_original": f"{i}.pdf",
               "tipo": "lista", "assunto": "x"} for i, (t, _) in BLOCOS.items()]
-    (tmp_path / "02-acervo").mkdir()
-    (tmp_path / "04-rag").mkdir()
-    (tmp_path / "02-acervo/itens.json").write_text(json.dumps(itens), encoding="utf-8")
+    (tmp_path / "pipeline/02-acervo").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "pipeline/04-rag").mkdir(parents=True, exist_ok=True)
+    (tmp_path / "pipeline/02-acervo/itens.json").write_text(json.dumps(itens), encoding="utf-8")
     indice = {"modo": "hibrido", "embedding_model": "bge-m3", "chunks": itens,
               "vectors": [_norm(v) for _, v in BLOCOS.values()]}
-    (tmp_path / "04-rag/indice.json").write_text(json.dumps(indice), encoding="utf-8")
+    (tmp_path / "pipeline/04-rag/indice.json").write_text(json.dumps(indice), encoding="utf-8")
     return tmp_path
 
 
@@ -81,13 +81,13 @@ def test_nada_relevante_devolve_lista_vazia(acervo):
 
 
 def test_correspondencia_exata_continua_entrando_mesmo_abaixo_do_corte(acervo):
-    itens = json.loads((acervo / "02-acervo/itens.json").read_text(encoding="utf-8"))
+    itens = json.loads((acervo / "pipeline/02-acervo/itens.json").read_text(encoding="utf-8"))
     itens[3]["texto"] = "Quantos asteriscos ASTERISCO(n) imprime?"
-    for nome in ("02-acervo/itens.json",):
+    for nome in ("pipeline/02-acervo/itens.json",):
         (acervo / nome).write_text(json.dumps(itens), encoding="utf-8")
-    indice = json.loads((acervo / "04-rag/indice.json").read_text(encoding="utf-8"))
+    indice = json.loads((acervo / "pipeline/04-rag/indice.json").read_text(encoding="utf-8"))
     indice["chunks"] = itens
-    (acervo / "04-rag/indice.json").write_text(json.dumps(indice), encoding="utf-8")
+    (acervo / "pipeline/04-rag/indice.json").write_text(json.dumps(indice), encoding="utf-8")
     achados = search("Quantos asteriscos imprime ASTERISCO?", root=acervo, vector=_norm([1, 0, 0]),
                      min_similarity=0.95, hub_penalty=True)
     assert "grafo" in ids(achados)
@@ -118,14 +118,14 @@ def test_backend_passa_o_corte_da_configuracao(monkeypatch):
 def test_indice_refeito_com_o_mesmo_mtime_nao_reusa_hub_antigo(acervo):
     import os
 
-    caminho = acervo / "04-rag/indice.json"
+    caminho = acervo / "pipeline/04-rag/indice.json"
     search(PERGUNTA, root=acervo, vector=VETOR, min_similarity=0.0, hub_penalty=True)
     mtime = caminho.stat().st_mtime_ns
     novo = {"id": "lis", "sha256": "lis", "confiabilidade": "media", "texto": "Mochila e LIS.",
             "fonte_original": "lis.pdf", "tipo": "lista", "assunto": "x"}
-    for nome in ("02-acervo/itens.json", "04-rag/indice.json"):
+    for nome in ("pipeline/02-acervo/itens.json", "pipeline/04-rag/indice.json"):
         dados = json.loads((acervo / nome).read_text(encoding="utf-8"))
-        if nome.startswith("04"):
+        if "04-rag" in nome:
             dados["chunks"].append(novo)
             dados["vectors"].append(_norm([0.95, 0.05, 0.3]))
         else:

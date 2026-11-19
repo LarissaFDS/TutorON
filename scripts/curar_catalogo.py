@@ -203,9 +203,9 @@ O modelo por pares é mais simples e tem O(n^2) restrições. Clique de G corres
 
 
 def main():
-    items = {i['id']: i for i in read_json(ROOT / '02-acervo/itens.json', [])}
-    manifest = read_json(ROOT / '03-triagem/correcoes.json', {})
-    sources = {d['id']: d['sha256'] for d in read_json(ROOT / '03-triagem/inventario.json', [])}
+    items = {i['id']: i for i in read_json(ROOT / 'pipeline/02-acervo/itens.json', [])}
+    manifest = read_json(ROOT / 'pipeline/03-triagem/correcoes.json', {})
+    sources = {d['id']: d['sha256'] for d in read_json(ROOT / 'pipeline/03-triagem/inventario.json', [])}
     for identifier, (reason, text) in CORRECTIONS.items():
         if text is None:
             text = CORRECTIONS['c09' if identifier.endswith('q1-1') else 'c08'][1]
@@ -216,13 +216,13 @@ def main():
             raise RuntimeError(f'Fonte mudou: {identifier}; revise a correção antes de atualizar o hash.')
         if identifier in manifest and manifest[identifier].get('sha256_fonte', source_hash) != source_hash:
             raise RuntimeError(f'Arquivo-fonte mudou: {identifier}; não basta o OCR continuar igual.')
-        path = ROOT / '03-triagem/correcoes' / (identifier + '.md')
+        path = ROOT / 'pipeline/03-triagem/correcoes' / (identifier + '.md')
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(text.strip() + '\n', encoding='utf-8')
         manifest[identifier] = {'sha256_original': original, 'sha256_fonte': source_hash, 'arquivo': caminho_guardado(path),
                                 'motivo': reason, 'revisor': 'Codex (agente; não é revisão humana)',
                                 'documento_id': item['documento_id']}
-    write_json(ROOT / '03-triagem/correcoes.json', manifest)
+    write_json(ROOT / 'pipeline/03-triagem/correcoes.json', manifest)
     print(f'{len(manifest)} correções derivadas registradas.')
 
 

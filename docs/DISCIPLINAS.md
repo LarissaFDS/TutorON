@@ -13,9 +13,9 @@ pergunta + disciplina ──► acervo da disciplina (itens.json + indice.json) 
 ## Diagnóstico de como PAA funcionava (auditoria de 19/10/2026, a partir de `dev` em 29ce773)
 
 - **Interface → API → IA.** O site (`backend/web/app.js`) envia `POST /api/perguntar` com `{pergunta, contexto}`. `backend/tarefas.py` cria uma tarefa em segundo plano: `rag.recuperar()` → `rag.contexto()` → `prompts.prompt_tutor()` → `LLM.stream()` com `SISTEMA_TUTOR`. O site consulta `GET /api/tarefas/{id}` a cada segundo. A CLI usa `POST /api/v1/questions`, que passa pelo mesmo fluxo.
-- **RAG real, híbrido.** `acervo/retrieval.search` combina BM25 simplificado e similaridade de embeddings `bge-m3` (reciprocal rank fusion) sobre `04-rag/indice.json`. Ele revalida cada bloco contra `02-acervo/itens.json` (hash e confiabilidade) e só aceita blocos de confiança média ou alta. Sem Ollama, cai para a busca léxica.
+- **RAG real, híbrido.** `acervo/retrieval.search` combina BM25 simplificado e similaridade de embeddings `bge-m3` (reciprocal rank fusion) sobre `pipeline/04-rag/indice.json`. Ele revalida cada bloco contra `pipeline/02-acervo/itens.json` (hash e confiabilidade) e só aceita blocos de confiança média ou alta. Sem Ollama, cai para a busca léxica.
 - **Segunda fonte:** o livro-texto de PAA no Supabase/pgvector (`match_chunks`), consultado em paralelo e só como complemento. **A tabela não tem coluna de disciplina.**
-- **Acervo de PAA:** gerado pelo pipeline de OCR (`python -m acervo pipeline`), que varre **toda** a pasta `materiais/`, segmenta por questão (`02-acervo`), faz triagem de confiabilidade (`03-triagem`) e indexa (`04-rag`).
+- **Acervo de PAA:** gerado pelo pipeline de OCR (`python -m acervo pipeline`), que varre **toda** a pasta `materiais/`, segmenta por questão (`pipeline/02-acervo`), faz triagem de confiabilidade (`pipeline/03-triagem`) e indexa (`pipeline/04-rag`).
 - **Acoplamentos a PAA encontrados:** caminhos fixos do índice em `retrieval.py`; título "… de PAA" em `rag.py`; nome da disciplina e regras do Teorema Mestre no `SISTEMA_TUTOR`; exemplos de pergunta no `app.js`; o livro do Supabase sem filtro; a lista `TOPICS` e os bônus léxicos do pipeline de OCR. Não havia nenhum mecanismo de escolha de disciplina.
 - **Testes existentes:** `backend/tests` (API, cascata de modelos, erros do site) e `tests_acervo` (pipeline, confiança, cache, design).
 
@@ -23,7 +23,7 @@ pergunta + disciplina ──► acervo da disciplina (itens.json + indice.json) 
 
 | Peça | Mudança | Efeito em PAA |
 |---|---|---|
-| `disciplinas/disciplinas.json` | Cadastro: id, nome, sigla, caminhos do acervo, regras de rigor, uso do livro do Supabase, exemplos. `padrao: paa`. | Nenhum: aponta para `02-acervo` e `04-rag` de sempre. |
+| `disciplinas/disciplinas.json` | Cadastro: id, nome, sigla, caminhos do acervo, regras de rigor, uso do livro do Supabase, exemplos. `padrao: paa`. | Nenhum: aponta para `pipeline/02-acervo` e `pipeline/04-rag` de sempre. |
 | `acervo/disciplinas.py` | Lê o cadastro (`obter`, `todas`) e gera `itens.json`/`indice.json` de disciplinas cujo acervo é Markdown curado. | Nenhum. |
 | `acervo/retrieval.py` | `search` e `build` aceitam os caminhos `itens`/`indice` (padrão = PAA). Na busca léxica, tokens de notação booleana (Σm(...), ΠM(...), d(...), variáveis S(A,B,C), termos negados A'B') recebem o mesmo bônus das frases exatas. | Mesmos caminhos; o ranking léxico das 20 perguntas de avaliação de PAA é idêntico (teste com instantâneo). |
 | `backend/rag.py` | `recuperar(..., disciplina)` busca só no acervo da disciplina; o livro do Supabase entra só se `livro_supabase` for verdadeiro (hoje, só PAA). | Sem disciplina, usa PAA. |
@@ -166,7 +166,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
-| `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`02-acervo`, `04-rag`) + livro no Supabase | MVP |
+| `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`pipeline/02-acervo`, `pipeline/04-rag`) + livro no Supabase | MVP |
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (34 blocos, 24 na busca; as 10 notas da equipe com IA sem revisão humana saíram da busca em 10/11/2026; 6 blocos de anotações manuscritas de 2025.2 entraram em 18/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana e aprovação do professor pendentes; tópicos 03, 04, 06, 07, 08, 11 e 12 sem bloco na busca; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
 | `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |

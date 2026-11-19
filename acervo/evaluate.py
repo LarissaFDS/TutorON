@@ -16,7 +16,7 @@ def checkpoint(label, regex, kind='deve'):
 
 
 def make_questions(root=ROOT):
-    items = read_json(root / '02-acervo/itens.json', [])
+    items = read_json(root / 'pipeline/02-acervo/itens.json', [])
     original = read_json(root / 'legado/poc-gemini/questoes.json', [])
     questions = []
     for q in original:
@@ -50,8 +50,8 @@ def make_questions(root=ROOT):
         questions.append({'id': qid, 'titulo': question[:80], 'pergunta': question, 'assunto': TOPICS[topic_idx],
                           'contexto': refs, 'fontes_esperadas': refs, 'checkpoints': checks,
                           'categoria': category, 'checklist_status': 'proposto_revisao_professor_pendente'})
-    write_json(root / '06-avaliacao/questoes.json', questions)
-    write_json(root / '06-avaliacao/cobertura.json', {'questoes': len(questions),
+    write_json(root / 'pipeline/06-avaliacao/questoes.json', questions)
+    write_json(root / 'pipeline/06-avaliacao/cobertura.json', {'questoes': len(questions),
                'por_assunto': dict(Counter(q['assunto'] for q in questions)),
                'sem_fonte': [q['id'] for q in questions if not q['contexto'] and q['categoria'] != 'sem_resposta'],
                'revisao_professor': 'pendente'})
@@ -70,8 +70,8 @@ def assess(q, answer, structured):
 
 
 def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
-    questions = read_json(root / '06-avaliacao/questoes.json', []) or make_questions(root)
-    items = {r['id']: r for r in read_json(root / '02-acervo/itens.json', [])}
+    questions = read_json(root / 'pipeline/06-avaliacao/questoes.json', []) or make_questions(root)
+    items = {r['id']: r for r in read_json(root / 'pipeline/02-acervo/itens.json', [])}
     results = []
     output_name = 'resultados.json' if generate else 'recuperacao.json'
     for q in questions:
@@ -89,7 +89,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
             row = {'questao': q['id'], 'cenario': scenario, 'fontes': actual_ids,
                    'contexto_texto': ctx,
                    'fontes_sha256': {i['id']: i['sha256'] for i in chosen if i['id'] in actual_ids},
-                   'indice_sha256': digest((root / '04-rag/indice.json').read_bytes()),
+                   'indice_sha256': digest((root / 'pipeline/04-rag/indice.json').read_bytes()),
                    'limite_palavras_solicitado': 220,
                    'esperadas': sorted(expected), 'excluidas_baixa': excluded,
                    'top_k_acertou': bool(expected.intersection(actual_ids)) if expected else None,
@@ -102,7 +102,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
             identity = models.model_digest(selected_model) if generate and provider == 'ollama' else None
             row['modelo_digest'] = identity
             key = digest(json.dumps([q, ctx, provider, models.SYSTEM, profile, selected_model, identity, scenario, 'validation-v4-trust-and-model-digest'], ensure_ascii=False))
-            cache = root / '06-avaliacao/execucoes' / f'{q["id"]}-{scenario}-{key[:16]}.json'
+            cache = root / 'pipeline/06-avaliacao/execucoes' / f'{q["id"]}-{scenario}-{key[:16]}.json'
             if generate:
                 previous = read_json(cache, {})
                 if previous.get('status') == 'ok':
@@ -126,7 +126,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
                     row['citacoes_ids'] = cited
                     row['citacoes_ids_invalidos'] = [c for c in cited if c not in actual_ids]
             results.append(row)
-            write_json(root / '06-avaliacao' / output_name, results)
+            write_json(root / 'pipeline/06-avaliacao' / output_name, results)
             print(q['id'], scenario, row['status'], flush=True)
     lines = ['# Avaliação de PAA', '', 'Checklists ainda dependem do professor. Percentuais são cobertura lexical, não acurácia.', '',
              '| Condição | Respostas concluídas | Critérios encontrados | Critérios aplicáveis |', '|---|---:|---:|---:|']
@@ -138,7 +138,7 @@ def evaluate(root=ROOT, provider='ollama', generate=False, selected=None):
     for r in results:
         if r['cenario'] == 'rag_automatica':
             lines.append(f'| {r["questao"]} | {r["top_k_acertou"]} | {", ".join(r["excluidas_baixa"])} | {r["segundos_busca"]:.3f} |')
-    (root / '06-avaliacao' / ('relatorio.md' if generate else 'relatorio-recuperacao.md')).write_text('\n'.join(lines), encoding='utf-8', newline='\n')
+    (root / 'pipeline/06-avaliacao' / ('relatorio.md' if generate else 'relatorio-recuperacao.md')).write_text('\n'.join(lines), encoding='utf-8', newline='\n')
     progress('6. Avaliação', f'{len(questions)} questões definidas; {sum(r["status"] == "ok" for r in results)} respostas reais nesta execução. Resultados de recuperação e geração separados. Revisão com professor pendente.', root)
     return results
 

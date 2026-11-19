@@ -32,11 +32,11 @@ grande** — eles podem ter mudado.
 - Uma pergunta com resposta ≈ 4–5 KB (com índice). **500 MB ≈ 100 mil perguntas.**
 - Uma linha de uso ≈ 150 B (duas por pergunta). Irrelevante.
 - Com 100 alunos × 20 perguntas/dia = 2.000/dia ≈ 10 MB/dia → **~50 dias para encher**.
-  Por isso: o texto completo das respostas fica 90 dias; depois o job de limpeza guarda só os metadados
+  Por isso: o texto completo das respostas fica 30 dias; depois o job de limpeza guarda só os metadados
   (disciplina, modelo, tokens, voto). Exporte para o PC antes (`scripts/exportar_banco.py`).
 - Vídeos: 1 GB ≈ 7 mil animações. Guardamos o vídeo no Storage por 7 dias (o roteiro JSON fica no banco e
   o vídeo pode ser gerado de novo).
-- O acervo/RAG (`04-rag/indice.json`) **não** vai para o banco: é estático e vai junto com o deploy.
+- O acervo/RAG (`pipeline/04-rag/indice.json`) **não** vai para o banco: é estático e vai junto com o deploy.
 
 ## Regra para quem mexer no código (pessoas e agentes)
 

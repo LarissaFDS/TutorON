@@ -34,7 +34,7 @@ sys.path.insert(0, str(ROOT))
 
 from acervo.common import write_json  # noqa: E402
 
-PASTA_DADOS = ROOT / '05-modelo/socratico/preparado'
+PASTA_DADOS = ROOT / 'pipeline/05-modelo/socratico/preparado'
 PASTA_TRABALHO = ROOT / '.tools/treino-socratico'
 OLLAMA = ROOT / '.tools/ollama/ollama.exe'
 OLLAMA_URL = os.environ.get('OLLAMA_URL', 'http://127.0.0.1:11434')
@@ -287,7 +287,7 @@ def importar_no_ollama(pasta: Path, nome: str) -> None:
                     '--outfile', str(bf16)], check=True, env=env)
     subprocess.run([str(OLLAMA.parent / 'lib/ollama/llama-quantize.exe'), str(bf16), str(q4), 'Q4_K_M'], check=True)
     bf16.unlink()
-    atual = (ROOT / '05-modelo/Modelfile').read_text(encoding='utf-8')
+    atual = (ROOT / 'pipeline/05-modelo/Modelfile').read_text(encoding='utf-8')
     linhas = [ln for ln in atual.splitlines() if not ln.startswith('FROM ') and not ln.startswith('#')]
     modelfile = saida / 'Modelfile'
     modelfile.write_text(f'FROM {q4}\n' + '\n'.join(linhas) + '\n', encoding='utf-8')

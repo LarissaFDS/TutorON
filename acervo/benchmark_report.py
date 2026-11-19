@@ -6,7 +6,7 @@ from .evaluate import SCENARIOS
 
 
 def report(root=ROOT):
-    results = read_json(root / '06-avaliacao/resultados.json', [])
+    results = read_json(root / 'pipeline/06-avaliacao/resultados.json', [])
     grouped = {}
     for row in results:
         grouped.setdefault(row['questao'], {})[row['cenario']] = row
@@ -19,7 +19,7 @@ def report(root=ROOT):
         comparison.append({'questao': qid, 'completa_quatro_condicoes': len(complete) == 4,
                            'criterios_comuns': sorted(common), 'acertos_comuns': scores})
     summaries = {}
-    review = read_json(root / '06-avaliacao/revisao-tecnica.json', {})
+    review = read_json(root / 'pipeline/06-avaliacao/revisao-tecnica.json', {})
     verdicts = {(r['questao'], r['cenario'], r['resposta_sha256']): r['parecer'] for r in review.get('revisoes', [])}
     full = [q for q in comparison if q['completa_quatro_condicoes']]
     for scenario in SCENARIOS:
@@ -47,7 +47,7 @@ def report(root=ROOT):
                               'Uma semente na rodada principal; sem inferência estatística de superioridade.',
                               'Material no RAG é permitido no protocolo aberto; não é teste de conhecimento memorizado.',
                               'Revisão técnica por agente e validação cega com alunos/professor são evidências separadas.']}
-    write_json(root / '06-avaliacao/comparacao-atual.json', summary)
+    write_json(root / 'pipeline/06-avaliacao/comparacao-atual.json', summary)
     lines = ['# Comparação local atual', '', 'Mesmos pesos Qwen2.5 3B, temperatura 0,2, seed 42, contexto de 4096 tokens. '
              'Todos recebem a mesma orientação de até 220 palavras. TutorON adiciona contexto acadêmico curado. '
              'O controle usa as mesmas instruções sem dados. Nenhum fine-tuning foi executado.', '',
@@ -69,7 +69,7 @@ def report(root=ROOT):
     lines += ['', '## Limites da conclusão', '', *['- '+s for s in summary['limitacoes']], '',
               'Respostas integrais, fontes, hashes e latência: resultados.json. Avaliação por agente: revisao-tecnica.json. '
               'Votos humanos reais são coletados em http://127.0.0.1:8765; nenhum voto é fabricado.']
-    (root / '06-avaliacao/COMPARACAO_ATUAL.md').write_text('\n'.join(lines)+'\n', encoding='utf-8')
+    (root / 'pipeline/06-avaliacao/COMPARACAO_ATUAL.md').write_text('\n'.join(lines)+'\n', encoding='utf-8')
     print(summary['status'], differences)
     return summary
 

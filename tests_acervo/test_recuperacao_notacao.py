@@ -62,7 +62,7 @@ def test_numero_de_resultados_nao_mudou():
 
 def test_maxtermos_nao_confundem_com_mintermos(tmp_path):
     base = 'assunto: a\ntipo: lista\nfonte: f\nautoria: a\nlicenca: l\ncuradoria: aprovado\n'
-    (tmp_path / 'm').mkdir()
+    (tmp_path / 'm').mkdir(parents=True, exist_ok=True)
     (tmp_path / 'm' / 'min.md').write_text(f'---\nid: min\ntitulo: t\n{base}---\nF = Σm(0,2,4) no mapa', encoding='utf-8')
     (tmp_path / 'm' / 'max.md').write_text(f'---\nid: max\ntitulo: t\n{base}---\nF = ΠM(0,2,4) no mapa', encoding='utf-8')
     d = disciplinas.Disciplina('t', 'T', 'T', tmp_path / 'i.json', tmp_path / 'x.json', rigor='', materiais=tmp_path / 'm')
@@ -73,7 +73,7 @@ def test_maxtermos_nao_confundem_com_mintermos(tmp_path):
 
 
 def test_ranking_lexico_de_paa_preservado():
-    """As 20 perguntas de 06-avaliacao (questoes.json e perguntas-mvp.json) devolvem exatamente
+    """As 20 perguntas de pipeline/06-avaliacao (questoes.json e perguntas-mvp.json) devolvem exatamente
     os mesmos blocos, na mesma ordem, que antes da mudança (instantâneo de e102e22)."""
     antes = json.loads((ROOT / 'tests_acervo/ranking-paa-lexico.json').read_text(encoding='utf-8'))
     assert len(antes) == 20

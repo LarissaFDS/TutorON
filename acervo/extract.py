@@ -91,7 +91,7 @@ def topic_for(text):
 def snapshot(src, root=ROOT):
     sha = digest(src.read_bytes())
     # Preserve versões diferentes sob hashes diferentes; nunca sobrescrever uma cópia.
-    dest = root / '00-originais' / 'ingestao' / sha / src.name
+    dest = root / 'pipeline/00-originais' / 'ingestao' / sha / src.name
     if not dest.exists():
         dest.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dest)
@@ -106,12 +106,12 @@ def inventory(root=ROOT, extra=None):
     init(root)
     sources = [(p, 'acervo') for p in ordenados((root / 'materiais').rglob('*'), root)
                if p.is_file() and p.suffix.lower() in SUPPORTED]
-    refs = root / '00-originais' / 'referencias'
+    refs = root / 'pipeline/00-originais' / 'referencias'
     sources += [(p, 'referencia') for p in ordenados(refs.glob('*'), root)
                 if p.suffix.lower() in SUPPORTED]
     if extra:
         sources += [(p, 'acervo') for p in ordenados(Path(extra).rglob('*'), Path(extra))
-                    if p.is_file() and p.suffix.lower() in SUPPORTED and '00-originais' not in p.parts]
+                    if p.is_file() and p.suffix.lower() in SUPPORTED and 'pipeline/00-originais' not in p.parts]
     rows, seen = [], set()
     for path, scope in sources:
         if path.resolve() in seen:
@@ -140,8 +140,8 @@ def inventory(root=ROOT, extra=None):
                      'paginas': pages, 'texto_extraivel': extractable,
                      'assunto_provavel': topic_for(path.name + '\n' + text[:3000]),
                      'escopo': scope, 'erro': error})
-    write_json(root / '03-triagem/inventario.json', rows)
-    write_csv(root / '03-triagem/inventario.csv', rows, list(rows[0]) if rows else ['id', 'arquivo'])
+    write_json(root / 'pipeline/03-triagem/inventario.json', rows)
+    write_csv(root / 'pipeline/03-triagem/inventario.csv', rows, list(rows[0]) if rows else ['id', 'arquivo'])
     progress('1. Inventário', f'{len(rows)} documentos de entrada; {sum(r["escopo"] == "acervo" for r in rows)} do acervo. Código, caches e credenciais não são documentos didáticos.', root)
     return rows
 
@@ -242,11 +242,11 @@ def pdf_page(page, number, figures, root, vision):
 def extract(root=ROOT, vision=False, retry=False):
     import pymupdf as fitz
     from PIL import Image
-    rows = read_json(root / '03-triagem/inventario.json', [])
+    rows = read_json(root / 'pipeline/03-triagem/inventario.json', [])
     docs = []
     version = f'v5-vision={vision}'
     for row in rows:
-        base = root / '01-extraido' / row['id']
+        base = root / 'pipeline/01-extraido' / row['id']
         previous = read_json(base.with_suffix('.json'), {})
         valid_previous = previous.get('pipeline') == version or (not vision and previous.get('pipeline') == 'v5-vision=True')
         failed_previous = any(p['metodo'] in ('erro', 'visao_falhou', 'pendente') for p in previous.get('paginas_extraidas', []))
@@ -254,19 +254,19 @@ def extract(root=ROOT, vision=False, retry=False):
             docs.append(previous)
             continue
         source = caminho_local(row['copia'], root)
-        figures = root / '01-extraido/figuras' / row['id']
+        figures = root / 'pipeline/01-extraido/figuras' / row['id']
         pages = []
         try:
             if row['tipo'] == '.pdf':
                 figures.mkdir(parents=True, exist_ok=True)
                 with fitz.open(source) as pdf:
                     for i, page in enumerate(pdf, 1):
-                        cache = root / '01-extraido/cache' / f'{row["sha256"]}-p{i}-{version}.json'
+                        cache = root / 'pipeline/01-extraido/cache' / f'{row["sha256"]}-p{i}-{version}.json'
                         cached = read_json(cache, {})
                         if cached and not retry and cached['metodo'] not in ('visao_falhou', 'pendente', 'erro'):
                             pages.append(cached)
                             continue
-                        basic_cache = root / '01-extraido/cache' / f'{row["sha256"]}-p{i}-v5-vision=False.json'
+                        basic_cache = root / 'pipeline/01-extraido/cache' / f'{row["sha256"]}-p{i}-v5-vision=False.json'
                         if vision and basic_cache.exists() and not retry:
                             entry = read_json(basic_cache)
                             entry['visao_candidata'] = []
@@ -328,6 +328,6 @@ def extract(root=ROOT, vision=False, retry=False):
         base.with_suffix('.md').write_text(body, encoding='utf-8', newline='\n')
         docs.append(doc)
     pending = sum(p['qualidade'] != 'boa' for d in docs for p in d['paginas_extraidas'])
-    examples = '\n'.join(f'- Antes: `{d["copia"]}` → depois: `01-extraido/{d["id"]}.md` ({d["paginas_extraidas"][0]["qualidade"]}).' for d in docs[:3])
+    examples = '\n'.join(f'- Antes: `{d["copia"]}` → depois: `pipeline/01-extraido/{d["id"]}.md` ({d["paginas_extraidas"][0]["qualidade"]}).' for d in docs[:3])
     progress('2. Extração', f'{len(docs)} documentos com Markdown; {pending} páginas exigem revisão/OCR. Exemplos:\n{examples}', root)
     return docs

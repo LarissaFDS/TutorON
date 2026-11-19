@@ -8,20 +8,20 @@ from acervo.common import ROOT, digest, read_json
 
 
 def main():
-    audit = read_json(ROOT / '03-triagem/auditoria.json', {})['resumo']
-    summary = read_json(ROOT / '06-avaliacao/comparacao-atual.json', {})
-    reviews = read_json(ROOT / '06-avaliacao/revisao-tecnica.json', {})
+    audit = read_json(ROOT / 'pipeline/03-triagem/auditoria.json', {})['resumo']
+    summary = read_json(ROOT / 'pipeline/06-avaliacao/comparacao-atual.json', {})
+    reviews = read_json(ROOT / 'pipeline/06-avaliacao/revisao-tecnica.json', {})
     decisions = {(r['questao'],r['cenario']):r for r in reviews['revisoes']}
-    results = read_json(ROOT / '06-avaliacao/resultados.json', [])
+    results = read_json(ROOT / 'pipeline/06-avaliacao/resultados.json', [])
     assert len(results) == 48 and all(r['status'] == 'ok' for r in results)
     assert all(decisions[r['questao'],r['cenario']]['resposta_sha256'] == digest(r['resposta']['texto']) for r in results)
-    follow = read_json(ROOT / '06-avaliacao/seguimento-7b.json', [])
-    repeats = read_json(ROOT / '06-avaliacao/repeticoes.json', [])
+    follow = read_json(ROOT / 'pipeline/06-avaliacao/seguimento-7b.json', [])
+    repeats = read_json(ROOT / 'pipeline/06-avaliacao/repeticoes.json', [])
     for r in follow + repeats:
         assert r['status'] == 'ok' and r['revisao_agente']['resposta_sha256'] == digest(r['resposta']['texto'])
-    training = read_json(ROOT / '05-modelo/treino/manifesto.json', {})
-    vision = read_json(ROOT / '06-avaliacao/visao-impressa.json', {})
-    checks = read_json(ROOT / '03-triagem/verificacoes-curadoria.json', {})
+    training = read_json(ROOT / 'pipeline/05-modelo/treino/manifesto.json', {})
+    vision = read_json(ROOT / 'pipeline/06-avaliacao/visao-impressa.json', {})
+    checks = read_json(ROOT / 'pipeline/03-triagem/verificacoes-curadoria.json', {})
     lines = ['# TutorON — relatório da validação antes do MVP', '',
         'Resultado: o fluxo local de OCR, curadoria, RAG e comparação funciona. **A superioridade do TutorON ainda não foi demonstrada.** '
         'Há ganhos em alguns critérios e respostas, mas também erros matemáticos graves. Não houve fine-tuning nem implantação pública.', '',
@@ -34,7 +34,7 @@ def main():
         '- A tentativa real em gabaritoprova.webp terminou em TruncatedResponse no limite de 4096 tokens de saída e foi descartada. Manuscritos continuam pendentes; interpretações visuais nunca substituem automaticamente o texto.',
         '- A extração teve dez páginas/blocos de qualidade boa, 146 parciais e cinco ilegíveis/vazios. Entre os cinco estão o TXT vazio, uma página de prova_1_A.pdf e três fotos. Não há promessa de OCR universal.',
         '- Correções e aprovações exigem hashes do texto e do arquivo-fonte. Uma imagem alterada invalida a revisão mesmo com OCR idêntico. Windows/Linux mantêm LF para textos usados nos hashes.',
-        '', 'Detalhes por arquivo: [AUDITORIA.md](03-triagem/AUDITORIA.md). Correções: [correcoes.json](03-triagem/correcoes.json).', '',
+        '', 'Detalhes por arquivo: [AUDITORIA.md](pipeline/03-triagem/AUDITORIA.md). Correções: [correcoes.json](pipeline/03-triagem/correcoes.json).', '',
         '## Validação matemática da curadoria', '',
         f'{checks["total_casos"]:,} casos finitos em {len(checks["verificacoes"])} famílias: recorrência ASTERISCO, panquecas, soma contígua, quadrados mágicos, triângulos, Subset Sum, número faltante, caminhos, torneios, seleção em listas, Hanoi, oito damas, clique e lucro de um exercício de programação linear. '
         'Código independente e fixo confronta enumeração/recorrências; não executa código de OCR ou respostas do modelo. Esses casos não certificam todas as provas.', '',
@@ -56,14 +56,14 @@ def main():
         'Nenhuma resposta da rodada principal citou um ID de fonte válido. Contagem zero de IDs inválidos não demonstra fundamentação; marcadores numéricos não são citações verificadas.',
         'Cobertura lexical não é acurácia. A revisão por agente encontrou comparações invertidas, implicações falsas de NP-completude, gráficos/custos inventados e traces de Kadane incorretos. '
         'O caso NP melhorou após excluir material não verificado, mas erros permaneceram mesmo com recorrências e fórmulas corretas no contexto.',
-        '', 'Textos integrais, contextos, fontes, fingerprints dos modelos e tempos: [resultados.json](06-avaliacao/resultados.json). '
-        '[Revisão técnica](06-avaliacao/revisao-tecnica.json) vinculada ao hash exato de cada resposta. Não é julgamento humano independente.', '',
+        '', 'Textos integrais, contextos, fontes, fingerprints dos modelos e tempos: [resultados.json](pipeline/06-avaliacao/resultados.json). '
+        '[Revisão técnica](pipeline/06-avaliacao/revisao-tecnica.json) vinculada ao hash exato de cada resposta. Não é julgamento humano independente.', '',
         '## Seguimentos e limitações', '',
         f'- 7B: {len(follow)} respostas para Q1/Q2, com os mesmos contextos finais e quatro condições. Média {mean(r["resposta"]["segundos"] for r in follow):.1f}s por resposta nesta CPU. '
         'A RAG manual deu prova de máximo e recorrência corretas; automática melhorou, mas ainda restringiu desnecessariamente Algoritmo X a vetor ordenado. Amostra insuficiente para escolher um modelo superior.',
         f'- Sementes 7 e 2026: {len(repeats)} respostas de Q2/Q6, genérico e automático. Os desenvolvimentos de Kadane continuaram incorretos; a fórmula correta sozinha não garantiu um raciocínio correto.',
         '- Uma semente no conjunto completo, duas questões nos seguimentos, avaliador por agente e questões correlacionadas. Não há inferência estatística de superioridade nem evidência de ganho de aprendizagem.',
-        '- Artefatos de índices anteriores com 39 correções/115 blocos e 53 correções/121 blocos estão rotulados em 06-avaliacao/historico. O índice final tem 53 blocos revisados.',
+        '- Artefatos de índices anteriores com 39 correções/115 blocos e 53 correções/121 blocos estão rotulados em pipeline/06-avaliacao/historico. O índice final tem 53 blocos revisados.',
         '- Cache reaproveita respostas idênticas; esses reaproveitamentos não são novas gerações. Identidade real do modelo entra no cache e mudança de pesos invalida resultados antigos. A migração de procedência desta sessão é registrada em cache-migracao.json.',
         '', '## Ambiente, treinamento e servidor', '',
         '- Ubuntu 24.04, Ryzen 7 3700U (4 núcleos/8 threads), aproximadamente 10 GiB RAM, nenhuma GPU NVIDIA. Ollama portátil oficial v0.34.4 instalado e SHA-256 verificado; preparar_modelos.sh foi executado.',
@@ -82,7 +82,7 @@ def main():
         'Esta é uma base de validação antes do MVP, sem release de produção. Pesos, .env, ambientes, snapshots locais e votos não são enviados ao GitHub.',
         'Antes do MVP: ampliar revisão matemática por professor, resolver manuscritos/diagramas pendentes, avaliar modelo de maior capacidade em mais questões e coletar avaliação cega real. '
         'Treinar somente após conferir o dataset e executar a receita na GPU; comparar base/ajustado com mesmas opções e conjunto reservado. Não converter checklist, preferência ou loss em alegação de superioridade.', '',
-        '[Operação Linux/Windows](PASSO_A_PASSO.md) · [Guia de treino](05-modelo/COMO_TREINAR.md) · [Comparação](06-avaliacao/COMPARACAO_ATUAL.md)', '']
+        '[Operação Linux/Windows](PASSO_A_PASSO.md) · [Guia de treino](pipeline/05-modelo/COMO_TREINAR.md) · [Comparação](pipeline/06-avaliacao/COMPARACAO_ATUAL.md)', '']
     (ROOT / 'docs/validacao-pre-mvp/RELATORIO_VALIDACAO.md').write_text('\n'.join(lines), encoding='utf-8')
     print('Relatório gerado com respostas e pareceres conferidos por hash.')
 

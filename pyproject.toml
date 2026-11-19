@@ -1,0 +1,25 @@
+[project]
+name = "tutoron"
+version = "0.2.0"
+description = "Tutor socrático de IA para Engenharia e Ciência da Computação"
+requires-python = ">=3.11"
+# Dependências continuam em requirements.txt (servidor) e requirements-acervo.txt (pipeline do acervo).
+
+[tool.pytest.ini_options]
+testpaths = ["backend/tests", "tests_acervo", "eval"]
+asyncio_default_fixture_loop_scope = "function"
+addopts = "-p no:cacheprovider"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["pipeline", "legado", ".tools", "dados", "tmp"]
+
+[tool.ruff.lint]
+# Erros reais (pyflakes), imports e bugs comuns. Estilo fica para o formatador.
+select = ["E9", "F", "I", "B", "UP"]
+ignore = ["B008", "E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = ["F811", "F401"]
+"tests_acervo/**" = ["F811", "F401"]

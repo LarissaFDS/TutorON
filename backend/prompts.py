@@ -35,7 +35,7 @@ Seu objetivo é destravar o aluno: explicar com clareza e corrigir o raciocínio
 - Não repita a pergunta. Não termine com ofertas genéricas de ajuda."""
 
 
-# Acrescentado depois do teste de 19/10/2026 (06-avaliacao/teste-2026-10-19.md): o modelo local
+# Acrescentado depois do teste de 19/10/2026 (pipeline/06-avaliacao/teste-2026-10-19.md): o modelo local
 # parafraseou estas instruções quando pedido, citou pouco ou fora de lugar e inventou um exemplo
 # errado para uma pergunta de outra disciplina. Só acrescenta seções; o texto anterior fica igual.
 _SECOES_NOVAS = """# Citações e fidelidade

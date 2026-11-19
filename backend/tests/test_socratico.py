@@ -1,6 +1,6 @@
 """Reunião de 21/10/2026: tutor socrático (sem resposta direta), foto do papel conferida pelo aluno
 e animações Manim. A IA é falsa: estes testes verificam o código em volta dela. O comportamento
-com modelo real está em 06-avaliacao/teste-socratico-2026-10-21.md."""
+com modelo real está em pipeline/06-avaliacao/teste-socratico-2026-10-21.md."""
 import base64
 import io
 import json

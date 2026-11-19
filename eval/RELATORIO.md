@@ -24,7 +24,7 @@ Os PRs #21 a #25 foram mesclados juntos numa cópia local, sem conflito: 104 tes
 
 ### H1 — Roteamento: confirmada nos logs
 
-Fontes: `perguntas.jsonl` (8 respostas do modo Tutor, 12/10) e `06-avaliacao/resultados-mvp.json` (8 respostas TutorON+Gemini). Detalhes em [`results/diagnostico-roteamento.md`](results/diagnostico-roteamento.md).
+Fontes: `perguntas.jsonl` (8 respostas do modo Tutor, 12/10) e `pipeline/06-avaliacao/resultados-mvp.json` (8 respostas TutorON+Gemini). Detalhes em [`results/diagnostico-roteamento.md`](results/diagnostico-roteamento.md).
 
 | Quem respondeu | Logs do site | Avaliação MVP | Total |
 |---|---:|---:|---:|

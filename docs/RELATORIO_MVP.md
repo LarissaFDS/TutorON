@@ -1,6 +1,6 @@
 # Relatório do MVP do TutorON — 12/10/2026
 
-Este relatório cobre o que foi implementado nesta rodada, como foi testado e o que a avaliação dos modelos mostrou. As respostas completas estão em [`06-avaliacao/resultados-mvp.json`](../06-avaliacao/resultados-mvp.json) e as perguntas com as soluções de referência em [`06-avaliacao/perguntas-mvp.json`](../06-avaliacao/perguntas-mvp.json).
+Este relatório cobre o que foi implementado nesta rodada, como foi testado e o que a avaliação dos modelos mostrou. As respostas completas estão em [`pipeline/06-avaliacao/resultados-mvp.json`](../06-avaliacao/resultados-mvp.json) e as perguntas com as soluções de referência em [`pipeline/06-avaliacao/perguntas-mvp.json`](../06-avaliacao/perguntas-mvp.json).
 
 ## 1. O que foi feito
 
@@ -76,7 +76,7 @@ Problemas encontrados no caminho, já corrigidos no pipeline:
 - O Ollama do Windows não importa safetensors (precisa do runtime MLX, que só existe no Mac). A importação passou a converter para GGUF com o conversor oficial do llama.cpp e quantizar com o `llama-quantize` que vem com o Ollama.
 - **A primeira versão treinada ficou quebrada**: parou de raciocinar e entrava em loop repetindo a mesma frase. Duas causas: o template do Qwen3 coloca um bloco de raciocínio vazio antes da resposta, e o modelo aprendeu a gerá-lo; e 60 passos sobre 26 exemplos (~9 épocas) sobreajustaram. Agora o bloco vazio fica fora da perda e o padrão é 30 passos com taxa de aprendizado menor. A versão nova raciocina normalmente e não entra em loop.
 
-Resultado (relatório completo em [`05-modelo/treino/avaliacao-20261012-0154.md`](../05-modelo/treino/avaliacao-20261012-0154.md)):
+Resultado (relatório completo em [`pipeline/05-modelo/treino/avaliacao-20261012-0154.md`](../05-modelo/treino/avaliacao-20261012-0154.md)):
 
 | Modelo | Nota média do juiz (0–2) | Casos julgados |
 |---|---:|---:|

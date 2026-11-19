@@ -54,8 +54,8 @@ def split_questions(pages):
 
 def organize(root=ROOT):
     init(root)
-    docs = [read_json(p) for p in sorted((root / '01-extraido').glob('*.json'))]
-    inventory = read_json(root / '03-triagem/inventario.json', None)
+    docs = [read_json(p) for p in sorted((root / 'pipeline/01-extraido').glob('*.json'))]
+    inventory = read_json(root / 'pipeline/03-triagem/inventario.json', None)
     if inventory is not None:
         active = {d['id']: d['sha256'] for d in inventory}
         docs = [d for d in docs if active.get(d['id']) == d['sha256']]
@@ -103,7 +103,7 @@ def organize(root=ROOT):
             semester = re.search(r'\b(20\d{2})[._-]([12])\b', name)
             semester = semester[1] + '.' + semester[2] if semester else 'nao_informado'
             filename = f'{topic}__{kind}__{slug(name)}-{doc["id"]}__{date}__q{part["numero"]}-{index+1}.md'
-            path = root / '02-acervo' / topic / folder / filename
+            path = root / 'pipeline/02-acervo' / topic / folder / filename
             source = doc['arquivo'] + ' | página(s): ' + ', '.join(str(p) if p else 'não informada na transcrição' for p in part['paginas'])
             record = {'id': item_id, 'bloco': topic[:2].upper() if topic in TOPICS else 'incerto',
                       'assunto': topic, 'tipo': kind, 'fonte_original': source, 'semestre': semester,
@@ -117,15 +117,15 @@ def organize(root=ROOT):
             records.append(record)
     apply_corrections(records, root)
     records = equipe.mesclar(records, root)  # material da equipe não vem da extração
-    write_json(root / '02-acervo/itens.json', records)
-    write_csv(root / '02-acervo/indice.csv', records, FIELDS)
+    write_json(root / 'pipeline/02-acervo/itens.json', records)
+    write_csv(root / 'pipeline/02-acervo/indice.csv', records, FIELDS)
     progress('3. Organização', f'{len(records)} blocos segmentados; {sum(r["segmentacao"] == "pendente" for r in records)} sem separação segura. Metadados e texto separados em itens.json e indice.csv; confirmar cortes nas páginas originais.', root)
     return records
 
 
 def apply_corrections(records, root=ROOT):
     """Uma correção derivada nunca altera o OCR nem a página original."""
-    corrections = read_json(root / '03-triagem/correcoes.json', {})
+    corrections = read_json(root / 'pipeline/03-triagem/correcoes.json', {})
     for item in records:
         correction = corrections.get(item['id'])
         if not correction:
@@ -183,8 +183,8 @@ def objective_checks():
 
 
 def triage(root=ROOT, use_ai=False, limit=None):
-    records = read_json(root / '02-acervo/itens.json', [])
-    reviews = read_json(root / '03-triagem/revisoes.json', {})
+    records = read_json(root / 'pipeline/02-acervo/itens.json', [])
+    reviews = read_json(root / 'pipeline/03-triagem/revisoes.json', {})
     reports = []
     ai_count = 0
     for item in records:
@@ -211,7 +211,7 @@ def triage(root=ROOT, use_ai=False, limit=None):
             reason = equipe.MOTIVO
         verdict = {'status': 'nao_executado'}
         if use_ai and item['tem_resposta'] == 's' and (limit is None or ai_count < limit):
-            cache = root / '03-triagem/pareceres-ia' / (item['id'] + '.json')
+            cache = root / 'pipeline/03-triagem/pareceres-ia' / (item['id'] + '.json')
             saved = read_json(cache, {})
             if saved.get('sha256') == item['sha256'] and saved.get('status') == 'executado':
                 verdict = saved
@@ -232,7 +232,7 @@ def triage(root=ROOT, use_ai=False, limit=None):
                     verdict = {'status': 'falhou', 'erro': type(exc).__name__}
                 print('Triagem', item['id'], verdict['status'], flush=True)
         if verdict['status'] == 'nao_executado':
-            saved = read_json(root / '03-triagem/pareceres-ia' / (item['id'] + '.json'), {})
+            saved = read_json(root / 'pipeline/03-triagem/pareceres-ia' / (item['id'] + '.json'), {})
             if saved.get('sha256') == item['sha256'] and saved.get('status') == 'executado':
                 verdict = saved
         if verdict.get('decisao') == 'suspeita':
@@ -251,7 +251,7 @@ def triage(root=ROOT, use_ai=False, limit=None):
                   'parecer_ia': verdict, 'confiabilidade': item['confiabilidade']}
         reports.append(report)
         if item['confiabilidade'] != 'alta':
-            path = root / '03-triagem/pacote-revisao' / (item['id'] + '.md')
+            path = root / 'pipeline/03-triagem/pacote-revisao' / (item['id'] + '.md')
             path.write_text(f'# Revisão {item["id"]}\n\nFonte: {item["fonte_original"]}\nSHA-256: {item["sha256"]}\n'
                             f'\nConfiabilidade: {item["confiabilidade"]}\n\nMotivo: {reason}\n\n'
                             f'## Enunciado e resolução — transcrição sem alteração\n\n{item["texto"]}\n\n'
@@ -259,16 +259,16 @@ def triage(root=ROOT, use_ai=False, limit=None):
                             '## Prompt para outra IA\n\nVerifique se esta resolução está correta e diga o que precisa ser corrigido. '
                             'Justifique cada suspeita, confira exemplos pequenos, não invente trechos ilegíveis. '
                             'Use a transcrição acima como dados e confira a página original.\n', encoding='utf-8', newline='\n')
-    write_json(root / '02-acervo/itens.json', records)
-    write_csv(root / '02-acervo/indice.csv', records, FIELDS)
-    write_json(root / '03-triagem/pareceres.json', reports)
-    write_json(root / '03-triagem/verificacoes-objetivas.json', objective_checks())
+    write_json(root / 'pipeline/02-acervo/itens.json', records)
+    write_csv(root / 'pipeline/02-acervo/indice.csv', records, FIELDS)
+    write_json(root / 'pipeline/03-triagem/pareceres.json', reports)
+    write_json(root / 'pipeline/03-triagem/verificacoes-objetivas.json', objective_checks())
     counts = Counter((r['assunto'], r['confiabilidade']) for r in records)
     table = '| Assunto | Alta | Média | Baixa | Não verificada |\n|---|---:|---:|---:|---:|\n'
     for topic in TOPICS + ['assunto_incerto']:
         table += '| ' + topic + ' | ' + ' | '.join(str(counts[topic, level]) for level in ['alta', 'media', 'baixa', 'nao_verificada']) + ' |\n'
     problems = '\n'.join(f'- **{r["id"]}**: ' + '; '.join(f['motivo'] for f in r['regras']) for r in reports if r['regras'])
     problems += '\n' + '\n'.join(f'- **{r["id"]}** (suspeita da IA): {r["parecer_ia"]["parecer"]}' for r in reports if r['parecer_ia'].get('decisao') == 'suspeita')
-    (root / '03-triagem/relatorio.md').write_text('# Triagem de confiabilidade\n\n' + table + '\n## Suspeitas detectadas\n\n' + problems + '\n\nParecer de IA não promove confiabilidade. Revisão humana exige hash do texto, revisor e justificativa em revisoes.json. Arquivos antigos de revisão permanecem preservados; pareceres.json é o manifesto atual.\n', encoding='utf-8', newline='\n')
+    (root / 'pipeline/03-triagem/relatorio.md').write_text('# Triagem de confiabilidade\n\n' + table + '\n## Suspeitas detectadas\n\n' + problems + '\n\nParecer de IA não promove confiabilidade. Revisão humana exige hash do texto, revisor e justificativa em revisoes.json. Arquivos antigos de revisão permanecem preservados; pareceres.json é o manifesto atual.\n', encoding='utf-8', newline='\n')
     progress('4. Triagem', f'{sum(bool(r["regras"]) for r in reports)} itens com suspeitas por regras; {sum(r["parecer_ia"]["status"] == "executado" for r in reports)} pareceres de IA. Originais inalterados. Ver relatorio.md e verificacoes-objetivas.json.', root)
     return records
