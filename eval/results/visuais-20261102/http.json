@@ -1,0 +1,69 @@
+{
+  "verificacoes": [
+    {
+      "url": "http://127.0.0.1:8000/health",
+      "http": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/visuais",
+      "http": 200
+    },
+    {
+      "url": "http://127.0.0.1:8000/api/visuais",
+      "http": 200
+    },
+    {
+      "url": "https://assessments-chapter-information-editorial.trycloudflare.com/health",
+      "http": 200
+    },
+    {
+      "url": "https://assessments-chapter-information-editorial.trycloudflare.com/visuais",
+      "http": 200
+    },
+    {
+      "url": "https://assessments-chapter-information-editorial.trycloudflare.com/api/visuais",
+      "http": 200
+    },
+    {
+      "exemplo": "robo-dp",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "fluxo-residual",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "karnaugh-bordas",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "circuito-tabela",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "grafo-bfs",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "certificado-np",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "exemplo": "direcao-reducao",
+      "video_http": 206,
+      "poster_http": 200
+    },
+    {
+      "post_cache": "pronta",
+      "segundos": 0.105
+    }
+  ],
+  "publico": "https://assessments-chapter-information-editorial.trycloudflare.com",
+  "resultados_privados_bloqueados": true
+}

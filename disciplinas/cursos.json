@@ -1,0 +1,135 @@
+{
+  "_fonte": "Instituto de Computação da UFAL (ic.ufal.br), projetos pedagógicos mais recentes publicados: Engenharia de Computação PPC 2014 (seção 5, Ordenamento Curricular) e Ciência da Computação PPC 2019 (seção 6.1 e Quadro 1). Só disciplinas obrigatórias; eletivas, TCC, estágio e extensão ficam de fora. Consultado em 18/11/2026.",
+  "_acervo": "Campo 'acervo' = id em disciplinas.json quando o TutorON tem material curado da disciplina.",
+  "padrao": "ecom",
+  "cursos": [
+    {
+      "id": "ecom",
+      "nome": "Engenharia de Computação",
+      "sigla": "EC",
+      "instituicao": "IC/UFAL",
+      "ppc": "2014",
+      "periodos": [
+        {"numero": 1, "disciplinas": [
+          {"codigo": "ECOM001", "nome": "Inglês Instrumental"},
+          {"codigo": "ECOM002", "nome": "Programação 1"},
+          {"codigo": "ECOM003", "nome": "Matemática Discreta"},
+          {"codigo": "ECOM004", "nome": "Cálculo 1"},
+          {"codigo": "ECOM005", "nome": "Geometria Analítica"},
+          {"codigo": "ECOM006", "nome": "Introdução à Engenharia de Computação"}
+        ]},
+        {"numero": 2, "disciplinas": [
+          {"codigo": "ECOM007", "nome": "Lógica Aplicada à Computação"},
+          {"codigo": "ECOM008", "nome": "Estrutura de Dados", "acervo": "ed"},
+          {"codigo": "ECOM009", "nome": "Física 1"},
+          {"codigo": "ECOM010", "nome": "Cálculo 2"},
+          {"codigo": "ECOM011", "nome": "Álgebra Linear"},
+          {"codigo": "ECOM012", "nome": "Circuitos Digitais"},
+          {"codigo": "ECOM013", "nome": "Desenho"}
+        ]},
+        {"numero": 3, "disciplinas": [
+          {"codigo": "ECOM014", "nome": "Linguagens Formais, Autômatos e Computabilidade"},
+          {"codigo": "ECOM015", "nome": "Projeto de Software"},
+          {"codigo": "ECOM016", "nome": "Física 2", "acervo": "fis2"},
+          {"codigo": "ECOM017", "nome": "Cálculo 3", "acervo": "calc3"},
+          {"codigo": "ECOM018", "nome": "Metodologia da Pesquisa e do Trabalho Científico"},
+          {"codigo": "ECOM019", "nome": "Sistemas Digitais", "acervo": "sd"},
+          {"codigo": "ECOM057", "nome": "Química Tecnológica"}
+        ]},
+        {"numero": 4, "disciplinas": [
+          {"codigo": "ECOM020", "nome": "Probabilidade e Estatística"},
+          {"codigo": "ECOM021", "nome": "Engenharia de Software"},
+          {"codigo": "ECOM022", "nome": "Física 3"},
+          {"codigo": "ECOM023", "nome": "Cálculo 4"},
+          {"codigo": "ECOM024", "nome": "Variáveis Complexas"},
+          {"codigo": "ECOM025", "nome": "Organização e Arquitetura de Computadores", "acervo": "oac"},
+          {"codigo": "ECOM026", "nome": "Física Experimental 3"}
+        ]},
+        {"numero": 5, "disciplinas": [
+          {"codigo": "ECOM027", "nome": "Projeto e Análise de Algoritmos", "acervo": "paa"},
+          {"codigo": "ECOM028", "nome": "Circuitos Elétricos"},
+          {"codigo": "ECOM029", "nome": "Redes de Computadores"},
+          {"codigo": "ECOM030", "nome": "Sinais e Sistemas"},
+          {"codigo": "ECOM031", "nome": "Inteligência Artificial"},
+          {"codigo": "ECOM032", "nome": "Sistemas Operacionais"},
+          {"codigo": "ECOM033", "nome": "Teoria dos Grafos"}
+        ]},
+        {"numero": 6, "disciplinas": [
+          {"codigo": "ECOM034", "nome": "Princípios de Comunicação"},
+          {"codigo": "ECOM035", "nome": "Eletrônica"},
+          {"codigo": "ECOM036", "nome": "Métodos Numéricos"},
+          {"codigo": "ECOM037", "nome": "Sistemas de Controle 1"},
+          {"codigo": "ECOM048", "nome": "Computador, Sociedade e Ética"},
+          {"codigo": "ECOM040", "nome": "Empreendedorismo"},
+          {"codigo": "ECOM118", "nome": "Fenômenos de Transporte"}
+        ]},
+        {"numero": 7, "disciplinas": [
+          {"codigo": "ECOM058", "nome": "Sistemas de Controle 2"},
+          {"codigo": "ECOM041", "nome": "Banco de Dados", "acervo": "bd"},
+          {"codigo": "ECOM059", "nome": "Microcontroladores e Aplicações"},
+          {"codigo": "ECOM060", "nome": "Instrumentação Eletrônica"},
+          {"codigo": "ECOM063", "nome": "Processamento Digital de Sinais"},
+          {"codigo": "ECOM046", "nome": "Noções de Direito"}
+        ]},
+        {"numero": 8, "disciplinas": [
+          {"codigo": "ECOM042", "nome": "Sistemas Embarcados"},
+          {"codigo": "ECOM061", "nome": "Automação Industrial"},
+          {"codigo": "ECOM039", "nome": "Computação Gráfica e Processamento de Imagens"},
+          {"codigo": "ECOM062", "nome": "Robótica"},
+          {"codigo": "ECOM044", "nome": "Sistemas Distribuídos"},
+          {"codigo": "ECOM119", "nome": "Mecânica dos Sólidos"}
+        ]},
+        {"numero": 9, "disciplinas": []},
+        {"numero": 10, "disciplinas": []}
+      ]
+    },
+    {
+      "id": "cc",
+      "nome": "Ciência da Computação",
+      "sigla": "CC",
+      "instituicao": "IC/UFAL",
+      "ppc": "2019",
+      "periodos": [
+        {"numero": 1, "disciplinas": [
+          {"nome": "Programação 1"},
+          {"nome": "Lógica para Computação"},
+          {"nome": "Computação, Sociedade e Ética"},
+          {"nome": "Matemática Discreta"},
+          {"nome": "Cálculo Diferencial e Integral"}
+        ]},
+        {"numero": 2, "disciplinas": [
+          {"nome": "Estrutura de Dados", "acervo": "ed"},
+          {"nome": "Banco de Dados", "acervo": "bd"},
+          {"nome": "Organização e Arquitetura de Computadores", "acervo": "oac"},
+          {"nome": "Geometria Analítica"}
+        ]},
+        {"numero": 3, "disciplinas": [
+          {"nome": "Redes de Computadores"},
+          {"nome": "Teoria dos Grafos"},
+          {"nome": "Probabilidade e Estatística"},
+          {"nome": "Álgebra Linear"}
+        ]},
+        {"numero": 4, "disciplinas": [
+          {"nome": "Programação 2"},
+          {"nome": "Programação 3"},
+          {"nome": "Projeto e Análise de Algoritmos", "acervo": "paa"},
+          {"nome": "Teoria da Computação"}
+        ]},
+        {"numero": 5, "disciplinas": [
+          {"nome": "Sistemas Operacionais"},
+          {"nome": "Compiladores"},
+          {"nome": "Inteligência Artificial"},
+          {"nome": "Computação Gráfica"}
+        ]},
+        {"numero": 6, "disciplinas": [
+          {"nome": "Projeto e Desenvolvimento de Sistemas"}
+        ]},
+        {"numero": 7, "disciplinas": [
+          {"nome": "Metodologia de Pesquisa e Trabalho Individual"},
+          {"nome": "Noções de Direito"}
+        ]},
+        {"numero": 8, "disciplinas": []}
+      ]
+    }
+  ]
+}

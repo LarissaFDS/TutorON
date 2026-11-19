@@ -1,0 +1,67 @@
+{
+  "modelo_rapido": true,
+  "verificacoes_interface": [
+    "gerar vídeo real",
+    "pausar na pergunta",
+    "transportar tentativa ao formulário sem enviar automaticamente",
+    "Conferir meu raciocínio selecionado",
+    "envio manual ao tutor"
+  ],
+  "registro": {
+    "id": "G_3FE6CsZx7l45fK",
+    "data": "2026-11-02T22:14:54+00:00",
+    "disciplina": "paa",
+    "pergunta": "Neste exemplo de robô, só são permitidos movimentos para a direita e para baixo. O custo inclui a célula inicial. Quero montar uma tabela de custo mínimo sem receber a rota nem a tabela pronta. Custos: [[2,4,1,3],[3,2,5,2],[1,3,2,4],[2,1,3,2]]. A célula (linha 1, coluna 2), contando a partir de zero, está bloqueada. Meu estado é dp[i][j], custo mínimo para chegar a (i,j).",
+    "contexto": "Minha tentativa após o exemplo visual:\nDefini dp[i][j] como o menor custo para chegar à célula. Acho que uma célula bloqueada não deve entrar na comparação, mas não sei como representar isso.",
+    "modo": "socratico",
+    "versao_politica": "socratico-v2",
+    "revisoes_pedagogicas": [
+      {
+        "aprovada": true,
+        "motivo": "A ajuda não entrega resposta final, solução completa ou complexidade final. Mantém o foco no raciocínio do aluno e estimula a reflexão sobre o impacto da célula bloqueada.",
+        "modelo": "ollama:tutoron-paa",
+        "segundos": 2.42
+      }
+    ],
+    "ajuda": "conferir",
+    "resposta": "Você está no caminho certo ao definir `dp[i][j]` como o custo mínimo para chegar à célula `(i, j)`. A ideia de tratar a célula bloqueada com cuidado também é válida — é essencial garantir que ela não interfira na comparação.\n\n### O que está certo:\n- A definição de `dp[i][j]` está correta.\n- A célula bloqueada não deve ser considerada em nenhuma etapa da atualização do `dp`.\n\n### O primeiro passo errado:\nVocê mencionou que a célula bloqueada \"não deve entrar na comparação\", mas não explicou **como** isso afeta a atualização do `dp[i][j]`. Por exemplo, se `(1, 1)` está bloqueada, como isso afeta os cálculos de `dp[1][0]` e `dp[0][1]`?\n\n### Pergunta para você:\nSe a célula `(1, 1)` estiver bloqueada, como isso afeta os valores de `dp[1][0]` e `dp[0][1]`? E como isso se reflete na atualização de `dp[1][2]`?\n\n### Sua vez\nTente definir o valor de `dp[0][0]` e `dp[0][1]`, e depois `dp[1][0]`. Depois, escreva como você faria para calcular `dp[1][2]`, considerando a célula bloqueada. Envie sua tentativa.",
+    "provedor": "ollama",
+    "modelo": "tutoron-paa",
+    "segundos": 10.39,
+    "degradado": false,
+    "tentativas": [
+      {
+        "modelo": "ollama:tutoron-paa",
+        "resultado": "respondeu",
+        "segundos": 10.39
+      }
+    ],
+    "fontes": [
+      {
+        "rotulo": "P1",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 2"
+      },
+      {
+        "rotulo": "P2",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L6.pdf | página(s): 5, 6"
+      },
+      {
+        "rotulo": "P3",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 1"
+      },
+      {
+        "rotulo": "P4",
+        "origem": "acervo",
+        "titulo": "Resolução de aluno de PAA",
+        "referencia": "PAA_L5.pdf | página(s): 4, 5"
+      }
+    ]
+  },
+  "limite": "A resposta textual desta rodada confunde dependências da grade; não conta como validação pedagógica."
+}

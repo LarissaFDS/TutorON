@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Demonstração offline do TutorON com perguntas, respostas, foto e animações gravadas.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; media-src data:; font-src data:; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>TutorON · Apresentação offline</title>
+<!-- ESTILOS -->
+<style>
+  .offline-status { border-bottom: var(--border); padding-block: var(--space-3); background: var(--color-surface-sunken); }
+  .offline-status p { margin: 0; }
+  .offline-nav { display: flex; flex-wrap: wrap; gap: var(--space-2); padding-block: var(--space-5); border-bottom: var(--border); }
+  .offline-nav button[aria-pressed="true"] { background: var(--color-primary); color: var(--color-on-primary); }
+  .offline-panel { padding-block: var(--space-6); }
+  .offline-panel h2 { font-size: var(--text-title); margin-bottom: var(--space-3); }
+  .offline-fields { display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-4); margin-block: var(--space-5); }
+  .offline-panel .field { margin-bottom: var(--space-4); }
+  .offline-panel select { width: 100%; }
+  .offline-panel .troca { margin-top: var(--space-6); border-top: var(--border); padding-top: var(--space-5); }
+  .offline-panel .question { margin-block: var(--space-4); }
+  .offline-panel .prose { max-width: var(--reading-max, 72ch); overflow-wrap: anywhere; }
+  .offline-help { font-weight: var(--weight-medium); margin-block: var(--space-3); }
+  .offline-photo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-5); margin-block: var(--space-5); }
+  .offline-photo img { width: 100%; height: auto; max-height: 560px; object-fit: contain; border: var(--border); }
+  .offline-video { max-width: 850px; width: 100%; background: var(--color-surface-sunken); }
+  .offline-poster img { width: 100%; max-width: 850px; }
+  .offline-panel pre { max-width: 100%; overflow-x: auto; white-space: pre-wrap; }
+  .offline-panel .caption { margin-block: var(--space-3); }
+  [hidden] { display: none !important; }
+  @media (max-width: 640px) { .offline-fields, .offline-photo { grid-template-columns: 1fr; } .offline-nav button { flex: 1 1 100%; } }
+  @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+</style>
+</head>
+<body>
+<header class="masthead">
+  <div class="page masthead__bar"><div class="wordmark">Tutor<span>ON</span></div><span class="masthead__context">Apresentação offline</span></div>
+  <div class="page masthead__intro">
+    <h1>Entenda as matérias da faculdade, passo a passo</h1>
+    <p class="masthead__lede">Peça uma pista, confira uma tentativa ou explore uma explicação com desenhos.</p>
+  </div>
+</header>
+<div class="offline-status"><p class="page caption"><strong>Funciona sem internet.</strong> Perguntas e respostas predefinidas; fotos e vídeos já incluídos. Esta demonstração não chama uma IA.</p></div>
+<main class="page">
+  <nav class="offline-nav" aria-label="Demonstrações">
+    <button class="button button--secondary" type="button" data-panel="tutor" aria-pressed="true" aria-controls="painel-tutor">Tirar dúvida</button>
+    <button class="button button--secondary" type="button" data-panel="foto" aria-pressed="false" aria-controls="painel-foto">Foto e novas pistas</button>
+    <button class="button button--secondary" type="button" data-panel="visual" aria-pressed="false" aria-controls="painel-visual">Aprender com desenhos</button>
+  </nav>
+  <noscript><p class="notice">Ative o JavaScript do navegador para explorar os exemplos. O arquivo funciona localmente, sem conexão.</p></noscript>
+  <section id="painel-tutor" class="offline-panel" aria-labelledby="titulo-tutor">
+    <h2 id="titulo-tutor">Uma ajuda para construir seu raciocínio</h2>
+    <p class="step__lede">Escolha uma dúvida preparada e clique em “Pedir ajuda”. Cada exemplo mostra um tipo de ajuda do tutor.</p>
+    <div class="offline-fields">
+      <div class="field"><label class="field__label" for="disciplina">Disciplina</label><select class="input" id="disciplina"><option value="PAA">Projeto e Análise de Algoritmos</option><option value="SD">Sistemas Digitais (beta)</option></select></div>
+      <div class="field"><label class="field__label" for="exemplo">Pergunta predefinida</label><select class="input" id="exemplo"></select></div>
+    </div>
+    <div class="field"><label class="field__label" for="pergunta">Sua dúvida neste exemplo</label><textarea class="input" id="pergunta" rows="3" readonly aria-describedby="pergunta-dica"></textarea><p class="caption" id="pergunta-dica">Use a lista acima para trocar de pergunta. No TutorON conectado, você escreve sua própria dúvida.</p></div>
+    <pre class="question" id="contexto" hidden></pre>
+    <p class="offline-help" id="tipo-ajuda"></p>
+    <div class="actions"><button class="button" type="button" id="pedir-ajuda">Pedir ajuda</button><button class="button button--secondary" type="button" id="reiniciar">Reiniciar demonstração</button></div>
+    <div id="resultado" hidden>
+      <article class="troca" aria-labelledby="titulo-resposta"><h2 id="titulo-resposta" tabindex="-1">Uma orientação do TutorON</h2><div class="question prose" id="pergunta-enviada"></div><div class="prose resposta" id="resposta"></div><p class="caption" id="origem"></p></article>
+      <div class="actions" id="feedback"><button class="button button--secondary" type="button" data-feedback="Ajudou">Ajudou</button><button class="button button--secondary" type="button" data-feedback="Não ajudou">Não ajudou</button><button class="button button--secondary" type="button" data-feedback="Tem erro">Tem erro</button></div>
+      <p class="caption" id="feedback-status" role="status"></p>
+      <div class="actions"><button class="button button--secondary" type="button" id="ver-ciclo">Ainda não consegui: ver exemplo com novas pistas</button><button class="button button--secondary" type="button" id="ver-desenhos">Ver exemplos de desenhos</button></div>
+    </div>
+  </section>
+  <section id="painel-foto" class="offline-panel" hidden aria-labelledby="titulo-foto">
+    <h2 id="titulo-foto">Do papel à próxima pista</h2>
+    <p class="step__lede">Um exemplo preparado de foto, conferência da leitura e três formas de explicar a mesma dúvida. A leitura já está gravada.</p>
+    <div class="actions"><button class="button" type="button" id="mostrar-foto">Usar foto de exemplo</button></div>
+    <div id="foto-leitura" hidden>
+      <div class="offline-photo"><img id="foto" alt="Exercício de programação dinâmica com tentativa manuscrita do aluno"><div><h3>Confira a leitura da tentativa</h3><div class="prose" id="tentativa"></div><p class="caption">Leitura previamente gravada. No sistema conectado, o aluno pode corrigir o texto antes de confirmar.</p><details class="disclosure"><summary>Ver enunciado e resolução impressa na folha</summary><div class="prose" id="enunciado"></div></details></div></div>
+      <div class="actions"><button class="button" type="button" id="confirmar-foto">Conferi a leitura, pedir ajuda</button></div>
+    </div>
+    <div id="ciclo" aria-live="polite"></div>
+    <div class="actions"><button class="button" type="button" id="outra-pista" hidden>Ainda não consegui, explica de outro jeito</button><button class="button button--secondary" type="button" id="reiniciar-foto" hidden>Recomeçar este exemplo</button></div>
+    <p class="caption" id="fim-ciclo" role="status"></p>
+  </section>
+  <section id="painel-visual" class="offline-panel" hidden aria-labelledby="titulo-visual">
+    <h2 id="titulo-visual">Aprender com desenhos</h2>
+    <p class="step__lede">Três animações gravadas mostram a estrutura do problema e deixam uma tarefa para você resolver no papel.</p>
+    <div class="field"><label class="field__label" for="animacao">Tema da animação</label><select class="input" id="animacao"></select></div>
+    <h3 id="video-titulo"></h3><p class="question" id="video-pergunta"></p>
+    <video class="offline-video" id="video" controls muted playsinline preload="metadata" aria-label="Animação gravada do TutorON"></video>
+    <p class="caption" id="video-status" role="status">Use os controles do vídeo para reproduzir, pausar ou ampliar.</p>
+    <p class="notice" id="video-tarefa"></p>
+    <details class="disclosure offline-poster"><summary>Ver quadro final como imagem</summary><img id="video-capa" alt="Quadro final da animação, com uma etapa para completar no papel"></details>
+    <p class="caption">Vídeos do protótipo gravados em outubro de 2026. Na versão conectada, a aba visual recebe perguntas livres; aqui você escolhe um dos exemplos incluídos.</p>
+  </section>
+</main>
+<footer class="site-footer page"><p class="caption">TutorON · demonstração de contingência · Tudo neste HTML funciona localmente. As respostas são registros históricos de 21 e 22/10/2026, sem edição; não representam uma nova avaliação da versão atual.</p></footer>
+<!-- SCRIPTS -->
+</body>
+</html>

@@ -15,3 +15,15 @@
 
 # Demo offline: arquivo único gerado (scripts/demo_offline.py), com base64 embutido; sem diff de texto.
 demo-offline/*.html -diff linguist-generated
+
+# Evidências geradas da auditoria: colapsar no GitHub, mantendo expansão do diff.
+eval/results/auditoria-20261102/*/resultados.json linguist-generated=true
+eval/results/auditoria-20261102/*/respostas.md linguist-generated=true
+
+# Medições e espelhos gerados; os pareceres manuais continuam expostos no diff.
+eval/results/promocao-20261102/comparacao.* linguist-generated=true
+eval/results/promocao-20261102/pares-cegos.md linguist-generated=true
+eval/results/promocao-20261102/chave-cega.json linguist-generated=true
+eval/results/promocao-20261102/decisao.json linguist-generated=true
+eval/results/promocao-20261102/limite-saida.* linguist-generated=true
+eval/results/visuais-20261102/personalizadas*.json linguist-generated=true

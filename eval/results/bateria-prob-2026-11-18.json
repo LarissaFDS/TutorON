@@ -1,0 +1,118 @@
+[
+ {
+  "id": "prob-indep",
+  "disciplina": "prob",
+  "pergunta": "Qual a diferença entre eventos independentes e mutuamente exclusivos?",
+  "esperado": "P(A∩B)=0 x P(A∩B)=P(A)P(B); disjuntos com probabilidade positiva não são independentes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.0,
+  "fontes": [
+   "Anotações manuscritas digitalizadas \"Probabilidade _250907_210206.pdf\" (2025.2), págs. 1–2"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença, pense no que acontece com a probabilidade de um evento quando o outro ocorre.\n\n1.  **Mutuamente exclusivos (disjuntos):** Imagine dois eventos que não podem acontecer ao mesmo tempo. Se você sabe que o evento $A$ ocorreu, o que isso diz sobre a chance de $B$ ter ocorrido? Eles \"brigam\" pelo espaço amostral.\n2.  **Independentes:** Aqui, a ocorrência de $A$ não traz nenhuma informação nova sobre a chance de $B$. Saber que $A$ aconteceu não altera a probabilidade de $B$ ($P(B|A) = P(B)$).\n\nO ponto crucial é a interseção $P(A \\cap B)$:\n*   Se são **disjuntos**, a interseção é vazia, logo $P(A \\cap B) = 0$.\n*   Se são **independentes**, a probabilidade da interseção é o produto das probabilidades individuais, $P(A \\cap B) = P(A) \\cdot P(B)$ [P1].\n\nLembre-se: se dois eventos são disjuntos e ambos têm probabilidade maior que zero, eles **não** podem ser independentes, pois o produto das probabilidades nunca será zero.\n\n### Sua vez\nTente desenhar dois diagramas de Venn: um representando dois eventos que não se tocam (disjuntos) e outro onde eles se sobrepõem. Se você lançar um dado, o evento \"sair número par\" e \"sair número ímpar\" são disjuntos ou independentes? Por quê?"
+ },
+ {
+  "id": "prob-poisson",
+  "disciplina": "prob",
+  "pergunta": "Como calcular P(X > 2) numa Poisson com média 3?",
+  "esperado": "1 − e^{-3}(1 + 3 + 9/2) = 1 − 8,5e^{-3} ≈ 0,5768; ppois(2, 3, lower.tail = FALSE)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Anotações manuscritas digitalizadas \"Principais Distribuições Discretas_251011_130200.pdf\" (2025.2), pág. 4; e \"Distribuição Exponencial e Combinação Linear _251011_140915.pdf\", págs. 3 e 5",
+   "Anotações manuscritas digitalizadas \"Distribuição Exponencial e Combinação Linear _251011_140915.pdf\" (2025.2), pág. 6",
+   "Anotações manuscritas digitalizadas \"Distribuições Normais e Uniformes_251011_135256.pdf\" (2025.2), págs. 1–2"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular a probabilidade de uma variável aleatória de Poisson $X$ ser maior que um valor, o caminho mais eficiente é utilizar o **evento complementar**.\n\nComo a distribuição de Poisson é discreta e assume valores inteiros não negativos ($0, 1, 2, \\dots$), o evento $X > 2$ é o oposto de $X \\le 2$. Ou seja, a soma de todas as probabilidades possíveis é igual a 1.\n\nPense na seguinte relação:\n$$P(X > 2) = 1 - P(X \\le 2)$$\n\nSabendo que $P(X \\le 2) = P(X=0) + P(X=1) + P(X=2)$, você pode usar a fórmula da função de probabilidade da Poisson [P1]:\n$$P(X = x) = \\frac{e^{-\\lambda}\\lambda^x}{x!}$$\n\nCom $\\lambda = 3$, tente calcular individualmente as probabilidades para $x=0$, $x=1$ e $x=2$ e subtrair a soma delas de 1.\n\n### Sua vez\nCalcule no papel o valor de $P(X=0)$, $P(X=1)$ e $P(X=2)$ usando $\\lambda = 3$ e monte a expressão final para $P(X > 2)$. Qual valor você encontrou para cada uma dessas probabilidades?"
+ },
+ {
+  "id": "prob-memoria",
+  "disciplina": "prob",
+  "pergunta": "O que significa a falta de memória da distribuição exponencial?",
+  "esperado": "P(X > s+t | X > s) = P(X > t) = e^{-λt}; taxa constante",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações manuscritas digitalizadas \"Distribuição Exponencial e Combinação Linear _251011_140915.pdf\" (2025.2), págs. 1–3",
+   "Anotações manuscritas digitalizadas \"Variáveis Aleatórias_251008_230428.pdf\" (2025.2), págs. 4–5",
+   "Anotações manuscritas digitalizadas \"Distribuição Exponencial e Combinação Linear _251011_140915.pdf\" (2025.2), págs. 2–3"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A **falta de memória** é uma propriedade fundamental das variáveis aleatórias com distribuição exponencial [P1]. Ela descreve situações onde a probabilidade de um evento ocorrer no futuro não depende de quanto tempo já se passou.\n\nImagine que você está esperando por um ônibus que segue uma distribuição exponencial de tempo de chegada. Se você já está no ponto há 10 minutos, a probabilidade de o ônibus chegar nos próximos 5 minutos é **exatamente a mesma** de alguém que acabou de chegar ao ponto e esperar pelos mesmos 5 minutos. O sistema \"esquece\" o tempo que você já esperou.\n\nMatematicamente, isso é expresso como:\n$$P(X > s + t \\mid X > s) = P(X > t)$$\n\nIsso significa que, dado que o evento não ocorreu até o tempo $s$, a probabilidade de ele ocorrer em um intervalo adicional $t$ é igual à probabilidade de ele ocorrer em um intervalo $t$ desde o início [P1].\n\nPara entender melhor, tente aplicar esse conceito a um componente eletrônico cuja vida útil segue uma distribuição exponencial. Se esse componente não falhou até o momento, a chance de ele falhar na próxima hora é a mesma de quando ele era novo?\n\n### Sua vez\nCom base na fórmula da falta de memória $P(X > s + t \\mid X > s) = P(X > t)$, se a vida útil de uma lâmpada segue uma exponencial com média de 100 horas, qual é a probabilidade de ela durar mais 50 horas, dado que ela já está funcionando há 200 horas? Tente montar a expressão usando $P(X > 50)$."
+ },
+ {
+  "id": "prob-2x-y",
+  "disciplina": "prob",
+  "pergunta": "Se X e Y são normais independentes, qual a distribuição de 2X − Y?",
+  "esperado": "N(2μX − μY, 4σX² + σY²); variâncias somam",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Anotações manuscritas digitalizadas \"Distribuição Exponencial e Combinação Linear _251011_140915.pdf\" (2025.2), págs. 4–5",
+   "Anotações manuscritas digitalizadas \"Variáveis Aleatórias_251008_230428.pdf\" (2025.2), págs. 5–6"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a distribuição de uma combinação linear de variáveis aleatórias normais independentes, precisamos encontrar dois parâmetros: a **média** (valor esperado) e a **variância** da nova variável resultante.\n\nComo $X$ e $Y$ são normais, qualquer combinação linear delas também seguirá uma distribuição normal [P1]. Se definirmos $W = 2X - Y$, sabemos que $W \\sim N(\\mu_W, \\sigma_W^2)$.\n\nPara encontrar esses parâmetros, lembre-se das propriedades de linearidade da esperança e das propriedades da variância para variáveis independentes [P2]:\n\n1.  **Média:** A esperança é um operador linear, então $E(aX + bY) = aE(X) + bE(Y)$. Como fica isso para $2X - Y$?\n2.  **Variância:** Ao calcular a variância de uma combinação linear, lembre-se que os coeficientes saem ao quadrado e que, para variáveis independentes, as variâncias **sempre somam**, mesmo quando estamos subtraindo as variáveis [P1, P2]. Ou seja, $\\operatorname{Var}(aX + bY) = a^2\\operatorname{Var}(X) + b^2\\operatorname{Var}(Y)$.\n\nComo você aplicaria essas regras para encontrar $\\mu_W$ e $\\sigma_W^2$ em termos de $\\mu_X, \\mu_Y, \\sigma_X^2$ e $\\sigma_Y^2$?\n\n### Sua vez\nEscreva no papel a expressão para a média $\\mu_W$ e a expressão para a variância $\\sigma_W^2$ usando os parâmetros das variáveis originais. Quais valores você obteve para os coeficientes que multiplicam as variâncias?"
+ },
+ {
+  "id": "prob-padronizar",
+  "disciplina": "prob",
+  "pergunta": "Como padronizar uma normal e usar a tabela?",
+  "esperado": "z = (x − μ)/σ; Φ(z) acumulada (ou área 0..z + 0,5); ex. N(40,10²): P(X ≤ 50) = Φ(1) ≈ 0,8413",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Anotações manuscritas digitalizadas \"Distribuições Normais e Uniformes_251011_135256.pdf\" (2025.2), págs. 1–2"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para padronizar uma variável aleatória normal $X \\sim N(\\mu, \\sigma^2)$, o objetivo é transformá-la em uma variável $Z$ que segue a **normal padrão** $N(0, 1)$, onde a média é 0 e o desvio-padrão é 1 [P1].\n\nA fórmula de padronização é:\n$$Z = \\frac{X - \\mu}{\\sigma}$$\n\nAo fazer isso, você \"desloca\" a média para a origem e \"escala\" a curva pelo desvio-padrão. Com o valor de $Z$ em mãos, você consulta a tabela da normal padrão (ou usa o software) para encontrar a probabilidade acumulada $\\Phi(z)$, que representa a área sob a curva de $-\\infty$ até aquele ponto [P1].\n\n**Dicas importantes:**\n1. Sempre verifique se o valor fornecido no problema é a variância ($\\sigma^2$) ou o desvio-padrão ($\\sigma$). Se for a variância, você deve extrair a raiz quadrada antes de dividir [P1].\n2. Se a tabela que você está usando for de \"área entre 0 e $z$\", lembre-se de somar $0,5$ ao valor encontrado para obter a probabilidade acumulada total, pois a curva é simétrica e metade da área está abaixo da média [P1].\n3. Para probabilidades do tipo $P(X \\ge a)$, use a propriedade do complemento: $1 - P(X < a)$ [P1].\n\n### Sua vez\nSuponha que $X \\sim N(50, 25)$. Qual é o valor de $Z$ correspondente a $X = 60$? Tente calcular no papel e me diga qual foi o resultado."
+ },
+ {
+  "id": "prob-fora",
+  "disciplina": "prob",
+  "pergunta": "Qual o período de um pêndulo simples de 1 m?",
+  "esperado": "diz que não é de Probabilidade; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Essa pergunta pertence à disciplina de **Física 2**, pois o período de um pêndulo simples é um fenômeno de oscilação mecânica. Como não encontrei esse tópico no material de Probabilidade e Estatística, posso te dar uma orientação geral sobre o conceito físico.\n\nPara encontrar o período ($T$) de um pêndulo simples, você deve considerar a relação entre o comprimento do fio ($L$) e a aceleração da gravidade local ($g$). A fórmula fundamental que descreve esse movimento para pequenas oscilações é:\n\n$$T = 2\\pi \\sqrt{\\frac{L}{g}}$$\n\nOnde:\n*   $L$ é o comprimento do pêndulo (dado como $1\\text{ m}$).\n*   $g$ é a aceleração da gravidade (geralmente aproximada para $9{,}8\\text{ m/s}^2$ ou $9{,}81\\text{ m/s}^2$).\n\nPara chegar ao resultado, você precisa substituir o valor de $L$ na fórmula e calcular a raiz quadrada antes de multiplicar pelos outros termos. Lembre-se de manter as unidades consistentes (metros e segundos).\n\n### Sua vez\nTente substituir $L = 1$ e $g = 9{,}8$ na fórmula acima e calcule o valor de $T$ no papel. Qual valor você encontrou para o período?"
+ }
+]

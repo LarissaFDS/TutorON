@@ -11,6 +11,8 @@
 }
 .modes__tab[aria-selected="true"] { color: var(--color-ink); border-bottom-color: var(--color-primary); }
 .modes__tab:hover { color: var(--color-ink); }
+.modes__list a.modes__tab { display: inline-flex; align-items: center; text-decoration: none; }
+.modes__tab[aria-current="page"] { color: var(--color-ink); border-bottom-color: var(--color-primary); }
 
 .masthead__nota { margin-top: var(--space-4); max-width: 68ch; font-size: var(--text-ui); color: var(--color-chalk); opacity: 0.9; }
 
@@ -90,3 +92,8 @@
 @media (min-width: 820px) { .demo__foto { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
 .demo__aluno { margin: 0; font-weight: var(--weight-bold); color: var(--color-primary); }
 .demo__videos { display: grid; gap: var(--space-5); max-width: 860px; }
+
+/* Cota do plano grátis (protótipo) */
+.masthead__bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.cota { font-size: .85rem; padding: 4px 10px; border-radius: 999px; border: 1px solid currentColor; opacity: .8; text-decoration: none; color: inherit; }
+.cota--fim { color: #b42318; opacity: 1; font-weight: 600; }

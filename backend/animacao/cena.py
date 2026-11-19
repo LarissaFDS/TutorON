@@ -55,7 +55,12 @@ class CenaTutor(Scene):
         self.play(Write(titulo), run_time=0.8)
         self.legenda = texto("", 24, MUTED).to_edge(DOWN, buff=0.35)
         self.add(self.legenda)
-        {ArvoreRecursao: self.arvore, Vetor: self.vetor, Grafo: self.grafo, Tabela: self.tabela}[type(r)](r)
+        tradicionais = {ArvoreRecursao: self.arvore, Vetor: self.vetor, Grafo: self.grafo, Tabela: self.tabela}
+        if type(r) in tradicionais:
+            tradicionais[type(r)](r)
+        else:
+            from .didatica import desenhar
+            desenhar(self, r)
         if r.pergunta_final:
             self.legendar("Sua vez: " + r.pergunta_final, cor=PRIMARIA)
         self.wait(2.5)
@@ -160,6 +165,8 @@ class CenaTutor(Scene):
         raio = 2.1 if n > 4 else 1.7
         pos = {no: [raio * 1.5 * math.cos(math.pi / 2 - 2 * math.pi * k / n),
                     raio * math.sin(math.pi / 2 - 2 * math.pi * k / n) - 0.1, 0] for k, no in enumerate(r.nos)}
+        if r.posicoes:
+            pos = {no: [*xy, 0] for no, xy in r.posicoes.items()}
         circulos = {}
         for no in r.nos:
             c = Circle(radius=0.33, color=PRIMARIA, stroke_width=3).move_to(pos[no])

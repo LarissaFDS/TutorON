@@ -1,0 +1,16 @@
+{
+  "base": "Qwen/Qwen3-8B",
+  "seq": 2048,
+  "splits": {
+    "treino": {
+      "exemplos": 2,
+      "max_tokens": 1956,
+      "min_tokens_resposta": 58
+    },
+    "validacao": {
+      "exemplos": 2,
+      "max_tokens": 1962,
+      "min_tokens_resposta": 63
+    }
+  }
+}

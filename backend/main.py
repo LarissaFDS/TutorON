@@ -33,14 +33,15 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
 from acervo import disciplinas
 
-from . import animacao, foto, prompts
+from . import animacao, cursos, foto, prompts
 from .config import Settings, load_settings
+from .cota import PLANOS, Cota, estimar_tokens
 from .dados import Limitador, Registro, agora
 from .llm import LLM, Model
 from .resultados import resumo
@@ -48,6 +49,14 @@ from .tarefas import Tarefas
 
 logger = logging.getLogger("tutoron.backend")
 WEB = Path(__file__).resolve().parent / "web"
+
+
+class AppStaticFiles(StaticFiles):
+    async def get_response(self, path, scope):
+        resposta = await super().get_response(path, scope)
+        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css'):
+            resposta.headers['Cache-Control'] = 'no-cache'
+        return resposta
 
 MSG_EM_VALIDACAO = ("{nome} ainda está em validação e não está disponível para uso normal. "
                     "Escolha outra disciplina.")
@@ -62,6 +71,8 @@ def disciplina_cadastrada(valor: str | None) -> str | None:
     """Sem disciplina, vale a padrão (PAA). Disciplina desconhecida é erro do pedido, não do servidor."""
     if valor is None or not valor.strip():
         return None
+    if valor.strip().lower() in ('auto', prompts.GERAL_ID):
+        return valor.strip().lower()
     try:
         return disciplinas.obter(valor).id
     except KeyError:
@@ -83,6 +94,9 @@ class Pergunta(BaseModel):
     # "Ainda não consegui": ajudas anteriores deste exercício e onde o aluno travou.
     historico: list[AjudaAnterior] = Field(default_factory=list, max_length=8)
     travou: str | None = Field(default=None, max_length=1500)
+    # Curso e período (disciplinas/cursos.json): contexto para a IA e preferência no roteamento.
+    curso: str | None = Field(default=None, max_length=20)
+    periodo: int | None = Field(default=None, ge=1, le=12)
 
     @field_validator("disciplina")
     @classmethod
@@ -95,6 +109,11 @@ class Pergunta(BaseModel):
         if len(valor.strip()) < 3:
             raise ValueError("Escreva a pergunta.")
         return valor.strip()
+
+
+class AtivarPlano(BaseModel):
+    plano: str = Field(..., max_length=20)
+    final_cartao: str = Field(default="", max_length=4, pattern=r"^[0-9]{0,4}$")
 
 
 class FotoPedido(BaseModel):
@@ -112,6 +131,8 @@ class AnimarPedido(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
     resposta: str | None = Field(default=None, max_length=12000)
     disciplina: str | None = Field(default=None, max_length=40)
+    contexto: str | None = Field(default=None, max_length=6000)
+    foto: str | None = Field(default=None, max_length=8000)
 
     @field_validator("disciplina")
     @classmethod
@@ -205,6 +226,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.registro = Registro(settings.data_dir)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
         app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
+        app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
+                              settings.cota_janela_h, settings.dev_chave)
         app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
         aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
@@ -216,11 +239,46 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
 
     app = FastAPI(title="TutorON", version="1.0.0", lifespan=lifespan,
                   docs_url=None, redoc_url=None, openapi_url=None)
-    app.mount("/static", StaticFiles(directory=WEB), name="static")
+    app.mount("/static", AppStaticFiles(directory=WEB), name="static")
 
     def limitar(request: Request) -> None:
         if not app.state.limitador.permitir(cliente(request)):
             raise HTTPException(429, "Muitas perguntas em pouco tempo. Aguarde alguns minutos e tente de novo.")
+
+    def usuario(request: Request) -> tuple[str, bool]:
+        """(id do usuário, é desenvolvedor?). Convidado = cookie anônimo; sem cookie, o IP."""
+        dev = requisicao_local(request) or app.state.cota.eh_dev(
+            request.cookies.get("tutoron_dev") or request.headers.get("x-tutoron-dev"))
+        return (request.cookies.get("tutoron_id") or "ip:" + cliente(request))[:64], dev
+
+    def exigir_cota(request: Request) -> None:
+        quem, dev = usuario(request)
+        if not app.state.cota.pode(quem, dev):
+            s = app.state.cota.situacao(quem)
+            import datetime
+            renova = datetime.datetime.fromtimestamp(s["renova_em"])
+            quando = "amanhã à meia-noite" if s.get("diaria") else "às " + renova.strftime("%H:%M")
+            gratis = s["plano"] == "gratis"
+            raise HTTPException(402, (f"Você usou todo o limite {'gratuito ' if gratis else ''}de hoje "
+                                      f"({s['limite']:,} tokens). Ele renova {quando}.").replace(",", ".")
+                                + (" Para continuar agora, conheça os planos." if gratis else ""))
+
+    def modo_de(request: Request) -> str:
+        quem, dev = usuario(request)
+        return app.state.cota.modo(quem, dev)
+
+    def cobrar_entrada(request: Request, *textos, tipo: str = "pergunta") -> None:
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, estimar_tokens(*textos), dev, tipo)
+
+    @app.middleware("http")
+    async def cookie_convidado(request: Request, call_next):
+        resposta = await call_next(request)
+        if not request.cookies.get("tutoron_id"):
+            import secrets as _s
+            resposta.set_cookie("tutoron_id", "c_" + _s.token_urlsafe(12), max_age=365 * 86400,
+                                httponly=True, samesite="lax")
+        return resposta
 
     def limitar_gravacao(request: Request) -> None:
         if not app.state.limitador_gravacao.permitir(cliente(request)):
@@ -244,19 +302,92 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return JSONResponse({"erro": f"Dados inválidos ({campo}): {detalhe.get('msg', '')}"}, status_code=422)
 
     # ------------------------------------------------------------------ páginas
+    def base_publica(request: Request) -> str:
+        """Endereço absoluto para a pré-visualização do link (og:image precisa de URL completa)."""
+        if settings.url_publica:
+            return settings.url_publica
+        proto = request.headers.get("x-forwarded-proto") or request.url.scheme
+        host = request.headers.get("x-forwarded-host") or request.headers.get("host") or request.url.netloc
+        proto = proto if proto in ("http", "https") else "https"
+        host = host if re.fullmatch(r"[A-Za-z0-9.:\[\]-]{1,255}", host or "") else "localhost"  # nada de aspas no HTML
+        return f"{proto}://{host}"
+
     @app.get("/", include_in_schema=False)
-    async def pagina() -> FileResponse:
-        return FileResponse(WEB / "index.html", headers={"Cache-Control": "no-cache"})
+    async def pagina(request: Request) -> Response:
+        html = (WEB / "index.html").read_text(encoding="utf-8").replace("{{BASE}}", base_publica(request))
+        return HTMLResponse(html, headers={"Cache-Control": "no-cache"})
+
+    @app.get("/manifest.webmanifest", include_in_schema=False)
+    async def manifesto() -> JSONResponse:
+        """Permite "instalar" o TutorON na tela inicial do celular (PWA simples, sem modo offline)."""
+        return JSONResponse({
+            "name": "TutorON", "short_name": "TutorON", "lang": "pt-BR", "start_url": "/", "display": "standalone",
+            "background_color": "#ffffff", "theme_color": "#4D6BFE",
+            "description": "Tutor de IA para Engenharia e Ciência da Computação: pistas e perguntas, sem entregar a resposta.",
+            "icons": [{"src": "/static/marca/icone-192.png", "sizes": "192x192", "type": "image/png"},
+                      {"src": "/static/marca/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}],
+        }, media_type="application/manifest+json", headers={"Cache-Control": "public, max-age=3600"})
+
+    @app.get("/favicon.ico", include_in_schema=False)
+    async def favicon() -> FileResponse:
+        return FileResponse(WEB / "marca" / "favicon-32.png", media_type="image/png",
+                            headers={"Cache-Control": "public, max-age=86400"})
 
     @app.get("/demo", include_in_schema=False)
     async def demo() -> FileResponse:
         """Demonstração do tutor socrático com respostas reais gravadas: não chama nenhuma IA."""
         return FileResponse(WEB / "demo.html", headers={"Cache-Control": "no-cache"})
 
+    @app.get('/visuais', include_in_schema=False)
+    async def pagina_visuais() -> FileResponse:
+        return FileResponse(WEB / 'visuais.html', headers={'Cache-Control': 'no-cache'})
+
+    @app.get('/demo/visuais', include_in_schema=False)
+    async def demo_visuais() -> FileResponse:
+        return FileResponse(WEB / 'visuais.html', headers={'Cache-Control': 'no-cache'})
+
     @app.get("/design.css", include_in_schema=False)
     async def design_css() -> Response:
         from design import stylesheet
         return Response(stylesheet(), media_type="text/css; charset=utf-8", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/planos", include_in_schema=False)
+    async def pagina_planos() -> Response:
+        """Os planos agora abrem como janela dentro do chat."""
+        return Response(status_code=307, headers={"Location": "/#planos"})
+
+    @app.get("/api/cota")
+    async def api_cota(request: Request) -> dict:
+        quem, dev = usuario(request)
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.post("/api/planos/ativar")
+    async def ativar_plano(corpo: AtivarPlano, request: Request) -> dict:
+        """Checkout SIMULADO: o cartão é validado no navegador e só os 4 últimos dígitos chegam aqui.
+        Nada é cobrado; serve para testar o fluxo e liberar o modo completo sem o modo administrador."""
+        limitar_gravacao(request)
+        quem, dev = usuario(request)
+        try:
+            app.state.cota.ativar_plano(quem, corpo.plano, corpo.final_cartao)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.post("/api/planos/cancelar")
+    async def cancelar_plano(request: Request) -> dict:
+        limitar_gravacao(request)
+        quem, dev = usuario(request)
+        app.state.cota.cancelar_plano(quem)
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.get("/dev", include_in_schema=False)
+    async def entrar_dev(chave: str = "") -> Response:
+        """Abre uma vez /dev?chave=SUA_CHAVE: o navegador guarda o cookie e fica sem limite."""
+        if not app.state.cota.eh_dev(chave):
+            raise HTTPException(404, "Não encontrado.")
+        r = Response(status_code=303, headers={"Location": "/"})
+        r.set_cookie("tutoron_dev", chave, max_age=180 * 86400, httponly=True, samesite="lax")
+        return r
 
     @app.get("/health")
     async def health() -> dict[str, str]:
@@ -286,6 +417,28 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not liberada(d):
             raise HTTPException(403, MSG_EM_VALIDACAO.replace("{nome}", d.nome))
 
+    def resolver_disciplina(ident, pergunta, contexto='', preferidas=(), geral=False):
+        """`geral=True` (só no modo Tutor): sem disciplina identificada, o tutor orienta com
+        conhecimento geral em vez de barrar o aluno (disciplinas sem acervo, como Controle)."""
+        if ident == prompts.GERAL_ID:
+            if geral:
+                return ident
+            ident = 'auto'
+        if ident == 'auto':
+            from .disciplina_auto import identificar
+            ident = identificar(pergunta, contexto or '', preferidas)
+            if ident is None and geral:
+                return prompts.GERAL_ID
+            if ident is None:
+                raise HTTPException(409, 'Não consegui identificar a disciplina com segurança. '
+                                    'Escolha a disciplina no seletor ou detalhe melhor o assunto.')
+        exigir_liberada(ident)
+        return disciplinas.obter(ident).id
+
+    @app.get("/api/cursos")
+    async def lista_cursos() -> JSONResponse:
+        return JSONResponse(cursos.publico(), headers={"Cache-Control": "public, max-age=600"})
+
     @app.get("/api/disciplinas")
     async def lista_disciplinas() -> dict:
         return {"padrao": disciplinas.obter().id,
@@ -295,11 +448,21 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/perguntar")
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
-        return app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, corpo.disciplina,
+        exigir_cota(request)
+        curso = corpo.curso if cursos.valido(corpo.curso, corpo.periodo) else None
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
+            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x), cursos.preferidas(curso, corpo.periodo),
+            geral=True)
+        cobrar_entrada(request, corpo.pergunta, corpo.contexto, corpo.foto, corpo.travou,
+                       *[str(h.model_dump()) for h in corpo.historico], tipo="pergunta")
+        t = app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
                                            ajuda=corpo.ajuda, leitura_foto=corpo.foto,
                                            historico=[h.model_dump() for h in corpo.historico],
-                                           travou=corpo.travou).publico()
+                                           travou=corpo.travou,
+                                           perfil=cursos.perfil(curso, corpo.periodo if curso else None, disciplina),
+                                           modo=modo_de(request))
+        t.dono = usuario(request)
+        return t.publico()
 
     @app.get("/api/ajudas")
     async def ajudas() -> dict:
@@ -309,20 +472,51 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/foto")
     async def ler_foto(corpo: FotoPedido, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
+        exigir_cota(request)
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, 1500, dev, "foto")  # imagem + transcrição (estimativa fixa)
+        # A foto precisa ser lida antes de inferir sua disciplina. A escolha auto
+        # só roteia a pergunta depois que o aluno confere a transcrição.
+        disciplina = None if corpo.disciplina in ('auto', prompts.GERAL_ID) else corpo.disciplina
+        exigir_liberada(disciplina)
         try:
             imagem = foto.decodificar(corpo.imagem)
-            return app.state.tarefas.ler_foto(imagem, corpo.disciplina, corpo.observacao).publico()
+            return app.state.tarefas.ler_foto(imagem, disciplina, corpo.observacao).publico()
         except foto.FotoInvalida as exc:
             raise HTTPException(400, str(exc)) from None
 
     @app.post("/api/animar")
     async def animar(corpo: AnimarPedido, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
+        exigir_cota(request)
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, 3000, dev, "animacao")  # roteiro da animação (estimativa fixa)
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
+            x for x in (corpo.contexto, corpo.foto) if x))
         if not animacao.disponivel():
             raise HTTPException(503, "As animações não estão instaladas neste servidor.")
-        return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, corpo.disciplina).publico()
+        return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, disciplina,
+                                       contexto_aluno=corpo.contexto, leitura_foto=corpo.foto).publico()
+
+    @app.get('/api/visuais')
+    async def exemplos_visuais() -> dict:
+        from .animacao import galeria
+        pasta = settings.data_dir / 'animacoes'
+        return {'disponivel': animacao.disponivel(), 'exemplos': [galeria.resumo(e, pasta)
+                for e in galeria.exemplos() if liberada(disciplinas.obter(e['disciplina']))]}
+
+    @app.post('/api/visuais/{ident}')
+    async def preparar_visual(ident: str, request: Request) -> dict:
+        from .animacao import galeria
+        limitar(request)
+        try:
+            exemplo = galeria.obter(ident)
+        except KeyError:
+            raise HTTPException(404, 'Exemplo não encontrado.') from None
+        exigir_liberada(exemplo['disciplina'])
+        if not animacao.disponivel():
+            raise HTTPException(503, 'As animações não estão instaladas neste servidor.')
+        return app.state.tarefas.animar_exemplo(ident).publico()
 
     @app.get("/api/animacoes/{ident}.mp4", include_in_schema=False)
     async def video(ident: str) -> FileResponse:
@@ -333,17 +527,32 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             raise HTTPException(404, "Esta animação expirou. Gere de novo.")
         return FileResponse(caminho, media_type="video/mp4", headers={"Cache-Control": "private, max-age=3600"})
 
+    @app.get('/api/animacoes/{ident}.jpg', include_in_schema=False)
+    async def poster_visual(ident: str) -> FileResponse:
+        if not re.fullmatch(r'visual_[a-f0-9]{32}', ident):
+            raise HTTPException(404, 'Não encontrado.')
+        caminho = settings.data_dir / 'animacoes' / f'{ident}.jpg'
+        if not caminho.is_file():
+            raise HTTPException(404, 'Imagem não encontrada.')
+        return FileResponse(caminho, media_type='image/jpeg', headers={'Cache-Control': 'private, max-age=3600'})
+
     @app.post("/api/comparar")
     async def comparar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
-        exigir_liberada(corpo.disciplina)
-        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, corpo.disciplina).publico()
+        exigir_cota(request)
+        cobrar_entrada(request, corpo.pergunta, corpo.contexto, tipo="comparacao")
+        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, corpo.contexto)
+        return app.state.tarefas.comparar(corpo.pergunta, corpo.contexto, disciplina).publico()
 
     @app.get("/api/tarefas/{ident}")
     async def tarefa(ident: str) -> JSONResponse:
         t = app.state.tarefas.obter(ident[:40])
         if not t:
             raise HTTPException(404, "Esta resposta expirou ou o servidor foi reiniciado. Envie a pergunta de novo.")
+        dono = getattr(t, "dono", None)
+        if dono and t.concluida is not None and not getattr(t, "cobrada", False):
+            t.cobrada = True  # cobra a resposta uma vez só, quando fica pronta
+            app.state.cota.cobrar(dono[0], estimar_tokens(t.texto, str(t.resultado)), dono[1], "resposta")
         return JSONResponse(t.publico(), headers={"Cache-Control": "no-store"})
 
     @app.post("/api/feedback")
@@ -389,6 +598,19 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         await app.state.llm.warm_up()
         return {"ok": True, "local": await app.state.llm.local_status(), "tarefas_ativas": app.state.tarefas.ativas()}
 
+    @app.get("/api/uso")
+    async def api_uso(request: Request) -> dict:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return {"limite": settings.cota_tokens, "janela_h": settings.cota_janela_h,
+                "alunos": app.state.cota.relatorio()}
+
+    @app.get("/uso", include_in_schema=False)
+    async def pagina_uso(request: Request) -> FileResponse:
+        if not requisicao_local(request):
+            raise HTTPException(404, "Não encontrado.")
+        return FileResponse(WEB / "uso.html", headers={"Cache-Control": "no-cache"})
+
     @app.get("/resultados", include_in_schema=False)
     async def pagina_resultados(request: Request) -> FileResponse:
         if not requisicao_local(request):
@@ -399,15 +621,16 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @app.post("/api/v1/questions", response_model=QuestionResponse)
     async def ask_question(payload: QuestionRequest, request: Request) -> QuestionResponse:
         limitar(request)
-        exigir_liberada(payload.subject)
-        t = app.state.tarefas.perguntar(payload.question, payload.context, payload.subject)
+        exigir_cota(request)
+        disciplina = resolver_disciplina(payload.subject, payload.question, payload.context)
+        t = app.state.tarefas.perguntar(payload.question, payload.context, disciplina)
         while t.concluida is None:
             await asyncio.sleep(0.5)
         if t.status != "pronta":
             raise HTTPException(503, MSG_INDISPONIVEL)
         return QuestionResponse(answer=t.texto, source="tutoron-rag", metadata={
             "model": t.rotulo, "latency_ms": round(t.resultado.get("segundos", 0) * 1000),
-            "chunks_used": len(t.fontes), "sources": t.fontes, "subject": disciplinas.obter(payload.subject).id})
+            "chunks_used": len(t.fontes), "sources": t.fontes, "subject": disciplina})
 
     return app
 

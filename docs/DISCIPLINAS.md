@@ -147,6 +147,21 @@ SQL no acervo:
 
 Notação na busca léxica: `tokens` descarta σ, π e ρ, então os blocos escrevem "sigma", "pi" e "rho" por extenso.
 
+## Probabilidade e Estatística: anotações de aluno conferidas por código (18/11/2026)
+
+Probabilidade entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/prob/`: rigor, 25 blocos (19 na busca; 6 notas da equipe candidatas), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_prob.py`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 5 PDFs de anotações de estudo de 2025.2 (aluno, não professor), parafraseados. Foram corrigidos 8 erros em 6 blocos (por exemplo, $\operatorname{Var}(X-Y)$ escrita como diferença); o exemplo do elevador ficou `pendente_professor`. Cada número é conferido com `scipy.stats`, `fractions`/SymPy ou Monte Carlo de semente fixa, e os erros das anotações são testados como erros.
+
+Busca: o exemplo do pêndulo (Física 2) tinha falso positivo semântico no bloco da exponencial; o bloco foi dividido em conceito e exemplos, sem mudar o critério de relevância.
+
+Instruções internas: a regra da variância em `rigor.md` estava escrita como a fórmula em LaTeX, e a resposta da IA que repetia a mesma fórmula padrão caiu na recusa de `copia_instrucoes` (12 palavras). A regra passou a ser escrita por extenso; a verificação de segurança não mudou.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -173,3 +188,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
 | `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (20 blocos, 18 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; o tutor não entrega projetos avaliativos prontos (regra em `rigor.md`); revisão humana e aprovação do professor pendentes; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
 | `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |
+| `prob` | Probabilidade e Estatística | Markdown curado em `disciplinas/prob` (25 blocos, 19 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; anotações de aluno sem autorização de publicar a transcrição (só paráfrases); professor, instituição e enunciados das provas não identificados; revisão humana e do professor pendentes; tópicos 10–13 só em notas fora da busca; veja a [curadoria](../disciplinas/prob/CURADORIA.md) |

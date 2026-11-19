@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="/static/marca/logo.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TutorON · Uso por aluno</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 1100px; margin: 0 auto; padding: 24px 16px; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { padding: 6px 8px; border-bottom: 1px solid #ddd; text-align: left; }
+  td.n { text-align: right; font-variant-numeric: tabular-nums; }
+  .dev { color: #2563eb; } .fim { color: #b42318; font-weight: 600; }
+  .scroll { overflow-x: auto; }
+</style>
+</head>
+<body>
+<h1>Uso por aluno</h1>
+<p id="resumo">Carregando…</p>
+<p>Só abre nesta máquina. Cada aluno é um navegador (cookie anônimo) ou, sem cookie, um IP. Dados em <code>dados/uso.jsonl</code>.</p>
+<div class="scroll"><table>
+<thead><tr><th>Aluno</th><th>Tokens (total)</th><th>Perguntas</th><th>Fotos</th><th>Animações</th><th>Saldo agora</th><th>Primeiro uso</th><th>Último uso</th></tr></thead>
+<tbody id="linhas"></tbody>
+</table></div>
+<script>
+(async function () {
+  var d = await (await fetch('/api/uso', { cache: 'no-store' })).json();
+  var total = d.alunos.reduce(function (s, a) { return s + a.tokens; }, 0);
+  document.getElementById('resumo').textContent = d.alunos.length + ' alunos · ' + total.toLocaleString('pt-BR') +
+    ' tokens no total · cota: ' + (d.limite ? d.limite.toLocaleString('pt-BR') + ' a cada ' + d.janela_h + ' h' : 'desligada');
+  var tb = document.getElementById('linhas');
+  d.alunos.forEach(function (a) {
+    var tr = document.createElement('tr');
+    var saldo = a.dev ? 'dev (sem limite)' : a.restantes_agora === null ? '—' : a.restantes_agora.toLocaleString('pt-BR');
+    [a.quem, a.tokens.toLocaleString('pt-BR'), a.perguntas, a.fotos, a.animacoes, saldo,
+     a.primeiro.replace('T', ' '), (a.ultimo || '').replace('T', ' ')].forEach(function (v, i) {
+      var td = document.createElement('td'); td.textContent = v;
+      if (i > 0 && i < 6) td.className = 'n';
+      if (i === 5 && a.dev) td.className = 'n dev';
+      if (i === 5 && a.restantes_agora === 0) td.className = 'n fim';
+      tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+})();
+</script>
+</body>
+</html>

@@ -34,7 +34,8 @@ def roteiro_valido(texto_ou_dados) -> dict:
     try:
         return validar(texto_ou_dados).model_dump()
     except (ValueError, ValidationError) as exc:
-        raise FalhaAnimacao(f"roteiro inválido: {str(exc)[:200]}") from exc
+        detalhe = '; '.join(e['msg'] for e in exc.errors()) if isinstance(exc, ValidationError) else str(exc)
+        raise FalhaAnimacao(f"roteiro inválido: {detalhe[:200]}") from exc
 
 
 async def renderizar(roteiro: dict, pasta: Path, qualidade: str = "low_quality") -> str:

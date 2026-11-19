@@ -153,7 +153,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
     assert modelo_paa == modelo_sd  # mesma cascata de modelos, mesmo serviço
     # O prompt de sistema é o mesmo texto do tutor; só mudam o nome da disciplina e as regras de rigor.
     paa, sd = disciplinas.obter("paa"), disciplinas.obter("sd")
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts._RIGOR_SOCRATICO[d.id], "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(sistema_paa, paa) == comum(sistema_sd, sd)
 
@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd", "prob"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
@@ -272,7 +272,7 @@ def test_mesma_ia_para_as_tres_disciplinas(site_oac):
     perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
     chamadas = site_oac.llm.chamadas[-3:]
     assert len({m for m, _, _ in chamadas}) == 1  # mesmo modelo, mesmo serviço
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     textos = {comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "oac"))}
     assert len(textos) == 1  # um único texto de tutor
@@ -328,7 +328,7 @@ def test_mesma_ia_para_as_quatro_disciplinas(site_calc3):
     perguntar(site_calc3, "Como calcular o comprimento de arco de uma curva paramétrica?", "calc3")
     chamadas = site_calc3.llm.chamadas[-3:]
     assert len({m for m, _, _ in chamadas}) == 1
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert len({comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "calc3"))}) == 1
 
@@ -355,7 +355,7 @@ def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
     assert all(f["titulo"].endswith("de Física 2") for f in t["fontes"])
     (m_oac, s_oac, _), (m_fis, s_fis, prompt) = site_oac.llm.chamadas[-2:]
     assert m_oac == m_fis
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(s_oac, disciplinas.obter("oac")) == comum(s_fis, disciplinas.obter("fis2"))
     assert "ΔE_int = Q − W" in s_fis and "RISC-V" not in s_fis.split("# Rigor")[-1]
@@ -378,7 +378,7 @@ def test_pergunta_de_ed_usa_material_de_ed_e_a_mesma_ia(site_oac):
     assert all(f["titulo"].endswith("de ED") for f in t["fontes"])
     (m_oac, s_oac, _), (m_ed, s_ed, prompt) = site_oac.llm.chamadas[-2:]
     assert m_oac == m_ed
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(s_oac, disciplinas.obter("oac")) == comum(s_ed, disciplinas.obter("ed"))
     assert "Não escreva o projeto completo" in s_ed and "RISC-V" not in s_ed.split("# Rigor")[-1]
@@ -397,6 +397,7 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     ("calc3", "Onde a cardioide r = 1 + sen θ tem tangente horizontal?"),
     ("fis2", "Qual o período de um pêndulo simples de 1 m?"),
     ("ed", "Como remover o último nó de uma lista encadeada?"),
+    ("prob", "O que significa a falta de memória da distribuição exponencial?"),
 ])
 def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
     """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""
