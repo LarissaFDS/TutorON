@@ -8,8 +8,8 @@ Leva uns 15 minutos. Quem tem a conta do projeto faz uma vez; depois é só cola
 2. Em **SQL Editor → New query**, cole todo o `docs/supabase/schema.sql` e clique em **Run**.
 3. Em **Project Settings → API**, copie:
    - Project URL → `SUPABASE_URL`
-   - chave `anon` / publishable → `SUPABASE_ANON_KEY`
-   - chave `service_role` / secret → `SUPABASE_SERVICE_KEY` (**nunca** compartilhe nem coloque no git)
+   - **Publishable key** (`sb_publishable_...`) → `SUPABASE_ANON_KEY`
+   - **Secret key** (`sb_secret_...`) → `SUPABASE_SERVICE_KEY` (**nunca** compartilhe nem coloque no git)
 
 ## 2. Login com e-mail
 **Authentication → Providers → Email**: deixe ligado e com "Confirm email" ligado.

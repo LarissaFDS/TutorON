@@ -19,8 +19,8 @@ ENV = Path(__file__).resolve().parents[1] / ".env"
 
 CAMPOS = [  # (variável, pergunta, secreta?)
     ("SUPABASE_URL", "URL do projeto Supabase (https://xxxx.supabase.co)", False),
-    ("SUPABASE_ANON_KEY", "Chave pública do Supabase (anon / publishable)", True),
-    ("SUPABASE_SERVICE_KEY", "Chave de serviço do Supabase (service_role / secret)", True),
+    ("SUPABASE_ANON_KEY", "Publishable key do Supabase (sb_publishable_...)", True),
+    ("SUPABASE_SERVICE_KEY", "Secret key do Supabase (sb_secret_...)", True),
     ("GROQ_API_KEY", "Chave do Groq (gsk_...)", True),
     ("TUTORON_ADMINS", "E-mails de administrador, separados por vírgula", False),
     ("TUTORON_SERVIDOR_URL", "Endereço do site hospedado (vazio se ainda não tem)", False),
@@ -51,7 +51,7 @@ def testar(v: dict[str, str]) -> None:
         try:
             k = v["SUPABASE_SERVICE_KEY"]
             r = httpx.get(v["SUPABASE_URL"].rstrip("/") + "/rest/v1/perfis", params={"select": "id", "limit": "1"},
-                          headers={"apikey": k, "Authorization": "Bearer " + k}, timeout=10)
+                          headers={"apikey": k} | ({"Authorization": "Bearer " + k} if k.startswith("eyJ") else {}), timeout=10)
             print("Supabase:", "ok" if r.status_code == 200 else
                   ("conectou, mas falta rodar docs/supabase/schema.sql" if r.status_code == 404 else f"erro HTTP {r.status_code}"))
         except httpx.HTTPError as exc:

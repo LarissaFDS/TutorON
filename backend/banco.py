@@ -33,8 +33,10 @@ class Banco:
     def __init__(self, url: str, chave_servico: str, client: httpx.Client | None = None):
         self.url = url.rstrip("/")
         self.rest = self.url + "/rest/v1"
-        self.headers = {"apikey": chave_servico, "Authorization": "Bearer " + chave_servico,
-                        "Content-Type": "application/json"}
+        # Chaves novas (sb_secret_...) vão só no cabeçalho apikey; as antigas (JWT eyJ...) também no Bearer.
+        self.headers = {"apikey": chave_servico, "Content-Type": "application/json"}
+        if chave_servico.startswith("eyJ"):
+            self.headers["Authorization"] = "Bearer " + chave_servico
         self.client = client or httpx.Client(timeout=5)
         self._fila: queue.Queue = queue.Queue(maxsize=5000)
         self._thread = threading.Thread(target=self._trabalhar, name="banco", daemon=True)
