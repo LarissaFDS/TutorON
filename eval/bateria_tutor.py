@@ -57,6 +57,18 @@ PERGUNTAS = [
      "um lugar por bloco × qualquer via do conjunto; menos conflito, mais comparadores"),
     ("oac-beq", "oac", "Como fica o datapath monociclo numa instrução beq?",
      "ALUSrc 0, ULA subtrai, Branch 1, PCSrc = Branch·Zero, RegWrite 0, MemWrite 0, MemtoReg X"),
+    # Probabilidade e Estatística: valores conferidos em tests_acervo/test_disciplina_prob.py.
+    ("prob-indep", "prob", "Qual a diferença entre eventos independentes e mutuamente exclusivos?",
+     "P(A∩B)=0 x P(A∩B)=P(A)P(B); disjuntos com probabilidade positiva não são independentes"),
+    ("prob-poisson", "prob", "Como calcular P(X > 2) numa Poisson com média 3?",
+     "1 − e^{-3}(1 + 3 + 9/2) = 1 − 8,5e^{-3} ≈ 0,5768; ppois(2, 3, lower.tail = FALSE)"),
+    ("prob-memoria", "prob", "O que significa a falta de memória da distribuição exponencial?",
+     "P(X > s+t | X > s) = P(X > t) = e^{-λt}; taxa constante"),
+    ("prob-2x-y", "prob", "Se X e Y são normais independentes, qual a distribuição de 2X − Y?",
+     "N(2μX − μY, 4σX² + σY²); variâncias somam"),
+    ("prob-padronizar", "prob", "Como padronizar uma normal e usar a tabela?",
+     "z = (x − μ)/σ; Φ(z) acumulada (ou área 0..z + 0,5); ex. N(40,10²): P(X ≤ 50) = Φ(1) ≈ 0,8413"),
+    ("prob-fora", "prob", "Qual o período de um pêndulo simples de 1 m?", "diz que não é de Probabilidade; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

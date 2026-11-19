@@ -217,6 +217,39 @@
         "Como sei se uma tabela está na 2FN ou na 3FN?",
         "Como escrever a projeção e a seleção da álgebra relacional em SQL?"
       ]
+    },
+    {
+      "id": "prob",
+      "nome": "Probabilidade e Estatística",
+      "sigla": "PE",
+      "situacao": "em validação",
+      "itens": "disciplinas/prob/acervo/itens.json",
+      "indice": "disciplinas/prob/acervo/indice.json",
+      "materiais": "disciplinas/prob/materiais",
+      "rigor": "disciplinas/prob/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "prob-01-probabilidade-basica",
+        "prob-02-bayes",
+        "prob-03-variaveis-aleatorias",
+        "prob-04-esperanca-variancia",
+        "prob-05-distribuicoes-discretas",
+        "prob-06-uniforme-normal",
+        "prob-07-exponencial",
+        "prob-08-combinacao-linear",
+        "prob-09-aproximacao-normal-tcl",
+        "prob-10-estatistica-descritiva",
+        "prob-11-estimacao",
+        "prob-12-testes-hipoteses",
+        "prob-13-conjuntas-regressao"
+      ],
+      "exemplos": [
+        "Qual a diferença entre eventos independentes e mutuamente exclusivos?",
+        "Como calcular P(X > 2) numa Poisson com média 3?",
+        "O que significa a falta de memória da distribuição exponencial?",
+        "Se X e Y são normais independentes, qual a distribuição de 2X − Y?",
+        "Como padronizar uma normal e usar a tabela?"
+      ]
     }
   ]
 }
