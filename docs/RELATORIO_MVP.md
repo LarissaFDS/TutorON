@@ -92,7 +92,8 @@ As instruções abaixo estão prontas para usar. O servidor público só tem est
 - Banco de Dados e as disciplinas fora do beta (LarissaFDS/TutorON#40 e LarissaFDS/TutorON#42);
 - os 6 blocos novos de OAC, das anotações manuscritas de 2025.2 (LarissaFDS/TutorON#44, commit `14f967d`);
 - Probabilidade e Estatística, como MVP (LarissaFDS/TutorON#50 e LarissaFDS/TutorON#51, commit `ae5ba39`);
-- Circuitos Elétricos, como MVP (LarissaFDS/TutorON#54 e LarissaFDS/TutorON#55, commit `4117bf3`).
+- Circuitos Elétricos, como MVP (LarissaFDS/TutorON#54 e LarissaFDS/TutorON#55, commit `4117bf3`);
+- Sinais e Sistemas, como MVP (LarissaFDS/TutorON#58 e LarissaFDS/TutorON#59, commit `317b67b`).
 
 Faça os passos no PC do servidor, na pasta do TutorON.
 
@@ -100,14 +101,14 @@ Faça os passos no PC do servidor, na pasta do TutorON.
 2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` ou rode `5-Desligar.bat`.
 3. Atualize: `git checkout main` e `git pull --ff-only origin main`.
 4. Dependências: nada novo para o servidor. O `duckdb` entrou só em `requirements-acervo.txt`, para os testes de SQL, e não precisa ser instalado no servidor.
-5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. Os índices de BD, de OAC (34 blocos, 24 na busca) de Probabilidade (25 blocos, 19 na busca) e de Circuitos (26 blocos, 23 na busca) já vêm gerados no repositório.
+5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. Os índices de BD, de OAC (34 blocos, 24 na busca) de Probabilidade (25 blocos, 19 na busca) de Circuitos (26 blocos, 23 na busca) e de Sinais e Sistemas (29 blocos, 28 na busca) já vêm gerados no repositório.
 6. `.env`: nada obrigatório de novo. **Não** coloque `TUTORON_LIBERAR_EM_VALIDACAO` no servidor público.
 7. Reinicie com dois cliques em `1-Iniciar-Servidor.bat`.
 8. Confira no endereço público:
-   - aparecem as nove disciplinas: PAA, SD, OAC, Cálculo 3, Física 2, ED, BD, Probabilidade e Estatística e Circuitos Elétricos;
+   - aparecem as dez disciplinas: PAA, SD, OAC, Cálculo 3, Física 2, ED, BD, Probabilidade e Estatística, Circuitos Elétricos e Sinais e Sistemas;
    - nenhuma mostra " · beta" no seletor nem aviso ao ser escolhida;
    - `?disciplina=bd` abre com Banco de Dados selecionada;
-   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN. Em OAC, "Como fica o datapath monociclo numa instrução beq?" deve citar as anotações do Projeto 1. Em Probabilidade, "O que significa a falta de memória da distribuição exponencial?" deve citar as anotações de 2025.2. Em Circuitos, "Como calcular o equivalente de Thévenin com uma fonte dependente?" deve citar as anotações de 2026.1 (Teorema de Thévenin e Norton).
+   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN. Em OAC, "Como fica o datapath monociclo numa instrução beq?" deve citar as anotações do Projeto 1. Em Probabilidade, "O que significa a falta de memória da distribuição exponencial?" deve citar as anotações de 2025.2. Em Circuitos, "Como calcular o equivalente de Thévenin com uma fonte dependente?" deve citar as anotações de 2026.1 (Teorema de Thévenin e Norton). Em Sinais e Sistemas, "Qual a transformada de Fourier de um pulso retangular?" deve citar as anotações de 2026.1 (Transformada de Fourier).
 9. Se algo der errado, volte: feche o servidor, rode `git checkout <commit anotado no passo 1>` (ex.: `git checkout ef5ed69`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
 
 ## 5. Como usar agora
