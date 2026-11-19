@@ -80,6 +80,18 @@ PERGUNTAS = [
     ("circ-ci-chave", "circ", "Como achar as condições iniciais do capacitor depois que a chave abre?",
      "regime CC antes (C aberto, L curto); vC(0+) = vC(0−), iL(0+) = iL(0−); derivada por iC = C dv/dt"),
     ("circ-fora", "circ", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Sinais e Sistemas: valores conferidos em tests_acervo/test_disciplina_sinais.py (SymPy e SciPy).
+    ("sinais-invariancia", "sinais", "Como saber se y(t) = x(2t) é invariante no tempo?",
+     "compara y(t−T) = x(2t−2T) com T[x(t−T)] = x(2t−T): diferentes, logo variante; contraexemplo"),
+    ("sinais-conv-pulsos", "sinais", "Como calcular a convolução de dois pulsos retangulares?",
+     "reflete e desloca; intervalos de sobreposição; dois pulsos de largura T dão triângulo em [0, 2T] com pico T"),
+    ("sinais-fourier-quadrada", "sinais", "Quais os coeficientes da série de Fourier de uma onda quadrada?",
+     "onda ±V: c0 = 0, ck = −j2V/(kπ) para k ímpar e 0 para k par; x = Σ 4V/(kπ) sen(kω0t)"),
+    ("sinais-bibo", "sinais", "Como saber se G(s) = (s+1)/(s²+3s−4) é BIBO estável?",
+     "polos 1 e −4 (zero −1): polo com parte real positiva, não é BIBO estável; regra: todos os polos com Re < 0"),
+    ("sinais-tf-pulso", "sinais", "Qual a transformada de Fourier de um pulso retangular?",
+     "V rect(t/T) ↔ VT sinc(ωT/2) = (2V/ω) sen(ωT/2); zeros em ω = 2πn/T; X(0) = VT"),
+    ("sinais-fora", "sinais", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

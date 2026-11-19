@@ -192,6 +192,33 @@ IA real (Gemini, 19/11/2026, `eval/results/bateria-circ-2026-11-19.json`): o `ge
 - Máxima transferência: na primeira execução, a resposta foi socrática e correta (montou $p(R_L)$ e pediu a derivada). Na segunda, a verificação de "entregou a resposta" trocou duas vezes a saída pela ajuda de reserva genérica.
 - Karnaugh com Circuitos selecionada: a IA citou "Sistemas Digitais", mas respondeu o assunto sem sugerir trocar a disciplina.
 
+## Sinais e Sistemas: resoluções refeitas com SymPy e SciPy (19/11/2026)
+
+Sinais e Sistemas entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/sinais/`: rigor, 29 blocos (28 na busca; 1 nota da equipe candidata, tempo discreto), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_sinais.py`, que refaz cada resultado com SymPy (integrais, `apart`, `dsolve`, transformadas) e SciPy/numpy (convolução numérica, coeficientes de Fourier por integração, `freqresp`, `lsim`, `step`);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` (exemplos, variantes em LaTeX e em texto simples, perguntas fora) e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 14 PDFs (139 páginas) de anotações de aluno de 2026.1, parafraseadas; professor e instituição não aparecem nos cabeçalhos. O autor autorizou publicar a transcrição em 18/11/2026. A ementa de ECOM030 (90 h) veio do PPC de 2014 (p. 40). Tempo discreto não está na ementa (é de ECOM063) nem nas anotações; Bode e filtros estão na ementa, mas não nas anotações.
+
+Foram corrigidos 10 blocos; os principais:
+- a regra BIBO da revisão ("(>0)"): todos os polos com parte real negativa;
+- ângulos de complexos com parte real negativa sem $\pm\pi$ (dois casos);
+- $\mathcal{L}\{e^{-at}\cos\omega t\}$ com sinais trocados;
+- $u(at - t_0) = u(t - t_0/a)$ só vale para $a > 0$;
+- o indutor chamado de "marginalmente estável" por um critério de entradas; ele não é BIBO estável.
+
+A conferência também achou dois erros da própria equipe antes do commit: o valor numérico de $c_1$ da exponencial periódica, e `\dddot`, que o KaTeX do site não renderiza.
+
+IA real (Gemini, 19/11/2026, `eval/results/bateria-sinais-2026-11-19.json`): a primeira resposta veio do `gemini-3.6-flash`; as outras 5, do `gemini-3.1-flash-lite` (degradado). Cada resposta foi conferida contra os valores dos testes:
+- as 5 perguntas de exemplo saíram corretas e socráticas, citando o bloco certo, sem rótulo inexistente. A regra BIBO veio certa: polos com parte real negativa;
+- na pergunta de BIBO, a verificação de "entregou a resposta" ajustou a saída;
+- Karnaugh com Sinais selecionada: a IA respondeu o assunto sem dizer que é de Sistemas Digitais, como já tinha acontecido em Circuitos.
+
+Na busca de Circuitos, "Quais os coeficientes da série de Fourier de uma onda quadrada?" traz blocos de RLC. Isso é do corte de Circuitos, não vazamento de Sinais; os índices não têm blocos em comum. `disciplinas/cursos.json` continua sem `acervo` para ECOM030, como ECOM028 e Probabilidade: ligar muda a preferência do 5º período, e `backend/tests/test_versao_final.py` espera só PAA.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -220,3 +247,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |
 | `prob` | Probabilidade e Estatística | Markdown curado em `disciplinas/prob` (25 blocos, 19 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; anotações de aluno sem autorização de publicar a transcrição (só paráfrases); professor, instituição e enunciados das provas não identificados; revisão humana e do professor pendentes; tópicos 10–13 só em notas fora da busca; veja a [curadoria](../disciplinas/prob/CURADORIA.md) |
 | `circ` | Circuitos Elétricos | Markdown curado em `disciplinas/circ` (26 blocos, 23 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; amp-op, primeira ordem e fasores só em notas fora da busca; veja a [curadoria](../disciplinas/circ/CURADORIA.md) |
+| `sinais` | Sinais e Sistemas | Markdown curado em `disciplinas/sinais` (29 blocos, 28 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; tempo discreto só em nota fora da busca; Bode e filtros sem material; veja a [curadoria](../disciplinas/sinais/CURADORIA.md) |
