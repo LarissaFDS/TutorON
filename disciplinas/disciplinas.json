@@ -284,7 +284,7 @@
       "id": "sinais",
       "nome": "Sinais e Sistemas",
       "sigla": "SS",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/sinais/acervo/itens.json",
       "indice": "disciplinas/sinais/acervo/indice.json",
       "materiais": "disciplinas/sinais/materiais",
