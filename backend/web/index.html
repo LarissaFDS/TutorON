@@ -62,6 +62,9 @@
       <a class="lateral__item" href="/demo">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver exemplos de como funciona
       </a>
+      <a class="lateral__item" href="/admin" id="admin-link" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Contas e limites
+      </a>
     </nav>
 
     <section class="conversas" aria-labelledby="historico-botao">
@@ -71,6 +74,10 @@
     </section>
 
     <div class="lateral__base">
+      <a class="perfil conta-chip" id="conta-chip" href="/entrar" hidden>
+        <span class="perfil__avatar" aria-hidden="true">👤</span>
+        <span class="perfil__texto"><strong data-nome>Entrar ou criar conta</strong><small data-sub></small></span>
+      </a>
       <button class="perfil" id="perfil-botao" type="button" aria-haspopup="dialog">
         <span class="perfil__avatar" aria-hidden="true">🎓</span>
         <span class="perfil__texto"><strong id="perfil-curso">Escolha seu curso</strong><small id="perfil-periodo">e o período</small></span>
@@ -347,5 +354,6 @@
 <script src="/static/vendor/katex/katex.min.js"></script>
 <script src="/static/render.js"></script>
 <script src="/static/app.js?v=final-1"></script>
+<script src="/static/conta.js?v=1"></script>
 </body>
 </html>

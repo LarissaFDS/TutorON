@@ -53,6 +53,7 @@
     try { payload = await res.json(); } catch (e) { /* sem JSON */ }
     atualizarCota();
     if (res.status === 402) abrirPlanos(payload.erro);
+    if (res.status === 401) location.href = '/entrar?voltar=' + encodeURIComponent(location.pathname + location.search);
     if (!res.ok) throw new Error(payload.erro || mensagemHttp(res.status));
     return payload;
   }

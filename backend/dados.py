@@ -8,10 +8,12 @@ fácil de abrir no Python/pandas e de juntar em datasets de treino.
 - ``dados/validacao/comparacoes.jsonl`` modo Validação: o par A/B gerado, com a identidade de cada lado
 - ``dados/validacao/avaliacoes.jsonl``  modo Validação: notas do aluno + par completo + qual lado era o TutorON
 
-Nenhum IP, nome ou identificador pessoal é gravado.
+Nenhum IP ou nome é gravado. Com contas (Supabase), cada linha também vai para o banco com o id
+da conta (`usuario`), para a coleta por aluno; veja backend/banco.py e docs/BANCO-E-LIMITES.md.
 """
 from __future__ import annotations
 
+import contextvars
 import json
 import secrets
 import threading
@@ -19,6 +21,11 @@ import time
 from collections import deque
 from datetime import datetime, timezone
 from pathlib import Path
+
+
+# Conta de quem fez o pedido ("u:<id>" logado, "c_..." convidado). O middleware de main.py define;
+# as tarefas em segundo plano herdam (asyncio copia o contexto ao criar a tarefa).
+USUARIO: contextvars.ContextVar[str | None] = contextvars.ContextVar("usuario", default=None)
 
 
 def agora() -> str:
@@ -30,8 +37,9 @@ def novo_id() -> str:
 
 
 class Registro:
-    def __init__(self, pasta: Path):
+    def __init__(self, pasta: Path, banco=None):
         self.pasta = pasta
+        self.banco = banco
         self.lock = threading.Lock()
         (pasta / "validacao").mkdir(parents=True, exist_ok=True)
         # Comparações aguardando nota. Também ficam em disco: reiniciar o
@@ -61,6 +69,11 @@ class Registro:
             with caminho.open("a", encoding="utf-8", newline="\n") as arquivo:
                 arquivo.write(linha)
                 arquivo.flush()
+        from .banco import TABELAS_DE_ARQUIVO
+        tabela = TABELAS_DE_ARQUIVO.get(nome)
+        if self.banco and tabela:
+            ident = str(registro.get("id") or registro.get("sessao") or novo_id())
+            self.banco.inserir(tabela, {"id": ident, "usuario": USUARIO.get(), "dados": registro}, upsert="id")
 
     def ler(self, nome: str) -> list[dict]:
         caminho = self.pasta / nome
