@@ -1,0 +1,140 @@
+[
+  {
+    "caso": "robo",
+    "disciplina": "paa",
+    "pergunta": "Faça uma pista visual para um robô que só anda à direita e abaixo. Use uma grade 3x3 de custos [[1,3,2],[2,1,4],[3,2,1]], sem obstáculos. Mostre a tabela DP em branco e destaque só os predecessores da célula (1,1). Não calcule a rota.",
+    "modelo": "tutoron-paa",
+    "segundos": 12.0,
+    "id": "1IWeJthBiGTnrPu109vSeA",
+    "status": "pronta",
+    "mensagem": "",
+    "video": "/api/animacoes/visual_0db9fa4c0c1b6650b0cadcf5aed614ca.mp4",
+    "poster": "/api/animacoes/visual_0db9fa4c0c1b6650b0cadcf5aed614ca.jpg",
+    "origem": "exemplo_relacionado",
+    "observacao": "Este vídeo usa outro exercício para explicar a ideia. Aplique o raciocínio à sua questão.",
+    "exemplo": "robo-dp",
+    "titulo": "Robô e programação dinâmica",
+    "pergunta_final": "Como impedir que o predecessor bloqueado entre na escolha?",
+    "modelo_cena": "grade_dp",
+    "registro": {
+      "id": "mbVzo7gPnZkOGY0L",
+      "data": "2026-11-02T22:16:07+00:00",
+      "disciplina": "paa",
+      "pergunta": "Faça uma pista visual para um robô que só anda à direita e abaixo. Use uma grade 3x3 de custos [[1,3,2],[2,1,4],[3,2,1]], sem obstáculos. Mostre a tabela DP em branco e destaque só os predecessores da célula (1,1). Não calcule a rota.",
+      "origem": "exemplo_relacionado",
+      "exemplo": "robo-dp",
+      "causa_alternativa": "O roteiro anterior era inválido (roteiro inválido: Value error, foco interno livre, com vizinhos acima e à esquerda). Devolva um JSON válido de um dos modelos.",
+      "roteiro": {
+        "modelo": "grade_dp",
+        "titulo": "Do terreno para a tabela",
+        "custos": [
+          [
+            2,
+            4,
+            1,
+            3
+          ],
+          [
+            3,
+            2,
+            5,
+            2
+          ],
+          [
+            1,
+            3,
+            2,
+            4
+          ],
+          [
+            2,
+            1,
+            3,
+            2
+          ]
+        ],
+        "bloqueios": [
+          [
+            1,
+            2
+          ]
+        ],
+        "foco": [
+          2,
+          2
+        ],
+        "pergunta_final": "Como impedir que o predecessor bloqueado entre na escolha?"
+      },
+      "video": "visual_0db9fa4c0c1b6650b0cadcf5aed614ca"
+    }
+  },
+  {
+    "caso": "karnaugh",
+    "disciplina": "sd",
+    "pergunta": "Quero enxergar a adjacência entre bordas do Karnaugh. Use um exemplo 2x4 com valores [[1,0,0,1],[0,1,1,0]], ordem Gray fixa. Destaque apenas o par da linha 0 nas colunas 0 e 3. Deixe os outros uns sem grupo e não dê expressão final.",
+    "modelo": "tutoron-paa",
+    "segundos": 12.6,
+    "id": "f8YSA8MGdmCZOH_jLkf9kA",
+    "status": "pronta",
+    "mensagem": "",
+    "video": "/api/animacoes/visual_d377897d053216678aa6d6952f7a2bec.mp4",
+    "poster": "/api/animacoes/visual_d377897d053216678aa6d6952f7a2bec.jpg",
+    "origem": "exemplo_relacionado",
+    "observacao": "Este vídeo usa outro exercício para explicar a ideia. Aplique o raciocínio à sua questão.",
+    "exemplo": "karnaugh-bordas",
+    "titulo": "Karnaugh e vizinhos nas bordas",
+    "pergunta_final": "Qual bit muda entre as células marcadas? Que outro par você investigaria?",
+    "modelo_cena": "karnaugh",
+    "registro": {
+      "id": "aCLnKSN6FqjwRFHO",
+      "data": "2026-11-02T22:16:19+00:00",
+      "disciplina": "sd",
+      "pergunta": "Quero enxergar a adjacência entre bordas do Karnaugh. Use um exemplo 2x4 com valores [[1,0,0,1],[0,1,1,0]], ordem Gray fixa. Destaque apenas o par da linha 0 nas colunas 0 e 3. Deixe os outros uns sem grupo e não dê expressão final.",
+      "origem": "exemplo_relacionado",
+      "exemplo": "karnaugh-bordas",
+      "causa_alternativa": "O roteiro anterior entregava a solução ou não pôde ser revisado. Faça só uma pista visual parcial.",
+      "roteiro": {
+        "modelo": "karnaugh",
+        "titulo": "Vizinhos também nas bordas",
+        "celulas": [
+          [
+            "1",
+            "0",
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1",
+            "1",
+            "0"
+          ],
+          [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          [
+            "0",
+            "0",
+            "0",
+            "0"
+          ]
+        ],
+        "grupo": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            3
+          ]
+        ],
+        "pergunta_final": "Qual bit muda entre as células marcadas? Que outro par você investigaria?"
+      },
+      "video": "visual_d377897d053216678aa6d6952f7a2bec"
+    }
+  }
+]

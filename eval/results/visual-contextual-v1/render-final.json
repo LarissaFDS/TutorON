@@ -1,0 +1,32 @@
+[
+  {
+    "caso": "robo",
+    "video": "Eoi8MXUhJQ5SbdWQ",
+    "render_s": 5.52,
+    "segundos_video": 7.96,
+    "largura": 854,
+    "altura": 480,
+    "bytes": 183746,
+    "quadros_decodificados": 191
+  },
+  {
+    "caso": "pilha",
+    "video": "eI97f7WByRB2q6r0",
+    "render_s": 4.86,
+    "segundos_video": 8.67,
+    "largura": 854,
+    "altura": 480,
+    "bytes": 197930,
+    "quadros_decodificados": 208
+  },
+  {
+    "caso": "estado",
+    "video": "at0XkElVWpToMtc7",
+    "render_s": 5.05,
+    "segundos_video": 8.67,
+    "largura": 854,
+    "altura": 480,
+    "bytes": 205465,
+    "quadros_decodificados": 208
+  }
+]

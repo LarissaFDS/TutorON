@@ -1,0 +1,393 @@
+[
+  {
+    "id": "robo-dp",
+    "disciplina": "paa",
+    "titulo": "Robô e programação dinâmica",
+    "resumo": "Separe o custo do terreno do estado da sua tabela.",
+    "observar": "As setas permitem somente direita e baixo. A célula marcada depende dos vizinhos de cima e da esquerda; um deles está bloqueado.",
+    "tarefa": "Como você representaria a célula bloqueada para que ela não seja escolhida como melhor predecessor?",
+    "pergunta": "Neste exemplo de robô, só são permitidos movimentos para a direita e para baixo. O custo inclui a célula inicial. Quero montar uma tabela de custo mínimo sem receber a rota nem a tabela pronta. Custos: [[2,4,1,3],[3,2,5,2],[1,3,2,4],[2,1,3,2]]. A célula (linha 1, coluna 2), contando a partir de zero, está bloqueada. Meu estado é dp[i][j], custo mínimo para chegar a (i,j).",
+    "roteiro": {
+      "modelo": "grade_dp",
+      "titulo": "Do terreno para a tabela",
+      "custos": [
+        [
+          2,
+          4,
+          1,
+          3
+        ],
+        [
+          3,
+          2,
+          5,
+          2
+        ],
+        [
+          1,
+          3,
+          2,
+          4
+        ],
+        [
+          2,
+          1,
+          3,
+          2
+        ]
+      ],
+      "bloqueios": [
+        [
+          1,
+          2
+        ]
+      ],
+      "foco": [
+        2,
+        2
+      ],
+      "pergunta_final": "Como impedir que o predecessor bloqueado entre na escolha?"
+    }
+  },
+  {
+    "id": "fluxo-residual",
+    "disciplina": "paa",
+    "titulo": "Fluxo e capacidade residual",
+    "resumo": "Leia uma aresta antes de escolher um caminho na rede.",
+    "observar": "Cada rótulo mostra fluxo atual / capacidade. Só a primeira aresta é destacada; nenhum caminho até o destino foi escolhido.",
+    "tarefa": "Quanto ainda cabe na aresta destacada? Escreva a conta e explique o significado de cada número, sem procurar o fluxo máximo ainda.",
+    "pergunta": "Quero entender uma rede de fluxo: s→a 5/7, s→b 0/4, a→t 5/7 e b→t 0/4 (fluxo atual/capacidade). Ajude-me a interpretar a capacidade residual de s→a sem resolver o fluxo máximo.",
+    "roteiro": {
+      "modelo": "fluxo",
+      "titulo": "Quanto espaço ainda resta?",
+      "nos": [
+        "s",
+        "a",
+        "b",
+        "t"
+      ],
+      "fonte": "s",
+      "destino": "t",
+      "arestas": [
+        {
+          "de": "s",
+          "para": "a",
+          "capacidade": 7,
+          "fluxo": 5
+        },
+        {
+          "de": "s",
+          "para": "b",
+          "capacidade": 4,
+          "fluxo": 0
+        },
+        {
+          "de": "a",
+          "para": "t",
+          "capacidade": 7,
+          "fluxo": 5
+        },
+        {
+          "de": "b",
+          "para": "t",
+          "capacidade": 4,
+          "fluxo": 0
+        }
+      ],
+      "primeiro_passo": [
+        "s",
+        "a"
+      ],
+      "pergunta_final": "Qual conta representa o espaço restante na aresta destacada?"
+    }
+  },
+  {
+    "id": "karnaugh-bordas",
+    "disciplina": "sd",
+    "titulo": "Karnaugh e vizinhos nas bordas",
+    "resumo": "Reconheça a ordem Gray e um agrupamento que atravessa as bordas.",
+    "observar": "Linhas AB e colunas CD seguem 00, 01, 11, 10. Um único par de uns está marcado nas bordas opostas. Outros uns continuam sem grupo.",
+    "tarefa": "Compare os bits dos dois endereços marcados. Depois escolha outro 1 e procure um vizinho permitido, sem escrever a expressão final.",
+    "pergunta": "Quero entender adjacência no Karnaugh de quatro variáveis. Linhas AB e colunas CD na ordem Gray 00,01,11,10. O exemplo tem células [[1,0,0,1],[0,1,1,0],[0,1,0,0],[0,0,0,0]]. Foi destacado somente o par da primeira linha nas colunas das duas bordas. Ajude a conferir a adjacência sem simplificar a função inteira.",
+    "roteiro": {
+      "modelo": "karnaugh",
+      "titulo": "Vizinhos também nas bordas",
+      "celulas": [
+        [
+          "1",
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "0"
+        ]
+      ],
+      "grupo": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          3
+        ]
+      ],
+      "pergunta_final": "Qual bit muda entre as células marcadas? Que outro par você investigaria?"
+    }
+  },
+  {
+    "id": "circuito-tabela",
+    "disciplina": "sd",
+    "titulo": "Do circuito à tabela-verdade",
+    "resumo": "Siga os sinais intermediários sem preencher a saída por você.",
+    "observar": "A tabela já contém as combinações de entrada. Os sinais X e Y continuam como interrogações. Comece pela primeira porta da linha marcada.",
+    "tarefa": "Na linha destacada, quais entradas chegam à porta AND? Anote o sinal X antes de tentar descobrir Y.",
+    "pergunta": "Tenho um circuito com entradas A,B,C. O sinal X sai de uma porta AND que recebe A e B. O sinal Y sai de uma XOR que recebe X e C. Quero aprender a construir a tabela-verdade, sem receber a tabela preenchida. Comecei pela linha A=0,B=0,C=1.",
+    "roteiro": {
+      "modelo": "circuito",
+      "titulo": "Uma porta de cada vez",
+      "entradas": [
+        "A",
+        "B",
+        "C"
+      ],
+      "portas": [
+        {
+          "id": "X",
+          "tipo": "AND",
+          "entradas": [
+            "A",
+            "B"
+          ]
+        },
+        {
+          "id": "Y",
+          "tipo": "XOR",
+          "entradas": [
+            "X",
+            "C"
+          ]
+        }
+      ],
+      "linha_foco": 1,
+      "pergunta_final": "Quais valores chegam à primeira porta na linha marcada? Preencha apenas X."
+    }
+  },
+  {
+    "id": "grafo-bfs",
+    "disciplina": "paa",
+    "titulo": "Grafo e primeira expansão da BFS",
+    "resumo": "Veja a fronteira inicial; a fila e a ordem restante ficam com você.",
+    "observar": "O grafo é não ponderado. A busca parte de A e destaca seus vizinhos diretos. Nenhuma ordem completa de visita é fornecida.",
+    "tarefa": "Escreva a fila depois de retirar A. Quais vértices já devem ser marcados para evitar entradas repetidas?",
+    "pergunta": "Quero simular BFS num grafo não ponderado, começando em A, com arestas A-B,A-C,B-D,C-D,D-E. Já identifiquei B e C como vizinhos de A. Ajude-me a pensar na fila e na marcação de visitados, sem fornecer a ordem completa.",
+    "roteiro": {
+      "modelo": "grafo",
+      "titulo": "A fronteira de uma busca",
+      "dirigido": false,
+      "nos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "arestas": [
+        [
+          "A",
+          "B",
+          ""
+        ],
+        [
+          "A",
+          "C",
+          ""
+        ],
+        [
+          "B",
+          "D",
+          ""
+        ],
+        [
+          "C",
+          "D",
+          ""
+        ],
+        [
+          "D",
+          "E",
+          ""
+        ]
+      ],
+      "passos": [
+        {
+          "nos": [
+            "A"
+          ],
+          "legenda": "Comece em A: a fila guarda o que ainda será expandido."
+        },
+        {
+          "nos": [
+            "B",
+            "C"
+          ],
+          "arestas": [
+            [
+              "A",
+              "B"
+            ],
+            [
+              "A",
+              "C"
+            ]
+          ],
+          "legenda": "Os vizinhos diretos entram na fronteira. Continue a fila no papel."
+        }
+      ],
+      "pergunta_final": "Depois de retirar A, como fica a fila? Quando você marca um vértice?",
+      "posicoes": {
+        "A": [
+          -4,
+          0
+        ],
+        "B": [
+          -1.5,
+          1.5
+        ],
+        "C": [
+          -1.5,
+          -1.5
+        ],
+        "D": [
+          1.5,
+          0
+        ],
+        "E": [
+          4,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "id": "certificado-np",
+    "disciplina": "paa",
+    "titulo": "Verificar um certificado em grafos",
+    "resumo": "Separe verificar uma escolha de encontrar a melhor escolha.",
+    "observar": "Apenas o vértice A foi marcado. As arestas incidentes em A estão destacadas; outras permanecem sem cobertura.",
+    "tarefa": "Escolha uma aresta ainda sem destaque. O conjunto marcado toca alguma de suas pontas? Escreva como faria essa verificação para todas as arestas.",
+    "pergunta": "Estou estudando Cobertura de Vértices e certificados em NP. Meu grafo tem arestas A-B,A-C,B-D,C-D,D-E. No desenho marquei somente A. Quero aprender a verificar uma escolha candidata, sem receber uma cobertura pronta ou mínima.",
+    "roteiro": {
+      "modelo": "grafo",
+      "titulo": "Verificar não é encontrar",
+      "dirigido": false,
+      "nos": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "arestas": [
+        [
+          "A",
+          "B",
+          ""
+        ],
+        [
+          "A",
+          "C",
+          ""
+        ],
+        [
+          "B",
+          "D",
+          ""
+        ],
+        [
+          "C",
+          "D",
+          ""
+        ],
+        [
+          "D",
+          "E",
+          ""
+        ]
+      ],
+      "passos": [
+        {
+          "nos": [
+            "A"
+          ],
+          "arestas": [
+            [
+              "A",
+              "B"
+            ],
+            [
+              "A",
+              "C"
+            ]
+          ],
+          "legenda": "Uma escolha de vértice cobre apenas suas arestas incidentes."
+        }
+      ],
+      "pergunta_final": "Que aresta ainda falta verificar? Como conferir se uma ponta pertence ao conjunto?",
+      "posicoes": {
+        "A": [
+          -4,
+          0
+        ],
+        "B": [
+          -1.5,
+          1.5
+        ],
+        "C": [
+          -1.5,
+          -1.5
+        ],
+        "D": [
+          1.5,
+          0
+        ],
+        "E": [
+          4,
+          0
+        ]
+      }
+    }
+  },
+  {
+    "id": "direcao-reducao",
+    "disciplina": "paa",
+    "titulo": "A direção de uma redução",
+    "resumo": "Entenda o papel da transformação antes de construir uma prova.",
+    "observar": "A é um problema já conhecido como difícil. A seta transforma uma instância de A em uma de B; o ponto de interrogação é a construção que ainda falta definir.",
+    "tarefa": "Se existisse um algoritmo eficiente para B, como as setas permitiriam resolver A? Depois explique por que é necessário preservar respostas SIM e NÃO.",
+    "pergunta": "Quero provar um problema B NP-difícil usando um problema A já conhecido como NP-difícil. Preciso entender a direção A para B e o papel da equivalência entre as instâncias, sem receber uma redução específica pronta.",
+    "roteiro": {
+      "modelo": "reducao",
+      "titulo": "Qual problema vira qual?",
+      "origem": "A",
+      "destino": "B",
+      "pergunta_final": "Se você resolvesse B rapidamente, como usaria esse desenho para resolver A?"
+    }
+  }
+]

@@ -1,0 +1,1295 @@
+{
+  "completa": true,
+  "resumo": {
+    "tutoron-paa": {
+      "casos": 12,
+      "erros": 0,
+      "primeira_ajuda_reprovada": 2,
+      "ajudas_de_reserva": 2,
+      "orientacoes_deterministicas": 0,
+      "publicadas_aprovadas_pelo_revisor": 10
+    },
+    "tutoron-socratico-ft": {
+      "casos": 12,
+      "erros": 0,
+      "primeira_ajuda_reprovada": 2,
+      "ajudas_de_reserva": 2,
+      "orientacoes_deterministicas": 0,
+      "publicadas_aprovadas_pelo_revisor": 10
+    }
+  },
+  "revisao_humana": "pendente",
+  "limite": "O mesmo modelo revisa a própria ajuda; aprovação automática não comprova ausência de vazamento nem aprendizagem.",
+  "casos": [
+    {
+      "id": "promo-mestre",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Na recorrência T(n)=5T(n/2)+n², qual é o primeiro erro da minha tentativa? Não calcule a complexidade.",
+      "contexto": "Escrevi a=2 e b=5, porque vi primeiro o denominador. Ainda não fiz o logaritmo.",
+      "criterio": "Reconhecer exatamente a troca dos parâmetros e pedir releitura do coeficiente; não inventar acertos nem dar a complexidade.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 19.7,
+      "primeira_resposta_bruta": "Você identificou corretamente que a recorrência está na forma $ T(n) = aT(n/b) + f(n) $, e que $ a = 5 $ e $ b = 2 $, já que a divisão é por 2. Isso é um bom começo — você está aplicando corretamente a estrutura do Teorema Mestre.\n\nAgora, o primeiro passo errado está na interpretação do que $ f(n) $ representa. Na recorrência $ T(n) = 5T(n/2) + n^2 $, o termo $ f(n) $ é $ n^2 $, mas você ainda não fez a comparação com $ n^{\\log_b a} $, que é $ n^{\\log_2 5} $.\n\n### Sua vez  \nFaça a comparação entre $ f(n) = n^2 $ e $ n^{\\log_2 5} $. Qual é maior? E qual é a relação entre $ f(n) $ e $ n^{\\log_b a} $?",
+      "ultima_resposta_bruta": "Você identificou corretamente que a recorrência está na forma $ T(n) = aT(n/b) + f(n) $, e que $ a = 5 $ e $ b = 2 $, já que a divisão é por 2. Isso é um bom começo — você está aplicando corretamente a estrutura do Teorema Mestre.\n\nAgora, o primeiro passo errado está na interpretação do que $ f(n) $ representa. Na recorrência $ T(n) = 5T(n/2) + n^2 $, o termo $ f(n) $ é $ n^2 $, mas você ainda não fez a comparação com $ n^{\\log_b a} $, que é $ n^{\\log_2 5} $.\n\n### Sua vez  \nFaça a comparação entre $ f(n) = n^2 $ e $ n^{\\log_2 5} $. Qual é maior? E qual é a relação entre $ f(n) $ e $ n^{\\log_b a} $?",
+      "publicada": "Você identificou corretamente que a recorrência está na forma $ T(n) = aT(n/b) + f(n) $, e que $ a = 5 $ e $ b = 2 $, já que a divisão é por 2. Isso é um bom começo — você está aplicando corretamente a estrutura do Teorema Mestre.\n\nAgora, o primeiro passo errado está na interpretação do que $ f(n) $ representa. Na recorrência $ T(n) = 5T(n/2) + n^2 $, o termo $ f(n) $ é $ n^2 $, mas você ainda não fez a comparação com $ n^{\\log_b a} $, que é $ n^{\\log_2 5} $.\n\n### Sua vez  \nFaça a comparação entre $ f(n) = n^2 $ e $ n^{\\log_2 5} $. Qual é maior? E qual é a relação entre $ f(n) $ e $ n^{\\log_b a} $?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda identifica corretamente a estrutura da recorrência e aponta o primeiro erro sem entregar a solução completa, seguindo as diretrizes solicitadas.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.43
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-reducao",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Quero provar que o problema Novo é NP-difícil. Cobertura de Vértices já é NP-completo. Estou pensando em reduzir Novo para Cobertura de Vértices. Essa direção prova o que preciso?",
+      "criterio": "Explicar a direção problema conhecido difícil para Novo; não apresentar uma redução específica pronta nem exigir Novo em NP para NP-dificuldade.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 24.6,
+      "primeira_resposta_bruta": "Para provar que o problema **Novo** é NP-difícil, você precisa mostrar que **todo problema de NP se reduz polinomialmente a Novo** — ou, alternativamente, que **um problema NP-completo se reduz polinomialmente a Novo**. Isso é o oposto do que você está pensando: **reduzir Novo para Cobertura de Vértices** não prova que Novo é NP-difícil, a menos que você já saiba que Novo é NP-completo.\n\nO que está certo:  \n- Você sabe que **Cobertura de Vértices é NP-completo**, o que é útil para reduções.  \n- A redução **de Novo para Cobertura de Vértices** é uma direção que pode ser útil, mas **não é suficiente por si só** para provar NP-dificuldade.\n\nO que está errado (primeiro passo):  \nVocê está pensando em reduzir **Novo para Cobertura de Vértices**, mas isso **não é a direção correta** para provar que Novo é NP-difícil. A redução para um problema NP-completo **deve ser do problema NP-completo para o problema que você quer provar NP-difícil**.\n\n### Sua vez  \nTente descrever **como você faria a redução de Cobertura de Vértices para Novo**, se fosse possível. Isso pode ajudar a entender melhor a direção correta para provar NP-dificuldade.",
+      "ultima_resposta_bruta": "Para provar que o problema **Novo** é NP-difícil, você precisa mostrar que **todo problema de NP se reduz polinomialmente a Novo** — ou, alternativamente, que **um problema NP-completo se reduz polinomialmente a Novo**. Isso é o que define a NP-dificuldade.\n\nO que está certo:  \n- Você sabe que **Cobertura de Vértices é NP-completo**, o que é útil para reduções.  \n- A redução **de Novo para Cobertura de Vértices** é uma direção que pode ser útil, mas **não é suficiente por si só** para provar NP-dificuldade.\n\nO que está errado (primeiro passo):  \nVocê está pensando em reduzir **Novo para Cobertura de Vértices**, mas isso **não é a direção correta** para provar que Novo é NP-difícil. A redução para um problema NP-completo **deve ser do problema NP-completo para o problema que você quer provar NP-difícil**.\n\n### Sua vez  \nTente descrever **como você faria a redução de Cobertura de Vértices para Novo**, se fosse possível. Isso pode ajudar a entender melhor a direção correta para provar NP-dificuldade.",
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados de entrada, o que precisa descobrir e a primeira etapa que tentou. Em qual etapa você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 2, 3, 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 9, 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 6, 7"
+        }
+      ],
+      "ajustes": [
+        "entregou_resposta",
+        "entregou_resposta_de_novo",
+        "ajuda_de_reserva"
+      ],
+      "resposta_bloqueada": "Para provar que o problema **Novo** é NP-difícil, você precisa mostrar que **todo problema de NP se reduz polinomialmente a Novo** — ou, alternativamente, que **um problema NP-completo se reduz polinomialmente a Novo**. Isso é o oposto do que você está pensando: **reduzir Novo para Cobertura de Vértices** não prova que Novo é NP-difícil, a menos que você já saiba que Novo é NP-completo.\n\nO que está certo:  \n- Você sabe que **Cobertura de Vértices é NP-completo**, o que é útil para reduções.  \n- A redução **de Novo para Cobertura de Vértices** é uma direção que pode ser útil, mas **não é suficiente por si só** para provar NP-dificuldade.\n\nO que está errado (primeiro passo):  \nVocê está pensando em reduzir **Novo para Cobertura de Vértices**, mas isso **não é a direção correta** para provar que Novo é NP-difícil. A redução para um problema NP-completo **deve ser do problema NP-completo para o problema que você quer provar NP-difícil**.\n\n### Sua vez  \nTente descrever **como você faria a redução de Cobertura de Vértices para Novo**, se fosse possível. Isso pode ajudar a entender melhor a direção correta para provar NP-dificuldade.",
+      "reserva": true,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a direção correta para a redução e explica o erro, mas não deixa a estrutura em branco. A redução de Novo para Cobertura de Vértices não é suficiente para provar NP-dificuldade, e a ajuda não deixa espaço para que o aluno descubra o erro por si mesmo.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.95
+        },
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a solução completa ao explicar que a redução deve ser do problema NP-completo para o problema novo, o que é a direção correta para provar NP-dificuldade.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.56
+        }
+      ],
+      "aprovada": false,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-robo",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Um robô começa no canto superior esquerdo de uma grade e só pode ir para a direita ou para baixo. Cada célula tem um custo. Estou montando a tabela de custo mínimo. Onde minha ideia falha?",
+      "contexto": "Para chegar na célula da linha 2, coluna 2, eu comparo a célula de cima, a da esquerda e a diagonal. Ainda não somei nada.",
+      "criterio": "Apontar que movimento diagonal não é permitido e orientar a identificar predecessores válidos; não calcular tabela ou rota final.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 7.9,
+      "primeira_resposta_bruta": "Você está pensando em usar uma abordagem de programação dinâmica, o que é uma boa direção. No entanto, há um erro na forma como está considerando os movimentos para chegar à célula (2,2). \n\nVocê mencionou comparar a célula de cima, a da esquerda e a diagonal. Isso é um sinal de que você está confundindo o problema de **caminho mínimo** com o de **caminho máximo**. No problema do robô, o robô só pode mover-se para **direita ou para baixo**, o que significa que, para chegar a uma célula (i,j), ele só pode vir de (i-1,j) ou (i,j-1), **nunca da diagonal**.\n\nAgora, vamos verificar: **qual é o erro na sua comparação?** E, se quiser, mande a tentativa que você fez para calcular o custo da célula (2,2).",
+      "ultima_resposta_bruta": "Você está pensando em usar uma abordagem de programação dinâmica, o que é uma boa direção. No entanto, há um erro na forma como está considerando os movimentos para chegar à célula (2,2). \n\nVocê mencionou comparar a célula de cima, a da esquerda e a diagonal. Isso é um sinal de que você está confundindo o problema de **caminho mínimo** com o de **caminho máximo**. No problema do robô, o robô só pode mover-se para **direita ou para baixo**, o que significa que, para chegar a uma célula (i,j), ele só pode vir de (i-1,j) ou (i,j-1), **nunca da diagonal**.\n\nAgora, vamos verificar: **qual é o erro na sua comparação?** E, se quiser, mande a tentativa que você fez para calcular o custo da célula (2,2).",
+      "publicada": "Você está pensando em usar uma abordagem de programação dinâmica, o que é uma boa direção. No entanto, há um erro na forma como está considerando os movimentos para chegar à célula (2,2). \n\nVocê mencionou comparar a célula de cima, a da esquerda e a diagonal. Isso é um sinal de que você está confundindo o problema de **caminho mínimo** com o de **caminho máximo**. No problema do robô, o robô só pode mover-se para **direita ou para baixo**, o que significa que, para chegar a uma célula (i,j), ele só pode vir de (i-1,j) ou (i,j-1), **nunca da diagonal**.\n\nAgora, vamos verificar: **qual é o erro na sua comparação?** E, se quiser, mande a tentativa que você fez para calcular o custo da célula (2,2).\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa (por texto ou foto) que eu confiro com você.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 3"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L8.pdf | página(s): 7, 8"
+        }
+      ],
+      "ajustes": [
+        "sua_vez_acrescentada"
+      ],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda identifica o erro de comparação com a célula diagonal e orienta o aluno a refletir sobre o erro, sem entregar a solução completa.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.95
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-mochila",
+      "disciplina": "paa",
+      "ajuda": "pista",
+      "pergunta": "Na mochila 0/1 com tabela de uma dimensão, percorri capacidades da menor para a maior e um mesmo objeto acabou contado duas vezes. Como encontrar o erro?",
+      "criterio": "Relacionar a ordem de atualização ao reaproveitamento indevido do mesmo item; orientar verificação sem código completo.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 6.3,
+      "primeira_resposta_bruta": "A tabela de uma dimensão na mochila 0/1 é usada para armazenar o valor máximo que pode ser obtido para cada capacidade. Se um objeto foi contado duas vezes, isso indica que a atualização da tabela foi feita de forma incorreta — provavelmente, você atualizou a célula para uma capacidade maior do que a que o objeto pode ocupar, ou não resetou o valor anterior.\n\n### Sua vez  \nRevisite a ordem em que você atualiza a tabela: para cada objeto, você deve percorrer as capacidades **da maior para a menor**, evitando que o mesmo objeto seja considerado mais de uma vez em uma mesma iteração. O que você deve fazer com a célula da tabela ao processar cada objeto?",
+      "ultima_resposta_bruta": "A tabela de uma dimensão na mochila 0/1 é usada para armazenar o valor máximo que pode ser obtido para cada capacidade. Se um objeto foi contado duas vezes, isso indica que a atualização da tabela foi feita de forma incorreta — provavelmente, você atualizou a célula para uma capacidade maior do que a que o objeto pode ocupar, ou não resetou o valor anterior.\n\n### Sua vez  \nRevisite a ordem em que você atualiza a tabela: para cada objeto, você deve percorrer as capacidades **da maior para a menor**, evitando que o mesmo objeto seja considerado mais de uma vez em uma mesma iteração. O que você deve fazer com a célula da tabela ao processar cada objeto?",
+      "publicada": "A tabela de uma dimensão na mochila 0/1 é usada para armazenar o valor máximo que pode ser obtido para cada capacidade. Se um objeto foi contado duas vezes, isso indica que a atualização da tabela foi feita de forma incorreta — provavelmente, você atualizou a célula para uma capacidade maior do que a que o objeto pode ocupar, ou não resetou o valor anterior.\n\n### Sua vez  \nRevisite a ordem em que você atualiza a tabela: para cada objeto, você deve percorrer as capacidades **da maior para a menor**, evitando que o mesmo objeto seja considerado mais de uma vez em uma mesma iteração. O que você deve fazer com a célula da tabela ao processar cada objeto?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 1"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda fornece uma pista relevante sobre a ordem de atualização da tabela e não entrega a solução completa, seguindo as diretrizes solicitadas.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.69
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-fluxo",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Em uma rede de fluxo há uma aresta s→a com capacidade 7 e fluxo atual 5. Quero entender capacidade residual, sem calcular o fluxo máximo.",
+      "contexto": "Eu disse que ainda posso empurrar mais 7 nessa aresta, pois capacidade é o número escrito no desenho.",
+      "criterio": "Distinguir capacidade total, fluxo usado e espaço disponível; pedir conta ao aluno sem entregar o residual numérico nem caminho ótimo.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 5.3,
+      "primeira_resposta_bruta": "Você está certo em reconhecer que a capacidade da aresta é 7, o que significa que ela pode suportar até 7 unidades de fluxo. No entanto, o fluxo atual é 5, o que indica que já há 5 unidades sendo utilizadas nessa aresta.\n\nAgora, vamos pensar: o que significa \"capacidade residual\" nesse contexto?\n\n### Sua vez  \nQual é a diferença entre a capacidade da aresta e o fluxo atual? E o que essa diferença representa?",
+      "ultima_resposta_bruta": "Você está certo em reconhecer que a capacidade da aresta é 7, o que significa que ela pode suportar até 7 unidades de fluxo. No entanto, o fluxo atual é 5, o que indica que já há 5 unidades sendo utilizadas nessa aresta.\n\nAgora, vamos pensar: o que significa \"capacidade residual\" nesse contexto?\n\n### Sua vez  \nQual é a diferença entre a capacidade da aresta e o fluxo atual? E o que essa diferença representa?",
+      "publicada": "Você está certo em reconhecer que a capacidade da aresta é 7, o que significa que ela pode suportar até 7 unidades de fluxo. No entanto, o fluxo atual é 5, o que indica que já há 5 unidades sendo utilizadas nessa aresta.\n\nAgora, vamos pensar: o que significa \"capacidade residual\" nesse contexto?\n\n### Sua vez  \nQual é a diferença entre a capacidade da aresta e o fluxo atual? E o que essa diferença representa?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2, 3"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta final, mas estimula o aluno a refletir sobre o conceito de capacidade residual. A pergunta final é aberta e não contém a solução embutida.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.01
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-bfs",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Num grafo com pesos positivos diferentes, BFS sempre encontra o caminho de menor custo? Estou confuso.",
+      "contexto": "Pensei que menor número de arestas significa sempre menor soma de pesos.",
+      "criterio": "Distinguir quantidade de arestas de soma de pesos, com pista conceitual correta; não resolver um caminho específico.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 9.5,
+      "primeira_resposta_bruta": "Você está certo em pensar que o menor número de arestas pode sugerir um caminho mais curto, mas isso **não é garantido** em grafos com pesos positivos diferentes. O BFS (Busca em Largura) é eficiente para encontrar caminhos com o menor número de arestas, mas **não garante o menor custo** quando os pesos das arestas são diferentes.\n\nO que está certo em sua ideia é que **menos arestas pode significar menor soma de pesos**, mas isso **não é uma regra absoluta**. Por exemplo, um caminho com 3 arestas de peso 1 cada (soma 3) pode ser mais longo que um caminho com 2 arestas de peso 2 cada (soma 4).\n\nAgora, vamos ver: **por que o BFS não garante o menor custo?**  \nPense em um exemplo com pesos diferentes e explique por que um caminho com mais arestas pode ter um custo total menor.\n\n### Sua vez  \nDê um exemplo de grafo com pesos positivos diferentes onde o BFS não encontra o caminho de menor custo. Mostre o caminho que o BFS encontraria e o caminho de verdadeiro menor custo.",
+      "ultima_resposta_bruta": "Você está certo em pensar que o menor número de arestas pode sugerir um caminho mais curto, mas isso **não é garantido** em grafos com pesos positivos diferentes. O BFS (Busca em Largura) é eficiente para encontrar caminhos com o menor número de arestas, mas **não garante o menor custo** quando os pesos das arestas são diferentes.\n\nO que está certo em sua ideia é que **menos arestas pode significar menor soma de pesos**, mas isso **não é uma regra absoluta**. Por exemplo, um caminho com 3 arestas de peso 1 cada (soma 3) pode ser mais longo que um caminho com 2 arestas de peso 2 cada (soma 4).\n\nAgora, vamos ver: **por que o BFS não garante o menor custo?**  \nPense em um exemplo com pesos diferentes e explique por que um caminho com mais arestas pode ter um custo total menor.\n\n### Sua vez  \nDê um exemplo de grafo com pesos positivos diferentes onde o BFS não encontra o caminho de menor custo. Mostre o caminho que o BFS encontraria e o caminho de verdadeiro menor custo.",
+      "publicada": "Você está certo em pensar que o menor número de arestas pode sugerir um caminho mais curto, mas isso **não é garantido** em grafos com pesos positivos diferentes. O BFS (Busca em Largura) é eficiente para encontrar caminhos com o menor número de arestas, mas **não garante o menor custo** quando os pesos das arestas são diferentes.\n\nO que está certo em sua ideia é que **menos arestas pode significar menor soma de pesos**, mas isso **não é uma regra absoluta**. Por exemplo, um caminho com 3 arestas de peso 1 cada (soma 3) pode ser mais longo que um caminho com 2 arestas de peso 2 cada (soma 4).\n\nAgora, vamos ver: **por que o BFS não garante o menor custo?**  \nPense em um exemplo com pesos diferentes e explique por que um caminho com mais arestas pode ter um custo total menor.\n\n### Sua vez  \nDê um exemplo de grafo com pesos positivos diferentes onde o BFS não encontra o caminho de menor custo. Mostre o caminho que o BFS encontraria e o caminho de verdadeiro menor custo.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 3"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 9"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta final, mas orienta o aluno a refletir sobre o conceito e a construir um exemplo. Mantém a estrutura de pergunta aberta e não revela a solução.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.18
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-gray",
+      "disciplina": "sd",
+      "ajuda": "conferir",
+      "pergunta": "Na ordem das colunas do Karnaugh escrevi 00, 01, 10, 11. Quero localizar o erro sem preencher o mapa.",
+      "contexto": "Acho que 01 e 10 são vizinhos válidos porque são números consecutivos.",
+      "criterio": "Explicar adjacência por mudança de um bit, pedir comparação de bits; não simplificar uma função nem aceitar ordem binária como Gray.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 10.2,
+      "primeira_resposta_bruta": "A ordem das colunas no mapa de Karnaugh é crucial para que os grupos sejam válidos. Você está certo em reconhecer que 01 e 10 são vizinhos, mas a ordem correta é **00, 01, 11, 10** — isso garante que as colunas sejam em **ordem Gray**, onde apenas um bit muda entre vizinhos. \n\nVocê mencionou que 01 e 10 são números consecutivos, mas isso é uma confusão com a numeração decimal. No mapa de Karnaugh, a ordem não segue a numeração decimal, mas sim a **ordem Gray**, que é diferente.\n\n### Sua vez  \nTente reescrever a ordem das colunas do mapa de Karnaugh com base na ordem Gray. Qual seria a posição correta de 10 em relação a 01?",
+      "ultima_resposta_bruta": "A ordem das colunas no mapa de Karnaugh é crucial para que os grupos sejam válidos. Você está certo em reconhecer que 01 e 10 são vizinhos, mas a ordem correta é **00, 01, 11, 10** — isso garante que as colunas sejam em **ordem Gray**, onde apenas um bit muda entre vizinhos. \n\nVocê mencionou que 01 e 10 são números consecutivos, mas isso é uma confusão com a numeração decimal. No mapa de Karnaugh, a ordem não segue a numeração decimal, mas sim a **ordem Gray**, que é diferente.\n\n### Sua vez  \nTente reescrever a ordem das colunas do mapa de Karnaugh com base na ordem Gray. Qual seria a posição correta de 10 em relação a 01?",
+      "publicada": "A ordem das colunas no mapa de Karnaugh é crucial para que os grupos sejam válidos. Você está certo em reconhecer que 01 e 10 são vizinhos, mas a ordem correta é **00, 01, 11, 10** — isso garante que as colunas sejam em **ordem Gray**, onde apenas um bit muda entre vizinhos. \n\nVocê mencionou que 01 e 10 são números consecutivos, mas isso é uma confusão com a numeração decimal. No mapa de Karnaugh, a ordem não segue a numeração decimal, mas sim a **ordem Gray**, que é diferente.\n\n### Sua vez  \nTente reescrever a ordem das colunas do mapa de Karnaugh com base na ordem Gray. Qual seria a posição correta de 10 em relação a 01?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Material de estudo de SD",
+          "referencia": "Somadores.pdf | páginas 1–6"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda identifica o erro sem fornecer a resposta final, mantém a estrutura em branco e orienta o aluno a refletir sobre a ordem Gray.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.92
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-zero",
+      "disciplina": "sd",
+      "ajuda": "conceito",
+      "pergunta": "No agrupamento de uns do Karnaugh posso incluir um zero obrigatório só para formar um retângulo maior? E um X, é a mesma coisa?",
+      "criterio": "Distinguir corretamente zero obrigatório e irrelevância; conceito não deve tratar zero como permitido.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 17.5,
+      "primeira_resposta_bruta": "No mapa de Karnaugh, os **zeros** e os **Xs** (irrelevâncias) têm regras diferentes. \n\n- **Zeros** são valores que **nunca ocorrem** na função, ou seja, não estão no conjunto de mintermos da função. Eles **não podem ser incluídos** em um grupo, pois não representam uma saída que devemos cobrir. Se você incluir um zero em um grupo, ele não contribui para a simplificação da função e pode levar a erros.\n\n- **Xs** são valores que **não importam** para a função. Eles podem ser usados **somente quando ajudam a formar um grupo maior**, ou seja, quando o uso de um X permite que você cubra mais 1s com um único grupo. O X **não é obrigatório** para formar um grupo, mas pode ser útil para otimizar a expressão.\n\nA ideia principal é que o **grupo deve conter apenas 1s** (ou 1s e Xs, se isso ajudar). O uso de Xs é uma **ferramenta de otimização**, mas não deve ser usado de forma excessiva ou sem necessidade.\n\n### Sua vez  \nExplique por que um X não pode ser usado para formar um grupo sozinho, mesmo que ele não esteja em um mintermo da função.",
+      "ultima_resposta_bruta": "No mapa de Karnaugh, os **Xs** (irrelevâncias) são valores que **não importam** para a função, ou seja, podem ser **1 ou 0**, dependendo do que melhor ajude a simplificação. Já os **zeros** são valores que **nunca ocorrem** na função e **não podem ser incluídos** em um grupo, pois não representam uma saída que devemos cobrir.\n\nA pergunta é: **como o X difere do zero em termos de flexibilidade no agrupamento?**\n\n### Sua vez  \nExplique por que um X pode ser usado para formar um grupo, mas um zero não pode, mesmo que ambos não estejam em um mintermo da função.",
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+        }
+      ],
+      "ajustes": [
+        "entregou_resposta",
+        "entregou_resposta_de_novo",
+        "ajuda_de_reserva"
+      ],
+      "resposta_bloqueada": "No mapa de Karnaugh, os **zeros** e os **Xs** (irrelevâncias) têm regras diferentes. \n\n- **Zeros** são valores que **nunca ocorrem** na função, ou seja, não estão no conjunto de mintermos da função. Eles **não podem ser incluídos** em um grupo, pois não representam uma saída que devemos cobrir. Se você incluir um zero em um grupo, ele não contribui para a simplificação da função e pode levar a erros.\n\n- **Xs** são valores que **não importam** para a função. Eles podem ser usados **somente quando ajudam a formar um grupo maior**, ou seja, quando o uso de um X permite que você cubra mais 1s com um único grupo. O X **não é obrigatório** para formar um grupo, mas pode ser útil para otimizar a expressão.\n\nA ideia principal é que o **grupo deve conter apenas 1s** (ou 1s e Xs, se isso ajudar). O uso de Xs é uma **ferramenta de otimização**, mas não deve ser usado de forma excessiva ou sem necessidade.\n\n### Sua vez  \nExplique por que um X não pode ser usado para formar um grupo sozinho, mesmo que ele não esteja em um mintermo da função.",
+      "reserva": true,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega informações sobre o uso de Xs e zeros no mapa de Karnaugh, mas não deixa a estrutura em branco e não termina com 'Sua vez' como solicitado.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.76
+        },
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a resposta solicitada ao explicar a diferença entre X e zero no agrupamento de Karnaugh, o que não é permitido para uma ajuda de conceito.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.49
+        }
+      ],
+      "aprovada": false,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-atomica",
+      "disciplina": "sd",
+      "ajuda": "pista",
+      "pergunta": "A porta E recebe um e zero. Me manda só o bit de saída, por favor.",
+      "criterio": "Não revelar o bit, inclusive por exclusão; oferecer uma etapa para o aluno consultar ou entender a regra.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 5.3,
+      "primeira_resposta_bruta": "A porta E recebe um bit de entrada e produz um bit de saída. Para descobrir o que acontece, você precisa saber qual é a função lógica da porta E — é NOT, AND, OR, NAND, NOR, XOR ou XNOR?  \n\n### Sua vez  \nEscreva qual é a função lógica da porta E e explique como ela transforma o bit de entrada em saída.",
+      "ultima_resposta_bruta": "A porta E recebe um bit de entrada e produz um bit de saída. Para descobrir o que acontece, você precisa saber qual é a função lógica da porta E — é NOT, AND, OR, NAND, NOR, XOR ou XNOR?  \n\n### Sua vez  \nEscreva qual é a função lógica da porta E e explique como ela transforma o bit de entrada em saída.",
+      "publicada": "A porta E recebe um bit de entrada e produz um bit de saída. Para descobrir o que acontece, você precisa saber qual é a função lógica da porta E — é NOT, AND, OR, NAND, NOR, XOR ou XNOR?  \n\n### Sua vez  \nEscreva qual é a função lógica da porta E e explique como ela transforma o bit de entrada em saída.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda fornece uma pista adequada, perguntando sobre a função lógica da porta E e orientando o aluno a explicar o processo, sem entregar a resposta final.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.12
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-binario",
+      "disciplina": "sd",
+      "ajuda": "conferir",
+      "pergunta": "Estou fazendo uma subtração binária de quatro bits e travei no empréstimo. Como posso conferir meu primeiro passo?",
+      "contexto": "Na coluna mais à direita apareceu 0 menos 1. Eu marquei 1 ali sem pegar emprestado, depois continuei para a coluna ao lado.",
+      "criterio": "Localizar a necessidade do empréstimo e orientar sua representação; não inventar operandos e resolver a subtração inteira.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 8.7,
+      "primeira_resposta_bruta": "Você está fazendo uma subtração binária de 4 bits e chegou a uma coluna onde precisa subtrair 0 - 1. Isso é comum em subtrações binárias, especialmente quando há empréstimo da coluna à esquerda. \n\nO que está **certo** é que você reconheceu a necessidade de um empréstimo, mas parece que não aplicou corretamente. A pergunta é: **como você tratou o empréstimo na coluna mais à direita?** \n\nSe você marcou 1 na coluna sem pegar empréstimo, isso pode indicar que não considerou a necessidade de propagar o empréstimo para as colunas à esquerda. \n\n### Sua vez  \nTente reescrever a subtração passo a passo, destacando como você tratou o empréstimo na coluna mais à direita. Se quiser, envie a sua tentativa para que eu possa ajudar a verificar.",
+      "ultima_resposta_bruta": "Você está fazendo uma subtração binária de 4 bits e chegou a uma coluna onde precisa subtrair 0 - 1. Isso é comum em subtrações binárias, especialmente quando há empréstimo da coluna à esquerda. \n\nO que está **certo** é que você reconheceu a necessidade de um empréstimo, mas parece que não aplicou corretamente. A pergunta é: **como você tratou o empréstimo na coluna mais à direita?** \n\nSe você marcou 1 na coluna sem pegar empréstimo, isso pode indicar que não considerou a necessidade de propagar o empréstimo para as colunas à esquerda. \n\n### Sua vez  \nTente reescrever a subtração passo a passo, destacando como você tratou o empréstimo na coluna mais à direita. Se quiser, envie a sua tentativa para que eu possa ajudar a verificar.",
+      "publicada": "Você está fazendo uma subtração binária de 4 bits e chegou a uma coluna onde precisa subtrair 0 - 1. Isso é comum em subtrações binárias, especialmente quando há empréstimo da coluna à esquerda. \n\nO que está **certo** é que você reconheceu a necessidade de um empréstimo, mas parece que não aplicou corretamente. A pergunta é: **como você tratou o empréstimo na coluna mais à direita?** \n\nSe você marcou 1 na coluna sem pegar empréstimo, isso pode indicar que não considerou a necessidade de propagar o empréstimo para as colunas à esquerda. \n\n### Sua vez  \nTente reescrever a subtração passo a passo, destacando como você tratou o empréstimo na coluna mais à direita. Se quiser, envie a sua tentativa para que eu possa ajudar a verificar.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega resposta final, solução completa ou indica diretamente a resposta. Mantém a estrutura aberta e orienta o aluno a refletir sobre seu raciocínio.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.31
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-progresso",
+      "disciplina": "paa",
+      "ajuda": "auto",
+      "pergunta": "Como montar a tabela do robô numa grade com obstáculos, só com movimentos para direita e para baixo?",
+      "contexto": "Já defini dp[i][j] como o custo mínimo para chegar na célula. As entradas são os custos e obstáculos; a meta é a célula inferior direita.",
+      "historico": [
+        {
+          "ajuda": "pista",
+          "texto": "Defina o que cada célula da tabela guarda. ### Sua vez\nEscreva o estado."
+        },
+        {
+          "ajuda": "perguntas",
+          "texto": "Observe a direção dos movimentos. ### Sua vez\nDe quais vizinhos uma célula recebe informação?"
+        }
+      ],
+      "travou": "Já entendi que recebo de cima e da esquerda. Minha dúvida agora é como representar uma célula bloqueada, sem copiar a tabela pronta.",
+      "criterio": "Reconhecer progresso e explicar bloqueio/inalcançável corretamente; não voltar a pedir entradas ou estado já dados nem completar tabela.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 7.5,
+      "primeira_resposta_bruta": "Imagine que o robô precisa passar por uma grade 2x2, mas uma célula está bloqueada. Por exemplo:\n\n```\nA B\nC D\n```\n\nSuponha que a célula B está bloqueada. O robô só pode ir para direita ou para baixo. Como você representaria o estado de cada célula, sabendo que B não é acessível?\n\n### Sua vez  \nEscreva o que cada célula da tabela guarda, considerando que B é um obstáculo.",
+      "ultima_resposta_bruta": "Imagine que o robô precisa passar por uma grade 2x2, mas uma célula está bloqueada. Por exemplo:\n\n```\nA B\nC D\n```\n\nSuponha que a célula B está bloqueada. O robô só pode ir para direita ou para baixo. Como você representaria o estado de cada célula, sabendo que B não é acessível?\n\n### Sua vez  \nEscreva o que cada célula da tabela guarda, considerando que B é um obstáculo.",
+      "publicada": "Imagine que o robô precisa passar por uma grade 2x2, mas uma célula está bloqueada. Por exemplo:\n\n```\nA B\nC D\n```\n\nSuponha que a célula B está bloqueada. O robô só pode ir para direita ou para baixo. Como você representaria o estado de cada célula, sabendo que B não é acessível?\n\n### Sua vez  \nEscreva o que cada célula da tabela guarda, considerando que B é um obstáculo.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda oferece um exemplo novo e mais simples, explora a representação do estado com um obstáculo e deixa a construção da tabela para o aluno, sem entregar a solução completa.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.75
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-npdificil",
+      "disciplina": "paa",
+      "ajuda": "conceito",
+      "pergunta": "Todo problema NP-difícil precisa pertencer a NP? Quero entender a diferença em relação a NP-completo, sem uma prova pronta.",
+      "criterio": "Definições corretas: NP-dificuldade não exige pertinência a NP; NP-completo exige ambas. Não inverter as reduções.",
+      "modelo_solicitado": "tutoron-paa",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-paa",
+      "segundos": 12.2,
+      "primeira_resposta_bruta": "A diferença entre NP-difícil e NP-completo está em duas propriedades: **pertencimento à classe NP** e **NP-dificuldade**. Um problema é **NP-completo** se satisfaz ambas as condições: pertence a NP e é NP-difícil. Já um problema **NP-difícil** só precisa ser NP-difícil — não necessariamente pertencer a NP.\n\nAgora, a pergunta central: **todo problema NP-difícil precisa pertencer a NP?** A resposta é **não**. Um problema pode ser NP-difícil mesmo sem estar em NP. Isso porque a NP-dificuldade é definida por meio de reduções polinomiais: se um problema A é NP-difícil, isso significa que **todo problema em NP se reduz a A**. Mas isso não implica que A esteja em NP — apenas que é **pelo menos tão difícil quanto os problemas em NP**.\n\nAgora, vamos pensar: **por que um problema NP-difícil não precisa estar em NP?** Isso acontece porque a NP-dificuldade é uma propriedade de **dificuldade**, não de **pertencimento a uma classe**. Um problema pode ser tão difícil quanto os de NP, mas não ser capaz de ser verificado em tempo polinomial por um certificado — ou seja, não estar em NP.\n\n### Sua vez  \nPense: se um problema é NP-difícil, mas não está em NP, o que isso implica sobre sua capacidade de ser verificado por um certificado? E como isso se relaciona com a hipótese P ≠ NP?",
+      "ultima_resposta_bruta": "A diferença entre NP-difícil e NP-completo está em duas propriedades: **pertencimento à classe NP** e **NP-dificuldade**. Um problema é **NP-completo** se satisfaz ambas as condições: pertence a NP e é NP-difícil. Já um problema **NP-difícil** só precisa ser NP-difícil — não necessariamente pertencer a NP.\n\nAgora, a pergunta central: **todo problema NP-difícil precisa pertencer a NP?** A resposta é **não**. Um problema pode ser NP-difícil mesmo sem estar em NP. Isso porque a NP-dificuldade é definida por meio de reduções polinomiais: se um problema A é NP-difícil, isso significa que **todo problema em NP se reduz a A**. Mas isso não implica que A esteja em NP — apenas que é **pelo menos tão difícil quanto os problemas em NP**.\n\nAgora, vamos pensar: **por que um problema NP-difícil não precisa estar em NP?** Isso acontece porque a NP-dificuldade é uma propriedade de **dificuldade**, não de **pertencimento a uma classe**. Um problema pode ser tão difícil quanto os de NP, mas não ser capaz de ser verificado em tempo polinomial por um certificado — ou seja, não estar em NP.\n\n### Sua vez  \nPense: se um problema é NP-difícil, mas não está em NP, o que isso implica sobre sua capacidade de ser verificado por um certificado? E como isso se relaciona com a hipótese P ≠ NP?",
+      "publicada": "A diferença entre NP-difícil e NP-completo está em duas propriedades: **pertencimento à classe NP** e **NP-dificuldade**. Um problema é **NP-completo** se satisfaz ambas as condições: pertence a NP e é NP-difícil. Já um problema **NP-difícil** só precisa ser NP-difícil — não necessariamente pertencer a NP.\n\nAgora, a pergunta central: **todo problema NP-difícil precisa pertencer a NP?** A resposta é **não**. Um problema pode ser NP-difícil mesmo sem estar em NP. Isso porque a NP-dificuldade é definida por meio de reduções polinomiais: se um problema A é NP-difícil, isso significa que **todo problema em NP se reduz a A**. Mas isso não implica que A esteja em NP — apenas que é **pelo menos tão difícil quanto os problemas em NP**.\n\nAgora, vamos pensar: **por que um problema NP-difícil não precisa estar em NP?** Isso acontece porque a NP-dificuldade é uma propriedade de **dificuldade**, não de **pertencimento a uma classe**. Um problema pode ser tão difícil quanto os de NP, mas não ser capaz de ser verificado em tempo polinomial por um certificado — ou seja, não estar em NP.\n\n### Sua vez  \nPense: se um problema é NP-difícil, mas não está em NP, o que isso implica sobre sua capacidade de ser verificado por um certificado? E como isso se relaciona com a hipótese P ≠ NP?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 2, 3, 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 9, 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 6, 7, 8"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda explica corretamente a diferença entre NP-difícil e NP-completo, sem entregar a resposta final ou resolver o exercício. Aborda os conceitos de pertencimento à classe NP e NP-dificuldade, e termina com uma pergunta aberta para o aluno.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.72
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-mestre",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Na recorrência T(n)=5T(n/2)+n², qual é o primeiro erro da minha tentativa? Não calcule a complexidade.",
+      "contexto": "Escrevi a=2 e b=5, porque vi primeiro o denominador. Ainda não fiz o logaritmo.",
+      "criterio": "Reconhecer exatamente a troca dos parâmetros e pedir releitura do coeficiente; não inventar acertos nem dar a complexidade.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 12.2,
+      "primeira_resposta_bruta": "Você identificou corretamente os parâmetros da forma padrão do Teorema Mestre. Ainda assim, o primeiro passo errado está na escolha do logaritmo. A base da recorrência não é 2, mas sim 5. Qual é a base da recorrência e como ela afeta o cálculo do logaritmo?",
+      "ultima_resposta_bruta": "Você identificou corretamente os parâmetros da forma padrão do Teorema Mestre. Ainda assim, o primeiro passo errado está na escolha do logaritmo. A base da recorrência não é 2, mas sim 5. Qual é a base da recorrência e como ela afeta o cálculo do logaritmo?",
+      "publicada": "Você identificou corretamente os parâmetros da forma padrão do Teorema Mestre. Ainda assim, o primeiro passo errado está na escolha do logaritmo. A base da recorrência não é 2, mas sim 5. Qual é a base da recorrência e como ela afeta o cálculo do logaritmo?\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa (por texto ou foto) que eu confiro com você.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 5"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L3.pdf | página(s): 6, 7"
+        }
+      ],
+      "ajustes": [
+        "sua_vez_acrescentada"
+      ],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda identifica o erro sem entregar a solução completa e pede uma pergunta que o aluno possa responder",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.84
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-reducao",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Quero provar que o problema Novo é NP-difícil. Cobertura de Vértices já é NP-completo. Estou pensando em reduzir Novo para Cobertura de Vértices. Essa direção prova o que preciso?",
+      "criterio": "Explicar a direção problema conhecido difícil para Novo; não apresentar uma redução específica pronta nem exigir Novo em NP para NP-dificuldade.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 7.7,
+      "primeira_resposta_bruta": "Seu raciocínio está correto em reconhecer que a redução polinomial é uma ferramenta para provar NP-dificuldade. A direção da redução é um passo crítico. A redução de Novo para Cobertura de Vértices é uma direção que pode provar NP-dificuldade, mas não é suficiente sozinha. O que está faltando?\n\n### Sua vez\nQual é a direção da redução que você está considerando?",
+      "ultima_resposta_bruta": "Seu raciocínio está correto em reconhecer que a redução polinomial é uma ferramenta para provar NP-dificuldade. A direção da redução é um passo crítico. A redução de Novo para Cobertura de Vértices é uma direção que pode provar NP-dificuldade, mas não é suficiente sozinha. O que está faltando?\n\n### Sua vez\nQual é a direção da redução que você está considerando?",
+      "publicada": "Seu raciocínio está correto em reconhecer que a redução polinomial é uma ferramenta para provar NP-dificuldade. A direção da redução é um passo crítico. A redução de Novo para Cobertura de Vértices é uma direção que pode provar NP-dificuldade, mas não é suficiente sozinha. O que está faltando?\n\n### Sua vez\nQual é a direção da redução que você está considerando?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 2, 3, 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 9, 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 6, 7"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta final, mas deixa a estrutura em branco e pede que o aluno continue o raciocínio.",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.78
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-robo",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Um robô começa no canto superior esquerdo de uma grade e só pode ir para a direita ou para baixo. Cada célula tem um custo. Estou montando a tabela de custo mínimo. Onde minha ideia falha?",
+      "contexto": "Para chegar na célula da linha 2, coluna 2, eu comparo a célula de cima, a da esquerda e a diagonal. Ainda não somei nada.",
+      "criterio": "Apontar que movimento diagonal não é permitido e orientar a identificar predecessores válidos; não calcular tabela ou rota final.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 4.9,
+      "primeira_resposta_bruta": "Você está certo em considerar os movimentos possíveis. O que está faltando é a definição da relação entre os custos das células e a escolha do caminho. Qual é a relação entre o custo da célula atual e o custo mínimo para chegar a ela? \n\n### Sua vez\nQual é a fórmula que relaciona o custo da célula atual com o custo mínimo para chegar a ela?",
+      "ultima_resposta_bruta": "Você está certo em considerar os movimentos possíveis. O que está faltando é a definição da relação entre os custos das células e a escolha do caminho. Qual é a relação entre o custo da célula atual e o custo mínimo para chegar a ela? \n\n### Sua vez\nQual é a fórmula que relaciona o custo da célula atual com o custo mínimo para chegar a ela?",
+      "publicada": "Você está certo em considerar os movimentos possíveis. O que está faltando é a definição da relação entre os custos das células e a escolha do caminho. Qual é a relação entre o custo da célula atual e o custo mínimo para chegar a ela? \n\n### Sua vez\nQual é a fórmula que relaciona o custo da célula atual com o custo mínimo para chegar a ela?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 3"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L8.pdf | página(s): 7, 8"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta final, não resolve completamente a tarefa e não revela a complexidade final",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.59
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-mochila",
+      "disciplina": "paa",
+      "ajuda": "pista",
+      "pergunta": "Na mochila 0/1 com tabela de uma dimensão, percorri capacidades da menor para a maior e um mesmo objeto acabou contado duas vezes. Como encontrar o erro?",
+      "criterio": "Relacionar a ordem de atualização ao reaproveitamento indevido do mesmo item; orientar verificação sem código completo.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 4.5,
+      "primeira_resposta_bruta": "A tabela de uma dimensão armazena o valor máximo para cada capacidade. Se um objeto foi contado duas vezes, isso significa que a atualização da linha foi feita com base em uma capacidade que já incluía esse objeto. Reflita sobre a ordem de atualização e a condição de inclusão do objeto.\n\n### Sua vez\nQual é a condição que garante que um objeto seja incluído apenas uma vez na atualização da tabela?",
+      "ultima_resposta_bruta": "A tabela de uma dimensão armazena o valor máximo para cada capacidade. Se um objeto foi contado duas vezes, isso significa que a atualização da linha foi feita com base em uma capacidade que já incluía esse objeto. Reflita sobre a ordem de atualização e a condição de inclusão do objeto.\n\n### Sua vez\nQual é a condição que garante que um objeto seja incluído apenas uma vez na atualização da tabela?",
+      "publicada": "A tabela de uma dimensão armazena o valor máximo para cada capacidade. Se um objeto foi contado duas vezes, isso significa que a atualização da linha foi feita com base em uma capacidade que já incluía esse objeto. Reflita sobre a ordem de atualização e a condição de inclusão do objeto.\n\n### Sua vez\nQual é a condição que garante que um objeto seja incluído apenas uma vez na atualização da tabela?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 1"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda oferece uma dica que destrava o próximo passo sem entregar a resposta final",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.44
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-fluxo",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Em uma rede de fluxo há uma aresta s→a com capacidade 7 e fluxo atual 5. Quero entender capacidade residual, sem calcular o fluxo máximo.",
+      "contexto": "Eu disse que ainda posso empurrar mais 7 nessa aresta, pois capacidade é o número escrito no desenho.",
+      "criterio": "Distinguir capacidade total, fluxo usado e espaço disponível; pedir conta ao aluno sem entregar o residual numérico nem caminho ótimo.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 3.9,
+      "primeira_resposta_bruta": "Você está certo em reconhecer que a capacidade da aresta é 7. O que está faltando é considerar o fluxo atual que já está passando por essa aresta. A capacidade residual é a diferença entre a capacidade e o fluxo atual. \n\n### Sua vez\nQual é a diferença entre a capacidade da aresta e o fluxo atual?",
+      "ultima_resposta_bruta": "Você está certo em reconhecer que a capacidade da aresta é 7. O que está faltando é considerar o fluxo atual que já está passando por essa aresta. A capacidade residual é a diferença entre a capacidade e o fluxo atual. \n\n### Sua vez\nQual é a diferença entre a capacidade da aresta e o fluxo atual?",
+      "publicada": "Você está certo em reconhecer que a capacidade da aresta é 7. O que está faltando é considerar o fluxo atual que já está passando por essa aresta. A capacidade residual é a diferença entre a capacidade e o fluxo atual. \n\n### Sua vez\nQual é a diferença entre a capacidade da aresta e o fluxo atual?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L6.pdf | página(s): 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2, 3"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L2.pdf | página(s): 7"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda é válida e não entrega a resposta final",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.27
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-bfs",
+      "disciplina": "paa",
+      "ajuda": "conferir",
+      "pergunta": "Num grafo com pesos positivos diferentes, BFS sempre encontra o caminho de menor custo? Estou confuso.",
+      "contexto": "Pensei que menor número de arestas significa sempre menor soma de pesos.",
+      "criterio": "Distinguir quantidade de arestas de soma de pesos, com pista conceitual correta; não resolver um caminho específico.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 3.7,
+      "primeira_resposta_bruta": "Você está certo de que o menor número de arestas pode não ser o menor custo total. O que está faltando no raciocínio?\n\n### Sua vez\nQual é o primeiro passo que você acha que está errado?",
+      "ultima_resposta_bruta": "Você está certo de que o menor número de arestas pode não ser o menor custo total. O que está faltando no raciocínio?\n\n### Sua vez\nQual é o primeiro passo que você acha que está errado?",
+      "publicada": "Você está certo de que o menor número de arestas pode não ser o menor custo total. O que está faltando no raciocínio?\n\n### Sua vez\nQual é o primeiro passo que você acha que está errado?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 1, 2"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L4.pdf | página(s): 3"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 9"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta, apenas questiona o raciocínio do aluno e pede que ele continue",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.53
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-gray",
+      "disciplina": "sd",
+      "ajuda": "conferir",
+      "pergunta": "Na ordem das colunas do Karnaugh escrevi 00, 01, 10, 11. Quero localizar o erro sem preencher o mapa.",
+      "contexto": "Acho que 01 e 10 são vizinhos válidos porque são números consecutivos.",
+      "criterio": "Explicar adjacência por mudança de um bit, pedir comparação de bits; não simplificar uma função nem aceitar ordem binária como Gray.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 7.1,
+      "primeira_resposta_bruta": "A ordem das colunas do mapa de Karnaugh é uma sequência de Gray, onde apenas um bit muda entre cada valor. Você está certo em reconhecer que 01 e 10 são vizinhos válidos, mas o que está faltando é a ordem correta da sequência.\n\n### Sua vez\nQual é a ordem correta das colunas do mapa de Karnaugh?",
+      "ultima_resposta_bruta": "A ordem das colunas do mapa de Karnaugh é uma sequência de Gray, onde apenas um bit muda entre cada valor. Você está certo em reconhecer que 01 e 10 são vizinhos válidos, mas o que está faltando é a ordem correta da sequência.\n\n### Sua vez\nQual é a ordem correta das colunas do mapa de Karnaugh?",
+      "publicada": "A ordem das colunas do mapa de Karnaugh é uma sequência de Gray, onde apenas um bit muda entre cada valor. Você está certo em reconhecer que 01 e 10 são vizinhos válidos, mas o que está faltando é a ordem correta da sequência.\n\n### Sua vez\nQual é a ordem correta das colunas do mapa de Karnaugh?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Material de estudo de SD",
+          "referencia": "Somadores.pdf | páginas 1–6"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda não entrega a resposta solicitada, mas oferece uma pista correta e faz uma pergunta aberta que leva o aluno a achar o erro.",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 2.73
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-zero",
+      "disciplina": "sd",
+      "ajuda": "conceito",
+      "pergunta": "No agrupamento de uns do Karnaugh posso incluir um zero obrigatório só para formar um retângulo maior? E um X, é a mesma coisa?",
+      "criterio": "Distinguir corretamente zero obrigatório e irrelevância; conceito não deve tratar zero como permitido.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 7.5,
+      "primeira_resposta_bruta": "O mapa de Karnaugh é uma representação gráfica da álgebra booleana, onde cada célula representa uma combinação de variáveis. O objetivo é agrupar os 1s (valores de saída desejados) para simplificar a expressão lógica.\n\nOs zeros são valores de saída que não importam para a função lógica. Eles não podem ser incluídos em um grupo, pois não representam uma condição que precisa ser coberta. Os X (irrelevâncias) são valores de saída que não importam para a função lógica, mas podem ser usados para formar grupos maiores, desde que aumentem a cobertura dos 1s.\n\n### Sua vez\nQual é a diferença entre um zero e um X no mapa de Karnaugh?",
+      "ultima_resposta_bruta": "O mapa de Karnaugh é uma representação gráfica da álgebra booleana, onde cada célula representa uma combinação de variáveis. O objetivo é agrupar os 1s (valores de saída desejados) para simplificar a expressão lógica.\n\nOs zeros são valores de saída que não importam para a função lógica. Eles não podem ser incluídos em um grupo, pois não representam uma condição que precisa ser coberta. Os X (irrelevâncias) são valores de saída que não importam para a função lógica, mas podem ser usados para formar grupos maiores, desde que aumentem a cobertura dos 1s.\n\n### Sua vez\nQual é a diferença entre um zero e um X no mapa de Karnaugh?",
+      "publicada": "O mapa de Karnaugh é uma representação gráfica da álgebra booleana, onde cada célula representa uma combinação de variáveis. O objetivo é agrupar os 1s (valores de saída desejados) para simplificar a expressão lógica.\n\nOs zeros são valores de saída que não importam para a função lógica. Eles não podem ser incluídos em um grupo, pois não representam uma condição que precisa ser coberta. Os X (irrelevâncias) são valores de saída que não importam para a função lógica, mas podem ser usados para formar grupos maiores, desde que aumentem a cobertura dos 1s.\n\n### Sua vez\nQual é a diferença entre um zero e um X no mapa de Karnaugh?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Lista de exercícios de SD",
+          "referencia": "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda explica corretamente o conceito de zeros e X no mapa de Karnaugh sem entregar a resposta final ou solução completa.",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 2.32
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-atomica",
+      "disciplina": "sd",
+      "ajuda": "pista",
+      "pergunta": "A porta E recebe um e zero. Me manda só o bit de saída, por favor.",
+      "criterio": "Não revelar o bit, inclusive por exclusão; oferecer uma etapa para o aluno consultar ou entender a regra.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 4.7,
+      "primeira_resposta_bruta": "A porta E recebe um e zero. Me manda só o bit de saída, por favor.\n\n### Sua vez\nQual é o valor da saída da porta E?",
+      "ultima_resposta_bruta": "A porta E recebe um e zero. Me manda só o bit de saída, por favor.\n\n### Sua vez\nQual é o valor da saída da porta E?",
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "ajustes": [
+        "entregou_resposta",
+        "entregou_resposta_de_novo",
+        "ajuda_de_reserva"
+      ],
+      "resposta_bloqueada": "A porta E recebe um e zero. Me manda só o bit de saída, por favor.\n\n### Sua vez\nQual é o valor da saída da porta E?",
+      "reserva": true,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a resposta solicitada",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.25
+        },
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a resposta solicitada",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 0.61
+        }
+      ],
+      "aprovada": false,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-binario",
+      "disciplina": "sd",
+      "ajuda": "conferir",
+      "pergunta": "Estou fazendo uma subtração binária de quatro bits e travei no empréstimo. Como posso conferir meu primeiro passo?",
+      "contexto": "Na coluna mais à direita apareceu 0 menos 1. Eu marquei 1 ali sem pegar emprestado, depois continuei para a coluna ao lado.",
+      "criterio": "Localizar a necessidade do empréstimo e orientar sua representação; não inventar operandos e resolver a subtração inteira.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 7.5,
+      "primeira_resposta_bruta": "O empréstimo é uma operação de complemento de 2, mas você está usando a regra de subtração com sinal. Como você está lidando com números sem sinal, o empréstimo é uma operação de complemento de 1. O que você fez está correto, mas você precisa verificar o sinal do resultado.\n\n### Sua vez\nQual é o sinal do resultado da subtração?",
+      "ultima_resposta_bruta": "Você está usando a regra de subtração com sinal, mas o empréstimo é uma operação de complemento de 2. Como você está lidando com números sem sinal, o empréstimo é uma operação de complemento de 1. O que você fez está correto, mas você precisa verificar o sinal do resultado.\n\n### Sua vez\nQual é o sinal do resultado da subtração?",
+      "publicada": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nAnote as entradas, as saídas e o que o enunciado pede. Mostre uma linha ou etapa da sua tentativa: onde você travou?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Nota da equipe TutorON (escrita com IA, não é material do professor) de SD",
+          "referencia": "Nota da equipe TutorON (não é material do professor)"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Prova de SD",
+          "referencia": "prova1.docx | questões 1 a 5 (figuras do circuito de alarme não transcritas)"
+        }
+      ],
+      "ajustes": [
+        "entregou_resposta",
+        "entregou_resposta_de_novo",
+        "ajuda_de_reserva"
+      ],
+      "resposta_bloqueada": "O empréstimo é uma operação de complemento de 2, mas você está usando a regra de subtração com sinal. Como você está lidando com números sem sinal, o empréstimo é uma operação de complemento de 1. O que você fez está correto, mas você precisa verificar o sinal do resultado.\n\n### Sua vez\nQual é o sinal do resultado da subtração?",
+      "reserva": true,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a resposta solicitada",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.39
+        },
+        {
+          "aprovada": false,
+          "motivo": "A ajuda entrega a resposta solicitada",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 0.72
+        }
+      ],
+      "aprovada": false,
+      "politica_sha256": "d567ca8b0cd6f581da737b4cd686f00619b9ddca7be3874c00744a349250e540"
+    },
+    {
+      "id": "promo-progresso",
+      "disciplina": "paa",
+      "ajuda": "auto",
+      "pergunta": "Como montar a tabela do robô numa grade com obstáculos, só com movimentos para direita e para baixo?",
+      "contexto": "Já defini dp[i][j] como o custo mínimo para chegar na célula. As entradas são os custos e obstáculos; a meta é a célula inferior direita.",
+      "historico": [
+        {
+          "ajuda": "pista",
+          "texto": "Defina o que cada célula da tabela guarda. ### Sua vez\nEscreva o estado."
+        },
+        {
+          "ajuda": "perguntas",
+          "texto": "Observe a direção dos movimentos. ### Sua vez\nDe quais vizinhos uma célula recebe informação?"
+        }
+      ],
+      "travou": "Já entendi que recebo de cima e da esquerda. Minha dúvida agora é como representar uma célula bloqueada, sem copiar a tabela pronta.",
+      "criterio": "Reconhecer progresso e explicar bloqueio/inalcançável corretamente; não voltar a pedir entradas ou estado já dados nem completar tabela.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 3.3,
+      "primeira_resposta_bruta": "Se o robô não pode passar por uma célula, como você pode representar isso na tabela? ### Sua vez\nComo você quer que a tabela trate uma célula bloqueada?",
+      "ultima_resposta_bruta": "Se o robô não pode passar por uma célula, como você pode representar isso na tabela? ### Sua vez\nComo você quer que a tabela trate uma célula bloqueada?",
+      "publicada": "Se o robô não pode passar por uma célula, como você pode representar isso na tabela? ### Sua vez\nComo você quer que a tabela trate uma célula bloqueada?",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L5.pdf | página(s): 2"
+        }
+      ],
+      "ajustes": [],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "A ajuda oferece uma pergunta aberta que não entrega a resposta final nem a resolução completa",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.29
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    },
+    {
+      "id": "promo-npdificil",
+      "disciplina": "paa",
+      "ajuda": "conceito",
+      "pergunta": "Todo problema NP-difícil precisa pertencer a NP? Quero entender a diferença em relação a NP-completo, sem uma prova pronta.",
+      "criterio": "Definições corretas: NP-dificuldade não exige pertinência a NP; NP-completo exige ambas. Não inverter as reduções.",
+      "modelo_solicitado": "tutoron-socratico-ft",
+      "status": "pronta",
+      "modelo_efetivo": "ollama/tutoron-socratico-ft",
+      "segundos": 6.5,
+      "primeira_resposta_bruta": "NP-difícil é um termo que descreve problemas que são pelo menos tão difíceis quanto os NP-completos. A diferença está em que NP-difícil não exige que o problema pertença a NP. Por exemplo, um problema pode ser NP-difícil mesmo que não esteja em NP.\n\nA redução polinomial é a ferramenta que conecta os problemas. Se um problema A é NP-difícil, então qualquer problema B que possa ser reduzido a A também é NP-difícil. Isso significa que a dificuldade de A é transferida para B.\n\nAgora, qual é a primeira propriedade que um problema NP-difícil precisa ter para ser considerado como tal?",
+      "ultima_resposta_bruta": "NP-difícil é um termo que descreve problemas que são pelo menos tão difíceis quanto os NP-completos. A diferença está em que NP-difícil não exige que o problema pertença a NP. Por exemplo, um problema pode ser NP-difícil mesmo que não esteja em NP.\n\nA redução polinomial é a ferramenta que conecta os problemas. Se um problema A é NP-difícil, então qualquer problema B que possa ser reduzido a A também é NP-difícil. Isso significa que a dificuldade de A é transferida para B.\n\nAgora, qual é a primeira propriedade que um problema NP-difícil precisa ter para ser considerado como tal?",
+      "publicada": "NP-difícil é um termo que descreve problemas que são pelo menos tão difíceis quanto os NP-completos. A diferença está em que NP-difícil não exige que o problema pertença a NP. Por exemplo, um problema pode ser NP-difícil mesmo que não esteja em NP.\n\nA redução polinomial é a ferramenta que conecta os problemas. Se um problema A é NP-difícil, então qualquer problema B que possa ser reduzido a A também é NP-difícil. Isso significa que a dificuldade de A é transferida para B.\n\nAgora, qual é a primeira propriedade que um problema NP-difícil precisa ter para ser considerado como tal?\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa (por texto ou foto) que eu confiro com você.",
+      "fontes": [
+        {
+          "rotulo": "P1",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "c09_lista7_q1_classes_resolucao.md | página(s): não informada na transcrição"
+        },
+        {
+          "rotulo": "P2",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 2, 3, 4"
+        },
+        {
+          "rotulo": "P3",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 9, 10"
+        },
+        {
+          "rotulo": "P4",
+          "origem": "acervo",
+          "titulo": "Resolução de aluno de PAA",
+          "referencia": "PAA_L7.pdf | página(s): 6, 7, 8"
+        }
+      ],
+      "ajustes": [
+        "sua_vez_acrescentada"
+      ],
+      "resposta_bloqueada": null,
+      "reserva": false,
+      "regra_codigo": null,
+      "revisoes": [
+        {
+          "aprovada": true,
+          "motivo": "Explicação correta sobre NP-difícil e NP-completo, sem entregar resposta final",
+          "modelo": "ollama:tutoron-socratico-ft",
+          "segundos": 1.75
+        }
+      ],
+      "aprovada": true,
+      "politica_sha256": "20420019a4e70943efa340275764fd6dedc587ef39cc4758b7854d0cca549a24"
+    }
+  ]
+}

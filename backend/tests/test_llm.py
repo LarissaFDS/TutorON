@@ -1,11 +1,40 @@
 """Corrida escalonada entre modelos, com provedores falsos (sem rede)."""
 import asyncio
 import dataclasses
+import json
 
 import pytest
 
 from backend.config import Settings
 from backend.llm import LLM, AllUnavailable, Model, Unavailable
+
+
+@pytest.mark.parametrize('pensar,revisao,limite', [(False, False, 2048), (True, False, 8192),
+                                                  (False, True, 256), (True, True, 256)])
+def test_orcamento_de_saida_preserva_raciocinio_e_limita_repeticao(pensar, revisao, limite):
+    import httpx
+    from backend.llm import REVISAO_JSON, SEM_RACIOCINIO
+    corpos = []
+
+    def responder(request):
+        if request.url.path == '/api/show':
+            return httpx.Response(200, json={'capabilities': ['completion', 'thinking']})
+        corpos.append(json.loads(request.content))
+        return httpx.Response(200, text='{"message":{"content":"pista"},"done":true}\n')
+
+    async def chamada():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as client:
+            llm = LLM(Settings(local_thinking=pensar), client=client)
+            formato, sem = REVISAO_JSON.set(revisao), SEM_RACIOCINIO.set(revisao)
+            try:
+                return ''.join([x async for x in llm._ollama(Model('ollama', 'teste'), 's', 'p')])
+            finally:
+                REVISAO_JSON.reset(formato)
+                SEM_RACIOCINIO.reset(sem)
+
+    assert asyncio.run(chamada()) == 'pista'
+    assert corpos[0]['options']['num_predict'] == limite
+    assert corpos[0]['think'] is (pensar and not revisao)
 
 
 def settings(**kw):
@@ -22,6 +51,11 @@ class FakeLLM(LLM):
         self.roteiro = roteiro
         self.iniciados = []
         self.fechados = []
+
+    async def revisar_ajuda(self, pergunta, contexto, resposta):
+        # A revisão semântica é simulada nos testes de rotas. O contrato real e as
+        # reprovações são exercitados separadamente em test_tutoria.py.
+        return {"aprovada": True, "motivo": "revisor simulado"}
 
     def _provider(self, model, system, prompt):
         self.iniciados.append(model.name)
@@ -46,6 +80,48 @@ class FakeLLM(LLM):
 
 def run(coro):
     return asyncio.run(coro)
+
+
+def test_foto_usa_visao_local_quando_gemini_esgota_cota():
+    import httpx
+    chamadas = []
+
+    def responder(req):
+        chamadas.append(req.url.path)
+        if req.url.host == 'generativelanguage.googleapis.com':
+            return httpx.Response(429, json={'error': {'details': [
+                {'violations': [{'quotaId': 'GenerateRequestsPerDayPerProjectPerModel-FreeTier'}]}]}})
+        corpo = json.loads(req.content)
+        assert corpo['model'] == 'visao' and corpo['messages'][1]['images']
+        return httpx.Response(200, json={'message': {'content': '{"enunciado":"T(n)=2T(n/2)+n"}'}})
+
+    async def executar():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as c:
+            llm = LLM(settings(gemini_models=('g1',), local_vision_model='visao'), client=c)
+            r = await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert r.model == Model('ollama', 'visao')
+            assert r.attempts[0]['cota'] == 'por_dia'
+            # A segunda foto pula o Gemini em pausa e vai direto para o local.
+            r = await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert r.attempts[0]['resultado'] == 'pulado (em pausa)'
+
+    run(executar())
+    assert len(chamadas) == 3
+
+
+def test_foto_nao_repete_ultimo_modelo_em_pausa_sem_visao_local():
+    llm = LLM(settings(gemini_models=('g1',)))
+    llm.breaker.trip(Model('gemini', 'g1'), 'HTTP 429', 60)
+
+    async def executar():
+        try:
+            with pytest.raises(AllUnavailable) as erro:
+                await llm.ver_imagens('s', 'p', [b'jpeg'])
+            assert erro.value.attempts == [{'modelo': 'gemini:g1', 'resultado': 'pulado (em pausa)'}]
+        finally:
+            await llm.client.aclose()
+
+    run(executar())
 
 
 def test_primeiro_modelo_responde():

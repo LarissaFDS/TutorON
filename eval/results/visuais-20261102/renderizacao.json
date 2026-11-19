@@ -1,0 +1,75 @@
+{
+  "completa": true,
+  "exemplos": [
+    {
+      "id": "robo-dp",
+      "video": "visual_0db9fa4c0c1b6650b0cadcf5aed614ca",
+      "preparo_s": 9.3,
+      "segundos_video": 12.38,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 338773,
+      "quadros_decodificados": 297
+    },
+    {
+      "id": "fluxo-residual",
+      "video": "visual_077a6d01ca60cb51a0bf7e63b00dc9b5",
+      "preparo_s": 5.42,
+      "segundos_video": 10.54,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 306896,
+      "quadros_decodificados": 253
+    },
+    {
+      "id": "karnaugh-bordas",
+      "video": "visual_d377897d053216678aa6d6952f7a2bec",
+      "preparo_s": 5.75,
+      "segundos_video": 10.79,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 269304,
+      "quadros_decodificados": 259
+    },
+    {
+      "id": "circuito-tabela",
+      "video": "visual_369871f4cf0faf448e080b53070ce4e8",
+      "preparo_s": 5.35,
+      "segundos_video": 9.58,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 198190,
+      "quadros_decodificados": 230
+    },
+    {
+      "id": "grafo-bfs",
+      "video": "visual_818360e26c145fd66457a4993be040c7",
+      "preparo_s": 4.46,
+      "segundos_video": 8.62,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 200090,
+      "quadros_decodificados": 207
+    },
+    {
+      "id": "certificado-np",
+      "video": "visual_21d98a73c4ca184a5888719d500790eb",
+      "preparo_s": 3.94,
+      "segundos_video": 6.83,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 147378,
+      "quadros_decodificados": 164
+    },
+    {
+      "id": "direcao-reducao",
+      "video": "visual_511172474ee194d2b226f75097e387aa",
+      "preparo_s": 5.09,
+      "segundos_video": 10.25,
+      "largura": 854,
+      "altura": 480,
+      "bytes": 250394,
+      "quadros_decodificados": 246
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "modelos": [
+    {
+      "name": "tutoron-socratico-ft:latest",
+      "digest": "89bca9cd2ca3c9725ea693da7c917af39c12497775fc33e7e0b3154402ee53f2",
+      "size": 5027784434,
+      "modified_at": "2026-11-02T16:38:26.5909336-03:00"
+    },
+    {
+      "name": "tutoron-paa:latest",
+      "digest": "1ef169a57cf1a620d642fb968b00c269ba5bbd40fa5ede889e1dc03f1d5e9280",
+      "size": 5225388105,
+      "modified_at": "2026-10-11T23:37:28.1491253-03:00"
+    }
+  ],
+  "casos_sha256": "aa86ae4419dd956b4ae57e8310fb3f42303792ef68f3fd68e26acde6de856db6",
+  "configuracao_geracao": {
+    "raciocinio": false,
+    "temperatura": 0.2,
+    "num_predict": 8192,
+    "num_ctx": 8192,
+    "gemini": false,
+    "supabase": false
+  },
+  "limite": "Geração da comparação terminou antes das alterações de limite de saída. Notas são inspeção técnica do agente, não docente nem medição de aprendizagem."
+}

@@ -1,25 +1,30 @@
 # TutorON
 
-O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e responde passo a passo, do jeito que o conteúdo é cobrado, com as fórmulas formatadas.
+O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, começando pelo curso de Computação. O aluno pergunta, o TutorON busca no material da disciplina (provas, listas, resoluções e o livro-texto) e orienta com pistas, conceitos e perguntas para o aluno resolver no papel, sem entregar a solução pronta.
 
 **Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA), Sistemas Digitais (SD), Organização e Arquitetura de Computadores (OAC), Cálculo 3, Física 2, Estrutura de Dados (ED) e Banco de Dados (BD), com a mesma IA e um acervo próprio por disciplina. Nenhuma delas mostra mais o aviso de beta. Isso não é validação: a revisão humana dos blocos, a aprovação dos professores e a validação técnica das respostas continuam pendentes, e as pendências de cada disciplina estão em [Disciplinas](docs/DISCIPLINAS.md). O aluno escolhe a disciplina no modo Tutor.
+
+**Versão final (nov/2026):** o site é um chat (barra lateral com conversas, caixa de mensagem com chips de tipo de ajuda, disciplina, código e foto). O aluno escolhe **curso e período** (Engenharia ou Ciência da Computação, matrizes obrigatórias do IC/UFAL em [`disciplinas/cursos.json`](disciplinas/cursos.json)); isso entra no prompt e ajuda a achar a disciplina certa. O plano **Grátis** tem limite diário (renova à meia-noite); os planos **Estudante** e **Intensivo** podem ser ativados com um **pagamento simulado** (nenhuma cobrança, nenhum dado de cartão sai do navegador) e ligam o **modo completo** (Gemini primeiro). Quem acessa deste PC é **administrador**: sem limite. Link fixo e início automático: [docs/LINK-FIXO.md](docs/LINK-FIXO.md).
 
 O site tem dois modos:
 
 - **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
 - **Avaliar respostas (validação)** — teste cego A/B: a mesma pergunta é respondida pelo TutorON (RAG + instruções) e por um modelo genérico (o mesmo modelo, sem material e sem instruções). O aluno dá notas sem saber qual é qual. Tudo chega como JSON nesta máquina, com a identificação de cada lado.
 
+**Aprender com desenhos:** a aba separada permite escrever uma dúvida livre ou explorar temas recomendados opcionais. Em **Tirar dúvida**, a seleção inicial é **O tutor escolhe**; depois da resposta em texto, **Quer entender visualmente?** gera uma pista na mesma conversa, com base na pergunta e na explicação. A disciplina é identificada automaticamente quando há sinais claros, com escolha manual opcional. Detalhes em [VISUAIS.md](docs/VISUAIS.md).
+
 ## Como usar (Windows)
 
-Cinco atalhos na raiz. Nada mais é necessário no dia a dia.
+Seis atalhos na raiz. Nada mais é necessário no dia a dia.
 
 | Atalho | O que faz |
 |---|---|
 | **`1-Iniciar-Servidor.bat`** | Liga tudo: modelo local na GPU, site e endereço público `https://….trycloudflare.com` para qualquer pessoa acessar. Instala o que faltar na primeira vez. Deixe a janela aberta. |
 | **`2-Validacao.bat`** | Abre o modo validação e o painel de resultados, e copia o link da validação para enviar aos alunos. |
-| **`3-Treinar.bat`** | Treina o modelo local na GPU (QLoRA), importa no Ollama como `tutoron-paa-ft` e gera um relatório comparando com o atual. Não troca o modelo sozinho. |
+| **`3-Treinar.bat`** | Treina o modelo local na GPU (QLoRA), importa no Ollama como `tutoron-socratico-ft` e gera um relatório comparando com o atual. Não troca o modelo sozinho. |
 | **`4-Reiniciar.bat`** | Se algo travar: religa os modelos e o site **sem mudar o endereço público**. Quem estava esperando recebe a resposta mesmo assim (a página reenvia a pergunta sozinha). |
 | **`5-Desligar.bat`** | Desliga site, túnel e modelo local (libera a GPU). |
+| **`6-Iniciar-com-o-Windows.bat`** | Liga (ou desliga) o início automático: ao entrar no Windows, o servidor abre sozinho. |
 
 Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.example)) e preencha `GEMINI_API_KEY` e, para incluir o livro-texto na busca, `SUPABASE_URL` e `SUPABASE_KEY`. O `.env` não vai para o Git.
 
@@ -30,6 +35,7 @@ Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.exa
 - `dados/fotos.jsonl` — a leitura de cada foto do papel (a foto em si não é guardada).
 - `dados/animacoes.jsonl` e `dados/animacoes/*.mp4` — roteiros e vídeos das animações.
 - `dados/validacao/avaliacoes.jsonl` — cada avaliação A/B completa: pergunta, as duas respostas, notas, preferência e **qual lado era o TutorON**.
+- `dados/cota.json`, `dados/planos.json` e `dados/uso.jsonl` — uso do dia por convidado (cookie anônimo), planos simulados e histórico de tokens; painel em `http://127.0.0.1:8000/uso` (só nesta máquina).
 - `http://127.0.0.1:8000/resultados` — resumo das avaliações. Só abre nesta máquina; pelo endereço público responde 404.
 
 Nenhum IP, nome ou matrícula é gravado.
@@ -37,7 +43,7 @@ Nenhum IP, nome ou matrícula é gravado.
 ## Como a resposta é escolhida
 
 1. A pergunta vira um embedding `bge-m3` (local, na CPU) e busca **no acervo da disciplina escolhida** (sem escolha, PAA). Em PAA, são duas fontes: o **acervo curado local** de provas, listas e resoluções ([`04-rag/`](04-rag/)), que é a fonte principal porque mostra como o professor cobra, e o livro-texto no Supabase, como complemento.
-2. O prompt do tutor ([`backend/prompts.py`](backend/prompts.py)) exige contas passo a passo, verificação no final, citação das fontes e Markdown com LaTeX.
+2. O prompt do tutor ([`backend/prompts.py`](backend/prompts.py)) orienta sem gabarito, preserva o rigor da disciplina e pede uma tarefa curta ao aluno. O texto só é publicado depois de uma revisão pedagógica; uma segunda versão reprovada é substituída por uma ajuda de reserva. A revisão por IA também pode errar.
 3. **Corrida entre modelos** ([`backend/llm.py`](backend/llm.py)): o primeiro Gemini da lista começa na hora; se não começar a responder em 6 s, ou der erro (503, 429…), o próximo começa também. O primeiro que responder vence e os outros são cancelados. Um modelo que falhou fica alguns segundos em pausa, então as perguntas seguintes nem tentam ele.
 4. Se nenhum Gemini responder em 20 s, entra o **TutorON local** (`tutoron-paa`, Qwen3 8B com raciocínio, na GPU desta máquina). Ele é a última instância: se nem ele responder, a geração é repetida até 4 vezes ao longo de quase 1 minuto (tempo para o `1-Iniciar-Servidor` religar o que caiu).
 5. A resposta é gerada em segundo plano e a página acompanha o andamento a cada segundo. Nenhuma requisição fica aberta esperando a IA, o que evita o erro 524 da Cloudflare (que corta requisições de mais de 100 s). Se a rede do aluno oscilar ou ele recarregar a página, a resposta continua de onde parou.
@@ -46,10 +52,15 @@ Nenhum IP, nome ou matrícula é gravado.
 
 A ordem dos modelos, os tempos e o modelo local ficam no `.env` (veja os comentários em `.env.example`).
 
+A leitura de fotos usa modelos de visão. Para continuar lendo quando o Gemini estiver sem cota,
+instale `qwen2.5vl:3b` no Ollama e defina `TUTORON_MODELO_VISAO_LOCAL=qwen2.5vl:3b` no `.env`;
+depois reinicie o servidor. O modelo de texto `tutoron-paa` não lê imagens. A leitura local pode
+levar dezenas de segundos e deve ser conferida pelo aluno, especialmente em fórmulas e manuscritos.
+
 ## Estrutura
 
 ```
-1-Iniciar-Servidor.bat … 5-Desligar.bat   atalhos
+1-Iniciar-Servidor.bat … 6-Iniciar-com-o-Windows.bat   atalhos
 backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
 scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
 acervo/           pipeline de OCR, curadoria e índice do material de PAA; cadastro de disciplinas (disciplinas.py)
@@ -85,7 +96,13 @@ powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
 
 ## Treinamento
 
-Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Treinar.bat` usa as soluções curadas do acervo, treina um adapter LoRA sobre o Qwen3-8B na RTX 4060, mescla, importa no Ollama e avalia. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-paa-ft` no `.env` e reinicie o servidor.
+Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: um clique no `3-Treinar.bat` faz tudo.
+
+0. **Casos de todas as disciplinas:** `scripts/gerar_casos_acervo.py` lê os acervos curados de PAA, SD, OAC, Cálculo 3, Física 2, ED e BD e pede ao modelo professor (Gemini → local) um caso socrático por bloco (conceito, pista, perguntas-guia, exemplo, conferência). Casos que entregam a resposta são descartados. É retomável: rodar de novo só gera o que falta (`05-modelo/socratico/gerados/`). Linhas revisadas à mão em `dados-treino/curados/*.jsonl` entram também.
+1. Junta com os 24 casos autorais de `05-modelo/socratico/casos.json`, separando treino, validação e teste por família.
+2. Treina um adapter LoRA sobre o Qwen3-8B na RTX 4060 (passos automáticos: ~2 épocas, entre 60 e 600), mescla, importa no Ollama como `tutoron-socratico-ft` e avalia pelo fluxo do site.
+
+Só preparar os dados, sem GPU: `3-Treinar.bat --so-dados`. Pular a geração: `--sem-gerar`. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-socratico-ft` no `.env` e reinicie o servidor.
 
 ## Documentação
 

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "txWDJzYEuB_ji5rn",
+    "data": "2026-11-02T23:39:26+00:00",
+    "disciplina": "sd",
+    "pergunta": "Qual é o papel do clock em um flip-flop D? Eu conheço a entrada D, mas não entendo quando Q pode mudar.",
+    "roteiro": {
+      "titulo": "Papel do clock no flip-flop D",
+      "pergunta_final": "Marque no diagrama de tempo quando Q atualiza seu valor.",
+      "modelo": "esquema",
+      "blocos": [
+        {
+          "id": "bloco1",
+          "texto": "O clock controla quando Q atualiza seu valor.",
+          "lacuna": false
+        },
+        {
+          "id": "bloco2",
+          "texto": "Q só muda quando o clock muda de estado.",
+          "lacuna": false
+        },
+        {
+          "id": "bloco3",
+          "texto": "Você completa",
+          "lacuna": true
+        }
+      ],
+      "ligacoes": [
+        [
+          "bloco1",
+          "bloco2"
+        ],
+        [
+          "bloco2",
+          "bloco3"
+        ]
+      ],
+      "destacar": [
+        "bloco3"
+      ]
+    },
+    "video": "cVsSbUeYBM4G9IIY",
+    "modelo": "ollama:tutoron-paa",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Papel do clock no flip-flop D\",\n  \"blocos\": [\n    {\n      \"id\": \"bloco1\",\n      \"texto\": \"O clock controla quando Q atualiza seu valor.\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco2\",\n      \"texto\": \"Q só muda quando o clock muda de estado.\",\n      \"lacuna\": false\n    },\n    {\n      \"id\": \"bloco3\",\n      \"texto\": \"Qual é o momento em que Q atualiza seu valor?\",\n      \"lacuna\": true\n    }\n  ],\n  \"ligacoes\": [\n    [\"bloco1\", \"bloco2\"],\n    [\"bloco2\", \"bloco3\"]\n  ],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Marque no diagrama de tempo quando Q atualiza seu valor.\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": true,
+          "motivo": "O roteiro está correto e aborda a dúvida do aluno de forma clara, sem revelar a solução.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 1.18
+        }
+      }
+    ]
+  }
+]

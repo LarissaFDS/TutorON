@@ -1,0 +1,95 @@
+{
+  "url_local": "http://127.0.0.1:8000",
+  "url_publica": "https://assessments-chapter-information-editorial.trycloudflare.com",
+  "casos": [
+    {
+      "id": "saude",
+      "http": 200,
+      "esperado": 200,
+      "ok": true,
+      "segundos": 0.006
+    },
+    {
+      "id": "pagina",
+      "http": 200,
+      "esperado": 200,
+      "ok": true,
+      "segundos": 0.005
+    },
+    {
+      "id": "disciplinas",
+      "http": 200,
+      "esperado": 200,
+      "ok": true,
+      "segundos": 0.001
+    },
+    {
+      "id": "ajudas",
+      "http": 200,
+      "esperado": 200,
+      "ok": true,
+      "segundos": 0.002
+    },
+    {
+      "id": "tarefa_inexistente",
+      "http": 404,
+      "esperado": 404,
+      "ok": true,
+      "segundos": 0.001
+    },
+    {
+      "id": "sem_pergunta",
+      "http": 422,
+      "esperado": 422,
+      "ok": true,
+      "segundos": 0.003
+    },
+    {
+      "id": "pergunta_vazia",
+      "http": 422,
+      "esperado": 422,
+      "ok": true,
+      "segundos": 0.002
+    },
+    {
+      "id": "disciplina_inexistente",
+      "http": 422,
+      "esperado": 422,
+      "ok": true,
+      "segundos": 0.001
+    },
+    {
+      "id": "foto_invalida",
+      "http": 400,
+      "esperado": 400,
+      "ok": true,
+      "segundos": 0.22
+    },
+    {
+      "id": "env_nao_publico",
+      "http": 404,
+      "esperado": 404,
+      "ok": true,
+      "segundos": 0.001
+    },
+    {
+      "id": "resultados_local",
+      "http": 200,
+      "esperado": 200,
+      "ok": true,
+      "segundos": 0.038
+    },
+    {
+      "id": "publico/health",
+      "http": 200,
+      "esperado": 200,
+      "ok": true
+    },
+    {
+      "id": "publico/resultados",
+      "http": 404,
+      "esperado": 404,
+      "ok": true
+    }
+  ]
+}

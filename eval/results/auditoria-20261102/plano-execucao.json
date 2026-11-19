@@ -1,0 +1,26 @@
+[
+  {
+    "fase": "dialogos",
+    "status": "completa"
+  },
+  {
+    "fase": "rapido",
+    "status": "completa"
+  },
+  {
+    "fase": "servidor-normal",
+    "status": "completa"
+  },
+  {
+    "fase": "repeticoes",
+    "status": "completa"
+  },
+  {
+    "fase": "carga4",
+    "status": "completa"
+  },
+  {
+    "fase": "carga8",
+    "status": "completa"
+  }
+]

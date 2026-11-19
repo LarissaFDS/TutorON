@@ -1,0 +1,57 @@
+[
+  {
+    "id": "YUqrQaoHUDiGvz7E",
+    "data": "2026-11-02T23:36:13+00:00",
+    "disciplina": "paa",
+    "pergunta": "Um robô só pode andar para a direita e para baixo numa grade com obstáculos. Estou tentando entender de quais células depende dp[i][j], sem calcular a rota. Quero enxergar o que muda se a célula de cima estiver bloqueada.",
+    "roteiro": {
+      "titulo": "Dependências da célula (i,j)",
+      "pergunta_final": "Como a célula de cima bloqueada afeta a dependência de dp[i][j]?",
+      "modelo": "esquema",
+      "blocos": [
+        {
+          "id": "bloco1",
+          "texto": "dp[i][j] depende de dp[i-1][j]",
+          "lacuna": false
+        },
+        {
+          "id": "bloco2",
+          "texto": "dp[i][j] depende de dp[i][j-1]",
+          "lacuna": false
+        },
+        {
+          "id": "bloco3",
+          "texto": "Você completa",
+          "lacuna": true
+        }
+      ],
+      "ligacoes": [
+        [
+          "bloco1",
+          "bloco3"
+        ],
+        [
+          "bloco2",
+          "bloco3"
+        ]
+      ],
+      "destacar": [
+        "bloco3"
+      ]
+    },
+    "video": "Oh1Fj5vJqBONqCsD",
+    "modelo": "ollama:tutoron-paa",
+    "tentativas_roteiro": [
+      {
+        "texto": "{\n  \"modelo\": \"esquema\",\n  \"titulo\": \"Dependências da célula (i,j)\",\n  \"blocos\": [\n    {\"id\": \"bloco1\", \"texto\": \"dp[i][j] depende de dp[i-1][j]\", \"lacuna\": false},\n    {\"id\": \"bloco2\", \"texto\": \"dp[i][j] depende de dp[i][j-1]\", \"lacuna\": false},\n    {\"id\": \"bloco3\", \"texto\": \"Se dp[i-1][j] está bloqueado, o que acontece com dp[i][j]?\", \"lacuna\": true}\n  ],\n  \"ligacoes\": [[\"bloco1\", \"bloco3\"], [\"bloco2\", \"bloco3\"]],\n  \"destacar\": [\"bloco3\"],\n  \"pergunta_final\": \"Como a célula de cima bloqueada afeta a dependência de dp[i][j]?\"\n}",
+        "modelo": "ollama:tutoron-paa",
+        "revisao": {
+          "aprovada": true,
+          "motivo": "A dependência de dp[i][j] está correta, mas a lacuna no bloco3 não está clara. A pergunta final é relevante, mas o modelo pode ser melhorado para esclarecer a relação com a célula de cima bloqueada.",
+          "modelo": "ollama:tutoron-paa",
+          "segundos": 2.44
+        }
+      }
+    ]
+  }
+]
