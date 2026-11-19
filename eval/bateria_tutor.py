@@ -69,6 +69,17 @@ PERGUNTAS = [
     ("prob-padronizar", "prob", "Como padronizar uma normal e usar a tabela?",
      "z = (x − μ)/σ; Φ(z) acumulada (ou área 0..z + 0,5); ex. N(40,10²): P(X ≤ 50) = Φ(1) ≈ 0,8413"),
     ("prob-fora", "prob", "Qual o período de um pêndulo simples de 1 m?", "diz que não é de Probabilidade; sem fontes"),
+    # Circuitos Elétricos: valores conferidos em tests_acervo/test_disciplina_circ.py (MNA exata e dsolve).
+    ("circ-thevenin-dep", "circ", "Como calcular o equivalente de Thévenin com uma fonte dependente?",
+     "não desliga a dependente; fonte de teste, Rth = VT/IT (ou Voc/Icc); ex. 3ix: Vth = 8 V, Rth = 1 Ω"),
+    ("circ-mtp", "circ", "Qual a condição para máxima transferência de potência?", "RL = Rth; Pmax = Vth²/(4Rth); eficiência 50%"),
+    ("circ-rlc-sub", "circ", "Como resolver um circuito RLC série subamortecido?",
+     "α = R/2L < ω0 = 1/√(LC); ωd = √(ω0² − α²); e^{−αt}(B1 cos ωd t + B2 sen ωd t) + valor final; CI vC e iL"),
+    ("circ-superno", "circ", "Quando uso um supernó na análise nodal?",
+     "fonte de tensão entre dois nós sem ser a referência; uma LKC para a superfície + equação de restrição"),
+    ("circ-ci-chave", "circ", "Como achar as condições iniciais do capacitor depois que a chave abre?",
+     "regime CC antes (C aberto, L curto); vC(0+) = vC(0−), iL(0+) = iL(0−); derivada por iC = C dv/dt"),
+    ("circ-fora", "circ", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

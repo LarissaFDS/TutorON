@@ -1,0 +1,193 @@
+{
+ "disciplina": "circ",
+ "atualizado_em": "2026-11-19",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo ou cobre lacuna fundamental; media = complementa; referencia = consulta, não é ingerida",
+  "uso": "acervo = parafraseado em disciplinas/circ/materiais; citada = indicada nas notas da equipe; referencia = só catálogo",
+  "notas": "null: não avaliadas nesta versão"
+ },
+ "fontes": [
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "turma",
+   "arquivo_local": "Fora do repositório: pasta 'TutorON - anotacoes por materia/Circuitos Eletricos' (Introdução à Circuitos Elétricos_260305_151403.pdf, Potência e Leis de Kirchoff_260312_152549.pdf, Máxima Transferência de Potência_260428_162126.pdf, Teorema de Thévenin e Norton_260428_171421.pdf, Questões circuitos_260501_111748.pdf, Lista para AB1_260501_213420.pdf, Questões para a prova 2_260517_161546.pdf, Lista para AB 2_260616_174145.pdf, Circuitos de Segunda Ordem_260618_093824.pdf)",
+   "id": "ufal-circ-anotacoes-otavio-2026-1",
+   "nome": "Anotações de estudo de Circuitos Elétricos, 2026.1 (9 PDFs)",
+   "autoria": "Otávio Joshua Costa Brandão Menezes, aluno e membro da equipe TutorON; turma do Prof. Jobson de Araújo Nascimento (IC/UFAL), conforme os cabeçalhos das listas",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PDFs de anotações manuscritas digitalizadas (sem texto extraível), com fotos de quadro e enunciados colados",
+   "notacao": "convenção passiva, Rth/Vth, iΔ, vφ, α e ω0; vírgula decimal",
+   "topicos": [
+    "circ-01-grandezas-potencia",
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-03-superposicao-transformacao",
+    "circ-04-thevenin-norton",
+    "circ-05-maxima-transferencia",
+    "circ-08-segunda-ordem"
+   ],
+   "licenca": "Não declarada; anotações pessoais. PDFs e imagens fora do repositório",
+   "acesso": "PDFs recebidos da equipe em 18/11/2026 e lidos página por página",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Único material da turma; cobre de grandezas e Kirchhoff até RLC de segunda ordem, com listas do professor (AB1, AB2) e questões de prova antiga.",
+   "autorizacao_transcricao": {
+    "data": "2026-11-18",
+    "por": "o autor (integrante da equipe TutorON), informado pela responsável pela curadoria",
+    "escopo": "anotações manuscritas do autor, parafraseadas; não inclui fotos de quadro, figuras nem enunciados copiados de livro ou de prova",
+    "aprovacao_professor": "não declarada"
+   }
+  },
+  {
+   "sha256": "31a3c6e77cbef2f99e220d60e0e6a45cc326f8ac3b18d72a912b33c4927542e5",
+   "notas": null,
+   "origem": "institucional",
+   "arquivo_local": null,
+   "id": "ufal-ppc-ecomp-2014",
+   "nome": "Projeto Pedagógico do Curso de Engenharia de Computação (UFAL, 2014) — ECOM028 Circuitos Elétricos",
+   "autoria": "Instituto de Computação, UFAL",
+   "url": "https://ic.ufal.br/pt-br/graduacao/engenharia-de-computacao/documentos/projeto-pedagogico/projeto-pedagogico-versao-2014/@@download/file/PPC_Eng_Comp_ATUAL.pdf",
+   "idioma": "pt-BR",
+   "formato": "PDF",
+   "notacao": "não se aplica",
+   "topicos": [
+    "circ-01-grandezas-potencia",
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-04-thevenin-norton",
+    "circ-07-primeira-ordem",
+    "circ-09-fasores"
+   ],
+   "licenca": "Documento institucional público; não é ingerido",
+   "acesso": "O download de 19/11/2026 falhou (tempo esgotado e erro 502); lida a cópia baixada em 18/11/2026 para Probabilidade, mesmo SHA-256 (p. 39)",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "justificativa": "Define a ementa de ECOM028 (60 h): elementos lineares, Ohm, Kirchhoff, métodos de análise, teoremas, primeira ordem, excitação senoidal, fasores, regime permanente CA e sua potência, síntese de circuitos. Bibliografia: Nilsson e Riedel, Hayt, Burian; complementar O’Malley e Kienitz."
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "aberta",
+   "arquivo_local": null,
+   "id": "kuphaldt-lessons-electric-circuits",
+   "nome": "Lessons in Electric Circuits, vol. I (DC) e II (AC)",
+   "autoria": "Tony R. Kuphaldt",
+   "url": "https://www.ibiblio.org/kuphaldt/electricCircuits/",
+   "idioma": "en",
+   "formato": "HTML e PDF",
+   "notacao": "convenção de fluxo de elétrons em parte do texto; atenção ao sentido",
+   "topicos": [
+    "circ-01-grandezas-potencia",
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-04-thevenin-norton",
+    "circ-07-primeira-ordem",
+    "circ-09-fasores"
+   ],
+   "licenca": "Design Science License",
+   "acesso": "Página acessada em 19/11/2026 (HTTP 200)",
+   "prioridade": "media",
+   "uso": "referencia",
+   "justificativa": "Texto aberto para lacunas de primeira ordem e fasores; não ingerido nesta versão."
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "aberta",
+   "arquivo_local": null,
+   "id": "mit-ocw-6-002-2007",
+   "nome": "MIT OCW 6.002 Circuits and Electronics (Spring 2007)",
+   "autoria": "Anant Agarwal, MIT",
+   "url": "https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/",
+   "idioma": "en",
+   "formato": "notas de aula, listas e vídeos",
+   "notacao": "convenção passiva; método nodal",
+   "topicos": [
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-04-thevenin-norton",
+    "circ-06-amp-op",
+    "circ-07-primeira-ordem",
+    "circ-08-segunda-ordem"
+   ],
+   "licenca": "CC BY-NC-SA 4.0",
+   "acesso": "Página acessada em 19/11/2026",
+   "prioridade": "media",
+   "uso": "referencia",
+   "justificativa": "Curso aberto com amp-op e transitórios; candidato a cobrir lacunas após revisão humana."
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "aberta",
+   "arquivo_local": null,
+   "id": "libretexts-fiore-dc-analysis",
+   "nome": "DC Electrical Circuit Analysis: A Practical Approach (LibreTexts)",
+   "autoria": "James M. Fiore",
+   "url": "https://eng.libretexts.org/Bookshelves/Electrical_Engineering/Electronics/DC_Electrical_Circuit_Analysis_-_A_Practical_Approach_(Fiore)",
+   "idioma": "en",
+   "formato": "HTML",
+   "notacao": "convencional",
+   "topicos": [
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-03-superposicao-transformacao",
+    "circ-04-thevenin-norton",
+    "circ-05-maxima-transferencia"
+   ],
+   "licenca": "CC BY-NC-SA 4.0",
+   "acesso": "Página acessada em 19/11/2026",
+   "prioridade": "media",
+   "uso": "referencia",
+   "justificativa": "Exercícios abertos de análise CC; não ingerido nesta versão."
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "aberta",
+   "arquivo_local": null,
+   "id": "falstad-circuit-simulator",
+   "nome": "Falstad Circuit Simulator",
+   "autoria": "Paul Falstad",
+   "url": "https://www.falstad.com/circuit/",
+   "idioma": "en",
+   "formato": "simulador no navegador",
+   "notacao": "não se aplica",
+   "topicos": [
+    "circ-07-primeira-ordem",
+    "circ-08-segunda-ordem"
+   ],
+   "licenca": "Ferramenta; código sob GPL",
+   "acesso": "Página acessada em 19/11/2026 (HTTP 200)",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "justificativa": "Ferramenta para o aluno conferir transitórios; não é texto ingerido."
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "bibliografia",
+   "arquivo_local": null,
+   "id": "nilsson-riedel-circuitos",
+   "nome": "Circuitos Elétricos (Nilsson e Riedel)",
+   "autoria": "James W. Nilsson; Susan A. Riedel",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "livro",
+   "notacao": "convenção passiva",
+   "topicos": [
+    "circ-01-grandezas-potencia",
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-03-superposicao-transformacao",
+    "circ-04-thevenin-norton",
+    "circ-05-maxima-transferencia",
+    "circ-06-amp-op",
+    "circ-07-primeira-ordem",
+    "circ-08-segunda-ordem",
+    "circ-09-fasores"
+   ],
+   "licenca": "Direitos reservados (editora); não é ingerido",
+   "acesso": "Não acessado; citado no PPC",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "justificativa": "Bibliografia básica do PPC; protegido por direitos autorais."
+  }
+ ]
+}
