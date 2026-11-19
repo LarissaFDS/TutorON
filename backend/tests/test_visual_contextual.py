@@ -38,9 +38,12 @@ def test_auto_resolve_acervo_e_permanece_nos_polls(site):  # noqa: F811
     assert all('de PAA' not in f['titulo'] for f in t['fontes'])
 
 
-def test_auto_ambiguo_pede_escolha_sem_chamar_modelo(site):  # noqa: F811
-    r = site.post('/api/perguntar', json={'pergunta': 'Me explique esta tabela', 'disciplina': 'auto'})
-    assert r.status_code == 409 and 'Escolha a disciplina' in r.json()['erro']
+def test_auto_ambiguo_na_animacao_pede_escolha_sem_chamar_modelo(site):  # noqa: F811
+    # A animação precisa do acervo: sem disciplina identificada, continua pedindo a escolha.
+    # (O modo Tutor responde com conhecimento geral: ver test_versao_final.)
+    for disciplina in ('auto', 'geral'):
+        r = site.post('/api/animar', json={'pergunta': 'Me explique esta tabela', 'disciplina': disciplina})
+        assert r.status_code == 409 and 'Escolha a disciplina' in r.json()['erro']
     assert not site.llm.chamadas
 
 

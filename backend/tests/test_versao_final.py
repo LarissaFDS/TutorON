@@ -168,6 +168,27 @@ def test_url_publica_configurada_vence_o_host(site):
         assert 'content="https://tutoron.com.br/static/marca/previa.png"' in c.get("/").text
 
 
+CONTROLE = ("Tenho uma planta G(s) = 1/(s(s+4)) com controlador proporcional K em malha fechada. "
+            "Qual a faixa de K para a resposta ao degrau não ter overshoot?")
+
+
+def test_disciplina_sem_acervo_e_orientada_com_conhecimento_geral(site):
+    t = esperar(site, site.post("/api/perguntar", json={"pergunta": CONTROLE, "disciplina": "auto",
+                                                        "curso": "ecom", "periodo": 6}).json())
+    assert t["status"] == "pronta" and t["disciplina"] == "geral" and t["fontes"] == []
+    sistema = site.llm.chamadas[0][1]
+    assert "Disciplina sem material no TutorON" in sistema and "Não entregue o resultado final" in sistema
+    # "Ainda não consegui" devolve a disciplina "geral" e continua funcionando.
+    t2 = esperar(site, site.post("/api/perguntar", json={
+        "pergunta": CONTROLE, "disciplina": "geral", "travou": "não sei achar o zeta",
+        "historico": [{"ajuda": "pista", "texto": t["texto"]}]}).json())
+    assert t2["status"] == "pronta" and t2["disciplina"] == "geral"
+    # Sinal claro de uma disciplina com acervo continua indo para ela.
+    t3 = esperar(site, site.post("/api/perguntar", json={"pergunta": "Como agrupar no Karnaugh?",
+                                                         "disciplina": "auto"}).json())
+    assert t3["disciplina"] == "sd"
+
+
 def test_prompt_socratico_das_novas_disciplinas_traz_o_rigor_do_cadastro():
     from acervo import disciplinas
     for ident in ("oac", "calc3", "fis2", "ed", "bd"):

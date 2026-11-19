@@ -655,9 +655,11 @@
   $('foto-descartar').addEventListener('click', limparFoto);
 
   /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado. */
-  var disciplinas = {};
+  // "geral": dúvida de disciplina sem acervo (ex.: Controle). O servidor orienta com conhecimento geral.
+  var disciplinas = { geral: { id: 'geral', sigla: 'Sem material cadastrado',
+    aviso: 'Ainda não há material do professor desta disciplina no TutorON: a orientação usa conhecimento geral, sem citações.' } };
   function escolherDisciplina(id) {
-    if (id === 'auto' || !disciplinas[id]) {
+    if (id === 'auto' || id === 'geral' || !disciplinas[id]) {
       $('disciplina').value = 'auto';
       $('disciplina-beta').hidden = true;
       $('disciplina-rotulo').textContent = 'Disciplina: automática';

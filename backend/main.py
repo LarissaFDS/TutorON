@@ -71,8 +71,8 @@ def disciplina_cadastrada(valor: str | None) -> str | None:
     """Sem disciplina, vale a padrão (PAA). Disciplina desconhecida é erro do pedido, não do servidor."""
     if valor is None or not valor.strip():
         return None
-    if valor.strip().lower() == 'auto':
-        return 'auto'
+    if valor.strip().lower() in ('auto', prompts.GERAL_ID):
+        return valor.strip().lower()
     try:
         return disciplinas.obter(valor).id
     except KeyError:
@@ -417,10 +417,18 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not liberada(d):
             raise HTTPException(403, MSG_EM_VALIDACAO.replace("{nome}", d.nome))
 
-    def resolver_disciplina(ident, pergunta, contexto='', preferidas=()):
+    def resolver_disciplina(ident, pergunta, contexto='', preferidas=(), geral=False):
+        """`geral=True` (só no modo Tutor): sem disciplina identificada, o tutor orienta com
+        conhecimento geral em vez de barrar o aluno (disciplinas sem acervo, como Controle)."""
+        if ident == prompts.GERAL_ID:
+            if geral:
+                return ident
+            ident = 'auto'
         if ident == 'auto':
             from .disciplina_auto import identificar
             ident = identificar(pergunta, contexto or '', preferidas)
+            if ident is None and geral:
+                return prompts.GERAL_ID
             if ident is None:
                 raise HTTPException(409, 'Não consegui identificar a disciplina com segurança. '
                                     'Escolha a disciplina no seletor ou detalhe melhor o assunto.')
@@ -443,7 +451,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         exigir_cota(request)
         curso = corpo.curso if cursos.valido(corpo.curso, corpo.periodo) else None
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
-            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x), cursos.preferidas(curso, corpo.periodo))
+            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x), cursos.preferidas(curso, corpo.periodo),
+            geral=True)
         cobrar_entrada(request, corpo.pergunta, corpo.contexto, corpo.foto, corpo.travou,
                        *[str(h.model_dump()) for h in corpo.historico], tipo="pergunta")
         t = app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
@@ -468,7 +477,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.cota.cobrar(quem, 1500, dev, "foto")  # imagem + transcrição (estimativa fixa)
         # A foto precisa ser lida antes de inferir sua disciplina. A escolha auto
         # só roteia a pergunta depois que o aluno confere a transcrição.
-        disciplina = None if corpo.disciplina == 'auto' else corpo.disciplina
+        disciplina = None if corpo.disciplina in ('auto', prompts.GERAL_ID) else corpo.disciplina
         exigir_liberada(disciplina)
         try:
             imagem = foto.decodificar(corpo.imagem)

@@ -6,6 +6,7 @@ preenche o nome e as regras de rigor da área (disciplinas/<id>/rigor.md).
 from __future__ import annotations
 
 from dataclasses import replace
+from pathlib import Path
 
 from acervo.disciplinas import Disciplina, obter, todas
 
@@ -160,12 +161,29 @@ _RIGOR_SOCRATICO = {
 def rigor_socratico(d: Disciplina) -> str:
     """Regras da área no modo Tutor. PAA e SD têm versão socrática escrita à mão; as demais
     disciplinas usam o rigor.md do cadastro (notação, conferência), subordinado à filosofia."""
+    if d.id == GERAL_ID:
+        return _RIGOR_GERAL
     if d.id in _RIGOR_SOCRATICO:
         return _RIGOR_SOCRATICO[d.id]
     if d.rigor and d.rigor.strip():
         return ("# Rigor na orientação\nAs regras abaixo valem para notação e conferência das pistas; "
                 "não autorizam entregar a resolução.\n" + d.rigor.strip())
     return "# Rigor na orientação\nConfira a validade das pistas sem executar a tarefa pelo aluno."
+
+
+# Dúvida de uma disciplina sem acervo no TutorON (ex.: Sistemas de Controle). Em vez de barrar
+# o aluno, o tutor orienta com conhecimento geral, avisando que não há material do professor.
+GERAL_ID = "geral"
+GERAL = Disciplina(id=GERAL_ID, nome="Engenharia e Computação", sigla="Geral", itens=Path(), indice=Path(),
+                   rigor="", situacao="sem_acervo",
+                   aviso="Ainda não há material do professor desta disciplina no TutorON: "
+                         "a orientação usa conhecimento geral, sem citações.")
+
+_RIGOR_GERAL = """# Disciplina sem material no TutorON
+- Esta dúvida é de uma disciplina que ainda não tem acervo no TutorON (por exemplo, Sistemas de Controle, Eletrônica, Redes). Oriente normalmente, pelo mesmo método socrático, com conhecimento geral da área.
+- Não há MATERIAL DA DISCIPLINA: não cite rótulos, não mencione provas, listas ou critérios do professor.
+- Confira internamente toda pista; preserve a notação usual da área. Não entregue o resultado final, a expressão final nem a faixa de valores pedida.
+- Ao conferir uma tentativa, aponte o primeiro erro e sugira uma verificação, sem corrigir pelo aluno."""
 
 
 def sistema_socratico(disciplina: Disciplina | None = None) -> str:

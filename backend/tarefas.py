@@ -200,7 +200,8 @@ class Tarefas:
     def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None,
                   ajuda: str = "auto", leitura_foto: str | None = None, historico: list[dict] | None = None,
                   travou: str | None = None, perfil: str | None = None, modo: str = "completo") -> Tarefa:
-        d = obter(disciplina)  # antes da tarefa: disciplina desconhecida falha na hora, não em segundo plano
+        # Antes da tarefa: disciplina desconhecida falha na hora. "geral" = sem acervo (conhecimento geral).
+        d = prompts.GERAL if disciplina == prompts.GERAL_ID else obter(disciplina)
         ajuda = prompts.ajuda_valida(ajuda)
         historico = historico or []
         if historico and ajuda == "auto":
@@ -230,7 +231,8 @@ class Tarefas:
                 t.resultado = {"id_resposta": ident, "segundos": 0, "degradado": False, "ajuda": ajuda}
                 t.status, t.mensagem = "pronta", ""
                 return
-            trechos = await recuperar(pergunta, self.llm, self.settings, d)
+            # Disciplina sem acervo: não há material a buscar.
+            trechos = [] if d.id == prompts.GERAL_ID else await recuperar(pergunta, self.llm, self.settings, d)
             t.fontes = [x.publico() for x in trechos]
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
             tamanho = len(pergunta) + len(contexto_aluno or "") + len(leitura_foto or "")
