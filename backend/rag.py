@@ -31,7 +31,7 @@ from .config import Settings
 
 logger = logging.getLogger("tutoron.rag")
 
-ACERVO_K = 4  # fonte principal
+ACERVO_K = 3  # fonte principal (custo: docs/CUSTO-POR-PERGUNTA.md)
 LIVRO_K = 2   # complemento
 MAX_CHARS_TRECHO = 2200
 TIPOS = {
@@ -134,7 +134,7 @@ async def recuperar(pergunta: str, llm, settings: Settings, disciplina: Discipli
 # Orçamento de caracteres para pergunta + código do aluno + material. O modelo local tem janela
 # de 8192 tokens, compartilhada entre prompt, raciocínio e resposta; acima disso o Ollama cortaria o
 # início do prompt (as instruções do tutor). ~9000 caracteres deixam ~4000 tokens para responder.
-ORCAMENTO_CARACTERES = 9000
+ORCAMENTO_CARACTERES = 5000
 MATERIAL_MINIMO = 2500
 
 

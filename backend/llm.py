@@ -244,7 +244,7 @@ class LLM:
             body["think"] = pensar
             if pensar:
                 # Recomendação do Qwen3 para o modo com raciocínio (temperatura baixa demais causa repetição).
-                body["options"].update(temperature=0.6, top_p=0.95, top_k=20, num_predict=8192)
+                body["options"].update(temperature=0.6, top_p=0.95, top_k=20, num_predict=self.settings.local_thinking_max)
         if PLANEJAMENTO_JSON.get():
             body['format'] = 'json'
             body['options'].update(temperature=0.1, num_predict=2048)

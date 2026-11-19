@@ -59,10 +59,11 @@ class Settings:
     ollama_url: str = "http://127.0.0.1:11434"
     local_model: str = "tutoron-paa"
     local_generic_model: str = "qwen3:8b"
-    local_thinking: bool = True
+    local_thinking: bool = False  # raciocínio custa até 8x mais tokens: docs/CUSTO-POR-PERGUNTA.md
     local_thinking_validacao: bool = False
     local_first_chunk_s: float = 150.0
     local_num_ctx: int = 8192
+    local_thinking_max: int = 2048  # teto de saída (raciocínio + ajuda) quando o raciocínio está ligado
     local_parallel: int = 2
     # Modelo de visão no Ollama para ler fotos quando nenhum Gemini responder (ex.: qwen2.5vl:7b).
     # Vazio = só Gemini lê fotos.
@@ -116,10 +117,11 @@ def load_settings() -> Settings:
         ollama_url=_env("OLLAMA_URL", "http://127.0.0.1:11434").rstrip("/"),
         local_model=_env("TUTORON_MODELO_LOCAL", "tutoron-paa"),
         local_generic_model=_env("TUTORON_MODELO_GENERICO_LOCAL", "qwen3:8b"),
-        local_thinking=_env("TUTORON_RACIOCINIO_LOCAL", "1") not in ("0", "false", "nao", "não"),
+        local_thinking=_env("TUTORON_RACIOCINIO_LOCAL", "0") not in ("0", "false", "nao", "não"),
         local_thinking_validacao=_env("TUTORON_RACIOCINIO_LOCAL_VALIDACAO", "0") not in ("0", "false", "nao", "não"),
         local_first_chunk_s=_float("TUTORON_TIMEOUT_LOCAL", 150.0),
         local_num_ctx=_int("TUTORON_NUM_CTX", 8192),
+        local_thinking_max=_int("TUTORON_RACIOCINIO_MAX", 2048),
         local_parallel=max(1, _int("TUTORON_LOCAL_PARALELO", 2)),
         local_vision_model=_env("TUTORON_MODELO_VISAO_LOCAL"),
         embed_model=_env("TUTORON_EMBED_MODEL", "bge-m3"),

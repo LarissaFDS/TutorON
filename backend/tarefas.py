@@ -173,8 +173,13 @@ class Tarefas:
             ajustes += mais
             if texto == seguranca.recusa(d.nome):
                 return texto, r, ajustes, bloqueada, pareceres
-            t.mensagem = "Revisando a ajuda antes de mostrar…"
-            parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, texto)
+            if seguranca.entrega_resposta(texto):
+                parecer = {"aprovada": False, "motivo": "entregou_resposta"}
+            elif not seguranca.precisa_revisor(texto):
+                parecer = {"aprovada": True, "motivo": "sem_sinal_de_solucao", "modelo": "codigo"}
+            else:
+                t.mensagem = "Revisando a ajuda antes de mostrar…"
+                parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, texto)
             pareceres.append(parecer)
             if parecer["aprovada"]:
                 texto, faltou = seguranca.garantir_sua_vez(texto)

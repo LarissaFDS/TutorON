@@ -103,10 +103,20 @@ def test_revisor_recebe_historico_e_tentativa(site):  # noqa: F811
         recebidos.append(contexto)
         return {"aprovada": True, "motivo": "não completa a solução acumulada"}
     site.llm.revisar_ajuda = revisar
+    site.llm.roteiro["g1"] = ("ok", "Portanto, compare os níveis.\n### Sua vez\nTente.")  # sinal -> revisor roda
     t = esperar(site, site.post("/api/perguntar", json={"pergunta": "Como continuar?", "contexto": "tentativa atual",
         "historico": [{"ajuda": "pista", "texto": "pista anterior"}], "travou": "não entendi o nível"}).json())
     assert t["status"] == "pronta"
     assert "pista anterior" in recebidos[0] and "não entendi o nível" in recebidos[0]
+
+
+def test_ajuda_sem_sinal_de_solucao_nao_gasta_revisor(site):  # noqa: F811
+    site.llm.roteiro["g1"] = ("ok", "Quantas chamadas recursivas aparecem?\n### Sua vez\nConte no papel.")
+    async def revisar(*a):
+        raise AssertionError("revisor por IA não deveria rodar")
+    site.llm.revisar_ajuda = revisar
+    t = perguntar(site, "Como resolvo essa recorrência?", "paa")
+    assert t["status"] == "pronta" and "chamadas recursivas" in t["texto"]
 
 
 def test_validacao_tutoron_tambem_bloqueia_solucao(site):  # noqa: F811
