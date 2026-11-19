@@ -87,3 +87,10 @@ alter view public.uso_por_usuario set (security_invoker = true);
 -- Limpeza: texto completo das respostas fica 30 dias; depois, só os metadados.
 --   update public.perguntas set dados = dados - 'resposta' - 'prompt' - 'contexto'
 --   where criado_em < now() - interval '30 days' and dados ? 'resposta';
+
+-- ------------------------------------------------------------------ permissões do servidor
+-- Projetos novos do Supabase não liberam tabelas criadas por SQL para a API. Só o servidor
+-- (service_role, chave secreta) recebe acesso; anon e authenticated continuam sem nada (RLS sem políticas).
+grant usage on schema public to service_role;
+grant select, insert, update, delete on all tables in schema public to service_role;
+grant usage, select on all sequences in schema public to service_role;
