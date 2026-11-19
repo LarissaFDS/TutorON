@@ -31,6 +31,9 @@ logger = logging.getLogger("tutoron.llm")
 SEM_RACIOCINIO: contextvars.ContextVar[bool] = contextvars.ContextVar("sem_raciocinio", default=False)
 REVISAO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar("revisao_json", default=False)
 PLANEJAMENTO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar('planejamento_json', default=False)
+# Plano grátis ("modo padrão"): modelo local primeiro e Gemini só como reserva (docs/precificacao-tutoron.md).
+# Plano pago e administrador ("modo completo"): Gemini primeiro, como sempre foi.
+PREFERIR_LOCAL: contextvars.ContextVar[bool] = contextvars.ContextVar('preferir_local', default=False)
 
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
@@ -171,8 +174,8 @@ class LLM:
     # ------------------------------------------------------------------ modelos
     def cascade(self, *, local_model: str | None = None) -> list[Model]:
         models = [Model("gemini", name) for name in self.settings.gemini_models] if self.settings.gemini_enabled else []
-        models.append(Model("ollama", local_model or self.settings.local_model))
-        return models
+        local = Model("ollama", local_model or self.settings.local_model)
+        return [local, *models] if PREFERIR_LOCAL.get() else [*models, local]
 
     # ------------------------------------------------------------------ provedores
     async def _gemini(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:

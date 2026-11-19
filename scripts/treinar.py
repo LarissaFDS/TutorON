@@ -1,7 +1,9 @@
 """Treino do TutorON em uma única execução (chamado por 3-Treinar.bat).
 
 Etapas:
-  1. dados      exporta exemplos socráticos autorais de PAA e SD, separados por família;
+  0. casos     (scripts/gerar_casos_acervo.py, chamado pelo 3-Treinar.bat) gera casos socráticos dos
+                acervos curados de TODAS as disciplinas cadastradas (PAA, SD, OAC, Cálculo 3, Física 2, ED, BD).
+  1. dados      junta os casos autorais (casos.json), os gerados e dados-treino/curados, separados por família;
                 questões reservadas do benchmark nunca entram no treino.
   2. treino     QLoRA (4 bits) sobre o mesmo modelo de base servido pelo Ollama (Qwen3-8B), na GPU.
   3. mescla     aplica o adapter LoRA nos pesos originais, arquivo por arquivo (cabe em 16 GB de RAM).
@@ -45,7 +47,7 @@ def titulo(texto: str) -> None:
 
 # ---------------------------------------------------------------------------- 1. dados
 def preparar_dados() -> dict:
-    titulo('1/5 Dados socráticos (PAA + Sistemas Digitais)')
+    titulo('1/5 Dados socráticos (todas as disciplinas)')
     from scripts.dados_socraticos import preparar
     return preparar(PASTA_DADOS)
 
@@ -325,7 +327,8 @@ async def avaliar(nome: str) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument('--passos', type=int, default=60, help='passos de otimização; revisar o relatório antes de ativar')
+    parser.add_argument('--passos', type=int, default=0,
+                        help='passos de otimização (0 = automático: ~2 épocas do treino, entre 60 e 600)')
     parser.add_argument('--base', default=os.environ.get('TUTORON_TREINO_BASE', 'Qwen/Qwen3-8B'))
     parser.add_argument('--nome', default='tutoron-socratico-ft')
     parser.add_argument('--rank', type=int, default=8)
@@ -338,7 +341,7 @@ def main() -> None:
                         help='avalia o candidato já instalado; não treina, mescla nem importa pesos')
     args = parser.parse_args()
 
-    if min(args.passos, args.rank, args.seq) < 1:
+    if args.passos < 0 or min(args.rank, args.seq) < 1:
         parser.error('--passos, --rank e --seq precisam ser positivos')
     if args.nome in ('tutoron-paa', 'qwen3:8b'):
         parser.error('use um nome novo para preservar o modelo base e permitir comparação')
@@ -351,6 +354,10 @@ def main() -> None:
         print(f'\nAvaliação concluída. Relatório: {relatorio}\nO modelo em uso no servidor não foi alterado.')
         return
     grupos = preparar_dados()
+    if not args.passos:
+        # Lote efetivo = 1 exemplo x acumulação 4: duas passadas pelo treino, com piso e teto.
+        args.passos = max(60, min(600, len(grupos.get('treino', [])) * 2 // 4))
+    print(f'   passos de otimização: {args.passos}', flush=True)
     if args.so_dados:
         return
     if args.verificar:
@@ -370,7 +377,7 @@ def main() -> None:
             # Exercita o maior contexto de cada disciplina, sem importar o adapter de teste.
             maiores = {n: [max((r for r in grupos[n] if r['disciplina'] == d),
                               key=lambda r: sum(len(m['content']) for m in r['prompt'] + r['completion']))
-                           for d in ('paa', 'sd')] for n in ('treino', 'validacao')}
+                           for d in sorted({r['disciplina'] for r in grupos[n]})] for n in ('treino', 'validacao')}
             treinar(maiores, args.base, 1, args.rank, args.seq, acumulacao=2)
             print(f'Teste GPU concluído; adapter de teste em {PASTA_TRABALHO}. Nenhum modelo foi importado.')
             return

@@ -90,8 +90,10 @@ class Settings:
     data_dir: Path = ROOT_DIR / "dados"
     # Cota de tokens por usuário (0 = desligada). Ver backend/cota.py.
     cota_tokens: int = 0
-    cota_janela_h: float = 5.0
+    cota_janela_h: float = 24.0
     dev_chave: str = ""
+    gratis_local_primeiro: bool = True
+    url_publica: str = ""
 
     @property
     def supabase_enabled(self) -> bool:
@@ -132,6 +134,8 @@ def load_settings() -> Settings:
         rate_limit_per_10min=_int("TUTORON_LIMITE_PERGUNTAS_10MIN", 300),
         data_dir=Path(data_dir) if data_dir else ROOT_DIR / "dados",
         cota_tokens=_int("TUTORON_COTA_TOKENS", 40000),
-        cota_janela_h=_float("TUTORON_COTA_JANELA_H", 5.0),
+        cota_janela_h=_float("TUTORON_COTA_JANELA_H", 24.0),
         dev_chave=_env("TUTORON_DEV_CHAVE"),
+        gratis_local_primeiro=_env("TUTORON_GRATIS_LOCAL_PRIMEIRO", "1") not in ("0", "false", "nao", "não"),
+        url_publica=_env("TUTORON_URL_PUBLICA").rstrip("/"),
     )

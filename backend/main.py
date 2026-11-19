@@ -33,13 +33,13 @@ from pathlib import Path
 from typing import Any, Literal
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field, field_validator
 
 from acervo import disciplinas
 
-from . import animacao, foto, prompts
+from . import animacao, cursos, foto, prompts
 from .config import Settings, load_settings
 from .cota import PLANOS, Cota, estimar_tokens
 from .dados import Limitador, Registro, agora
@@ -94,6 +94,9 @@ class Pergunta(BaseModel):
     # "Ainda não consegui": ajudas anteriores deste exercício e onde o aluno travou.
     historico: list[AjudaAnterior] = Field(default_factory=list, max_length=8)
     travou: str | None = Field(default=None, max_length=1500)
+    # Curso e período (disciplinas/cursos.json): contexto para a IA e preferência no roteamento.
+    curso: str | None = Field(default=None, max_length=20)
+    periodo: int | None = Field(default=None, ge=1, le=12)
 
     @field_validator("disciplina")
     @classmethod
@@ -106,6 +109,11 @@ class Pergunta(BaseModel):
         if len(valor.strip()) < 3:
             raise ValueError("Escreva a pergunta.")
         return valor.strip()
+
+
+class AtivarPlano(BaseModel):
+    plano: str = Field(..., max_length=20)
+    final_cartao: str = Field(default="", max_length=4, pattern=r"^[0-9]{0,4}$")
 
 
 class FotoPedido(BaseModel):
@@ -248,9 +256,16 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not app.state.cota.pode(quem, dev):
             s = app.state.cota.situacao(quem)
             import datetime
-            hora = datetime.datetime.fromtimestamp(s["renova_em"]).strftime("%H:%M")
-            raise HTTPException(429, f"Você usou toda a cota gratuita ({s['limite']:,} tokens). "
-                                f"Ela renova às {hora}. Veja os planos em /planos.".replace(",", "."))
+            renova = datetime.datetime.fromtimestamp(s["renova_em"])
+            quando = "amanhã à meia-noite" if s.get("diaria") else "às " + renova.strftime("%H:%M")
+            gratis = s["plano"] == "gratis"
+            raise HTTPException(402, (f"Você usou todo o limite {'gratuito ' if gratis else ''}de hoje "
+                                      f"({s['limite']:,} tokens). Ele renova {quando}.").replace(",", ".")
+                                + (" Para continuar agora, conheça os planos." if gratis else ""))
+
+    def modo_de(request: Request) -> str:
+        quem, dev = usuario(request)
+        return app.state.cota.modo(quem, dev)
 
     def cobrar_entrada(request: Request, *textos, tipo: str = "pergunta") -> None:
         quem, dev = usuario(request)
@@ -287,9 +302,36 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return JSONResponse({"erro": f"Dados inválidos ({campo}): {detalhe.get('msg', '')}"}, status_code=422)
 
     # ------------------------------------------------------------------ páginas
+    def base_publica(request: Request) -> str:
+        """Endereço absoluto para a pré-visualização do link (og:image precisa de URL completa)."""
+        if settings.url_publica:
+            return settings.url_publica
+        proto = request.headers.get("x-forwarded-proto") or request.url.scheme
+        host = request.headers.get("x-forwarded-host") or request.headers.get("host") or request.url.netloc
+        proto = proto if proto in ("http", "https") else "https"
+        host = host if re.fullmatch(r"[A-Za-z0-9.:\[\]-]{1,255}", host or "") else "localhost"  # nada de aspas no HTML
+        return f"{proto}://{host}"
+
     @app.get("/", include_in_schema=False)
-    async def pagina() -> FileResponse:
-        return FileResponse(WEB / "index.html", headers={"Cache-Control": "no-cache"})
+    async def pagina(request: Request) -> Response:
+        html = (WEB / "index.html").read_text(encoding="utf-8").replace("{{BASE}}", base_publica(request))
+        return HTMLResponse(html, headers={"Cache-Control": "no-cache"})
+
+    @app.get("/manifest.webmanifest", include_in_schema=False)
+    async def manifesto() -> JSONResponse:
+        """Permite "instalar" o TutorON na tela inicial do celular (PWA simples, sem modo offline)."""
+        return JSONResponse({
+            "name": "TutorON", "short_name": "TutorON", "lang": "pt-BR", "start_url": "/", "display": "standalone",
+            "background_color": "#ffffff", "theme_color": "#4D6BFE",
+            "description": "Tutor de IA para Engenharia e Ciência da Computação: pistas e perguntas, sem entregar a resposta.",
+            "icons": [{"src": "/static/marca/icone-192.png", "sizes": "192x192", "type": "image/png"},
+                      {"src": "/static/marca/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable"}],
+        }, media_type="application/manifest+json", headers={"Cache-Control": "public, max-age=3600"})
+
+    @app.get("/favicon.ico", include_in_schema=False)
+    async def favicon() -> FileResponse:
+        return FileResponse(WEB / "marca" / "favicon-32.png", media_type="image/png",
+                            headers={"Cache-Control": "public, max-age=86400"})
 
     @app.get("/demo", include_in_schema=False)
     async def demo() -> FileResponse:
@@ -310,12 +352,32 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return Response(stylesheet(), media_type="text/css; charset=utf-8", headers={"Cache-Control": "no-cache"})
 
     @app.get("/planos", include_in_schema=False)
-    async def pagina_planos() -> FileResponse:
-        return FileResponse(WEB / "planos.html", headers={"Cache-Control": "no-cache"})
+    async def pagina_planos() -> Response:
+        """Os planos agora abrem como janela dentro do chat."""
+        return Response(status_code=307, headers={"Location": "/#planos"})
 
     @app.get("/api/cota")
     async def api_cota(request: Request) -> dict:
         quem, dev = usuario(request)
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.post("/api/planos/ativar")
+    async def ativar_plano(corpo: AtivarPlano, request: Request) -> dict:
+        """Checkout SIMULADO: o cartão é validado no navegador e só os 4 últimos dígitos chegam aqui.
+        Nada é cobrado; serve para testar o fluxo e liberar o modo completo sem o modo administrador."""
+        limitar_gravacao(request)
+        quem, dev = usuario(request)
+        try:
+            app.state.cota.ativar_plano(quem, corpo.plano, corpo.final_cartao)
+        except ValueError as exc:
+            raise HTTPException(422, str(exc)) from exc
+        return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
+
+    @app.post("/api/planos/cancelar")
+    async def cancelar_plano(request: Request) -> dict:
+        limitar_gravacao(request)
+        quem, dev = usuario(request)
+        app.state.cota.cancelar_plano(quem)
         return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
 
     @app.get("/dev", include_in_schema=False)
@@ -355,15 +417,19 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not liberada(d):
             raise HTTPException(403, MSG_EM_VALIDACAO.replace("{nome}", d.nome))
 
-    def resolver_disciplina(ident, pergunta, contexto=''):
+    def resolver_disciplina(ident, pergunta, contexto='', preferidas=()):
         if ident == 'auto':
             from .disciplina_auto import identificar
-            ident = identificar(pergunta, contexto or '')
+            ident = identificar(pergunta, contexto or '', preferidas)
             if ident is None:
                 raise HTTPException(409, 'Não consegui identificar a disciplina com segurança. '
-                                    'Escolha a disciplina no campo opcional ou detalhe melhor o assunto.')
+                                    'Escolha a disciplina no seletor ou detalhe melhor o assunto.')
         exigir_liberada(ident)
         return disciplinas.obter(ident).id
+
+    @app.get("/api/cursos")
+    async def lista_cursos() -> JSONResponse:
+        return JSONResponse(cursos.publico(), headers={"Cache-Control": "public, max-age=600"})
 
     @app.get("/api/disciplinas")
     async def lista_disciplinas() -> dict:
@@ -375,14 +441,17 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     async def perguntar(corpo: Pergunta, request: Request) -> dict:
         limitar(request)
         exigir_cota(request)
+        curso = corpo.curso if cursos.valido(corpo.curso, corpo.periodo) else None
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
-            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x))
+            x for x in (corpo.contexto, corpo.foto, corpo.travou) if x), cursos.preferidas(curso, corpo.periodo))
         cobrar_entrada(request, corpo.pergunta, corpo.contexto, corpo.foto, corpo.travou,
                        *[str(h.model_dump()) for h in corpo.historico], tipo="pergunta")
         t = app.state.tarefas.perguntar(corpo.pergunta, corpo.contexto, disciplina,
                                            ajuda=corpo.ajuda, leitura_foto=corpo.foto,
                                            historico=[h.model_dump() for h in corpo.historico],
-                                           travou=corpo.travou)
+                                           travou=corpo.travou,
+                                           perfil=cursos.perfil(curso, corpo.periodo if curso else None, disciplina),
+                                           modo=modo_de(request))
         t.dono = usuario(request)
         return t.publico()
 

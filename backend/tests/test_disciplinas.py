@@ -272,7 +272,7 @@ def test_mesma_ia_para_as_tres_disciplinas(site_oac):
     perguntar(site_oac, "Qual a diferença entre blt e bltu?", "oac")
     chamadas = site_oac.llm.chamadas[-3:]
     assert len({m for m, _, _ in chamadas}) == 1  # mesmo modelo, mesmo serviço
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     textos = {comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "oac"))}
     assert len(textos) == 1  # um único texto de tutor
@@ -328,7 +328,7 @@ def test_mesma_ia_para_as_quatro_disciplinas(site_calc3):
     perguntar(site_calc3, "Como calcular o comprimento de arco de uma curva paramétrica?", "calc3")
     chamadas = site_calc3.llm.chamadas[-3:]
     assert len({m for m, _, _ in chamadas}) == 1
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert len({comum(s, disciplinas.obter(d)) for (_, s, _), d in zip(chamadas, ("paa", "sd", "calc3"))}) == 1
 
@@ -355,7 +355,7 @@ def test_pergunta_de_fis2_usa_material_de_fis2_e_a_mesma_ia(site_oac):
     assert all(f["titulo"].endswith("de Física 2") for f in t["fontes"])
     (m_oac, s_oac, _), (m_fis, s_fis, prompt) = site_oac.llm.chamadas[-2:]
     assert m_oac == m_fis
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(s_oac, disciplinas.obter("oac")) == comum(s_fis, disciplinas.obter("fis2"))
     assert "ΔE_int = Q − W" in s_fis and "RISC-V" not in s_fis.split("# Rigor")[-1]
@@ -378,7 +378,7 @@ def test_pergunta_de_ed_usa_material_de_ed_e_a_mesma_ia(site_oac):
     assert all(f["titulo"].endswith("de ED") for f in t["fontes"])
     (m_oac, s_oac, _), (m_ed, s_ed, prompt) = site_oac.llm.chamadas[-2:]
     assert m_oac == m_ed
-    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(d.rigor, "").replace(d.nome, "")
+    comum = lambda s, d: (s.replace(prompts._outras(d), "").replace(prompts.rigor_socratico(d), "").replace(d.nome, "")
                           .replace(d.sigla, ""))
     assert comum(s_oac, disciplinas.obter("oac")) == comum(s_ed, disciplinas.obter("ed"))
     assert "Não escreva o projeto completo" in s_ed and "RISC-V" not in s_ed.split("# Rigor")[-1]

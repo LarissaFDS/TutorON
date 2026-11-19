@@ -1,6 +1,13 @@
 # dados-treino — entrada de dados novos para treinar o TutorON
 
-Pasta só de organização. Nada aqui é usado pelo servidor nem pelo `3-Treinar.bat` ainda.
+Entrada de dados novos para treinar o TutorON. O `3-Treinar.bat` lê **`curados/*.jsonl`** automaticamente (junto com os casos gerados dos acervos de todas as disciplinas). As outras pastas são só de organização.
+
+Formato de cada linha de `curados/*.jsonl` (um caso socrático; `split` é opcional e, sem ele, a divisão é feita por hash):
+
+```json
+{"disciplina": "oac", "pergunta": "...", "tema": "...", "conceito": "...", "pista": "...", "perguntas": "...",
+ "exemplo": "...", "visual": "...", "tentativa": "...", "conferir": "...", "tarefa": "...?"}
+```
 
 | Pasta | O que vai nela |
 |---|---|

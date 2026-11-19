@@ -1,8 +1,10 @@
 # Treinar o TutorON socrático
 
-Dê duplo clique em **`3-Treinar.bat`** para treinar PAA e Sistemas Digitais. O fluxo prepara os dados, treina um adapter QLoRA sobre `Qwen/Qwen3-8B`, mescla, converte para GGUF Q4_K_M, instala como **`tutoron-socratico-ft`** e compara com o modelo configurado no servidor. O modelo em uso só muda depois que você revisar o relatório e ativá-lo.
+Dê duplo clique em **`3-Treinar.bat`** para treinar com **todas as disciplinas** (PAA, SD, OAC, Cálculo 3, Física 2, ED e BD). O fluxo gera casos socráticos a partir dos acervos curados, prepara os dados, treina um adapter QLoRA sobre `Qwen/Qwen3-8B`, mescla, converte para GGUF Q4_K_M, instala como **`tutoron-socratico-ft`** e compara com o modelo configurado no servidor. O modelo em uso só muda depois que você revisar o relatório e ativá-lo.
 
 ## O que o modelo aprende
+
+**Desde nov/2026 (versão final):** antes do treino, a etapa 0 (`scripts/gerar_casos_acervo.py`) transforma cada bloco curado (confiabilidade média ou alta) de cada disciplina em um caso no mesmo formato de `casos.json`, usando o modelo professor do servidor (Gemini, ou o local se o Gemini estiver sem cota). Cerca de 195 blocos hoje: PAA 58, SD 23, OAC 24, Cálculo 3 16, Física 2 30, ED 18, BD 26. Os casos ficam em `socratico/gerados/<disciplina>.json` (retomável; revise e corrija à mão se quiser) e entram com divisão estável por família. `dados-treino/curados/*.jsonl` também entra. O número de passos é automático (`--passos 0`: ~2 épocas, entre 60 e 600). O texto abaixo descreve a base autoral, que continua no treino.
 
 O dataset anterior de soluções completas não é usado neste fluxo. A fonte agora é [`socratico/casos.json`](socratico/casos.json): 24 famílias autorais, com sete formas de ajuda por família. São **112 exemplos de treino, 28 de validação e 28 de teste**, equilibrados entre PAA e SD. Cada exemplo orienta sem completar o exercício e devolve a vez ao aluno. Há pistas, conceitos, exemplos, desenhos, perguntas, conferência de erro e insistência depois de uma ajuda anterior.
 

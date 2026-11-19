@@ -1,6 +1,6 @@
 """Disciplina "em validação" fica fora do atendimento normal, decidido no servidor.
 
-SD saiu da validação para "beta" (21/10/2026) e é atendida sem nenhuma liberação. A barreira continua
+SD, OAC, Cálculo 3, Física 2, ED e BD são MVP (18/11/2026) e são atendidas sem nenhuma liberação. A barreira continua
 valendo para qualquer disciplina cadastrada como "em validação": aqui, uma disciplina fictícia (CALC)
 recebe 403 em /api/perguntar, /api/comparar e /api/v1/questions, mesmo chamando a API direto.
 """
@@ -65,7 +65,7 @@ def producao(tmp_path, monkeypatch, com_calc):
 
 
 def test_situacao_no_cadastro(com_calc):
-    assert disciplinas.obter("sd").situacao == "beta" and not disciplinas.obter("sd").em_validacao
+    assert disciplinas.obter("sd").situacao == "MVP" and not disciplinas.obter("sd").em_validacao
     assert not disciplinas.obter("paa").em_validacao and disciplinas.obter("calc").em_validacao
 
 
@@ -121,17 +121,31 @@ def test_disciplina_desconhecida_continua_422(producao, rota, corpo):
     assert producao.post(rota, json=corpo).status_code == 422
 
 
-def test_lista_informa_disponibilidade_e_aviso_beta(producao):
+def test_lista_informa_disponibilidade_sem_aviso_beta(producao):
     lista = {d["id"]: d for d in producao.get("/api/disciplinas").json()["disciplinas"]}
-    assert lista["paa"]["disponivel"] and lista["sd"]["disponivel"] and not lista["calc"]["disponivel"]
-    assert lista["sd"]["situacao"] == "beta" and not lista["sd"]["em_validacao"]
-    assert lista["sd"]["aviso"].startswith("Sistemas Digitais — versão beta.")
-    assert "podem conter erros" in lista["sd"]["aviso"] and lista["paa"]["aviso"] == ""
+    assert not lista["calc"]["disponivel"] and lista["calc"]["em_validacao"]
+    for d in ("paa", "sd", "oac", "calc3", "fis2", "ed", "bd"):
+        assert lista[d]["disponivel"] and lista[d]["situacao"] == "MVP" and not lista[d]["em_validacao"]
+        assert lista[d]["aviso"] == ""
 
 
-def test_site_mostra_e_troca_o_aviso_beta():
+def test_nenhuma_nota_de_ia_sem_revisao_humana_entra_na_busca():
+    """Genérico: vale para toda disciplina cadastrada, inclusive as que vierem depois."""
+    from acervo.common import read_json
+    for d in disciplinas.todas():
+        if not d.indice or not d.indice.exists():
+            continue
+        itens = {i["id"]: i for i in read_json(d.indice.with_name("itens.json"), [])} if d.itens is None else             {i["id"]: i for i in read_json(d.itens, [])}
+        for c in read_json(d.indice)["chunks"]:
+            i = itens.get(c["id"], {})
+            if i.get("natureza") == "nota_da_equipe_ia":
+                assert i.get("revisao_humana") == "feita", (d.id, c["id"])
+
+
+def test_site_mostra_e_troca_o_aviso_do_cadastro():
     """O site usa o aviso do cadastro ao escolher a disciplina (também via ?disciplina=sd, que passa pela
-    mesma função) e o esconde quando a disciplina não tem aviso. Conferência estática do JS e do HTML."""
+    mesma função) e o esconde quando a disciplina não tem aviso. Sem disciplina pedida, a identificação é
+    automática (ajudada pelo curso e período). Conferência estática do JS e do HTML."""
     from backend.main import WEB
     js = (WEB / "app.js").read_text(encoding="utf-8")
     html = (WEB / "index.html").read_text(encoding="utf-8")
@@ -139,5 +153,4 @@ def test_site_mostra_e_troca_o_aviso_beta():
     assert "beta.textContent = d.aviso || ''" in corpo and "beta.hidden = !d.aviso" in corpo
     assert "escolherDisciplina(disciplinas[pedida] ? pedida : 'auto')" in js
     assert "escolherDisciplina($('disciplina').value)" in js
-    cabecalho = html.split('</header>')[0]
-    assert 'id="disciplina-beta"' in html and 'masthead__nota' not in cabecalho
+    assert 'id="disciplina-beta"' in html and 'masthead__nota' not in html

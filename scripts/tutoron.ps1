@@ -3,8 +3,9 @@
 #   2-Validacao.bat         -> -Acao Validacao  (abre o modo validação e os resultados)
 #   3-Treinar.bat           -> -Acao Treinar    (fine-tuning QLoRA na GPU)
 #   4-Reiniciar.bat         -> -Acao Reiniciar  (religa modelos e site sem mudar o endereço público)
+#   6-Iniciar-com-o-Windows.bat -> -Acao AutoIniciar (liga/desliga o servidor ao entrar no Windows)
 # Outras ações: Testar, Acervo (refaz OCR/curadoria/índice), Parar.
-param([ValidateSet('Servidor','Validacao','Treinar','Reiniciar','Testar','Acervo','Parar')][string]$Acao = 'Servidor',
+param([ValidateSet('Servidor','Validacao','Treinar','Reiniciar','Testar','Acervo','Parar','AutoIniciar')][string]$Acao = 'Servidor',
       [Parameter(ValueFromRemainingArguments = $true)][string[]]$Extra = @())
 # 'Continue': no PowerShell 5.1, avisos que programas escrevem no stderr virariam erro fatal com 'Stop'.
 # Falhas de programas são checadas pelo código de saída (Falhou); cmdlets usam -ErrorAction Stop.
@@ -140,6 +141,10 @@ function Parar-Tudo {
     Get-Process cloudflared -ErrorAction SilentlyContinue |
         Where-Object { $_.Path -and $_.Path.StartsWith($Tools, [StringComparison]::OrdinalIgnoreCase) } |
         Stop-Process -Force -ErrorAction SilentlyContinue
+    if ((Tunel-Modo) -eq 'tailscale') {
+        $ts = Tailscale-Exe
+        if ($ts) { & $ts funnel --https=443 off 2>$null | Out-Null }
+    }
     Remove-Item (Join-Path $Dados 'url-publica.txt') -ErrorAction SilentlyContinue
 }
 
@@ -154,10 +159,46 @@ function Iniciar-Servidor {
     throw "O servidor não iniciou. Veja $Logs\servidor-erros.log"
 }
 
+function Tailscale-Exe {
+    $cmd = Get-Command tailscale -ErrorAction SilentlyContinue
+    if ($cmd) { return $cmd.Source }
+    $padrao = Join-Path $env:ProgramFiles 'Tailscale\tailscale.exe'
+    if (Test-Path $padrao) { return $padrao }
+    return $null
+}
+
+function Tunel-Modo {
+    # tailscale  -> Tailscale Funnel: endereço fixo e gratuito https://<pc>.<rede>.ts.net (docs/LINK-FIXO.md)
+    # cloudflare -> túnel nomeado com domínio próprio (TUTORON_TUNEL_TOKEN + TUTORON_URL_PUBLICA)
+    # rapido     -> túnel rápido da Cloudflare, endereço aleatório que muda a cada reinício
+    $modo = (Ler-Env 'TUTORON_TUNEL').ToLower()
+    if ($modo) { return $modo }
+    if (Ler-Env 'TUTORON_TUNEL_TOKEN') { return 'cloudflare' }
+    return 'rapido'
+}
+
 function Iniciar-Tunel {
     $log = Join-Path $Logs 'tunel.log'
     Remove-Item $log -ErrorAction SilentlyContinue
     $token = Ler-Env 'TUTORON_TUNEL_TOKEN'
+    if ((Tunel-Modo) -eq 'tailscale') {
+        $ts = Tailscale-Exe
+        if (!$ts) {
+            Aviso 'TUTORON_TUNEL=tailscale, mas o Tailscale não está instalado. Veja docs\LINK-FIXO.md. Usando o túnel rápido.'
+        } else {
+            # O Funnel roda dentro do serviço do Tailscale (--bg): não há processo para vigiar aqui.
+            & $ts funnel --bg --https=443 $Local 2>&1 | Out-File $log -Encoding utf8
+            $nome = $null
+            try { $nome = ((& $ts status --json | ConvertFrom-Json).Self.DNSName).TrimEnd('.') } catch { }
+            if ($LASTEXITCODE -eq 0 -and $nome) {
+                $url = "https://$nome"
+                Set-Content (Join-Path $Dados 'url-publica.txt') $url -Encoding utf8
+                return @{ processo = $null; url = $url; tailscale = $true }
+            }
+            Aviso 'O Tailscale Funnel não abriu (veja dados\logs\tunel.log). Usando o túnel rápido.'
+        }
+        $token = $null
+    }
     if ($token) {
         # Túnel nomeado (endereço fixo configurado no painel da Cloudflare).
         $p = Start-Process -FilePath $Cloudflared -ArgumentList 'tunnel','--no-autoupdate','run','--token',$token `
@@ -189,7 +230,11 @@ function Mostrar-Enderecos($url) {
     Write-Host '  ===================================================================' -ForegroundColor Cyan
     Write-Host '   TutorON NO AR' -ForegroundColor Cyan
     Write-Host "   Nesta máquina:     $Local"
-    if ($url) { Write-Host "   Para os alunos:    $url" -ForegroundColor Green }
+    if ($url) {
+        Write-Host "   Para os alunos:    $url" -ForegroundColor Green
+        if ((Tunel-Modo) -eq 'rapido') { Write-Host '                      (endereço temporário: muda a cada reinício; veja docs\LINK-FIXO.md)' -ForegroundColor DarkGray }
+        try { Set-Clipboard $url; Write-Host '                      (link copiado para a área de transferência)' -ForegroundColor DarkGray } catch { }
+    }
     else { Write-Host '   Endereço público:  indisponível (veja dados\logs\tunel.log)' -ForegroundColor Yellow }
     Write-Host "   Modo validação:    $(if ($url) { $url } else { $Local })/?modo=validacao"
     Write-Host "   Resultados:        $Local/resultados   (só nesta máquina)"
@@ -269,7 +314,7 @@ function Servidor {
                     $falhas = 0
                     Ok 'site religado'
                 }
-                if ($tunel.processo.HasExited) {
+                if ($tunel.processo -and $tunel.processo.HasExited) {
                     Aviso "$(Get-Date -Format HH:mm:ss) túnel caiu; reabrindo (o endereço público pode mudar)..."
                     $tunel = Iniciar-Tunel
                     Salvar-Pids @{ servidor = $servidor.Id; tunel = $tunel.processo.Id }
@@ -337,7 +382,7 @@ function Validacao {
 }
 
 function Treinar {
-    Titulo 'Treinamento socrático do TutorON (PAA + SD, QLoRA na GPU)'
+    Titulo 'Treinamento socrático do TutorON (todas as disciplinas, QLoRA na GPU)'
     $LogTreino = Join-Path $Logs ("treino-{0}.log" -f (Get-Date -Format 'yyyyMMdd-HHmmss-fff'))
     Start-Transcript -Path $LogTreino -ErrorAction Stop | Out-Null
     try {
@@ -355,6 +400,13 @@ function Treinar {
             return
         }
         if ($Extra -notcontains '--verificar' -and $Extra -notcontains '--teste-gpu') { Iniciar-Ollama }
+        # 0/5: casos socráticos gerados dos acervos de todas as disciplinas (retomável; pula o que já existe).
+        if ($Extra -notcontains '--sem-gerar' -and $Extra -notcontains '--verificar' -and $Extra -notcontains '--teste-gpu') {
+            Preparar-Python
+            & $Python scripts\gerar_casos_acervo.py 2>&1 | Out-Default
+            if ($LASTEXITCODE -ne 0) { Aviso 'Geração de casos incompleta; o treino segue com os casos já prontos.' }
+        }
+        $Extra = @($Extra | Where-Object { $_ -ne '--sem-gerar' })
         $Treino = Join-Path $Raiz '.venv-treino\Scripts\python.exe'
         if (!(Test-Path $Treino)) {
             Write-Host '   Criando ambiente de treino (.venv-treino) — só na primeira vez, baixa ~3 GB...'
@@ -379,11 +431,32 @@ function Treinar {
     }
 }
 
+function AutoIniciar {
+    # Tarefa agendada do usuário atual: ao entrar no Windows, abre o 1-Iniciar-Servidor.bat minimizado.
+    $nome = 'TutorON - servidor'
+    $existe = Get-ScheduledTask -TaskName $nome -ErrorAction SilentlyContinue
+    if ($existe -and $Extra -notcontains '--ligar') {
+        Unregister-ScheduledTask -TaskName $nome -Confirm:$false
+        Ok 'Início automático DESLIGADO. O TutorON só liga quando você abrir o 1-Iniciar-Servidor.bat.'
+        return
+    }
+    $bat = Join-Path $Raiz '1-Iniciar-Servidor.bat'
+    $acao = New-ScheduledTaskAction -Execute 'cmd.exe' -Argument "/c start `"TutorON`" /min `"$bat`"" -WorkingDirectory $Raiz
+    $gatilho = New-ScheduledTaskTrigger -AtLogOn -User "$env:USERDOMAIN\$env:USERNAME"
+    $gatilho.Delay = 'PT30S'  # espera a rede e o driver da GPU subirem
+    $config = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -ExecutionTimeLimit ([TimeSpan]::Zero)
+    Register-ScheduledTask -TaskName $nome -Action $acao -Trigger $gatilho -Settings $config `
+        -Description 'Liga a IA e o site do TutorON ao entrar no Windows.' -Force | Out-Null
+    Ok 'Início automático LIGADO: ao entrar no Windows, o TutorON abre sozinho (minimizado).'
+    Write-Host '   Rode este atalho de novo para desligar.'
+}
+
 switch ($Acao) {
     'Servidor'  { Servidor }
     'Validacao' { Validacao }
     'Treinar'   { Treinar }
     'Reiniciar' { Reiniciar }
+    'AutoIniciar' { AutoIniciar }
     'Parar'     {
         # Fecha também a janela do 1-Iniciar-Servidor (senão ela religa o servidor).
         Get-CimInstance Win32_Process -Filter "Name='powershell.exe'" |

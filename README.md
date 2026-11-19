@@ -4,6 +4,8 @@ O TutorON é uma IA que ajuda estudantes a entender as matérias da faculdade, c
 
 **Fase MVP:** o TutorON atende Projeto e Análise de Algoritmos (PAA), Sistemas Digitais (SD), Organização e Arquitetura de Computadores (OAC), Cálculo 3, Física 2, Estrutura de Dados (ED) e Banco de Dados (BD), com a mesma IA e um acervo próprio por disciplina. Nenhuma delas mostra mais o aviso de beta. Isso não é validação: a revisão humana dos blocos, a aprovação dos professores e a validação técnica das respostas continuam pendentes, e as pendências de cada disciplina estão em [Disciplinas](docs/DISCIPLINAS.md). O aluno escolhe a disciplina no modo Tutor.
 
+**Versão final (nov/2026):** o site é um chat (barra lateral com conversas, caixa de mensagem com chips de tipo de ajuda, disciplina, código e foto). O aluno escolhe **curso e período** (Engenharia ou Ciência da Computação, matrizes obrigatórias do IC/UFAL em [`disciplinas/cursos.json`](disciplinas/cursos.json)); isso entra no prompt e ajuda a achar a disciplina certa. O plano **Grátis** tem limite diário (renova à meia-noite); os planos **Estudante** e **Intensivo** podem ser ativados com um **pagamento simulado** (nenhuma cobrança, nenhum dado de cartão sai do navegador) e ligam o **modo completo** (Gemini primeiro). Quem acessa deste PC é **administrador**: sem limite. Link fixo e início automático: [docs/LINK-FIXO.md](docs/LINK-FIXO.md).
+
 O site tem dois modos:
 
 - **Tirar dúvida** — tutor socrático: **não entrega a resposta**. O aluno resolve no papel e escolhe o tipo de ajuda (pista, perguntas-guia, conceito, exemplo parecido, conferir o raciocínio, desenho). Se não conseguir, clica em "Ainda não consegui" e o tutor explica de outro jeito, quantas vezes precisar. Aceita foto do papel (o aluno confere a leitura antes de perguntar) e gera animações Manim (beta). Veja [docs/TUTOR-SOCRATICO.md](docs/TUTOR-SOCRATICO.md).
@@ -13,7 +15,7 @@ O site tem dois modos:
 
 ## Como usar (Windows)
 
-Cinco atalhos na raiz. Nada mais é necessário no dia a dia.
+Seis atalhos na raiz. Nada mais é necessário no dia a dia.
 
 | Atalho | O que faz |
 |---|---|
@@ -22,6 +24,7 @@ Cinco atalhos na raiz. Nada mais é necessário no dia a dia.
 | **`3-Treinar.bat`** | Treina o modelo local na GPU (QLoRA), importa no Ollama como `tutoron-socratico-ft` e gera um relatório comparando com o atual. Não troca o modelo sozinho. |
 | **`4-Reiniciar.bat`** | Se algo travar: religa os modelos e o site **sem mudar o endereço público**. Quem estava esperando recebe a resposta mesmo assim (a página reenvia a pergunta sozinha). |
 | **`5-Desligar.bat`** | Desliga site, túnel e modelo local (libera a GPU). |
+| **`6-Iniciar-com-o-Windows.bat`** | Liga (ou desliga) o início automático: ao entrar no Windows, o servidor abre sozinho. |
 
 Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.example)) e preencha `GEMINI_API_KEY` e, para incluir o livro-texto na busca, `SUPABASE_URL` e `SUPABASE_KEY`. O `.env` não vai para o Git.
 
@@ -32,6 +35,7 @@ Antes da primeira vez, crie o arquivo `.env` (copie de [`.env.example`](.env.exa
 - `dados/fotos.jsonl` — a leitura de cada foto do papel (a foto em si não é guardada).
 - `dados/animacoes.jsonl` e `dados/animacoes/*.mp4` — roteiros e vídeos das animações.
 - `dados/validacao/avaliacoes.jsonl` — cada avaliação A/B completa: pergunta, as duas respostas, notas, preferência e **qual lado era o TutorON**.
+- `dados/cota.json`, `dados/planos.json` e `dados/uso.jsonl` — uso do dia por convidado (cookie anônimo), planos simulados e histórico de tokens; painel em `http://127.0.0.1:8000/uso` (só nesta máquina).
 - `http://127.0.0.1:8000/resultados` — resumo das avaliações. Só abre nesta máquina; pelo endereço público responde 404.
 
 Nenhum IP, nome ou matrícula é gravado.
@@ -56,7 +60,7 @@ levar dezenas de segundos e deve ser conferida pelo aluno, especialmente em fór
 ## Estrutura
 
 ```
-1-Iniciar-Servidor.bat … 5-Desligar.bat   atalhos
+1-Iniciar-Servidor.bat … 6-Iniciar-com-o-Windows.bat   atalhos
 backend/          servidor (FastAPI), cascata de modelos, RAG, registro dos dados, site (backend/web)
 scripts/          tutoron.ps1 (motor dos atalhos), treinar.py, avaliar_modelos.py
 acervo/           pipeline de OCR, curadoria e índice do material de PAA; cadastro de disciplinas (disciplinas.py)
@@ -92,9 +96,13 @@ powershell -ExecutionPolicy Bypass -File scripts\tutoron.ps1 -Acao Acervo
 
 ## Treinamento
 
-Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: o `3-Treinar.bat` usa 112 exemplos socráticos de PAA e SD, com famílias separadas de validação e teste, treina um adapter LoRA sobre o Qwen3-8B na RTX 4060, mescla, importa no Ollama e avalia pelo fluxo do site. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-socratico-ft` no `.env` e reinicie o servidor.
+Veja [`05-modelo/COMO_TREINAR.md`](05-modelo/COMO_TREINAR.md). Resumo: um clique no `3-Treinar.bat` faz tudo.
 
-O treino de 02/11 terminou, mas o candidato não passou na [comparação de promoção](06-avaliacao/comparacao-modelo-2026-11-02.md); o servidor mantém o modelo atual. [Resumo para apresentação e origem dos dados](06-avaliacao/resumo-apresentacao-treino-e-visuais-2026-11-02.md).
+0. **Casos de todas as disciplinas:** `scripts/gerar_casos_acervo.py` lê os acervos curados de PAA, SD, OAC, Cálculo 3, Física 2, ED e BD e pede ao modelo professor (Gemini → local) um caso socrático por bloco (conceito, pista, perguntas-guia, exemplo, conferência). Casos que entregam a resposta são descartados. É retomável: rodar de novo só gera o que falta (`05-modelo/socratico/gerados/`). Linhas revisadas à mão em `dados-treino/curados/*.jsonl` entram também.
+1. Junta com os 24 casos autorais de `05-modelo/socratico/casos.json`, separando treino, validação e teste por família.
+2. Treina um adapter LoRA sobre o Qwen3-8B na RTX 4060 (passos automáticos: ~2 épocas, entre 60 e 600), mescla, importa no Ollama como `tutoron-socratico-ft` e avalia pelo fluxo do site.
+
+Só preparar os dados, sem GPU: `3-Treinar.bat --so-dados`. Pular a geração: `--sem-gerar`. Para usar o modelo treinado, coloque `TUTORON_MODELO_LOCAL=tutoron-socratico-ft` no `.env` e reinicie o servidor.
 
 ## Documentação
 

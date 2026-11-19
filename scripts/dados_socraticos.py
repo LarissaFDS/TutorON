@@ -62,25 +62,32 @@ def variantes(c: dict) -> list[dict]:
     return linhas
 
 
-def preparar(destino: Path, caminho: Path = CASOS) -> dict:
+def preparar(destino: Path, caminho: Path = CASOS, *, acervos: bool = True) -> dict:
+    """Casos autorais (casos.json) + casos gerados dos acervos de todas as disciplinas
+    (scripts/gerar_casos_acervo.py) + dados-treino/curados/*.jsonl."""
     casos = carregar(caminho)
+    if acervos:
+        from scripts.gerar_casos_acervo import todos_os_casos
+        autorais = {c["id"] for c in casos}
+        casos += [c for c in todos_os_casos() if c["id"] not in autorais]
     grupos = {nome: [] for nome in ("treino", "validacao", "teste")}
     for c in casos:
         grupos[c["split"]].extend(variantes(c))
+    exigidas = {"paa", "sd"}
     for nome, linhas in grupos.items():
-        if {r["disciplina"] for r in linhas} != {"paa", "sd"}:
-            raise ValueError(f"{nome}: é necessário cobrir PAA e SD")
+        if not exigidas <= {r["disciplina"] for r in linhas}:
+            raise ValueError(f"{nome}: é necessário cobrir pelo menos PAA e SD")
     destino.mkdir(parents=True, exist_ok=True)
     for nome, linhas in grupos.items():
         (destino / f"{nome}.jsonl").write_text(
             "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in linhas), encoding="utf-8", newline="\n")
     manifesto = {
-        "versao_politica": VERSAO, "origem": "05-modelo/socratico/casos.json", "sha256_origem": digest(caminho.read_bytes()),
+        "versao_politica": VERSAO, "origem": "05-modelo/socratico/casos.json + gerados/*.json + dados-treino/curados", "casos": len(casos), "sha256_origem": digest(caminho.read_bytes()),
         "contagens": {n: len(rs) for n, rs in grupos.items()},
         "disciplinas": {n: dict(Counter(r["disciplina"] for r in rs)) for n, rs in grupos.items()},
         "familias": {n: sorted({r["family"] for r in rs}) for n, rs in grupos.items()},
         "sha256": {n: digest((destino / f"{n}.jsonl").read_bytes()) for n in grupos},
-        "prompts_sha256": {d: digest(prompts.sistema_socratico(obter(d))) for d in ("paa", "sd")},
+        "prompts_sha256": {d: digest(prompts.sistema_socratico(obter(d))) for d in sorted({c["disciplina"] for c in casos})},
         "limite": "Dados sintéticos pequenos, sem revisão docente. Teste mede orientação, não ganho comprovado de aprendizagem. Não inclui dados de alunos. Teste nunca entra na loss nem na seleção de checkpoints.",
     }
     (destino / "manifesto.json").write_text(json.dumps(manifesto, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

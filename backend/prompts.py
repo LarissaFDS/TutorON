@@ -157,11 +157,21 @@ _RIGOR_SOCRATICO = {
 }
 
 
+def rigor_socratico(d: Disciplina) -> str:
+    """Regras da área no modo Tutor. PAA e SD têm versão socrática escrita à mão; as demais
+    disciplinas usam o rigor.md do cadastro (notação, conferência), subordinado à filosofia."""
+    if d.id in _RIGOR_SOCRATICO:
+        return _RIGOR_SOCRATICO[d.id]
+    if d.rigor and d.rigor.strip():
+        return ("# Rigor na orientação\nAs regras abaixo valem para notação e conferência das pistas; "
+                "não autorizam entregar a resolução.\n" + d.rigor.strip())
+    return "# Rigor na orientação\nConfira a validade das pistas sem executar a tarefa pelo aluno."
+
+
 def sistema_socratico(disciplina: Disciplina | None = None) -> str:
     """Instruções do modo Tutor: mesmas fontes, citações e segurança, mas sem resposta direta."""
     d = disciplina or obter()
-    rigor = _RIGOR_SOCRATICO.get(d.id, "# Rigor na orientação\nConfira a validade das pistas sem executar a tarefa pelo aluno.")
-    return _preencher(_MODELO_SOCRATICO, replace(d, rigor=rigor))
+    return _preencher(_MODELO_SOCRATICO, replace(d, rigor=rigor_socratico(d)))
 
 
 def ajuda_valida(ajuda: str | None) -> str:
@@ -184,8 +194,10 @@ def proxima_ajuda(usadas: list[str]) -> str:
 
 def prompt_socratico(pergunta: str, material: str, contexto_aluno: str | None = None, ajuda: str = "auto",
                      leitura_foto: str | None = None, historico: list[dict] | None = None,
-                     travou: str | None = None) -> str:
+                     travou: str | None = None, perfil: str | None = None) -> str:
     partes = [prompt_tutor(pergunta, material, contexto_aluno)]
+    if perfil and perfil.strip():
+        partes += ["", "PERFIL ACADÊMICO DO ALUNO, ESCOLHIDO POR ELE NO SITE (dados):", "<<<", perfil.strip(), ">>>"]
     if leitura_foto and leitura_foto.strip():
         partes += ["", "FOTO DO PAPEL DO ALUNO, JÁ CONFIRMADA POR ELE (dados):", "<<<", leitura_foto.strip(), ">>>"]
     if historico:

@@ -66,7 +66,7 @@ def test_animacao_recebe_tentativa_e_foto_em_campos_separados(site, monkeypatch)
 
 def test_aba_visual_separada_tem_pergunta_livre_e_recomendacoes_opcionais(site):  # noqa: F811
     html = site.get('/').text
-    assert 'Fase MVP' not in html and 'href="/visuais">Aprender com desenhos' in html
+    assert 'Fase MVP' not in html and 'href="/visuais"' in html and 'Aprender com desenhos' in html
     assert 'id="temas-visuais"' not in html and 'id="sugestoes-visuais"' not in html
     assert 'Disciplina (opcional)' in html
     r = site.get('/visuais', follow_redirects=False)
@@ -78,7 +78,8 @@ def test_aba_visual_separada_tem_pergunta_livre_e_recomendacoes_opcionais(site):
 def test_script_da_interface_e_revalidado_apos_atualizacao(site):  # noqa: F811
     r = site.get('/static/app.js?v=abas-visuais-2')
     assert r.status_code == 200 and r.headers['cache-control'] == 'no-cache'
-    assert 'Só animação' in r.text and 'Identificar automaticamente' in r.text
+    assert 'Só animação' in r.text and "'auto'" in r.text
+    assert 'Identificar automaticamente' in site.get('/').text
     condicional = site.get('/static/app.js?v=abas-visuais-2', headers={'If-None-Match': r.headers['etag']})
     assert condicional.status_code == 304 and condicional.headers['cache-control'] == 'no-cache'
     assert site.get('/static/visuais.js?v=pergunta-livre-2').headers['cache-control'] == 'no-cache'

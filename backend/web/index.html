@@ -2,203 +2,350 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TutorON · IA para estudar as matérias da faculdade</title>
-<meta name="description" content="TutorON: uma IA que ajuda estudantes a entender as matérias da faculdade, começando por Computação.">
-<link rel="stylesheet" href="/design.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TutorON · seu tutor de faculdade, online</title>
+<meta name="description" content="TutorON é um tutor de IA para Engenharia e Ciência da Computação. Ele te guia com pistas e perguntas, no seu período, sem entregar a resposta pronta.">
+<meta name="theme-color" content="#4D6BFE">
+<link rel="canonical" href="{{BASE}}/">
+<!-- Pré-visualização do link (WhatsApp, Telegram, Discord, Instagram, LinkedIn, X) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TutorON">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="TutorON · seu tutor de faculdade, online">
+<meta property="og:description" content="Tire dúvidas de PAA, Sistemas Digitais, OAC, Cálculo 3, Física 2, Estrutura de Dados e Banco de Dados com um tutor que te guia passo a passo, sem entregar a resposta.">
+<meta property="og:url" content="{{BASE}}/">
+<meta property="og:image" content="{{BASE}}/static/marca/previa.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo do TutorON: um balão de conversa com o botão liga e um ponto verde de online.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TutorON · seu tutor de faculdade, online">
+<meta name="twitter:description" content="Um tutor de IA que te guia com pistas e perguntas, no seu curso e período.">
+<meta name="twitter:image" content="{{BASE}}/static/marca/previa.png">
+<link rel="icon" href="/static/marca/logo.svg" type="image/svg+xml">
+<link rel="icon" href="/static/marca/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/static/marca/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="/static/app.css?v=abas-visuais-2">
+<link rel="stylesheet" href="/static/chat.css?v=final-1">
 </head>
 <body>
+<div class="app" id="app">
 
-<header class="masthead">
-  <div class="page masthead__bar">
-    <div class="wordmark" aria-label="TutorON">Tutor<span>ON</span></div>
-    <a id="cota" class="cota" href="/planos" hidden></a>
-  </div>
-  <div class="page masthead__intro">
-    <h1>Entenda as matérias da faculdade, passo a passo</h1>
-    <p class="masthead__lede">Peça uma pista, confira sua tentativa ou entenda o problema com uma animação.</p>
-  </div>
-</header>
-
-<nav class="page modes" aria-label="Modo">
-  <div class="modes__list" role="tablist">
-    <button class="modes__tab" role="tab" id="tab-tutor" aria-controls="modo-tutor" aria-selected="true" type="button">Tirar dúvida</button>
-    <a class="modes__tab" href="/visuais">Aprender com desenhos</a>
-    <button class="modes__tab" role="tab" id="tab-validacao" aria-controls="modo-validacao" aria-selected="false" type="button">Avaliar respostas (validação)</button>
-  </div>
-</nav>
-
-<main class="page">
-
-  <!-- ============================================================ MODO TUTOR -->
-  <section id="modo-tutor" role="tabpanel" aria-labelledby="tab-tutor">
-    <p class="notice step"><strong>O TutorON não entrega respostas: ele ajuda você a chegar lá.</strong> Resolva no papel e peça ideias, pistas, perguntas-guia ou a conferência do seu raciocínio. Pode mandar uma foto do papel. As ajudas são geradas por IA e podem conter erros; marque “Tem erro” quando encontrar um. <a href="/demo">Veja exemplos de como funciona</a>.</p>
-
-    <div id="conversa" class="conversa" aria-live="polite"></div>
-
-    <!-- Perguntas anteriores: só na memória da página; recarregar zera. -->
-    <div class="historico" id="historico-box" hidden>
-      <button class="button button--secondary" id="historico-botao" type="button"
-        aria-expanded="false" aria-controls="historico">Ver perguntas anteriores</button>
-      <ol class="historico__lista" id="historico" aria-label="Perguntas anteriores, da mais recente para a mais antiga" hidden></ol>
+  <!-- ============================================================ BARRA LATERAL -->
+  <aside class="lateral" id="lateral" aria-label="Menu do TutorON">
+    <div class="lateral__topo">
+      <a class="marca" href="/" aria-label="TutorON, início">
+        <img src="/static/marca/logo.svg" alt="" width="30" height="30">
+        <span class="marca__nome">Tutor<b>ON</b></span>
+      </a>
+      <button class="icone-btn so-celular" id="fechar-lateral" type="button" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
     </div>
 
-    <form id="form-tutor" class="composer" novalidate>
-      <div class="field estreito" id="disciplina-campo" hidden>
-        <label class="field__label" for="disciplina">Disciplina (opcional)</label>
-        <select class="input" id="disciplina"></select>
-        <span class="field__hint caption">O tutor tenta identificar pela dúvida. Você pode corrigir a escolha.</span>
-        <span class="field__hint caption" id="disciplina-aviso" role="status" hidden></span>
-        <p class="field__hint caption" id="disciplina-beta" role="note" aria-live="polite" hidden></p>
-      </div>
-      <div class="field">
-        <label class="field__label" for="pergunta">Sua dúvida</label>
-        <textarea class="input" id="pergunta" maxlength="4000" rows="4" required
-          placeholder="Ex.: Como aplico o Teorema Mestre em T(n) = 3T(n/4) + n log n?" aria-describedby="pergunta-dica"></textarea>
-        <span class="field__hint caption" id="pergunta-dica">Ctrl+Enter envia. Não escreva nome, matrícula ou contato.</span>
-      </div>
-      <fieldset class="ajudas" id="ajudas">
-        <legend class="field__label">Que tipo de ajuda você quer?</legend>
-        <div class="ajudas__opcoes" id="ajudas-opcoes"></div>
-      </fieldset>
+    <button class="nova" id="nova-conversa" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+      Nova conversa
+    </button>
 
-      <div class="foto" id="foto-box">
-        <div class="foto__acoes">
-          <label class="button button--secondary" for="foto-arquivo">Enviar foto do papel</label>
-          <input class="visually-hidden" type="file" id="foto-arquivo" accept="image/*" capture="environment">
-          <span class="caption">Enunciado ou sua tentativa. Você confere a leitura antes de perguntar.</span>
-        </div>
-        <p class="status" id="foto-status" role="status" aria-live="polite"></p>
-        <section class="foto__conferir" id="foto-conferir" hidden aria-labelledby="foto-conferir-titulo" tabindex="-1">
-          <h3 class="foto__titulo" id="foto-conferir-titulo">Confira o que o TutorON leu da sua foto</h3>
-          <div class="foto__previa"><img id="foto-previa" alt="Sua foto"></div>
-          <p class="caption" id="foto-confianca"></p>
-          <div class="foto__duvidas" id="foto-duvidas" hidden>
-            <p class="foto__duvidas-titulo">Não tenho certeza destes trechos. Corrija abaixo se estiver errado:</p>
-            <ul id="foto-duvidas-lista"></ul>
-          </div>
-          <div class="field">
-            <label class="field__label" for="foto-enunciado">Enunciado lido</label>
-            <textarea class="input input--code" id="foto-enunciado" rows="5" maxlength="6000"></textarea>
-          </div>
-          <fieldset class="field" id="foto-subtopicos-box" hidden>
-            <legend class="field__label">Subtópicos encontrados (desmarque os que não são do exercício)</legend>
-            <div id="foto-subtopicos"></div>
-          </fieldset>
-          <div class="field">
-            <label class="field__label" for="foto-tentativa">Sua tentativa lida <span class="caption">(vazio se não houver)</span></label>
-            <textarea class="input input--code" id="foto-tentativa" rows="4" maxlength="6000"></textarea>
-          </div>
-          <details class="disclosure" id="foto-regioes-box" hidden>
-            <summary>O que foi visto em cada parte da folha</summary>
-            <ul class="fontes__lista" id="foto-regioes"></ul>
-          </details>
-          <div class="actions">
-            <button class="button" id="foto-ok" type="button">Está certo, usar esta leitura</button>
-            <button class="button button--secondary" id="foto-descartar" type="button">Descartar foto</button>
-          </div>
-        </section>
-        <p class="foto__confirmada caption" id="foto-confirmada" hidden></p>
-      </div>
+    <nav class="lateral__nav" aria-label="Seções">
+      <button class="lateral__item" id="tab-tutor" type="button" aria-controls="modo-tutor" aria-current="page">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Tirar dúvida
+      </button>
+      <a class="lateral__item" href="/visuais">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 4 3-3 4 5M4 5h16v14H4z"/></svg>Aprender com desenhos
+      </a>
+      <button class="lateral__item" id="tab-validacao" type="button" aria-controls="modo-validacao">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12l4 4 10-10"/></svg>Avaliar respostas (validação)
+      </button>
+      <a class="lateral__item" href="/demo">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver exemplos de como funciona
+      </a>
+    </nav>
 
-      <details class="disclosure">
-        <summary>Colar código ou enunciado (opcional)</summary>
-        <div class="field">
-          <label class="field__label" for="contexto">Código, pseudocódigo ou enunciado</label>
-          <textarea class="input input--code" id="contexto" maxlength="6000" rows="6"></textarea>
-        </div>
-      </details>
-      <div class="sugestoes" id="sugestoes-tutor" aria-label="Exemplos de perguntas"></div>
-      <div class="actions">
-        <button class="button" id="enviar" type="submit">Pedir ajuda</button>
-      </div>
-      <p class="status" id="status-tutor" role="status" aria-live="polite"></p>
-    </form>
-  </section>
-
-  <!-- ============================================================ MODO VALIDAÇÃO -->
-  <section id="modo-validacao" role="tabpanel" aria-labelledby="tab-validacao" hidden>
-    <p class="notice step">Validação cega: a mesma dúvida é respondida por dois sistemas diferentes. Você não sabe qual é qual; a ordem é sorteada. Dê notas às duas e escolha a que mais ajuda a estudar para a prova. Nenhum login, nome ou matrícula é pedido.</p>
-
-    <section class="step" id="v-passo1" aria-labelledby="v-passo1-titulo">
-      <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="v-passo1-titulo">Escreva uma dúvida</h2></div>
-      <div class="field">
-        <label class="field__label" for="v-pergunta">Sua dúvida</label>
-        <textarea class="input" id="v-pergunta" maxlength="4000" rows="4"
-          placeholder="Ex.: Por que o algoritmo guloso de troco falha para moedas {1, 3, 4} e valor 6?" aria-describedby="v-dica"></textarea>
-        <span class="field__hint caption" id="v-dica">As duas respostas são geradas na hora; normalmente levam menos de um minuto. Não escreva nome, matrícula ou contato.</span>
-      </div>
-      <div class="sugestoes" id="sugestoes-validacao" aria-label="Exemplos de perguntas"></div>
-      <div class="actions"><button class="button" id="v-gerar" type="button">Gerar as duas respostas</button></div>
-      <p class="status" id="v-status" role="status" aria-live="polite"></p>
+    <section class="conversas" aria-labelledby="historico-botao">
+      <button class="conversas__titulo" id="historico-botao" type="button" aria-controls="historico" aria-expanded="false">Conversas (0)</button>
+      <ol class="conversas__lista" id="historico" aria-label="Conversas desta aba (somem ao fechar a aba)" hidden></ol>
+      <p class="conversas__vazio" id="historico-vazio">Suas conversas aparecem aqui. Elas ficam só nesta aba.</p>
     </section>
 
-    <form id="v-form" hidden novalidate>
-      <section class="step" id="v-passo2" aria-labelledby="v-passo2-titulo">
-        <div class="step__head"><span class="step__number" aria-hidden="true">2</span><h2 class="step__title" id="v-passo2-titulo" tabindex="-1">Leia e dê notas às duas respostas</h2></div>
-        <div class="question prose" id="v-escolhida"></div>
-        <p class="step__lede">Dê uma nota de 1 a 5 em cada critério, nas duas respostas. 1 é pouco, 5 é muito.</p>
-        <div class="answers" id="v-respostas">
-          <article class="answer" aria-labelledby="rotuloA">
-            <h3 class="answer__label" id="rotuloA">Resposta A</h3>
-            <div class="prose" id="respostaA"></div>
-            <div class="answer__rating" id="notasA"><p class="answer__rating-title">Suas notas para a resposta A</p></div>
-          </article>
-          <article class="answer" aria-labelledby="rotuloB">
-            <h3 class="answer__label" id="rotuloB">Resposta B</h3>
-            <div class="prose" id="respostaB"></div>
-            <div class="answer__rating" id="notasB"><p class="answer__rating-title">Suas notas para a resposta B</p></div>
-          </article>
+    <div class="lateral__base">
+      <button class="perfil" id="perfil-botao" type="button" aria-haspopup="dialog">
+        <span class="perfil__avatar" aria-hidden="true">🎓</span>
+        <span class="perfil__texto"><strong id="perfil-curso">Escolha seu curso</strong><small id="perfil-periodo">e o período</small></span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+      </button>
+      <a class="plano-card" id="cota" href="/planos" data-abrir-planos>
+        <span class="plano-card__linha"><strong id="cota-plano">Plano Grátis</strong><span id="cota-acao">Ver planos</span></span>
+        <span class="medidor" aria-hidden="true"><span id="cota-barra"></span></span>
+        <small id="cota-texto">Carregando seu limite de hoje…</small>
+      </a>
+    </div>
+  </aside>
+  <div class="veu" id="veu" hidden></div>
+
+  <!-- ============================================================ ÁREA PRINCIPAL -->
+  <div class="principal">
+    <header class="topo">
+      <button class="icone-btn so-celular" id="abrir-lateral" type="button" aria-label="Abrir menu" aria-controls="lateral">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+      <div class="topo__centro">
+        <button class="seletor" id="contexto-botao" type="button" aria-haspopup="dialog">
+          <span class="ponto-on" aria-hidden="true"></span>
+          <span id="contexto-rotulo">TutorON</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <span class="selo-modo" id="selo-modo" hidden></span>
+    </header>
+
+    <main class="palco" id="palco">
+      <!-- ========================================================== MODO TUTOR -->
+      <section id="modo-tutor" class="modo-tutor" aria-label="Tirar dúvida">
+        <div class="rolagem" id="rolagem">
+          <div class="boas-vindas" id="boas-vindas">
+            <img class="boas-vindas__logo" src="/static/marca/logo.svg" alt="" width="64" height="64">
+            <h1>Olá! Eu sou o Tutor<b>ON</b>.</h1>
+            <p>Me conte em que exercício você travou. Eu não entrego a resposta: te dou pistas, perguntas e exemplos até você chegar lá no papel.</p>
+            <div class="sugestoes" id="sugestoes-tutor" aria-label="Exemplos de perguntas"></div>
+          </div>
+          <div id="conversa" class="conversa" aria-live="polite"></div>
         </div>
+
+        <form id="form-tutor" class="compositor" novalidate>
+          <!-- Foto do papel: a IA lê, o aluno confere, e só então a leitura vai com a dúvida. -->
+          <section class="foto-cartao" id="foto-conferir" hidden aria-labelledby="foto-conferir-titulo" tabindex="-1">
+            <div class="foto-cartao__topo">
+              <img id="foto-previa" alt="Sua foto">
+              <div>
+                <h3 id="foto-conferir-titulo">Confira o que eu li da sua foto</h3>
+                <p class="dica" id="foto-confianca"></p>
+              </div>
+            </div>
+            <div class="foto-cartao__duvidas" id="foto-duvidas" hidden>
+              <p>Não tenho certeza destes trechos. Corrija abaixo se estiver errado:</p>
+              <ul id="foto-duvidas-lista"></ul>
+            </div>
+            <label class="rotulo" for="foto-enunciado">Enunciado lido</label>
+            <textarea class="campo campo--codigo" id="foto-enunciado" rows="4" maxlength="6000"></textarea>
+            <fieldset class="foto-cartao__subs" id="foto-subtopicos-box" hidden>
+              <legend class="rotulo">Subtópicos encontrados (desmarque os que não são do exercício)</legend>
+              <div id="foto-subtopicos"></div>
+            </fieldset>
+            <label class="rotulo" for="foto-tentativa">Sua tentativa lida <span class="dica">(vazio se não houver)</span></label>
+            <textarea class="campo campo--codigo" id="foto-tentativa" rows="3" maxlength="6000"></textarea>
+            <details class="detalhe" id="foto-regioes-box" hidden>
+              <summary>O que foi visto em cada parte da folha</summary>
+              <ul class="fontes__lista" id="foto-regioes"></ul>
+            </details>
+            <div class="acoes">
+              <button class="botao" id="foto-ok" type="button">Está certo, usar esta leitura</button>
+              <button class="botao botao--leve" id="foto-descartar" type="button">Descartar foto</button>
+            </div>
+          </section>
+
+          <div class="anexos" id="anexos">
+            <p class="anexo" id="foto-confirmada" hidden></p>
+            <p class="status" id="foto-status" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="caixa" id="caixa">
+            <label class="visually-hidden" for="pergunta">Sua dúvida</label>
+            <textarea id="pergunta" class="caixa__texto" maxlength="4000" rows="1" required
+              placeholder="Pergunte ao TutorON…" aria-describedby="pergunta-dica"></textarea>
+
+            <div class="caixa__codigo" id="contexto-box" hidden>
+              <label class="rotulo" for="contexto">Código, pseudocódigo ou enunciado</label>
+              <textarea class="campo campo--codigo" id="contexto" maxlength="6000" rows="4"></textarea>
+            </div>
+
+            <div class="caixa__barra">
+              <div class="chips">
+                <div class="chip-menu">
+                  <button class="chip" id="ajuda-botao" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="ajudas">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg>
+                    <span id="ajuda-rotulo">O tutor escolhe</span>
+                  </button>
+                  <fieldset class="menu" id="ajudas" hidden>
+                    <legend class="menu__titulo">Que tipo de ajuda você quer?</legend>
+                    <div id="ajudas-opcoes"></div>
+                  </fieldset>
+                </div>
+                <div class="chip-menu">
+                  <button class="chip" id="disciplina-chip" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="disciplina-menu">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h7a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H4zM20 5h-6M20 5v12h-6"/></svg>
+                    <span id="disciplina-rotulo">Disciplina: automática</span>
+                  </button>
+                  <div class="menu menu--largo" id="disciplina-menu" hidden>
+                    <div class="campo-grupo" id="disciplina-campo">
+                      <label class="rotulo" for="disciplina">Disciplina (opcional)</label>
+                      <select class="campo" id="disciplina"><option value="auto">Identificar automaticamente</option></select>
+                      <span class="dica">O tutor tenta identificar pela dúvida e pelo seu período. Você pode corrigir a escolha.</span>
+                      <span class="dica" id="disciplina-aviso" role="status" hidden></span>
+                      <p class="dica" id="disciplina-beta" role="note" aria-live="polite" hidden></p>
+                    </div>
+                  </div>
+                </div>
+                <button class="chip" id="codigo-botao" type="button" aria-pressed="false" aria-controls="contexto-box" title="Colar código ou enunciado">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5"/></svg>
+                  <span class="chip__texto">Código</span>
+                </button>
+              </div>
+              <div class="caixa__direita">
+                <label class="icone-btn" for="foto-arquivo" title="Enviar foto do papel" aria-label="Enviar foto do papel">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.5l-8.4 8.4a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg>
+                </label>
+                <input class="visually-hidden" type="file" id="foto-arquivo" accept="image/*">
+                <button class="enviar" id="enviar" type="submit" aria-label="Enviar">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <p class="rodape-caixa" id="pergunta-dica">Enter envia · Shift+Enter quebra a linha · Não escreva nome, matrícula ou contato. O TutorON pode errar: marque “Tem erro” quando achar um.</p>
+          <p class="status" id="status-tutor" role="status" aria-live="polite"></p>
+        </form>
       </section>
 
-      <section class="step" id="v-passo3" aria-labelledby="v-passo3-titulo">
-        <div class="step__head"><span class="step__number" aria-hidden="true">3</span><h2 class="step__title" id="v-passo3-titulo">Qual você prefere?</h2></div>
-        <fieldset class="scale">
-          <legend class="visually-hidden">Resposta preferida</legend>
-          <div class="scale__options">
-            <label class="pick"><input type="radio" name="preferida" value="A"><span>Resposta A</span></label>
-            <label class="pick"><input type="radio" name="preferida" value="B"><span>Resposta B</span></label>
-            <label class="pick"><input type="radio" name="preferida" value="empate"><span>Empate</span></label>
-          </div>
-        </fieldset>
-        <div class="field estreito">
-          <label class="field__label" for="v-comentario">O que ajudou ou ficou confuso? <span class="caption">Opcional</span></label>
-          <textarea class="input" id="v-comentario" maxlength="1500" placeholder="Ex.: a resposta B errou a soma da árvore de recursão no último nível."></textarea>
+      <!-- ========================================================== MODO VALIDAÇÃO -->
+      <section id="modo-validacao" class="modo-validacao" hidden aria-label="Avaliar respostas">
+        <div class="validacao">
+          <p class="aviso">Validação cega: a mesma dúvida é respondida por dois sistemas diferentes. Você não sabe qual é qual; a ordem é sorteada. Dê notas às duas e escolha a que mais ajuda a estudar para a prova. Nenhum login, nome ou matrícula é pedido.</p>
+
+          <section class="etapa" id="v-passo1" aria-labelledby="v-passo1-titulo">
+            <h2 id="v-passo1-titulo"><span class="etapa__num">1</span>Escreva uma dúvida</h2>
+            <label class="rotulo" for="v-pergunta">Sua dúvida</label>
+            <textarea class="campo" id="v-pergunta" maxlength="4000" rows="4"
+              placeholder="Ex.: Por que o algoritmo guloso de troco falha para moedas {1, 3, 4} e valor 6?" aria-describedby="v-dica"></textarea>
+            <span class="dica" id="v-dica">As duas respostas são geradas na hora; normalmente levam menos de um minuto. Não escreva nome, matrícula ou contato.</span>
+            <div class="sugestoes sugestoes--linha" id="sugestoes-validacao" aria-label="Exemplos de perguntas"></div>
+            <div class="acoes"><button class="botao" id="v-gerar" type="button">Gerar as duas respostas</button></div>
+            <p class="status" id="v-status" role="status" aria-live="polite"></p>
+          </section>
+
+          <form id="v-form" hidden novalidate>
+            <section class="etapa" id="v-passo2" aria-labelledby="v-passo2-titulo">
+              <h2 id="v-passo2-titulo" tabindex="-1"><span class="etapa__num">2</span>Leia e dê notas às duas respostas</h2>
+              <div class="bolha bolha--aluno prose" id="v-escolhida"></div>
+              <p class="dica">Dê uma nota de 1 a 5 em cada critério, nas duas respostas. 1 é pouco, 5 é muito.</p>
+              <div class="respostas" id="v-respostas">
+                <article class="resposta-ab" aria-labelledby="rotuloA">
+                  <h3 id="rotuloA">Resposta A</h3>
+                  <div class="prose" id="respostaA"></div>
+                  <div class="notas" id="notasA"><p class="notas__titulo">Suas notas para a resposta A</p></div>
+                </article>
+                <article class="resposta-ab" aria-labelledby="rotuloB">
+                  <h3 id="rotuloB">Resposta B</h3>
+                  <div class="prose" id="respostaB"></div>
+                  <div class="notas" id="notasB"><p class="notas__titulo">Suas notas para a resposta B</p></div>
+                </article>
+              </div>
+            </section>
+
+            <section class="etapa" id="v-passo3" aria-labelledby="v-passo3-titulo">
+              <h2 id="v-passo3-titulo"><span class="etapa__num">3</span>Qual você prefere?</h2>
+              <fieldset class="escala">
+                <legend class="visually-hidden">Resposta preferida</legend>
+                <div class="escala__opcoes">
+                  <label class="pilula"><input type="radio" name="preferida" value="A"><span>Resposta A</span></label>
+                  <label class="pilula"><input type="radio" name="preferida" value="B"><span>Resposta B</span></label>
+                  <label class="pilula"><input type="radio" name="preferida" value="empate"><span>Empate</span></label>
+                </div>
+              </fieldset>
+              <label class="rotulo" for="v-comentario">O que ajudou ou ficou confuso? <span class="dica">Opcional</span></label>
+              <textarea class="campo" id="v-comentario" maxlength="1500" placeholder="Ex.: a resposta B errou a soma da árvore de recursão no último nível."></textarea>
+              <div class="duas-colunas">
+                <div><label class="rotulo" for="v-curso">Curso <span class="dica">Opcional</span></label>
+                  <input class="campo" id="v-curso" maxlength="100" autocomplete="off" placeholder="Ex.: Ciência da Computação"></div>
+                <div><label class="rotulo" for="v-periodo">Período <span class="dica">Opcional</span></label>
+                  <input class="campo" id="v-periodo" maxlength="30" autocomplete="off" placeholder="Ex.: 4º"></div>
+              </div>
+              <div class="acoes"><button class="botao" id="v-enviar" type="submit">Enviar avaliação</button></div>
+              <p class="status" id="v-status-envio" role="status" aria-live="polite"></p>
+            </section>
+          </form>
+
+          <section class="etapa confirmacao" id="v-feito" hidden tabindex="-1" aria-labelledby="v-feito-titulo">
+            <h2 id="v-feito-titulo">Avaliação enviada</h2>
+            <p>Obrigado. Cada avaliação ajuda a melhorar o TutorON.</p>
+            <div class="acoes"><button class="botao" id="v-outra" type="button">Avaliar outra dúvida</button></div>
+          </section>
         </div>
-        <div class="fields-row estreito">
-          <div class="field">
-            <label class="field__label" for="v-curso">Curso <span class="caption">Opcional</span></label>
-            <input class="input" id="v-curso" maxlength="100" autocomplete="off" placeholder="Ex.: Ciência da Computação">
-          </div>
-          <div class="field">
-            <label class="field__label" for="v-periodo">Período <span class="caption">Opcional</span></label>
-            <input class="input" id="v-periodo" maxlength="30" autocomplete="off" placeholder="Ex.: 4º">
-          </div>
-        </div>
-        <div class="actions"><button class="button" id="v-enviar" type="submit">Enviar avaliação</button></div>
-        <p class="status" id="v-status-envio" role="status" aria-live="polite"></p>
       </section>
-    </form>
+    </main>
+  </div>
+</div>
 
-    <section class="confirmation" id="v-feito" hidden tabindex="-1" aria-labelledby="v-feito-titulo">
-      <h2 id="v-feito-titulo">Avaliação enviada</h2>
-      <p>Obrigado. Cada avaliação ajuda a melhorar o TutorON.</p>
-      <div class="actions"><button class="button" id="v-outra" type="button">Avaliar outra dúvida</button></div>
-    </section>
-  </section>
-</main>
+<!-- ============================================================ CURSO E PERÍODO -->
+<dialog class="janela" id="janela-perfil" aria-labelledby="perfil-titulo">
+  <form method="dialog" class="janela__corpo" id="form-perfil">
+    <img src="/static/marca/logo.svg" alt="" width="44" height="44">
+    <h2 id="perfil-titulo">Em que ponto do curso você está?</h2>
+    <p class="dica">Assim o TutorON já sabe quais disciplinas você está cursando e acha o material certo mais rápido. Fica só neste navegador.</p>
+    <div class="cursos" id="cursos" role="radiogroup" aria-label="Curso"></div>
+    <label class="rotulo" for="periodo">Período</label>
+    <div class="periodos" id="periodos" role="radiogroup" aria-label="Período"></div>
+    <div class="grade-disc" id="grade-disc" aria-live="polite"></div>
+    <p class="dica fonte-matriz" id="fonte-matriz"></p>
+    <div class="acoes acoes--fim">
+      <button class="botao botao--leve" value="pular" type="submit" id="perfil-pular">Agora não</button>
+      <button class="botao" value="ok" type="submit" id="perfil-salvar">Salvar</button>
+    </div>
+  </form>
+</dialog>
 
-<footer class="site-footer page">
-  <p class="caption">Perguntas e avaliações são guardadas sem identificação, apenas para melhorar o TutorON.</p>
-</footer>
+<!-- ============================================================ PLANOS -->
+<dialog class="janela janela--larga" id="janela-planos" aria-labelledby="planos-titulo">
+  <div class="janela__corpo">
+    <button class="icone-btn janela__fechar" type="button" data-fechar aria-label="Fechar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="planos-titulo">Planos do TutorON</h2>
+    <p class="dica" id="planos-motivo"></p>
+    <p class="aviso aviso--simulado">Protótipo: o pagamento é <strong>simulado</strong>. Nenhum valor é cobrado e nenhum dado de cartão sai do seu navegador.</p>
+    <div class="planos" id="planos-grade"></div>
+    <p class="dica">Preços calculados a partir do custo por token (estudo de precificação, nov/2026). O limite é medido em tokens: cada dúvida gasta, em média, 1.500 a 2.500.</p>
+  </div>
+</dialog>
+
+<dialog class="janela" id="janela-checkout" aria-labelledby="checkout-titulo">
+  <form class="janela__corpo" id="form-checkout" novalidate>
+    <button class="icone-btn janela__fechar" type="button" data-fechar aria-label="Fechar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h2 id="checkout-titulo">Assinar</h2>
+    <p class="resumo-compra" id="checkout-resumo"></p>
+    <div class="cartao-visual" aria-hidden="true">
+      <span class="cartao-visual__chip"></span>
+      <span class="cartao-visual__numero" id="cv-numero">•••• •••• •••• ••••</span>
+      <span class="cartao-visual__linha"><span id="cv-nome">NOME NO CARTÃO</span><span id="cv-validade">MM/AA</span></span>
+      <span class="cartao-visual__bandeira" id="cv-bandeira"></span>
+    </div>
+    <label class="rotulo" for="cc-numero">Número do cartão</label>
+    <input class="campo" id="cc-numero" inputmode="numeric" autocomplete="off" maxlength="23" placeholder="0000 0000 0000 0000">
+    <label class="rotulo" for="cc-nome">Nome impresso no cartão</label>
+    <input class="campo" id="cc-nome" autocomplete="off" maxlength="40" placeholder="Como está no cartão">
+    <div class="duas-colunas">
+      <div><label class="rotulo" for="cc-validade">Validade</label>
+        <input class="campo" id="cc-validade" inputmode="numeric" autocomplete="off" maxlength="5" placeholder="MM/AA"></div>
+      <div><label class="rotulo" for="cc-cvv">CVV</label>
+        <input class="campo" id="cc-cvv" inputmode="numeric" autocomplete="off" maxlength="4" placeholder="123"></div>
+    </div>
+    <p class="dica">Para testar, use 4242 4242 4242 4242, qualquer validade futura e qualquer CVV.</p>
+    <p class="status" id="checkout-status" role="status" aria-live="polite"></p>
+    <div class="acoes acoes--fim">
+      <button class="botao botao--leve" type="button" data-fechar>Cancelar</button>
+      <button class="botao" id="checkout-pagar" type="submit">Pagar (simulado)</button>
+    </div>
+  </form>
+</dialog>
 
 <script src="/static/vendor/marked.min.js"></script>
 <script src="/static/vendor/purify.min.js"></script>
 <script src="/static/vendor/katex/katex.min.js"></script>
 <script src="/static/render.js"></script>
-<script src="/static/app.js?v=fotos-3"></script>
+<script src="/static/app.js?v=final-1"></script>
 </body>
 </html>

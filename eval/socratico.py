@@ -90,7 +90,7 @@ async def executar(modelos: list[str], destino: Path, *, limite: int | None = No
             raise ValueError("IDs de teste desconhecidos")
     if limite:
         # Alterna PAA e SD mesmo numa rodada rápida.
-        por_disciplina = [[c for c in casos if c["disciplina"] == d] for d in ("paa", "sd")]
+        por_disciplina = [[c for c in casos if c["disciplina"] == d] for d in dict.fromkeys(c["disciplina"] for c in casos)]
         casos = [grupo[i] for i in range(max(map(len, por_disciplina)))
                  for grupo in por_disciplina if i < len(grupo)][:limite]
     registros = []

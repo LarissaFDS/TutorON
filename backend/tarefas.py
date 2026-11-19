@@ -24,7 +24,7 @@ from acervo.disciplinas import obter
 
 from . import animacao, foto, prompts, seguranca, tutoria
 from .dados import Registro, agora, novo_id
-from .llm import LLM, SEM_RACIOCINIO, PLANEJAMENTO_JSON, AllUnavailable, Model, Result, degradado
+from .llm import LLM, SEM_RACIOCINIO, PLANEJAMENTO_JSON, PREFERIR_LOCAL, AllUnavailable, Model, Result, degradado
 from .animacao.roteiro import extrair_json
 from .rag import contexto, recuperar
 
@@ -199,7 +199,7 @@ class Tarefas:
     # ------------------------------------------------------------------ modo Tutor
     def perguntar(self, pergunta: str, contexto_aluno: str | None, disciplina: str | None = None,
                   ajuda: str = "auto", leitura_foto: str | None = None, historico: list[dict] | None = None,
-                  travou: str | None = None) -> Tarefa:
+                  travou: str | None = None, perfil: str | None = None, modo: str = "completo") -> Tarefa:
         d = obter(disciplina)  # antes da tarefa: disciplina desconhecida falha na hora, não em segundo plano
         ajuda = prompts.ajuda_valida(ajuda)
         historico = historico or []
@@ -208,6 +208,8 @@ class Tarefas:
             ajuda = prompts.proxima_ajuda([prompts.ajuda_valida(h.get("ajuda")) for h in historico])
 
         async def trabalho(t: Tarefa) -> None:
+            # Contexto da tarefa (asyncio copia o contexto): vale só para esta pergunta.
+            PREFERIR_LOCAL.set(modo == "padrao" and self.settings.gratis_local_primeiro)
             if seguranca.pedido_de_instrucoes(pergunta):
                 # Não chega à IA: a recusa não depende de o modelo obedecer ao prompt.
                 ident = novo_id()
@@ -233,7 +235,7 @@ class Tarefas:
             t.status, t.mensagem = "gerando", "Preparando a resposta…"
             tamanho = len(pergunta) + len(contexto_aluno or "") + len(leitura_foto or "")
             prompt = prompts.prompt_socratico(pergunta, contexto(trechos, tamanho), contexto_aluno, ajuda, leitura_foto,
-                                              historico, travou)
+                                              historico, travou, perfil)
 
             ident = novo_id()
             sistema = prompts.sistema_socratico(d)
@@ -255,7 +257,8 @@ class Tarefas:
             self.registro.anexar("perguntas.jsonl", {
                 "id": ident, "data": agora(), "disciplina": d.id, "pergunta": pergunta, "contexto": contexto_aluno,
                 "modo": "socratico", "versao_politica": "socratico-v2", "revisoes_pedagogicas": pareceres,
-                "ajuda": ajuda, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
+                "ajuda": ajuda, "modo_ia": modo, **({"leitura_foto": leitura_foto} if leitura_foto else {}),
+                **({"perfil": perfil} if perfil else {}),
                 **({"rodada": len(historico) + 1, "travou": travou} if historico else {}),
                 **({"resposta_bloqueada": bloqueada} if bloqueada else {}),
                 "resposta": texto, **({"resposta_original": r.text, "ajustes": ajustes} if ajustes else {}),
