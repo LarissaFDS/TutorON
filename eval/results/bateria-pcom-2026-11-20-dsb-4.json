@@ -1,0 +1,21 @@
+[
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.1,
+  "fontes": [
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro de recuperação em um sistema DSB-SC, precisamos olhar para o que acontece logo após a multiplicação do sinal modulado pela portadora local.\n\nQuando você multiplica o sinal $s(t) = m(t) \\cos(2\\pi f_c t)$ pela portadora local $\\cos(2\\pi f_c t)$, o resultado, pela identidade trigonométrica, gera dois termos: um que contém a mensagem original (em baixas frequências) e outro que contém a mensagem deslocada para o dobro da frequência da portadora ($2f_c$).\n\nO objetivo do filtro passa-baixas é exatamente isolar a mensagem original e eliminar a cópia em alta frequência. Pense no espectro desse sinal resultante:\n1. Onde está centrada a mensagem original?\n2. Onde está centrada a cópia de alta frequência?\n3. Qual é a faixa de frequências que o filtro deve \"deixar passar\" para garantir que a mensagem seja recuperada sem distorção, mas sem incluir a cópia em $2f_c$?\n\nLembre-se da convenção que você está utilizando: se a mensagem original ocupa de $0$ a $W$ Hz, qual é a largura de banda mínima necessária para passar apenas esse conteúdo? E como isso se relaciona com a frequência de corte do filtro?\n\n### Sua vez\nSe a mensagem $m(t)$ possui uma largura de banda $W$ (em Hz), qual deve ser a frequência de corte $f_{corte}$ do filtro passa-baixas para que ele recupere apenas a mensagem original, considerando que a cópia indesejada está centrada em $2f_c$?"
+ }
+]

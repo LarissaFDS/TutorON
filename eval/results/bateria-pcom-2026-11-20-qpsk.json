@@ -1,0 +1,114 @@
+[
+ {
+  "id": "pcom-am-banda",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+  "esperado": "BT = 2W = 10 kHz (duas bandas laterais, frequências positivas); a portadora não muda a banda",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 26.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-carson",
+  "disciplina": "pcom",
+  "pergunta": "Como calcular a largura de banda de FM pela regra de Carson?",
+  "esperado": "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 2 e 4; Anotações \"Lista 2s\" (19 ago. 2026), p. 2; Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 8",
+   "Anotações \"Lista 2s\" (19 ago. 2026), p. 2–3 (questões 3 e 4)",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para calcular a largura de banda de um sinal FM pela regra de Carson, o ponto de partida é entender que o espectro de um sinal modulado em frequência não é tão simples quanto o do AM, pois ele depende de como a frequência da portadora varia em relação à mensagem.\n\nA regra de Carson é uma aproximação prática que estima a faixa necessária para conter a maior parte da potência do sinal (cerca de 98%). Ela combina dois fatores principais: o **desvio de frequência** ($\\Delta f$), que indica o quanto a frequência se afasta da portadora, e a **frequência da mensagem** ($f_m$), que dita a rapidez com que esse desvio ocorre.\n\nAo olhar para a fórmula $B_T \\approx 2(\\Delta f + f_m)$, note que ela soma esses dois componentes antes de dobrar o resultado. É fundamental que ambos estejam na mesma unidade (Hz). Se você estiver trabalhando com frequências angulares ($\\omega$ em rad/s), lembre-se de converter para Hz dividindo por $2\\pi$ antes de somar.\n\nUma dica importante: se você tiver o índice de modulação $\\beta$ e a frequência da mensagem, você também pode expressar essa largura como $B_T \\approx 2f_m(\\beta + 1)$. Ambas as formas levam ao mesmo resultado, desde que você tenha os dados corretos.\n\n### Sua vez\nSe você tem um sinal FM com uma mensagem de $10$ kHz e um desvio de frequência de $40$ kHz, tente montar a expressão da regra de Carson no papel. Qual seria o valor da soma dentro dos parênteses antes de aplicar o fator multiplicativo?"
+ },
+ {
+  "id": "pcom-pm-fm",
+  "disciplina": "pcom",
+  "pergunta": "Qual a diferença entre PM e FM?",
+  "esperado": "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 60.1,
+  "fontes": [
+   "Anotações \"Simulação - Modulação FM e PM\" (27 ago. 2026), p. 1–5; Anotações \"Lista 2s\" (19 ago. 2026), p. 1; Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre PM e FM está na **característica que a mensagem modula na portadora**. Em PM, a **fase** da portadora varia com a mensagem, enquanto em FM, a **frequência instantânea** da portadora é que varia com a mensagem. \n\nPense: se você tem uma mensagem $ m(t) $, como isso afeta a fase e a frequência da portadora? Qual é a relação entre a fase e a frequência? E como isso se reflete no sinal modulado?\n\n### Sua vez  \nEscreva a fórmula da fase em função da mensagem para um sinal PM e para um sinal FM. O que muda entre elas?"
+ },
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Qual a eficiência espectral de uma QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a eficiência espectral ($\\eta$) de uma modulação QPSK, precisamos seguir os passos de cálculo que relacionam a taxa de bits ($R_b$) com a banda ocupada ($B_T$).\n\nLembre-se que a eficiência espectral é definida como a razão entre a taxa de bits e a largura de banda:\n$$\\eta = \\frac{R_b}{B_T}$$\n\nPara chegar ao valor, considere os seguintes pontos:\n1. **Bits por símbolo ($k$):** Na QPSK, quantos estados (símbolos) diferentes existem? Sabendo que $M$ é o número de estados, quantos bits são necessários para representar cada símbolo ($k = \\log_2 M$)?\n2. **Taxa de bits vs. Taxa de símbolos:** A relação entre a taxa de bits ($R_b$) e a taxa de símbolos ($R_s$) é dada por $R_b = R_s \\cdot k$.\n3. **Banda ocupada ($B_T$):** Assumindo um pulso de Nyquist ideal (sem fator de rolagem), a banda ocupada em banda passante é igual à taxa de símbolos ($B_T = R_s$).\n\nAo substituir $R_b$ e $B_T$ na fórmula da eficiência, você notará que a taxa de símbolos ($R_s$) aparece tanto no numerador quanto no denominador.\n\n### Sua vez\nCom base nos passos acima, qual é o valor de $M$ para a QPSK e, consequentemente, quantos bits por símbolo ($k$) ela transmite? Tente montar a expressão da eficiência $\\eta$ substituindo esses valores."
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro necessário para recuperar a mensagem $m(t)$ em um sistema DSB-SC, precisamos pensar no que acontece com o espectro do sinal modulado quando o multiplicamos novamente pela portadora no receptor.\n\nLembre-se que, ao multiplicar o sinal modulado $s(t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro original é deslocado para novas posições. O que você espera encontrar na vizinhança da frequência zero (banda base) após essa operação?\n\nConsidere o seguinte:\n1. O sinal modulado $s(t)$ ocupa a faixa de $f_c - W$ a $f_c + W$ (nas frequências positivas).\n2. Ao multiplicar por $\\cos(2\\pi f_c t)$, o espectro resultante terá componentes em torno de $0$ Hz e em torno de $2f_c$ Hz.\n3. O filtro passa-baixas deve ser capaz de isolar apenas a parte que contém a mensagem original, rejeitando as componentes de alta frequência que surgiram em torno de $2f_c$.\n\nQual é a frequência máxima que o filtro deve permitir passar para que a mensagem $m(t)$ seja recuperada sem distorção, considerando que a mensagem original tem largura de banda $W$?\n\n### Sua vez\nDesenhe no papel o espectro de um sinal DSB-SC (duas bandas laterais em torno de $f_c$) e, abaixo dele, o espectro resultante após a multiplicação pela portadora no receptor. Qual é a frequência de corte mínima necessária para o filtro passa-baixas?"
+ },
+ {
+  "id": "pcom-fora",
+  "disciplina": "pcom",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O mapa de Karnaugh é uma ferramenta visual poderosa para simplificar expressões booleanas, baseada no princípio de que células adjacentes diferem por apenas uma variável. Ao agrupar os \"1s\" em potências de 2 (1, 2, 4, 8...), você consegue eliminar as variáveis que mudam de estado dentro do grupo.\n\nPara começar, imagine o mapa como uma grade onde cada célula representa uma combinação das suas variáveis de entrada. O segredo é que, ao formar um grupo, você deve observar quais variáveis mantêm o mesmo valor (0 ou 1) em todas as células daquele agrupamento. As variáveis que mudam de valor dentro do grupo são as que você pode descartar da expressão final.\n\nPor exemplo, se você tem um grupo de dois \"1s\" onde a variável $A$ é sempre 1, mas a variável $B$ muda de 0 para 1, a variável $B$ é eliminada e o termo resultante para aquele grupo será apenas $A$.\n\nLembre-se:\n1. Agrupe o maior número possível de \"1s\" (sempre em potências de 2).\n2. Grupos maiores resultam em termos mais simples.\n3. O mapa é \"cíclico\": as bordas da esquerda conectam-se com as da direita, e o topo com a base.\n\n### Sua vez\nDesenhe um mapa de Karnaugh para 3 variáveis ($A, B, C$) e coloque \"1s\" nas células correspondentes a $ABC=010$ e $ABC=011$. Como você agruparia esses dois \"1s\" e qual variável seria eliminada nesse caso?"
+ }
+]

@@ -1,0 +1,24 @@
+[
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)"
+  ],
+  "rotulos_citados": [
+   "P2",
+   "P3"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro de recuperação em um sistema DSB-SC, precisamos olhar para o que acontece após a multiplicação do sinal modulado pela portadora local.\n\nQuando você multiplica o sinal modulado $s(t) = A_c m(t) \\cos(2\\pi f_c t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro resultante contém duas partes principais: uma centrada em zero (que é a mensagem original recuperada) e outra centrada em $2f_c$ (que é uma cópia da mensagem deslocada para frequências altas).\n\nO objetivo do filtro passa-baixas é permitir a passagem da mensagem original e bloquear a cópia que foi para $2f_c$. Pense no espectro da mensagem, que vai de $0$ a $W$ Hz:\n1. Onde termina a mensagem original?\n2. Onde começa a cópia indesejada em $2f_c$?\n\nO filtro deve ter uma frequência de corte $f_{corte}$ que esteja situada exatamente nesse intervalo entre $W$ e $2f_c - W$. A largura de banda do filtro, portanto, deve ser suficiente para cobrir a mensagem, mas não deve atingir a cópia em alta frequência.\n\nLembre-se de verificar se o seu exercício pede a largura de banda considerando apenas frequências positivas (a faixa de $0$ a $f_{corte}$) ou a largura bilateral (de $-f_{corte}$ a $+f_{corte}$), conforme discutido nas anotações [P2] e [P3].\n\n### Sua vez\nSe a mensagem $m(t)$ tem largura de banda $W = 5$ kHz e a portadora $f_c$ é de $50$ kHz, qual é o intervalo de frequências (em Hz) onde você pode posicionar a frequência de corte do filtro passa-baixas para recuperar a mensagem sem distorção?"
+ }
+]

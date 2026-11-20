@@ -116,6 +116,18 @@ PERGUNTAS = [
     ("eletronica-saturacao", "eletronica", "Como saber se o transistor está saturado?",
      "comparar βIB com IC,sat = VCC/(RC+RE) ou VCE < 0,2 V; na saturação não vale IC = βIB"),
     ("eletronica-fora", "eletronica", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Princípios de Comunicação: valores conferidos em tests_acervo/test_disciplina_pcom.py (NumPy, SciPy e SymPy).
+    ("pcom-am-banda", "pcom", "Como se calcula a largura de banda de um sinal AM a partir da banda da mensagem?",
+     "BT = 2W (duas bandas laterais, frequências positivas); a portadora não muda a banda; ex.: 5 kHz dá 10 kHz"),
+    ("pcom-carson", "pcom", "Como calcular a largura de banda de FM pela regra de Carson?",
+     "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz"),
+    ("pcom-pm-fm", "pcom", "Qual a diferença entre PM e FM?",
+     "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m"),
+    ("pcom-qpsk", "pcom", "Como se calcula a eficiência espectral de uma modulação digital como a QPSK?",
+     "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25"),
+    ("pcom-filtro-dsb", "pcom", "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+     "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte"),
+    ("pcom-fora", "pcom", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

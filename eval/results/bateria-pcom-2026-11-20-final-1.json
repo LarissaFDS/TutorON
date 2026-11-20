@@ -1,0 +1,105 @@
+[
+ {
+  "id": "pcom-am-banda",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+  "esperado": "BT = 2W = 10 kHz (duas bandas laterais, frequências positivas); a portadora não muda a banda",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-carson",
+  "disciplina": "pcom",
+  "pergunta": "Como calcular a largura de banda de FM pela regra de Carson?",
+  "esperado": "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 2 e 4; Anotações \"Lista 2s\" (19 ago. 2026), p. 2; Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 8",
+   "Anotações \"Lista 2s\" (19 ago. 2026), p. 2–3 (questões 3 e 4)",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender a regra de Carson, imagine que o sinal FM \"espalha\" a energia da portadora original para frequências vizinhas. A largura de banda necessária para capturar quase toda essa energia (cerca de 98%) depende de quão rápido a frequência oscila ($\\Delta f$) e de quão rápido a própria mensagem varia ($f_m$).\n\nA fórmula é $B_T \\approx 2(\\Delta f + f_m)$. O ponto-chave aqui é que a largura de banda não é apenas o desvio, mas sim o desvio somado à frequência da mensagem, tudo isso multiplicado por dois.\n\nPara aplicar essa regra, o passo mais importante é garantir que você está trabalhando com as unidades corretas:\n1. O desvio de frequência deve estar em **Hz** ($\\Delta f$). Se você tiver o desvio em rad/s ($\\Delta\\omega$), lembre-se de converter dividindo por $2\\pi$.\n2. A frequência da mensagem ($f_m$) também deve estar em **Hz**.\n\nSe você tiver um sinal onde a frequência instantânea varia entre $f_c - \\Delta f$ e $f_c + \\Delta f$, a regra de Carson nos diz que o espectro ocupado será um pouco maior que essa excursão, justamente por causa da variação da mensagem.\n\n### Sua vez\nSe você tem um sinal FM com um desvio de frequência de $\\Delta f = 50$ kHz e uma mensagem que é um tom puro de $f_m = 10$ kHz, monte a expressão da regra de Carson substituindo esses valores e me diga: qual é a unidade final do resultado que você espera obter?"
+ },
+ {
+  "id": "pcom-pm-fm",
+  "disciplina": "pcom",
+  "pergunta": "Qual a diferença entre PM e FM?",
+  "esperado": "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.1,
+  "fontes": [
+   "Anotações \"Simulação - Modulação FM e PM\" (27 ago. 2026), p. 1–5; Anotações \"Lista 2s\" (19 ago. 2026), p. 1; Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre PM (Modulação de Fase) e FM (Modulação de Frequência), o melhor caminho é olhar para a definição da **fase instantânea** $\\theta(t)$, que é o argumento dentro do cosseno: $s(t) = A\\cos(\\theta(t))$.\n\nPense no seguinte: se você quer que a informação da mensagem $m(t)$ altere o sinal, você pode escolher \"esconder\" essa informação na fase ou na frequência.\n\n1.  **Na PM:** A fase instantânea $\\theta(t)$ é alterada diretamente pela mensagem: $\\theta(t) = \\omega_c t + k_p m(t)$.\n2.  **Na FM:** O que a mensagem altera é a **frequência instantânea** $\\omega_i(t)$, que, como vimos em [P2], é a derivada da fase em relação ao tempo ($\\omega_i = \\frac{d\\theta}{dt}$).\n\nSe a frequência é a derivada da fase, o que acontece com a fase se você quiser que a frequência siga a mensagem em FM? Tente relacionar isso com a operação matemática de integração.\n\nSe você tiver um sinal de mensagem constante, como o comportamento da fase em cada um dos dois casos? Em qual deles a fase \"cresce\" indefinidamente com o tempo e em qual ela apenas oscila em torno de um valor?\n\n### Sua vez\nEscreva no papel a expressão da fase instantânea $\\theta(t)$ para um sinal FM, sabendo que $\\omega_i(t) = \\omega_c + k_f m(t)$ e que $\\theta(t) = \\int \\omega_i(t) dt$. Como essa expressão difere da forma como a fase é definida na PM?"
+ },
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Qual a eficiência espectral de uma QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.1,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro necessário para recuperar a mensagem $m(t)$ em um sistema DSB-SC, precisamos pensar no que acontece com o sinal logo após a etapa de demodulação (multiplicação pela portadora local).\n\nQuando você multiplica o sinal modulado $s(t)$ pela portadora $c(t) = \\cos(2\\pi f_c t)$, o espectro da mensagem original é deslocado para a origem (frequência zero) e também para o dobro da frequência da portadora ($2f_c$).\n\nLembre-se de que a mensagem original $m(t)$ possui uma largura de banda $W$ (frequência máxima presente em $m(t)$). O filtro que colocamos após a multiplicação serve justamente para \"isolar\" a parte do espectro que nos interessa e eliminar as componentes de alta frequência que surgiram no processo.\n\nSe o espectro da mensagem recuperada está centrado em 0 Hz e vai até $W$ Hz, qual é a faixa de frequências que esse filtro deve permitir passar? Pense na relação entre essa faixa e a largura de banda da mensagem original.\n\n**Dica:** Lembre-se da convenção que você está usando (se está considerando apenas frequências positivas ou o espectro bilateral).\n\n### Sua vez\nConsiderando que a mensagem $m(t)$ ocupa a faixa de $0$ a $W$ Hz, qual deve ser a frequência de corte do filtro passa-baixas para recuperar apenas a mensagem original, e qual seria a largura de banda desse filtro (em frequências positivas)?"
+ }
+]

@@ -1,0 +1,42 @@
+[
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Qual a eficiência espectral de uma QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro de recuperação em um sistema DSB-SC, precisamos pensar no que acontece com o sinal após a multiplicação pela portadora no receptor.\n\nQuando você multiplica o sinal modulado $s(t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro da mensagem original é \"deslocado\" de volta para a origem (frequência zero), mas também aparece uma cópia centrada em $2f_c$.\n\nO filtro passa-baixas (LPF) tem a função de isolar apenas a mensagem original, descartando as componentes de alta frequência que surgiram na demodulação.\n\n1.  Se a mensagem original $m(t)$ possui uma largura de banda de $W$ Hz (ou seja, seu espectro vai de $0$ a $W$ Hz), qual é a faixa de frequências que o filtro deve permitir passar?\n2.  Lembre-se da diferença entre largura de banda unilateral (frequências positivas) e bilateral (que inclui o lado negativo do espectro). Se o seu filtro deve passar de $0$ a $W$ Hz, qual é a largura de banda unilateral dele?\n\n### Sua vez\nDesenhe no papel o espectro da mensagem $M(f)$ (de $-W$ a $W$) e o espectro após a multiplicação pela portadora no receptor. Qual é a frequência de corte mínima do filtro passa-baixas para recuperar $m(t)$ sem distorção?"
+ }
+]

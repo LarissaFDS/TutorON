@@ -1,0 +1,121 @@
+[
+ {
+  "id": "pcom-am-banda",
+  "disciplina": "pcom",
+  "pergunta": "Como se calcula a largura de banda de um sinal AM a partir da banda da mensagem?",
+  "esperado": "BT = 2W (duas bandas laterais, frequências positivas); a portadora não muda a banda; ex.: 5 kHz dá 10 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a largura de banda de um sinal AM, o melhor caminho é visualizar o que acontece com o espectro da mensagem quando ela é multiplicada pela portadora.\n\nPense no espectro da sua mensagem original (o sinal de áudio ou dados que você quer transmitir). Se ela ocupa uma faixa de frequências que vai de $0$ até $W$ Hz, o que acontece quando você a \"desloca\" para uma frequência central $f_c$ através da modulação?\n\nAo multiplicar a mensagem pela portadora (que é um cosseno em $f_c$), o espectro da mensagem é espelhado e deslocado para $f_c$. Isso cria duas bandas laterais: uma acima da portadora e outra abaixo.\n\nSe a mensagem original tem largura $W$, qual é a distância da frequência mais baixa até a frequência mais alta ocupada pelo sinal modulado em torno de $f_c$? Lembre-se de que, em AM, a largura de banda de transmissão ($B_T$) é definida pela faixa total ocupada nas frequências positivas.\n\n### Sua vez\nSe você tem uma mensagem que ocupa de $0$ a $5$ kHz, desenhe no papel o espectro dessa mensagem e, ao lado, o espectro do sinal AM resultante (com a portadora em $100$ kHz). Qual é a frequência mínima e a máxima ocupada pelo sinal modulado e qual a diferença entre elas?"
+ },
+ {
+  "id": "pcom-carson",
+  "disciplina": "pcom",
+  "pergunta": "Como calcular a largura de banda de FM pela regra de Carson?",
+  "esperado": "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 2 e 4; Anotações \"Lista 2s\" (19 ago. 2026), p. 2; Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 8",
+   "Anotações \"Lista 2s\" (19 ago. 2026), p. 2–3 (questões 3 e 4)",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-pm-fm",
+  "disciplina": "pcom",
+  "pergunta": "Qual a diferença entre PM e FM?",
+  "esperado": "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações \"Simulação - Modulação FM e PM\" (27 ago. 2026), p. 1–5; Anotações \"Lista 2s\" (19 ago. 2026), p. 1; Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre PM (Modulação de Fase) e FM (Modulação de Frequência), o ponto de partida é olhar para o que acontece dentro do argumento do cosseno, ou seja, a **fase instantânea** $\\theta(t)$.\n\nComo vimos em [P2], o sinal modulado é da forma $s(t) = A\\cos(\\theta(t))$. A diferença fundamental reside em como a mensagem $m(t)$ altera esse ângulo:\n\n1.  **No PM:** A fase instantânea $\\theta(t)$ é alterada **diretamente** pela mensagem. Se você dobrar o valor da mensagem, a fase muda proporcionalmente.\n2.  **No FM:** O que a mensagem altera diretamente é a **frequência instantânea** $\\omega_i(t)$. Lembre-se da relação fundamental entre frequência e fase: $\\omega_i(t) = \\frac{d\\theta(t)}{dt}$.\n\nPense nisso como uma relação de causa e efeito:\n*   Se no FM a mensagem controla a *taxa de variação* da fase (a derivada), o que você precisa fazer com a mensagem para obter a fase $\\theta(t)$ e colocá-la dentro do cosseno?\n*   Por outro lado, se no PM a mensagem controla a própria fase, o que acontece com a frequência instantânea quando a mensagem varia rapidamente?\n\nTente desenhar ou escrever a expressão da fase $\\theta(t)$ para um tom $m(t) = \\cos(\\omega_m t)$ nos dois casos.\n\n### Sua vez\nEscreva a expressão da fase instantânea $\\theta(t)$ para um sinal FM, partindo da definição de que a frequência instantânea é $\\omega_i(t) = \\omega_c + k_f m(t)$. Como você isolaria $\\theta(t)$ a partir dessa igualdade?"
+ },
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Como se calcula a eficiência espectral de uma modulação digital como a QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 1–4",
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender a eficiência espectral ($\\eta$), pense nela como uma medida de \"densidade de informação\": quantos bits conseguimos \"espremer\" dentro de cada unidade de frequência (Hz) disponível.\n\nO material [P2] nos dá o caminho: a eficiência é a razão entre a taxa de bits ($R_b$) e a largura de banda ocupada ($B_T$). O segredo para calcular isso sem se perder nas unidades é sempre converter tudo para a taxa de símbolos ($R_s$), que é o \"elo\" entre a informação digital e o sinal analógico.\n\nLembre-se que, para qualquer modulação, a taxa de bits é sempre $R_b = R_s \\cdot \\log_2 M$. Se você estiver usando um pulso ideal, a banda ocupada $B_T$ será numericamente igual à taxa de símbolos $R_s$. \n\nAo montar a fração $\\eta = \\frac{R_b}{B_T}$, tente substituir esses termos e observe o que acontece com a variável $R_s$. Ela permanece na expressão final ou ela se cancela?\n\n### Sua vez\nConsiderando uma modulação QPSK ($M=4$), quantos bits por símbolo ($k$) você obtém? Substitua esse valor na fórmula da eficiência espectral assumindo um pulso ideal ($B_T = R_s$) e escreva no papel qual é a relação final entre $\\eta$ e $k$."
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro necessário para recuperar a mensagem $m(t)$ em um sistema DSB-SC, precisamos pensar no que acontece com o sinal após a demodulação.\n\nQuando você multiplica o sinal modulado $s(t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro da mensagem é deslocado de volta para a origem (frequência zero) e também para uma frequência mais alta (o dobro da portadora, $2f_c$).\n\nO filtro passa-baixas tem a função de isolar apenas a parte que nos interessa. Se a sua mensagem original $m(t)$ ocupa uma faixa de $0$ a $W$ Hz, qual é a frequência máxima que o filtro deve permitir passar para garantir que toda a informação da mensagem seja recuperada, sem deixar passar a componente de alta frequência que surgiu na demodulação?\n\nLembre-se de que, em PCOM, a largura de banda de um filtro passa-baixas é definida pela sua frequência de corte. Se o filtro deve deixar passar a mensagem que vai até $W$ Hz, qual deve ser o valor mínimo e máximo dessa frequência de corte?\n\n### Sua vez\nDesenhe no papel o espectro do sinal após a multiplicação pela portadora local (o sinal demodulado). Identifique onde está a mensagem original e onde está a componente de alta frequência. Qual é a frequência de corte ideal para o filtro passa-baixas que separa essas duas partes?"
+ },
+ {
+  "id": "pcom-fora",
+  "disciplina": "pcom",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma função booleana usando o Mapa de Karnaugh, o objetivo principal é agrupar os \"1s\" adjacentes em potências de 2 (1, 2, 4, 8...), de modo a eliminar as variáveis que mudam de estado dentro desses grupos.\n\nPense no mapa como uma representação visual da tabela-verdade, onde células vizinhas diferem por apenas um bit (código de Gray). Ao agrupar, você busca o maior bloco possível, pois quanto maior o grupo, mais variáveis você consegue eliminar da expressão final.\n\nO processo segue estes passos:\n1. **Montagem:** Preencha o mapa com os valores da tabela-verdade.\n2. **Agrupamento:** Circule os \"1s\" adjacentes em blocos de tamanho $2^n$. Lembre-se que o mapa é \"dobrável\" (as bordas opostas são vizinhas).\n3. **Simplificação:** Para cada grupo, observe quais variáveis mantêm o mesmo valor (0 ou 1) em todas as células daquele bloco. As variáveis que mudam de valor dentro do grupo são descartadas.\n\nSe você tiver uma função específica, tente desenhar o mapa dela no papel. Quais são as variáveis de entrada da sua função e quantos \"1s\" você tem para agrupar?\n\n### Sua vez\nDesenhe um mapa de 3 variáveis ($A, B, C$) e tente agrupar os \"1s\" presentes nas células onde a função vale 1 para as combinações $ABC = 010, 011, 110, 111$. Quais variáveis permanecem constantes dentro desse grupo de 4 células?"
+ }
+]
