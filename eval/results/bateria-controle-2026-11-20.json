@@ -1,0 +1,119 @@
+[
+ {
+  "id": "controle-blocos",
+  "disciplina": "controle",
+  "pergunta": "Como reduzir um diagrama de blocos com realimentação negativa?",
+  "esperado": "Y/R = G/(1 + GH) (malha fechada, realimentação negativa); positiva dá G/(1 − GH); série, paralelo e mover blocos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 248.5,
+  "fontes": [
+   "Anotações \"Diagrama de Blocos\" (1º out. 2026), p. 1–4",
+   "Anotações \"Diagrama de Blocos\" (1º out. 2026), p. 4–7",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 6–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para reduzir um diagrama de blocos, o segredo é simplificar o sistema passo a passo até que ele se pareça com a estrutura básica de malha fechada.\n\nImagine que você tem um sinal de entrada $R(s)$, um controlador $C(s)$ e uma planta $G_p(s)$ no ramo direto, e um sensor $H(s)$ no ramo de realimentação. O sinal que chega ao somador é a diferença entre a entrada e o sinal que volta pelo sensor.\n\nSe você chamar o ganho total do ramo direto de $G(s) = C(s)G_p(s)$, o sinal de saída $Y(s)$ pode ser escrito como o ganho do ramo direto multiplicado pelo erro: $Y(s) = G(s) \\cdot E(s)$. Como o erro é $E(s) = R(s) - H(s)Y(s)$, você tem um sistema de equações algébricas. O objetivo é manipular essas equações para isolar a razão entre a saída e a entrada, ou seja, $\\frac{Y(s)}{R(s)}$.\n\nSe o diagrama for complexo, tente primeiro agrupar blocos em série (multiplicando-os) ou em paralelo (somando-os) antes de aplicar a fórmula da malha fechada.\n\n### Sua vez\nConsidere um sistema onde o ramo direto tem um ganho $G(s)$ e o ramo de retorno tem um ganho $H(s)$. Escreva a equação do erro $E(s)$ em função de $R(s)$, $Y(s)$ e $H(s)$, e substitua essa expressão na equação $Y(s) = G(s)E(s)$. O que você obtém ao isolar $Y(s)$ de um lado e $R(s)$ do outro?"
+ },
+ {
+  "id": "controle-sobressinal",
+  "disciplina": "controle",
+  "pergunta": "Como calcular o sobressinal de um sistema de segunda ordem?",
+  "esperado": "Mp = e^(−ζπ/√(1−ζ²)); ζ e ωn tirados do denominador s² + 2ζωn s + ωn²; ζ = 0,5 dá 16,3%",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 60.1,
+  "fontes": [
+   "Anotações \"Análise de Resposta Temporal\" (1º out. 2026), p. 11–15",
+   "Anotações \"Análise de Resposta Temporal\" (1º out. 2026), p. 3–9"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular o sobressinal ($M_p$) de um sistema de segunda ordem, o primeiro passo é identificar os parâmetros fundamentais do sistema a partir da sua função de transferência.\n\nComo vimos no material [P2], o sistema de segunda ordem na forma padrão é dado por:\n$$G(s) = \\frac{C\\omega_n^2}{s^2 + 2\\zeta\\omega_ns + \\omega_n^2}$$\n\nO sobressinal depende exclusivamente do **fator de amortecimento** ($\\zeta$). Se você tiver a função de transferência, você deve comparar o denominador dela com a forma padrão $s^2 + 2\\zeta\\omega_ns + \\omega_n^2$ para isolar o valor de $\\zeta$.\n\nUma vez que você tenha o valor de $\\zeta$, você pode utilizar a fórmula do sobressinal:\n$$M_p = e^{-\\frac{\\zeta\\pi}{\\sqrt{1 - \\zeta^2}}}$$\n\nLembre-se de que essa fórmula é válida apenas para sistemas de segunda ordem **padrão** (sem zeros adicionais ou polos extras). Se o seu sistema tiver um termo no numerador (um zero) ou um polo extra, essa fórmula será apenas uma aproximação e o comportamento real será diferente.\n\n### Sua vez\nIdentifique na sua função de transferência os valores de $2\\zeta\\omega_n$ e $\\omega_n^2$. Qual é o valor de $\\zeta$ que você encontra ao comparar com a forma padrão?"
+ },
+ {
+  "id": "controle-erro-tipo1",
+  "disciplina": "controle",
+  "pergunta": "Qual o erro em regime para entrada degrau num sistema tipo 1?",
+  "esperado": "zero (Kp infinito); conferir estabilidade da malha fechada antes do TVF; rampa dá 1/Kv",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 104.2,
+  "fontes": [
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 1–6",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 6–9",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "controle-lgr",
+  "disciplina": "controle",
+  "pergunta": "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
+  "esperado": "polos 0 e −2; eixo real [−2, 0]; assíntotas ±90° em σ = −1; ramificação em −1 com K = 1; estável para K > 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 46.1,
+  "fontes": [
+   "Anotações \"Método Lugar das raízes\" (11 nov. 2026), p. 1–3",
+   "Anotações \"Método Lugar das raízes\" (11 nov. 2026), p. 3–9",
+   "Anotações \"Estabilidade de SLIT contínuo\" (9 set. 2026), p. 6–8"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para desenhar o lugar das raízes, o primeiro passo é identificar onde os ramos começam e para onde eles tendem. O método do lugar das raízes analisa a equação característica $1 + KG(s) = 0$.\n\nPara o seu sistema $G(s) = \\frac{1}{s(s+2)}$, a equação característica é $s^2 + 2s + K = 0$.\n\n1.  **Polos de malha aberta:** Identifique os valores de $s$ que tornam $G(s)$ infinito (quando $K=0$). Onde eles estão no plano complexo?\n2.  **Eixo Real:** O lugar das raízes percorre o eixo real onde a condição de fase é satisfeita. Lembre-se da regra: o lugar existe à esquerda de um número ímpar de polos e zeros reais. Analise o segmento entre os seus polos.\n3.  **Assíntotas:** Como temos dois polos ($n=2$) e nenhum zero ($m=0$), quantos ramos vão para o infinito? Qual o ângulo dessas assíntotas e onde elas se cruzam no eixo real (o centroide)?\n\nCom esses pontos marcados no papel, você já terá a estrutura básica do desenho.\n\n### Sua vez\nMarque os polos de malha aberta no plano complexo e determine o centroide das assíntotas usando a fórmula $\\sigma = \\frac{\\sum \\text{polos} - \\sum \\text{zeros}}{n - m}$. Onde esses ramos se encontram e para onde eles vão quando $K$ aumenta?"
+ },
+ {
+  "id": "controle-massa-mola",
+  "disciplina": "controle",
+  "pergunta": "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
+  "esperado": "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 162.3,
+  "fontes": [
+   "Anotações \"Sistemas mecânicos\" (19 ago. 2026) e \"Revisão de Laplace e Sistemas mecânicos\", p. 7–8 e 10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 8–10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 4 e 10–16"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A função de transferência de um sistema massa-mola-amortecedor surge da aplicação da segunda lei de Newton. Qual é a equação diferencial que relaciona a força externa $ f(t) $, a posição $ x(t) $ e as propriedades do sistema $ m $, $ b $, $ K $?  \n\n### Dica:  \nUse a lei de Newton para a massa: a soma das forças atuantes ($ f(t) $, força da mola $ -Kx $, força do amortecedor $ -b\\dot{x} $) é igual à massa vezes a aceleração ($ m\\ddot{x} $).  \n\n### Sua vez  \nEscreva a equação diferencial do sistema e aplique a transformada de Laplace com condições iniciais nulas. Depois, isole $ X(s) $ em função de $ F(s) $.  \n\n---  \n*Se precisar de ajuda com a álgebra ou a transformada de Laplace, diga! (Não esqueça de mencionar se há realimentação ou se o sistema é de malha aberta.)*"
+ },
+ {
+  "id": "controle-fora",
+  "disciplina": "controle",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 16.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Vejo que você está estudando simplificação de funções lógicas. Notei que você perguntou sobre **Mapas de Karnaugh**, que é um método gráfico excelente para simplificar expressões booleanas.\n\nComo você está em uma disciplina de **Sistemas de Controle**, é importante notar que esse tema é fundamental em **Sistemas Digitais**. Em Sistemas de Controle, usamos mais funções de transferência e análise de estabilidade, mas a lógica booleana é a base para implementar controladores digitais.\n\nPara simplificar uma função usando o mapa, o segredo está em agrupar os \"1s\" adjacentes. O objetivo é formar grupos com potências de 2 (1, 2, 4, 8...) que sejam o maior possível, pois quanto maior o grupo, mais variáveis você consegue eliminar da expressão final.\n\nO passo fundamental é identificar quais variáveis permanecem constantes dentro de cada grupo que você formou. Se uma variável muda de 0 para 1 (ou vice-versa) dentro do mesmo grupo, ela não faz parte do termo simplificado daquele grupo.\n\nPara eu te ajudar melhor, você tem uma tabela verdade ou uma expressão específica que está tentando simplificar? Se tiver, tente montar o mapa no papel, preenchendo os valores conforme as entradas, e me conte como você organizou os grupos.\n\n### Sua vez\nDesenhe um mapa de Karnaugh para uma função de 3 variáveis ($A, B, C$) e me diga: se você tiver um grupo de 4 células adjacentes, quantas variáveis você espera que sejam eliminadas desse termo?"
+ }
+]
