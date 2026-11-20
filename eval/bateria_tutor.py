@@ -104,6 +104,18 @@ PERGUNTAS = [
     ("controle-massa-mola", "controle", "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
      "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))"),
     ("controle-fora", "controle", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Princípios de Comunicação: valores conferidos em tests_acervo/test_disciplina_pcom.py (NumPy, SciPy e SymPy).
+    ("pcom-am-banda", "pcom", "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+     "BT = 2W = 10 kHz (duas bandas laterais, frequências positivas); a portadora não muda a banda"),
+    ("pcom-carson", "pcom", "Como calcular a largura de banda de FM pela regra de Carson?",
+     "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz"),
+    ("pcom-pm-fm", "pcom", "Qual a diferença entre PM e FM?",
+     "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m"),
+    ("pcom-qpsk", "pcom", "Qual a eficiência espectral de uma QPSK?",
+     "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25"),
+    ("pcom-filtro-dsb", "pcom", "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+     "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte"),
+    ("pcom-fora", "pcom", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

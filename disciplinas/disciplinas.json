@@ -339,6 +339,37 @@
         "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
         "Como montar a função de transferência de um sistema massa-mola-amortecedor?"
       ]
+    },
+    {
+      "id": "pcom",
+      "nome": "Princípios de Comunicação",
+      "sigla": "PCOM",
+      "situacao": "em validação",
+      "itens": "disciplinas/pcom/acervo/itens.json",
+      "indice": "disciplinas/pcom/acervo/indice.json",
+      "materiais": "disciplinas/pcom/materiais",
+      "rigor": "disciplinas/pcom/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "pcom-01-sinais-espectro",
+        "pcom-02-am-dsb",
+        "pcom-03-ssb-vsb",
+        "pcom-04-modulacao-angular",
+        "pcom-05-filtros-esquemas",
+        "pcom-06-modulacao-digital",
+        "pcom-07-amostragem-pcm",
+        "pcom-08-exposicao-campos",
+        "pcom-09-ruido-processos",
+        "pcom-10-banda-base-codificacao-linha",
+        "pcom-11-enlaces-teoria-informacao"
+      ],
+      "exemplos": [
+        "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+        "Como calcular a largura de banda de FM pela regra de Carson?",
+        "Qual a diferença entre PM e FM?",
+        "Qual a eficiência espectral de uma QPSK?",
+        "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?"
+      ]
     }
   ]
 }

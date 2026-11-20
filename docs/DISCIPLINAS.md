@@ -246,6 +246,34 @@ IA real: Gemini, 20/11/2026, `eval/results/bateria-controle-2026-11-20.json` e `
 - erro ao degrau num sistema tipo 1: nas duas primeiras rodadas o revisor (modelo local, com o Gemini em 429) reprovou duas vezes uma pista correta só por mostrar a fórmula geral, e sobrou a ajuda de reserva. O `SISTEMA_REVISOR` (`backend/tutoria.py`) passou a permitir explicitamente a fórmula geral do material quando o valor final fica para o aluno. Na 3ª rodada (`…-revisor.json`) a pista veio aprovada de primeira, correta e sem entregar o zero; as perguntas de Sistemas Digitais da mesma rodada (Karnaugh e mux) continuaram sem entregar a resposta;
 - Karnaugh com Controle selecionada: a IA disse que o tema é de Sistemas Digitais, mas respondeu mesmo assim (o mesmo comportamento de Circuitos e Sinais).
 
+## Princípios de Comunicação: espectros, potências e desvios refeitos por código (20/11/2026)
+
+Princípios de Comunicação entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/pcom/`: rigor, 33 blocos (28 na busca; 5 notas da equipe candidatas: SSB e VSB, amostragem e PCM, ruído, codificação de linha, enlaces e teoria da informação), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_pcom.py`, que refaz cada resultado com NumPy (FFT, potência média, frequência instantânea), SciPy (`special.jv`, Butterworth, `hilbert`) e SymPy (identidades);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` (exemplos, variantes em LaTeX e em texto simples, perguntas fora) e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 12 PDFs (68 páginas) de anotações de aluno de 2026.2, parafraseadas; os cabeçalhos das simulações citam o docente Jobson de Araújo Nascimento. A ementa de ECOM034 (60 h) veio do PPC de 2014 (p. 43). Processos estocásticos, ruído, codificação de linha, enlaces e teoria da informação estão na ementa, mas não nas anotações: ficam só em notas IA fora da busca. A Lista 4 (exposição a campos) foi atribuída à disciplina pela sequência das listas, sem confirmação.
+
+Foram corrigidos 14 blocos e 5 ficaram pendentes de confirmação do professor; os principais:
+- identidade do produto de cossenos com o sinal trocado ($-$ no lugar de $+$);
+- linha da portadora desenhada num espectro DSB-SC;
+- $B = A_c\mu/2$ no AM (é $A_c\mu$; $A_c\mu/2$ é cada banda lateral);
+- FM escrita como $\phi = \beta m(t)$ e desvios em rad/s chamados de kHz;
+- raias de Bessel arredondadas e $t$ omitido na fase da portadora;
+- limite de exposição 4,16 kV/m (é 4,17) e "conformidade" para valores acima do limite público;
+- pendentes: largura de banda de um filtro que depende da convenção (500 Hz bilateral ou 9 kHz), "modulado em ângulo" resolvido como PM (FM daria 52 kHz), eficiência espectral sem enunciado, e as duas questões da Lista 4.
+
+A conferência também achou erros da própria equipe antes do commit: um passa-baixas de teste que atenuava a mensagem (o bloco dizia corte em 400 Hz para um tom de 300 Hz) e uma afirmação de conferência por SymPy que o SymPy não fechava; o bloco agora diz como foi conferido.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026, `eval/results/bateria-pcom-2026-11-20.json` e `…-repeticao.json`. Cada resposta foi conferida contra os valores dos testes:
+- banda do AM, regra de Carson e diferença entre PM e FM: corretas e socráticas, com o bloco certo citado;
+- filtro do DSB: na 1ª rodada veio do modelo local e estava **errada** (mandava filtrar uma banda lateral, em vez de multiplicar pela portadora e passar um passa-baixas); na repetição veio do Gemini, correta;
+- eficiência espectral da QPSK: **falhou nas duas rodadas**. O revisor reprovou as duas pistas por entregar a resposta, e sobrou a ajuda de reserva genérica. Por isso a disciplina continua **em validação**;
+- Karnaugh com Comunicação selecionada: respondeu sem dizer que o tema é de Sistemas Digitais (o mesmo comportamento de Controle, Circuitos e Sinais).
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -276,3 +304,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `circ` | Circuitos Elétricos | Markdown curado em `disciplinas/circ` (26 blocos, 23 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; amp-op, primeira ordem e fasores só em notas fora da busca; veja a [curadoria](../disciplinas/circ/CURADORIA.md) |
 | `sinais` | Sinais e Sistemas | Markdown curado em `disciplinas/sinais` (29 blocos, 28 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; tempo discreto só em nota fora da busca; Bode e filtros sem material; veja a [curadoria](../disciplinas/sinais/CURADORIA.md) |
 | `controle` | Sistemas de Controle | Markdown curado em `disciplinas/controle` (24 blocos, 22 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; resposta em frequência e projeto de controladores só em notas fora da busca; veja a [curadoria](../disciplinas/controle/CURADORIA.md) |
+| `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |
