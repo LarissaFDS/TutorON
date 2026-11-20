@@ -315,7 +315,7 @@
       "id": "controle",
       "nome": "Sistemas de Controle",
       "sigla": "SC",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/controle/acervo/itens.json",
       "indice": "disciplinas/controle/acervo/indice.json",
       "materiais": "disciplinas/controle/materiais",

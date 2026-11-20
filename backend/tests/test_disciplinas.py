@@ -400,6 +400,7 @@ def test_ed_sem_material_relevante_nao_inventa_fonte(site_oac):
     ("prob", "O que significa a falta de memória da distribuição exponencial?"),
     ("circ", "Qual a condição para máxima transferência de potência?"),
     ("sinais", "Qual a transformada de Fourier de um pulso retangular?"),
+    ("controle", "Qual o erro em regime para entrada degrau num sistema tipo 1?"),
 ])
 def test_disciplina_mvp_e_atendida_sem_liberacao(site, disciplina, pergunta):
     """Atende sem TUTORON_LIBERAR_EM_VALIDACAO e sem aviso no cadastro."""
