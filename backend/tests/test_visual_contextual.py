@@ -73,9 +73,11 @@ def test_aba_visual_separada_tem_pergunta_livre_e_recomendacoes_opcionais(site):
     assert 'id="temas-visuais"' not in html and 'id="sugestoes-visuais"' not in html
     assert 'Disciplina (opcional)' in html
     r = site.get('/visuais', follow_redirects=False)
-    assert r.status_code == 200 and 'Temas recomendados (opcional)' in r.text
+    assert r.status_code == 200 and 'Temas recomendados' in r.text
     assert 'id="livre-pergunta"' in r.text and 'id="livre-form"' in r.text
-    assert 'Você não precisa escolher um dos temas recomendados.' in r.text
+    # mesmo layout do chat: barra lateral e caixa de mensagem, sem o cabeçalho antigo
+    assert 'class="lateral"' in r.text and 'chat.css' in r.text and 'masthead' not in r.text
+    assert 'masthead' not in site.get('/demo').text
 
 
 def test_script_da_interface_e_revalidado_apos_atualizacao(site):  # noqa: F811

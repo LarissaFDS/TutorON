@@ -46,7 +46,7 @@ O `git status` deve sair vazio. Siga só se o preflight terminar em "pronto para
 - o `bge-m3` está fora do ar;
 - o índice está sem vetores;
 - o #23 ou o #24 está no checkout;
-- o `04-rag/indice.json` foi alterado.
+- o `pipeline/04-rag/indice.json` foi alterado.
 
 ```bash
 python eval/matriz.py gerar --saida eval/results/rodada1 --perguntas A1,A2,A3 --intervalo 4
@@ -81,18 +81,18 @@ Nesta etapa é normal o preflight avisar "0 materiais da equipe no índice". Ele
 ```bash
 BACKUP=~/backups-tutoron/indice-$(date +%Y%m%d-%H%M)
 mkdir -p "$BACKUP"
-cp -a 04-rag 02-acervo "$BACKUP"/
+cp -a pipeline/04-rag pipeline/02-acervo "$BACKUP"/
 ls "$BACKUP"
 ```
 
 Para **restaurar** o índice anterior (o backup fica fora do repositório, em `~/backups-tutoron`), a partir de `~/TutorON-eval`:
 
 ```bash
-rm -rf 04-rag 02-acervo
+rm -rf pipeline/04-rag pipeline/02-acervo
 cp -a "$BACKUP"/04-rag "$BACKUP"/02-acervo .
 ```
 
-Para voltar ao índice versionado, o mesmo vale: `git checkout -- 04-rag 02-acervo`.
+Para voltar ao índice versionado, o mesmo vale: `git checkout -- pipeline/04-rag pipeline/02-acervo`.
 
 ### 2.3 Reindexar e calibrar
 
@@ -130,7 +130,7 @@ tar czf resultados-matriz.tgz eval/results/rodada1 eval/results/rodada2 eval/res
 
 - **O que vai no pacote:** respostas, notas, relatórios e a decisão. Não há chave nesses arquivos.
 - **Folha cega:** envie `rodada1/folha_cega.md` ao aluno. O `folha_cega_mapa.json` fica com a equipe.
-- **Não faça commit** do `04-rag/indice.json` reindexado. Ele só entra no repositório depois que o #24 for revisado e mesclado.
+- **Não faça commit** do `pipeline/04-rag/indice.json` reindexado. Ele só entra no repositório depois que o #24 for revisado e mesclado.
 
 Para apagar a cópia de avaliação:
 

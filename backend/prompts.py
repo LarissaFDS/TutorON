@@ -35,7 +35,7 @@ Seu objetivo é destravar o aluno: explicar com clareza e corrigir o raciocínio
 - Não repita a pergunta. Não termine com ofertas genéricas de ajuda."""
 
 
-# Acrescentado depois do teste de 19/10/2026 (06-avaliacao/teste-2026-10-19.md): o modelo local
+# Acrescentado depois do teste de 19/10/2026 (pipeline/06-avaliacao/teste-2026-10-19.md): o modelo local
 # parafraseou estas instruções quando pedido, citou pouco ou fora de lugar e inventou um exemplo
 # errado para uma pergunta de outra disciplina. Só acrescenta seções; o texto anterior fica igual.
 _SECOES_NOVAS = """# Citações e fidelidade
@@ -220,8 +220,9 @@ def prompt_socratico(pergunta: str, material: str, contexto_aluno: str | None = 
         partes += ["", "FOTO DO PAPEL DO ALUNO, JÁ CONFIRMADA POR ELE (dados):", "<<<", leitura_foto.strip(), ">>>"]
     if historico:
         partes += ["", f"AJUDAS QUE VOCÊ JÁ DEU NESTE EXERCÍCIO ({len(historico)}), E O ALUNO AINDA NÃO CONSEGUIU (dados):"]
-        for n, h in enumerate(historico, 1):
-            partes += [f"--- Ajuda {n} ({AJUDAS[ajuda_valida(h.get('ajuda'))][0]}):", "<<<", str(h.get("texto", ""))[:2500], ">>>"]
+        # Só as 2 últimas ajudas entram (custo de tokens); as anteriores já foram superadas.
+        for n, h in list(enumerate(historico, 1))[-2:]:
+            partes += [f"--- Ajuda {n} ({AJUDAS[ajuda_valida(h.get('ajuda'))][0]}):", "<<<", str(h.get("texto", ""))[:1500], ">>>"]
         if travou and travou.strip():
             partes += ["O QUE O ALUNO DIZ QUE TENTOU OU ONDE TRAVOU (dados):", "<<<", travou.strip()[:1500], ">>>"]
         partes += ["", "O aluno tentou e ainda não conseguiu reproduzir. Explique de um jeito DIFERENTE de todas as ajudas "

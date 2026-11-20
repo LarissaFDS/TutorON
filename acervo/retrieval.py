@@ -8,8 +8,8 @@ from .curate import searchable
 from . import models
 
 # Acervo de PAA; as outras disciplinas passam os próprios caminhos (acervo/disciplinas.py).
-ITENS = '02-acervo/itens.json'
-INDICE = '04-rag/indice.json'
+ITENS = 'pipeline/02-acervo/itens.json'
+INDICE = 'pipeline/04-rag/indice.json'
 STOP = set('a o e de da do das dos um uma que em no na os as para por com se ao ou qual como quais explique mostre prova professor algoritmo problema'.split())
 
 

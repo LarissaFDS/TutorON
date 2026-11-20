@@ -6,9 +6,9 @@
 ## 2026-09-29T18:20:43 — 2. Extração
 
 60 documentos com Markdown; 55 páginas exigem revisão/OCR. Exemplos:
-- Antes: `00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `01-extraido/260cd3c33c2e.md` (boa).
-- Antes: `00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `01-extraido/ebd32d24085d.md` (boa).
-- Antes: `00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `01-extraido/7384e3442406.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `pipeline/01-extraido/260cd3c33c2e.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `pipeline/01-extraido/ebd32d24085d.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `pipeline/01-extraido/7384e3442406.md` (boa).
 
 ## 2026-09-29T18:23:18 — 3. Organização
 
@@ -53,16 +53,16 @@
 ## 2026-09-29T18:39:48 — 2. Extração
 
 60 documentos com Markdown; 159 páginas exigem revisão/OCR. Exemplos:
-- Antes: `00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `01-extraido/260cd3c33c2e.md` (boa).
-- Antes: `00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `01-extraido/ebd32d24085d.md` (boa).
-- Antes: `00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `01-extraido/7384e3442406.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `pipeline/01-extraido/260cd3c33c2e.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `pipeline/01-extraido/ebd32d24085d.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `pipeline/01-extraido/7384e3442406.md` (boa).
 
 ## 2026-09-29T18:48:48 — 2. Extração
 
 60 documentos com Markdown; 159 páginas exigem revisão/OCR. Exemplos:
-- Antes: `00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `01-extraido/260cd3c33c2e.md` (boa).
-- Antes: `00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `01-extraido/ebd32d24085d.md` (boa).
-- Antes: `00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `01-extraido/7384e3442406.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `pipeline/01-extraido/260cd3c33c2e.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `pipeline/01-extraido/ebd32d24085d.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `pipeline/01-extraido/7384e3442406.md` (boa).
 
 ## 2026-09-29T18:48:49 — 3. Organização
 
@@ -122,7 +122,7 @@ Guia PASSO_A_PASSO.md criado. 20 testes do pipeline, 43 do backend e checklists 
 
 ## 2026-09-29T23:09:17 — Exemplos antes/depois
 
-Três casos reais (texto nativo, código em imagem e manuscrito), com imagens e trechos de saída: [03-triagem/EXEMPLOS_OCR.md](03-triagem/EXEMPLOS_OCR.md). As limitações e símbolos duvidosos foram mantidos.
+Três casos reais (texto nativo, código em imagem e manuscrito), com imagens e trechos de saída: [pipeline/03-triagem/EXEMPLOS_OCR.md](pipeline/03-triagem/EXEMPLOS_OCR.md). As limitações e símbolos duvidosos foram mantidos.
 
 ## 2026-09-29T23:10:12 — 6. Avaliação
 
@@ -155,9 +155,9 @@ Três casos reais (texto nativo, código em imagem e manuscrito), com imagens e 
 ## 2026-10-07T18:30:10 — 2. Extração
 
 57 documentos com Markdown; 151 páginas exigem revisão/OCR. Exemplos:
-- Antes: `00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `01-extraido/260cd3c33c2e.md` (boa).
-- Antes: `00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `01-extraido/ebd32d24085d.md` (boa).
-- Antes: `00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `01-extraido/7384e3442406.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\500f410d72e2af3a58f2bb93e3d1f120485fbde2e35374785ef8ba0b2d440853\c01_prova1_2023-03_q2_algoritmo_x.md` → depois: `pipeline/01-extraido/260cd3c33c2e.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\267d09ee167cc15c1eb46d86fef7f57c071f4b772e8b7d110d5e70e4119e32d5\c02_gabarito_algoritmo_x_nota_2.md` → depois: `pipeline/01-extraido/ebd32d24085d.md` (boa).
+- Antes: `pipeline/00-originais\ingestao\c16620fae2a1846abd1e20953c4241e1c1a3c014ee35be196de6f8f758fc4ada\c03_variantes_algoritmo_x_outras_provas.md` → depois: `pipeline/01-extraido/7384e3442406.md` (boa).
 
 ## 2026-10-07T18:42:14 — 3. Organização
 

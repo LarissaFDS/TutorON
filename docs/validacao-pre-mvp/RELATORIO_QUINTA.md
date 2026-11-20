@@ -7,7 +7,7 @@ Este relatório separa execução técnica de validação pedagógica. Os result
 - 57 documentos de entrada inventariados; 57 saídas de extração.
 - 161 páginas/blocos: boa: 10, ilegivel: 5, parcial: 146.
 - 0 tentativas de visão em recortes/fotos: 0 candidatos incertos e 0 falhas. Nenhum candidato substitui automaticamente a fonte.
-- Cópias imutáveis por hash em 00-originais; imagens/páginas para conferência em 01-extraido/figuras.
+- Cópias imutáveis por hash em pipeline/00-originais; imagens/páginas para conferência em pipeline/01-extraido/figuras.
 - Extração automática não certifica manuscritos, fórmulas, diagramas nem qualidade de soluções.
 
 ## 2. Organizar por questão, fonte e confiabilidade
@@ -43,9 +43,9 @@ Este relatório separa execução técnica de validação pedagógica. Os result
 
 - Conferir páginas com imagens e OCR parcial; segmentação automática pode confundir enumerações e linhas de código.
 - Conferir origem/autoria e corrigir apenas em arquivos derivados aprovados; triagem não reescreve resoluções.
-- Revisar suspeitas em 03-triagem/relatorio.md e confirmar enunciados, fontes esperadas e checklists em 06-avaliacao/questoes.json.
+- Revisar suspeitas em pipeline/03-triagem/relatorio.md e confirmar enunciados, fontes esperadas e checklists em pipeline/06-avaliacao/questoes.json.
 - Nenhum fine-tuning foi executado. Dataset só admite pares de alta confiança, com aprovação e fonte verificável.
-- A comparação rápida antiga em 05-modelo/comparacao.json pertence ao hardware Windows de setembro; não é o resultado desta validação Linux.
+- A comparação rápida antiga em pipeline/05-modelo/comparacao.json pertence ao hardware Windows de setembro; não é o resultado desta validação Linux.
 - Inferência e acervo são locais; GitHub recebe código e artefatos de validação. Não há publicação do servidor nem envio a Gemini nesta rodada.
 
 Execução: python -m acervo pipeline --embeddings refaz OCR, curadoria e índice; python -m acervo avaliar --gerar executa as quatro condições.
@@ -59,4 +59,4 @@ Execução: python -m acervo pipeline --embeddings refaz OCR, curadoria e índic
 | rag_manual | 12 | 30 / 47 |
 | rag_automatica | 12 | 29 / 47 |
 
-Esses números não são acurácia matemática. Fontes recuperadas e exclusões estão em 06-avaliacao/relatorio.md; respostas, tempos de geração e eventuais repetições estão em 06-avaliacao/resultados.json.
+Esses números não são acurácia matemática. Fontes recuperadas e exclusões estão em pipeline/06-avaliacao/relatorio.md; respostas, tempos de geração e eventuais repetições estão em pipeline/06-avaliacao/resultados.json.

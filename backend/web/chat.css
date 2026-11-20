@@ -427,3 +427,11 @@ textarea.campo { resize: vertical; }
   .cursos, .duas-colunas { grid-template-columns: 1fr; }
   .msg--tutor .avatar { display: none; }
 }
+
+/* links com cara de botão na barra lateral (conta, nova conversa, itens) */
+a.perfil, a.nova, a.lateral__item { text-decoration: none; color: inherit; }
+.conta-chip { margin-bottom: 8px; }
+
+/* convite para criar conta (convidado) */
+.aviso-conta { margin: 0 auto 8px; width: min(var(--largura-chat), 100%); padding: 10px 14px; border-radius: var(--raio); background: var(--azul-suave); color: var(--tinta); font-size: 14px; }
+.aviso-conta a { color: var(--azul); font-weight: 600; }

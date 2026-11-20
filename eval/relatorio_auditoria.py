@@ -100,7 +100,7 @@ def main():
            'As perguntas são sintéticas e o aluno dos diálogos segue tentativas preparadas, reenviando o histórico real de ajudas. Portanto, a continuidade é exercitada, mas não há observação de aprendizagem real. A ordem é fixa, o modelo é estocástico e a máquina continuou com outros aplicativos abertos; comparações de tempo são descritivas, sem significância estatística.','',
            'O Supabase esteve configurado, mas as buscas registraram ConnectError; as fontes efetivamente retornadas estão em cada caso. Não é uma validação de disponibilidade do livro remoto. Os rótulos de fonte foram registrados, mas a sustentação semântica de todas as citações não foi validada.','',
            'A candidata inicial registrada pode já ter passado pela limpeza de rótulos do servidor; a última resposta original e os motivos de revisão também ficam no JSON. Nenhuma nota de aluno foi fabricada. Os pedidos sintéticos no servidor principal ficam identificáveis pelos IDs de resposta nesta auditoria.']
-    destino=ROOT/'06-avaliacao/auditoria-servidor-2026-11-02.md'
+    destino=ROOT/'pipeline/06-avaliacao/auditoria-servidor-2026-11-02.md'
     destino.write_text('\n'.join(md)+'\n',encoding='utf-8',newline='\n')
     print(json.dumps(consolidado,ensure_ascii=False,indent=2))
 

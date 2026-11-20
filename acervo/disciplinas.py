@@ -6,7 +6,7 @@ instruções de rigor da área e os exemplos de pergunta. Tudo isso fica cadastr
 ``disciplinas/disciplinas.json``; nenhum código é específico de uma disciplina.
 
 PAA continua com o pipeline de OCR (``python -m acervo pipeline``) e seus caminhos de
-sempre (02-acervo, 04-rag). Disciplinas novas usam material já curado em Markdown,
+sempre (pipeline/02-acervo, pipeline/04-rag). Disciplinas novas usam material já curado em Markdown,
 um arquivo por bloco, com cabeçalho de metadados entre ``---``:
 
     python -m acervo.disciplinas sd                 # gera itens.json e indice.json (busca léxica)
@@ -125,7 +125,7 @@ def ler(caminho: Path) -> tuple[dict, str, str]:
 
 
 def registros(disciplina: Disciplina, root: Path = ROOT) -> list[dict]:
-    """Itens no mesmo esquema de 02-acervo/itens.json, para a busca de PAA servir sem mudança."""
+    """Itens no mesmo esquema de pipeline/02-acervo/itens.json, para a busca de PAA servir sem mudança."""
     itens, vistos = [], set()
     for caminho in sorted(disciplina.materiais.glob('*.md')):
         if caminho.name.upper() == 'README.MD':

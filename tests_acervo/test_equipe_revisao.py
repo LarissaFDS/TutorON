@@ -15,13 +15,13 @@ PERGUNTA = "mochila 0/1 tabela de programação dinâmica capacidade"
 @pytest.fixture
 def acervo(tmp_path, monkeypatch):
     monkeypatch.delenv("ACERVO_USAR_NAO_REVISADOS", raising=False)
-    (tmp_path / "02-acervo").mkdir()
+    (tmp_path / "pipeline/02-acervo").mkdir(parents=True, exist_ok=True)
     shutil.copytree(ROOT / equipe.PASTA, tmp_path / equipe.PASTA)
     texto = "Prova: mochila 0/1 com capacidade W; preencha a tabela de programação dinâmica."
     professor = {"id": "p01", "texto": texto, "sha256": digest(texto), "confiabilidade": "alta", "qualidade_ocr": "boa",
                  "assunto": "b2-04-programacao-dinamica", "segmentacao": "automatica", "fonte_original": "prova.pdf",
                  "tipo": "prova"}
-    write_json(tmp_path / "02-acervo/itens.json", [professor])
+    write_json(tmp_path / "pipeline/02-acervo/itens.json", [professor])
     equipe.sincronizar(tmp_path)
     retrieval.build(root=tmp_path, embed=False)
     return tmp_path
@@ -52,7 +52,7 @@ def test_marcar_revisado_libera_sem_reindexar(acervo):
     equipe.sincronizar(acervo)  # `python -m acervo equipe`; o sha256 é do corpo, então o índice continua válido
     assert "e01" in ids(acervo)
     assert "e02" not in ids(acervo)
-    assert {i["id"]: i.get("revisado") for i in read_json(acervo / "02-acervo/itens.json", [])}["e01"] is True
+    assert {i["id"]: i.get("revisado") for i in read_json(acervo / "pipeline/02-acervo/itens.json", [])}["e01"] is True
 
 
 def test_config_padrao_nao_usa_nao_revisados(monkeypatch):

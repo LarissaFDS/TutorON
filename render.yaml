@@ -1,0 +1,34 @@
+# Render Blueprint: Dashboard -> New -> Blueprint -> escolha este repositório.
+# As chaves (sync: false) são pedidas na tela do Render; nunca ficam no git.
+services:
+  - type: web
+    name: tutoron
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: TUTORON_EXIGIR_LOGIN
+        value: "0"
+      - key: TUTORON_COTA_CONVIDADO
+        value: "6000"
+      - key: TUTORON_COTA_TOKENS
+        value: "40000"
+      - key: TUTORON_GRATIS_LOCAL_PRIMEIRO
+        value: "1"
+      - key: TUTORON_URL_PUBLICA
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: TUTORON_ADMINS
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TUTORON_WORKER_TOKEN
+        generateValue: true

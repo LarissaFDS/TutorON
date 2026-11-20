@@ -173,8 +173,13 @@ class Tarefas:
             ajustes += mais
             if texto == seguranca.recusa(d.nome):
                 return texto, r, ajustes, bloqueada, pareceres
-            t.mensagem = "Revisando a ajuda antes de mostrar…"
-            parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, texto)
+            if seguranca.entrega_resposta(texto):
+                parecer = {"aprovada": False, "motivo": "entregou_resposta"}
+            elif not seguranca.precisa_revisor(texto):
+                parecer = {"aprovada": True, "motivo": "sem_sinal_de_solucao", "modelo": "codigo"}
+            else:
+                t.mensagem = "Revisando a ajuda antes de mostrar…"
+                parecer = await tutoria.avaliar_ajuda(self.llm, pergunta, prompt, texto)
             pareceres.append(parecer)
             if parecer["aprovada"]:
                 texto, faltou = seguranca.garantir_sua_vez(texto)
@@ -296,7 +301,7 @@ class Tarefas:
             # Comparação justa: o genérico usa o mesmo modelo de base do TutorON, só sem
             # material e sem instruções. Se a corrida caiu em outro modelo, tenta uma vez
             # no mesmo; se não der, fica o que já foi gerado (o modelo de cada lado é registrado).
-            alvo = tutor.model if tutor.model.provider == "gemini" else Model("ollama", self.settings.local_generic_model)
+            alvo = tutor.model if tutor.model.provider in ("gemini", "groq") else Model("ollama", self.settings.local_generic_model)
             if generico.model != alvo:
                 marca = SEM_RACIOCINIO.set(not pensar)
                 try:

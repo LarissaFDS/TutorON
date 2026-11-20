@@ -4,9 +4,9 @@ from acervo.evaluate import evaluate
 
 
 def test_model_update_invalidates_only_affected_generation_cache(tmp_path, monkeypatch):
-    write_json(tmp_path / '02-acervo/itens.json', [])
-    write_json(tmp_path / '04-rag/indice.json', {'chunks': [], 'vectors': []})
-    write_json(tmp_path / '06-avaliacao/questoes.json', [
+    write_json(tmp_path / 'pipeline/02-acervo/itens.json', [])
+    write_json(tmp_path / 'pipeline/04-rag/indice.json', {'chunks': [], 'vectors': []})
+    write_json(tmp_path / 'pipeline/06-avaliacao/questoes.json', [
         {'id': 'Qtest', 'pergunta': 'Explique', 'contexto': [], 'fontes_esperadas': [], 'checkpoints': []}])
     versions = {}
     calls = []

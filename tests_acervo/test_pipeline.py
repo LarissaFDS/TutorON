@@ -10,7 +10,7 @@ from acervo import models
 @pytest.fixture
 def workspace(tmp_path):
     init(tmp_path)
-    (tmp_path / 'materiais').mkdir()
+    (tmp_path / 'materiais').mkdir(parents=True, exist_ok=True)
     return tmp_path
 
 
@@ -35,15 +35,15 @@ def test_pdf_inventory_extract_idempotent_and_corrupt_input(workspace):
     (workspace / 'materiais/quebrado.pdf').write_bytes(b'not pdf')
     rows = inventory(workspace)
     extract(workspace)
-    files = list((workspace / '01-extraido').glob('*.md'))
+    files = list((workspace / 'pipeline/01-extraido').glob('*.md'))
     assert len(rows) == len(files) == 2
     valid = next(r for r in rows if 'prova.pdf' in r['arquivo'])
-    output = workspace / '01-extraido' / (valid['id'] + '.md')
+    output = workspace / 'pipeline/01-extraido' / (valid['id'] + '.md')
     mtime = output.stat().st_mtime_ns
     extract(workspace)
     assert output.stat().st_mtime_ns == mtime
     broken = next(r for r in rows if 'quebrado.pdf' in r['arquivo'])
-    assert read_json(workspace / '01-extraido' / (broken['id'] + '.json'))['paginas_extraidas'][0]['qualidade'] == 'ilegivel'
+    assert read_json(workspace / 'pipeline/01-extraido' / (broken['id'] + '.json'))['paginas_extraidas'][0]['qualidade'] == 'ilegivel'
 
 
 def test_taxonomy_filename_overrides_wrong_internal_title():
@@ -91,17 +91,17 @@ def seed_item(identifier, text, confidence='media'):
 def test_low_confidence_never_enters_search_and_revocation_is_immediate(workspace):
     good = seed_item('bom', 'ASTERISCO imprime uma recorrência.')
     bad = seed_item('ruim', 'ASTERISCO ASTERISCO ASTERISCO', 'baixa')
-    write_json(workspace / '02-acervo/itens.json', [good, bad])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [good, bad])
     index = build(workspace)
     assert [r['id'] for r in index['chunks']] == ['bom']
     assert search('ASTERISCO', workspace, semantic=False)[0]['id'] == 'bom'
     good['confiabilidade'] = 'baixa'
-    write_json(workspace / '02-acervo/itens.json', [good, bad])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [good, bad])
     assert search('ASTERISCO', workspace, semantic=False) == []
 
 
 def test_embedding_failure_degrades_to_lexical_without_fake_vectors(workspace, monkeypatch):
-    write_json(workspace / '02-acervo/itens.json', [seed_item('a', 'ASTERISCO')])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [seed_item('a', 'ASTERISCO')])
     monkeypatch.setattr(models, 'embeddings', lambda *a, **k: (_ for _ in ()).throw(TimeoutError()))
     index = build(workspace, embed=True)
     assert index['modo'] == 'lexical' and not index['vectors']
@@ -141,22 +141,22 @@ def test_generation_retries_truncation_once_without_serving_partial(monkeypatch,
 
 def test_cached_ai_suspicion_survives_non_ai_rerun(workspace):
     item = seed_item('a', 'Solução de ASTERISCO a revisar.')
-    write_json(workspace / '02-acervo/itens.json', [item])
-    write_json(workspace / '03-triagem/pareceres-ia/a.json',
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [item])
+    write_json(workspace / 'pipeline/03-triagem/pareceres-ia/a.json',
                {'sha256': item['sha256'], 'status': 'executado', 'decisao': 'suspeita', 'parecer': 'Conta inconsistente.'})
     assert triage(workspace, use_ai=False)[0]['confiabilidade'] == 'baixa'
 
 
 def test_human_approval_expires_when_source_changes(workspace):
     item = seed_item('a', 'Solução inicial.')
-    write_json(workspace / '03-triagem/revisoes.json', {'a': {'sha256': item['sha256'], 'sha256_fonte': item['sha256_fonte'], 'revisor': 'Revisor de teste',
+    write_json(workspace / 'pipeline/03-triagem/revisoes.json', {'a': {'sha256': item['sha256'], 'sha256_fonte': item['sha256_fonte'], 'revisor': 'Revisor de teste',
                                                           'justificativa':'Conferido.', 'confiabilidade':'alta'}})
-    write_json(workspace / '02-acervo/itens.json', [item])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [item])
     assert triage(workspace)[0]['confiabilidade'] == 'alta'
     item['sha256_fonte'] = digest('imagem modificada com OCR idêntico')
-    write_json(workspace / '02-acervo/itens.json', [item])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [item])
     assert triage(workspace)[0]['confiabilidade'] == 'nao_verificada'
     item['texto'] = 'Solução alterada.'
     item['sha256'] = digest(item['texto'])
-    write_json(workspace / '02-acervo/itens.json', [item])
+    write_json(workspace / 'pipeline/02-acervo/itens.json', [item])
     assert triage(workspace)[0]['confiabilidade'] == 'nao_verificada'

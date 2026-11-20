@@ -14,8 +14,8 @@ TOPICS = [
     'b2-05-transformacao-de-problemas', 'b2-06-np-completude',
     'b2-07-lidando-com-np-completude',
 ]
-DIRECTORIES = ['00-originais', '01-extraido', '02-acervo', '03-triagem/pacote-revisao',
-               '04-rag', '05-modelo', '06-avaliacao']
+DIRECTORIES = ['pipeline/00-originais', 'pipeline/01-extraido', 'pipeline/02-acervo', 'pipeline/03-triagem/pacote-revisao',
+               'pipeline/04-rag', 'pipeline/05-modelo', 'pipeline/06-avaliacao']
 
 
 # Os dados do acervo foram gerados no Windows e guardam caminhos com '\\'. O ID de
@@ -42,7 +42,7 @@ def init(root=ROOT):
         (root / name).mkdir(parents=True, exist_ok=True)
     for topic in TOPICS + ['assunto_incerto']:
         for kind in ['provas', 'listas', 'resolucoes', 'gabaritos', 'material_estudo']:
-            (root / '02-acervo' / topic / kind).mkdir(parents=True, exist_ok=True)
+            (root / 'pipeline/02-acervo' / topic / kind).mkdir(parents=True, exist_ok=True)
 
 
 def normalize(text):

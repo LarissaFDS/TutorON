@@ -4,14 +4,14 @@ from .common import ROOT, caminho_local, digest, read_json, write_json
 
 
 def audit(root=ROOT):
-    inventory = read_json(root / '03-triagem/inventario.json', [])
-    items = read_json(root / '02-acervo/itens.json', [])
-    indexed = {i['id'] for i in read_json(root / '04-rag/indice.json', {}).get('chunks', [])}
+    inventory = read_json(root / 'pipeline/03-triagem/inventario.json', [])
+    items = read_json(root / 'pipeline/02-acervo/itens.json', [])
+    indexed = {i['id'] for i in read_json(root / 'pipeline/04-rag/indice.json', {}).get('chunks', [])}
     docs = []
     for source in inventory:
         original = caminho_local(source['arquivo'], root)
         snapshot = caminho_local(source['copia'], root)
-        extracted = read_json(root / '01-extraido' / (source['id'] + '.json'), {})
+        extracted = read_json(root / 'pipeline/01-extraido' / (source['id'] + '.json'), {})
         pages = extracted.get('paginas_extraidas', [])
         blocks = [i for i in items if i['documento_id'] == source['id']]
         integrity = original.exists() and snapshot.exists() and digest(original.read_bytes()) == digest(snapshot.read_bytes()) == source['sha256']
@@ -42,7 +42,7 @@ def audit(root=ROOT):
               'resumo': {'documentos': len(docs), 'paginas': sum(d['paginas_extraidas'] for d in docs),
                          'blocos': len(items), 'blocos_corrigidos': sum(len(d['blocos_corrigidos']) for d in docs),
                          'blocos_rag': len(indexed), 'integridade_ok': all(d['integridade'] for d in docs)}}
-    write_json(root / '03-triagem/auditoria.json', result)
+    write_json(root / 'pipeline/03-triagem/auditoria.json', result)
     lines = ['# Auditoria por arquivo', '', 'Cada entrada foi aberta, extraída e verificada por hash. '
              'Correções pedagógicas por agente não equivalem à aprovação do professor. '
              'Fotos, código e diagramas podem continuar parciais. Não há alegação de OCR universal.', '',
@@ -50,7 +50,7 @@ def audit(root=ROOT):
     lines += [f'| {d["arquivo"]} | {d["paginas_extraidas"]}/{d["paginas_esperadas"]} | {d["integridade"]} | {len(d["blocos_corrigidos"])} | {len(d["blocos_rag"])} |' for d in docs]
     lines += ['', 'Detalhes de todos os blocos, hashes, alertas e pendências: auditoria.json. '
               'Artefatos históricos fora do inventário atual não alimentam o índice.']
-    (root / '03-triagem/AUDITORIA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    (root / 'pipeline/03-triagem/AUDITORIA.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
     print(result['resumo'])
     if not result['resumo']['integridade_ok'] or any(d['figuras_ausentes'] or not d['extraido_sha256_confere'] or d['paginas_extraidas'] != d['paginas_esperadas'] for d in docs):
         raise RuntimeError('Auditoria encontrou falha estrutural; veja auditoria.json')

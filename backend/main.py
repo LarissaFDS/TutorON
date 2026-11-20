@@ -39,10 +39,11 @@ from pydantic import BaseModel, Field, field_validator
 
 from acervo import disciplinas
 
-from . import animacao, cursos, foto, prompts
+from . import animacao, banco as banco_mod, cursos, foto, prompts
 from .config import Settings, load_settings
+from .contas import Contas, token_da_requisicao
 from .cota import PLANOS, Cota, estimar_tokens
-from .dados import Limitador, Registro, agora
+from .dados import USUARIO, Limitador, Registro, agora
 from .llm import LLM, Model
 from .resultados import resumo
 from .tarefas import Tarefas
@@ -54,7 +55,7 @@ WEB = Path(__file__).resolve().parent / "web"
 class AppStaticFiles(StaticFiles):
     async def get_response(self, path, scope):
         resposta = await super().get_response(path, scope)
-        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css'):
+        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css', 'shell.js', 'chat.css', 'conta.js', 'entrar.js', 'admin.js'):
             resposta.headers['Cache-Control'] = 'no-cache'
         return resposta
 
@@ -109,6 +110,14 @@ class Pergunta(BaseModel):
         if len(valor.strip()) < 3:
             raise ValueError("Escreva a pergunta.")
         return valor.strip()
+
+
+class LimiteConta(BaseModel):
+    limite: int | None = Field(default=None, ge=0, le=100_000_000)  # None = volta ao limite do plano
+
+
+class RegistroWorker(BaseModel):
+    url: str = Field(..., max_length=300, pattern=r"^https://[A-Za-z0-9.-]+(:[0-9]+)?/?$")
 
 
 class AtivarPlano(BaseModel):
@@ -223,17 +232,22 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         app.state.llm = llm or LLM(settings)
-        app.state.registro = Registro(settings.data_dir)
+        app.state.banco = banco_mod.criar(settings)
+        app.state.contas = Contas(app.state.banco, settings.supabase_anon_key, settings.admins)
+        app.state.registro = Registro(settings.data_dir, app.state.banco)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
         app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
         app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
-                              settings.cota_janela_h, settings.dev_chave)
+                              settings.cota_janela_h, settings.dev_chave, app.state.banco,
+                              settings.cota_convidado if app.state.contas.ativas else None)
         app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
         aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
         if aquecimento:
             aquecimento.cancel()
         await app.state.tarefas.encerrar()
+        if app.state.banco:
+            app.state.banco.esperar(5)
         if llm is None:
             await app.state.llm.client.aclose()
 
@@ -245,16 +259,36 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not app.state.limitador.permitir(cliente(request)):
             raise HTTPException(429, "Muitas perguntas em pouco tempo. Aguarde alguns minutos e tente de novo.")
 
+    def conta(request: Request) -> dict | None:
+        """Conta logada (Supabase) desta requisição, conferida uma vez e guardada no request."""
+        if not hasattr(request.state, "conta"):
+            request.state.conta = app.state.contas.usuario(token_da_requisicao(request))
+        return request.state.conta
+
     def usuario(request: Request) -> tuple[str, bool]:
-        """(id do usuário, é desenvolvedor?). Convidado = cookie anônimo; sem cookie, o IP."""
-        dev = requisicao_local(request) or app.state.cota.eh_dev(
-            request.cookies.get("tutoron_dev") or request.headers.get("x-tutoron-dev"))
+        """(id do usuário, é administrador?). Conta logada = "u:<id>"; convidado = cookie anônimo; sem
+        cookie, o IP. Administrador: esta máquina, a chave TUTORON_DEV_CHAVE ou e-mail em TUTORON_ADMINS."""
+        c = conta(request)
+        dev = (requisicao_local(request) or bool(c and c["admin"]) or app.state.cota.eh_dev(
+            request.cookies.get("tutoron_dev") or request.headers.get("x-tutoron-dev")))
+        if c:
+            return "u:" + c["id"], dev
         return (request.cookies.get("tutoron_id") or "ip:" + cliente(request))[:64], dev
 
+    def exigir_admin(request: Request) -> None:
+        if not usuario(request)[1]:
+            raise HTTPException(403, "Só administradores.")
+
     def exigir_cota(request: Request) -> None:
+        if settings.exigir_login and app.state.contas.ativas and not conta(request) and not usuario(request)[1]:
+            raise HTTPException(401, "Entre com sua conta para usar o TutorON.")
         quem, dev = usuario(request)
         if not app.state.cota.pode(quem, dev):
             s = app.state.cota.situacao(quem)
+            if app.state.cota.convidado(quem):
+                # 401 leva o site à página de criar conta (app.js).
+                raise HTTPException(401, "Você usou o limite de convidado de hoje. Crie uma conta grátis "
+                                         "(só e-mail e senha) para continuar com um limite bem maior.")
             import datetime
             renova = datetime.datetime.fromtimestamp(s["renova_em"])
             quando = "amanhã à meia-noite" if s.get("diaria") else "às " + renova.strftime("%H:%M")
@@ -273,7 +307,13 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
 
     @app.middleware("http")
     async def cookie_convidado(request: Request, call_next):
-        resposta = await call_next(request)
+        # Quem pediu, para gravar junto com perguntas e votos (coleta por aluno). Conferir o token
+        # só nas rotas da API: páginas e arquivos estáticos não precisam.
+        marca = USUARIO.set(usuario(request)[0] if request.url.path.startswith("/api/") else None)
+        try:
+            resposta = await call_next(request)
+        finally:
+            USUARIO.reset(marca)
         if not request.cookies.get("tutoron_id"):
             import secrets as _s
             resposta.set_cookie("tutoron_id", "c_" + _s.token_urlsafe(12), max_age=365 * 86400,
@@ -361,6 +401,75 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         quem, dev = usuario(request)
         return app.state.cota.situacao(quem, dev) | {"planos": PLANOS}
 
+    # ------------------------------------------------------------------ contas (Supabase)
+    @app.get("/api/config")
+    async def api_config() -> dict:
+        """O que o navegador precisa para o login. A chave pública (anon) pode ir para o navegador;
+        a chave de serviço nunca sai do servidor."""
+        return {"contas": app.state.contas.ativas, "exigir_login": settings.exigir_login,
+                "supabase_url": settings.supabase_url if app.state.contas.ativas else "",
+                "supabase_anon_key": settings.supabase_anon_key if app.state.contas.ativas else ""}
+
+    @app.post("/api/worker/registrar")
+    async def registrar_worker(corpo: RegistroWorker, request: Request) -> dict:
+        """O PC da equipe (scripts/worker_pc.py) avisa a cada minuto onde o modelo local está."""
+        import secrets as _s
+        token = request.headers.get("authorization", "").removeprefix("Bearer ").strip()
+        if not (settings.worker_token and token and _s.compare_digest(token, settings.worker_token)):
+            raise HTTPException(403, "Token do worker inválido.")
+        app.state.llm.registrar_worker(corpo.url)
+        return {"ok": True, "ttl_s": 150}
+
+    @app.get("/api/eu")
+    async def api_eu(request: Request) -> dict:
+        quem, dev = usuario(request)
+        c = conta(request)
+        return {"logado": bool(c), "conta": c and {k: c[k] for k in ("email", "nome", "foto")},
+                "admin": dev, "cota": app.state.cota.situacao(quem, dev)}
+
+    @app.get("/entrar", include_in_schema=False)
+    async def pagina_entrar() -> FileResponse:
+        return FileResponse(WEB / "entrar.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/admin", include_in_schema=False)
+    async def pagina_admin() -> FileResponse:
+        # A página em si é pública; os dados (/api/admin/*) só saem para administradores.
+        return FileResponse(WEB / "admin.html", headers={"Cache-Control": "no-cache"})
+
+    @app.get("/api/admin/usuarios")
+    async def admin_usuarios(request: Request) -> dict:
+        exigir_admin(request)
+        perfis = {}
+        if app.state.banco:
+            try:
+                perfis = {"u:" + p["id"]: p for p in app.state.banco.selecionar(
+                    "perfis", {"select": "id,email,nome,limite_tokens,criado_em", "order": "criado_em.desc"})}
+            except Exception as exc:  # noqa: BLE001
+                logger.warning("Perfis não lidos: %s", exc)
+        uso = {r["quem"]: r for r in app.state.cota.relatorio()}
+        linhas = []
+        for quem in list(perfis) + [q for q in uso if q not in perfis]:
+            p, u = perfis.get(quem, {}), uso.get(quem, {})
+            s = app.state.cota.situacao(quem)
+            linhas.append({"quem": quem, "email": p.get("email"), "nome": p.get("nome"), "conta": quem.startswith("u:"),
+                           "limite_proprio": p.get("limite_tokens"), "limite": s.get("limite"),
+                           "usados_hoje": s.get("usados"), "plano": s["plano"], "criado_em": p.get("criado_em"),
+                           "tokens_total": u.get("tokens", 0), "perguntas": u.get("perguntas", 0),
+                           "ultimo": u.get("ultimo")})
+        return {"limite_padrao": settings.cota_tokens, "banco": bool(app.state.banco), "usuarios": linhas}
+
+    @app.post("/api/admin/usuarios/{quem}/limite")
+    async def admin_limite(quem: str, corpo: LimiteConta, request: Request) -> dict:
+        exigir_admin(request)
+        app.state.cota.definir_limite(quem[:80], corpo.limite)
+        return app.state.cota.situacao(quem[:80])
+
+    @app.post("/api/admin/usuarios/{quem}/zerar")
+    async def admin_zerar(quem: str, request: Request) -> dict:
+        exigir_admin(request)
+        app.state.cota.zerar(quem[:80])
+        return app.state.cota.situacao(quem[:80])
+
     @app.post("/api/planos/ativar")
     async def ativar_plano(corpo: AtivarPlano, request: Request) -> dict:
         """Checkout SIMULADO: o cartão é validado no navegador e só os 4 últimos dígitos chegam aqui.
@@ -398,7 +507,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         local = await app.state.llm.local_status()
         dados = {
             "gemini": {"habilitado": settings.gemini_enabled, "modelos": list(settings.gemini_models)},
-            "local": local,
+            "groq": {"habilitado": settings.groq_enabled, "modelos": list(settings.groq_models)},
+            "local": local | {"pc_conectado": bool(app.state.llm.ollama_url)},
             "pausados": app.state.llm.breaker.state(),
             "livro_supabase": settings.supabase_enabled,
         }

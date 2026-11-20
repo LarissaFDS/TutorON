@@ -34,7 +34,7 @@ revisado: false
    python -m acervo equipe
    ```
 
-   O comando reescreve `02-acervo/itens.json` e `indice.csv`. A busca relê o `itens.json` a cada consulta, então o bloco passa a valer na hora.
+   O comando reescreve `pipeline/02-acervo/itens.json` e `indice.csv`. A busca relê o `itens.json` a cada consulta, então o bloco passa a valer na hora.
 4. **Reindexar só se o corpo do texto mudou.** O índice guarda o `sha256` do corpo, não do cabeçalho. Trocar apenas `revisado` dispensa reindexar. Se o corpo mudou:
 
    ```bash
@@ -42,6 +42,6 @@ revisado: false
    ```
 
    Sem reindexar, o bloco com hash diferente é ignorado.
-5. **Abrir um PR** com o `.md`, o `02-acervo/itens.json` e o `indice.csv`. O nome de quem revisou vai na descrição.
+5. **Abrir um PR** com o `.md`, o `pipeline/02-acervo/itens.json` e o `indice.csv`. O nome de quem revisou vai na descrição.
 
 Para tirar um material de circulação, volte o cabeçalho para `revisado: false` e rode `python -m acervo equipe`.

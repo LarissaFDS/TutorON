@@ -45,7 +45,7 @@ def registros_de_log(caminhos: list[Path]) -> list[dict]:
                 if linha.strip():
                     r = json.loads(linha)
                     regs.append({**r, "fonte_log": caminho.name})
-        else:  # 06-avaliacao/resultados-mvp.json
+        else:  # pipeline/06-avaliacao/resultados-mvp.json
             for r in json.loads(caminho.read_text(encoding="utf-8")):
                 if r.get("condicao") == "tutoron_gemini":
                     regs.append({**r, "fonte_log": caminho.name})
@@ -131,7 +131,7 @@ def hubness(k: int = 4) -> list[tuple[int, dict]]:
     Um 'hub' do embedding aparece perto de quase tudo, inclusive de perguntas sem relação."""
     from acervo.retrieval import cosine
 
-    indice = json.loads((ROOT / "04-rag/indice.json").read_text(encoding="utf-8"))
+    indice = json.loads((ROOT / "pipeline/04-rag/indice.json").read_text(encoding="utf-8"))
     chunks, vetores = indice["chunks"], indice["vectors"]
     contagem = Counter()
     for i, v in enumerate(vetores):
@@ -149,7 +149,7 @@ def recuperacao() -> str:
     from acervo import models
     from acervo.retrieval import search
 
-    indice = json.loads((ROOT / "04-rag/indice.json").read_text(encoding="utf-8"))
+    indice = json.loads((ROOT / "pipeline/04-rag/indice.json").read_text(encoding="utf-8"))
     try:
         models.embeddings(["teste"], indice.get("embedding_model") or "bge-m3")
         semantica = True
@@ -157,7 +157,7 @@ def recuperacao() -> str:
         semantica = False
     qs = json.loads((ROOT / "eval/perguntas.json").read_text(encoding="utf-8"))
     linhas = ["# Diagnóstico de recuperação", "",
-              f"Índice `04-rag/indice.json`: {len(indice['chunks'])} blocos, modo {indice['modo']}. "
+              f"Índice `pipeline/04-rag/indice.json`: {len(indice['chunks'])} blocos, modo {indice['modo']}. "
               f"Consulta desta execução: {'híbrida (bge-m3)' if semantica else 'SÓ LÉXICA (bge-m3 indisponível nesta máquina)'}.",
               "", "Relevância por assunto: o bloco é do mesmo assunto da pergunta (b2-04 para PD etc.). "
               "É um critério grosseiro: um bloco do assunto certo ainda pode tratar de outro problema.", ""]
@@ -236,7 +236,7 @@ def calibrar() -> str:
     from acervo import models
     from acervo.retrieval import cosine
 
-    indice = json.loads((ROOT / "04-rag/indice.json").read_text(encoding="utf-8"))
+    indice = json.loads((ROOT / "pipeline/04-rag/indice.json").read_text(encoding="utf-8"))
     if not indice.get("vectors"):
         raise SystemExit("O índice não tem embeddings: rode `python -m acervo indexar --embeddings` antes.")
     try:
@@ -276,7 +276,7 @@ def main() -> None:
     sub = parser.add_subparsers(dest="etapa", required=True)
     r = sub.add_parser("roteamento")
     r.add_argument("--logs", nargs="+", default=[str(ROOT / "dados/perguntas.jsonl"),
-                                                 str(ROOT / "06-avaliacao/resultados-mvp.json")])
+                                                 str(ROOT / "pipeline/06-avaliacao/resultados-mvp.json")])
     sub.add_parser("recuperacao")
     sub.add_parser("calibrar")
     parser.add_argument("--saida", help="pasta do relatório (padrão: eval/results); vem antes da etapa")

@@ -2,7 +2,7 @@
 
 Estes testes usam uma IA FALSA: verificam o tratamento no código (o que chega ao modelo, o que sai
 para o aluno e o que fica registrado). Não provam que um modelo real obedece ao prompt; os testes
-com modelo real estão em 06-avaliacao/correcoes-2026-10-19.md.
+com modelo real estão em pipeline/06-avaliacao/correcoes-2026-10-19.md.
 """
 import hashlib
 import json

@@ -13,7 +13,7 @@ Resultado: o fluxo local de OCR, curadoria, RAG e comparação funciona. **A sup
 - A extração teve dez páginas/blocos de qualidade boa, 146 parciais e cinco ilegíveis/vazios. Entre os cinco estão o TXT vazio, uma página de prova_1_A.pdf e três fotos. Não há promessa de OCR universal.
 - Correções e aprovações exigem hashes do texto e do arquivo-fonte. Uma imagem alterada invalida a revisão mesmo com OCR idêntico. Windows/Linux mantêm LF para textos usados nos hashes.
 
-Detalhes por arquivo: [AUDITORIA.md](03-triagem/AUDITORIA.md). Correções: [correcoes.json](03-triagem/correcoes.json).
+Detalhes por arquivo: [AUDITORIA.md](pipeline/03-triagem/AUDITORIA.md). Correções: [correcoes.json](pipeline/03-triagem/correcoes.json).
 
 ## Validação matemática da curadoria
 
@@ -34,14 +34,14 @@ RAG automática ficou acima do genérico em 7 questões, empatou em 4 e ficou ab
 Nenhuma resposta da rodada principal citou um ID de fonte válido. Contagem zero de IDs inválidos não demonstra fundamentação; marcadores numéricos não são citações verificadas.
 Cobertura lexical não é acurácia. A revisão por agente encontrou comparações invertidas, implicações falsas de NP-completude, gráficos/custos inventados e traces de Kadane incorretos. O caso NP melhorou após excluir material não verificado, mas erros permaneceram mesmo com recorrências e fórmulas corretas no contexto.
 
-Textos integrais, contextos, fontes, fingerprints dos modelos e tempos: [resultados.json](06-avaliacao/resultados.json). [Revisão técnica](06-avaliacao/revisao-tecnica.json) vinculada ao hash exato de cada resposta. Não é julgamento humano independente.
+Textos integrais, contextos, fontes, fingerprints dos modelos e tempos: [resultados.json](pipeline/06-avaliacao/resultados.json). [Revisão técnica](pipeline/06-avaliacao/revisao-tecnica.json) vinculada ao hash exato de cada resposta. Não é julgamento humano independente.
 
 ## Seguimentos e limitações
 
 - 7B: 8 respostas para Q1/Q2, com os mesmos contextos finais e quatro condições. Média 225.9s por resposta nesta CPU. A RAG manual deu prova de máximo e recorrência corretas; automática melhorou, mas ainda restringiu desnecessariamente Algoritmo X a vetor ordenado. Amostra insuficiente para escolher um modelo superior.
 - Sementes 7 e 2026: 8 respostas de Q2/Q6, genérico e automático. Os desenvolvimentos de Kadane continuaram incorretos; a fórmula correta sozinha não garantiu um raciocínio correto.
 - Uma semente no conjunto completo, duas questões nos seguimentos, avaliador por agente e questões correlacionadas. Não há inferência estatística de superioridade nem evidência de ganho de aprendizagem.
-- Artefatos de índices anteriores com 39 correções/115 blocos e 53 correções/121 blocos estão rotulados em 06-avaliacao/historico. O índice final tem 53 blocos revisados.
+- Artefatos de índices anteriores com 39 correções/115 blocos e 53 correções/121 blocos estão rotulados em pipeline/06-avaliacao/historico. O índice final tem 53 blocos revisados.
 - Cache reaproveita respostas idênticas; esses reaproveitamentos não são novas gerações. Identidade real do modelo entra no cache e mudança de pesos invalida resultados antigos. A migração de procedência desta sessão é registrada em cache-migracao.json.
 
 ## Ambiente, treinamento e servidor
@@ -64,4 +64,4 @@ Textos integrais, contextos, fontes, fingerprints dos modelos e tempos: [resulta
 Entrega na branch codex/paa-acervo-validacao, integrada por [PR #15](https://github.com/LarissaFDS/TutorON/pull/15) para dev. Esta é uma base de validação antes do MVP, sem release de produção. Pesos, .env, ambientes, snapshots locais e votos não são enviados ao GitHub.
 Antes do MVP: ampliar revisão matemática por professor, resolver manuscritos/diagramas pendentes, avaliar modelo de maior capacidade em mais questões e coletar avaliação cega real. Treinar somente após conferir o dataset e executar a receita na GPU; comparar base/ajustado com mesmas opções e conjunto reservado. Não converter checklist, preferência ou loss em alegação de superioridade.
 
-[Operação Linux/Windows](PASSO_A_PASSO.md) · [Guia de treino](05-modelo/COMO_TREINAR.md) · [Comparação](06-avaliacao/COMPARACAO_ATUAL.md)
+[Operação Linux/Windows](PASSO_A_PASSO.md) · [Guia de treino](pipeline/05-modelo/COMO_TREINAR.md) · [Comparação](pipeline/06-avaliacao/COMPARACAO_ATUAL.md)

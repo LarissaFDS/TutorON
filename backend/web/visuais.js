@@ -17,7 +17,6 @@
   }
   function escolher(e) {
     atual = e;
-    $('visual-layout').classList.remove('visual-layout--recomendacoes');
     $('exemplo-estudo').hidden = false;
     versao++;
     video.pause();
@@ -38,13 +37,10 @@
     status('video-status', e.video ? 'Pause o vídeo quando quiser e tente continuar no papel.' :
       (disponivel ? 'Na primeira vez, preparar o desenho pode levar até 90 segundos.' : 'As animações estão indisponíveis neste servidor.'), disponivel ? '' : 'error');
     document.querySelectorAll('.visual-tema').forEach(function (b) {
-      var selecionado = b.dataset.id === e.id;
-      b.setAttribute('aria-current', String(selecionado));
-      if (selecionado && window.matchMedia('(max-width: 760px)').matches) {
-        var lista = $('exemplos');
-        lista.scrollLeft = Math.max(0, b.offsetLeft - lista.offsetLeft - (lista.clientWidth - b.clientWidth) / 2);
-      }
+      b.setAttribute('aria-current', String(b.dataset.id === e.id));
     });
+    if (window.TutorShell) window.TutorShell.fecharLateral();
+    $('exemplo-estudo').scrollIntoView({ block: 'start', behavior: 'smooth' });
     if (e.poster) video.poster = e.poster;
     if (e.video) mostrarVideo(e.video);
     var url = new URL(location.href);
@@ -178,8 +174,19 @@
     finally { gerandoLivre = false; $('livre-enviar').disabled = false; }
   }
   $('livre-form').addEventListener('submit', function (e) { e.preventDefault(); desenharLivre(); });
+  // Mesmo comportamento da caixa do chat: Enter envia, Shift+Enter quebra a linha.
   $('livre-pergunta').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) $('livre-form').requestSubmit();
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); $('livre-form').requestSubmit(); }
+  });
+  $('livre-pergunta').addEventListener('input', function () {
+    this.style.height = 'auto';
+    this.style.height = Math.min(this.scrollHeight, 220) + 'px';
+  });
+  $('livre-codigo').addEventListener('click', function () {
+    var abrir = $('livre-contexto-box').hidden;
+    $('livre-contexto-box').hidden = !abrir;
+    this.setAttribute('aria-pressed', String(abrir));
+    if (abrir) $('livre-contexto').focus();
   });
   window.addEventListener('beforeunload', function (e) {
     if (gerandoLivre) { e.preventDefault(); e.returnValue = ''; }
@@ -192,7 +199,8 @@
       dados.disciplinas.filter(function (d) { return d.disponivel !== false; }).forEach(function (d) {
         var opcao = document.createElement('option');
         opcao.value = d.id;
-        opcao.textContent = d.nome + ' (' + d.sigla + ')';
+        opcao.textContent = 'Disciplina: ' + d.sigla;
+        opcao.title = d.nome;
         $('livre-disciplina').append(opcao);
       });
     } catch (e) { /* identificação automática continua disponível */ }
@@ -224,7 +232,7 @@
         $('exemplos').append(b);
       });
       $('visual-layout').hidden = false;
-      status('catalogo-status', '');
+      $('catalogo-status').hidden = true;
       var id = new URL(location.href).searchParams.get('exemplo');
       var recomendado = dados.exemplos.find(function (e) { return e.id === id; });
       if (recomendado) escolher(recomendado);

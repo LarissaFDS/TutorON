@@ -132,7 +132,7 @@ acervo/               pipeline do acervo local; acervo/web/ tem a página de val
 design/               design system (tokens, componentes, renderizador de respostas); regras em DESIGN.md
 frontend/             CLI que conversa com o backend FastAPI
 backend/              API FastAPI; check_supabase.py e smoke_check.py são checagens manuais
-01-extraido … 07-validacao-alunos/   dados do pipeline, na ordem em que são produzidos
+pipeline/01-extraido … pipeline/07-validacao-alunos/   dados do pipeline, na ordem em que são produzidos
 ```
 
 Antes de criar ou mudar uma tela, leia [DESIGN.md](DESIGN.md).

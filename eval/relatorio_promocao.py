@@ -76,7 +76,7 @@ def executar():
         'As novas proteções limitam a saída sem raciocínio e recusam candidatas extensas para revisão, '
         'sem aprovar só um prefixo. Um novo ensaio do caso visual terminou em 6,6 s sem repetir o problema, '
         'mas uma repetição isolada não demonstra causalmente a eliminação de repetições.']
-    (ROOT / '06-avaliacao/comparacao-modelo-2026-11-02.md').write_text('\n'.join(linhas) + '\n', encoding='utf-8', newline='\n')
+    (ROOT / 'pipeline/06-avaliacao/comparacao-modelo-2026-11-02.md').write_text('\n'.join(linhas) + '\n', encoding='utf-8', newline='\n')
     rng, chave = random.Random(20261102), {}
     cegos = ['# Revisão de pares de ajuda', '', 'Leia cada enunciado e tentativa. Compare os lados sem consultar a chave.',
              'Para cada lado, marque: erro técnico (sim/não), entrega indevida (sim/não), utilidade (0–2) e motivo.',

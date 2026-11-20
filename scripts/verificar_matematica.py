@@ -162,7 +162,7 @@ def verify():
     checks.append({'familia': 'racoes_vertices_lucro', 'casos': 5, 'ok': True})
     result = {'verificacoes': checks, 'total_casos': sum(c['casos'] for c in checks),
               'limite': 'Casos finitos verificam propriedades das versões derivadas; não certificam todas as provas nem respostas de IA.'}
-    write_json(ROOT / '03-triagem/verificacoes-curadoria.json', result)
+    write_json(ROOT / 'pipeline/03-triagem/verificacoes-curadoria.json', result)
     print(result)
 
 
