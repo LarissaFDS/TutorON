@@ -95,7 +95,8 @@ As instruções abaixo estão prontas para usar. O servidor público só tem est
 - Circuitos Elétricos, como MVP (LarissaFDS/TutorON#54 e LarissaFDS/TutorON#55, commit `4117bf3`);
 - Sinais e Sistemas, como MVP (LarissaFDS/TutorON#58 e LarissaFDS/TutorON#59, commit `317b67b`);
 - Sistemas de Controle, como MVP, e o ajuste do revisor que passou a aceitar a fórmula geral do material quando o valor final fica para o aluno (LarissaFDS/TutorON#61 e LarissaFDS/TutorON#62, commit `ec92b41`);
-- Eletrônica, como MVP (LarissaFDS/TutorON#65 e LarissaFDS/TutorON#66, commit `f2093bf`).
+- Eletrônica, como MVP (LarissaFDS/TutorON#65 e LarissaFDS/TutorON#66, commit `f2093bf`);
+- Princípios de Comunicação, **em validação** (LarissaFDS/TutorON#64), e Variáveis Complexas, como MVP (LarissaFDS/TutorON#68 e LarissaFDS/TutorON#69, commit `f7fd054`).
 
 Faça os passos no PC do servidor, na pasta do TutorON.
 
@@ -103,14 +104,15 @@ Faça os passos no PC do servidor, na pasta do TutorON.
 2. Pare o servidor: feche a janela do `1-Iniciar-Servidor.bat` ou rode `5-Desligar.bat`.
 3. Atualize: `git checkout main` e `git pull --ff-only origin main`.
 4. Dependências: nada novo para o servidor. O `duckdb` entrou só em `requirements-acervo.txt`, para os testes de SQL, e não precisa ser instalado no servidor.
-5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. Os índices de BD, de OAC (34 blocos, 24 na busca) de Probabilidade (25 blocos, 19 na busca) de Circuitos (26 blocos, 23 na busca) de Sinais e Sistemas (29 blocos, 28 na busca) de Sistemas de Controle (24 blocos, 22 na busca) e de Eletrônica (22 blocos, 19 na busca) já vêm gerados no repositório.
+5. Modelos do Ollama: os mesmos de antes (`tutoron-paa`, `qwen3:8b`, `bge-m3`). Confira com `ollama list`. Os índices de BD, de OAC (34 blocos, 24 na busca) de Probabilidade (25 blocos, 19 na busca) de Circuitos (26 blocos, 23 na busca) de Sinais e Sistemas (29 blocos, 28 na busca) de Sistemas de Controle (24 blocos, 22 na busca) de Eletrônica (22 blocos, 19 na busca), de Princípios de Comunicação (33 blocos, 28 na busca) e de Variáveis Complexas (20 blocos, 13 na busca) já vêm gerados no repositório.
 6. `.env`: nada obrigatório de novo. **Não** coloque `TUTORON_LIBERAR_EM_VALIDACAO` no servidor público.
 7. Reinicie com dois cliques em `1-Iniciar-Servidor.bat`.
 8. Confira no endereço público:
-   - aparecem as doze disciplinas: PAA, SD, OAC, Cálculo 3, Física 2, ED, BD, Probabilidade e Estatística, Circuitos Elétricos, Sinais e Sistemas, Sistemas de Controle e Eletrônica;
-   - nenhuma mostra " · beta" no seletor nem aviso ao ser escolhida;
+   - aparecem as treze disciplinas liberadas: PAA, SD, OAC, Cálculo 3, Física 2, ED, BD, Probabilidade e Estatística, Circuitos Elétricos, Sinais e Sistemas, Sistemas de Controle, Eletrônica e Variáveis Complexas;
+   - nenhuma delas mostra " · beta" no seletor nem aviso ao ser escolhida;
+   - Princípios de Comunicação aparece **desabilitada** (em validação), e uma pergunta enviada com `disciplina=pcom` recebe 403;
    - `?disciplina=bd` abre com Banco de Dados selecionada;
-   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN. Em OAC, "Como fica o datapath monociclo numa instrução beq?" deve citar as anotações do Projeto 1. Em Probabilidade, "O que significa a falta de memória da distribuição exponencial?" deve citar as anotações de 2025.2. Em Circuitos, "Como calcular o equivalente de Thévenin com uma fonte dependente?" deve citar as anotações de 2026.1 (Teorema de Thévenin e Norton). Em Sinais e Sistemas, "Qual a transformada de Fourier de um pulso retangular?" deve citar as anotações de 2026.1 (Transformada de Fourier). Em Sistemas de Controle, "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?" deve citar as anotações de 2026.2 (Método Lugar das raízes). Em Eletrônica, "Como saber se o diodo está conduzindo?" deve citar as anotações de 2026.2 (Diodos).
+   - uma pergunta de exemplo de cada disciplina (as sugestões da tela) responde com material citado da própria disciplina; em BD, por exemplo, a de LEFT JOIN e INNER JOIN. Em OAC, "Como fica o datapath monociclo numa instrução beq?" deve citar as anotações do Projeto 1. Em Probabilidade, "O que significa a falta de memória da distribuição exponencial?" deve citar as anotações de 2025.2. Em Circuitos, "Como calcular o equivalente de Thévenin com uma fonte dependente?" deve citar as anotações de 2026.1 (Teorema de Thévenin e Norton). Em Sinais e Sistemas, "Qual a transformada de Fourier de um pulso retangular?" deve citar as anotações de 2026.1 (Transformada de Fourier). Em Sistemas de Controle, "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?" deve citar as anotações de 2026.2 (Método Lugar das raízes). Em Eletrônica, "Como saber se o diodo está conduzindo?" deve citar as anotações de 2026.2 (Diodos). Em Variáveis Complexas, "Como calcular todas as raízes cúbicas de 1 − i?" deve citar a Prova 1 de Variáveis Complexas (versão C, questão 1).
 9. Se algo der errado, volte: feche o servidor, rode `git checkout <commit anotado no passo 1>` (ex.: `git checkout ef5ed69`) e abra o `1-Iniciar-Servidor.bat` de novo. Para sair do commit antigo depois: `git checkout main`.
 
 ## 5. Como usar agora
