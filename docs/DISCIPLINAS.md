@@ -364,7 +364,7 @@ A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão 
 ## Matemática Discreta: contas conferidas por código (20/11/2026)
 
 Matemática Discreta (ECOM003) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
-- a entrada em `disciplinas/disciplinas.json` (`discreta`, "em validação", com aviso);
+- a entrada em `disciplinas/disciplinas.json` (`discreta`);
 - `disciplinas/discreta/`: rigor, 22 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
 - `tests_acervo/test_disciplina_discreta.py`, que recalcula com Python e SymPy cada número dos blocos;
 - a lista de disciplinas do teste da API;
@@ -380,7 +380,7 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado por HTTP 429), 20/11/2026 (`
 - só as respostas de equivalência, ARARA e RSA terminam com "**Verificação:**";
 - Karnaugh com Discreta selecionada: a IA não disse que o assunto é de Sistemas Digitais, como já acontece em outras disciplinas.
 
-A disciplina continua "em validação". A pendência da busca acima precisa de decisão antes de ela passar a MVP.
+A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou a falha de busca acima.
 
 ## Como cadastrar uma nova disciplina
 
@@ -417,4 +417,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026; publicação da transcrição não autorizada; revisão humana e do professor pendentes; 13 resoluções pendentes de confirmação do professor; funções analíticas, séries, resíduos, conformes, harmônicas e Gamma só em notas fora da busca; veja a [curadoria](../disciplinas/varcomp/CURADORIA.md) |
 | `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |
 | `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
-| `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | em validação; slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
+| `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |

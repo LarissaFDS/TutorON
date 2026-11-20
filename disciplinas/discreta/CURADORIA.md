@@ -1,6 +1,6 @@
 # Curadoria — Matemática Discreta (`discreta`, ECOM003)
 
-Situação: **em validação** (barrada no servidor público; veja `docs/DISCIPLINAS.md`).
+Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitando a falha de busca registrada em `docs/DISCIPLINAS.md`.
 
 ## Disciplina
 
