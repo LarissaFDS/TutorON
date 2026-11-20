@@ -404,7 +404,7 @@
       "id": "varcomp",
       "nome": "Variáveis Complexas",
       "sigla": "VC",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/varcomp/acervo/itens.json",
       "indice": "disciplinas/varcomp/acervo/indice.json",
       "materiais": "disciplinas/varcomp/materiais",

@@ -1,6 +1,6 @@
 # Variáveis Complexas — curadoria do acervo
 
-Situação: **em validação** desde 20/11/2026 (veja a seção 7). A disciplina está cadastrada, com acervo e índice próprios, e usa o mesmo fluxo e a mesma IA das outras. Enquanto estiver em validação, o servidor recusa perguntas de Variáveis Complexas no atendimento normal (403). Para testes autorizados, use `TUTORON_LIBERAR_EM_VALIDACAO=varcomp` (veja [`docs/DISCIPLINAS.md`](../../docs/DISCIPLINAS.md)).
+Situação: **MVP** desde 20/11/2026: liberada no atendimento normal depois que a suíte completa, a bateria de relevância e as 6 perguntas com a IA real (Gemini e modelo local) passaram, sem nota de IA na busca e com bloco na busca para todo tópico coberto pelas provas. O acervo continua com as pendências da seção 7: resoluções da equipe `pendente_professor`, notas de IA fora da busca e transcrição não autorizada para publicação. A disciplina usa o mesmo fluxo e a mesma IA das outras.
 
 | Item | Estado em 20/11/2026 |
 |---|---|
