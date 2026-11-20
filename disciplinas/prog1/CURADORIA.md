@@ -1,6 +1,6 @@
 # Curadoria — Programação 1 (`prog1`, ECOM002)
 
-Situação: **em validação**. A barreira continua ligada; `TUTORON_LIBERAR_EM_VALIDACAO` não deve ser ligado no servidor público.
+Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, mesmo com os sanitizers ainda não rodados (veja Código).
 
 ## Disciplina
 

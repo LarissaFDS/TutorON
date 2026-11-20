@@ -51,8 +51,7 @@ def test_prog1_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    # Fica em validação até os sanitizers rodarem em Linux e a equipe revisar (veja CURADORIA.md).
-    assert P1.situacao == 'em validação' and P1.em_validacao and P1.aviso
+    assert P1.situacao == 'MVP' and not P1.em_validacao and not P1.aviso
 
 
 def test_itens_gerados_estao_atualizados():
