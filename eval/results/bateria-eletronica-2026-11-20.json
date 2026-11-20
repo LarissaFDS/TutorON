@@ -1,0 +1,113 @@
+[
+ {
+  "id": "eletronica-diodo",
+  "disciplina": "eletronica",
+  "pergunta": "Como saber se o diodo está conduzindo?",
+  "esperado": "supor o estado, calcular e conferir: ligado exige corrente do ânodo ao cátodo; desligado exige V_D < 0,7 V; dizer o modelo",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 38.1,
+  "fontes": [
+   "Anotações \"Diodos\" (11 set. 2026), p. 1–3, e \"Revisão prova 1\" (19 set. 2026), p. 1",
+   "Anotações \"Aplicações de diodos\" (24 set. 2026), questão 5, e \"Exercícios\" (17 set. 2026), exercício 37 (de livro, parafraseados)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para saber se um diodo está conduzindo ou bloqueado, utilizamos o **método da hipótese** [P1]:\n\n1. **Identifique os terminais:** localize o ânodo ($A$) e o cátodo ($K$). A tensão no diodo é $V_D = V_A - V_K$.\n2. **Faça uma hipótese:** escolha um estado inicial para o diodo (por exemplo, \"diodo ligado\").\n3. **Substitua pelo modelo adequado:**\n   - **Diodo ideal:** se ligado, vira um circuito fechado/fio ($V_D = 0\\ \\mathrm{V}$); se desligado, um circuito aberto ($I_D = 0\\ \\mathrm{A}$).\n   - **Diodo de silício (queda constante):** se ligado, vira uma fonte de $0{,}7\\ \\mathrm{V}$ (com o polo positivo no ânodo); se desligado, um circuito aberto [P1].\n4. **Calcule as grandezas do circuito:** resolva as malhas/nós para encontrar $I_D$ ou $V_D$.\n5. **Confira a hipótese:**\n   - **Se supôs LIGADO:** a corrente calculada no sentido do ânodo para o cátodo deve ser estritamente positiva ($I_D > 0$).\n   - **Se supôs DESLIGADO:** a tensão calculada entre ânodo e cátodo deve ser menor que o limiar de condução ($V_D < 0\\ \\mathrm{V}$ para ideal ou $V_D < 0{,}7\\ \\mathrm{V}$ para silício).\n\nSe o teste falhar, a hipótese estava incorreta: inverta o estado do diodo e refaça a análise [P1].\n\n---\n\n### Sua vez\nImagine um circuito com uma fonte CC de $5\\ \\mathrm{V}$, um resistor de $1\\ \\mathrm{k}\\Omega$ e um diodo de silício ($0{,}7\\ \\mathrm{V}$) em série, com o polo positivo da fonte ligado ao ânodo do diodo. \n\nNo seu papel:\n1. Suponha que o diodo está **ligado** e substitua-o pela fonte de $0{,}7\\ \\mathrm{V}$.\n2. Escreva a equação da malha e calcule a corrente $I_D$.\n3. Verifique se $I_D > 0$. A hipótese de condução se confirmou?"
+ },
+ {
+  "id": "eletronica-ceifador",
+  "disciplina": "eletronica",
+  "pergunta": "Qual a tensão de saída de um ceifador com diodo de silício e entrada de 10 V de pico?",
+  "esperado": "ceifador paralelo com 1k/1k: vo = vi/2 até vi = 1,4 V, depois 0,7 V; semiciclo negativo −5 V; 9,3 mA no pico",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Anotações \"Exercícios\" (17 set. 2026), exercício 26 (de livro, parafraseado)",
+   "Anotações \"Exercícios\" (17 set. 2026), exercício 40 (resolução do professor no quadro, fotografada; foto não copiada)",
+   "Anotações \"Simulação de retificadores\" (9 set. 2026, simulação no Falstad), p. 1–2, e \"Revisão prova 1\" (19 set. 2026), p. 2–3"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para analisar esse circuito, precisamos primeiro definir a topologia, já que o comportamento do ceifador depende de como o diodo e o resistor estão conectados.\n\nNo exemplo [P1] do nosso material, temos um ceifador paralelo onde o diodo está em derivação com a carga. Para começarmos a sua análise, você precisa desenhar o circuito que está estudando. Onde estão posicionados o resistor, o diodo e a fonte de entrada? O diodo está em série com a carga ou em paralelo com ela?\n\nLembre-se que, ao usar o modelo de **queda constante de silício**, assumimos que o diodo se comporta como uma fonte de $0,7\\ \\mathrm{V}$ quando está conduzindo (polarizado diretamente) e como um circuito aberto quando está bloqueado (polarizado inversamente).\n\nPara avançar, tente identificar:\n1. Em qual semiciclo da entrada (positivo ou negativo) o diodo entra em condução?\n2. Qual é o valor da tensão de saída quando o diodo está bloqueado (circuito aberto)?\n3. Qual é o valor da tensão de saída quando o diodo está conduzindo (considerando a queda de $0,7\\ \\mathrm{V}$)?\n\n### Sua vez\nDesenhe o circuito no papel e identifique se o diodo está em série ou em paralelo com a carga. Se possível, descreva a posição do ânodo e do cátodo em relação à fonte de entrada."
+ },
+ {
+  "id": "eletronica-divisor",
+  "disciplina": "eletronica",
+  "pergunta": "Como calcular o ponto Q de um TBJ com polarização por divisor de tensão?",
+  "esperado": "Thévenin da base; IB = (VTh − 0,7)/(RTh + (β+1)RE); IC = βIB; VCE = VCC − IC RC − IE RE; conferir região ativa",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [
+   "Anotações \"Circuitos de Polarização de Transistores\" (23 out. 2026), item c, e \"Exercício parte 2\" (22 out. 2026), p. 2–5 (exercício de livro, parafraseado)",
+   "Anotações \"Exercício parte 2\" (22 out. 2026), p. 8–9 (exercício de livro, parafraseado)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular o ponto Q (o ponto de operação em corrente contínua) de um transistor bipolar de junção (TBJ) usando a configuração de divisor de tensão, o objetivo principal é encontrar os valores de $I_C$ (corrente de coletor) e $V_{CE}$ (tensão coletor-emissor).\n\nComo você viu no material [P1], o segredo é simplificar o circuito da base para facilitar a análise. Imagine que você \"olha\" para o circuito a partir da base do transistor: você pode substituir a rede de resistores $R_1$ e $R_2$ por um circuito equivalente de Thévenin. Isso transforma o divisor em uma malha simples com uma fonte de tensão $V_{Th}$ e uma resistência $R_{Th}$ em série com a base.\n\nUma vez feito isso, você aplica a Lei de Kirchhoff na malha da base para encontrar a corrente de base ($I_B$) e, consequentemente, a corrente de coletor ($I_C = \\beta I_B$). Com $I_C$ em mãos, a malha do coletor permite encontrar a tensão $V_{CE}$.\n\nLembre-se sempre de conferir se o transistor está realmente na região ativa, verificando se a junção base-coletor está reversa e se $V_{CE}$ é maior que a tensão de saturação (geralmente considerada 0,2 V).\n\n### Sua vez\nSe você tiver um circuito com $V_{CC} = 15\\ \\mathrm{V}$, $R_1 = 10\\ \\mathrm{k}\\Omega$, $R_2 = 2\\ \\mathrm{k}\\Omega$, $R_E = 1\\ \\mathrm{k}\\Omega$ e $\\beta = 100$, qual seria o valor da tensão de Thévenin ($V_{Th}$) e da resistência de Thévenin ($R_{Th}$) vistas da base? Tente montar essas expressões no papel."
+ },
+ {
+  "id": "eletronica-retificador",
+  "disciplina": "eletronica",
+  "pergunta": "Qual a diferença entre retificador de meia onda e de onda completa?",
+  "esperado": "média Vp/π contra 2Vp/π; uma queda contra duas na ponte; 60 contra 120 Hz; 220 V é RMS (pico 311 V)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Anotações \"Simulação de retificadores\" (9 set. 2026), p. 3–5, e \"Revisão prova 1\" (19 set. 2026), p. 3–4",
+   "Anotações \"Simulação de retificadores\" (9 set. 2026, simulação no Falstad), p. 1–2, e \"Revisão prova 1\" (19 set. 2026), p. 2–3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre eles, o segredo está em observar o que acontece com a corrente na carga durante o semiciclo negativo da fonte (quando a tensão da fonte inverte a polaridade).\n\nNo **retificador de meia onda**, o diodo bloqueia a passagem de corrente durante esse semiciclo negativo, fazendo com que a tensão na carga seja zero nesse intervalo. Já no **retificador de onda completa em ponte**, a disposição dos quatro diodos faz com que, mesmo quando a fonte inverte, a corrente continue fluindo pela carga sempre no mesmo sentido.\n\nPense no caminho que a corrente percorre em cada caso:\n1. No meia onda, a corrente tem apenas um caminho possível. Quando a fonte inverte, o diodo \"abre\" o circuito.\n2. Na ponte de diodos, quando a fonte inverte, o arranjo dos diodos \"desvia\" a corrente para que ela entre na carga pelo mesmo terminal de antes.\n\nPara visualizar melhor, tente desenhar os dois circuitos no papel e trace o caminho da corrente (o sentido do fluxo) para o semiciclo positivo e para o semiciclo negativo da fonte.\n\n### Sua vez\nDesenhe um retificador em ponte com quatro diodos e uma carga $R$. Identifique quais são os dois diodos que conduzem durante o semiciclo positivo e quais são os dois que conduzem durante o semiciclo negativo. O que acontece com o sentido da corrente na carga em ambos os casos?"
+ },
+ {
+  "id": "eletronica-saturacao",
+  "disciplina": "eletronica",
+  "pergunta": "Como saber se o transistor está saturado?",
+  "esperado": "comparar βIB com IC,sat = VCC/(RC+RE) ou VCE < 0,2 V; na saturação não vale IC = βIB",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 20.1,
+  "fontes": [
+   "Anotações \"Transistores - circuitos de polarização fixa\" (9 out. 2026), p. 1–4, e \"Circuitos de Polarização de Transistores\" (23 out. 2026), item a (exercício de livro, parafraseado)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para saber se o transistor está saturado, o ponto principal é entender que a relação $I_C = \\beta I_B$ só é válida enquanto o transistor estiver na **região ativa**. Quando ele entra em saturação, essa proporção deixa de ser verdadeira e o componente se comporta quase como uma chave fechada entre coletor e emissor.\n\nPense no seguinte: se você calculasse uma corrente de coletor ($I_C = \\beta I_B$) que exigisse uma tensão no coletor menor do que a tensão no emissor (ou menor que a tensão de saturação $V_{CE,sat} \\approx 0,2\\text{ V}$), isso seria fisicamente possível? O circuito \"trava\" o valor de $I_C$ em um limite máximo imposto pelos resistores externos.\n\nPara verificar isso, você pode comparar a corrente que o transistor *gostaria* de ter ($\\beta I_B$) com a corrente máxima que o circuito permite que ele tenha quando está totalmente \"aberto\" (a corrente de saturação, $I_{C,sat}$, calculada como se $V_{CE}$ fosse zero).\n\nSe a corrente calculada pela base for maior que essa corrente máxima permitida pelo circuito, o transistor não consegue atingir o valor de $\\beta I_B$ e acaba saturando.\n\n### Sua vez\nConsiderando um circuito de polarização fixa com $V_{CC} = 15\\text{ V}$ e $R_C = 1\\text{ k}\\Omega$, qual seria o valor da corrente de saturação ($I_{C,sat}$) se considerarmos $V_{CE} \\approx 0\\text{ V}$?"
+ },
+ {
+  "id": "eletronica-fora",
+  "disciplina": "eletronica",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 38.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A simplificação de uma função com mapa de Karnaugh é um processo visual e lógico que busca agrupar os 1s (ou 0s, dependendo da função) em bloces de potências de 2. O objetivo é identificar os termos lógicos que repetem ou cobrem múltiplos termos da tabela verdade, reduzindo assim o número de variáveis na expressão final.\n\nEntão, para começar, o que você deve fazer antes de preencher o mapa de Karnaugh?\n\n### Sua vez  \nDesenhe um mapa de Karnaugh para uma função de 3 variáveis (A, B, C) e preencha-o com os valores da tabela verdade da função. Depois, identifique quais blocos de 1s você pode formar."
+ }
+]

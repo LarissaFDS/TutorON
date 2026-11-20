@@ -104,6 +104,18 @@ PERGUNTAS = [
     ("controle-massa-mola", "controle", "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
      "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))"),
     ("controle-fora", "controle", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Eletrônica: valores conferidos em tests_acervo/test_disciplina_eletronica.py (SymPy e NumPy).
+    ("eletronica-diodo", "eletronica", "Como saber se o diodo está conduzindo?",
+     "supor o estado, calcular e conferir: ligado exige corrente do ânodo ao cátodo; desligado exige V_D < 0,7 V; dizer o modelo"),
+    ("eletronica-ceifador", "eletronica", "Qual a tensão de saída de um ceifador com diodo de silício e entrada de 10 V de pico?",
+     "ceifador paralelo com 1k/1k: vo = vi/2 até vi = 1,4 V, depois 0,7 V; semiciclo negativo −5 V; 9,3 mA no pico"),
+    ("eletronica-divisor", "eletronica", "Como calcular o ponto Q de um TBJ com polarização por divisor de tensão?",
+     "Thévenin da base; IB = (VTh − 0,7)/(RTh + (β+1)RE); IC = βIB; VCE = VCC − IC RC − IE RE; conferir região ativa"),
+    ("eletronica-retificador", "eletronica", "Qual a diferença entre retificador de meia onda e de onda completa?",
+     "média Vp/π contra 2Vp/π; uma queda contra duas na ponte; 60 contra 120 Hz; 220 V é RMS (pico 311 V)"),
+    ("eletronica-saturacao", "eletronica", "Como saber se o transistor está saturado?",
+     "comparar βIB com IC,sat = VCC/(RC+RE) ou VCE < 0,2 V; na saturação não vale IC = βIB"),
+    ("eletronica-fora", "eletronica", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 
