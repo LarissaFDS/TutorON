@@ -17,7 +17,7 @@ jobs:
       - name: Instalar dependências (sem Manim, que precisa de bibliotecas do sistema; SymPy, NumPy e SciPy para tests_acervo)
         run: |
           grep -v '^manim' requirements.txt > /tmp/req.txt
-          pip install -r /tmp/req.txt ruff sympy==1.14.0 numpy==2.4.4 scipy==1.18.1
+          pip install -r /tmp/req.txt ruff sympy==1.14.0 numpy scipy
       - name: Lint (erros reais)
         run: ruff check --select E9,F63,F7,F82 .
       - name: Testes
