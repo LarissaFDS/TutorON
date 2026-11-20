@@ -163,6 +163,18 @@ PERGUNTAS = [
     ("prog1-troca", "prog1", "Por que minha função troca não troca os valores?",
      "passagem por valor; precisa de ponteiros (int *a, int *b) e chamar troca(&x, &y)"),
     ("prog1-fora", "prog1", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Matemática Discreta: contas conferidas em tests_acervo/test_disciplina_discreta.py.
+    ("discreta-inducao", "discreta", "Como provar por indução que 1 + 2 + … + n = n(n+1)/2?",
+     "nomeia a técnica; base n = 1; hipótese de indução; passo soma n + 1 e usa a hipótese; termina com Verificação"),
+    ("discreta-equivalencia", "discreta", "Como mostrar que uma relação é de equivalência?",
+     "reflexiva, simétrica e transitiva, cada uma com justificativa; contraexemplo basta para negar; classes de equivalência"),
+    ("discreta-inverso", "discreta", "Como calcular o inverso de 7 módulo 26?",
+     "confere mdc(7, 26) = 1; Euclides estendido 1 = 3·26 − 11·7; inverso 15; confere 7·15 = 105 ≡ 1"),
+    ("discreta-arara", "discreta", "Quantos anagramas tem a palavra ARARA?",
+     "ordem importa, letras repetidas: 5!/(3!·2!) = 10; diz ordem e repetição"),
+    ("discreta-rsa", "discreta", "Como funciona a criptografia RSA?",
+     "n = pq, φ = (p−1)(q−1), c com mdc(c, φ) = 1, d inverso de c mod φ; C = M^c mod n e M = C^d mod n; segurança na fatoração"),
+    ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

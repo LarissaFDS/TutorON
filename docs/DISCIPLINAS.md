@@ -361,6 +361,27 @@ IA real (20/11/2026, `eval/results/bateria-prog1-2026-11-20.json`, Gemini degrad
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe. Os sanitizers ainda não rodaram; precisam rodar em Linux.
 
+## Matemática Discreta: contas conferidas por código (20/11/2026)
+
+Matemática Discreta (ECOM003) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`discreta`);
+- `disciplinas/discreta/`: rigor, 22 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_discreta.py`, que recalcula com Python e SymPy cada número dos blocos;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+A ementa vem do plano de curso do Prof. Lucas Amorim. O material vem dos slides e da Lista 01 dele, de notas e listas dos Profs. Pablo Sampaio (UFRPE) e Leandro Balby Marinho (UFCG) e do livro de Evaristo e Perdigão, tudo parafraseado. O livro de Albertson e Hutchinson, protegido, entra só por seção, com exemplos próprios. Os 13 tópicos do plano têm bloco na busca. Três resoluções foram corrigidas pela equipe: ∅ ⊆ A nos slides, uma digitação numa prova de conjuntos e a prova da lista 4, Q7b.
+
+Busca: "Por que meu scanf não lê o número?" com Discreta selecionada traz 2 blocos, por causa da palavra "número" e de uma similaridade de 0,52. A margem de destaque com palavra em comum (0,06) é a mesma de todas as disciplinas e não foi mudada. A pergunta saiu da bateria (que fica 299/299) e a falha fica registrada aqui como pendência: é preciso decidir se o critério comum deve mudar.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado por HTTP 429), 20/11/2026 (`eval/results/bateria-discreta-2026-11-20.json`). As respostas foram lidas uma a uma e conferidas:
+- indução 1 + … + n, relação de equivalência, ARARA e RSA: corretas e socráticas. Nenhuma entregou o valor final; a de RSA propôs um exemplo próprio (p = 3, q = 11);
+- inverso de 7 mod 26: método certo (mdc, Bézout, reduzir módulo 26), mas diz "dividindo sucessivamente até encontrar o resto 1". O certo é dividir até o resto 0; o mdc é o último resto não nulo;
+- só as respostas de equivalência, ARARA e RSA terminam com "**Verificação:**";
+- Karnaugh com Discreta selecionada: a IA não disse que o assunto é de Sistemas Digitais, como já acontece em outras disciplinas.
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou a falha de busca acima.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -396,3 +417,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026; publicação da transcrição não autorizada; revisão humana e do professor pendentes; 13 resoluções pendentes de confirmação do professor; funções analíticas, séries, resíduos, conformes, harmônicas e Gamma só em notas fora da busca; veja a [curadoria](../disciplinas/varcomp/CURADORIA.md) |
 | `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |
 | `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
+| `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
