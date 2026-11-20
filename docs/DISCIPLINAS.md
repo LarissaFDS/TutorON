@@ -303,6 +303,23 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026, `eval/results/
 - **filtro do DSB com o modelo local (`tutoron-paa`): errado nas 3 vezes em que ele respondeu** (1ª rodada, `…-exemplos-1` e `…-exemplos-3`). Ele não manda multiplicar pela portadora e diz para filtrar em torno de $f_c$. Pelo Gemini veio sempre correto. Como o modelo local é o principal no servidor, isso mantém a disciplina **em validação**; depois que o bloco do DSB-SC passou a trazer a demodulação (multiplicar pela portadora, passa-baixas com $W \le f_{corte} \le 2f_c - W$), o Gemini acertou 4 de 4 (`…-dsb-1` a `…-dsb-4`), mas o modelo local, rodado sozinho (`…-dsb-local`), ainda mandou passar "a banda lateral", sem a multiplicação;
 - Karnaugh com Comunicação selecionada: respondeu sem dizer que o tema é de Sistemas Digitais (o mesmo comportamento de Controle, Circuitos e Sinais).
 
+## Variáveis Complexas: provas do professor sem gabarito, resolvidas e conferidas por código (20/11/2026)
+
+Variáveis Complexas entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/varcomp/`: rigor, 20 blocos (13 na busca; 7 notas da equipe candidatas: Cauchy-Riemann, funções elementares, Taylor e Laurent, resíduos, conformes, harmônicas, Gamma e Stirling), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_varcomp.py`, que refaz cada resultado com SymPy (aritmética exata, raízes, `residue`, integral da parametrização) e NumPy (integral numérica sobre cada curva, com a orientação do enunciado e a derivada exata de γ);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` (exemplos, variantes em LaTeX e em texto simples, perguntas fora) e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de três versões da Prova 1 do Prof. Xu Yang (IC/UFAL, PDFs de março de 2021), sem gabarito. Os enunciados foram lidos na imagem de cada página, porque a extração de texto perde sinais e barras, e entram parafraseados: a publicação da transcrição e dos PDFs não foi autorizada. A ementa de ECOM024 (60 h, 4º semestre) veio do PPC de 2014 (p. 37 do PDF). As 13 resoluções são da equipe e ficam `pendente_professor`. Três pontos de enunciado estão registrados: a Q1(b) usa barras de módulo onde "todos os valores" sugere a raiz complexa (as duas leituras estão resolvidas); a curva da Q3 da versão A é horária ($\oint dz/z = -2\pi i$); a primeira integral da Q2 da versão B dá zero porque $g(-0{,}5) = g(1{,}5) = \sqrt2$.
+
+Teste numérico: a regra do trapézio com `np.gradient` errava 2·10⁻³ em $\oint (\sin\pi z^2 + \cos\pi z^2)/((z-1)(z-2))\,dz$, porque o numerador chega a 10¹² em $|z| = 3$; com a derivada exata e a regra periódica, o erro cai abaixo de 10⁻⁶.
+
+Busca: "O que são as equações de Cauchy-Riemann?" traz blocos da fórmula integral de Cauchy (similaridade 0,46–0,52) pela palavra "Cauchy", porque Cauchy-Riemann só tem nota fora da busca. O critério de relevância não foi mudado.
+
+IA real: RESULTADO_IA
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -335,3 +352,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `controle` | Sistemas de Controle | Markdown curado em `disciplinas/controle` (24 blocos, 22 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; resposta em frequência e projeto de controladores só em notas fora da busca; veja a [curadoria](../disciplinas/controle/CURADORIA.md) |
 | `eletronica` | Eletrônica | Markdown curado em `disciplinas/eletronica` (22 blocos, 19 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; Zener, filtro capacitivo e MOSFET só em notas fora da busca; amp-op, tiristores, optoeletrônicos e fontes sem material; veja a [curadoria](../disciplinas/eletronica/CURADORIA.md) |
 | `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |
+| `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | SITUACAO_VC |
