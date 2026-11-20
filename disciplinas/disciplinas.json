@@ -492,6 +492,40 @@
         "Como inverter uma string em C?",
         "Por que minha função troca não troca os valores?"
       ]
+    },
+    {
+      "id": "discreta",
+      "nome": "Matemática Discreta",
+      "sigla": "MD",
+      "situacao": "em validação",
+      "aviso": "Matemática Discreta está em validação: o material da turma ainda não foi revisado pelo professor.",
+      "itens": "disciplinas/discreta/acervo/itens.json",
+      "indice": "disciplinas/discreta/acervo/indice.json",
+      "materiais": "disciplinas/discreta/materiais",
+      "rigor": "disciplinas/discreta/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "discreta-01-nocoes-logica",
+        "discreta-02-demonstracoes",
+        "discreta-03-conjuntos",
+        "discreta-04-relacoes",
+        "discreta-05-funcoes",
+        "discreta-06-inducao-peano",
+        "discreta-07-inteiros-numeracao",
+        "discreta-08-mdc-primos",
+        "discreta-09-aritmetica-modular-rsa",
+        "discreta-10-estruturas-algebricas-booleanas",
+        "discreta-11-combinatoria",
+        "discreta-12-grafos",
+        "discreta-13-recorrencias"
+      ],
+      "exemplos": [
+        "Como provar por indução que 1 + 2 + … + n = n(n+1)/2?",
+        "Como mostrar que uma relação é de equivalência?",
+        "Como calcular o inverso de 7 módulo 26?",
+        "Quantos anagramas tem a palavra ARARA?",
+        "Como funciona a criptografia RSA?"
+      ]
     }
   ]
 }
