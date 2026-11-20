@@ -139,6 +139,18 @@ PERGUNTAS = [
     ("varcomp-cr", "varcomp", "O que são as equações de Cauchy-Riemann?",
      "u_x = v_y, u_y = −v_x; não há material na busca (nota de IA candidata); não cita blocos de integral como fonte de CR"),
     ("varcomp-fora", "varcomp", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Inglês Instrumental: trechos conferidos em tests_acervo/test_disciplina_ingles.py.
+    ("ingles-skim-scan", "ingles", "O que é skimming e scanning?",
+     "skimming = ideia geral (título, primeiras frases); scanning = informação específica (número, nome) com pista visual"),
+    ("ingles-nucleo", "ingles", 'Como identificar o núcleo de um grupo nominal como "plant extract based insecticides"?',
+     "núcleo é o último substantivo, insecticides; ler da direita para a esquerda: inseticidas à base de extratos de plantas"),
+    ("ingles-actually", "ingles", 'Qual a diferença entre "actually" e "atualmente"?',
+     "falso cognato: actually = na verdade, de fato; atualmente = currently, nowadays; cita trecho em inglês"),
+    ("ingles-passiva", "ingles", "Como reconhecer a voz passiva num texto técnico?",
+     "to be + particípio passado, agente com by; tempo no auxiliar; has increased não é passiva"),
+    ("ingles-they", "ingles", 'A quem se refere "they" em "where they are used to eliminate damage"?',
+     "insecticides (inseticidas), da frase anterior; sem entregar direto no modo Tutor: estratégia de voltar à frase anterior e concordância"),
+    ("ingles-fora", "ingles", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 
