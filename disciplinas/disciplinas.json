@@ -459,6 +459,39 @@
         "Como reconhecer a voz passiva num texto técnico?",
         "A quem se refere \"they\" em \"where they are used to eliminate damage\"?"
       ]
+    },
+    {
+      "id": "prog1",
+      "nome": "Programação 1",
+      "sigla": "P1",
+      "situacao": "MVP",
+      "itens": "disciplinas/prog1/acervo/itens.json",
+      "indice": "disciplinas/prog1/acervo/indice.json",
+      "materiais": "disciplinas/prog1/materiais",
+      "rigor": "disciplinas/prog1/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "prog1-01-algoritmos-representacao",
+        "prog1-02-compilacao",
+        "prog1-03-variaveis-tipos-es",
+        "prog1-04-decisao",
+        "prog1-05-repeticao",
+        "prog1-06-funcoes",
+        "prog1-07-vetores",
+        "prog1-08-matrizes",
+        "prog1-09-strings",
+        "prog1-10-ponteiros",
+        "prog1-11-structs",
+        "prog1-12-recursao",
+        "prog1-13-juiz-online"
+      ],
+      "exemplos": [
+        "Por que meu scanf não lê o número?",
+        "Qual a diferença entre while e do-while?",
+        "Como passar um vetor para uma função em C?",
+        "Como inverter uma string em C?",
+        "Por que minha função troca não troca os valores?"
+      ]
     }
   ]
 }

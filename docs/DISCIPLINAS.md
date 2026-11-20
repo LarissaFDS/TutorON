@@ -344,6 +344,23 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado por HTTP 429) e o modelo loc
 
 A disciplina passou a MVP, sem aviso, no último commit da branch.
 
+## Programação 1: C do primeiro período, código compilado nos testes (20/11/2026)
+
+Programação 1 (ECOM002) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/prog1/`: rigor, 18 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_prog1.py` e os programas em `tests_acervo/c_prog1/`;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O material vem dos slides do Prof. Rodrigo de Barros Paes (aulas 1 a 16) e do livro de Jaime Evaristo, ambos parafraseados. A ementa vem do PPC de 2014 (p. 23). Os trechos de C são cópias exatas de programas que compilam com `-std=c99 -Wall -Wextra -pedantic -Werror` e passam em casos de teste. O teste dos sanitizers é pulado nesta máquina, porque o MinGW não tem sanitizers e o Docker não subiu. As questões do Huxley aparecem só por número e tema.
+
+Busca: "Por que 7 / 2 dá 3 em C?" não tem token nenhum, porque números de um dígito e "dá" caem. Com isso, a busca semântica nem roda. A pergunta da bateria passou a ser "Por que a divisão 7 / 2 dá 3 em C?", e a busca não mudou.
+
+IA real (20/11/2026, `eval/results/bateria-prog1-2026-11-20.json`, Gemini degradado e uma resposta do modelo local): as respostas sobre scanf, while/do-while, vetor como parâmetro, inverter string (sem programa pronto) e troca por ponteiros estão corretas e socráticas. Só a de scanf termina com "**Verificação:**". Na pergunta de Karnaugh, a IA não disse que o assunto é de Sistemas Digitais, como já acontece em outras disciplinas.
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe. Os sanitizers ainda não rodaram; precisam rodar em Linux.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -378,3 +395,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |
 | `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026; publicação da transcrição não autorizada; revisão humana e do professor pendentes; 13 resoluções pendentes de confirmação do professor; funções analíticas, séries, resíduos, conformes, harmônicas e Gamma só em notas fora da busca; veja a [curadoria](../disciplinas/varcomp/CURADORIA.md) |
 | `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |
+| `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |

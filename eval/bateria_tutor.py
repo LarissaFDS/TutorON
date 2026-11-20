@@ -151,6 +151,18 @@ PERGUNTAS = [
     ("ingles-they", "ingles", 'A quem se refere "they" em "where they are used to eliminate damage"?',
      "insecticides (inseticidas), da frase anterior; sem entregar direto no modo Tutor: estratégia de voltar à frase anterior e concordância"),
     ("ingles-fora", "ingles", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Programação 1: código conferido em tests_acervo/test_disciplina_prog1.py.
+    ("prog1-scanf", "prog1", "Por que meu scanf não lê o número?",
+     "falta & no scanf, ou %c/espaço sobrando no buffer; pergunta pelo código; não usa fflush(stdin)"),
+    ("prog1-do-while", "prog1", "Qual a diferença entre while e do-while?",
+     "do-while executa o corpo ao menos uma vez e testa no fim; while testa antes; termina com ; depois do while"),
+    ("prog1-vetor-funcao", "prog1", "Como passar um vetor para uma função em C?",
+     "passa o nome (endereço do 1º elemento) e o tamanho à parte; alterações no vetor valem fora; sizeof não dá o tamanho dentro"),
+    ("prog1-inverter", "prog1", "Como inverter uma string em C?",
+     "guia sem dar o programa pronto (é questão do Huxley 247): strlen, dois índices, troca, '\\0'"),
+    ("prog1-troca", "prog1", "Por que minha função troca não troca os valores?",
+     "passagem por valor; precisa de ponteiros (int *a, int *b) e chamar troca(&x, &y)"),
+    ("prog1-fora", "prog1", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 
