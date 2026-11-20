@@ -1,0 +1,107 @@
+[
+ {
+  "id": "prog1-scanf",
+  "disciplina": "prog1",
+  "pergunta": "Por que meu scanf não lê o número?",
+  "esperado": "falta & no scanf, ou %c/espaço sobrando no buffer; pergunta pelo código; não usa fflush(stdin)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 20.0,
+  "fontes": [
+   "Slides de Programação 1 (UFAL), Prof. Rodrigo de Barros Paes, Aula 4 (scanf); livro de Jaime Evaristo, seções 2.7 e 5.6 (fflush)",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 4 (Elementos básicos; livro, capítulo 5)"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "No C, quando o `scanf` não lê um número ou parece \"pular\" a execução, a causa quase sempre é um destes três pontos (`[P1]`):\n\n1. **Falta do operador `&`**: Variáveis simples (como `int`, `float`, `double`) exigem o `&` antes do nome para indicar o endereço de memória onde o valor será salvo (`[P1]`, `[P2]`).\n2. **Especificador de formato incompatível**: O código de formatação precisa bater exatamente com o tipo da variável. Por exemplo, para `double` no `scanf`, deve-se usar `%lf` (usar `%f` lerá incorretamente) (`[P1]`, `[P2]`).\n3. **Enter (`'\\n'`) retido no buffer**: Se você fez uma leitura anterior, a tecla Enter pressionada pode ter ficado na entrada e interferido na leitura seguinte (`[P1]`).\n\nAlém disso, o `scanf` devolve a quantidade de itens lidos com sucesso, o que ajuda a identificar se a leitura falhou porque o usuário digitou letras em vez de números (`[P1]`):\n\n```c\nint n;\nif (scanf(\"%d\", &n) != 1) {\n    /* Entrada inválida ou falha na leitura */\n}\n```\n\n**Verificação:** Compile o seu programa usando `gcc -std=c99 -Wall -Wextra` no terminal. O compilador emitirá um aviso (*warning*) se o formato do `scanf` não corresponder ao tipo da variável ou se faltar o `&`.\n\n---\n\n### Sua vez\nPara descobrirmos o que está acontecendo no seu caso, dê uma olhada no seu código e me diga:\n1. Qual é a **declaração da variável** que você está tentando ler (ex: `int x;` ou `double y;`)?\n2. Como está escrita exatamente a sua linha do `scanf`?"
+ },
+ {
+  "id": "prog1-do-while",
+  "disciplina": "prog1",
+  "pergunta": "Qual a diferença entre while e do-while?",
+  "esperado": "do-while executa o corpo ao menos uma vez e testa no fim; while testa antes; termina com ; depois do while",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 80.1,
+  "fontes": [
+   "UFAL), 3ª ed. digital, seção 4.4 (O comando do while)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre `while` e `do-while` está no momento em que a condição é verificada. No `while`, a condição é testada **antes** de executar o bloco, o que significa que o bloco pode **nunca** ser executado. Já no `do-while`, o bloco é executado **pelo menos uma vez**, pois a condição é verificada **depois** da execução do bloco.\n\nAgora, vamos pensar em um exemplo prático: imagine que você precisa validar uma entrada do usuário, como um número entre 1 e 10. Com o `while`, você teria que ler a entrada **antes** do laço e **dentro** dele. Já com o `do-while`, você pode ler a entrada **dentro** do laço, garantindo que o bloco execute ao menos uma vez.\n\n### Sua vez  \nImagine que você precisa pedir ao usuário para digitar um número entre 1 e 10. Qual dos dois comandos (`while` ou `do-while`) seria mais adequado para esse caso? Por quê?"
+ },
+ {
+  "id": "prog1-vetor-funcao",
+  "disciplina": "prog1",
+  "pergunta": "Como passar um vetor para uma função em C?",
+  "esperado": "passa o nome (endereço do 1º elemento) e o tamanho à parte; alterações no vetor valem fora; sizeof não dá o tamanho dentro",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 11 (Arrays; livro, capítulo 10)",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 13 (Strings; livro, capítulo 11)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para passar um vetor para uma função em C, você precisa entender que o nome do vetor, quando usado como argumento, funciona como um endereço de memória (o endereço do primeiro elemento). Por isso, a função não recebe uma cópia de todos os valores, mas sim uma referência ao original.\n\nComo a função recebe apenas esse endereço, ela não tem como saber, por conta própria, quantos elementos existem no vetor. Se você tentar usar `sizeof` dentro da função, obterá apenas o tamanho do ponteiro, não o tamanho do vetor. Por isso, é uma boa prática sempre passar o tamanho como um segundo parâmetro.\n\nNa chamada da função, você deve usar apenas o nome do vetor, sem colchetes `[]` e sem o operador `&`.\n\n### Sua vez\nImagine que você tem um vetor `float notas[10]` e quer criar uma função chamada `exibir` que imprima todos os elementos desse vetor. Como ficaria a assinatura dessa função (o cabeçalho dela) e como você faria a chamada dessa função dentro da `main`? Tente escrever esse trecho no papel."
+ },
+ {
+  "id": "prog1-inverter",
+  "disciplina": "prog1",
+  "pergunta": "Como inverter uma string em C?",
+  "esperado": "guia sem dar o programa pronto (é questão do Huxley 247): strlen, dois índices, troca, '\\0'",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 13 (Strings; livro, capítulo 11)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para inverter uma string, o segredo é manipular as posições dos caracteres dentro do próprio vetor. Pense na string como uma fila de pessoas: para inverter a ordem, a pessoa da primeira posição deve trocar de lugar com a da última, a segunda com a penúltima, e assim por diante, até chegar ao meio.\n\nComo você faria para trocar o conteúdo de duas variáveis, digamos `a` e `b`, usando uma variável auxiliar `temp`? Se você conseguir fazer essa troca para um par de posições, o próximo passo é repetir isso para os outros pares, movendo os índices do início e do fim em direção ao centro.\n\nLembre-se de que, em C, uma string termina com o caractere nulo `'\\0'`, que não deve ser movido para o início, pois ele marca o fim da string.\n\n### Sua vez\nEscreva no papel um pequeno trecho de código que declare dois índices, `inicio = 0` e `fim = tamanho - 1`, e mostre como você trocaria o caractere da posição `inicio` com o da posição `fim` usando uma variável `temp`."
+ },
+ {
+  "id": "prog1-troca",
+  "disciplina": "prog1",
+  "pergunta": "Por que minha função troca não troca os valores?",
+  "esperado": "passagem por valor; precisa de ponteiros (int *a, int *b) e chamar troca(&x, &y)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 14 (Ponteiros; livro, capítulo 12)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender por que a troca não está acontecendo, precisamos lembrar como o C trata os argumentos de uma função.\n\nQuando você passa uma variável para uma função sem usar ponteiros, o C cria uma **cópia** do valor dessa variável dentro da função. Qualquer alteração que você faça nessa cópia (como atribuir um novo valor) só existe dentro do escopo daquela função e não afeta a variável original que está na função `main`. É por isso que, no seu código, a troca ocorre apenas \"localmente\".\n\nPara que a função consiga modificar a variável original, ela precisa saber **onde** essa variável mora na memória, e não apenas qual o valor que ela guarda. É aí que entram os ponteiros e o operador `&`.\n\nPense no seguinte: se você quer que alguém altere o conteúdo de uma caixa que está na sua casa, você entrega a própria caixa (o valor) ou entrega o endereço da sua casa (o ponteiro)?\n\n### Sua vez\nAnalise o seu código: na definição da sua função, os parâmetros estão declarados como `int x, int y` ou como `int *x, int *y`? E na hora de chamar a função, você está passando as variáveis diretamente ou usando o operador `&` antes delas? Tente ajustar a declaração da função e a chamada, e verifique se o comportamento muda."
+ },
+ {
+  "id": "prog1-fora",
+  "disciplina": "prog1",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O uso de mapas de Karnaugh (K-map) é uma técnica visual para simplificar expressões booleanas baseada na adjacência de células. O objetivo principal é agrupar os \"1s\" (mintermos) em blocos que sejam potências de 2 (1, 2, 4, 8...).\n\nPara começar, você precisa montar a tabela de verdade da sua função e preencher o mapa. A regra de ouro é: **agrupe o maior número possível de \"1s\" adjacentes**. Lembre-se que o mapa é \"cíclico\", ou seja, as bordas esquerda/direita e superior/inferior são consideradas vizinhas.\n\nAo formar um grupo, você deve observar quais variáveis mantêm o mesmo valor (0 ou 1) em todas as células daquele grupo. Se uma variável muda de valor dentro do grupo, ela é eliminada daquela expressão específica.\n\nPara eu te ajudar melhor, você tem uma função específica ou uma tabela de verdade que está tentando simplificar? Se tiver, tente montar o mapa no papel e me diga: quais grupos você conseguiu formar e quais variáveis você acha que permanecem constantes em cada um deles?\n\n### Sua vez\nDesenhe um mapa de 3 variáveis ($A, B, C$) e tente agrupar os \"1s\" das posições $m_0, m_1, m_4, m_5$. Quais variáveis você consegue eliminar ao agrupar esses quatro quadrados?"
+ }
+]
