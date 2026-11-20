@@ -128,6 +128,17 @@ PERGUNTAS = [
     ("pcom-filtro-dsb", "pcom", "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
      "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte"),
     ("pcom-fora", "pcom", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Variáveis Complexas: valores conferidos em tests_acervo/test_disciplina_varcomp.py (SymPy e NumPy).
+    ("varcomp-raizes", "varcomp", "Como calcular todas as raízes cúbicas de 1 − i?",
+     "três raízes 2^{1/6} e^{i(−π/4+2kπ)/3}: ângulos −π/12, 7π/12, 5π/4 (≈1,084−0,291i; −0,291+1,084i; −0,794−0,794i)"),
+    ("varcomp-cauchy", "varcomp", "Como usar a fórmula integral de Cauchy em ∮ e^{2z}/(z+1)⁴ dz?",
+     "z = −1 dentro da curva; fórmula para derivadas com n = 3 e 3!; na prova, |z| = 3 dá 8πi e^{−2}/3"),
+    ("varcomp-1z", "varcomp", "Por que ∮ 1/z dz = 2πi e ∮ 1/z² dz = 0?",
+     "1/z não tem primitiva no plano furado (2πi, sentido anti-horário); 1/z² tem primitiva −1/z, logo 0"),
+    ("varcomp-segmento", "varcomp", "Como calcular ∫ z² dz no segmento de 0 a 2+i?", "primitiva z³/3: (2+11i)/3"),
+    ("varcomp-cr", "varcomp", "O que são as equações de Cauchy-Riemann?",
+     "u_x = v_y, u_y = −v_x; não há material na busca (nota de IA candidata); não cita blocos de integral como fonte de CR"),
+    ("varcomp-fora", "varcomp", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

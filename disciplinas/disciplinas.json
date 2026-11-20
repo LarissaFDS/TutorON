@@ -399,6 +399,37 @@
         "Como se calcula a eficiência espectral de uma modulação digital como a QPSK?",
         "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?"
       ]
+    },
+    {
+      "id": "varcomp",
+      "nome": "Variáveis Complexas",
+      "sigla": "VC",
+      "situacao": "MVP",
+      "itens": "disciplinas/varcomp/acervo/itens.json",
+      "indice": "disciplinas/varcomp/acervo/indice.json",
+      "materiais": "disciplinas/varcomp/materiais",
+      "rigor": "disciplinas/varcomp/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "varcomp-01-numeros-complexos",
+        "varcomp-02-funcoes-analiticas-cauchy-riemann",
+        "varcomp-03-funcoes-elementares",
+        "varcomp-04-integrais-de-contorno",
+        "varcomp-05-cauchy-goursat-primitivas",
+        "varcomp-06-formula-integral-cauchy",
+        "varcomp-07-series-taylor-laurent",
+        "varcomp-08-residuos-singularidades",
+        "varcomp-09-representacao-conforme",
+        "varcomp-10-funcoes-harmonicas",
+        "varcomp-11-gamma-stirling"
+      ],
+      "exemplos": [
+        "Como calcular todas as raízes cúbicas de 1 − i?",
+        "Como usar a fórmula integral de Cauchy em ∮ e^{2z}/(z+1)⁴ dz?",
+        "Por que ∮ 1/z dz = 2πi e ∮ 1/z² dz = 0?",
+        "Como calcular ∫ z² dz no segmento de 0 a 2+i?",
+        "Por que o sentido da curva muda o sinal de ∮ 1/z dz?"
+      ]
     }
   ]
 }

@@ -1,0 +1,111 @@
+[
+ {
+  "id": "varcomp-raizes",
+  "disciplina": "varcomp",
+  "pergunta": "Como calcular todas as raízes cúbicas de 1 − i?",
+  "esperado": "três raízes 2^{1/6} e^{i(−π/4+2kπ)/3}: ângulos −π/12, 7π/12, 5π/4 (≈1,084−0,291i; −0,291+1,084i; −0,794−0,794i)",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 60.1,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 1b",
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 1",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular todas as raízes cúbicas de $1 - i$, você precisa seguir um processo em duas etapas: **converter o número complexo para a forma polar** e, em seguida, **aplicar a fórmula das raízes de números complexos**.\n\nComece identificando o **módulo** e o **argumento principal** de $1 - i$. Lembre-se de que o módulo é a distância do ponto $1 - i$ à origem no plano complexo, e o argumento é o ângulo que o vetor forma com o eixo real positivo, seguindo a convenção $(- \\pi, \\pi]$.\n\n### Sua vez  \nCalcule o módulo de $1 - i$ e determine o quadrante em que o ponto $1 - i$ está. Depois, identifique o argumento principal desse número."
+ },
+ {
+  "id": "varcomp-cauchy",
+  "disciplina": "varcomp",
+  "pergunta": "Como usar a fórmula integral de Cauchy em ∮ e^{2z}/(z+1)⁴ dz?",
+  "esperado": "z = −1 dentro da curva; fórmula para derivadas com n = 3 e 3!; na prova, |z| = 3 dá 8πi e^{−2}/3",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 58.1,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 2",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A fórmula integral de Cauchy é usada para integrar funções analíticas em torno de singularidades isoladas, especialmente quando há potências no denominador. No caso de uma potência elevada, como $(z + 1)^4$, você precisa associar isso a uma derivada de ordem específica da função no numerador.\n\nPense: qual é a relação entre a potência no denominador e a ordem da derivada? E como essa derivada é calculada?\n\n### Sua vez  \nCalcule a derivada de terceira ordem da função $f(z) = e^{2z}$ em relação a $z$, e escreva-a em termos de $f'''(z)$."
+ },
+ {
+  "id": "varcomp-1z",
+  "disciplina": "varcomp",
+  "pergunta": "Por que ∮ 1/z dz = 2πi e ∮ 1/z² dz = 0?",
+  "esperado": "1/z não tem primitiva no plano furado (2πi, sentido anti-horário); 1/z² tem primitiva −1/z, logo 0",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 54.1,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre $\\oint \\frac{1}{z} \\, dz$ e $\\oint \\frac{1}{z^2} \\, dz$ está na **existência ou não de uma primitiva** no domínio considerado. A curva é fechada e envolve a origem, que é uma singularidade.\n\nVamos pensar:  \n- Qual é a **condição para que uma função tenha primitiva** em um domínio?  \n- O que acontece com a função $1/z$ e $1/z^2$ em torno da origem?  \n- Como a **existência de uma primitiva** afeta o valor da integral em uma curva fechada?\n\n### Sua vez  \nTente explicar por que a função $1/z$ **não tem primitiva** no plano complexo sem a origem, enquanto $1/z^2$ **tem primitiva**. Dica: pense em como se comportam as integrais de $1/z$ e $1/z^2$ ao longo de uma curva que envolve a origem."
+ },
+ {
+  "id": "varcomp-segmento",
+  "disciplina": "varcomp",
+  "pergunta": "Como calcular ∫ z² dz no segmento de 0 a 2+i?",
+  "esperado": "primitiva z³/3: (2+11i)/3",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 114.2,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 4",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 4",
+   "Prova 1 de Variáveis Complexas, versão B (arquivo prova10.pdf, PDF gerado em março de 2021), questão 4"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "A função $ f(z) = z^2 $ é inteira, o que significa que ela possui uma primitiva em todo o plano complexo. Isso permite que você calcule a integral de $ f(z) $ sobre qualquer caminho aberto que conecte os pontos $ 0 $ e $ 2 + i $, independentemente da forma do caminho.\n\n### Pergunta-chave:\nSe você já sabe que a primitiva de $ z^2 $ é $ F(z) = \\frac{z^3}{3} $, como você usaria essa informação para calcular a integral?\n\n### Sua vez  \nCalcule $ F(2 + i) $ e $ F(0) $, e subtraia-os. Depois, simplifique o resultado."
+ },
+ {
+  "id": "varcomp-cr",
+  "disciplina": "varcomp",
+  "pergunta": "O que são as equações de Cauchy-Riemann?",
+  "esperado": "u_x = v_y, u_y = −v_x; não há material na busca (nota de IA candidata); não cita blocos de integral como fonte de CR",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 80.2,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 3",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 2",
+   "Prova 1 de Variáveis Complexas, versão B (arquivo prova10.pdf, PDF gerado em março de 2021), questão 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "As equações de Cauchy-Riemann são condições que uma função de variáveis complexas deve satisfazer para ser **analítica** (ou seja, diferenciável em todos os pontos de um domínio). Elas relacionam as derivadas parciais da parte real e da parte imaginária da função.\n\nSe uma função $ f(z) = u(x, y) + iv(x, y) $, onde $ z = x + iy $, é diferenciável em um ponto, então suas partes real $ u $ e imaginária $ v $ devem satisfazer as equações:\n\n$$\n\\frac{\\partial u}{\\partial x} = \\frac{\\partial v}{\\partial y}, \\quad \\frac{\\partial u}{\\partial y} = -\\frac{\\partial v}{\\partial x}.\n$$\n\nEssas equações são fundamentais para verificar se uma função é analítica, o que é essencial para o estudo de integrais de contorno e séries de potências em variáveis complexas.\n\n### Sua vez  \nEscreva as equações de Cauchy-Riemann para a função $ f(z) = z^2 $, onde $ z = x + iy $."
+ },
+ {
+  "id": "varcomp-fora",
+  "disciplina": "varcomp",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 42.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma função com mapa de Karnaugh, o primeiro passo é identificar os grupos de 1s (ou 0s, dependendo da função) que possuem potências de 2 elementos (1, 2, 4, 8, etc.). Esses grupos devem ser formados horizontalmente ou verticalmente, e sempre alinhados com as bordas do mapa para garantir que a simplificação seja correta.\n\nAgora, pense: **como você identifica os grupos de 1s no mapa de Karnaugh?**  \nLembre-se de que cada grupo representa uma variável que pode ser eliminada, simplificando a expressão final.\n\n### Sua vez  \nEscreva no papel: **\"Quais são as regras para formar os grupos no mapa de Karnaugh?\"**  \nNão precisa responder agora — apenas anote a pergunta para refletir sobre ela."
+ }
+]
