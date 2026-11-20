@@ -424,10 +424,10 @@ def test_lista4_distancia():
 # ---------------------------------------------------------------- busca
 
 EXEMPLOS = [
-    ('Qual a largura de banda de um sinal AM com mensagem de 5 kHz?', {'pcom-anot-largura-banda-am-dsb'}),
+    ('Como se calcula a largura de banda de um sinal AM a partir da banda da mensagem?', {'pcom-anot-largura-banda-am-dsb'}),
     ('Como calcular a largura de banda de FM pela regra de Carson?', {'pcom-anot-desvio-beta-carson', 'pcom-lista2-fm-desvio-potencia'}),
     ('Qual a diferença entre PM e FM?', {'pcom-anot-pm-fm-diferenca'}),
-    ('Qual a eficiência espectral de uma QPSK?', {'pcom-lista3-eficiencia-espectral'}),
+    ('Como se calcula a eficiência espectral de uma modulação digital como a QPSK?', {'pcom-lista3-eficiencia-espectral'}),
     ('Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?', {'pcom-revisao-filtro-dsb-18000pi', 'pcom-anot-demodulacao-coerente', 'pcom-prova-filtro-17khz',
                                                                                  'pcom-prova-filtro-cos2-8000t'}),
 ]

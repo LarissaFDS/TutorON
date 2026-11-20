@@ -364,10 +364,10 @@
         "pcom-11-enlaces-teoria-informacao"
       ],
       "exemplos": [
-        "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+        "Como se calcula a largura de banda de um sinal AM a partir da banda da mensagem?",
         "Como calcular a largura de banda de FM pela regra de Carson?",
         "Qual a diferença entre PM e FM?",
-        "Qual a eficiência espectral de uma QPSK?",
+        "Como se calcula a eficiência espectral de uma modulação digital como a QPSK?",
         "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?"
       ]
     }
