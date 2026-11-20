@@ -99,7 +99,7 @@ def test_ingles_cadastrada_com_acervo_proprio_e_a_mesma_ia():
             assert NA_BUSCA.isdisjoint({c["id"] for c in read_json(outra.indice)["chunks"]}), outra.id
     bruto = [d for d in read_json(ROOT / "disciplinas/disciplinas.json")["disciplinas"] if d["id"] == "ingles"][0]
     assert not {"modelo", "model", "provedor", "endpoint", "prompt", "chave"} & set(bruto)
-    assert bruto["situacao"] == "em validação" and "aviso" not in bruto
+    assert bruto["situacao"] == "MVP" and "aviso" not in bruto
     assert read_json(ING.indice)["embedding_model"] == read_json(disciplinas.obter("varcomp").indice)["embedding_model"]
 
 

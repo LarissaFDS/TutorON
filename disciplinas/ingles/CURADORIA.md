@@ -1,6 +1,6 @@
 # Inglês Instrumental — curadoria do acervo
 
-Situação: **em validação** durante o trabalho na branch `codex/ingles-acervo`; o critério de liberação está na seção 6. A disciplina usa o mesmo fluxo e a mesma IA das outras: só acrescenta acervo, `rigor.md` e exemplos.
+Situação: **MVP** desde 20/11/2026, sem aviso: liberada no atendimento normal depois do critério da seção 6. A disciplina usa o mesmo fluxo e a mesma IA das outras: só acrescenta acervo, `rigor.md` e exemplos.
 
 | Item | Estado em 20/11/2026 |
 |---|---|
@@ -102,10 +102,20 @@ Busca (`eval/relevancia.py`, com o `bge-m3` real): as 5 perguntas de exemplo, 8 
 
 ## 6. Liberação e validação com a IA real
 
-Seção preenchida ao fim da validação.
+Critério de liberação (o mesmo de PAA e Variáveis Complexas): suíte completa e bateria de relevância passando, nenhuma nota de IA na busca, perguntas de exemplo rodadas com a IA real e conferidas, e nenhum tópico com material da turma sem bloco na busca.
+
+As 6 perguntas de `eval/bateria_tutor.py` rodaram em 20/11/2026 pelo fluxo completo. Os maiores modelos do Gemini deram HTTP 429 e as respostas vieram do `gemini-3.1-flash-lite` (degradado). Arquivos: `eval/results/bateria-ingles-2026-11-20.json`, `…-repeticao.json`, `…-nucleo-1.json`, `…-nucleo-2.json` e, só com o modelo local `tutoron-paa`, `…-local.json`. Cada resposta foi lida e comparada com os blocos e com os testes:
+
+- skimming e scanning, actually × atualmente, voz passiva e referente de *they*: corretas e socráticas nas duas rodadas do Gemini e no modelo local. Citaram o bloco certo e não usaram rótulo inexistente. Em *they*, o tutor deu a estratégia (voltar à frase anterior, concordância, substituição) e deixou a conclusão para o aluno;
+- núcleo de "plant extract based insecticides": na 1ª rodada, o revisor reprovou duas vezes a pista do Gemini e sobrou a ajuda de reserva genérica. O motivo era o mesmo da QPSK em Comunicação: o bloco trazia a tradução pronta do caso da pergunta. O bloco passou a resolver *mosquito-borne viral diseases* e a deixar o caso da pergunta para o aluno (o teste confere que a tradução não está no bloco). Depois disso, a pergunta saiu correta e socrática nas 3 rodadas do Gemini (em duas, o ajuste `entregou_resposta` atuou, sem entregar a tradução) e no modelo local;
+- modelo local, imprecisão: atribuiu ao "texto da prova" o trecho de *actually*, que é de Wilson et al. O sentido explicado estava certo;
+- pergunta de fora (mapa de Karnaugh): a busca devolveu vazio, mas nem o Gemini nem o modelo local disseram que o tema é de Sistemas Digitais. O modelo local ainda disse que os grupos podem ter "forma de L", o que está errado (os grupos são retângulos). É o mesmo comportamento já registrado em Circuitos, Sinais, Controle e Eletrônica, e não envolve o acervo de Inglês.
+
+Com o critério cumprido, a disciplina passou a **MVP**, sem `aviso`, no último commit da branch.
 
 ## 7. Pendências
 
+- Que o tutor diga, com Inglês selecionada, que uma pergunta é de outra disciplina (comportamento do prompt comum, igual nas outras disciplinas).
 - Revisão humana dos 12 blocos e confirmação do professor dos 5 exercícios `pendente_professor`.
 - Identificar o professor e confirmar com a equipe se o arquivo da prova pode ser publicado (hoje, só trechos curtos do artigo, que é CC BY-NC).
 - Confirmar com o professor os tópicos marcados como "interpretação" (grupos nominais, referência pronominal, marcadores, tempos verbais e voz passiva).

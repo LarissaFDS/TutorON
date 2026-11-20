@@ -435,7 +435,7 @@
       "id": "ingles",
       "nome": "Inglês Instrumental",
       "sigla": "ING",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/ingles/acervo/itens.json",
       "indice": "disciplinas/ingles/acervo/indice.json",
       "materiais": "disciplinas/ingles/materiais",
