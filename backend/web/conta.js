@@ -58,6 +58,18 @@
       if ($('admin-link')) $('admin-link').hidden = !eu.admin;
     } else {
       nome.textContent = 'Entrar ou criar conta';
+      var aviso = $('aviso-conta');
+      if (aviso && eu.cota && eu.cota.convidado) {
+        var vezes = Math.max(2, Math.round((eu.cota.limite_conta || 0) / (eu.cota.limite || 1)));
+        aviso.replaceChildren();
+        var link = document.createElement('a');
+        link.href = '/entrar?criar=1&voltar=' + encodeURIComponent(location.pathname + location.search);
+        link.textContent = 'Criar conta grátis';
+        aviso.append(document.createTextNode(eu.cota.restantes > 0
+          ? 'Você está como convidado, com poucas perguntas por dia. Com uma conta (só e-mail e senha) o limite é ' + vezes + 'x maior. '
+          : 'Seu limite de convidado acabou por hoje. Crie uma conta para continuar. '), link);
+        aviso.hidden = false;
+      }
       sub.textContent = cfg.exigir_login ? 'Necessário para perguntar' : 'Com e-mail · limite próprio';
       chip.href = '/entrar?voltar=' + encodeURIComponent(location.pathname + location.search);
       chip.onclick = null;

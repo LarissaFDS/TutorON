@@ -51,8 +51,11 @@ def estimar_tokens(*textos: str | None) -> int:
 
 
 class Cota:
-    def __init__(self, arquivo: Path, limite: int, janela_h: float = 24, chave_dev: str = "", banco=None):
+    def __init__(self, arquivo: Path, limite: int, janela_h: float = 24, chave_dev: str = "", banco=None,
+                 limite_convidado: int | None = None):
         self.arquivo = arquivo
+        # Com contas ligadas, quem não entrou ("c_..." ou "ip:...") tem este limite menor.
+        self.limite_convidado = limite_convidado
         self.banco = banco
         self._limites: dict[str, int | None] = {}  # limite próprio da conta (None = o do plano)
         self.limite = limite
@@ -191,7 +194,12 @@ class Cota:
         if proprio is not None:
             return proprio
         p = self.plano(quem)
+        if p["id"] == "gratis" and self.convidado(quem):
+            return self.limite_convidado
         return self.limite if p["id"] == "gratis" else int(p["tokens_dia"])
+
+    def convidado(self, quem: str) -> bool:
+        return self.limite_convidado is not None and not quem.startswith("u:")
 
     def modo(self, quem: str, dev: bool = False) -> str:
         """'completo' (Gemini primeiro) para plano pago e administrador; 'padrao' no grátis."""
@@ -201,7 +209,8 @@ class Cota:
     def situacao(self, quem: str, dev: bool = False) -> dict:
         p = self.plano(quem)
         base = {"plano": p["id"], "plano_nome": p["nome"], "modo": self.modo(quem, dev), "admin": dev,
-                "assinatura": self._planos.get(quem)}
+                "assinatura": self._planos.get(quem), "convidado": self.convidado(quem),
+                "limite_conta": self.limite}
         if dev or not self.ativa:
             return base | {"plano": "dev" if dev else p["id"], "ilimitado": True}
         limite = self.limite_de(quem)

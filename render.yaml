@@ -9,7 +9,9 @@ services:
     healthCheckPath: /health
     envVars:
       - key: TUTORON_EXIGIR_LOGIN
-        value: "1"
+        value: "0"
+      - key: TUTORON_COTA_CONVIDADO
+        value: "6000"
       - key: TUTORON_COTA_TOKENS
         value: "40000"
       - key: TUTORON_GRATIS_LOCAL_PRIMEIRO

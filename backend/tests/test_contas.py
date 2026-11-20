@@ -157,3 +157,20 @@ def test_registro_grava_no_banco_com_a_conta(tmp_path):
 def test_contas_desligadas_sem_supabase():
     c = Contas(None, "")
     assert not c.ativas and c.usuario("qualquer") is None
+
+
+def test_convidado_tem_limite_menor_e_e_levado_a_criar_conta(site, monkeypatch):
+    import dataclasses
+    from backend import main
+    s = dataclasses.replace(site.app.state.llm.settings, exigir_login=False, cota_convidado=5)
+    from backend import banco as banco_mod
+    monkeypatch.setattr(banco_mod, "criar", lambda settings: site.banco)
+    with TestClient(main.create_app(settings=s, llm=site.app.state.llm, warm_up=False)) as c:
+        c.cookies.set("tutoron_id", "c_visitante")
+        eu = c.get("/api/eu", headers=ALUNO).json()
+        assert eu["cota"]["convidado"] and eu["cota"]["limite"] == 5 and eu["cota"]["limite_conta"] == 500
+        assert c.post("/api/perguntar", json={"pergunta": "x" * 100}, headers=ALUNO).status_code == 200
+        r = c.post("/api/perguntar", json={"pergunta": "Teorema Mestre"}, headers=ALUNO)
+        assert r.status_code == 401 and "Crie uma conta" in r.json()["erro"]
+        c.cookies.set("tutoron_sessao", "tok-ana")  # com conta: limite normal
+        assert c.get("/api/eu", headers=ALUNO).json()["cota"]["limite"] == 500

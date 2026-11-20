@@ -238,7 +238,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
         app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
         app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
-                              settings.cota_janela_h, settings.dev_chave, app.state.banco)
+                              settings.cota_janela_h, settings.dev_chave, app.state.banco,
+                              settings.cota_convidado if app.state.contas.ativas else None)
         app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
         aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
@@ -284,6 +285,10 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         quem, dev = usuario(request)
         if not app.state.cota.pode(quem, dev):
             s = app.state.cota.situacao(quem)
+            if app.state.cota.convidado(quem):
+                # 401 leva o site à página de criar conta (app.js).
+                raise HTTPException(401, "Você usou o limite de convidado de hoje. Crie uma conta grátis "
+                                         "(só e-mail e senha) para continuar com um limite bem maior.")
             import datetime
             renova = datetime.datetime.fromtimestamp(s["renova_em"])
             quando = "amanhã à meia-noite" if s.get("diaria") else "às " + renova.strftime("%H:%M")

@@ -29,6 +29,10 @@
     status('');
   }
   $('aba-entrar').addEventListener('click', function () { modo(false); });
+  if (new URL(location.href).searchParams.get('criar')) {
+    modo(true);
+    status('Crie sua conta grátis para continuar: só e-mail e senha.');
+  }
   $('aba-criar').addEventListener('click', function () { modo(true); });
 
   window.TutorConta.pronto.then(async function (p) {
