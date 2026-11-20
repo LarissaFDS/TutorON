@@ -430,6 +430,35 @@
         "Como calcular ∫ z² dz no segmento de 0 a 2+i?",
         "Por que o sentido da curva muda o sinal de ∮ 1/z dz?"
       ]
+    },
+    {
+      "id": "ingles",
+      "nome": "Inglês Instrumental",
+      "sigla": "ING",
+      "situacao": "MVP",
+      "itens": "disciplinas/ingles/acervo/itens.json",
+      "indice": "disciplinas/ingles/acervo/indice.json",
+      "materiais": "disciplinas/ingles/materiais",
+      "rigor": "disciplinas/ingles/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ingles-01-estrategias-leitura",
+        "ingles-02-cognatos-falsos-cognatos",
+        "ingles-03-grupos-nominais",
+        "ingles-04-afixos-formacao-palavras",
+        "ingles-05-referencia-pronominal",
+        "ingles-06-marcadores-discurso",
+        "ingles-07-tempos-verbais-voz-passiva",
+        "ingles-08-dicionario-contexto",
+        "ingles-09-leitura-artigos-cientificos"
+      ],
+      "exemplos": [
+        "O que é skimming e scanning?",
+        "Como identificar o núcleo de um grupo nominal como \"plant extract based insecticides\"?",
+        "Qual a diferença entre \"actually\" e \"atualmente\"?",
+        "Como reconhecer a voz passiva num texto técnico?",
+        "A quem se refere \"they\" em \"where they are used to eliminate damage\"?"
+      ]
     }
   ]
 }
