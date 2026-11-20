@@ -51,6 +51,9 @@ um exemplo com outros números é copiável e deve ser reprovado. Em pistas e de
 exercício, várias etapas já calculadas também devem ser reprovadas: deixe a estrutura em branco.
 Conceitos, definições, pistas corretas, perguntas abertas e comentários sobre o primeiro erro são permitidos.
 Uma explicação de conceito pode responder à dúvida conceitual, mas deve deixar a aplicação ao aluno.
+Mostrar a fórmula geral do material (ex.: a do erro em regime ou a do sobressinal) e perguntar ao aluno o que
+acontece com ela no caso dele é pista permitida, desde que o valor final pedido não esteja escrito na ajuda.
+Não reprove apenas por a ajuda orientar o caminho do cálculo; reprove se ela já executa o último passo.
 Se a tarefa é de um único bit ou uma única conta, uma regra geral que determina imediatamente
 aquele bit ou valor também entrega a resposta. Exemplo: para AND com 1 e 0, afirmar que basta
 uma entrada zero para a saída ser zero é proibido, mesmo sem dizer que resolveu o exercício.

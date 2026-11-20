@@ -1,0 +1,46 @@
+[
+ {
+  "id": "controle-erro-tipo1",
+  "disciplina": "controle",
+  "pergunta": "Qual o erro em regime para entrada degrau num sistema tipo 1?",
+  "esperado": "zero (Kp infinito); conferir estabilidade da malha fechada antes do TVF; rampa dá 1/Kv",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 20.1,
+  "fontes": [
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 1–6",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 6–9",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "controle-massa-mola",
+  "disciplina": "controle",
+  "pergunta": "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
+  "esperado": "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 264.6,
+  "fontes": [
+   "Anotações \"Sistemas mecânicos\" (19 ago. 2026) e \"Revisão de Laplace e Sistemas mecânicos\", p. 7–8 e 10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 8–10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 4 e 10–16"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para montar a função de transferência de um sistema mecânico, o ponto de partida é sempre o equilíbrio dinâmico das forças que atuam sobre o corpo.\n\nPense no sistema como um corpo de massa $m$ que sofre a influência de três forças principais: a força externa aplicada, a força restauradora da mola e a força dissipativa do amortecedor. De acordo com a Segunda Lei de Newton, a soma dessas forças deve ser igual à massa vezes a aceleração.\n\nAo escrever essa equação diferencial no domínio do tempo, você terá termos envolvendo a posição $x(t)$, a velocidade $\\dot{x}(t)$ e a aceleração $\\ddot{x}(t)$. O segredo para chegar à função de transferência é aplicar a Transformada de Laplace em ambos os lados da equação, lembrando que, para sistemas lineares invariantes no tempo, assumimos condições iniciais nulas. Isso transforma as derivadas em potências de $s$.\n\nSe você tentar escrever essa equação no papel, verá que o termo de aceleração se torna $s^2 X(s)$, o de velocidade se torna $s X(s)$ e o de posição apenas $X(s)$.\n\n### Sua vez\nTente escrever a equação diferencial completa somando as forças (massa, amortecedor e mola) e igualando à força externa $f(t)$. Em seguida, aplique a transformada de Laplace e tente isolar a razão entre a saída $X(s)$ e a entrada $F(s)$. Como fica o polinômio que multiplica $X(s)$ após a transformada?"
+ }
+]
