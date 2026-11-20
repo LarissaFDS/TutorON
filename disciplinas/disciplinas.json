@@ -344,7 +344,7 @@
       "id": "eletronica",
       "nome": "Eletrônica",
       "sigla": "ELT",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/eletronica/acervo/itens.json",
       "indice": "disciplinas/eletronica/acervo/indice.json",
       "materiais": "disciplinas/eletronica/materiais",
