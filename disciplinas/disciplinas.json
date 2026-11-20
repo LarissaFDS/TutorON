@@ -310,6 +310,35 @@
         "Como saber se G(s) = (s+1)/(s²+3s−4) é BIBO estável?",
         "Qual a transformada de Fourier de um pulso retangular?"
       ]
+    },
+    {
+      "id": "controle",
+      "nome": "Sistemas de Controle",
+      "sigla": "SC",
+      "situacao": "em validação",
+      "itens": "disciplinas/controle/acervo/itens.json",
+      "indice": "disciplinas/controle/acervo/indice.json",
+      "materiais": "disciplinas/controle/materiais",
+      "rigor": "disciplinas/controle/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "controle-01-laplace-ft",
+        "controle-02-modelagem",
+        "controle-03-diagramas-blocos",
+        "controle-04-estabilidade-routh",
+        "controle-05-resposta-temporal",
+        "controle-06-erro-regime",
+        "controle-07-lugar-raizes",
+        "controle-08-resposta-frequencia",
+        "controle-09-projeto-controladores"
+      ],
+      "exemplos": [
+        "Como reduzir um diagrama de blocos com realimentação negativa?",
+        "Como calcular o sobressinal de um sistema de segunda ordem?",
+        "Qual o erro em regime para entrada degrau num sistema tipo 1?",
+        "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
+        "Como montar a função de transferência de um sistema massa-mola-amortecedor?"
+      ]
     }
   ]
 }

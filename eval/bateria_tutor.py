@@ -92,6 +92,18 @@ PERGUNTAS = [
     ("sinais-tf-pulso", "sinais", "Qual a transformada de Fourier de um pulso retangular?",
      "V rect(t/T) ↔ VT sinc(ωT/2) = (2V/ω) sen(ωT/2); zeros em ω = 2πn/T; X(0) = VT"),
     ("sinais-fora", "sinais", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Sistemas de Controle: valores conferidos em tests_acervo/test_disciplina_controle.py (SymPy e SciPy).
+    ("controle-blocos", "controle", "Como reduzir um diagrama de blocos com realimentação negativa?",
+     "Y/R = G/(1 + GH) (malha fechada, realimentação negativa); positiva dá G/(1 − GH); série, paralelo e mover blocos"),
+    ("controle-sobressinal", "controle", "Como calcular o sobressinal de um sistema de segunda ordem?",
+     "Mp = e^(−ζπ/√(1−ζ²)); ζ e ωn tirados do denominador s² + 2ζωn s + ωn²; ζ = 0,5 dá 16,3%"),
+    ("controle-erro-tipo1", "controle", "Qual o erro em regime para entrada degrau num sistema tipo 1?",
+     "zero (Kp infinito); conferir estabilidade da malha fechada antes do TVF; rampa dá 1/Kv"),
+    ("controle-lgr", "controle", "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
+     "polos 0 e −2; eixo real [−2, 0]; assíntotas ±90° em σ = −1; ramificação em −1 com K = 1; estável para K > 0"),
+    ("controle-massa-mola", "controle", "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
+     "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))"),
+    ("controle-fora", "controle", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

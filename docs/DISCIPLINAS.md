@@ -219,6 +219,33 @@ IA real (Gemini, 19/11/2026, `eval/results/bateria-sinais-2026-11-19.json`): a p
 
 Na busca de Circuitos, "Quais os coeficientes da série de Fourier de uma onda quadrada?" traz blocos de RLC. Isso é do corte de Circuitos, não vazamento de Sinais; os índices não têm blocos em comum. `disciplinas/cursos.json` continua sem `acervo` para ECOM030, como ECOM028 e Probabilidade: ligar muda a preferência do 5º período, e `backend/tests/test_versao_final.py` espera só PAA.
 
+## Sistemas de Controle: resoluções refeitas com SymPy e SciPy (20/11/2026)
+
+Sistemas de Controle entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/controle/`: rigor, 24 blocos (22 na busca; 2 notas da equipe candidatas: resposta em frequência e projeto de controladores), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_controle.py`, que refaz cada resultado com SymPy (`apart`, inversas, `solve` dos modelos, limites), numpy (`roots`, Routh) e SciPy (`step`, `lsim`);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` (exemplos, variantes em LaTeX e em texto simples, perguntas fora) e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 8 PDFs (86 páginas) de anotações de aluno de 2026.2, parafraseadas; o professor não aparece nos cabeçalhos. A ementa de ECOM037 (60 h) veio do PPC de 2014 (p. 44). Resposta em frequência e projeto de controladores estão na ementa, mas não nas anotações: ficam só em notas IA fora da busca.
+
+Foram corrigidos 8 blocos; os principais:
+- sobressinal da revisão 4.5 com $e^{-\zeta\pi\sqrt{1-\zeta^2}}$ (25,65%): o certo é 16,3%;
+- sinais trocados na LKC de um circuito (daria $G(0) = -1$);
+- $t^2e^{-3t}$ no lugar de $t^2e^{-t}$ numa inversa;
+- polos e $\omega_d$ de segunda ordem escritos sem $\omega_n$ ou com $\sqrt{\zeta^2 - 1}$;
+- parábola unitária $t^2$ com $R = 1/s^3$ (é $t^2/2$);
+- Routh com o polinômio escrito com $2s^2$, mas a tabela feita com $s^2$.
+
+A conferência também achou erros da própria equipe antes do commit: um resíduo recalculado errado (as anotações estavam certas) e `\frac13\,^\circ`, que o KaTeX do site não renderiza.
+
+IA real: Gemini, 20/11/2026, `eval/results/bateria-controle-2026-11-20.json` e `…-repeticao.json`. Os modelos maiores deram HTTP 429 e as respostas vieram do `gemini-3.1-flash-lite` (degradado). Cada resposta foi conferida contra os valores dos testes:
+- diagrama de blocos, sobressinal e lugar das raízes: corretas e socráticas; o sobressinal citou o bloco certo;
+- massa-mola-amortecedor: na 1ª rodada veio do modelo local (Gemini indisponível); na repetição veio do Gemini, correta;
+- **erro ao degrau num sistema tipo 1: nas duas rodadas, a verificação de "entregou a resposta" cortou a saída duas vezes e sobrou só a ajuda de reserva genérica, sem conteúdo**. Por isso a disciplina continua "em validação";
+- Karnaugh com Controle selecionada: a IA disse que o tema é de Sistemas Digitais, mas respondeu mesmo assim (o mesmo comportamento de Circuitos e Sinais).
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -248,3 +275,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `prob` | Probabilidade e Estatística | Markdown curado em `disciplinas/prob` (25 blocos, 19 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; anotações de aluno sem autorização de publicar a transcrição (só paráfrases); professor, instituição e enunciados das provas não identificados; revisão humana e do professor pendentes; tópicos 10–13 só em notas fora da busca; veja a [curadoria](../disciplinas/prob/CURADORIA.md) |
 | `circ` | Circuitos Elétricos | Markdown curado em `disciplinas/circ` (26 blocos, 23 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; amp-op, primeira ordem e fasores só em notas fora da busca; veja a [curadoria](../disciplinas/circ/CURADORIA.md) |
 | `sinais` | Sinais e Sistemas | Markdown curado em `disciplinas/sinais` (29 blocos, 28 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; tempo discreto só em nota fora da busca; Bode e filtros sem material; veja a [curadoria](../disciplinas/sinais/CURADORIA.md) |
+| `controle` | Sistemas de Controle | Markdown curado em `disciplinas/controle` (24 blocos, 22 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; resposta em frequência e projeto de controladores só em notas fora da busca; veja a [curadoria](../disciplinas/controle/CURADORIA.md) |
