@@ -1,0 +1,114 @@
+[
+ {
+  "id": "pcom-am-banda",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+  "esperado": "BT = 2W = 10 kHz (duas bandas laterais, frequências positivas); a portadora não muda a banda",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 16.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda de um sinal AM, precisamos olhar para como o espectro da mensagem original se desloca ao ser multiplicado pela portadora.\n\nQuando você modula uma mensagem que possui frequências de $0$ a $W$ Hz, o processo de modulação cria duas bandas laterais em torno da frequência da portadora ($f_c$): uma banda lateral inferior (de $f_c - W$ até $f_c$) e uma banda lateral superior (de $f_c$ até $f_c + W$).\n\nSe você observar o espectro nas frequências positivas, qual é a distância total entre a frequência mais baixa ocupada pelo sinal modulado e a frequência mais alta? Pense em como o valor de $W$ (a largura da mensagem) se relaciona com essas duas bandas laterais.\n\n### Sua vez\nConsiderando que a mensagem vai de $0$ a $5$ kHz, qual é a frequência da banda lateral inferior e qual é a da banda lateral superior em relação à portadora $f_c$? Qual a diferença entre elas?"
+ },
+ {
+  "id": "pcom-carson",
+  "disciplina": "pcom",
+  "pergunta": "Como calcular a largura de banda de FM pela regra de Carson?",
+  "esperado": "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 2 e 4; Anotações \"Lista 2s\" (19 ago. 2026), p. 2; Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 8",
+   "Anotações \"Lista 2s\" (19 ago. 2026), p. 2–3 (questões 3 e 4)",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular a largura de banda de um sinal FM usando a regra de Carson, o primeiro passo é identificar os dois parâmetros fundamentais que definem o comportamento do sinal: o **desvio de frequência** ($\\Delta f$) e a **frequência da mensagem** ($f_m$).\n\nA regra de Carson nos diz que a largura de banda de transmissão ($B_T$) é aproximadamente o dobro da soma desses dois valores. Pense nisso como uma forma de considerar a faixa ocupada pela variação da frequência (o desvio) somada à \"largura\" que a própria mensagem impõe ao sinal.\n\nLembre-se de que:\n1. O desvio de frequência $\\Delta f$ deve estar em **Hz**. Se você tiver o desvio angular $\\Delta\\omega$ (em rad/s), precisará convertê-lo antes de aplicar a fórmula.\n2. A frequência da mensagem $f_m$ também deve estar em **Hz**.\n3. A fórmula é $B_T \\approx 2(\\Delta f + f_m)$.\n\nSe você tiver um sinal específico em mãos, tente identificar qual é o valor do desvio de frequência e qual é a frequência da mensagem. Se o sinal for complexo, lembre-se de que $\\Delta f$ é o valor máximo que a frequência instantânea se afasta da portadora.\n\n### Sua vez\nSuponha um sinal FM com uma mensagem de tom puro de $10$ kHz e um desvio de frequência de $40$ kHz. Qual seria a largura de banda aproximada pela regra de Carson? Tente montar a conta no papel e me diga o resultado em Hz."
+ },
+ {
+  "id": "pcom-pm-fm",
+  "disciplina": "pcom",
+  "pergunta": "Qual a diferença entre PM e FM?",
+  "esperado": "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Anotações \"Simulação - Modulação FM e PM\" (27 ago. 2026), p. 1–5; Anotações \"Lista 2s\" (19 ago. 2026), p. 1; Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre PM (Modulação de Fase) e FM (Modulação de Frequência), o ponto de partida é observar como a mensagem $m(t)$ altera o argumento do cosseno, que chamamos de **fase instantânea** $\\theta(t)$.\n\nLembre-se que o sinal modulado tem a forma geral $s(t) = A\\cos(\\theta(t))$.\n\n1.  **PM:** A fase instantânea é alterada diretamente pela mensagem: $\\theta(t) = \\omega_c t + k_p m(t)$.\n2.  **FM:** O que é alterado pela mensagem é a **frequência instantânea** $\\omega_i(t) = \\omega_c + k_f m(t)$.\n\nAqui está a chave para o seu raciocínio: se você conhece a relação entre a frequência instantânea e a fase (dada por $\\omega_i(t) = \\frac{d\\theta(t)}{dt}$), como você escreveria a fase $\\theta(t)$ no caso da FM em função da integral da mensagem?\n\nPense no que acontece com o sinal se a mensagem for um degrau (um valor constante):\n*   No **PM**, a fase dá um \"salto\" e para em um novo valor. A frequência continua a mesma da portadora (pois a derivada da fase constante é zero).\n*   No **FM**, a frequência muda para um novo valor e permanece lá enquanto o degrau durar. A fase, portanto, cresce linearmente com o tempo.\n\n### Sua vez\nConsiderando que $m(t) = \\cos(\\omega_m t)$, escreva a expressão da fase instantânea $\\theta(t)$ para o caso FM, realizando a integral de $m(t)$ conforme definido em [P1]. Como essa expressão difere da fase do PM para o mesmo sinal?"
+ },
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Qual a eficiência espectral de uma QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 82.2,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A largura de banda do filtro depende de **quanto da informação da mensagem está presente no sinal modulado**. No DSB-SC, a mensagem é carregada nas duas bandas laterais, mas **não há portadora**. Para recuperar $ m(t) $, o filtro deve **capturar apenas uma das bandas laterais** — a que contém a informação da mensagem.\n\nPense:  \n- O sinal modulado tem componentes em $ f_c - W $ e $ f_c + W $, onde $ W $ é a largura de banda da mensagem.  \n- Para recuperar $ m(t) $, o filtro deve passar **apenas uma dessas bandas**.  \n- Qual é a largura de banda necessária para isso?\n\n### Sua vez  \nEscreva a largura de banda do filtro que recupera $ m(t) $ no DSB-SC, em termos de $ W $."
+ },
+ {
+  "id": "pcom-fora",
+  "disciplina": "pcom",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 24.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O Mapa de Karnaugh é uma ferramenta visual poderosa para simplificar expressões booleanas, baseada no princípio de que células adjacentes diferem por apenas uma variável. Ao agrupar os \"1s\" em potências de 2 (1, 2, 4, 8...), conseguimos eliminar as variáveis que mudam de estado dentro do grupo.\n\nPara começar, imagine que você tem uma tabela verdade. O primeiro passo é desenhar o mapa (uma grade) onde cada célula corresponde a uma linha da tabela. O segredo está na organização das colunas e linhas usando o **Código de Gray** (ex: 00, 01, 11, 10), garantindo que apenas um bit mude entre vizinhos.\n\nDepois de preencher os \"1s\" no mapa, o objetivo é fazer os maiores grupos possíveis. Lembre-se:\n1. Grupos devem ser retangulares ou quadrados.\n2. O tamanho do grupo deve ser sempre uma potência de 2.\n3. Você pode \"dobrar\" o mapa (as bordas são adjacentes).\n4. Um \"1\" pode pertencer a mais de um grupo.\n\nAo analisar um grupo, você deve observar quais variáveis mantêm o mesmo valor (0 ou 1) para todas as células daquele agrupamento. As variáveis que mudam de valor dentro do grupo são descartadas, pois não afetam o resultado final daquela parcela da expressão.\n\n### Sua vez\nDesenhe um mapa de Karnaugh para uma função de 3 variáveis ($A, B, C$) e preencha com \"1\" nas posições onde $A=0, B=1, C=1$ e $A=1, B=1, C=1$. Como você agruparia esses dois \"1s\" e qual variável seria eliminada na simplificação desse grupo?"
+ }
+]

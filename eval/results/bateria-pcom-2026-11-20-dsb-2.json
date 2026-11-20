@@ -1,0 +1,21 @@
+[
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro de recuperação em um sistema DSB-SC, precisamos olhar para o que acontece após a multiplicação do sinal modulado pela portadora local.\n\nQuando você multiplica o sinal $s(t) = m(t) \\cdot A_c \\cos(2\\pi f_c t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro resultante contém duas partes: uma centrada em zero (que é a sua mensagem original recuperada) e outra centrada em $2f_c$ (que é uma cópia da mensagem deslocada para frequências altas).\n\nO objetivo do filtro passa-baixas é eliminar a cópia em $2f_c$ e manter apenas a mensagem original. Pense no espectro da mensagem: se ela vai de $0$ até $W$ Hz, qual é a frequência máxima que o filtro deve permitir passar para que a mensagem seja preservada, mas a cópia em $2f_c$ seja bloqueada?\n\nLembre-se da convenção que você está utilizando: se você estiver trabalhando com a largura de banda bilateral (de $-f$ a $+f$), o filtro deve cobrir a faixa da mensagem em ambos os lados. Se estiver usando a convenção de frequências positivas, o filtro deve cobrir apenas de $0$ a $W$ Hz.\n\n### Sua vez\nSe a sua mensagem $m(t)$ possui uma frequência máxima $W$ (em Hz), qual deve ser a frequência de corte $f_{corte}$ do filtro passa-baixas para que ele recupere apenas a mensagem original?"
+ }
+]

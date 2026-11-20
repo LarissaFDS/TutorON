@@ -368,6 +368,68 @@
         "Qual a diferença entre retificador de meia onda e de onda completa?",
         "Como saber se o transistor está saturado?"
       ]
+    },
+    {
+      "id": "pcom",
+      "nome": "Princípios de Comunicação",
+      "sigla": "PCOM",
+      "situacao": "em validação",
+      "itens": "disciplinas/pcom/acervo/itens.json",
+      "indice": "disciplinas/pcom/acervo/indice.json",
+      "materiais": "disciplinas/pcom/materiais",
+      "rigor": "disciplinas/pcom/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "pcom-01-sinais-espectro",
+        "pcom-02-am-dsb",
+        "pcom-03-ssb-vsb",
+        "pcom-04-modulacao-angular",
+        "pcom-05-filtros-esquemas",
+        "pcom-06-modulacao-digital",
+        "pcom-07-amostragem-pcm",
+        "pcom-08-exposicao-campos",
+        "pcom-09-ruido-processos",
+        "pcom-10-banda-base-codificacao-linha",
+        "pcom-11-enlaces-teoria-informacao"
+      ],
+      "exemplos": [
+        "Como se calcula a largura de banda de um sinal AM a partir da banda da mensagem?",
+        "Como calcular a largura de banda de FM pela regra de Carson?",
+        "Qual a diferença entre PM e FM?",
+        "Como se calcula a eficiência espectral de uma modulação digital como a QPSK?",
+        "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?"
+      ]
+    },
+    {
+      "id": "varcomp",
+      "nome": "Variáveis Complexas",
+      "sigla": "VC",
+      "situacao": "MVP",
+      "itens": "disciplinas/varcomp/acervo/itens.json",
+      "indice": "disciplinas/varcomp/acervo/indice.json",
+      "materiais": "disciplinas/varcomp/materiais",
+      "rigor": "disciplinas/varcomp/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "varcomp-01-numeros-complexos",
+        "varcomp-02-funcoes-analiticas-cauchy-riemann",
+        "varcomp-03-funcoes-elementares",
+        "varcomp-04-integrais-de-contorno",
+        "varcomp-05-cauchy-goursat-primitivas",
+        "varcomp-06-formula-integral-cauchy",
+        "varcomp-07-series-taylor-laurent",
+        "varcomp-08-residuos-singularidades",
+        "varcomp-09-representacao-conforme",
+        "varcomp-10-funcoes-harmonicas",
+        "varcomp-11-gamma-stirling"
+      ],
+      "exemplos": [
+        "Como calcular todas as raízes cúbicas de 1 − i?",
+        "Como usar a fórmula integral de Cauchy em ∮ e^{2z}/(z+1)⁴ dz?",
+        "Por que ∮ 1/z dz = 2πi e ∮ 1/z² dz = 0?",
+        "Como calcular ∫ z² dz no segmento de 0 a 2+i?",
+        "Por que o sentido da curva muda o sinal de ∮ 1/z dz?"
+      ]
     }
   ]
 }

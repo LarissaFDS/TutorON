@@ -1,0 +1,111 @@
+[
+ {
+  "id": "varcomp-raizes",
+  "disciplina": "varcomp",
+  "pergunta": "Como calcular todas as raízes cúbicas de 1 − i?",
+  "esperado": "três raízes 2^{1/6} e^{i(−π/4+2kπ)/3}: ângulos −π/12, 7π/12, 5π/4 (≈1,084−0,291i; −0,291+1,084i; −0,794−0,794i)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 1b",
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 1",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar as raízes cúbicas de um número complexo $z = 1 - i$, o caminho mais eficiente é utilizar a **forma polar** (ou exponencial).\n\nLembre-se que qualquer número complexo pode ser escrito como $z = r e^{i\\theta}$, onde $r = |z|$ é o módulo e $\\theta = \\operatorname{Arg}(z)$ é o argumento principal.\n\nPara o seu caso:\n1. Calcule o módulo $r = \\sqrt{a^2 + b^2}$.\n2. Determine o argumento $\\theta$. Como o ponto $(1, -1)$ está no 4º quadrante, lembre-se de que o ângulo deve estar no intervalo $(-\\pi, \\pi]$.\n3. A fórmula para as raízes cúbicas ($n=3$) é dada por:\n   $$w_k = \\sqrt[3]{r} \\cdot e^{i\\left(\\frac{\\theta + 2k\\pi}{3}\\right)}, \\quad \\text{para } k = 0, 1, 2$$\n\nAo aplicar essa fórmula, você obterá três valores distintos. O segredo é substituir cada valor de $k$ e simplificar o ângulo resultante.\n\n### Sua vez\nNo papel, escreva o número $1 - i$ na forma polar $r e^{i\\theta}$. Qual valor você encontrou para o módulo $r$ e para o argumento $\\theta$?"
+ },
+ {
+  "id": "varcomp-cauchy",
+  "disciplina": "varcomp",
+  "pergunta": "Como usar a fórmula integral de Cauchy em ∮ e^{2z}/(z+1)⁴ dz?",
+  "esperado": "z = −1 dentro da curva; fórmula para derivadas com n = 3 e 3!; na prova, |z| = 3 dá 8πi e^{−2}/3",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 2",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para resolver essa integral, o primeiro passo é identificar que o denominador possui uma singularidade de ordem superior (neste caso, uma potência 4). Quando temos uma singularidade desse tipo, a **Fórmula Integral de Cauchy para Derivadas** é a ferramenta adequada.\n\nA fórmula geral é:\n$$f^{(n)}(z_0) = \\frac{n!}{2\\pi i} \\oint_\\gamma \\frac{f(z)}{(z - z_0)^{n+1}} \\, dz$$\n\nPara aplicar essa fórmula ao seu caso, observe o denominador $(z + 1)^4$. \n1. Qual é o valor de $z_0$ (a singularidade)?\n2. Comparando $(z - z_0)^{n+1}$ com $(z + 1)^4$, qual é o valor de $n$?\n3. Identifique quem é a função $f(z)$ que está no numerador.\n\nLembre-se de verificar se a singularidade $z_0$ está dentro da curva de integração. Se estiver, você precisará calcular a $n$-ésima derivada de $f(z)$ e avaliá-la em $z_0$.\n\n### Sua vez\nIdentifique os valores de $n$, $z_0$ e a função $f(z)$ para o seu exercício e escreva como ficaria a expressão da derivada necessária para resolver a integral."
+ },
+ {
+  "id": "varcomp-1z",
+  "disciplina": "varcomp",
+  "pergunta": "Por que ∮ 1/z dz = 2πi e ∮ 1/z² dz = 0?",
+  "esperado": "1/z não tem primitiva no plano furado (2πi, sentido anti-horário); 1/z² tem primitiva −1/z, logo 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Essa é uma excelente pergunta sobre o comportamento das funções complexas em torno de singularidades. O segredo está na diferença entre as potências de $z$ no denominador.\n\nPara entender por que os resultados são diferentes, pense na **primitiva** da função. Se uma função $f(z)$ possui uma primitiva $F(z)$ que é analítica em toda a região delimitada pela curva fechada $\\gamma$, o que o **Teorema Fundamental do Cálculo para Integrais de Linha** nos diz sobre a integral de $f(z)$ ao longo dessa curva?\n\nAgora, aplique isso aos dois casos:\n1. Para $f(z) = \\frac{1}{z^2}$, existe uma função $F(z)$ tal que $F'(z) = \\frac{1}{z^2}$? Ela é bem definida (analítica) em todo o caminho da elipse?\n2. Para $f(z) = \\frac{1}{z}$, existe uma primitiva que seja analítica em todo o plano, incluindo a origem? Lembre-se que o logaritmo complexo $\\log(z)$ possui uma descontinuidade (o chamado \"corte de ramo\") que impede que ele seja uma função analítica única em torno da origem.\n\nComo a integral de $1/z^2$ \"anula\" o efeito da volta completa e a de $1/z$ \"acumula\" esse valor, dizemos que $1/z$ possui um **resíduo** não nulo em $z=0$, enquanto $1/z^2$ não possui.\n\n### Sua vez\nTente escrever no papel a primitiva de $z^n$ para $n = -2$ e para $n = -1$. Em seguida, aplique os limites da curva fechada (o ponto inicial e final são o mesmo) nessas primitivas e observe o que acontece com o resultado. O que você conclui sobre a existência de uma primitiva única para cada caso?"
+ },
+ {
+  "id": "varcomp-segmento",
+  "disciplina": "varcomp",
+  "pergunta": "Como calcular ∫ z² dz no segmento de 0 a 2+i?",
+  "esperado": "primitiva z³/3: (2+11i)/3",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 4",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 4",
+   "Prova 1 de Variáveis Complexas, versão B (arquivo prova10.pdf, PDF gerado em março de 2021), questão 4"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para calcular a integral de uma função complexa ao longo de um caminho, o primeiro passo é verificar se a função é analítica na região que contém esse caminho.\n\nComo o integrando é $f(z) = z^2$, ele é uma função inteira (analítica em todo o plano complexo). Quando uma função é analítica, podemos utilizar o **Teorema Fundamental do Cálculo para integrais de linha**. Isso significa que, se encontrarmos uma função $F(z)$ tal que $F'(z) = f(z)$, a integral ao longo de qualquer caminho que ligue dois pontos $z_0$ e $z_1$ será dada por $F(z_1) - F(z_0)$.\n\nPense na regra de derivação de potências que você já conhece do cálculo real: qual seria a função $F(z)$ cuja derivada é $z^2$?\n\n### Sua vez\nIdentifique a primitiva $F(z)$ e escreva no papel a expressão $F(2+i) - F(0)$. Qual é o primeiro passo para elevar o número complexo $(2+i)$ ao cubo?"
+ },
+ {
+  "id": "varcomp-cr",
+  "disciplina": "varcomp",
+  "pergunta": "O que são as equações de Cauchy-Riemann?",
+  "esperado": "u_x = v_y, u_y = −v_x; não há material na busca (nota de IA candidata); não cita blocos de integral como fonte de CR",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Prova 1 de Variáveis Complexas, versão C (arquivo prova16.pdf, PDF gerado em março de 2021), questão 3",
+   "Prova 1 de Variáveis Complexas, versão A (arquivo prova variaveis.pdf, PDF gerado em março de 2021), questão 2",
+   "Prova 1 de Variáveis Complexas, versão B (arquivo prova10.pdf, PDF gerado em março de 2021), questão 3"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "As equações de Cauchy-Riemann são o critério fundamental para verificar se uma função complexa $f(z) = u(x, y) + i v(x, y)$ é **analítica** (ou holomorfa) em um determinado ponto ou região.\n\nImagine que você tem uma função que mapeia números complexos. Para que ela seja diferenciável no sentido complexo, ela não pode apenas ter derivadas parciais em relação a $x$ e $y$; essas derivadas precisam estar \"conectadas\" de uma forma muito específica.\n\nSe pensarmos na função como um campo vetorial $(u, v)$, as equações de Cauchy-Riemann garantem que a função preserve ângulos (seja uma transformação conforme) e que a derivada complexa $f'(z)$ seja única, independentemente da direção pela qual você se aproxima do ponto $z$.\n\nAs equações são um par de igualdades relacionando as derivadas parciais de $u$ e $v$:\n1. A derivada de $u$ em relação a $x$ deve ser igual à derivada de $v$ em relação a $y$.\n2. A derivada de $u$ em relação a $y$ deve ser igual ao negativo da derivada de $v$ em relação a $x$.\n\nSe você estiver analisando uma função específica, o primeiro passo é identificar quem são as partes real ($u$) e imaginária ($v$) da sua função.\n\n### Sua vez\nEscreva a forma matemática das duas equações de Cauchy-Riemann usando a notação de derivadas parciais ($\\frac{\\partial u}{\\partial x}$, etc.) e, em seguida, tente aplicá-las para a função $f(z) = z^2$. (Dica: lembre-se que $z = x + iy$, então $z^2 = (x+iy)^2 = x^2 - y^2 + 2ixy$)."
+ },
+ {
+  "id": "varcomp-fora",
+  "disciplina": "varcomp",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre **Mapas de Karnaugh**, que é um tópico fundamental de **Sistemas Digitais (SD)**. Como sou seu tutor de **Variáveis Complexas (VC)**, não sou a pessoa mais indicada para te guiar nesse assunto específico.\n\nPara obter a melhor ajuda, sugiro que você selecione a disciplina **Sistemas Digitais (SD)** no menu do site. Lá, os tutores especializados poderão te explicar a lógica de agrupamento de uns (ou zeros), como tratar as condições \"don't care\" e como extrair a expressão booleana simplificada a partir do mapa.\n\nSe você tiver alguma dúvida sobre **Variáveis Complexas** — como números complexos, funções analíticas, integrais de contorno ou resíduos —, estou à disposição!\n\n### Sua vez\nVocê tem algum exercício de Variáveis Complexas em que gostaria de aplicar algum conceito, ou prefere trocar a disciplina para focar em Sistemas Digitais?"
+ }
+]
