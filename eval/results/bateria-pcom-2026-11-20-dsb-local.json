@@ -1,0 +1,21 @@
+[
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 58.1,
+  "fontes": [
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A largura de banda do filtro é a faixa de frequências que ele permite passar, e ela está diretamente relacionada à largura da mensagem $ m(t) $. No DSB-SC, o sinal modulado tem duas bandas laterais simétricas em torno da frequência da portadora. Para recuperar $ m(t) $, o filtro deve passar apenas a parte da mensagem, ou seja, a banda lateral que contém a informação.\n\nPense: se a mensagem ocupa uma faixa de frequências de largura $ W $, qual é a faixa de frequências que o filtro deve passar para recuperar $ m(t) $?\n\n### Sua vez  \nEscreva a faixa de frequências que o filtro deve passar para recuperar $ m(t) $ no DSB-SC, em termos da largura da mensagem $ W $."
+ }
+]

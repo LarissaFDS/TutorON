@@ -23,6 +23,8 @@ $$S(f) = \frac{A_c}{2}[M(f - f_c) + M(f + f_c)]$$ (o espectro da mensagem desloc
 **Exemplo:** $m(t) = \cos(2\pi\,2t)$ e $c(t) = \cos(2\pi\,10t)$ (Hz) dão
 $$s(t) = \frac{1}{2}\cos(2\pi\,12t) + \frac{1}{2}\cos(2\pi\,8t),$$ com quatro linhas simétricas, em $\pm 8$ Hz e $\pm 12$ Hz, cada uma de peso 1/4. O espectro da mensagem tem linhas em $\pm 2$ Hz de peso 1/2.
 
+**Para recuperar $m(t)$ (demodulação coerente):** multiplique $s(t)$ pela portadora local $\cos(2\pi f_c t)$, obtendo $\tfrac{1}{2}m(t) + \tfrac{1}{2}m(t)\cos(4\pi f_c t)$, e passe por um **filtro passa-baixas**, não por um filtro em torno de $f_c$. O corte fica entre a banda da mensagem e a cópia em $2f_c$: $W \le f_{corte} \le 2f_c - W$.
+
 Correção: a anotação desenha também uma linha da portadora em $\pm 10$ Hz ("carrier"). Em DSB-SC a portadora é **suprimida**: não há linha em $f_c$. Ela aparece no AM convencional.
 
 **Verificação:** FFT de $s(t)$ em 1 s: picos de 0,25 em 8 e 12 Hz e nada (menos de $10^{-12}$) em 10 Hz.
