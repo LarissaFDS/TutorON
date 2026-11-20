@@ -1,0 +1,25 @@
+[
+ {
+  "id": "ingles-nucleo",
+  "disciplina": "ingles",
+  "pergunta": "Como identificar o núcleo de um grupo nominal como \"plant extract based insecticides\"?",
+  "esperado": "núcleo é o último substantivo, insecticides; ler da direita para a esquerda: inseticidas à base de extratos de plantas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de grupos nominais",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para identificar o núcleo de um grupo nominal, a estratégia principal é o **scanning** da estrutura da frase, focando na posição das palavras.\n\nConforme o material [P1], em grupos nominais, o núcleo é geralmente a última palavra do grupo antes de uma preposição ou verbo. Observe o grupo *\"plant extract based insecticides\"*:\n\n1.  **Delimitação:** Identifique onde o grupo termina. Note que não há preposições (como *of*, *for*, *in*) ou vírgulas logo após esse conjunto de palavras.\n2.  **Identificação do núcleo:** O núcleo é o substantivo principal, aquele que sofre a modificação dos termos anteriores. Entre *plant*, *extract*, *based* e *insecticides*, qual deles é o substantivo que nomeia o objeto central do grupo?\n3.  **Papel dos modificadores:** Lembre-se que, em inglês, os modificadores vêm antes do núcleo. O termo *based* (terminado em *-ed*) atua como um adjetivo (particípio), descrevendo uma característica do núcleo.\n\nAo traduzir da direita para a esquerda, você começa pelo núcleo e adiciona os modificadores, ligando-os com preposições adequadas em português (como \"de\" ou \"à base de\").\n\n**Verificação:** O núcleo que você escolher deve ser um substantivo que faz sentido ser o \"alvo\" de uma descrição técnica sobre inseticidas. Se você traduzir da direita para a esquerda, o resultado deve descrever um tipo específico de inseticida mencionado no título do texto.\n\n### Sua vez\nQual é a última palavra do grupo *\"plant extract based insecticides\"*? Por que, seguindo a regra do material [P1], ela deve ser considerada o núcleo em vez de *plant* ou *extract*? Tente montar a tradução da direita para a esquerda e escreva apenas a estrutura lógica que você encontrou."
+ }
+]

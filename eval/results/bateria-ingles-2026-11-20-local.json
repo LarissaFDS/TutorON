@@ -1,0 +1,112 @@
+[
+ {
+  "id": "ingles-skim-scan",
+  "disciplina": "ingles",
+  "pergunta": "O que é skimming e scanning?",
+  "esperado": "skimming = ideia geral (título, primeiras frases); scanning = informação específica (número, nome) com pista visual",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 76.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de scanning",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "sua_vez_acrescentada"
+  ],
+  "bloqueio": null,
+  "resposta": "**O que é skimming e scanning?**\n\nA pergunta é sobre **estratégias de leitura**, e a resposta está no **material da disciplina**. Vamos destravar o passo inicial.\n\n**Pista 1:** No **[P1]**, há uma explicação direta sobre **scanning** — é procurar uma informação específica, como números, porcentagens, nomes ou datas. O texto diz: *\"decida antes o que procura e qual pista visual ela tem\"*. Isso é um exemplo de **scanning**.\n\n**Pista 2:** Já o **skimming** é descrito no **[P2]** como uma leitura rápida para pegar a **ideia geral** — título, primeiras frases, palavras repetidas, nomes em destaque. O texto diz: *\"não se lê palavra por palavra nem se usa dicionário\"*. Isso é um exemplo de **skimming**.\n\n**Sua vez:**  \nReleia o trecho do **[P1]** sobre **scanning** e o do **[P2]** sobre **skimming**. **Escreva uma frase curta** explicando a diferença entre os dois métodos de leitura, usando as palavras **\"informação específica\"** e **\"ideia geral\"**.\n\n### Sua vez\nTente o próximo passo no papel. Depois me mande sua tentativa (por texto ou foto) que eu confiro com você."
+ },
+ {
+  "id": "ingles-nucleo",
+  "disciplina": "ingles",
+  "pergunta": "Como identificar o núcleo de um grupo nominal como \"plant extract based insecticides\"?",
+  "esperado": "núcleo é o último substantivo, insecticides; ler da direita para a esquerda: inseticidas à base de extratos de plantas",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 58.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de grupos nominais",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar o núcleo do grupo nominal **\"plant extract based insecticides\"**, siga o método descrito no material da disciplina:\n\n1. **Delimite o grupo**: olhe até a preposição, verbo ou vírgula. Nesse caso, o grupo termina antes de qualquer desses elementos — o grupo é todo o termo.\n2. **Ache o núcleo**: o núcleo é a **última palavra do grupo** que é um **substantivo**. No grupo, qual é a última palavra e é um substantivo?\n3. **Traduza da direita para a esquerda**: comece pelo núcleo e vá adicionando os modificadores, ligando com \"de\", \"à base de\", \"para\", etc.\n\n**Pergunta-chave:** Qual é a última palavra do grupo e é um substantivo? Que papel tem *based* (terminado em *-ed*) antes do núcleo?\n\n### Sua vez  \nIdentifique a última palavra do grupo \"plant extract based insecticides\" e diga se ela é um substantivo. Em seguida, pense: que papel *based* tem antes do núcleo?"
+ },
+ {
+  "id": "ingles-actually",
+  "disciplina": "ingles",
+  "pergunta": "Qual a diferença entre \"actually\" e \"atualmente\"?",
+  "esperado": "falso cognato: actually = na verdade, de fato; atualmente = currently, nowadays; cita trecho em inglês",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 46.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de cognatos"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre **\"actually\"** e **\"atualmente\"** está no **sentido** e no **contexto** em que cada palavra é usada. Vamos explorar isso juntos.\n\n**\"Actually\"** é um **falso cognato**. Parece com a palavra portuguesa \"atualmente\", mas **não significa o mesmo**. No texto da prova, vimos que *“it is much more difficult to know that it is actually doing what it is intended to do”*. Nesse trecho, **\"actually\"** significa **\"de fato\"** ou **\"na verdade\"**, e não **\"atualmente\"**.\n\nAgora, vamos pensar: **por que \"atualmente\" não é a tradução correta para \"actually\"** nesse contexto?\n\n### Sua vez  \n**Escreva a frase do exemplo da prova com \"atualmente\" no lugar de \"actually\"** e diga se a frase faz sentido. Se não fizer, por que?"
+ },
+ {
+  "id": "ingles-passiva",
+  "disciplina": "ingles",
+  "pergunta": "Como reconhecer a voz passiva num texto técnico?",
+  "esperado": "to be + particípio passado, agente com by; tempo no auxiliar; has increased não é passiva",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 58.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de voz passiva",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de tempos verbais"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para reconhecer a voz passiva em um texto técnico, você precisa identificar **duas partes principais**:\n\n1. A forma do verbo **to be** (is, are, was, were, be, been, being) — ela indica que a ação **acontece com o sujeito**, não por ele.\n2. O **particípio passado** do verbo principal — ele mostra o que foi feito ou o que aconteceu.\n\nPor exemplo, em *“the incidence has increased 30-fold”*, o verbo **has increased** é no **present perfect ativo**, não passivo. Já em *“their use is being gradually abandoned”*, temos **is being** (to be + being) + **abandoned** (particípio), indicando que a ação **está sendo feita** com o sujeito.\n\n### Sua vez  \nVamos praticar: no trecho *“Automated output and intermediate files can be regenerated as needed.”* (Wilson et al., 2014), identifique a forma do verbo **to be** e o particípio passado. Qual é o tempo do verbo? E o que isso indica sobre o foco do texto?"
+ },
+ {
+  "id": "ingles-they",
+  "disciplina": "ingles",
+  "pergunta": "A quem se refere \"they\" em \"where they are used to eliminate damage\"?",
+  "esperado": "insecticides (inseticidas), da frase anterior; sem entregar direto no modo Tutor: estratégia de voltar à frase anterior e concordância",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 48.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de voz passiva"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A pergunta é sobre **referência pronominal**, ou seja, **a quem se refere o pronome \"they\"** na frase *\"where they are used to eliminate damage\"*. Para resolver isso, precisamos identificar **o que foi mencionado antes** e que pode ser retomado pelo pronome.\n\nVamos seguir a estratégia:  \n1. **Volte à frase anterior** e veja o que foi dito.  \n2. **Procure um substantivo que concorde em número** com \"they\" (plural).  \n3. **Substitua \"they\"** por esse substantivo e veja se a frase faz sentido.\n\n**Dica:** A frase anterior fala sobre **inseticidas**. O que você acha que pode ser retomado por \"they\" nessa frase?\n\n### Sua vez  \nReleia a frase anterior e identifique **o substantivo que concorda em número com \"they\"**. Substitua \"they\" por esse substantivo e confira se a frase faz sentido."
+ },
+ {
+  "id": "ingles-fora",
+  "disciplina": "ingles",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 36.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma função com mapa de Karnaugh, o primeiro passo é identificar os grupos de 1s que podem ser combinados. Esses grupos devem ter um número de células que é uma potência de 2 (1, 2, 4, 8, etc.) e devem ser o maior possível para minimizar o número de termos na expressão final.\n\nPense: **Como você identifica os grupos de 1s no mapa de Karnaugh?**  \nLembre-se de que os grupos podem ser horizontais, verticais ou em forma de L, e que as bordas do mapa são consideradas adjacentes.\n\n### Sua vez  \nEscreva no papel: **\"Desenhe um mapa de Karnaugh com 4 variáveis e marque os grupos de 1s que você identificaria.\"**  \nSe quiser, envie uma foto do que você fez."
+ }
+]
