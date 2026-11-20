@@ -243,7 +243,7 @@ A conferência também achou erros da própria equipe antes do commit: um resíd
 IA real: Gemini, 20/11/2026, `eval/results/bateria-controle-2026-11-20.json` e `…-repeticao.json`. Os modelos maiores deram HTTP 429 e as respostas vieram do `gemini-3.1-flash-lite` (degradado). Cada resposta foi conferida contra os valores dos testes:
 - diagrama de blocos, sobressinal e lugar das raízes: corretas e socráticas; o sobressinal citou o bloco certo;
 - massa-mola-amortecedor: na 1ª rodada veio do modelo local (Gemini indisponível); na repetição veio do Gemini, correta;
-- **erro ao degrau num sistema tipo 1: nas duas rodadas, a verificação de "entregou a resposta" cortou a saída duas vezes e sobrou só a ajuda de reserva genérica, sem conteúdo**. Por isso a disciplina continua "em validação";
+- erro ao degrau num sistema tipo 1: nas duas primeiras rodadas o revisor (modelo local, com o Gemini em 429) reprovou duas vezes uma pista correta só por mostrar a fórmula geral, e sobrou a ajuda de reserva. O `SISTEMA_REVISOR` (`backend/tutoria.py`) passou a permitir explicitamente a fórmula geral do material quando o valor final fica para o aluno. Na 3ª rodada (`…-revisor.json`) a pista veio aprovada de primeira, correta e sem entregar o zero; as perguntas de Sistemas Digitais da mesma rodada (Karnaugh e mux) continuaram sem entregar a resposta;
 - Karnaugh com Controle selecionada: a IA disse que o tema é de Sistemas Digitais, mas respondeu mesmo assim (o mesmo comportamento de Circuitos e Sinais).
 
 ## Como cadastrar uma nova disciplina

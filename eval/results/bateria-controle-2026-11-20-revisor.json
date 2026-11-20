@@ -1,0 +1,152 @@
+[
+ {
+  "id": "k-basico",
+  "disciplina": "sd",
+  "pergunta": "Como simplificar F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15) com mapa de Karnaugh?",
+  "esperado": "B'D' + BD",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 52.1,
+  "fontes": [
+   "Nota da equipe TutorON (não é material do professor)",
+   "Nota da equipe TutorON (não é material do professor)",
+   "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar essa função usando o Mapa de Karnaugh, o primeiro passo é organizar as variáveis e os mintermos corretamente. Como temos 4 variáveis ($A, B, C, D$), o mapa terá 16 células.\n\nLembre-se de seguir a ordem de Gray ($00, 01, 11, 10$) tanto para as linhas ($AB$) quanto para as colunas ($CD$). Ao preencher o mapa, coloque o número $1$ nas posições correspondentes aos mintermos fornecidos: $0, 2, 5, 7, 8, 10, 13$ e $15$.\n\nDica: observe a disposição desses números no mapa. Você notará que existem grupos de 4 células que podem ser formados. Lembre-se que as bordas do mapa são vizinhas (o mapa \"dá a volta\") e que os quatro cantos também formam um grupo válido de 4 células.\n\nAo agrupar, tente encontrar os maiores retângulos possíveis (potências de 2: 1, 2, 4, 8...). Para cada grupo, a expressão resultante será composta apenas pelas variáveis que **não mudam** de valor dentro daquele retângulo.\n\n### Sua vez\nDesenhe o mapa de 4x4 no papel, preencha os $1$ nos mintermos indicados e identifique quais grupos de 4 células você consegue formar. Quais grupos você encontrou?"
+ },
+ {
+  "id": "mux",
+  "disciplina": "sd",
+  "pergunta": "Implemente F(A,B,C) = Σm(1,2,6,7) com um multiplexador 4x1 usando A e B na seleção.",
+  "esperado": "I0=C, I1=C', I2=0, I3=1",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Nota da equipe TutorON (não é material do professor)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para implementar essa função usando um MUX 4:1 com $A$ e $B$ nas linhas de seleção, precisamos usar o conceito de expansão de Shannon. Como temos três variáveis ($A, B, C$) e o MUX utiliza duas para seleção, a terceira variável ($C$) ficará conectada às entradas de dados do MUX ($I_0, I_1, I_2, I_3$).\n\nO segredo é agrupar os mintermos da função de acordo com as combinações de $A$ e $B$:\n- $I_0$ corresponde ao caso onde $A=0, B=0$ (mintermos onde $A$ e $B$ são 0).\n- $I_1$ corresponde ao caso onde $A=0, B=1$.\n- $I_2$ corresponde ao caso onde $A=1, B=0$.\n- $I_3$ corresponde ao caso onde $A=1, B=1$.\n\nPara cada entrada $I_n$, você deve verificar o que acontece com a saída $F$ em relação a $C$. Por exemplo, se para uma combinação de $A$ e $B$, a função $F$ for 1 quando $C=0$ e 1 quando $C=1$, a entrada $I_n$ deve ser ligada ao nível lógico 1. Se $F$ for igual a $C$, a entrada $I_n$ deve ser ligada ao próprio sinal $C$.\n\n### Sua vez\nMonte uma tabela com as quatro combinações de $A$ e $B$ ($00, 01, 10, 11$). Para cada uma, observe os mintermos dados ($1, 2, 6, 7$) e determine qual será o valor ou a expressão de $C$ que deve entrar em cada $I_n$. Quais são os valores de $I_0, I_1, I_2$ e $I_3$?"
+ },
+ {
+  "id": "controle-blocos",
+  "disciplina": "controle",
+  "pergunta": "Como reduzir um diagrama de blocos com realimentação negativa?",
+  "esperado": "Y/R = G/(1 + GH) (malha fechada, realimentação negativa); positiva dá G/(1 − GH); série, paralelo e mover blocos",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 136.3,
+  "fontes": [
+   "Anotações \"Diagrama de Blocos\" (1º out. 2026), p. 1–4",
+   "Anotações \"Diagrama de Blocos\" (1º out. 2026), p. 4–7",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 6–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para reduzir um diagrama de blocos com realimentação negativa, comece identificando os blocos em série e em paralelo. A realimentação negativa envolve um somador que subtrai o sinal de saída multiplicado por $ H(s) $ da entrada $ R(s) $.  \n\n**Pergunta-guia:**  \nSe $ Y(s) = G(s) \\cdot [R(s) - H(s)Y(s)] $, como você isolaria $ Y(s)/R(s) $? Qual seria o denominador da função de transferência final?  \n\n### Sua vez  \nEscreva a equação de $ Y(s) $ em termos de $ R(s) $ e $ H(s) $, e tente resolver para $ Y(s)/R(s) $. Depois, confirme se o denominador reflete a realimentação negativa ($ 1 + GH $) ou positiva ($ 1 - GH $)."
+ },
+ {
+  "id": "controle-sobressinal",
+  "disciplina": "controle",
+  "pergunta": "Como calcular o sobressinal de um sistema de segunda ordem?",
+  "esperado": "Mp = e^(−ζπ/√(1−ζ²)); ζ e ωn tirados do denominador s² + 2ζωn s + ωn²; ζ = 0,5 dá 16,3%",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Anotações \"Análise de Resposta Temporal\" (1º out. 2026), p. 11–15",
+   "Anotações \"Análise de Resposta Temporal\" (1º out. 2026), p. 3–9"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O cálculo do sobressinal ($M_p$) em sistemas de segunda ordem depende fundamentalmente do **fator de amortecimento** ($\\zeta$).\n\nQuando você tem um sistema na forma padrão, como apresentado em [P2], o sobressinal é uma medida de quanto a resposta ultrapassa o valor de regime permanente em relação ao valor final. Ele é derivado da parte oscilatória da resposta ao degrau.\n\nPara chegar à fórmula, o caminho é:\n1. Identificar os polos do sistema a partir do denominador da função de transferência de malha fechada (comparando com $s^2 + 2\\zeta\\omega_n s + \\omega_n^2$).\n2. Verificar se o sistema é subamortecido ($0 < \\zeta < 1$), que é a condição necessária para haver sobressinal.\n3. Utilizar a relação que conecta o fator de amortecimento ao percentual de ultrapassagem.\n\nSe você tiver uma função de transferência específica, o primeiro passo é garantir que ela esteja na forma padrão. Se houver zeros ou polos adicionais, lembre-se da nota em [P1]: as fórmulas de segunda ordem padrão tornam-se aproximações ou deixam de valer, sendo necessário analisar o efeito desses elementos extras.\n\n### Sua vez\nEscreva a função de transferência de malha fechada que você está analisando e identifique, a partir do denominador, quais são os valores de $\\zeta$ e $\\omega_n$ do seu sistema."
+ },
+ {
+  "id": "controle-erro-tipo1",
+  "disciplina": "controle",
+  "pergunta": "Qual o erro em regime para entrada degrau num sistema tipo 1?",
+  "esperado": "zero (Kp infinito); conferir estabilidade da malha fechada antes do TVF; rampa dá 1/Kv",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 38.1,
+  "fontes": [
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 1–6",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 6–9",
+   "Anotações \"Resposta em Regime permanente\" (20 out. 2026), p. 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para responder a essa pergunta, precisamos olhar para a definição de **erro em regime permanente** ($e_{ss}$) e como o **tipo do sistema** influencia o comportamento da função de transferência de malha aberta $G(s)$.\n\nLembre-se que, para uma realimentação unitária negativa, o erro é dado por:\n$$e_{ss} = \\lim_{s\\to0} \\frac{s R(s)}{1 + G(s)}$$\n\nSe a entrada $R(s)$ é um degrau unitário, temos $R(s) = 1/s$. Substituindo isso na fórmula, o termo $s$ do numerador cancela com o $s$ da entrada. O que sobra é:\n$$e_{ss} = \\frac{1}{1 + \\lim_{s\\to0} G(s)}$$\n\nAgora, considere a definição de um **sistema tipo 1**: ele possui exatamente um polo na origem em sua função de transferência de malha aberta $G(s)$. Matematicamente, isso significa que podemos escrever $G(s) = \\frac{K \\cdot P(s)}{s^1 \\cdot Q(s)}$, onde $P(0)$ e $Q(0)$ são constantes diferentes de zero.\n\nO que acontece com o valor de $G(s)$ quando $s$ tende a zero em um sistema desse tipo? Pense no comportamento de $1/s$ à medida que $s$ se aproxima de zero e como isso afeta o denominador da expressão do erro.\n\n### Sua vez\nTente escrever a expressão de $G(s)$ para um sistema tipo 1 e calcule o limite $\\lim_{s\\to0} G(s)$ no papel. O que acontece com o valor de $e_{ss}$ quando esse limite é aplicado?"
+ },
+ {
+  "id": "controle-lgr",
+  "disciplina": "controle",
+  "pergunta": "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
+  "esperado": "polos 0 e −2; eixo real [−2, 0]; assíntotas ±90° em σ = −1; ramificação em −1 com K = 1; estável para K > 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Anotações \"Método Lugar das raízes\" (11 nov. 2026), p. 1–3",
+   "Anotações \"Método Lugar das raízes\" (11 nov. 2026), p. 3–9",
+   "Anotações \"Estabilidade de SLIT contínuo\" (9 set. 2026), p. 6–8"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para desenhar o lugar das raízes de $G(s) = \\frac{K}{s(s+2)}$, o primeiro passo é identificar onde o sistema começa (quando $K=0$) e para onde ele tende (quando $K \\to \\infty$).\n\nComo visto em [P1], o polinômio característico da malha fechada é $1 + KG(s) = 0$, ou seja, $s^2 + 2s + K = 0$.\n\nPara começar o esboço, siga estas etapas fundamentais:\n\n1.  **Polos de malha aberta:** Identifique as raízes de $s(s+2) = 0$. Marque esses pontos no plano complexo com um \"x\".\n2.  **Eixo real:** O lugar das raízes existe onde a condição de fase é satisfeita. Lembre-se da regra: o lugar das raízes está no eixo real à esquerda de um número ímpar de polos e zeros de malha aberta. Analise o segmento entre os dois polos que você marcou.\n3.  **Assíntotas:** Como temos dois polos ($n=2$) e nenhum zero ($m=0$), quantos ramos vão para o infinito? Onde eles se cruzam no eixo real (centro das assíntotas)? E quais são os ângulos dessas assíntotas?\n\nTente esboçar esses pontos e o comportamento inicial no papel. Se precisar de ajuda com o cálculo do centro ou dos ângulos, me avise!\n\n### Sua vez\nIdentifique os polos de malha aberta de $G(s) = \\frac{K}{s(s+2)}$ e determine qual trecho do eixo real faz parte do lugar das raízes. O que acontece com os ramos quando eles se encontram no eixo real?"
+ },
+ {
+  "id": "controle-massa-mola",
+  "disciplina": "controle",
+  "pergunta": "Como montar a função de transferência de um sistema massa-mola-amortecedor?",
+  "esperado": "m x'' + b x' + K x = f; X/F = 1/(ms² + bs + K) com CI nulas; ωn = √(K/m), ζ = b/(2√(Km))",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 36.1,
+  "fontes": [
+   "Anotações \"Sistemas mecânicos\" (19 ago. 2026) e \"Revisão de Laplace e Sistemas mecânicos\", p. 7–8 e 10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 8–10",
+   "Anotações \"Revisão de Laplace e Sistemas mecânicos\" (19 ago. 2026), p. 4 e 10–16"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para montar a função de transferência de um sistema massa-mola-amortecedor, o primeiro passo é aplicar a **Segunda Lei de Newton** para descrever o equilíbrio de forças que atuam sobre a massa.\n\nPense no sistema como um corpo de massa $m$ que sofre a ação de três forças principais quando deslocado de sua posição de equilíbrio $x$:\n1.  **Força da mola:** proporcional ao deslocamento ($Kx$).\n2.  **Força do amortecedor:** proporcional à velocidade ($\\dot{x}$).\n3.  **Força de inércia:** proporcional à aceleração ($m\\ddot{x}$).\n\nSe houver uma força externa $f(t)$ aplicada ao sistema, a soma dessas forças deve ser igual a ela. Lembre-se de que, para a função de transferência, assumimos **condições iniciais nulas** (ou seja, o sistema parte do repouso).\n\nAo escrever essa equação diferencial no domínio do tempo, você pode aplicar a Transformada de Laplace em ambos os lados. Como a derivada de ordem $n$ no tempo se torna uma multiplicação por $s^n$ em Laplace (considerando as condições iniciais nulas), a equação diferencial se transforma em uma equação algébrica. A função de transferência $G(s)$ será simplesmente a razão entre a saída $X(s)$ e a entrada $F(s)$.\n\n### Sua vez\nEscreva a equação diferencial que descreve o equilíbrio de forças para uma massa $m$ com mola $K$, amortecedor $b$ e força externa $f(t)$, e tente aplicar a Transformada de Laplace nela. Qual expressão você obtém para $X(s)$ em função de $F(s)$?"
+ },
+ {
+  "id": "controle-fora",
+  "disciplina": "controle",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 34.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma função lógica usando o Mapa de Karnaugh, o objetivo principal é agrupar os termos \"1\" adjacentes em potências de 2 (1, 2, 4, 8...), buscando sempre os maiores grupos possíveis para eliminar variáveis que mudam de estado dentro do agrupamento.\n\nComo você está estudando **Sistemas de Controle**, é importante notar que essa técnica é fundamental para simplificar a lógica combinacional que pode estar presente em controladores digitais ou sistemas de supervisão.\n\nO processo segue estes passos lógicos:\n1. **Montagem:** Dispor os valores da tabela-verdade no mapa, respeitando a sequência de Gray (onde apenas um bit muda entre células adjacentes).\n2. **Agrupamento:** Cercar os \"1s\" em blocos retangulares ou quadrados de tamanho $2^n$. Lembre-se que as bordas do mapa são \"conectadas\" (o mapa é como um toro/cilindro).\n3. **Simplificação:** Para cada grupo, observe quais variáveis mantêm o mesmo valor (0 ou 1) em todas as células do grupo. As variáveis que mudam de valor dentro do grupo são descartadas.\n\nSe você tiver uma função específica ou uma tabela-verdade em mãos, podemos analisar como montar esse mapa.\n\n### Sua vez\nEscreva a tabela-verdade de uma função simples de 3 variáveis (por exemplo, $F(A, B, C)$ que vale 1 quando a soma dos bits for par) e tente desenhar o mapa de Karnaugh correspondente no papel. Quais células seriam preenchidas com \"1\"?"
+ }
+]
