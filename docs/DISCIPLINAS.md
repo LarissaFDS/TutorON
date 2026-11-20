@@ -246,6 +246,32 @@ IA real: Gemini, 20/11/2026, `eval/results/bateria-controle-2026-11-20.json` e `
 - erro ao degrau num sistema tipo 1: nas duas primeiras rodadas o revisor (modelo local, com o Gemini em 429) reprovou duas vezes uma pista correta só por mostrar a fórmula geral, e sobrou a ajuda de reserva. O `SISTEMA_REVISOR` (`backend/tutoria.py`) passou a permitir explicitamente a fórmula geral do material quando o valor final fica para o aluno. Na 3ª rodada (`…-revisor.json`) a pista veio aprovada de primeira, correta e sem entregar o zero; as perguntas de Sistemas Digitais da mesma rodada (Karnaugh e mux) continuaram sem entregar a resposta;
 - Karnaugh com Controle selecionada: a IA disse que o tema é de Sistemas Digitais, mas respondeu mesmo assim (o mesmo comportamento de Circuitos e Sinais).
 
+## Eletrônica: resoluções refeitas com SymPy e NumPy (20/11/2026)
+
+Eletrônica entrou só com cadastro e acervo, com a mesma IA, e passou a MVP sem aviso no mesmo dia, depois dos critérios de liberação. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/eletronica/`: rigor, 22 blocos (19 na busca; 3 notas da equipe candidatas: Zener, filtro capacitivo e MOSFET), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_eletronica.py`, que refaz cada resultado com SymPy (análise nodal com o modelo do diodo e conferência do estado, malhas do TBJ e conferência da região, modelo re) e NumPy (média e RMS numéricos, varredura do ceifador);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O acervo vem de 9 PDFs (47 páginas) de anotações de aluno de 2026.2, parafraseadas e com a transcrição autorizada pelo autor. O docente indicado num cabeçalho é o Prof. João Raphael Souza Martins. A ementa de ECOM035 (60 h) veio do PPC de 2014 (p. 43). Zener e MOSFET não aparecem nas anotações e ficam só em notas IA fora da busca. Amp-op, tiristores, optoeletrônicos e fontes não têm material.
+
+Foram corrigidos 6 blocos; o "Exercício parte 2", marcado pelas próprias anotações como errado, foi refeito do zero:
+- 220 V tratado como pico (é RMS; o pico é 311 V);
+- $I_{rms} = I_{med}/2$ na meia onda (o certo é $I_{max}/2$);
+- ceifador sem a região do joelho ($v_o = v_i/2$ abaixo de 1,4 V);
+- quedas nos resistores tomadas por tensões de nó e $V_{CE}$ com sinal trocado;
+- realimentação de coletor sem $I_E$ em $R_C$, e o exemplo inacabado;
+- $r_e pprox V_A/I_{CQ}$ (isso é $r_o$) e $A_v$ dividindo por $r_o$.
+
+O exercício 31 ficou `pendente_professor`: a topologia no quadro está ilegível.
+
+IA real: Gemini, 20/11/2026, `eval/results/bateria-eletronica-2026-11-20.json`. O `gemini-3.5-flash` respondeu a 1ª pergunta. Nas outras, os modelos maiores deram HTTP 429 e as respostas vieram do `gemini-3.1-flash-lite` (degradado). Cada resposta foi conferida contra os valores dos testes:
+- diodo, divisor de tensão, retificadores e saturação: corretas e socráticas, sem entregar o resultado. O diodo e o divisor citaram o bloco certo;
+- ceifador: a IA pediu a topologia antes de calcular, sem dar valores errados;
+- Karnaugh com Eletrônica selecionada: veio do modelo local, que respondeu o assunto sem dizer que é de Sistemas Digitais. É o mesmo comportamento já registrado em Circuitos, Sinais e Controle.
+
 ## Princípios de Comunicação: espectros, potências e desvios refeitos por código (20/11/2026)
 
 Princípios de Comunicação entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
@@ -307,4 +333,5 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `circ` | Circuitos Elétricos | Markdown curado em `disciplinas/circ` (26 blocos, 23 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; amp-op, primeira ordem e fasores só em notas fora da busca; veja a [curadoria](../disciplinas/circ/CURADORIA.md) |
 | `sinais` | Sinais e Sistemas | Markdown curado em `disciplinas/sinais` (29 blocos, 28 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 19/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; tempo discreto só em nota fora da busca; Bode e filtros sem material; veja a [curadoria](../disciplinas/sinais/CURADORIA.md) |
 | `controle` | Sistemas de Controle | Markdown curado em `disciplinas/controle` (24 blocos, 22 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; resposta em frequência e projeto de controladores só em notas fora da busca; veja a [curadoria](../disciplinas/controle/CURADORIA.md) |
+| `eletronica` | Eletrônica | Markdown curado em `disciplinas/eletronica` (22 blocos, 19 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; Zener, filtro capacitivo e MOSFET só em notas fora da busca; amp-op, tiristores, optoeletrônicos e fontes sem material; veja a [curadoria](../disciplinas/eletronica/CURADORIA.md) |
 | `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |

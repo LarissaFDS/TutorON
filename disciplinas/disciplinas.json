@@ -341,6 +341,35 @@
       ]
     },
     {
+      "id": "eletronica",
+      "nome": "Eletrônica",
+      "sigla": "ELT",
+      "situacao": "MVP",
+      "itens": "disciplinas/eletronica/acervo/itens.json",
+      "indice": "disciplinas/eletronica/acervo/indice.json",
+      "materiais": "disciplinas/eletronica/materiais",
+      "rigor": "disciplinas/eletronica/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "eletronica-01-diodo-modelos",
+        "eletronica-02-circuitos-diodo",
+        "eletronica-03-retificadores",
+        "eletronica-04-ceifadores-grampeadores",
+        "eletronica-05-zener",
+        "eletronica-06-tbj-regioes",
+        "eletronica-07-tbj-polarizacao",
+        "eletronica-08-pequenos-sinais",
+        "eletronica-09-mosfet"
+      ],
+      "exemplos": [
+        "Como saber se o diodo está conduzindo?",
+        "Qual a tensão de saída de um ceifador com diodo de silício e entrada de 10 V de pico?",
+        "Como calcular o ponto Q de um TBJ com polarização por divisor de tensão?",
+        "Qual a diferença entre retificador de meia onda e de onda completa?",
+        "Como saber se o transistor está saturado?"
+      ]
+    },
+    {
       "id": "pcom",
       "nome": "Princípios de Comunicação",
       "sigla": "PCOM",
