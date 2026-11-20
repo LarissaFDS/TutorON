@@ -1,0 +1,25 @@
+[
+ {
+  "id": "ingles-nucleo",
+  "disciplina": "ingles",
+  "pergunta": "Como identificar o núcleo de um grupo nominal como \"plant extract based insecticides\"?",
+  "esperado": "núcleo é o último substantivo, insecticides; ler da direita para a esquerda: inseticidas à base de extratos de plantas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 60.1,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de grupos nominais",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para identificar o núcleo, lembre-se da regra de ouro do material [P1]: em grupos nominais, o núcleo é a **última palavra** do grupo antes de uma preposição ou verbo.\n\nObserve o grupo *\"plant extract based insecticides\"*. Se seguirmos a regra de delimitação, qual é a última palavra desse conjunto? Ela é um substantivo?\n\nSobre o termo *based*, o material [P1] indica que palavras terminadas em *-ed* antes do núcleo funcionam como adjetivos. Pense no verbo *to base* (basear): se *based* está modificando o núcleo, ele indica que o inseticida é \"baseado em\" algo.\n\nPara traduzir, o segredo é inverter a ordem do inglês para o português. Se o núcleo é a última palavra, comece por ele e vá voltando para a esquerda, traduzindo os modificadores um a um.\n\n**Verificação:** Ao traduzir da direita para a esquerda, o núcleo (o que é o produto) aparece primeiro em português, seguido pelas características (do que ele é feito). O resultado final deve ser um substantivo acompanhado de uma especificação sobre sua origem.\n\n### Sua vez\nIdentifique qual é a última palavra do grupo *\"plant extract based insecticides\"* e escreva no papel a tradução desse núcleo. Em seguida, tente traduzir o bloco *\"plant extract based\"* e junte tudo. Como fica a frase em português?"
+ }
+]

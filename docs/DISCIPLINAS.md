@@ -321,6 +321,29 @@ Busca: "O que são as equações de Cauchy-Riemann?" traz blocos da fórmula int
 IA real: as 6 perguntas de `eval/bateria_tutor.py` rodaram em 20/11/2026 pelo fluxo completo, com o Gemini (`eval/results/bateria-varcomp-2026-11-20.json`) e só com o modelo local `tutoron-paa` (`…-local.json`), e as respostas foram lidas uma a uma. Raízes cúbicas de $1-i$, fórmula de Cauchy com $(z+1)^4$, $\oint 1/z$ vs $\oint 1/z^2$ e $\int z^2$ no segmento: corretas e socráticas nos dois (no segmento, o modelo local sugeriu a primitiva $z^3/3$ e o ajuste `entregou_resposta` atuou; o valor final não foi dado). Cauchy-Riemann: equações corretas nos dois; o Gemini disse que elas "garantem" a preservação de ângulos, impreciso (conformidade exige também $f' 
 e 0$). Pergunta de fora (mapa de Karnaugh): o Gemini apontou Sistemas Digitais; o modelo local respondeu o conteúdo de Karnaugh sem dizer que é de outra disciplina, o mesmo comportamento já visto em Circuitos, Sinais, Controle e Eletrônica (a busca devolve vazio; não há trecho do acervo na resposta).
 
+## Inglês Instrumental: primeira disciplina de leitura, respostas conferidas no próprio texto (20/11/2026)
+
+Inglês Instrumental entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json`;
+- `disciplinas/ingles/`: rigor, 12 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_ingles.py` e `tests_acervo/ingles_trechos.json` (os trechos curtos em inglês citados nos blocos);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O único material da turma (ECOM001) é o texto de uma prova de proficiência em leitura, sem questões: o início do artigo de revisão de Roman Pavela (*Plant Protection Science*, 2016), em acesso aberto com CC BY-NC 4.0. O professor não foi identificado. A ementa veio do PPC de 2014 (p. 22). Como o texto da prova é de agricultura e saúde, e a ementa pede textos da área de computação, o texto de computação é Wilson et al., *Best Practices for Scientific Computing* (PLOS Biology, 2014, CC BY 4.0). Os exercícios são da equipe e usam só trechos curtos (no máximo 35 palavras cada, conferido por teste); 7 estão `validada` (a resposta é um fato do texto, refeito por código) e 5 `pendente_professor` (dependem de interpretação).
+
+Conferência: cada trecho entre aspas curvas num bloco precisa estar em `ingles_trechos.json`. Com `TUTORON_INGLES_ORIGINAIS` apontando para a pasta com `prova.docx` e `wilson.xml` (fora do repositório), os testes também conferem os trechos nos originais. Com os originais, eles conferem ainda: as seis primeiras frases abrem os seis parágrafos, em ordem; o referente de cada pronome vem antes dele no mesmo parágrafo; o nome dos metadados do .docx não foi versionado. Sem a pasta, esses testes são pulados com o motivo. Não há fórmulas nem código no acervo.
+
+Busca: "eventually quer dizer eventualmente?" não trazia nada na primeira rodada (0,466 de similaridade contra uma mediana de 0,435), porque *eventually* só aparecia numa lista. O bloco ganhou uma linha própria para o par; o critério de relevância não mudou.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado por HTTP 429) e o modelo local `tutoron-paa` sozinho, 20/11/2026 (`eval/results/bateria-ingles-2026-11-20*.json`). As respostas foram lidas uma a uma:
+- skimming e scanning, actually, voz passiva e *they*: corretas e socráticas nos dois;
+- núcleo do grupo nominal: na 1ª rodada caiu na ajuda de reserva, porque o bloco trazia a tradução pronta do caso da pergunta (o mesmo caso da QPSK em Comunicação). O bloco passou a resolver outro grupo do texto e a deixar esse para o aluno; depois disso, saiu correta nas 3 rodadas do Gemini e no modelo local;
+- o modelo local atribuiu ao texto da prova um trecho de Wilson et al.;
+- Karnaugh com Inglês selecionada: nenhum dos dois disse que é de Sistemas Digitais, o mesmo comportamento já registrado em outras disciplinas.
+
+A disciplina passou a MVP, sem aviso, no último commit da branch.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -354,3 +377,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `eletronica` | Eletrônica | Markdown curado em `disciplinas/eletronica` (22 blocos, 19 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; transcrição autorizada pelo autor; revisão humana e do professor pendentes; Zener, filtro capacitivo e MOSFET só em notas fora da busca; amp-op, tiristores, optoeletrônicos e fontes sem material; veja a [curadoria](../disciplinas/eletronica/CURADORIA.md) |
 | `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |
 | `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026; publicação da transcrição não autorizada; revisão humana e do professor pendentes; 13 resoluções pendentes de confirmação do professor; funções analíticas, séries, resíduos, conformes, harmônicas e Gamma só em notas fora da busca; veja a [curadoria](../disciplinas/varcomp/CURADORIA.md) |
+| `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |

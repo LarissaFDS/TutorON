@@ -1,0 +1,114 @@
+[
+ {
+  "id": "ingles-skim-scan",
+  "disciplina": "ingles",
+  "pergunta": "O que é skimming e scanning?",
+  "esperado": "skimming = ideia geral (título, primeiras frases); scanning = informação específica (número, nome) com pista visual",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 18.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de scanning",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre **skimming** e **scanning**, pense no seu objetivo ao abrir um texto. Eles são estratégias de leitura rápida, mas usados em momentos diferentes:\n\n1. **Skimming (Leitura dinâmica/geral):** Imagine que você está em uma livraria e quer saber se um livro é interessante. Você não lê cada palavra, certo? Você olha o título, a capa, o sumário e talvez a primeira frase de alguns parágrafos. O objetivo é ter uma visão panorâmica: \"Sobre o que é este texto?\".\n2. **Scanning (Leitura seletiva/busca):** Imagine que você está procurando o seu nome em uma lista de aprovados ou um número de telefone em uma agenda. Você não precisa entender o contexto de toda a página; você \"varre\" o texto com os olhos procurando apenas uma pista visual específica (como um número, uma letra maiúscula ou uma palavra-chave). O objetivo é localizar um dado pontual.\n\nNo material [P1] e [P2], note que o **skimming** foca na estrutura (título e frases iniciais dos parágrafos), enquanto o **scanning** foca em pistas visuais (algarismos) para responder perguntas específicas.\n\n**Verificação:** Tente aplicar: se você precisa saber apenas o *ano* em que um evento ocorreu em um artigo de 20 páginas, qual das duas técnicas você usaria? E se você precisa explicar para um colega *o tema principal* do artigo em uma frase, qual técnica seria a mais eficiente?\n\n### Sua vez\nImagine que você tem um texto longo sobre tecnologia. Se eu te pedir para encontrar a **porcentagem** de usuários de smartphones citada no texto, você usaria *skimming* ou *scanning*? Por quê?"
+ },
+ {
+  "id": "ingles-nucleo",
+  "disciplina": "ingles",
+  "pergunta": "Como identificar o núcleo de um grupo nominal como \"plant extract based insecticides\"?",
+  "esperado": "núcleo é o último substantivo, insecticides; ler da direita para a esquerda: inseticidas à base de extratos de plantas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de grupos nominais",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de skimming",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar o núcleo de um grupo nominal, o passo mais importante é localizar a **última palavra** do grupo antes de uma preposição ou verbo. Pense no grupo como uma \"pilha\" onde o substantivo principal (o núcleo) sustenta todas as outras palavras que o descrevem.\n\nNo caso de *\"plant extract based insecticides\"*:\n\n1.  **Delimite o grupo:** O grupo termina em *insecticides*.\n2.  **Identifique o núcleo:** Qual é a palavra que representa o objeto principal da frase? (Dica: é a última palavra do grupo).\n3.  **Analise os modificadores:** As palavras que vêm antes (*plant*, *extract*, *based*) estão qualificando esse núcleo. Lembre-se do passo 4 do seu material: palavras terminadas em *-ed* (como *based*) funcionam como adjetivos. Elas indicam uma característica ou origem do núcleo.\n4.  **Tradução:** Ao traduzir da direita para a esquerda, você começa pelo núcleo e vai \"pendurando\" os significados dos modificadores.\n\nTente montar a tradução seguindo essa ordem:\n*   *Insecticides* (o núcleo)\n*   *Based* (que significa \"baseado em\")\n*   *Plant extract* (extrato de planta)\n\n**Verificação:** A tradução que você montou faz sentido com o título do texto (*“Plant Extracts as Commercial Botanical Insecticides”*)? O núcleo que você escolheu é um substantivo?\n\n### Sua vez\nEscreva no papel a tradução do grupo \"plant extract based insecticides\" seguindo a ordem da direita para a esquerda e identifique qual palavra você definiu como o núcleo."
+ },
+ {
+  "id": "ingles-actually",
+  "disciplina": "ingles",
+  "pergunta": "Qual a diferença entre \"actually\" e \"atualmente\"?",
+  "esperado": "falso cognato: actually = na verdade, de fato; atualmente = currently, nowadays; cita trecho em inglês",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de cognatos"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Essa é uma dúvida excelente, pois esse par é um dos \"falsos amigos\" (ou falsos cognatos) mais comuns em textos técnicos e acadêmicos.\n\nPara entender a diferença, pense na estratégia de leitura: quando você encontra uma palavra que parece muito com uma do português, o primeiro passo é testar se o sentido faz sentido dentro da frase. Se ao traduzir a frase ela ficar estranha ou ilógica, é um sinal de alerta para um falso cognato.\n\nNo material que você enviou, há um exemplo prático retirado de um texto sobre computação: *“it is much more difficult to know that it is **actually** doing what it is intended to do”*.\n\nSe você substituir *actually* por \"atualmente\" (o sentido que parece óbvio), a frase diria: \"é muito mais difícil saber que ele **atualmente** faz o que deveria fazer\". Note que isso não explica o problema de *saber se o programa funciona como deveria*. Se você trocar por \"na verdade\" ou \"de fato\", o sentido de verificar a funcionalidade real do código se encaixa perfeitamente.\n\nPortanto, *actually* é um advérbio que enfatiza a realidade de um fato, enquanto \"atualmente\" refere-se ao tempo presente.\n\n**Verificação:** Sempre que encontrar *actually*, tente substituir por \"de fato\". Se a frase mantiver o sentido lógico, você encontrou a tradução correta. Se precisar dizer \"hoje em dia\", procure por *currently* ou *nowadays*.\n\n### Sua vez\nComo você traduziria a frase *\"The software actually runs on Linux\"* para garantir que não está cometendo o erro do falso cognato? Tente escrever a tradução no papel."
+ },
+ {
+  "id": "ingles-passiva",
+  "disciplina": "ingles",
+  "pergunta": "Como reconhecer a voz passiva num texto técnico?",
+  "esperado": "to be + particípio passado, agente com by; tempo no auxiliar; has increased não é passiva",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de voz passiva",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de tempos verbais"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar a voz passiva em textos técnicos, o segredo é observar a estrutura do verbo, que funciona como uma \"fórmula\" matemática.\n\nComo vimos no material [P1], a voz passiva não é apenas um verbo no particípio; ela exige a presença de um auxiliar específico. Pense nela como uma combinação de dois elementos essenciais que devem aparecer juntos:\n\n1.  **O verbo *to be*:** Ele atua como o \"marcador\" de tempo (pode estar no presente *is/are*, passado *was/were*, ou acompanhado de modais como *can be*).\n2.  **O particípio passado:** É a forma do verbo que indica a ação sofrida (geralmente terminada em *-ed* para verbos regulares, ou formas irregulares como *built*, *done*, *known*).\n\n**Por que isso importa?**\nEm textos científicos, o foco é o processo (o que foi feito) e não quem realizou a ação. Por isso, o sujeito da frase \"sofre\" a ação. Se você encontrar um *to be* seguido de um particípio, você tem uma estrutura passiva.\n\n**Dica de ouro:** Cuidado para não confundir com o *Present Perfect* (ex: *has increased*). Note que, no *Present Perfect*, temos o auxiliar *have/has*, mas não temos o *to be*. Sem o *to be*, não há voz passiva!\n\n### Sua vez\nAnalise a frase abaixo e identifique se ela está na voz passiva ou ativa, justificando com base na estrutura que discutimos:\n\n*\"The data were collected during the experiment.\"*\n\n(Dica: Localize o verbo principal e verifique se ele atende aos dois requisitos da fórmula da passiva)."
+ },
+ {
+  "id": "ingles-they",
+  "disciplina": "ingles",
+  "pergunta": "A quem se refere \"they\" em \"where they are used to eliminate damage\"?",
+  "esperado": "insecticides (inseticidas), da frase anterior; sem entregar direto no modo Tutor: estratégia de voltar à frase anterior e concordância",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, Plant Protection Science 52(4), 2016), exercício de referência pronominal",
+   "Texto da prova de proficiência em leitura de Inglês Instrumental (trecho de Pavela, 2016) e Wilson et al., Best Practices for Scientific Computing (PLOS Biology, 2014), exercício de voz passiva"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar a quem o pronome **\"they\"** se refere, precisamos aplicar a estratégia de **referência pronominal** descrita no seu material [P1].\n\nComo o \"they\" é um pronome pessoal no plural, ele deve retomar um substantivo no plural que apareceu anteriormente no texto. O segredo não é apenas olhar a palavra mais próxima, mas sim verificar o **sentido** da frase.\n\nSe você substituir \"they\" pelo substantivo que você suspeita ser o referente, a frase faz sentido lógico? Por exemplo, se o texto fala sobre \"inseticidas\" e \"insetos\", tente ler a frase substituindo \"they\" por cada um deles:\n1. \"Onde os **inseticidas** são usados para eliminar danos...\"\n2. \"Onde os **insetos** são usados para eliminar danos...\"\n\nQual dessas opções mantém a coerência com o objetivo de proteger plantações?\n\n**Verificação:** O referente correto deve aparecer antes da frase citada, no mesmo parágrafo, e concordar em número (plural) com o pronome *they*.\n\n### Sua vez\nVolte ao parágrafo anterior à frase \"where they are used to eliminate damage\" e liste os substantivos no plural que aparecem lá. Qual deles é o agente que realiza a ação de \"eliminar danos\"?"
+ },
+ {
+  "id": "ingles-fora",
+  "disciplina": "ingles",
+  "pergunta": "Como simplificar uma função com mapa de Karnaugh?",
+  "esperado": "diz que é de Sistemas Digitais; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma função usando o Mapa de Karnaugh (K-Map), o objetivo principal é agrupar os \"1s\" adjacentes para eliminar variáveis que mudam de estado dentro desses grupos.\n\nComo não temos um material específico da sua disciplina, vamos usar o conceito geral: o Mapa de Karnaugh é uma representação visual da tabela-verdade, organizada de forma que células vizinhas difiram por apenas um bit (usando o código de Gray).\n\nPara começar, você precisa seguir estes passos:\n1. **Montagem:** Desenhe o mapa com o número correto de células (baseado no número de variáveis).\n2. **Preenchimento:** Transfira os valores da tabela-verdade para as células correspondentes.\n3. **Agrupamento:** Aqui está o segredo. Você deve formar grupos de potências de 2 ($1, 2, 4, 8...$). O objetivo é fazer grupos o maior possível, sempre com \"1s\" adjacentes.\n\n**Dica de estratégia:** Ao olhar para um grupo, observe quais variáveis mantêm o mesmo valor (0 ou 1) em todas as células daquele grupo. As variáveis que mudam de valor dentro do grupo são as que você pode \"eliminar\" da expressão final.\n\nVocê tem algum exercício específico ou uma função (ex: $f(A, B, C) = \\sum m(0, 2, 5)$) que gostaria de tentar montar o mapa?\n\n**Verificação:** Verifique se o seu mapa está organizado em código de Gray (ex: 00, 01, 11, 10) para garantir que a adjacência entre as células esteja correta.\n\n### Sua vez\nDesenhe um mapa de 3 variáveis ($A, B, C$) e identifique quais células são adjacentes à célula onde $A=0, B=1, C=0$."
+ }
+]
