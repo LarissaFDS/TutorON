@@ -130,7 +130,8 @@ Não foi encontrada apostila aberta em português com licença declarada: a pág
 
 Busca (`eval/relevancia.py`, com o `bge-m3` real): as 5 perguntas de exemplo, 8 variantes em LaTeX e em texto simples e 5 perguntas de outras áreas passam. Limitação: "O que são as equações de Cauchy-Riemann?" traz blocos da fórmula integral de Cauchy (similaridade 0,46–0,52), pela palavra "Cauchy"; não há bloco de Cauchy-Riemann na busca. Com a nota n01 aprovada, ela passa a ser o primeiro resultado (`test_cauchy_riemann_so_teria_bloco_com_a_nota_aprovada`).
 
-IA real: RESULTADO_IA
+IA real: as 6 perguntas de `eval/bateria_tutor.py` rodaram em 20/11/2026 pelo fluxo completo, com o Gemini (`eval/results/bateria-varcomp-2026-11-20.json`) e só com o modelo local `tutoron-paa` (`…-local.json`), e as respostas foram lidas uma a uma. Raízes cúbicas de $1-i$, fórmula de Cauchy com $(z+1)^4$, $\oint 1/z$ vs $\oint 1/z^2$ e $\int z^2$ no segmento: corretas e socráticas nos dois (no segmento, o modelo local sugeriu a primitiva $z^3/3$ e o ajuste `entregou_resposta` atuou; o valor final não foi dado). Cauchy-Riemann: equações corretas nos dois; o Gemini disse que elas "garantem" a preservação de ângulos, impreciso (conformidade exige também $f' 
+e 0$). Pergunta de fora (mapa de Karnaugh): o Gemini apontou Sistemas Digitais; o modelo local respondeu o conteúdo de Karnaugh sem dizer que é de outra disciplina, o mesmo comportamento já visto em Circuitos, Sinais, Controle e Eletrônica (a busca devolve vazio; não há trecho do acervo na resposta).
 
 ## 7. Pendências
 
