@@ -72,7 +72,7 @@ Cada resultado foi refeito por código: espectros por FFT, potências pela médi
 | `pcom-lista2-fm-desvio-potencia` | corrigida | "$\Delta f = 100\pi$" | $\Delta\omega = 100\pi$ rad/s, $\Delta f = 50$ Hz; Carson dado ao lado de $2\Delta f$ |
 | `pcom-prova-filtro-17khz` | pendente_professor | pico de A desenhado como 2; $B$ depende da convenção | pico 4; 500 Hz (bilateral) ou 9 kHz (corte) |
 | `pcom-prova-angulo-dobra-amplitude` | pendente_professor | conta de PM num enunciado "em ângulo"; amplitude $5/(2\pi)$ | FM 52 kHz, PM 36 kHz; amplitude de $m$ exige $k_f$ |
-| `pcom-lista3-eficiencia-espectral` | pendente_professor | enunciados não transcritos; $V_m = 2W$ sem justificativa | $\eta = \log_2 M$ (ideal), $2/(1+\alpha)$ para QPSK |
+| `pcom-lista3-eficiencia-espectral` | pendente_professor | enunciados não transcritos; $V_m = 2W$ sem justificativa | $\eta = \log_2 M$ (ideal), $\log_2 M/(1+\alpha)$ com rolagem; exemplos BPSK e 16-QAM, e a QPSK fica como exercício para o aluno (o valor não é escrito, para que a pista não o entregue) |
 | `pcom-lista4-exposicao-60hz` | pendente_professor | 4,16 kV/m; "colocar conformidade" estando acima do limite | 4,17 kV/m; acima do limite é não conforme; soma ICNIRP dada |
 | `pcom-lista4-distancia-separacao` | pendente_professor | fator 23 de origem desconhecida | fator 6 da IEC 60601-1-2 dado ao lado (0,6 m) |
 | demais blocos `pcom-*` | validada | — | resultado das anotações confere com o código |

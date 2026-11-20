@@ -254,10 +254,10 @@ def test_revisao_espectro_impulsos_e_potencia_das_bandas():
 def test_largura_de_banda_am():
     fs = 1e6
     t = np.arange(0, 0.01, 1 / fs)
-    s = (1 + 0.5 * np.cos(2 * np.pi * 5000 * t)) * np.cos(2 * np.pi * 100000 * t)
+    s = (1 + 0.5 * np.cos(2 * np.pi * 4000 * t)) * np.cos(2 * np.pi * 100000 * t)
     f, X = linhas(s, fs)
     ocupadas = sorted({abs(round(x)) for x in f[X > 1e-6]})
-    assert ocupadas == [95000, 100000, 105000] and ocupadas[-1] - ocupadas[0] == 10000
+    assert ocupadas == [96000, 100000, 104000] and ocupadas[-1] - ocupadas[0] == 8000
 
 
 # ---------------------------------------------------------------- 05 esquemas com filtros
@@ -383,7 +383,9 @@ def test_taxas_digitais():
 
 def test_eficiencia_espectral():
     assert math.log2(4) == 2 and math.log2(16) == 4
-    assert math.isclose(2 / (1 + 0.25), 1.6)
+    assert math.isclose(1 / (1 + 0.5), 0.67, abs_tol=0.005)
+    assert math.isclose(2 / (1 + 0.25), 1.6)  # QPSK com α = 0,25 (gabarito da bateria; fora do bloco)
+    assert 'aplique os mesmos passos' in texto('pcom-lista3-eficiencia-espectral')
     W = 1
     assert (2 * W * 2) / (2 * W) == math.log2(4)
 

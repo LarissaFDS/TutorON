@@ -1,0 +1,101 @@
+[
+ {
+  "id": "pcom-am-banda",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda de um sinal AM com mensagem de 5 kHz?",
+  "esperado": "BT = 2W = 10 kHz (duas bandas laterais, frequências positivas); a portadora não muda a banda",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 132.3,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "A largura de banda de um sinal AM depende da mensagem que está sendo modulada. No AM convencional, a mensagem ocupa uma faixa de frequências, e essa faixa é replicada em duas bandas laterais ao redor da portadora. A largura de banda total é o dobro da largura da mensagem.\n\nPense: se a mensagem ocupa de 0 a $W$ Hz, qual é a faixa de frequências que o sinal modulado ocupa? E como isso se traduz em largura de banda?\n\n### Sua vez\n\nEscreva no papel:  \n1. Qual é a largura de banda de transmissão de um sinal AM, em termos da largura da mensagem $W$?  \n2. Substitua $W = 5\\text{ kHz}$ nessa expressão. Qual é o valor da largura de banda?  \n\nNão calcule ainda em radianos por segundo — foque apenas na largura de banda em Hz. O que você encontrou?"
+ },
+ {
+  "id": "pcom-carson",
+  "disciplina": "pcom",
+  "pergunta": "Como calcular a largura de banda de FM pela regra de Carson?",
+  "esperado": "BT ≈ 2(Δf + fm) = 2(β + 1)fm, em Hz; β = Δf/fm; ex.: Δf = 75 kHz, fm = 15 kHz dá 180 kHz",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 50.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 2 e 4; Anotações \"Lista 2s\" (19 ago. 2026), p. 2; Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 8",
+   "Anotações \"Lista 2s\" (19 ago. 2026), p. 2–3 (questões 3 e 4)",
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular a largura de banda de um sinal FM usando a regra de Carson, o primeiro passo é identificar os parâmetros fundamentais do sinal: o **desvio de frequência** ($\\Delta f$) e a **frequência da mensagem** ($f_m$).\n\nA regra de Carson, conforme apresentada no material [P1], é uma aproximação que considera a maior parte da potência do sinal (cerca de 98%). Ela relaciona esses dois parâmetros da seguinte forma:\n\n$$B_T \\approx 2(\\Delta f + f_m)$$\n\nPara aplicar essa fórmula com sucesso, você precisa garantir que ambos os valores estejam na mesma unidade: **Hertz (Hz)**. Se o seu exercício fornecer a frequência angular da mensagem ($\\omega_m$ em rad/s) ou o desvio angular ($\\Delta\\omega$ em rad/s), lembre-se de converter para Hz dividindo por $2\\pi$.\n\nUm ponto importante é que, em FM, o índice de modulação $\\beta$ é definido como a razão entre o desvio e a frequência da mensagem ($\\beta = \\Delta f / f_m$). Substituindo isso na fórmula, você também pode expressar a largura de banda como $B_T \\approx 2(\\beta + 1)f_m$.\n\nPara praticar, tente identificar em um exercício qualquer: qual é o desvio máximo de frequência que o sinal sofre e qual é a frequência do tom modulante?\n\n### Sua vez\nSe você tiver um sinal FM com um desvio de frequência $\\Delta f = 50$ kHz e uma mensagem de tom único com $f_m = 10$ kHz, qual seria o valor da largura de banda $B_T$ segundo a regra de Carson? (Lembre-se de manter as unidades em Hz)."
+ },
+ {
+  "id": "pcom-pm-fm",
+  "disciplina": "pcom",
+  "pergunta": "Qual a diferença entre PM e FM?",
+  "esperado": "PM: fase = kp m(t); FM: frequência instantânea ωc + kf m(t), fase = kf ∫m; FM de m é PM da integral de m",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 18.1,
+  "fontes": [
+   "Anotações \"Simulação - Modulação FM e PM\" (27 ago. 2026), p. 1–5; Anotações \"Lista 2s\" (19 ago. 2026), p. 1; Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"conceitos iniciais\" (22 ago. 2026), p. 1",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 2–3; Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 3"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre PM (Modulação de Fase) e FM (Modulação de Frequência), o melhor caminho é olhar para a definição da **fase instantânea** $\\theta(t)$ do sinal modulado, que é o argumento do cosseno: $s(t) = A\\cos(\\theta(t))$.\n\nPense no que acontece com esse argumento quando aplicamos uma mensagem $m(t)$:\n\n1.  No **PM**, a mensagem altera diretamente a fase: $\\theta(t) = \\omega_c t + k_p m(t)$.\n2.  No **FM**, a mensagem altera a **frequência instantânea** $\\omega_i(t)$, que é a derivada da fase em relação ao tempo: $\\omega_i(t) = \\frac{d\\theta(t)}{dt} = \\omega_c + k_f m(t)$.\n\nSe você tem a mensagem $m(t)$ e quer encontrar a fase $\\theta(t)$ para o caso FM, o que você precisaria fazer com $m(t)$ para obter a frequência e, em seguida, a fase? Lembre-se da relação entre integral e derivada mencionada no material [P1].\n\nSe você desenhasse um gráfico da frequência instantânea ao longo do tempo para um sinal modulado por uma onda quadrada, como você acha que seria o comportamento da frequência no PM comparado ao FM?\n\n### Sua vez\nConsiderando a relação $\\omega_i(t) = \\frac{d\\theta(t)}{dt}$, se a mensagem $m(t)$ for um degrau (um valor constante que sobe de 0 para 1 em $t=0$), como seria a variação da frequência instantânea $\\omega_i(t)$ no PM e no FM?"
+ },
+ {
+  "id": "pcom-qpsk",
+  "disciplina": "pcom",
+  "pergunta": "Qual a eficiência espectral de uma QPSK?",
+  "esperado": "2 bit/s/Hz com pulsos de Nyquist ideais (log2 4); 2/(1+α) com cosseno levantado, ex. 1,6 com α = 0,25",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 20.1,
+  "fontes": [
+   "Anotações \"Modulação Digital\" (23 set. 2026), p. 5–8 (questões 8 e 9, enunciados não transcritos)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender a eficiência espectral de uma modulação, o ponto de partida é sempre a relação entre a quantidade de informação (bits) e o recurso utilizado (largura de banda).\n\nNa QPSK, o nome já nos dá uma dica sobre o número de estados possíveis ($M$). Se cada símbolo representa um desses estados, quantos bits você consegue codificar em um único símbolo? Lembre-se da relação $k = \\log_2 M$.\n\nUma vez que você tenha o valor de $k$, pense na definição de eficiência espectral: $\\eta = \\frac{R_b}{B_T}$. Se usarmos um pulso de Nyquist ideal, a banda ocupada $B_T$ é numericamente igual à taxa de símbolos $R_s$. Como a taxa de bits é $R_b = R_s \\cdot k$, ao montar essa fração, o que acontece com a taxa de símbolos $R_s$?\n\n### Sua vez\nConsiderando $M=4$ para a QPSK, calcule o valor de $k$ (bits por símbolo) e, usando a relação entre $R_b$ e $B_T$ para um pulso ideal, escreva a expressão que define a eficiência espectral $\\eta$ em função apenas de $k$."
+ },
+ {
+  "id": "pcom-filtro-dsb",
+  "disciplina": "pcom",
+  "pergunta": "Qual a largura de banda do filtro para recuperar m(t) num esquema DSB?",
+  "esperado": "multiplica pela portadora e passa-baixas com corte entre W e 2fc − W; diz se a largura é bilateral ou de corte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Anotações \"fórmulas fundamentais para a prova 1\" (7 set. 2026), p. 1 e 4; Anotações \"Simulação Modulação AM\" (30 ago. 2026), p. 7–9",
+   "Anotações \"Revisão Final prova 1\" (9 set. 2026), p. 1–2 (questão 1 de prova, enunciado parafraseado)",
+   "Anotações \"Modulação AM\" (25 ago. 2026), p. 1–2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar a largura de banda do filtro necessário para recuperar a mensagem $m(t)$ em um sistema DSB-SC, precisamos pensar no que acontece com o espectro do sinal modulado quando o multiplicamos novamente pela portadora no receptor.\n\nLembre-se de que, ao multiplicar o sinal modulado $s(t)$ pela portadora local $\\cos(2\\pi f_c t)$, o espectro da mensagem original é \"deslocado\" de volta para a origem (frequência zero) e também para uma frequência mais alta ($2f_c$).\n\n1.  Onde, exatamente, o espectro da mensagem original reaparece no domínio da frequência após essa multiplicação?\n2.  Além da mensagem original, que outra componente aparece no espectro e que o filtro precisa eliminar?\n3.  Considerando que a mensagem original ocupa a faixa de $0$ a $W$ Hz, qual é a menor frequência que o filtro deve deixar passar e qual é a maior frequência que ele deve bloquear para isolar apenas a mensagem?\n\nPense no que acontece com as frequências positivas: o filtro precisa ser um passa-baixas. Qual deve ser a sua frequência de corte para que ele capture toda a informação da mensagem, mas rejeite a cópia que foi deslocada para $2f_c$?\n\n### Sua vez\nDesenhe o espectro do sinal após a multiplicação no receptor (o sinal demodulado) e indique qual é a faixa de frequências que o filtro deve permitir passar para recuperar $m(t)$ sem distorção. Qual é o valor dessa frequência de corte em termos de $W$?"
+ }
+]

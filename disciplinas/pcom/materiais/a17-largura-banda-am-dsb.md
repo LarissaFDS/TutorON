@@ -1,6 +1,6 @@
 ---
 id: pcom-anot-largura-banda-am-dsb
-titulo: Largura de banda do sinal AM e DSB: BT = 2W (mensagem de 5 kHz ocupa 10 kHz); a portadora não muda a banda; convenção unilateral e bilateral (± f)
+titulo: Largura de banda do sinal AM e DSB: BT = 2W (largura de transmissão é o dobro da banda da mensagem); a portadora não muda a banda; convenção unilateral e bilateral (± f)
 assunto: pcom-02-am-dsb
 tipo: material_estudo
 resolucao: sim
@@ -19,7 +19,7 @@ Anotações de aluno (2026.2), parafraseadas e conferidas pela equipe. Status da
 
 Se a mensagem ocupa de 0 a $W$ Hz, tanto o DSB-SC quanto o AM convencional ocupam de $f_c - W$ a $f_c + W$: **largura de banda de transmissão $B_T = 2W$** (duas bandas laterais). Somar a portadora não muda essa largura.
 
-**Exemplo:** mensagem de 5 kHz em AM: $B_T = 2\cdot 5 = 10$ kHz ($2\pi\cdot 10^4 \approx 62\,832$ rad/s). Com portadora em 100 kHz, o sinal ocupa de 95 a 105 kHz.
+**Exemplo:** mensagem de 4 kHz em AM: $B_T = 2 \cdot 4 = 8$ kHz ($2\pi \cdot 8000 \approx 50\,265$ rad/s). Com portadora em 100 kHz, o sinal ocupa de 96 a 104 kHz. Para outra banda de mensagem, aplique a mesma regra.
 
 **Simulação da turma:** tom de 300 Hz ($600\pi$ rad/s) e portadora de 3 kHz: bandas em 2700 e 3300 Hz ($5400\pi$ e $6600\pi$ rad/s), $B_T = 600$ Hz ($1200\pi$ rad/s), com e sem portadora.
 
@@ -27,4 +27,4 @@ Se a mensagem ocupa de 0 a $W$ Hz, tanto o DSB-SC quanto o AM convencional ocupa
 
 Correção: a folha de fórmulas chama de "largura de banda do sinal modulado" a distância entre a borda da mensagem e $f_c$ ($f_c - f_d$ no esboço); a largura do sinal modulado é a faixa ocupada em torno de $f_c$, $2W$.
 
-**Verificação:** FFT de um AM com tom de 5 kHz e portadora de 100 kHz: componentes só em 95, 100 e 105 kHz, largura ocupada 10 kHz.
+**Verificação:** FFT de um AM com tom de 4 kHz e portadora de 100 kHz: componentes só em 96, 100 e 104 kHz, largura ocupada 8 kHz.

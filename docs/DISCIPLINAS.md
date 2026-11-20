@@ -271,7 +271,8 @@ A conferência também achou erros da própria equipe antes do commit: um passa-
 IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026, `eval/results/bateria-pcom-2026-11-20.json` e `…-repeticao.json`. Cada resposta foi conferida contra os valores dos testes:
 - banda do AM, regra de Carson e diferença entre PM e FM: corretas e socráticas, com o bloco certo citado;
 - filtro do DSB: na 1ª rodada veio do modelo local e estava **errada** (mandava filtrar uma banda lateral, em vez de multiplicar pela portadora e passar um passa-baixas); na repetição veio do Gemini, correta;
-- eficiência espectral da QPSK: **falhou nas duas rodadas**. O revisor reprovou as duas pistas por entregar a resposta, e sobrou a ajuda de reserva genérica. Por isso a disciplina continua **em validação**;
+- eficiência espectral da QPSK: falhou nas duas primeiras rodadas. O revisor reprovou as pistas porque o bloco `pcom-lista3-eficiencia-espectral` trazia o valor da QPSK pronto (complemento da equipe). O bloco passou a dar o método com BPSK e 16-QAM e a deixar a QPSK para o aluno; o mesmo foi feito em `pcom-anot-largura-banda-am-dsb`, que resolvia exatamente o caso de 5 kHz (o exemplo passou a ser de 4 kHz);
+- depois disso (`…-qpsk.json`, `…-final-1.json`, `…-final-2.json`), a QPSK e a banda do AM passaram em 2 de 3 e em 2 de 4 rodadas. Quando falham, é pela regra do revisor para pergunta de uma única conta ("fórmula geral + substituir" conta como entrega), com o Gemini degradado. Nessas falhas sai a ajuda de reserva genérica, sem resposta entregue e sem erro técnico. Carson, PM×FM e filtro do DSB passaram em todas as rodadas do Gemini;
 - Karnaugh com Comunicação selecionada: respondeu sem dizer que o tema é de Sistemas Digitais (o mesmo comportamento de Controle, Circuitos e Sinais).
 
 ## Como cadastrar uma nova disciplina

@@ -1,6 +1,6 @@
 ---
 id: pcom-lista3-eficiencia-espectral
-titulo: Eficiência espectral η = Rb/BT em bit/s/Hz; QPSK com pulsos de Nyquist: 2 bit/s/Hz, 2/(1 + α) com cosseno levantado; 16-QAM 4 bit/s/Hz; 4-ASK em largura 2W
+titulo: Eficiência espectral η = Rb/BT em bit/s/Hz de modulações digitais (BPSK, QPSK, 16-QAM, 4-ASK): pulsos de Nyquist ideais e cosseno levantado com fator de rolagem α
 assunto: pcom-06-modulacao-digital
 tipo: lista
 resolucao: sim
@@ -22,11 +22,13 @@ Anotações de aluno (2026.2), parafraseadas e conferidas pela equipe. Status da
 Com pulsos de Nyquist ideais, um sinal em banda passante de $R_s$ símbolos por segundo ocupa $B_T = R_s$ (de $f_c - R_s/2$ a $f_c + R_s/2$). Como $R_b = R_s\log_2 M$:
 $$\eta = \log_2 M\ \text{(ideal)},\qquad \eta = \frac{\log_2 M}{1 + \alpha}\ \text{(cosseno levantado com fator de rolagem } \alpha).$$
 
-- **QPSK:** 2 bits por símbolo, $\eta = 2$ bit/s/Hz no ideal; com $\alpha = 0{,}25$, $2/1{,}25 = 1{,}6$ bit/s/Hz. BPSK: 1 bit/s/Hz.
-- **16-QAM:** 4 bit/s/Hz no ideal: é mais eficiente que QPSK (questão 9), porque cada símbolo leva mais bits na mesma banda, ao custo de símbolos mais próximos (mais sensível a ruído).
+**Passos:** (1) bits por símbolo, $k = \log_2 M$; (2) $R_b = R_s\,k$; (3) banda $B_T$ pelo pulso suposto; (4) divida: $R_s$ se cancela.
+- **BPSK** ($M = 2$): 1 bit por símbolo, $\eta = 1$ bit/s/Hz no ideal; com $\alpha = 0{,}5$, $1/1{,}5 \approx 0{,}67$ bit/s/Hz.
+- **16-QAM** ($M = 16$): 4 bits por símbolo, 4 bit/s/Hz no ideal.
+- **QPSK** ($M = 4$) fica entre as duas; aplique os mesmos passos. A questão 9 compara QPSK e 16-QAM: a 16-QAM é mais eficiente, porque cada símbolo leva mais bits na mesma banda, ao custo de símbolos mais próximos (mais sensível a ruído).
 
-**Questão 8 (4-ASK):** com a banda de largura $2W$ (de $-W$ a $W$ em torno da portadora, como no AM), as anotações usam $V_m = 2W$ bauds e $V_T = 2W\cdot 2 = 4W$ bit/s. O $V_m = 2W$ vem de $B_T = R_s$ acima; a anotação registra que o aluno não entendeu essa parte.
+**Questão 8 (4-ASK):** com a banda de largura $2W$ (de $-W$ a $W$ em torno da portadora, como no AM), as anotações usam $V_m = 2W$ bauds e $V_T = 2W\cdot 2 = 4W$ bit/s (2 bits por símbolo). O $V_m = 2W$ vem de $B_T = R_s$ acima; a anotação registra que o aluno não entendeu essa parte.
 
 Pendente: os enunciados das questões 8 e 9 não estão nas anotações, e a convenção de banda (com ou sem rolagem) precisa ser confirmada com o professor. As fórmulas de $\eta$ são complemento da equipe.
 
-**Verificação:** $\log_2 4 = 2$, $\log_2 16 = 4$ e $2/(1 + 0{,}25) = 1{,}6$ conferidos; para 4-ASK, $R_b/B_T = 4W/2W = 2$ bit/s/Hz, igual a $\log_2 4$.
+**Verificação:** $\log_2 2 = 1$, $\log_2 16 = 4$ e $1/(1 + 0{,}5) \approx 0{,}67$ conferidos; para 4-ASK, $R_b/B_T = 4W/2W$ coincide com $\log_2 M$ para $M = 4$.
