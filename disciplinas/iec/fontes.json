@@ -1,0 +1,310 @@
+{
+  "disciplina": "iec",
+  "atualizado_em": "2026-11-20",
+  "legenda": {
+    "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
+    "uso": "acervo = parafraseado em disciplinas/iec/materiais; citada = indicada na curadoria; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
+    "isa": "não se aplica a esta disciplina (o campo mantém o nome do esquema comum)",
+    "notas": "qualidade de 1 a 5, avaliada na curadoria"
+  },
+  "fontes": [
+    {
+      "id": "ufal-ppc-ecomp-2014",
+      "nome": "Projeto Pedagógico do Curso de Engenharia de Computação (UFAL, 2014) — ECOM006 Introdução a Engenharia de Computação",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ic.ufal.br/pt-br/graduacao/engenharia-de-computacao/documentos/projeto-pedagogico/projeto-pedagogico-versao-2014/@@download/file/PPC_Eng_Comp_ATUAL.pdf",
+      "arquivo_local": null,
+      "sha256": "31a3c6e77cbef2f99e220d60e0e6a45cc326f8ac3b18d72a912b33c4927542e5",
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-01-historia-atribuicoes",
+        "iec-02-componentes-niveis",
+        "iec-03-linguagens-programacao",
+        "iec-04-software-basico",
+        "iec-05-numeracao-conversoes",
+        "iec-06-representacao-dados",
+        "iec-11-embarcados-automacao"
+      ],
+      "licenca": "Documento institucional público",
+      "acesso": "Baixado e conferido em 2026-11-20 (p. 19 e 25 do PDF)",
+      "notas": 5,
+      "prioridade": "alta",
+      "uso": "citada",
+      "justificativa": "Ementa oficial de ECOM006 (1º semestre, 60 h); define os assuntos."
+    },
+    {
+      "id": "ufal-iec-reav-ab1-2016",
+      "nome": "Reavaliação AB1 de Introdução à Engenharia de Computação, 2016.1 (5 questões)",
+      "autoria": "Professor não identificado na prova (UFAL)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "fotos de prova impressa",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-05-numeracao-conversoes",
+        "iec-06-representacao-dados",
+        "iec-07-portas-boole",
+        "iec-09-circuitos-combinacionais"
+      ],
+      "licenca": "Não declarada (prova da disciplina)",
+      "acesso": "Fotos entregues pela equipe; não versionadas",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Questões de prova parafraseadas, resolvidas pela equipe e conferidas por código."
+    },
+    {
+      "id": "ufal-iec-reav-ab2-2016",
+      "nome": "Reavaliação AB2 de Introdução à Engenharia de Computação, 2016.1 (10 questões)",
+      "autoria": "Professor não identificado na prova (UFAL)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "fotos de prova impressa",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-04-software-basico",
+        "iec-10-redes-internet"
+      ],
+      "licenca": "Não declarada (prova da disciplina)",
+      "acesso": "Fotos entregues pela equipe; não versionadas",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Redes, SO e compilação cobrados em prova; redes não aparece na ementa de 2014."
+    },
+    {
+      "id": "pearson-tanenbaum-slides",
+      "nome": "Slides do Capítulo 3 (O nível lógico digital) e do Apêndice A (Números binários) de Organização Estruturada de Computadores, 6ª ed.",
+      "autoria": "Pearson Education do Brasil (baseados em Andrew S. Tanenbaum)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de slides",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-02-componentes-niveis",
+        "iec-05-numeracao-conversoes",
+        "iec-06-representacao-dados",
+        "iec-07-portas-boole"
+      ],
+      "licenca": "Protegido (© 2014 Pearson, todos os direitos reservados)",
+      "acesso": "PDF entregue pela equipe; não versionado; só paráfrase",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Material usado na disciplina; parafraseado com exemplos próprios, sem figuras."
+    },
+    {
+      "id": "usp-baranauskas-boole",
+      "nome": "Álgebra de Boole e Simplificação de Circuitos Lógicos (slides)",
+      "autoria": "Prof. José Augusto Baranauskas (FFCLRP-USP)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de slides (123 p.)",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-07-portas-boole",
+        "iec-08-simplificacao-karnaugh"
+      ],
+      "licenca": "Não declarada (material do professor)",
+      "acesso": "PDF entregue pela equipe; não versionado",
+      "notas": 5,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Exercícios resolvidos de fatoração e Karnaugh, conferidos por força bruta."
+    },
+    {
+      "id": "unicamp-deaecto-combinacionais",
+      "nome": "Circuitos Combinacionais (notas de aula ES572, 2013)",
+      "autoria": "Profa. Grace S. Deaecto (FEM-Unicamp)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de slides (67 p.)",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-07-portas-boole",
+        "iec-08-simplificacao-karnaugh",
+        "iec-09-circuitos-combinacionais"
+      ],
+      "licenca": "Não declarada (material da professora)",
+      "acesso": "PDF entregue pela equipe; não versionado",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Somadores, comparador e codificadores; parafraseado."
+    },
+    {
+      "id": "pucrs-vargas-circuitos-digitais",
+      "nome": "Circuitos Digitais — Parte 1 (apostila)",
+      "autoria": "Prof. Dr. Fabian Vargas (Faculdade de Engenharia, PUCRS)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de apostila (59 p., quase só figuras)",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-07-portas-boole",
+        "iec-09-circuitos-combinacionais"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "PDF entregue pela equipe; não versionado",
+      "notas": 3,
+      "prioridade": "media",
+      "uso": "referencia",
+      "justificativa": "Quase tudo em figuras e mais avançado (ULA, carry lookahead, sequenciais); coberto pelos outros slides."
+    },
+    {
+      "id": "tanenbaum-livro",
+      "nome": "Organização Estruturada de Computadores (5ª ed. em português e Structured Computer Organization, 6ª ed.)",
+      "autoria": "Andrew S. Tanenbaum",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "livro",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-02-componentes-niveis",
+        "iec-05-numeracao-conversoes"
+      ],
+      "licenca": "Protegido (direitos reservados)",
+      "acesso": "Não incluído no pacote; não buscado, não transcrito nem ingerido",
+      "notas": null,
+      "prioridade": "referencia",
+      "uso": "referencia",
+      "justificativa": "Bibliografia básica do PPC; só referência por seção (cap. 1, níveis; apêndice A)."
+    },
+    {
+      "id": "rfc-791",
+      "nome": "RFC 791: Internet Protocol",
+      "autoria": "J. Postel (ed.), USC/ISI, 1981",
+      "url": "https://www.rfc-editor.org/rfc/rfc791",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "en",
+      "formato": "HTML/texto",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-10-redes-internet"
+      ],
+      "licenca": "RFC; o texto diz que a distribuição é ilimitada (aviso de cópia não conferido no texto integral)",
+      "acesso": "Aberto em 2026-11-20",
+      "notas": 5,
+      "prioridade": "media",
+      "uso": "citada",
+      "justificativa": "Confere as classes A/B/C (bits iniciais 0, 10, 110) do bloco de IPv4."
+    },
+    {
+      "id": "rfc-1035",
+      "nome": "RFC 1035: Domain Names — Implementation and Specification",
+      "autoria": "P. Mockapetris, USC/ISI, 1987",
+      "url": "https://www.rfc-editor.org/rfc/rfc1035",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "en",
+      "formato": "HTML/texto",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-10-redes-internet"
+      ],
+      "licenca": "RFC; o texto diz que a distribuição é ilimitada",
+      "acesso": "Aberto em 2026-11-20",
+      "notas": 5,
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Referência do DNS (resolução de nomes, registros)."
+    },
+    {
+      "id": "maziero-so",
+      "nome": "Sistemas Operacionais: Conceitos e Mecanismos",
+      "autoria": "Prof. Carlos Maziero (UFPR), Editora da UFPR, 2019",
+      "url": "https://wiki.inf.ufpr.br/maziero/doku.php?id=socm:start",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF por capítulo",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-04-software-basico"
+      ],
+      "licenca": "Creative Commons BY-NC-SA (a página cita 3.0 no texto e 4.0 no rodapé; versão a confirmar)",
+      "acesso": "Aberto em 2026-11-20",
+      "notas": 5,
+      "prioridade": "media",
+      "uso": "citada",
+      "justificativa": "Conferência dos conceitos de processo, modos de execução e chamadas de sistema; candidato a material de estudo de SO."
+    },
+    {
+      "id": "wikilivros-eletronica-digital",
+      "nome": "Eletrônica Digital (Wikilivros)",
+      "autoria": "Comunidade Wikilivros",
+      "url": "https://pt.wikibooks.org/wiki/Eletr%C3%B4nica_Digital",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "wiki",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-07-portas-boole"
+      ],
+      "licenca": "CC BY-SA 4.0 (rodapé, conferido em 2026-11-20)",
+      "acesso": "Aberto; muitos capítulos vazios (última edição em 2013)",
+      "notas": 2,
+      "prioridade": "referencia",
+      "uso": "referencia",
+      "justificativa": "Licença aberta, mas incompleto; já catalogado em SD."
+    },
+    {
+      "id": "confea-atribuicoes",
+      "nome": "Resolução do Confea sobre atribuições do engenheiro de computação",
+      "autoria": "Confea",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "não obtido",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-01-historia-atribuicoes"
+      ],
+      "licenca": "Não se aplica (documento não obtido)",
+      "acesso": "Os links testados em 2026-11-20 trouxeram outra resolução ou erro 404",
+      "notas": null,
+      "prioridade": "alta",
+      "uso": "indisponivel",
+      "justificativa": "Fonte necessária para o tópico de atribuições; não confirmada, por isso o tópico ficou sem bloco."
+    },
+    {
+      "id": "sbc-referenciais",
+      "nome": "Referenciais de Formação para os Cursos de Graduação em Computação (SBC, 2017)",
+      "autoria": "Sociedade Brasileira de Computação",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "não obtido",
+      "isa": "não se aplica",
+      "topicos": [
+        "iec-01-historia-atribuicoes"
+      ],
+      "licenca": "Não se aplica (documento não obtido)",
+      "acesso": "Link testado em 2026-11-20 deu 404",
+      "notas": null,
+      "prioridade": "media",
+      "uso": "indisponivel",
+      "justificativa": "Descreveria o perfil do engenheiro de computação; procurar o endereço atual."
+    }
+  ]
+}

@@ -186,6 +186,17 @@ PERGUNTAS = [
     ("ga-esfera", "ga", "Como achar o centro e o raio de uma esfera?",
      "completar quadrados em x, y, z; forma reduzida; conferir r² > 0"),
     ("ga-fora", "ga", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Introdução à Engenharia de Computação: contas conferidas em tests_acervo/test_disciplina_iec.py.
+    ("iec-156", "iec", "Como converter 156 para binário e hexadecimal?",
+     "divisões sucessivas por 2: 10011100; grupos de 4 bits: 9C; Verificação convertendo de volta"),
+    ("iec-karnaugh", "iec", "Como simplificar uma expressão com mapa de Karnaugh?",
+     "tabela-verdade antes; ordem Gray 00 01 11 10; grupos de 1, 2, 4, 8; variáveis que não mudam; conferir na tabela"),
+    ("iec-xor", "iec", "O que faz uma porta XOR?", "1 quando as entradas são diferentes; A'B + AB'; tabela-verdade"),
+    ("iec-niveis", "iec", "O que são os níveis de máquina do Tanenbaum?",
+     "seis níveis: lógico digital, microarquitetura, ISA, SO, montagem, linguagem orientada a problemas; tradução e interpretação"),
+    ("iec-c2", "iec", "Como representar -3 em complemento de 2 com 8 bits?",
+     "inverte os bits de 00000011 e soma 1: 11111101; conferir -128 + 125 = -3"),
+    ("iec-fora", "iec", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
