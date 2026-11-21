@@ -31,7 +31,7 @@ $A_{TM} = \{\langle M, w\rangle \mid M$ é MT e aceita $w\}$ e $HALT_{TM} = \{\l
    - se $R$ aceitar, simule $M$ sobre $w$ (agora se sabe que termina) e responda o que $M$ responder.
 3. $S$ sempre para e decide $A_{TM}$, o que contradiz o Teorema 1.
 
-A **direção** da redução é a parte importante: reduzimos o problema já sabido indecidível ($A_{TM}$) ao novo ($HALT_{TM}$). "Se eu resolvesse HALT, resolveria $A_{TM}$."
+A **direção** da redução é a parte importante: reduzimos o problema já sabido indecidível ($A_{TM}$) ao novo ($HALT_{TM}$). "Se eu resolvesse HALT, resolveria $A_{TM}$." Dizer "uso $A_{TM}$ para resolver HALT" é a direção errada.
 
 Por que a parada é indecidível, em uma frase: um decisor da parada daria um decisor de $A_{TM}$, que não existe. Os dois são **reconhecíveis**: simule $M$ sobre $w$ e aceite quando ela aceitar (ou parar). Os complementos não são reconhecíveis.
 
