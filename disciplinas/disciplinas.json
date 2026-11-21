@@ -654,7 +654,7 @@
       "id": "so",
       "nome": "Sistemas Operacionais",
       "sigla": "SO",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/so/acervo/itens.json",
       "indice": "disciplinas/so/acervo/indice.json",
       "materiais": "disciplinas/so/materiais",

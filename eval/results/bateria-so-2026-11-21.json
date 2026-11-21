@@ -1,0 +1,107 @@
+[
+ {
+  "id": "so-rr",
+  "disciplina": "so",
+  "pergunta": "Como montar o Gantt do Round-Robin com quantum 2?",
+  "esperado": "fila de prontas a cada quantum; quem chega entra antes da preemptada; vida = fim − chegada; espera = vida − duração",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 36.1,
+  "fontes": [
+   "Lista 2 da turma (2021), sobre o caderno de exercícios do Prof. Maziero, cap. 2, questão 17",
+   "Prova AB1 (questões abertas), Prof. André Aquino (UFAL), conforme as respostas compartilhadas da turma; caderno do Prof. Maziero, cap. 2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para montar o diagrama de Gantt no Round-Robin (RR), o segredo é tratar o escalonador como uma **fila circular** que você atualiza a cada instante de tempo.\n\nImagine que você tem uma lista de tarefas prontas. O escalonador sempre retira a primeira da fila, executa-a por, no máximo, o valor do **quantum** ($t_q$), e então toma uma decisão:\n1. Se a tarefa terminou, ela sai do sistema.\n2. Se a tarefa ainda precisa de tempo, ela vai para o **final** da fila.\n3. **Atenção:** Se novas tarefas chegarem durante a execução da fatia atual, elas devem ser inseridas na fila de prontas *antes* da tarefa que acabou de ser preemptada (conforme a convenção do seu material).\n\nPara começar, liste as tarefas com seus tempos de chegada e duração. No instante $t=0$, quem está na fila? Coloque essa tarefa para rodar até $t=2$ (ou até ela terminar, se for menor que o quantum). Anote quem chegou nesse intervalo e coloque-os na fila antes de inserir a tarefa que acabou de rodar.\n\n### Sua vez\nListe as tarefas do seu exercício e, no papel, desenhe a fila de prontas no instante $t=0$. Qual tarefa entra na execução primeiro e qual é o estado da fila no instante $t=2$, considerando as chegadas que ocorreram nesse intervalo?"
+ },
+ {
+  "id": "so-lru",
+  "disciplina": "so",
+  "pergunta": "Quantas faltas de página o LRU dá com 3 quadros?",
+  "esperado": "tabela por referência; substitui o usado há mais tempo; conta faltas iniciais; 7 0 1 2 0 3 0 4 2 3 0 3 2 dá 9",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides do Prof. André Aquino (UFAL), gerência de memória (algoritmos de substituição); caderno do Prof. Maziero, cap. 5; sequência de referências e tabelas da equipe TutorON, conferidas por simulação",
+   "Prova 2 do Prof. André Aquino (UFAL), fotos da turma com gabarito; Lista 4 da turma (2021) sobre os exercícios do Prof. Maziero",
+   "Prova 2 do Prof. André Aquino (UFAL), fotos da turma com gabarito; resolução da turma de uma variante da AB2; Lista 4 da turma (2021) sobre o caderno do Prof. Maziero"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para determinar o número de faltas do algoritmo **LRU** (*Least Recently Used*), precisamos lembrar que ele substitui a página que não é acessada há mais tempo. Diferente do FIFO, o LRU \"renova\" a idade de uma página toda vez que ela é acessada (acerto).\n\nPara resolver, monte uma tabela com as colunas: **Referência**, **Quadros** (o conteúdo da memória), **Falta?** (sim/não) e **Vítima** (qual página foi removida).\n\nComo você tem 3 quadros, as três primeiras referências (7, 0, 1) preencherão os quadros vazios, gerando faltas automaticamente. A partir da quarta referência (o número 2), você deve olhar para os quadros atuais e identificar qual deles foi usado há mais tempo para ser o próximo a sair.\n\nLembre-se: se uma página que já está na memória for referenciada novamente, ela se torna a mais \"recente\" e não gera falta.\n\n### Sua vez\nTente montar a tabela no papel para a sequência **7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2** com 3 quadros. Qual página você escolhe como vítima quando a referência **2** chega pela primeira vez (após as páginas 7, 0, 1 estarem na memória)?"
+ },
+ {
+  "id": "so-disputa",
+  "disciplina": "so",
+  "pergunta": "O que é uma condição de disputa?",
+  "esperado": "entrelaçamento ler-somar-escrever de duas tarefas perde atualização; seção crítica; exclusão mútua",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "disputa.c"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Uma condição de disputa ocorre quando o resultado final de uma operação depende da ordem imprevisível em que as instruções de diferentes tarefas são executadas pelo processador.\n\nImagine que você e um amigo tentam atualizar o saldo de uma conta bancária ao mesmo tempo. Se ambos lerem o saldo atual de R$ 100,00, calcularem o novo valor (cada um somando seu depósito) e tentarem gravar o resultado, o último a gravar \"sobrescreverá\" o trabalho do primeiro, fazendo com que um dos depósitos desapareça.\n\nO problema central é que operações simples, como `soma += 1`, não são **atômicas**. Elas são quebradas pelo hardware em passos menores: ler o valor da memória, modificar o valor no registrador e escrever o valor de volta na memória. Se uma tarefa é interrompida entre a leitura e a escrita, outra tarefa pode ler um valor \"antigo\" e causar o erro.\n\nPara entender melhor, tente visualizar o que aconteceria se você tivesse duas tarefas tentando incrementar uma variável `x` (inicialmente 0) e o sistema operacional decidisse trocar a tarefa exatamente após a leitura do valor, mas antes da gravação.\n\n### Sua vez\nDesenhe uma tabela com duas colunas (Tarefa A e Tarefa B) e três linhas representando os passos de `x += 1` (Ler, Somar, Gravar). Tente preencher essa tabela de forma que, ao final, o valor de `x` na memória seja 1, mesmo que ambas as tarefas tenham executado a instrução de incremento."
+ },
+ {
+  "id": "so-impasse",
+  "disciplina": "so",
+  "pergunta": "Quais são as quatro condições para um impasse?",
+  "esperado": "exclusão mútua, posse e espera, não preempção, espera circular; todas necessárias",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "ordem_travas.c"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para que um impasse (ou *deadlock*) ocorra em um sistema, não basta que uma tarefa esteja esperando por um recurso. É necessário que um conjunto específico de condições ocorra simultaneamente, criando uma situação de \"travamento\" onde nenhuma tarefa consegue progredir.\n\nPense no cenário de dois processos que precisam de dois arquivos diferentes para terminar suas tarefas. Se o Processo A trava o Arquivo 1 e tenta pegar o Arquivo 2, enquanto o Processo B faz o inverso, temos um impasse.\n\nPara entender as quatro condições, tente imaginar o que aconteceria se você pudesse \"quebrar\" uma delas. Por exemplo:\n1. Se o recurso não fosse de uso exclusivo (exclusão mútua), o que mudaria?\n2. Se uma tarefa pudesse ser interrompida e forçada a soltar o recurso que já possui (não preempção), o impasse continuaria?\n\nO material [P1] lista exatamente essas quatro condições fundamentais. Releia-as com atenção e tente explicar, com suas próprias palavras, o que cada uma significa no contexto de uma tarefa tentando acessar um recurso.\n\n### Sua vez\nListe as quatro condições necessárias para um impasse e, para cada uma, tente descrever um exemplo simples de como ela se manifesta (por exemplo, o que significa \"posse e espera\" na prática?)."
+ },
+ {
+  "id": "so-thread",
+  "disciplina": "so",
+  "pergunta": "Qual a diferença entre processo e thread?",
+  "esperado": "processo tem espaço de endereçamento próprio; threads compartilham a memória do processo, cada uma com pilha e registradores",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Lista 2 da turma (2021) e respostas compartilhadas da turma, sobre o caderno do Prof. Maziero, cap. 2; slides do Prof. André Aquino (UFAL), gerência de tarefas"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença, pense no processo como o \"ambiente de trabalho\" e na thread como o \"trabalhador\" que executa as tarefas dentro desse ambiente.\n\nO **processo** é a unidade de alocação de recursos: ele possui seu próprio espaço de endereçamento na memória, descritores de arquivos abertos e credenciais de segurança. Já a **thread** é o fluxo de execução propriamente dito. Dentro de um mesmo processo, várias threads podem coexistir, compartilhando o mesmo espaço de memória e os mesmos recursos.\n\nImagine que você tem um programa de edição de texto:\n1. O **processo** é o programa aberto, que reserva memória para o documento e mantém o arquivo aberto no disco.\n2. As **threads** seriam, por exemplo, uma cuidando da interface gráfica (respondendo aos seus cliques), outra verificando a ortografia em segundo plano e uma terceira salvando o arquivo periodicamente.\n\nSe uma dessas threads falhar gravemente (como um acesso indevido à memória), o que acontece com o processo inteiro? E se você precisasse criar um novo processo em vez de uma nova thread, o que o sistema operacional teria que alocar de novo?\n\n### Sua vez\nCom base no conceito de \"unidade de recursos\", explique com suas palavras: se duas threads do mesmo processo precisam trocar uma informação, elas precisam de mecanismos complexos de comunicação entre processos (IPC) ou podem simplesmente acessar a mesma variável na memória? Por quê?"
+ },
+ {
+  "id": "so-fora",
+  "disciplina": "so",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para resolver uma integral dupla em coordenadas polares, o segredo está em transformar a região de integração e o diferencial de área.\n\nEm coordenadas cartesianas, temos $dA = dx \\, dy$. Quando passamos para polares, onde $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$, o elemento de área sofre uma alteração devido ao **Jacobiano** da transformação. Você se lembra qual é o termo extra que aparece no diferencial de área $dA$ ao converter para $r$ e $\\theta$?\n\nAlém disso, ao montar a integral, os limites de integração devem refletir a nova região: o raio $r$ varia de um valor mínimo a um máximo (que podem depender de $\\theta$), e o ângulo $\\theta$ varia em um intervalo angular (geralmente de $0$ a $2\\pi$ para uma volta completa).\n\nA estrutura geral fica:\n$$\\iint_R f(x, y) \\, dx \\, dy = \\int_{\\theta_1}^{\\theta_2} \\int_{r_1(\\theta)}^{r_2(\\theta)} f(r \\cos \\theta, r \\sin \\theta) \\cdot (\\text{fator de correção}) \\, dr \\, d\\theta$$\n\nLembre-se que essa disciplina de Sistemas Operacionais foca em gerenciamento de recursos e processos; se este exercício for de Cálculo, recomendo verificar o material da disciplina de **Cálculo 3** para confirmar a notação específica que seu professor utiliza para o Jacobiano.\n\n### Sua vez\nTente escrever como ficaria o diferencial de área $dA$ em coordenadas polares e, se tiver um exemplo de região (como um círculo de raio $R$), tente montar os limites de integração para $r$ e $\\theta$. O que você obteve?"
+ }
+]

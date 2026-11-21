@@ -1,6 +1,6 @@
 # Curadoria — Sistemas Operacionais (`so`, ECOM032)
 
-Situação: **em validação** (aviso no site até cumprir o critério de liberação de `docs/DISCIPLINAS.md`).
+Situação: **MVP** desde 21/11/2026, sem aviso, depois de cumprido o critério de liberação (veja `docs/DISCIPLINAS.md`).
 
 ## Disciplina e ementa
 

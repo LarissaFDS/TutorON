@@ -64,7 +64,7 @@ def test_so_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert SO.situacao == "em validação" and SO.em_validacao
+    assert SO.situacao == "MVP" and not SO.em_validacao and not SO.aviso
 
 
 def test_itens_gerados_estao_atualizados():
