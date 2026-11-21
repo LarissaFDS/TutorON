@@ -243,7 +243,19 @@ PERGUNTAS = [
     ("lfa-parada", "lfa", "Por que o problema da parada é indecidível?",
      "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa"),
     ("lfa-fora", "lfa", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
-    ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Metodologia da Pesquisa: exemplos compilados em tests_acervo/test_disciplina_metodologia.py.
+    ("met-bibtex", "metodologia", "Como fazer uma referência bibliográfica no LaTeX com BibTeX?",
+     "arquivo .bib com chave; \\cite; \\bibliography; ciclo pdflatex, bibtex, pdflatex, pdflatex; abntex2cite; sem @online"),
+    ("met-secoes", "metodologia", "Quais as seções de um artigo científico?",
+     "pré-textuais (título, autores, resumo, palavras-chave), textuais (introdução, desenvolvimento, conclusão), pós-textuais (referências)"),
+    ("met-citacao", "metodologia", "Como citar um artigo segundo a ABNT?",
+     "NBR 10520 autor-data; direta curta com aspas e página; longa recuada sem aspas; edição 2023 em maiúsculas/minúsculas; até três autores todos, mais de três et al."),
+    ("met-figura", "metodologia", "Como inserir uma figura com legenda no LaTeX?",
+     "figure, \\includegraphics (graphicx), \\caption e \\label depois do \\caption; \\ref"),
+    ("met-resumo", "metodologia", "Como escrever o resumo de um artigo científico?",
+     "objetivo, método, resultados e conclusão; parágrafo único; 100 a 250 palavras; palavras-chave; não escreve o resumo pelo aluno"),
+    ("met-fora", "metodologia", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    ("discreta-fora","discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
 

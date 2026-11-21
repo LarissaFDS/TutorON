@@ -1,0 +1,113 @@
+[
+ {
+  "id": "met-bibtex",
+  "disciplina": "metodologia",
+  "pergunta": "Como fazer uma referência bibliográfica no LaTeX com BibTeX?",
+  "esperado": "arquivo .bib com chave; \\cite; \\bibliography; ciclo pdflatex, bibtex, pdflatex, pdflatex; abntex2cite; sem @online",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Lopez e Silva, Introdução ao uso do LaTeX (UFRJ, 2013), seção 2.22 (referências bibliográficas e uso do BibTeX)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para criar referências bibliográficas usando o BibTeX no LaTeX, o processo é dividido em dois arquivos que trabalham em conjunto: um arquivo de texto para o seu artigo (`.tex`) e um arquivo de banco de dados para as referências (`.bib`).\n\nO arquivo `.bib` funciona como uma biblioteca onde você armazena os dados de cada obra. Cada entrada começa com o tipo (como `@book` ou `@article`), seguido por uma chave única que você inventa para citar no texto, e os campos com as informações (autor, título, ano, etc.).\n\nNo seu arquivo `.tex`, você precisa indicar ao LaTeX onde encontrar esse arquivo de referências e qual estilo de formatação deseja usar. O BibTeX então \"lê\" o seu texto, identifica quais chaves você citou com o comando `\\cite{chave}`, busca os dados correspondentes no arquivo `.bib` e gera a lista final automaticamente.\n\nUm ponto importante é que o BibTeX clássico não reconhece caracteres acentuados diretamente como o UTF-8 moderno; por isso, usamos comandos do TeX (como `{\\~a}` para o \"ã\") para garantir que a ordenação e a formatação fiquem corretas.\n\n**Verificação:** Após compilar, verifique se o arquivo `.blg` (o log do BibTeX) não apresenta mensagens de erro ou avisos de \"entry type not defined\" e se o PDF exibe a lista de referências corretamente.\n\n### Sua vez\nCrie um arquivo chamado `refs.bib` contendo apenas uma entrada do tipo `@book` de um livro de sua preferência, seguindo a estrutura de campos (autor, título, editora, ano) apresentada no material [P1]. Em seguida, tente escrever o comando no seu arquivo `.tex` que faz a ligação com esse arquivo `.bib`. Qual comando você utilizou?"
+ },
+ {
+  "id": "met-secoes",
+  "disciplina": "metodologia",
+  "pergunta": "Quais as seções de um artigo científico?",
+  "esperado": "pré-textuais (título, autores, resumo, palavras-chave), textuais (introdução, desenvolvimento, conclusão), pós-textuais (referências)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Alves e Arruda, Como elaborar um artigo científico (BU-UFSC, 2004), modelo de artigo da turma, seções 2 e 3",
+   "Alves e Arruda, Como elaborar um artigo científico (BU-UFSC, 2004), modelo de artigo da turma, seção 3.2"
+  ],
+  "rotulos_citados": [
+   "P1",
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a estrutura de um artigo, imagine-o como um organismo vivo: ele precisa de uma \"cabeça\" (elementos pré-textuais), um \"corpo\" (elementos textuais) e uma \"base\" (elementos pós-textuais).\n\nO material [P1] organiza essas seções em três grandes blocos. O bloco **textual** é onde o conteúdo científico propriamente dito se desenvolve, seguindo uma lógica que, em muitas áreas da engenharia, é conhecida como IMRaD (Introdução, Métodos, Resultados e Discussão).\n\nPara organizar seu pensamento, tente visualizar o fluxo do texto:\n1. O que vem antes de começar a leitura do conteúdo principal?\n2. O que compõe o miolo do trabalho, onde você apresenta o problema, como resolveu e o que descobriu?\n3. O que vem depois que você encerra sua argumentação, para dar suporte e fechar o documento?\n\nDê uma olhada no material [P1] novamente, focando na lista numerada de \"Três partes\".\n\n### Sua vez\nListe, com suas palavras, quais são os três grandes blocos que compõem um artigo científico e tente identificar, dentro do bloco **textual**, quais são as quatro seções principais que compõem o padrão IMRaD mencionado no material [P2]."
+ },
+ {
+  "id": "met-citacao",
+  "disciplina": "metodologia",
+  "pergunta": "Como citar um artigo segundo a ABNT?",
+  "esperado": "NBR 10520 autor-data; direta curta com aspas e página; longa recuada sem aspas; edição 2023 em maiúsculas/minúsculas; aponta a referência NBR 6023",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Alves e Arruda, Como elaborar um artigo científico (BU-UFSC, 2004), modelo de artigo da turma (citações no texto e notas da margem); atualização pela NBR 10520:2023 segundo guias de bibliotecas"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para citar um artigo, o primeiro passo é identificar se você está fazendo uma **citação direta** (transcrição fiel) ou uma **citação indireta** (paráfrase com suas próprias palavras).\n\nA NBR 10520:2023 utiliza o sistema autor-data. O formato muda dependendo de onde o nome do autor aparece na sua frase:\n\n1.  **Autor fora dos parênteses:** O nome do autor faz parte da estrutura da frase. Exemplo: *Segundo Silva (2020), a pesquisa científica exige rigor metodológico.*\n2.  **Autor dentro dos parênteses:** O nome e o ano ficam ao final da ideia, entre parênteses. Exemplo: *A pesquisa científica exige rigor metodológico (Silva, 2020).*\n\nLembre-se que, se for uma citação direta (cópia literal), você deve incluir a página obrigatoriamente, como em *(Silva, 2020, p. 15)*. Se for uma paráfrase, a página é opcional.\n\nUm ponto importante: verifique se o artigo que você está lendo tem um ou mais autores. Se forem dois autores, ambos devem aparecer na citação. Se forem três ou mais, a norma atual simplifica o uso do \"et al.\".\n\n### Sua vez\nEscolha um artigo que você está utilizando no seu trabalho e tente escrever uma frase citando o autor de forma indireta (paráfrase), colocando o nome dele dentro dos parênteses ao final da frase. Como ficaria essa estrutura?"
+ },
+ {
+  "id": "met-figura",
+  "disciplina": "metodologia",
+  "pergunta": "Como inserir uma figura com legenda no LaTeX?",
+  "esperado": "figure, \\includegraphics (graphicx), \\caption e \\label depois do \\caption; \\ref",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Lopez e Silva, Introdução ao uso do LaTeX (UFRJ, 2013), seções 2.20 e 2.21 (figuras numeradas)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para inserir uma figura no LaTeX, utilizamos um ambiente chamado \"flutuante\", que permite ao sistema gerenciar o posicionamento da imagem no documento. O comando principal para incluir o arquivo é o `\\includegraphics`, que faz parte do pacote `graphicx`.\n\nConforme o material [P1], a estrutura básica envolve o ambiente `figure`, onde você define o alinhamento, a legenda (`\\caption`) e a referência cruzada (`\\label`). Um detalhe técnico importante é a ordem dos comandos: o `\\label` deve vir logo após o `\\caption`, pois é o comando de legenda que gera o número da figura que o `\\ref` irá capturar.\n\nAlém disso, lembre-se de que, para que o número da figura apareça corretamente no seu texto, o LaTeX precisa processar o arquivo duas vezes, pois ele utiliza o arquivo auxiliar (`.aux`) para registrar as numerações.\n\n### Sua vez\nTente montar o código de um ambiente `figure` que inclua uma imagem chamada `exemplo.png`, com a legenda \"Distribuição de dados\" e um rótulo (label) para que você possa citá-la no texto. Lembre-se de usar `\\centering` em vez do ambiente `center` e coloque o `\\label` logo após o `\\caption`. Como ficaria esse trecho de código?\n\n**Verificação:** Após escrever o código, compile o documento duas vezes e verifique se o PDF exibe a legenda correta e se o número da figura aparece no lugar onde você usou o `\\ref`."
+ },
+ {
+  "id": "met-resumo",
+  "disciplina": "metodologia",
+  "pergunta": "Como escrever o resumo de um artigo científico?",
+  "esperado": "objetivo, método, resultados e conclusão; parágrafo único; 100 a 250 palavras; palavras-chave; não escreve o resumo pelo aluno",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Alves e Arruda, Como elaborar um artigo científico (BU-UFSC, 2004), modelo de artigo da turma, seções 2 e 3",
+   "Alves e Arruda, Como elaborar um artigo científico (BU-UFSC, 2004), modelo de artigo da turma, seção 3.1 (resumo e palavras-chave)"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Escrever um resumo é um exercício de síntese. O objetivo é permitir que o leitor entenda o que foi feito e o que foi descoberto sem precisar ler o artigo inteiro.\n\nPara começar, pense no seu trabalho como uma narrativa curta. De acordo com o material [P2], um bom resumo deve responder a quatro perguntas fundamentais em um único parágrafo:\n\n1. **Objetivo:** O que você pretendia investigar ou resolver?\n2. **Metodologia:** Como você realizou essa investigação (quais métodos, ferramentas ou procedimentos)?\n3. **Resultados:** O que você encontrou de mais importante?\n4. **Conclusão:** Qual é a principal mensagem ou contribuição do seu trabalho?\n\nLembre-se de que, segundo as normas, você deve evitar o uso da primeira pessoa (\"nós fizemos\", \"neste trabalho falaremos\"), não deve incluir citações de outros autores e deve manter o texto em frases completas, evitando listas de tópicos.\n\nPara estruturar o seu, tente escrever uma frase para cada um desses quatro pontos. Depois, verifique se elas se conectam bem e se o texto final está dentro do limite de 250 palavras.\n\n### Sua vez\nEscreva, em quatro frases curtas, o objetivo, a metodologia, o resultado e a conclusão do seu artigo. Não se preocupe com a formatação agora, apenas coloque essas ideias no papel e veja se elas contam a história completa da sua pesquisa."
+ },
+ {
+  "id": "met-fora",
+  "disciplina": "metodologia",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Como a sua pergunta envolve o cálculo de uma integral, lembre-se de que o meu papel aqui é orientá-lo sobre a **Metodologia da Pesquisa e do Trabalho Científico (MPTC)**. O cálculo em si é um conteúdo de Cálculo 3.\n\nNo entanto, posso te ajudar a estruturar o raciocínio matemático para que você consiga escrever essa integral corretamente no seu trabalho acadêmico, utilizando a notação adequada em LaTeX.\n\nPara passar de coordenadas cartesianas $(x, y)$ para polares $(r, \\theta)$, o segredo está na mudança de variáveis. Você deve substituir $x$ por $r \\cos(\\theta)$ e $y$ por $r \\sin(\\theta)$. Além disso, ao mudar o diferencial de área $dA = dx \\, dy$, não podemos esquecer do **Jacobiano** da transformação, que adiciona um fator fundamental à integral.\n\nPara escrever isso em LaTeX, você usaria algo como:\n`\\iint_R f(r \\cos \\theta, r \\sin \\theta) \\, r \\, dr \\, d\\theta`\n\nLembre-se de que, na escrita científica, é importante definir claramente os limites de integração para $r$ e $\\theta$ de acordo com a região $R$ que você está analisando.\n\n**Verificação:** Ao escrever seu texto, confira se todos os símbolos matemáticos estão entre cifrões e se a unidade de área (o Jacobiano) foi incluída, pois sua ausência é um erro comum que invalida o resultado.\n\n### Sua vez\nTente escrever no papel a fórmula da integral dupla em coordenadas polares, incluindo o termo do Jacobiano, e verifique se os limites de integração que você definiu para $r$ e $\\theta$ descrevem corretamente a região do seu problema. Como ficaria a representação dessa integral para um círculo de raio $a$ centrado na origem?"
+ }
+]
