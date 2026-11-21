@@ -243,6 +243,11 @@ PERGUNTAS = [
     ("lfa-parada", "lfa", "Por que o problema da parada é indecidível?",
      "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa"),
     ("lfa-fora", "lfa", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Física 2, Lista 2 de Gravitação: conferidas em tests_acervo/test_disciplina_fis2.py.
+    ("fis2-escape", "fis2", "Como calcular a velocidade de escape da Terra?",
+     "energia mecânica nula no infinito; v = √(2GM/R) ≈ 11,2 km/s; não depende da massa do projétil"),
+    ("fis2-orbita-baixa", "fis2", "Qual o período de um satélite em órbita baixa?",
+     "GMm/r² = mv²/r; T = 2π√(r³/GM); r ≈ R da Terra dá ≈ 84 min (≈ 90 min a algumas centenas de km)"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
