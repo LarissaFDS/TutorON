@@ -209,6 +209,18 @@ PERGUNTAS = [
     ("logica-dn", "logica", "Como provar p → q ⊢ ¬q → ¬p por dedução natural?",
      "caixa com ¬q; MT 1, 2 dá ¬p; →i fecha a caixa; linhas numeradas com regra; sem entregar a prova inteira"),
     ("logica-fora", "logica", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Física 1: resoluções conferidas em tests_acervo/test_disciplina_fis1.py.
+    ("fis1-dcl-rampa", "fis1", "Como montar o diagrama de corpo livre de um bloco num plano inclinado com atrito?",
+     "eixos paralelo e perpendicular; mg sen θ ao longo, mg cos θ contra a rampa; N = mg cos θ; atrito contra o movimento"),
+    ("fis1-alcance", "fis1", "Qual o alcance máximo de um projétil?",
+     "R = v0² sen 2θ / g; máximo v0²/g em 45°; só com mesma altura de saída e chegada, sem ar"),
+    ("fis1-energia", "fis1", "Quando a energia mecânica se conserva?",
+     "só com forças conservativas realizando trabalho; atrito: ΔK + ΔU = −f_k d; exemplo da mola com atrito"),
+    ("fis1-inelastica", "fis1", "Como resolver uma colisão perfeitamente inelástica?",
+     "momento se conserva, energia cinética não; corpos saem juntos V = m v/(m+M); pêndulo balístico em duas etapas"),
+    ("fis1-disco", "fis1", "Como achar a aceleração de um bloco pendurado num fio enrolado num disco?",
+     "mg − T = ma; TR = ½MR²α; a = αR; a = 2mg/(M+2m); M=2,5, m=1,2 dá 4,8 m/s² sem entregar se for a prova"),
+    ("fis1-fora", "fis1", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")

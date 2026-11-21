@@ -1,0 +1,109 @@
+[
+ {
+  "id": "fis1-dcl-rampa",
+  "disciplina": "fis1",
+  "pergunta": "Como montar o diagrama de corpo livre de um bloco num plano inclinado com atrito?",
+  "esperado": "eixos paralelo e perpendicular; mg sen θ ao longo, mg cos θ contra a rampa; N = mg cos θ; atrito contra o movimento",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 46.1,
+  "fontes": [
+   "Reavaliação AB1 de Física 1, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; Halliday 10ª ed., cap. 6, problema 28",
+   "Prova AB1 de Física 1, 6 mar. 2017, e reavaliação AB1, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; baseada em Halliday 10ª ed., cap. 6, problema 5",
+   "Reavaliação AB1 de Física 1, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; Halliday 10ª ed., cap. 6, problema 9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para montar o diagrama de corpo livre (DCL) em um plano inclinado, o segredo é escolher um sistema de eixos que facilite a análise. Em vez de usar o eixo $y$ na vertical absoluta, rotacionamos o sistema para que um dos eixos fique alinhado com a superfície da rampa.\n\nAqui estão os passos fundamentais para você desenhar o seu DCL:\n\n1.  **Eixos:** Defina o eixo $x$ paralelo à rampa e o eixo $y$ perpendicular a ela.\n2.  **Forças:** Identifique todas as forças atuando no bloco:\n    *   **Peso ($P = mg$):** Este é o ponto mais importante. Como o eixo $y$ está inclinado, o peso não está alinhado com nenhum dos eixos. Você precisará decompô-lo em uma componente perpendicular à rampa ($mg \\cos \\theta$) e uma paralela à rampa ($mg \\text{sen} \\theta$).\n    *   **Normal ($N$):** Sempre perpendicular à superfície de contato.\n    *   **Atrito ($f$):** Sempre paralelo à superfície e no sentido oposto ao movimento (ou à tendência de movimento).\n    *   **Outras forças:** Se houver tração de um fio ou uma força externa, desenhe-as conforme a direção indicada no problema.\n3.  **Equilíbrio ou Movimento:** Se o bloco estiver em repouso ou com velocidade constante, a soma das forças em cada eixo deve ser zero ($\\sum F_x = 0$ e $\\sum F_y = 0$).\n\nLembre-se: a Normal **não** é igual ao peso total ($mg$) em um plano inclinado, pois ela equilibra apenas a componente perpendicular do peso.\n\n### Sua vez\nTente desenhar o diagrama no papel: coloque o bloco sobre uma rampa inclinada de um ângulo $\\theta$, desenhe os eixos $x$ e $y$ inclinados e tente decompor o vetor peso $mg$ nessas duas direções. Qual das componentes do peso (a que está no eixo $x$ ou no eixo $y$) você acha que \"tenta\" fazer o bloco deslizar rampa abaixo?"
+ },
+ {
+  "id": "fis1-alcance",
+  "disciplina": "fis1",
+  "pergunta": "Qual o alcance máximo de um projétil?",
+  "esperado": "R = v0² sen 2θ / g; máximo v0²/g em 45°; só com mesma altura de saída e chegada, sem ar",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 44.1,
+  "fontes": [
+   "Reavaliação AB1 de Física 1, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; Halliday 10ª ed., cap. 4, problema 32",
+   "Reavaliação AB2 de Física 1, 24 maio 2017, Prof. Osvaldo A. Rosso (UFAL), foto da turma; baseada no exemplo 9.07 do Halliday (10ª ed.)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O alcance máximo de um projétil depende da velocidade inicial com que ele é lançado e do ângulo desse lançamento em relação à horizontal.\n\nPara entender como chegar a esse valor, pense no movimento como uma combinação de dois deslocamentos independentes:\n1.  **Horizontal:** O projétil percorre uma distância $x$ com velocidade constante $v_x = v_0 \\cos\\theta_0$.\n2.  **Vertical:** O projétil sobe e desce, retornando ao nível do solo, sob a ação da gravidade ($y = 0$ no início e no fim).\n\nSe você escrever a equação da posição vertical $y(t) = v_0 \\text{sen}\\theta_0 \\, t - \\frac{1}{2}gt^2$ e igualar a zero, você encontrará o tempo total que o projétil permanece no ar. Ao substituir esse tempo na equação da posição horizontal $x(t)$, você obterá a fórmula do alcance $R$.\n\nPara encontrar o **máximo**, você pode analisar a função trigonométrica que aparece nessa fórmula (o seno de um ângulo dobrado) ou, se você já tiver estudado cálculo, derivar a expressão do alcance em relação ao ângulo $\\theta_0$ e igualar a zero.\n\n### Sua vez\nEscreva no papel a expressão do alcance $R$ em função de $v_0$, $g$ e $\\theta_0$ (usando a identidade trigonométrica $2 \\text{sen}\\theta \\cos\\theta = \\text{sen}2\\theta$). Qual é o valor do ângulo $\\theta_0$ que faz o termo $\\text{sen}2\\theta_0$ atingir seu valor máximo?"
+ },
+ {
+  "id": "fis1-energia",
+  "disciplina": "fis1",
+  "pergunta": "Quando a energia mecânica se conserva?",
+  "esperado": "só com forças conservativas realizando trabalho; atrito: ΔK + ΔU = −f_k d; exemplo da mola com atrito",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 26.1,
+  "fontes": [
+   "Prova AB2 de Física 1, 17 maio 2017, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; baseada no exemplo 8.07 do Halliday (8ª ed., p. 218)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A energia mecânica ($E_{mec} = K + U$) é a soma da energia cinética com a energia potencial. Ela se conserva quando o sistema está isolado de forças dissipativas, ou seja, quando não há forças como o atrito ou a resistência do ar realizando trabalho sobre o objeto.\n\nPense no trabalho realizado pelas forças que atuam no sistema:\n1. **Forças Conservativas:** Como o peso ou a força elástica. Quando elas realizam trabalho, a energia apenas muda de forma (de cinética para potencial, ou vice-versa), mas o total permanece constante.\n2. **Forças Não Conservativas:** Como o atrito. Elas retiram energia do sistema mecânico, transformando-a em outras formas (como calor ou som), o que chamamos de dissipação.\n\nEm resumo, a energia mecânica se conserva se, e somente se, o trabalho realizado pelas forças não conservativas for nulo. Se houver atrito, por exemplo, parte da energia \"sai\" do sistema mecânico.\n\n### Sua vez\nConsidere o problema do pacote deslizando na mola que você enviou: se o piso fosse perfeitamente liso (sem atrito), o trabalho realizado pela força de atrito seria quanto? Nesse caso, a energia mecânica final seria igual à inicial?"
+ },
+ {
+  "id": "fis1-inelastica",
+  "disciplina": "fis1",
+  "pergunta": "Como resolver uma colisão perfeitamente inelástica?",
+  "esperado": "momento se conserva, energia cinética não; corpos saem juntos V = m v/(m+M); pêndulo balístico em duas etapas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Reavaliação AB2 de Física 1, 24 maio 2017, Prof. Osvaldo A. Rosso (UFAL), foto da turma; baseada no exemplo 9.07 do Halliday (10ª ed.)",
+   "Prova AB2 de Física 1, 17 maio 2017, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; baseada no exemplo 9.11 do Halliday (8ª ed., p. 259)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender uma colisão perfeitamente inelástica, o segredo é dividir o problema em duas etapas distintas, pois a física que rege cada uma é diferente.\n\nComo o material [P1] indica, o ponto chave é que, durante o choque, o tempo é tão curto que podemos considerar que as forças externas (como a gravidade ou a tensão dos fios) não alteram o **momento linear** do sistema. Por isso, o momento linear total antes da colisão é igual ao momento linear total logo após a colisão.\n\nNo entanto, a energia cinética **não** se conserva nesse tipo de choque: parte dela é dissipada na forma de calor, som ou deformação permanente dos objetos. Por isso, você não pode usar conservação de energia *durante* a colisão.\n\nO processo geralmente segue esta lógica:\n1. **Antes da colisão:** Use conservação de energia (se houver queda ou subida) para encontrar a velocidade dos objetos imediatamente antes do impacto.\n2. **Durante a colisão:** Use a conservação do momento linear ($p_{antes} = p_{depois}$). Como é perfeitamente inelástica, os objetos saem grudados, movendo-se com uma única velocidade final.\n3. **Depois da colisão:** Use novamente a conservação de energia para analisar o que acontece com o conjunto (por exemplo, até que altura ele sobe).\n\n### Sua vez\nSe você tem um bloco de massa $M$ em repouso e uma bala de massa $m$ que o atinge com velocidade $v$, qual seria a expressão do momento linear total do sistema antes da colisão e qual seria o momento linear total logo após a colisão, considerando que eles saem juntos com uma velocidade $V$?"
+ },
+ {
+  "id": "fis1-disco",
+  "disciplina": "fis1",
+  "pergunta": "Como achar a aceleração de um bloco pendurado num fio enrolado num disco?",
+  "esperado": "mg − T = ma; TR = ½MR²α; a = αR; a = 2mg/(M+2m); M=2,5, m=1,2 dá 4,8 m/s² sem entregar se for a prova",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 42.1,
+  "fontes": [
+   "Prova AB1 de Física 1, 6 mar. 2017, Prof. Osvaldo A. Rosso (UFAL), foto da turma; baseada em Halliday 10ª ed., cap. 6, problema 23",
+   "Prova AB2 de Física 1, 17 maio 2017, Prof. Osvaldo A. Rosso (UFAL), fotos da turma; baseada no exemplo 10.10 do Halliday (10ª ed.; 8ª ed., p. 295)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar a aceleração de um bloco pendurado em um fio enrolado em um disco, precisamos analisar dois movimentos simultâneos: a translação do bloco e a rotação do disco.\n\nO segredo está em conectar essas duas partes usando a condição de **fio sem escorregar**.\n\n1.  **Para o bloco:** Aplique a Segunda Lei de Newton ($F_{res} = ma$). Considere as forças que atuam nele (peso e tração) e escolha um sentido positivo para o movimento (geralmente para baixo, já que o bloco desce).\n2.  **Para o disco:** Aplique a Segunda Lei de Newton para rotações ($\\tau = I\\alpha$), onde $\\tau$ é o torque, $I$ é o momento de inércia do disco e $\\alpha$ é a aceleração angular. O torque aqui é gerado pela tração do fio aplicada na borda do disco.\n3.  **A conexão:** O fio não escorrega, o que significa que a aceleração linear do bloco ($a$) está diretamente ligada à aceleração angular do disco ($\\alpha$) pelo raio ($R$).\n\nAo escrever essas equações, você terá um sistema com duas incógnitas: a aceleração ($a$) e a tração ($T$).\n\n### Sua vez\nTente desenhar o diagrama de corpo livre para o bloco e para o disco separadamente. Quais são as expressões para a força resultante no bloco e para o torque no disco? Escreva-as no papel e tente relacionar $a$ e $\\alpha$ usando o raio $R$."
+ },
+ {
+  "id": "fis1-fora",
+  "disciplina": "fis1",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 42.2,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular uma integral dupla em coordenadas polares, o segredo está em como transformamos a área elementar e os limites de integração.\n\nEm coordenadas cartesianas, trabalhamos com um retângulo infinitesimal $dA = dx \\, dy$. Quando passamos para coordenadas polares $(r, \\theta)$, esse elemento de área muda de formato. Imagine um pequeno setor circular: o lado curvo tem comprimento $r \\, d\\theta$ e a espessura radial é $dr$. Portanto, o novo elemento de área é $dA = r \\, dr \\, d\\theta$.\n\nA integral dupla de uma função $f(x, y)$ sobre uma região $D$ torna-se:\n$$\\iint_D f(x, y) \\, dA = \\iint_{D'} f(r \\cos \\theta, r \\sin \\theta) \\, r \\, dr \\, d\\theta$$\n\nNote que o termo $r$ (o \"Jacobiano\" da transformação) é indispensável. Sem ele, o cálculo da área ou da integral estará incorreto.\n\nPara montar os limites, você deve observar os valores mínimos e máximos de $r$ (a distância até a origem) e de $\\theta$ (o ângulo varrido) que cobrem a sua região $D$. Se a região for um círculo de raio $R$, por exemplo, $r$ varia de $0$ a $R$ e $\\theta$ varia de $0$ a $2\\pi$.\n\nComo este é um tópico de Cálculo, recomendo verificar no seu material de Cálculo 3 os exemplos de mudança de variáveis para confirmar como os limites de integração são definidos para regiões circulares ou semicirculares.\n\n### Sua vez\nSe você tivesse que integrar a função constante $f(x, y) = 1$ sobre um círculo de raio $R$ centrado na origem, como ficariam os limites de integração para $r$ e para $\\theta$ na integral $\\int \\int r \\, dr \\, d\\theta$?"
+ }
+]
