@@ -61,7 +61,7 @@ def test_lfa_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert LFA.situacao == "em validação" and LFA.em_validacao
+    assert LFA.situacao == "MVP" and not LFA.em_validacao and not LFA.aviso
 
 
 def test_itens_gerados_estao_atualizados():

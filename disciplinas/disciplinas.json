@@ -681,7 +681,7 @@
       "id": "lfa",
       "nome": "Linguagens Formais, Autômatos e Computabilidade",
       "sigla": "LFA",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/lfa/acervo/itens.json",
       "indice": "disciplinas/lfa/acervo/indice.json",
       "materiais": "disciplinas/lfa/materiais",

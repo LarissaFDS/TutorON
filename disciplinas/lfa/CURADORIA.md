@@ -1,6 +1,6 @@
 # Curadoria — Linguagens Formais, Autômatos e Computabilidade (`lfa`, ECOM014)
 
-Situação: **em validação** (veja `docs/DISCIPLINAS.md`, critério de liberação).
+Situação: **MVP** desde 21/11/2026, sem aviso, depois de cumprido o critério de liberação (veja `docs/DISCIPLINAS.md`).
 
 ## Disciplina e ementa
 
