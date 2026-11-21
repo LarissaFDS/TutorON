@@ -499,6 +499,14 @@ A ementa foi conferida no PPC de 2014, p. 30. **Autoria (correção):** a lista 
 
 Busca: bateria de relevância 380/380, com 9 perguntas de LFA, 2 fora do assunto e 3 de fronteira (PAA, Lógica e Discreta).
 
+IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 1, com HTTP 429/503 nos modelos maiores), 21/11/2026 (`eval/results/bateria-lfa-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas contra os blocos e os simuladores:
+- AFD do número par de zeros, AFN → AFD e bombeamento de aⁿbⁿ: corretas e socráticas (estados de paridade com o inicial final; subconjuntos com fecho-ε, finais que **contêm** um final e ∅ como estado morto; toda decomposição com |xy| ≤ p), sem entregar o resultado final;
+- problema da parada: socrática, mas **com um erro**: uma frase inverte a direção da redução (diz usar $A_{TM}$ para resolver $HALT_{TM}$); a pergunta seguinte, na direção certa, pede um decisor de $A_{TM}$ a partir de um decisor da parada. O bloco `lfa-problema-da-parada-indecidivel` está certo;
+- integral dupla com LFA selecionada: sem fontes, indicou Cálculo 3, mas adiantou o fator de área ($dA = r\,dr\,d\theta$, "r dr d-teta");
+- nenhuma termina com "**Verificação:**"; só as de AFN e bombeamento citam rótulo ([P1], pertinente).
+
+A disciplina **continua em validação**: suíte e relevância verdes, nenhuma nota de IA na busca e todo assunto com material da turma tem bloco; o erro de direção da redução, que o `rigor.md` pede explicitamente, aguarda decisão da equipe antes da liberação. 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:

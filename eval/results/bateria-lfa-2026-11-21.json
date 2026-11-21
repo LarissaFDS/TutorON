@@ -1,0 +1,96 @@
+[
+ {
+  "id": "lfa-afd",
+  "disciplina": "lfa",
+  "pergunta": "Como construir um AFD para cadeias com número par de zeros?",
+  "esperado": "estados p (par) e i (ímpar); 0 troca, 1 mantém; p inicial e final; tabela de transição; δ total",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 50.2,
+  "fontes": [
+   "Apostila 02 (Profa. Simone Prado, UNESP), definição de AFD e exemplos 04 e 05; aula 1 das notas de Sipser (MIT)",
+   "Apostila 02 (Profa. Simone Prado, UNESP), gramática regular; aulas 2 e 3 das notas de Sipser (MIT), ER ↔ autômato",
+   "Apostila 02 (Profa. Simone Prado, UNESP), redução de estados e exemplo de minimização com seis estados"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para construir um AFD, o segredo é pensar no que o autômato precisa \"lembrar\" sobre o que já foi lido para decidir se a cadeia será aceita ou não.\n\nComo queremos saber se o número de zeros é par, pense nos estados como \"memória\" da paridade atual:\n1. Se você leu um número par de zeros até agora, em que estado você estaria?\n2. Se você ler um '0', como essa paridade muda? E se ler um '1'?\n\nLembre-se da definição de AFD: para cada estado e cada símbolo do alfabeto ($\\Sigma = \\{0, 1\\}$), deve haver exatamente uma transição saindo dele. Se você definir dois estados, um para \"paridade par\" e outro para \"paridade ímpar\", você conseguirá cobrir todas as possibilidades de leitura.\n\nO estado inicial deve representar o que acontece com uma cadeia vazia (zero zeros, que é par). O estado final deve ser aquele que representa a condição de aceitação (paridade par).\n\n### Sua vez\nDesenhe no papel dois estados: um chamado $P$ (para par) e outro $I$ (para ímpar). Defina qual é o inicial e qual é o final. Agora, tente desenhar as setas de transição para os símbolos '0' e '1' saindo de cada um desses estados. Como ficaria a sua tabela de transição?"
+ },
+ {
+  "id": "lfa-afn",
+  "disciplina": "lfa",
+  "pergunta": "Como converter um AFN em AFD?",
+  "esperado": "construção de subconjuntos; fecho-ε; finais = conjuntos que contêm final; ∅ é estado morto",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 34.1,
+  "fontes": [
+   "Apostila 02 (Profa. Simone Prado, UNESP), definição de AFN, exemplos 07 e 08 e algoritmo de equivalência; aula 2 das notas de Sipser (MIT)",
+   "Apostila 02 (Profa. Simone Prado, UNESP), gramática regular; aulas 2 e 3 das notas de Sipser (MIT), ER ↔ autômato",
+   "Apostila 02 (Profa. Simone Prado, UNESP), exemplos 09 e 11 de equivalência entre AFN e AFD"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A conversão de um **AFN** (Autômato Finito Não-Determinístico) para um **AFD** (Autômato Finito Determinístico) utiliza o algoritmo de **Construção de Subconjuntos** [P1]. \n\nA ideia central é: como o AFN pode estar em múltiplos estados ao mesmo tempo, cada estado do novo AFD será um **conjunto de estados** do AFN original.\n\n### Passos do Algoritmo\n\n1. **Estado Inicial:** \n   O estado inicial do AFD é o fecho-$\\varepsilon$ (lido \"fecho êpsilon\", denotado por $E(\\{q_0\\})$) do estado inicial $q_0$ do AFN. O fecho-$\\varepsilon$ inclui o próprio $q_0$ e todos os estados alcançáveis a partir dele usando apenas transições vazias ($\\varepsilon$). Se não houver transições $\\varepsilon$, o estado inicial é apenas $\\{q_0\\}$.\n\n2. **Função de Transição ($\\delta'$):**\n   Para cada conjunto de estados $X$ e cada símbolo do alfabeto $a \\in \\Sigma$, o novo destino será:\n   $$\\delta'(X, a) = E\\left(\\bigcup_{q \\in X} \\delta(q, a)\\right)$$\n   Ou seja: veja para onde cada estado de $X$ vai ao ler $a$, junte todos esses destinos e aplique o fecho-$\\varepsilon$ no resultado.\n\n3. **Repetição:**\n   Calcule as transições apenas para os novos conjuntos que forem surgindo, construindo a tabela de transição do AFD linha por linha.\n\n4. **Estados Finais:**\n   Todo conjunto $X$ que **contiver pelo menos um** estado final do AFN original será um estado final no AFD.\n\n*Nota:* Se ao ler um símbolo um conjunto não levar a nenhum estado, o destino é o conjunto vazio $\\emptyset$, que atua como estado morto.\n\n---\n\n### Sua vez\n\nPara praticar no papel: suponha um AFN sem transições $\\varepsilon$ com estado inicial $q_0$ e transições $\\delta(q_0, a) = \\{q_0, q_1\\}$. \n\nQual é o **estado inicial do AFD** e qual é a **linha correspondente a ele** na tabela de transição para o símbolo $a$? Desenhe a tabela no papel e me diga o que encontrou!"
+ },
+ {
+  "id": "lfa-bombeamento",
+  "disciplina": "lfa",
+  "pergunta": "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?",
+  "esperado": "p arbitrário; w = a^p b^p; toda decomposição com |xy| ≤ p e |y| ≥ 1 tem y só de a; xy²z fora de L",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Apostila 02 (Profa. Simone Prado, UNESP), lema do bombeamento; aula 3 das notas de Sipser (MIT), linguagens não regulares",
+   "Apostila 01 (Profa. Simone Prado, UNESP), tabela linguagem × gramática × reconhecedor; ementa de ECOM014 no PPC de 2014",
+   "Apostila 02 (Profa. Simone Prado, UNESP), exemplo 17"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para provar que uma linguagem não é regular usando o lema do bombeamento, o segredo é tratar o lema como um **jogo de estratégia** contra um adversário. O objetivo é mostrar que, não importa como o adversário escolha a decomposição da palavra, você sempre consegue encontrar um valor para $i$ que tira a palavra da linguagem.\n\nO material [P1] detalha esse jogo. O passo fundamental é que você não pode escolher a decomposição $xyz$; você deve provar que a propriedade falha para **toda e qualquer** decomposição possível que respeite as regras $|xy| \\le p$ e $|y| \\ge 1$.\n\nPara o caso de $L = \\{a^n b^n \\mid n \\ge 0\\}$, o raciocínio segue estes pontos:\n1. Você assume que a linguagem é regular (por contradição).\n2. Você escolhe uma palavra $w$ que dependa de $p$ (a constante do lema), garantindo que $|w| \\ge p$.\n3. Você analisa o que acontece com a parte \"bombeável\" ($y$) dentro das restrições impostas pelo lema. Como $|xy| \\le p$, onde essa parte $y$ está localizada dentro da palavra $a^p b^p$? Ela pode conter apenas 'a', apenas 'b', ou uma mistura?\n\n### Sua vez\nConsiderando a palavra $w = a^p b^p$ e a restrição $|xy| \\le p$, tente desenhar no papel onde a subpalavra $y$ pode estar. Se $y$ for composto apenas por símbolos 'a', o que acontece com a contagem de 'a's e 'b's se você escolher $i=2$ (ou seja, $xy^2z$)?"
+ },
+ {
+  "id": "lfa-parada",
+  "disciplina": "lfa",
+  "pergunta": "Por que o problema da parada é indecidível?",
+  "esperado": "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [
+   "Aulas 8 e 9 das notas de Sipser (MIT, Holden Lee), A_TM indecidível e problema da parada; ementa de ECOM014",
+   "Aulas 9 a 14 das notas de Sipser (MIT, Holden Lee), redutibilidade, PCP e complexidade de tempo; ementa de ECOM014"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender por que o problema da parada ($HALT_{TM}$) é indecidível, pense no que aconteceria se você tivesse uma \"caixa preta\" mágica que pudesse responder, para qualquer programa $M$ e entrada $w$, se ele para ou não.\n\nSe você tivesse essa caixa, você poderia construir um novo programa que usasse essa informação para criar uma contradição lógica, exatamente como fizemos com o problema da aceitação ($A_{TM}$) usando a diagonalização de Cantor.\n\nLembre-se da lógica da redução: se você consegue usar um problema \"difícil\" (como $A_{TM}$) para resolver um problema \"novo\" (como $HALT_{TM}$), e você já sabe que o primeiro é impossível de resolver, então o segundo também deve ser.\n\nPara visualizar melhor, tente responder: se você tivesse um decisor para a parada, como você poderia construir um decisor para $A_{TM}$? Ou seja, como você usaria a resposta \"para/não para\" para decidir se uma máquina \"aceita/não aceita\"?\n\n### Sua vez\nImagine que você tem uma máquina $M$ e uma entrada $w$. Você quer saber se $M$ aceita $w$. Se você pudesse perguntar a um \"oráculo da parada\" se $M$ para em $w$, qual seria o próximo passo lógico para decidir se $M$ aceita $w$ sem cair em um laço infinito?"
+ },
+ {
+  "id": "lfa-fora",
+  "disciplina": "lfa",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre **Cálculo 3**. Como sou um tutor especializado em **Linguagens Formais, Autômatos e Computabilidade (LFA)**, esse tema está fora do meu escopo de atuação.\n\nPara obter a melhor ajuda possível, recomendo que você selecione a disciplina **Cálculo 3** no menu do site. Lá, os tutores poderão te explicar como realizar a mudança de variáveis de coordenadas cartesianas $(x, y)$ para polares $(r, \\theta)$, incluindo o importante fator de correção no diferencial de área ($dA = r \\, dr \\, d\\theta$).\n\nSe precisar de ajuda com autômatos, gramáticas, máquinas de Turing ou qualquer outro tópico de LFA, estou à disposição!\n\n### Sua vez\nPara garantir que você está no lugar certo, qual é o tópico de LFA que você está estudando no momento?"
+ }
+]
