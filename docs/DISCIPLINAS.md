@@ -382,6 +382,27 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado por HTTP 429), 20/11/2026 (`
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou a falha de busca acima.
 
+## Geometria Analítica: provas resolvidas e conferidas com SymPy (20/11/2026)
+
+Geometria Analítica (ECOM005) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`ga`), **em validação**, com aviso;
+- `disciplinas/ga/`: rigor, 29 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_ga.py`, que recalcula com SymPy cada número dos blocos;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+O material vem de 14 fotos de provas (2016.2, com o nome do Prof. Adelailson Peixoto no cabeçalho; 2017.1, sem professor impresso; e duas sem cabeçalho), parafraseadas; as fotos não estão no repositório, e os dados pessoais de um aluno que apareciam numa delas não foram registrados. A ementa oficial não foi encontrada: os 13 assuntos saíram das provas. Os livros protegidos (Steinbruch, Reis e Silva, Boulos) ficaram só como referência. Uma resolução foi corrigida (enunciado falso sobre retas e parábola) e três ficam pendentes do professor (figuras e uma foto desfocada). Os testes acharam e a equipe corrigiu um erro de conta num bloco (quarto vértice do paralelogramo).
+
+Busca: na busca só léxica dos testes, "distância de um ponto a uma reta no plano" traz primeiro o bloco de plano por três pontos; na busca híbrida do backend (bateria de relevância, 313/313) o bloco certo vem primeiro.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026 (`eval/results/bateria-ga-2026-11-20.json`). As respostas foram lidas uma a uma e conferidas:
+- plano por três pontos, retas reversas, produto misto e esfera: corretas e socráticas; nenhuma entregou valor final de questão de prova;
+- identificar cônica: correta (completar quadrados, B² − 4AC), mas a "Verificação" sugere substituir o **centro** na equação original, o que está errado: o centro não pertence à cônica;
+- só as respostas de plano e de cônica terminam com "**Verificação:**";
+- integral dupla com GA selecionada: disse que é de Cálculo 3, sem fontes.
+
+A disciplina continua **em validação**: a passagem a MVP depende de decisão da equipe sobre a dica errada acima e as linhas de verificação ausentes.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -418,3 +439,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |
 | `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
 | `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
+| `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | em validação; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
