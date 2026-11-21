@@ -221,6 +221,18 @@ PERGUNTAS = [
     ("fis1-disco", "fis1", "Como achar a aceleração de um bloco pendurado num fio enrolado num disco?",
      "mg − T = ma; TR = ½MR²α; a = αR; a = 2mg/(M+2m); M=2,5, m=1,2 dá 4,8 m/s² sem entregar se for a prova"),
     ("fis1-fora", "fis1", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Sistemas Operacionais: resoluções conferidas em tests_acervo/test_disciplina_so.py.
+    ("so-rr", "so", "Como montar o Gantt do Round-Robin com quantum 2?",
+     "fila de prontas a cada quantum; quem chega entra antes da preemptada; vida = fim − chegada; espera = vida − duração"),
+    ("so-lru", "so", "Quantas faltas de página o LRU dá com 3 quadros?",
+     "tabela por referência; substitui o usado há mais tempo; conta faltas iniciais; 7 0 1 2 0 3 0 4 2 3 0 3 2 dá 9"),
+    ("so-disputa", "so", "O que é uma condição de disputa?",
+     "entrelaçamento ler-somar-escrever de duas tarefas perde atualização; seção crítica; exclusão mútua"),
+    ("so-impasse", "so", "Quais são as quatro condições para um impasse?",
+     "exclusão mútua, posse e espera, não preempção, espera circular; todas necessárias"),
+    ("so-thread", "so", "Qual a diferença entre processo e thread?",
+     "processo tem espaço de endereçamento próprio; threads compartilham a memória do processo, cada uma com pilha e registradores"),
+    ("so-fora", "so", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
