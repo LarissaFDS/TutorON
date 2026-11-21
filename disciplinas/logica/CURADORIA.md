@@ -1,6 +1,6 @@
 # Curadoria — Lógica Aplicada à Computação (`logica`, ECOM007)
 
-Situação: **em validação**, com aviso no site, até passarem os critérios de liberação de `docs/DISCIPLINAS.md`.
+Situação: **MVP** desde 21/11/2026, sem aviso, depois dos critérios de liberação: suíte e relevância verdes, nenhuma nota de IA na busca, bateria com o Gemini real lida e conferida, todo assunto com material com bloco. Falhas da IA registradas em `docs/DISCIPLINAS.md`.
 
 ## Disciplina e ementa
 

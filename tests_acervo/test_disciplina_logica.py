@@ -51,9 +51,7 @@ def test_logica_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert LOG.situacao in ("em validação", "MVP")
-    assert LOG.em_validacao == (LOG.situacao == "em validação")
-    assert bool(LOG.aviso) == LOG.em_validacao
+    assert LOG.situacao == "MVP" and not LOG.em_validacao and not LOG.aviso
 
 
 def test_itens_gerados_estao_atualizados():
