@@ -1,6 +1,6 @@
 # Curadoria — Geometria Analítica (`ga`, ECOM005)
 
-Situação: **em validação**.
+Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitando a dica errada da IA sobre cônicas registrada em `docs/DISCIPLINAS.md`.
 
 ## Disciplina
 

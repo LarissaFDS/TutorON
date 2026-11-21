@@ -62,7 +62,7 @@ def test_ga_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert GA.situacao == "em validação" and GA.em_validacao and GA.aviso
+    assert GA.situacao == "MVP" and not GA.em_validacao and not GA.aviso
 
 
 def test_itens_gerados_estao_atualizados():
