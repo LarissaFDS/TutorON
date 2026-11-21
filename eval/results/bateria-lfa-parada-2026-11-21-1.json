@@ -1,0 +1,22 @@
+[
+ {
+  "id": "lfa-parada",
+  "disciplina": "lfa",
+  "pergunta": "Por que o problema da parada é indecidível?",
+  "esperado": "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Aulas 8 e 9 das notas de Sipser (MIT, Holden Lee), A_TM indecidível e problema da parada; ementa de ECOM014",
+   "Aulas 9 a 14 das notas de Sipser (MIT, Holden Lee), redutibilidade, PCP e complexidade de tempo; ementa de ECOM014"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender por que o problema da parada ($HALT_{TM}$) é indecidível, o caminho mais seguro é pensar na relação de dependência entre problemas.\n\nImagine que você é um engenheiro de software e alguém lhe entrega uma \"caixa preta\" mágica chamada `decisor_parada(M, w)`. Essa caixa sempre retorna `SIM` se a máquina $M$ para ao rodar com a entrada $w$, e `NÃO` se ela entra em loop infinito.\n\nAgora, tente usar essa caixa para resolver o problema da aceitação ($A_{TM}$), que sabemos ser indecidível (conforme o Teorema 1 em [P1]). Se você tivesse essa caixa, como você construiria um algoritmo que decide se uma máquina $M$ aceita uma palavra $w$? \n\nLembre-se: o problema da aceitação exige que você diga `SIM` apenas se $M$ aceitar $w$. O que acontece se você rodar a `decisor_parada` primeiro? Se ela disser `NÃO`, você já sabe a resposta. Mas se ela disser `SIM`, o que você pode fazer com segurança para descobrir se a máquina aceita ou rejeita?\n\nSe você conseguir construir esse algoritmo, você teria resolvido o $A_{TM}$. Como sabemos que o $A_{TM}$ é impossível de resolver, o que isso nos diz sobre a existência da sua \"caixa preta\"?\n\n### Sua vez\nTente desenhar no papel o pseudocódigo de uma máquina $S$ que usa a `decisor_parada` como sub-rotina para decidir o $A_{TM}$. Onde ela aceita e onde ela rejeita?"
+ }
+]
