@@ -704,6 +704,36 @@
         "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?",
         "Por que o problema da parada é indecidível?"
       ]
+    },
+    {
+      "id": "metodologia",
+      "nome": "Metodologia da Pesquisa e do Trabalho Científico",
+      "sigla": "MPTC",
+      "situacao": "MVP",
+      "itens": "disciplinas/metodologia/acervo/itens.json",
+      "indice": "disciplinas/metodologia/acervo/indice.json",
+      "materiais": "disciplinas/metodologia/materiais",
+      "rigor": "disciplinas/metodologia/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "metodologia-01-ciencia-conhecimento",
+        "metodologia-02-tipos-metodos-pesquisa",
+        "metodologia-03-problema-hipotese-projeto",
+        "metodologia-04-estrutura-artigo-monografia",
+        "metodologia-05-normas-abnt-citacoes-referencias",
+        "metodologia-06-latex-basico",
+        "metodologia-07-latex-figuras-tabelas-matematica",
+        "metodologia-08-referencias-bibtex-jabref",
+        "metodologia-09-apresentacao-trabalhos",
+        "metodologia-10-etica-plagio"
+      ],
+      "exemplos": [
+        "Como fazer uma referência bibliográfica no LaTeX com BibTeX?",
+        "Quais as seções de um artigo científico?",
+        "Como citar um artigo segundo a ABNT?",
+        "Como inserir uma figura com legenda no LaTeX?",
+        "Como escrever o resumo de um artigo científico?"
+      ]
     }
   ]
 }

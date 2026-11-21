@@ -410,6 +410,62 @@ PERGUNTAS = [
     ("paa", "fora", "Como converter um AFN em AFD?", []),
     ("logica", "fora", "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?", []),
     ("discreta", "fora", "Como construir um AFD para cadeias com número par de zeros?", []),
+    # Metodologia da Pesquisa: exemplos do cadastro, paráfrases e perguntas de fora (fronteira: Inglês).
+    (
+        "metodologia",
+        "assunto",
+        "Como fazer uma referência bibliográfica no LaTeX com BibTeX?",
+        ["metodologia-bibtex-arquivo-bib", "metodologia-bibtex-abntex2cite"],
+    ),
+    (
+        "metodologia",
+        "assunto",
+        "Quais as seções de um artigo científico?",
+        ["metodologia-artigo-estrutura", "metodologia-artigo-secoes-textuais"],
+    ),
+    (
+        "metodologia",
+        "assunto",
+        "Como citar um artigo segundo a ABNT?",
+        ["metodologia-abnt-citacoes", "metodologia-abnt-referencias"],
+    ),
+    ("metodologia", "assunto", "Como inserir uma figura com legenda no LaTeX?", ["metodologia-latex-figura-legenda"]),
+    (
+        "metodologia",
+        "assunto",
+        "Como escrever o resumo de um artigo científico?",
+        ["metodologia-resumo-palavras-chave"],
+    ),
+    ("metodologia", "assunto", "Como fazer uma tabela no LaTeX?", ["metodologia-latex-tabela"]),
+    (
+        "metodologia",
+        "assunto",
+        "O que significa o erro Undefined control sequence?",
+        ["metodologia-latex-compilacao-erros"],
+    ),
+    ("metodologia", "assunto", "Como escrever uma equação numerada no LaTeX?", ["metodologia-latex-matematica"]),
+    (
+        "metodologia",
+        "assunto",
+        "Qual a diferença entre apêndice e anexo?",
+        ["metodologia-artigo-estrutura", "metodologia-monografia-abntex2"],
+    ),
+    ("metodologia", "assunto", "Como usar o apud numa citação de citação?", ["metodologia-abnt-citacoes"]),
+    ("metodologia", "assunto", "Como fazer slides de apresentação em LaTeX?", ["metodologia-apresentacao-beamer"]),
+    ("metodologia", "assunto", "Como montar um TCC no padrão ABNT usando LaTeX?", ["metodologia-monografia-abntex2"]),
+    (
+        "metodologia",
+        "assunto",
+        "Onde fica a legenda de uma figura segundo a ABNT?",
+        ["metodologia-abnt-ilustracoes-tabelas-secoes", "metodologia-latex-figura-legenda"],
+    ),
+    ("metodologia", "fora", "Como simplificar uma função com mapa de Karnaugh?", []),
+    ("metodologia", "fora", "Como fazer um LEFT JOIN em SQL?", []),
+    ("metodologia", "fora", "Me conte uma piada", []),
+    ("metodologia", "fora", "Qual a transformada de Laplace de e^{-at}?", []),
+    ("metodologia", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
+    ("ingles", "fora", "Como inserir uma figura com legenda no LaTeX?", []),
+    ("ingles", "fora", "Como fazer uma referência bibliográfica no LaTeX com BibTeX?", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
