@@ -64,9 +64,7 @@ def test_iec_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert IEC.situacao in ("em validação", "MVP")
-    if IEC.situacao == "MVP":
-        assert not IEC.em_validacao and not IEC.aviso
+    assert IEC.situacao == "MVP" and not IEC.em_validacao and not IEC.aviso
 
 
 def test_itens_gerados_estao_atualizados():

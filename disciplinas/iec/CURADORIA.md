@@ -1,6 +1,6 @@
 # Curadoria — Introdução à Engenharia de Computação (`iec`, ECOM006)
 
-Situação: **em validação** (ver o critério de liberação em `docs/DISCIPLINAS.md`).
+Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitando as falhas da IA registradas em `docs/DISCIPLINAS.md`.
 
 ## Disciplina e ementa
 
