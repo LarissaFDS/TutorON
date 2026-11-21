@@ -1,0 +1,108 @@
+[
+ {
+  "id": "iec-156",
+  "disciplina": "iec",
+  "pergunta": "Como converter 156 para binário e hexadecimal?",
+  "esperado": "divisões sucessivas por 2: 10011100; grupos de 4 bits: 9C; Verificação convertendo de volta",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 22.1,
+  "fontes": [
+   "Fotos da Reavaliação AB1 de Introdução à Engenharia de Computação (ECOM006), UFAL, 2016.1, Q1",
+   "Slides do Apêndice A (Números binários), Tanenbaum, Pearson, slides 2 a 8",
+   "Fotos da Reavaliação AB1 de Introdução à Engenharia de Computação (ECOM006), UFAL, 2016.1, Q2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para converter um número decimal para binário, o método mais direto é o das **divisões sucessivas por 2**. Você divide o número pelo qual deseja converter e guarda o resto. Como o resto de uma divisão por 2 só pode ser 0 ou 1, esses serão exatamente os bits do seu número.\n\nO segredo está na ordem: o primeiro resto que você encontra é o bit menos significativo (o da direita), e o último resto é o mais significativo (o da esquerda).\n\nDepois de ter o número em binário, a conversão para hexadecimal fica muito mais simples: basta agrupar os bits de 4 em 4, começando da direita para a esquerda, e substituir cada grupo pelo símbolo hexadecimal correspondente (lembrando que de 10 a 15 usamos as letras de A a F).\n\nTente realizar as divisões no papel. Se precisar, comece dividindo 156 por 2, depois o resultado por 2, e assim por diante, até chegar a 0.\n\n### Sua vez\nNo papel, faça as divisões sucessivas de 156 por 2. Quais foram os restos que você encontrou para as três primeiras divisões (começando por $156 \\div 2$)?"
+ },
+ {
+  "id": "iec-karnaugh",
+  "disciplina": "iec",
+  "pergunta": "Como simplificar uma expressão com mapa de Karnaugh?",
+  "esperado": "tabela-verdade antes; ordem Gray 00 01 11 10; grupos de 1, 2, 4, 8; variáveis que não mudam; conferir na tabela",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "FFCLRP-USP), slides 28 a 70 (exercícios dos slides 62 a 70)",
+   "Fotos da Reavaliação AB1 de Introdução à Engenharia de Computação (ECOM006), UFAL, 2016.1, Q4"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar uma expressão usando o Mapa de Karnaugh, o objetivo principal é agrupar os \"1s\" adjacentes em potências de 2 (1, 2, 4, 8...), buscando sempre os maiores grupos possíveis para eliminar o máximo de variáveis.\n\nO segredo está na **ordem Gray** das colunas (00, 01, 11, 10), que garante que apenas um bit mude entre colunas vizinhas, inclusive entre a primeira e a última (o mapa é como um cilindro). Quando uma variável muda de valor dentro de um grupo (ex: de 0 para 1), ela é eliminada daquela parte da expressão.\n\nPara começar, você precisa:\n1. Desenhar o mapa com as variáveis (ex: A nas linhas, BC nas colunas).\n2. Preencher com \"1\" as células correspondentes aos mintermos da sua expressão.\n3. Identificar os grupos (quadras, depois pares, depois isolados).\n4. Escrever o produto das variáveis que se mantêm constantes em cada grupo.\n\nSe você tiver uma expressão específica em mente, podemos aplicá-la passo a passo.\n\n### Sua vez\nEscreva a tabela-verdade ou a lista de mintermos da expressão que você deseja simplificar. Se preferir, monte o mapa de 3 variáveis no papel e me diga quais células (mintermos) estão preenchidas com \"1\"."
+ },
+ {
+  "id": "iec-xor",
+  "disciplina": "iec",
+  "pergunta": "O que faz uma porta XOR?",
+  "esperado": "1 quando as entradas são diferentes; A'B + AB'; tabela-verdade",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides do Capítulo 3 (O nível lógico digital) de Organização Estruturada de Computadores, Tanenbaum, 6ª ed., Pearson, slides 3, 4 e 10"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A porta XOR (ou \"ou exclusivo\") é fundamental em circuitos aritméticos, como somadores. Como você pode notar na tabela-verdade do material, ela possui um comportamento bem específico em relação às suas entradas $A$ e $B$.\n\nObserve as linhas da tabela onde a saída da porta XOR é igual a $1$:\n- Quando $A=0$ e $B=1$, a saída é $1$.\n- Quando $A=1$ e $B=0$, a saída é $1$.\n\nAgora, compare com as linhas onde a saída é $0$:\n- Quando $A=0$ e $B=0$, a saída é $0$.\n- Quando $A=1$ e $B=1$, a saída é $0$.\n\nCom base nessa observação, como você descreveria, com suas próprias palavras, a condição necessária para que a saída de uma porta XOR seja verdadeira (nível lógico 1)? Pense no que acontece com os valores das entradas em cada caso.\n\n### Sua vez\nEscreva no papel uma regra simples que defina o comportamento da porta XOR baseada na comparação entre os valores de $A$ e $B$."
+ },
+ {
+  "id": "iec-niveis",
+  "disciplina": "iec",
+  "pergunta": "O que são os níveis de máquina do Tanenbaum?",
+  "esperado": "seis níveis: lógico digital, microarquitetura, ISA, SO, montagem, linguagem orientada a problemas; tradução e interpretação",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 22.1,
+  "fontes": [
+   "Slides do Capítulo 3 (O nível lógico digital) de Organização Estruturada de Computadores, Tanenbaum, 6ª ed., Pearson, slide 2 (Máquinas multiníveis contemporâneas); capítulo 1 do livro só como referência"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Os níveis de máquina, conforme apresentados por Tanenbaum, são uma forma de organizar o computador como uma hierarquia de **máquinas virtuais**. Pense nisso como uma \"cebola\": cada camada esconde a complexidade da camada inferior e oferece uma interface mais simples para a camada superior.\n\nO nível mais baixo (nível 0) lida diretamente com os componentes físicos, como portas lógicas, enquanto o nível mais alto (nível 5) é onde nós, programadores, escrevemos códigos em linguagens como Python ou C. Para que o computador funcione, o que está escrito em um nível precisa ser \"traduzido\" ou \"interpretado\" para o nível abaixo, até chegar ao hardware.\n\nImagine que você quer construir um prédio: o nível 0 seria o tijolo e o cimento, enquanto o nível 5 seria o projeto arquitetônico final. Entre eles, existem etapas de engenharia, planejamento e fundação que permitem que o projeto se torne realidade.\n\nPara visualizar melhor, tente imaginar o caminho de um comando simples, como uma soma, descendo por esses níveis.\n\n### Sua vez\nSe você tivesse que explicar para alguém por que precisamos de tantos níveis em vez de apenas um nível \"físico\" e um nível \"programação\", qual seria o principal benefício dessa organização para quem desenvolve softwares?"
+ },
+ {
+  "id": "iec-c2",
+  "disciplina": "iec",
+  "pergunta": "Como representar -3 em complemento de 2 com 8 bits?",
+  "esperado": "inverte os bits de 00000011 e soma 1: 11111101; conferir -128 + 125 = -3",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Slides do Apêndice A (Números binários), Tanenbaum, Pearson, slides 2 a 8",
+   "Fotos da Reavaliação AB1 de Introdução à Engenharia de Computação (ECOM006), UFAL, 2016.1, Q2"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para representar um número negativo em complemento de 2, o método mais seguro é seguir três passos fundamentais. Vamos usar o número $+3$ como base para chegar ao $-3$.\n\n1.  **Representação do módulo:** Primeiro, escreva o número positivo ($+3$) em binário usando os 8 bits disponíveis.\n2.  **Inversão (Complemento de 1):** Inverta todos os bits dessa representação (o que é 0 vira 1, o que é 1 vira 0).\n3.  **Soma do bit de unidade:** Adicione $1$ ao resultado obtido no passo anterior.\n\nLembre-se que, em 8 bits, o $+3$ é representado como `00000011`. Ao realizar a inversão e a soma, você encontrará a representação correta para o valor negativo.\n\n**Verificação:** Se você somar o número original ($+3$) com o resultado que encontrar em complemento de 2, o resultado da soma (desprezando o bit que \"sobrar\" além do 8º bit) deve ser zero.\n\n### Sua vez\nEscreva no papel a representação de $+3$ em 8 bits, inverta cada um desses bits e, por fim, some $1$ ao resultado. Qual sequência de 8 bits você obteve?"
+ },
+ {
+  "id": "iec-fora",
+  "disciplina": "iec",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular uma integral dupla em coordenadas polares, o segredo está em transformar a região de integração e o diferencial de área do sistema cartesiano ($dx\\,dy$) para o sistema polar ($r, \\theta$).\n\nLembre-se que, no sistema polar, cada ponto no plano é definido por sua distância à origem ($r$) e pelo ângulo que o segmento faz com o eixo positivo das abscissas ($\\theta$). As relações fundamentais são $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$.\n\nQuando mudamos de coordenadas, o elemento de área $dA$ não é simplesmente $dr\\,d\\theta$. Existe um fator de correção chamado **Jacobiano** da transformação, que compensa a mudança na \"densidade\" do espaço ao passarmos de um sistema de grades retangulares para um de arcos e raios.\n\nPense no seguinte: se você desenhar um pequeno \"retângulo\" polar com variações $\\Delta r$ e $\\Delta \\theta$, o comprimento do arco é proporcional ao raio $r$. Por isso, o diferencial de área torna-se $r\\,dr\\,d\\theta$.\n\nPara montar a integral, você deve:\n1. Identificar os limites de $r$ (do centro para fora) e de $\\theta$ (a variação angular).\n2. Substituir $x$ e $y$ na função dentro da integral.\n3. Não esquecer de multiplicar pelo Jacobiano ($r$).\n\n### Sua vez\nSe você tivesse que integrar uma função sobre um círculo de raio $R$ centrado na origem, quais seriam os limites de integração para $r$ e para $\\theta$? Tente escrever a estrutura da integral (sem resolver) com esses limites."
+ }
+]

@@ -403,6 +403,26 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026 (`eval/results/
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou a dica errada e as linhas de verificação ausentes acima.
 
+## Introdução à Engenharia de Computação: reavaliações e slides conferidos por força bruta (20/11/2026)
+
+Introdução à Engenharia de Computação (ECOM006) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`iec`);
+- `disciplinas/iec/`: rigor, 16 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_iec.py`, que refaz por força bruta cada conversão, tabela-verdade, simplificação e circuito dos blocos (e confere IEEE 754 com `struct` e IPv4 com `ipaddress`);
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+A ementa foi conferida no PPC de 2014. O material vem de duas reavaliações de 2016.1 (fotos não versionadas, professor não identificado) e de slides usados na disciplina: Pearson/Tanenbaum (protegidos), Baranauskas (USP) e Deaecto (Unicamp), todos parafraseados. **Fronteira:** numeração, Boole, Karnaugh e combinacionais se sobrepõem a Sistemas Digitais, mas metade das provas é de software básico, SO e redes, que não cabem em SD; por isso é uma disciplina própria, com ângulo introdutório descrito na curadoria e isolamento testado com SD, OAC, Programação 1 e Discreta nos dois sentidos. Redes (TCP/IP, DNS, IPv4) é cobrada nas provas, mas não está na ementa de 2014. História e atribuições da profissão, linguagens de programação e embarcados ficaram sem bloco (sem material da turma nem fonte aberta conferida).
+
+Busca: bateria de relevância 327/327, com 13 perguntas de IEC e uma de fronteira.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026 (`eval/results/bateria-iec-2026-11-20.json`). As respostas foram lidas uma a uma e conferidas:
+- 156 em binário e hexadecimal, Karnaugh, XOR, níveis de Tanenbaum e −3 em complemento de 2: corretas e socráticas; nenhuma entregou o valor final;
+- só a resposta de complemento de 2 termina com "**Verificação:**"; nenhuma cita rótulo [P] do material, embora todas tenham recebido trechos;
+- integral dupla com IEC selecionada: respondeu o conteúdo sem dizer que é de Cálculo 3 (sem fontes).
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou as falhas acima (como em Discreta e GA).
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -440,3 +460,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
 | `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
 | `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; dica errada da IA sobre cônicas aceita; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
+| `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |
