@@ -174,6 +174,18 @@ PERGUNTAS = [
      "ordem importa, letras repetidas: 5!/(3!·2!) = 10; diz ordem e repetição"),
     ("discreta-rsa", "discreta", "Como funciona a criptografia RSA?",
      "n = pq, φ = (p−1)(q−1), c com mdc(c, φ) = 1, d inverso de c mod φ; C = M^c mod n e M = C^d mod n; segurança na fatoração"),
+    # Geometria Analítica: contas conferidas em tests_acervo/test_disciplina_ga.py.
+    ("ga-plano", "ga", "Como achar a equação do plano por três pontos?",
+     "vetores AB e AC; normal n = AB × AC (não nulo: pontos não colineares); forma geral n·(X − A) = 0; Verificação substituindo os pontos"),
+    ("ga-reversas", "ga", "Como calcular a distância entre duas retas reversas?",
+     "d = |(d1, d2, P1P2)| / ‖d1 × d2‖ (altura do paralelepípedo); produto misto 0 = concorrentes; d1 × d2 = 0 = paralelas"),
+    ("ga-conica", "ga", "Como identificar uma cônica pela equação?",
+     "completar quadrados (translação); sinais de x² e y²; com xy, rotação e B² − 4AC; casos degenerados"),
+    ("ga-misto", "ga", "Para que serve o produto misto?",
+     "(u × v)·w = determinante; |.| = volume do paralelepípedo; 0 = coplanares; distância ponto-plano e entre retas reversas"),
+    ("ga-esfera", "ga", "Como achar o centro e o raio de uma esfera?",
+     "completar quadrados em x, y, z; forma reduzida; conferir r² > 0"),
+    ("ga-fora", "ga", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")

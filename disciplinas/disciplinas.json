@@ -525,6 +525,39 @@
         "Quantos anagramas tem a palavra ARARA?",
         "Como funciona a criptografia RSA?"
       ]
+    },
+    {
+      "id": "ga",
+      "nome": "Geometria Analítica",
+      "sigla": "GA",
+      "situacao": "MVP",
+      "itens": "disciplinas/ga/acervo/itens.json",
+      "indice": "disciplinas/ga/acervo/indice.json",
+      "materiais": "disciplinas/ga/materiais",
+      "rigor": "disciplinas/ga/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ga-01-vetores-operacoes",
+        "ga-02-produto-vetorial-misto",
+        "ga-03-retas-no-plano",
+        "ga-04-planos-retas-espaco",
+        "ga-05-distancias-angulos-espaco",
+        "ga-06-circunferencia-esfera",
+        "ga-07-parabola",
+        "ga-08-elipse",
+        "ga-09-hiperbole",
+        "ga-10-identificacao-conicas",
+        "ga-11-rotacao-coordenadas",
+        "ga-12-quadricas-superficies",
+        "ga-13-demonstracoes-vetoriais"
+      ],
+      "exemplos": [
+        "Como achar a equação do plano por três pontos?",
+        "Como calcular a distância entre duas retas reversas?",
+        "Como identificar uma cônica pela equação?",
+        "Para que serve o produto misto?",
+        "Como achar o centro e o raio de uma esfera?"
+      ]
     }
   ]
 }
