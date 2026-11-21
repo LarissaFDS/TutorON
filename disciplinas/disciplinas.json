@@ -676,6 +676,34 @@
         "Quais são as quatro condições para um impasse?",
         "Qual a diferença entre processo e thread?"
       ]
+    },
+    {
+      "id": "lfa",
+      "nome": "Linguagens Formais, Autômatos e Computabilidade",
+      "sigla": "LFA",
+      "situacao": "em validação",
+      "itens": "disciplinas/lfa/acervo/itens.json",
+      "indice": "disciplinas/lfa/acervo/indice.json",
+      "materiais": "disciplinas/lfa/materiais",
+      "rigor": "disciplinas/lfa/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "lfa-01-linguagens-chomsky",
+        "lfa-02-automatos-finitos",
+        "lfa-03-expressoes-gramaticas-regulares",
+        "lfa-04-nao-regularidade",
+        "lfa-05-livres-de-contexto",
+        "lfa-06-maquinas-de-turing",
+        "lfa-07-funcoes-recursivas-programas",
+        "lfa-08-decidibilidade-parada",
+        "lfa-09-reducao-complexidade"
+      ],
+      "exemplos": [
+        "Como construir um AFD para cadeias com número par de zeros?",
+        "Como converter um AFN em AFD?",
+        "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?",
+        "Por que o problema da parada é indecidível?"
+      ]
     }
   ]
 }

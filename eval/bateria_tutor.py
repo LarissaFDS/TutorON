@@ -233,6 +233,16 @@ PERGUNTAS = [
     ("so-thread", "so", "Qual a diferença entre processo e thread?",
      "processo tem espaço de endereçamento próprio; threads compartilham a memória do processo, cada uma com pilha e registradores"),
     ("so-fora", "so", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Linguagens Formais, Autômatos e Computabilidade: conferidas em tests_acervo/test_disciplina_lfa.py.
+    ("lfa-afd", "lfa", "Como construir um AFD para cadeias com número par de zeros?",
+     "estados p (par) e i (ímpar); 0 troca, 1 mantém; p inicial e final; tabela de transição; δ total"),
+    ("lfa-afn", "lfa", "Como converter um AFN em AFD?",
+     "construção de subconjuntos; fecho-ε; finais = conjuntos que contêm final; ∅ é estado morto"),
+    ("lfa-bombeamento", "lfa", "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?",
+     "p arbitrário; w = a^p b^p; toda decomposição com |xy| ≤ p e |y| ≥ 1 tem y só de a; xy²z fora de L"),
+    ("lfa-parada", "lfa", "Por que o problema da parada é indecidível?",
+     "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa"),
+    ("lfa-fora", "lfa", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")

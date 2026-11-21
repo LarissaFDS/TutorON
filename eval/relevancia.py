@@ -396,6 +396,20 @@ PERGUNTAS = [
     ("so", "fora", "Me conte uma piada", []),
     ("oac", "fora", "Como montar o Gantt do Round-Robin com quantum 2?", []),
     ("ed", "fora", "Quais são as quatro condições para um impasse?", []),
+    ("lfa", "assunto", "Como construir um AFD para cadeias com número par de zeros?", ["lfa-afd-numero-par-de-zeros"]),
+    ("lfa", "assunto", "Como converter um AFN em AFD?", ["lfa-afn-para-afd-subconjuntos", "lfa-afn-para-afd-exemplos-corrigidos"]),
+    ("lfa", "assunto", "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?", ["lfa-lema-do-bombeamento-anbn", "lfa-bombeamento-mesmo-numero-a-b-corrigido"]),
+    ("lfa", "assunto", "Por que o problema da parada é indecidível?", ["lfa-problema-da-parada-indecidivel"]),
+    ("lfa", "assunto", "Como minimizar um AFD pela tabela de pares?", ["lfa-minimizacao-afd-tabela-de-pares"]),
+    ("lfa", "assunto", "Quando uma gramática é ambígua?", ["lfa-ambiguidade-gramatica-linguagem-inerente", "lfa-glc-derivacao-arvore-corrigido"]),
+    ("lfa", "assunto", "Como passar uma gramática para a forma normal de Chomsky?", ["lfa-forma-normal-de-chomsky"]),
+    ("lfa", "assunto", "Qual a diferença entre linguagem decidível e reconhecível?", ["lfa-decidivel-vs-reconhecivel-diagonalizacao"]),
+    ("lfa", "assunto", "Como fazer a divisão inteira em LPM sem GOTO?", ["lfa-lpm-divisao-inteira-loop-sem-goto"]),
+    ("lfa", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
+    ("lfa", "fora", "Me conte uma piada", []),
+    ("paa", "fora", "Como converter um AFN em AFD?", []),
+    ("logica", "fora", "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?", []),
+    ("discreta", "fora", "Como construir um AFD para cadeias com número par de zeros?", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
