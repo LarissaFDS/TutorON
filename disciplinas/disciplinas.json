@@ -709,7 +709,7 @@
       "id": "metodologia",
       "nome": "Metodologia da Pesquisa e do Trabalho Científico",
       "sigla": "MPTC",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/metodologia/acervo/itens.json",
       "indice": "disciplinas/metodologia/acervo/indice.json",
       "materiais": "disciplinas/metodologia/materiais",

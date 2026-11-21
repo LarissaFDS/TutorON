@@ -1,6 +1,6 @@
 # Metodologia da Pesquisa e do Trabalho Científico — curadoria do acervo
 
-Situação: **em validação**. Usa o mesmo fluxo e a mesma IA das outras disciplinas; só acrescenta acervo, `rigor.md` e testes. Nenhum modelo, provedor ou prompt próprio.
+Situação: **MVP** desde 21/11/2026, sem aviso, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real com Gemini lida e conferida; todo tópico com material da turma tem bloco na busca). Antes disso esteve em validação. Usa o mesmo fluxo e a mesma IA das outras disciplinas; só acrescenta acervo, `rigor.md` e testes. Nenhum modelo, provedor ou prompt próprio.
 
 | Item | Estado em 21/11/2026 |
 |---|---|

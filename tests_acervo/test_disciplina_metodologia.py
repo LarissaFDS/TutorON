@@ -85,7 +85,7 @@ def test_metodologia_cadastrada_com_acervo_proprio_e_a_mesma_ia():
             assert NA_BUSCA.isdisjoint({c["id"] for c in read_json(outra.indice)["chunks"]}), outra.id
     bruto = [d for d in read_json(ROOT / "disciplinas/disciplinas.json")["disciplinas"] if d["id"] == "metodologia"][0]
     assert not {"modelo", "model", "provedor", "endpoint", "prompt", "chave"} & set(bruto)
-    assert bruto["situacao"] == "em validação"
+    assert bruto["situacao"] == "MVP" and "aviso" not in bruto
     assert read_json(MET.indice)["embedding_model"] == read_json(disciplinas.obter("ingles").indice)["embedding_model"]
 
 
