@@ -487,6 +487,26 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 429 nos modelos m
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida; todo assunto com material da turma tem bloco na busca). As falhas acima são as mesmas aceitas nas disciplinas anteriores; 1 resolução aguarda o professor e a revisão humana e do professor continuam pendentes.
 
+## Linguagens Formais, Autômatos e Computabilidade: listas e provas da UFAL e apostilas conferidas por simulação (21/11/2026)
+
+Linguagens Formais, Autômatos e Computabilidade (ECOM014; Teoria da Computação em CC) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`lfa`) e o campo `acervo` em `disciplinas/cursos.json` (EC e CC);
+- `disciplinas/lfa/`: rigor, 32 blocos (31 na busca; 1 nota da equipe candidata, fora da busca), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/lfa_verif.py`, simuladores de AFD, AFN (subconjuntos com fecho-ε), minimização, ER (Thompson), gramáticas (Earley e contagem de derivações), autômato com pilha, máquina de Turing, programas LPM e funções recursivas primitivas;
+- `tests_acervo/test_disciplina_lfa.py`, a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+A ementa foi conferida no PPC de 2014, p. 30. **Autoria (correção):** a lista de 2014.1 cujo arquivo tem o nome de um aluno é da **Profa. Eliana (UFAL)**; o aluno só a resolveu à mão (nome e matrícula não versionados; o teste procura os dois). As apostilas são da Profa. Simone Prado (UNESP), sem licença declarada: só paráfrase, com erros corrigidos (AFN → AFD, bombeamento, ambiguidade). Sipser, Menezes e Hopcroft só por referência; JFLAP só citado. **Fronteira:** complexidade aprofundada em PAA; lógica em Lógica; conjuntos e contagem em Discreta; isolamento testado nos dois sentidos.
+
+Busca: bateria de relevância 380/380, com 9 perguntas de LFA, 2 fora do assunto e 3 de fronteira (PAA, Lógica e Discreta).
+
+IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 1, com HTTP 429/503 nos modelos maiores), 21/11/2026 (`eval/results/bateria-lfa-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas contra os blocos e os simuladores:
+- AFD do número par de zeros, AFN → AFD e bombeamento de aⁿbⁿ: corretas e socráticas (estados de paridade com o inicial final; subconjuntos com fecho-ε, finais que **contêm** um final e ∅ como estado morto; toda decomposição com |xy| ≤ p), sem entregar o resultado final;
+- problema da parada: socrática, mas **com um erro**: uma frase inverte a direção da redução (diz usar $A_{TM}$ para resolver $HALT_{TM}$); a pergunta seguinte, na direção certa, pede um decisor de $A_{TM}$ a partir de um decisor da parada. O bloco `lfa-problema-da-parada-indecidivel` está certo; depois disso, `rigor.md` e o bloco passaram a dizer qual frase é a direção certa e qual é a errada, e a pergunta rodou de novo duas vezes (`eval/results/bateria-lfa-parada-2026-11-21-1.json` e `-2.json`): nas duas, a direção da redução está certa (um decisor da parada daria um decisor de $A_{TM}$); a segunda adianta mais da construção do decisor;
+- integral dupla com LFA selecionada: sem fontes, indicou Cálculo 3, mas adiantou o fator de área ($dA = r\,dr\,d\theta$, "r dr d-teta");
+- nenhuma termina com "**Verificação:**"; só as de AFN e bombeamento citam rótulo ([P1], pertinente).
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -528,3 +548,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (33 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; falhas da IA registradas (verificação, citações, conteúdo fora da disciplina); ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
+| `lfa` | Linguagens Formais, Autômatos e Computabilidade | Markdown curado em `disciplinas/lfa` (32 blocos, 31 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |

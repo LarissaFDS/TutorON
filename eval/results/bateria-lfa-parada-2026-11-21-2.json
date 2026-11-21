@@ -1,0 +1,20 @@
+[
+ {
+  "id": "lfa-parada",
+  "disciplina": "lfa",
+  "pergunta": "Por que o problema da parada é indecidível?",
+  "esperado": "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 26.1,
+  "fontes": [
+   "Aulas 8 e 9 das notas de Sipser (MIT, Holden Lee), A_TM indecidível e problema da parada; ementa de ECOM014",
+   "Aulas 9 a 14 das notas de Sipser (MIT, Holden Lee), redutibilidade, PCP e complexidade de tempo; ementa de ECOM014"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender por que o problema da parada ($HALT_{TM}$) é indecidível, pense no que aconteceria se você tivesse uma \"caixa preta\" mágica (um decisor) que, ao receber qualquer código de máquina de Turing $M$ e uma entrada $w$, respondesse instantaneamente \"SIM\" se ela para ou \"NÃO\" se ela entra em laço infinito.\n\nO segredo aqui é a **redução**. Se você possui essa caixa mágica, você poderia resolver problemas que já sabemos serem impossíveis, como o $A_{TM}$ (o problema de decidir se uma máquina aceita uma palavra).\n\nImagine que você quer saber se uma máquina $M$ aceita $w$. Você poderia usar sua caixa mágica da parada para verificar se $M$ para em $w$. Se ela para, você simplesmente simula $M$ em $w$ até o fim e vê o resultado. Se ela não para, você já sabe que ela nunca aceitará. \n\nO problema é que, se você consegue decidir $A_{TM}$ usando essa caixa, você entra em contradição com o Teorema da Diagonalização de Cantor, que prova que $A_{TM}$ é indecidível. Ou seja: se a caixa existisse, a lógica matemática quebraria.\n\n### Sua vez\nTente escrever no papel: se você tivesse um decisor para $HALT_{TM}$, como você construiria um algoritmo (passo a passo) que decide $A_{TM}$? O que esse seu algoritmo faria ao receber a resposta \"NÃO\" da caixa mágica da parada?"
+ }
+]

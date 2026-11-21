@@ -28,7 +28,7 @@
           {"codigo": "ECOM013", "nome": "Desenho"}
         ]},
         {"numero": 3, "disciplinas": [
-          {"codigo": "ECOM014", "nome": "Linguagens Formais, Autômatos e Computabilidade"},
+          {"codigo": "ECOM014", "nome": "Linguagens Formais, Autômatos e Computabilidade", "acervo": "lfa"},
           {"codigo": "ECOM015", "nome": "Projeto de Software"},
           {"codigo": "ECOM016", "nome": "Física 2", "acervo": "fis2"},
           {"codigo": "ECOM017", "nome": "Cálculo 3", "acervo": "calc3"},
@@ -113,7 +113,7 @@
           {"nome": "Programação 2"},
           {"nome": "Programação 3"},
           {"nome": "Projeto e Análise de Algoritmos", "acervo": "paa"},
-          {"nome": "Teoria da Computação"}
+          {"nome": "Teoria da Computação", "acervo": "lfa"}
         ]},
         {"numero": 5, "disciplinas": [
           {"nome": "Sistemas Operacionais"},
