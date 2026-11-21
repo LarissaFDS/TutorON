@@ -1,0 +1,109 @@
+[
+ {
+  "id": "ga-plano",
+  "disciplina": "ga",
+  "pergunta": "Como achar a equação do plano por três pontos?",
+  "esperado": "vetores AB e AC; normal n = AB × AC (não nulo: pontos não colineares); forma geral n·(X − A) = 0; Verificação substituindo os pontos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.0,
+  "fontes": [
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | Final (14.11.2016), Q7; P2 (15.10.2016), Q3b; Reavaliação AB2 (24.05.2017), Q4a; P2 Adventistas, Q5; Reposição 2, Q1c",
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | P2 (15.10.2016), Q2; Reposição 2 (03.11.2016), Q2b e Q3; Reavaliação AB2 (24.05.2017), Q3b"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar a equação de um plano definido por três pontos $A$, $B$ e $C$, precisamos de duas informações fundamentais: um **ponto** pertencente ao plano (você já tem três!) e um **vetor normal** ($\\mathbf{n}$) ao plano.\n\nO vetor normal é aquele que é perpendicular a qualquer vetor contido no plano. Se você tem os pontos $A$, $B$ e $C$, você pode criar dois vetores que \"vivem\" dentro desse plano: $\\overrightarrow{AB} = B - A$ e $\\overrightarrow{AC} = C - A$.\n\nComo você faria para encontrar um terceiro vetor que seja, ao mesmo tempo, perpendicular a $\\overrightarrow{AB}$ e a $\\overrightarrow{AC}$? Pense na operação vetorial que resulta em um vetor ortogonal aos dois vetores de entrada.\n\nUma vez que você tenha esse vetor normal $\\mathbf{n} = (a, b, c)$, a equação geral do plano é dada por:\n$$\\mathbf{n} \\cdot (X - A) = 0$$\nOnde $X = (x, y, z)$ é um ponto genérico do plano.\n\n### Sua vez\nEscolha três pontos quaisquer (por exemplo, $A(1, 0, 0)$, $B(0, 1, 0)$ e $C(0, 0, 1)$), calcule os vetores $\\overrightarrow{AB}$ e $\\overrightarrow{AC}$ e aplique o produto vetorial entre eles para encontrar o vetor normal $\\mathbf{n}$. Qual vetor você obteve?\n\n**Verificação:** Após encontrar $\\mathbf{n}$, verifique se ele é realmente ortogonal a $\\overrightarrow{AB}$ fazendo o produto escalar $\\mathbf{n} \\cdot \\overrightarrow{AB}$. O resultado deve ser zero."
+ },
+ {
+  "id": "ga-reversas",
+  "disciplina": "ga",
+  "pergunta": "Como calcular a distância entre duas retas reversas?",
+  "esperado": "d = |(d1, d2, P1P2)| / ‖d1 × d2‖ (altura do paralelepípedo); produto misto 0 = concorrentes; d1 × d2 = 0 = paralelas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | Reavaliação AB2 (24.05.2017), Q4b",
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | 1ª Avaliação (10.02.2017), Q4a; 1ª Avaliação (11.02.2017), Q4a; Reavaliação AB1 (24.05.2017), Q2b",
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | Reavaliação AB1 (24.05.2017), Q2a; 1ª Avaliação (10.02.2017), Q4b; 1ª Avaliação (11.02.2017), Q4b"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular a distância entre duas retas reversas, o conceito fundamental é que essa distância é a **menor distância possível** entre qualquer ponto de uma reta e qualquer ponto da outra. Como elas não são paralelas nem se cruzam, essa distância é medida ao longo de um segmento que é simultaneamente perpendicular a ambas as retas.\n\nPense no seguinte: se você tem uma reta $r$ com vetor diretor $\\mathbf{d}_1$ e uma reta $s$ com vetor diretor $\\mathbf{d}_2$, qual seria um vetor que aponta na direção dessa \"menor distância\"? \n\nLembre-se de que, para encontrar um vetor perpendicular a dois outros vetores dados, utilizamos uma operação específica da álgebra vetorial. Além disso, se você tomar um ponto $P_1$ em $r$ e um ponto $P_2$ em $s$, o vetor $\\overrightarrow{P_1P_2}$ conecta as duas retas. A distância será a projeção desse vetor $\\overrightarrow{P_1P_2}$ sobre a direção perpendicular que você encontrou.\n\nO material [P1] apresenta uma fórmula que resume esse raciocínio usando o produto misto e o produto vetorial.\n\n### Sua vez\nTente escrever no papel, com base na definição de produto misto $(\\mathbf{d}_1, \\mathbf{d}_2, \\overrightarrow{P_1P_2})$, por que a divisão pela norma do produto vetorial $\\|\\mathbf{d}_1 \\times \\mathbf{d}_2\\|$ é necessária para obter a distância. O que esse produto vetorial representa geometricamente em relação às duas retas?"
+ },
+ {
+  "id": "ga-conica",
+  "disciplina": "ga",
+  "pergunta": "Como identificar uma cônica pela equação?",
+  "esperado": "completar quadrados (translação); sinais de x² e y²; com xy, rotação e B² − 4AC; casos degenerados",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | Final (14.11.2016), Q6; Reposição 2 (03.11.2016), Q4"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar uma cônica, o primeiro passo é observar se a equação geral $Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$ possui o termo misto $Bxy$.\n\nSe $B = 0$, você não precisa se preocupar com rotação. Nesse caso, o caminho mais direto é agrupar os termos em $x$ e os termos em $y$ para **completar quadrados**. Isso permitirá transformar a equação na forma reduzida, onde você conseguirá visualizar o centro, os eixos e o tipo de cônica (elipse, hipérbole ou parábola).\n\nSe $B \\neq 0$, a cônica está rotacionada. O sinal do discriminante $B^2 - 4AC$ é o que define a \"natureza\" da curva:\n*   $B^2 - 4AC < 0$: Elipse (ou caso degenerado).\n*   $B^2 - 4AC = 0$: Parábola.\n*   $B^2 - 4AC > 0$: Hipérbole (ou caso degenerado).\n\nLembre-se: completar quadrados é uma técnica de translação. Ao isolar os termos, você desloca o centro da cônica para $(h, k)$.\n\n### Sua vez\nPegue uma folha de papel e tente aplicar o método de completar quadrados na equação $x^2 - 4x + 4y^2 + 8y + 4 = 0$. Qual é o primeiro passo para agrupar os termos de $x$ e os de $y$ antes de completar os quadrados?\n\n**Verificação:** Após completar os quadrados, tente substituir um ponto qualquer (como o centro que você encontrar) na equação original para ver se a igualdade se mantém."
+ },
+ {
+  "id": "ga-misto",
+  "disciplina": "ga",
+  "pergunta": "Para que serve o produto misto?",
+  "esperado": "(u × v)·w = determinante; |.| = volume do paralelepípedo; 0 = coplanares; distância ponto-plano e entre retas reversas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | P2 Adventistas (14.10.2016), Q2 e Q3; Reposição 2 (03.11.2016), Q1a e Q1b; Reavaliação AB2 (24.05.2017), Q2a"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O produto misto é uma ferramenta poderosa em Geometria Analítica para analisar a relação entre três vetores no espaço tridimensional. Como vimos no material, ele é definido como o produto escalar de um vetor pelo produto vetorial de outros dois: $(\\mathbf{u}, \\mathbf{v}, \\mathbf{w}) = (\\mathbf{u}\\times\\mathbf{v})\\cdot\\mathbf{w}$.\n\nPense na geometria desses vetores:\n1. O produto vetorial $\\mathbf{u}\\times\\mathbf{v}$ gera um vetor perpendicular ao plano formado por $\\mathbf{u}$ e $\\mathbf{v}$, cujo módulo representa a área da base (o paralelogramo).\n2. Quando você faz o produto escalar desse resultado com um terceiro vetor $\\mathbf{w}$, você está projetando $\\mathbf{w}$ sobre essa direção normal.\n\nGeometricamente, o valor absoluto desse resultado nos dá o volume de um sólido específico formado por esses três vetores. Além disso, ele é muito útil para verificar se três vetores estão no mesmo plano (são coplanares). Se o volume desse sólido for zero, o que isso nos diz sobre a posição dos vetores?\n\n### Sua vez\nTente explicar, com suas palavras, o que acontece com o volume do paralelepípedo se os três vetores $\\mathbf{u}, \\mathbf{v}$ e $\\mathbf{w}$ estiverem contidos no mesmo plano. O que o valor do produto misto deve ser nesse caso?"
+ },
+ {
+  "id": "ga-esfera",
+  "disciplina": "ga",
+  "pergunta": "Como achar o centro e o raio de uma esfera?",
+  "esperado": "completar quadrados em x, y, z; forma reduzida; conferir r² > 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | P2 Adventistas (14.10.2016), Q1; 4ª Avaliação (12.05.2017), Q1",
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | P2 (15.10.2016), Q1; Final (14.11.2016), Q5; Reavaliação AB2 (24.05.2017), Q3a; P2 Adventistas, Q4; Reposição 2, Q2a",
+   "Fotos de provas de Geometria Analítica (ECOM005), UFAL | 2ª Avaliação (10.03.2017), Q1; 2ª Avaliação (11.03.2017), Q1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar o centro e o raio de uma esfera, o caminho mais direto é manipular a equação geral (aquela que aparece como $x^2 + y^2 + z^2 + Dx + Ey + Fz + G = 0$) para que ela fique na **forma reduzida**:\n\n$$(x - a)^2 + (y - b)^2 + (z - c)^2 = r^2$$\n\nNessa forma, o centro $(a, b, c)$ e o raio $r$ ficam visíveis. O segredo para chegar nela é o método de **completar quadrados** para cada uma das variáveis ($x$, $y$ e $z$) separadamente.\n\nImagine que você tem $x^2 - 4x$. Para transformar isso em um quadrado perfeito, você precisa somar um termo que complete a expressão $(x - a)^2 = x^2 - 2ax + a^2$. Nesse caso, como $-2a = -4$, temos $a = 2$, então você somaria $2^2 = 4$. Lembre-se sempre de que, em uma igualdade, o que você soma de um lado da equação, deve somar do outro para manter o equilíbrio!\n\nSe você tiver um exercício específico em mãos, tente agrupar os termos de cada variável e aplicar esse processo. Se quiser, escreva aqui a equação que você está tentando resolver e me mostre como você agruparia os termos.\n\n### Sua vez\nTente completar os quadrados para a equação $x^2 + y^2 + z^2 - 6x + 4y - 2z - 2 = 0$. Qual valor você deve somar em ambos os lados para completar o quadrado de cada variável?"
+ },
+ {
+  "id": "ga-fora",
+  "disciplina": "ga",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Como você está estudando Geometria Analítica, é importante notar que o cálculo de integrais duplas em coordenadas polares é um tópico que pertence ao conteúdo de **Cálculo 3**.\n\nEm Geometria Analítica, focamos na representação geométrica de pontos, retas, planos e superfícies. No entanto, a transição para coordenadas polares é uma ferramenta poderosa para descrever regiões no plano.\n\nA ideia central é substituir o elemento de área infinitesimal $dA = dx\\,dy$ por um elemento em coordenadas polares, que leva em conta a variação do raio $r$ e do ângulo $\\theta$. Quando fazemos essa mudança, o elemento de área torna-se $dA = r\\,dr\\,d\\theta$. O fator $r$ é fundamental e não pode ser esquecido!\n\nPara montar a integral, você precisa identificar:\n1. Os limites de variação do raio $r$ (geralmente em função de $\\theta$).\n2. Os limites de variação do ângulo $\\theta$.\n3. A substituição das variáveis cartesianas $x$ e $y$ pelas polares: $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$.\n\n### Sua vez\nSe você tivesse uma região circular de raio $R$ centrada na origem, quais seriam os limites de integração para $r$ e para $\\theta$ que você escreveria na sua integral? Tente montar a estrutura da integral (sem resolvê-la) e me diga como ficou."
+ }
+]
