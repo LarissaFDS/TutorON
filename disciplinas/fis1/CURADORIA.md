@@ -1,6 +1,6 @@
 # Curadoria — Física 1 (`fis1`, ECOM009)
 
-Situação: **em validação** até os critérios de liberação serem cumpridos (veja `docs/DISCIPLINAS.md`).
+Situação: **MVP** desde 21/11/2026, sem aviso, depois de cumprido o critério de liberação (veja `docs/DISCIPLINAS.md`).
 
 ## Disciplina e ementa
 

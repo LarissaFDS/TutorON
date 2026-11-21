@@ -61,7 +61,7 @@ def test_fis1_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert FIS.situacao == "em validação" and FIS.em_validacao
+    assert FIS.situacao == "MVP" and not FIS.em_validacao and not FIS.aviso
 
 
 def test_itens_gerados_estao_atualizados():

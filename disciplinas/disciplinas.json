@@ -627,7 +627,7 @@
       "id": "fis1",
       "nome": "Física 1",
       "sigla": "Física 1",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/fis1/acervo/itens.json",
       "indice": "disciplinas/fis1/acervo/indice.json",
       "materiais": "disciplinas/fis1/materiais",
