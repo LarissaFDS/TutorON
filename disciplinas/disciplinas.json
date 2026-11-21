@@ -558,6 +558,38 @@
         "Para que serve o produto misto?",
         "Como achar o centro e o raio de uma esfera?"
       ]
+    },
+    {
+      "id": "iec",
+      "nome": "Introdução à Engenharia de Computação",
+      "sigla": "IEC",
+      "situacao": "em validação",
+      "aviso": "Introdução à Engenharia de Computação ainda está em validação.",
+      "itens": "disciplinas/iec/acervo/itens.json",
+      "indice": "disciplinas/iec/acervo/indice.json",
+      "materiais": "disciplinas/iec/materiais",
+      "rigor": "disciplinas/iec/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "iec-01-historia-atribuicoes",
+        "iec-02-componentes-niveis",
+        "iec-03-linguagens-programacao",
+        "iec-04-software-basico",
+        "iec-05-numeracao-conversoes",
+        "iec-06-representacao-dados",
+        "iec-07-portas-boole",
+        "iec-08-simplificacao-karnaugh",
+        "iec-09-circuitos-combinacionais",
+        "iec-10-redes-internet",
+        "iec-11-embarcados-automacao"
+      ],
+      "exemplos": [
+        "Como converter 156 para binário e hexadecimal?",
+        "Como simplificar uma expressão com mapa de Karnaugh?",
+        "O que faz uma porta XOR?",
+        "O que são os níveis de máquina do Tanenbaum?",
+        "Como representar -3 em complemento de 2 com 8 bits?"
+      ]
     }
   ]
 }
