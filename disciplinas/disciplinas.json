@@ -589,6 +589,39 @@
         "O que são os níveis de máquina do Tanenbaum?",
         "Como representar -3 em complemento de 2 com 8 bits?"
       ]
+    },
+    {
+      "id": "logica",
+      "nome": "Lógica Aplicada à Computação",
+      "sigla": "LAC",
+      "situacao": "MVP",
+      "itens": "disciplinas/logica/acervo/itens.json",
+      "indice": "disciplinas/logica/acervo/indice.json",
+      "materiais": "disciplinas/logica/materiais",
+      "rigor": "disciplinas/logica/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "logica-01-historico-fundamentos",
+        "logica-02-proposicional-sintaxe-semantica",
+        "logica-03-consequencia-equivalencia",
+        "logica-04-tableaux",
+        "logica-05-formas-normais-horn-sat",
+        "logica-06-resolucao-proposicional",
+        "logica-07-deducao-natural",
+        "logica-08-corretude-completude",
+        "logica-09-primeira-ordem-formalizacao",
+        "logica-10-primeira-ordem-semantica",
+        "logica-11-deducao-natural-primeira-ordem",
+        "logica-12-forma-clausal-unificacao-resolucao",
+        "logica-13-model-checking-alloy"
+      ],
+      "exemplos": [
+        "Como provar que (¬P → Q) ∧ (R → ¬P) ⊨ Q ∨ ¬R por tabela-verdade?",
+        "Qual a diferença entre ⊨ e ⊢?",
+        "Como negar \"todo aluno estuda\"?",
+        "Como converter uma fórmula para forma normal conjuntiva?",
+        "Como provar p → q ⊢ ¬q → ¬p por dedução natural?"
+      ]
     }
   ]
 }

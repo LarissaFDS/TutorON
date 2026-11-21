@@ -197,6 +197,18 @@ PERGUNTAS = [
     ("iec-c2", "iec", "Como representar -3 em complemento de 2 com 8 bits?",
      "inverte os bits de 00000011 e soma 1: 11111101; conferir -128 + 125 = -3"),
     ("iec-fora", "iec", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Lógica Aplicada à Computação: resoluções conferidas em tests_acervo/test_disciplina_logica.py.
+    ("logica-tabela", "logica", "Como provar que (¬P → Q) ∧ (R → ¬P) ⊨ Q ∨ ¬R por tabela-verdade?",
+     "8 linhas de P, Q, R; procurar premissas V e conclusão F; só Q=F, R=V tornaria a conclusão F e aí uma premissa é F; vale"),
+    ("logica-models-vdash", "logica", "Qual a diferença entre ⊨ e ⊢?",
+     "⊨ semântica (modelos, tabela-verdade); ⊢ sintaxe (prova com regras); coincidem por corretude e completude"),
+    ("logica-negacao", "logica", "Como negar \"todo aluno estuda\"?",
+     "∀x(A(x)→E(x)); negação ∃x(A(x)∧¬E(x)): existe aluno que não estuda; não é 'nenhum aluno estuda'"),
+    ("logica-cnf", "logica", "Como converter uma fórmula para forma normal conjuntiva?",
+     "eliminar → e ↔; De Morgan e dupla negação; distribuir ∨ sobre ∧; conferir por tabela-verdade"),
+    ("logica-dn", "logica", "Como provar p → q ⊢ ¬q → ¬p por dedução natural?",
+     "caixa com ¬q; MT 1, 2 dá ¬p; →i fecha a caixa; linhas numeradas com regra; sem entregar a prova inteira"),
+    ("logica-fora", "logica", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     ("discreta-fora", "discreta", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
 ]
 ROTULO = re.compile(r"\[\s*([PL]\d+)\s*\]")
