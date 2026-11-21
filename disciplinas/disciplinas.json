@@ -622,6 +622,33 @@
         "Como converter uma fórmula para forma normal conjuntiva?",
         "Como provar p → q ⊢ ¬q → ¬p por dedução natural?"
       ]
+    },
+    {
+      "id": "fis1",
+      "nome": "Física 1",
+      "sigla": "Física 1",
+      "situacao": "em validação",
+      "itens": "disciplinas/fis1/acervo/itens.json",
+      "indice": "disciplinas/fis1/acervo/indice.json",
+      "materiais": "disciplinas/fis1/materiais",
+      "rigor": "disciplinas/fis1/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "fis1-01-grandezas-cinematica",
+        "fis1-02-vetores-projeteis",
+        "fis1-03-leis-newton-atrito",
+        "fis1-04-trabalho-energia",
+        "fis1-05-sistemas-particulas-colisoes",
+        "fis1-06-rotacao",
+        "fis1-07-rolamento-momento-angular"
+      ],
+      "exemplos": [
+        "Como montar o diagrama de corpo livre de um bloco num plano inclinado com atrito?",
+        "Qual o alcance máximo de um projétil?",
+        "Quando a energia mecânica se conserva?",
+        "Como resolver uma colisão perfeitamente inelástica?",
+        "Como achar a aceleração de um bloco pendurado num fio enrolado num disco?"
+      ]
     }
   ]
 }

@@ -444,6 +444,27 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 429 nos modelos m
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida; todo assunto com material tem bloco). As falhas acima são as mesmas aceitas em IEC, Discreta e GA; revisão humana e do professor continuam pendentes.
 
+## Física 1: provas do Prof. Rosso resolvidas de forma independente e conferidas por código (21/11/2026)
+
+Física 1 (ECOM009) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`fis1`);
+- `disciplinas/fis1/`: rigor, 19 blocos (16 na busca; 3 notas da equipe candidatas, fora da busca), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/fis1_verif.py`, que refaz cada questão a partir dos dados parafraseados e confere as expressões finais por análise dimensional (SymPy);
+- `tests_acervo/test_disciplina_fis1.py`, que compara cada número citado num bloco com o recalculado, inclusive as leituras alternativas dos dados duvidosos e os erros comuns citados;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+A ementa foi conferida no PPC de 2014 (p. 27). O material da turma são fotos das provas AB1, AB2 e reavaliações de 2017 do Prof. Osvaldo A. Rosso (UFAL) e um arquivo de texto de aluno que liga cada questão a um problema do Halliday. As questões são problemas do Halliday (livro protegido): os blocos trazem enunciado parafraseado e resolução própria; o livro, as resoluções do Halliday e o manual de Alonso e Finn não foram incluídos nem consultados. Fotos e texto não foram versionados; três fotos mostram nome de aluno, e o teste confere (por hash) que nenhum nome entrou no acervo. **Fronteira:** equilíbrio, gravitação, fluidos, oscilações, ondas e termodinâmica ficam em Física 2; vetores geométricos em GA; técnica de derivadas e integrais em Cálculo; isolamento testado com Física 2, Cálculo 3 e GA nos dois sentidos.
+
+Duas resoluções são `corrigida` (a nota da AB1 dá sen 60 = 0,809 e cos 60 = 0,588, valores de 54°; a AB2 usa a letra M para o disco e para o bloco) e três `pendente_professor` (bola "homogênea" com momento de inércia de disco; pêndulo balístico com h = 6,3 m; disco de 500 kg). Medição e vetores não têm questão própria; vetores, movimento circular e trabalho só têm notas da equipe, fora da busca.
+
+Busca: bateria de relevância 353/353, com 9 perguntas de Física 1, 3 fora do assunto e uma de fronteira (colisão inelástica com Física 2 selecionada não traz nada). Na busca só léxica, "quando uso atrito estático ou cinético" e "conservação do momento angular" empatam com outros blocos; a busca híbrida acerta as duas.
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 503 e 429 nos modelos maiores), 21/11/2026 (`eval/results/bateria-fis1-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas contra os blocos e os testes:
+- diagrama de corpo livre na rampa, alcance máximo, conservação da energia mecânica, colisão perfeitamente inelástica e bloco no disco: corretas e socráticas (eixos inclinados, N ≠ mg na rampa; R com sen 2θ e a pergunta sobre o ângulo; só forças conservativas; momento sim, energia cinética não; τ = Iα com a = αR), sem entregar resultado final;
+- nenhuma termina com "**Verificação:**"; só a de colisão cita rótulo ([P1], pertinente); a de energia diz "o problema do pacote que você enviou", atribuindo ao aluno um exemplo do material;
+- integral dupla com Física 1 selecionada: sem fontes, indicou o material de Cálculo 3, mas explicou o conteúdo antes.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -483,3 +504,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; dica errada da IA sobre cônicas aceita; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
 | `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |
 | `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (33 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; falhas da IA registradas (verificação, citações, conteúdo fora da disciplina); ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
+| `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
