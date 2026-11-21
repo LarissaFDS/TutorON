@@ -467,6 +467,26 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 503 e 429 nos mod
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida; todo assunto com material da turma tem bloco na busca; nos cap. 2, 5 e 7 o material da turma é só número de lista). As falhas acima são as mesmas aceitas nas disciplinas anteriores; 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Sistemas Operacionais: slides, provas e listas da turma do Prof. Aquino conferidos por simulação e por código C (21/11/2026)
+
+Sistemas Operacionais (ECOM032) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`so`);
+- `disciplinas/so/`: rigor, 24 blocos (23 na busca; 1 nota da equipe candidata, fora da busca), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `	ests_acervo/so_verif.py`, simuladores de escalonamento, substituição de páginas, alocação, disco, ext2 e banqueiro;
+- `	ests_acervo/c_so/`, quatro programas em C (disputa, mutex, produtor-consumidor, ordem de travas), compilados com `-Wall -Wextra -Werror -pthread` e rodados com ThreadSanitizer na imagem `gcc:14` do Docker;
+- `	ests_acervo/test_disciplina_so.py`, a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+A ementa foi conferida no PPC de 2014. Os slides SO-01 a SO-07 são do **Prof. André L. L. Aquino (UFAL)**, CC BY-NC-SA 4.0, baseados no livro do Prof. Maziero (não são do Maziero). Os comprovantes das provas de 2020.1 trazem nome e e-mail de aluno e não foram versionados; listas e resumos também trazem nomes, que o teste procura por hash. **Fronteira:** hardware de memória e E/S em OAC; estruturas de dados em ED; isolamento testado nos dois sentidos.
+
+Busca: bateria de relevância 366/366, com 9 perguntas de SO, 2 fora do assunto e 2 de fronteira (OAC e ED).
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 429 nos modelos maiores), 21/11/2026 (`eval/results/bateria-so-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas contra os blocos e os simuladores:
+- Round-Robin, LRU, condição de disputa, impasse e processo × thread: corretas e socráticas (fila a cada quantum com a convenção de chegada antes da preemptada; tabela de quadros com faltas iniciais; entrelaçamento ler-somar-escrever; as quatro condições; espaço de endereçamento compartilhado), sem entregar resultado final;
+- nenhuma termina com "**Verificação:**"; só a de impasse cita rótulo ([P1], pertinente);
+- integral dupla com SO selecionada: sem fontes, indicou Cálculo 3, mas explicou o conteúdo antes.
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida; todo assunto com material da turma tem bloco na busca). As falhas acima são as mesmas aceitas nas disciplinas anteriores; 1 resolução aguarda o professor e a revisão humana e do professor continuam pendentes.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -507,3 +527,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |
 | `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (33 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; falhas da IA registradas (verificação, citações, conteúdo fora da disciplina); ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
+| `so` | Sistemas Operacionais | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |

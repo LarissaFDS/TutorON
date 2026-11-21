@@ -383,6 +383,19 @@ PERGUNTAS = [
     ("ga", "fora", "O que são os níveis de máquina do Tanenbaum?", []),
     ("discreta", "fora", "Para que serve o produto misto?", []),
     ("oac", "fora", "O que é fotossíntese?", []),
+    ("so", "assunto", "Como montar o Gantt do Round-Robin com quantum 2?", ["so-escalonamento-round-robin"]),
+    ("so", "assunto", "Quantas faltas de página o LRU dá com 3 quadros?", ["so-substituicao-paginas-fifo-lru-otimo", "so-belady-envelhecimento-localidade-thrashing"]),
+    ("so", "assunto", "O que é uma condição de disputa?", ["so-condicao-de-disputa-secao-critica"]),
+    ("so", "assunto", "Quais são as quatro condições para um impasse?", ["so-impasses-quatro-condicoes"]),
+    ("so", "assunto", "Qual a diferença entre processo e thread?", ["so-tarefas-processos-threads-estados"]),
+    ("so", "assunto", "Como resolver o produtor-consumidor com semáforos?", ["so-semaforos-produtor-consumidor"]),
+    ("so", "assunto", "Qual o tamanho máximo de arquivo no ext2?", ["so-fat-cluster-ext2-tamanho-maximo"]),
+    ("so", "assunto", "Como calcular o deslocamento da cabeça do disco no SCAN?", ["so-escalonamento-disco-subindo", "so-ab2-escalonamento-disco-descendo"]),
+    ("so", "assunto", "Qual a diferença entre controlador e driver?", ["so-entrada-saida-controlador-driver-dma-raid"]),
+    ("so", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
+    ("so", "fora", "Me conte uma piada", []),
+    ("oac", "fora", "Como montar o Gantt do Round-Robin com quantum 2?", []),
+    ("ed", "fora", "Quais são as quatro condições para um impasse?", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
