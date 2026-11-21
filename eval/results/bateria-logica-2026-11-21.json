@@ -1,0 +1,109 @@
+[
+ {
+  "id": "logica-tabela",
+  "disciplina": "logica",
+  "pergunta": "Como provar que (¬P → Q) ∧ (R → ¬P) ⊨ Q ∨ ¬R por tabela-verdade?",
+  "esperado": "8 linhas de P, Q, R; procurar premissas V e conclusão F; só Q=F, R=V tornaria a conclusão F e aí uma premissa é F; vale",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 50.1,
+  "fontes": [
+   "Slides de Lógica Clássica Proposicional (Baldoino Fonseca, UFAL), consequência lógica e aplicações de T1 e T2",
+   "Lista de Questões de lógica proposicional (Baldoino Fonseca, UFAL), Q3",
+   "Slides de Lógica Clássica Proposicional (Baldoino Fonseca, UFAL), sintaxe; slides Lógica Proposicional: sintaxe e semântica (Tiago Massoni, UFCG)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para provar que $\\Gamma \\models \\alpha$ (alfa é consequência lógica de gama) usando tabelas-verdade, o objetivo é verificar se existe algum caso (linha) onde todas as premissas são verdadeiras, mas a conclusão é falsa. Se não existir tal linha, o argumento é válido.\n\nComo você tem três variáveis proposicionais ($P, Q, R$), a tabela completa teria 8 linhas. No entanto, você pode ser mais estratégico: em vez de montar a tabela inteira, foque em investigar se existe um **contraexemplo**.\n\nUm contraexemplo ocorre apenas quando a conclusão é falsa. Analise a fórmula da conclusão: $Q \\lor \\neg R$. Para que uma disjunção (o \"ou\") seja falsa, o que precisa acontecer com os valores de $Q$ e de $\\neg R$? A partir disso, você saberá exatamente quais valores de $Q$ e $R$ tornam a conclusão falsa. Com esses valores fixos, você só precisa testar o que acontece com as premissas para os possíveis valores de $P$.\n\n### Sua vez\nNo papel, determine quais valores de $Q$ e $R$ tornam a conclusão $Q \\lor \\neg R$ falsa. Depois, com esses valores fixos, teste os dois casos possíveis para $P$ ($P=V$ e $P=F$): em algum desses casos, as duas premissas ($\\neg P \\to Q$ e $R \\to \\neg P$) conseguem ser verdadeiras ao mesmo tempo?"
+ },
+ {
+  "id": "logica-models-vdash",
+  "disciplina": "logica",
+  "pergunta": "Qual a diferença entre ⊨ e ⊢?",
+  "esperado": "⊨ semântica (modelos, tabela-verdade); ⊢ sintaxe (prova com regras); coincidem por corretude e completude",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Slides Lógica de predicados: Semântica, completude e corretude (Tiago Massoni, UFCG); slides Forma Normal: equivalência (UFCG)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre esses dois símbolos é fundamental para entender a lógica: um trata do **significado** (o que é verdade) e o outro trata do **processo** (o que pode ser provado).\n\nPense da seguinte forma:\n*   $\\Gamma \\models \\psi$ (consequência lógica) é um conceito **semântico**. Ele olha para o \"mundo\" das interpretações. Se você imaginar todas as situações possíveis onde as premissas em $\\Gamma$ são verdadeiras, a conclusão $\\psi$ também será verdadeira em todas elas? Se sim, a relação de consequência lógica existe.\n*   $\\Gamma \\vdash \\psi$ (derivação) é um conceito **sintático**. Ele olha para \"regras de manipulação\". Você consegue chegar na conclusão $\\psi$ partindo das premissas $\\Gamma$ usando apenas um conjunto de regras de inferência (como as de dedução natural ou resolução), sem se preocupar com o significado das fórmulas?\n\nA relação entre eles é garantida pelos teoremas de **Corretude** e **Completude**, que dizem que, para sistemas bem construídos, o que é \"verdade\" ($\\models$) é exatamente o que é \"provável\" ($\\vdash$).\n\nPara fixar, imagine que você tem um argumento. Se você quer mostrar que ele é válido, você pode tentar construir uma prova ($\\vdash$). Se você quer mostrar que ele é inválido, você não tenta provar, você busca um **contramodelo** ($\\not\\models$).\n\n### Sua vez\nSe eu te desse um argumento e você tentasse construir uma prova ($\\vdash$) por 30 minutos e não conseguisse, isso seria suficiente para afirmar que o argumento é inválido ($\\not\\models$)? Por que?"
+ },
+ {
+  "id": "logica-negacao",
+  "disciplina": "logica",
+  "pergunta": "Como negar \"todo aluno estuda\"?",
+  "esperado": "∀x(A(x)→E(x)); negação ∃x(A(x)∧¬E(x)): existe aluno que não estuda; não é 'nenhum aluno estuda'",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides Lógica de predicados: Semântica (Tiago Massoni, UFCG), validade de ∀x¬P(x) → ¬∃xP(x); slides Linguagens de Primeira Ordem (Baldoino Fonseca, UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para negar uma sentença quantificada, o primeiro passo é sempre formalizá-la corretamente na lógica de predicados. Como vimos no material, \"todo aluno estuda\" pode ser escrito como $\\forall x(A(x) \\to E(x))$, onde $A(x)$ significa \"$x$ é aluno\" e $E(x)$ significa \"$x$ estuda\".\n\nQuando aplicamos a negação a essa fórmula, temos $\\neg\\forall x(A(x) \\to E(x))$. O segredo aqui é usar a regra de De Morgan para quantificadores: ao passar a negação para dentro do quantificador, o $\\forall$ (para todo) se transforma em $\\exists$ (existe).\n\nAlém disso, lembre-se da regra de negação de uma implicação: a negação de $p \\to q$ é equivalente a $p \\land \\neg q$. Aplicando isso ao que está dentro do parêntese, você chegará à forma final.\n\n### Sua vez\nTente aplicar a negação $\\neg$ sobre a expressão $\\forall x(A(x) \\to E(x))$ passo a passo:\n1. Primeiro, mova a negação para dentro do quantificador (trocando $\\forall$ por $\\exists$).\n2. Depois, aplique a negação sobre a implicação $(A(x) \\to E(x))$. \n\nComo fica a expressão resultante?"
+ },
+ {
+  "id": "logica-cnf",
+  "disciplina": "logica",
+  "pergunta": "Como converter uma fórmula para forma normal conjuntiva?",
+  "esperado": "eliminar → e ↔; De Morgan e dupla negação; distribuir ∨ sobre ∧; conferir por tabela-verdade",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides Forma Normal: Transformações (Tiago Massoni, UFCG); slides Linguagens Proposicionais (Baldoino Fonseca, UFAL), notação clausal"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para converter uma fórmula para a Forma Normal Conjuntiva (CNF), o objetivo é reescrevê-la como uma **conjunção de disjunções** (ou seja, \"E\" de \"Ou\"s), onde as negações aparecem apenas junto aos átomos.\n\nO método mais direto é seguir os passos de transformação algébrica, garantindo que cada etapa resulte em uma fórmula equivalente à anterior. Pense nisso como uma \"limpeza\" da fórmula:\n\n1.  **Eliminação de conectivos:** Substitua todos os $\\leftrightarrow$ e $\\to$ usando as equivalências básicas (como $A \\to B \\equiv \\neg A \\lor B$).\n2.  **Negações internas:** Use as Leis de De Morgan e a eliminação da dupla negação ($\\neg\\neg A \\equiv A$) para garantir que o símbolo de negação ($\\neg$) esteja colado apenas nas variáveis (átomos).\n3.  **Distribuição:** Aplique a propriedade distributiva do $\\lor$ sobre o $\\land$ ($A \\lor (B \\land C) \\equiv (A \\lor B) \\land (A \\lor C)$) até que você tenha apenas disjunções conectadas por conjunções.\n\nSe você tiver uma fórmula específica em mente, podemos aplicá-los passo a passo.\n\n### Sua vez\nTente aplicar o primeiro passo (eliminar $\\to$ e $\\leftrightarrow$) na fórmula $(p \\to q) \\to r$. Como ela ficaria após remover os condicionais?"
+ },
+ {
+  "id": "logica-dn",
+  "disciplina": "logica",
+  "pergunta": "Como provar p → q ⊢ ¬q → ¬p por dedução natural?",
+  "esperado": "caixa com ¬q; MT 1, 2 dá ¬p; →i fecha a caixa; linhas numeradas com regra; sem entregar a prova inteira",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides Lógica Proposicional: Dedução Natural (Tiago Massoni, UFCG), exemplos de →i e de regras de disjunção",
+   "Slides Lógica de predicados: Semântica, completude e corretude (Tiago Massoni, UFCG); slides Forma Normal: equivalência (UFCG)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para provar uma implicação como $\\neg q \\to \\neg p$ usando dedução natural, a estratégia padrão é utilizar a regra de introdução da implicação ($\\to i$).\n\nEssa regra nos diz que, para provar $A \\to B$, devemos assumir $A$ como uma hipótese (abrindo uma \"caixa\") e, a partir dela e das premissas disponíveis, derivar $B$. Ao final, fechamos a caixa e escrevemos a implicação.\n\nNo seu caso, o objetivo é chegar em $\\neg p$ assumindo $\\neg q$. Olhando para a sua premissa $p \\to q$, você tem uma implicação e uma hipótese que se relaciona com o consequente dela. Existe uma regra de inferência que permite concluir a negação do antecedente a partir de uma implicação e da negação do consequente. Você se lembra qual é o nome dessa regra?\n\n### Sua vez\nTente montar o esqueleto da prova no papel:\n1. Escreva a premissa $p \\to q$.\n2. Abra uma caixa assumindo a hipótese $\\neg q$.\n3. Qual fórmula você consegue derivar dentro dessa caixa usando a regra que mencionei acima? (Dica: consulte o material [P1] sobre a regra MT)."
+ },
+ {
+  "id": "logica-fora",
+  "disciplina": "logica",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Essa é uma dúvida de Cálculo 3, disciplina que trata de funções de várias variáveis e integração múltipla. Em Lógica Aplicada à Computação, focamos em estruturas formais, provas e dedução, então para questões de cálculo, recomendo que você selecione a disciplina correta no site para obter uma orientação mais específica sobre o conteúdo programático da sua turma.\n\nDe forma geral, o cálculo de uma integral dupla em coordenadas polares baseia-se na transformação da região de integração do plano cartesiano $(x, y)$ para o sistema polar $(r, \\theta)$. \n\nO ponto principal é lembrar que, ao mudar as variáveis, a área infinitesimal $dA$ (que antes era $dx\\,dy$) precisa ser ajustada pelo **Jacobiano** da transformação. Sem esse fator, a integral não representa a mesma região.\n\nPara começar, tente visualizar a relação entre um ponto $(x, y)$ e suas coordenadas polares $(r, \\theta)$:\n1. Como você expressaria $x$ e $y$ em função de $r$ e $\\theta$?\n2. Qual é a expressão do elemento de área $dA$ em coordenadas polares?\n\n### Sua vez\nEscreva no papel a relação entre $x$, $y$ e as coordenadas polares ($r, \\theta$) e tente montar a integral dupla $\\iint_R f(x, y) \\, dx \\, dy$ substituindo os termos por $r$ e $\\theta$, incluindo o fator de correção do Jacobiano. O que acontece com o $dx \\, dy$ após essa substituição?"
+ }
+]

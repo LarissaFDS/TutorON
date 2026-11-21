@@ -423,6 +423,25 @@ IA real: Gemini (`gemini-3.1-flash-lite`, degradado), 20/11/2026 (`eval/results/
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, por decisão da equipe, que aceitou as falhas acima (como em Discreta e GA).
 
+## Lógica Aplicada à Computação: refutações e provas conferidas por um verificador (21/11/2026)
+
+Lógica Aplicada à Computação (ECOM007) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`logica`);
+- `disciplinas/logica/`: rigor, 33 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/logica_verif.py`, um verificador pequeno: tabela-verdade, resolvente proposicional e de primeira ordem (com unificação e renomeação), caixas da dedução natural e busca de contramodelo em universos finitos;
+- `tests_acervo/test_disciplina_logica.py`, que lê as refutações e as provas em dedução natural do próprio texto dos blocos e as confere linha a linha, e recalcula cada consequência, contramodelo e equivalência citada;
+- a lista de disciplinas do teste da API;
+- as perguntas rotuladas em `eval/relevancia.py` e 6 perguntas em `eval/bateria_tutor.py`.
+
+A ementa foi conferida no PPC de 2014. O material vem da UFAL (slides, Prova 1 de 2013 e listas dos Profs. Evandro Costa e Baldoino Fonseca) e da UFCG (slides do Prof. Tiago Massoni, Alloy com o Prof. Rohit Gheyi), todos parafraseados; PDFs não versionados e e-mail de professor não copiado. O livro de Huth e Ryan é protegido: só citado por seção, e as páginas dele copiadas nos slides log04 e log08 não foram transcritas. **Fronteira:** conjuntos, relações e indução ficam em Discreta; Boole e Karnaugh em SD e IEC; SAT como problema NP-completo em PAA; isolamento testado com as quatro nos dois sentidos. Oito blocos são `corrigida` (erros do material original apontados) e um, a Q2 da Prova 1, é `pendente_professor`: o enunciado pede para provar algo que não segue das premissas dadas.
+
+Busca: bateria de relevância 340/340, com 12 perguntas de Lógica e uma de fronteira (dedução natural com SD selecionada não traz nada). Na busca só léxica, ⊨, ⊢ e letras soltas não viram palavras; os blocos dizem as perguntas comuns em palavras ("diferença entre", "provar por tabela-verdade").
+
+IA real: Gemini (`gemini-3.1-flash-lite`, degradado após HTTP 429 nos modelos maiores), 21/11/2026 (`eval/results/bateria-logica-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas:
+- tabela-verdade de $(\neg P\to Q)\land(R\to\neg P)\models Q\lor\neg R$, ⊨ versus ⊢, negação de "todo aluno estuda", CNF e $p\to q\vdash\neg q\to\neg p$: corretas e socráticas; nenhuma entregou a resposta final (na primeira, o código cortou uma resposta que entregava, `entregou_resposta`);
+- nenhuma termina com "**Verificação:**"; só a de dedução natural cita rótulo ([P1], pertinente);
+- integral dupla com Lógica selecionada: disse que é de Cálculo 3 (sem fontes), mas depois orientou o conteúdo.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -461,3 +480,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
 | `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; dica errada da IA sobre cônicas aceita; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
 | `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |
+| `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (33 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | em validação, com aviso; ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
