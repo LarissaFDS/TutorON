@@ -175,6 +175,15 @@ PERGUNTAS = [
     ("prog1-troca", "prog1", "Por que minha função troca não troca os valores?",
      "passagem por valor; precisa de ponteiros (int *a, int *b) e chamar troca(&x, &y)"),
     ("prog1-fora", "prog1", "Como simplificar uma função com mapa de Karnaugh?", "diz que é de Sistemas Digitais; sem fontes"),
+    # Programação 1, complemento de Ciência da Computação.
+    ("prog1-cc-malloc", "prog1", "Como alocar um vetor de tamanho lido do teclado com malloc?",
+     "malloc(n * sizeof(int)), confere NULL, usa como vetor, free no fim; não usa listas encadeadas"),
+    ("prog1-cc-vogais", "prog1", "Minha função de remover vogais pula letras quando há duas vogais seguidas. Por quê?",
+     "depois de puxar o resto, o índice avança e o novo caractere da posição não é testado; dois índices ou não avançar"),
+    ("prog1-cc-maiuscula", "prog1", "Por que s[i] - 32 corta minha string no espaço?",
+     "espaço é 32 e vira '\0', que termina a string; usar toupper e só em letras"),
+    ("prog1-cc-terminal", "prog1", "Como apagar uma pasta pelo terminal do Linux?",
+     "rm -r; cuidado com -f e sem lixeira; rmdir para vazia"),
     # Matemática Discreta: contas conferidas em tests_acervo/test_disciplina_discreta.py.
     ("discreta-inducao", "discreta", "Como provar por indução que 1 + 2 + … + n = n(n+1)/2?",
      "nomeia a técnica; base n = 1; hipótese de indução; passo soma n + 1 e usa a hipótese; termina com Verificação"),

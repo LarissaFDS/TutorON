@@ -1,6 +1,6 @@
 {
   "disciplina": "prog1",
-  "atualizado_em": "2026-11-20",
+  "atualizado_em": "2026-11-21",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
     "uso": "acervo = parafraseado em disciplinas/prog1/materiais; citada = indicada nas notas ou na curadoria; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -61,7 +61,7 @@
       "prioridade": "alta",
       "uso": "acervo",
       "origem": "material de turma",
-      "justificativa": "Só os números e temas entram no bloco s17. As questões são atividade avaliativa: o acervo não traz soluções."
+      "justificativa": "Só os números e temas entram no bloco s17. As questões são atividade avaliativa: o acervo não traz soluções. A mesma lista veio da turma de Ciência da Computação como \"Guia funcional para passar em P1\" (fonte ufal-cc-prog1-guia-huxley)."
     },
     {
       "id": "ufal-evaristo-livro",
@@ -90,7 +90,7 @@
       "prioridade": "alta",
       "uso": "acervo",
       "origem": "material do professor",
-      "justificativa": "Livro de professor do IC/UFAL, citado na bibliografia complementar do PPC (edição em ILA). Usado só por seção e em paráfrase (s04: seções 2.7 e 5.6; s09: seção 4.4), para do-while e leitura de caracteres, que os slides não cobrem. Corrigidos: main() sem tipo, scanf(\"%c\") depois de outra leitura e fflush(stdin)."
+      "justificativa": "Livro de professor do IC/UFAL, citado na bibliografia complementar do PPC (edição em ILA). Usado só por seção e em paráfrase (s04: seções 2.7 e 5.6; s09: seção 4.4), para do-while e leitura de caracteres, que os slides não cobrem. Corrigidos: main() sem tipo, scanf(\"%c\") depois de outra leitura e fflush(stdin). O mesmo livro (139 páginas) veio também no material da turma de Ciência da Computação, em duas cópias, e está na bibliografia básica do PPC de Ciência da Computação de 2006."
     },
     {
       "id": "ufal-ppc-ecomp-2014",
@@ -262,6 +262,97 @@
       "uso": "referencia",
       "origem": "material externo",
       "justificativa": "Questões avaliativas: o acervo guarda só número e tema."
+    },
+    {
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "isa": "C",
+      "notas": 3,
+      "id": "ufal-cc-prog1-codigos-c",
+      "nome": "Códigos C de exercícios de Programação 1 (pasta \"c_descomplicado\"), turma de Ciência da Computação",
+      "autoria": "Aluno(s) de Ciência da Computação da UFAL, não identificados; sem enunciados nem professor",
+      "sha256": null,
+      "formato": "92 arquivos: ~84 .c de listas 5 a 10 (strings, structs, funções, recursão, ponteiros, alocação dinâmica), exemplos e questões do The Huxley (pasta \"the huxley\"), além de executáveis ELF compilados com gcc 5.4 (Ubuntu)",
+      "topicos": [
+        "prog1-06-funcoes",
+        "prog1-09-strings",
+        "prog1-10-ponteiros",
+        "prog1-11-structs",
+        "prog1-12-recursao",
+        "prog1-14-alocacao-dinamica",
+        "prog1-13-juiz-online"
+      ],
+      "licenca": "Não declarada; trabalho de aluno",
+      "acesso": "Arquivos entregues pela equipe; não versionados",
+      "prioridade": "alta",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Evidência dos tópicos da turma de CC (inclui malloc, calloc e realloc, que os slides de ECOM não têm). Os blocos s18 a s22 reescrevem as funções com código próprio, testado em tests_acervo/c_prog1/cc_*.c, e apontam os erros encontrados. Os códigos de questões do Huxley (acima_media, frigorifico, lider_copa, somar_num_grande etc.) e os incompletos ou que não compilam não entram. Nenhum código foi copiado, e nenhum nome de aluno aparece."
+    },
+    {
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "isa": "C",
+      "notas": 3,
+      "id": "ufal-cc-prog1-guia-huxley",
+      "nome": "\"Guia funcional para passar em P1\" (lista de questões do The Huxley)",
+      "autoria": "Não identificada; circula na turma de Ciência da Computação",
+      "sha256": null,
+      "formato": ".txt, só números e títulos de questões, em 4 grupos",
+      "topicos": [
+        "prog1-13-juiz-online"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Arquivo entregue pela equipe; não versionado",
+      "prioridade": "alta",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Mesma lista da fonte ufal-prog1-huxley-lista (bloco s17). As questões 697, 686 e 300 aparecem duas vezes no guia."
+    },
+    {
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "isa": "shell",
+      "notas": 3,
+      "id": "ufal-cc-dicas-terminal",
+      "nome": "\"Iniciando no Terminal Linux\" (dicas-terminal.pdf)",
+      "autoria": "Não identificada; material da turma de Ciência da Computação, gerado em 06/12/2018",
+      "sha256": null,
+      "formato": "PDF, 3 páginas, comandos de terminal",
+      "topicos": [
+        "prog1-02-compilacao"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Arquivo entregue pela equipe; não versionado",
+      "prioridade": "media",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Parafraseado no bloco s23, com correções (rm -Rf, renomear, WSL)."
+    },
+    {
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ppc-ciencia-computacao.pdf",
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "isa": "não se aplica",
+      "notas": 3,
+      "id": "ufal-ppc-cc-2006",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação (agosto de 2006)",
+      "autoria": "Instituto de Computação, UFAL",
+      "sha256": "5612d365491e4753a1bf787fd7631cff46121305c068e7141a195878c033d095",
+      "formato": "PDF, 48 páginas",
+      "topicos": [
+        "prog1-01-algoritmos-representacao",
+        "prog1-12-recursao"
+      ],
+      "licenca": "Documento institucional público",
+      "acesso": "Aberto (baixado em 21/11/2026)",
+      "prioridade": "alta",
+      "uso": "citada",
+      "origem": "documento institucional",
+      "justificativa": "Ementa de COMP002 Programação 1 (80 h: 60 teóricas e 20 práticas, 1º período), p. 20: texto idêntico ao de ECOM002 no PPC de Engenharia de Computação de 2014. O código COMP359 da pasta não aparece nesse PPC; não encontramos PPC mais novo."
     }
   ]
 }

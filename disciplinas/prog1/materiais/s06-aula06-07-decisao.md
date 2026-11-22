@@ -4,6 +4,7 @@ titulo: Aulas 6 e 7 — if, else, else if, operadores relacionais e lógicos
 assunto: prog1-04-decisao
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aulas 6 (Decisão) e 7 (E se não for verdade?; livro, capítulo 7)
 fontes_catalogo: ufal-prog1-slides-paes
 autoria: Slides do Prof. Rodrigo de Barros Paes (IC/UFAL), parafraseados pela equipe TutorON com auxílio de IA

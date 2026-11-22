@@ -573,7 +573,23 @@ O material da turma de Ciência da Computação (COMP360, Profa. Roberta Lopes) 
   - As fórmulas das provas foram conferidas em Python.
 - **Dados pessoais:** as fotos das provas mostram nome e respostas de um aluno. Nada disso foi versionado, e as respostas não foram usadas. As apostilas e livros de terceiros da pasta Prolog ficaram só como referência.
 - **Pendência:** "grau de complexidade" não tem definição no enunciado. Por isso a amostra da 1ª prova fica `pendente_professor`.
-- **Relevância:** 439/439, com 8 perguntas novas de assunto e 2 de fora. Uma delas pede um diagnóstico médico, que o acervo não pode responder.
+- **Relevância:** 452/452 após o merge de dev (439/439 antes), com 8 perguntas novas de assunto e 2 de fora. Uma delas pede um diagnóstico médico, que o acervo não pode responder.
+## Programação 1, complemento de Ciência da Computação: primeiro material de outro curso (21/11/2026)
+
+O TutorON organiza o acervo por disciplina, não por curso. A Programação 1 de Ciência da Computação ganhou 6 blocos na disciplina `prog1` já existente, sem cópia nova e sem mudar a situação (MVP). O PPC de Ciência da Computação de 2006 traz a ementa de COMP002 idêntica à de ECOM002; muda só a carga horária (80 h contra 60 h). Cada bloco diz no campo `curso:` do cabeçalho de que curso e de que turma veio; o campo não entra no índice nem muda o código.
+
+Os arquivos são:
+- 6 blocos (`s18` a `s23`) e a nova entrada `prog1-14-alocacao-dinamica` em `disciplinas/disciplinas.json`;
+- 4 fontes novas em `fontes.json`;
+- a curadoria e o `rigor.md` (a alocação dinâmica básica passa a ser de Programação 1; estruturas encadeadas continuam com ED);
+- os programas `tests_acervo/c_prog1/cc_*.c` e os testes novos;
+- 13 perguntas em `eval/relevancia.py` e 4 em `eval/bateria_tutor.py`.
+
+O material de CC é quase todo código de aluno, sem enunciado nem nome. As funções dos blocos foram reescritas pela equipe e testadas. Os erros reais apontados nos blocos (remover vogais que pula letras, `s[i] - 32` que vira `'\0'` no espaço, caso base que nunca chega) foram conferidos rodando os originais fora do repositório. Os códigos de questões do Huxley, os executáveis e os códigos incompletos ficaram de fora.
+
+Sanitizers: com o Docker de volta, todos os programas de `c_prog1` (os de ECOM e os de CC) passaram com AddressSanitizer e UBSan.
+
+IA real (Gemini, 21/11/2026, `eval/results/bateria-prog1-cc-2026-11-21.json`): as respostas sobre malloc, remover vogais, `s[i] - 32` e apagar pasta estão corretas e socráticas. Na do terminal, a IA chamou o bloco de "material que você enviou". Nenhuma das quatro termina com "**Verificação:**".
 
 ## Como cadastrar uma nova disciplina
 
@@ -609,7 +625,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `pcom` | Princípios de Comunicação | Markdown curado em `disciplinas/pcom` (33 blocos, 28 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | em validação; transcrição autorizada pelo autor; revisão humana e do professor pendentes; 5 resoluções pendentes de confirmação do professor; SSB/VSB, PCM, ruído, codificação de linha, enlaces e teoria da informação só em notas fora da busca; veja a [curadoria](../disciplinas/pcom/CURADORIA.md) |
 | `varcomp` | Variáveis Complexas | Markdown curado em `disciplinas/varcomp` (20 blocos, 13 na busca; 7 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 20/11/2026; publicação da transcrição não autorizada; revisão humana e do professor pendentes; 13 resoluções pendentes de confirmação do professor; funções analíticas, séries, resíduos, conformes, harmônicas e Gamma só em notas fora da busca; veja a [curadoria](../disciplinas/varcomp/CURADORIA.md) |
 | `ingles` | Inglês Instrumental | Markdown curado em `disciplinas/ingles` (12 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; texto da prova de Pavela (2016), CC BY-NC 4.0, só em trechos curtos; professor não identificado; revisão humana e do professor pendentes; 5 exercícios pendentes de confirmação do professor; veja a [curadoria](../disciplinas/ingles/CURADORIA.md) |
-| `prog1` | Programação 1 | Markdown curado em `disciplinas/prog1` (18 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes e livro de Jaime Evaristo sem licença aberta, parafraseados; sanitizers ainda não rodaram (sem Linux nem Docker); revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
+| `prog1` | Programação 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/prog1` (24 blocos, todos na busca; 6 do complemento de Ciência da Computação; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; slides do Prof. Rodrigo Paes, livro de Jaime Evaristo e códigos de aluno da turma de CC sem licença aberta, parafraseados ou reescritos; sanitizers rodaram em 21/11/2026 (Docker); revisão humana e do professor pendentes; código COMP359 sem PPC encontrado; veja a [curadoria](../disciplinas/prog1/CURADORIA.md) |
 | `discreta` | Matemática Discreta | Markdown curado em `disciplinas/discreta` (22 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
 | `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; dica errada da IA sobre cônicas aceita; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
 | `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |

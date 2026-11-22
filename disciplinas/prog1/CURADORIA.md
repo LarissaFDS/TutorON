@@ -1,12 +1,14 @@
-# Curadoria — Programação 1 (`prog1`, ECOM002)
+# Curadoria — Programação 1 (`prog1`; ECOM002 e Ciência da Computação)
 
-Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, mesmo com os sanitizers ainda não rodados (veja Código).
+Situação: **MVP** desde 20/11/2026, sem aviso. O complemento de Ciência da Computação (21/11/2026) não mudou a situação.
 
 ## Disciplina
 
 - Código ECOM002, 1º período, 60 h, Engenharia de Computação da UFAL. A linguagem é C.
 - Ementa, do PPC de 2014 (p. 23): "Resolução de problemas e desenvolvimento de algoritmos. Análise do problema. Estratégias de solução. Representação e documentação. Programação de algoritmos usando uma linguagem de programação. Estruturação de programas. Noções de tipos e estrutura elementares de dados. Conceito de recursão e sua aplicação."
 - Professor dos slides: Rodrigo de Barros Paes (IC/UFAL). Não sabemos se ele é o professor atual da turma.
+- Ciência da Computação: o material veio da pasta "01. COMP359 - Programação 1". O PPC de Ciência da Computação de 2006 (`ufal-ppc-cc-2006`, p. 17 e 20) traz a disciplina como COMP002 Programação 1, com 80 h (60 teóricas e 20 práticas), no 1º período. A ementa é **idêntica, palavra por palavra,** à de ECOM002, e o livro de Jaime Evaristo está na bibliografia básica. Por isso é a mesma disciplina no TutorON, e não foi criada uma cópia. Diferenças: a carga horária (80 h contra 60 h) e, nas listas da turma de CC, alocação dinâmica básica (`malloc`, `calloc`, `realloc`), que os slides de ECOM não têm. O código COMP359 não aparece no PPC de 2006, e não encontramos um PPC mais novo de CC: fica como pendência. Não há professor, semestre nem turma identificados no material de CC.
+- Cada bloco diz no cabeçalho (`curso:`) de que curso e de que turma veio.
 
 ## Fontes (`fontes.json`)
 
@@ -23,7 +25,7 @@ Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, mesmo c
 | `cppreference-c` | referência | Não confirmamos a licença na página; só consulta |
 | `the-huxley` | referência | Juiz online; nenhum enunciado nem solução no acervo |
 
-## Blocos (18, todos `material_da_disciplina`, todos na busca)
+## Blocos (24, todos `material_da_disciplina`, todos na busca)
 
 Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e nenhum tem revisão do professor.
 
@@ -46,7 +48,13 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e ne
 | `prog1-aula14-ponteiros` | `&`, `*`, troca por ponteiro | validada |
 | `prog1-aula15-structs` | `struct` | validada |
 | `prog1-aula16-recursao` | recursão | validada |
-| `prog1-huxley-juiz-online` | como o juiz corrige; números e temas | sem resolução |
+| `prog1-huxley-juiz-online` | como o juiz corrige; números e temas (ECOM e CC) | sem resolução |
+| `prog1-cc-recursao-listas` | CC, lista 8: casos base, ordem da impressão | corrigida |
+| `prog1-cc-ponteiros-listas` | CC, lista 9: `*(v + i)`, `%p`, `**`, `void *` | corrigida |
+| `prog1-cc-alocacao-dinamica` | CC, lista 10: `malloc`, `calloc`, `realloc`, `free` | corrigida |
+| `prog1-cc-strings-listas` | CC, lista 5: Enter do `fgets`, remover caractere, `toupper` | corrigida |
+| `prog1-cc-structs-listas` | CC, lista 6: `typedef`, struct aninhada, vetor de structs | corrigida |
+| `prog1-cc-terminal-linux` | CC: comandos do terminal e `gcc` | corrigida |
 
 "corrigida" é correção da equipe TutorON e **não é gabarito do professor**. Cada bloco corrigido diz qual foi a divergência.
 
@@ -55,18 +63,44 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e ne
 - Slides: `int` com 2 bytes e faixa do `float` errada; exemplo do salário sem `;` e com `%d` para valor real; `imprimir_varios` declarada `int` sem `return`; aspas curvas no código; `gets`; `--n` e `parede(h-2)` sem `;`; `^` usado como "ou exclusivo" lógico.
 - Livro: `main()` sem tipo; `scanf("%c")` logo depois de ler um número; `fflush(stdin)`.
 
+## Material de Ciência da Computação (21/11/2026)
+
+| Arquivo | Uso |
+|---|---|
+| Livro de Jaime Evaristo (duas cópias, 139 páginas cada) | já catalogado (`ufal-evaristo-livro`); nada novo entrou |
+| "Guia funcional para passar em P1" | `ufal-cc-prog1-guia-huxley`: é a mesma lista de questões do Huxley do bloco s17; 697, 686 e 300 aparecem duas vezes |
+| `dicas-terminal.pdf` | `ufal-cc-dicas-terminal`: parafraseado no bloco s23 |
+| `c_descomplicado/` (92 arquivos) | `ufal-cc-prog1-codigos-c`: códigos de aluno(s) das listas 5 a 10, sem enunciados nem nomes. Serviram de evidência dos tópicos e como fonte de erros reais. As funções dos blocos s18 a s22 foram escritas pela equipe e testadas, e nenhum código foi copiado |
+
+Ficaram de fora:
+- os executáveis (`a.out`, `ata`), que são ELF compilados com gcc 5.4 no Ubuntu;
+- os códigos de questões do Huxley (pasta `the huxley`, `lider_copa.c`, `somar_num_grande.c`, `adivinhe.c`, `chandu.c`, `quadro_medalhas.c`), que são atividade avaliativa;
+- os códigos incompletos ou que não compilam (`cont_par.c`, `fibonacci.c`, `lista06_24.c`, `lista07_24.c`, `lista08_11.c`, `lista08_12.c`, `lista08_14.c`, `lista09_3.c`);
+- os nomes de exemplo que estavam nos códigos.
+
+Erros conferidos compilando ou rodando os originais fora do repositório:
+- remover vogais de "oaeb ia" dava "ab a";
+- remover espaços de "a  b c" dava "a bc";
+- `s[i] - 32` em "ab cd" dava "AB", porque o espaço vira `'\0'`;
+- ponteiro usado antes de receber endereço ("used uninitialized");
+- função usada antes de ser declarada ("implicit declaration");
+- função `float` sem `return` em todos os caminhos;
+- aritmética com `void *` ("pointer-arith").
+
+As versões mínimas desses erros estão em `test_erros_dos_slides_e_de_iniciante_dao_aviso`.
+
 ## Código
 
 Os trechos de C dos blocos são cópias exatas de `tests_acervo/c_prog1/*.c` (conferido por teste). Os programas compilam com `gcc -std=c99 -Wall -Wextra -pedantic -Werror` e conferem as saídas com casos de teste.
 
-**Os sanitizers (`-fsanitize=address,undefined`) não rodaram nesta máquina.** O gcc local é MinGW 6.3, que não tem sanitizers, e o Docker Desktop não subiu. O teste tenta primeiro o gcc local, depois o Docker, e senão é pulado com o motivo. Ele precisa rodar em Linux antes da revisão final.
+Sanitizers (`-fsanitize=address,undefined`): em 20/11/2026 o teste foi pulado, porque o MinGW 6.3 não tem sanitizers e o Docker Desktop não subiu. Em 21/11/2026 o Docker subiu, e **todos os programas de `tests_acervo/c_prog1/` (os de ECOM e os `cc_*.c`) passaram com AddressSanitizer e UBSan** na imagem `gcc` do Docker. O teste continua tentando o gcc local, depois o Docker, e é pulado com o motivo se não houver nenhum dos dois.
 
 Inversão de string, palíndromo, MDC e primos não têm código no acervo, porque são questões do Huxley. O bloco de strings explica a inversão só em palavras.
 
 ## Tópicos e evidência
 
 - Os slides cobrem as aulas 1 a 16: algoritmos, compilação, variáveis e E/S, decisão, repetição, funções, vetores, matrizes, strings, ponteiros, structs e recursão. Todos esses tópicos têm bloco na busca.
-- Alocação dinâmica e arquivos não aparecem nos slides. A alocação dinâmica fica com Estrutura de Dados (`ed`), e o `rigor.md` marca essa fronteira. Arquivos não têm material.
+- Alocação dinâmica e arquivos não aparecem nos slides de ECOM. A alocação dinâmica básica aparece nas listas de CC e tem bloco próprio (`prog1-14-alocacao-dinamica`). Listas encadeadas e outras estruturas ficam com Estrutura de Dados (`ed`), e o `rigor.md` marca essa fronteira. Arquivos não têm material em nenhum dos dois cursos.
 
 ## Dados pessoais excluídos
 
@@ -75,5 +109,6 @@ Ficaram de fora o e-mail do professor, os links do grupo, do Google Sites e do D
 ## Pendências
 
 - Revisão humana dos 18 blocos e revisão do professor.
-- Rodar os sanitizers em Linux.
+- Confirmar o código atual (COMP359) e a ementa do PPC de Ciência da Computação em vigor.
+- Identificar professor, semestre e turma do material de CC.
 - Confirmar quem é o professor atual e se os slides podem ser usados.
