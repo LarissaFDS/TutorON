@@ -4,6 +4,7 @@ titulo: Aula 12 — matrizes (arrays de duas dimensões): ler, percorrer, somar 
 assunto: prog1-08-matrizes
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 12 (Arrays com duas dimensões; livro, seção 10.7)
 fontes_catalogo: ufal-prog1-slides-paes
 autoria: Slides do Prof. Rodrigo de Barros Paes (IC/UFAL), parafraseados pela equipe TutorON com auxílio de IA

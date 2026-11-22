@@ -3,6 +3,7 @@ id: prog1-aula02-algoritmos
 titulo: Aula 2 — algoritmo, instrução, estado e representação de quantidades
 assunto: prog1-01-algoritmos-representacao
 tipo: material_estudo
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 2 (Introdução; livro, capítulos 1 a 3)
 fontes_catalogo: ufal-prog1-slides-paes
 autoria: Slides do Prof. Rodrigo de Barros Paes (IC/UFAL), parafraseados pela equipe TutorON com auxílio de IA
