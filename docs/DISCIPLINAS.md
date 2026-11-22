@@ -108,7 +108,6 @@ Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a
 
 O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `\text{N·m}`, que o KaTeX do site não aceita.
 
-
 **Complemento de 21/11/2026.** A Lista 2 de Gravitação (8 problemas do cap. 13 do Halliday, digitalizados, sem resolução e sem autoria identificada) entrou como 3 blocos `t14`–`t16` com enunciado parafraseado, figuras descritas em texto e resolução independente da equipe, conferida em `tests_acervo/test_disciplina_fis2.py`. O PDF, o livro e o manual de resoluções não foram versionados nem usados como fonte. Nada de código mudou; a situação da disciplina (MVP) continua a mesma. Perguntas novas no eval: velocidade de escape da Terra e período de satélite em órbita baixa.
 
 ## Estrutura de Dados: primeira disciplina de programação em C (03/11/2026)
@@ -598,6 +597,10 @@ A ementa de CCOM011 no PPC de Ciência da Computação (matriz 2011) é idêntic
 ## Matemática Discreta, complemento de Ciência da Computação (22/11/2026)
 
 A ementa de CCOM010 no PPC de Ciência da Computação (matriz 2011) é a de ECOM003 sem "Noções Básicas" e "Aplicações": o material de CC (COMP362) entrou na disciplina `discreta`, sem cópia e sem mudar a situação (MVP). São 7 blocos (`s24` a `s30`) feitos das provas do Prof. Bruno Pimentel (2020.1 a 2021.1), da Prova 01 de 2017 do Prof. Lucas Amorim e das revisões da monitoria: conjuntos e leis, fecho de equivalência e ordem parcial, funções e compostas com inversa, provas (paridade, indução, Euclides), congruência linear, Teorema Chinês do Resto e Pequeno Teorema de Fermat. Cada conta é refeita em `tests_acervo/test_disciplina_discreta.py`; 9 perguntas novas em `eval/relevancia.py`. Fotos de prova com nome de aluno, o código RSA de aluno com chave privada e os nomes dos monitores ficaram fora.
+
+## Probabilidade e Estatística, complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM022 (PPC de CC, matriz 2011) tem os tópicos de `prob`. Entraram 4 blocos (`a19` a `a22`) das provas de 2013 do Prof. Heitor S. Ramos Filho, com `curso:` no cabeçalho; a situação não mudou. A atividade AT1, de alunos identificados, ficou fora.
 
 ## Geometria Analítica, complemento de Ciência da Computação (22/11/2026)
 

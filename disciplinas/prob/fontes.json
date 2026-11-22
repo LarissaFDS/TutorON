@@ -343,6 +343,42 @@
    "justificativa": "Confere todos os valores numéricos do acervo; não é ingerida.",
    "arquivo_local": null,
    "sha256": null
+  },
+  {
+   "id": "ufal-cc-prob-provas-heitor-2013",
+   "nome": "Avaliações de Probabilidade e Estatística de 2013 (26/06, 07/08 e 16/10, esta com folha de respostas), turmas COMP221, COMP023 e ECOM020",
+   "autoria": "Prof. Heitor S. Ramos Filho, Instituto de Computação da UFAL",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PDF de provas (LaTeX)",
+   "notacao": "Pr(A), f(x), E(X), σ²",
+   "topicos": [
+    "prob-01-probabilidade-basica",
+    "prob-02-bayes",
+    "prob-05-distribuicoes-discretas",
+    "prob-07-exponencial",
+    "prob-09-aproximacao-normal-tcl"
+   ],
+   "licenca": "Não declarada (prova da disciplina)",
+   "acesso": "PDFs do material de Ciência da Computação entregue pela equipe; não versionados",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Provas do Instituto de Computação para as turmas de CC. Enunciados parafraseados, resolvidos pela equipe e conferidos com scipy.stats; a folha de respostas de 16/10/2013 tem três erros, corrigidos no bloco."
+  },
+  {
+   "id": "ufal-ppc-cc-2011",
+   "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL",
+   "autoria": "Instituto de Computação, UFAL",
+   "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+   "idioma": "pt-BR",
+   "formato": "PDF",
+   "notacao": "não se aplica",
+   "topicos": [],
+   "licenca": "Documento institucional público",
+   "acesso": "Lido online; não versionado",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "justificativa": "Ementa de CCOM022, usada só para comparar com a disciplina prob."
   }
  ]
 }
