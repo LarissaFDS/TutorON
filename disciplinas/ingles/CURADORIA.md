@@ -49,7 +49,7 @@ Todos os exercícios usam trechos do texto da prova (o único material da turma)
 
 | Tema | Tratamento |
 |---|---|
-| Metodologia da Pesquisa (ECOM018: estrutura e escrita de trabalho científico) | Não está cadastrada. Aqui só a **leitura** do artigo em inglês (IMRaD, *abstract*, citações autor-data como pistas de compreensão), não a escrita nem as normas |
+| Metodologia da Pesquisa (ECOM018: estrutura e escrita de trabalho científico) | Cadastrada à parte (`metodologia`), com isolamento testado nos dois sentidos. Aqui só a **leitura** do artigo em inglês (IMRaD, *abstract*, citações autor-data como pistas de compreensão), não a escrita nem as normas |
 | Conteúdo técnico dos textos (boas práticas de software, inseticidas) | Fora: o tutor explica a leitura, não ensina a área. Perguntas de programação vão para ED ou PAA |
 
 O teste `test_isolamento_com_disciplinas_de_computacao` confere os dois sentidos com ED, BD e PAA. Os índices não têm blocos em comum com nenhuma disciplina.
