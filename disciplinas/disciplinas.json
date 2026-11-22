@@ -794,6 +794,32 @@
         "Quando um grafo com n vértices e m arestas pode ser planar?",
         "Como achar o fluxo máximo com Ford-Fulkerson?"
       ]
+    },
+    {
+      "id": "projsw",
+      "nome": "Projeto de Software",
+      "sigla": "PROJSW",
+      "situacao": "em validação",
+      "itens": "disciplinas/projsw/acervo/itens.json",
+      "indice": "disciplinas/projsw/acervo/indice.json",
+      "materiais": "disciplinas/projsw/materiais",
+      "rigor": "disciplinas/projsw/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "projsw-01-classes-objetos",
+        "projsw-02-colecoes-genericos",
+        "projsw-03-heranca-composicao",
+        "projsw-04-polimorfismo-interfaces",
+        "projsw-05-regras-de-projeto",
+        "projsw-06-refatoramento",
+        "projsw-07-excecoes-arquivos"
+      ],
+      "exemplos": [
+        "Qual a diferença entre == e equals em Java?",
+        "Quando usar composição em vez de herança?",
+        "Em que ordem os construtores rodam numa hierarquia de classes?",
+        "Qual a saída do programa de soma com os argumentos 2 4 oi?"
+      ]
     }
   ]
 }
