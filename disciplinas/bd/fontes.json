@@ -367,6 +367,73 @@
       "uso": "referencia",
       "origem": "bibliografia da disciplina",
       "justificativa": "Só catálogo; nenhum trecho foi usado"
+    },
+    {
+      "id": "ufal-cc-bd-lista2-hospital",
+      "nome": "Lista 2 - Exercícios SQL (esquema de hospital: ambulatório, médico, paciente, consulta, funcionário)",
+      "autoria": "Não identificada no arquivo (material da turma de Ciência da Computação da UFAL; o enunciado cita Florianópolis)",
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de lista de exercícios",
+      "isa": "não se aplica",
+      "dialeto": "SQL padrão",
+      "notacao_er": "não se aplica",
+      "sql_roda_no_sqlite": true,
+      "topicos": [
+        "bd-09-consultas-agregacao",
+        "bd-10-juncoes-uniao",
+        "bd-11-subconsultas"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Pasta do material de Ciência da Computação; não versionada",
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Enunciados parafraseados e resolvidos pela equipe; o SQL roda num banco de teste com dados inventados (tests_acervo/sql_bd/hospital_cc.sql). O dump MySQL da turma (dump_hospital.sql) não foi versionado nem usado: tem nomes de pessoas e a origem não está clara."
+    },
+    {
+      "id": "ufal-cc-bd-materiais",
+      "nome": "Material de BD1 da turma de CC: slides de Álgebra Relacional, Projeto Físico, SQL-DDL e SQL-DML; Revisão AB2 (normalização); Exercícios SQL (base HR); Lista de modelagem ER; trabalhos da AB2 e da reavaliação 2020.1",
+      "autoria": "Vários (a Revisão AB2 é de uma aluna ou monitora; os demais sem autoria clara no arquivo)",
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "dialeto": "Oracle (base HR) e SQL padrão",
+      "notacao_er": "Heuser",
+      "sql_roda_no_sqlite": false,
+      "topicos": [
+        "bd-03-modelo-er",
+        "bd-06-algebra-relacional",
+        "bd-07-dependencia-normalizacao",
+        "bd-08-sql-ddl-dml",
+        "bd-13-indices-acesso"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Pasta do material de Ciência da Computação; não versionada",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Usado só como evidência de que a turma de CC tem os mesmos tópicos; os trabalhos avaliativos não entram no acervo"
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "dialeto": "não se aplica",
+      "notacao_er": "não se aplica",
+      "sql_roda_no_sqlite": false,
+      "topicos": [],
+      "licenca": "Documento institucional público",
+      "acesso": "Lido online; não versionado",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Ementa de CCOM021 (Banco de Dados 1), usada só para comparar com a disciplina bd"
     }
   ]
 }
