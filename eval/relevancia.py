@@ -506,6 +506,12 @@ PERGUNTAS = [
     ("calc1", "assunto", "Qual o cilindro de volume máximo inscrito num cone?", ["calc1-otimizacao-geometrica"]),
     ("calc1", "assunto", "O que diz o Teorema do Valor Médio?", ["calc1-tvm-rolle"]),
     ("calc1", "assunto", "Como achar a primitiva com condição inicial?", ["calc1-primitivas-condicoes"]),
+    # Cálculo 1, complemento de Ciência da Computação (4ª provas de 2006 e 2007)
+    ("calc1", "assunto", "Qual o limite de (eˣ + x)^(1/x) quando x tende a 0 pela direita?", ["calc1-cc-limites-potencias-log", "calc1-regra-lhospital"]),
+    ("calc1", "assunto", "Como calcular o limite de raiz de x vezes ln x em zero?", ["calc1-cc-limites-potencias-log", "calc1-regra-lhospital"]),
+    ("calc1", "assunto", "Qual a maior área cercada com dois tipos de arame e 600 reais?", ["calc1-cc-otimizacao-cercas"]),
+    ("calc1", "assunto", "Quais as assíntotas de x³/(x² − 1)?", ["calc1-cc-esboco-x3-sobre-x2-menos-1", "calc1-assintotas-limites-infinito", "calc1-esboco-grafico"]),
+    ("calc1", "assunto", "Se 2 ≤ f'(x) ≤ 3 e f(1) = 2, qual o menor valor possível de f(4)?", ["calc1-cc-primitivas-tvm-estimativa", "calc1-tvm-rolle"]),
     ("calc1", "fora", "Como calcular o rotacional de um campo vetorial?", []),
     ("calc1", "fora", "Me conte uma piada", []),
     ("calc3", "fora", "Quando posso usar a regra de L'Hospital?", []),

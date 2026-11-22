@@ -89,3 +89,24 @@ Livros protegidos (Stewart, manual de soluções, Apostol) e os slides da editor
 - Revisão humana dos 23 blocos e confirmação das duas pendências com o professor.
 - Conferir a ementa com o plano de curso; confirmar a autoria do banco de questões e da lista COMP210.
 - Conferir a versão e a licença do Active Calculus antes de usá-lo.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+O TutorON organiza o acervo por disciplina, não por curso: o material de Cálculo Diferencial e Integral de Ciência da Computação (COMP363; no PPC de 2011, CCOM011 Cálculo 1) entrou na disciplina `calc1` já existente, sem cópia e sem mudar a situação.
+
+**Ementas.** A ementa de CCOM011 no PPC de CC (`ufal-ppc-cc-2011`) é igual, palavra por palavra, à de ECOM004. As duas turmas fazem as provas do Instituto de Matemática.
+
+**Fontes novas:** `ufal-ppc-cc-2011` (citada), `ufal-cc-calc1-banco-provas` (acervo) e `ufal-cc-calc1-bancos-solucionados` (referência; bancos solucionados, Stewart, Guidorizzi e Apostol ficaram fora do pacote e não foram abertos).
+
+**O que entrou.** O banco da turma de CC tem as provas avulsas do IM-UFAL de 2003 a 2013. As de 2012.2 e 2013 já estavam no acervo pelas fotos de ECOM; viraram blocos novos só as 4ª provas de 2006 e 2007, que cobrem limites com potência, primitivas, TVM, otimização e esboço:
+
+| Bloco | Tema | Status da resolução |
+|---|---|---|
+| `calc1-cc-limites-potencias-log` | $1^\infty$, $0\cdot\infty$ e 0/0 com logaritmo | validada |
+| `calc1-cc-primitivas-tvm-estimativa` | f a partir de f'' e derivada terceira com condições; estimativa pelo TVM | corrigida |
+| `calc1-cc-otimizacao-cercas` | cerca de menor custo e maior área com dois arames | validada |
+| `calc1-cc-esboco-x3-sobre-x2-menos-1` | esboço completo de x³/(x² − 1) | validada |
+
+**Correção.** Na 4ª prova de 2007 (Q5a), a derivada terceira é $2-6x$, com "(0, 2) ponto de máximo local" e "(1, 31/12) ponto de inflexão": as condições determinam $y=-x^4/4+x^3/3+x^2/2+2$, mas $y''(0)=1>0$, então (0, 2) é mínimo local. O bloco é `corrigida` e explica a divergência.
+
+**Dados pessoais.** As provas escaneadas trazem nomes de alunos e de professores escritos à mão; nada disso foi copiado. Nenhum PDF ou imagem foi versionado. As demais provas (2003 a 2011, Prova 1 a 3) foram lidas como evidência dos tópicos, que já têm bloco.
