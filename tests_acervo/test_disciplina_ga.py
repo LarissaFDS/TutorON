@@ -102,6 +102,19 @@ def test_nenhuma_nota_da_ia_e_nada_revisado_sem_registro():
         ("Como achar os focos e as assíntotas de uma hipérbole?", {"ga-hiperbole"}),
         ("O que é uma superfície de revolução?", {"ga-superficies-revolucao"}),
         ("Como encontrar o plano tangente a uma esfera?", {"ga-esfera-plano-tangente"}),
+        (
+            "Como escrever um vetor como combinação linear de outros dois e achar os escalares?",
+            {"ga-cc-vetores-escalares-modulo"},
+        ),
+        (
+            "Como saber se duas retas no espaço são reversas e calcular a distância entre elas?",
+            {"ga-cc-planos-retas-distancias", "ga-distancia-retas-reversas"},
+        ),
+        ("Como eliminar o termo misto de xy = 1 por rotação?", {"ga-cc-conicas-provas-cc"}),
+        (
+            "Que superfície sai da rotação de z = sen y em torno do eixo y?",
+            {"ga-cc-revolucao-quadricas-provas-cc", "ga-superficies-revolucao"},
+        ),
     ],
 )
 def test_pergunta_de_ga_encontra_bloco_pertinente(pergunta, aceitos):
@@ -147,7 +160,7 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
     }
     assert all("status_resolucao" in i for i in ITENS.values())
     contagem = {s: sum(i["status_resolucao"] == s for i in ITENS.values()) for s in rotulo}
-    assert contagem == {"validada": 25, "corrigida": 1, "pendente_professor": 3}
+    assert contagem == {"validada": 28, "corrigida": 2, "pendente_professor": 3}
     for i in ITENS.values():
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i["texto"], i["id"]
         assert "gabarito oficial" not in i["texto"].lower()
@@ -423,6 +436,58 @@ def test_quadricas_e_revolucao():
     assert sp.simplify(p[1] ** 2 - (p[0] ** 2 + p[2] ** 2)) == 0
     par = (x - 3) ** 2 / Q(25, 8) + (y + 1) ** 2 / 8 - z
     assert par.subs({x: 3 + Q(5, 2), y: -1, z: 2}) == 0 and par.subs({x: 3, y: 3, z: 2}) == 0
+
+
+def test_blocos_de_cc_dizem_curso():
+    cc = [p for p in GA.materiais.glob("g3[0-3]-cc-*.md")]
+    assert len(cc) == 4
+    for p in cc:
+        cab = p.read_text(encoding="utf-8").split("---")[1]
+        assert "curso: Ciência da Computação (UFAL)" in cab and "ufal-cc-ga-provas-2017-2" in cab, p.name
+
+
+def test_vetores_e_planos_das_provas_de_cc():
+    a, b, t, s = sp.symbols("a b t s", real=True)
+    k1, k2 = sp.symbols("k1 k2")
+    assert sp.solve([-k1 + k2 - 2, 2 * k1 + 2 * k2 - 3], [k1, k2]) == {k1: Q(-1, 4), k2: Q(7, 4)}
+    assert set(sp.solve(1 + (3 - a) ** 2 - 25, a)) == {3 - 2 * sqrt(6), 3 + 2 * sqrt(6)}
+    for va, vb in sp.solve([4 * a + 2 * b - 10, a**2 + b**2 - 36], [a, b]):
+        v, u = Matrix([va, vb]), Matrix([4, 2])
+        assert sp.simplify(v.dot(u) / u.dot(u) * u - Matrix([2, 1])) == Matrix([0, 0]) and sp.simplify(v.norm()) == 6
+    n = Matrix([2, 1, -1]).cross(Matrix([-2, 2, 1]))
+    assert list(n) == [3, 0, 6] and sp.simplify(abs(n.dot(Matrix([-2, 1, -8]))) / n.norm() - 18 / sqrt(5)) == 0
+    r0, rd, s0, sd = Matrix([1, 0, 0]), Matrix([1, -3, 2]), Matrix([-5, 6, 4]), Matrix([4, -5, 3])
+    assert sp.solve(list(r0 + t * rd - s0 - s * sd), [t, s]) == []
+    w = rd.cross(sd)
+    assert list(w) == [1, 5, 7] and sp.simplify(abs(w.dot(s0 - r0)) / w.norm() - 52 * sqrt(3) / 15) == 0
+    m = sd.cross(Matrix([1, -2, 3]) - s0)
+    assert list(m) == [29, 22, -2] and m.dot(Matrix([1, -2, 3])) == -21 and m.dot(s0) == -21
+    assert sp.simplify((Matrix([0, 2, -1])).cross(rd).norm() / rd.norm() - sqrt(21) / 7) == 0
+    assert Matrix([0, -4, 2]).cross(Matrix([0, -4, 2])) == Matrix([0, 0, 0])  # P2 = P3 na prova final
+    p = Matrix([1, 2, -1])
+    nn = (Matrix([-1, 2, 1]) - p).cross(Matrix([1, -2, 1]) - p)
+    assert sp.simplify(abs(nn.dot(Matrix([2, 2, 2]) - p)) / nn.norm()) == Q(8, 3)
+
+
+def test_conicas_e_revolucao_das_provas_de_cc():
+    assert sp.expand(2 * ((x - 1) ** 2 + (y - 1) ** 2) - (x + y + 2) ** 2) == x**2 - 2 * x * y + y**2 - 8 * x - 8 * y
+    assert sp.expand(9 * ((x + 2) ** 2 / 9 - (y - 1) ** 2 - 1) - (x**2 - 9 * y**2 - 14 + 4 * x + 18 * y)) == 0
+    vert = {x: 1, y: 2 * sqrt(2)}
+    assert sp.simplify(
+        (sp.sqrt((x - 1) ** 2 + (y - 1) ** 2) + sp.sqrt((x - 1) ** 2 + (y + 1) ** 2)).subs(vert)
+    ) == 4 * sqrt(2)
+    assert ((x - 1) ** 2 / 7 + y**2 / 8).subs(vert) == 1
+    X, Y = sp.symbols("X Y")
+    assert sp.expand((X - Y) / sqrt(2) * (X + Y) / sqrt(2)) == X**2 / 2 - Y**2 / 2
+    th, u = sp.symbols("th u", real=True)
+    pt = (sp.sin(u) * sp.cos(th), u, sp.sin(u) * sp.sin(th))  # z = sen y girada em torno de y
+    assert sp.simplify(pt[0] ** 2 + pt[2] ** 2 - sp.sin(pt[1]) ** 2) == 0
+    c = 2 + sp.cos(u)  # círculo (x-2)^2+z^2=1 girado em torno de z; c >= 1 é a distância ao eixo
+    tor = (c * sp.cos(th), c * sp.sin(th), sp.sin(u))
+    assert sp.simplify(tor[0] ** 2 + tor[1] ** 2 - c**2) == 0
+    assert sp.simplify((c - 2) ** 2 + tor[2] ** 2 - 1) == 0
+    r = sp.symbols("r", positive=True)
+    assert sp.simplify(sp.sin(sp.sqrt((r * sp.cos(th)) ** 2 + (r * sp.sin(th)) ** 2)) - sp.sin(r)) == 0
 
 
 # ---------------------------------------------------------------- fórmulas, catálogo e restrições
