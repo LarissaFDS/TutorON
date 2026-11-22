@@ -77,3 +77,10 @@ Fora da busca (`nota_da_equipe_ia`, `candidato`): `so-nota-filas-multinivel-real
 Todas as resoluções são da equipe TutorON, **não gabarito do professor**. `tests_acervo/so_verif.py` simula escalonamento (FCFS, SJF, SRTF, prioridades, RR), substituição de páginas (FIFO, LRU, ótimo), envelhecimento, alocação contígua, disco, ext2 e o banqueiro. Os programas de `tests_acervo/c_so/` compilam com `gcc -pthread -Wall -Wextra -Werror`; com `-fsanitize=thread` só `disputa.c` acusa condição de disputa, como esperado.
 
 Revisão humana e do professor: **pendentes** em todos os blocos.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+O material da turma de Ciência da Computação (pasta `18. COMP378 - Sistemas Operacionais`) foi conferido arquivo por arquivo contra o catálogo de `fontes.json`: são os mesmos slides do Prof. Aquino, o livro e o caderno do Prof. Maziero, as provas AB1, AB2 e reavaliação de 2020.1, as fotos da Prova 2, as listas de 2021, os resumos de 2017, o seminário e o arquivo vazio "Cap. 5 - Estudos". **Nada novo:** nenhum bloco foi criado e a situação não mudou (MVP).
+
+- **Ementa:** no PPC de Ciência da Computação (matriz 2011, `ufal-ppc-cc-2011`), CCOM034 Sistemas Operacionais (60 h) tem o **mesmo texto de ementa** de ECOM032 e a mesma bibliografia básica (Tanenbaum, Silberschatz, Deitel). O código COMP378 vem do nome da pasta e não aparece no PPC de 2011. Não há motivo para separar disciplinas.
+- Os blocos atuais servem às duas turmas; o campo `curso:` não foi acrescentado porque nenhum bloco veio só do material de CC.
