@@ -610,6 +610,10 @@ A ementa de CCOM05 (PPC de CC, matriz 2011) tem as partes de `ga` e mais matrize
 
 A ementa de CCOM021 (PPC de CC, matriz 2011) tem os tópicos de `bd`. Entraram 2 blocos (`b12` e `b13`) da Lista 2 de SQL da turma de CC, com `curso:` no cabeçalho, conferidos num banco de teste com dados inventados; a situação não mudou. O dump do hospital da turma não foi versionado nem usado.
 
+## Estrutura de Dados, complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM009 (PPC de CC, matriz 2011) tem os TADs de `ed` e mais POO e containers, sem bloco. Entraram 3 blocos (`s24` a `s26`) de exercícios do Huxley da turma de CC, com `curso:` no cabeçalho e código testado em `tests_acervo/c_ed/cc_huxley.c`; a situação não mudou. O projeto Huffman da turma é avaliativo e ficou fora.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:

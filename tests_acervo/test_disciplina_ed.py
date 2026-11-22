@@ -99,6 +99,9 @@ def test_nenhum_bloco_aprovado_pelo_professor_ou_revisado_por_humano():
     ('Como testar se minha AVL está balanceada?', {'ed-testes-avl-heap'}),
     ('Quais as propriedades de uma árvore rubro-negra?', {'ed-ufcg-rubro-negra', 'ed-ufcg-rubro-negra-insercao'}),
     ('Qual o custo amortizado da árvore splay?', {'ed-ufcg-splay-skiplist'}),
+    ('Como verificar se os parênteses de uma expressão estão balanceados usando pilha?', {'ed-cc-parenteses-pilha'}),
+    ('Como achar a profundidade de um nó numa árvore binária escrita como texto com parênteses?', {'ed-cc-profundidade-arvore-texto'}),
+    ('Como guardar a distância e o predecessor de cada vértice na busca em largura?', {'ed-cc-bfs-distancia-predecessor'}),
 ])
 def test_pergunta_de_ed_encontra_material_pertinente(pergunta, aceitos):
     assert buscar(pergunta)[0] in aceitos
@@ -154,7 +157,7 @@ def test_blocos_de_ed_nao_copiam_paa():
 def test_resolucoes_tem_status_e_dizem_no_texto():
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
-    assert len(resolvidas) == 21
+    assert len(resolvidas) == 24
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
         assert 'gabarito oficial' not in i['texto'].lower()
@@ -322,6 +325,16 @@ def test_catalogo_completo_e_coerente():
     assert {x for i in ITENS.values() for x in i['fontes_catalogo']} <= set(CATALOGO)
     assert {i for i, f in CATALOGO.items() if f['uso'] == 'acervo'} == {
         x for i in ITENS.values() if i['natureza'] == 'material_da_disciplina' for x in i['fontes_catalogo']}
+
+
+def test_blocos_de_cc_dizem_curso_e_usam_o_codigo_testado():
+    cc = [p for p in ED.materiais.glob('s2[4-6]-cc-*.md')]
+    assert len(cc) == 3
+    fonte = (C_ED / 'cc_huxley.c').read_text(encoding='utf-8')
+    for p in cc:
+        t = p.read_text(encoding='utf-8')
+        assert 'curso: Ciência da Computação (UFAL)' in t and 'ufal-cc-ed-huxley' in t, p.name
+        assert re.search(r'```c\n(.*?)```', t, re.S).group(1).strip() in fonte, p.name
 
 
 def test_originais_fora_do_repositorio():
