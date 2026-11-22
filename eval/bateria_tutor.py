@@ -264,6 +264,16 @@ PERGUNTAS = [
     ("lfa-parada", "lfa", "Por que o problema da parada é indecidível?",
      "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa"),
     ("lfa-fora", "lfa", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Teoria dos Grafos: conferidas em tests_acervo/test_disciplina_grafos.py.
+    ("grafos-isomorfismo", "grafos", "Quantos grafos não isomorfos existem com 4 vértices?",
+     "separa por número de arestas; invariantes (arestas, sequência de graus); 11 no total; não entrega a lista pronta"),
+    ("grafos-petersen", "grafos", "Por que o grafo de Petersen não é hamiltoniano?",
+     "10 vértices, 3-regular; ciclo cruza raios em número par; casos de 2 e 4 raios dão contradição"),
+    ("grafos-planar", "grafos", "Por que K3,3 não é planar?",
+     "Euler n - m + f = 2; sem triângulos m <= 2n - 4; 9 > 8; desigualdade só prova não planaridade"),
+    ("grafos-fluxo", "grafos", "Como funciona o Ford-Fulkerson?",
+     "grafo residual com arcos de volta; gargalo; fluxo máximo = corte mínimo; conservação"),
+    ("grafos-fora", "grafos", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Cálculo 1: conferidas em tests_acervo/test_disciplina_calc1.py.
     ("calc1-definicao", "calc1", "Como derivar √(2x+1) pela definição?",
      "domínio x ≥ -1/2; limite do quociente; racionaliza com o conjugado; f'(x) = 1/√(2x+1); não entrega tudo"),

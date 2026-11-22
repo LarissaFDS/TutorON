@@ -1,0 +1,93 @@
+[
+ {
+  "id": "grafos-isomorfismo",
+  "disciplina": "grafos",
+  "pergunta": "Quantos grafos não isomorfos existem com 4 vértices?",
+  "esperado": "separa por número de arestas; invariantes (arestas, sequência de graus); 11 no total; não entrega a lista pronta",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 42.2,
+  "fontes": [
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL)",
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL)",
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL); 2ª avaliação de Teoria dos Grafos 2016.2, Prof. Leonardo Viana (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para saber quantos grafos não isomorfos existem com $n = |V| = 4$ ($n$ \"número de vértices\"), estamos considerando grafos simples e não orientados $G = (V, E)$, onde $E$ é o conjunto de arestas.\n\nUma estratégia muito eficiente no papel é organizar a contagem pelo **número de arestas** $m = |E|$ ($m$ \"número de arestas\"):\n\n1. **Limite máximo de arestas:** O número máximo de arestas em um grafo simples com 4 vértices é dado pelo grafo completo $K_4$, que possui $\\binom{4}{2} = 6$ arestas. Portanto, $m$ pode variar de $0$ a $6$.\n2. **Propriedade do complemento:** Se você encontrar todos os grafos não isomorfos com $m$ arestas, o complemento $\\bar{G}$ (\"grafo complementar\") desses grafos nos dá exatamente os grafos não isomorfos com $6 - m$ arestas. Isso significa que a contagem para $m = 4, 5, 6$ é simétrica à de $m = 2, 1, 0$!\n\nAssim, basta desenhar e contar cuidadosamente as formas distintas (não isomorfas) para $m = 0, 1, 2$ e $m = 3$.\n\n---\n\n### Sua vez\n\nPegue papel e caneta e faça o seguinte passo a passo:\n\n1. Desenhe as formas possíveis (não isomorfas) de grafos com 4 vértices para:\n   - $m = 0$ (quantos?)\n   - $m = 1$ (quantos?)\n   - $m = 2$ (dica: verifique se as duas arestas se conectam num mesmo vértice ou se são disjuntas)\n   - $m = 3$ (busque arranjos diferentes de graus)\n2. Escreva aqui quantos grafos você encontrou para cada um desses valores de $m$."
+ },
+ {
+  "id": "grafos-petersen",
+  "disciplina": "grafos",
+  "pergunta": "Por que o grafo de Petersen não é hamiltoniano?",
+  "esperado": "10 vértices, 3-regular; ciclo cruza raios em número par; casos de 2 e 4 raios dão contradição",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 46.1,
+  "fontes": [
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender por que o grafo de Petersen não possui um **ciclo hamiltoniano** (um ciclo simples que visita todos os $n = |V| = 10$ vértices exatamente uma vez), vale a pena analisar como seus vértices estão organizados [P1].\n\nO grafo de Petersen é 3-regular (todos os vértices têm grau $d(v) = 3$) e pode ser visto como duas partes de 5 vértices:\n- **Parte externa:** o ciclo formado por $u_0, u_1, u_2, u_3, u_4$.\n- **Parte interna:** a estrela/ciclo interno formado por $v_0, v_1, v_2, v_3, v_4$.\n- **Raios:** 5 arestas da forma $(u_i, v_i)$ que conectam a parte externa à interna.\n\nSe um ciclo hamiltoniano existisse, ele precisaria passar por todos os 10 vértices e usaria algumas arestas externas, algumas internas e algumas arestas de raio para passar de um lado para o outro.\n\n---\n\n### Sua vez\nPegue papel e caneta para dar o primeiro passo da demonstração:\n\n1. Cada vez que um caminho entra na parte interna por um raio, ele precisa sair por outro raio para continuar navegando no grafo. Por essa razão, o número total de raios usados pelo ciclo precisa ser **par** ou **ímpar**?\n2. Sabendo que existem apenas 5 raios no total, quais são os dois únicos números possíveis de raios que um ciclo hamiltoniano poderia utilizar?"
+ },
+ {
+  "id": "grafos-planar",
+  "disciplina": "grafos",
+  "pergunta": "Por que K3,3 não é planar?",
+  "esperado": "Euler n - m + f = 2; sem triângulos m <= 2n - 4; 9 > 8; desigualdade só prova não planaridade",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 72.2,
+  "fontes": [
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL); 2ª avaliação de Teoria dos Grafos 2016.2, Prof. Leonardo Viana (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "grafos-fluxo",
+  "disciplina": "grafos",
+  "pergunta": "Como funciona o Ford-Fulkerson?",
+  "esperado": "grafo residual com arcos de volta; gargalo; fluxo máximo = corte mínimo; conservação",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 34.1,
+  "fontes": [
+   "Lista de exercícios de Teoria dos Grafos 2020.1, Prof. Rian Gabriel Pinheiro (IC-UFAL); 2ª avaliação de Teoria dos Grafos 2016.2, Prof. Leonardo Viana (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O algoritmo de Ford-Fulkerson é uma estratégia iterativa para encontrar o fluxo máximo em uma rede. Ele se baseia na ideia de \"melhorar\" um fluxo inicial (que pode ser zero) enquanto for possível encontrar um caminho que permita enviar mais unidades da fonte $s$ até o sumidouro $t$.\n\nPara entender como ele funciona, imagine que você tem um grafo orientado $G = (V, E)$ com capacidades $c(e)$ em cada arco. O segredo está no **grafo residual** $G_f$. Ele nos mostra quanto ainda podemos enviar por um arco (capacidade restante) e quanto podemos \"desfazer\" de um fluxo já enviado (capacidade de recuo).\n\nO processo segue estes passos:\n1. Começamos com um fluxo nulo em todos os arcos.\n2. Buscamos um **caminho aumentante** no grafo residual de $s$ para $t$.\n3. Se encontrarmos, calculamos o **gargalo** (a menor capacidade residual ao longo desse caminho).\n4. Atualizamos o fluxo na rede original e ajustamos as capacidades no grafo residual.\n5. Repetimos até que não exista mais nenhum caminho de $s$ para $t$ no grafo residual.\n\nO ponto crucial é que o grafo residual permite que o algoritmo \"corrija\" escolhas ruins feitas anteriormente, enviando fluxo de volta através de arcos que já estavam ocupados.\n\n### Sua vez\nImagine uma rede simples com três vértices: $s \\to A$ (capacidade 5), $A \\to t$ (capacidade 5) e $s \\to t$ (capacidade 2). Se você enviar 2 unidades pelo caminho $s \\to t$, qual é a capacidade residual do arco $s \\to t$ no grafo residual e por que ela se torna esse valor?"
+ },
+ {
+  "id": "grafos-fora",
+  "disciplina": "grafos",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 34.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Essa é uma dúvida de **Cálculo 2 ou 3**, disciplina que trata de funções de várias variáveis e integração múltipla. Como sou o TutorON, especializado em **Teoria dos Grafos**, posso te dar uma orientação geral sobre o conceito, mas recomendo que você verifique o material específico da sua disciplina de Cálculo para garantir que está seguindo a notação do seu professor.\n\nPara calcular uma integral dupla em coordenadas polares, o objetivo é transformar uma região definida em coordenadas cartesianas $(x, y)$ para coordenadas polares $(r, \\theta)$, onde $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$.\n\nO ponto fundamental que não pode ser esquecido é o **Jacobiano** da transformação. Ao mudar de coordenadas, o elemento de área $dA = dx \\, dy$ não é simplesmente $dr \\, d\\theta$. Existe um fator de correção que surge da mudança de variáveis. Você se lembra qual é esse fator que aparece dentro da integral ao converter para coordenadas polares?\n\n### Sua vez\nEscreva no papel a fórmula da integral dupla $\\iint_R f(x, y) \\, dx \\, dy$ convertida para coordenadas polares, incluindo o termo do Jacobiano. Qual é a expressão completa do novo integrando e do diferencial de área?"
+ }
+]
