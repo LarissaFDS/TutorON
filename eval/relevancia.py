@@ -27,6 +27,9 @@ CORTE = 0.45  # ACERVO_SIMILARIDADE_MINIMA padrão (backend/config.py)
 # (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório pipeline/06-avaliacao/teste-2026-10-19.md,
 # eval/perguntas.json e paráfrases sem as palavras do acervo.
 PERGUNTAS = [
+    ("oac", "assunto", "Cache de 4 blocos com os endereços 0, 8, 0, 6, 8, 4, 8, 10, 6: quantas faltas no mapeamento direto, em 2 vias e totalmente associativo?", ["oac-cc-cache-tres-mapeamentos"]),
+    ("oac", "assunto", "Qual o CPI médio de cada compilador e por que MIPS não serve para comparar arquiteturas diferentes?", ["oac-cc-desempenho-compiladores"]),
+    ("oac", "assunto", "Trocar add e or resolve o conflito de dados no pipeline de 5 estágios sem forwarding?", ["oac-cc-pipeline-reordenar-ciclo"]),
     ("bd", "assunto", "Como buscar os pacientes que estão com sarampo juntando consulta e doença?", ["bd-cc-hospital-filtros-juncoes"]),
     ("bd", "assunto", "Como contar o número de médicos de cada especialidade?", ["bd-cc-hospital-agregacao-not-exists-union"]),
     ("bd", "assunto", "Como listar os médicos que não têm consultas marcadas?", ["bd-cc-hospital-agregacao-not-exists-union"]),

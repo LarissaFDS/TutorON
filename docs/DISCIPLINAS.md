@@ -614,6 +614,10 @@ A ementa de CCOM021 (PPC de CC, matriz 2011) tem os tópicos de `bd`. Entraram 2
 
 A ementa de CCOM009 (PPC de CC, matriz 2011) tem os TADs de `ed` e mais POO e containers, sem bloco. Entraram 3 blocos (`s24` a `s26`) de exercícios do Huxley da turma de CC, com `curso:` no cabeçalho e código testado em `tests_acervo/c_ed/cc_huxley.c`; a situação não mudou. O projeto Huffman da turma é avaliativo e ficou fora.
 
+## OAC, complemento de Ciência da Computação (22/11/2026)
+
+As provas de 2017.2 do Prof. Erick são comuns a Engenharia e Ciência da Computação. Entraram 3 blocos (`v01` a `v03`: desempenho, cache e pipeline), com `curso:` no cabeçalho e contas conferidas em Python; a situação não mudou.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
