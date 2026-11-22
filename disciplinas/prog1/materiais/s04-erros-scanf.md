@@ -4,6 +4,7 @@ titulo: Por que o scanf não lê? & esquecido, formato errado, Enter que sobra e
 assunto: prog1-03-variaveis-tipos-es
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (UFAL), Prof. Rodrigo de Barros Paes, Aula 4 (scanf); livro de Jaime Evaristo, seções 2.7 e 5.6 (fflush)
 fontes_catalogo: ufal-prog1-slides-paes,ufal-evaristo-livro
 autoria: Slides do Prof. Rodrigo de Barros Paes e livro do Prof. Jaime Evaristo (IC/UFAL), parafraseados e corrigidos pela equipe TutorON com auxílio de IA

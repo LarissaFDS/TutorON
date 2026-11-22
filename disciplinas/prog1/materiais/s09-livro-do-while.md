@@ -4,6 +4,7 @@ titulo: Diferença entre while e do-while: o teste no fim garante uma execução
 assunto: prog1-05-repeticao
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação e Ciência da Computação (UFAL): o livro está na bibliografia dos dois PPCs; turma não se aplica
 fonte: Livro "Aprendendo a Programar Programando na Linguagem C", Jaime Evaristo (IC/UFAL), 3ª ed. digital, seção 4.4 (O comando do while)
 fontes_catalogo: ufal-evaristo-livro
 autoria: Livro do Prof. Jaime Evaristo (IC/UFAL), parafraseado e corrigido pela equipe TutorON com auxílio de IA

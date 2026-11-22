@@ -1,6 +1,6 @@
 {
   "disciplina": "discreta",
-  "atualizado_em": "2026-11-20",
+  "atualizado_em": "2026-11-22",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
     "uso": "acervo = parafraseado em disciplinas/discreta/materiais; citada = indicada na curadoria; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -288,6 +288,118 @@
       "prioridade": "referencia",
       "uso": "referencia",
       "justificativa": "Referência aberta para consulta; não ingerida."
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação da UFAL (matriz 2011), ementa de CCOM010 Matemática Discreta",
+      "autoria": "Universidade Federal de Alagoas, Instituto de Computação",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF institucional (51 páginas)",
+      "isa": "não se aplica",
+      "topicos": [
+        "discreta-03-conjuntos",
+        "discreta-05-funcoes",
+        "discreta-06-inducao-peano",
+        "discreta-07-inteiros-numeracao",
+        "discreta-08-mdc-primos",
+        "discreta-09-aritmetica-modular-rsa",
+        "discreta-10-estruturas-algebricas-booleanas",
+        "discreta-11-combinatoria",
+        "discreta-12-grafos"
+      ],
+      "licenca": "Documento institucional público",
+      "acesso": "Público; consultado em 22/11/2026; não versionado",
+      "prioridade": "alta",
+      "uso": "citada",
+      "justificativa": "Ementa de CC, igual à de ECOM003 sem \"Noções Básicas\" e \"Aplicações\"; confirma que o material de CC é complemento, não disciplina nova."
+    },
+    {
+      "id": "ufal-cc-discreta-provas-bruno",
+      "nome": "Provas 1, 2, 3, reavaliações e final de Matemática Discreta (2020.1, 2020.2 e 2021.1), Prof. Bruno Pimentel",
+      "autoria": "Prof. Bruno Pimentel, IC/UFAL",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "8 PDFs de prova, sem gabarito",
+      "isa": "não se aplica",
+      "topicos": [
+        "discreta-02-demonstracoes",
+        "discreta-03-conjuntos",
+        "discreta-04-relacoes",
+        "discreta-05-funcoes",
+        "discreta-09-aritmetica-modular-rsa"
+      ],
+      "licenca": "Não declarada (provas do professor)",
+      "acesso": "Arquivo entregue pela equipe (pacote de Ciência da Computação); não versionado",
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Enunciados parafraseados; resolução da equipe conferida por código em tests_acervo/test_disciplina_discreta.py."
+    },
+    {
+      "id": "ufal-cc-discreta-prova-lucas-2017",
+      "nome": "Prova Escrita Individual 01 de Matemática Discreta (COMP208, 2017), Prof. Lucas Amorim",
+      "autoria": "Prof. Lucas Amorim, IC/UFAL",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "4 fotos de prova respondida por aluno",
+      "isa": "não se aplica",
+      "topicos": [
+        "discreta-03-conjuntos",
+        "discreta-04-relacoes",
+        "discreta-05-funcoes"
+      ],
+      "licenca": "Não declarada (prova do professor)",
+      "acesso": "Arquivo entregue pela equipe (pacote de Ciência da Computação); não versionado",
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Só os enunciados foram parafraseados; as fotos trazem nome e respostas de aluno e não foram versionadas nem transcritas."
+    },
+    {
+      "id": "ufal-cc-discreta-monitoria",
+      "nome": "Revisões da monitoria para a 2ª e a 3ª prova (2020.2, turma do Prof. Bruno Pimentel)",
+      "autoria": "Monitoria de Matemática Discreta, IC/UFAL (nomes dos monitores omitidos)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "2 PDFs de slides",
+      "isa": "não se aplica",
+      "topicos": [
+        "discreta-01-nocoes-logica",
+        "discreta-02-demonstracoes",
+        "discreta-08-mdc-primos",
+        "discreta-09-aritmetica-modular-rsa"
+      ],
+      "licenca": "Não declarada (material da monitoria)",
+      "acesso": "Arquivo entregue pela equipe (pacote de Ciência da Computação); não versionado",
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Roteiro de congruência linear e Teorema Chinês do Resto parafraseado; o exemplo do TCR para em 314 e o bloco reduz para 104."
+    },
+    {
+      "id": "cc-discreta-rsa-python",
+      "nome": "Implementação de RSA em Python (pasta rsa-master das provas)",
+      "autoria": "Autoria de aluno não identificada no repositório de origem",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "Código Python, README e chaves de exemplo",
+      "isa": "não se aplica",
+      "topicos": [
+        "discreta-09-aritmetica-modular-rsa"
+      ],
+      "licenca": "GPL-3.0 declarada no arquivo LICENSE",
+      "acesso": "Arquivo entregue pela equipe (pacote de Ciência da Computação); não versionado",
+      "prioridade": "referencia",
+      "uso": "referencia",
+      "justificativa": "Trabalho de aluno com chave privada de exemplo: não versionado nem copiado; só confirma que a turma implementa o RSA."
     }
   ]
 }

@@ -484,7 +484,8 @@
         "prog1-10-ponteiros",
         "prog1-11-structs",
         "prog1-12-recursao",
-        "prog1-13-juiz-online"
+        "prog1-13-juiz-online",
+        "prog1-14-alocacao-dinamica"
       ],
       "exemplos": [
         "Por que meu scanf não lê o número?",
