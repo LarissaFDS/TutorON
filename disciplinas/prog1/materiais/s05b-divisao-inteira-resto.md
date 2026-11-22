@@ -4,6 +4,7 @@ titulo: Por que 7 / 2 dá 3 em C? Divisão inteira, resto (%) e conversão para 
 assunto: prog1-03-variaveis-tipos-es
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aulas 4 (operadores) e 6 (resto para testar par)
 fontes_catalogo: ufal-prog1-slides-paes
 autoria: Slides do Prof. Rodrigo de Barros Paes (IC/UFAL), parafraseados pela equipe TutorON com auxílio de IA

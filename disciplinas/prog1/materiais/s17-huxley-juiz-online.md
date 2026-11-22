@@ -3,8 +3,9 @@ id: prog1-huxley-juiz-online
 titulo: The Huxley — como o juiz online corrige e lista de questões sugeridas por tema
 assunto: prog1-13-juiz-online
 tipo: lista
-fonte: Slides de Programação 1 (UFAL), Prof. Rodrigo de Barros Paes, Aulas 1 e 5 (dicas do The Huxley); lista "Questões Huxley Sugestões" (só números e temas)
-fontes_catalogo: ufal-prog1-slides-paes,ufal-prog1-huxley-lista
+curso: Engenharia de Computação (ECOM002) e Ciência da Computação (UFAL): a mesma lista circula nas duas turmas; semestre não identificado
+fonte: Slides de Programação 1 (UFAL), Prof. Rodrigo de Barros Paes, Aulas 1 e 5 (dicas do The Huxley); lista "Questões Huxley Sugestões" (Engenharia de Computação) e "Guia funcional para passar em P1" (Ciência da Computação), a mesma lista; só números e temas
+fontes_catalogo: ufal-prog1-slides-paes,ufal-prog1-huxley-lista,ufal-cc-prog1-guia-huxley
 autoria: Dicas dos slides do Prof. Rodrigo de Barros Paes (IC/UFAL); lista de questões sugeridas, autoria não identificada; reescritas pela equipe TutorON com auxílio de IA
 licenca: Não declarada; os enunciados são do The Huxley e não estão no acervo
 publicacao_transcricao: não se aplica: o bloco traz só números e temas das questões e parafraseia as dicas
@@ -21,7 +22,7 @@ O The Huxley compara a saída do seu programa, caractere por caractere, com a re
 
 A disciplina recomenda pelo menos 100 questões, duas ou três por dia, e ler o assunto no livro antes da aula.
 
-Questões sugeridas (números e temas; os enunciados ficam no Huxley):
+Questões sugeridas nas turmas de Engenharia e de Ciência da Computação (números e temas; os enunciados ficam no Huxley):
 - Aquecimento: 166 algarismo das unidades, 234 resto entre números, 302 distância, 28 inverter com 2 algarismos, 40 coma bem, 583 empilhando dominó, 697 sistema de equação de primeiro grau, 204 triângulos, 275 passadas do relógio, 657 divisão da Nlogônia, 698 presenteando, 661 alarme despertador, 709 jogo do sapo, 707 Prateek e seus amigos, 165 quadrado mágico, 8 matrizes, 377 líder do grupo da Copa, 23 múltiplos de cinco, 417 zeros no fim do fatorial, 7 calculadora, 247 inverter uma string, 161 palíndromo, 524 números que faltam, 446 escovas de dente, 442 comprando laranjas.
 - Função e recursão: 352 MDC recursivo, 552 algoritmo de Euclides, 356 decimal para binário recursivo, 24 fatorial.
 - Nível de prova: 135, 300, 686, 667, 320, 64, 505, 131, 179, 479, 194, 388, 197, 85, 89, 526, 232, 61, 218, 373, 54, 685, 365, 387, 592, 416, 277, 145, 717, 229, 407, 525, 535, 4, 220.

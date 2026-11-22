@@ -89,7 +89,13 @@ def test_nenhuma_nota_da_ia_e_nada_revisado_sem_registro():
     ('Por que a divisão de dois inteiros perde a parte fracionária?', {'prog1-divisao-inteira-resto', 'prog1-aula05-resolucao-problemas'}),
     ('Como compilar com gcc?', {'prog1-aula03-compilacao'}),
     ('O Huxley diz resposta errada mas o exemplo passa', {'prog1-huxley-juiz-online'}),
-    ('Como ler uma frase com espaços usando fgets?', {'prog1-aula13-strings'}),
+    ('Como ler uma frase com espaços usando fgets?', {'prog1-aula13-strings', 'prog1-cc-strings-listas'}),
+    ('Como alocar um vetor com malloc e liberar com free?', {'prog1-cc-alocacao-dinamica'}),
+    ('Como remover as vogais de uma string?', {'prog1-cc-strings-listas'}),
+    ('Posso imprimir o endereço de um ponteiro com %d?', {'prog1-cc-ponteiros-listas'}),
+    ('Por que minha recursão de potência nunca para?', {'prog1-cc-recursao-listas'}),
+    ('Como acessar uma struct dentro de outra struct?', {'prog1-cc-structs-listas', 'prog1-aula15-structs'}),
+    ('Como renomear ou apagar um arquivo no terminal Linux?', {'prog1-cc-terminal-linux'}),
 ])
 def test_pergunta_de_prog1_encontra_bloco_pertinente(pergunta, aceitos):
     assert buscar(pergunta)[0] in aceitos
@@ -125,7 +131,7 @@ def test_assunto_de_ed_com_prog1_selecionada_usa_regra_de_fronteira():
 def test_resolucoes_tem_status_e_dizem_no_texto():
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
-    assert len(resolvidas) == 15
+    assert len(resolvidas) == 21
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
         assert 'gabarito oficial' not in i['texto'].lower()
@@ -230,12 +236,15 @@ def test_codigo_c_passa_no_address_sanitizer_e_ubsan(tmp_path):
      'int main(void) { imprimir(1); return 0; }\n', 'return'),
     ('int main(void) { int x = 0; if (x = 5) { return 1; } return 0; }\n', 'parentheses'),
     ('#include <stdio.h>\nint main(void) { int n; scanf("%d", n); return n; }\n', 'format'),
+    ('int main(void) { return fat(3); }\nint fat(int n) { return n > 1 ? n * fat(n - 1) : 1; }\n', 'implicit'),
+    ('int main(void) { int *p; return *p; }\n', 'uninitialized'),
+    ('int main(void) { void *p = 0; p++; return p == 0; }\n', 'pointer-arith'),
 ])
 def test_erros_dos_slides_e_de_iniciante_dao_aviso(original, aviso, tmp_path):
     """Versões mínimas, escritas pela equipe, dos erros apontados nos blocos: o -Wall os denuncia."""
     fonte = tmp_path / 'original.c'
     fonte.write_text(original, encoding='utf-8')
-    r = subprocess.run([_gcc(), '-std=c99', '-Wall', '-Wextra', '-c', str(fonte), '-o', str(tmp_path / 'o.o')],
+    r = subprocess.run([_gcc(), '-std=c99', '-Wall', '-Wextra', '-pedantic', '-c', str(fonte), '-o', str(tmp_path / 'o.o')],
                        capture_output=True, text=True)
     assert 'warning' in r.stderr and aviso in r.stderr, r.stderr
 
@@ -297,7 +306,7 @@ def test_originais_e_dados_pessoais_fora_do_repositorio():
     arquivos = [p for p in PASTA.rglob('*') if p.is_file()] + PROGRAMAS
     assert not [p for p in arquivos if p.suffix.lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.docx', '.pptx', '.gif', '.h')]
     assert not [p for p in PASTA.rglob('*.c')]
-    proibidos = re.compile(r'(?i)[\w.]+@[\w-]+\.\w+|groups\.google|dropbox|bsenhab|usu[aá]rio: programador|sites\.google')
+    proibidos = re.compile(r'(?i)[\w.]+@[\w-]+\.\w+|groups\.google|dropbox|\bsenha\b|usu[aá]rio: programador|sites\.google')
     for p in [*P1.materiais.glob('*.md'), P1.itens, PASTA / 'rigor.md', *PROGRAMAS]:
         assert not proibidos.search(p.read_text(encoding='utf-8')), p.name
     versionados = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, check=True).stdout
@@ -309,3 +318,36 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f'`{i}`' not in curadoria] == []
     assert [i for i in ITENS if f'`{i}`' not in curadoria] == []
     assert '`prog1`' in (ROOT / 'docs/DISCIPLINAS.md').read_text(encoding='utf-8')
+
+
+# ---------------------------------------------------------------- complemento de Ciência da Computação
+
+CC = ('prog1-cc-recursao-listas', 'prog1-cc-ponteiros-listas', 'prog1-cc-alocacao-dinamica', 'prog1-cc-strings-listas',
+      'prog1-cc-structs-listas', 'prog1-cc-terminal-linux')
+
+
+def test_cada_bloco_diz_de_que_curso_e_turma_veio():
+    for md in P1.materiais.glob('*.md'):
+        cabecalho = md.read_text(encoding='utf-8').split('---')[1]
+        curso = re.search(r'^curso: (.+)$', cabecalho, re.M)
+        assert curso and 'Computação' in curso.group(1), md.name
+        if '\nid: prog1-cc-' in cabecalho:
+            assert curso.group(1).startswith('Ciência da Computação'), md.name
+    assert set(CC) <= set(ITENS)
+
+
+def test_codigos_de_aluno_e_huxley_nao_entram():
+    """Os códigos da turma de CC são reescritos; nenhum programa de questão do Huxley entra."""
+    fonte = '\n'.join(p.read_text(encoding='utf-8') for p in PROGRAMAS)
+    assert not re.search(r'(?i)\b(bubblesort|swap1|frigorifico|lider|medalha|ambr|monstro|soma_grande)\w*\s*\(', fonte)
+    assert not re.search(r'\bstrlwr|\bstrupr|fflush\(stdin\)|\bgets\(', fonte)
+    assert [p.name for p in C_P1.iterdir() if p.suffix != '.c'] == []
+    assert 'Estrutura de Dados' in texto('prog1-cc-alocacao-dinamica') and 'malloc' in P1.rigor
+
+
+def test_contas_do_complemento_de_cc():
+    assert sum(k ** 3 for k in range(1, 4)) == 36 and 2 ** 4 == 16 and 5 * 3 * 1 == 15 and 8 * 6 * 4 * 2 == 384
+    assert math.factorial(12) < 2 ** 31 - 1 < math.factorial(14) and (8 + 5 + 9) / 3 > 7 > 5
+    assert 'banana'.replace('a', 'o') == 'bonono' and 'a  b c'.replace(' ', '') == 'abc'
+    assert ''.join(c for c in 'aeiou xyz eu' if c not in 'aeiouAEIOU') == ' xyz '
+    assert chr(ord(' ') - 32) == '\0'  # por que s[i] - 32 corta a string no espaço

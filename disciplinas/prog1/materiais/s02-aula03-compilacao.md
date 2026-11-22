@@ -4,6 +4,7 @@ titulo: Aula 3 — primeiro programa em C, compilador e gcc
 assunto: prog1-02-compilacao
 tipo: material_estudo
 resolucao: sim
+curso: Engenharia de Computação (UFAL), Programação 1 (ECOM002); slides do Prof. Rodrigo de Barros Paes; semestre não identificado
 fonte: Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 3 (Primeiro programa; livro, capítulo 4)
 fontes_catalogo: ufal-prog1-slides-paes
 autoria: Slides do Prof. Rodrigo de Barros Paes (IC/UFAL), parafraseados pela equipe TutorON com auxílio de IA

@@ -1,0 +1,81 @@
+[
+ {
+  "id": "prog1-cc-malloc",
+  "disciplina": "prog1",
+  "pergunta": "Como alocar um vetor de tamanho lido do teclado com malloc?",
+  "esperado": "malloc(n * sizeof(int)), confere NULL, usa como vetor, free no fim; não usa listas encadeadas",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 34.1,
+  "fontes": [
+   "Códigos de exercícios de Programação 1 da turma de Ciência da Computação (UFAL), lista 10 (alocação dinâmica) e exemplos de malloc e calloc, pasta \"c_descomplicado\"",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 13 (Strings; livro, capítulo 11)",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 11 (Arrays; livro, capítulo 10)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para alocar memória dinamicamente, o `malloc` precisa saber exatamente quantos bytes você deseja reservar. Como o computador não sabe de antemão o tamanho de cada tipo de dado em bytes, usamos o operador `sizeof` para perguntar ao compilador: \"Qual o tamanho de um elemento deste tipo?\".\n\nSe você quer reservar espaço para $N$ elementos, a lógica é multiplicar a quantidade de elementos pelo tamanho de cada um deles. O `malloc` então retorna um ponteiro para o início dessa área de memória, que você deve armazenar em uma variável do tipo ponteiro correspondente.\n\nLembre-se sempre de verificar se o ponteiro retornado não é `NULL`, o que indicaria que o sistema não conseguiu reservar a memória solicitada, e de liberar esse espaço com `free` ao final do uso.\n\n### Sua vez\nSe você precisa alocar um vetor para guardar $N$ números do tipo **`double`**, como você escreveria a expressão dentro do `malloc` para garantir que o espaço reservado seja suficiente para todos esses elementos? Tente escrever essa linha no papel."
+ },
+ {
+  "id": "prog1-cc-vogais",
+  "disciplina": "prog1",
+  "pergunta": "Minha função de remover vogais pula letras quando há duas vogais seguidas. Por quê?",
+  "esperado": "depois de puxar o resto, o índice avança e o novo caractere da posição não é testado; dois índices ou não avançar",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Códigos de exercícios de Programação 1 da turma de Ciência da Computação (UFAL), lista 5 (strings), pasta \"c_descomplicado\""
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O problema de \"pular\" caracteres acontece porque, ao encontrar uma vogal e deslocar os elementos para trás, o seu índice de controle (o `i`) continua avançando para a próxima posição. Assim, a letra que acabou de ser trazida para a posição atual não é verificada, e o laço segue em frente.\n\nPense no seguinte: se você tem uma string `\"ae\"` e remove o `'a'`, o `'e'` ocupa o lugar do `'a'`. Se o seu contador `i` incrementa logo em seguida, o programa vai analisar a próxima posição da string original, ignorando o `'e'` que agora está na posição zero.\n\nO material da disciplina sugere uma técnica com dois índices (`i` e `j`) para resolver isso. O índice `i` percorre a string original, enquanto o `j` só avança quando o caractere é mantido. Dessa forma, você não precisa \"puxar\" nada manualmente, apenas copia o que é válido para a nova posição `j`.\n\nPara visualizar melhor, tente desenhar em um papel uma string com 4 posições, como `['a', 'e', 'b', '\\0']`. Simule o seu código atual passo a passo, anotando o valor de `i` e o que acontece com o conteúdo do vetor a cada iteração.\n\n### Sua vez\nEscreva no papel o estado do vetor e o valor do seu índice `i` logo após o código processar a primeira vogal da string `\"ae\"`. O que acontece com a segunda vogal nesse momento?"
+ },
+ {
+  "id": "prog1-cc-maiuscula",
+  "disciplina": "prog1",
+  "pergunta": "Por que s[i] - 32 corta minha string no espaço?",
+  "esperado": "espaço é 32 e vira '\u0000', que termina a string; usar toupper e só em letras",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.0,
+  "fontes": [
+   "Códigos de exercícios de Programação 1 da turma de Ciência da Computação (UFAL), lista 5 (strings), pasta \"c_descomplicado\"",
+   "Slides de Programação 1 (UFAL), Prof. Rodrigo de Barros Paes, Aula 4 (scanf); livro de Jaime Evaristo, seções 2.7 e 5.6 (fflush)",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 13 (Strings; livro, capítulo 11)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender por que sua string é cortada, precisamos olhar para como o computador enxerga os caracteres. Em C, cada caractere é, na verdade, um número inteiro seguindo a tabela ASCII.\n\nQuando você faz `s[i] - 32`, você está realizando uma operação aritmética sobre o código numérico daquele caractere. O problema ocorre porque essa operação não sabe distinguir se o caractere é uma letra ou um símbolo, como o espaço.\n\nPense no seguinte:\n1. Se você tem um caractere qualquer e subtrai 32 dele, o resultado é um novo código numérico.\n2. Em C, existe um caractere especial que serve como \"sentinela\" para indicar o fim de uma string. Você sabe qual é o valor numérico desse caractere especial?\n3. Se, por acaso, a operação `espaço - 32` resultar exatamente no valor desse caractere sentinela, o que o `printf` ou outras funções de string vão entender ao encontrar esse valor no meio da sua frase?\n\nO `toupper` é preferível justamente porque ele verifica se o caractere é uma letra antes de tentar transformá-lo, evitando esse tipo de efeito colateral.\n\n### Sua vez\nConsulte uma tabela ASCII e verifique qual é o valor numérico do caractere de espaço. Em seguida, subtraia 32 desse valor e me diga: o que esse número representa na linguagem C e por que isso faria uma string \"parar\" de ser lida ali?"
+ },
+ {
+  "id": "prog1-cc-terminal",
+  "disciplina": "prog1",
+  "pergunta": "Como apagar uma pasta pelo terminal do Linux?",
+  "esperado": "rm -r; cuidado com -f e sem lixeira; rmdir para vazia",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.1,
+  "fontes": [
+   "\"Iniciando no Terminal Linux\" (dicas-terminal), material de Programação 1 da turma de Ciência da Computação (UFAL), 3 páginas",
+   "Slides de Programação 1 (ECOM002, UFAL), Prof. Rodrigo de Barros Paes, Aula 3 (Primeiro programa; livro, capítulo 4)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para apagar arquivos ou diretórios no terminal, utilizamos o comando `rm` (*remove*). No entanto, o comportamento dele muda dependendo do que você deseja remover: um arquivo comum ou uma pasta (diretório) que pode conter outros arquivos dentro.\n\nSe você tentar usar apenas `rm` em uma pasta, o sistema entenderá que você está tentando remover um diretório como se fosse um arquivo, o que causará um erro. Para remover uma pasta e todo o seu conteúdo, precisamos adicionar uma \"opção\" (ou *flag*) ao comando para indicar que a remoção deve ser recursiva.\n\nConsultando o material [P1] que você enviou, você consegue identificar qual é a letra que acompanha o comando `rm` para realizar essa remoção de diretórios?\n\n### Sua vez\nQual comando você escreveria no terminal para apagar uma pasta chamada `Projetos`?"
+ }
+]
