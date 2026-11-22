@@ -95,6 +95,15 @@ def test_nenhuma_nota_da_ia_e_nada_revisado_sem_registro():
         ("Qual a soma dos graus de um grafo?", {"discreta-grafos"}),
         ("Como resolver uma recorrência pela equação característica?", {"discreta-recorrencias"}),
         ("O que é um monoide?", {"discreta-estruturas-algebricas"}),
+        ("Como resolver 7x ≡ 12 (mod 40)?", {"discreta-cc-congruencias-lineares"}),
+        ("Quantas soluções tem 9x congruente a 18 mod 45?", {"discreta-cc-congruencias-lineares"}),
+        ("Como resolver um sistema pelo teorema chinês do resto?", {"discreta-cc-teorema-chines-resto"}),
+        ("Quanto é 3^2021 mod 7?", {"discreta-cc-fermat-potencias-rsa"}),
+        ("Como calcular uma potência grande módulo um primo com o pequeno teorema de Fermat?", {"discreta-cc-fermat-potencias-rsa"}),
+        ("Quais pares inserir para a relação virar de equivalência?", {"discreta-cc-relacoes-fecho-ordem"}),
+        ("Como achar f composta com a inversa de g?", {"discreta-cc-funcoes-bijecao-composta", "discreta-funcoes"}),
+        ("Como provar por indução que 2^(2n) - 1 é divisível por 3?", {"discreta-cc-provas-paridade-inducao-euclides", "discreta-inducao"}),
+        ("Como escrever {2x | x inteiro, 6 < x < 12} por extensão?", {"discreta-cc-conjuntos-extensao-leis"}),
     ],
 )
 def test_pergunta_de_discreta_encontra_bloco_pertinente(pergunta, aceitos):
@@ -138,7 +147,7 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
         "pendente_professor": "pendente de confirmação do professor",
     }
     resolvidas = [i for i in ITENS.values() if "status_resolucao" in i]
-    assert len(resolvidas) == 20
+    assert len(resolvidas) == 27
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i["texto"], i["id"]
         assert "gabarito oficial" not in i["texto"].lower()
@@ -340,3 +349,99 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f"`{i}`" not in curadoria] == []
     assert [i for i in ITENS if f"`{i}`" not in curadoria] == []
     assert "`discreta`" in (ROOT / "docs/DISCIPLINAS.md").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- complemento de Ciência da Computação
+
+CC = (
+    "discreta-cc-conjuntos-extensao-leis",
+    "discreta-cc-relacoes-fecho-ordem",
+    "discreta-cc-funcoes-bijecao-composta",
+    "discreta-cc-provas-paridade-inducao-euclides",
+    "discreta-cc-congruencias-lineares",
+    "discreta-cc-teorema-chines-resto",
+    "discreta-cc-fermat-potencias-rsa",
+)
+
+
+def test_blocos_de_cc_dizem_curso_e_turma():
+    assert set(CC) <= set(ITENS)
+    for md in MD.materiais.glob("s*-cc-*.md"):
+        cab = md.read_text(encoding="utf-8").split("---")[1]
+        assert re.search(r"^curso: Ciência da Computação \(UFAL\)", cab, re.M), md.name
+    texto = " ".join(ITENS[i]["texto"] for i in CC)
+    assert not re.search(r"(?i)lilian|giselly|isidoro|mesquita|fl[aá]vio|farias", texto)  # monitores e aluno
+
+
+def test_conjuntos_e_relacoes_das_provas_de_cc():
+    U = set(range(11))
+    A, B = {1, 2, 3, 4, 5}, {0, 3, 6, 7}
+    assert (A & B, A | B, A - B, U - B, (U - B) - A) == ({3}, set(range(8)), {1, 2, 4, 5}, {1, 2, 4, 5, 8, 9, 10}, {8, 9, 10})
+    assert {2 * x for x in range(7, 12)} == {14, 16, 18, 20, 22}
+    assert {x * x for x in range(-9, 10)} == {k * k for k in range(10)}
+    assert {x for x in range(-10, 11) if x * x < 10} == set(range(-3, 4))
+    assert {x - y for x in range(1, 10, 2) for y in range(1, 10, 2) if x < y} == {-8, -6, -4, -2}
+    V = range(4)
+    for bits_a in range(16):
+        for bits_b in range(16):
+            a = {i for i in V if bits_a >> i & 1}
+            b = {i for i in V if bits_b >> i & 1}
+            ac, bc = set(V) - a, set(V) - b
+            assert (a & b) | (a & bc) == a
+            assert ((a & b) | (a & bc)) & (ac | b) == a & b
+            assert (a | b) | (a & b) == a | b and (a & b) | (a - b) == a
+
+    def fecho(r, dom):
+        r = set(r) | {(x, x) for x in dom}
+        while True:
+            n = r | {(y, x) for x, y in r} | {(x, w) for x, y in r for z, w in r if y == z}
+            if n == r:
+                return r
+            r = n
+
+    r = {(0, 0), (1, 1), (1, 3), (3, 0)}
+    assert fecho(r, range(4)) - r == {(0, 1), (0, 3), (1, 0), (3, 1), (3, 3), (2, 2)} and len(fecho(r, range(4))) == 10
+    assert len(fecho({(0, 1), (1, 2), (3, 3)}, range(4))) == 10
+    assert len(fecho({(0, 0), (1, 1), (1, 3), (3, 0), (2, 3), (3, 1), (3, 2)}, range(4))) == 16
+    o = {(1, 1), (2, 2), (3, 3), (4, 4), (3, 2), (2, 4), (3, 4)}
+    assert all((x, z) in o for x, y in o for w, z in o if y == w)
+    assert not [(x, y) for x, y in o if x != y and (y, x) in o]
+    g = {(1, 1), (1, 2), (1, 3), (1, 4), (1, 5), (2, 5), (3, 4)}
+    assert (2, 2) not in g and all((x, z) in g for x, y in g for w, z in g if y == w)
+    R = {(1, "a"), (2, "a"), (1, "b"), (3, "b")}
+    comp = lambda s: {(x, z) for x, y in R for w, z in s if y == w}  # noqa: E731
+    assert comp({("a", "j"), ("b", "w")}) == {(1, "j"), (2, "j"), (1, "w"), (3, "w")}
+    assert comp({(1, "j"), (2, "w")}) == set()
+
+
+def test_funcoes_e_provas_de_cc():
+    from fractions import Fraction as Fr
+
+    assert (lambda x: x * x + x)(Fr(2 + 5, 2)) == Fr(63, 4)
+    assert (lambda x: x * x + 2 * x)(Fr(2 - 4, 3)) == Fr(-8, 9)
+    assert (lambda x: x * x + 2 * x)(2 + 2) == 24 and (1 + 2) + 2 == 5
+    assert [10**n - 5 for n in range(1, 5)] == [5, 95, 995, 9995]
+    assert len({"b", "b", "d", "c"}) < 4
+    for p, q, r in itertools.product((False, True), repeat=3):
+        assert ((p and not (not p or q)) or (p and q)) == p
+        assert ((not p or r) or (not q or r)) == (not (p and q) or r)
+    assert all((2 ** (2 * n) - 1) % 3 == 0 and sum(range(1, n + 1)) == n * (n + 1) // 2 for n in range(1, 201))
+    assert 4040 == 32 * 125 + 40 and 125 == 3 * 40 + 5 and math.gcd(4040, 125) == 5
+
+
+def test_aritmetica_modular_das_provas_de_cc():
+    from sympy.ntheory.modular import crt
+
+    assert (-155 % 19, -82 % 15, -27 % 10) == (16, 8, 3)
+    assert [pow(a, -1, m) for a, m in ((8, 25), (11, 135), (5, 21), (7, 29), (7, 40), (7, 23))] == [22, 86, 17, 25, 23, 10]
+    sol = lambda a, b, m: [x for x in range(m) if (a * x - b) % m == 0]  # noqa: E731
+    assert sol(7, 12, 40) == [36] and sol(2, 7, 17) == [12] and sol(3, 7, 20) == [9]
+    assert sol(9, 18, 45) == list(range(2, 45, 5)) and sol(21, 6, 69) == [20, 43, 66]
+    for m, r, x in (((3, 5, 7), (2, 4, 6), 104), ((5, 6, 7), (1, 2, 3), 206), ((3, 7, 11), (1, 2, 1), 100), ((3, 7, 8), (1, 2, 3), 163)):
+        M = math.prod(m)
+        assert crt(m, r) == (x, M)
+        assert [y for y in range(M) if all(y % mi == ri for mi, ri in zip(m, r))] == [x]
+    assert 35 * 2 * 2 + 21 * 4 + 15 * 6 == 314 and 314 % 105 == 104
+    assert (pow(3, 2021, 7), pow(8, 1330, 13), pow(4, 883, 5), pow(2, 2021, 3)) == (5, 12, 4, 2)
+    assert 2021 == 6 * 336 + 5 and 1330 == 12 * 110 + 10
+    assert all(pow(a, p - 1, p) == 1 for p in (5, 7, 13) for a in range(1, p))
