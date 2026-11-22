@@ -1,0 +1,90 @@
+[
+ {
+  "id": "am-tipos",
+  "disciplina": "am",
+  "pergunta": "Quais os três tipos de aprendizagem de máquina?",
+  "esperado": "supervisionada (rótulos), não supervisionada (padrões), por reforço (recompensa)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender os tipos de Aprendizagem de Máquina, o ponto central é observar **como o algoritmo recebe a informação** durante o treinamento. Pense na diferença entre um professor que corrige cada exercício seu, um aluno que tenta encontrar semelhanças entre figuras sem saber o nome delas, e alguém que aprende a jogar um videogame apenas recebendo pontos ao realizar boas jogadas.\n\nCom base no material que você enviou, tente identificar qual dessas situações corresponde a cada tipo:\n\n1.  **Aprendizagem Supervisionada:** O modelo recebe exemplos que já possuem a \"resposta certa\" (rótulos).\n2.  **Aprendizagem Não Supervisionada:** O modelo lida com dados brutos, sem qualquer indicação de qual seria o resultado esperado.\n3.  **Aprendizagem por Reforço:** O modelo aprende através de tentativas e erros, recebendo sinais de recompensa ou punição.\n\nPara fixar, imagine que você quer criar um sistema para identificar se um e-mail é \"spam\" ou \"não spam\". Se você fornecer ao sistema milhares de e-mails já marcados como \"spam\" ou \"não spam\", qual desses três tipos você estaria utilizando?\n\n### Sua vez\nExplique, com suas palavras, qual é a diferença fundamental entre a Aprendizagem Supervisionada e a Não Supervisionada, focando no que o algoritmo recebe como entrada durante o treinamento."
+ },
+ {
+  "id": "am-avaliacao",
+  "disciplina": "am",
+  "pergunta": "Que metodologia usar para construir e avaliar classificadores?",
+  "esperado": "teste fora do treino; k-fold estratificado; métrica conforme o problema",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para construir e avaliar classificadores de forma robusta, precisamos garantir que o modelo aprenda padrões generalizáveis e não apenas \"decore\" os dados de treino. O processo geralmente segue um fluxo de preparação, treinamento e validação.\n\nO ponto crucial é a **separação dos dados**. Se avaliarmos o modelo nos mesmos dados usados para o treino, teremos uma visão otimista demais, o que chamamos de *overfitting* (sobreajuste). Por isso, dividimos o conjunto original em partes distintas.\n\nExistem técnicas como o *Holdout* (divisão simples em treino e teste) ou o *K-fold Cross-Validation* (validação cruzada), onde dividimos os dados em $k$ partes, treinando $k$ vezes e alternando qual parte será usada para teste em cada rodada. Isso nos dá uma estimativa mais confiável do desempenho do modelo em dados inéditos.\n\nApós o treinamento, usamos métricas como **Acurácia**, **Precisão** e **Cobertura (Recall)**, calculadas a partir da **Matriz de Confusão**. Ela organiza as previsões do modelo comparando-as com as classes reais:\n- Eixo das linhas: Classes Reais.\n- Eixo das colunas: Classes Previstas.\n\n### Sua vez\nImagine que você tem um conjunto de dados com 100 exemplos. Se você optar pelo método *Holdout* com uma proporção de 80/20, quantos exemplos você usará para treinar o modelo e quantos usará para avaliar o desempenho final? Por que não usar todos os 100 para treinar?"
+ },
+ {
+  "id": "am-clustering",
+  "disciplina": "am",
+  "pergunta": "Qual a diferença entre k-means e DBSCAN?",
+  "esperado": "centroides e k fixo × densidade, forma arbitrária e ruído",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)",
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)",
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre o **k-means** e o **DBSCAN**, pense no que cada um considera \"importante\" para formar um grupo.\n\nO **k-means** é um algoritmo baseado em **centroides**. Ele tenta dividir o espaço em regiões circulares (convexas) ao redor de um ponto central que representa a média dos dados daquele grupo. Ele sempre tentará \"forçar\" cada ponto do seu conjunto de dados a pertencer a um dos $k$ grupos que você definiu previamente.\n\nJá o **DBSCAN** é um algoritmo baseado em **densidade**. Ele não olha para um centro, mas sim para a vizinhança: se uma região tem pontos suficientes (definidos pelo parâmetro `minPts`) dentro de um raio ($\\varepsilon$), ele considera aquilo um grupo. Isso permite que ele siga caminhos sinuosos ou formas irregulares, e o mais importante: se um ponto estiver isolado, ele simplesmente não o coloca em grupo nenhum, classificando-o como ruído.\n\nPara visualizar, imagine que você tem um conjunto de dados com pontos espalhados em formato de \"S\" e alguns pontos perdidos longe de qualquer grupo:\n1. O k-means tentaria \"cortar\" o \"S\" ao meio para criar dois círculos, e os pontos perdidos seriam forçados a entrar em um dos grupos.\n2. O DBSCAN seguiria o desenho do \"S\" e ignoraria os pontos perdidos.\n\n### Sua vez\nSe você tivesse uma base de dados onde você **não sabe quantos grupos existem** e os dados possuem **muitos ruídos (outliers)**, qual desses dois algoritmos você escolheria e por que, baseando-se no que cada um faz com os pontos isolados?"
+ },
+ {
+  "id": "am-qlearning",
+  "disciplina": "am",
+  "pergunta": "Como funciona o Q-learning?",
+  "esperado": "Q(s,a) += alfa [r + gama max Q(s',a') - Q(s,a)]; exploração × explotação",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.0,
+  "fontes": [
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)",
+   "Provas de Aprendizagem de Máquina do Prof. Aydano Machado (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta",
+   "entregou_resposta_de_novo",
+   "ajuda_de_reserva"
+  ],
+  "bloqueio": null,
+  "resposta": "Vamos trabalhar a partir da sua tentativa para escolher uma pista menor.\n\n### Sua vez\nEscreva os dados do problema e a primeira etapa que tentou. Onde você travou?"
+ },
+ {
+  "id": "am-fora",
+  "disciplina": "am",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular uma integral dupla em coordenadas polares, o segredo está em transformar a região de integração e o diferencial de área.\n\nEm coordenadas cartesianas, temos $dA = dx \\, dy$. Quando passamos para polares, onde $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$, o elemento de área sofre uma alteração devido à mudança de variáveis (o Jacobiano da transformação). Você se lembra qual fator extra aparece no diferencial de área $dA$ ao converter para $r$ e $\\theta$?\n\nAlém disso, ao montar a integral, é fundamental observar os limites de integração: o raio $r$ geralmente varia de uma função a outra (ou de uma constante a outra), e o ângulo $\\theta$ percorre o intervalo que cobre a região desejada.\n\nSe você tiver uma função $f(x, y)$ para integrar sobre uma região $D$, a estrutura da integral será:\n$$\\iint_D f(r \\cos \\theta, r \\sin \\theta) \\cdot (\\text{fator extra}) \\, dr \\, d\\theta$$\n\n### Sua vez\nTente identificar qual é esse \"fator extra\" que multiplica o $dr \\, d\\theta$ e escreva como ficaria a integral de uma função genérica $f(r, \\theta)$ em um retângulo polar definido por $a \\leq r \\leq b$ e $\\alpha \\leq \\theta \\leq \\beta$."
+ }
+]
