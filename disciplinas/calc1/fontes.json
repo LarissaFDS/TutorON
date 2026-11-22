@@ -1,6 +1,6 @@
 {
   "disciplina": "calc1",
-  "atualizado_em": "2026-11-21",
+  "atualizado_em": "2026-11-22",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
     "uso": "acervo = parafraseado em disciplinas/calc1/materiais; citada = indicada na curadoria; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -511,6 +511,72 @@
       "prioridade": "referencia",
       "uso": "citada",
       "justificativa": "Sugerido para o aluno conferir gráficos."
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação da UFAL (matriz 2011), ementa de CCOM011 Cálculo 1",
+      "autoria": "Universidade Federal de Alagoas, Instituto de Computação",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "formato": "PDF institucional (51 páginas)",
+      "topicos": [
+        "calc1-01-funcoes-inequacoes-modulo",
+        "calc1-02-limites-continuidade",
+        "calc1-04-derivada-definicao-tangente",
+        "calc1-06-taxas-aproximacao-linear",
+        "calc1-07-extremos-tvm",
+        "calc1-08-esboco-graficos",
+        "calc1-11-primitivas-integral"
+      ],
+      "licenca": "Documento institucional público",
+      "acesso": "Público; consultado em 22/11/2026; não versionado",
+      "prioridade": "alta",
+      "uso": "citada",
+      "justificativa": "Ementa de CC idêntica à de ECOM004 (funções e gráficos, limite e continuidade, derivada, valores extremos, construção de gráficos, diferencial, integração e integral definida); confirma que o material de CC é complemento.",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "isa": "não se aplica"
+    },
+    {
+      "id": "ufal-cc-calc1-banco-provas",
+      "nome": "Banco de questões da turma de Ciência da Computação: provas avulsas de Cálculo 1 do IM-UFAL (2003 a 2013)",
+      "autoria": "Instituto de Matemática da UFAL (professores variados)",
+      "url": null,
+      "formato": "28 PDFs escaneados e 4 fotos de provas, algumas com nome de aluno",
+      "topicos": [
+        "calc1-08-esboco-graficos",
+        "calc1-09-lhospital",
+        "calc1-10-otimizacao",
+        "calc1-11-primitivas-integral"
+      ],
+      "licenca": "Não declarada (provas)",
+      "acesso": "Arquivo entregue pela equipe (pacote de Ciência da Computação); não versionado",
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Só as 4ª provas de 2006 e 2007 viraram blocos novos; as de 2012.2 e 2013 já estavam no acervo pelas fotos do material de ECOM. Nomes de alunos e professores escritos à mão não foram copiados.",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "isa": "não se aplica"
+    },
+    {
+      "id": "ufal-cc-calc1-bancos-solucionados",
+      "nome": "Bancos de questões solucionados de Cálculo 1 do IM-UFAL (2005 a 2016) do pacote de CC",
+      "autoria": "Instituto de Matemática da UFAL",
+      "url": null,
+      "formato": "PDFs (não incluídos no pacote)",
+      "topicos": [
+        "calc1-11-primitivas-integral"
+      ],
+      "licenca": "Não declarada; tratados como protegidos",
+      "acesso": "Não incluído no pacote; não obtido",
+      "prioridade": "referencia",
+      "uso": "referencia",
+      "justificativa": "Marcados como protegidos pelo pacote da equipe; não foram abertos. Stewart, Guidorizzi e Apostol do mesmo pacote também ficaram fora (já catalogados como referência).",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "isa": "não se aplica"
     }
   ]
 }

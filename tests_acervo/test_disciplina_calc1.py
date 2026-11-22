@@ -98,6 +98,10 @@ def test_nenhuma_nota_da_ia_e_nada_revisado_sem_registro():
         ("Como achar a primitiva com condição inicial?", {"calc1-primitivas-condicoes"}),
         ("Como escolher as constantes para a função por partes ser contínua?", {"calc1-continuidade-por-partes"}),
         ("Qual a derivada do seno hiperbólico?", {"calc1-funcoes-hiperbolicas"}),
+        ("Como calcular o limite de (cos x)^(1/x) quando x tende a 0?", {"calc1-cc-limites-potencias-log", "calc1-regra-lhospital"}),
+        ("Qual o terreno de 200 m² com cerca de menor custo?", {"calc1-cc-otimizacao-cercas"}),
+        ("Como esboçar o gráfico de x³/(x² − 1)?", {"calc1-cc-esboco-x3-sobre-x2-menos-1", "calc1-esboco-grafico"}),
+        ("Como achar y sabendo a terceira derivada 2 − 6x e um ponto de máximo em (0, 2)?", {"calc1-cc-primitivas-tvm-estimativa", "calc1-primitivas-condicoes"}),
     ],
 )
 def test_pergunta_de_calc1_encontra_bloco_pertinente(pergunta, aceitos):
@@ -139,7 +143,7 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
         "pendente_professor": "pendente de confirmação do professor",
     }
     contagem = {s: sum(i["status_resolucao"] == s for i in ITENS.values()) for s in rotulo}
-    assert contagem == {"validada": 19, "corrigida": 2, "pendente_professor": 2}
+    assert contagem == {"validada": 22, "corrigida": 3, "pendente_professor": 2}
     for i in ITENS.values():
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i["texto"], i["id"]
         assert "gabarito oficial" not in i["texto"].lower()
@@ -453,3 +457,50 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f"`{i}`" not in curadoria] == []
     assert [i for i in ITENS if f"`{i}`" not in curadoria] == []
     assert "`calc1`" in (ROOT / "docs/DISCIPLINAS.md").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- complemento de Ciência da Computação
+
+
+def test_blocos_de_cc_dizem_curso_e_turma():
+    novos = {i for i in ITENS if i.startswith("calc1-cc-")}
+    assert novos == {"calc1-cc-limites-potencias-log", "calc1-cc-primitivas-tvm-estimativa",
+                     "calc1-cc-otimizacao-cercas", "calc1-cc-esboco-x3-sobre-x2-menos-1"}  # fmt: skip
+    for md in C1.materiais.glob("c*-cc-*.md"):
+        cab = md.read_text(encoding="utf-8").split("---")[1]
+        assert re.search(r"^curso: Ciência da Computação \(UFAL\)", cab, re.M), md.name
+
+
+def test_contas_das_provas_de_2006_e_2007():
+    xp = sp.symbols("x", positive=True)
+    assert sp.limit((sp.exp(xp) + xp) ** (1 / xp), xp, 0, "+") == sp.E**2
+    assert sp.limit(sp.cos(x) ** (1 / x), x, 0) == 1
+    assert sp.limit(sp.sqrt(xp) * sp.log(xp), xp, 0, "+") == 0
+    assert sp.limit(xp * sp.log(sp.exp(xp) - 1), xp, 0, "+") == 0
+    assert sp.limit(sp.log(xp) / (xp - sp.sqrt(xp)), xp, 1) == 2
+    f = x**3 / 6 - sp.sin(x) + sp.pi**2 * x / 8 + sp.pi**2 / 16
+    assert sp.simplify(sp.diff(f, x, 2) - (x + sp.sin(x))) == 0
+    assert sp.simplify(sp.diff(f, x).subs(x, sp.pi / 2) - sp.pi**2 / 4) == 0 and f.subs(x, 0) == sp.pi**2 / 16
+    assert sp.simplify(f.subs(x, sp.pi) - (7 * sp.pi**3 / 24 + sp.pi**2 / 16)) == 0
+    g = x**4 / 4 + Q(3, 4)
+    assert sp.diff(g, x).subs(x, -1) == -1 and g.subs(x, -1) == 1
+    y = -(x**4) / 4 + x**3 / 3 + x**2 / 2 + 2
+    assert sp.expand(sp.diff(y, x, 3)) == 2 - 6 * x and y.subs(x, 0) == 2 and sp.diff(y, x).subs(x, 0) == 0
+    assert sp.diff(y, x, 2).subs(x, 1) == 0 and y.subs(x, 1) == Q(31, 12)
+    assert sp.diff(y, x, 2).subs(x, 0) == 1  # mínimo, não máximo: o enunciado erra
+    h = 2 * sp.sqrt(xp) + Q(2, 3) * xp ** Q(3, 2) - Q(8, 3)
+    assert sp.simplify(sp.diff(h, xp) - (1 + xp) / sp.sqrt(xp)) == 0 and h.subs(xp, 1) == 0
+    assert (2 + 2 * 3, 2 + 3 * 3) == (8, 11)
+
+
+def test_otimizacao_e_esboco_das_provas_de_2006_e_2007():
+    xp = sp.symbols("x", positive=True)
+    P = 2 * xp + 400 / xp
+    assert solve(sp.diff(P, xp), xp) == [10 * sp.sqrt(2)] and P.subs(xp, 10 * sp.sqrt(2)) == 40 * sp.sqrt(2)
+    A = xp * (150 - Q(3, 2) * xp)
+    assert solve(sp.diff(A, xp), xp) == [50] and A.subs(xp, 50) == 3750 and 6 * 50 + 4 * 75 == 600
+    f = x**3 / (x**2 - 1)
+    assert sp.factor(sp.diff(f, x)) == x**2 * (x**2 - 3) / ((x - 1) ** 2 * (x + 1) ** 2)
+    assert sp.simplify(sp.diff(f, x, 2) - 2 * x * (x**2 + 3) / (x**2 - 1) ** 3) == 0
+    assert sp.limit(f - x, x, sp.oo) == 0 and sp.limit(f, x, 1, "+") == sp.oo and sp.limit(f, x, 1, "-") == -sp.oo
+    assert sp.simplify(f.subs(x, sp.sqrt(3)) - 3 * sp.sqrt(3) / 2) == 0
