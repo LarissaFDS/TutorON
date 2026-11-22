@@ -104,6 +104,8 @@ PERGUNTAS = [
     ("fis2", "assunto", "Qual a eficiência máxima de uma máquina entre 500 K e 300 K?", ["fis2-notion-maquinas-carnot"]),
     ("fis2", "assunto", "Por que a sirene da ambulância fica mais aguda quando ela se aproxima?", ["fis2-notion-batimentos-doppler"]),
     ("fis2", "assunto", "Como achar a velocidade de escape da Terra?", ["fis2-notion-gravitacao-energia-kepler"]),
+    ("fis2", "assunto", "Como calcular a velocidade de escape da Terra?", ["fis2-notion-gravitacao-energia-kepler", "fis2-lista2-gravitacao-escape-estrelas"]),
+    ("fis2", "assunto", "Qual o período de um satélite em órbita baixa?", ["fis2-lista2-gravitacao-satelites-anel", "fis2-notion-gravitacao-energia-kepler"]),
     ("fis2", "fora", "Qual a diferença entre blt e bltu?", []),
     ("fis2", "fora", "Como simplificar com mapa de Karnaugh?", []),
     ("fis2", "fora", "O que é fotossíntese?", []),

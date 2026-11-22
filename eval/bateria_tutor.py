@@ -255,6 +255,11 @@ PERGUNTAS = [
     ("calc1-cilindro-cone", "calc1", "Qual o cilindro de volume máximo inscrito num cone?",
      "semelhança h = H(1 − r/R); V(r) numa variável; r = 2R/3, h = H/3; compara extremidades"),
     ("calc1-fora", "calc1", "Como calcular o rotacional de um campo vetorial?", "diz que é de Cálculo 3; sem fontes"),
+    # Física 2, Lista 2 de Gravitação: conferidas em tests_acervo/test_disciplina_fis2.py.
+    ("fis2-escape", "fis2", "Como calcular a velocidade de escape da Terra?",
+     "energia mecânica nula no infinito; v = √(2GM/R) ≈ 11,2 km/s; não depende da massa do projétil"),
+    ("fis2-orbita-baixa", "fis2", "Qual o período de um satélite em órbita baixa?",
+     "GMm/r² = mv²/r; T = 2π√(r³/GM); r ≈ R da Terra dá ≈ 84 min (≈ 90 min a algumas centenas de km)"),
     # Metodologia da Pesquisa: exemplos compilados em tests_acervo/test_disciplina_metodologia.py.
     ("met-bibtex", "metodologia", "Como fazer uma referência bibliográfica no LaTeX com BibTeX?",
      "arquivo .bib com chave; \\cite; \\bibliography; ciclo pdflatex, bibtex, pdflatex, pdflatex; abntex2cite; sem @online"),
