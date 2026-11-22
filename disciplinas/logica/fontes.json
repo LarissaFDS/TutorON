@@ -342,6 +342,151 @@
       "prioridade": "media",
       "uso": "citada",
       "justificativa": "Ferramenta usada nos slides de Alloy para run e check."
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação (UFAL, matriz 2011) — CCOM014 Lógica Aplicada à Computação; PPC de 2006 traz a mesma ementa como COMP014",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "arquivo_local": null,
+      "sha256": "d432cc93e4bf25f762d2201a7c9b863c184e0c136d3906de1191a0f6b1582a62",
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-01-historico-fundamentos",
+        "logica-02-proposicional-sintaxe-semantica",
+        "logica-09-primeira-ordem-formalizacao",
+        "logica-12-forma-clausal-unificacao-resolucao"
+      ],
+      "licenca": "Documento institucional público",
+      "acesso": "Baixado e conferido em 2026-11-22; ementa e bibliografia de CCOM014 (60 h). O PPC de 2006 (ppc-ciencia-computacao.pdf, COMP014, 80 h) tem o mesmo texto de ementa. O código COMP360 (nome da pasta) não aparece em nenhum dos dois",
+      "notas": 5,
+      "prioridade": "alta",
+      "uso": "citada",
+      "justificativa": "Ementa oficial do curso de Ciência da Computação; o texto é igual ao de ECOM007, por isso o material entra como complemento."
+    },
+    {
+      "id": "roberta-provas-2019",
+      "nome": "Provas de Lógica Aplicada à Computação (1ª avaliação 22/01/2019, 2ª avaliação 19/03/2019, prova de Prolog 21/03/2019)",
+      "autoria": "Profa. Roberta Lopes (IC-UFAL)",
+      "url": "",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "Fotos (JPG) de provas respondidas por aluno",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-02-proposicional-sintaxe-semantica",
+        "logica-10-primeira-ordem-semantica",
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Não declarada (material do professor)",
+      "acesso": "Não incluído: as fotos mostram nome e respostas manuscritas de um aluno. Só os enunciados foram parafraseados, com fórmulas e grafo próprios; nenhuma resposta do aluno foi usada (há erros nelas)",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Provas da turma de Ciência da Computação: amostras de resolução por tópico."
+    },
+    {
+      "id": "cc-prolog-turma",
+      "nome": "Arquivos Prolog da pasta da turma (first.pl, prolog1.pl, 99-bottles.pl, questoes_prolog.txt)",
+      "autoria": "Não identificada (arquivos de aula e soluções anotadas por estudantes)",
+      "url": "",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "Código Prolog e texto",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Não incluído; usado só para apontar erros comuns (ponto e vírgula no lugar de ponto, soma com = em vez de is). As soluções anotadas não foram copiadas",
+      "notas": 3,
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Mostra os erros reais da turma em Prolog."
+    },
+    {
+      "id": "fichas-praticas-prolog",
+      "nome": "Fichas práticas 2 a 12 de Prolog (cabeçalho \"PPIII - TP (LESI)\")",
+      "autoria": "Não identificada (material de outra instituição, provavelmente portuguesa, usado pela turma)",
+      "url": "",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-PT",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Não incluído; lido em 2026-11-22 e parafraseado por tópico com exemplos próprios (por dúvida de autoria, nada transcrito)",
+      "notas": 4,
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Roteiro de prática: bases de conhecimento, operadores, unificação, listas, árvores de prova, cut, findall, assert."
+    },
+    {
+      "id": "cc-expertsystem-gui",
+      "nome": "Projeto ExpertSystem-GUI (dados.pl, main.pl)",
+      "autoria": "Não identificada (projeto de estudantes, sem nomes nos arquivos)",
+      "url": "",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "Código Prolog com XPCE",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Não incluído; só a arquitetura é descrita. O domínio original (diagnóstico de doenças) foi trocado por um exemplo neutro: o tutor não dá diagnóstico",
+      "notas": 3,
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Exemplo da turma de sistema especialista em Prolog."
+    },
+    {
+      "id": "swi-prolog-manual",
+      "nome": "SWI-Prolog Reference Manual",
+      "autoria": "Jan Wielemaker e colaboradores",
+      "url": "https://www.swi-prolog.org/pldoc/doc_for?object=manual",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "en",
+      "formato": "HTML",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Sistema sob licença BSD-2 (https://www.swi-prolog.org/license.html); documentação aberta para consulta",
+      "acesso": "Aberto em 2026-11-22; o SWI-Prolog 11.0.0 foi instalado para rodar todo código dos blocos",
+      "notas": 5,
+      "prioridade": "alta",
+      "uso": "citada",
+      "justificativa": "Referência dos predicados usados (is, =:=, \\+, findall, bagof, setof, assert, retract, op)."
+    },
+    {
+      "id": "cc-prolog-livros-protegidos",
+      "nome": "PDFs de livros e apostilas de terceiros na pasta Prolog (Introduction to Algorithms 3rd Ed., prolog.pdf, prolog-palazzo, slago-prolog, LC-Prolog, Exercicios_PL_2005_06 e outros)",
+      "autoria": "Vários autores (Cormen et al.; Silvio Lago; Maria João Frade; Cesar A. Tacla; outros)",
+      "url": "",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR/en",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-14-programacao-logica-prolog"
+      ],
+      "licenca": "Protegidos ou sem licença declarada",
+      "acesso": "Não incluído; só referência. Nenhum trecho foi copiado nem parafraseado nos blocos",
+      "notas": 3,
+      "prioridade": "referencia",
+      "uso": "referencia",
+      "justificativa": "Ficam fora do acervo por direito autoral; CLRS nem é de lógica."
     }
   ]
 }

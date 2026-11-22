@@ -96,13 +96,14 @@ def test_topicos_com_anotacoes_tem_bloco_na_busca():
 
 def test_resolucoes_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 19
+    assert len(turma) == 23
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
     corrigidas = {i['id'] for i in turma if i['status_resolucao'] == 'corrigida'}
     assert corrigidas == {'prob-anot-conceitos-probabilidade', 'prob-anot-contagem', 'prob-anot-va-continua',
-                          'prob-anot-esperanca-variancia', 'prob-anot-binomial', 'prob-anot-combinacao-linear-normais'}
+                          'prob-anot-esperanca-variancia', 'prob-anot-binomial', 'prob-anot-combinacao-linear-normais',
+                          'prob-cc-eventos-defeitos-custo'}
     assert all('**Correç' in texto(c) for c in corrigidas)
     assert {i['id'] for i in turma if i['status_resolucao'] == 'pendente_professor'} == {'prob-anot-elevador'}
 
@@ -277,6 +278,40 @@ def test_notas_da_equipe():
     assert stats.hypergeom(35, 14, 3).mean() == pytest.approx(1.2)
 
 
+def test_blocos_de_cc_dizem_curso_e_professor():
+    cc = [i for i in ITENS.values() if i['id'].startswith('prob-cc-')]
+    assert len(cc) == 4
+    for p in (ROOT / 'disciplinas/prob/materiais').glob('a*-cc-*.md'):
+        assert 'curso: Ciência da Computação (UFAL)' in p.read_text(encoding='utf-8')
+    assert all('Heitor' in p.read_text(encoding='utf-8') for p in (ROOT / 'disciplinas/prob/materiais').glob('a*-cc-*.md'))
+
+
+def test_provas_de_cc_de_2013():
+    assert (0.145 - 0.005) / 0.145 == pytest.approx(0.9655, abs=5e-5)
+    g = stats.geom(0.2)
+    assert 1300 * g.mean() - 300 == pytest.approx(6200)
+    assert g.sf(2) == pytest.approx(0.64) and g.sf(1) == pytest.approx(0.8)  # gabarito: 0,8 é P(X >= 2)
+    assert 0.42 / 0.58 == pytest.approx(0.724, abs=5e-4)
+    assert math.ceil(math.log(0.1) / math.log(0.99)) == 230
+    assert next(n for n in range(1, 400) if stats.hypergeom(1000, 10, n).sf(0) >= 0.9) == 205
+    assert stats.poisson(1).sf(3) == pytest.approx(0.0190, abs=5e-5)
+    assert stats.poisson(1).cdf(3) ** 30 == pytest.approx(0.563, abs=5e-4)
+    erl = stats.gamma(5, scale=2)
+    assert (erl.mean(), erl.std()) == pytest.approx((10, math.sqrt(20)))
+    assert erl.cdf(10) == pytest.approx(0.560, abs=5e-4) and erl.cdf(5) == pytest.approx(0.109, abs=5e-4)
+    lam = 4096 * 8 / 1e5
+    assert stats.poisson(lam).sf(1) == pytest.approx(0.0433, abs=5e-5) and 1 / stats.poisson(lam).sf(0) == pytest.approx(3.58, abs=5e-3)
+    w = stats.weibull_min(2, scale=4000)
+    assert w.sf(3000) == pytest.approx(0.570, abs=5e-4) and w.sf(6000) / w.sf(3000) == pytest.approx(0.185, abs=5e-4)
+    ex = stats.expon(scale=w.mean())
+    assert ex.sf(3000) == pytest.approx(0.429, abs=5e-4) == ex.sf(6000) / ex.sf(3000)
+    aprox = lambda n: stats.norm.cdf((185.5 - 0.9 * n) / math.sqrt(0.09 * n))  # noqa: E731
+    assert aprox(200) == pytest.approx(0.903, abs=5e-4) and stats.binom(200, 0.9).cdf(185) == pytest.approx(0.907, abs=5e-4)
+    assert max(n for n in range(185, 220) if aprox(n) >= 0.95) == 198
+    assert max(n for n in range(185, 220) if stats.binom(n, 0.9).cdf(185) >= 0.95) == 198
+    assert stats.norm.cdf(1) - stats.norm.cdf(-1.8) == pytest.approx(0.805, abs=5e-4)
+
+
 # ---------------------------------------------------------------- busca
 
 @pytest.mark.parametrize('pergunta, esperado', [
@@ -287,6 +322,9 @@ def test_notas_da_equipe():
     ('Como padronizar uma normal e usar a tabela?', 'prob-anot-normal-padronizacao'),
     ('Teorema de Bayes: teste positivo para doença rara', 'prob-anot-bayes-teste-diagnostico'),
     ('Qual a variância de X − Y?', 'prob-anot-esperanca-variancia'),
+    ('Qual a probabilidade de um servidor receber mais de três requisições em um segundo?', 'prob-cc-servidor-erlang-weibull'),
+    ('Como calcular o tempo de montagem de um pacote de mensagens com distribuição de Erlang?', 'prob-cc-servidor-erlang-weibull'),
+    ('Quantas passagens a companhia aérea pode vender no overbooking?', 'prob-cc-overbooking-media-amostral'),
 ])
 def test_perguntas_de_exemplo_trazem_o_bloco_certo(pergunta, esperado):
     assert buscar(pergunta)[0] == esperado

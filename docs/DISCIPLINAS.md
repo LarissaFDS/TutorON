@@ -108,7 +108,6 @@ Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a
 
 O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `\text{N·m}`, que o KaTeX do site não aceita.
 
-
 **Complemento de 21/11/2026.** A Lista 2 de Gravitação (8 problemas do cap. 13 do Halliday, digitalizados, sem resolução e sem autoria identificada) entrou como 3 blocos `t14`–`t16` com enunciado parafraseado, figuras descritas em texto e resolução independente da equipe, conferida em `tests_acervo/test_disciplina_fis2.py`. O PDF, o livro e o manual de resoluções não foram versionados nem usados como fonte. Nada de código mudou; a situação da disciplina (MVP) continua a mesma. Perguntas novas no eval: velocidade de escape da Terra e período de satélite em órbita baixa.
 
 ## Estrutura de Dados: primeira disciplina de programação em C (03/11/2026)
@@ -558,6 +557,22 @@ IA real: Gemini (`gemini-3.6-flash` e `gemini-3.5-flash` em 2 respostas, `gemini
 
 Fronteiras: Cálculo 2 (técnicas de integração), Cálculo 3 e Física 1; o isolamento é testado nos dois sentidos. A pergunta "integral dupla em coordenadas polares" traz o bloco de integral definida na busca de `calc1` (palavra "integral" em comum); o rigor manda dizer que o assunto é de Cálculo 3.
 
+## Lógica Aplicada à Computação: complemento de Ciência da Computação, Prolog no SWI-Prolog (22/11/2026)
+
+O material da turma de Ciência da Computação (COMP360, Profa. Roberta Lopes) entrou em `logica` como **complemento**, sem criar outra disciplina e sem mudar a situação (continua MVP).
+
+- **Ementa:** a ementa dos PPCs de CC da UFAL (2011, CCOM014; 2006, COMP014) tem o mesmo texto da ECOM007. Muda só a bibliografia. O código COMP360 não aparece nos PPCs encontrados.
+- **Blocos:** são 9 novos, 42 no total.
+  - 7 de Prolog, no assunto novo `logica-14-programacao-logica-prolog`: fatos e regras, listas, `=`/`is`/`=:=`, corte e negação por falha, findall/assert, prova de grafos e sistema especialista.
+  - 2 amostras das provas de lógica proposicional e de primeira ordem, com fórmulas próprias.
+  - Cada bloco registra o curso e a turma no campo `curso:`.
+- **Execução do Prolog:** todo código Prolog dos blocos roda no SWI-Prolog 11.0.0 em `tests_acervo/test_disciplina_logica.py`, com as respostas comparadas.
+  - Os erros apontados nos arquivos da turma foram reproduzidos: `;` no lugar de `.` e soma com `=`.
+  - Sem `swipl` instalado (caso do CI), esses testes são pulados com motivo explícito.
+  - As fórmulas das provas foram conferidas em Python.
+- **Dados pessoais:** as fotos das provas mostram nome e respostas de um aluno. Nada disso foi versionado, e as respostas não foram usadas. As apostilas e livros de terceiros da pasta Prolog ficaram só como referência.
+- **Pendência:** "grau de complexidade" não tem definição no enunciado. Por isso a amostra da 1ª prova fica `pendente_professor`.
+- **Relevância:** 452/452 após o merge de dev (439/439 antes), com 8 perguntas novas de assunto e 2 de fora. Uma delas pede um diagnóstico médico, que o acervo não pode responder.
 ## Programação 1, complemento de Ciência da Computação: primeiro material de outro curso (21/11/2026)
 
 O TutorON organiza o acervo por disciplina, não por curso. A Programação 1 de Ciência da Computação ganhou 6 blocos na disciplina `prog1` já existente, sem cópia nova e sem mudar a situação (MVP). O PPC de Ciência da Computação de 2006 traz a ementa de COMP002 idêntica à de ECOM002; muda só a carga horária (80 h contra 60 h). Cada bloco diz no campo `curso:` do cabeçalho de que curso e de que turma veio; o campo não entra no índice nem muda o código.
@@ -582,6 +597,14 @@ A ementa de CCOM011 no PPC de Ciência da Computação (matriz 2011) é idêntic
 ## Matemática Discreta, complemento de Ciência da Computação (22/11/2026)
 
 A ementa de CCOM010 no PPC de Ciência da Computação (matriz 2011) é a de ECOM003 sem "Noções Básicas" e "Aplicações": o material de CC (COMP362) entrou na disciplina `discreta`, sem cópia e sem mudar a situação (MVP). São 7 blocos (`s24` a `s30`) feitos das provas do Prof. Bruno Pimentel (2020.1 a 2021.1), da Prova 01 de 2017 do Prof. Lucas Amorim e das revisões da monitoria: conjuntos e leis, fecho de equivalência e ordem parcial, funções e compostas com inversa, provas (paridade, indução, Euclides), congruência linear, Teorema Chinês do Resto e Pequeno Teorema de Fermat. Cada conta é refeita em `tests_acervo/test_disciplina_discreta.py`; 9 perguntas novas em `eval/relevancia.py`. Fotos de prova com nome de aluno, o código RSA de aluno com chave privada e os nomes dos monitores ficaram fora.
+
+## Probabilidade e Estatística, complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM022 (PPC de CC, matriz 2011) tem os tópicos de `prob`. Entraram 4 blocos (`a19` a `a22`) das provas de 2013 do Prof. Heitor S. Ramos Filho, com `curso:` no cabeçalho; a situação não mudou. A atividade AT1, de alunos identificados, ficou fora.
+
+## Geometria Analítica, complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM05 (PPC de CC, matriz 2011) tem as partes de `ga` e mais matrizes, determinantes e sistemas lineares. O material de CC entrou como complemento de `ga`: 4 blocos (`g30` a `g33`) das provas de nov./dez. de 2017, com `curso:` no cabeçalho; a situação não mudou. A diferença de ementa está no `disciplinas/ga/CURADORIA.md`.
 
 ## Como cadastrar uma nova disciplina
 
@@ -621,7 +644,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `discreta` | Matemática Discreta (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/discreta` (29 blocos, todos na busca; 7 do complemento de Ciência da Computação; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falha de busca aceita ("scanf … número" traz 2 blocos); slides e listas dos professores e livro de Evaristo e Perdigão sem licença aberta, parafraseados; Albertson e Hutchinson só por seção; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/discreta/CURADORIA.md) |
 | `ga` | Geometria Analítica | Markdown curado em `disciplinas/ga` (29 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; dica errada da IA sobre cônicas aceita; ementa oficial não obtida (tópicos tirados das provas); fotos de provas não versionadas, enunciados parafraseados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ga/CURADORIA.md) |
 | `iec` | Introdução à Engenharia de Computação | Markdown curado em `disciplinas/iec` (16 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 20/11/2026, sem aviso; falhas da IA aceitas (verificação, citações, aviso de outra disciplina); ementa conferida no PPC de 2014; fotos de provas não versionadas; slides da Pearson, de Baranauskas e de Deaecto parafraseados (licença não aberta); história e atribuições, linguagens e embarcados sem bloco; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/iec/CURADORIA.md) |
-| `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (33 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; falhas da IA registradas (verificação, citações, conteúdo fora da disciplina); ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
+| `logica` | Lógica Aplicada à Computação | Markdown curado em `disciplinas/logica` (42 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; falhas da IA registradas (verificação, citações, conteúdo fora da disciplina); ementa conferida no PPC de 2014; slides, prova e listas da UFAL e slides da UFCG parafraseados (licença não aberta; PDFs não versionados); livro de Huth e Ryan só citado; Q2 da Prova 1 pendente com o professor; complemento de Ciência da Computação (Prolog testado no SWI-Prolog, provas da Profa. Roberta Lopes) desde 22/11/2026; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/logica/CURADORIA.md) |
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
 | `lfa` | Linguagens Formais, Autômatos e Computabilidade | Markdown curado em `disciplinas/lfa` (32 blocos, 31 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |
