@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Conceitos de Linguagens de Programação: conferidas em tests_acervo/test_disciplina_clp.py.
+    ("clp-escopo", "clp", "Qual a diferença entre escopo estático e dinâmico?",
+     "estático pelo texto, dinâmico pela pilha de chamadas; exemplo com resultados diferentes"),
+    ("clp-coercao", "clp", "O que é coerção e tipagem forte?",
+     "coerção = conversão implícita; tipagem forte = erros de tipo sempre detectados; C não é"),
+    ("clp-parametros", "clp", "Qual a diferença entre passagem por valor-resultado e por referência?",
+     "cópia com atualização no retorno × apelido; diferem com apelidos"),
+    ("clp-coluna", "clp", "Como calcular o endereço de A[j,k] com armazenamento por coluna?",
+     "base + ((k - i2)(s1 - i1 + 1) + (j - i1)) * tamanho; guia sem entregar"),
+    ("clp-fora", "clp", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Redes de Computadores: conferidas em tests_acervo/test_disciplina_redes.py.
     ("redes-get-condicional", "redes", "Como funciona o GET condicional do HTTP?",
      "If-Modified-Since; 304 Not Modified sem corpo; cache do proxy"),

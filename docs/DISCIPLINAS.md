@@ -525,6 +525,17 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Conceitos de Linguagens de Programação: provas do IC-UFAL com C compilado nos testes (22/11/2026)
+
+Disciplina nova `clp` (**em validação**). Ementa conferida no PPC de CC (CCOM027, 60 h, 4º semestre).
+14 blocos parafraseiam as provas do Prof. Alcino Dall'Igna Jr. (AB1 2013.1, AB2 2011.2, final 2012.2):
+critérios de avaliação, palavras reservadas, vinculação e tempo de vida, escopo, coerção e tipagem,
+compatibilidade de tipos, arrays por linha e por coluna, registros, ponteiros, precedência,
+curto-circuito, else pendente, passagem de parâmetros, Ruby, Haskell e Prolog. O código C é
+compilado com gcc em `tests_acervo/test_disciplina_clp.py`. Fotos, trabalhos e respostas de alunos e
+o material do Sebesta não foram versionados. Sem ligação em `cursos.json` (4º período de CC). Veja a
+[curadoria](../disciplinas/clp/CURADORIA.md).
+
 ## Redes de Computadores: provas do IC-UFAL conferidas por código (22/11/2026)
 
 Disciplina nova `redes` (**em validação**). Ementa conferida no PPC de CC (CCOM032 Redes de
@@ -725,5 +736,6 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `grafos` | Teoria dos Grafos (Ciência da Computação) | Markdown curado em `disciplinas/grafos` (14 blocos, todos na busca; índice híbrido com `bge-m3`) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM030); lista 2020.1 do Prof. Rian e prova de 2016.2 do Prof. Viana parafraseadas (originais não versionados); hipergrafos e matróides sem material; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/grafos/CURADORIA.md) |
 | `projsw` | Projeto de Software (Programação 2 em Ciência da Computação) | Markdown curado em `disciplinas/projsw` (12 blocos, todos na busca; índice híbrido com `bge-m3`) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM016); notas de aula de Programação II da UFCG parafraseadas (originais não versionados), código reescrito e compilado nos testes (JDK); 1 resolução corrigida; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/projsw/CURADORIA.md) |
 | `redes` | Redes de Computadores (Ciência da Computação) | Markdown curado em `disciplinas/redes` (12 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM032); provas do IC-UFAL parafraseadas (fotos com nomes de alunos não versionadas), resoluções conferidas por código nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/redes/CURADORIA.md) |
+| `clp` | Conceitos de Linguagens de Programação (Ciência da Computação) | Markdown curado em `disciplinas/clp` (14 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM027); provas do IC-UFAL parafraseadas (fotos com nomes de alunos não versionadas), código C compilado nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/clp/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |
