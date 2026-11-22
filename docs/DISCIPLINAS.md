@@ -525,6 +525,17 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Computação Evolucionária: apostilas e atividades de 2021.1 (22/11/2026)
+
+Disciplina nova `compevol` (**em validação**), optativa da ênfase Sistemas Inteligentes de CC
+(COMP397). A ementa não está no PPC de 2011 e não foi inventada; a pasta não tem provas. 14 blocos:
+otimização e máximos locais, representação binária, seleção, cruzamento e mutação, AG completo,
+esquemas, função F6, estratégias evolutivas e regra do 1/5, subida de encosta e meméticos,
+caixeiro-viajante (OX), dilema do prisioneiro e, das atividades avaliativas de 2021.1, controle de
+parâmetros, multiobjetivo e alinhamento de DNA (só conceitos). Algoritmos executados com semente fixa
+em `tests_acervo/test_disciplina_compevol.py`. Sem ligação em `cursos.json`. Veja a
+[curadoria](../disciplinas/compevol/CURADORIA.md).
+
 ## Ciência de Dados: provas do IC-UFAL conferidas com scikit-learn (22/11/2026)
 
 Disciplina nova `cd` (**em validação**), optativa da ênfase Sistemas Inteligentes de CC (COMP401).
@@ -771,5 +782,6 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `sd_dist` | Sistemas Distribuídos (Ciência da Computação) | Markdown curado em `disciplinas/sd_dist` (18 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM044); provas do IC-UFAL parafraseadas (formulários com nome e e-mail de aluno não versionados), RPC, REST e algoritmos executados nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/sd_dist/CURADORIA.md) |
 | `am` | Aprendizagem de Máquina (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/am` (12 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa não encontrada no PPC (COMP390); provas e slides do IC-UFAL parafraseados, conferidos com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/am/CURADORIA.md) |
 | `cd` | Ciência de Dados (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/cd` (14 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa não encontrada no PPC (COMP401); provas e listas do IC-UFAL parafraseadas, conferidas com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/cd/CURADORIA.md) |
+| `compevol` | Computação Evolucionária (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/compevol` (14 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa não encontrada no PPC (COMP397); apostilas e atividades de 2021.1 parafraseadas, algoritmos executados nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/compevol/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |

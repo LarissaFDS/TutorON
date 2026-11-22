@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Computação Evolucionária: conferidas em tests_acervo/test_disciplina_compevol.py.
+    ("compevol-roleta", "compevol", "Como funciona a seleção por roleta?",
+     "fatia proporcional à aptidão; exemplo 15x - x², soma 218"),
+    ("compevol-esquemas", "compevol", "O que é o teorema dos esquemas?",
+     "ordem, comprimento definidor; esquemas curtos, de baixa ordem e acima da média crescem"),
+    ("compevol-1-5", "compevol", "Qual a regra do 1/5 nas estratégias evolutivas?",
+     "sucesso > 1/5 aumenta sigma; < 1/5 diminui"),
+    ("compevol-pareto", "compevol", "O que é dominância de Pareto?",
+     "não pior em nenhum objetivo e melhor em pelo menos um; frente de Pareto"),
+    ("compevol-fora", "compevol", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Ciência de Dados: conferidas em tests_acervo/test_disciplina_cd.py.
     ("cd-bigdata", "cd", "Quais são os 5 Vs do Big Data?",
      "volume, velocidade, variedade, veracidade, valor"),

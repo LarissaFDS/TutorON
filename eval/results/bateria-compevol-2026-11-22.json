@@ -1,0 +1,89 @@
+[
+ {
+  "id": "compevol-roleta",
+  "disciplina": "compevol",
+  "pergunta": "Como funciona a seleção por roleta?",
+  "esperado": "fatia proporcional à aptidão; exemplo 15x - x², soma 218",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 16.0,
+  "fontes": [
+   "Apostilas e textos da pasta da turma (Lucas, UFRGS 2002; Lacerda e Carvalho; Dianati, Song e Treiber)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A **seleção por roleta** (ou proporcional à aptidão) atribui a cada indivíduo uma chance de reprodução diretamente proporcional ao seu valor de aptidão (*fitness*) [P1].\n\n### Como funciona passo a passo:\n\n1. **Soma das aptidões:** Calcula-se a soma total da aptidão da população:\n   $$S = \\sum_{j=1}^{N} f_j$$\n   onde $f_j$ é a aptidão do indivíduo $j$ e $N$ é o tamanho da população.\n\n2. **Probabilidade de cada indivíduo:** A probabilidade $p_i$ de escolher o indivíduo $i$ é dada por:\n   $$p_i = \\frac{f_i}{S}$$\n\n3. **Giro da roleta:** Visualmente, cada indivíduo recebe uma fatia da roleta com tamanho proporcional a $p_i$. Sorteia-se um número aleatório entre $0$ e $1$ para girar a roleta. Indivíduos mais aptos ocupam áreas maiores, tendo maior chance de serem selecionados, mas os menos aptos ainda mantêm alguma chance de preservação da diversidade [P1].\n\n**Verificação:** A soma de todas as probabilidades de uma população deve sempre resultar em $1$ (ou $100\\%$), ou seja, $\\sum_{i=1}^{N} p_i = 1$.\n\n---\n\n### Sua vez\n\nConsidere uma população de 3 indivíduos com as seguintes aptidões:\n- Indivíduo 1: $f_1 = 2$\n- Indivíduo 2: $f_2 = 5$\n- Indivíduo 3: $f_3 = 3$\n\nNo papel, faça o seguinte:\n1. Calcule a soma total das aptidões ($S$).\n2. Encontre a probabilidade $p_2$ (em porcentagem) do **Indivíduo 2** ser selecionado na roleta.\n\nQual foi a porcentagem da fatia do Indivíduo 2?"
+ },
+ {
+  "id": "compevol-esquemas",
+  "disciplina": "compevol",
+  "pergunta": "O que é o teorema dos esquemas?",
+  "esperado": "ordem, comprimento definidor; esquemas curtos, de baixa ordem e acima da média crescem",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 22.1,
+  "fontes": [
+   "Apostilas e textos da pasta da turma (Lucas, UFRGS 2002; Lacerda e Carvalho; Dianati, Song e Treiber)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "O Teorema dos Esquemas é uma ferramenta teórica que nos ajuda a entender como os Algoritmos Genéticos (AGs) \"aprendem\" ao longo das gerações. Pense nele como uma forma de prever o sucesso de certos padrões de bits (os esquemas) dentro da população.\n\nA ideia central é que o AG não trabalha apenas com indivíduos isolados, mas com \"blocos\" de informação que se espalham. O teorema quantifica como a seleção, o cruzamento e a mutação afetam a sobrevivência desses padrões. Se um padrão tem uma aptidão acima da média, ele tende a se multiplicar, mas os operadores genéticos podem acabar \"quebrando\" esse padrão se ele for muito longo ou muito complexo.\n\nPara entender como isso funciona na prática, precisamos olhar para dois conceitos que medem a \"fragilidade\" de um esquema:\n1. **Ordem $o(H)$**: Quantos bits específicos o esquema exige que sejam mantidos? (Quanto mais bits fixos, mais fácil a mutação estragar o padrão).\n2. **Comprimento definidor $\\delta(H)$**: Qual a distância entre o primeiro e o último bit fixo? (Quanto maior essa distância, maior a chance de o cruzamento \"cortar\" o esquema ao meio).\n\n**Verificação:** Para um esquema como `1*0*`, as posições fixas são 1 e 3. A ordem é o total de posições fixas (2) e o comprimento é a distância entre elas ($3-1=2$).\n\n### Sua vez\nNo papel, analise o esquema $H =$ `*1*0*1*` para cromossomos de tamanho $L=7$:\n1. Identifique quais são as posições fixas (índices onde não há `*`).\n2. Com base nelas, calcule a ordem $o(H)$ e o comprimento definidor $\\delta(H)$. \n\nQuais valores você encontrou para cada um?"
+ },
+ {
+  "id": "compevol-1-5",
+  "disciplina": "compevol",
+  "pergunta": "Qual a regra do 1/5 nas estratégias evolutivas?",
+  "esperado": "sucesso > 1/5 aumenta sigma; < 1/5 diminui",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Apostilas e textos da pasta da turma (Lucas, UFRGS 2002; Lacerda e Carvalho; Dianati, Song e Treiber)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A regra do 1/5 é uma heurística fundamental em Estratégias Evolutivas (EE) para controlar o tamanho do passo da mutação ($\\sigma$) de forma adaptativa. O objetivo é garantir que o algoritmo não fique \"preso\" por passos pequenos demais nem \"salte\" o ótimo por passos grandes demais.\n\nPense no processo como um ajuste de sintonia: se você está tentando encontrar o topo de uma colina, a frequência com que você consegue dar um passo que te leva a um ponto mais alto (sucesso) nos diz se o seu passo está adequado.\n\nSe a taxa de sucesso for muito alta (acima de 20%), significa que você está sendo \"conservador\" demais, dando passos muito curtos. Se for muito baixa (abaixo de 20%), você pode estar dando passos grandes demais, perdendo a precisão necessária para convergir.\n\nPara aplicar isso, você deve monitorar a proporção:\n$$\\text{Taxa de Sucesso} = \\frac{\\text{Número de mutações bem-sucedidas}}{\\text{Número total de mutações}}$$\n\n### Sua vez\nConsiderando que você está executando uma (1+1)-ES e, após 100 gerações, observou que apenas 5 mutações resultaram em um indivíduo com aptidão superior ao pai, o que você deve fazer com o valor de $\\sigma$ segundo a regra de Rechenberg e por quê?"
+ },
+ {
+  "id": "compevol-pareto",
+  "disciplina": "compevol",
+  "pergunta": "O que é dominância de Pareto?",
+  "esperado": "não pior em nenhum objetivo e melhor em pelo menos um; frente de Pareto",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Atividades da turma 2021.1 de Computação Evolucionária (UFAL), página do curso"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A dominância de Pareto é o conceito fundamental para lidar com problemas onde não existe uma única \"melhor\" solução, mas sim um equilíbrio entre objetivos que competem entre si (como minimizar custo e maximizar desempenho).\n\nImagine que você tem duas soluções, $A$ e $B$. Para dizer que $A$ domina $B$, precisamos de duas condições simultâneas:\n1. $A$ não pode ser pior que $B$ em nenhum dos objetivos.\n2. $A$ deve ser estritamente melhor que $B$ em pelo menos um dos objetivos.\n\nSe essas condições forem atendidas, dizemos que $B$ é uma solução \"dominada\" e, portanto, menos interessante que $A$ para o nosso conjunto de soluções ideais. O conjunto de todas as soluções que não são dominadas por nenhuma outra é o que chamamos de **Frente de Pareto**.\n\nPara fixar, pense em um cenário de compra de um carro:\n- Carro X: Custa R$ 50 mil e faz 15 km/l.\n- Carro Y: Custa R$ 60 mil e faz 12 km/l.\n\nNesse caso, o Carro X domina o Carro Y, pois é mais barato e mais econômico. Agora, se o Carro Z custasse R$ 40 mil e fizesse 10 km/l, ele seria dominado pelo X? Por que sim ou por que não?\n\n### Sua vez\nConsidere três soluções com dois objetivos (ambos de minimização): $P_1 = (2, 8)$, $P_2 = (3, 6)$ e $P_3 = (4, 7)$. No papel, verifique qual delas domina as outras ou se elas formam uma frente de Pareto. Explique o porquê."
+ },
+ {
+  "id": "compevol-fora",
+  "disciplina": "compevol",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você está perguntando sobre um conceito de **Circuitos Elétricos**, que é uma disciplina diferente de Computação Evolucionária. Como sou seu tutor de CEVO, posso te dar uma orientação geral sobre o tema, mas recomendo que, para exercícios específicos, você selecione a disciplina correta no sistema para obter ajuda mais precisa.\n\nEm circuitos de corrente alternada (CA), a impedância de um indutor (chamada de **reatância indutiva**) não é um valor fixo como a resistência de um resistor; ela depende da frequência da fonte de tensão.\n\nPense no seguinte:\n1. O indutor se opõe a variações de corrente.\n2. Quanto mais rápida for a variação (ou seja, quanto maior a frequência $f$), mais difícil será para a corrente mudar através dele.\n3. A fórmula básica relaciona a reatância indutiva ($X_L$) com a frequência angular ($\\omega$) e a indutância ($L$).\n\nVocê se lembra da relação entre a frequência em Hertz ($f$) e a frequência angular ($\\omega$)?\n\n### Sua vez\nEscreva no papel a fórmula que relaciona $X_L$, $\\omega$ e $L$. Em seguida, substitua $\\omega$ pela expressão que envolve a frequência $f$ e o número $\\pi$. O que acontece com o valor de $X_L$ se a frequência $f$ aumentar?"
+ }
+]

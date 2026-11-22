@@ -1,0 +1,133 @@
+{
+ "disciplina": "compevol",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-ce-atividades-2021",
+   "nome": "Página do curso 2021.1 de Computação Evolucionária (capturas de tela): atividades da 1ª ABN, projeto e atividades 1 e 2 da ABN2",
+   "autoria": "Docente da turma 2021.1 (UFAL; nome não aparece nas capturas)",
+   "url": null,
+   "formato": "PNG",
+   "topicos": [
+    "compevol-04-atividades-2021"
+   ],
+   "licenca": "Não declarada (atividades)",
+   "acesso": "Pasta da turma de CC (ênfase Sistemas Inteligentes, COMP397); capturas não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados em e11–e13; atividades avaliativas sem solução completa"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "lucas-apostila-ag",
+   "nome": "Algoritmos Genéticos: uma Introdução (apostila)",
+   "autoria": "Diogo C. Lucas, orientação de Luís Otávio Álvares (UFRGS), 2002",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "compevol-01-fundamentos",
+    "compevol-02-operadores",
+    "compevol-03-outras-metaheuristicas"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Pasta da turma; não versionada, só paráfrase de conceitos",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Componentes, operadores, esquemas, técnicas e aplicações dos AGs"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "lacerda-carvalho-ag",
+   "nome": "Introdução aos Algoritmos Genéticos (capítulo 3 de livro)",
+   "autoria": "Estéfane G. M. de Lacerda e André C. P. L. F. de Carvalho",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "compevol-01-fundamentos",
+    "compevol-02-operadores"
+   ],
+   "licenca": "Protegido (capítulo de livro)",
+   "acesso": "Só referência por seção; os problemas clássicos (x sen(10πx) + 1, F6, caixeiro-viajante) são resolvidos pela equipe",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Problemas 3.1 e 3.2 e seção 3.5"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "dianati-gaes",
+   "nome": "An Introduction to Genetic Algorithms and Evolution Strategies",
+   "autoria": "Mehrdad Dianati, Insop Song e Mark Treiber (University of Waterloo)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "compevol-02-operadores",
+    "compevol-03-outras-metaheuristicas"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Pasta da turma; não versionado, só paráfrase",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Exemplo da roleta, cruzamento de um ponto, esquemas, regra do 1/5 e (μ+λ)-ES"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "mitchell-overview-1995",
+   "nome": "Genetic Algorithms: An Overview (Complexity 1(1), 1995)",
+   "autoria": "Melanie Mitchell",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "compevol-03-outras-metaheuristicas"
+   ],
+   "licenca": "Protegido (artigo de revista)",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "artigo",
+   "justificativa": "Experimento do dilema do prisioneiro"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "mitchell-livro",
+   "nome": "An Introduction to Genetic Algorithms (MIT Press, 1996)",
+   "autoria": "Melanie Mitchell",
+   "url": null,
+   "formato": "livro",
+   "topicos": [],
+   "licenca": "Protegido (todos os direitos reservados)",
+   "acesso": "Só referência por capítulo",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Livro-texto de consulta"
+  }
+ ]
+}
