@@ -846,6 +846,31 @@
         "Com máscara /30, 192.168.0.9 e 192.168.0.13 conversam?",
         "Qual a diferença entre Link State e Vetor de Distância?"
       ]
+    },
+    {
+      "id": "clp",
+      "nome": "Conceitos de Linguagens de Programação",
+      "sigla": "CLP",
+      "situacao": "em validação",
+      "itens": "disciplinas/clp/acervo/itens.json",
+      "indice": "disciplinas/clp/acervo/indice.json",
+      "materiais": "disciplinas/clp/materiais",
+      "rigor": "disciplinas/clp/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "clp-01-criterios-e-historia",
+        "clp-02-nomes-vinculacao-escopo",
+        "clp-03-tipos",
+        "clp-04-arrays-e-registros",
+        "clp-05-expressoes-e-controle",
+        "clp-06-subprogramas"
+      ],
+      "exemplos": [
+        "Qual a diferença entre escopo estático e dinâmico?",
+        "O que é coerção e tipagem forte?",
+        "Qual a diferença entre passagem por valor-resultado e por referência?",
+        "Como calcular o endereço de A[j,k] com armazenamento por coluna?"
+      ]
     }
   ]
 }

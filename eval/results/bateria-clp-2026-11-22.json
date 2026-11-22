@@ -1,0 +1,88 @@
+[
+ {
+  "id": "clp-escopo",
+  "disciplina": "clp",
+  "pergunta": "Qual a diferença entre escopo estático e dinâmico?",
+  "esperado": "estático pelo texto, dinâmico pela pilha de chamadas; exemplo com resultados diferentes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 38.1,
+  "fontes": [
+   "Provas de Conceitos de Linguagens de Programação do Prof. Alcino Dall'Igna Jr. (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre escopo estático e dinâmico, pense no \"caminho\" que o computador percorre para encontrar o valor de uma variável quando ela é usada dentro de uma função.\n\nNo **escopo estático** (ou léxico), o compilador não precisa rodar o programa para saber qual variável você está usando. Ele olha para o **texto do código-fonte**: se a variável não está definida dentro da função, ele sobe para o bloco que a envolve fisicamente no arquivo. É como se o programa tivesse um \"mapa\" fixo definido pela escrita.\n\nJá no **escopo dinâmico**, o computador não se importa com onde a função foi escrita. Ele olha para a **pilha de chamadas** no momento em que a função está sendo executada. Se uma função chama outra, a segunda \"herda\" o ambiente da primeira. É como se o contexto de quem chamou a função fosse temporariamente \"colado\" nela.\n\nPara fixar, imagine que você é um detetive:\n* No estático, você segue o mapa do prédio (o código escrito).\n* No dinâmico, você segue os passos de quem acabou de te chamar para a sala.\n\n### Sua vez\n\nConsidere este trecho:\n```python\na = 10\ndef funcao_b():\n    print(a)\n\ndef funcao_c():\n    a = 20\n    funcao_b()\n```\nSe você desenhar o fluxo de execução, onde `funcao_b` buscaria o valor de `a` se o escopo fosse **estático** e onde buscaria se fosse **dinâmico**? Tente explicar o raciocínio no papel."
+ },
+ {
+  "id": "clp-coercao",
+  "disciplina": "clp",
+  "pergunta": "O que é coerção e tipagem forte?",
+  "esperado": "coerção = conversão implícita; tipagem forte = erros de tipo sempre detectados; C não é",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de Conceitos de Linguagens de Programação do Prof. Alcino Dall'Igna Jr. (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender esses conceitos, pense na relação entre o compilador e a segurança do seu programa.\n\nA **coerção** é um mecanismo de \"facilitação\" que a linguagem oferece. Imagine que você tem uma expressão como `x + y`, onde `x` é um inteiro e `y` é um ponto flutuante. Em vez de exigir que você converta manualmente os tipos, a linguagem faz isso por baixo dos panos para que a operação ocorra. O problema é que, ao fazer isso automaticamente, ela pode esconder erros de lógica ou causar perda de precisão, como vimos no caso do `int` para `float`.\n\nJá a **tipagem forte** é uma política de rigor. Uma linguagem com tipagem forte é aquela que se esforça para garantir que, se você declarou uma variável como um tipo, ela só seja usada de formas que façam sentido para aquele tipo, sem permitir \"atalhos\" perigosos. Se a linguagem permite muitas coerções implícitas, ela acaba enfraquecendo essa detecção de erros.\n\nPara fixar, tente aplicar isso a um exemplo: se você tentasse somar uma `String` com um `int` em uma linguagem que você conhece, o que aconteceria? O compilador reclamaria (tipagem forte) ou ele tentaria converter o número para texto automaticamente (coerção)?\n\n### Sua vez\nCom base nas definições acima, como você explicaria a diferença entre **coerção** e **conversão explícita** (*cast*) usando suas próprias palavras?"
+ },
+ {
+  "id": "clp-parametros",
+  "disciplina": "clp",
+  "pergunta": "Qual a diferença entre passagem por valor-resultado e por referência?",
+  "esperado": "cópia com atualização no retorno × apelido; diferem com apelidos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [
+   "Provas de Conceitos de Linguagens de Programação do Prof. Alcino Dall'Igna Jr. (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença fundamental entre esses dois modos de passagem de parâmetros reside no **momento** e na **forma** como o valor do parâmetro formal é sincronizado com o parâmetro real.\n\nComo vimos no material, ambos são modos de entrada e saída, mas a passagem por **referência** trata o parâmetro formal como um \"apelido\" (*alias*) do real, enquanto a passagem por **valor-resultado** utiliza uma cópia local.\n\nPense no seguinte cenário: se você tem uma variável global e a passa como parâmetro para uma sub-rotina que altera tanto o parâmetro formal quanto a própria variável global, o que acontece se a sub-rotina modificar o parâmetro formal **antes** de modificar a variável global?\n\nNo caso da **referência**, como o formal é o próprio endereço da variável, qualquer mudança no formal reflete imediatamente na global. Já no **valor-resultado**, a sub-rotina trabalha com uma cópia isolada e só \"devolve\" esse valor para a variável original no momento em que a sub-rotina termina.\n\nPara visualizar isso, tente desenhar uma tabela com duas colunas: \"Valor de `x` (formal)\" e \"Valor de `global`\". Acompanhe o exemplo do material passo a passo:\n1. Início: `global = 1`.\n2. Chamada: `f(global)`.\n3. Dentro de `f`: `x = x + 10` e depois `global = global * 2`.\n\n### Sua vez\nSe a sub-rotina `f` fosse chamada com um parâmetro que é um apelido da variável global, em qual dos dois métodos (referência ou valor-resultado) a alteração feita em `x` dentro da função afetaria o cálculo de `global * 2` que ocorre logo em seguida? Por quê?"
+ },
+ {
+  "id": "clp-coluna",
+  "disciplina": "clp",
+  "pergunta": "Como calcular o endereço de A[j,k] com armazenamento por coluna?",
+  "esperado": "base + ((k - i2)(s1 - i1 + 1) + (j - i1)) * tamanho; guia sem entregar",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de Conceitos de Linguagens de Programação do Prof. Alcino Dall'Igna Jr. (IC-UFAL)",
+   "Provas de Conceitos de Linguagens de Programação do Prof. Alcino Dall'Igna Jr. (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender como calcular o endereço de um elemento em uma matriz, pense na memória como um longo corredor linear de células. Como o computador só consegue acessar uma célula por vez, precisamos \"achatar\" a matriz (que é bidimensional) em uma sequência única (unidimensional).\n\nQuando usamos o armazenamento **por coluna** (*column-major*), a linguagem decide organizar os dados colocando todos os elementos da primeira coluna, seguidos por todos os da segunda, e assim por diante.\n\nPara encontrar o endereço de $A[j, k]$, você precisa percorrer dois caminhos:\n1. **Pular as colunas completas:** Quantas colunas existem antes da coluna $k$? Se cada coluna tem um número fixo de linhas ($n_l$), quantas células você já \"pulou\" ao passar por essas colunas inteiras?\n2. **Pular os elementos na coluna atual:** Dentro da coluna $k$, quantos elementos você precisa descer até chegar na linha $j$?\n\nLembre-se de que, se os índices não começarem em zero (por exemplo, se as linhas vão de $i_1$ até $s_1$), você deve subtrair o limite inferior para saber a posição relativa.\n\n### Sua vez\nSe uma matriz tem linhas de $1$ a $10$ e colunas de $1$ a $5$, e você quer acessar o elemento na linha $j=3$ e coluna $k=2$, quantas colunas completas você precisa pular e quantos elementos você precisa percorrer dentro da coluna $2$ para chegar ao seu destino? Escreva essa lógica no papel."
+ },
+ {
+  "id": "clp-fora",
+  "disciplina": "clp",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre cálculo de integrais duplas em coordenadas polares. Como essa é uma dúvida de **Cálculo 3**, posso te explicar o conceito fundamental para que você consiga montar a sua integral.\n\nPara passar de coordenadas cartesianas $(x, y)$ para polares $(r, \\theta)$, utilizamos as relações $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$. O ponto principal aqui é o que acontece com o elemento de área $dA$.\n\nEm coordenadas cartesianas, temos $dA = dx \\, dy$. Quando fazemos a mudança de variável para polares, o elemento de área não é apenas $dr \\, d\\theta$, pois precisamos considerar o **Jacobiano** da transformação, que compensa a distorção da grade ao passar de retângulos para \"setores circulares\".\n\nA fórmula geral fica:\n$$\\iint_R f(x, y) \\, dA = \\iint_{R'} f(r \\cos \\theta, r \\sin \\theta) \\cdot r \\, dr \\, d\\theta$$\n\nO termo $r$ (frequentemente chamado de \"o $r$ do Jacobiano\") é essencial. Sem ele, o cálculo da área ou da integral estará incorreto.\n\n### Sua vez\nImagine que você precisa calcular a área de um círculo de raio $R$ centrado na origem. Quais seriam os limites de integração para $r$ e para $\\theta$ nessa integral dupla, lembrando que o círculo completo dá uma volta de $2\\pi$ radianos? Tente montar a integral no papel e me diga quais limites você encontrou."
+ }
+]
