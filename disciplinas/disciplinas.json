@@ -615,7 +615,8 @@
         "logica-10-primeira-ordem-semantica",
         "logica-11-deducao-natural-primeira-ordem",
         "logica-12-forma-clausal-unificacao-resolucao",
-        "logica-13-model-checking-alloy"
+        "logica-13-model-checking-alloy",
+        "logica-14-programacao-logica-prolog"
       ],
       "exemplos": [
         "Como provar que (¬P → Q) ∧ (R → ¬P) ⊨ Q ∨ ¬R por tabela-verdade?",

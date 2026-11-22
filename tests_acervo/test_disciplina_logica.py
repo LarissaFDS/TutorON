@@ -1,6 +1,8 @@
 """Acervo de Lógica Aplicada à Computação e conferência das resoluções.
 
 Os blocos parafraseiam slides, prova e listas da UFAL (Baldoino e Evandro) e slides da UFCG (Massoni).
+O complemento de Ciência da Computação (Prolog, sistema especialista, provas da Profa. Roberta Lopes) tem o
+código Prolog executado no SWI-Prolog quando ele está instalado (no CI o teste é pulado e diz por quê).
 Cada refutação, prova em dedução natural, consequência e contramodelo citado num bloco é recalculado aqui,
 com o verificador de `tests_acervo/logica_verif.py`.
 """
@@ -9,6 +11,7 @@ import json
 import re
 import shutil
 import subprocess
+from itertools import product
 
 import pytest
 
@@ -22,7 +25,7 @@ PASTA = ROOT / "disciplinas/logica"
 FONTES = read_json(PASTA / "fontes.json")["fontes"]
 CATALOGO = {f["id"]: f for f in FONTES}
 ITENS = {i["id"]: i for i in read_json(LOG.itens)}
-FRONTEIRA = ("discreta", "sd", "paa", "iec")
+FRONTEIRA = ("discreta", "sd", "paa", "iec", "ed", "prog1")
 OUTRAS = tuple(d["id"] for d in read_json(ROOT / "disciplinas/disciplinas.json")["disciplinas"] if d["id"] != "logica")
 SEM_MATERIAL: set[str] = set()
 
@@ -80,7 +83,10 @@ def test_nenhuma_nota_da_ia_e_nada_revisado_sem_registro():
 def test_resolucoes_tem_status_e_dizem_no_texto():
     status = {i: x["status_resolucao"] for i, x in ITENS.items()}
     assert set(status.values()) <= {"validada", "corrigida", "pendente_professor"}
-    assert [i for i, s in status.items() if s == "pendente_professor"] == ["logica-prova1-q2-greve"]
+    assert [i for i, s in status.items() if s == "pendente_professor"] == [
+        "logica-prova1-q2-greve",
+        "logica-roberta-prova1-complexidade-negacao",
+    ]
     for i, x in ITENS.items():
         assert f"Status da resolução: {status[i]}" in x["texto"], i
         assert "não é gabarito do professor" in x["texto"], i
@@ -109,6 +115,21 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
         ("Como calcular o unificador mais geral?", {"logica-unificacao-mgu"}),
         ("O que é skolemização?", {"logica-forma-clausal-skolem"}),
         ("O que é uma cláusula de Horn?", {"logica-horn-prolog-sat"}),
+        # complemento de Ciência da Computação: perguntas reais do material da turma
+        (
+            "Por que o Prolog dá No permission to modify static procedure (;)/2?",
+            {"logica-prolog-fatos-regras-consultas"},
+        ),
+        ("Qual a diferença entre = e is em Prolog?", {"logica-prolog-unificacao-aritmetica"}),
+        ("Como somar os elementos de uma lista em Prolog?", {"logica-prolog-listas-recursao"}),
+        ("minha soma da lista em prolog devolve 0+3+2+1 em vez de 6", {"logica-prolog-listas-recursao"}),
+        ("O que faz o corte ! em Prolog?", {"logica-prolog-corte-negacao-falha"}),
+        ("Qual a diferença entre findall e bagof?", {"logica-prolog-findall-assert"}),
+        ("Como calcular o grau de um vértice do grafo em Prolog?", {"logica-prolog-grafos-prova"}),
+        ("Como fazer um sistema especialista em Prolog?", {"logica-sistema-especialista-prolog"}),
+        ("Quais variáveis estão livres em ∃x(1+y=x) ∧ ∀y(y ≤ x)?", {"logica-roberta-prova2-modelo-finito"}),
+        ("Como escrever a negação com o ¬ só nos átomos?", {"logica-roberta-prova1-complexidade-negacao"}),
+        ("Qual o grau de complexidade de uma fórmula?", {"logica-roberta-prova1-complexidade-negacao"}),
     ],
 )
 def test_pergunta_de_logica_encontra_bloco_pertinente(pergunta, aceitos):
@@ -127,6 +148,8 @@ def test_pergunta_fora_do_acervo_nao_inventa_material(pergunta):
         "Como aplicar as leis de De Morgan?",
         "O que é uma prova por indução?",
         "O que é o problema SAT?",
+        "Como percorrer uma lista recursivamente?",
+        "Como calcular o grau de um vértice?",
     ],
 )
 def test_vocabulario_comum_fica_na_disciplina_escolhida(pergunta):
@@ -483,3 +506,95 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f"`{i}`" not in curadoria] == []
     assert [i for i in ITENS if f"`{i}`" not in curadoria] == []
     assert "`logica`" in (ROOT / "docs/DISCIPLINAS.md").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- complemento de Ciência da Computação
+
+COMPLEMENTO_CC = {i for i, x in ITENS.items() if {"roberta-provas-2019", "cc-prolog-turma", "fichas-praticas-prolog",
+                  "cc-expertsystem-gui"} & set(x["fontes_catalogo"])}  # fmt: skip
+_SWIPL_WINDOWS = ROOT.__class__("C:/Program Files/swipl/bin/swipl.exe")
+SWIPL = shutil.which("swipl") or (str(_SWIPL_WINDOWS) if _SWIPL_WINDOWS.exists() else None)
+
+
+def test_complemento_cc_registra_curso_e_turma():
+    assert len(COMPLEMENTO_CC) == 9
+    for i in COMPLEMENTO_CC:
+        cab = (
+            (LOG.materiais / ITENS[i]["arquivo"].replace("\\", "/").rsplit("/", 1)[-1])
+            .read_text(encoding="utf-8")
+            .split("---")[1]
+        )
+        assert "curso: Ciência da Computação (UFAL)" in cab and "Ciência da Computação" in ITENS[i]["fonte_original"], i
+    for i in ("logica-roberta-prova1-complexidade-negacao", "logica-roberta-prova2-modelo-finito"):
+        assert "sem nada da resposta do aluno" in ITENS[i]["autoria"], i
+    assert "Ciência da Computação" in (PASTA / "CURADORIA.md").read_text(encoding="utf-8")
+
+
+def _prolog(ident):
+    return "\n".join(re.findall(r"```prolog\n(.*?)```", texto(ident), re.S))
+
+
+@pytest.mark.skipif(SWIPL is None, reason="SWI-Prolog não instalado: código Prolog não executado")
+@pytest.mark.parametrize(
+    "ident, objetivo, esperado",
+    [
+        ("logica-prolog-fatos-regras-consultas", "findall(X-A,area(X,A),L),print(L)", "[sala-20,quarto-9]"),
+        ("logica-prolog-listas-recursao",
+         "comprimento([a,b,c],N),soma([1,2,3],S),findall(R,remove(b,[a,b,c],R),Rs),findall(X-Y,concatena(X,Y,[1,2]),Ps),"
+         "print([N,S,Rs,Ps])", "[3,6,[[a,c]],[[]-[1,2],[1]-[2],[1,2]-[]]]"),
+        ("logica-prolog-corte-negacao-falha",
+         "max(3,5,A),max(5,3,B),(max(5,3,3)->E=aceita;E=recusa),findall(X,voa(X),V),print([A,B,E,V])",
+         "[5,5,aceita,[piupiu]]"),
+        ("logica-prolog-findall-assert",
+         "findall(F,pai(F,_),L),findall(P-L2,bagof(F2,pai(F2,P),L2),B),incrementa,incrementa,contador(C),print([L,B,C])",
+         "[[ana,beto,caio],[joao-[ana,beto],maria-[caio]],2]"),
+        ("logica-prolog-grafos-prova", "findall(V,laco(V),Ls),grau(c,G),once(caminho(a,d,P)),print([Ls,G,P])",
+         "[[c],5,[a,b,c,d]]"),
+        ("logica-sistema-especialista-prolog", "responde(p1,s),responde(p2,n),melhor(H),print(H)", "pato"),
+    ],
+)  # fmt: skip
+def test_codigo_prolog_dos_blocos_roda_no_swipl(tmp_path, ident, objetivo, esperado):
+    arq = tmp_path / "bloco.pl"
+    arq.write_text(":- style_check(-discontiguous).\n" + _prolog(ident), encoding="utf-8")
+    r = subprocess.run([SWIPL, "-q", "-g", f"consult('{arq.as_posix()}'),{objetivo},halt", "-t", "halt(1)"],
+                       capture_output=True, text=True, encoding="utf-8", timeout=60)  # fmt: skip
+    assert r.returncode == 0 and r.stdout.strip() == esperado, (r.stdout, r.stderr)
+    assert "ERROR" not in r.stderr and "Warning" not in r.stderr, r.stderr
+
+
+@pytest.mark.skipif(SWIPL is None, reason="SWI-Prolog não instalado: código Prolog não executado")
+def test_erros_apontados_nos_arquivos_da_turma(tmp_path):
+    def rodar(codigo, objetivo="true"):
+        (tmp_path / "x.pl").write_text(codigo, encoding="utf-8")
+        alvo = (tmp_path / "x.pl").as_posix()
+        return subprocess.run([SWIPL, "-q", "-g", f"consult('{alvo}'),{objetivo},halt", "-t", "halt(1)"],
+                              capture_output=True, text=True, encoding="utf-8", timeout=60)  # fmt: skip
+
+    r = rodar("comprimento(quarto,3);\narea(X,A) :- largura(X,L), comprimento(X,C), A is L*C.\n")
+    assert "No permission to modify static procedure `(;)/2`" in r.stderr or "(;)/2" in r.stderr
+    r = rodar("s([],0).\ns([X|T],S) :- s(T,S0), S = S0+X.\n", "s([1,2,3],S),print(S),(S=6->print(igual);print(difere))")
+    assert r.stdout.strip() == "0+3+2+1difere"
+    r = rodar(":- op(700, xfy, impl).\nt :- X is 2+3,(2+3=5->A=s;A=n),(2+3=:=5->B=s;B=n),"
+              "(unify_with_occurs_check(W,f(W))->C=s;C=n),((p impl q)==impl(p,q)->D=s;D=n),print([X,A,B,C,D]).\n",
+              "t")  # fmt: skip
+    assert r.stdout.strip() == "[5,n,s,n,s]"
+
+
+def test_prova1_da_roberta_formula_de_amostra():
+    a = r"(p\to q)\land\neg(q\lor r)"
+    assert lv.equivalentes(r"\neg(" + a + ")", r"p\lor q\lor r")
+    assert lv.equivalentes(r"\neg(" + a + ")", r"(p\land\neg q)\lor q\lor r")
+    assert lv.equivalentes(a, r"\neg p\land\neg q\land\neg r")
+    linhas = [v for v in product([False, True], repeat=3) if lv.valor(lv.parse(a), dict(zip("pqr", v, strict=True)))]
+    assert linhas == [(False, False, False)]  # contingência: 1 linha verdadeira de 8
+
+
+def test_prova2_da_roberta_modelo_finito():
+    D = (1, 2, 3)
+    mais, vezes = (lambda a, b: min(a + b, 3)), (lambda a, b: min(a * b, 3))
+    s = {"x": 1, "y": 2, "z": 3}
+    f1 = any(mais(1, s["y"]) == x for x in D) and all(y <= s["x"] for y in D)
+    f2 = (not any(vezes(x, x) == 2 for x in D)) or mais(s["x"], 1) == 3
+    f3 = (not all(any(mais(s["x"], y) == z for z in D) for y in D)) or s["x"] == 3
+    assert (f1, f2, f3) == (False, True, False)
+    assert sorted({vezes(x, x) for x in D}) == [1, 3]
