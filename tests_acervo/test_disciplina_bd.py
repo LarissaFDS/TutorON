@@ -106,6 +106,9 @@ def test_nenhum_bloco_aprovado_pelo_professor_ou_revisado_por_humano():
     ('Qual a cardinalidade dos relacionamentos da floricultura?', {'bd-aula-exercicios-er'}),
     ('O que é a arquitetura de três esquemas e a independência de dados?', {'bd-aula-modelos-arquitetura'}),
     ('Quais as vantagens de usar um SGBD?', {'bd-aula-conceitos-sgbd'}),
+    ('Como buscar os pacientes que estão com sarampo juntando consulta e doença?', {'bd-cc-hospital-filtros-juncoes'}),
+    ('Como contar o número de médicos de cada especialidade?', {'bd-cc-hospital-agregacao-not-exists-union'}),
+    ('Como listar os médicos que não têm consultas marcadas?', {'bd-cc-hospital-agregacao-not-exists-union'}),
 ])
 def test_pergunta_de_bd_encontra_material_pertinente(pergunta, aceitos):
     assert buscar(pergunta)[0] in aceitos
@@ -139,7 +142,8 @@ def test_resolucoes_ficam_pendentes_do_professor_e_dizem_no_texto():
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
     assert {i['id'] for i in resolvidas} == {
         'bd-aula-exercicios-er', 'bd-aula-exercicio-streaming', 'bd-aula-exercicios-algebra-selecao',
-        'bd-aula-exercicios-algebra-projecao', 'bd-aula-exercicios-algebra-renomear', 'bd-aula-exercicios-normalizacao'}
+        'bd-aula-exercicios-algebra-projecao', 'bd-aula-exercicios-algebra-renomear', 'bd-aula-exercicios-normalizacao',
+        'bd-cc-hospital-filtros-juncoes', 'bd-cc-hospital-agregacao-not-exists-union'}
     for i in resolvidas:
         assert i['status_resolucao'] == 'pendente_professor'
         assert 'Status da resolução: pendente de confirmação do professor' in i['texto'], i['id']
@@ -369,9 +373,21 @@ def test_catalogo_completo_e_coerente():
         assert set(f['topicos']) <= set(BD.assuntos), f['id']
     assert {x for i in ITENS.values() for x in i['fontes_catalogo']} <= set(CATALOGO)
     usadas = {x for i in ITENS.values() if i['natureza'] == 'material_da_disciplina' for x in i['fontes_catalogo']}
-    assert {i for i, f in CATALOGO.items() if f['uso'] == 'acervo'} == usadas & {'ufal-bd-slides', 'ufal-bd2-slides'}
+    assert {i for i, f in CATALOGO.items() if f['uso'] == 'acervo'} == usadas & {'ufal-bd-slides', 'ufal-bd2-slides', 'ufal-cc-bd-lista2-hospital'}
     for f in ('ufal-bd-slides', 'ufal-bd2-slides'):
         assert all(re.fullmatch(r'[0-9a-f]{64}', s) for s in CATALOGO[f]['arquivo_local'].values())
+
+
+def test_blocos_de_cc_dizem_curso_e_dump_do_hospital_fica_fora():
+    cc = [i for i in ITENS if i.startswith('bd-cc-')]
+    assert len(cc) == 2
+    for p in BD.materiais.glob('b1[23]-cc-*.md'):
+        t = p.read_text(encoding='utf-8')
+        assert 'curso: Ciência da Computação (UFAL)' in t and 'banco_teste: hospital_cc' in t, p.name
+    rastreados = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, encoding='utf-8').stdout
+    assert 'dump_hospital' not in rastreados
+    fixture = (SQL_BD / 'hospital_cc.sql').read_text(encoding='utf-8')
+    assert 'LOCK TABLES' not in fixture and 'dados inventados' in fixture
 
 
 def test_originais_fora_do_repositorio():

@@ -136,3 +136,14 @@ As 10 perguntas de BD de `eval/bateria_tutor.py` foram feitas ao Gemini com `TUT
 | Pergunta de Física | Redireciona para Física 2, sem fontes |
 
 Nenhuma das respostas terminou com a linha "**Verificação:**" que `rigor.md` pede. Isso fica como pendência de prompt e de rigor, a acompanhar com alunos. Esses 10 casos não substituem a validação com a turma.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM021 no PPC de Ciência da Computação (matriz 2011, `ufal-ppc-cc-2011`) traz acesso a dados, modelos, ER, modelo lógico e relacional, transações e SQL: os tópicos de `bd`. Não há disciplina separada.
+
+Entraram 2 blocos da Lista 2 de SQL (`ufal-cc-bd-lista2-hospital`), com `curso:` no cabeçalho e `pendente_professor`, como as demais resoluções desta disciplina: `bd-cc-hospital-filtros-juncoes`, `bd-cc-hospital-agregacao-not-exists-union`. O SQL roda em `tests_acervo/sql_bd/hospital_cc.sql`, com dados inventados pela equipe.
+
+**Dump do hospital:** `dump_hospital.sql` (MySQL) não foi versionado, não foi usado nos testes e nenhum dado dele entrou no acervo: ele traz nomes de pessoas e não dá para saber se são fictícios.
+
+Usados só como evidência (`ufal-cc-bd-materiais`): slides de álgebra, projeto físico, DDL e DML, a revisão da AB2, os exercícios da base HR (Oracle), a lista de ER e os trabalhos avaliativos da AB2 e da reavaliação. Fora do repositório: os livros de Navathe e Heuser, os slides de normalização do Heuser e os exercícios do livro.
+
