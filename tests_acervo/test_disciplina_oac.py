@@ -70,6 +70,9 @@ def test_status_de_resolucao_invalido(tmp_path):
      'oac-otavio-ab2-q1-cache'),
     ('O que é um hazard de dados e quando o forwarding não resolve?', 'oac-otavio-projeto2-hazards'),
     ('Qual a diferença entre cache associativa por conjunto e mapeamento direto?', 'oac-otavio-ab2-q1-cache'),
+    ('Cache de 4 blocos com os endereços 0, 8, 0, 6, 8, 4, 8, 10, 6: quantas faltas no mapeamento direto, em 2 vias e totalmente associativo?', 'oac-cc-cache-tres-mapeamentos'),
+    ('Qual o CPI médio de cada compilador e por que MIPS não serve para comparar arquiteturas diferentes?', 'oac-cc-desempenho-compiladores'),
+    ('Trocar add e or resolve o conflito de dados no pipeline de 5 estágios sem forwarding?', 'oac-cc-pipeline-reordenar-ciclo'),
     ('Como fica o datapath monociclo numa instrução beq?', 'oac-otavio-projeto1-monociclo'),
 ])
 def test_pergunta_de_oac_encontra_material_pertinente(pergunta, esperado):
@@ -111,7 +114,7 @@ def test_pergunta_fora_do_acervo_nao_inventa_material():
 
 def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 24  # 11 da prova, lista e aula + 7 do Notion + 6 das anotações manuscritas (u*)
+    assert len(turma) == 27  # 11 da prova, lista e aula + 7 do Notion + 6 das anotações manuscritas (u*) + 3 de CC (v*)
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert i.get('status_resolucao') in rotulo, i['id']
@@ -367,6 +370,27 @@ def test_ab2_q1_misses_conferidos_por_simulador():
     assert set(total) <= {'H', 'compulsoria'}  # 12 blocos distintos cabem em 16 vias
     pergunta = simular_cache([1, 4, 8, 5, 20, 17], 16, 1)
     assert pergunta == ['compulsoria'] * 6 and '6 misses, todos compulsórios' in texto
+
+
+def test_provas_de_cc_de_2017():
+    for p in OAC.materiais.glob('v0[1-3]-cc-*.md'):
+        assert 'curso: Ciência da Computação (UFAL)' in p.read_text(encoding='utf-8'), p.name
+    seq = [0, 8, 0, 6, 8, 4, 8, 10, 6]
+    assert [faltas(simular_cache(seq, 4, v)) for v in (1, 2, 4)] == [9, 7, 5]
+    texto = ITENS['oac-cc-cache-tres-mapeamentos']['texto']
+    assert all(f'**{n} faltas**' in texto for n in (9, 7, 5))
+    cpi_a, cpi_b = 1.1 / (1e9 * 1e-9), 1.5 / (1.2e9 * 1e-9)
+    novo = 6e8 * cpi_a * 1e-9
+    assert (round(cpi_a, 2), round(cpi_b, 2), round(cpi_a / 1.5, 3), round(novo, 2)) == (1.1, 1.25, 0.733, 0.66)
+    assert (round(1.1 / novo, 2), round(1.5 / novo, 2)) == (1.67, 2.27)
+    escreve = ['$6', '$5', '$1', '$3', '$1']
+    le = [{'$4', '$2'}, {'$4', '$3'}, {'$2'}, {'$2', '$1'}, {'$1', '$4'}]
+
+    def ok(ordem):  # sem forwarding, escrita na 1ª metade e leitura na 2ª: distância mínima 3
+        return all(escreve[ordem[i]] not in le[ordem[j]] or j - i >= 3
+                   for i in range(len(ordem)) for j in range(i + 1, len(ordem)))
+    assert not ok([0, 1, 2, 3, 4]) and ok([2, 1, 0, 3, 4]) and not ok([0, 2, 1, 3, 4])
+    assert '60+2=62' in ITENS['oac-cc-pipeline-reordenar-ciclo']['texto']
 
 
 def test_cache_usa_endereco_do_bloco_e_nao_do_byte():
