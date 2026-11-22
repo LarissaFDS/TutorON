@@ -519,7 +519,11 @@ SWIPL = shutil.which("swipl") or (str(_SWIPL_WINDOWS) if _SWIPL_WINDOWS.exists()
 def test_complemento_cc_registra_curso_e_turma():
     assert len(COMPLEMENTO_CC) == 9
     for i in COMPLEMENTO_CC:
-        cab = (ROOT / ITENS[i]["arquivo"]).read_text(encoding="utf-8").split("---")[1]
+        cab = (
+            (LOG.materiais / ITENS[i]["arquivo"].replace("\\", "/").rsplit("/", 1)[-1])
+            .read_text(encoding="utf-8")
+            .split("---")[1]
+        )
         assert "curso: Ciência da Computação (UFAL)" in cab and "Ciência da Computação" in ITENS[i]["fonte_original"], i
     for i in ("logica-roberta-prova1-complexidade-negacao", "logica-roberta-prova2-modelo-finito"):
         assert "sem nada da resposta do aluno" in ITENS[i]["autoria"], i
