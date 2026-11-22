@@ -96,3 +96,80 @@ def test_m16_hexadecimal_contagem_e_identidade():
     for r, k in [(2, 3), (8, 2), (10, 3), (16, 2)]:
         assert len(range(1, r**k)) == r**k - 1
     assert all(((x & y) | (x & (1 - y))) == x for x, y in product((0, 1), repeat=2))
+
+
+# ---------------------------------------------------------------- listas das aulas 1 a 7 (m17–m19)
+
+
+def test_m17_bases_e_complemento_de_2():
+    for n, b, o, h in [
+        (1984, "11111000000", "3700", "7c0"),
+        (4000, "111110100000", "7640", "fa0"),
+        (8192, "10000000000000", "20000", "2000"),
+        (100, "1100100", "144", "64"),
+    ]:
+        assert (format(n, "b"), format(n, "o"), format(n, "x")) == (b, o, h)
+    assert (0b00000000 - 0b11111111) & 0xFF == 0b00000001
+    assert (0b11111111 + 0b11111111) & 0xFF == 0b11111110
+    assert [2 ** (2**n) for n in (1, 2, 3, 4)] == [4, 16, 256, 65536]
+
+
+def test_m17_or_com_3_nand_e_xor_com_4_nand():
+    for a, b in product((0, 1), repeat=2):
+        assert nand(nand(a, a), nand(b, b)) == a | b
+        n = nand(a, b)
+        assert nand(nand(a, n), nand(b, n)) == a ^ b
+
+
+def test_m18_circuitos_da_aula_4():
+    for a, b in product((0, 1), repeat=2):
+        assert 1 - (1 - (a ^ b)) == a ^ b  # (A XNOR B)' = A XOR B
+    for a, b, c in product((0, 1), repeat=3):
+        x = int((a, b, c) in {(0, 0, 0), (1, 0, 0), (1, 1, 1)})
+        assert x == (((1 - b) & (1 - c)) | (a & b & c))
+
+
+def test_m18_karnaugh_da_aula_5():
+    t1 = [[1, 0, 0, 1], [1, 0, 1, 1]]  # linha x, colunas yz
+    for x in (0, 1):
+        for j, yz in enumerate(GRAY):
+            y, z = yz >> 1, yz & 1
+            assert t1[x][j] == ((1 - z) | (x & y))
+    t3 = [[0, 1, 1, 0], [1, 0, 0, 1], [1, 0, 0, 1], [0, 1, 1, 0]]  # linhas gh, colunas ij
+    for i, gh in enumerate(GRAY):
+        for k, ij in enumerate(GRAY):
+            assert t3[i][k] == (gh & 1) ^ (ij & 1)
+    for a, b, c in product((0, 1), repeat=3):
+        s = int(4 * a + 2 * b + c in {0, 1, 3, 5, 7})
+        assert s == (c | ((1 - a) & (1 - b)))
+
+
+def test_m19_tanque_mux_e_paridade():
+    nivel = 0
+    for _ in range(5):  # botão em 1: enche até o sensor e para
+        ve, vs = 1 & (1 - nivel), 0
+        nivel = 1 if ve else nivel
+    assert (nivel, 1 & (1 - nivel), vs) == (1, 0, 0)
+    for s, i0, i1 in product((0, 1), repeat=3):
+        assert (((1 - s) & i0) | (s & i1)) == (i1 if s else i0)
+    for a, b, c in product((0, 1), repeat=3):
+        assert 1 - (a ^ b ^ c) == int((a + b + c) % 2 == 0)
+        assert (a ^ b ^ c) == int(((1 - a) + (1 - b) + (1 - c)) % 2 == 0)  # chave fechada = 0
+
+
+def test_m19_codificador_gray_e_decodificador_ativo_em_baixo():
+    for i in range(4):
+        e = [int(k == i) for k in range(4)]
+        assert ((e[2] | e[3]) << 1 | (e[1] | e[3])) == i
+    for n in range(16):
+        g = n ^ (n >> 1)
+        bits = [(g >> k) & 1 for k in range(4)]
+        b3 = bits[3]
+        b2 = b3 ^ bits[2]
+        b1 = b2 ^ bits[1]
+        b0 = b1 ^ bits[0]
+        assert b3 << 3 | b2 << 2 | b1 << 1 | b0 == n
+    for s in range(4):
+        s1, s0 = s >> 1, s & 1
+        y = [nand(s1 if i & 2 else 1 - s1, s0 if i & 1 else 1 - s0) for i in range(4)]
+        assert y == [0 if i == s else 1 for i in range(4)]

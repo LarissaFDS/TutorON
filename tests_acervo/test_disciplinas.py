@@ -238,7 +238,8 @@ def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     # então nada vira "alta" e os candidatos (figuras ausentes) continuam fora da busca.
     # Os blocos de ECOM012 (21/11/2026) ainda não passaram por revisão humana.
     ecom012 = {i for i in itens if i.startswith('sd-ecom012')}
-    assert ecom012 == {'sd-ecom012-ab1', 'sd-ecom012-ab2', 'sd-ecom012-mux-demux'}
+    assert ecom012 == {'sd-ecom012-ab1', 'sd-ecom012-ab2', 'sd-ecom012-mux-demux',
+                       'sd-ecom012-listas-1-3', 'sd-ecom012-listas-4-5', 'sd-ecom012-listas-6-7'}
     assert all(itens[i]['revisao_humana'] == 'pendente' for i in ecom012)
     assert all(i['revisao_humana'] == 'feita' and i['revisao_humana_em'] == '2026-10-21'
                for k, i in itens.items() if k not in ecom012)
@@ -246,7 +247,7 @@ def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     candidatos = {i for i, x in itens.items() if x['status_curadoria'] == 'candidato'}
     assert len(candidatos) == 2 and all(itens[i]['confiabilidade'] == 'nao_verificada' for i in candidatos)
     indexados = {c['id'] for c in json.loads(SD.indice.read_text(encoding='utf-8'))['chunks']}
-    assert candidatos.isdisjoint(indexados) and len(indexados) == 26
+    assert candidatos.isdisjoint(indexados) and len(indexados) == 29
     # Licença do original e autorização da transcrição não se confundem nem dizem "pendente".
     for x in itens.values():
         assert 'pendente' not in x['licenca']
@@ -260,7 +261,7 @@ def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     # "conferida_por_codigo" só vale para blocos cujas resoluções têm teste neste arquivo.
     conferidos = {i for i, x in itens.items() if x['verificacao'] == 'conferida_por_codigo'}
     assert conferidos == {'sd-av1-q01-07', 'sd-av1-q14-18', 'sd-prova2-q1-2', 'sd-reav-q1-q3', 'sd-somadores-monitoria',
-                          'sd-ecom012-ab1', 'sd-ecom012-mux-demux'}  # estes dois: tests_acervo/test_sd_ecom012.py
+                          'sd-ecom012-ab1', 'sd-ecom012-mux-demux', 'sd-ecom012-listas-6-7'}  # estes dois: tests_acervo/test_sd_ecom012.py
     # Esboços que dependem de figura não conferida ficam fora da busca.
     fora = {c['id'] for c in read_json(SD.indice)['chunks']} ^ set(itens)
     assert fora == {'sd-prova2-q3-4', 'sd-reav-q2-q4'}

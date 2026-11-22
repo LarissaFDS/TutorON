@@ -81,7 +81,7 @@ Prioridades: **alta** compõe o acervo inicial; **média** complementa ou preenc
 | `sim-circuitverse` CircuitVerse | — | — | — | — | — | — | — | — | referência | ferramenta |
 | `ufal-sd-lista4-projetos` Lista 4 — projetos (.docx) | — | — | — | — | — | — | — | — | referência | indisponível |
 | `ufal-ecom012-provas-2015-2016` Provas de Circuitos Digitais (ECOM012), fotos | 5 | 3 | 3 | 3 | 4 | 3 | 1 | 4 | alta | no acervo (m14–m16, enunciados parafraseados) |
-| `ufal-ecom012-listas` Listas das aulas 1 a 7 de ECOM012 | — | — | — | — | — | — | — | — | média | indisponível (arquivos não reenviados) |
+| `ufal-ecom012-listas` Listas das aulas 1 a 7 de ECOM012 | 5 | 4 | 3 | 3 | 4 | 4 | 1 | 4 | alta | no acervo (m17–m19, enunciados parafraseados) |
 | `pearson-tanenbaum-slides-cap3` Slides do cap. 3 de Tanenbaum (Pearson) | — | — | — | — | — | — | — | — | referência | protegido |
 | `idoeta-capuano-eletronica-digital` Idoeta e Capuano, *Elementos de Eletrônica Digital* | — | — | — | — | — | — | — | — | referência | protegido |
 | `tanenbaum-oec-5ed` Tanenbaum, *Organização Estruturada de Computadores* | — | — | — | — | — | — | — | — | referência | protegido |
@@ -129,6 +129,9 @@ Cada bloco declara no cabeçalho quatro coisas, gravadas também em `acervo/iten
 | m14 | `sd-ecom012-ab1` | material da disciplina (ECOM012) | conferida por código | aprovado | revisão humana; listas das aulas 1–7 |
 | m15 | `sd-ecom012-ab2` | material da disciplina (ECOM012) | parcial (latch e borda simulados; discursivas sem conferência) | aprovado | revisão humana |
 | m16 | `sd-ecom012-mux-demux` | material da disciplina (ECOM012) | conferida por código | aprovado | revisão humana |
+| m17 | `sd-ecom012-listas-1-3` | material da disciplina (ECOM012) | parcial (contas e portas conferidas; aula 2 discursiva) | aprovado | revisão humana |
+| m18 | `sd-ecom012-listas-4-5` | material da disciplina (ECOM012) | parcial (expressões conferidas; Q5 da aula 5 não transcrita) | aprovado | revisão humana |
+| m19 | `sd-ecom012-listas-6-7` | material da disciplina (ECOM012) | conferida por código | aprovado | revisão humana; convenção das chaves na aula 6 Q3 |
 | n01, n03, n09, n12 | `sd-nota-numeracao`, `sd-nota-karnaugh`, `sd-nota-fsm`, `sd-nota-conversores-memorias` | nota da equipe (IA) | exemplos conferidos | aprovado | revisão do texto |
 | n02, n04–n08, n10, n11 | demais `sd-nota-*` | nota da equipe (IA) | não verificada | aprovado | revisão do texto |
 
@@ -168,7 +171,8 @@ O PPC de Engenharia de Computação de 2014 tem **ECOM012 Circuitos Digitais** (
 
 - **Entrou:** m14–m16, a partir de 8 fotos de provas (AB1 e AB2 de 2015 e 2016, reposição e final). Os enunciados foram parafraseados. As fotos **não foram versionadas**: mostram nomes e notas de alunos, que não aparecem no acervo. Uma foto era a folha de respostas de um aluno e não foi usada. Professor não identificado; publicação das transcrições não autorizada; `revisao_humana: pendente`.
 - **Conferência:** `tests_acervo/test_sd_ecom012.py` (tabelas-verdade por força bruta; latch SR com NAND e gerador de pulso de borda simulados). Não há conferência das respostas discursivas (m15, itens 3–6), nem das figuras que não foram transcritas: o circuito 2 da AB1, o circuito da reposição e a expressão Z da reposição, ilegível na foto.
-- **Não entrou:** as listas das aulas 1 a 7 (`ufal-ecom012-listas`). Os arquivos não estavam mais disponíveis quando os blocos foram escritos; reenviá-los é pendência. Os slides de Tanenbaum (Pearson) e os livros de Idoeta e Capuano, Tanenbaum e Stallings são só referência; não foram versionados nem ingeridos.
+- **Listas das aulas 1 a 7** (`ufal-ecom012-listas`), reenviadas na mesma data: m17–m19. Enunciados parafraseados; as figuras das aulas 4, 5 e 6 foram descritas em texto. O circuito 2, que faltava na AB1, aparece na aula 4 e foi transcrito. A Q5 da aula 5 não entrou: as barras de negação se perderam no arquivo. Na aula 6 Q3, a convenção das chaves ligadas ao terra é suposição, e o bloco dá as duas leituras.
+- **Não entrou:** os slides de Tanenbaum (Pearson) e os livros de Idoeta e Capuano, Tanenbaum e Stallings são só referência; não foram versionados nem ingeridos.
 - **Busca:** novas perguntas na bateria `eval/relevancia.py` (decodificador 3 para 8, 0x3F, simplificação por Boole, latch SR e borda de descida). Resultado: 385/385.
 - **IA real (21/11/2026):** as 3 perguntas pedidas rodaram pelo fluxo do site (`eval/results/bateria-sd-ecom012-2026-11-21.json`). Os modelos Gemini principais deram HTTP 429, então respondeu o `gemini-3.1-flash-lite`. Conferido: as três ajudas estão corretas e não entregam a resposta (decodificador por mintermos com 3 NOT e AND de 3 entradas; 3F₁₆ por grupos de 4 bits; A'B + AB' + AB pela idempotência e pelo complemento, chegando a A + B). Falha: **nenhuma das três citou os trechos recebidos**.
 
