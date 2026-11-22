@@ -631,3 +631,105 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f"`{i}`" not in curadoria] == []
     assert [i for i in TODOS if f"`{i}`" not in curadoria] == []
     assert "`lfa`" in (ROOT / "docs/DISCIPLINAS.md").read_text(encoding="utf-8")
+
+
+# ---------------------------------------------------------------- complemento de Ciência da Computação (t01–t03)
+
+
+@pytest.mark.parametrize(
+    "pergunta, aceito",
+    [
+        ("AFN com aa ou bb como subpalavra convertido para AFD", "lfa-cc-ab1-2017-afn-para-afd-aa-ou-bb"),
+        ("O que faz a máquina de Turing que alterna a e b, computação da palavra aba", "lfa-cc-ab2-2017-anbn-pilha-maquina-de-turing"),
+        ("AFD para a expressão regular (11+00)*01(010)*", "lfa-cc-reavaliacao-2016-er-afn-afd"),
+        ("autômato para a união contém 0101 ou não contém 110", "lfa-cc-reavaliacao-2016-er-afn-afd"),
+    ],
+)  # fmt: skip
+def test_perguntas_da_turma_de_cc(pergunta, aceito):
+    assert aceito in buscar(pergunta)[:3]
+
+
+def test_blocos_de_cc_dizem_o_curso():
+    for i in ("lfa-cc-ab1-2017-afn-para-afd-aa-ou-bb", "lfa-cc-ab2-2017-anbn-pilha-maquina-de-turing",
+              "lfa-cc-reavaliacao-2016-er-afn-afd"):  # fmt: skip
+        assert ITENS[i]["status_resolucao"] == "validada"
+    for p in LFA.materiais.glob("t0*.md"):
+        assert "curso: Ciência da Computação" in p.read_text(encoding="utf-8").split("---")[1], p.name
+
+
+def test_prova_cc_2017_ab1():
+    V = lv.VAZIO
+    fig1 = lv.AFN(["q0", "qf"], "01", {("q0", "0"): {"q0"}, ("q0", V): {"qf"}, ("qf", "1"): {"qf"}}, "q0", {"qf"})
+    for w in lv.palavras("01", 8):
+        assert fig1.aceita(w) == bool(re.fullmatch("0*1*", w)), w
+    fig2 = lv.AFN(["q0", "q1", "q2", "q3"], AB,
+                  {("q0", "a"): {"q0", "q2"}, ("q0", "b"): {"q0", "q1"}, ("q2", "a"): {"q3"}, ("q1", "b"): {"q3"},
+                   ("q3", "a"): {"q3"}, ("q3", "b"): {"q3"}}, "q0", {"q3"})  # fmt: skip
+    afd = fig2.subconjuntos()
+    assert len(afd.Q) == 5 and len(afd.F) == 2 and len(afd.minimo().Q) == 4
+    assert {lv.nome(X) for X in afd.F} == {"<q0,q2,q3>", "<q0,q1,q3>"}
+    assert fig2.aceita("abb")
+    for w in lv.palavras(AB, 8):
+        assert afd.aceita(w) == fig2.aceita(w) == ("aa" in w or "bb" in w), w
+    sufixo = lv.AFD("nub", AB, {("n", "a"): "n", ("n", "b"): "u", ("u", "a"): "n", ("u", "b"): "b",
+                                ("b", "a"): "n", ("b", "b"): "b"}, "n", {"b"})  # fmt: skip
+    aa = lv.AFD("nux", AB, {("n", "a"): "u", ("n", "b"): "n", ("u", "a"): "x", ("u", "b"): "n",
+                            ("x", "a"): "x", ("x", "b"): "x"}, "n", {"x"})  # fmt: skip
+    for w in lv.palavras(AB, 8):
+        assert sufixo.aceita(w) == w.endswith("bb") and aa.aceita(w) == ("aa" in w), w
+
+
+def test_prova_cc_2017_ab2():
+    g = lv.gramatica("S -> aSb | λ")
+    for w in lv.palavras(AB, 8):
+        n = len(w) // 2
+        assert lv.gera(g, w) == (w == "a" * n + "b" * n and len(w) % 2 == 0), w
+    assert lv.derivacoes_mais_a_esquerda(g, "aaabbb") == 1
+    assert lv.derivacoes_mais_a_esquerda(lv.gramatica("S -> aSb | ab | λ"), "ab") == 2
+    fig = {("q0", "a"): ("q1", "a", "D"), ("q1", "b"): ("q0", "b", "D"), ("q0", B_): ("qa", B_, "D"),
+           ("q1", B_): ("qa", B_, "D")}  # fmt: skip
+    for w in lv.palavras(AB, 8):
+        assert (lv.mt(fig, w)[0] == "qa") == bool(re.fullmatch("(ab)*a?", w)), w
+    assert lv.mt(fig, "aba") == ("qa", "aba") and lv.mt(fig, "abb")[0] == "qr"
+    zeros = {("q0", "0"): ("q0", "0", "D"), ("q0", B_): ("qa", B_, "D")}
+    for w in lv.palavras("01", 8):
+        assert (lv.mt(zeros, w)[0] == "qa") == (set(w) <= {"0"}), w
+
+
+def _kmp(p):
+    d = {}
+    for q in range(len(p) + 1):
+        for a in "01":
+            if q == len(p):
+                d[q, a] = q
+                continue
+            s, k = p[:q] + a, q + 1
+            while k and not s.endswith(p[:k]):
+                k -= 1
+            d[q, a] = k
+    return d
+
+
+def test_reavaliacao_2016_1():
+    d = {("A", "1"): "B", ("B", "1"): "A", ("A", "0"): "C", ("C", "0"): "A", ("C", "1"): "F", ("F", "0"): "G",
+         ("G", "1"): "H", ("H", "0"): "F"}  # fmt: skip
+    q1 = lv.AFD("ABCFGH", "01", d, "A", {"F"})
+    for w in lv.palavras("01", 12):
+        assert q1.aceita(w) == bool(re.fullmatch("(11|00)*01(010)*", w)), w
+    assert len(q1.completo().minimo().Q) == 7
+    d1, d2 = _kmp("0101"), _kmp("110")
+    pares = [(i, j) for i in range(5) for j in range(4)]
+    prod = lv.AFD(pares, "01", {((i, j), a): (d1[i, a], d2[j, a]) for i, j in pares for a in "01"}, (0, 0),
+                  [(i, j) for i, j in pares if i == 4 or j < 3])  # fmt: skip
+    assert len(prod.acessiveis()) == 14 and len(prod.minimo().Q) == 11
+    for w in lv.palavras("01", 12):
+        assert prod.aceita(w) == ("0101" in w or "110" not in w), w
+    assert not prod.aceita("0110") and prod.aceita("01010")
+    m = lv.AFN([f"q{i}" for i in range(1, 6)], "xy",
+               {("q1", "x"): {"q1"}, ("q1", "y"): {"q1", "q2"}, ("q2", "y"): {"q3"}, ("q3", "x"): {"q3"},
+                ("q3", "y"): {"q3", "q4"}, ("q4", "y"): {"q5"}, ("q5", "x"): {"q5"}, ("q5", "y"): {"q5"}},
+               "q1", {"q5"})  # fmt: skip
+    afd = m.subconjuntos()
+    assert len(afd.Q) == 7 and {lv.nome(X) for X in afd.F} == {"<q1,q2,q3,q4,q5>", "<q1,q3,q5>"}
+    for w in lv.palavras("xy", 11):
+        assert afd.aceita(w) == m.aceita(w) == bool(re.fullmatch("[xy]*yy[xy]*yy[xy]*", w)), w

@@ -41,6 +41,37 @@
     return { cfg: cfg, cliente: cliente };
   }
 
+  /* Pergunta antes de sair da conta. Usa a janela do site (.janela, em chat.css); sem suporte a
+   * <dialog>, cai no confirm() do navegador. Resolve true só se a pessoa confirmar. */
+  function confirmarSaida() {
+    var janela = $('janela-sair');
+    if (!janela) {
+      janela = document.createElement('dialog');
+      janela.className = 'janela';
+      janela.id = 'janela-sair';
+      janela.setAttribute('aria-labelledby', 'sair-titulo');
+      janela.innerHTML =
+        '<form method="dialog" class="janela__corpo">' +
+        '<h2 id="sair-titulo">Sair da conta?</h2>' +
+        '<p class="dica">Você vai voltar a usar o TutorON como convidado, com o limite de perguntas de convidado. ' +
+        'Para continuar com sua conta depois, é só entrar de novo.</p>' +
+        '<div class="acoes acoes--fim">' +
+        '<button class="botao botao--leve" value="cancelar" type="submit">Cancelar</button>' +
+        '<button class="botao" value="sair" type="submit" id="sair-confirmar">Sair</button>' +
+        '</div></form>';
+      document.body.append(janela);
+    }
+    if (typeof janela.showModal !== 'function') {
+      return Promise.resolve(window.confirm('Sair da conta?'));
+    }
+    return new Promise(function (ok) {
+      janela.returnValue = '';
+      janela.addEventListener('close', function () { ok(janela.returnValue === 'sair'); }, { once: true });
+      janela.showModal();
+      $('sair-confirmar').focus();
+    });
+  }
+
   async function desenharChip() {
     var chip = $('conta-chip');
     if (!chip) return;
@@ -54,7 +85,12 @@
       nome.textContent = eu.conta.nome || eu.conta.email;
       sub.textContent = eu.admin ? 'Administrador · sair' : 'Sair da conta';
       chip.href = '#sair';
-      chip.onclick = async function (e) { e.preventDefault(); await window.TutorConta.sair(); location.reload(); };
+      chip.onclick = async function (e) {
+        e.preventDefault();
+        if (!(await confirmarSaida())) return;
+        await window.TutorConta.sair();
+        location.reload();
+      };
       if ($('admin-link')) $('admin-link').hidden = !eu.admin;
     } else {
       nome.textContent = 'Entrar ou criar conta';

@@ -459,6 +459,25 @@
    "uso": "referencia",
    "origem": "material de turma",
    "justificativa": "Registrado para não ser procurado de novo."
+  },
+  {
+   "id": "ufal-ppc-cc-2011",
+   "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL — CCOM034 Sistemas Operacionais",
+   "autoria": "Instituto de Computação, UFAL",
+   "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF",
+   "isa": "não se aplica",
+   "topicos": [],
+   "licenca": "Documento institucional público",
+   "acesso": "Baixado e lido em 2026-11-22; não versionado",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Ementa de CCOM034 (60 h), idêntica à de ECOM032; usada só para comparar os cursos"
   }
  ]
 }
