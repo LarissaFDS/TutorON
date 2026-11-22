@@ -80,6 +80,12 @@ Prioridades: **alta** compõe o acervo inicial; **média** complementa ou preenc
 | `sim-logisim-evolution` Logisim-evolution | — | — | — | — | — | — | — | — | referência | ferramenta |
 | `sim-circuitverse` CircuitVerse | — | — | — | — | — | — | — | — | referência | ferramenta |
 | `ufal-sd-lista4-projetos` Lista 4 — projetos (.docx) | — | — | — | — | — | — | — | — | referência | indisponível |
+| `ufal-ecom012-provas-2015-2016` Provas de Circuitos Digitais (ECOM012), fotos | 5 | 3 | 3 | 3 | 4 | 3 | 1 | 4 | alta | no acervo (m14–m16, enunciados parafraseados) |
+| `ufal-ecom012-listas` Listas das aulas 1 a 7 de ECOM012 | — | — | — | — | — | — | — | — | média | indisponível (arquivos não reenviados) |
+| `pearson-tanenbaum-slides-cap3` Slides do cap. 3 de Tanenbaum (Pearson) | — | — | — | — | — | — | — | — | referência | protegido |
+| `idoeta-capuano-eletronica-digital` Idoeta e Capuano, *Elementos de Eletrônica Digital* | — | — | — | — | — | — | — | — | referência | protegido |
+| `tanenbaum-oec-5ed` Tanenbaum, *Organização Estruturada de Computadores* | — | — | — | — | — | — | — | — | referência | protegido |
+| `stallings-coa` Stallings, *Computer Organization and Architecture* | — | — | — | — | — | — | — | — | referência | protegido |
 
 ### Por que esta seleção
 
@@ -120,6 +126,9 @@ Cada bloco declara no cabeçalho quatro coisas, gravadas também em `acervo/iten
 | m11 | `sd-reav-q2-q4` | material da disciplina | não verificada (esboço) | **candidato** | divergência 25 × 26 e condição de parada |
 | m12 | `sd-somadores-monitoria` | material da disciplina | conferida por código | aprovado | — |
 | m13 | `sd-vhdl-fibonacci-controle` | material da disciplina (código de autor não identificado) | não verificada (análise lida do código, sem simulação) | aprovado | simular em GHDL |
+| m14 | `sd-ecom012-ab1` | material da disciplina (ECOM012) | conferida por código | aprovado | revisão humana; listas das aulas 1–7 |
+| m15 | `sd-ecom012-ab2` | material da disciplina (ECOM012) | parcial (latch e borda simulados; discursivas sem conferência) | aprovado | revisão humana |
+| m16 | `sd-ecom012-mux-demux` | material da disciplina (ECOM012) | conferida por código | aprovado | revisão humana |
 | n01, n03, n09, n12 | `sd-nota-numeracao`, `sd-nota-karnaugh`, `sd-nota-fsm`, `sd-nota-conversores-memorias` | nota da equipe (IA) | exemplos conferidos | aprovado | revisão do texto |
 | n02, n04–n08, n10, n11 | demais `sd-nota-*` | nota da equipe (IA) | não verificada | aprovado | revisão do texto |
 
@@ -152,6 +161,16 @@ Na busca léxica, as 20 perguntas de avaliação de PAA (`pipeline/06-avaliacao`
 | `qwen2.5:7b` local, depois da correção | sim (110 s) | **P1 = Lista AV1 Q1–Q7**, nota de Karnaugh, Somadores, nota | S = C' | **errada**: ignorou a resolução de P1 (S = C + A'B') e não citou fontes |
 
 Conclusão: a recuperação foi corrigida, mas **a disciplina não está validada para uso**. O modelo que de fato rodou (`qwen2.5:7b`) não usou o trecho certo que recebeu. Falta repetir o teste com o Gemini e com o `tutoron-paa`. Controle de PAA no mesmo servidor e modelo ("Teorema Mestre em T(n) = 3T(n/4) + n log n"): fontes só de PAA; conclusão correta, Θ(n log n), com erros no meio da justificativa ("log n é Θ(n)").
+
+## 3.2 Complemento ECOM012 — Circuitos Digitais (21/11/2026)
+
+O PPC de Engenharia de Computação de 2014 tem **ECOM012 Circuitos Digitais** (2º período) e **ECOM019 Sistemas Digitais** (3º período) como disciplinas diferentes. Os tópicos de ECOM012 (numeração, Boole, Karnaugh, MUX/DEMUX, latches e flip-flops) são os tópicos 01–08 deste acervo, e a ementa de CCOM019 Circuitos Digitais (CC 2011) já fazia parte da curadoria. Por isso, **a equipe decidiu em 21/11/2026 juntar o material de ECOM012 ao acervo de SD**, sem criar outra disciplina e sem mudar a situação de SD.
+
+- **Entrou:** m14–m16, a partir de 8 fotos de provas (AB1 e AB2 de 2015 e 2016, reposição e final). Os enunciados foram parafraseados. As fotos **não foram versionadas**: mostram nomes e notas de alunos, que não aparecem no acervo. Uma foto era a folha de respostas de um aluno e não foi usada. Professor não identificado; publicação das transcrições não autorizada; `revisao_humana: pendente`.
+- **Conferência:** `tests_acervo/test_sd_ecom012.py` (tabelas-verdade por força bruta; latch SR com NAND e gerador de pulso de borda simulados). Não há conferência das respostas discursivas (m15, itens 3–6), nem das figuras que não foram transcritas: o circuito 2 da AB1, o circuito da reposição e a expressão Z da reposição, ilegível na foto.
+- **Não entrou:** as listas das aulas 1 a 7 (`ufal-ecom012-listas`). Os arquivos não estavam mais disponíveis quando os blocos foram escritos; reenviá-los é pendência. Os slides de Tanenbaum (Pearson) e os livros de Idoeta e Capuano, Tanenbaum e Stallings são só referência; não foram versionados nem ingeridos.
+- **Busca:** novas perguntas na bateria `eval/relevancia.py` (decodificador 3 para 8, 0x3F, simplificação por Boole, latch SR e borda de descida). Resultado: 385/385.
+- **IA real (21/11/2026):** as 3 perguntas pedidas rodaram pelo fluxo do site (`eval/results/bateria-sd-ecom012-2026-11-21.json`). Os modelos Gemini principais deram HTTP 429, então respondeu o `gemini-3.1-flash-lite`. Conferido: as três ajudas estão corretas e não entregam a resposta (decodificador por mintermos com 3 NOT e AND de 3 entradas; 3F₁₆ por grupos de 4 bits; A'B + AB' + AB pela idempotência e pelo complemento, chegando a A + B). Falha: **nenhuma das três citou os trechos recebidos**.
 
 ## 4. Licenças e restrições
 
