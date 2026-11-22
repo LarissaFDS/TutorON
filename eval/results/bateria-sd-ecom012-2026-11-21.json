@@ -1,0 +1,59 @@
+[
+ {
+  "id": "sd-ecom012-decod",
+  "disciplina": "sd",
+  "pergunta": "Como montar um decodificador 3 para 8 com portas lógicas?",
+  "esperado": "3 NOT + 8 AND de 3 entradas, uma saída por mintermo; sem entregar tudo pronto (modo Tutor)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 24.1,
+  "fontes": [
+   "Lista de SD AV1.pdf | páginas 3–4 | questões 14 a 18",
+   "Nota da equipe TutorON (não é material do professor)",
+   "fotos da AB2 de 2015 e da prova final de Circuitos Digitais (UFAL) | enunciados parafraseados"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para entender como construir um decodificador $3:8$, pense no que define a \"identidade\" de cada uma das 8 saídas. Como cada saída deve ser ativada por apenas uma combinação específica das entradas, precisamos de uma forma de identificar quando os bits de entrada ($S_2, S_1, S_0$) assumem um valor exato.\n\nLembre-se que um decodificador é um gerador de **mintermos**. Se você tem 3 entradas, cada mintermo é um produto lógico que só resulta em $1$ para uma única combinação das variáveis. Para detectar um $0$ em uma entrada, você precisa do seu complemento; para detectar um $1$, você usa a entrada direta.\n\nPense no seguinte: se você quer que a saída $Y_0$ seja ativada apenas quando $S_2=0, S_1=0$ e $S_0=0$, você precisa de uma porta que \"enxergue\" esses três zeros simultaneamente. Que tipo de porta lógica realiza uma operação de \"E\" (AND) e como você pode representar esses zeros usando inversores?\n\n### Sua vez\n\n1. Desenhe no papel as 3 entradas ($S_2, S_1, S_0$) e passe cada uma por uma porta NOT para obter os complementos ($S_2', S_1', S_0'$).\n2. Agora, tente escrever a expressão lógica para a saída $Y_3$, que deve ser ativada apenas quando a entrada for $011_2$ (ou seja, $S_2=0, S_1=1, S_0=1$). Quais sinais você deve conectar a uma porta AND de 3 entradas para obter esse resultado?"
+ },
+ {
+  "id": "sd-ecom012-hex",
+  "disciplina": "sd",
+  "pergunta": "Como converter 0x3F para binário e decimal?",
+  "esperado": "0011 1111₂ = 63",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Nota da equipe TutorON (não é material do professor)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para converter de hexadecimal para binário, o segredo é lembrar que cada dígito hexadecimal corresponde exatamente a um grupo de 4 bits.\n\nComo o sistema hexadecimal utiliza a base 16 ($2^4$), você pode converter cada símbolo individualmente para o seu equivalente em 4 bits. Por exemplo, o dígito '3' em binário (com 4 bits) é $0011$.\n\nJá para a conversão para decimal, você pode usar a soma dos pesos das potências de 16, ou converter o binário que você acabou de encontrar para decimal somando os pesos das potências de 2 ($2^i$) onde houver bits iguais a 1.\n\n### Sua vez\nTente converter o dígito 'F' do seu número $3F_{16}$ para um grupo de 4 bits. Depois, junte esse resultado com o binário do '3' que mencionei acima e me diga: qual sequência de bits você obteve?"
+ },
+ {
+  "id": "sd-ecom012-boole",
+  "disciplina": "sd",
+  "pergunta": "Como simplificar F = A'B + AB' + AB com Boole?",
+  "esperado": "F = A + B",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Nota da equipe TutorON (não é material do professor)",
+   "fotos de duas versões da AB1 de Circuitos Digitais (UFAL, 2015) | enunciados parafraseados",
+   "Lista de SD AV1.pdf | páginas 1–2 | questões 1 a 7"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para simplificar essa expressão usando a Álgebra Booleana, o segredo é observar se existem termos que podem ser agrupados ou simplificados através das propriedades que você já conhece, como a **idempotência** ($A + A = A$) ou a **distributiva**.\n\nUma dica valiosa: note que o termo $AB$ aparece no final. Você poderia \"quebrar\" esse $AB$ em dois, usando a propriedade de idempotência ($AB = AB + AB$), e então agrupar cada parte com os outros termos da expressão.\n\nPor exemplo, tente reescrever a expressão assim:\n$F = A'B + AB' + AB + AB$\n\nAgora, tente agrupar os termos dois a dois:\n1. Agrupe $(A'B + AB)$ e coloque o $B$ em evidência.\n2. Agrupe $(AB' + AB)$ e coloque o $A$ em evidência.\n\nO que sobra dentro dos parênteses após colocar as variáveis em evidência? Lembre-se da propriedade do complemento ($A + A' = 1$).\n\n### Sua vez\nAplique a distributiva como sugeri acima e simplifique os termos resultantes. O que você obtém após aplicar a propriedade do complemento?"
+ }
+]
