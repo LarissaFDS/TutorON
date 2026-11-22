@@ -606,6 +606,10 @@ A ementa de CCOM022 (PPC de CC, matriz 2011) tem os tópicos de `prob`. Entraram
 
 A ementa de CCOM05 (PPC de CC, matriz 2011) tem as partes de `ga` e mais matrizes, determinantes e sistemas lineares. O material de CC entrou como complemento de `ga`: 4 blocos (`g30` a `g33`) das provas de nov./dez. de 2017, com `curso:` no cabeçalho; a situação não mudou. A diferença de ementa está no `disciplinas/ga/CURADORIA.md`.
 
+## Banco de Dados, complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM021 (PPC de CC, matriz 2011) tem os tópicos de `bd`. Entraram 2 blocos (`b12` e `b13`) da Lista 2 de SQL da turma de CC, com `curso:` no cabeçalho, conferidos num banco de teste com dados inventados; a situação não mudou. O dump do hospital da turma não foi versionado nem usado.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
