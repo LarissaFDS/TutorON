@@ -820,6 +820,32 @@
         "Em que ordem os construtores rodam numa hierarquia de classes?",
         "Qual a saída do programa de soma com os argumentos 2 4 oi?"
       ]
+    },
+    {
+      "id": "redes",
+      "nome": "Redes de Computadores",
+      "sigla": "REDES",
+      "situacao": "em validação",
+      "itens": "disciplinas/redes/acervo/itens.json",
+      "indice": "disciplinas/redes/acervo/indice.json",
+      "materiais": "disciplinas/redes/materiais",
+      "rigor": "disciplinas/redes/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "redes-01-camadas-encapsulamento",
+        "redes-02-aplicacao",
+        "redes-03-sockets-multiplexacao",
+        "redes-04-transporte-tcp",
+        "redes-05-congestionamento",
+        "redes-06-camada-de-rede",
+        "redes-07-roteamento"
+      ],
+      "exemplos": [
+        "Como funciona o GET condicional do HTTP?",
+        "Qual a diferença entre controle de fluxo e controle de congestionamento?",
+        "Com máscara /30, 192.168.0.9 e 192.168.0.13 conversam?",
+        "Qual a diferença entre Link State e Vetor de Distância?"
+      ]
     }
   ]
 }

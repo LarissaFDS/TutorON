@@ -1,0 +1,85 @@
+[
+ {
+  "id": "redes-get-condicional",
+  "disciplina": "redes",
+  "pergunta": "Como funciona o GET condicional do HTTP?",
+  "esperado": "If-Modified-Since; 304 Not Modified sem corpo; cache do proxy",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.0,
+  "fontes": [
+   "Provas de 2012, 2017 e 2020.1 de Redes de Computadores 1, Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O GET condicional é uma técnica fundamental para otimizar o tráfego em redes, evitando o download desnecessário de objetos que já estão armazenados no cache do proxy.\n\nPense no processo como uma conferência de versão: o proxy já possui uma cópia do arquivo, mas ele precisa garantir que essa cópia ainda é válida antes de entregá-la ao usuário. Para isso, ele utiliza o cabeçalho `If-Modified-Since` (ou `If-None-Match`, no caso de ETags).\n\nO servidor de origem, ao receber essa requisição, compara a data enviada pelo proxy com a data da última modificação do arquivo real no servidor. A partir dessa comparação, o servidor decide se envia o conteúdo completo ou apenas um código de status curto, indicando que a cópia do proxy ainda é válida.\n\nPara visualizar melhor, imagine que você tem um documento impresso e quer saber se ele foi atualizado. Você não pede uma cópia nova imediatamente; você pergunta ao autor: \"Este documento mudou desde a data X?\".\n\n### Sua vez\nConsiderando o cenário onde o arquivo **não mudou** desde a última requisição, qual é a vantagem prática de o servidor responder apenas com o código `304 Not Modified` em vez de enviar o arquivo inteiro novamente, pensando na camada de transporte (TCP) e na economia de banda?"
+ },
+ {
+  "id": "redes-fluxo",
+  "disciplina": "redes",
+  "pergunta": "Qual a diferença entre controle de fluxo e controle de congestionamento?",
+  "esperado": "fluxo protege o receptor (rwnd); congestionamento protege a rede (cwnd)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Provas de 2012, 2017 e 2020.1 de Redes de Computadores 1, Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença, pense em quem está sendo \"protegido\" pelo mecanismo e onde o gargalo pode ocorrer.\n\nImagine que você está enviando cartas para um amigo. O **controle de fluxo** é como se o seu amigo lhe dissesse: \"Ei, minha caixa de correio está quase cheia, pare de enviar por um tempo\". Ele garante que o receptor não seja sobrecarregado e perca dados por falta de espaço no buffer.\n\nJá o **controle de congestionamento** é como se houvesse um engarrafamento na estrada entre você e seu amigo. Mesmo que a caixa de correio dele esteja vazia, as cartas não chegam rápido porque a estrada (a rede) está entupida. O emissor precisa \"adivinhar\" que a estrada está cheia e diminuir o ritmo para não piorar o trânsito.\n\nNote que, no TCP, o emissor precisa equilibrar essas duas preocupações ao decidir quantos bytes pode enviar. Ele usa duas variáveis para isso: `rwnd` (relacionada ao receptor) e `cwnd` (relacionada à rede).\n\n### Sua vez\nSe um emissor TCP tem uma `rwnd` de 10.000 bytes e uma `cwnd` de 5.000 bytes, quantos bytes ele pode enviar de uma vez? Por que ele não pode enviar o valor da `rwnd` nesse caso?"
+ },
+ {
+  "id": "redes-subrede",
+  "disciplina": "redes",
+  "pergunta": "Com máscara /30, os hosts 192.168.0.9 e 192.168.0.13 conversam diretamente?",
+  "esperado": "não: redes .8/30 e .12/30 diferentes; precisa de roteador",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Provas AB2 de 2017 e 2020.1 e reposição da AB2 de 2020.1 de Redes de Computadores 1, Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para saber se dois dispositivos conversam diretamente em uma rede local, eles precisam estar na mesma sub-rede. Quando um computador quer enviar um pacote, ele faz uma operação lógica (o \"E\" bit a bit) entre o seu próprio endereço IP e a máscara de sub-rede para descobrir o endereço da rede onde ele está. Se o resultado for o mesmo para ambos, eles se reconhecem como vizinhos.\n\nNo seu caso, a máscara `/30` significa que os últimos 30 bits são de rede e apenas os 2 bits finais são reservados para os hospedeiros. \n\nPara descobrir se eles estão na mesma rede, tente seguir estes passos no papel:\n1. Converta o último octeto dos IPs (9 e 13) para binário (8 bits).\n2. Converta a máscara `/30` para binário (o que equivale a 255.255.255.252).\n3. Aplique a operação \"E\" lógico entre o IP e a máscara para cada um dos dois hosts.\n4. Compare os resultados: o endereço de rede resultante é o mesmo?\n\nLembre-se: em uma sub-rede `/30`, o bloco de endereços é de apenas 4 posições (rede, primeiro host, segundo host e broadcast). Se o endereço de rede for diferente, eles não estão no mesmo segmento e, portanto, não conseguem se comunicar sem um roteador.\n\n### Sua vez\nEscreva em binário os últimos octetos de `192.168.0.9` e `192.168.0.13` e aplique a máscara `255.255.255.252` (ou `/30`) para encontrar o endereço de rede de cada um. Eles coincidem?"
+ },
+ {
+  "id": "redes-roteamento",
+  "disciplina": "redes",
+  "pergunta": "Qual a diferença entre Link State e Vetor de Distância?",
+  "esperado": "LS: inundação e Dijkstra global; DV: Bellman-Ford com vizinhos, contagem ao infinito",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de 2017 e 2020.1 de Redes de Computadores 1, Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença fundamental entre esses dois algoritmos de roteamento reside em **quanta informação** cada roteador possui sobre a rede e **como ele utiliza** essa informação para decidir o próximo salto.\n\nPense na analogia de um mapa:\n1. No **Link State (LS)**, imagine que cada roteador recebe uma cópia completa do mapa da rede. Com o mapa inteiro em mãos, ele calcula a melhor rota para qualquer destino usando um algoritmo de busca de caminho mínimo (como o Dijkstra).\n2. No **Vetor de Distância (DV)**, o roteador não tem o mapa completo. Ele é como alguém em uma encruzilhada que apenas pergunta aos vizinhos: \"Qual o custo para chegar ao destino X a partir de você?\". Ele confia na informação que o vizinho lhe passa e atualiza sua própria tabela com base nisso, usando a equação de Bellman-Ford.\n\nConsidere os seguintes pontos para comparar:\n*   **Visibilidade:** O que cada roteador conhece sobre a topologia?\n*   **Comunicação:** Com quem cada roteador troca mensagens de atualização?\n*   **Convergência:** O que acontece se um enlace falhar em cada um dos casos?\n\n### Sua vez\nSe um roteador no algoritmo de **Vetor de Distância** recebe uma informação errada de um vizinho (por exemplo, um custo muito menor do que o real), como isso afeta a visão dos outros roteadores na rede? Compare isso com o que aconteceria se um roteador no **Link State** anunciasse um custo errado para seus próprios enlaces."
+ },
+ {
+  "id": "redes-fora",
+  "disciplina": "redes",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Como sou o TutorON, seu tutor de **Redes de Computadores**, preciso te informar que esse assunto pertence à disciplina de **Cálculo 2** (ou Cálculo de Várias Variáveis). Como não sou especialista nessa área, sugiro que você selecione a disciplina correta no sistema para que um tutor especializado possa te ajudar melhor.\n\nNo entanto, posso te dar uma dica geral sobre o conceito: quando mudamos para coordenadas polares, o objetivo é simplificar a região de integração que, em coordenadas cartesianas ($x, y$), seria muito difícil de descrever.\n\nPara isso, você precisa lembrar de duas coisas fundamentais:\n1. A substituição das variáveis: $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$.\n2. O **Jacobiano** da transformação, que aparece sempre que você troca o diferencial de área $dA = dx dy$ por $r \\, dr \\, d\\theta$. Aquele $r$ ali não pode ser esquecido!\n\nPara entender melhor, tente desenhar a região de integração no plano cartesiano e veja se ela possui alguma simetria circular ou se os limites de $x$ e $y$ envolvem termos como $\\sqrt{a^2 - x^2}$.\n\n### Sua vez\nTente escrever no papel como ficariam os limites de integração para um círculo de raio $R$ centrado na origem, expressando o raio $r$ e o ângulo $\\theta$ em termos de seus valores mínimos e máximos."
+ }
+]
