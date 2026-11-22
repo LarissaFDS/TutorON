@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Redes de Computadores: conferidas em tests_acervo/test_disciplina_redes.py.
+    ("redes-get-condicional", "redes", "Como funciona o GET condicional do HTTP?",
+     "If-Modified-Since; 304 Not Modified sem corpo; cache do proxy"),
+    ("redes-fluxo", "redes", "Qual a diferença entre controle de fluxo e controle de congestionamento?",
+     "fluxo protege o receptor (rwnd); congestionamento protege a rede (cwnd)"),
+    ("redes-subrede", "redes", "Com máscara /30, os hosts 192.168.0.9 e 192.168.0.13 conversam diretamente?",
+     "não: redes .8/30 e .12/30 diferentes; precisa de roteador"),
+    ("redes-roteamento", "redes", "Qual a diferença entre Link State e Vetor de Distância?",
+     "LS: inundação e Dijkstra global; DV: Bellman-Ford com vizinhos, contagem ao infinito"),
+    ("redes-fora", "redes", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Cálculo 1: conferidas em tests_acervo/test_disciplina_calc1.py.
     ("calc1-definicao", "calc1", "Como derivar √(2x+1) pela definição?",
      "domínio x ≥ -1/2; limite do quociente; racionaliza com o conjugado; f'(x) = 1/√(2x+1); não entrega tudo"),

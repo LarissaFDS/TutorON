@@ -104,7 +104,7 @@
           {"nome": "Geometria Analítica"}
         ]},
         {"numero": 3, "disciplinas": [
-          {"nome": "Redes de Computadores"},
+          {"nome": "Redes de Computadores", "acervo": "redes"},
           {"nome": "Teoria dos Grafos", "acervo": "grafos"},
           {"nome": "Probabilidade e Estatística"},
           {"nome": "Álgebra Linear"}
