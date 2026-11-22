@@ -55,7 +55,7 @@ def test_calc1_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert C1.situacao == "em validação" and C1.em_validacao
+    assert C1.situacao == "MVP" and not C1.em_validacao and not C1.aviso
 
 
 def test_itens_gerados_estao_atualizados():

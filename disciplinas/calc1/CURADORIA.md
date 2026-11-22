@@ -1,6 +1,6 @@
 # Curadoria — Cálculo 1 (`calc1`, ECOM004)
 
-Situação: **em validação**. Blocos com `revisao_humana: pendente`; resoluções da equipe TutorON conferidas por código (`tests_acervo/test_disciplina_calc1.py`), não gabarito do professor.
+Situação: **MVP** desde 21/11/2026, sem aviso: suíte, bateria de relevância e perguntas de exemplo com a IA real passaram. Blocos com `revisao_humana: pendente`; resoluções da equipe TutorON conferidas por código (`tests_acervo/test_disciplina_calc1.py`), não gabarito do professor.
 
 ## Disciplina
 

@@ -709,7 +709,7 @@
       "id": "calc1",
       "nome": "Cálculo 1",
       "sigla": "Cálculo 1",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/calc1/acervo/itens.json",
       "indice": "disciplinas/calc1/acervo/indice.json",
       "materiais": "disciplinas/calc1/materiais",
