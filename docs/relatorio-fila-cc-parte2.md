@@ -15,6 +15,6 @@
 - Projeto de Software: ligar `"acervo": "projsw"` à Programação 2 de CC em `disciplinas/cursos.json` exige pôr `projsw` nas preferidas do 4º período de CC em `backend/tests/test_versao_final.py` (hoje `{paa, lfa}`). Não mexi nesse teste; a decisão é sua.
 - Grafos: ECOM033 (Teoria dos Grafos de Engenharia) não foi ligada ao acervo `grafos`, porque a ementa de Engenharia não foi conferida.
 - Grafos: promover a MVP depende de rodar de novo a pergunta de planaridade e de decidir sobre hipergrafos e matróides (sem material da turma).
+- Redes: ECOM029 (Redes de Computadores de Engenharia) não foi ligada ao acervo `redes`, porque a ementa de Engenharia não foi conferida e o período dela está entre os fixados em `test_versao_final.py`.
+- CLP: ligar `"acervo": "clp"` no 4º período de CC também exige mudar as preferidas em `backend/tests/test_versao_final.py`; não liguei.
 - O site não foi atualizado: não há acesso ao PC do servidor.
-
-- Redes: ECOM029 (Engenharia) não ligada.
