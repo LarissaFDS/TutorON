@@ -170,6 +170,7 @@ O PPC de Engenharia de Computação de 2014 tem **ECOM012 Circuitos Digitais** (
 - **Conferência:** `tests_acervo/test_sd_ecom012.py` (tabelas-verdade por força bruta; latch SR com NAND e gerador de pulso de borda simulados). Não há conferência das respostas discursivas (m15, itens 3–6), nem das figuras que não foram transcritas: o circuito 2 da AB1, o circuito da reposição e a expressão Z da reposição, ilegível na foto.
 - **Não entrou:** as listas das aulas 1 a 7 (`ufal-ecom012-listas`). Os arquivos não estavam mais disponíveis quando os blocos foram escritos; reenviá-los é pendência. Os slides de Tanenbaum (Pearson) e os livros de Idoeta e Capuano, Tanenbaum e Stallings são só referência; não foram versionados nem ingeridos.
 - **Busca:** novas perguntas na bateria `eval/relevancia.py` (decodificador 3 para 8, 0x3F, simplificação por Boole, latch SR e borda de descida). Resultado: 385/385.
+- **IA real (21/11/2026):** as 3 perguntas pedidas rodaram pelo fluxo do site (`eval/results/bateria-sd-ecom012-2026-11-21.json`). Os modelos Gemini principais deram HTTP 429, então respondeu o `gemini-3.1-flash-lite`. Conferido: as três ajudas estão corretas e não entregam a resposta (decodificador por mintermos com 3 NOT e AND de 3 entradas; 3F₁₆ por grupos de 4 bits; A'B + AB' + AB pela idempotência e pelo complemento, chegando a A + B). Falha: **nenhuma das três citou os trechos recebidos**.
 
 ## 4. Licenças e restrições
 
