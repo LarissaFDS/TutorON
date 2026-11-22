@@ -1,0 +1,79 @@
+[
+ {
+  "id": "circ-thevenin-ccvs",
+  "disciplina": "circ",
+  "pergunta": "Como achar o equivalente de Thévenin com uma fonte dependente de tensão?",
+  "esperado": "mantém a dependente; Vth em aberto e Rth por fonte de teste ou Voc/Icc; ex. reavaliação Q7: Vth = 12 V, Rth = 7 kΩ",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Reavaliação AB1 do Prof. Davi, questão 7, resolvida no caderno",
+   "Anotações manuscritas \"Teorema de Thévenin e Norton\" (28 abr. 2026), exercício 5",
+   "Anotações manuscritas \"Máxima Transferência de Potência\" (28 abr. 2026), lista 4, questão 4; Anotações manuscritas \"Lista para AB1\" (1 maio 2026), lista do Prof. Jobson de Araújo Nascimento, questão 5"
+  ],
+  "rotulos_citados": [
+   "P2"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Quando um circuito possui **fontes dependentes** (seja de tensão ou de corrente), a regra fundamental é: **a fonte dependente nunca é desligada** [P1, P2]. Como o valor dela depende de uma variável do próprio circuito, ela deve permanecer ativa durante os cálculos.\n\nPara determinar o equivalente de Thévenin, siga estes passos no papel:\n\n1. **Tensão de Thévenin ($V_{Th}$):**\n   - Mantenha todas as fontes (independentes e dependentes) ligadas.\n   - Calcule a tensão em circuito aberto ($V_{oc}$) entre os terminais de interesse. Assim, $V_{Th} = V_{oc}$.\n\n2. **Resistência de Thévenin ($R_{Th}$):**\n   Não é possível achar $R_{Th}$ apenas combinando resistores em série/paralelo [P2]. Escolha um dos dois métodos:\n   - **Método da Fonte de Teste:** Desligue **apenas as fontes independentes** (fontes de tensão viram curto-circuito; de corrente, circuito aberto). A fonte dependente **continua ligada**. Conecte uma fonte de teste ($V_T$ ou $I_T$) nos terminais de saída e encontre a grandeza correspondente ($I_T$ ou $V_T$). A resistência será:\n     $$R_{Th} = \\frac{V_T}{I_T}$$\n   - **Método de Curto-Circuito:** Com as fontes independentes ligadas, faça um curto-circuito nos terminais de saída para determinar a corrente de curto-circuito ($I_{cc}$). Em seguida, calcule:\n     $$R_{Th} = \\frac{V_{oc}}{I_{cc}}$$\n\n---\n\n### Sua vez\nVocê tem um circuito específico para resolver? Se sim, descreva os componentes e nós (ou qual é a variável que controla a fonte dependente) para começarmos o primeiro passo juntos no papel!"
+ },
+ {
+  "id": "circ-inversor",
+  "disciplina": "circ",
+  "pergunta": "Qual o ganho de um amplificador inversor?",
+  "esperado": "hipóteses ideais (i = 0 nas entradas, vp = vn com realimentação negativa); vo = −(Rf/Rs) vs; satura fora da alimentação",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Slides do Prof. Davi, aula 5 (amplificadores operacionais)",
+   "Prova AB2 do Prof. Davi (2017), questão 1, e resolução fotografada",
+   "Anotações manuscritas \"Máxima Transferência de Potência\" (28 abr. 2026), lista 4, questão 4; Anotações manuscritas \"Lista para AB1\" (1 maio 2026), lista do Prof. Jobson de Araújo Nascimento, questão 5"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender o ganho de um amplificador inversor, precisamos aplicar as duas hipóteses fundamentais do **amp-op ideal** com realimentação negativa:\n\n1.  **Correntes de entrada nulas:** A corrente que entra nos terminais inversor ($i_n$) e não inversor ($i_p$) é zero.\n2.  **Curto virtual:** Como o ganho de malha aberta é infinito, a diferença de potencial entre as entradas é nula, ou seja, $v_n = v_p$.\n\nNo amplificador inversor, o terminal não inversor ($v_p$) está conectado diretamente ao terra ($0\\text{ V}$). Isso significa que o nó da entrada inversora ($v_n$) também estará em $0\\text{ V}$.\n\nAgora, imagine o circuito: a tensão de entrada $v_s$ está conectada ao nó inversor através de um resistor $R_s$, e a saída $v_o$ está conectada ao mesmo nó através de um resistor de realimentação $R_f$. Como a corrente que entra no amp-op é zero, toda a corrente que passa por $R_s$ deve passar por $R_f$.\n\n### Sua vez\nAplique a Lei das Correntes de Kirchhoff (LKC) no nó da entrada inversora ($v_n$). Sabendo que a soma das correntes que saem do nó é zero e que $v_n = 0$, qual é a equação que relaciona $v_s$, $v_o$, $R_s$ e $R_f$? Tente escrever essa equação no papel."
+ },
+ {
+  "id": "circ-divisor-corrente",
+  "disciplina": "circ",
+  "pergunta": "Como montar um divisor de corrente?",
+  "esperado": "resistores em paralelo com fonte de corrente; i1 = R2/(R1+R2)·is; mais corrente no resistor menor",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Slides do Prof. Davi, aula 3 (associação de resistores)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para montar um divisor de corrente, o conceito fundamental é que a corrente total se divide entre caminhos paralelos, sendo que cada caminho \"escolhe\" uma quantidade de corrente inversamente proporcional à sua resistência.\n\nImagine que você tem uma fonte de corrente $i_s$ e dois resistores, $R_1$ e $R_2$, conectados em paralelo a ela. Como eles estão em paralelo, ambos compartilham a mesma tensão $v$. Pela Lei de Ohm, sabemos que $v = i_1 R_1 = i_2 R_2$. Além disso, pela Lei de Kirchhoff das Correntes (LKC), a soma das correntes que entram no nó deve ser igual à soma das que saem: $i_s = i_1 + i_2$.\n\nO objetivo é expressar $i_1$ (ou $i_2$) apenas em função da corrente total $i_s$ e das resistências. Se você substituir $i_2$ na equação da LKC usando a relação de tensão, conseguirá isolar $i_1$.\n\nLembre-se: o resistor que oferece \"menos dificuldade\" (menor resistência) permite a passagem de uma corrente maior. Por isso, na fórmula do divisor, o resistor que aparece no numerador é sempre o **outro** resistor do paralelo.\n\n### Sua vez\nTente escrever no papel a equação da LKC ($i_s = i_1 + i_2$) e substitua $i_2$ por uma expressão que envolva $i_1$, $R_1$ e $R_2$ (usando o fato de que a tensão é a mesma). Qual expressão você obtém para $i_1$ em função de $i_s$, $R_1$ e $R_2$?"
+ },
+ {
+  "id": "circ-potencia-nodal",
+  "disciplina": "circ",
+  "pergunta": "Como encontrar a potência fornecida por uma fonte com análise nodal?",
+  "esperado": "tensões de nó → corrente da fonte pela LKC → p = vi na convenção passiva; ex.: 12 V fornece 14,4 mW; soma zero",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.0,
+  "fontes": [
+   "Reavaliação AB1 do Prof. Davi, questões 4 e 5, resolvidas no quadro e no caderno",
+   "Anotações manuscritas \"Teorema de Thévenin e Norton\" (28 abr. 2026), exercícios 1, 7 e 9"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para encontrar a potência de uma fonte em uma análise nodal, o ponto de partida é sempre a definição de potência elétrica: $p = vi$. Como você já terá as tensões de nó após resolver o sistema, o desafio é determinar a corrente que atravessa a fonte.\n\nLembre-se da **convenção passiva**: a potência é positiva se o elemento absorve energia (corrente entrando pelo terminal positivo) e negativa se ele fornece energia (corrente saindo pelo terminal positivo).\n\nPara fontes de corrente, a corrente é um dado do problema, então basta encontrar a diferença de potencial entre seus terminais. Para fontes de tensão, a tensão é conhecida, mas a corrente não é direta: você deve olhar para o nó onde a fonte está conectada e aplicar a **LKC** (Lei de Kirchhoff das Correntes) naquele ponto, considerando todas as correntes que chegam ou saem, inclusive a que passa pela fonte.\n\nImagine um nó $A$ onde você calculou uma tensão $v_A$. Se nesse nó estiver conectada uma fonte de tensão (ligada à referência) e um resistor por onde sai uma corrente $I_R$, a soma das correntes que saem do nó deve ser zero. A corrente da fonte será a \"peça que falta\" para equilibrar essa soma.\n\n### Sua vez\nConsidere um nó $A$ com tensão $v_A = 15\\text{ V}$. Nele, chegam $3\\text{ A}$ de um circuito externo e sai uma corrente de $2\\text{ A}$ por um resistor. Se uma fonte de tensão de $15\\text{ V}$ também estiver conectada a esse nó (ligada à referência), como você montaria a equação da LKC neste nó para descobrir a corrente que atravessa essa fonte?"
+ }
+]

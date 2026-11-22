@@ -83,15 +83,16 @@ def test_topicos_com_anotacoes_tem_bloco_na_busca():
     """Critério de liberação: todo tópico "Sim" no mapeamento (01 a 05 e 08) tem bloco na busca."""
     na_busca = {ITENS[x]['assunto'] for x in NA_BUSCA}
     sim = {'circ-01-grandezas-potencia', 'circ-02-kirchhoff-nodal-malhas', 'circ-03-superposicao-transformacao',
-           'circ-04-thevenin-norton', 'circ-05-maxima-transferencia', 'circ-08-segunda-ordem'}
+           'circ-04-thevenin-norton', 'circ-05-maxima-transferencia', 'circ-06-amp-op', 'circ-07-primeira-ordem',
+           'circ-08-segunda-ordem'}
     assert na_busca == sim
-    assert set(CIRC.assuntos) - sim == {'circ-06-amp-op', 'circ-07-primeira-ordem', 'circ-09-fasores'}
+    assert set(CIRC.assuntos) - sim == {'circ-09-fasores'}
 
 
 # ---------------------------------------------------------------- status das resoluções
 
 def test_resolucoes_tem_status_e_dizem_no_texto():
-    turma = [x for x in ITENS.values() if x['natureza'] == 'material_da_disciplina']
+    turma = [x for x in ITENS.values() if x['natureza'] == 'material_da_disciplina' and x['id'].startswith('circ-anot-')]
     assert len(turma) == 23
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for x in turma:
@@ -297,7 +298,8 @@ def test_catalogo_completo_e_coerente():
         assert f['prioridade'] in ('alta', 'media', 'referencia') and f['uso'] in ('acervo', 'citada', 'referencia')
         assert set(f['topicos']) <= set(CIRC.assuntos), f['id']
     assert {x for i_ in ITENS.values() for x in i_['fontes_catalogo']} - {'nenhuma'} <= set(CATALOGO)
-    assert {k for k, f in CATALOGO.items() if f['uso'] == 'acervo'} == {'ufal-circ-anotacoes-otavio-2026-1'}
+    assert {k for k, f in CATALOGO.items() if f['uso'] == 'acervo'} == {'ufal-circ-anotacoes-otavio-2026-1',
+                                                                         'ufal-circ-davi-2017'}
     aut = CATALOGO['ufal-circ-anotacoes-otavio-2026-1']['autorizacao_transcricao']
     assert aut['data'] == '2026-11-18' and aut['aprovacao_professor'] == 'não declarada'
     assert CATALOGO['nilsson-riedel-circuitos']['uso'] == 'referencia'
@@ -307,7 +309,7 @@ def test_anotacoes_e_imagens_fora_do_repositorio():
     arquivos = [p for p in (ROOT / 'disciplinas/circ').rglob('*') if p.is_file()]
     assert not [p for p in arquivos if p.suffix.lower() in ('.pdf', '.png', '.jpg', '.jpeg', '.webp', '.docx', '.pptx')]
     for x in ITENS.values():
-        if x['natureza'] == 'material_da_disciplina':
+        if x['natureza'] == 'material_da_disciplina' and x['id'].startswith('circ-anot-'):
             assert x['publicacao_transcricao'].startswith('autorizada pelo autor') and 'fora do repositório' in x['licenca']
     rastreados = subprocess.run(['git', 'ls-files'], cwd=ROOT, capture_output=True, text=True, encoding='utf-8').stdout
     assert not [l for l in rastreados.splitlines() if re.search(r'_26\d{4}_\d{6}\.pdf$', l)]
