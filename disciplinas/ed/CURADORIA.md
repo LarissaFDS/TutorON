@@ -95,11 +95,19 @@ Cada correção foi conferida por um programa em `tests_acervo/c_ed/`. As falhas
 
 | Status | Blocos |
 |---|---|
-| `validada` | `ed-notion-ordenacao-simples`, `ed-notion-abb`, `ed-prof-huffman`, `ed-prof-sat`, `ed-ufcg-rubro-negra`, `ed-ufcg-rubro-negra-insercao`, `ed-ufcg-arvore-b`, `ed-testes-avl-heap` |
+| `validada` | `ed-cc-parenteses-pilha`, `ed-cc-profundidade-arvore-texto`, `ed-cc-bfs-distancia-predecessor`, `ed-notion-ordenacao-simples`, `ed-notion-abb`, `ed-prof-huffman`, `ed-prof-sat`, `ed-ufcg-rubro-negra`, `ed-ufcg-rubro-negra-insercao`, `ed-ufcg-arvore-b`, `ed-testes-avl-heap` |
 | `corrigida` | `ed-notion-ponteiros-lista`, `ed-notion-sizeof-alocacao`, `ed-notion-structs`, `ed-notion-ponteiros-funcao`, `ed-notion-busca`, `ed-notion-big-o`, `ed-notion-quick-merge`, `ed-notion-listas-genericas`, `ed-notion-pilha-fila`, `ed-notion-heap`, `ed-notion-hash`, `ed-notion-grafos` |
 | `pendente_professor` | `ed-notion-recorrencias` (convenção dos casos-base) |
 
 `ed-prof-projetos-ab2` e `ed-ufcg-splay-skiplist` não têm resolução (regras das entregas; texto conceitual sem código). Os casos 1–8 de SAT do Notion não foram transcritos; só se registrou que o caso 6 declara 5 cláusulas no cabeçalho e traz 4.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM009 no PPC de Ciência da Computação (matriz 2011, `ufal-ppc-cc-2011`) traz POO, containers, listas, TADs pilha, fila, fila de prioridade, árvore e grafo, complexidade, busca e ordenação. Os TADs e os algoritmos são os de `ed`; a parte de POO e containers (a turma de CC usa Java nos roteiros de teste) não tem bloco. A diferença fica registrada aqui e não justifica disciplina separada (pergunta deixada na PR).
+
+Entraram 3 blocos, com `curso:` no cabeçalho e código da equipe testado em `tests_acervo/c_ed/cc_huxley.c`: `ed-cc-parenteses-pilha`, `ed-cc-profundidade-arvore-texto`, `ed-cc-bfs-distancia-predecessor` (todos `validada`), a partir de `ufal-cc-ed-huxley`.
+
+Usados só como evidência: os slides do Prof. Márcio Ribeiro (`ufal-cc-ed-slides-marcio`), o livro de Shaffer (já `shaffer-dsaa-3-2`) e as dicas de testes de AVL e heap (já `dicas-testes-avl-heap`). Fora do repositório: o projeto Huffman (avaliativo: nenhuma implementação completa no acervo), o tutorial de Makefile, os .zip, .o e o vídeo, os slides de outras disciplinas (Funções, de Discreta; Lambda Cálculo) e os livros protegidos (Tenenbaum, Goodrich).
 
 ## 6. Notas da equipe e validação
 
