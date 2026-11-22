@@ -735,6 +735,37 @@
         "Como inserir uma figura com legenda no LaTeX?",
         "Como escrever o resumo de um artigo científico?"
       ]
+    },
+    {
+      "id": "calc1",
+      "nome": "Cálculo 1",
+      "sigla": "Cálculo 1",
+      "situacao": "MVP",
+      "itens": "disciplinas/calc1/acervo/itens.json",
+      "indice": "disciplinas/calc1/acervo/indice.json",
+      "materiais": "disciplinas/calc1/materiais",
+      "rigor": "disciplinas/calc1/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "calc1-01-funcoes-inequacoes-modulo",
+        "calc1-02-limites-continuidade",
+        "calc1-03-limites-infinito-assintotas",
+        "calc1-04-derivada-definicao-tangente",
+        "calc1-05-regras-derivacao",
+        "calc1-06-taxas-aproximacao-linear",
+        "calc1-07-extremos-tvm",
+        "calc1-08-esboco-graficos",
+        "calc1-09-lhospital",
+        "calc1-10-otimizacao",
+        "calc1-11-primitivas-integral"
+      ],
+      "exemplos": [
+        "Como derivar √(2x+1) pela definição?",
+        "Quando posso usar a regra de L'Hospital?",
+        "Quais são as assíntotas de x²/(x−1)?",
+        "Como resolver o problema da escada que desliza na parede?",
+        "Qual o cilindro de volume máximo inscrito num cone?"
+      ]
     }
   ]
 }

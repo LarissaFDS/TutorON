@@ -471,6 +471,17 @@ PERGUNTAS = [
     ("metodologia", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
     ("ingles", "fora", "Como inserir uma figura com legenda no LaTeX?", []),
     ("ingles", "fora", "Como fazer uma referência bibliográfica no LaTeX com BibTeX?", []),
+    ("calc1", "assunto", "Como derivar √(2x+1) pela definição?", ["calc1-derivada-pela-definicao"]),
+    ("calc1", "assunto", "Quando posso usar a regra de L'Hospital?", ["calc1-regra-lhospital"]),
+    ("calc1", "assunto", "Quais são as assíntotas de x²/(x−1)?", ["calc1-assintotas-limites-infinito", "calc1-esboco-grafico"]),
+    ("calc1", "assunto", "Como resolver o problema da escada que desliza na parede?", ["calc1-taxas-relacionadas"]),
+    ("calc1", "assunto", "Qual o cilindro de volume máximo inscrito num cone?", ["calc1-otimizacao-geometrica"]),
+    ("calc1", "assunto", "O que diz o Teorema do Valor Médio?", ["calc1-tvm-rolle"]),
+    ("calc1", "assunto", "Como achar a primitiva com condição inicial?", ["calc1-primitivas-condicoes"]),
+    ("calc1", "fora", "Como calcular o rotacional de um campo vetorial?", []),
+    ("calc1", "fora", "Me conte uma piada", []),
+    ("calc3", "fora", "Quando posso usar a regra de L'Hospital?", []),
+    ("fis1", "fora", "Qual o cilindro de volume máximo inscrito num cone?", []),
 ]
 # Em PAA, "assunto" com None: basta trazer algum bloco do assunto (o acervo de OCR tem ids opacos);
 # a ordem exata das 20 perguntas de avaliação é coberta por tests_acervo/ranking-paa-lexico.json.
