@@ -14,7 +14,7 @@
           {"codigo": "ECOM001", "nome": "Inglês Instrumental"},
           {"codigo": "ECOM002", "nome": "Programação 1"},
           {"codigo": "ECOM003", "nome": "Matemática Discreta"},
-          {"codigo": "ECOM004", "nome": "Cálculo 1"},
+          {"codigo": "ECOM004", "nome": "Cálculo 1", "acervo": "calc1"},
           {"codigo": "ECOM005", "nome": "Geometria Analítica"},
           {"codigo": "ECOM006", "nome": "Introdução à Engenharia de Computação"}
         ]},

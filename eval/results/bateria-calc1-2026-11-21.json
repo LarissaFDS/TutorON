@@ -1,0 +1,113 @@
+[
+ {
+  "id": "calc1-definicao",
+  "disciplina": "calc1",
+  "pergunta": "Como derivar √(2x+1) pela definição?",
+  "esperado": "domínio x ≥ -1/2; limite do quociente; racionaliza com o conjugado; f'(x) = 1/√(2x+1); não entrega tudo",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Provas de Cálculo 1, IM-UFAL | 1ª Avaliação (05.04.2014), Q3b; Reavaliação AB1 (11.07.2014), Q5b; 1ª prova (15.12.2012), Q5a; 1ª prova Adventistas (14.12.2012), Q5a",
+   "Provas de Cálculo 1, IM-UFAL | 1ª Avaliação (05.04.2014), Q1b; 1ª Avaliação (11.04.2015), Q4; 1ª Avaliação (30.08.2014), Q3a; Três exercícios com soluções (aula de 17.02.2017), Q1 e Q2"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para derivar a função $f(x) = \\sqrt{2x+1}$ (lê-se: \"raiz quadrada de duas vezes x mais um\") pela definição, seguimos alguns passos fundamentais [P1]:\n\n1. **Domínio:** Como temos uma raiz quadrada (índice par), o radicando deve ser não negativo: $2x + 1 \\ge 0 \\implies x \\ge -\\frac{1}{2}$.\n\n2. **Definição da derivada:** A derivada é dada pelo limite do quociente de Newton:\n   $$f'(x) = \\lim_{h\\to0} \\frac{f(x+h) - f(x)}{h}$$\n\n   Substituindo $f(x)$, o limite fica:\n   $$\\lim_{h\\to0} \\frac{\\sqrt{2(x+h)+1} - \\sqrt{2x+1}}{h}$$\n\n3. **Indeterminação:** Se tentarmos substituir $h = 0$ diretamente, obtemos a forma indeterminada $\\frac{0}{0}$. \n\n4. **Técnica de Racionalização:** Para eliminar a raiz do numerador e desfazer a indeterminação, multiplicamos o numerador e o denominador pelo **conjugado** do numerador, que é $(\\sqrt{2(x+h)+1} + \\sqrt{2x+1})$ [P1].\n\n**Verificação:** Ao terminar, você poderá conferir o resultado aplicando a regra da cadeia para derivadas diretas.\n\n### Sua vez\nEscreva no papel o quociente multiplicando em cima e em baixo pelo conjugado:\n\n$$\\frac{\\sqrt{2(x+h)+1} - \\sqrt{2x+1}}{h} \\cdot \\frac{\\sqrt{2(x+h)+1} + \\sqrt{2x+1}}{\\sqrt{2(x+h)+1} + \\sqrt{2x+1}}$$\n\nDesenvolva o produto do numerador usando a identidade $(a-b)(a+b) = a^2 - b^2$. O que sobra no numerador após simplificar os termos?"
+ },
+ {
+  "id": "calc1-lhospital",
+  "disciplina": "calc1",
+  "pergunta": "Quando posso usar a regra de L'Hospital?",
+  "esperado": "só em 0/0 ou ∞/∞; deriváveis, g' ≠ 0; derivar separado, não a regra do quociente; outras formas viram quociente",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 14.1,
+  "fontes": [
+   "Provas de Cálculo 1, IM-UFAL | 4ª Avaliação (16.03.2013), Q2a e Q2b; 4ª prova (foto), Q4b e Q5b; Quarto Simulado (04.05.2016), Q1a",
+   "Provas de Cálculo 1, IM-UFAL | 1ª Avaliação (05.04.2014), Q1a e Q2a; 1ª Avaliação (30.08.2014), Q5b; Exercícios resolvidos (aula de 17.02.2017), Q6 e Q7"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A Regra de L'Hospital é uma ferramenta para resolver limites que resultam em indeterminações do tipo quociente [P1].\n\nVocê **só pode aplicar** a regra diretamente no limite $\\lim_{x \\to a} \\dfrac{f(x)}{g(x)}$ (limite de $f(x)$ sobre $g(x)$ com $x$ tendendo a $a$) quando todas as condições abaixo forem atendidas [P1]:\n\n1. **Forma indeterminada:** A substituição direta na expressão gera o tipo $\\tfrac{0}{0}$ (zero sobre zero) ou $\\tfrac{\\infty}{\\infty}$ (infinito sobre infinito).\n2. **Derivabilidade:** As funções $f(x)$ e $g(x)$ são deriváveis próximo de $a$ (não necessariamente em $a$).\n3. **Denominador válido:** A derivada $g'(x)$ ($g$ linha de $x$) não é zero perto de $a$.\n4. **Existência do limite derivado:** O limite da razão das derivadas $\\lim_{x \\to a} \\dfrac{f'(x)}{g'(x)}$ existe ou é $\\pm\\infty$.\n\nAo aplicar a regra, você deriva o numerador e o denominador **separadamente** (não utilize a regra do quociente) [P1]. \n\nPara outras formas indeterminadas, como $0 \\cdot \\infty$, $\\infty - \\infty$, $1^\\infty$, $0^0$ ou $\\infty^0$, é necessário reescrever a expressão algebricamente (ou aplicando logaritmo) até obter um quociente $\\tfrac{0}{0}$ ou $\\tfrac{\\infty}{\\infty}$ antes de derivar [P1].\n\n---\n\n### Sua vez\n\nNo papel, faça a substituição direta no limite $\\lim_{x \\to 0} \\dfrac{\\operatorname{sen} x}{x + 1}$ (limite de seno de $x$ dividido por $x + 1$ quando $x$ tende a 0). \n\nÉ possível aplicar a regra de L'Hospital nesse limite? Justifique com base nas condições dadas acima."
+ },
+ {
+  "id": "calc1-assintotas",
+  "disciplina": "calc1",
+  "pergunta": "Quais são as assíntotas de x²/(x−1)?",
+  "esperado": "domínio x ≠ 1; vertical x = 1; oblíqua y = x + 1; sem horizontal",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.1,
+  "fontes": [
+   "Provas de Cálculo 1, IM-UFAL | 1ª Avaliação (30.08.2014), Q1b e Q4b; 1ª Avaliação (05.04.2014), Q4a; Exercícios resolvidos (aula de 17.02.2017), Q4",
+   "Provas de Cálculo 1, IM-UFAL | 4ª prova (foto), Q5b; Avaliação Final (03.12.2015), Q8",
+   "Provas de Cálculo 1, IM-UFAL | 2ª Avaliação (10.05.2014), Q2b e Q4a; 2ª Avaliação (04.10.2014), Q2a; Avaliação Final (03.12.2015), Q4a, Q4b e Q6a"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para encontrar as assíntotas de $f(x) = \\dfrac{x^2}{x-1}$, precisamos seguir o roteiro de análise de comportamento da função.\n\nPrimeiro, como você bem notou, o domínio é $x \\neq 1$. Isso já nos dá uma pista sobre onde pode haver uma **assíntota vertical**. Para confirmar, verifique o que acontece com a função quando $x$ se aproxima de $1$ pela direita ($x \\to 1^+$) e pela esquerda ($x \\to 1^-$). O limite tende a $+\\infty$ ou $-\\infty$?\n\nDepois, para as **assíntotas horizontais ou oblíquas**, devemos analisar o comportamento quando $x \\to \\pm\\infty$. Como o grau do numerador ($2$) é exatamente uma unidade maior que o grau do denominador ($1$), a função não terá uma assíntota horizontal (o limite será infinito), mas sim uma **assíntota oblíqua** da forma $y = mx + b$.\n\nPara encontrar $m$ e $b$:\n1. $m = \\lim_{x \\to \\infty} \\dfrac{f(x)}{x}$\n2. $b = \\lim_{x \\to \\infty} (f(x) - mx)$\n\nUma dica prática: você pode realizar a divisão polinomial de $x^2$ por $x-1$. O quociente dessa divisão será justamente a reta $y = mx + b$ da sua assíntota oblíqua.\n\n### Sua vez\nTente realizar a divisão polinomial de $x^2$ por $x-1$ no papel e me diga qual expressão você encontrou para o quociente e o resto."
+ },
+ {
+  "id": "calc1-escada",
+  "disciplina": "calc1",
+  "pergunta": "Como resolver o problema da escada que desliza na parede?",
+  "esperado": "Pitágoras x² + y² = L²; derivar em t antes de substituir; 2x x' + 2y y' = 0",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [
+   "Provas de Cálculo 1, IM-UFAL | 4ª prova (foto), Q2a; 3ª Avaliação (01.11.2014), Q1a e Q1b; Avaliação Final (03.12.2015), Q10"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para resolver problemas de taxas relacionadas como o da escada, o segredo é não se apressar em substituir os números. Siga o roteiro que está no seu material:\n\n1. **Desenho e Variáveis:** Imagine a escada encostada na parede. O comprimento da escada é fixo, mas a distância da base da escada até a parede ($x$) e a altura da ponta da escada no chão ($y$) mudam conforme ela desliza.\n2. **Relação Geométrica:** Como a parede e o chão formam um ângulo reto, qual teorema relaciona os dois catetos ($x$ e $y$) com a hipotenusa (o comprimento da escada, que chamaremos de $L$)?\n3. **Derivação:** Lembre-se que tanto $x$ quanto $y$ são funções do tempo $t$. Ao derivar a equação do passo 2 em relação a $t$, você precisará usar a regra da cadeia (por exemplo, a derivada de $x^2$ é $2x \\cdot \\frac{dx}{dt}$).\n4. **Substituição:** Só agora você insere os valores do instante específico que o problema pede.\n\nSe você tentar substituir o comprimento da escada ou a posição inicial antes de derivar, você tratará essas variáveis como constantes e a derivada delas será zero, o que impedirá de encontrar a taxa de variação.\n\n### Sua vez\nDesenhe o triângulo retângulo no papel, nomeie os lados como $x(t)$ e $y(t)$ e escreva a equação que relaciona esses lados com o comprimento fixo da escada $L$. Qual é essa equação?"
+ },
+ {
+  "id": "calc1-cilindro-cone",
+  "disciplina": "calc1",
+  "pergunta": "Qual o cilindro de volume máximo inscrito num cone?",
+  "esperado": "semelhança h = H(1 − r/R); V(r) numa variável; r = 2R/3, h = H/3; compara extremidades",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.1,
+  "fontes": [
+   "Provas de Cálculo 1, IM-UFAL | 4ª prova (foto), Q4b (calha); Avaliação Final (03.12.2015), Q9; Quarto Simulado (04.05.2016), Q3b; 4ª lista de Cálculo 1, Engenharia Ambiental 2016.2, Q5",
+   "Provas de Cálculo 1, IM-UFAL | 4ª prova (foto), Q2a; 3ª Avaliação (01.11.2014), Q1a e Q1b; Avaliação Final (03.12.2015), Q10"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Para encontrar o cilindro de volume máximo dentro de um cone, o caminho é transformar o problema em uma função de uma única variável.\n\nComo você bem notou, a geometria do problema nos dá uma relação entre o raio $r$ e a altura $h$ do cilindro, baseada nas dimensões fixas do cone ($R$ e $H$). A semelhança de triângulos que você mencionou é o ponto de partida correto:\n\n$$\\frac{r}{R} = \\frac{H - h}{H}$$\n\nO objetivo agora é expressar o volume do cilindro, $V = \\pi r^2 h$, usando apenas uma das variáveis. Se você isolar $h$ na equação da semelhança, poderá substituir esse valor na fórmula do volume.\n\nLembre-se de que, ao derivar essa função $V(r)$ e igualar a zero para encontrar o ponto crítico, você estará buscando o valor de $r$ que maximiza o volume. Como estamos trabalhando com dimensões físicas, verifique se o valor encontrado está dentro do intervalo possível para $r$ (que vai de $0$ até $R$).\n\n### Sua vez\nIsole $h$ na equação da semelhança e escreva a expressão de $V$ em função apenas de $r$. Em seguida, calcule a derivada $V'(r)$ e deixe indicada a equação que você usaria para encontrar o valor crítico de $r$."
+ },
+ {
+  "id": "calc1-fora",
+  "disciplina": "calc1",
+  "pergunta": "Como calcular o rotacional de um campo vetorial?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O cálculo do rotacional de um campo vetorial é um tópico que pertence ao **Cálculo 3** (Cálculo de Várias Variáveis), pois envolve operadores diferenciais aplicados a campos em três dimensões.\n\nO rotacional de um campo vetorial $\\vec{F} = P\\mathbf{i} + Q\\mathbf{j} + R\\mathbf{k}$ é definido como o produto vetorial do operador nabla ($\\nabla$) pelo campo $\\vec{F}$. Em termos práticos, ele é calculado através do determinante de uma matriz simbólica:\n\n$$\\text{rot } \\vec{F} = \\nabla \\times \\vec{F} = \\begin{vmatrix} \\mathbf{i} & \\mathbf{j} & \\mathbf{k} \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ P & Q & R \\end{vmatrix}$$\n\nPara resolver, você deve expandir esse determinante seguindo as regras de álgebra linear, tratando os termos da segunda linha como operadores de derivada parcial que atuam sobre as funções $P$, $Q$ e $R$ na terceira linha.\n\nLembre-se:\n1. $\\frac{\\partial}{\\partial x}$ atua sobre $P, Q, R$ derivando apenas em relação a $x$ e tratando $y$ e $z$ como constantes.\n2. O resultado final será um novo campo vetorial.\n\n### Sua vez\nSe você tiver um campo específico, escreva-o aqui. Caso contrário, tente montar a estrutura do determinante para o campo genérico $\\vec{F}(x, y, z) = (x^2y)\\mathbf{i} + (yz)\\mathbf{j} + (xz)\\mathbf{k}$ e me diga qual seria a expressão da componente na direção $\\mathbf{i}$ (o primeiro termo do vetor resultante)."
+ }
+]
