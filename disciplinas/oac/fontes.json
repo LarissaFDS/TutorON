@@ -598,6 +598,43 @@
     "escopo": "anotações manuscritas do autor; não inclui os slides da editora reproduzidos nelas",
     "aprovacao_professor": "não declarada"
    }
+  },
+  {
+   "id": "ufal-cc-oac-provas-erick-2017",
+   "nome": "Provas 1 e 2 de OAC de 2017.2 com gabarito (turmas de Engenharia e Ciência da Computação)",
+   "autoria": "Prof. Erick de Andrade Barboza, IC-UFAL",
+   "url": null,
+   "arquivo_local": null,
+   "idioma": "pt-BR",
+   "formato": "PDF de prova com gabarito",
+   "isa": "MIPS",
+   "topicos": [
+    "oac-02-desempenho",
+    "oac-14-pipeline-hazards",
+    "oac-15-hierarquia-memoria",
+    "oac-16-paralelismo"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Pasta do material de Ciência da Computação; não versionada",
+   "prioridade": "media",
+   "uso": "acervo",
+   "justificativa": "Questões parafraseadas e resolvidas em 3 blocos (v01–v03), conferidas com o gabarito e em Python (cache pelo mesmo simulador LRU dos testes). As provas de 2016.2 e a reavaliação de 2017.1 e os arquivos do MARS ficaram fora: mesmos tópicos, sem bloco novo"
+  },
+  {
+   "id": "ufal-ppc-cc-2011",
+   "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL",
+   "autoria": "Instituto de Computação, UFAL",
+   "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+   "arquivo_local": null,
+   "idioma": "pt-BR",
+   "formato": "PDF",
+   "isa": "não se aplica",
+   "topicos": [],
+   "licenca": "Documento institucional público",
+   "acesso": "Lido online; não versionado",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "justificativa": "Ementa de OAC no PPC de CC, usada só para comparar com a disciplina oac"
   }
  ]
 }

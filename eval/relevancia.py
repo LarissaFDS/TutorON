@@ -27,6 +27,9 @@ CORTE = 0.45  # ACERVO_SIMILARIDADE_MINIMA padrão (backend/config.py)
 # (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório pipeline/06-avaliacao/teste-2026-10-19.md,
 # eval/perguntas.json e paráfrases sem as palavras do acervo.
 PERGUNTAS = [
+    ("oac", "assunto", "Cache de 4 blocos com os endereços 0, 8, 0, 6, 8, 4, 8, 10, 6: quantas faltas no mapeamento direto, em 2 vias e totalmente associativo?", ["oac-cc-cache-tres-mapeamentos"]),
+    ("oac", "assunto", "Qual o CPI médio de cada compilador e por que MIPS não serve para comparar arquiteturas diferentes?", ["oac-cc-desempenho-compiladores"]),
+    ("oac", "assunto", "Trocar add e or resolve o conflito de dados no pipeline de 5 estágios sem forwarding?", ["oac-cc-pipeline-reordenar-ciclo"]),
     ("ed", "assunto", "Como verificar se os parênteses de uma expressão estão balanceados usando pilha?", ["ed-cc-parenteses-pilha"]),
     ("ed", "assunto", "Como achar a profundidade de um nó numa árvore binária escrita como texto com parênteses?", ["ed-cc-profundidade-arvore-texto"]),
     ("ed", "assunto", "Como guardar a distância e o predecessor de cada vértice na busca em largura?", ["ed-cc-bfs-distancia-predecessor"]),

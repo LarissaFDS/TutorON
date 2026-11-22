@@ -153,6 +153,12 @@ Em 02/11/2026 também foram lidos, com autorização da responsável, os anexos 
 
 Conferências em `tests_acervo/test_disciplina_oac.py`: simulador de cache (mapeamento direto, associativa por conjunto, LRU, índice pelo endereço do bloco, falta compulsória × conflito) e diagrama de pipeline ciclo a ciclo (enchimento, bolha de load-use mesmo com forwarding, sequência sub/and/or/add/sw com e sem forwarding). O enunciado original da Q5b (tamanho da PTE) não está nas anotações; o bloco avisa que o tamanho depende dele. As questões 1–3 do cap. 6 que a anotação marca como foco não estão resolvidas no PDF.
 
+## 4.3 Complemento de Ciência da Computação (22/11/2026)
+
+As provas do Prof. Erick de Andrade Barboza são comuns às turmas de Engenharia e Ciência da Computação; o PPC de CC (`ufal-ppc-cc-2011`) traz os mesmos tópicos. Não há disciplina separada. As provas de 2017 usam MIPS, e o acervo usa RISC-V: os blocos dizem isso no status.
+
+Entraram 3 blocos de `ufal-cc-oac-provas-erick-2017`, todos `validada` e com `curso:` no cabeçalho: `oac-cc-desempenho-compiladores`, `oac-cc-cache-tres-mapeamentos`, `oac-cc-pipeline-reordenar-ciclo`. O item b da Q2 da prova 1 foi anulado no gabarito; o bloco mostra a conta (clock de A cerca de 27% mais lento). Fora do repositório: as provas de 2016.2 e a reavaliação de 2017.1 (mesmos tópicos) e os arquivos do MARS.
+
 ## 5. Blocos do acervo
 
 Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum bloco tem confiabilidade alta.
@@ -218,7 +224,7 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 
 ## 7. Pendências
 
-1. Revisão humana interna dos 34 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s05, s07) e pela tabela de sinais (n07); das anotações de 2025.2, primeiro u01, u02, u03 e u05 (corrigidas).
+1. Revisão humana interna dos 37 blocos (`revisao_humana`), começando pelos corrigidos e pendentes (t03–t09, s01, s02, s04, s05, s07) e pela tabela de sinais (n07); das anotações de 2025.2, primeiro u01, u02, u03 e u05 (corrigidas).
 2. Confirmar com o professor o item d da versão A e a leitura do riscado da versão B (t06, t07), e se a disciplina aceita as correções de t03, t04, t05 e t09.
 3. Autorização da equipe para publicar transcrições literais da prova e da lista (hoje, parafraseadas).
 4. Validar respostas reais com o Gemini e com o modelo local (as quatro perguntas de `backend/tests/test_disciplinas.py` e as de `tests_acervo/test_disciplina_oac.py`). Só depois mudar a `situacao` no cadastro para `beta`.
