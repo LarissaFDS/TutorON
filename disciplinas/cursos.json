@@ -32,7 +32,7 @@
           {"codigo": "ECOM015", "nome": "Projeto de Software"},
           {"codigo": "ECOM016", "nome": "Física 2", "acervo": "fis2"},
           {"codigo": "ECOM017", "nome": "Cálculo 3", "acervo": "calc3"},
-          {"codigo": "ECOM018", "nome": "Metodologia da Pesquisa e do Trabalho Científico"},
+          {"codigo": "ECOM018", "nome": "Metodologia da Pesquisa e do Trabalho Científico", "acervo": "metodologia"},
           {"codigo": "ECOM019", "nome": "Sistemas Digitais", "acervo": "sd"},
           {"codigo": "ECOM057", "nome": "Química Tecnológica"}
         ]},
