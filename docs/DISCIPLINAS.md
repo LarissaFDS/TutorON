@@ -507,6 +507,19 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Cálculo 1: provas do IM-UFAL resolvidas e conferidas com SymPy (21/11/2026)
+
+O mesmo tutor, com outro acervo. Entraram:
+- a entrada em `disciplinas/disciplinas.json` (`calc1`, **em validação**) e o campo `acervo` em `disciplinas/cursos.json` (ECOM004);
+- `disciplinas/calc1/`: rigor (domínio antes de derivar ou esboçar; nome da forma indeterminada e da técnica; hipóteses antes de L'Hospital, TVM, Rolle e TVI; linha de verificação), 23 blocos (todos na busca; nenhuma nota de IA), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_calc1.py`, que recalcula com SymPy cada número dos blocos, e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+Fontes: ementa do PPC de Engenharia de Computação de 2014; fotos e PDFs de provas, listas, banco de questões e resoluções manuscritas do IM-UFAL, parafraseados (licença não declarada; originais não versionados). Stewart, o manual de soluções, Apostol e os slides da editora são só referência; OpenStax não é ingerido (o prefácio restringe uso em treino de modelos). Duas resoluções da turma foram corrigidas pela equipe e duas questões ficam pendentes do professor (veja a curadoria).
+
+IA real: Gemini (`gemini-3.6-flash` e `gemini-3.5-flash` em 2 respostas, `gemini-3.1-flash-lite` em 4, com HTTP 429 nos modelos maiores), 21/11/2026 (`eval/results/bateria-calc1-2026-11-21.json`). As respostas foram lidas uma a uma e conferidas contra os blocos e o SymPy: definição de $\sqrt{2x+1}$ (domínio, forma 0/0, conjugado), L'Hospital (as quatro hipóteses e derivar separado), assíntotas de $x^2/(x-1)$ (vertical $x = 1$, oblíqua por divisão), escada (Pitágoras, derivar antes de substituir), cilindro no cone (semelhança, $V(r)$ em $[0, R]$) estão certas e socráticas, sem valor final; o rotacional é mandado para Cálculo 3, sem fontes. Ressalva: o `flash-lite` escreveu duas vezes "como você bem notou" sem o aluno ter dito nada.
+
+Fronteiras: Cálculo 2 (técnicas de integração), Cálculo 3 e Física 1; o isolamento é testado nos dois sentidos. A pergunta "integral dupla em coordenadas polares" traz o bloco de integral definida na busca de `calc1` (palavra "integral" em comum); o rigor manda dizer que o assunto é de Cálculo 3.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -549,3 +562,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
 | `lfa` | Linguagens Formais, Autômatos e Computabilidade | Markdown curado em `disciplinas/lfa` (32 blocos, 31 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |
+| `calc1` | Cálculo 1 | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | Em validação; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |
