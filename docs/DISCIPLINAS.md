@@ -108,6 +108,9 @@ Notação física na busca léxica: `acervo/retrieval.py::tokens` guarda só `[a
 
 O teste de KaTeX (`node` com `backend/web/vendor/katex`) renderiza todas as fórmulas do acervo com `throwOnError`; ele achou `\text{N·m}`, que o KaTeX do site não aceita.
 
+
+**Complemento de 21/11/2026.** A Lista 2 de Gravitação (8 problemas do cap. 13 do Halliday, digitalizados, sem resolução e sem autoria identificada) entrou como 3 blocos `t14`–`t16` com enunciado parafraseado, figuras descritas em texto e resolução independente da equipe, conferida em `tests_acervo/test_disciplina_fis2.py`. O PDF, o livro e o manual de resoluções não foram versionados nem usados como fonte. Nada de código mudou; a situação da disciplina (MVP) continua a mesma. Perguntas novas no eval: velocidade de escape da Terra e período de satélite em órbita baixa.
+
 ## Estrutura de Dados: primeira disciplina de programação em C (03/11/2026)
 
 ED entrou só com cadastro e acervo, como Física 2, e com a mesma IA. Os arquivos são:
@@ -512,6 +515,26 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Metodologia da Pesquisa e do Trabalho Científico: modelo de artigo e guias de LaTeX conferidos por compilação (21/11/2026)
+
+Metodologia da Pesquisa e do Trabalho Científico (ECOM018, 3º semestre, 30 h) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
+- a entrada em `disciplinas/disciplinas.json` (`metodologia`) e o campo `acervo` em `disciplinas/cursos.json` (EC);
+- `disciplinas/metodologia/`: rigor, 22 blocos (16 na busca; 6 notas da equipe com IA candidatas, fora da busca), `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_metodologia.py`, que compila os 9 exemplos LaTeX com pdflatex e bibtex (imagem Docker em `tests_acervo/latex_metodologia/`, TeX Live 2026 com abnTeX2) e duas contraprovas (`\label` antes de `\caption`; `@Online` no BibTeX);
+- a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+Material da turma: modelo de artigo de Alves e Arruda (BU-UFSC, 2004; sem licença, só paráfrase; e-mails das autoras fora do repositório), apostila de Lopez e Silva (UFRJ, 2013; CC BY-SA 3.0, herdada pelos blocos que a adaptam) e guia de Wilkins (1995; copyright, só paráfrase). Professor não identificado. O JabRef-2.10.jar não foi incluído. As normas ABNT não são reproduzidas; as mudanças de edição (6022:2018, 6023:2018, 10520:2023) foram conferidas em guias de bibliotecas (UFC, UFSCar, UFV, UNIFOR). Os tópicos 01, 02, 03 e 10 da ementa não têm material da turma: só notas candidatas.
+
+Busca: bateria de relevância 400/400, com 13 perguntas de Metodologia, 5 fora do assunto e 2 de fronteira com Inglês.
+
+IA real: Gemini (`gemini-3.1-flash-lite`; HTTP 429 nos maiores), 21/11/2026 (`eval/results/bateria-metodologia-2026-11-21.json` e `-2.json`). Lidas uma a uma:
+- BibTeX, seções do artigo, figura com legenda e resumo: corretas e socráticas (ciclo de compilação, IMRaD, `\label` depois de `\caption`, 100 a 250 palavras sem primeira pessoa);
+- citação ABNT: na 1ª rodada, **erro**: disse que *et al.* vale a partir de três autores. O bloco `metodologia-abnt-citacoes` passou a dizer "até três, todos; mais de três, *et al.*" (conferido no guia da UFC); na 2ª rodada, correta (maiúsculas/minúsculas na edição 2023);
+- integral dupla com Metodologia selecionada: na 1ª rodada, o bloco de fórmulas LaTeX entrou na busca e a IA ensinou o cálculo; o exemplo de integral foi trocado e a pergunta entrou como "fora" na relevância. Na 2ª rodada, sem fontes, indicou Cálculo 3, mas ainda adiantou o jacobiano $r$, mesmo com a regra nova do `rigor.md` (o mesmo comportamento já registrado em LFA).
+- Também corrigido: `rag.py` corta a referência no último "/", e "BU/UFSC" virou "BU-UFSC".
+
+A disciplina passou a MVP, sem aviso, no último commit da branch, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; as cinco perguntas de exemplo rodadas com Gemini, lidas e conferidas, com o erro de *et al.* corrigido no bloco; todo tópico com material da turma tem bloco na busca). Fica registrado que a pergunta fora do assunto ainda adianta o jacobiano.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -535,7 +558,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (25 blocos, 23 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (34 blocos, 24 na busca; as 10 notas da equipe com IA sem revisão humana saíram da busca em 10/11/2026; 6 blocos de anotações manuscritas de 2025.2 entraram em 18/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana e aprovação do professor pendentes; tópicos 03, 04, 06, 07, 08, 11 e 12 sem bloco na busca; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
 | `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
-| `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (34 blocos, 30 na busca; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
+| `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (37 blocos, 33 na busca; complemento da Lista 2 de Gravitação em 21/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
 | `ed` | Estrutura de Dados | Markdown curado em `disciplinas/ed` (25 blocos, 23 na busca; 2 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; o tutor não entrega projetos avaliativos prontos (regra em `rigor.md`); revisão humana e aprovação do professor pendentes; veja a [curadoria](../disciplinas/ed/CURADORIA.md) |
 | `bd` | Banco de Dados | Markdown curado em `disciplinas/bd` (32 blocos, 26 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e confirmação das resoluções pendentes; tópicos 04, 13 e 14 só em notas fora da busca, 15 sem bloco; veja a [curadoria](../disciplinas/bd/CURADORIA.md) |
 | `prob` | Probabilidade e Estatística | Markdown curado em `disciplinas/prob` (25 blocos, 19 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; anotações de aluno sem autorização de publicar a transcrição (só paráfrases); professor, instituição e enunciados das provas não identificados; revisão humana e do professor pendentes; tópicos 10–13 só em notas fora da busca; veja a [curadoria](../disciplinas/prob/CURADORIA.md) |
@@ -554,3 +577,4 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
 | `lfa` | Linguagens Formais, Autômatos e Computabilidade | Markdown curado em `disciplinas/lfa` (32 blocos, 31 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |
+| `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |

@@ -1,10 +1,10 @@
 # Física 2 — curadoria do acervo
 
-Situação: **em validação** desde 02/11/2026. A disciplina está cadastrada com acervo e índice próprios e passa pelo mesmo fluxo da IA que PAA, SD e OAC: mesmo modelo, mesmo backend e mesmo prompt de sistema, com as regras de [`rigor.md`](rigor.md) anexadas. Enquanto a validação não acontecer, o servidor recusa perguntas de Física 2 no atendimento normal (403). Para testes autorizados, use `TUTORON_LIBERAR_EM_VALIDACAO=fis2` (veja [`docs/DISCIPLINAS.md`](../../docs/DISCIPLINAS.md)).
+Situação: **MVP** desde 18/11/2026, sem aviso (cadastrada em validação em 02/11/2026). A disciplina tem acervo e índice próprios e passa pelo mesmo fluxo da IA que as demais: mesmo modelo, mesmo backend e mesmo prompt de sistema, com as regras de [`rigor.md`](rigor.md) anexadas. Revisão humana, aprovação do professor e ementa continuam pendentes (veja [`docs/DISCIPLINAS.md`](../../docs/DISCIPLINAS.md)).
 
 | Item | Estado em 02/11/2026 |
 |---|---|
-| Cadastro, acervo (34 blocos, 30 na busca) e índice híbrido (`bge-m3`) | **Feitos** |
+| Cadastro, acervo (37 blocos, 33 na busca) e índice híbrido (`bge-m3`) | **Feitos** |
 | Contas das resoluções e exemplos | **Conferidas por código** (`tests_acervo/test_disciplina_fis2.py`, SymPy e Python) |
 | Revisão humana interna | **Pendente** (`revisao_humana: pendente` em todos os blocos) |
 | Autorização para publicar transcrições das listas | **Não dada**: os blocos trazem enunciados parafraseados e os dados |
@@ -25,7 +25,7 @@ A lista de oscilações (`ufal-fis2-lista-oscilacoes`) tem o cabeçalho "Univers
 | Assunto | Halliday, vol. 2 | Evidência da turma | Blocos |
 |---|---|---|---|
 | `fis2-01-equilibrio-elasticidade` | cap. 12 | Notion + lista com resolução | `fis2-notion-equilibrio`, `fis2-lista-equilibrio-q1`, `fis2-lista-equilibrio-q2`, `fis2-lista-equilibrio-q3`, `fis2-lista-equilibrio-q4`, `fis2-lista-equilibrio-q5`, `fis2-notion-q9-lista1`, `fis2-nota-escolher-metodo` |
-| `fis2-02-gravitacao` | cap. 13 | Notion + lista | `fis2-notion-gravitacao-forca`, `fis2-notion-gravitacao-energia-kepler`, `fis2-lista-gravitacao-q1-q5` |
+| `fis2-02-gravitacao` | cap. 13 | Notion + lista | `fis2-notion-gravitacao-forca`, `fis2-notion-gravitacao-energia-kepler`, `fis2-lista-gravitacao-q1-q5`, `fis2-lista2-gravitacao-superposicao`, `fis2-lista2-gravitacao-escape-estrelas`, `fis2-lista2-gravitacao-satelites-anel` |
 | `fis2-03-fluidos` | cap. 14 | Notion + lista | `fis2-notion-fluidos-hidrostatica`, `fis2-notion-fluidos-pascal-arquimedes`, `fis2-notion-fluidos-escoamento`, `fis2-lista-fluidos-q1`, `fis2-lista-fluidos-q2-q3`, `fis2-lista-fluidos-q4`, `fis2-lista-fluidos-q5`, `fis2-lista-fluidos-q6-q11` |
 | `fis2-04-oscilacoes` | cap. 15 | Notion + lista do professor | `fis2-notion-mhs`, `fis2-notion-pendulos`, `fis2-lista-oscilacoes-q1-q4` |
 | `fis2-05-ondas-i` | cap. 16 | Notion + notas de aula | `fis2-notion-ondas-progressivas`, `fis2-notion-ondas-estacionarias` |
@@ -77,6 +77,7 @@ Cada bloco `s*` termina com "Correções da equipe".
 | `fis2-lista-fluidos-q2-q3`, `fis2-lista-fluidos-q6-q11` | validada | Q10 fora (depende da figura) |
 | `fis2-lista-fluidos-q4` | corrigida | sinal escrito errado na pressão dos pés |
 | `fis2-lista-fluidos-q5` | pendente_professor | geometria só na figura; bloco `candidato`, fora da busca |
+| `fis2-lista2-gravitacao-superposicao`, `fis2-lista2-gravitacao-escape-estrelas`, `fis2-lista2-gravitacao-satelites-anel` | validada | Lista 2: resolução independente da equipe (seção 8) |
 | `fis2-lista-gravitacao-q1-q5` | corrigida | G arredondado (18,92 m → 19 m); Q2–Q4 dependem de figura |
 | `fis2-lista-oscilacoes-q1-q4` | validada | resolução da equipe; a lista não tem gabarito |
 | `fis2-notion-q9-lista1` | pendente_professor | resolução do ChatGPT com geometria inconsistente; `candidato` |
@@ -92,3 +93,17 @@ Respostas do tutor com um modelo (Gemini ou local) **não foram avaliadas** nest
 ## 7. Fontes externas
 
 Nenhuma fonte externa foi ingerida. `openstax-university-physics-v1` e `openstax-university-physics-v2` são CC BY-NC-SA 4.0, mas o prefácio proíbe uso em IA generativa sem permissão: só referência. `mit-ocw-8-03sc`, `mit-ocw-8-01sc` e `mit-ocw-5-60` (CC BY-NC-SA 4.0) são leitura indicada; o 5.60 usa ΔU = q + w. `phet-simulacoes` e `hyperphysics` têm termos não verificados. `halliday-fundamentos-vol2` é protegido: não foi versionado, fragmentado nem ingerido.
+
+## 8. Complemento de 21/11/2026: Lista 2 de Gravitação
+
+Material recebido: `lista2-gravitacao-halliday` (PDF de 2 páginas, sha256 no catálogo, não versionado). São 8 problemas do cap. 13 do Halliday digitalizados das páginas do livro (números 14, 18, 13, 37, 59, 65, 99 e 82, com as figuras 13-40, 13-39 e 13-55). O arquivo não traz instituição, professor nem resolução; o metadado de autoria é "valentim" (2017). Os campos Nome e Curso estão em branco: não há dado pessoal. Como os enunciados são do livro protegido, os blocos trazem enunciado parafraseado, figuras descritas em texto e resolução independente da equipe, conferida por código em `tests_acervo/test_disciplina_fis2.py`. O livro e o manual de resoluções (`halliday-manual-solucoes`) não foram consultados nem incluídos.
+
+Antes já havia na busca a velocidade de escape e a 3ª lei de Kepler (`fis2-notion-gravitacao-energia-kepler`) e a lista anterior (`fis2-lista-gravitacao-q1-q5`). O que faltava e entrou: superposição em duas dimensões, esfera com cavidade, lançamento com g variável, sistema de três corpos, dependência de T, K, L e v com o raio da órbita, período de órbita baixa e campo de um anel.
+
+| Bloco | Problemas | Status |
+|---|---|---|
+| `fis2-lista2-gravitacao-superposicao` | 14, 18, 13 | validada |
+| `fis2-lista2-gravitacao-escape-estrelas` | 37, 59 | validada |
+| `fis2-lista2-gravitacao-satelites-anel` | 65, 82, 99 | validada |
+
+A situação da disciplina não mudou. A autorização para publicar a lista não foi confirmada; por isso nada dela é transcrito.
