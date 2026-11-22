@@ -768,6 +768,32 @@
         "Como resolver o problema da escada que desliza na parede?",
         "Qual o cilindro de volume máximo inscrito num cone?"
       ]
+    },
+    {
+      "id": "grafos",
+      "nome": "Teoria dos Grafos",
+      "sigla": "GRAFOS",
+      "situacao": "em validação",
+      "itens": "disciplinas/grafos/acervo/itens.json",
+      "indice": "disciplinas/grafos/acervo/indice.json",
+      "materiais": "disciplinas/grafos/materiais",
+      "rigor": "disciplinas/grafos/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "grafos-01-conceitos",
+        "grafos-02-arvores-conectividade",
+        "grafos-03-percursos-caminhos",
+        "grafos-04-emparelhamento-estabilidade",
+        "grafos-05-coloracao",
+        "grafos-06-planaridade",
+        "grafos-07-digrafos-fluxos"
+      ],
+      "exemplos": [
+        "Por que todo grafo euleriano não tem ponte?",
+        "Como mostrar que o grafo de Petersen não é hamiltoniano?",
+        "Quando um grafo com n vértices e m arestas pode ser planar?",
+        "Como achar o fluxo máximo com Ford-Fulkerson?"
+      ]
     }
   ]
 }

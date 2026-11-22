@@ -525,6 +525,25 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Teoria dos Grafos: lista e prova da UFAL conferidas com NetworkX (22/11/2026)
+
+Teoria dos Grafos (CCOM030, 30 h, Ciência da Computação) entrou só com cadastro e acervo, com a mesma IA:
+- a entrada em `disciplinas/disciplinas.json` (`grafos`, **em validação**) e o campo `acervo` em `disciplinas/cursos.json` (CC, 3º período);
+- `disciplinas/grafos/`: rigor, 14 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_grafos.py`, que confere cada fato citado com NetworkX 3.7 ou força bruta (11 grafos de 4 vértices, Petersen não hamiltoniano com χ = 3 e χ' = 4, Ramsey em K6, tabuleiro 30/62, fluxo de 2000 e 2000 aumentos, AGM e Dijkstra); NetworkX entrou em `requirements-acervo.txt` e no CI;
+- a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+Busca: relevância 500/500, com 5 perguntas de Grafos e 2 fora do assunto; o teste confere que ED, PAA e Discreta não trazem blocos de grafos.
+
+IA real: Gemini, 22/11/2026 (`eval/results/bateria-grafos-2026-11-22.json`), com HTTP 429/503 nos modelos maiores. Lidas uma a uma:
+- isomorfismo e Petersen (`gemini-3.6-flash`): corretas e socráticas (contagem por número de arestas e complemento; paridade dos raios), sem entregar o total;
+- Ford-Fulkerson (`gemini-3.1-flash-lite`): correta (residual, gargalo, arcos de volta), pergunta do aluno sobre capacidade residual;
+- K3,3 (`gemini-3.1-flash-lite`): o modelo entregou a resposta duas vezes e o código trocou pela ajuda de reserva genérica; **não conferida**;
+- integral dupla com Grafos selecionada: sem fontes, indicou Cálculo, mas adiantou o Jacobiano;
+- nenhuma termina com "**Verificação:**".
+
+Fica **em validação** porque a resposta de planaridade não pôde ser conferida (critério da bateria real) e hipergrafos e matróides, da ementa, não têm material da turma.
+
 ## Metodologia da Pesquisa e do Trabalho Científico: modelo de artigo e guias de LaTeX conferidos por compilação (21/11/2026)
 
 Metodologia da Pesquisa e do Trabalho Científico (ECOM018, 3º semestre, 30 h) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
@@ -673,5 +692,6 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
 | `lfa` | Linguagens Formais, Autômatos e Computabilidade (Engenharia; Teoria da Computação em Ciência da Computação) | Markdown curado em `disciplinas/lfa` (35 blocos, 34 na busca; 3 do complemento de Ciência da Computação; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |
+| `grafos` | Teoria dos Grafos (Ciência da Computação) | Markdown curado em `disciplinas/grafos` (14 blocos, todos na busca; índice híbrido com `bge-m3`) | **em validação** desde 22/11/2026; ementa conferida no PPC de CC (CCOM030); lista 2020.1 do Prof. Rian e prova de 2016.2 do Prof. Viana parafraseadas (originais não versionados); hipergrafos e matróides sem material; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/grafos/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |

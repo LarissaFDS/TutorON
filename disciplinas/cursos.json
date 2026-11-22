@@ -105,7 +105,7 @@
         ]},
         {"numero": 3, "disciplinas": [
           {"nome": "Redes de Computadores"},
-          {"nome": "Teoria dos Grafos"},
+          {"nome": "Teoria dos Grafos", "acervo": "grafos"},
           {"nome": "Probabilidade e Estatística"},
           {"nome": "Álgebra Linear"}
         ]},
