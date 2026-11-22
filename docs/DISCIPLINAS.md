@@ -614,6 +614,9 @@ A ementa de CCOM021 (PPC de CC, matriz 2011) tem os tópicos de `bd`. Entraram 2
 
 A ementa de CCOM009 (PPC de CC, matriz 2011) tem os TADs de `ed` e mais POO e containers, sem bloco. Entraram 3 blocos (`s24` a `s26`) de exercícios do Huxley da turma de CC, com `curso:` no cabeçalho e código testado em `tests_acervo/c_ed/cc_huxley.c`; a situação não mudou. O projeto Huffman da turma é avaliativo e ficou fora.
 
+## PAA, complemento de Ciência da Computação (22/11/2026)
+
+O material da turma de CC (COMP374) tem os tópicos de `paa`. Ficaram 2 candidatos em `disciplinas/paa/candidatos/` (`e06`: assintótica e recorrência; `e07`: NP-completude e clique ∝ conjunto independente), fora do acervo. Dois testes existentes não permitem incluir material novo em `materiais/Equipe/` sem mudança (padrão de PD e instantâneo do ranking de PAA), e a decisão ficou com a equipe. Registro em `disciplinas/paa/CURADORIA.md`; a situação não mudou.
 ## OAC, complemento de Ciência da Computação (22/11/2026)
 
 As provas de 2017.2 do Prof. Erick são comuns a Engenharia e Ciência da Computação. Entraram 3 blocos (`v01` a `v03`: desempenho, cache e pipeline), com `curso:` no cabeçalho e contas conferidas em Python; a situação não mudou.
