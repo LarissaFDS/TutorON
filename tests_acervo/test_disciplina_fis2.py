@@ -85,6 +85,9 @@ def test_nenhum_bloco_aprovado_pelo_professor_ou_revisado_por_humano():
     ('Como calcular a variação de entropia numa expansão livre?', {'fis2-notion-entropia'}),
     ('Qual a eficiência de Carnot entre 500 K e 300 K?', {'fis2-notion-maquinas-carnot'}),
     ('Como funciona o efeito Doppler?', {'fis2-notion-batimentos-doppler'}),
+    ('Como calcular a velocidade de escape da Terra?', {'fis2-notion-gravitacao-energia-kepler'}),
+    ('Qual o período de um satélite em órbita baixa?',
+     {'fis2-lista2-gravitacao-satelites-anel', 'fis2-notion-gravitacao-energia-kepler'}),
     ('Por que a temperatura precisa estar em kelvin na lei dos gases?', {'fis2-notion-gas-ideal-cinetica'}),
 ])
 def test_pergunta_de_fisica_encontra_material_pertinente(pergunta, aceitos):
@@ -122,7 +125,7 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     listas = [i for i in ITENS.values() if i.get('resolucao') or 'status_resolucao' in i]
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
-    assert len(resolvidas) == 13
+    assert len(resolvidas) == 16
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
         assert 'gabarito oficial' not in i['texto'].lower()
@@ -217,6 +220,31 @@ def test_lista_gravitacao():
     assert round(math.sqrt(6.6e-11 * 5.2 * 2.4 / 2.3e-12), 2) == 18.92  # a resolução da turma
     assert round(math.sqrt(G * 5.2 * 2.4 / 2.3e-12), 1) == 19.0
     assert math.sqrt(G * 5.98e24 / 4.9) - 6.37e6 == pytest.approx(2.65e6, rel=0.005)
+
+
+def test_lista2_gravitacao():
+    """Lista 2 (problemas do Halliday, cap. 13): resolução independente da equipe."""
+    fx, fy = 3 / 1.5 ** 2, 2  # P14: forças de C (-x) e B (+y) sobre A, em G m_A²/d²
+    r = math.sqrt(4 / math.hypot(fx, fy))
+    assert (round(r * fx / math.hypot(fx, fy), 3), round(-r * fy / math.hypot(fx, fy), 2)) == (0.716, -1.07)
+    R = 6.37e6
+    assert round(600 * ((R / (R + 1609)) ** 2 - 1), 2) == -0.30  # P18
+    M, m, d = 2.95, 0.431, 0.0900  # P13: esfera cheia menos a cavidade (M/8 a d - R/2)
+    assert G * M * m / d ** 2 - G * (M / 8) * m / (d - 0.02) ** 2 == pytest.approx(8.31e-9, rel=1e-3)
+    gm = 3.0 * 5e5 ** 2  # P37: GM = g R²
+    assert round(math.sqrt(2 * gm / 5e5)) == 1732
+    assert 1 / (1 / 5e5 - 1000 ** 2 / (2 * gm)) - 5e5 == pytest.approx(2.5e5)
+    assert round(math.sqrt(2 * gm * (1 / 5e5 - 1 / 1.5e6))) == 1414
+    Ms, L = sp.symbols('M L', positive=True)  # P59: resultante centrípeta com r = L/√3
+    v = sp.sqrt(2 * Ms ** 2 / L ** 2 * sp.cos(sp.pi / 6) * (L / sp.sqrt(3)) / Ms)
+    assert sp.simplify(v - sp.sqrt(Ms / L)) == 0
+    assert 2 * math.pi * math.sqrt(R ** 3 / (G * 5.98e24)) / 60 == pytest.approx(84, abs=0.5)  # P65, órbita baixa
+    w = 2 * math.pi / (6 * 3600)  # P82
+    r = 80 / (50 * w ** 2)
+    assert (round(r, -6), round(0.5 * 80 * r, -7), round(80 * r ** 2 / (G * 50), -23)) == (1.9e7, 7.6e8, 8.6e24)
+    x, Ra, Gs, Ma, mm = sp.symbols('x R G M m', positive=True)  # P99: força no eixo do anel = -dU/dx
+    U = -Gs * Ma * mm / sp.sqrt(x ** 2 + Ra ** 2)
+    assert sp.simplify(-sp.diff(U, x) + Gs * Ma * mm * x / (x ** 2 + Ra ** 2) ** sp.Rational(3, 2)) == 0
 
 
 def test_lista_oscilacoes():
