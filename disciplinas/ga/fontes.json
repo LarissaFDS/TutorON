@@ -330,6 +330,52 @@
       "prioridade": "referencia",
       "uso": "referencia",
       "justificativa": "Só referência por seção."
+    },
+    {
+      "id": "ufal-cc-ga-provas-2017-2",
+      "nome": "Provas de Geometria Analítica das turmas de Ciência da Computação (pasta 2017.1, aplicadas em nov. e dez. de 2017): AB1, AB2, Reavaliações e Finais",
+      "autoria": "Instituto de Matemática da UFAL",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de provas",
+      "isa": "não se aplica",
+      "topicos": [
+        "ga-01-vetores-operacoes",
+        "ga-03-retas-no-plano",
+        "ga-04-planos-retas-espaco",
+        "ga-05-distancias-angulos-espaco",
+        "ga-07-parabola",
+        "ga-08-elipse",
+        "ga-09-hiperbole",
+        "ga-10-identificacao-conicas",
+        "ga-11-rotacao-coordenadas",
+        "ga-12-quadricas-superficies"
+      ],
+      "licenca": "Não declarada (prova da disciplina)",
+      "acesso": "PDFs do material de Ciência da Computação entregue pela equipe; não versionados",
+      "notas": 4,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "justificativa": "Provas diferentes das de ufal-ga-provas-2017 (datas de novembro e dezembro de 2017). Enunciados parafraseados e resolvidos pela equipe, conferidos por código. As fotos de resumos (Cônicas, O Plano, Anotações) não foram usadas."
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [],
+      "licenca": "Documento institucional público",
+      "acesso": "Lido online; não versionado",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Ementa de CCOM05 (Geometria Analítica), usada só para comparar com a disciplina ga."
     }
   ]
 }
