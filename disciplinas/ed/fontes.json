@@ -441,6 +441,71 @@
       "uso": "citada",
       "origem": "livro aberto",
       "justificativa": "Referência por seção para árvore B, splay e skip list; a licença exige reproduzir o aviso, então não copiamos trechos"
+    },
+    {
+      "id": "ufal-cc-ed-huxley",
+      "nome": "Problemas do Huxley salvos pela turma de CC: 533 (Hashset), 547 (Profundidade de um nó em uma árvore binária) e 805 (Busca em Largura), e exercícios em C da mesma pasta",
+      "autoria": "Huxley (juiz on-line usado no IC-UFAL); exercícios em C de aluno da turma (autor não identificado)",
+      "formato": "Páginas HTML salvas e arquivos .c",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "isa": "C",
+      "topicos": [
+        "ed-07-pilhas-filas",
+        "ed-09-hash",
+        "ed-10-arvores",
+        "ed-11-grafos"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Pasta do material de Ciência da Computação; não versionada",
+      "notas": "Enunciados parafraseados; código dos alunos não copiado (a equipe escreveu e testou o próprio)",
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Exercícios de prática da turma de CC para pilha, árvore binária e BFS; o código dos blocos é da equipe e está em tests_acervo/c_ed/cc_huxley.c"
+    },
+    {
+      "id": "ufal-cc-ed-slides-marcio",
+      "nome": "Slides de Estruturas de Dados / Programação 2: Filas, Hash Tables, Grafos, Árvores, AVL, Heaps e Huffman (aulas 12 a 20)",
+      "autoria": "Márcio Ribeiro, UFAL, Instituto de Computação",
+      "formato": "PDF de slides (inglês)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "en",
+      "isa": "C",
+      "topicos": [
+        "ed-07-pilhas-filas",
+        "ed-08-heap-fila-prioridade",
+        "ed-09-hash",
+        "ed-10-arvores",
+        "ed-11-grafos",
+        "ed-12-huffman"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Pasta do material de Ciência da Computação; não versionada",
+      "notas": "Usados só como evidência de que a turma de CC tem os mesmos tópicos",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Mesmo professor e mesmos tópicos já cobertos pelo acervo de ed; não geraram bloco novo"
+    },
+    {
+      "id": "ufal-ppc-cc-2011",
+      "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL",
+      "autoria": "Instituto de Computação, UFAL",
+      "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF",
+      "isa": "não se aplica",
+      "topicos": [],
+      "licenca": "Documento institucional público",
+      "acesso": "Lido online; não versionado",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "justificativa": "Ementa de CCOM009, usada só para comparar com a disciplina ed"
     }
   ]
 }
