@@ -60,6 +60,8 @@ Fronteiras: densidades conjuntas com integrais duplas pertencem a Cálculo 3, e 
 
 ## 4. Fontes (`fontes.json`)
 
+Novas (complemento de CC): `ufal-cc-prob-provas-heitor-2013` (acervo) e `ufal-ppc-cc-2011` (citada).
+
 Matriz de critérios igual à das disciplinas anteriores (notas de 1 a 5 em autoridade, cobertura, profundidade, didática, aderência, acessibilidade, reutilização e tutoria).
 
 | id | Prioridade | Uso | Licença conferida |
@@ -95,6 +97,23 @@ Nenhum texto das fontes abertas foi copiado. As notas da equipe citam as seçõe
 | `prob-fora` | correta: diz que é de Física 2 e não cita fontes |
 
 Nenhuma resposta teve rótulo inexistente. Falta repetir com o modelo principal quando ele estiver disponível.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM022 no PPC de Ciência da Computação (matriz 2011, `ufal-ppc-cc-2011`) traz análise exploratória, probabilidade, distribuições, esperança e variância, inferência e ferramentas: os mesmos tópicos de `prob`. Não há disciplina separada.
+
+Fontes usadas: `ufal-cc-prob-provas-heitor-2013` (provas de 2013 do Prof. Heitor S. Ramos Filho). Entraram 4 blocos, com `curso:` no cabeçalho:
+
+| Bloco | Assunto | Status |
+|---|---|---|
+| `prob-cc-eventos-defeitos-custo` | prob-01-probabilidade-basica | corrigida |
+| `prob-cc-limites-bayes-amostra` | prob-02-bayes | validada |
+| `prob-cc-servidor-erlang-weibull` | prob-07-exponencial | validada |
+| `prob-cc-overbooking-media-amostral` | prob-09-aproximacao-normal-tcl | validada |
+
+A folha de respostas de 16/10/2013 tem três erros (o complementar de "todos ocorrem", a fórmula do custo e $P(C>2300)$), corrigidos em `prob-cc-eventos-defeitos-custo`.
+
+Fora do acervo: a atividade AT1 (trabalho de alunos identificados pelo nome), o arquivo de dados de idades que a acompanha, o livro OpenIntro, as soluções do OpenIntro e os slides (já cobertos por `openintro-statistics`), e as outras provas (AB2, LE, reavaliações), que ficam como evidência dos tópicos. Estatística descritiva e inferência continuam sem bloco na busca.
 
 ## 7. Pendências
 

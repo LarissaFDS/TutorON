@@ -27,6 +27,12 @@ CORTE = 0.45  # ACERVO_SIMILARIDADE_MINIMA padrão (backend/config.py)
 # (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório pipeline/06-avaliacao/teste-2026-10-19.md,
 # eval/perguntas.json e paráfrases sem as palavras do acervo.
 PERGUNTAS = [
+    ("prob", "assunto", "Qual o maior e o menor valor possível de P(A ∩ B) sabendo P(A) e P(B)?", ["prob-cc-limites-bayes-amostra"]),
+    ("prob", "assunto", "Qual a probabilidade de um servidor receber mais de três requisições em um segundo?", ["prob-cc-servidor-erlang-weibull"]),
+    ("prob", "assunto", "Como calcular o tempo de montagem de um pacote de mensagens com distribuição de Erlang?", ["prob-cc-servidor-erlang-weibull"]),
+    ("prob", "assunto", "Quantas passagens a companhia aérea pode vender no overbooking?", ["prob-cc-overbooking-media-amostral"]),
+    ("prob", "assunto", "Qual o custo esperado de repetir um experimento até o primeiro sucesso?", ["prob-cc-eventos-defeitos-custo"]),
+    ("prob", "assunto", "Qual o tamanho mínimo da amostra para achar ao menos um item defeituoso com probabilidade 0,9?", ["prob-cc-limites-bayes-amostra"]),
     ("sd", "assunto", "Como simplificar F(A,B,C,D) = Σm(0,2,5,7,8,10,13,15) com mapa de Karnaugh?", ["sd-nota-karnaugh"]),
     ("sd", "assunto", "Simplifique F(A,B,C,D) = Σm(0,1,2,3,7) + d(5,6) usando irrelevâncias", ["sd-nota-karnaugh", "sd-av1-q01-07"]),
     ("sd", "assunto", "Simplifique F = ΠM(0,1,4,5) por mapa de Karnaugh", ["sd-nota-karnaugh", "sd-av1-q01-07", "sd-nota-algebra-booleana"]),
