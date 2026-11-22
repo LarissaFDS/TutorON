@@ -236,23 +236,31 @@ def test_classificacao_dos_blocos_nao_trata_tudo_como_validado():
     itens = {i['id']: i for i in read_json(SD.itens)}
     # Revisão interna feita em 21/10/2026 pela responsável pela curadoria; o professor não aprovou,
     # então nada vira "alta" e os candidatos (figuras ausentes) continuam fora da busca.
-    assert all(i['revisao_humana'] == 'feita' and i['revisao_humana_em'] == '2026-10-21' for i in itens.values())
+    # Os blocos de ECOM012 (21/11/2026) ainda não passaram por revisão humana.
+    ecom012 = {i for i in itens if i.startswith('sd-ecom012')}
+    assert ecom012 == {'sd-ecom012-ab1', 'sd-ecom012-ab2', 'sd-ecom012-mux-demux'}
+    assert all(itens[i]['revisao_humana'] == 'pendente' for i in ecom012)
+    assert all(i['revisao_humana'] == 'feita' and i['revisao_humana_em'] == '2026-10-21'
+               for k, i in itens.items() if k not in ecom012)
     assert all(i['confiabilidade'] != 'alta' for i in itens.values())
     candidatos = {i for i, x in itens.items() if x['status_curadoria'] == 'candidato'}
     assert len(candidatos) == 2 and all(itens[i]['confiabilidade'] == 'nao_verificada' for i in candidatos)
     indexados = {c['id'] for c in json.loads(SD.indice.read_text(encoding='utf-8'))['chunks']}
-    assert candidatos.isdisjoint(indexados) and len(indexados) == 23
+    assert candidatos.isdisjoint(indexados) and len(indexados) == 26
     # Licença do original e autorização da transcrição não se confundem nem dizem "pendente".
     for x in itens.values():
         assert 'pendente' not in x['licenca']
-        if x['natureza'] == 'material_da_disciplina':
+        if x['id'] in ecom012:
+            assert x['licenca'].startswith('Não declarada') and x['publicacao_transcricao'].startswith('não autorizada')
+        elif x['natureza'] == 'material_da_disciplina':
             assert x['licenca'].startswith('Não declarada') and '2026-10-21' in x['publicacao_transcricao']
             assert 'não declarada' in x['publicacao_transcricao']
     notas = {i for i, x in itens.items() if x['natureza'] == 'nota_da_equipe_ia'}
     assert notas == {i for i in itens if i.startswith('sd-nota')}
     # "conferida_por_codigo" só vale para blocos cujas resoluções têm teste neste arquivo.
     conferidos = {i for i, x in itens.items() if x['verificacao'] == 'conferida_por_codigo'}
-    assert conferidos == {'sd-av1-q01-07', 'sd-av1-q14-18', 'sd-prova2-q1-2', 'sd-reav-q1-q3', 'sd-somadores-monitoria'}
+    assert conferidos == {'sd-av1-q01-07', 'sd-av1-q14-18', 'sd-prova2-q1-2', 'sd-reav-q1-q3', 'sd-somadores-monitoria',
+                          'sd-ecom012-ab1', 'sd-ecom012-mux-demux'}  # estes dois: tests_acervo/test_sd_ecom012.py
     # Esboços que dependem de figura não conferida ficam fora da busca.
     fora = {c['id'] for c in read_json(SD.indice)['chunks']} ^ set(itens)
     assert fora == {'sd-prova2-q3-4', 'sd-reav-q2-q4'}

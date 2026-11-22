@@ -32,6 +32,12 @@ PERGUNTAS = [
     ("sd", "assunto", "Simplifique F = ΠM(0,1,4,5) por mapa de Karnaugh", ["sd-nota-karnaugh", "sd-av1-q01-07", "sd-nota-algebra-booleana"]),
     ("sd", "assunto", "Qual a diferença entre máquina de Moore e máquina de Mealy?", ["sd-nota-fsm"]),
     ("sd", "assunto", "Explique Moore e Mealy com um exemplo", ["sd-nota-fsm"]),
+    # Complemento ECOM012 (Circuitos Digitais, provas de 2015–2016), 21/11/2026.
+    ("sd", "assunto", "Como montar um decodificador 3 para 8 com portas lógicas?", ["sd-ecom012-mux-demux", "sd-nota-blocos-combinacionais"]),
+    ("sd", "assunto", "Como converter 0x3F para binário e decimal?", ["sd-nota-numeracao", "sd-ecom012-ab1"]),
+    ("sd", "assunto", "Como simplificar F = A'B + AB' + AB com Boole?", ["sd-nota-algebra-booleana", "sd-ecom012-ab1"]),
+    ("sd", "assunto", "Qual o estado quiescente das entradas S e R num latch SR com NAND?", ["sd-ecom012-ab2", "sd-nota-latches-flip-flops"]),
+    ("sd", "assunto", "Como fazer um flip-flop disparado na borda de descida?", ["sd-ecom012-ab2", "sd-nota-latches-flip-flops"]),
     ("sd", "assunto", "Numa máquina de estados, quando a saída depende só do estado atual e quando depende também da entrada?", ["sd-nota-fsm", "sd-prova2-q1-2"]),
     ("sd", "assunto", "Como funciona um latch SR?", ["sd-nota-latches-flip-flops"]),
     ("sd", "assunto", "Como detectar overflow em complemento de 2?", ["sd-nota-numeracao", "sd-av1-q14-18", "sd-nota-aritmeticos"]),
