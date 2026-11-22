@@ -1,0 +1,87 @@
+[
+ {
+  "id": "sd_dist-middleware",
+  "disciplina": "sd_dist",
+  "pergunta": "Um sistema operacional é middleware?",
+  "esperado": "não: SO gerencia uma máquina; middleware fica sobre os SOs e esconde a distribuição",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 14.0,
+  "fontes": [
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)",
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença, pense em onde cada um \"mora\" e qual o seu papel principal.\n\nO **Sistema Operacional** é o gerente daquela máquina específica: ele controla o processador, a memória e os dispositivos (como o disco rígido) para que os programas locais funcionem. Ele é a base sobre a qual tudo o resto é executado.\n\nJá o **Middleware** é uma camada que você instala *acima* dos sistemas operacionais. Imagine que você tem um computador com Windows e outro com Linux. O middleware não gerencia o hardware de nenhum deles; ele \"conversa\" com ambos para que um programa em um computador consiga enviar uma mensagem para o outro, sem que o programador precise saber que um é Windows e o outro é Linux.\n\nSe o SO cuida dos recursos locais, o que o middleware precisa fazer para que dois computadores diferentes trabalhem como se fossem um só?\n\n### Sua vez\nReflita: se você tentasse usar o Sistema Operacional para fazer dois computadores distantes trocarem dados, o que você teria que configurar manualmente em cada um deles que o middleware faz automaticamente para você?"
+ },
+ {
+  "id": "sd_dist-pubsub",
+  "disciplina": "sd_dist",
+  "pergunta": "Qual a diferença entre publicar-assinar e fila de mensagens?",
+  "esperado": "pub/sub entrega a todos os assinantes; fila entrega cada mensagem a um consumidor",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)",
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença, pense no **destino** da mensagem e no **papel** dos participantes.\n\nImagine que você tem uma mensagem importante para entregar. No modelo de **fila de mensagens**, você a coloca em uma caixa de correio compartilhada e apenas **um** dos funcionários (consumidores) que estão monitorando essa caixa irá retirá-la e processá-la. Uma vez que ele a pegou, ela \"desaparece\" da fila para os outros. É um modelo de distribuição de carga: o objetivo é que o trabalho seja feito, não importa por quem.\n\nJá no modelo **publicar-assinar**, o foco é a **disseminação da informação**. Quando um evento é publicado em um tópico, o sistema garante que **todos** os interessados (assinantes) recebam uma cópia daquele evento. Se houver 10 assinantes, a mensagem será entregue 10 vezes. É como um canal de notícias: todos que estão sintonizados recebem a mesma informação simultaneamente.\n\nPara fixar, tente aplicar esses conceitos a um cenário prático:\n\n### Sua vez\nSe você estivesse projetando um sistema para:\n1. Distribuir o processamento de 1.000 imagens pesadas entre 5 servidores diferentes.\n2. Notificar 3 módulos distintos (Estoque, Faturamento e Logística) de que um novo pedido foi realizado.\n\nQual modelo de comunicação você escolheria para cada caso e por quê? Tente justificar com base na diferença entre \"um para um\" (fila) e \"um para muitos\" (pub/sub)."
+ },
+ {
+  "id": "sd_dist-detector",
+  "disciplina": "sd_dist",
+  "pergunta": "Qual a diferença entre detector de falhas confiável e não confiável?",
+  "esperado": "confiável exige sistema síncrono; não confiável só suspeita",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença entre esses dois detectores, pense no que acontece quando um processo demora muito para responder, mas ainda está \"vivo\".\n\nNo **modelo assíncrono**, como não temos um limite máximo de tempo para a entrega de mensagens, o detector não consegue distinguir se o processo travou ou se a rede apenas está muito lenta. Por outro lado, no **modelo síncrono**, temos garantias temporais rígidas.\n\nImagine que você é o detector:\n1. Se você tem uma \"certeza absoluta\" de que o processo morreu (porque o tempo limite passou e a mensagem não chegou), você é um detector **confiável**.\n2. Se você pode se enganar, acusando um processo que está apenas lento, você é um detector **não confiável**.\n\nA pergunta fundamental é: o que permite ao detector ter essa \"certeza\"? Pense na relação entre o tempo de envio do *heartbeat* e o limite de atraso da rede.\n\n### Sua vez\nConsiderando o que está no material sobre o **modelo síncrono** e o **modelo assíncrono**, tente explicar com suas palavras: por que é impossível construir um detector de falhas \"confiável\" em um sistema como a Internet?"
+ },
+ {
+  "id": "sd_dist-eleicao",
+  "disciplina": "sd_dist",
+  "pergunta": "Para que servem os algoritmos de eleição de líder?",
+  "esperado": "escolher um coordenador único; exemplo; anel ou valentão; guia sem entregar",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas de Sistemas Distribuídos do Prof. Leandro Melo de Sales (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Os algoritmos de eleição são fundamentais em sistemas distribuídos para evitar o \"ponto único de falha\" e garantir que o sistema continue operando de forma consistente, mesmo quando um componente crítico para de funcionar.\n\nPense em um sistema onde você tem um banco de dados replicado: se todas as réplicas tentarem escrever dados ao mesmo tempo, você terá conflitos. Para evitar isso, você designa uma réplica como \"primária\" (ou coordenadora), que é a única autorizada a processar escritas. Mas o que acontece se essa réplica primária travar? O sistema não pode simplesmente parar. É aí que entra a eleição: os processos restantes precisam decidir, por conta própria, quem assumirá o papel de novo primário.\n\nEm essência, esses algoritmos permitem que um grupo de processos chegue a um **consenso** sobre quem deve exercer uma função especial, garantindo que o sistema tenha um líder definido sem a necessidade de um administrador humano intervir a cada falha.\n\nPara fixar o conceito, imagine um cenário com 5 processos (IDs 1 a 5) organizados em um anel lógico, onde o processo 5 é o coordenador atual. Se o processo 5 falhar, como os outros processos saberiam que precisam iniciar uma eleição e qual seria o critério para definir o novo líder?\n\n### Sua vez\nExplique, com suas palavras, qual é a diferença fundamental entre o papel de um \"detector de falhas\" e o papel de um \"algoritmo de eleição\" em um sistema distribuído."
+ },
+ {
+  "id": "sd_dist-fora",
+  "disciplina": "sd_dist",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Como sou o tutor de **Sistemas Distribuídos**, essa dúvida pertence à disciplina de **Cálculo 2** ou **Cálculo 3**. Posso te explicar o conceito geral, mas recomendo que você selecione a disciplina correta no site para obter ajuda mais específica sobre o formalismo matemático.\n\nEm coordenadas polares, a ideia central para resolver uma integral dupla é transformar a região de integração e o diferencial de área. Quando passamos de coordenadas cartesianas $(x, y)$ para polares $(r, \\theta)$, onde $x = r \\cos(\\theta)$ e $y = r \\sin(\\theta)$, o elemento de área $dA = dx \\, dy$ não é simplesmente $dr \\, d\\theta$.\n\nVocê se lembra por que precisamos incluir o **Jacobiano** da transformação ao mudar de coordenadas? Pense na geometria de um pequeno setor circular: conforme você se afasta da origem (aumentando o raio $r$), o \"arco\" desse setor aumenta de tamanho.\n\nPara montar a integral, você deve:\n1. Identificar os limites de $r$ e $\\theta$ que definem sua região.\n2. Substituir $x$ e $y$ na função original.\n3. Multiplicar pelo fator de correção (o Jacobiano) antes de integrar.\n\n### Sua vez\nTente desenhar no papel um pequeno retângulo em coordenadas polares (com variações $\\Delta r$ e $\\Delta \\theta$) e escreva qual seria a área desse retângulo em função de $r$ e $\\Delta \\theta$. Como essa área se compara ao produto $dr \\cdot d\\theta$?"
+ }
+]
