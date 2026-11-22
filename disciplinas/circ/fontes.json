@@ -1,6 +1,6 @@
 {
  "disciplina": "circ",
- "atualizado_em": "2026-11-19",
+ "atualizado_em": "2026-11-21",
  "legenda": {
   "prioridade": "alta = compõe o acervo ou cobre lacuna fundamental; media = complementa; referencia = consulta, não é ingerida",
   "uso": "acervo = parafraseado em disciplinas/circ/materiais; citada = indicada nas notas da equipe; referencia = só catálogo",
@@ -36,6 +36,39 @@
     "data": "2026-11-18",
     "por": "o autor (integrante da equipe TutorON), informado pela responsável pela curadoria",
     "escopo": "anotações manuscritas do autor, parafraseadas; não inclui fotos de quadro, figuras nem enunciados copiados de livro ou de prova",
+    "aprovacao_professor": "não declarada"
+   }
+  },
+  {
+   "sha256": null,
+   "notas": null,
+   "origem": "professor",
+   "arquivo_local": "Fora do repositório: pasta 'Circuitos Eletricos - material do Prof Davi' (Slides: Aula_1-4.pptx, Aula_5-8.pdf; Provas: fotos AB1 e AB2 de 2017; Reavaliacao: fotos de quadro e caderno, questões 1 a 10)",
+   "id": "ufal-circ-davi-2017",
+   "nome": "Slides das aulas 1 a 8, provas AB1 e AB2 (2017) e reavaliação resolvida, Circuitos Elétricos",
+   "autoria": "Prof. Davi Bibiano Brito (IC/UFAL): slides e enunciados; as resoluções fotografadas são de alunos não identificados e de aula no quadro. Os slides se baseiam em Nilsson e Riedel e em Boylestad",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PPTX e PDF de slides; fotos de provas, de quadro e de caderno",
+   "notacao": "convenção passiva, Rth/Vth, α, ω0, ωd; vírgula decimal",
+   "topicos": [
+    "circ-01-grandezas-potencia",
+    "circ-02-kirchhoff-nodal-malhas",
+    "circ-04-thevenin-norton",
+    "circ-05-maxima-transferencia",
+    "circ-06-amp-op",
+    "circ-07-primeira-ordem",
+    "circ-08-segunda-ordem"
+   ],
+   "licenca": "Não declarada; slides derivados de livros protegidos. Arquivos e fotos fora do repositório",
+   "acesso": "Recebido da equipe em 21/11/2026; slides lidos pelo texto extraído e fotos lidas uma a uma",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Primeiro material de professor do acervo: cobre amp-op e primeira ordem, que faltavam, e traz questões de prova com resolução para conferir.",
+   "autorizacao_transcricao": {
+    "data": null,
+    "por": "não declarada",
+    "escopo": "só paráfrase; nenhum slide, enunciado ou foto copiado; nomes de alunos e e-mail do professor omitidos",
     "aprovacao_professor": "não declarada"
    }
   },
