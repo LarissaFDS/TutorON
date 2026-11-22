@@ -94,6 +94,11 @@ def test_nenhum_bloco_aprovado_pelo_professor_ou_revisado_por_humano():
     ('como usar void* numa lista genérica', {'ed-notion-listas-genericas'}),
     ('Como montar a árvore de Huffman?', {'ed-prof-huffman', 'ed-prof-projetos-ab2'}),
     ('Como ler um arquivo DIMACS no SAT solver?', {'ed-prof-sat', 'ed-prof-projetos-ab2'}),
+    ('Como fazer a inserção numa árvore rubro-negra?', {'ed-ufcg-rubro-negra-insercao', 'ed-ufcg-rubro-negra'}),
+    ('Como funciona a divisão de um nó numa árvore B?', {'ed-ufcg-arvore-b'}),
+    ('Como testar se minha AVL está balanceada?', {'ed-testes-avl-heap'}),
+    ('Quais as propriedades de uma árvore rubro-negra?', {'ed-ufcg-rubro-negra', 'ed-ufcg-rubro-negra-insercao'}),
+    ('Qual o custo amortizado da árvore splay?', {'ed-ufcg-splay-skiplist'}),
 ])
 def test_pergunta_de_ed_encontra_material_pertinente(pergunta, aceitos):
     assert buscar(pergunta)[0] in aceitos
@@ -149,7 +154,7 @@ def test_blocos_de_ed_nao_copiam_paa():
 def test_resolucoes_tem_status_e_dizem_no_texto():
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
-    assert len(resolvidas) == 17
+    assert len(resolvidas) == 21
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
         assert 'gabarito oficial' not in i['texto'].lower()

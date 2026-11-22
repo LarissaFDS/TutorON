@@ -124,6 +124,9 @@ PERGUNTAS = [
     ("ed", "assunto", "Como implementar o merge sort em C sem ler fora do vetor?", ["ed-notion-quick-merge"]),
     ("ed", "assunto", "printf com %zu ou %lu para size_t?", ["ed-notion-sizeof-alocacao"]),
     ("ed", "assunto", "Como ler um arquivo DIMACS no SAT solver?", ["ed-prof-sat", "ed-prof-projetos-ab2"]),
+    ("ed", "assunto", "Como fazer a inserção numa árvore rubro-negra?", ["ed-ufcg-rubro-negra-insercao", "ed-ufcg-rubro-negra"]),
+    ("ed", "assunto", "Como funciona a divisão de um nó numa árvore B?", ["ed-ufcg-arvore-b"]),
+    ("ed", "assunto", "Como testar se minha AVL está balanceada?", ["ed-testes-avl-heap"]),
     # Fronteira com PAA: a prova formal com ED selecionada usa o material de ED (rigor.md manda indicar PAA).
     ("ed", "assunto", "Prove pelo Teorema Mestre que o merge sort é O(n log n)", ["ed-notion-recorrencias", "ed-notion-quick-merge"]),
     # A prova de NP-completude é de PAA; em ED vem o bloco de SAT, que diz isso.
