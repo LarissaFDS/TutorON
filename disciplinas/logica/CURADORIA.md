@@ -8,7 +8,7 @@ Situação: **MVP** desde 21/11/2026, sem aviso, depois dos critérios de libera
 - **Ementa conferida** no PPC de 2014 (`ufal-ppc-ecomp-2014`, p. 19 e 26 do PDF): histórico evolutivo; fundamentos de lógica; lógica proposicional; lógica de primeira ordem; prova automática de teoremas; seminários em temas complementares. Bibliografia básica: Polya (*A arte de resolver problemas*), Souza (*Lógica para Ciência da Computação*), Casanova, Giorno e Furtado (*Programação em Lógica e a Linguagem PROLOG*).
 - Material da turma: Profs. **Evandro Costa** e **Baldoino Fonseca** (IC-UFAL), slides, Prova 1 de 2013 e listas. Material complementar: slides de Lógica Matemática do Prof. **Tiago Massoni** (UFCG), com a parte de Alloy feita com o Prof. **Rohit Gheyi**.
 - "Prova automática de teoremas" está coberta por resolução (proposicional e de primeira ordem), Horn/Prolog e SAT. "Seminários em temas complementares" ficou com model checking (LTL) e Alloy, os temas dos slides da UFCG.
-- Os 13 assuntos de `disciplinas.json` (`logica-01-historico-fundamentos` a `logica-13-model-checking-alloy`) têm todos pelo menos um bloco.
+- Os 14 assuntos de `disciplinas.json` (`logica-01-historico-fundamentos` a `logica-14-programacao-logica-prolog`) têm todos pelo menos um bloco.
 
 ## Fronteiras
 
@@ -26,6 +26,24 @@ O rigor diz isso ao tutor, e `tests_acervo/test_disciplina_logica.py` testa o is
 - Nenhum PDF ou imagem está no repositório. Os slides têm o e-mail institucional de um professor: **não foi copiado**. A Prova 1 tem nome e matrícula em branco; nenhum aluno aparece.
 - Nenhum material tem licença aberta declarada: todos os blocos são paráfrases com resolução da equipe, sem figuras. **Confirmar com a equipe** se os slides da UFAL e da UFCG podem continuar como base de paráfrase.
 
+
+## Complemento: material de Ciência da Computação (22/11/2026)
+
+O material da turma de Ciência da Computação (COMP360, IC-UFAL) entrou como **complemento** de `logica`, sem cópia da disciplina e sem mudar a situação (continua MVP).
+- **Ementa:** o código COMP360 vem do nome da pasta e não aparece nos PPCs encontrados. O PPC de CC de 2011 (`ufal-ppc-cc-2011`, CCOM014, 60 h) e o de 2006 (COMP014, 80 h) trazem **o mesmo texto de ementa de ECOM007**. A diferença está na bibliografia: o PPC de CC lista Chang e Lee, van Dalen, Souza e Enderton, sem livro de Prolog (o de Engenharia lista Casanova et al.). Por isso não há motivo para separar disciplinas.
+- **Diferença de conteúdo:** a turma de CC dedicou uma unidade a **Prolog e sistemas especialistas** (fichas práticas, arquivos .pl, projeto ExpertSystem-GUI, prova de grafos). Isso cabe em "prova automática de teoremas" e "temas complementares" e virou o assunto novo `logica-14-programacao-logica-prolog`.
+- **Professora:** Profa. **Roberta Lopes** (IC-UFAL): 1ª avaliação (22/01/2019), 2ª avaliação (19/03/2019) e prova de Prolog (21/03/2019). Semestre letivo não informado nas fotos.
+- **Curso e turma** estão no campo `curso:` de cada bloco novo e na linha `fonte`.
+- **Dados pessoais:** as fotos das provas mostram o nome e as respostas manuscritas de um aluno. Nenhuma foto foi versionada e nenhum nome entrou. As respostas do aluno não foram usadas (têm erros, como chamar de tautologia uma fórmula verdadeira em um único modelo). Os enunciados foram parafraseados com fórmulas e grafo próprios. Na 1ª prova, cada aluno montava a fórmula a partir do próprio nome, e esse esquema não foi reproduzido.
+- **Material protegido:** `Logic In Computer Science.pdf` (já em `huth-ryan-lics`), `Introduction to Algorithms 3rdEd.pdf`, `prolog.pdf` e as apostilas de terceiros da pasta Prolog (`cc-prolog-livros-protegidos`) ficaram fora, só como referência. As fichas práticas são de outra instituição, com autoria não identificada: foram parafraseadas por tópico, sem transcrição.
+- **Sistema especialista:** o projeto da turma diagnostica doenças. O bloco descreve só a arquitetura, com exemplo neutro, e o tutor não dá diagnóstico.
+- **Execução:** todo código Prolog dos blocos roda no SWI-Prolog 11.0.0 em `test_codigo_prolog_dos_blocos_roda_no_swipl`. O teste é pulado se o `swipl` não estiver instalado (o CI não tem).
+- **Correções** nos arquivos da turma:
+  - `first.pl` usa `;` no lugar de `.`;
+  - as soluções anotadas de `questoes_prolog.txt` trazem `remove([X],X,[])` e somam com `=` em vez de `is`.
+- **Pendência:** na 1ª prova, "grau de complexidade" não está definido no enunciado; o bloco `logica-roberta-prova1-complexidade-negacao` fica `pendente_professor`.
+- **Fronteiras novas:** listas e recursão também aparecem em Estrutura de Dados (`ed`) e Programação 1 (`prog1`); o isolamento com elas é testado.
+
 ## Fontes (`fontes.json`)
 
 | id | Uso | Licença |
@@ -39,6 +57,13 @@ O rigor diz isso ao tutor, e `tests_acervo/test_disciplina_logica.py` testa o is
 | `ufcg-massoni-slides` | acervo | Não declarada |
 | `huth-ryan-lics` | referencia | Protegido; não incluído |
 | `souza-logica-computacao` | referencia | Protegido; não obtido |
+| `ufal-ppc-cc-2011` | citada | Documento institucional público |
+| `roberta-provas-2019` | acervo | Não declarada |
+| `cc-prolog-turma` | acervo | Não declarada |
+| `fichas-praticas-prolog` | acervo | Não declarada |
+| `cc-expertsystem-gui` | acervo | Não declarada |
+| `swi-prolog-manual` | citada | Sistema sob licença BSD-2 |
+| `cc-prolog-livros-protegidos` | referencia | Protegidos ou sem licença declarada |
 | `casanova-prolog` | referencia | Protegido; não obtido |
 | `forallx` | citada | CC BY 4.0 |
 | `open-logic-project` | citada | CC BY |
@@ -66,7 +91,7 @@ Correções em relação ao material original (status `corrigida`):
 
 Não conferido por código: os exemplos de LTL (semáforo) e de Alloy, conferidos à mão (`verificacao: exemplos_conferidos`).
 
-## Blocos (33, todos `material_da_disciplina`, todos na busca)
+## Blocos (42, todos `material_da_disciplina`, todos na busca)
 
 Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente` e nenhum tem revisão do professor.
 
@@ -105,3 +130,12 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente` e nen
 | `logica-resolucao-passageiros-dragoes-felizes` | 12-forma-clausal-unificacao-resolucao | validada | ufal-baldoino-lista-primeira-ordem |
 | `logica-model-checking-ltl` | 13-model-checking-alloy | validada | ufcg-massoni-slides |
 | `logica-alloy-especificacao` | 13-model-checking-alloy | validada | ufcg-massoni-slides |
+| `logica-prolog-fatos-regras-consultas` | 14-programacao-logica-prolog | corrigida | cc-prolog-turma |
+| `logica-prolog-listas-recursao` | 14-programacao-logica-prolog | corrigida | cc-prolog-turma, fichas-praticas-prolog |
+| `logica-prolog-unificacao-aritmetica` | 14-programacao-logica-prolog | validada | fichas-praticas-prolog |
+| `logica-prolog-corte-negacao-falha` | 14-programacao-logica-prolog | validada | fichas-praticas-prolog |
+| `logica-prolog-findall-assert` | 14-programacao-logica-prolog | validada | fichas-praticas-prolog |
+| `logica-prolog-grafos-prova` | 14-programacao-logica-prolog | validada | roberta-provas-2019 |
+| `logica-sistema-especialista-prolog` | 14-programacao-logica-prolog | validada | cc-expertsystem-gui |
+| `logica-roberta-prova1-complexidade-negacao` | 02-proposicional-sintaxe-semantica | pendente_professor | roberta-provas-2019 |
+| `logica-roberta-prova2-modelo-finito` | 10-primeira-ordem-semantica | validada | roberta-provas-2019 |
