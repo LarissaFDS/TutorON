@@ -894,6 +894,29 @@
         "Para que servem os algoritmos de eleição de líder?",
         "Qual a diferença entre detector de falhas confiável e não confiável?"
       ]
+    },
+    {
+      "id": "am",
+      "nome": "Aprendizagem de Máquina",
+      "sigla": "AM",
+      "situacao": "em validação",
+      "itens": "disciplinas/am/acervo/itens.json",
+      "indice": "disciplinas/am/acervo/indice.json",
+      "materiais": "disciplinas/am/materiais",
+      "rigor": "disciplinas/am/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "am-01-fundamentos-e-kdd",
+        "am-02-classificacao",
+        "am-03-agrupamento-e-associacao",
+        "am-04-reforco"
+      ],
+      "exemplos": [
+        "Quais os três tipos de aprendizagem de máquina?",
+        "Como avaliar um classificador com validação cruzada?",
+        "Qual a diferença entre k-means e DBSCAN?",
+        "Como funciona o Q-learning?"
+      ]
     }
   ]
 }

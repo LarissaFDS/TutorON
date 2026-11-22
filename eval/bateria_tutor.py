@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Aprendizagem de Máquina: conferidas em tests_acervo/test_disciplina_am.py.
+    ("am-tipos", "am", "Quais os três tipos de aprendizagem de máquina?",
+     "supervisionada (rótulos), não supervisionada (padrões), por reforço (recompensa)"),
+    ("am-avaliacao", "am", "Que metodologia usar para construir e avaliar classificadores?",
+     "teste fora do treino; k-fold estratificado; métrica conforme o problema"),
+    ("am-clustering", "am", "Qual a diferença entre k-means e DBSCAN?",
+     "centroides e k fixo × densidade, forma arbitrária e ruído"),
+    ("am-qlearning", "am", "Como funciona o Q-learning?",
+     "Q(s,a) += alfa [r + gama max Q(s',a') - Q(s,a)]; exploração × explotação"),
+    ("am-fora", "am", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Sistemas Distribuídos: conferidas em tests_acervo/test_disciplina_sd_dist.py.
     ("sd_dist-middleware", "sd_dist", "Um sistema operacional é middleware?",
      "não: SO gerencia uma máquina; middleware fica sobre os SOs e esconde a distribuição"),

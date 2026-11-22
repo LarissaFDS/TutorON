@@ -14,10 +14,10 @@ jobs:
         with:
           python-version: "3.11"
           cache: pip
-      - name: Instalar dependências (sem Manim, que precisa de bibliotecas do sistema; SymPy, NumPy, SciPy e PyMuPDF e NetworkX para tests_acervo)
+      - name: Instalar dependências (sem Manim, que precisa de bibliotecas do sistema; SymPy, NumPy, SciPy, PyMuPDF, NetworkX e scikit-learn para tests_acervo)
         run: |
           grep -v '^manim' requirements.txt > /tmp/req.txt
-          pip install -r /tmp/req.txt ruff sympy==1.14.0 numpy scipy pymupdf==1.28.2 networkx
+          pip install -r /tmp/req.txt ruff sympy==1.14.0 numpy scipy pymupdf==1.28.2 networkx scikit-learn
       - name: Lint (erros reais)
         run: ruff check --select E9,F63,F7,F82 .
       - name: Testes
