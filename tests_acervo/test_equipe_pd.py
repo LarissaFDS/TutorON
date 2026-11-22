@@ -112,7 +112,9 @@ def test_robo_rastreio_confere():
 
 
 # ---------------------------------------------------------------------- forma e integração
-@pytest.mark.parametrize("caminho", sorted(PASTA.glob("*.md")), ids=lambda p: p.name)
+# O padrão de tabela e rastreio vale para os arquivos de PD (e*_pd_*); e06 e e07 (CC) têm teste próprio
+# em test_equipe_cc_paa.py.
+@pytest.mark.parametrize("caminho", sorted(PASTA.glob("e*_pd_*.md")), ids=lambda p: p.name)
 def test_cada_arquivo_segue_o_padrao(caminho):
     meta, corpo, _ = equipe.ler(caminho)
     assert meta["revisado"] == "false" and "não é material do professor" in meta["autoria"]
@@ -135,7 +137,7 @@ def test_sincronizar_e_idempotente_e_preserva_o_resto(tmp_path):
     write_json(tmp_path / "pipeline/02-acervo/itens.json", [{"id": "c01", "texto": "outro", "origem": None}])
     equipe.sincronizar(tmp_path)
     itens = equipe.sincronizar(tmp_path)
-    assert [i["id"] for i in itens] == ["c01", "e01", "e02", "e03", "e04", "e05"]
+    assert [i["id"] for i in itens] == ["c01", "e01", "e02", "e03", "e04", "e05", "e06", "e07"]
     novos = [i for i in itens if i.get("origem") == "equipe"]
     assert all(i["revisado"] is False and i["confiabilidade"] == "media" and i["tipo"] == "material_equipe"
                for i in novos)

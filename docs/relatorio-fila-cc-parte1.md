@@ -10,12 +10,12 @@
 | 5 | Estrutura de Dados | #117 | dev: sim; main: PR final | 3 (`s24`–`s26`) | suíte ok; relevância ok; ruff ok | POO e containers da ementa de CCOM009 não têm bloco; o projeto Huffman (avaliativo) ficou fora |
 | 6 | Banco de Dados | #118 | dev: sim; main: PR final | 2 (`b12`, `b13`) | pytest 1659 ok; relevância 486/486; ruff ok | `pendente_professor`, como as demais resoluções de bd; o dump do hospital não foi versionado nem usado |
 | 7 | OAC | #119 | dev: sim; main: PR final | 3 (`v01`–`v03`) | pytest 1658 ok, 8 pulados; relevância 486/486 (489/489 depois do merge de dev); ruff ok | as provas de 2017 usam MIPS, e o acervo usa RISC-V |
-| 8 | PAA | esta PR | dev: ver PR; main: PR final | 0 no acervo; 2 candidatos (`e06`, `e07`) | testes novos ok; suíte e relevância na PR | dois testes existentes impedem a entrada em `materiais/Equipe/` (ver abaixo) |
+| 8 | PAA | #120 e PR seguinte | dev: sim; main: sim | 2 (`e06`, `e07`, `revisado: false`) | suíte ok; relevância 486/486 | entraram depois de ajustar dois testes, com autorização (ver abaixo) |
 
 Programação 1 foi pulada (PR #109, já em dev).
 
 ## Aguardando decisão
-- **PAA:** os candidatos `e06` (assintótica e recorrência) e `e07` (NP-completude, clique ∝ conjunto independente) estão em `disciplinas/paa/candidatos/`, fora do acervo. Para entrarem em `materiais/Equipe/`, seria preciso mudar `tests_acervo/test_equipe_pd.py`, que só aceita os blocos de PD e01–e05, e o instantâneo `test_ranking_lexico_de_paa_preservado`. Testes existentes não foram alterados. A equipe decide.
+- **PAA:** `e06` e `e07` estão em `materiais/Equipe/` com `revisado: false`, fora da busca até a revisão humana. Com autorização da responsável, `test_equipe_pd.py` passou a aplicar o padrão de PD só aos arquivos `e*_pd_*`, e o instantâneo do ranking léxico de PAA foi regenerado.
 - **Ementas:** GA (matrizes e sistemas em CCOM05), ED (POO e containers em CCOM009) e PAA (árvores B, TSP e FFT no material da turma) têm diferenças registradas no `CURADORIA.md` de cada uma. Nenhuma pediu disciplina separada.
 - **OAC:** confirmar se blocos com MIPS (provas de 2017) servem para a turma atual, que usa RISC-V.
 - **Revisão:** nenhum bloco novo tem `revisao_humana: feita`, e todos esperam revisão humana, a começar pelos `corrigida` (c25, g31, a19) e pelos `pendente_professor` de BD.
