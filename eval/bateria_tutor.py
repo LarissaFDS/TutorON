@@ -274,6 +274,16 @@ PERGUNTAS = [
     ("grafos-fluxo", "grafos", "Como funciona o Ford-Fulkerson?",
      "grafo residual com arcos de volta; gargalo; fluxo máximo = corte mínimo; conservação"),
     ("grafos-fora", "grafos", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Projeto de Software: código conferido em tests_acervo/test_disciplina_projsw.py.
+    ("projsw-equals", "projsw", "Qual a diferença entre == e equals em Java?",
+     "== compara referências; equals de Object também; sobrescrever equals e hashCode juntos; não comparar String com =="),
+    ("projsw-composicao", "projsw", "Quando usar composição em vez de herança?",
+     "é um versus tem um; herança acopla mais; mudanças na base quebram subclasses; composição muda em execução"),
+    ("projsw-construtores", "projsw", "Em que ordem os construtores rodam numa hierarquia de classes?",
+     "super primeiro até Object; depois atributos; depois o corpo; método sobrescrito no construtor roda o da subclasse"),
+    ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
+     "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
+    ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Cálculo 1: conferidas em tests_acervo/test_disciplina_calc1.py.
     ("calc1-definicao", "calc1", "Como derivar √(2x+1) pela definição?",
      "domínio x ≥ -1/2; limite do quociente; racionaliza com o conjugado; f'(x) = 1/√(2x+1); não entrega tudo"),
