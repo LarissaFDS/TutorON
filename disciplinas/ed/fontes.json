@@ -1,6 +1,6 @@
 {
   "disciplina": "ed",
-  "atualizado_em": "2026-11-03",
+  "atualizado_em": "2026-11-21",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
     "uso": "acervo = reescrito ou parafraseado em disciplinas/ed/materiais; citada = indicada nas notas; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -376,6 +376,71 @@
       "uso": "referencia",
       "origem": "ferramenta acadêmica",
       "justificativa": "O aluno visualiza ponteiros e nós do próprio código lá; nada roda no servidor do TutorON"
+    },
+    {
+      "id": "ufcg-ed-cajueiro-slides",
+      "nome": "Slides de Estrutura de Dados do DSC/UFCG: Árvore Rubro-Negra, Árvore B, Splay Tree e Skip List",
+      "autoria": "Prof. Adalberto Cajueiro (DSC/UFCG), 2013",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF de slides com figuras; exemplos e exercícios (inclui questão do POSCOMP 2009)",
+      "isa": "Java (pseudocódigo e Java nos slides)",
+      "topicos": [
+        "ed-15-arvores-balanceadas"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Arquivo recebido pela equipe; não versionado",
+      "notas": "Outra universidade (UFCG): splay e skip list não constam da ementa da UFAL consultada (PPC 2014)",
+      "prioridade": "media",
+      "uso": "acervo",
+      "origem": "material de outra universidade",
+      "justificativa": "Cobre árvores balanceadas que faltavam no acervo; parafraseado e reescrito em C, slides fora do repositório"
+    },
+    {
+      "id": "dicas-testes-avl-heap",
+      "nome": "Dicas para Testes AVL e Heap",
+      "autoria": "Não identificada no arquivo",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF curto com casos de teste em Java (JUnit)",
+      "isa": "Java",
+      "topicos": [
+        "ed-08-heap-fila-prioridade",
+        "ed-10-arvores"
+      ],
+      "licenca": "Não declarada",
+      "acesso": "Arquivo recebido pela equipe; não versionado",
+      "notas": "Pré-ordens esperadas recalculadas pela equipe em C e Python",
+      "prioridade": "media",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Roteiro de testes de AVL e heap; os casos foram reescritos em C e conferidos por programa"
+    },
+    {
+      "id": "shaffer-dsaa-3-2",
+      "nome": "Data Structures and Algorithm Analysis, edição 3.2 (C++), seções 10.4 (árvore 2-3), 10.5 (árvore B), 13.2.1 (AVL), 13.2.2 (splay) e 16.2.2 (skip list)",
+      "autoria": "Clifford A. Shaffer (Virginia Tech)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "en",
+      "formato": "Livro em PDF",
+      "isa": "C++ (não C)",
+      "topicos": [
+        "ed-10-arvores",
+        "ed-15-arvores-balanceadas"
+      ],
+      "licenca": "Uso educacional não comercial; trechos só com a página de rosto, título, autor e aviso (declarado no livro)",
+      "acesso": "Aberto para uso educacional",
+      "notas": "Não versionado nem ingerido; consulta por seção",
+      "prioridade": "referencia",
+      "uso": "citada",
+      "origem": "livro aberto",
+      "justificativa": "Referência por seção para árvore B, splay e skip list; a licença exige reproduzir o aviso, então não copiamos trechos"
     }
   ]
 }
