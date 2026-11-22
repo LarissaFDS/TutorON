@@ -1,7 +1,6 @@
-"""Candidatos de PAA da turma de Ciência da Computação (e06, e07): as contas e a redução são refeitas aqui.
+"""Blocos de PAA da turma de Ciência da Computação (e06, e07): as contas e a redução são refeitas aqui.
 
-Ficam em disciplinas/paa/candidatos, fora do acervo e da busca, até a equipe decidir como entram
-(disciplinas/paa/CURADORIA.md)."""
+Ficam em materiais/Equipe com revisado: false, fora da busca de produção até a revisão humana."""
 
 import itertools
 import math
@@ -12,7 +11,7 @@ from acervo import equipe
 from acervo.common import ROOT, read_json
 from backend.rag import MAX_CHARS_TRECHO
 
-PASTA = ROOT / "disciplinas/paa/candidatos"
+PASTA = ROOT / equipe.PASTA
 CC = {"e06": "e06_cc_assintotica_recorrencia.md", "e07": "e07_cc_np_clique_conjunto_independente.md"}
 
 
@@ -20,16 +19,15 @@ def corpo(nome):
     return equipe.ler(PASTA / nome)[1]
 
 
-def test_candidatos_de_cc_dizem_curso_e_ficam_fora_do_acervo():
-    itens = read_json(ROOT / "pipeline/02-acervo/itens.json", [])
-    textos = {i["texto"] for i in itens}
+def test_blocos_de_cc_dizem_curso_e_ficam_fora_da_busca_ate_revisao():
+    itens = {i["id"]: i for i in read_json(ROOT / "pipeline/02-acervo/itens.json", [])}
     for ident, nome in CC.items():
         meta, texto, _ = equipe.ler(PASTA / nome)
         assert meta["id"] == ident and meta["revisado"] == "false"
         assert "Curso: Ciência da Computação (UFAL)" in texto and "Status da resolução:" in texto
         assert texto.rstrip().splitlines()[-1].startswith("**Verificação:**")
         assert len(texto) <= MAX_CHARS_TRECHO
-        assert texto not in textos and not (ROOT / equipe.PASTA / nome).exists()
+        assert itens[ident]["revisado"] is False and itens[ident]["texto"] == texto
 
 
 def test_nenhum_nome_de_aluno_nem_pdf_da_turma_versionado():
