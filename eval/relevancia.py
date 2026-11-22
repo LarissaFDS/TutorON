@@ -27,6 +27,9 @@ CORTE = 0.45  # ACERVO_SIMILARIDADE_MINIMA padrão (backend/config.py)
 # (disciplina, rótulo, pergunta, blocos aceitos). Fontes: relatório pipeline/06-avaliacao/teste-2026-10-19.md,
 # eval/perguntas.json e paráfrases sem as palavras do acervo.
 PERGUNTAS = [
+    ("ed", "assunto", "Como verificar se os parênteses de uma expressão estão balanceados usando pilha?", ["ed-cc-parenteses-pilha"]),
+    ("ed", "assunto", "Como achar a profundidade de um nó numa árvore binária escrita como texto com parênteses?", ["ed-cc-profundidade-arvore-texto"]),
+    ("ed", "assunto", "Como guardar a distância e o predecessor de cada vértice na busca em largura?", ["ed-cc-bfs-distancia-predecessor"]),
     ("prob", "assunto", "Qual o maior e o menor valor possível de P(A ∩ B) sabendo P(A) e P(B)?", ["prob-cc-limites-bayes-amostra"]),
     ("prob", "assunto", "Qual a probabilidade de um servidor receber mais de três requisições em um segundo?", ["prob-cc-servidor-erlang-weibull"]),
     ("prob", "assunto", "Como calcular o tempo de montagem de um pacote de mensagens com distribuição de Erlang?", ["prob-cc-servidor-erlang-weibull"]),
