@@ -243,6 +243,18 @@ PERGUNTAS = [
     ("lfa-parada", "lfa", "Por que o problema da parada é indecidível?",
      "A_TM indecidível por diagonalização (D contradiz a si mesma); HALT por redução de A_TM, na direção certa"),
     ("lfa-fora", "lfa", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Cálculo 1: conferidas em tests_acervo/test_disciplina_calc1.py.
+    ("calc1-definicao", "calc1", "Como derivar √(2x+1) pela definição?",
+     "domínio x ≥ -1/2; limite do quociente; racionaliza com o conjugado; f'(x) = 1/√(2x+1); não entrega tudo"),
+    ("calc1-lhospital", "calc1", "Quando posso usar a regra de L'Hospital?",
+     "só em 0/0 ou ∞/∞; deriváveis, g' ≠ 0; derivar separado, não a regra do quociente; outras formas viram quociente"),
+    ("calc1-assintotas", "calc1", "Quais são as assíntotas de x²/(x−1)?",
+     "domínio x ≠ 1; vertical x = 1; oblíqua y = x + 1; sem horizontal"),
+    ("calc1-escada", "calc1", "Como resolver o problema da escada que desliza na parede?",
+     "Pitágoras x² + y² = L²; derivar em t antes de substituir; 2x x' + 2y y' = 0"),
+    ("calc1-cilindro-cone", "calc1", "Qual o cilindro de volume máximo inscrito num cone?",
+     "semelhança h = H(1 − r/R); V(r) numa variável; r = 2R/3, h = H/3; compara extremidades"),
+    ("calc1-fora", "calc1", "Como calcular o rotacional de um campo vetorial?", "diz que é de Cálculo 3; sem fontes"),
     # Física 2, Lista 2 de Gravitação: conferidas em tests_acervo/test_disciplina_fis2.py.
     ("fis2-escape", "fis2", "Como calcular a velocidade de escape da Terra?",
      "energia mecânica nula no infinito; v = √(2GM/R) ≈ 11,2 km/s; não depende da massa do projétil"),
