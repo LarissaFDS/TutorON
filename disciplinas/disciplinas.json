@@ -173,7 +173,8 @@
         "ed-11-grafos",
         "ed-12-huffman",
         "ed-13-sat",
-        "ed-14-projetos-depuracao"
+        "ed-14-projetos-depuracao",
+        "ed-15-arvores-balanceadas"
       ],
       "exemplos": [
         "Como remover o último nó de uma lista encadeada em C sem perder a referência?",
