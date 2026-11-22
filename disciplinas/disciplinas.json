@@ -940,6 +940,29 @@
         "Quais os componentes de uma série temporal?",
         "O que é meta-aprendizado?"
       ]
+    },
+    {
+      "id": "compevol",
+      "nome": "Computação Evolucionária",
+      "sigla": "CEVO",
+      "situacao": "em validação",
+      "itens": "disciplinas/compevol/acervo/itens.json",
+      "indice": "disciplinas/compevol/acervo/indice.json",
+      "materiais": "disciplinas/compevol/materiais",
+      "rigor": "disciplinas/compevol/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "compevol-01-fundamentos",
+        "compevol-02-operadores",
+        "compevol-03-outras-metaheuristicas",
+        "compevol-04-atividades-2021"
+      ],
+      "exemplos": [
+        "Como funciona a seleção por roleta?",
+        "O que é o teorema dos esquemas?",
+        "Qual a regra do 1/5 nas estratégias evolutivas?",
+        "O que é dominância de Pareto?"
+      ]
     }
   ]
 }
