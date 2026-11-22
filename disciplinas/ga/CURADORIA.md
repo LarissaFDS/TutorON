@@ -22,6 +22,8 @@ Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitan
 | `ufal-ga-ementa` | indisponivel | Não se aplica (documento não obtido) |
 | `ufal-ga-provas-2016` | acervo | Não declarada (prova da disciplina) |
 | `ufal-ga-provas-2017` | acervo | Não declarada (prova da disciplina) |
+| `ufal-cc-ga-provas-2017-2` | acervo | Não declarada (prova da disciplina) |
+| `ufal-ppc-cc-2011` | citada | Documento institucional público |
 | `ufal-ga-provas-sem-cabecalho` | acervo | Não declarada |
 | `ufabc-miranda-gav` | referencia | Conflito: o texto diz CC BY 4.0 e o link aponta para CC BY-NC 4.0; não confirmada |
 | `ufms-carvalho-vga` | candidato | CC BY-SA indicada só no nome do arquivo; não confirmada no texto |
@@ -33,7 +35,7 @@ Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitan
 
 Os livros protegidos (Steinbruch e Winterle, Reis e Silva, Boulos e Camargo) ficaram "não incluído": não foram buscados, baixados, transcritos nem ingeridos.
 
-## Blocos (29, todos `material_da_disciplina`, todos na busca)
+## Blocos (33, todos `material_da_disciplina`, todos na busca)
 
 Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e nenhum tem revisão do professor. As resoluções são da equipe TutorON, não gabarito do professor, e as contas estão conferidas com SymPy em `tests_acervo/test_disciplina_ga.py`.
 
@@ -81,6 +83,21 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e ne
 
 - Cálculo 3: retas, planos e vetores aparecem lá como ferramenta (plano tangente a z = f(x, y), gradiente). Os blocos de GA tratam da geometria em si; o teste de isolamento confere que perguntas de Cálculo 3 não trazem blocos de GA e vice-versa.
 - Álgebra Linear não está cadastrada; espaços vetoriais, autovalores e diagonalização ficam para ela (regra em `rigor.md`).
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+A ementa de CCOM05 no PPC de Ciência da Computação (matriz 2011, `ufal-ppc-cc-2011`) cobre vetores, produtos, retas, planos, cônicas e quádricas, como `ga`, mas inclui também espaços euclidianos, matrizes, determinantes e sistemas lineares. Essa parte de álgebra linear não tem bloco aqui; a diferença fica registrada e não justifica disciplina separada (pergunta deixada na PR).
+
+As provas de CC (`ufal-cc-ga-provas-2017-2`) são diferentes das de `ufal-ga-provas-2017`. Entraram 4 blocos, com `curso:` no cabeçalho:
+
+| Bloco | Assunto | Status |
+|---|---|---|
+| `ga-cc-vetores-escalares-modulo` | ga-01-vetores-operacoes | validada |
+| `ga-cc-planos-retas-distancias` | ga-04-planos-retas-espaco | corrigida |
+| `ga-cc-conicas-provas-cc` | ga-10-identificacao-conicas | validada |
+| `ga-cc-revolucao-quadricas-provas-cc` | ga-12-quadricas-superficies | validada |
+
+Correção: numa prova final, dois dos três pontos do plano são iguais; o bloco aponta o erro. Fotos de resumos e anotações do material de CC não foram usadas.
 
 ## Pendências
 
