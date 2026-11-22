@@ -246,7 +246,8 @@ def test_erros_dos_slides_e_de_iniciante_dao_aviso(original, aviso, tmp_path):
     fonte.write_text(original, encoding='utf-8')
     r = subprocess.run([_gcc(), '-std=c99', '-Wall', '-Wextra', '-pedantic', '-c', str(fonte), '-o', str(tmp_path / 'o.o')],
                        capture_output=True, text=True)
-    assert 'warning' in r.stderr and aviso in r.stderr, r.stderr
+    # GCC 14+ trata declaração implícita como erro; versões antigas, como aviso.
+    assert ('warning' in r.stderr or 'error' in r.stderr) and aviso in r.stderr, r.stderr
 
 
 def test_troca_sem_auxiliar_perde_o_valor():
