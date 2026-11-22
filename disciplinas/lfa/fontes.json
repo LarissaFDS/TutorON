@@ -1,6 +1,6 @@
 {
  "disciplina": "lfa",
- "atualizado_em": "2026-11-21",
+ "atualizado_em": "2026-11-22",
  "legenda": {
   "prioridade": "alta = compõe o acervo; media = complementa; referencia = consulta, não ingerida",
   "uso": "acervo = parafraseado em disciplinas/so/materiais; citada = indicada nos blocos; referencia = só catálogo",
@@ -376,6 +376,89 @@
    "uso": "referencia",
    "origem": "bibliografia do PPC",
    "justificativa": "Bibliografia complementar; definição alternativa de MT citada no bloco s19."
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-cc-tc-provas-2017-2",
+   "nome": "AB1 e AB2 de Teoria da Computação 2017.2 (fotos), turma de Ciência da Computação",
+   "autoria": "IC-UFAL; professor não identificado nas fotos",
+   "url": null,
+   "formato": "JPEG, 3 fotos",
+   "isa": "SI",
+   "topicos": [
+    "lfa-02-automatos-finitos",
+    "lfa-05-livres-de-contexto",
+    "lfa-06-maquinas-de-turing"
+   ],
+   "licenca": "Não declarada (prova)",
+   "acesso": "Pasta da turma de CC entregue pela equipe; fotos lidas visualmente e não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Questões parafraseadas e resolvidas em t01 e t02 (AFN/AFD, aⁿbⁿ, máquinas de Turing)"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-eliana-reavaliacao-2016-1",
+   "nome": "Reavaliação AB1 2016.1 de Linguagens Formais e Autômatos",
+   "autoria": "Profa. Eliana (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "isa": "SI",
+   "topicos": [
+    "lfa-02-automatos-finitos",
+    "lfa-03-expressoes-gramaticas-regulares"
+   ],
+   "licenca": "Não declarada (prova)",
+   "acesso": "Pasta da turma de CC entregue pela equipe; PDF não versionado",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Questões parafraseadas e resolvidas em t03; a tabela do AFN foi lida na página renderizada (o texto extraído perde as colunas)"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-ppc-cc-2011",
+   "nome": "Projeto Pedagógico do Curso de Ciência da Computação (matriz 2011), UFAL — CCOM015 Teoria da Computação",
+   "autoria": "Instituto de Computação, UFAL",
+   "url": "https://ufal.br/estudante/graduacao/projetos-pedagogicos/campus-maceio/ProjetoPedagogicoCCompMatriz2011_PROGRAD.pdf",
+   "formato": "PDF",
+   "isa": "não se aplica",
+   "topicos": [],
+   "licenca": "Documento institucional público",
+   "acesso": "Baixado e lido em 2026-11-22; não versionado",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Ementa de CCOM015 (30 h) usada para comparar com ECOM014"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "cc-tc-material-sem-bloco",
+   "nome": "Demais arquivos da pasta de CC: slides de TC (aulas 1 a 5) e do curso de LFA 2015.2, textos do Prof. Palazzo (UCPel), lista de exercícios de LFA, exercícios de LLC, anotações de aluno e fotos de quadro",
+   "autoria": "Vários; os slides de LFA 2015.2 e de TC não identificam o autor no nome do arquivo; textos de Luiz A. M. Palazzo (UCPel)",
+   "url": null,
+   "formato": "PDF, PPTX, TXT, JPEG",
+   "isa": "SI",
+   "topicos": [],
+   "licenca": "Não declarada",
+   "acesso": "Pasta da turma de CC entregue pela equipe; não versionados",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Mesmos tópicos dos blocos s01–s31; servem de evidência da ementa da turma de CC, sem bloco novo"
   }
  ]
 }

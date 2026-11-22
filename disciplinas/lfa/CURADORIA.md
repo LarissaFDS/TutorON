@@ -40,7 +40,7 @@ Situação: **MVP** desde 21/11/2026, sem aviso, depois de cumprido o critério 
 
 ## Fontes (`fontes.json`)
 
-`ufal-ppc-ecomp-2014`, `ufal-eliana-lista-2014-1`, `ufal-eliana-prova2-2017-1`, `ufal-lista-decidibilidade-2016-2`, `ufal-thyago-atividade-2015-1`, `unesp-prado-apostilas-tc`, `lee-sipser-notas-2012`, `mit-ocw-18-404j`, `openlogic-slc`, `jflap`, `turing-1950-imitation-game`, `sipser-livro`, `menezes-livro`, `hopcroft`, `diverio-menezes`.
+`ufal-ppc-ecomp-2014`, `ufal-ppc-cc-2011`, `ufal-cc-tc-provas-2017-2`, `ufal-eliana-reavaliacao-2016-1`, `cc-tc-material-sem-bloco`, `ufal-eliana-lista-2014-1`, `ufal-eliana-prova2-2017-1`, `ufal-lista-decidibilidade-2016-2`, `ufal-thyago-atividade-2015-1`, `unesp-prado-apostilas-tc`, `lee-sipser-notas-2012`, `mit-ocw-18-404j`, `openlogic-slc`, `jflap`, `turing-1950-imitation-game`, `sipser-livro`, `menezes-livro`, `hopcroft`, `diverio-menezes`.
 
 ## Blocos
 
@@ -92,3 +92,21 @@ Fora da busca (`nota_da_equipe_ia`, `candidato`): `lfa-nota-bombeamento-livres-d
 Todas as resoluções são da equipe TutorON, **não gabarito do professor**. `tests_acervo/lfa_verif.py` simula AFD, AFN (subconjuntos), minimização, ER (Thompson), gramáticas (Earley e contagem de derivações), autômato com pilha, máquina de Turing, programas LPM e funções recursivas primitivas.
 
 Revisão humana e do professor: **pendentes** em todos os blocos.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+Material da turma de Ciência da Computação (pasta `17. COMP376 - Teoria da Computação`). Entrou em `lfa` como **complemento**, sem cópia da disciplina e sem mudar a situação (MVP).
+
+- **Ementa:** no PPC de CC (matriz 2011, `ufal-ppc-cc-2011`), CCOM015 Teoria da Computação tem 30 h e cobre só a parte de computabilidade: contagem e enumerabilidade, tese de Church-Turing, modelos de computação, funções recursivas, máquinas de Turing, decidibilidade, problema da parada, redutibilidade e complexidade (Sipser; Diverio e Menezes). Autômatos, gramáticas e hierarquia de Chomsky não estão nessa ementa, mas a pasta da turma traz slides de um curso de LFA de 2015.2 e provas de autômatos (AB1 de 2017.2, reavaliação de 2016.1). A ementa de CC é um **subconjunto** da de ECOM014: não há motivo para separar disciplinas. O código COMP376 vem do nome da pasta e não aparece no PPC de 2011.
+- **Já no acervo:** a atividade de 2015.1 (Prof. Thyago), a lista de decidibilidade de 2016.2, a Prova 2 de 2017.1 (Profa. Eliana), as apostilas TC01 a TC03, as notas de Sipser e o trecho de Turing (1950) estão na pasta de CC e já tinham sido usados.
+- **Novos blocos** (todos com `curso:` no cabeçalho e `status_resolucao: validada`):
+
+| Bloco | Origem | Conferência |
+|---|---|---|
+| `lfa-cc-ab1-2017-afn-para-afd-aa-ou-bb` | AB1 2017.2 (foto; professor não identificado), Q2–Q5 | `test_prova_cc_2017_ab1` |
+| `lfa-cc-ab2-2017-anbn-pilha-maquina-de-turing` | AB2 2017.2 (foto), Q1–Q4 | `test_prova_cc_2017_ab2` |
+| `lfa-cc-reavaliacao-2016-er-afn-afd` | Reavaliação AB1 2016.1, Profa. Eliana | `test_reavaliacao_2016_1` |
+
+- A tabela do AFN da reavaliação foi lida na página renderizada: o texto extraído do PDF perde as colunas e faz parecer que $q_2$ e $q_4$ têm transição em x.
+- **Sem bloco** (`cc-tc-material-sem-bloco`): slides de TC (aulas 1 a 5) e do curso de LFA 2015.2, textos do Prof. Palazzo (UCPel), a lista "Exercício LFA 1309", os exercícios de LLC, `questoes_lfa.txt` (anotações de aluno sobre FNC) e fotos de quadro. Cobrem os mesmos tópicos de s01–s31. O problema da correspondência de Post (aula 24 de LFA 2015.2) não tem bloco: fica como pendência.
+- **Fora do repositório:** fotos de prova e de quadro, PDFs, PPTX e o `.doc`. Sipser e Menezes (livros) e o JFLAP não vieram no zip e continuam só como referência. Uma lista de TC sem texto extraível (o nome do arquivo traz um nome próprio) não foi usada.
