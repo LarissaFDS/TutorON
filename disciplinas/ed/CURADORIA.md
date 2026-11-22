@@ -4,7 +4,7 @@ Situação: **em validação** desde 03/11/2026. A disciplina tem cadastro, acer
 
 | Item | Estado em 03/11/2026 |
 |---|---|
-| Cadastro, acervo (20 blocos, 18 na busca) e índice híbrido (`bge-m3`) | **Feitos** |
+| Cadastro, acervo (25 blocos, 23 na busca desde o complemento de 21/11/2026) e índice híbrido (`bge-m3`) | **Feitos** |
 | Código C dos blocos | **Compilado e testado**: `tests_acervo/c_ed/*.c` com `gcc -std=c99 -Wall -Wextra -pedantic -Werror`, e com `-fsanitize=address,undefined` no gcc 14 do Docker (o MinGW local não tem sanitizadores) |
 | Revisão humana interna | **Pendente** (`revisao_humana: pendente` em todos os blocos) |
 | Autorização para publicar transcrições (anotações e PDFs do professor) | **Não dada**: os blocos reescrevem e parafraseiam |
@@ -12,7 +12,7 @@ Situação: **em validação** desde 03/11/2026. A disciplina tem cadastro, acer
 | Respostas da IA com o modelo real | **Conferidas em 5 casos** em 03/11/2026 com o Gemini 3.6 Flash (seção 7); não substitui a validação com alunos |
 
 - Catálogo legível por máquina: [`fontes.json`](fontes.json)
-- Blocos (um arquivo por bloco): [`materiais/`](materiais/). `s01`–`s15` = anotações da turma no Notion, reescritas e corrigidas; `s16`–`s18` = material do professor, parafraseado; `n*` = notas da equipe (candidatas, fora da busca)
+- Blocos (um arquivo por bloco): [`materiais/`](materiais/). `s01`–`s15` = anotações da turma no Notion, reescritas e corrigidas; `s16`–`s18` = material do professor, parafraseado; `s19`–`s23` = complemento de árvores balanceadas e testes (seção 9); `n*` = notas da equipe (candidatas, fora da busca)
 - Os trechos de código dos blocos são cópias exatas de funções dos programas de teste; `tests_acervo/test_disciplina_ed.py` confere isso.
 - Gerados (não editar à mão): [`acervo/itens.json`](acervo/itens.json) e [`acervo/indice.json`](acervo/indice.json)
 
@@ -33,11 +33,12 @@ Os PDFs anexados no Notion trazem "Estruturas de Dados - ECOM008" e "Márcio Rib
 | `ed-07-pilhas-filas` | Notion (Pilha estática/dinâmica, Fila) | `ed-notion-pilha-fila` |
 | `ed-08-heap-fila-prioridade` | Notion (Priority Queue, Heap no Apêndice; página Heaps vazia) | `ed-notion-heap` |
 | `ed-09-hash` | Notion (Hash aberto e encadeado) | `ed-notion-hash` |
-| `ed-10-arvores` | Notion (ABB; página AVL vazia) | `ed-notion-abb`, `ed-nota-avl` (candidata) |
+| `ed-10-arvores` | Notion (ABB; página AVL vazia) + roteiro de testes de AVL e heap | `ed-notion-abb`, `ed-testes-avl-heap`, `ed-nota-avl` (candidata) |
 | `ed-11-grafos` | Notion (DFS/BFS) | `ed-notion-grafos` |
 | `ed-12-huffman` | Notion (Exemplo com Árvore Binária) + PDF do professor | `ed-prof-huffman` |
 | `ed-13-sat` | PDF da aula 21 + Casos teste do Notion | `ed-prof-sat` |
 | `ed-14-projetos-depuracao` | PDF do professor (AB2) | `ed-prof-projetos-ab2`, `ed-nota-depuracao-memoria` (candidata) |
+| `ed-15-arvores-balanceadas` | Slides da UFCG (não é material da turma da UFAL; seção 9) | `ed-ufcg-rubro-negra`, `ed-ufcg-rubro-negra-insercao`, `ed-ufcg-arvore-b`, `ed-ufcg-splay-skiplist` |
 
 ### Fronteira com PAA
 
@@ -94,11 +95,11 @@ Cada correção foi conferida por um programa em `tests_acervo/c_ed/`. As falhas
 
 | Status | Blocos |
 |---|---|
-| `validada` | `ed-notion-ordenacao-simples`, `ed-notion-abb`, `ed-prof-huffman`, `ed-prof-sat` |
+| `validada` | `ed-notion-ordenacao-simples`, `ed-notion-abb`, `ed-prof-huffman`, `ed-prof-sat`, `ed-ufcg-rubro-negra`, `ed-ufcg-rubro-negra-insercao`, `ed-ufcg-arvore-b`, `ed-testes-avl-heap` |
 | `corrigida` | `ed-notion-ponteiros-lista`, `ed-notion-sizeof-alocacao`, `ed-notion-structs`, `ed-notion-ponteiros-funcao`, `ed-notion-busca`, `ed-notion-big-o`, `ed-notion-quick-merge`, `ed-notion-listas-genericas`, `ed-notion-pilha-fila`, `ed-notion-heap`, `ed-notion-hash`, `ed-notion-grafos` |
 | `pendente_professor` | `ed-notion-recorrencias` (convenção dos casos-base) |
 
-`ed-prof-projetos-ab2` não tem resolução (regras das entregas). Os casos 1–8 de SAT do Notion não foram transcritos; só se registrou que o caso 6 declara 5 cláusulas no cabeçalho e traz 4.
+`ed-prof-projetos-ab2` e `ed-ufcg-splay-skiplist` não têm resolução (regras das entregas; texto conceitual sem código). Os casos 1–8 de SAT do Notion não foram transcritos; só se registrou que o caso 6 declara 5 cláusulas no cabeçalho e traz 4.
 
 ## 6. Notas da equipe e validação
 
@@ -134,3 +135,27 @@ As fontes foram abertas e conferidas em 03/11/2026 (título, autoria, URL e lice
   - Python Tutor (`python-tutor-c`)
 
 Não se usaram blogs nem sites de soluções.
+
+## 9. Complemento de 21/11/2026: árvores balanceadas e testes de AVL e heap
+
+Material recebido pela equipe, fora do repositório, sem transcrição: os blocos parafraseiam com texto próprio e reescrevem os exemplos em C (os originais usam Java).
+
+| Material | Autoria e licença | Uso | Blocos |
+|---|---|---|---|
+| Slides "Árvore Rubro-Negra", "Árvore B", "Splay Tree" e "Skip List" do DSC/UFCG (`ufcg-ed-cajueiro-slides`) | Prof. Adalberto Cajueiro, 2013; licença não declarada | acervo (paráfrase) | `ed-ufcg-rubro-negra`, `ed-ufcg-rubro-negra-insercao`, `ed-ufcg-arvore-b`, `ed-ufcg-splay-skiplist` |
+| "Dicas para Testes AVL e Heap" (`dicas-testes-avl-heap`) | autoria não identificada no arquivo; licença não declarada | acervo (casos reescritos em C) | `ed-testes-avl-heap` |
+| Shaffer, *Data Structures and Algorithm Analysis* 3.2, seções 10.4, 10.5, 13.2.1, 13.2.2 e 16.2.2 (`shaffer-dsaa-3-2`) | Clifford A. Shaffer; uso educacional não comercial, trechos só com a página de rosto e o aviso | citada por seção; não versionado nem ingerido | nenhum |
+
+Livros protegidos (Tenenbaum, Goodrich) e o `trees.jar` citados no material não foram buscados, baixados, versionados nem ingeridos.
+
+- **Ementa**: árvore rubro-negra, árvore B, splay e skip list não constam da ementa de ECOM008 a que a equipe teve acesso (PPC 2014, seção 1); AVL e heap também não, mas aparecem no Notion da turma. O bloco `ed-ufcg-splay-skiplist` e `rigor.md` avisam o aluno; confirmar com o professor.
+- **Correção**: os slides de árvore B escrevem "pelo menos m/2 filhos"; o bloco usa o teto, ⌈m/2⌉. A frase dos slides "a altura de um filho nunca é maior que o dobro do outro" virou a afirmação exata sobre o caminho mais longo e o mais curto até as folhas NIL.
+- **Código conferido** (`gcc -std=c99 -Wall -Wextra -pedantic -Werror` e ASan/UBSan, como na seção 7):
+  - `rubro_negra.c`: inserção com os casos de conserto; verifica ordem, ponteiros de pai, raiz preta, vermelho sem filho vermelho e mesma altura negra depois de cada uma de 3000 inserções crescentes e de novo ao fim de mais 3000 aleatórias, e por fim $h \le 2\log_2(n+1)$; exemplo da aula 8, 4, 2.
+  - `arvore_b.c`: ordem 3, divisão na mediana; verifica ordem das chaves, mínimo e máximo de chaves por nó e folhas no mesmo nível após cada inserção; exemplo 10, 20, 30.
+  - `avl_testes.c`: verificador `eh_avl`, pré-ordens do roteiro depois de inserções e remoções (sucessor) e build-heap mínimo; as pré-ordens foram calculadas também por uma implementação independente em Python, fora do repositório, e batem.
+- **Não incluído**: a remoção em árvore rubro-negra e em árvore B só é descrita em texto (sem código testado); as questões do POSCOMP dos slides não foram transcritas.
+- **IA real (21/11/2026, processo de teste local com a chave Gemini; os modelos maiores deram HTTP 429 ou estavam em pausa, respondeu o Gemini 3.1 Flash Lite)**:
+  - "Como fazer a inserção numa árvore rubro-negra?": fontes P1 e P2 = blocos de rubro-negra; resposta correta (nó novo vermelho, olhar o tio, linha reta ou zigue-zague) e no modo socrático.
+  - "Como testar se minha AVL está balanceada?": P1 = `ed-testes-avl-heap`; resposta correta (ordem, altura recalculada, fator −1/0/1, verificar após cada operação).
+  - "Como funciona a divisão de um nó numa árvore B?": P1 = `ed-ufcg-arvore-b` e a resposta original estava correta (mediana sobe, ponteiros dos filhos, nova raiz), mas a revisão pedagógica a bloqueou duas vezes por considerar o exercício proposto uma solução guiada, e o aluno recebeu só a ajuda de reserva genérica. É comportamento da revisão pedagógica comum a todas as disciplinas, não do acervo; não foi alterado nesta entrega.
