@@ -23,6 +23,11 @@ Situação: **MVP** desde 20/11/2026, sem aviso, por decisão da equipe, aceitan
 | `respostas-introducao-algebra` | referência | .zip com .doc de autoria desconhecida; não aberto |
 | `levin-dmoi` | referência | CC BY-NC-SA 4.0; só consulta |
 | `mit-mcs` | referência | CC BY-SA 3.0; só consulta |
+| `ufal-ppc-cc-2011` | citada | PPC de Ciência da Computação (matriz 2011), ementa de CCOM010 |
+| `ufal-cc-discreta-provas-bruno` | acervo | 8 provas do Prof. Bruno Pimentel (2020.1 a 2021.1), sem gabarito; enunciados parafraseados, resolução da equipe conferida por código |
+| `ufal-cc-discreta-prova-lucas-2017` | acervo | 4 fotos da Prova 01 de 2017 (Prof. Lucas Amorim) respondida por aluno: só os enunciados foram usados; fotos, nome e respostas do aluno fora |
+| `ufal-cc-discreta-monitoria` | acervo | Revisões da monitoria (2020.2); nomes dos monitores omitidos |
+| `cc-discreta-rsa-python` | referência | RSA em Python de aluno (GPL-3.0), com chave privada de exemplo: não versionado |
 
 Arquivos marcados "não incluído" no pacote da equipe não foram buscados nem baixados.
 
@@ -60,3 +65,25 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e ne
 - Revisão humana e do professor de todos os blocos.
 - Questões da Lista 01 em imagem (2, 3 e 13) não foram resolvidas.
 - Enunciados ambíguos da lista de contagem da UFCG (com ou sem repetição; salas distintas ou não) não estão no acervo; o rigor manda mostrar as duas leituras.
+
+## Complemento de Ciência da Computação (22/11/2026)
+
+O TutorON organiza o acervo por disciplina, não por curso: o material de Matemática Discreta de Ciência da Computação (COMP362; no PPC de 2011, CCOM010) entrou na disciplina `discreta` já existente, sem cópia e sem mudar a situação (MVP).
+
+**Ementas.** A ementa de CCOM010 no PPC de CC (`ufal-ppc-cc-2011`) é a mesma de ECOM003, sem os itens "Noções Básicas" e "Aplicações". As provas de CC de 2020 e 2021 dão mais peso a congruência linear, Teorema Chinês do Resto e Pequeno Teorema de Fermat do que o material de ECOM; a diferença não justifica disciplina separada.
+
+**O que entrou.** 7 blocos (`s24` a `s30`), todos `material_da_disciplina`, na busca, com `curso:` no cabeçalho, `revisao_humana: pendente` e status `validada`; as contas estão em `tests_acervo/test_disciplina_discreta.py` (testes do complemento de CC).
+
+| Bloco | Tema | Status da resolução |
+|---|---|---|
+| `discreta-cc-conjuntos-extensao-leis` | conjuntos por extensão, Venn, leis da álgebra dos conjuntos | validada |
+| `discreta-cc-relacoes-fecho-ordem` | fecho de equivalência, ordem parcial, relação por grafo, composição | validada |
+| `discreta-cc-funcoes-bijecao-composta` | função mal definida, bijeção, composta com inversa, termo geral | validada |
+| `discreta-cc-provas-paridade-inducao-euclides` | simplificação lógica, paridade, divisibilidade, indução, Euclides | validada |
+| `discreta-cc-congruencias-lineares` | resto de negativo, inverso, $ax\equiv b$ com d soluções | validada |
+| `discreta-cc-teorema-chines-resto` | Teorema Chinês do Resto | validada |
+| `discreta-cc-fermat-potencias-rsa` | potências pelo Pequeno Teorema de Fermat | validada |
+
+**Observações da validação.** A Prova 1 (2020.2 e 2021.1) define f só em a, b e d no conjunto {a, b, c, d}: o bloco diz que não é função. A prova de 2017 pede compostas com $g(x)=1/x$ "de N em N", que não é função de N em N. O exemplo de TCR da monitoria para em 314; o bloco reduz para 104 (mod 105).
+
+**Fora do acervo.** As fotos da prova de 2017 (nome e respostas de aluno), o código RSA de aluno com chave privada, os livros de Evaristo (já catalogados) e os slides da UFCG e do Prof. Lucas (já catalogados) não foram versionados. Os slides das Aulas 03 e 04 do Prof. Lucas Amorim são os mesmos já cobertos por `ufal-discreta-slides-lucas`.
