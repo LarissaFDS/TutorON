@@ -917,6 +917,29 @@
         "Qual a diferença entre k-means e DBSCAN?",
         "Como funciona o Q-learning?"
       ]
+    },
+    {
+      "id": "cd",
+      "nome": "Ciência de Dados",
+      "sigla": "CDAD",
+      "situacao": "em validação",
+      "itens": "disciplinas/cd/acervo/itens.json",
+      "indice": "disciplinas/cd/acervo/indice.json",
+      "materiais": "disciplinas/cd/materiais",
+      "rigor": "disciplinas/cd/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "cd-01-fundamentos",
+        "cd-02-preparacao-e-avaliacao",
+        "cd-03-metodos",
+        "cd-04-series-meta-visualizacao"
+      ],
+      "exemplos": [
+        "Qual a diferença entre Ciência de Dados e Big Data?",
+        "Como remover outliers dos dados?",
+        "Quais os componentes de uma série temporal?",
+        "O que é meta-aprendizado?"
+      ]
     }
   ]
 }
