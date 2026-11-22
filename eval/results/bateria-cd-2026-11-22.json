@@ -1,0 +1,93 @@
+[
+ {
+  "id": "cd-bigdata",
+  "disciplina": "cd",
+  "pergunta": "Quais são os 5 Vs do Big Data?",
+  "esperado": "volume, velocidade, variedade, veracidade, valor",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 12.0,
+  "fontes": [
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)",
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Os 5 Vs do Big Data são fundamentais para entender por que nem todo conjunto de dados exige infraestruturas complexas de processamento distribuído. Eles ajudam a caracterizar quando os dados superam as ferramentas tradicionais de análise.\n\nO material [P1] lista esses cinco pilares. Três deles referem-se às características físicas e operacionais dos dados (o que você provavelmente já ouviu falar como os \"3 Vs\" originais), enquanto os outros dois adicionam camadas de qualidade e utilidade estratégica ao processo.\n\nPara fixar, tente associar cada um a um exemplo prático:\n*   **Volume:** Pense em algo que não cabe no seu computador pessoal.\n*   **Velocidade:** Pense em dados que chegam em tempo real (como sensores).\n*   **Variedade:** Pense em formatos diferentes (tabelas vs. vídeos).\n*   **Veracidade:** Pense na confiabilidade da fonte.\n*   **Valor:** Pense no objetivo final da Ciência de Dados.\n\n### Sua vez\nTente listar os 5 Vs com suas próprias palavras, baseando-se nas definições do material [P1], e explique brevemente por que o \"Valor\" é considerado um dos Vs, mesmo não sendo uma característica física do dado."
+ },
+ {
+  "id": "cd-outliers",
+  "disciplina": "cd",
+  "pergunta": "Como remover outliers dos dados?",
+  "esperado": "IQR (1,5 IQR) ou z-escore > 3; ver se é erro ou caso raro",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)",
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Remover outliers é uma etapa crítica que depende da natureza dos seus dados. Como vimos no material [P1], não existe uma regra única; a escolha entre o método do **IQR** (Intervalo Interquartil) e o **z-escore** depende de como os seus dados estão distribuídos.\n\nO **z-escore** mede quantos desvios padrão um ponto está afastado da média. Ele é muito intuitivo, mas tem uma limitação importante: como ele usa a média e o desvio padrão no cálculo, os próprios outliers acabam \"puxando\" esses valores para perto deles, o que pode esconder a existência de outros pontos extremos. Já o **IQR** é mais robusto, pois foca na mediana e nos quartis, que não são tão afetados por valores extremos.\n\nAntes de aplicar qualquer fórmula, vale sempre a pergunta: esse valor é um erro de medição ou um fenômeno raro, mas real? Se for um erro, a remoção é indicada; se for um caso real, talvez seja melhor apenas tratá-lo de forma diferente ou mantê-lo, dependendo do objetivo do seu modelo.\n\nPara começar, tente visualizar a distribuição dos seus dados. Um boxplot, por exemplo, mostra visualmente onde o IQR termina e onde os outliers começam.\n\n### Sua vez\nSe você tem um conjunto de dados, qual das duas técnicas (IQR ou z-escore) você acha que seria mais adequada se os seus dados não seguirem uma distribuição normal? Por que?"
+ },
+ {
+  "id": "cd-naive-bayes",
+  "disciplina": "cd",
+  "pergunta": "Classifique o texto what do you mean com Naive Bayes",
+  "esperado": "Laplace; question (0,00375) > stmt (0,00066); guia sem entregar tudo",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para classificar a frase \"what do you mean\" usando o modelo Naive Bayes Multinomial com suavização de Laplace, precisamos calcular a probabilidade de cada classe (*stmt* e *question*) dado esse conjunto de palavras.\n\nA fórmula que você deve aplicar para cada classe $C$ é:\n$$P(C \\mid \\text{frase}) \\propto P(C) \\cdot \\prod_{w \\in \\text{frase}} P(w \\mid C)$$\n\nOnde, com a suavização de Laplace, a probabilidade de uma palavra $w$ dada a classe $C$ é:\n$$P(w \\mid C) = \\frac{\\text{contagem}(w, C) + 1}{\\text{total\\_palavras}(C) + |V|}$$\n\nAqui, $|V|$ é o tamanho do vocabulário total (número de palavras distintas no treino). Note que, para palavras que não aparecem no treino (como \"do\" e \"mean\"), o termo $\\text{contagem}(w, C)$ será zero, mas a suavização garante que a probabilidade não seja nula.\n\nPara começar, você já tem os valores do material:\n- $P(\\text{stmt}) = P(\\text{question}) = 0,5$\n- Total de palavras em *stmt* = 17; em *question* = 18\n- Vocabulário $|V| = 22$\n\n### Sua vez\nListe as contagens individuais de cada palavra da frase (\"what\", \"do\", \"you\", \"mean\") dentro da classe *question* e dentro da classe *stmt*, baseando-se nos dados fornecidos, e monte a expressão do produto para cada classe. Qual é o valor de $P(w \\mid C)$ para a palavra \"what\" em cada uma das classes?"
+ },
+ {
+  "id": "cd-series",
+  "disciplina": "cd",
+  "pergunta": "Quais os componentes de uma série temporal?",
+  "esperado": "tendência, sazonalidade, ciclo, irregular",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas e listas de Ciência de Dados do Prof. Bruno Pimentel (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender os componentes de uma série temporal, imagine que você está analisando o gráfico de vendas de uma loja ao longo de vários anos. Se você traçar uma linha que acompanha o \"caminho geral\" das vendas, subindo ou descendo, você está isolando um componente específico.\n\nAgora, se você notar que todo mês de dezembro as vendas disparam, independentemente de o negócio estar indo bem ou mal, você encontrou outro padrão recorrente. Além disso, existem oscilações econômicas que duram anos, mas não têm uma data marcada para acontecer, e, por fim, sempre haverá aquele \"ruído\" imprevisível, como um dia de chuva inesperado que afetou o movimento.\n\nCom base no material, pense em como esses quatro elementos se comportam:\n1. O movimento de longo prazo (crescimento ou queda).\n2. O padrão que se repete em intervalos fixos (como meses ou dias).\n3. As oscilações de longo prazo sem período definido.\n4. O que sobra quando retiramos tudo isso.\n\n### Sua vez\nComo você classificaria o aumento constante nas vendas de uma empresa ao longo de 5 anos e o pico de vendas que ocorre todo mês de dezembro? Qual componente cada um representa?"
+ },
+ {
+  "id": "cd-fora",
+  "disciplina": "cd",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "Esta pergunta pertence à disciplina de **Circuitos Elétricos**. Como tutor de Ciência de Dados, posso te ajudar a entender o conceito físico por trás dessa relação, que é fundamental para modelar sistemas dinâmicos.\n\nA impedância de um indutor, chamada de reatância indutiva ($X_L$), descreve como o componente se opõe à variação da corrente elétrica. Diferente de um resistor, que oferece uma oposição constante, o indutor reage de forma diferente dependendo da rapidez com que a corrente oscila.\n\nPense na relação entre a tensão e a corrente em um indutor: a tensão é proporcional à taxa de variação da corrente no tempo ($v = L \\frac{di}{dt}$). Em um sinal senoidal, essa taxa de variação é ditada pela frequência angular ($\\omega$). Se a frequência aumenta, a variação da corrente torna-se mais rápida, o que exige uma \"força\" maior do indutor para se opor a essa mudança.\n\nPara encontrar a expressão, considere que a reatância indutiva é o fator de proporcionalidade que relaciona a amplitude da tensão à amplitude da corrente no domínio da frequência.\n\n### Sua vez\nSabendo que a reatância indutiva $X_L$ aumenta conforme a frequência angular $\\omega$ e a indutância $L$ aumentam, tente escrever no papel uma relação matemática simples que combine essas três variáveis ($X_L, \\omega, L$) para representar essa dependência direta."
+ }
+]

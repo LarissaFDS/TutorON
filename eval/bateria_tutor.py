@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Ciência de Dados: conferidas em tests_acervo/test_disciplina_cd.py.
+    ("cd-bigdata", "cd", "Quais são os 5 Vs do Big Data?",
+     "volume, velocidade, variedade, veracidade, valor"),
+    ("cd-outliers", "cd", "Como remover outliers dos dados?",
+     "IQR (1,5 IQR) ou z-escore > 3; ver se é erro ou caso raro"),
+    ("cd-naive-bayes", "cd", "Classifique o texto what do you mean com Naive Bayes",
+     "Laplace; question (0,00375) > stmt (0,00066); guia sem entregar tudo"),
+    ("cd-series", "cd", "Quais os componentes de uma série temporal?",
+     "tendência, sazonalidade, ciclo, irregular"),
+    ("cd-fora", "cd", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Aprendizagem de Máquina: conferidas em tests_acervo/test_disciplina_am.py.
     ("am-tipos", "am", "Quais os três tipos de aprendizagem de máquina?",
      "supervisionada (rótulos), não supervisionada (padrões), por reforço (recompensa)"),

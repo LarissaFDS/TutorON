@@ -1,0 +1,73 @@
+{
+ "disciplina": "cd",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-pimentel-provas-cd",
+   "nome": "Provas (AB1, AB2, finais e reavaliações de 2020.1, 2020.2 e 2021.1), listas 1 e 2 e enunciado do projeto de Ciência de Dados",
+   "autoria": "Prof. Bruno Pimentel (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "cd-01-fundamentos",
+    "cd-02-preparacao-e-avaliacao",
+    "cd-03-metodos",
+    "cd-04-series-meta-visualizacao"
+   ],
+   "licenca": "Não declarada (provas)",
+   "acesso": "Pasta da turma de CC (ênfase Sistemas Inteligentes, COMP401); não versionadas (as provas de 2021.1 trazem nome e matrícula do aluno)",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados e resolvidos em c01–c14; o projeto não é resolvido"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "knaflic-storytelling",
+   "nome": "Storytelling with Data",
+   "autoria": "Cole Nussbaumer Knaflic",
+   "url": null,
+   "formato": "livro",
+   "topicos": [],
+   "licenca": "Protegido",
+   "acesso": "Só referência (as seis etapas de visualização cobradas nas provas)",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Roteiro de seis etapas citado na AB2"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "scikit-learn-cd",
+   "nome": "scikit-learn, SciPy e pandas: documentação",
+   "autoria": "Desenvolvedores do scikit-learn, SciPy e pandas",
+   "url": "https://scikit-learn.org/stable/user_guide.html",
+   "formato": "HTML",
+   "topicos": [
+    "cd-02-preparacao-e-avaliacao",
+    "cd-03-metodos"
+   ],
+   "licenca": "BSD-3-Clause (código); documentação aberta",
+   "acesso": "Bibliotecas usadas nos testes",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Conferência das resoluções em tests_acervo/test_disciplina_cd.py"
+  }
+ ]
+}
