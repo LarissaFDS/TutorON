@@ -125,6 +125,7 @@
           {"nome": "Projeto e Desenvolvimento de Sistemas"}
         ]},
         {"numero": 7, "disciplinas": [
+          {"nome": "Sistemas Distribuídos", "acervo": "sd_dist"},
           {"nome": "Metodologia de Pesquisa e Trabalho Individual"},
           {"nome": "Noções de Direito"}
         ]},

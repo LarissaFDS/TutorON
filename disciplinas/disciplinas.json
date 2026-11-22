@@ -871,6 +871,29 @@
         "Qual a diferença entre passagem por valor-resultado e por referência?",
         "Como calcular o endereço de A[j,k] com armazenamento por coluna?"
       ]
+    },
+    {
+      "id": "sd_dist",
+      "nome": "Sistemas Distribuídos",
+      "sigla": "SDIST",
+      "situacao": "em validação",
+      "itens": "disciplinas/sd_dist/acervo/itens.json",
+      "indice": "disciplinas/sd_dist/acervo/indice.json",
+      "materiais": "disciplinas/sd_dist/materiais",
+      "rigor": "disciplinas/sd_dist/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "sd_dist-01-caracterizacao-e-modelos",
+        "sd_dist-02-comunicacao",
+        "sd_dist-03-coordenacao-e-falhas",
+        "sd_dist-04-tecnologias"
+      ],
+      "exemplos": [
+        "O que é middleware?",
+        "Qual a diferença entre publicar-assinar e fila de mensagens?",
+        "Para que servem os algoritmos de eleição de líder?",
+        "Qual a diferença entre detector de falhas confiável e não confiável?"
+      ]
     }
   ]
 }

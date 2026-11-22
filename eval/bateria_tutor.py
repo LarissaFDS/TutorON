@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Sistemas Distribuídos: conferidas em tests_acervo/test_disciplina_sd_dist.py.
+    ("sd_dist-middleware", "sd_dist", "Um sistema operacional é middleware?",
+     "não: SO gerencia uma máquina; middleware fica sobre os SOs e esconde a distribuição"),
+    ("sd_dist-pubsub", "sd_dist", "Qual a diferença entre publicar-assinar e fila de mensagens?",
+     "pub/sub entrega a todos os assinantes; fila entrega cada mensagem a um consumidor"),
+    ("sd_dist-detector", "sd_dist", "Qual a diferença entre detector de falhas confiável e não confiável?",
+     "confiável exige sistema síncrono; não confiável só suspeita"),
+    ("sd_dist-eleicao", "sd_dist", "Para que servem os algoritmos de eleição de líder?",
+     "escolher um coordenador único; exemplo; anel ou valentão; guia sem entregar"),
+    ("sd_dist-fora", "sd_dist", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
     # Conceitos de Linguagens de Programação: conferidas em tests_acervo/test_disciplina_clp.py.
     ("clp-escopo", "clp", "Qual a diferença entre escopo estático e dinâmico?",
      "estático pelo texto, dinâmico pela pilha de chamadas; exemplo com resultados diferentes"),
