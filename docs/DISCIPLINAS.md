@@ -865,3 +865,15 @@ da barreira: `pcom`, `grafos`, `projsw`, `redes`, `clp`, `sd_dist`, `am`, `cd`, 
 `seguranca`, `ihc`, `etica` e `direito`. As pendências registradas nas seções de cada uma
 (revisão humana dos blocos, confirmação do professor, tópicos sem bloco, respostas da bateria real
 não conferidas) **continuam abertas**: a liberação não as resolve.
+
+### Ligação automática com as matrizes dos cursos
+
+O ✓ da janela "Em que ponto do curso você está?" e a preferência por período no roteamento vêm
+de `backend/cursos.py`, que liga cada disciplina das matrizes (`disciplinas/cursos.json`) ao acervo
+**pelo nome**, sem acento, caixa nem pontuação. Uma disciplina nova cadastrada em
+`disciplinas/disciplinas.json` aparece sozinha em todos os cursos e períodos onde o nome bate.
+Disciplinas "em validação" não ganham o ✓.
+
+Quando o nome na matriz de um curso for outro, adicione-o em `nomes_nos_cursos` no cadastro
+(ex.: `logica` tem `["Lógica para Computação"]`, `lfa` tem `["Teoria da Computação"]`). Um campo
+`acervo` escrito em `cursos.json` ainda tem prioridade, para forçar uma ligação diferente.

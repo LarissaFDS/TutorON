@@ -10,15 +10,58 @@ Fonte: disciplinas/cursos.json (matrizes obrigatórias dos PPCs do IC/UFAL; sem 
 from __future__ import annotations
 
 import json
+import re
+import unicodedata
 from functools import lru_cache
 from pathlib import Path
 
 ARQUIVO = Path(__file__).resolve().parents[1] / "disciplinas" / "cursos.json"
+CADASTRO = Path(__file__).resolve().parents[1] / "disciplinas" / "disciplinas.json"
+
+
+def _chave(nome: str) -> str:
+    """Nome sem acento, caixa e pontuação: "Computação, Sociedade e Ética" -> "computacao sociedade e etica"."""
+    s = unicodedata.normalize("NFKD", nome).encode("ascii", "ignore").decode().lower()
+    return re.sub(r"[^a-z0-9]+", " ", s).strip()
+
+
+def _acervos_por_nome(cadastro: dict) -> dict[str, str]:
+    """Nome normalizado -> id do acervo, para as disciplinas disponíveis (fora de "em validação").
+
+    Vale o `nome` da disciplina e cada nome de `nomes_nos_cursos` (como ela aparece na matriz de
+    algum curso, quando o nome é outro). Assim toda disciplina nova liga sozinha às matrizes.
+    """
+    mapa: dict[str, str] = {}
+    for d in cadastro.get("disciplinas", []):
+        if d.get("situacao") == "em validação":
+            continue
+        for nome in [d["nome"], *d.get("nomes_nos_cursos", [])]:
+            mapa.setdefault(_chave(nome), d["id"])
+    return mapa
+
+
+def _ligar_acervos(dados: dict, cadastro: dict) -> dict:
+    """Preenche `acervo` nas matrizes. Um `acervo` escrito em cursos.json tem prioridade."""
+    por_nome = _acervos_por_nome(cadastro)
+    ids = {d["id"] for d in cadastro.get("disciplinas", [])}
+    for c in dados["cursos"]:
+        for p in c["periodos"]:
+            for x in p["disciplinas"]:
+                if x.get("acervo") in ids:
+                    continue
+                auto = por_nome.get(_chave(x["nome"]))
+                if auto:
+                    x["acervo"] = auto
+                else:
+                    x.pop("acervo", None)
+    return dados
 
 
 @lru_cache(maxsize=1)
 def _dados() -> dict:
-    return json.loads(ARQUIVO.read_text(encoding="utf-8"))
+    dados = json.loads(ARQUIVO.read_text(encoding="utf-8"))
+    cadastro = json.loads(CADASTRO.read_text(encoding="utf-8"))
+    return _ligar_acervos(dados, cadastro)
 
 
 def publico() -> dict:
