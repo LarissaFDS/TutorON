@@ -1118,6 +1118,28 @@
         "Como fazer encadeamento para frente e para trás?",
         "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?"
       ]
+    },
+    {
+      "id": "cg",
+      "nome": "Computação Gráfica",
+      "sigla": "CG",
+      "situacao": "MVP",
+      "itens": "disciplinas/cg/acervo/itens.json",
+      "indice": "disciplinas/cg/acervo/indice.json",
+      "materiais": "disciplinas/cg/materiais",
+      "rigor": "disciplinas/cg/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "cg-01-fundamentos-e-rasterizacao",
+        "cg-02-transformacoes-projecao-e-recorte",
+        "cg-03-modelagem-iluminacao-e-textura"
+      ],
+      "exemplos": [
+        "Como funciona o algoritmo de Bresenham?",
+        "Como compor rotação e translação em coordenadas homogêneas?",
+        "Qual a diferença entre o sombreamento de Gouraud e o de Phong?",
+        "Como funciona o recorte de Cohen-Sutherland?"
+      ]
     }
   ]
 }

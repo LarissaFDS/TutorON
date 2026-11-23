@@ -290,6 +290,12 @@ PERGUNTAS = [
     ("ia-encadeamento", "ia", "Como fazer encadeamento para frente e para trás?", "guiado por dados e por objetivos; ponto fixo"),
     ("ia-rbc", "ia", "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?", "recuperar, reusar, revisar, reter; similaridade"),
     ("ia-fora", "ia", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
+    # Computação Gráfica: conferidas em tests_acervo/test_disciplina_cg.py.
+    ("cg-bresenham", "cg", "Como funciona o algoritmo de Bresenham?", "parâmetro de decisão; só somas inteiras"),
+    ("cg-composicao", "cg", "Como compor rotação e translação em coordenadas homogêneas?", "matriz 3x3; ordem da multiplicação importa"),
+    ("cg-cohen", "cg", "Como funciona o recorte de Cohen-Sutherland?", "códigos de 4 bits; aceitação e rejeição trivial"),
+    ("cg-gouraud", "cg", "Qual a diferença entre o sombreamento de Gouraud e o de Phong?", "interpola intensidades ou normais; brilho especular"),
+    ("cg-fora", "cg", "Como funciona a poda alfa-beta?", "diz que é de Inteligência Artificial; sem fontes"),
     # Noções de Direito: conferidas em tests_acervo/test_disciplina_direito.py.
     ("dir-fontes", "direito", "Quais são as fontes do Direito?", "lei, costume, analogia, princípios; LINDB art. 4º"),
     ("dir-kelsen", "direito", "O que é a pirâmide de Kelsen?", "Constituição no topo; escalonamento"),

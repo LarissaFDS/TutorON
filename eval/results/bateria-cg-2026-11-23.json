@@ -1,0 +1,92 @@
+[
+ {
+  "id": "cg-bresenham",
+  "disciplina": "cg",
+  "pergunta": "Como funciona o algoritmo de Bresenham?",
+  "esperado": "parâmetro de decisão; só somas inteiras",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 58.2,
+  "fontes": [
+   "Exercícios e provas de Computação Gráfica do Prof. Marcelo Costa Oliveira (IC-UFAL)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "O **algoritmo de Bresenham** é uma técnica de **rasterização** [P1] usada para desenhar primitivas vetoriais (como retas) em uma grade de pixels. O seu grande diferencial em relação ao algoritmo DDA é trabalhar **apenas com números inteiros**, eliminando a necessidade de arredondamentos e operações em ponto flutuante [P1].\n\n### A ideia principal\nPara uma reta com inclinação entre 0 e 1 ($0 \\le m \\le 1$):\n- A cada passo, avançamos sempre 1 unidade no eixo $x$.\n- Para o eixo $y$, o algoritmo precisa decidir entre duas opções de pixels vizinhos:\n  - **E** (*East* / Leste): mantém o valor atual de $y$.\n  - **NE** (*North-East* / Nordeste): incrementa $y$ em 1.\n\n### O parâmetro de decisão\nA escolha entre **E** e **NE** é feita por uma variável inteira $p$ (parâmetro de decisão) [P1]:\n1. Calculamos $dx = x_2 - x_1$ e $dy = y_2 - y_1$.\n2. O valor inicial é $p_0 = 2dy - dx$.\n3. Em cada passo do $x$:\n   - Se $p < 0$: escolhe-se **E** (mantém $y$) e atualiza-se $p \\leftarrow p + 2dy$.\n   - Se $p \\ge 0$: escolhe-se **NE** ($y$ aumenta 1) e atualiza-se $p \\leftarrow p + 2(dy - dx)$.\n\n**Verificação:** Para conferir o resultado no papel, substitua o valor de $x$ na equação contínua da reta $y = y_1 + m(x - x_1)$ e veja se o pixel escolhido é o que tem menor distância vertical em relação à reta ideal.\n\n---\n\n### Sua vez\nVamos aplicar os passos iniciais no papel para uma reta de $(0,0)$ a $(6,3)$:\n\n1. Calcule os valores de $dx$ e $dy$.\n2. Encontre o valor do parâmetro inicial $p_0$.\n\nEscreva os dois resultados para darmos o próximo passo!"
+ },
+ {
+  "id": "cg-composicao",
+  "disciplina": "cg",
+  "pergunta": "Como compor rotação e translação em coordenadas homogêneas?",
+  "esperado": "matriz 3x3; ordem da multiplicação importa",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 54.2,
+  "fontes": [
+   "Exercícios e provas de Computação Gráfica do Prof. Marcelo Costa Oliveira (IC-UFAL)",
+   "Exercícios e provas de Computação Gráfica do Prof. Marcelo Costa Oliveira (IC-UFAL)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Em Computação Gráfica, representamos transformações geométricas como matrizes em coordenadas homogêneas ($3 \\times 3$ para 2D ou $4 \\times 4$ para 3D), o que nos permite combinar qualquer sequência de operações em uma única matriz equivalente por meio da **multiplicação de matrizes** [P1].\n\nO ponto fundamental da composição é a **ordem das matrizes**:\n\n- Considerando a convenção de vetor-coluna, ao aplicar primeiro uma transformação $A$ e em seguida uma transformação $B$ sobre um ponto $P$, escrevemos:\n  $$P' = B \\cdot (A \\cdot P) = (B \\cdot A) \\cdot P$$\n- Assim, a matriz composta é $M = B \\cdot A$. A primeira transformação aplicada fica sempre **mais à direita** [P1].\n\nComo a multiplicação de matrizes não é comutativa, girar e depois trasladar ($T \\cdot R$) resulta em uma posição final diferente de trasladar e depois girar ($R \\cdot T$).\n\n**Verificação:** Para conferir a matriz composta obtida, aplique $M$ a um ponto conhecido (como a origem ou um vértice do objeto) e verifique se as coordenadas finais equivalem a aplicar cada transformação individualmente, uma após a outra.\n\n### Sua vez\nNo seu caderno, monte o produto de matrizes para a seguinte situação: você quer **primeiro aplicar uma rotação** $R(\\theta)$ e **depois uma translação** $T(d_x, d_y)$ em 2D. \n\nQual é a expressão da matriz resultante $M$ em termos de $T$ e $R$? (Escreva apenas a ordem do produto $M = \\dots \\cdot \\dots$)."
+ },
+ {
+  "id": "cg-cohen",
+  "disciplina": "cg",
+  "pergunta": "Como funciona o recorte de Cohen-Sutherland?",
+  "esperado": "códigos de 4 bits; aceitação e rejeição trivial",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 52.2,
+  "fontes": [
+   "Exercícios e provas de Computação Gráfica do Prof. Marcelo Costa Oliveira (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O algoritmo de **Cohen-Sutherland** é uma técnica eficiente para recortar segmentos de linha em uma janela definida. Ele usa **códigos de região** para identificar rapidamente se um segmento está inteiramente dentro, inteiramente fora ou parcialmente visível. A ideia principal é **reduzir o número de cálculos** ao usar esses códigos para tomar decisões rápidas.\n\nAgora, vamos pensar juntos:  \n- O que acontece se um segmento tem ambas as extremidades dentro da janela?  \n- E se ambas estiverem fora?  \n- E se uma estiver dentro e a outra fora?  \n\n### Sua vez  \nEscreva os **códigos de região** para um ponto que está **acima** e **à direita** da janela. Depois, diga qual seria a **decisão trivial** se as duas extremidades de um segmento tivessem esses códigos."
+ },
+ {
+  "id": "cg-gouraud",
+  "disciplina": "cg",
+  "pergunta": "Qual a diferença entre o sombreamento de Gouraud e o de Phong?",
+  "esperado": "interpola intensidades ou normais; brilho especular",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 44.2,
+  "fontes": [
+   "Exercícios e provas de Computação Gráfica do Prof. Marcelo Costa Oliveira (IC-UFAL)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre Gouraud e Phong está em **como a iluminação é calculada e propagada pelo polígono**. Um dos pontos-chave é **onde** o cálculo da intensidade é feito: nos vértices (Gouraud) ou em cada pixel (Phong).\n\nVamos pensar juntos:  \n- Em Gouraud, a intensidade é calculada **nos vértices** e depois **interpolada** ao longo das arestas e das linhas de varredura.  \n- Em Phong, a intensidade é calculada **em cada pixel**, após a interpolação das **normais**.\n\nAgora, faça uma pergunta:  \n**Qual modelo (Gouraud ou Phong) é mais adequado para representar reflexos especulares precisos? Por quê?**  \n\n### Sua vez  \nEscreva uma frase que compare Gouraud e Phong com base na **localização do cálculo da intensidade**."
+ },
+ {
+  "id": "cg-fora",
+  "disciplina": "cg",
+  "pergunta": "Como funciona a poda alfa-beta?",
+  "esperado": "diz que é de Inteligência Artificial; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 34.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A poda alfa-beta é uma técnica de otimização para o algoritmo minimax, que é usado em jogos de dois jogadores. O objetivo é reduzir o número de nós que precisam ser avaliados, economizando tempo de processamento.\n\nVamos pensar juntos: o que acontece quando um nó é avaliado e seu valor é melhor que o melhor valor que o outro jogador pode obter? Como isso pode ser usado para cortar a árvore de busca?\n\n### Sua vez  \nDesenhe um pequeno diagrama da árvore de busca de um jogo simples (como o jogo da velha) e marque os nós com valores. Agora, tente identificar em qual situação a poda alfa-beta poderia ser aplicada. O que você acha que acontece com os nós que ficam abaixo desse nó?"
+ }
+]
