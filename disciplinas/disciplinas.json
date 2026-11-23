@@ -1052,6 +1052,28 @@
         "Como montar um código de conduta ética?",
         "O que é computação verde?"
       ]
+    },
+    {
+      "id": "direito",
+      "nome": "Noções de Direito",
+      "sigla": "DIR",
+      "situacao": "em validação",
+      "itens": "disciplinas/direito/acervo/itens.json",
+      "indice": "disciplinas/direito/acervo/indice.json",
+      "materiais": "disciplinas/direito/materiais",
+      "rigor": "disciplinas/direito/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "dir-01-introducao-ao-direito",
+        "dir-02-constituicao-e-direitos-humanos",
+        "dir-03-direito-civil-e-digital"
+      ],
+      "exemplos": [
+        "Quais são as fontes do Direito?",
+        "O que é a pirâmide de Kelsen?",
+        "Como registrar um software no INPI?",
+        "O que é a teoria dos frutos da árvore envenenada?"
+      ]
     }
   ]
 }
