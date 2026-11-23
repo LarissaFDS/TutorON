@@ -284,6 +284,14 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Computação, Sociedade e Ética: conferidas em tests_acervo/test_disciplina_etica.py.
+    ("etica-lgpd", "etica", "Quais são os princípios da LGPD?",
+     "art. 6º, dez princípios; sem inventar incisos"),
+    ("etica-4passos", "etica", "Como aplicar a técnica dos 4 passos num caso de IA?",
+     "reunir dados, analisar, negociar, avaliar alternativas; sem escrever o trabalho"),
+    ("etica-conduta", "etica", "Como montar um código de conduta ética?", "abrangência, regras, canal, sanções"),
+    ("etica-verde", "etica", "O que é computação verde?", "energia, PUE, e-lixo; posições divergentes"),
+    ("etica-fora", "etica", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Interação Humano-Computador: conferidas em tests_acervo/test_disciplina_ihc.py.
     ("ihc-voz-alta", "ihc", "O que é pensamento em voz alta num teste de usabilidade?",
      "usuário fala o que procura; não ajudar; gravar com consentimento"),
