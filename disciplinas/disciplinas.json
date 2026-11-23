@@ -374,7 +374,7 @@
       "id": "pcom",
       "nome": "Princípios de Comunicação",
       "sigla": "PCOM",
-      "situacao": "em validação",
+      "situacao": "MVP",
       "itens": "disciplinas/pcom/acervo/itens.json",
       "indice": "disciplinas/pcom/acervo/indice.json",
       "materiais": "disciplinas/pcom/materiais",
@@ -767,6 +767,312 @@
         "Quais são as assíntotas de x²/(x−1)?",
         "Como resolver o problema da escada que desliza na parede?",
         "Qual o cilindro de volume máximo inscrito num cone?"
+      ]
+    },
+    {
+      "id": "grafos",
+      "nome": "Teoria dos Grafos",
+      "sigla": "GRAFOS",
+      "situacao": "MVP",
+      "itens": "disciplinas/grafos/acervo/itens.json",
+      "indice": "disciplinas/grafos/acervo/indice.json",
+      "materiais": "disciplinas/grafos/materiais",
+      "rigor": "disciplinas/grafos/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "grafos-01-conceitos",
+        "grafos-02-arvores-conectividade",
+        "grafos-03-percursos-caminhos",
+        "grafos-04-emparelhamento-estabilidade",
+        "grafos-05-coloracao",
+        "grafos-06-planaridade",
+        "grafos-07-digrafos-fluxos"
+      ],
+      "exemplos": [
+        "Por que todo grafo euleriano não tem ponte?",
+        "Como mostrar que o grafo de Petersen não é hamiltoniano?",
+        "Quando um grafo com n vértices e m arestas pode ser planar?",
+        "Como achar o fluxo máximo com Ford-Fulkerson?"
+      ]
+    },
+    {
+      "id": "projsw",
+      "nome": "Projeto de Software",
+      "sigla": "PROJSW",
+      "situacao": "MVP",
+      "itens": "disciplinas/projsw/acervo/itens.json",
+      "indice": "disciplinas/projsw/acervo/indice.json",
+      "materiais": "disciplinas/projsw/materiais",
+      "rigor": "disciplinas/projsw/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "projsw-01-classes-objetos",
+        "projsw-02-colecoes-genericos",
+        "projsw-03-heranca-composicao",
+        "projsw-04-polimorfismo-interfaces",
+        "projsw-05-regras-de-projeto",
+        "projsw-06-refatoramento",
+        "projsw-07-excecoes-arquivos"
+      ],
+      "exemplos": [
+        "Qual a diferença entre == e equals em Java?",
+        "Quando usar composição em vez de herança?",
+        "Em que ordem os construtores rodam numa hierarquia de classes?",
+        "Qual a saída do programa de soma com os argumentos 2 4 oi?"
+      ]
+    },
+    {
+      "id": "redes",
+      "nome": "Redes de Computadores",
+      "sigla": "REDES",
+      "situacao": "MVP",
+      "itens": "disciplinas/redes/acervo/itens.json",
+      "indice": "disciplinas/redes/acervo/indice.json",
+      "materiais": "disciplinas/redes/materiais",
+      "rigor": "disciplinas/redes/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "redes-01-camadas-encapsulamento",
+        "redes-02-aplicacao",
+        "redes-03-sockets-multiplexacao",
+        "redes-04-transporte-tcp",
+        "redes-05-congestionamento",
+        "redes-06-camada-de-rede",
+        "redes-07-roteamento"
+      ],
+      "exemplos": [
+        "Como funciona o GET condicional do HTTP?",
+        "Qual a diferença entre controle de fluxo e controle de congestionamento?",
+        "Com máscara /30, 192.168.0.9 e 192.168.0.13 conversam?",
+        "Qual a diferença entre Link State e Vetor de Distância?"
+      ]
+    },
+    {
+      "id": "clp",
+      "nome": "Conceitos de Linguagens de Programação",
+      "sigla": "CLP",
+      "situacao": "MVP",
+      "itens": "disciplinas/clp/acervo/itens.json",
+      "indice": "disciplinas/clp/acervo/indice.json",
+      "materiais": "disciplinas/clp/materiais",
+      "rigor": "disciplinas/clp/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "clp-01-criterios-e-historia",
+        "clp-02-nomes-vinculacao-escopo",
+        "clp-03-tipos",
+        "clp-04-arrays-e-registros",
+        "clp-05-expressoes-e-controle",
+        "clp-06-subprogramas"
+      ],
+      "exemplos": [
+        "Qual a diferença entre escopo estático e dinâmico?",
+        "O que é coerção e tipagem forte?",
+        "Qual a diferença entre passagem por valor-resultado e por referência?",
+        "Como calcular o endereço de A[j,k] com armazenamento por coluna?"
+      ]
+    },
+    {
+      "id": "sd_dist",
+      "nome": "Sistemas Distribuídos",
+      "sigla": "SDIST",
+      "situacao": "MVP",
+      "itens": "disciplinas/sd_dist/acervo/itens.json",
+      "indice": "disciplinas/sd_dist/acervo/indice.json",
+      "materiais": "disciplinas/sd_dist/materiais",
+      "rigor": "disciplinas/sd_dist/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "sd_dist-01-caracterizacao-e-modelos",
+        "sd_dist-02-comunicacao",
+        "sd_dist-03-coordenacao-e-falhas",
+        "sd_dist-04-tecnologias"
+      ],
+      "exemplos": [
+        "O que é middleware?",
+        "Qual a diferença entre publicar-assinar e fila de mensagens?",
+        "Para que servem os algoritmos de eleição de líder?",
+        "Qual a diferença entre detector de falhas confiável e não confiável?"
+      ]
+    },
+    {
+      "id": "am",
+      "nome": "Aprendizagem de Máquina",
+      "sigla": "AM",
+      "situacao": "MVP",
+      "itens": "disciplinas/am/acervo/itens.json",
+      "indice": "disciplinas/am/acervo/indice.json",
+      "materiais": "disciplinas/am/materiais",
+      "rigor": "disciplinas/am/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "am-01-fundamentos-e-kdd",
+        "am-02-classificacao",
+        "am-03-agrupamento-e-associacao",
+        "am-04-reforco"
+      ],
+      "exemplos": [
+        "Quais os três tipos de aprendizagem de máquina?",
+        "Como avaliar um classificador com validação cruzada?",
+        "Qual a diferença entre k-means e DBSCAN?",
+        "Como funciona o Q-learning?"
+      ]
+    },
+    {
+      "id": "cd",
+      "nome": "Ciência de Dados",
+      "sigla": "CDAD",
+      "situacao": "MVP",
+      "itens": "disciplinas/cd/acervo/itens.json",
+      "indice": "disciplinas/cd/acervo/indice.json",
+      "materiais": "disciplinas/cd/materiais",
+      "rigor": "disciplinas/cd/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "cd-01-fundamentos",
+        "cd-02-preparacao-e-avaliacao",
+        "cd-03-metodos",
+        "cd-04-series-meta-visualizacao"
+      ],
+      "exemplos": [
+        "Qual a diferença entre Ciência de Dados e Big Data?",
+        "Como remover outliers dos dados?",
+        "Quais os componentes de uma série temporal?",
+        "O que é meta-aprendizado?"
+      ]
+    },
+    {
+      "id": "compevol",
+      "nome": "Computação Evolucionária",
+      "sigla": "CEVO",
+      "situacao": "MVP",
+      "itens": "disciplinas/compevol/acervo/itens.json",
+      "indice": "disciplinas/compevol/acervo/indice.json",
+      "materiais": "disciplinas/compevol/materiais",
+      "rigor": "disciplinas/compevol/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "compevol-01-fundamentos",
+        "compevol-02-operadores",
+        "compevol-03-outras-metaheuristicas",
+        "compevol-04-atividades-2021"
+      ],
+      "exemplos": [
+        "Como funciona a seleção por roleta?",
+        "O que é o teorema dos esquemas?",
+        "Qual a regra do 1/5 nas estratégias evolutivas?",
+        "O que é dominância de Pareto?"
+      ]
+    },
+    {
+      "id": "pln",
+      "nome": "Processamento de Linguagem Natural",
+      "sigla": "PLN",
+      "situacao": "MVP",
+      "itens": "disciplinas/pln/acervo/itens.json",
+      "indice": "disciplinas/pln/acervo/indice.json",
+      "materiais": "disciplinas/pln/materiais",
+      "rigor": "disciplinas/pln/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "pln-01-regex-e-preprocessamento",
+        "pln-02-representacao-e-classificacao",
+        "pln-03-topicos-agrupamento-e-embeddings",
+        "pln-04-redes-neurais-e-spacy"
+      ],
+      "exemplos": [
+        "Como usar grupos nomeados em expressões regulares?",
+        "Qual a diferença entre CountVectorizer e TF-IDF?",
+        "Como escolher o número de tópicos no LDA?",
+        "Como funciona o word2vec?"
+      ]
+    },
+    {
+      "id": "seguranca",
+      "nome": "Segurança de Sistemas Computacionais",
+      "sigla": "SEG",
+      "situacao": "MVP",
+      "itens": "disciplinas/seguranca/acervo/itens.json",
+      "indice": "disciplinas/seguranca/acervo/indice.json",
+      "materiais": "disciplinas/seguranca/materiais",
+      "rigor": "disciplinas/seguranca/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "seg-01-fundamentos-e-politica",
+        "seg-02-ameacas-e-ataques",
+        "seg-03-criptografia-e-autenticacao",
+        "seg-04-seguranca-em-redes"
+      ],
+      "exemplos": [
+        "Quais os requisitos básicos de segurança da informação?",
+        "Qual a diferença entre MAC e assinatura digital?",
+        "Quais requisitos o IPSec com ESP atende?",
+        "Por que o WEP é inseguro?"
+      ]
+    },
+    {
+      "id": "ihc",
+      "nome": "Interação Humano-Computador",
+      "sigla": "IHC",
+      "situacao": "MVP",
+      "itens": "disciplinas/ihc/acervo/itens.json",
+      "indice": "disciplinas/ihc/acervo/indice.json",
+      "materiais": "disciplinas/ihc/materiais",
+      "rigor": "disciplinas/ihc/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ihc-01-design-centrado-no-usuario",
+        "ihc-02-avaliacao-de-usabilidade"
+      ],
+      "exemplos": [
+        "O que é pensamento em voz alta num teste de usabilidade?",
+        "Como calcular a pontuação do SUS?",
+        "Quais são as heurísticas de Nielsen?",
+        "Como criar uma persona?"
+      ]
+    },
+    {
+      "id": "etica",
+      "nome": "Computação, Sociedade e Ética",
+      "sigla": "CSE",
+      "situacao": "MVP",
+      "itens": "disciplinas/etica/acervo/itens.json",
+      "indice": "disciplinas/etica/acervo/indice.json",
+      "materiais": "disciplinas/etica/materiais",
+      "rigor": "disciplinas/etica/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "etica-01-fundamentos-eticos",
+        "etica-02-tecnologia-e-sociedade",
+        "etica-03-etica-profissional-e-lgpd"
+      ],
+      "exemplos": [
+        "Quais são os princípios da LGPD?",
+        "Como aplicar a técnica dos 4 passos num caso de IA?",
+        "Como montar um código de conduta ética?",
+        "O que é computação verde?"
+      ]
+    },
+    {
+      "id": "direito",
+      "nome": "Noções de Direito",
+      "sigla": "DIR",
+      "situacao": "MVP",
+      "itens": "disciplinas/direito/acervo/itens.json",
+      "indice": "disciplinas/direito/acervo/indice.json",
+      "materiais": "disciplinas/direito/materiais",
+      "rigor": "disciplinas/direito/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "dir-01-introducao-ao-direito",
+        "dir-02-constituicao-e-direitos-humanos",
+        "dir-03-direito-civil-e-digital"
+      ],
+      "exemplos": [
+        "Quais são as fontes do Direito?",
+        "O que é a pirâmide de Kelsen?",
+        "Como registrar um software no INPI?",
+        "O que é a teoria dos frutos da árvore envenenada?"
       ]
     }
   ]

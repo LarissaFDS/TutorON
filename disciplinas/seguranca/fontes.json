@@ -1,0 +1,118 @@
+{
+ "disciplina": "seguranca",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-seguranca-provas-listas",
+   "nome": "Provas AB1, AB2, reposições e final (2020.1 e 2020.2) e listas semanais 1 a 11 de Segurança de Sistemas Computacionais",
+   "autoria": "IC-UFAL (professor não identificado nos PDFs)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "seg-01-fundamentos-e-politica",
+    "seg-02-ameacas-e-ataques",
+    "seg-03-criptografia-e-autenticacao",
+    "seg-04-seguranca-em-redes"
+   ],
+   "licenca": "Não declarada (provas e listas)",
+   "acesso": "Pasta da turma de CC; não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados em s01–s15; as provas de 2020.2 com respostas e as respostas das listas são de alunos e não foram usadas"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "stallings-cripto",
+   "nome": "Criptografia e Segurança de Redes: Princípios e Prática, 6ª ed.",
+   "autoria": "William Stallings (Pearson, 2014)",
+   "url": null,
+   "formato": "Livro",
+   "topicos": [
+    "seg-03-criptografia-e-autenticacao",
+    "seg-04-seguranca-em-redes"
+   ],
+   "licenca": "Protegido (livro); base dos slides das semanas 10 e 11",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Base dos slides de redes sem fio e SSL; não reproduzido"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "kurose-redes-seguranca",
+   "nome": "Redes de Computadores e a Internet, capítulo de segurança",
+   "autoria": "James Kurose e Keith Ross (Pearson)",
+   "url": null,
+   "formato": "Livro",
+   "topicos": [
+    "seg-03-criptografia-e-autenticacao",
+    "seg-04-seguranca-em-redes"
+   ],
+   "licenca": "Protegido (livro); origem dos exercícios ap1.0–ap5.0 e SSL das listas 9 e 11",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Sequência ap1.0–ap5.0 e apresentação SSL didática; não reproduzido"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "normas-iso-27000",
+   "nome": "Normas da família ISO/IEC 27000 (arquivos norma1 e norma2 da pasta)",
+   "autoria": "ABNT/ISO",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "seg-01-fundamentos-e-politica"
+   ],
+   "licenca": "Protegido (norma técnica)",
+   "acesso": "Não versionadas; só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Referência para a política de segurança; texto não reproduzido"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "rfcs-seguranca",
+   "nome": "RFC 1994 (CHAP), RFC 4303 (ESP), RFC 2644 (broadcast direcionado), BCP 38 (filtragem de origem), RFC 8446 (TLS 1.3)",
+   "autoria": "IETF",
+   "url": "https://www.rfc-editor.org/rfc/rfc1994",
+   "formato": "HTML",
+   "topicos": [
+    "seg-02-ameacas-e-ataques",
+    "seg-03-criptografia-e-autenticacao",
+    "seg-04-seguranca-em-redes"
+   ],
+   "licenca": "IETF Trust (texto das RFCs, reprodução permitida com aviso)",
+   "acesso": "Citadas",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Detalhes de CHAP, janela anti-reprodução do ESP, Smurf e spoofing conferidos nos testes"
+  }
+ ]
+}

@@ -1,0 +1,97 @@
+[
+ {
+  "id": "projsw-equals",
+  "disciplina": "projsw",
+  "pergunta": "Qual a diferença entre == e equals em Java?",
+  "esperado": "== compara referências; equals de Object também; sobrescrever equals e hashCode juntos; não comparar String com ==",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 28.1,
+  "fontes": [
+   "Notas de aula de Programação II (UFCG), seções \"Usando objetos\" e \"Criação de Classes\""
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Em Java, a diferença entre o operador `==` e o método `equals()` está no que exatamente é comparado:\n\n1. **Operador `==` (Comparação de valor/referência):**\n   - Para **tipos primitivos** (`int`, `double`, `boolean`), compara diretamente o valor armazenado.\n   - Para **objetos**, compara as **referências** na memória. Retorna `true` apenas se ambas as variáveis apontarem para exatamente o *mesmo* objeto.\n\n2. **Método `equals()` (Comparação lógica/conteúdo):**\n   - É um método herdado da classe `Object`.\n   - Na implementação original de `Object`, ele se comporta igual ao `==`.\n   - Porém, classes da API do Java (como `String`) ou classes criadas por você (como a classe `Pessoa` em `[P1]`) podem **sobrescrever** o método `equals()` para comparar o **conteúdo/estado** dos objetos (por exemplo, checar se o CPF e o nome são iguais), independentemente de serem instâncias diferentes na memória.\n\nComo aponta `[P1]`, criar dois objetos com `new` gera duas referências distintas. Portanto, `==` retornará `false`, mas `equals()` retornará `true` caso a classe tenha sobrescrito o método para comparar o conteúdo.\n\n---\n\n### Sua vez\n\nEscreva no papel a resposta para o seguinte cenário em Java:\n\n```java\nString s1 = new String(\"Computacao\");\nString s2 = new String(\"Computacao\");\n```\n\n1. Qual é o resultado de `s1 == s2` (`true` ou `false`)?\n2. Qual é o resultado de `s1.equals(s2)` (`true` ou `false`)?\n3. Justifique brevemente cada um dos resultados com base na diferença entre referência na memória e conteúdo do objeto."
+ },
+ {
+  "id": "projsw-composicao",
+  "disciplina": "projsw",
+  "pergunta": "Quando usar composição em vez de herança?",
+  "esperado": "é um versus tem um; herança acopla mais; mudanças na base quebram subclasses; composição muda em execução",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Notas de aula de Programação II (UFCG), seção \"Reuso por composição e herança\"",
+   "Notas de aula de Programação II (UFCG), seção \"Regras básicas de projeto OO (I)\"",
+   "Notas de aula de Programação II (UFCG), seção \"Regras básicas de projeto OO (II)\", regra 4"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para decidir entre composição e herança, o ponto de partida é analisar a natureza do relacionamento entre os objetos.\n\nA **herança** estabelece um vínculo rígido, definido em tempo de compilação, onde a subclasse \"é um\" tipo da superclasse. Isso é útil quando você precisa de polimorfismo, ou seja, tratar diferentes objetos da mesma forma através de uma interface comum. No entanto, essa rigidez cria um acoplamento forte: qualquer mudança na superclasse pode impactar diretamente todas as suas subclasses.\n\nA **composição**, por outro lado, expressa que um objeto \"tem um\" outro objeto. Ela oferece um acoplamento muito mais fraco, pois o objeto composto pode ser alterado em tempo de execução e a classe que o contém não precisa conhecer os detalhes internos de como o componente funciona — ela apenas delega tarefas a ele.\n\nPense no seu projeto:\n1. Existe uma hierarquia real onde um objeto *é* uma versão especializada de outro, ou você apenas quer aproveitar funcionalidades de outra classe?\n2. Você precisa trocar o comportamento desse objeto durante a execução do programa?\n\nSe você não precisa tratar o objeto como se fosse a superclasse, a composição costuma ser a escolha mais segura e flexível para manter seu código desacoplado.\n\n### Sua vez\nImagine que você está modelando um sistema de `Carro`. Você deve usar herança ou composição para representar o `Motor` do carro? Justifique sua escolha baseando-se na regra do \"é um\" vs \"tem um\" e na flexibilidade de trocar o motor."
+ },
+ {
+  "id": "projsw-construtores",
+  "disciplina": "projsw",
+  "pergunta": "Em que ordem os construtores rodam numa hierarquia de classes?",
+  "esperado": "super primeiro até Object; depois atributos; depois o corpo; método sobrescrito no construtor roda o da subclasse",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Notas de aula de Programação II (UFCG), seção \"Reuso por composição e herança\"",
+   "Notas de aula de Programação II (UFCG), seções \"Polimorfismo\", \"Interfaces\" e \"Regras básicas de projeto OO (II)\"",
+   "Notas de aula de Programação II (UFCG), seção \"Regras básicas de projeto OO (I)\""
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a ordem de execução dos construtores, imagine que uma classe filha é uma \"extensão\" de sua classe pai. Para que o objeto da classe filha exista e funcione corretamente, ele precisa primeiro garantir que a estrutura básica (o pai) esteja pronta.\n\nPense no processo como uma construção de um prédio: você não consegue terminar o acabamento do último andar se a fundação e os andares inferiores não estiverem consolidados. Em Java, o compilador garante essa hierarquia através da chamada ao construtor da superclasse.\n\nQuando você instancia uma classe, o primeiro passo é subir toda a hierarquia até chegar na classe `Object` (a raiz de tudo). A partir daí, os construtores começam a rodar de cima para baixo, mas com uma regra importante sobre os atributos da própria classe que você está instanciando.\n\nReleia a seção **[P1]** do material, especificamente a regra dos três passos:\n1. Chamada ao construtor da superclasse (`super()`).\n2. Inicialização dos atributos da própria classe.\n3. Execução do corpo do construtor.\n\nSe você tem uma classe `C` que herda de `B`, que herda de `A`, qual construtor é executado primeiro e em que momento os atributos de `C` são inicializados em relação ao corpo do construtor de `C`?\n\n### Sua vez\nDesenhe no papel a hierarquia `Refeicao` -> `Almoco` -> `AlmocoPortatil` -> `MistoQuente` e escreva a sequência de execução dos construtores, indicando em que ponto os atributos de `MistoQuente` (como `Pao`) são inicializados."
+ },
+ {
+  "id": "projsw-excecoes",
+  "disciplina": "projsw",
+  "pergunta": "Qual a saída do programa de soma com os argumentos 2 4 oi?",
+  "esperado": "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Notas de aula de Programação II (UFCG), seção \"Tratamento de erros com exceções\"",
+   "Notas de aula de Programação II (UFCG), seção \"Reuso por composição e herança\"",
+   "Notas de aula de Programação II (UFCG), seção \"Estrutura de dados — Arquivos\""
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para responder a essa pergunta, precisamos primeiro identificar qual das duas versões do código você está utilizando: aquela em que o `try-catch` envolve todo o laço ou aquela em que o `try-catch` está dentro do laço, protegendo apenas a conversão individual de cada argumento.\n\nObserve o material [P1]:\n1. Na **Versão 1**, quando o `Integer.parseInt(\"oi\")` falha, o fluxo de execução é interrompido imediatamente e o programa salta para o bloco `catch`. O que acontece com o restante dos números que ainda não foram somados?\n2. Na **Versão 2**, o `try-catch` está dentro do `for`. Quando o erro ocorre para o argumento \"oi\", o bloco `catch` é executado, mas o que acontece com o laço `for` na iteração seguinte?\n\nSe você olhar o exemplo da Versão 2 no material, verá que ele imprime uma mensagem específica de erro e, ao final, o valor acumulado da soma.\n\nPara chegar à resposta, tente desenhar o fluxo de execução no papel:\n- Se o `try` está fora, o programa \"desiste\" da soma ao encontrar o primeiro erro.\n- Se o `try` está dentro, o programa \"ignora\" o erro e continua processando os demais argumentos.\n\n### Sua vez\nConsiderando o código da **Versão 2** (o que está dentro do laço), qual seria a saída exata no console se você executasse o programa com os argumentos `2 4 oi`? Escreva no papel a sequência de linhas que apareceriam no `System.err` e no `System.out`."
+ },
+ {
+  "id": "projsw-fora",
+  "disciplina": "projsw",
+  "pergunta": "Como calcular uma integral dupla em coordenadas polares?",
+  "esperado": "diz que é de Cálculo 3; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 8.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular uma integral dupla em coordenadas polares, o segredo está em como transformamos a região de integração e o diferencial de área.\n\nQuando passamos de coordenadas cartesianas $(x, y)$ para polares $(r, \\theta)$, usamos as relações fundamentais:\n$x = r \\cos(\\theta)$\n$y = r \\sin(\\theta)$\n$x^2 + y^2 = r^2$\n\nO ponto crucial, que muitas vezes é esquecido, é o que acontece com o diferencial de área $dA$. Em coordenadas cartesianas, temos $dA = dx \\, dy$. Ao mudar para polares, o elemento de área \"estica\" conforme nos afastamos da origem, o que nos obriga a incluir um fator de correção chamado **Jacobiano** da transformação.\n\nVocê se lembra qual é o valor desse fator que multiplica o $dr \\, d\\theta$ na integral?\n\nAlém disso, ao montar os limites de integração, lembre-se de que $r$ representa a distância até a origem e $\\theta$ o ângulo varrido. Se você tiver uma região circular, por exemplo, como ficariam os limites para $r$ e para $\\theta$?\n\n### Sua vez\nTente escrever a fórmula geral da integral dupla $\\iint_R f(x, y) \\, dA$ convertida para coordenadas polares, incluindo o termo do Jacobiano. Se quiser, desenhe um pequeno setor circular no papel para visualizar por que o $r$ aparece ali."
+ }
+]

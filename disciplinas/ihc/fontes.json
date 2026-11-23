@@ -1,0 +1,133 @@
+{
+ "disciplina": "ihc",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-ihc-slides-dcu",
+   "nome": "Slides \"A Nova Informática: Design centrado no Usuário\" (18 slides)",
+   "autoria": "Material da disciplina COMP395 (IC-UFAL); autor dos slides não identificado",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "ihc-01-design-centrado-no-usuario",
+    "ihc-02-avaliacao-de-usabilidade"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Pasta da turma de CC; não versionado",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseado em h01, h02, h07 e h08"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-ihc-etapas-projeto",
+   "nome": "Etapas do projeto de microteste de usabilidade (AB1 e AB2, 2020.2)",
+   "autoria": "Prof. Fábio Paraguaçu (IC-UFAL), conforme os trabalhos entregues",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "ihc-01-design-centrado-no-usuario",
+    "ihc-02-avaliacao-de-usabilidade"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Conhecidas pelos enunciados citados em dois trabalhos de alunos; os trabalhos (com nomes e notas) não foram versionados nem usados como resposta",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Etapas parafraseadas em h03–h06 e h08; exemplos parecidos com outras interfaces"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "shneiderman-laptop-leonardo",
+   "nome": "O Laptop de Leonardo",
+   "autoria": "Ben Shneiderman (Nova Fronteira, 2006)",
+   "url": null,
+   "formato": "Livro",
+   "topicos": [
+    "ihc-01-design-centrado-no-usuario"
+   ],
+   "licenca": "Protegido (livro)",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Base dos slides; não reproduzido"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "nngroup-10-heuristicas",
+   "nome": "10 Usability Heuristics for User Interface Design",
+   "autoria": "Jakob Nielsen (Nielsen Norman Group)",
+   "url": "https://www.nngroup.com/articles/ten-usability-heuristics/",
+   "formato": "HTML",
+   "topicos": [
+    "ihc-02-avaliacao-de-usabilidade"
+   ],
+   "licenca": "Protegido (artigo); só nomes das heurísticas citados",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "web",
+   "justificativa": "Nomes e ordem das 10 heurísticas em h07"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "brooke-sus",
+   "nome": "SUS: a quick and dirty usability scale",
+   "autoria": "John Brooke (1996, em Usability Evaluation in Industry)",
+   "url": null,
+   "formato": "Capítulo",
+   "topicos": [
+    "ihc-02-avaliacao-de-usabilidade"
+   ],
+   "licenca": "Protegido (capítulo); questionário de uso livre com citação",
+   "acesso": "Só referência",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "livro",
+   "justificativa": "Fórmula de pontuação do SUS em h06, conferida nos testes"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "w3c-wcag",
+   "nome": "Web Content Accessibility Guidelines (WCAG) 2.1",
+   "autoria": "W3C",
+   "url": "https://www.w3.org/TR/WCAG21/",
+   "formato": "HTML",
+   "topicos": [
+    "ihc-01-design-centrado-no-usuario"
+   ],
+   "licenca": "W3C Document License",
+   "acesso": "Citada",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Quatro princípios e fórmula da razão de contraste em h08, conferida nos testes"
+  }
+ ]
+}

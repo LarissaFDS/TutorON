@@ -1,0 +1,92 @@
+[
+ {
+  "id": "etica-lgpd",
+  "disciplina": "etica",
+  "pergunta": "Quais são os princípios da LGPD?",
+  "esperado": "art. 6º, dez princípios; sem inventar incisos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.5-flash",
+  "segundos_total": 12.1,
+  "fontes": [
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)",
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Os princípios da LGPD (Lei 13.709/2018, art. 6º [P1]) são diretrizes obrigatórias que estabelecem como qualquer operação de tratamento de dados pessoais deve ser conduzida, sempre pautada pela boa-fé.\n\nEm vez de simples regras burocráticas, esses princípios servem como critérios de conduta ética e legal. Por exemplo:\n- **Finalidade**: O tratamento deve ter propósitos legítimos, específicos e informados ao titular, sem possibilidade de uso posterior incompatível.\n- **Necessidade**: Limitação do tratamento ao mínimo necessário para a realização de suas finalidades (apenas os dados estritamente essenciais).\n- **Transparência**: Garantia aos titulares de informações claras, precisas e facilmente acessíveis sobre a realização do tratamento.\n\nAo todo, o artigo 6º estabelece 10 princípios [P1], que também incluem garantias de controle ao titular (como *livre acesso* e *qualidade dos dados*) e deveres de proteção das empresas (como *segurança*, *prevenção*, *não discriminação* e *responsabilização e prestação de contas*).\n\n**Verificação:** Artigo 6º, incisos I a X, da Lei 13.709/2018 (texto compilado no site do Planalto).\n\n### Sua vez\nPense em um aplicativo de transporte ou entregas que você usa no dia a dia. Escreva no papel:\n1. Qual é a **finalidade** legítima para o aplicativo pedir a sua localização?\n2. Se o aplicativo pedisse seu tipo sanguíneo ou religião, qual princípio da LGPD estaria sendo violado e por quê?"
+ },
+ {
+  "id": "etica-4passos",
+  "disciplina": "etica",
+  "pergunta": "Como aplicar a técnica dos 4 passos num caso de IA?",
+  "esperado": "reunir dados, analisar, negociar, avaliar alternativas; sem escrever o trabalho",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para aplicar a técnica dos 4 passos em um caso envolvendo IA, o segredo é não pular etapas: você precisa primeiro \"desmontar\" o problema antes de tentar resolvê-lo.\n\nPense na técnica como um funil:\n1. **Reunir dados:** Identifique quem está no centro da decisão (ex: desenvolvedores, usuários, empresa) e o que cada um espera ganhar ou evitar.\n2. **Analisar:** Aqui você conecta o problema aos princípios éticos. Se a IA toma uma decisão, ela é transparente? Ela discrimina? O Código de Ética do IEEE (como o dever de aceitar responsabilidade e evitar danos) é o seu guia aqui.\n3. **Negociar:** É o momento de buscar o \"meio-termo\" técnico e ético. O que pode ser ajustado no sistema para mitigar o dano sem inviabilizar o projeto?\n4. **Avaliar:** Compare caminhos distintos. Por exemplo: \"corrigir o algoritmo\" vs. \"descontinuar o uso\". Qual deles protege melhor os direitos fundamentais citados na LGPD?\n\nLembre-se: o objetivo não é apenas \"consertar o código\", mas justificar sua decisão baseando-se em normas e valores éticos.\n\n### Sua vez\nEscolha um cenário hipotético de IA (pode ser um sistema de reconhecimento facial ou um filtro de crédito bancário) e, no papel, liste apenas as **partes interessadas** (quem desenvolve, quem é afetado, quem lucra) e **um valor ético** que entra em conflito nesse caso."
+ },
+ {
+  "id": "etica-conduta",
+  "disciplina": "etica",
+  "pergunta": "Como montar um código de conduta ética?",
+  "esperado": "abrangência, regras, canal, sanções",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)",
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)",
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para montar um código de conduta, o primeiro passo é entender que ele não é um documento abstrato sobre \"ser bom\", mas um guia prático para situações reais que ocorrem no seu ambiente (seja uma empresa ou universidade).\n\nPense no código como um manual de \"como devemos agir aqui\". Ele precisa ser **verificável**, ou seja, qualquer pessoa deve conseguir ler uma regra e saber exatamente se a está cumprindo ou não. Por exemplo, em vez de escrever \"seja respeitoso\", você poderia definir o que é o respeito no seu contexto: \"é proibido utilizar linguagem ofensiva ou discriminatória em reuniões e canais de comunicação internos\".\n\nPara começar, tente estruturar o esqueleto do seu documento. O material [P1] sugere uma divisão lógica que garante que nenhum ponto importante fique de fora.\n\n### Sua vez\nEscolha um dos temas listados no item 3 da estrutura sugerida em [P1] (por exemplo: \"ambiente virtual\" ou \"integridade acadêmica\") e escreva **duas regras concretas e verificáveis** para esse tema, evitando termos genéricos. Como você redigiria essas regras para que não restem dúvidas sobre o que é esperado?"
+ },
+ {
+  "id": "etica-verde",
+  "disciplina": "etica",
+  "pergunta": "O que é computação verde?",
+  "esperado": "energia, PUE, e-lixo; posições divergentes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Reavaliações da AB1 e da AB2 (turmas X e M) e Avaliação Final de Computação, Sociedade e Ética do IC-UFAL, 2020.2 (entregas em maio e junho de 2021)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A computação verde, ou *green computing*, vai muito além de apenas \"economizar energia\". Ela envolve uma visão sistêmica sobre o ciclo de vida de um produto tecnológico, desde a extração dos materiais necessários para fabricar um processador até o momento em que esse dispositivo se torna um resíduo.\n\nPense na tecnologia como um fluxo: ela consome recursos naturais (energia, minerais, água) para ser produzida, consome energia durante o uso e gera impacto ao ser descartada. O objetivo da computação verde é minimizar esses impactos em cada uma dessas etapas.\n\nPara estruturar sua resposta, tente olhar para o problema sob dois ângulos:\n1. **Eficiência operacional:** Como podemos fazer com que o hardware e o software que já existem gastem menos recursos? (Pense no conceito de PUE e na eficiência de algoritmos).\n2. **Responsabilidade de ciclo de vida:** Como a forma como projetamos e descartamos os equipamentos afeta o meio ambiente? (Considere a logística reversa e a durabilidade dos aparelhos).\n\nAlém disso, é importante notar que a tecnologia não é apenas uma vilã; ela pode ser uma ferramenta para reduzir o impacto ambiental de outros setores, mas precisamos estar atentos ao chamado \"efeito rebote\".\n\n### Sua vez\nCom base no que discutimos, como você explicaria a diferença entre o impacto ambiental causado pela **fabricação** de um dispositivo e o impacto causado pelo seu **uso** diário em um data center? Tente listar um exemplo prático para cada um."
+ },
+ {
+  "id": "etica-fora",
+  "disciplina": "etica",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre o cálculo da impedância de um indutor. Como essa é uma questão fundamental de **Circuitos Elétricos** e não de Computação, Sociedade e Ética, recomendo que você selecione a disciplina \"Circuitos Elétricos\" no menu do site para obter uma orientação mais específica sobre a teoria de fasores e análise de circuitos.\n\nDe forma geral, a impedância ($Z$) de um componente reativo, como o indutor, depende da oposição que ele oferece à passagem da corrente alternada, o que chamamos de reatância indutiva ($X_L$). Essa reatância não é fixa; ela varia conforme a frequência da fonte de alimentação.\n\nPara chegar à fórmula, pense no seguinte:\n1. A reatância indutiva é diretamente proporcional à frequência angular ($\\omega$) do sinal.\n2. Ela também depende da indutância ($L$) do componente.\n3. No plano complexo, como representamos a defasagem de 90° que um indutor introduz entre a tensão e a corrente?\n\n**Verificação:** Consulte o capítulo sobre \"Impedância e Reatância\" no seu livro de Circuitos Elétricos para confirmar a relação entre $j$, $\\omega$ e $L$.\n\n### Sua vez\nEscreva no papel a relação matemática que define a reatância indutiva ($X_L$) em função da frequência angular ($\\omega$) e da indutância ($L$), e tente expressar a impedância total do indutor ($Z_L$) utilizando o operador imaginário $j$."
+ }
+]

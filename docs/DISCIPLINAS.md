@@ -525,6 +525,159 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Noções de Direito: avaliações do IC-UFAL (22/11/2026)
+
+Disciplina nova `direito` (**em validação**), COMP387 de CC, turma 2020.2 da Profa. Jessica Hind.
+8 blocos parafraseiam a avaliação dissertativa (Kant e Hegel), o formulário objetivo e os slides
+iniciais: ordens normativas, fontes do Direito, Kelsen e tratados, direitos humanos e TPI, contratos e
+propriedade, propriedade intelectual e software, provas digitais. Só LINDB art. 4º e Constituição
+art. 5º (LVI, §3º) são citados com número, conferidos no Planalto; um teste impede outros números. As
+cópias da pasta são respostas de um aluno e o PDF de 42 MB é tratado como livro protegido: nada disso
+foi versionado. Veja a [curadoria](../disciplinas/direito/CURADORIA.md).
+
+## Computação, Sociedade e Ética: avaliações do IC-UFAL (22/11/2026)
+
+Disciplina nova `etica` (**em validação**), COMP361 de CC, turmas X e M de 2020.2. Seis enunciados de
+avaliação (reavaliações da AB1 e da AB2 e avaliação final), todos trabalhos escritos: os blocos dão
+roteiro e pontos de discussão, sem texto pronto, com posições divergentes. A LGPD entra como apoio,
+com artigos e incisos conferidos no texto do Planalto e checados nos testes; o código de ética do IEEE
+não foi lido (página não carregou) e não é numerado. Ementa não conferida; propriedade intelectual
+sem bloco. Veja a [curadoria](../disciplinas/etica/CURADORIA.md).
+
+## Interação Humano-Computador: slides e projeto do IC-UFAL (22/11/2026)
+
+Disciplina nova `ihc` (**em validação**), COMP395 de CC (ênfase Sistemas de Informação), turma
+2020.2. A pasta tem só um conjunto de slides de design centrado no usuário e dois trabalhos de alunos.
+Os trabalhos, com nomes e notas, não foram versionados e serviram só para conhecer as etapas pedidas
+pelo professor. A ementa oficial não foi conferida. 8 blocos: nova informática e casos de falha,
+métodos centrados no usuário, microteste e pensamento em voz alta, árvore de tarefas e modelo mental,
+personas, SUS, heurísticas de Nielsen e acessibilidade (WCAG). Contas e exemplos conferidos em
+`tests_acervo/test_disciplina_ihc.py`. Veja a [curadoria](../disciplinas/ihc/CURADORIA.md).
+
+## Segurança de Sistemas Computacionais: provas e listas do IC-UFAL (22/11/2026)
+
+Disciplina nova `seguranca` (**em validação**), COMP403 de CC (ênfase Sistemas de Informação). A
+ementa oficial não foi conferida e não foi inventada; o professor não aparece nos PDFs. 15 blocos
+parafraseiam provas de 2020.1 e 2020.2 e as listas semanais: requisitos e política, engenharia social
+e Pharming, sniffing, malware, DoS (SYN flood, Smurf), spoofing e Pentest, RSA, hash/MAC/assinatura e
+certificados, nonce e KDC, SSL/TLS, IPsec, WEP, firewall, PPP/AAA e controle de acesso. **Só defesa e
+conceitos**: o `rigor.md` proíbe código de exploração, e um teste confere que os blocos não têm código
+nem comandos de varredura. Exemplos defensivos conferidos com a biblioteca padrão em
+`tests_acervo/test_disciplina_seguranca.py`. Normas (`norma1`, `norma2`), respostas de alunos e o
+trabalho avaliado não foram versionados. Veja a [curadoria](../disciplinas/seguranca/CURADORIA.md).
+
+## Processamento de Linguagem Natural: listas do IC-UFAL (22/11/2026)
+
+Disciplina nova `pln` (**em validação**), eletiva de CC. A ementa não está no PPC de 2011 e não foi
+inventada. 13 blocos parafraseiam as listas 1 a 6 (2021.1) do Prof. Thales Vieira: expressões
+regulares, pré-processamento, stopwords/POS/stemização, cosseno e TF-IDF, classificação, tópicos
+(LDA, SVD, NMF), PCA e k-means, t-SNE e UMAP, word2vec e Doc2Vec, redes neurais, spaCy e seq2seq. As
+listas são avaliativas: os blocos trazem método e exemplo parecido, conferidos em
+`tests_acervo/test_disciplina_pln.py`. Sem ligação em `cursos.json`. Veja a
+[curadoria](../disciplinas/pln/CURADORIA.md).
+
+## Computação Evolucionária: apostilas e atividades de 2021.1 (22/11/2026)
+
+Disciplina nova `compevol` (**em validação**), optativa da ênfase Sistemas Inteligentes de CC
+(COMP397). A ementa não está no PPC de 2011 e não foi inventada; a pasta não tem provas. 14 blocos:
+otimização e máximos locais, representação binária, seleção, cruzamento e mutação, AG completo,
+esquemas, função F6, estratégias evolutivas e regra do 1/5, subida de encosta e meméticos,
+caixeiro-viajante (OX), dilema do prisioneiro e, das atividades avaliativas de 2021.1, controle de
+parâmetros, multiobjetivo e alinhamento de DNA (só conceitos). Algoritmos executados com semente fixa
+em `tests_acervo/test_disciplina_compevol.py`. Sem ligação em `cursos.json`. Veja a
+[curadoria](../disciplinas/compevol/CURADORIA.md).
+
+## Ciência de Dados: provas do IC-UFAL conferidas com scikit-learn (22/11/2026)
+
+Disciplina nova `cd` (**em validação**), optativa da ênfase Sistemas Inteligentes de CC (COMP401).
+A ementa não está no PPC de 2011 e não foi inventada. 14 blocos parafraseiam as provas (2020.1,
+2020.2 e 2021.1) e as listas do Prof. Bruno Pimentel: fundamentos e Big Data, estatística,
+pré-processamento, avaliação, agrupamento hierárquico, k-NN e k-means, Naive Bayes, árvore e Random
+Forest, regressão, SVM e redes neurais, séries temporais, meta-aprendizado e visualização. Contas
+conferidas com NumPy, SciPy e scikit-learn em `tests_acervo/test_disciplina_cd.py`. Sem ligação em
+`cursos.json`. Veja a [curadoria](../disciplinas/cd/CURADORIA.md).
+
+## Aprendizagem de Máquina: provas do IC-UFAL conferidas com scikit-learn (22/11/2026)
+
+Disciplina nova `am` (**em validação**), optativa da ênfase Sistemas Inteligentes de CC (COMP390).
+A ementa não está no PPC de 2011 e não foi inventada. 12 blocos parafraseiam as provas AB1 e AB2 e
+exemplos dos slides do Prof. Aydano Machado: tipos de aprendizagem, KDD, árvore de decisão, k-NN,
+avaliação de classificadores, matriz de confusão, redução de dimensionalidade, k-means, k-medoids,
+DBSCAN, Apriori, lift e Q-learning (fórmula da turma corrigida). Contas conferidas com scikit-learn
+em `tests_acervo/test_disciplina_am.py`; o CI passou a instalar `scikit-learn`. Sem ligação em
+`cursos.json`. Veja a [curadoria](../disciplinas/am/CURADORIA.md).
+
+## Sistemas Distribuídos: provas do IC-UFAL com RPC, REST e algoritmos executados nos testes (22/11/2026)
+
+Disciplina nova `sd_dist` (**em validação**; o id `sd` é de Sistemas Digitais). Ementa conferida no
+PPC de CC (CCOM044, 60 h, 7º semestre). 18 blocos parafraseiam as provas do Prof. Leandro Melo de
+Sales (2017, 2020.1 e 2020.2): caracterização, middleware, modelos arquiteturais, invocação remota,
+comunicação indireta, P2P, detectores de falhas, eleição, replicação, containers, Kubernetes,
+blockchain, IPFS, RabbitMQ, Kafka, REST, GraphQL, gRPC, Envoy e utility computing. RPC, REST, filas,
+eleição e prova de trabalho rodam em `tests_acervo/test_disciplina_sd_dist.py`. Formulários com nome e
+e-mail de aluno, respostas, seminários e livros não foram versionados. Ligada ao 7º período de CC em
+`cursos.json`. Veja a [curadoria](../disciplinas/sd_dist/CURADORIA.md).
+
+## Conceitos de Linguagens de Programação: provas do IC-UFAL com C compilado nos testes (22/11/2026)
+
+Disciplina nova `clp` (**em validação**). Ementa conferida no PPC de CC (CCOM027, 60 h, 4º semestre).
+14 blocos parafraseiam as provas do Prof. Alcino Dall'Igna Jr. (AB1 2013.1, AB2 2011.2, final 2012.2):
+critérios de avaliação, palavras reservadas, vinculação e tempo de vida, escopo, coerção e tipagem,
+compatibilidade de tipos, arrays por linha e por coluna, registros, ponteiros, precedência,
+curto-circuito, else pendente, passagem de parâmetros, Ruby, Haskell e Prolog. O código C é
+compilado com gcc em `tests_acervo/test_disciplina_clp.py`. Fotos, trabalhos e respostas de alunos e
+o material do Sebesta não foram versionados. Sem ligação em `cursos.json` (4º período de CC). Veja a
+[curadoria](../disciplinas/clp/CURADORIA.md).
+
+## Redes de Computadores: provas do IC-UFAL conferidas por código (22/11/2026)
+
+Disciplina nova `redes` (**em validação**). Ementa conferida no PPC de CC (CCOM032 Redes de
+Computadores 1, 60 h). 12 blocos parafraseiam as provas do Prof. Leandro Melo de Sales (2012, 2017 e
+2020.1): camadas e encapsulamento, HTTP (GET condicional, stateless), DNS e MX, sockets,
+multiplexação, TCP (sequência e ACK, log do tcpdump, entrega confiável, Go-Back-N), controle de fluxo
+e de congestionamento (Tahoe e Reno), sub-redes e TTL, roteamento LS e DV. Cada resolução é conferida
+em `tests_acervo/test_disciplina_redes.py` com a biblioteca padrão do Python em localhost. Fotos e
+respostas de alunos não foram versionadas. Ligada a "Redes de Computadores" do 3º período de CC em
+`cursos.json`. Veja a [curadoria](../disciplinas/redes/CURADORIA.md).
+
+## Projeto de Software: notas de aula da UFCG com código Java compilado nos testes (22/11/2026)
+
+Projeto de Software (CCOM016, 60 h; Programação 2 em Ciência da Computação) entrou só com cadastro e acervo, com a mesma IA:
+- a entrada em `disciplinas/disciplinas.json` (`projsw`, **em validação**); **sem** campo `acervo` em `disciplinas/cursos.json`: ligar a Programação 2 de CC mudaria as preferidas do 4º período fixadas em `backend/tests/test_versao_final.py` (decisão da equipe);
+- `disciplinas/projsw/`: rigor, 12 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/projsw_java/`: 14 programas Java da equipe (2 que **não** devem compilar), compilados e executados por `tests_acervo/test_disciplina_projsw.py` com `javac`/`java` (pulados se o JDK faltar);
+- a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+Correção nas notas: o `compareTo` com `long` não compila; o bloco usa `Long.compare`.
+
+Busca: relevância 507/507, com 5 perguntas de Projeto de Software e 2 fora do assunto; isolamento com Programação 1, Estrutura de Dados e Banco de Dados.
+
+IA real: Gemini, 22/11/2026 (`eval/results/bateria-projsw-2026-11-22.json`; `gemini-3.6-flash` em 1 resposta e `gemini-3.1-flash-lite` em 4). Lidas uma a uma:
+- `==` e `equals`, composição ou herança, ordem dos construtores e soma com `2 4 oi`: corretas e socráticas, sem entregar a saída final;
+- integral dupla com Projeto de Software selecionada: sem fontes, mas **não** disse que é de outra disciplina e adiantou o Jacobiano;
+- nenhuma termina com "**Verificação:**".
+
+Fica **em validação** porque recursividade (assunto das notas) não tem bloco, sobrecarga de operadores e templates (C++, da ementa) não têm material e a resposta fora do assunto não indicou a outra disciplina.
+
+## Teoria dos Grafos: lista e prova da UFAL conferidas com NetworkX (22/11/2026)
+
+Teoria dos Grafos (CCOM030, 30 h, Ciência da Computação) entrou só com cadastro e acervo, com a mesma IA:
+- a entrada em `disciplinas/disciplinas.json` (`grafos`, **em validação**) e o campo `acervo` em `disciplinas/cursos.json` (CC, 3º período);
+- `disciplinas/grafos/`: rigor, 14 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_grafos.py`, que confere cada fato citado com NetworkX 3.7 ou força bruta (11 grafos de 4 vértices, Petersen não hamiltoniano com χ = 3 e χ' = 4, Ramsey em K6, tabuleiro 30/62, fluxo de 2000 e 2000 aumentos, AGM e Dijkstra); NetworkX entrou em `requirements-acervo.txt` e no CI;
+- a lista de disciplinas do teste da API e as perguntas de `eval/relevancia.py` e `eval/bateria_tutor.py`.
+
+Busca: relevância 500/500, com 5 perguntas de Grafos e 2 fora do assunto; o teste confere que ED, PAA e Discreta não trazem blocos de grafos.
+
+IA real: Gemini, 22/11/2026 (`eval/results/bateria-grafos-2026-11-22.json`), com HTTP 429/503 nos modelos maiores. Lidas uma a uma:
+- isomorfismo e Petersen (`gemini-3.6-flash`): corretas e socráticas (contagem por número de arestas e complemento; paridade dos raios), sem entregar o total;
+- Ford-Fulkerson (`gemini-3.1-flash-lite`): correta (residual, gargalo, arcos de volta), pergunta do aluno sobre capacidade residual;
+- K3,3 (`gemini-3.1-flash-lite`): o modelo entregou a resposta duas vezes e o código trocou pela ajuda de reserva genérica; **não conferida**;
+- integral dupla com Grafos selecionada: sem fontes, indicou Cálculo, mas adiantou o Jacobiano;
+- nenhuma termina com "**Verificação:**".
+
+Fica **em validação** porque a resposta de planaridade não pôde ser conferida (critério da bateria real) e hipergrafos e matróides, da ementa, não têm material da turma.
+
 ## Metodologia da Pesquisa e do Trabalho Científico: modelo de artigo e guias de LaTeX conferidos por compilação (21/11/2026)
 
 Metodologia da Pesquisa e do Trabalho Científico (ECOM018, 3º semestre, 30 h) entrou só com cadastro e acervo, com a mesma IA. Os arquivos são:
@@ -673,5 +826,26 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `fis1` | Física 1 | Markdown curado em `disciplinas/fis1` (19 blocos, 16 na busca; 3 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; fotos das provas do Prof. Rosso não versionadas, enunciados (problemas do Halliday) parafraseados; Halliday e manuais de soluções só citados; 3 resoluções pendentes de confirmação do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/fis1/CURADORIA.md) |
 | `so` | Sistemas Operacionais (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/so` (24 blocos, 23 na busca; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; slides do Prof. Aquino (CC BY-NC-SA 4.0) e provas parafraseados; comprovantes com dados pessoais não versionados; 1 resolução pendente do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/so/CURADORIA.md) |
 | `lfa` | Linguagens Formais, Autômatos e Computabilidade (Engenharia; Teoria da Computação em Ciência da Computação) | Markdown curado em `disciplinas/lfa` (35 blocos, 34 na busca; 3 do complemento de Ciência da Computação; 1 nota da equipe candidata; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; listas e provas da UFAL e apostilas da Profa. Simone Prado parafraseadas (licença não declarada; originais não versionados); 3 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/lfa/CURADORIA.md) |
+| `grafos` | Teoria dos Grafos (Ciência da Computação) | Markdown curado em `disciplinas/grafos` (14 blocos, todos na busca; índice híbrido com `bge-m3`) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa conferida no PPC de CC (CCOM030); lista 2020.1 do Prof. Rian e prova de 2016.2 do Prof. Viana parafraseadas (originais não versionados); hipergrafos e matróides sem material; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/grafos/CURADORIA.md) |
+| `projsw` | Projeto de Software (Programação 2 em Ciência da Computação) | Markdown curado em `disciplinas/projsw` (12 blocos, todos na busca; índice híbrido com `bge-m3`) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa conferida no PPC de CC (CCOM016); notas de aula de Programação II da UFCG parafraseadas (originais não versionados), código reescrito e compilado nos testes (JDK); 1 resolução corrigida; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/projsw/CURADORIA.md) |
+| `redes` | Redes de Computadores (Ciência da Computação) | Markdown curado em `disciplinas/redes` (12 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa conferida no PPC de CC (CCOM032); provas do IC-UFAL parafraseadas (fotos com nomes de alunos não versionadas), resoluções conferidas por código nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/redes/CURADORIA.md) |
+| `clp` | Conceitos de Linguagens de Programação (Ciência da Computação) | Markdown curado em `disciplinas/clp` (14 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa conferida no PPC de CC (CCOM027); provas do IC-UFAL parafraseadas (fotos com nomes de alunos não versionadas), código C compilado nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/clp/CURADORIA.md) |
+| `sd_dist` | Sistemas Distribuídos (Ciência da Computação) | Markdown curado em `disciplinas/sd_dist` (18 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa conferida no PPC de CC (CCOM044); provas do IC-UFAL parafraseadas (formulários com nome e e-mail de aluno não versionados), RPC, REST e algoritmos executados nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/sd_dist/CURADORIA.md) |
+| `am` | Aprendizagem de Máquina (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/am` (12 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não encontrada no PPC (COMP390); provas e slides do IC-UFAL parafraseados, conferidos com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/am/CURADORIA.md) |
+| `cd` | Ciência de Dados (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/cd` (14 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não encontrada no PPC (COMP401); provas e listas do IC-UFAL parafraseadas, conferidas com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/cd/CURADORIA.md) |
+| `compevol` | Computação Evolucionária (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/compevol` (14 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não encontrada no PPC (COMP397); apostilas e atividades de 2021.1 parafraseadas, algoritmos executados nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/compevol/CURADORIA.md) |
+| `pln` | Processamento de Linguagem Natural (Ciência da Computação, eletiva) | Markdown curado em `disciplinas/pln` (13 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não encontrada no PPC; listas 1 a 6 do IC-UFAL parafraseadas, exemplos conferidos com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/pln/CURADORIA.md) |
+| `seguranca` | Segurança de Sistemas Computacionais (Ciência da Computação, COMP403) | Markdown curado em `disciplinas/seguranca` (15 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa oficial não conferida; provas e listas do IC-UFAL parafraseadas, só defesa e conceitos, exemplos conferidos com a biblioteca padrão; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/seguranca/CURADORIA.md) |
+| `ihc` | Interação Humano-Computador (Ciência da Computação, COMP395) | Markdown curado em `disciplinas/ihc` (8 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa oficial não conferida; slides e etapas do projeto parafraseados, trabalhos de alunos não versionados; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ihc/CURADORIA.md) |
+| `etica` | Computação, Sociedade e Ética (Ciência da Computação, COMP361) | Markdown curado em `disciplinas/etica` (9 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não conferida; avaliações escritas com roteiro; LGPD conferida no Planalto; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/etica/CURADORIA.md) |
+| `direito` | Noções de Direito (Ciência da Computação, COMP387) | Markdown curado em `disciplinas/direito` (8 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não conferida; avaliações de 2020.2 parafraseadas, citações legais conferidas no Planalto; revisão humana pendente; veja a [curadoria](../disciplinas/direito/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |
+
+### Liberação de 22/11/2026
+
+Por decisão da equipe, as 14 disciplinas que estavam **em validação** passaram para **MVP** e saíram
+da barreira: `pcom`, `grafos`, `projsw`, `redes`, `clp`, `sd_dist`, `am`, `cd`, `compevol`, `pln`,
+`seguranca`, `ihc`, `etica` e `direito`. As pendências registradas nas seções de cada uma
+(revisão humana dos blocos, confirmação do professor, tópicos sem bloco, respostas da bateria real
+não conferidas) **continuam abertas**: a liberação não as resolve.

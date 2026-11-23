@@ -1,0 +1,117 @@
+{
+ "disciplina": "am",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-aydano-provas-am",
+   "nome": "Provas AB1 e AB2 de Aprendizagem de Máquina (duas versões, uma de 2021.1), com respostas de alunos",
+   "autoria": "Prof. Aydano Machado (IC-UFAL); respostas de alunos",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "am-01-fundamentos-e-kdd",
+    "am-02-classificacao",
+    "am-03-agrupamento-e-associacao",
+    "am-04-reforco"
+   ],
+   "licenca": "Não declarada (provas)",
+   "acesso": "Pasta da turma de CC (ênfase Sistemas Inteligentes, COMP390); não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados e resolvidos; respostas de alunos usadas só para apontar o que estava incompleto"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-aydano-slides-am",
+   "nome": "Slides de Aprendizagem de Máquina: introdução, KDD, árvore de decisão, k-NN, avaliação, agrupamento, regras de associação, medidas de interesse, extração de regras, aprendizagem por reforço",
+   "autoria": "Prof. Aydano Machado (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "am-01-fundamentos-e-kdd",
+    "am-02-classificacao",
+    "am-03-agrupamento-e-associacao",
+    "am-04-reforco"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Pasta da turma; não versionados, só paráfrase de exemplos numéricos",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Exemplos do exercício de matriz de confusão e das medidas de interesse; tópicos da disciplina"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "turma-resumos-am",
+   "nome": "Resumos da AB1 e da AB2 feitos por aluno",
+   "autoria": "Aluno da turma",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [],
+   "licenca": "Trabalho de aluno",
+   "acesso": "Pasta da turma; não versionado",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Evidência dos tópicos e do exemplo de taxa de erro ponderada"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "scikit-learn",
+   "nome": "scikit-learn: User Guide",
+   "autoria": "Desenvolvedores do scikit-learn",
+   "url": "https://scikit-learn.org/stable/user_guide.html",
+   "formato": "HTML",
+   "topicos": [
+    "am-01-fundamentos-e-kdd",
+    "am-02-classificacao",
+    "am-03-agrupamento-e-associacao"
+   ],
+   "licenca": "BSD-3-Clause (código); documentação aberta",
+   "acesso": "Biblioteca usada nos testes",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Conferência das resoluções em tests_acervo/test_disciplina_am.py"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "sutton-barto",
+   "nome": "Reinforcement Learning: An Introduction (2ª ed.)",
+   "autoria": "Richard S. Sutton e Andrew G. Barto",
+   "url": "http://incompleteideas.net/book/the-book-2nd.html",
+   "formato": "livro",
+   "topicos": [
+    "am-04-reforco"
+   ],
+   "licenca": "Protegido (PDF disponibilizado pelos autores)",
+   "acesso": "Só referência por seção (6.5, Q-learning)",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "web",
+   "justificativa": "Formulação padrão da atualização do Q-learning"
+  }
+ ]
+}

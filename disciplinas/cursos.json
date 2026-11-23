@@ -104,8 +104,8 @@
           {"nome": "Geometria Analítica"}
         ]},
         {"numero": 3, "disciplinas": [
-          {"nome": "Redes de Computadores"},
-          {"nome": "Teoria dos Grafos"},
+          {"nome": "Redes de Computadores", "acervo": "redes"},
+          {"nome": "Teoria dos Grafos", "acervo": "grafos"},
           {"nome": "Probabilidade e Estatística"},
           {"nome": "Álgebra Linear"}
         ]},
@@ -125,6 +125,7 @@
           {"nome": "Projeto e Desenvolvimento de Sistemas"}
         ]},
         {"numero": 7, "disciplinas": [
+          {"nome": "Sistemas Distribuídos", "acervo": "sd_dist"},
           {"nome": "Metodologia de Pesquisa e Trabalho Individual"},
           {"nome": "Noções de Direito"}
         ]},
