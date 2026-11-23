@@ -44,6 +44,14 @@ O material da turma de Ciência da Computação (COMP360, IC-UFAL) entrou como *
 - **Pendência:** na 1ª prova, "grau de complexidade" não está definido no enunciado; o bloco `logica-roberta-prova1-complexidade-negacao` fica `pendente_professor`.
 - **Fronteiras novas:** listas e recursão também aparecem em Estrutura de Dados (`ed`) e Programação 1 (`prog1`); o isolamento com elas é testado.
 
+## Complemento: material do 2º período de Engenharia de Computação (23/11/2026)
+
+Material da turma de 2024.1 do Prof. **Evandro Costa** (ECOM007): slides "Lógica Proposicional (Parte 1)", Lista 1 em imagens, fotos de questões da prova 1, uma tabela de equivalências, `teste.py`, `logica (1).cv` e um artigo científico em inglês. Situação mantida (MVP).
+- **Novo (3 blocos):** `logica-evandro-2024-tecnico-culpado` (Lista Q8 e prova Q2), `logica-evandro-2024-governo-inflacao` (Lista Q9 com "há inflação" e prova Q3 com "não há inflação": a resposta muda para "nenhuma das alternativas") e `logica-evandro-2024-valoracao-classificacao` (prova Q4, Lista Q5, Q6 e Q3 de concurso). Respostas conferidas por tabela-verdade em `tests_acervo/test_disciplina_logica.py`.
+- **Sem bloco (já coberto):** os slides de 2024.1 (argumento, princípios, sintaxe, precedência, semântica, tautologia, equivalências, consequência) repetem o que está em `l01` a `l07`; a tabela de equivalências repete `logica-equivalencias-e-conectivos`; a questão do Fulano já está em `logica-conectivos-exercicios-concurso`.
+- **Só evidência, não versionados:** `teste.py` (tradutor ingênuo de frases para símbolos), `logica (1).cv` (circuito do CircuitVerse chamado "TAUTOLOGIA") e o artigo em inglês (de terceiros).
+- **Dados pessoais:** as fotos da prova têm respostas manuscritas de um aluno, com erros (marca "o governo é bom e não há desemprego" e dá F para a fórmula da Q4 com $p$ V, $q$ F). Não foram usadas nem versionadas. Os slides trazem o e-mail do professor, que não foi copiado.
+
 ## Fontes (`fontes.json`)
 
 | id | Uso | Licença |
@@ -70,6 +78,7 @@ O material da turma de Ciência da Computação (COMP360, IC-UFAL) entrou como *
 | `openlogic-proof-checker` | citada | ferramenta |
 | `stanford-truth-table-tool` | citada | ferramenta |
 | `alloy-tools` | citada | ferramenta |
+| `ufal-evandro-2024-lista-prova` | acervo | Não declarada |
 
 Os links das fontes citadas foram testados em 20/11/2026 (HTTP 200); nenhuma foi baixada para o acervo.
 
@@ -91,7 +100,7 @@ Correções em relação ao material original (status `corrigida`):
 
 Não conferido por código: os exemplos de LTL (semáforo) e de Alloy, conferidos à mão (`verificacao: exemplos_conferidos`).
 
-## Blocos (42, todos `material_da_disciplina`, todos na busca)
+## Blocos (45, todos `material_da_disciplina`, todos na busca)
 
 Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente` e nenhum tem revisão do professor.
 
@@ -139,3 +148,6 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente` e nen
 | `logica-sistema-especialista-prolog` | 14-programacao-logica-prolog | validada | cc-expertsystem-gui |
 | `logica-roberta-prova1-complexidade-negacao` | 02-proposicional-sintaxe-semantica | pendente_professor | roberta-provas-2019 |
 | `logica-roberta-prova2-modelo-finito` | 10-primeira-ordem-semantica | validada | roberta-provas-2019 |
+| `logica-evandro-2024-tecnico-culpado` | 03-consequencia-equivalencia | validada | ufal-evandro-2024-lista-prova |
+| `logica-evandro-2024-governo-inflacao` | 03-consequencia-equivalencia | validada | ufal-evandro-2024-lista-prova |
+| `logica-evandro-2024-valoracao-classificacao` | 02-proposicional-sintaxe-semantica | validada | ufal-evandro-2024-lista-prova |
