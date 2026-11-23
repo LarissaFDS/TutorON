@@ -60,7 +60,7 @@ def test_sd_dist_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert SD.situacao == "em validação" and SD.em_validacao
+    assert SD.situacao == "MVP" and not SD.em_validacao and not SD.aviso
 
 
 def test_itens_gerados_estao_atualizados():

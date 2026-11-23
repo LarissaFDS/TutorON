@@ -44,7 +44,7 @@ def test_etica_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert ETICA.situacao == "em validação" and ETICA.em_validacao
+    assert ETICA.situacao == "MVP" and not ETICA.em_validacao and not ETICA.aviso
 
 
 def test_itens_gerados_estao_atualizados():

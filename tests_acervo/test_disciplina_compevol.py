@@ -48,7 +48,7 @@ def test_compevol_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert CE.situacao == "em validação" and CE.em_validacao
+    assert CE.situacao == "MVP" and not CE.em_validacao and not CE.aviso
 
 
 def test_itens_gerados_estao_atualizados():

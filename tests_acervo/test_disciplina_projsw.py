@@ -65,7 +65,7 @@ def test_projsw_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert PROJSW.situacao == "em validação" and PROJSW.em_validacao
+    assert PROJSW.situacao == "MVP" and not PROJSW.em_validacao and not PROJSW.aviso
 
 
 def test_itens_gerados_estao_atualizados():

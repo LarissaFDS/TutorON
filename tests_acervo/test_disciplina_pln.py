@@ -66,7 +66,7 @@ def test_pln_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert PLN.situacao == "em validação" and PLN.em_validacao
+    assert PLN.situacao == "MVP" and not PLN.em_validacao and not PLN.aviso
 
 
 def test_itens_gerados_estao_atualizados():

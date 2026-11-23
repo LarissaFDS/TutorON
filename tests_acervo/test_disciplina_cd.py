@@ -60,7 +60,7 @@ def test_cd_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert CD.situacao == "em validação" and CD.em_validacao
+    assert CD.situacao == "MVP" and not CD.em_validacao and not CD.aviso
 
 
 def test_itens_gerados_estao_atualizados():

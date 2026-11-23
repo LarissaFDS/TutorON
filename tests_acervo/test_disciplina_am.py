@@ -65,7 +65,7 @@ def test_am_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert AM.situacao == "em validação" and AM.em_validacao
+    assert AM.situacao == "MVP" and not AM.em_validacao and not AM.aviso
 
 
 def test_itens_gerados_estao_atualizados():
