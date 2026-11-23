@@ -48,7 +48,7 @@ def test_seguranca_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert SEG.situacao == "em validação" and SEG.em_validacao
+    assert SEG.situacao == "MVP" and not SEG.em_validacao and not SEG.aviso
 
 
 def test_itens_gerados_estao_atualizados():

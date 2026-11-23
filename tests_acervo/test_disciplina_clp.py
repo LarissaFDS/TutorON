@@ -64,7 +64,7 @@ def test_clp_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert CLP.situacao == "em validação" and CLP.em_validacao
+    assert CLP.situacao == "MVP" and not CLP.em_validacao and not CLP.aviso
 
 
 def test_itens_gerados_estao_atualizados():

@@ -40,7 +40,7 @@ def test_ihc_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert IHC.situacao == "em validação" and IHC.em_validacao
+    assert IHC.situacao == "MVP" and not IHC.em_validacao and not IHC.aviso
 
 
 def test_itens_gerados_estao_atualizados():

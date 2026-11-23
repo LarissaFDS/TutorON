@@ -93,7 +93,7 @@ def test_grafos_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert GRAFOS.situacao == "em validação" and GRAFOS.em_validacao
+    assert GRAFOS.situacao == "MVP" and not GRAFOS.em_validacao and not GRAFOS.aviso
 
 
 def test_itens_gerados_estao_atualizados():

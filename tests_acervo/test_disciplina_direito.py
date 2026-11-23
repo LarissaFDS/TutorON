@@ -45,7 +45,7 @@ def test_direito_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert DIR.situacao == "em validação" and DIR.em_validacao
+    assert DIR.situacao == "MVP" and not DIR.em_validacao and not DIR.aviso
 
 
 def test_itens_gerados_estao_atualizados():

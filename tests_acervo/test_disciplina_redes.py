@@ -49,7 +49,7 @@ def test_redes_cadastrada_com_acervo_proprio():
 
 
 def test_situacao_da_disciplina():
-    assert REDES.situacao == "em validação" and REDES.em_validacao
+    assert REDES.situacao == "MVP" and not REDES.em_validacao and not REDES.aviso
 
 
 def test_itens_gerados_estao_atualizados():
