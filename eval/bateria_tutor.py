@@ -284,6 +284,12 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Inteligência Artificial: conferidas em tests_acervo/test_disciplina_ia.py.
+    ("ia-busca", "ia", "Qual a diferença entre busca em largura e em profundidade?", "fila e pilha; completude e memória"),
+    ("ia-alfabeta", "ia", "Como funciona a poda alfa-beta?", "alfa e beta; corte quando alfa >= beta; mesmo valor do minimax"),
+    ("ia-encadeamento", "ia", "Como fazer encadeamento para frente e para trás?", "guiado por dados e por objetivos; ponto fixo"),
+    ("ia-rbc", "ia", "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?", "recuperar, reusar, revisar, reter; similaridade"),
+    ("ia-fora", "ia", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Noções de Direito: conferidas em tests_acervo/test_disciplina_direito.py.
     ("dir-fontes", "direito", "Quais são as fontes do Direito?", "lei, costume, analogia, princípios; LINDB art. 4º"),
     ("dir-kelsen", "direito", "O que é a pirâmide de Kelsen?", "Constituição no topo; escalonamento"),

@@ -1095,6 +1095,29 @@
         "Como registrar um software no INPI?",
         "O que é a teoria dos frutos da árvore envenenada?"
       ]
+    },
+    {
+      "id": "ia",
+      "nome": "Inteligência Artificial",
+      "sigla": "IA",
+      "situacao": "MVP",
+      "itens": "disciplinas/ia/acervo/itens.json",
+      "indice": "disciplinas/ia/acervo/indice.json",
+      "materiais": "disciplinas/ia/materiais",
+      "rigor": "disciplinas/ia/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ia-01-fundamentos-e-agentes",
+        "ia-02-busca-e-jogos",
+        "ia-03-conhecimento-e-raciocinio",
+        "ia-04-incerteza-e-aprendizado"
+      ],
+      "exemplos": [
+        "Qual a diferença entre busca em largura e em profundidade?",
+        "Como funciona a poda alfa-beta?",
+        "Como fazer encadeamento para frente e para trás?",
+        "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?"
+      ]
     }
   ]
 }

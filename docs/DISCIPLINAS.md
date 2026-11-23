@@ -525,6 +525,21 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Inteligência Artificial: listas e slides do IC-UFAL (23/11/2026)
+
+Disciplina nova `ia` (**MVP** desde 23/11/2026, por decisão da equipe para a parte 3 da fila, sem
+revisão humana dos blocos), COMP380 de CC, listas de 2020.2 do Prof. Evandro de Barros Costa.
+14 blocos parafraseiam as aulas dele de RCR e lógica, os slides do Prof. Jacson R. C. Silva (UFES)
+usados na turma e os enunciados das listas 1 e 2: agentes, busca cega e heurística (A*), satisfação de
+restrições, minimax e alfa-beta, RCR, consequência lógica, regras de inferência, encadeamento,
+sistemas especialistas, ID3 na base de risco de crédito, raciocínio baseado em casos, redes bayesianas e
+fuzzy de Mamdani. Toda conta é refeita em Python em `tests_acervo/test_disciplina_ia.py`. As cópias das
+listas são respostas de um aluno e o Russell e Norvig é livro protegido: nada disso foi versionado.
+Veja a [curadoria](../disciplinas/ia/CURADORIA.md).
+
+Pendências: revisão humana e do professor dos 14 blocos (nenhum marcado como revisado); ementa de
+COMP380 não conferida; planejamento, aprendizado por reforço e redes neurais sem material da turma.
+
 ## Noções de Direito: avaliações do IC-UFAL (22/11/2026)
 
 Disciplina nova `direito` (**em validação**), COMP387 de CC, turma 2020.2 da Profa. Jessica Hind.
@@ -839,6 +854,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `ihc` | Interação Humano-Computador (Ciência da Computação, COMP395) | Markdown curado em `disciplinas/ihc` (8 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa oficial não conferida; slides e etapas do projeto parafraseados, trabalhos de alunos não versionados; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ihc/CURADORIA.md) |
 | `etica` | Computação, Sociedade e Ética (Ciência da Computação, COMP361) | Markdown curado em `disciplinas/etica` (9 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não conferida; avaliações escritas com roteiro; LGPD conferida no Planalto; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/etica/CURADORIA.md) |
 | `direito` | Noções de Direito (Ciência da Computação, COMP387) | Markdown curado em `disciplinas/direito` (8 blocos, todos na busca) | **MVP** (liberada em 22/11/2026 por decisão da equipe, sem revisão humana dos blocos) desde 22/11/2026; ementa não conferida; avaliações de 2020.2 parafraseadas, citações legais conferidas no Planalto; revisão humana pendente; veja a [curadoria](../disciplinas/direito/CURADORIA.md) |
+| `ia` | Inteligência Artificial (Ciência da Computação, COMP380) | Markdown curado em `disciplinas/ia` (14 blocos, todos na busca) | **MVP** desde 23/11/2026 (liberada por decisão da equipe, sem revisão humana dos blocos); ementa não conferida; listas de 2020.2 e slides parafraseados, contas refeitas em Python; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ia/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |
 

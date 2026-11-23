@@ -1,0 +1,97 @@
+{
+ "disciplina": "ia",
+ "atualizado_em": "2026-11-23",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-ia-listas-2020-2",
+   "nome": "Listas 1 e 2 de Inteligência Artificial (2020.2)",
+   "autoria": "Prof. Evandro de Barros Costa (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "ia-03-conhecimento-e-raciocinio",
+    "ia-04-incerteza-e-aprendizado"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "As cópias da pasta são respostas de um aluno (nome e matrícula): só os enunciados foram parafraseados; não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados em i08, i09 e i11 a i14; respostas do aluno não usadas",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "ufal-evandro-rcr-logica",
+   "nome": "Aulas de Representação de Conhecimento e Raciocínio (2016) e de Lógica Proposicional: consequência lógica (2013)",
+   "autoria": "Prof. Evandro Costa (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "ia-03-conhecimento-e-raciocinio"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Slides do professor; parafraseados, não versionados",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas em i06 e i07",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "ufes-jeiks-slides",
+   "nome": "Slides de Inteligência Artificial 01 a 06 (Introdução, Agentes, Representação de Conhecimento, Sistemas Especialistas, Métodos de Busca, Árvore de Jogos)",
+   "autoria": "Prof. Jacson R. C. Silva (Departamento de Computação, CCA-UFES)",
+   "url": "http://jeiks.net",
+   "formato": "PDF",
+   "topicos": [
+    "ia-01-fundamentos-e-agentes",
+    "ia-02-busca-e-jogos",
+    "ia-03-conhecimento-e-raciocinio"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Material de outra universidade usado na turma; parafraseado, não versionado",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseados em i01 a i06 e i10",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "russell-norvig-aima",
+   "nome": "Inteligência Artificial: uma abordagem moderna (Russell e Norvig), edições em inglês e espanhol e capítulos 1 a 5, 7 e 8",
+   "autoria": "Stuart Russell e Peter Norvig",
+   "url": null,
+   "formato": "livro",
+   "topicos": [
+    "ia-01-fundamentos-e-agentes",
+    "ia-02-busca-e-jogos",
+    "ia-03-conhecimento-e-raciocinio",
+    "ia-04-incerteza-e-aprendizado"
+   ],
+   "licenca": "Protegido (direitos autorais da editora)",
+   "acesso": "Não incluído no material entregue; só referência por capítulo",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência externa",
+   "justificativa": "Livro-texto da área; não reproduzido",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  }
+ ]
+}
