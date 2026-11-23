@@ -1,0 +1,88 @@
+[
+ {
+  "id": "ihc-voz-alta",
+  "disciplina": "ihc",
+  "pergunta": "O que é pensamento em voz alta num teste de usabilidade?",
+  "esperado": "usuário fala o que procura; não ajudar; gravar com consentimento",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 18.1,
+  "fontes": [
+   "Etapas do projeto de microteste de usabilidade pedidas pelo Prof. Fábio Paraguaçu (IC-UFAL), 2020.2, conhecidas pelos enunciados citados nos trabalhos entregues"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O pensamento em voz alta (*think aloud*) é uma técnica fundamental na avaliação de usabilidade para entender o **modelo mental** do usuário enquanto ele interage com o sistema.\n\nEm vez de apenas observar o que a pessoa faz (o comportamento), você quer entender o *porquê* ela está fazendo aquilo. Imagine que você está assistindo a um filme mudo: você vê as ações, mas não sabe se o usuário clicou em um botão por ter certeza de que era o certo, por puro chute ou por confusão. O *think aloud* transforma esse \"filme mudo\" em um relato narrado.\n\nO objetivo não é que o usuário explique a interface para você, mas que ele verbalize o fluxo de consciência dele: o que ele está tentando alcançar, o que ele espera que aconteça ao clicar em um elemento e o que o surpreende (positiva ou negativamente) durante o processo. É como se ele estivesse \"abrindo a caixa preta\" da mente dele para que você identifique onde a interface falha em comunicar sua função.\n\nPara aplicar isso, você precisa criar um ambiente onde o usuário se sinta confortável para falar tudo, sem medo de errar, pois o foco é avaliar o design, e não a habilidade dele.\n\n### Sua vez\nSe você estivesse testando um site de compras e pedisse para um usuário \"comprar um tênis\", que tipo de frase ou comentário você esperaria ouvir dele que indicaria um problema de usabilidade, seguindo a técnica do *think aloud*? Tente escrever um exemplo de fala do usuário que revelaria uma dificuldade."
+ },
+ {
+  "id": "ihc-sus",
+  "disciplina": "ihc",
+  "pergunta": "Como calcular a pontuação do SUS?",
+  "esperado": "ímpares r-1, pares 5-r, soma vezes 2,5; 0 a 100, não é porcentagem",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Trabalhos correlatos citados no projeto da disciplina (2020.2); questionário SUS de John Brooke"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular o **SUS (System Usability Scale)**, o segredo está em tratar as perguntas positivas e negativas de formas diferentes para que todas apontem na mesma direção: quanto maior a pontuação, melhor a usabilidade percebida.\n\nImagine que você tem as 10 respostas de um usuário. O primeiro passo é separar o que é \"positivo\" (itens 1, 3, 5, 7, 9) do que é \"negativo\" (itens 2, 4, 6, 8, 10).\n\n1. Nos **itens ímpares**, você quer saber o quanto o usuário concorda com algo bom. Como a escala vai de 1 a 5, subtraímos 1 para que a pontuação comece em 0.\n2. Nos **itens pares**, o usuário está avaliando algo negativo (ex: \"achei o sistema complexo\"). Se ele respondeu 5 (concordo totalmente), isso é ruim para a usabilidade, então precisamos \"inverter\" esse valor para que ele conte pouco na pontuação final.\n\nDepois de ajustar cada uma das 10 respostas, basta somar esses valores e multiplicar por 2,5 para levar a escala para o intervalo de 0 a 100.\n\n**Verificação:** Se um usuário marcou \"3\" (neutro) em todas as 10 perguntas, a soma final das contribuições deve resultar em 20. Multiplicando por 2,5, chegamos a 50, que é o ponto médio da escala.\n\n### Sua vez\nSe um usuário respondeu **4** na pergunta 1 (ímpar) e **2** na pergunta 2 (par), qual é a contribuição individual de cada uma dessas duas respostas para a soma final?"
+ },
+ {
+  "id": "ihc-nielsen",
+  "disciplina": "ihc",
+  "pergunta": "Quais são as heurísticas de Nielsen?",
+  "esperado": "as 10, com exemplos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Slides da disciplina (cita Nielsen, 1993) e as 10 heurísticas publicadas pelo Nielsen Norman Group",
+   "Slides \"A Nova Informática: Design centrado no Usuário\" da disciplina (base: Shneiderman, 2006; Nielsen, 1993)"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "As heurísticas de Nielsen são um conjunto de diretrizes fundamentais para avaliar a usabilidade de interfaces, focando em como tornar o sistema mais intuitivo e eficiente para o usuário. Elas foram desenvolvidas por Jakob Nielsen e são amplamente utilizadas na avaliação heurística.\n\nPara você começar a se familiarizar com elas, pense em um aplicativo que você usa diariamente. Quando você comete um erro ao preencher um formulário, o sistema te avisa claramente o que aconteceu e como corrigir, ou ele apenas exibe um código de erro genérico? Esse tipo de observação está diretamente ligado a uma das heurísticas que tratam de erros.\n\nO material [P1] lista as 10 heurísticas. Em vez de apenas memorizá-las, tente agrupar mentalmente quais delas se referem ao **feedback** do sistema, quais tratam da **prevenção de erros** e quais focam na **facilidade de aprendizado**.\n\n### Sua vez\nCom base na lista presente no material [P1], escolha **duas** heurísticas que você considera mais importantes para um sistema de caixa eletrônico (ATM) e explique, com suas palavras, por que elas seriam cruciais nesse contexto específico."
+ },
+ {
+  "id": "ihc-persona",
+  "disciplina": "ihc",
+  "pergunta": "Como criar uma persona?",
+  "esperado": "baseada em dados; objetivos, frustrações; Cooper",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Etapas do projeto de microteste de usabilidade pedidas pelo Prof. Fábio Paraguaçu (IC-UFAL), 2020.2, conhecidas pelos enunciados citados nos trabalhos entregues"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Criar uma persona é um exercício de síntese: você transforma dados brutos coletados com usuários reais em um personagem que guia suas decisões de design. O segredo não é inventar um perfil, mas identificar padrões recorrentes no que você observou ou ouviu durante suas pesquisas.\n\nPense na persona como uma ferramenta de empatia e foco. Se você tenta projetar para \"todo mundo\", acaba não atendendo ninguém com precisão. Ao criar um \"alguém concreto\", você consegue se perguntar: \"Será que essa pessoa, com essa dificuldade específica, conseguiria realizar essa tarefa nesta interface?\".\n\nPara começar, não tente escrever o texto final agora. O primeiro passo é olhar para os dados que você já coletou (seja por entrevistas, observação ou questionários).\n\n### Sua vez\nListe três comportamentos, objetivos ou dificuldades que você notou em comum entre as pessoas que participaram da sua pesquisa ou microteste. Como esses pontos se conectam entre si para formar um perfil de usuário?"
+ },
+ {
+  "id": "ihc-fora",
+  "disciplina": "ihc",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você está perguntando sobre o cálculo da **impedância de um indutor**, que é um conceito fundamental em circuitos elétricos.\n\nComo sou o tutor de **Interação Humano-Computador (IHC)**, essa dúvida pertence à disciplina de **Circuitos Elétricos**. Para garantir que você receba a orientação mais precisa, recomendo que selecione \"Circuitos Elétricos\" no campo de disciplinas do site.\n\nDe toda forma, posso te dar uma dica conceitual: a impedância de um indutor ($Z_L$) não é um valor fixo como a resistência de um resistor; ela depende da frequência da corrente que passa por ele. O componente imaginário dessa impedância é chamado de **reatância indutiva** ($X_L$).\n\nPara chegar à fórmula, pense no seguinte:\n1. Qual é a relação entre a tensão e a corrente em um indutor ideal?\n2. Como a frequência angular ($\\omega$) influencia a oposição à passagem da corrente alternada?\n3. Lembre-se que a impedância em um indutor é puramente imaginária, então ela é representada como $Z_L = jX_L$.\n\nSe você tiver o valor da indutância ($L$) e a frequência ($f$ ou $\\omega$), você já tem quase tudo o que precisa.\n\n### Sua vez\nEscreva no papel a fórmula da reatância indutiva ($X_L$) relacionando-a com a frequência angular ($\\omega$) e a indutância ($L$). Se precisar, como você converteria a frequência comum ($f$, em Hertz) para a frequência angular ($\\omega$)?"
+ }
+]

@@ -525,6 +525,16 @@ IA real: Gemini (`gemini-3.1-flash-lite` em 4 respostas e `gemini-3.5-flash` em 
 
 A disciplina passou a MVP, sem aviso, no último commit da branch, com a aprovação da equipe, depois dos quatro critérios de liberação (suíte e relevância verdes; nenhuma nota de IA na busca; bateria real lida e conferida, com o erro de direção da redução corrigido no `rigor.md` e no bloco e não repetido em duas novas rodadas; todo assunto com material da turma tem bloco na busca). 3 resoluções aguardam o professor e a revisão humana e do professor continuam pendentes.
 
+## Interação Humano-Computador: slides e projeto do IC-UFAL (22/11/2026)
+
+Disciplina nova `ihc` (**em validação**), COMP395 de CC (ênfase Sistemas de Informação), turma
+2020.2. A pasta tem só um conjunto de slides de design centrado no usuário e dois trabalhos de alunos.
+Os trabalhos, com nomes e notas, não foram versionados e serviram só para conhecer as etapas pedidas
+pelo professor. A ementa oficial não foi conferida. 8 blocos: nova informática e casos de falha,
+métodos centrados no usuário, microteste e pensamento em voz alta, árvore de tarefas e modelo mental,
+personas, SUS, heurísticas de Nielsen e acessibilidade (WCAG). Contas e exemplos conferidos em
+`tests_acervo/test_disciplina_ihc.py`. Veja a [curadoria](../disciplinas/ihc/CURADORIA.md).
+
 ## Segurança de Sistemas Computacionais: provas e listas do IC-UFAL (22/11/2026)
 
 Disciplina nova `seguranca` (**em validação**), COMP403 de CC (ênfase Sistemas de Informação). A
@@ -807,5 +817,6 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | `compevol` | Computação Evolucionária (Ciência da Computação, ênfase Sistemas Inteligentes) | Markdown curado em `disciplinas/compevol` (14 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa não encontrada no PPC (COMP397); apostilas e atividades de 2021.1 parafraseadas, algoritmos executados nos testes; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/compevol/CURADORIA.md) |
 | `pln` | Processamento de Linguagem Natural (Ciência da Computação, eletiva) | Markdown curado em `disciplinas/pln` (13 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa não encontrada no PPC; listas 1 a 6 do IC-UFAL parafraseadas, exemplos conferidos com scikit-learn; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/pln/CURADORIA.md) |
 | `seguranca` | Segurança de Sistemas Computacionais (Ciência da Computação, COMP403) | Markdown curado em `disciplinas/seguranca` (15 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa oficial não conferida; provas e listas do IC-UFAL parafraseadas, só defesa e conceitos, exemplos conferidos com a biblioteca padrão; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/seguranca/CURADORIA.md) |
+| `ihc` | Interação Humano-Computador (Ciência da Computação, COMP395) | Markdown curado em `disciplinas/ihc` (8 blocos, todos na busca) | **em validação** desde 22/11/2026; ementa oficial não conferida; slides e etapas do projeto parafraseados, trabalhos de alunos não versionados; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/ihc/CURADORIA.md) |
 | `metodologia` | Metodologia da Pesquisa e do Trabalho Científico | Markdown curado em `disciplinas/metodologia` (22 blocos, 16 na busca; 6 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; modelo de artigo da UFSC parafraseado, apostila de Lopez e Silva (CC BY-SA 3.0) adaptada, exemplos LaTeX compilados nos testes; 4 resoluções pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/metodologia/CURADORIA.md) |
 | `calc1` | Cálculo 1 (Engenharia e Ciência da Computação) | Markdown curado em `disciplinas/calc1` (23 blocos, todos na busca; nenhuma nota de IA; índice híbrido com `bge-m3`) | MVP desde 21/11/2026, sem aviso; ementa conferida no PPC de 2014; provas e resoluções do IM-UFAL parafraseadas (licença não declarada; originais não versionados); 2 resoluções corrigidas e 2 pendentes do professor; revisão humana e do professor pendentes; veja a [curadoria](../disciplinas/calc1/CURADORIA.md) |

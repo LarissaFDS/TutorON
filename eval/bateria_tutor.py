@@ -284,6 +284,14 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Interação Humano-Computador: conferidas em tests_acervo/test_disciplina_ihc.py.
+    ("ihc-voz-alta", "ihc", "O que é pensamento em voz alta num teste de usabilidade?",
+     "usuário fala o que procura; não ajudar; gravar com consentimento"),
+    ("ihc-sus", "ihc", "Como calcular a pontuação do SUS?",
+     "ímpares r-1, pares 5-r, soma vezes 2,5; 0 a 100, não é porcentagem"),
+    ("ihc-nielsen", "ihc", "Quais são as heurísticas de Nielsen?", "as 10, com exemplos"),
+    ("ihc-persona", "ihc", "Como criar uma persona?", "baseada em dados; objetivos, frustrações; Cooper"),
+    ("ihc-fora", "ihc", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Segurança de Sistemas Computacionais: conferidas em tests_acervo/test_disciplina_seguranca.py.
     ("seg-requisitos", "seguranca", "Quais os requisitos básicos de segurança da informação?",
      "confidencialidade, integridade, disponibilidade, autenticidade, não repúdio"),

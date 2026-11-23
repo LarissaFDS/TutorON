@@ -1009,6 +1009,27 @@
         "Quais requisitos o IPSec com ESP atende?",
         "Por que o WEP é inseguro?"
       ]
+    },
+    {
+      "id": "ihc",
+      "nome": "Interação Humano-Computador",
+      "sigla": "IHC",
+      "situacao": "em validação",
+      "itens": "disciplinas/ihc/acervo/itens.json",
+      "indice": "disciplinas/ihc/acervo/indice.json",
+      "materiais": "disciplinas/ihc/materiais",
+      "rigor": "disciplinas/ihc/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "ihc-01-design-centrado-no-usuario",
+        "ihc-02-avaliacao-de-usabilidade"
+      ],
+      "exemplos": [
+        "O que é pensamento em voz alta num teste de usabilidade?",
+        "Como calcular a pontuação do SUS?",
+        "Quais são as heurísticas de Nielsen?",
+        "Como criar uma persona?"
+      ]
     }
   ]
 }
