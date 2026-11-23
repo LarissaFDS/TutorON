@@ -6,6 +6,11 @@ O aluno escolhe no site o curso e o período. Isso:
    disciplinas do período com material têm preferência.
 
 Fonte: disciplinas/cursos.json (matrizes obrigatórias dos PPCs do IC/UFAL; sem eletivas).
+
+Nenhuma disciplina com material fica fora da janela: além da ligação pelo nome, o cadastro pode
+dizer onde ela fica em cada curso (`"cursos": {"cc": 6}` ou `{"cc": "eletiva"}`), e toda
+disciplina disponível que não cair em nenhum período de um curso entra no grupo
+"Eletivas, ênfases e outras" desse curso.
 """
 from __future__ import annotations
 
@@ -40,9 +45,22 @@ def _acervos_por_nome(cadastro: dict) -> dict[str, str]:
     return mapa
 
 
+GRUPO_ELETIVAS = "Eletivas, ênfases e outras"
+
+
+def _disponiveis(cadastro: dict) -> list[dict]:
+    return [d for d in cadastro.get("disciplinas", []) if d.get("situacao") != "em validação"]
+
+
 def _ligar_acervos(dados: dict, cadastro: dict) -> dict:
-    """Preenche `acervo` nas matrizes. Um `acervo` escrito em cursos.json tem prioridade."""
+    """Preenche `acervo` nas matrizes e monta o grupo de eletivas de cada curso.
+
+    1. Um `acervo` escrito em cursos.json tem prioridade; senão, liga pelo nome (ou `nomes_nos_cursos`).
+    2. O campo `cursos` do cadastro (curso -> período) põe a disciplina naquele período, se ainda não estiver.
+    3. Toda disciplina disponível que não ficou em nenhum período do curso vai para `eletivas`.
+    """
     por_nome = _acervos_por_nome(cadastro)
+    disponiveis = _disponiveis(cadastro)
     ids = {d["id"] for d in cadastro.get("disciplinas", [])}
     for c in dados["cursos"]:
         for p in c["periodos"]:
@@ -54,6 +72,16 @@ def _ligar_acervos(dados: dict, cadastro: dict) -> dict:
                     x["acervo"] = auto
                 else:
                     x.pop("acervo", None)
+        periodos = {p.get("numero"): p for p in c["periodos"]}
+        for d in disponiveis:
+            n = (d.get("cursos") or {}).get(c.get("id"))
+            if isinstance(n, int) and not isinstance(n, bool) and n in periodos:
+                lista = periodos[n]["disciplinas"]
+                if not any(x.get("acervo") == d["id"] for x in lista):
+                    lista.append({"nome": d["nome"], "codigo": None, "acervo": d["id"], "extra": True})
+        na_grade = {x.get("acervo") for p in c["periodos"] for x in p["disciplinas"]}
+        c["eletivas"] = [{"nome": d["nome"], "codigo": None, "acervo": d["id"]}
+                         for d in sorted(disponiveis, key=lambda d: _chave(d["nome"])) if d["id"] not in na_grade]
     return dados
 
 
@@ -71,7 +99,8 @@ def publico() -> dict:
         {"id": c["id"], "nome": c["nome"], "sigla": c["sigla"], "instituicao": c["instituicao"], "ppc": c["ppc"],
          "periodos": [{"numero": p["numero"], "disciplinas": [
              {"nome": x["nome"], "codigo": x.get("codigo"), "acervo": x.get("acervo")} for x in p["disciplinas"]]}
-             for p in c["periodos"]]}
+             for p in c["periodos"]],
+         "eletivas": {"nome": GRUPO_ELETIVAS, "disciplinas": c.get("eletivas", [])}}
         for c in d["cursos"]]}
 
 
@@ -103,10 +132,11 @@ def perfil(curso_id: str | None, periodo: int | None, disciplina_atual: str | No
         return None
     linhas = [f"Curso: {c['nome']} ({c['instituicao']})."]
     if periodo:
-        atuais = [x["nome"] for x in _periodo(c, periodo)]
+        atuais = [x["nome"] for x in _periodo(c, periodo) if not x.get("extra")]
         linhas.append(f"Período: {periodo}º." + (f" Disciplinas obrigatórias deste período: {', '.join(atuais)}."
                                                  if atuais else " Período só de eletivas, estágio ou TCC."))
-        vistas = [x["nome"] for p in c["periodos"] if p["numero"] < periodo for x in p["disciplinas"]]
+        vistas = [x["nome"] for p in c["periodos"] if p["numero"] < periodo for x in p["disciplinas"]
+                  if not x.get("extra")]
         if vistas:
             linhas.append("Já cursou (em princípio): " + ", ".join(vistas[-14:]) + ".")
         if disciplina_atual:
