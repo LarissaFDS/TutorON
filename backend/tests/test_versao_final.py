@@ -45,7 +45,7 @@ def test_matrizes_do_ic_sem_eletivas_e_com_os_acervos_certos():
     nomes = [d["nome"] for c in (ecom, cc) for p in c["periodos"] for d in p["disciplinas"]]
     assert not any("letiva" in n for n in nomes)
     assert cursos.preferidas("ecom", 3) == ("lfa", "projsw", "fis2", "calc3", "metodologia", "sd")
-    assert set(cursos.preferidas("ecom", 5)) == {"paa", "circ", "redes", "sinais", "so", "grafos"}
+    assert set(cursos.preferidas("ecom", 5)) == {"paa", "circ", "redes", "sinais", "so", "grafos", "ia"}
     assert set(cursos.preferidas("ecom", 7)) == {"bd", "direito"}
     assert set(cursos.preferidas("cc", 2)) == {"ed", "bd", "oac", "ga"}
     assert set(cursos.preferidas("cc", 4)) == {"projsw", "paa", "lfa"}
