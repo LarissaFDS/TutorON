@@ -6,7 +6,7 @@ como `MVP`, sem aviso. Liberar não é revisar: nenhum bloco está marcado com `
 
 | # | Item | PR | Merge dev / main | Blocos novos | Testes e bateria de relevância | Pendências |
 |---|---|---|---|---|---|---|
-| 1 | Lógica (`logica`) | branch `codex/logica-ec2` | em andamento | 3 (`logica-evandro-2024-*`) | pytest e ruff: ver PR; relevância 650/650 | revisão humana e do professor dos 3 blocos |
+| 1 | Lógica (`logica`) | [#161](https://github.com/LarissaFDS/TutorON/pull/161) | dev: sim; main: ver PR dev→main | 3 (`logica-evandro-2024-*`) | pytest 2251 ok, ruff ok; relevância 650/650 | revisão humana e do professor dos 3 blocos |
 
 ## Item 1: Lógica (`logica`, complemento)
 
