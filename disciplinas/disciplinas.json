@@ -986,6 +986,29 @@
         "Como escolher o número de tópicos no LDA?",
         "Como funciona o word2vec?"
       ]
+    },
+    {
+      "id": "seguranca",
+      "nome": "Segurança de Sistemas Computacionais",
+      "sigla": "SEG",
+      "situacao": "em validação",
+      "itens": "disciplinas/seguranca/acervo/itens.json",
+      "indice": "disciplinas/seguranca/acervo/indice.json",
+      "materiais": "disciplinas/seguranca/materiais",
+      "rigor": "disciplinas/seguranca/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "seg-01-fundamentos-e-politica",
+        "seg-02-ameacas-e-ataques",
+        "seg-03-criptografia-e-autenticacao",
+        "seg-04-seguranca-em-redes"
+      ],
+      "exemplos": [
+        "Quais os requisitos básicos de segurança da informação?",
+        "Qual a diferença entre MAC e assinatura digital?",
+        "Quais requisitos o IPSec com ESP atende?",
+        "Por que o WEP é inseguro?"
+      ]
     }
   ]
 }

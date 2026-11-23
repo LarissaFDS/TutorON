@@ -1,0 +1,90 @@
+[
+ {
+  "id": "seg-requisitos",
+  "disciplina": "seguranca",
+  "pergunta": "Quais os requisitos básicos de segurança da informação?",
+  "esperado": "confidencialidade, integridade, disponibilidade, autenticidade, não repúdio",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL",
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender os requisitos básicos de segurança da informação, pense no que precisamos garantir para que um sistema seja considerado \"seguro\" em um cenário real.\n\nImagine que você enviou uma mensagem importante para um colega. Para que essa comunicação seja confiável, o que precisa acontecer?\n1. Se um intruso interceptar a mensagem, ele não deve conseguir ler o conteúdo.\n2. Se o intruso alterar uma palavra da mensagem, o destinatário deve ser capaz de perceber que o conteúdo foi modificado.\n3. O sistema que transmite essa mensagem precisa estar funcionando e disponível para o destinatário no momento em que ele for ler.\n4. O destinatário precisa ter certeza de que a mensagem veio realmente de você (e não de um impostor).\n5. Por fim, você não pode negar que enviou aquela mensagem, caso precise provar a autoria depois.\n\nEsses cinco pontos que listei acima correspondem aos pilares da segurança. O material [P1] chama esses requisitos de **Confidencialidade, Integridade, Disponibilidade, Autenticidade e Não repúdio**.\n\n### Sua vez\nCom base nas definições do material [P1], tente associar cada um dos cinco pontos que descrevi acima ao seu respectivo requisito técnico (por exemplo: qual deles é garantido por uma assinatura digital?). Tente listar os cinco e explicar, com suas palavras, por que cada um é necessário para a segurança."
+ },
+ {
+  "id": "seg-mac",
+  "disciplina": "seguranca",
+  "pergunta": "Qual a diferença entre MAC e assinatura digital?",
+  "esperado": "chave compartilhada × chave privada; MAC não dá não repúdio",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL",
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL",
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender a diferença fundamental entre esses dois mecanismos, pense em quem possui a capacidade de gerar o código de verificação e quem possui a capacidade de validá-lo.\n\nNo **MAC**, como o próprio nome sugere (Código de Autenticação de Mensagem), utilizamos uma chave secreta compartilhada entre o emissor e o receptor. Se você e eu possuímos a mesma chave, ambos conseguimos gerar e verificar o código.\n\nJá na **assinatura digital**, utilizamos o conceito de criptografia assimétrica (chave pública e privada). Pense no seguinte cenário: se apenas o emissor possui a sua chave privada, o que isso permite afirmar sobre a autoria de uma assinatura que só pode ser verificada com a chave pública correspondente? E, comparando com o MAC, o que acontece com a questão do \"não repúdio\" quando apenas uma das partes detém a chave usada para assinar?\n\nPara te ajudar a estruturar o raciocínio, tente responder: se eu recebo uma mensagem com um MAC, eu tenho certeza absoluta de que foi o emissor que a criou, ou eu apenas sei que alguém que possui a chave secreta a criou? Como isso muda no caso da assinatura digital?\n\n### Sua vez\nListe dois pontos de divergência entre MAC e assinatura digital: um relacionado ao tipo de chave utilizada (simétrica ou assimétrica) e outro relacionado à propriedade de \"não repúdio\"."
+ },
+ {
+  "id": "seg-esp",
+  "disciplina": "seguranca",
+  "pergunta": "Quais requisitos o IPSec com ESP atende?",
+  "esperado": "confidencialidade, integridade, autenticação da origem, anti-reprodução",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para identificar os requisitos atendidos pelo ESP, pense no que acontece com o conteúdo do pacote quando ele é \"encapsulado\" e o que o protocolo garante ao receptor sobre a origem e a integridade desse conteúdo.\n\nO material menciona que o ESP atende a quatro pilares fundamentais da segurança. Para te ajudar a organizar, tente separar esses quatro pontos:\n1. O que garante que ninguém que interceptou o pacote conseguiu ler o que estava dentro?\n2. O que garante que o pacote não foi alterado durante o trajeto?\n3. O que garante que o pacote realmente veio de quem diz ter vindo?\n4. O que impede que um atacante capture um pacote válido e o envie novamente para o destino (ataque de repetição)?\n\nNote que, ao contrário do AH, o ESP possui um mecanismo específico para o primeiro ponto que citei.\n\n### Sua vez\nCom base na lista acima, verifique no material quais são os quatro requisitos listados explicitamente para o ESP e escreva-os no papel, associando cada um a uma das perguntas que fiz."
+ },
+ {
+  "id": "seg-wep",
+  "disciplina": "seguranca",
+  "pergunta": "Por que o WEP é inseguro?",
+  "esperado": "IV de 24 bits repete; CRC-32 linear; chave fixa; usar WPA2/WPA3",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Provas (2020.1 e 2020.2) e listas semanais de Segurança de Sistemas Computacionais do IC-UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O WEP (Wired Equivalent Privacy) foi projetado para oferecer uma segurança comparável à de uma rede cabeada, mas falhou ao adotar escolhas de design que hoje consideramos críticas.\n\nPara entender por que ele é inseguro, pense no processo de cifragem descrito no material: o emissor combina um **IV (Vetor de Inicialização)** de 24 bits com uma chave secreta $K$ para gerar o fluxo de bits que será aplicado aos dados.\n\nConsidere dois pontos fundamentais:\n1. **O tamanho do IV:** O IV tem apenas 24 bits. Em uma rede com tráfego intenso, quantos quadros seriam necessários para que o mesmo IV fosse reutilizado? O que acontece se dois quadros diferentes forem cifrados com o mesmo fluxo de chave (o mesmo IV e a mesma chave $K$)?\n2. **A integridade:** O WEP utiliza o CRC-32 para verificar se os dados foram alterados. O CRC-32 foi desenhado para detectar erros acidentais de transmissão (como ruído no meio físico), não para impedir ataques maliciosos. Como a função CRC é linear, um atacante pode alterar partes do quadro e recalcular o valor do CRC sem conhecer a chave secreta.\n\nReflita sobre como a repetição do IV e a falta de um mecanismo de autenticação robusto (como um MAC) facilitam a vida de um atacante que está apenas escutando o tráfego da rede.\n\n### Sua vez\nSe você capturasse dois quadros cifrados que utilizaram o mesmo IV, qual operação matemática simples entre os dois cifrados permitiria eliminar o fluxo de chave e revelar informações sobre os dados originais?"
+ },
+ {
+  "id": "seg-fora",
+  "disciplina": "seguranca",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que sua dúvida envolve conceitos de circuitos elétricos, que são fundamentais para entender a base física de alguns sistemas de segurança (como a proteção contra interferências eletromagnéticas ou análise de sinais em hardware).\n\nPara calcular a impedância de um indutor (frequentemente chamada de **reatância indutiva**), precisamos considerar como ele se comporta em corrente alternada. Diferente de um resistor, que oferece uma oposição constante, o indutor reage à variação da corrente ao longo do tempo.\n\nPense no seguinte:\n1. A impedância de um indutor depende da frequência da corrente que passa por ele. Se a frequência for zero (corrente contínua), como você acha que o indutor se comporta?\n2. Além da frequência, qual característica física do próprio indutor (aquela medida em Henries) influencia essa oposição?\n\nA relação matemática envolve o produto desses dois fatores e uma constante angular. Se você estiver com o material de Circuitos Elétricos em mãos, procure pela fórmula da reatância indutiva ($X_L$).\n\n**Verificação:** Lembre-se que a unidade da impedância deve ser a mesma de qualquer resistência para que a Lei de Ohm (na forma fasorial) seja válida.\n\n### Sua vez\nEscreva no papel a fórmula que relaciona a reatância indutiva ($X_L$), a frequência angular ($\\omega$) e a indutância ($L$). Se não se lembrar da frequência angular, como ela pode ser escrita em função da frequência comum ($f$)?"
+ }
+]
