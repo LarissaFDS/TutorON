@@ -1,0 +1,85 @@
+[
+ {
+  "id": "pln-regex",
+  "disciplina": "pln",
+  "pergunta": "Como usar grupos nomeados em expressões regulares?",
+  "esperado": "(?P<nome>...), groupdict; opcional com (?:...)?; guia sem entregar a lista",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 18.1,
+  "fontes": [
+   "Listas de exercícios 1 a 6 de Processamento de Linguagem Natural, Prof. Thales Vieira (IC-UFAL), 2021.1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Os grupos nomeados são uma forma poderosa de organizar o que você captura com uma expressão regular, transformando o resultado em um dicionário onde a chave é o nome que você escolheu e o valor é o texto capturado.\n\nA sintaxe básica dentro da expressão é `(?P<nome_do_grupo>padrão)`. Quando você usa o método `fullmatch` ou `search` do módulo `re`, o objeto retornado possui o método `.groupdict()`, que organiza automaticamente essas capturas.\n\nPense nisso como rotular partes específicas de uma string: se você quer extrair um endereço, em vez de tentar lembrar se o número da casa está no índice 1 ou 2 da lista de grupos, você simplesmente acessa `resultado['numero']`.\n\nPara praticar, imagine que você quer capturar uma data no formato \"dia/mês/ano\". Em vez de apenas capturar os números, você nomeia cada parte para facilitar o uso posterior no seu código.\n\n### Sua vez\nEscreva uma expressão regular usando grupos nomeados (`dia`, `mes`, `ano`) para capturar uma data no formato `DD/MM/AAAA`. Em seguida, mostre como você acessaria apenas o valor do `mes` a partir do dicionário retornado pelo método `groupdict()`."
+ },
+ {
+  "id": "pln-tfidf",
+  "disciplina": "pln",
+  "pergunta": "Qual a diferença entre CountVectorizer e TF-IDF?",
+  "esperado": "contagem × peso por raridade (idf); cosseno",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Listas de exercícios 1 a 6 de Processamento de Linguagem Natural, Prof. Thales Vieira (IC-UFAL), 2021.1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença fundamental entre essas duas abordagens reside em **como elas valorizam as palavras** dentro do seu conjunto de documentos.\n\nO `CountVectorizer` foca puramente na frequência absoluta: ele conta quantas vezes cada termo aparece em um documento. Se uma palavra como \"o\" ou \"de\" aparecer 50 vezes, ela terá um peso muito maior do que uma palavra rara que aparece apenas uma vez, mesmo que a palavra rara seja muito mais importante para definir o assunto do texto.\n\nJá o TF-IDF (Term Frequency-Inverse Document Frequency) tenta equilibrar essa balança. Ele mantém a contagem (TF), mas aplica um \"filtro\" (IDF) que penaliza termos que aparecem em muitos documentos diferentes. Pense nisso como um mecanismo de importância: se uma palavra aparece em quase todos os textos da sua base, ela provavelmente não ajuda a diferenciar um documento do outro, certo?\n\nPara visualizar isso, imagine que você tem uma coleção de artigos sobre culinária. A palavra \"receita\" aparece em todos eles, enquanto a palavra \"açafrão\" aparece apenas em dois. Como o `CountVectorizer` e o TF-IDF tratariam esses dois termos de forma distinta ao comparar dois documentos?\n\n### Sua vez\nSe você tivesse um documento com a palavra \"açafrão\" e outro que não a tivesse, como o peso dessa palavra seria afetado pelo cálculo do IDF em comparação a uma contagem simples? Tente explicar com suas palavras o que acontece com o peso de um termo que é muito comum em toda a base."
+ },
+ {
+  "id": "pln-topicos",
+  "disciplina": "pln",
+  "pergunta": "Como escolher o número de tópicos no LDA?",
+  "esperado": "vários k; coerência, perplexidade; ler os tópicos",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Listas de exercícios 1 a 6 de Processamento de Linguagem Natural, Prof. Thales Vieira (IC-UFAL), 2021.1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Escolher o número de tópicos ($k$) em modelos como o LDA é um desafio clássico, pois não existe um valor \"correto\" universal; ele depende da granularidade que você deseja extrair da sua base de textos.\n\nComo o LDA é um modelo probabilístico, a estratégia principal é avaliar o quão bem o modelo \"explica\" novos dados ou quão semanticamente consistentes são os tópicos formados. Pense nisso como um equilíbrio:\n1. **Perplexidade:** Mede o quão \"surpreso\" o modelo fica ao ver dados novos (conjunto de teste). Valores menores indicam que o modelo generaliza melhor.\n2. **Coerência:** Avalia se as palavras mais importantes de um tópico aparecem juntas frequentemente nos documentos. Se um tópico mistura termos de assuntos muito distintos, talvez o $k$ esteja muito baixo; se os tópicos forem muito parecidos entre si, talvez o $k$ esteja muito alto.\n\nUma prática comum é rodar o modelo para uma faixa de valores de $k$ (por exemplo, de 2 a 20) e plotar essas métricas. Você notará que, a partir de certo ponto, o ganho de informação estabiliza ou a coerência começa a cair.\n\nPara o seu exercício, tente visualizar o que acontece com a interpretação dos tópicos quando você altera o $k$. Se você tem 50 documentos, faz sentido ter 50 tópicos? Por que não?\n\n### Sua vez\nEscolha dois valores de $k$ bem diferentes (um pequeno e um grande) para a sua base de textos, execute o LDA para ambos e liste as 5 palavras mais importantes de cada tópico. O que você observa sobre a clareza dos temas em cada caso?"
+ },
+ {
+  "id": "pln-word2vec",
+  "disciplina": "pln",
+  "pergunta": "Como funciona o word2vec?",
+  "esperado": "vetores densos; CBOW/skip-gram; similaridade do cosseno; modelo do idioma",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 10.0,
+  "fontes": [
+   "Listas de exercícios 1 a 6 de Processamento de Linguagem Natural, Prof. Thales Vieira (IC-UFAL), 2021.1"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O Word2vec é uma técnica que transforma palavras em vetores numéricos densos, onde a posição no espaço vetorial captura o significado semântico. A ideia central é a **Hipótese Distribucional**: palavras que aparecem em contextos semelhantes tendem a ter significados próximos.\n\nImagine que você tem uma frase como \"O gato bebe leite\". O modelo tenta aprender a relação entre \"gato\" e as palavras ao seu redor (\"O\", \"bebe\", \"leite\"). Existem duas arquiteturas principais para isso:\n\n1.  **CBOW (Continuous Bag of Words):** O modelo tenta prever uma palavra-alvo a partir do contexto (as palavras vizinhas). É como completar uma lacuna: \"O [?] bebe leite\".\n2.  **Skip-gram:** O modelo faz o inverso: dada uma palavra, ele tenta prever quais palavras aparecem no seu contexto.\n\nAo treinar uma rede neural rasa para realizar essas tarefas, os pesos da camada oculta acabam se tornando os \"vetores de palavras\" (embeddings). Como resultado, palavras como \"rei\" e \"rainha\" acabam ficando próximas no espaço vetorial, permitindo operações matemáticas interessantes, como $vetor(rei) - vetor(homem) + vetor(mulher) \\approx vetor(rainha)$.\n\nPara aplicar isso, usamos modelos pré-treinados, pois treinar do zero exige um volume de dados imenso que raramente temos em projetos acadêmicos.\n\n### Sua vez\nSe você tivesse os vetores de \"cachorro\", \"gato\" e \"avião\", como você poderia verificar matematicamente qual dos dois primeiros está mais próximo de \"gato\" usando a similaridade de cosseno? (Dica: pense na fórmula do produto escalar entre dois vetores normalizados)."
+ },
+ {
+  "id": "pln-fora",
+  "disciplina": "pln",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 18.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre o cálculo da impedância de um indutor. Como essa é uma questão fundamental de **Circuitos Elétricos**, gostaria de esclarecer que meu foco aqui é em **Processamento de Linguagem Natural (PLN)**.\n\nNo entanto, posso te dar uma direção para você encontrar a resposta no seu material de Circuitos Elétricos. A impedância de um componente passivo em corrente alternada (CA) depende da frequência do sinal. Para um indutor ideal, a impedância ($Z_L$) é puramente imaginária e está relacionada à sua indutância ($L$) e à frequência angular ($\\omega$).\n\nLembre-se da relação entre a frequência angular e a frequência linear ($f$):\n$$\\omega = 2\\pi f$$\n\nA impedância do indutor é dada por $Z_L = jX_L$, onde $X_L$ é a reatância indutiva. Pense em como a oposição à passagem da corrente aumenta conforme a frequência ou a indutância crescem.\n\nPara aprofundar, recomendo que você verifique no seu material de **Circuitos Elétricos** o capítulo sobre \"Impedância e Reatância\" ou \"Análise em Regime Permanente Senoidal\". Se precisar de ajuda com conceitos de PLN, como tokenização, vetores de palavras ou modelos de linguagem, estou à disposição!\n\n### Sua vez\nEscreva no papel a fórmula da reatância indutiva ($X_L$) em função de $L$ e $f$. Como essa reatância se comporta quando a frequência do sinal tende a zero (corrente contínua)?"
+ }
+]

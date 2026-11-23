@@ -963,6 +963,29 @@
         "Qual a regra do 1/5 nas estratégias evolutivas?",
         "O que é dominância de Pareto?"
       ]
+    },
+    {
+      "id": "pln",
+      "nome": "Processamento de Linguagem Natural",
+      "sigla": "PLN",
+      "situacao": "em validação",
+      "itens": "disciplinas/pln/acervo/itens.json",
+      "indice": "disciplinas/pln/acervo/indice.json",
+      "materiais": "disciplinas/pln/materiais",
+      "rigor": "disciplinas/pln/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "pln-01-regex-e-preprocessamento",
+        "pln-02-representacao-e-classificacao",
+        "pln-03-topicos-agrupamento-e-embeddings",
+        "pln-04-redes-neurais-e-spacy"
+      ],
+      "exemplos": [
+        "Como usar grupos nomeados em expressões regulares?",
+        "Qual a diferença entre CountVectorizer e TF-IDF?",
+        "Como escolher o número de tópicos no LDA?",
+        "Como funciona o word2vec?"
+      ]
     }
   ]
 }

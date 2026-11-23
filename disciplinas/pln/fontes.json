@@ -1,0 +1,75 @@
+{
+ "disciplina": "pln",
+ "atualizado_em": "2026-11-22",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null,
+   "id": "ufal-vieira-listas-pln",
+   "nome": "Listas de exercícios 1 a 6 de Processamento de Linguagem Natural (2021.1, out/2021 a fev/2022)",
+   "autoria": "Prof. Thales Vieira (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "pln-01-regex-e-preprocessamento",
+    "pln-02-representacao-e-classificacao",
+    "pln-03-topicos-agrupamento-e-embeddings",
+    "pln-04-redes-neurais-e-spacy"
+   ],
+   "licenca": "Não declarada (listas)",
+   "acesso": "Pasta da turma de CC (eletiva); não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados em p01–p13; listas avaliativas, explicadas com exemplos parecidos"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "scikit-learn-pln",
+   "nome": "Documentação do scikit-learn (extração de texto, decomposição, agrupamento, variedades)",
+   "autoria": "Desenvolvedores do scikit-learn",
+   "url": "https://scikit-learn.org/stable/modules/feature_extraction.html",
+   "formato": "HTML",
+   "topicos": [
+    "pln-02-representacao-e-classificacao",
+    "pln-03-topicos-agrupamento-e-embeddings"
+   ],
+   "licenca": "BSD-3-Clause (código); documentação aberta",
+   "acesso": "Biblioteca usada nos testes",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Fórmula do TF-IDF e conferência em tests_acervo/test_disciplina_pln.py"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "notas": null,
+   "id": "keras-lstm-seq2seq",
+   "nome": "Character-level recurrent sequence-to-sequence model (exemplo do Keras)",
+   "autoria": "Documentação do Keras",
+   "url": "https://keras.io/examples/nlp/lstm_seq2seq/",
+   "formato": "HTML",
+   "topicos": [
+    "pln-04-redes-neurais-e-spacy"
+   ],
+   "licenca": "Apache-2.0 (exemplos do Keras)",
+   "acesso": "Indicado na lista 6; só citado",
+   "prioridade": "referencia",
+   "uso": "citada",
+   "origem": "web",
+   "justificativa": "Tutorial pedido na lista 6, questão 4"
+  }
+ ]
+}
