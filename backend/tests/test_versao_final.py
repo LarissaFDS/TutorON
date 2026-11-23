@@ -44,12 +44,32 @@ def test_matrizes_do_ic_sem_eletivas_e_com_os_acervos_certos():
     assert len(ecom["periodos"]) == 10 and len(cc["periodos"]) == 8
     nomes = [d["nome"] for c in (ecom, cc) for p in c["periodos"] for d in p["disciplinas"]]
     assert not any("letiva" in n for n in nomes)
-    assert cursos.preferidas("ecom", 3) == ("lfa", "fis2", "calc3", "metodologia", "sd")
-    assert cursos.preferidas("ecom", 5) == ("paa",) and cursos.preferidas("ecom", 7) == ("bd",)
-    assert set(cursos.preferidas("cc", 2)) == {"ed", "bd", "oac"} and set(cursos.preferidas("cc", 4)) == {"paa", "lfa"}
+    assert cursos.preferidas("ecom", 3) == ("lfa", "projsw", "fis2", "calc3", "metodologia", "sd")
+    assert set(cursos.preferidas("ecom", 5)) == {"paa", "circ", "redes", "sinais", "so", "grafos"}
+    assert set(cursos.preferidas("ecom", 7)) == {"bd", "direito"}
+    assert set(cursos.preferidas("cc", 2)) == {"ed", "bd", "oac", "ga"}
+    assert set(cursos.preferidas("cc", 4)) == {"projsw", "paa", "lfa"}
     from acervo import disciplinas
     ids = {d.id for d in disciplinas.todas()}
     assert {d["acervo"] for c in (ecom, cc) for p in c["periodos"] for d in p["disciplinas"] if d["acervo"]} <= ids
+
+
+def test_disciplina_nova_liga_sozinha_as_matrizes_pelo_nome():
+    """Sem `acervo` em cursos.json: o nome (ou `nomes_nos_cursos`) do cadastro basta; em validação não liga."""
+    dados = {"cursos": [{"periodos": [{"disciplinas": [
+        {"nome": "Inteligência  ARTIFICIAL"}, {"nome": "Lógica para Computação"}, {"nome": "Desenho"},
+        {"nome": "Robótica"}, {"nome": "Cálculo 1", "acervo": "calc1"}]}]}]}
+    cadastro = {"disciplinas": [
+        {"id": "ia", "nome": "Inteligência Artificial", "situacao": "MVP"},
+        {"id": "logica", "nome": "Lógica Aplicada à Computação", "situacao": "MVP",
+         "nomes_nos_cursos": ["Lógica para Computação"]},
+        {"id": "rob", "nome": "Robótica", "situacao": "em validação"},
+        {"id": "calc1", "nome": "Cálculo 1", "situacao": "MVP"}]}
+    grade = cursos._ligar_acervos(dados, cadastro)["cursos"][0]["periodos"][0]["disciplinas"]
+    assert [d.get("acervo") for d in grade] == ["ia", "logica", None, None, "calc1"]
+    # Nas matrizes reais: toda disciplina do 1º período de EC já tem material.
+    assert cursos.preferidas("ecom", 1) == ("ingles", "prog1", "discreta", "calc1", "ga", "iec")
+    assert set(cursos.preferidas("cc", 1)) == {"prog1", "logica", "etica", "discreta", "calc1"}
 
 
 def test_perfil_calibra_sem_inventar():
@@ -72,7 +92,7 @@ def test_periodo_desempata_e_decide_sem_sinal():
 def test_api_cursos_e_perfil_chegam_ao_prompt(site):
     assert site.get("/api/cursos").json()["padrao"] == "ecom"
     t = esperar(site, site.post("/api/perguntar", json={
-        "pergunta": "Não entendi a questão 3 da lista", "disciplina": "auto", "curso": "ecom", "periodo": 5}).json())
+        "pergunta": "Não entendi a questão 3 da lista", "disciplina": "paa", "curso": "ecom", "periodo": 5}).json())
     assert t["status"] == "pronta" and t["disciplina"] == "paa"
     prompt = site.llm.chamadas[0][2]
     assert "PERFIL ACADÊMICO DO ALUNO" in prompt and "5º" in prompt and "Projeto e Análise de Algoritmos" in prompt
