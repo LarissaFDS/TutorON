@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Segurança de Sistemas Computacionais: conferidas em tests_acervo/test_disciplina_seguranca.py.
+    ("seg-requisitos", "seguranca", "Quais os requisitos básicos de segurança da informação?",
+     "confidencialidade, integridade, disponibilidade, autenticidade, não repúdio"),
+    ("seg-mac", "seguranca", "Qual a diferença entre MAC e assinatura digital?",
+     "chave compartilhada × chave privada; MAC não dá não repúdio"),
+    ("seg-esp", "seguranca", "Quais requisitos o IPSec com ESP atende?",
+     "confidencialidade, integridade, autenticação da origem, anti-reprodução"),
+    ("seg-wep", "seguranca", "Por que o WEP é inseguro?",
+     "IV de 24 bits repete; CRC-32 linear; chave fixa; usar WPA2/WPA3"),
+    ("seg-fora", "seguranca", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Processamento de Linguagem Natural: conferidas em tests_acervo/test_disciplina_pln.py.
     ("pln-regex", "pln", "Como usar grupos nomeados em expressões regulares?",
      "(?P<nome>...), groupdict; opcional com (?:...)?; guia sem entregar a lista"),
