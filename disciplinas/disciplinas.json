@@ -339,6 +339,9 @@
         "Qual o erro em regime para entrada degrau num sistema tipo 1?",
         "Como desenhar o lugar das raízes de G(s) = K/(s(s+2))?",
         "Como montar a função de transferência de um sistema massa-mola-amortecedor?"
+      ],
+      "nomes_nos_cursos": [
+        "Sistemas de Controle 1"
       ]
     },
     {
@@ -624,6 +627,9 @@
         "Como negar \"todo aluno estuda\"?",
         "Como converter uma fórmula para forma normal conjuntiva?",
         "Como provar p → q ⊢ ¬q → ¬p por dedução natural?"
+      ],
+      "nomes_nos_cursos": [
+        "Lógica para Computação"
       ]
     },
     {
@@ -706,6 +712,9 @@
         "Como converter um AFN em AFD?",
         "Como usar o lema do bombeamento para provar que aⁿbⁿ não é regular?",
         "Por que o problema da parada é indecidível?"
+      ],
+      "nomes_nos_cursos": [
+        "Teoria da Computação"
       ]
     },
     {
@@ -736,6 +745,9 @@
         "Como citar um artigo segundo a ABNT?",
         "Como inserir uma figura com legenda no LaTeX?",
         "Como escrever o resumo de um artigo científico?"
+      ],
+      "nomes_nos_cursos": [
+        "Metodologia de Pesquisa e Trabalho Individual"
       ]
     },
     {
@@ -767,6 +779,9 @@
         "Quais são as assíntotas de x²/(x−1)?",
         "Como resolver o problema da escada que desliza na parede?",
         "Qual o cilindro de volume máximo inscrito num cone?"
+      ],
+      "nomes_nos_cursos": [
+        "Cálculo Diferencial e Integral"
       ]
     },
     {
@@ -819,6 +834,9 @@
         "Quando usar composição em vez de herança?",
         "Em que ordem os construtores rodam numa hierarquia de classes?",
         "Qual a saída do programa de soma com os argumentos 2 4 oi?"
+      ],
+      "nomes_nos_cursos": [
+        "Programação 2"
       ]
     },
     {
@@ -1051,6 +1069,9 @@
         "Como aplicar a técnica dos 4 passos num caso de IA?",
         "Como montar um código de conduta ética?",
         "O que é computação verde?"
+      ],
+      "nomes_nos_cursos": [
+        "Computador, Sociedade e Ética"
       ]
     },
     {

@@ -1,6 +1,6 @@
 {
   "_fonte": "Instituto de Computação da UFAL (ic.ufal.br), projetos pedagógicos mais recentes publicados: Engenharia de Computação PPC 2014 (seção 5, Ordenamento Curricular) e Ciência da Computação PPC 2019 (seção 6.1 e Quadro 1). Só disciplinas obrigatórias; eletivas, TCC, estágio e extensão ficam de fora. Consultado em 18/11/2026.",
-  "_acervo": "Campo 'acervo' = id em disciplinas.json quando o TutorON tem material curado da disciplina.",
+  "_acervo": "Campo 'acervo' é opcional: o servidor liga sozinho cada disciplina da matriz ao acervo de mesmo nome em disciplinas.json (ou de um nome em 'nomes_nos_cursos'). Só escreva 'acervo' aqui para forçar uma ligação diferente.",
   "padrao": "ecom",
   "cursos": [
     {
