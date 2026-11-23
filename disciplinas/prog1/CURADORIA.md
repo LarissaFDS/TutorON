@@ -55,6 +55,8 @@ Nenhum bloco é `nota_da_equipe_ia`. Todos têm `revisao_humana: pendente`, e ne
 | `prog1-cc-strings-listas` | CC, lista 5: Enter do `fgets`, remover caractere, `toupper` | corrigida |
 | `prog1-cc-structs-listas` | CC, lista 6: `typedef`, struct aninhada, vetor de structs | corrigida |
 | `prog1-cc-terminal-linux` | CC: comandos do terminal e `gcc` | corrigida |
+| `prog1-ec2-ordenacao-vetor` | EC, 2º período: ordenação por trocas e bolha | validada |
+| `prog1-ec2-recursao-acumulador` | EC, 2º período: recursão com acumulador, `return` esquecido | validada |
 
 "corrigida" é correção da equipe TutorON e **não é gabarito do professor**. Cada bloco corrigido diz qual foi a divergência.
 
@@ -112,3 +114,15 @@ Ficaram de fora o e-mail do professor, os links do grupo, do Google Sites e do D
 - Confirmar o código atual (COMP359) e a ementa do PPC de Ciência da Computação em vigor.
 - Identificar professor, semestre e turma do material de CC.
 - Confirmar quem é o professor atual e se os slides podem ser usados.
+
+## Material do 2º período de Engenharia de Computação (23/11/2026)
+
+| Arquivo | Uso |
+|---|---|
+| 48 arquivos `.c` de exercícios | `ufal-ec2-prog1-codigos-c`: evidência de dois tópicos novos; blocos s24 (ordenação de vetor) e s25 (recursão com acumulador), com código próprio testado em `tests_acervo/c_prog1/ec2_ordenacao_acumulador.c` |
+| executáveis `.exe` e pastas `output/` | fora (binários) |
+| `MD.c` (primos e coprimos) | fora: é projeto de Matemática Discreta |
+
+O resto (vetores, matrizes, strings, structs, funções, fatorial com estouro de `int`) já estava nos blocos s01 a s23. Questões do Huxley (como "24 fatorial") não entram resolvidas.
+
+Todos os 48 arquivos foram compilados com `gcc -std=c99 -Wall -Wextra` (MinGW) e rodados com AddressSanitizer/UBSan (Docker `gcc:14`) fora do repositório. Achados, com entrada genérica: índice −1 lido num vetor, estouro de `int` no fatorial de 13 (já no bloco s16), `return` esquecido na chamada recursiva (vira o erro do bloco s25), leitura fora do vetor e estouro de pilha numa recursão sem caso base alcançável. O nome de pessoa que aparece no nome de uma pasta não foi usado.

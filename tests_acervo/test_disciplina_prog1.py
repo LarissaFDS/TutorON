@@ -131,7 +131,7 @@ def test_assunto_de_ed_com_prog1_selecionada_usa_regra_de_fronteira():
 def test_resolucoes_tem_status_e_dizem_no_texto():
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     resolvidas = [i for i in ITENS.values() if 'status_resolucao' in i]
-    assert len(resolvidas) == 21
+    assert len(resolvidas) == 23
     for i in resolvidas:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
         assert 'gabarito oficial' not in i['texto'].lower()
@@ -352,3 +352,40 @@ def test_contas_do_complemento_de_cc():
     assert 'banana'.replace('a', 'o') == 'bonono' and 'a  b c'.replace(' ', '') == 'abc'
     assert ''.join(c for c in 'aeiou xyz eu' if c not in 'aeiouAEIOU') == ' xyz '
     assert chr(ord(' ') - 32) == '\0'  # por que s[i] - 32 corta a string no espaço
+
+
+# ---------------------------------------------------------------- complemento do 2º período de Engenharia de Computação
+
+EC2 = ('prog1-ec2-ordenacao-vetor', 'prog1-ec2-recursao-acumulador')
+
+
+def test_complemento_ec2_blocos_e_contas():
+    assert set(EC2) <= set(ITENS)
+    for i in EC2:
+        assert ITENS[i]['status_resolucao'] == 'validada'
+        assert ITENS[i]['fontes_catalogo'] == ['ufal-ec2-prog1-codigos-c']
+    ordem = texto('prog1-ec2-ordenacao-vetor')
+    assert 'v[j + 1]' in ordem and 'trocou' in ordem and '5 comparações' in ordem and '15' in ordem
+    assert 6 * 5 // 2 == 15 and sum(range(11)) == 55 and 2 ** 10 == 1024
+    rec = texto('prog1-ec2-recursao-acumulador')
+    assert 'control reaches end of non-void function' in rec and '55' in rec and '1024' in rec
+
+
+def test_complemento_ec2_return_esquecido_gera_aviso():
+    """O erro do bloco s25: sem return na chamada recursiva, o gcc -Wall avisa."""
+    import shutil
+    from pathlib import Path
+    import tempfile
+
+    gcc = shutil.which('gcc')
+    if not gcc:
+        import pytest
+
+        pytest.skip('gcc não instalado')
+    codigo = 'int soma_acum(int n, int acc)\n{\n    if (n == 0) {\n        return acc;\n    }\n    soma_acum(n - 1, acc + n);\n}\n'
+    with tempfile.TemporaryDirectory() as tmp:
+        fonte = Path(tmp) / 'sem_return.c'
+        fonte.write_text(codigo, encoding='utf-8')
+        r = subprocess.run([gcc, '-std=c99', '-Wall', '-c', str(fonte), '-o', str(Path(tmp) / 'x.o')],
+                           capture_output=True, text=True)
+    assert 'control reaches end of non-void function' in r.stderr
