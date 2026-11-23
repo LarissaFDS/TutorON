@@ -1,0 +1,89 @@
+[
+ {
+  "id": "comp-firstfollow",
+  "disciplina": "compiladores",
+  "pergunta": "Como calcular os conjuntos FIRST e FOLLOW?",
+  "esperado": "definições; condições LL(1)",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.6-flash",
+  "segundos_total": 34.1,
+  "fontes": [
+   "Provas de Compiladores do Prof. Marcus Ramos (2009 e 2010), cópias da pasta da turma"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para calcular os conjuntos **FIRST** e **FOLLOW** [P1], seguimos regras bem definidas a partir das produções da gramática.\n\n---\n\n### 1. Como calcular o FIRST($X$)\nO conjunto $\\text{FIRST}(X)$ contém os símbolos terminais que podem iniciar cadeias derivadas de $X$:\n1. Se $X$ for um **terminal**, $\\text{FIRST}(X) = \\{X\\}$.\n2. Se houver a produção $X \\to \\varepsilon$, adicione $\\varepsilon$ a $\\text{FIRST}(X)$.\n3. Se houver a produção $X \\to Y_1 Y_2 \\dots Y_k$:\n   - Adicione todos os terminais de $\\text{FIRST}(Y_1)$ a $\\text{FIRST}(X)$.\n   - Se $Y_1$ puder derivar $\\varepsilon$, adicione também os terminais de $\\text{FIRST}(Y_2)$, e assim por diante. Se todos $Y_i$ derivarem $\\varepsilon$, adicione $\\varepsilon$ a $\\text{FIRST}(X)$.\n\n---\n\n### 2. Como calcular o FOLLOW($A$)\nO conjunto $\\text{FOLLOW}(A)$ contém os terminais que podem aparecer imediatamente à direita de $A$ em alguma forma sentencial:\n1. Coloque o sinal de fim de entrada `$` em $\\text{FOLLOW}(S)$, onde $S$ é o símbolo inicial.\n2. Se houver uma produção $A \\to \\alpha B \\beta$:\n   - Tudo o que está em $\\text{FIRST}(\\beta)$ (exceto $\\varepsilon$) entra em $\\text{FOLLOW}(B)$.\n3. Se houver uma produção $A \\to \\alpha B$, ou $A \\to \\alpha B \\beta$ onde $\\text{FIRST}(\\beta)$ contém $\\varepsilon$:\n   - Tudo o que está em $\\text{FOLLOW}(A)$ entra em $\\text{FOLLOW}(B)$.\n\n---\n\n### Sua vez\n\nConsidere a gramática com símbolo inicial $S$:\n- $S \\to 'a' A$\n- $A \\to 'b' \\mid \\varepsilon$\n\nEscreva no papel e me diga:\n1. Qual é o conjunto **FIRST($A$)**?\n2. Olhando para a produção de $S$, qual terminal vem logo após $A$, e portanto qual é o **FOLLOW($A$)**?"
+ },
+ {
+  "id": "comp-recursao",
+  "disciplina": "compiladores",
+  "pergunta": "Como eliminar a recursão à esquerda de uma gramática?",
+  "esperado": "A -> beta A', A' -> alfa A' | vazia",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 48.1,
+  "fontes": [
+   "Provas de Compiladores do Prof. Marcus Ramos (2009 e 2010), cópias da pasta da turma"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A recursão à esquerda ocorre quando uma produção começa com o mesmo não-terminal que define a regra. Isso causa problemas para analisadores descendentes, pois o parser não consegue decidir qual produção usar. Para eliminar essa recursão, você precisa reescrever as regras de forma que o não-terminal não apareça no início de nenhuma alternativa.\n\nPense: se uma regra é como $A \\to A\\alpha \\mid \\beta$, como você pode reescrevê-la para quebrar a recursão à esquerda? Qual símbolo pode ser movido para uma nova regra, e como isso afeta a estrutura da gramática?\n\n### Sua vez  \nReescreva a regra $E \\to E + T \\mid T$ para eliminar a recursão à esquerda. Qual nova regra você cria para substituir a produção $E \\to E + T$?"
+ },
+ {
+  "id": "comp-slr",
+  "disciplina": "compiladores",
+  "pergunta": "Como montar a tabela SLR(1)?",
+  "esperado": "itens LR(0); reduz nos FOLLOW",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 40.1,
+  "fontes": [
+   "Provas de Compiladores do Prof. Marcus Ramos (2009 e 2010), cópias da pasta da turma"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Montar a tabela SLR(1) é um processo em etapas, e a chave está em entender como os **itens LR(0)** se comportam e como os **conjuntos de itens** são construídos. Comece com a gramática original e adicione a produção $S' \\to S$, onde $S$ é o símbolo inicial. Isso é o primeiro passo para garantir que a tabela inclua a regra de aceitação.\n\nAgora, pense: **como você começa a construir os itens LR(0)**? Qual é o primeiro item que você adiciona ao conjunto inicial? E como você calcula o fechamento desse item?\n\n### Sua vez  \nEscreva o primeiro item do conjunto inicial da gramática, após adicionar $S' \\to S$. Depois, diga como você calcula o fechamento desse item."
+ },
+ {
+  "id": "comp-tac",
+  "disciplina": "compiladores",
+  "pergunta": "Como gerar código de três endereços para x = a * b + c?",
+  "esperado": "T1 = a * b; T2 = T1 + c; x = T2",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 90.2,
+  "fontes": [
+   "Provas de Compiladores do IC-UFAL (2013 a 2017.1)"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [
+   "entregou_resposta"
+  ],
+  "bloqueio": null,
+  "resposta": "A expressão `x = a * b + c` envolve dois operadores: multiplicação e adição. O código de três endereços precisa representar cada operação em uma instrução separada. A pergunta é: **como representar a adição de `a * b` com `c`?**\n\nLembre-se de que o código de três endereços usa temporários para armazenar resultados intermediários. A multiplicação vem primeiro, então você precisa gerar um temporário para `a * b`. Depois, esse temporário é usado na adição com `c`.\n\nAgora, faça o seguinte passo:\n\n### Sua vez  \nEscreva a instrução de código de três endereços para `a * b`, usando um temporário. Depois, pense como incluir `c` nessa expressão."
+ },
+ {
+  "id": "comp-fora",
+  "disciplina": "compiladores",
+  "pergunta": "Como funciona o algoritmo de Bresenham?",
+  "esperado": "diz que é de Computação Gráfica; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 40.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O algoritmo de Bresenham é um método eficiente para desenhar linhas em um grid de pixels, usando apenas operações aritméticas simples. Ele evita o uso de cálculos complexos como raízes quadradas ou divisões, o que o torna rápido e adequado para ambientes de baixa precisão, como gráficos de computador.\n\nA pergunta-chave é: **como o algoritmo decide qual pixel escolher em cada passo?**\n\nPense: o algoritmo compara a distância entre o pixel atual e o pixel ideal da linha. Como ele faz isso sem usar operações caras?\n\n### Sua vez  \nDesenhe um pequeno trecho de uma linha em um grid (por exemplo, de (0,0) a (5,3)), e marque os pixels que o algoritmo de Bresenham escolheria. Qual é a regra que decide se o próximo pixel vai para cima ou para a direita?"
+ }
+]
