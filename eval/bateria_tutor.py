@@ -284,6 +284,16 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Processamento de Linguagem Natural: conferidas em tests_acervo/test_disciplina_pln.py.
+    ("pln-regex", "pln", "Como usar grupos nomeados em expressões regulares?",
+     "(?P<nome>...), groupdict; opcional com (?:...)?; guia sem entregar a lista"),
+    ("pln-tfidf", "pln", "Qual a diferença entre CountVectorizer e TF-IDF?",
+     "contagem × peso por raridade (idf); cosseno"),
+    ("pln-topicos", "pln", "Como escolher o número de tópicos no LDA?",
+     "vários k; coerência, perplexidade; ler os tópicos"),
+    ("pln-word2vec", "pln", "Como funciona o word2vec?",
+     "vetores densos; CBOW/skip-gram; similaridade do cosseno; modelo do idioma"),
+    ("pln-fora", "pln", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Computação Evolucionária: conferidas em tests_acervo/test_disciplina_compevol.py.
     ("compevol-roleta", "compevol", "Como funciona a seleção por roleta?",
      "fatia proporcional à aptidão; exemplo 15x - x², soma 218"),
