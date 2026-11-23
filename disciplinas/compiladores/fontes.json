@@ -1,0 +1,119 @@
+{
+ "disciplina": "compiladores",
+ "atualizado_em": "2026-11-23",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-compiladores-provas",
+   "nome": "Provas de Compiladores do IC-UFAL: 2013, 2014, 2015.2 (com resoluções), AB1 e AB2 de 2017.1 e reavaliação",
+   "autoria": "IC-UFAL; correções de 2015.2 atribuídas na cópia ao Prof. Alcino Dall'Igna Júnior; questões do POSCOMP 2002 e 2003 citadas",
+   "url": null,
+   "formato": "PDF, fotos e anotações",
+   "topicos": [
+    "comp-01-fundamentos-e-analise-lexica",
+    "comp-02-analise-sintatica",
+    "comp-03-semantica-e-codigo-intermediario"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Cópias com nomes, matrículas e respostas de alunos: só os enunciados foram parafraseados; não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas em c02, c03 e c05 a c11; resoluções refeitas pela equipe",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "ufal-compiladores-trabalhos",
+   "nome": "Enunciados dos trabalhos de Compiladores de 2017.1 (especificação da linguagem, gramática e analisador sintático)",
+   "autoria": "IC-UFAL",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "comp-01-fundamentos-e-analise-lexica",
+    "comp-02-analise-sintatica"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Enunciados parafraseados; trabalhos de alunos (LDS, 2M, analisadores) não usados nem versionados",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Tipos de analisador e regras da gramática citados em c06 e c07",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "ramos-provas-compiladores",
+   "nome": "Provas de Compiladores de 01/10/2009 e 04/10/2010 com respostas",
+   "autoria": "Prof. Marcus Ramos (instituição não indicada nos arquivos)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "comp-01-fundamentos-e-analise-lexica",
+    "comp-02-analise-sintatica"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Cópias na pasta da turma; parafraseadas, não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas em c01 a c04 e c07",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "uri-apostila-compiladores-2001",
+   "nome": "Apostila de Compiladores (URI, Campus de Erechim, 2001)",
+   "autoria": "URI-Erechim (autor não indicado no texto extraído)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "comp-01-fundamentos-e-analise-lexica",
+    "comp-02-analise-sintatica",
+    "comp-03-semantica-e-codigo-intermediario"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Na pasta da turma; não versionada; só evidência de tópicos",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Material de apoio da turma",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "livros-compiladores",
+   "nome": "Livros: Aho, Lam, Sethi e Ullman (Compiladores: Princípios, Técnicas e Ferramentas); Price e Toscani (Implementação de Linguagens de Programação: Compiladores)",
+   "autoria": "Vários autores",
+   "url": null,
+   "formato": "livro",
+   "topicos": [
+    "comp-01-fundamentos-e-analise-lexica",
+    "comp-02-analise-sintatica",
+    "comp-03-semantica-e-codigo-intermediario"
+   ],
+   "licenca": "Protegido (direitos autorais das editoras)",
+   "acesso": "Não incluídos no material entregue; só referência por seção",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência externa",
+   "justificativa": "Livros-texto da disciplina; não reproduzidos",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  }
+ ]
+}

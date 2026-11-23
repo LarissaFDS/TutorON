@@ -1140,6 +1140,28 @@
         "Qual a diferença entre o sombreamento de Gouraud e o de Phong?",
         "Como funciona o recorte de Cohen-Sutherland?"
       ]
+    },
+    {
+      "id": "compiladores",
+      "nome": "Compiladores",
+      "sigla": "COMP",
+      "situacao": "MVP",
+      "itens": "disciplinas/compiladores/acervo/itens.json",
+      "indice": "disciplinas/compiladores/acervo/indice.json",
+      "materiais": "disciplinas/compiladores/materiais",
+      "rigor": "disciplinas/compiladores/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "comp-01-fundamentos-e-analise-lexica",
+        "comp-02-analise-sintatica",
+        "comp-03-semantica-e-codigo-intermediario"
+      ],
+      "exemplos": [
+        "Como calcular os conjuntos FIRST e FOLLOW?",
+        "Como eliminar a recursão à esquerda de uma gramática?",
+        "Como montar a tabela SLR(1)?",
+        "Como gerar código de três endereços para uma expressão?"
+      ]
     }
   ]
 }
