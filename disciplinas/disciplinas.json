@@ -1030,6 +1030,28 @@
         "Quais são as heurísticas de Nielsen?",
         "Como criar uma persona?"
       ]
+    },
+    {
+      "id": "etica",
+      "nome": "Computação, Sociedade e Ética",
+      "sigla": "CSE",
+      "situacao": "em validação",
+      "itens": "disciplinas/etica/acervo/itens.json",
+      "indice": "disciplinas/etica/acervo/indice.json",
+      "materiais": "disciplinas/etica/materiais",
+      "rigor": "disciplinas/etica/rigor.md",
+      "livro_supabase": false,
+      "assuntos": [
+        "etica-01-fundamentos-eticos",
+        "etica-02-tecnologia-e-sociedade",
+        "etica-03-etica-profissional-e-lgpd"
+      ],
+      "exemplos": [
+        "Quais são os princípios da LGPD?",
+        "Como aplicar a técnica dos 4 passos num caso de IA?",
+        "Como montar um código de conduta ética?",
+        "O que é computação verde?"
+      ]
     }
   ]
 }
