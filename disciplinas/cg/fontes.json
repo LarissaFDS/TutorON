@@ -1,0 +1,99 @@
+{
+ "disciplina": "cg",
+ "atualizado_em": "2026-11-23",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; citada = indicada nos blocos; referencia = só catálogo",
+  "origem": "\"material de turma\" = pasta da turma entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-marcelo-aulas-cg",
+   "nome": "Aulas de Computação Gráfica (introdução, dispositivos, rasterização, aliasing, transformações 2D e 3D, cores, observação 3D, recorte, modelagem, iluminação, iluminação global, textura)",
+   "autoria": "Prof. Marcelo Costa Oliveira (IC-UFAL)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "cg-01-fundamentos-e-rasterizacao",
+    "cg-02-transformacoes-projecao-e-recorte",
+    "cg-03-modelagem-iluminacao-e-textura"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Slides do professor (2009 a 2017); parafraseados, não versionados",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas em g01 a g13",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "ufal-cg-provas-exercicios",
+   "nome": "Exercícios, prova bimestral I.2, AB1 e AB2 de 2021.2 e reavaliação, questões de 2014",
+   "autoria": "Prof. Marcelo Costa Oliveira (IC-UFAL); questões de ENADE 2008, POSCOMP 2011 e 2018 citadas nas provas",
+   "url": null,
+   "formato": "PDF, DOCX e fotos",
+   "topicos": [
+    "cg-01-fundamentos-e-rasterizacao",
+    "cg-02-transformacoes-projecao-e-recorte",
+    "cg-03-modelagem-iluminacao-e-textura"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Cópias com respostas e nomes de alunos: só os enunciados foram parafraseados; não versionadas",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Enunciados parafraseados em g01, g02 e g04 a g13; resoluções refeitas pela equipe",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "icmc-apostila-cg-2006",
+   "nome": "Apostila de Computação Gráfica (ICMC-USP, 2006)",
+   "autoria": "Profa. Agma Juci Machado Traina e Profa. Maria Cristina Ferreira de Oliveira (ICMC-USP)",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "cg-01-fundamentos-e-rasterizacao",
+    "cg-02-transformacoes-projecao-e-recorte",
+    "cg-03-modelagem-iluminacao-e-textura"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Indicada pelo professor; não versionada; só evidência de tópicos",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Referência de estudo indicada na atividade da aula 8",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  },
+  {
+   "id": "livros-cg",
+   "nome": "Livros: Azevedo e Conci (Teoria e Prática), Hearn e Baker (Computer Graphics, C version), OpenGL SuperBible, Introduction to Computer Graphics and Creative 3-D Environments",
+   "autoria": "Vários autores",
+   "url": null,
+   "formato": "livro",
+   "topicos": [
+    "cg-01-fundamentos-e-rasterizacao",
+    "cg-02-transformacoes-projecao-e-recorte",
+    "cg-03-modelagem-iluminacao-e-textura"
+   ],
+   "licenca": "Protegido (direitos autorais das editoras)",
+   "acesso": "Não incluídos no material entregue; só referência por capítulo",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência externa",
+   "justificativa": "Livros-texto da área; não reproduzidos",
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "notas": null
+  }
+ ]
+}

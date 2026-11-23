@@ -1,0 +1,88 @@
+[
+ {
+  "id": "ia-busca",
+  "disciplina": "ia",
+  "pergunta": "Qual a diferença entre busca em largura e em profundidade?",
+  "esperado": "fila e pilha; completude e memória",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 86.5,
+  "fontes": [
+   "Slides de Inteligência Artificial do Prof. Jacson R. C. Silva (Departamento de Computação, CCA-UFES), usados na turma da UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A diferença entre busca em largura e em profundidade está na **ordem em que os nós são explorados**. Ambas são estratégias para encontrar um objetivo em um espaço de estados, mas cada uma tem uma **prioridade diferente** para expandir os nós.\n\nPense:  \n- Em qual ordem você exploraria uma árvore se quisesse **ver todos os nós de um nível antes de ir para o próximo**?  \n- E se quisesse **ir o mais fundo possível antes de voltar para explorar outros ramos**?\n\n### Sua vez  \nEscreva uma frase que descreva a **principal diferença** entre busca em largura e em profundidade, com base na ordem de exploração dos nós. Não precisa ser longa — apenas o essencial."
+ },
+ {
+  "id": "ia-alfabeta",
+  "disciplina": "ia",
+  "pergunta": "Como funciona a poda alfa-beta?",
+  "esperado": "alfa e beta; corte quando alfa >= beta; mesmo valor do minimax",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 72.4,
+  "fontes": [
+   "Slides de Inteligência Artificial do Prof. Jacson R. C. Silva (Departamento de Computação, CCA-UFES), usados na turma da UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A poda alfa-beta é uma técnica que otimiza a busca no espaço de estados de jogos, evitando explorar ramificações que não afetam a decisão ótima. Ela funciona com dois valores: **α** (alfa), que representa o melhor valor que o MAX pode garantir, e **β** (beta), que representa o melhor valor que o MIN pode garantir. A ideia é cortar a busca quando **α ≥ β**, pois isso indica que o MAX já tem um valor que o MIN não pode melhorar.\n\nImagine que você está analisando um nó MIN e já sabe que o valor mínimo que ele pode oferecer é **2**, enquanto o MAX já tem um valor garantido de **3**. Nesse caso, não há necessidade de continuar explorando, pois o MIN não pode melhorar a situação do MAX.\n\n### Sua vez  \nDesenhe um pequeno trecho de uma árvore de jogo com MAX e MIN alternando, e marque os valores de α e β em cada nó. Em qual momento você poderia cortar a busca?"
+ },
+ {
+  "id": "ia-encadeamento",
+  "disciplina": "ia",
+  "pergunta": "Como fazer encadeamento para frente e para trás?",
+  "esperado": "guiado por dados e por objetivos; ponto fixo",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 72.2,
+  "fontes": [
+   "Listas 1 e 2 de Inteligência Artificial (IC-UFAL), 2020.2, Prof. Evandro de Barros Costa",
+   "Slides de Inteligência Artificial do Prof. Jacson R. C. Silva (Departamento de Computação, CCA-UFES), usados na turma da UFAL",
+   "Slides de Inteligência Artificial do Prof. Jacson R. C. Silva (Departamento de Computação, CCA-UFES), usados na turma da UFAL"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A pergunta é sobre como aplicar os métodos de **encadeamento para frente** e **para trás** em um sistema de regras. Vamos focar no **encadeamento para frente** primeiro.\n\n### Pergunta-chave:\nSe você tem uma base de regras e um fato inicial, como você começa a aplicar o encadeamento para frente? Qual é o primeiro passo?\n\n### Pista:\nO encadeamento para frente começa com os **fatos conhecidos**. A partir desses fatos, você identifica quais regras podem ser aplicadas (ou seja, quais regras têm premissas que estão entre os fatos). Depois, você adiciona as **conclusões** dessas regras como novos fatos e repete o processo.\n\n### Sua vez\nTente escrever o primeiro passo do encadeamento para frente, com base no fato inicial $S$ e nas regras fornecidas. O que você pode concluir com $S$?"
+ },
+ {
+  "id": "ia-rbc",
+  "disciplina": "ia",
+  "pergunta": "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?",
+  "esperado": "recuperar, reusar, revisar, reter; similaridade",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 46.1,
+  "fontes": [
+   "Listas 1 e 2 de Inteligência Artificial (IC-UFAL), 2020.2, Prof. Evandro de Barros Costa",
+   "Aulas de Representação de Conhecimento e Raciocínio e de Lógica Proposicional do Prof. Evandro Costa (IC-UFAL), 2013 e 2016"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "O ciclo dos 4 Rs é um processo estruturado para resolver problemas usando conhecimento de casos anteriores. Ele é dividido em quatro etapas, cada uma com um objetivo específico. Mas, em vez de dizer o que cada R significa, quero que você me diga: **qual é o objetivo da etapa \"Recuperar\" no ciclo dos 4 Rs?**  \n\n### Sua vez  \nEscreva o objetivo da etapa \"Recuperar\" do ciclo dos 4 Rs, usando suas próprias palavras."
+ },
+ {
+  "id": "ia-fora",
+  "disciplina": "ia",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "ollama/tutoron-paa",
+  "segundos_total": 50.1,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A impedância de um indutor é uma grandeza complexa que representa a oposição que o indutor oferece à corrente alternada. Para calculá-la, você precisa entender a relação entre a tensão e a corrente em um circuito AC.\n\n### Pergunta-chave:\nQual é a fórmula da impedância de um indutor em função da frequência e da indutância?\n\n### Dica:\nA impedância de um indutor é diretamente proporcional à frequência da corrente e à indutância do componente. A unidade de medida dessa impedância é o ohm.\n\n### Sua vez  \nEscreva a fórmula da impedância de um indutor em termos da frequência angular (ω) e da indutância (L)."
+ }
+]

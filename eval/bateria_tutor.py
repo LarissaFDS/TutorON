@@ -284,6 +284,24 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Inteligência Artificial: conferidas em tests_acervo/test_disciplina_ia.py.
+    ("ia-busca", "ia", "Qual a diferença entre busca em largura e em profundidade?", "fila e pilha; completude e memória"),
+    ("ia-alfabeta", "ia", "Como funciona a poda alfa-beta?", "alfa e beta; corte quando alfa >= beta; mesmo valor do minimax"),
+    ("ia-encadeamento", "ia", "Como fazer encadeamento para frente e para trás?", "guiado por dados e por objetivos; ponto fixo"),
+    ("ia-rbc", "ia", "O que é o ciclo dos 4 Rs do raciocínio baseado em casos?", "recuperar, reusar, revisar, reter; similaridade"),
+    ("ia-fora", "ia", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
+    # Computação Gráfica: conferidas em tests_acervo/test_disciplina_cg.py.
+    ("cg-bresenham", "cg", "Como funciona o algoritmo de Bresenham?", "parâmetro de decisão; só somas inteiras"),
+    ("cg-composicao", "cg", "Como compor rotação e translação em coordenadas homogêneas?", "matriz 3x3; ordem da multiplicação importa"),
+    ("cg-cohen", "cg", "Como funciona o recorte de Cohen-Sutherland?", "códigos de 4 bits; aceitação e rejeição trivial"),
+    ("cg-gouraud", "cg", "Qual a diferença entre o sombreamento de Gouraud e o de Phong?", "interpola intensidades ou normais; brilho especular"),
+    ("cg-fora", "cg", "Como funciona a poda alfa-beta?", "diz que é de Inteligência Artificial; sem fontes"),
+    # Compiladores: conferidas em tests_acervo/test_disciplina_compiladores.py.
+    ("comp-firstfollow", "compiladores", "Como calcular os conjuntos FIRST e FOLLOW?", "definições; condições LL(1)"),
+    ("comp-recursao", "compiladores", "Como eliminar a recursão à esquerda de uma gramática?", "A -> beta A', A' -> alfa A' | vazia"),
+    ("comp-slr", "compiladores", "Como montar a tabela SLR(1)?", "itens LR(0); reduz nos FOLLOW"),
+    ("comp-tac", "compiladores", "Como gerar código de três endereços para x = a * b + c?", "T1 = a * b; T2 = T1 + c; x = T2"),
+    ("comp-fora", "compiladores", "Como funciona o algoritmo de Bresenham?", "diz que é de Computação Gráfica; sem fontes"),
     # Noções de Direito: conferidas em tests_acervo/test_disciplina_direito.py.
     ("dir-fontes", "direito", "Quais são as fontes do Direito?", "lei, costume, analogia, princípios; LINDB art. 4º"),
     ("dir-kelsen", "direito", "O que é a pirâmide de Kelsen?", "Constituição no topo; escalonamento"),
