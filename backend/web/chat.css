@@ -373,6 +373,7 @@ textarea.campo { resize: vertical; }
 .grade-disc span { font-size: 12.5px; padding: 4px 9px; border-radius: 99px; background: var(--bg-suave); color: var(--tinta-2); }
 .grade-disc span.tem { background: var(--azul-suave); color: var(--azul); font-weight: 600; }
 .grade-disc p { margin: 0; font-size: 13px; color: var(--tinta-3); width: 100%; }
+.grade-disc p.grupo-eletivas { margin-top: 8px; font-weight: 600; color: var(--tinta-2); }
 .fonte-matriz { margin-top: 6px; }
 
 .planos { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; margin: 12px 0; }

@@ -913,12 +913,25 @@ não conferidas) **continuam abertas**: a liberação não as resolve.
 
 ### Ligação automática com as matrizes dos cursos
 
-O ✓ da janela "Em que ponto do curso você está?" e a preferência por período no roteamento vêm
-de `backend/cursos.py`, que liga cada disciplina das matrizes (`disciplinas/cursos.json`) ao acervo
-**pelo nome**, sem acento, caixa nem pontuação. Uma disciplina nova cadastrada em
-`disciplinas/disciplinas.json` aparece sozinha em todos os cursos e períodos onde o nome bate.
-Disciplinas "em validação" não ganham o ✓.
+A janela "Em que ponto do curso você está?" (curso e período), o ✓ de cada disciplina e a
+preferência por período no roteamento vêm de `backend/cursos.py`. As matrizes de
+`disciplinas/cursos.json` têm só as obrigatórias; cada disciplina disponível (fora de
+"em validação") de `disciplinas/disciplinas.json` aparece na janela de um destes jeitos, nesta ordem:
 
-Quando o nome na matriz de um curso for outro, adicione-o em `nomes_nos_cursos` no cadastro
-(ex.: `logica` tem `["Lógica para Computação"]`, `lfa` tem `["Teoria da Computação"]`). Um campo
-`acervo` escrito em `cursos.json` ainda tem prioridade, para forçar uma ligação diferente.
+1. **Pelo nome**, sem acento, caixa nem pontuação: liga sozinha em todo curso e período onde o
+   nome da matriz bate. Quando o nome na matriz for outro, adicione-o em `nomes_nos_cursos`
+   (ex.: `logica` tem `["Lógica para Computação"]`, `lfa` tem `["Teoria da Computação"]`). Um campo
+   `acervo` escrito em `cursos.json` ainda tem prioridade, para forçar uma ligação diferente.
+2. **Pelo campo opcional `cursos`** do cadastro, curso → período: `"cursos": {"cc": 6}` põe a
+   disciplina no 6º período de CC, com ✓, mesmo fora da matriz, e ela passa a contar em
+   `cursos.preferidas()` daquele período (mas não entra na lista de "obrigatórias" do perfil mandado
+   à IA). `"cursos": {"cc": "eletiva"}` só documenta que ela é eletiva ou de ênfase naquele curso.
+3. **Grupo automático "Eletivas, ênfases e outras"**: toda disciplina disponível que não caiu em
+   nenhum período de um curso aparece nesse grupo do curso, depois dos períodos. Assim nenhuma
+   disciplina com material fica invisível, mesmo sem campo nenhum.
+
+**Disciplina nova:** se o nome bate com a matriz, não precisa fazer nada. Se é obrigatória de um
+período com nome diferente, use `nomes_nos_cursos`. Se é eletiva ou de ênfase, preencha
+`"cursos": {"<curso>": "eletiva"}`; use um número só quando o PPC ou o material indicar o período
+(não invente). Disciplinas "em validação" não aparecem em lugar nenhum. O teste
+`backend/tests/test_cursos_eletivas.py` falha se alguma disciplina disponível sumir da janela.

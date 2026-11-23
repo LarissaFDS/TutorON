@@ -375,6 +375,16 @@
       });
       if (p.disciplinas.some(function (d) { return d.acervo; })) grade.append(el('p', null, '✓ = disciplina com material do curso no TutorON.'));
     }
+    // Eletivas, ênfases e outras: disciplinas com material que não estão em nenhum período da matriz.
+    var elet = c && c.eletivas && c.eletivas.disciplinas;
+    if (elet && elet.length) {
+      grade.append(el('p', 'grupo-eletivas', (c.eletivas.nome || 'Eletivas, ênfases e outras') + ':'));
+      elet.forEach(function (d) {
+        var s = el('span', 'tem', d.nome + ' ✓');
+        s.title = 'O TutorON tem material curado desta disciplina (eletiva, ênfase ou de outro período)';
+        grade.append(s);
+      });
+    }
   }
   function abrirPerfil() {
     rascunho = { curso: perfil ? perfil.curso : (cursos.padrao || 'ecom'), periodo: perfil ? perfil.periodo : 1 };
@@ -393,7 +403,7 @@
       var res = await fetch('/api/cursos');
       if (!res.ok) return;
       cursos = await res.json();
-      $('fonte-matriz').textContent = 'Fonte: matrizes obrigatórias dos projetos pedagógicos do Instituto de Computação (sem eletivas).';
+      $('fonte-matriz').textContent = 'Fonte: matrizes obrigatórias dos projetos pedagógicos do Instituto de Computação; eletivas e ênfases com material aparecem no grupo próprio.';
       mostrarPerfil();
       var pulou = false;
       try { pulou = !!sessionStorage.getItem('tutoron-perfil-pulado'); } catch (e) { /* sem storage */ }
