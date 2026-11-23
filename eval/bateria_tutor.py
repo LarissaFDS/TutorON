@@ -284,6 +284,12 @@ PERGUNTAS = [
     ("projsw-excecoes", "projsw", "Qual a saída do programa de soma com os argumentos 2 4 oi?",
      "try fora do laço: só a mensagem, sem soma; try dentro: mensagem de [oi] e Sum = 6"),
     ("projsw-fora", "projsw", "Como calcular uma integral dupla em coordenadas polares?", "diz que é de Cálculo 3; sem fontes"),
+    # Noções de Direito: conferidas em tests_acervo/test_disciplina_direito.py.
+    ("dir-fontes", "direito", "Quais são as fontes do Direito?", "lei, costume, analogia, princípios; LINDB art. 4º"),
+    ("dir-kelsen", "direito", "O que é a pirâmide de Kelsen?", "Constituição no topo; escalonamento"),
+    ("dir-software", "direito", "Como registrar um software no INPI?", "Lei 9.609; registro opcional; hash do código-fonte"),
+    ("dir-arvore", "direito", "O que é a teoria dos frutos da árvore envenenada?", "prova derivada de ilícita; exceções; sem aconselhar"),
+    ("dir-fora", "direito", "Como calcular a impedância de um indutor?", "diz que é de Circuitos; sem fontes"),
     # Computação, Sociedade e Ética: conferidas em tests_acervo/test_disciplina_etica.py.
     ("etica-lgpd", "etica", "Quais são os princípios da LGPD?",
      "art. 6º, dez princípios; sem inventar incisos"),

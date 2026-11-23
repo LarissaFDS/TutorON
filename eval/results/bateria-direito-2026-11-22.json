@@ -1,0 +1,88 @@
+[
+ {
+  "id": "dir-fontes",
+  "disciplina": "direito",
+  "pergunta": "Quais são as fontes do Direito?",
+  "esperado": "lei, costume, analogia, princípios; LINDB art. 4º",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 6.0,
+  "fontes": [
+   "Avaliações de Noções de Direito da Profa. Jessica Hind (IC-UFAL), 2020.2 (setembro e outubro de 2021), e slides \"Noções Iniciais\" da disciplina",
+   "Avaliações de Noções de Direito da Profa. Jessica Hind (IC-UFAL), 2020.2 (setembro e outubro de 2021), e slides \"Noções Iniciais\" da disciplina"
+  ],
+  "rotulos_citados": [
+   "P1"
+  ],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender as fontes do Direito, pense nelas como os \"lugares\" ou \"origens\" de onde o ordenamento jurídico retira suas normas. O material que você tem disponível ([P1]) lista os elementos fundamentais que compõem esse sistema.\n\nImagine que um juiz precisa decidir um caso, mas não encontra uma lei específica escrita para aquela situação exata. O que ele deve fazer? O artigo 4º da LINDB (Lei de Introdução às Normas do Direito Brasileiro) é o guia principal para essa busca.\n\nPara organizar seu estudo, tente agrupar esses elementos. Pense na diferença entre uma norma que nasce de um processo legislativo formal e uma prática que a sociedade adota por costume. Além disso, considere o papel da interpretação dos juízes e dos estudiosos do Direito.\n\n**Dica:** Ao listar, tente diferenciar o que é uma norma escrita (lei) de outros mecanismos que suprem lacunas ou orientam a aplicação do Direito, como a analogia e os princípios.\n\n### Sua vez\nCom base no material [P1], tente listar as fontes mencionadas e, para cada uma, escreva uma frase curta explicando o que a caracteriza (por exemplo: o que define um \"costume\" para o Direito?). Se quiser, mande sua lista para conferirmos!"
+ },
+ {
+  "id": "dir-kelsen",
+  "disciplina": "direito",
+  "pergunta": "O que é a pirâmide de Kelsen?",
+  "esperado": "Constituição no topo; escalonamento",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [
+   "Avaliações de Noções de Direito da Profa. Jessica Hind (IC-UFAL), 2020.2 (setembro e outubro de 2021), e slides \"Noções Iniciais\" da disciplina"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "A pirâmide de Kelsen é uma representação visual e teórica da estrutura do ordenamento jurídico, proposta pelo jurista Hans Kelsen em sua *Teoria Pura do Direito*. A ideia central é que o Direito não é um conjunto desordenado de regras, mas um sistema hierarquizado.\n\nPense na validade de uma norma: para que uma norma inferior (como um contrato ou uma sentença) seja válida, ela precisa encontrar fundamento em uma norma superior. Esse processo de \"subir\" na hierarquia continua até chegar ao ponto mais alto, que dá validade a todo o sistema.\n\nPara entender melhor, imagine que você está criando uma regra interna para um grupo de estudos. Se essa regra contrariar o Regimento da sua faculdade, ela é válida? E se o Regimento da faculdade contrariar a Constituição Federal? A pirâmide ajuda a visualizar esse \"filtro\" de validade.\n\n### Sua vez\nSe você tivesse que desenhar essa pirâmide, o que você colocaria no topo e o que você colocaria na base, considerando a relação de validade entre as normas? Tente listar três níveis dessa hierarquia, do mais importante para o menos importante.\n\n**Verificação:** Constituição Federal de 1988 (texto vigente no Planalto)."
+ },
+ {
+  "id": "dir-software",
+  "disciplina": "direito",
+  "pergunta": "Como registrar um software no INPI?",
+  "esperado": "Lei 9.609; registro opcional; hash do código-fonte",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.1,
+  "fontes": [
+   "Avaliações de Noções de Direito da Profa. Jessica Hind (IC-UFAL), 2020.2 (setembro e outubro de 2021), e slides \"Noções Iniciais\" da disciplina"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender como funciona o registro de um programa de computador no INPI, é importante primeiro diferenciar o que é o \"objeto\" do registro e o que é a \"prova\" da sua existência.\n\nConforme o material da disciplina, o direito autoral sobre o software nasce no momento da criação, independentemente de qualquer registro. O registro no INPI, portanto, não é o que \"cria\" o direito, mas sim uma ferramenta para garantir segurança jurídica, servindo como prova de autoria e data.\n\nUm ponto fundamental que diferencia o registro de software de outros registros de propriedade industrial é a forma como o código é tratado. O INPI não exige que você entregue o código-fonte aberto, o que seria um risco à confidencialidade do seu trabalho. Em vez disso, utiliza-se uma técnica computacional para gerar uma representação única do arquivo.\n\nPense no seguinte: se você tem um arquivo com milhares de linhas de código, como você poderia provar, daqui a dois anos, que aquele arquivo específico já existia hoje, sem precisar revelar o conteúdo dele para o mundo? Qual é o nome daquela \"assinatura digital\" mencionada no material que garante que, se alguém alterar uma única vírgula no seu código, o registro não será mais válido?\n\n**Verificação:** Lei 9.609/1998 (Lei de Software), artigos 3º e 4º.\n\n### Sua vez\nExplique, com suas palavras, qual é o papel do *hash* no processo de registro de software no INPI e por que ele é utilizado em vez de enviar o código-fonte completo."
+ },
+ {
+  "id": "dir-arvore",
+  "disciplina": "direito",
+  "pergunta": "O que é a teoria dos frutos da árvore envenenada?",
+  "esperado": "prova derivada de ilícita; exceções; sem aconselhar",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 2.0,
+  "fontes": [
+   "Avaliações de Noções de Direito da Profa. Jessica Hind (IC-UFAL), 2020.2 (setembro e outubro de 2021), e slides \"Noções Iniciais\" da disciplina"
+  ],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Para entender essa teoria, imagine uma árvore que cresceu em um solo contaminado por substâncias tóxicas. Se essa árvore produz frutos, o que acontece com eles?\n\nNo Direito, essa metáfora é usada para explicar como a ilicitude de uma prova inicial pode afetar outras provas que surgiram a partir dela. Pense no exemplo do grampo telefônico sem autorização judicial mencionado no material: se, através desse grampo, a polícia descobre o local onde uma prova física está escondida, essa segunda prova (a física) seria considerada \"limpa\" ou ela também estaria \"contaminada\" pela origem ilegal?\n\nA teoria busca impedir que o Estado se beneficie de meios ilegais para construir um caso, mesmo que a prova secundária pareça legítima à primeira vista. No entanto, o Código de Processo Penal prevê situações específicas onde essa \"contaminação\" pode ser afastada.\n\n**Verificação:** Confira o artigo 157, § 1º e § 2º, do Código de Processo Penal (versão compilada no site do Planalto).\n\n### Sua vez\nCom base no que discutimos, se uma prova for obtida por um meio ilícito, mas a polícia conseguir provar que chegaria ao mesmo resultado por um caminho totalmente diferente e legal (uma \"fonte independente\"), essa prova derivada ainda seria considerada \"envenenada\"? Por quê?"
+ },
+ {
+  "id": "dir-fora",
+  "disciplina": "direito",
+  "pergunta": "Como calcular a impedância de um indutor?",
+  "esperado": "diz que é de Circuitos; sem fontes",
+  "status": "pronta",
+  "modelo": "gemini/gemini-3.1-flash-lite",
+  "segundos_total": 4.0,
+  "fontes": [],
+  "rotulos_citados": [],
+  "rotulos_inexistentes": [],
+  "ajustes": [],
+  "bloqueio": null,
+  "resposta": "Olá! Notei que você perguntou sobre o cálculo da impedância de um indutor. Como sou o tutor de **Noções de Direito (DIR)**, preciso esclarecer que essa é uma dúvida técnica de **Circuitos Elétricos (CE)**.\n\nPara te ajudar a encontrar o caminho certo, posso te explicar o conceito físico por trás disso: a impedância em um indutor não é uma resistência fixa (como em um resistor), mas sim uma oposição que depende da frequência da corrente alternada que passa por ele. Essa grandeza é chamada de **reatância indutiva**.\n\nPara calcular essa reatância, você precisará considerar dois fatores principais: a frequência angular da fonte (geralmente representada pela letra grega ômega, $\\omega$) e a própria indutância do componente ($L$).\n\nSugiro que você verifique no seu material de **Circuitos Elétricos** a fórmula que relaciona a reatância indutiva ($X_L$) com esses dois parâmetros. Se precisar de ajuda com conceitos jurídicos ou sobre a disciplina de Direito, estou à disposição!\n\n### Sua vez\nTente escrever no papel a fórmula que relaciona a reatância indutiva ($X_L$) com a frequência angular ($\\omega$) e a indutância ($L$). Você consegue identificar qual é a unidade de medida dessa grandeza no Sistema Internacional?"
+ }
+]
