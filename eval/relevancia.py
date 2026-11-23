@@ -438,6 +438,10 @@ PERGUNTAS = [
     ("logica", "assunto", "Como fazer um sistema especialista em Prolog?", ["logica-sistema-especialista-prolog"]),
     ("logica", "assunto", "Quais variáveis estão livres em ∃x(1+y=x) ∧ ∀y(y ≤ x)?", ["logica-roberta-prova2-modelo-finito"]),
     ("logica", "assunto", "Como escrever a negação com o ¬ só nos átomos?", ["logica-roberta-prova1-complexidade-negacao"]),
+    # complemento de EC, 2º período (Prof. Evandro Costa, 2024.1)
+    ("logica", "assunto", "Se o time joga bem ganha o campeonato; os torcedores não estão contentes: como provar que o técnico é culpado?", ["logica-evandro-2024-tecnico-culpado"]),
+    ("logica", "assunto", "Se o governo é bom não há desemprego e se não há desemprego não há inflação; se não há inflação, o que posso concluir?", ["logica-evandro-2024-governo-inflacao"]),
+    ("logica", "assunto", "Qual o valor de (p ∧ (¬q → p)) ∧ ¬((p ↔ ¬q) → q ∨ ¬p) com p verdadeiro e q falso?", ["logica-evandro-2024-valoracao-classificacao"]),
     ("logica", "fora", "Quais os sintomas de gonorreia?", []),
     ("logica", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
     ("logica", "fora", "Me conte uma piada", []),
