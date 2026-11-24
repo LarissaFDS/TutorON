@@ -54,6 +54,11 @@ class Settings:
     groq_api_key: str = field(repr=False, default="")
     groq_models: tuple[str, ...] = ("openai/gpt-oss-120b", "openai/gpt-oss-20b")
     groq_vision_model: str = "qwen/qwen3.8-27b"
+    # Mais reservas grátis no mesmo formato da OpenAI (24/11/2026): entram depois do Groq, antes do Gemini.
+    cerebras_api_key: str = field(repr=False, default="")
+    cerebras_models: tuple[str, ...] = ("gpt-oss-120b",)
+    openrouter_api_key: str = field(repr=False, default="")
+    openrouter_models: tuple[str, ...] = ("openai/gpt-oss-120b:free",)
     # Worker: com a chave definida, o servidor hospedado usa o modelo local do PC só enquanto o PC
     # se registra (scripts/worker_pc.py). Sem ela, usa OLLAMA_URL direto (servidor no próprio PC).
     worker_token: str = field(repr=False, default="")
@@ -120,6 +125,14 @@ class Settings:
         return bool(self.groq_api_key and self.groq_models)
 
     @property
+    def cerebras_enabled(self) -> bool:
+        return bool(self.cerebras_api_key and self.cerebras_models)
+
+    @property
+    def openrouter_enabled(self) -> bool:
+        return bool(self.openrouter_api_key and self.openrouter_models)
+
+    @property
     def gemini_enabled(self) -> bool:
         return bool(self.gemini_api_key and self.gemini_models)
 
@@ -133,6 +146,10 @@ def load_settings() -> Settings:
         groq_api_key=_env("GROQ_API_KEY"),
         groq_models=tuple(_list("GROQ_MODELS", "openai/gpt-oss-120b,openai/gpt-oss-20b")),
         groq_vision_model=_env("GROQ_MODELO_VISAO", "qwen/qwen3.8-27b"),
+        cerebras_api_key=_env("CEREBRAS_API_KEY"),
+        cerebras_models=tuple(_list("CEREBRAS_MODELS", "gpt-oss-120b")),
+        openrouter_api_key=_env("OPENROUTER_API_KEY"),
+        openrouter_models=tuple(_list("OPENROUTER_MODELS", "openai/gpt-oss-120b:free")),
         worker_token=_env("TUTORON_WORKER_TOKEN"),
         gemini_idle_s=_float("GEMINI_TIMEOUT_ENTRE_TRECHOS", 30.0),
         stagger_s=_float("TUTORON_ESCALONAMENTO_S", 6.0),

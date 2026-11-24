@@ -28,6 +28,10 @@ services:
         sync: false
       - key: GROQ_API_KEY
         sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
+        sync: false
       - key: GEMINI_API_KEY
         sync: false
       - key: TUTORON_WORKER_TOKEN

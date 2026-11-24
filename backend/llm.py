@@ -41,6 +41,11 @@ PLANEJAMENTO_JSON: contextvars.ContextVar[bool] = contextvars.ContextVar('planej
 PREFERIR_LOCAL: contextvars.ContextVar[bool] = contextvars.ContextVar('preferir_local', default=False)
 
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
+CEREBRAS_URL = "https://api.cerebras.ai/v1/chat/completions"
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+# Provedores no formato da OpenAI (streaming SSE): mesmo código, URL e chave diferentes.
+COMPATIVEIS_OPENAI = ("groq", "cerebras", "openrouter")
+NOMES_PROVEDOR = {"groq": "Groq", "cerebras": "Cerebras", "openrouter": "OpenRouter"}
 WORKER_TTL_S = 150  # o PC avisa a cada minuto; sem aviso por 2,5 min, o modelo local sai da cascata
 GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:streamGenerateContent?alt=sse"
 
@@ -63,7 +68,7 @@ class AllUnavailable(Exception):
 
 @dataclass(frozen=True)
 class Model:
-    provider: str  # "gemini" | "groq" | "ollama" | "codigo" (orientação fixa, sem inferência)
+    provider: str  # "gemini" | "groq" | "cerebras" | "openrouter" | "ollama" | "codigo" (orientação fixa)
     name: str
 
     @property
@@ -76,8 +81,8 @@ class Model:
             return "Orientação estruturada do TutorON"
         if self.provider == "gemini":
             return " ".join(part.capitalize() for part in self.name.split("-"))
-        if self.provider == "groq":
-            return self.name.split("/")[-1] + " (Groq)"
+        if self.provider in NOMES_PROVEDOR:
+            return self.name.split("/")[-1].removesuffix(":free") + f" ({NOMES_PROVEDOR[self.provider]})"
         return f"{self.name} (local)"
 
 
@@ -213,6 +218,8 @@ class LLM:
     # ------------------------------------------------------------------ modelos
     def cascade(self, *, local_model: str | None = None) -> list[Model]:
         nuvem = [Model("groq", n) for n in self.settings.groq_models] if self.settings.groq_enabled else []
+        nuvem += [Model("cerebras", n) for n in self.settings.cerebras_models] if self.settings.cerebras_enabled else []
+        nuvem += [Model("openrouter", n) for n in self.settings.openrouter_models] if self.settings.openrouter_enabled else []
         nuvem += [Model("gemini", n) for n in self.settings.gemini_models] if self.settings.gemini_enabled else []
         local = [Model("ollama", local_model or self.settings.local_model)]
         if self.settings.worker_token and not self.ollama_url and nuvem:
@@ -316,24 +323,35 @@ class LLM:
             raise Unavailable("Ollama local desligado", 10.0) from exc
 
     def _provider(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
-        if model.provider == "groq":
+        if model.provider in COMPATIVEIS_OPENAI:
             return self._groq(model, system, prompt)
         return self._gemini(model, system, prompt) if model.provider == "gemini" else self._ollama(model, system, prompt)
 
     async def _groq(self, model: Model, system: str | None, prompt: str) -> AsyncIterator[str]:
-        """Groq: API no formato da OpenAI, com streaming (SSE)."""
+        """Groq, Cerebras e OpenRouter: API no formato da OpenAI, com streaming (SSE)."""
         messages = ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": prompt}]
         body: dict = {"model": model.name, "messages": messages, "stream": True, "temperature": 0.3,
                       "max_completion_tokens": 2048}
         if "gpt-oss" in model.name:
-            body["reasoning_effort"] = "low"  # raciocínio curto: menos tokens e mais rápido
+            # raciocínio curto: menos tokens e mais rápido (o OpenRouter usa outro campo)
+            if model.provider == "openrouter":
+                body["reasoning"] = {"effort": "low", "exclude": True}
+            else:
+                body["reasoning_effort"] = "low"
         if PLANEJAMENTO_JSON.get():
             body.update(temperature=0.1, response_format={"type": "json_object"})
         if REVISAO_JSON.get():
             body.update(temperature=0.0, max_completion_tokens=512, response_format={"type": "json_object"})
-        headers = {"Authorization": "Bearer " + self.settings.groq_api_key}
+        if model.provider == "openrouter":
+            body["max_tokens"] = body.pop("max_completion_tokens")
+        url, chave = {"groq": (GROQ_URL, self.settings.groq_api_key),
+                      "cerebras": (CEREBRAS_URL, self.settings.cerebras_api_key),
+                      "openrouter": (OPENROUTER_URL, self.settings.openrouter_api_key)}[model.provider]
+        headers = {"Authorization": "Bearer " + chave}
+        if model.provider == "openrouter":
+            headers["X-Title"] = "TutorON"
         try:
-            async with self.client.stream("POST", GROQ_URL, json=body, headers=headers,
+            async with self.client.stream("POST", url, json=body, headers=headers,
                                           timeout=httpx.Timeout(self.settings.gemini_idle_s, connect=5)) as response:
                 if response.status_code != 200:
                     corpo = await response.aread()
@@ -355,7 +373,7 @@ class LLM:
                     except json.JSONDecodeError:
                         continue
                     if "error" in payload:
-                        raise Unavailable("erro no stream do Groq", 20.0)
+                        raise Unavailable(f"erro no stream do {NOMES_PROVEDOR[model.provider]}", 20.0)
                     for escolha in payload.get("choices", [])[:1]:
                         texto = (escolha.get("delta") or {}).get("content")
                         if texto:

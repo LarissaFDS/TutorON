@@ -8,7 +8,9 @@ O **modelo local continua sendo o principal**: o PC da equipe empresta a GPU enq
                  │
                  ├─ 1º modelo local do TutorON ◄── túnel ◄── PC da equipe (7-Ligar-IA-Local.bat)
                  ├─ 2º Groq (gpt-oss-120b / 20b)        ← quando o PC está desligado ou demora
-                 └─ 3º Gemini                            ← reserva final
+                 ├─ 3º Cerebras (gpt-oss-120b)          ← opcional: CEREBRAS_API_KEY
+                 ├─ 4º OpenRouter (modelos :free)        ← opcional: OPENROUTER_API_KEY
+                 └─ 5º Gemini                            ← reserva final
 ```
 
 - **PC ligado:** o PC abre um túnel e avisa o site a cada minuto (`scripts/worker_pc.py`). O site usa o

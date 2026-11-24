@@ -303,7 +303,7 @@ class Tarefas:
             # Comparação justa: o genérico usa o mesmo modelo de base do TutorON, só sem
             # material e sem instruções. Se a corrida caiu em outro modelo, tenta uma vez
             # no mesmo; se não der, fica o que já foi gerado (o modelo de cada lado é registrado).
-            alvo = tutor.model if tutor.model.provider in ("gemini", "groq") else Model("ollama", self.settings.local_generic_model)
+            alvo = tutor.model if tutor.model.provider in ("gemini", "groq", "cerebras", "openrouter") else Model("ollama", self.settings.local_generic_model)
             if generico.model != alvo:
                 marca = SEM_RACIOCINIO.set(not pensar)
                 try:

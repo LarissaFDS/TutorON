@@ -551,6 +551,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         dados = {
             "gemini": {"habilitado": settings.gemini_enabled, "modelos": list(settings.gemini_models)},
             "groq": {"habilitado": settings.groq_enabled, "modelos": list(settings.groq_models)},
+            "cerebras": {"habilitado": settings.cerebras_enabled, "modelos": list(settings.cerebras_models)},
+            "openrouter": {"habilitado": settings.openrouter_enabled, "modelos": list(settings.openrouter_models)},
             "local": local | {"pc_conectado": bool(app.state.llm.ollama_url)},
             "pausados": app.state.llm.breaker.state(),
             "livro_supabase": settings.supabase_enabled,
