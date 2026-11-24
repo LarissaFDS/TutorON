@@ -12,8 +12,9 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 |---|---|---|---|---|---|---|
 | 1 | OAC (`oac`) | [#170](https://github.com/LarissaFDS/TutorON/pull/170) | dev: sim; main: sim ([#172](https://github.com/LarissaFDS/TutorON/pull/172)) | 4 (`oac-prova2016-2-*`, `oac-lista-cap2-*`) | pytest 2290 ok, ruff ok; relevância 677/677 | revisão humana e do professor dos 4 blocos; Ex. 3 e 6 da lista do cap. 2 sem resolução |
 | 2 | Probabilidade e Estatística (`prob`) | [#171](https://github.com/LarissaFDS/TutorON/pull/171) | dev: sim; main: sim ([#172](https://github.com/LarissaFDS/TutorON/pull/172)) | 6 (`prob-petrucio-*`, `prob-ec4-lista2-basica`) | pytest 2272 ok (30 pulados sem Docker local), ruff ok; relevância 682/682 | revisão humana e do professor dos 6 blocos |
-| 3 | Variáveis Complexas (`varcomp`) | [#173](https://github.com/LarissaFDS/TutorON/pull/173) | dev: sim; main: pendente | 3 (`varcomp-lista1-*`) | pytest 2275 ok (30 pulados: Docker), ruff ok; relevância 685/685 | revisão humana e do professor; Q5c do arquivo sem o $i$ |
-| 4 | Teoria dos Grafos (`grafos`) | PR deste item | — | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
+| 3 | Variáveis Complexas (`varcomp`) | [#173](https://github.com/LarissaFDS/TutorON/pull/173) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`varcomp-lista1-*`) | pytest 2275 ok (30 pulados: Docker), ruff ok; relevância 685/685 | revisão humana e do professor; Q5c do arquivo sem o $i$ |
+| 4 | Teoria dos Grafos (`grafos`) | [#174](https://github.com/LarissaFDS/TutorON/pull/174) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
+| 5 | Projeto de Software (`projsw`) | PR deste item | — | 3 (`projsw-padrao-observer-*`, `-command-*`, `-criacao-*`) | pytest 2282 ok (30 pulados: Docker), ruff ok; relevância 691/691 | revisão humana e do professor; confirmar a ligação com Engenharia de Software (ECOM021) |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -67,6 +68,17 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
   `Minimum-path-algoritms-scenarios` (sem arquivo de licença, não versionado nem copiado); `.html` soltos.
 - O enunciado diz `=` para célula livre, mas o arquivo de exemplo usa `.`; o bloco registra a diferença.
 
+## Item 5: Projeto de Software (`projsw`, complemento; ligado a Engenharia de Software de EC)
+
+- **Ligação:** "Engenharia de Software" entrou em `nomes_nos_cursos` de `projsw`: o material do 4º período (lista de
+  projetos OO e repositórios com padrões de projeto) cobre os mesmos assuntos. Decisão registrada no `CURADORIA.md`
+  de `projsw`; o teste novo confere `projsw` em `preferidas("ecom", 4)`. Processos de software não têm material.
+- **Novo:** 3 blocos de padrões (Observer, Command, padrões de criação) com contexto da lista de projetos
+  (`Software_Projects.pdf`, lista da disciplina: não versionada) e código Java da equipe compilado e executado no teste.
+- **Só evidência:** `crm-tool-PS-OO` (MIT), `design-patterns-python` (Apache 2.0) e `Biblioteca` (sem licença), todos
+  de alunos ou de terceiros; nada copiado.
+
 ## Aguardando decisão
 
 - Revisão humana e do professor dos blocos novos (nenhum marcado como revisado).
+- Confirmar que Engenharia de Software (ECOM021) deve mesmo abrir o acervo de Projeto de Software (`nomes_nos_cursos`).
