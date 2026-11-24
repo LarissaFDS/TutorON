@@ -133,6 +133,20 @@ Busca (`eval/relevancia.py`, com o `bge-m3` real): as 5 perguntas de exemplo, 8 
 IA real: as 6 perguntas de `eval/bateria_tutor.py` rodaram em 20/11/2026 pelo fluxo completo, com o Gemini (`eval/results/bateria-varcomp-2026-11-20.json`) e só com o modelo local `tutoron-paa` (`…-local.json`), e as respostas foram lidas uma a uma. Raízes cúbicas de $1-i$, fórmula de Cauchy com $(z+1)^4$, $\oint 1/z$ vs $\oint 1/z^2$ e $\int z^2$ no segmento: corretas e socráticas nos dois (no segmento, o modelo local sugeriu a primitiva $z^3/3$ e o ajuste `entregou_resposta` atuou; o valor final não foi dado). Cauchy-Riemann: equações corretas nos dois; o Gemini disse que elas "garantem" a preservação de ângulos, impreciso (conformidade exige também $f' 
 e 0$). Pergunta de fora (mapa de Karnaugh): o Gemini apontou Sistemas Digitais; o modelo local respondeu o conteúdo de Karnaugh sem dizer que é de outra disciplina, o mesmo comportamento já visto em Circuitos, Sinais, Controle e Eletrônica (a busca devolve vazio; não há trecho do acervo na resposta).
 
+## 6.1 Complemento do 4º período de Engenharia de Computação (24/11/2026)
+
+Fonte nova: `ufal-varcomp-lista1` (Lista nº 1 de Variável Complexa, sem gabarito oficial). Entraram 3 blocos, com resolução da equipe conferida com SymPy em `tests_acervo/test_disciplina_varcomp.py` e status `pendente_professor`, como os da prova:
+
+| Bloco | Assunto | Questões |
+|---|---|---|
+| `varcomp-lista1-q2-partes-u-v` | varcomp-01-numeros-complexos | Q2 (partes real e imaginária) |
+| `varcomp-lista1-q3-limites` | varcomp-02-funcoes-analiticas-cauchy-riemann | Q3 (limites 0/0) |
+| `varcomp-lista1-q6-q7-exponencial` | varcomp-03-funcoes-elementares | Q6 e Q7 (exponencial complexa) |
+
+Com isso, os tópicos 02 e 03 passam a ter bloco na busca (antes só tinham nota de IA fora da busca); o teste de tópicos ganhou esses dois, sem tirar nenhum. Ficaram sem bloco: Q1 (conjuntos no plano, pede desenho), Q4 e Q5 (Cauchy-Riemann e analiticidade: o tópico continua coberto só pela nota de IA, para não misturar com a decisão de aprovar essa nota), Q8 a Q10 (desigualdade e operadores vetoriais em notação complexa). Na Q5c, o enunciado do arquivo dá uma função real (falta um $i$), o que vale perguntar ao professor; na Q7b a extração perde a raiz de $\sqrt3$.
+
+Só evidência, fora do repositório: `resolução lista 1.pdf` (manuscrita, com o nome do aluno; os resultados das Q2 conferem com os da equipe) e `stirling_complex.html` (parece gerado por IA; o tópico 11 continua sem bloco na busca).
+
 ## 7. Pendências
 
 - Autorização do professor (ou da equipe) para publicar a transcrição literal e versionar os PDFs.

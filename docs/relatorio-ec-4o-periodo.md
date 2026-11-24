@@ -10,8 +10,10 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 
 | # | Item | PR | Merge dev / main | Blocos novos | Testes e bateria de relevância | Pendências |
 |---|---|---|---|---|---|---|
-| 1 | OAC (`oac`) | [#170](https://github.com/LarissaFDS/TutorON/pull/170) | dev: sim; main: PR dev→main dos itens 1 e 2 | 4 (`oac-prova2016-2-*`, `oac-lista-cap2-*`) | pytest 2290 ok, ruff ok; relevância 677/677 | revisão humana e do professor dos 4 blocos; Ex. 3 e 6 da lista do cap. 2 sem resolução |
-| 2 | Probabilidade e Estatística (`prob`) | PR deste item | — | 6 (`prob-petrucio-*`, `prob-ec4-lista2-basica`) | pytest 2272 ok (30 pulados sem Docker local), ruff ok; relevância 682/682 | revisão humana e do professor dos 6 blocos |
+| 1 | OAC (`oac`) | [#170](https://github.com/LarissaFDS/TutorON/pull/170) | dev: sim; main: sim ([#172](https://github.com/LarissaFDS/TutorON/pull/172)) | 4 (`oac-prova2016-2-*`, `oac-lista-cap2-*`) | pytest 2290 ok, ruff ok; relevância 677/677 | revisão humana e do professor dos 4 blocos; Ex. 3 e 6 da lista do cap. 2 sem resolução |
+| 2 | Probabilidade e Estatística (`prob`) | [#171](https://github.com/LarissaFDS/TutorON/pull/171) | dev: sim; main: sim ([#172](https://github.com/LarissaFDS/TutorON/pull/172)) | 6 (`prob-petrucio-*`, `prob-ec4-lista2-basica`) | pytest 2272 ok (30 pulados sem Docker local), ruff ok; relevância 682/682 | revisão humana e do professor dos 6 blocos |
+| 3 | Variáveis Complexas (`varcomp`) | [#173](https://github.com/LarissaFDS/TutorON/pull/173) | dev: sim; main: pendente | 3 (`varcomp-lista1-*`) | pytest 2275 ok (30 pulados: Docker), ruff ok; relevância 685/685 | revisão humana e do professor; Q5c do arquivo sem o $i$ |
+| 4 | Teoria dos Grafos (`grafos`) | PR deste item | — | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -42,6 +44,28 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
   `prob-anot-poisson`; ajustei a redação do bloco novo (sem mexer no teste nem nos limiares).
 - **Teste estendido:** a contagem de blocos da turma passou de 23 para 29 e o conjunto de corrigidas ganhou o novo
   bloco; nenhuma condição foi afrouxada.
+
+## Item 3: Variáveis Complexas (`varcomp`, complemento)
+
+- **Novo:** Lista nº 1 (sem gabarito oficial): Q2 (partes real e imaginária), Q3 (limites 0/0) e Q6 e Q7 (exponencial
+  complexa), em 3 blocos conferidos com SymPy e com status `pendente_professor`. Os tópicos 02 e 03 passam a ter bloco
+  na busca; o teste de tópicos ganhou esses dois, sem tirar nenhum, e a contagem de blocos passou de 13 para 16.
+- **Sem bloco:** Q1 (pede desenho), Q4 e Q5 (Cauchy-Riemann segue só com a nota de IA fora da busca), Q8 a Q10.
+  A Q5c do arquivo dá uma função real (parece faltar um $i$) e a Q7b perde a raiz de $\sqrt3$ na extração.
+- **Fora:** a resolução manuscrita (de aluno, com nome; os resultados da Q2 conferem com os da equipe) e
+  `stirling_complex.html` (evidência).
+- **Busca:** a primeira redação de uma pergunta nova trouxe um bloco da prova; reescrevi a pergunta nova (684 → 685).
+
+## Item 4: Teoria dos Grafos (`grafos`, complemento)
+
+- **Novo:** Prática 1 de ECOM033 (caminho mínimo), três cenários com os arquivos de entrada da prática: estação
+  central de metrô por Floyd-Warshall (vértice 9, soma 219), carro elétrico com pesos negativos por Bellman-Ford
+  (0 → 3 → 5 → 6, custo 8) e robô em grid 10 × 15 por Dijkstra (custo 26, 22 movimentos). Os números foram
+  recalculados com NetworkX e com implementações próprias no teste; ao conferir, corrigi o texto do bloco do grid,
+  que dizia três células `~` em vez de duas.
+- **Só evidência:** slides ECOM033 (assuntos já cobertos por g01 a g10); o repositório
+  `Minimum-path-algoritms-scenarios` (sem arquivo de licença, não versionado nem copiado); `.html` soltos.
+- O enunciado diz `=` para célula livre, mas o arquivo de exemplo usa `.`; o bloco registra a diferença.
 
 ## Aguardando decisão
 

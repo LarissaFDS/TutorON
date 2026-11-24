@@ -717,6 +717,13 @@ IA real: Gemini, 22/11/2026 (`eval/results/bateria-projsw-2026-11-22.json`; `gem
 
 Fica **em validação** porque recursividade (assunto das notas) não tem bloco, sobrecarga de operadores e templates (C++, da ementa) não têm material e a resposta fora do assunto não indicou a outra disciplina.
 
+## Teoria dos Grafos: Prática 1 de ECOM033 (Engenharia de Computação) conferida com NetworkX (24/11/2026)
+
+Três blocos novos (`grafos-pratica1-estacao-central-floyd`, `grafos-pratica1-bellman-ford-regeneracao`,
+`grafos-pratica1-robo-grid-dijkstra`) da Prática 1 de caminho mínimo, com fonte `ufal-ecom033-pratica1-caminho-minimo`
+e os números refeitos em `tests_acervo/test_disciplina_grafos.py`. Busca: 688/688, com 3 perguntas novas.
+Pendente: revisão humana e do professor dos 3 blocos. IA real: não rodada.
+
 ## Teoria dos Grafos: lista e prova da UFAL conferidas com NetworkX (22/11/2026)
 
 Teoria dos Grafos (CCOM030, 30 h, Ciência da Computação) entrou só com cadastro e acervo, com a mesma IA:
@@ -869,6 +876,10 @@ Entraram 4 blocos: a prova do módulo 3 de 2016.2 com gabarito (`oac-prova2016-2
 ## Probabilidade e Estatística: complemento do 4º período de Engenharia de Computação (24/11/2026)
 
 Entraram 6 blocos das listas do Prof. Petrucio A. Medeiros Barros (ECOM020): binomial, Poisson, normal, exponencial e soma/média de normais, com os comandos R da lista (`dbinom`, `ppois`, `pnorm`, `qnorm`, `pexp`) e os valores refeitos com `scipy.stats`; e a lista 2 de probabilidade básica, com duas respostas do arquivo corrigidas (bilhetes; Bayes das vacinas, 28,57%). AB1.1, AB2.1 e AB2.2 dependem da matrícula ou da base de cada aluno e ficaram só como referência. Arquivos com nome de aluno, trabalhos, scripts `.R` e a pasta `Monitoria` (material de SD) ficaram fora. Revisão humana e do professor pendentes. Situação continua MVP.
+
+## Variáveis Complexas: complemento do 4º período de Engenharia de Computação (24/11/2026)
+
+Entraram 3 blocos da Lista nº 1 (`varcomp-lista1-q2-partes-u-v`, `varcomp-lista1-q3-limites`, `varcomp-lista1-q6-q7-exponencial`), resolvidos pela equipe e conferidos com SymPy, com status `pendente_professor` (a lista não tem gabarito oficial). Os tópicos 02 (limites) e 03 (funções elementares) passam a ter bloco na busca. Cauchy-Riemann (Q4, Q5) continua só com a nota de IA fora da busca. A resolução manuscrita que veio junto é de aluno (com nome) e `stirling_complex.html` parece gerado por IA: os dois ficaram fora. Revisão humana e do professor pendentes. Situação continua MVP.
 
 ## Como cadastrar uma nova disciplina
 
