@@ -396,8 +396,10 @@ class Tarefas:
         return self._criar('animacao', trabalho, disciplina=exemplo['disciplina'])
 
     def animar(self, pergunta: str, resposta_tutor: str | None, disciplina: str | None = None,
-               *, contexto_aluno: str | None = None, leitura_foto: str | None = None) -> Tarefa:
-        d = obter(disciplina)
+               *, contexto_aluno: str | None = None, leitura_foto: str | None = None,
+               formato_saida: str = "video") -> Tarefa:
+        d = prompts.GERAL if disciplina == prompts.GERAL_ID else obter(disciplina)
+        imagem = formato_saida == "imagem"
 
         async def trabalho(t: Tarefa) -> None:
             t.status, t.mensagem = "gerando", "Planejando a animação…"
@@ -447,9 +449,9 @@ class Tarefas:
                 t.status, t.mensagem = "erro", "Não consegui preparar um desenho correto para esta dúvida. " \
                     "Diga qual relação ou passo você quer enxergar e tente novamente."
                 return
-            t.mensagem = "Desenhando a animação (leva uns 10 segundos)…"
+            t.mensagem = "Desenhando a imagem…" if imagem else "Desenhando a animação (leva uns 10 segundos)…"
             try:
-                video = await animacao.renderizar(roteiro, self.settings.data_dir / "animacoes")
+                video = await animacao.renderizar(roteiro, self.settings.data_dir / "animacoes", imagem=imagem)
             except animacao.FalhaAnimacao as exc:
                 logger.warning("Animação falhou: %s", exc)
                 self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
@@ -458,8 +460,10 @@ class Tarefas:
                 return
             self.registro.anexar("animacoes.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                      "pergunta": pergunta, "roteiro": roteiro, "video": video,
+                                                     "formato": formato_saida,
                                                      "modelo": r.model.key, 'tentativas_roteiro': tentativas_roteiro})
-            t.resultado = {"video": f"/api/animacoes/{video}.mp4", "modelo_cena": roteiro["modelo"],
+            arquivo = {"imagem": f"/api/animacoes/{video}.png"} if imagem else {"video": f"/api/animacoes/{video}.mp4"}
+            t.resultado = {**arquivo, "modelo_cena": roteiro["modelo"],
                            "titulo": roteiro.get("titulo", ""), "pergunta_final": roteiro.get("pergunta_final", "")}
             t.status, t.mensagem = "pronta", ""
 

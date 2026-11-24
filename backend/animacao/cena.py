@@ -232,19 +232,24 @@ class CenaTutor(Scene):
             self.wait(0.5)
 
 
-def renderizar(roteiro: dict, saida: Path, qualidade: str = "low_quality") -> Path:
+def renderizar(roteiro: dict, saida: Path, qualidade: str = "low_quality", imagem: bool = False) -> Path:
+    """Vídeo da cena ou, com `imagem=True`, só o quadro final (a figura completa, em PNG)."""
     r = validar(roteiro)
     saida.mkdir(parents=True, exist_ok=True)
     cena = type("CenaTutorRender", (CenaTutor,), {"roteiro": r})
-    with tempconfig({"quality": qualidade, "background_color": FUNDO, "media_dir": str(saida / "media"),
-                     "output_file": "animacao", "disable_caching": True, "verbosity": "ERROR",
-                     "progress_bar": "none", "frame_rate": 24}):
+    opcoes = {"quality": "medium_quality" if imagem else qualidade, "background_color": FUNDO,
+              "media_dir": str(saida / "media"), "output_file": "animacao", "disable_caching": True,
+              "verbosity": "ERROR", "progress_bar": "none", "frame_rate": 24}
+    if imagem:
+        opcoes |= {"save_last_frame": True, "write_to_movie": False}
+    with tempconfig(opcoes):
         c = cena()
         c.render()
-        return Path(c.renderer.file_writer.movie_file_path)
+        return Path(c.renderer.file_writer.image_file_path if imagem else c.renderer.file_writer.movie_file_path)
 
 
 if __name__ == "__main__":
     dados = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
-    video = renderizar(dados, Path(sys.argv[2]), sys.argv[3] if len(sys.argv) > 3 else "low_quality")
-    print(json.dumps({"video": str(video)}))
+    imagem = len(sys.argv) > 4 and sys.argv[4] == "imagem"
+    arquivo = renderizar(dados, Path(sys.argv[2]), sys.argv[3] if len(sys.argv) > 3 else "low_quality", imagem)
+    print(json.dumps({"video": str(arquivo)}))

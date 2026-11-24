@@ -167,7 +167,8 @@ class AnimarPedido(BaseModel):
     resposta: str | None = Field(default=None, max_length=12000)
     disciplina: str | None = Field(default=None, max_length=40)
     contexto: str | None = Field(default=None, max_length=6000)
-    foto: str | None = Field(default=None, max_length=8000)
+    foto: str | None = Field(default=None, max_length=16000)
+    formato: str = Field(default="video", pattern=r"^(video|imagem)$")  # "imagem": só a figura final
 
     @field_validator("disciplina")
     @classmethod
@@ -185,7 +186,7 @@ class Feedback(BaseModel):
     util: bool | None = None
     erro_matematico: bool = False
     comentario: str = Field(default="", max_length=1500)
-    tipo: str = Field(default="resposta", pattern=r"^(resposta|leitura)$")
+    tipo: str = Field(default="resposta", pattern=r"^(resposta|leitura|disciplina)$")
 
 
 Nota = Field(..., ge=1, le=5)
@@ -745,11 +746,12 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         quem, dev = usuario(request)
         app.state.cota.cobrar(quem, 3000, dev, "animacao")  # roteiro da animação (estimativa fixa)
         disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
-            x for x in (corpo.contexto, corpo.foto) if x))
+            x for x in (corpo.contexto, corpo.foto) if x), geral=True)
         if not animacao.disponivel():
             raise HTTPException(503, "As animações não estão instaladas neste servidor.")
         return app.state.tarefas.animar(corpo.pergunta, corpo.resposta, disciplina,
-                                       contexto_aluno=corpo.contexto, leitura_foto=corpo.foto).publico()
+                                       contexto_aluno=corpo.contexto, leitura_foto=corpo.foto,
+                                       formato_saida=corpo.formato).publico()
 
     @app.get('/api/visuais')
     async def exemplos_visuais() -> dict:
@@ -779,6 +781,15 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         if not caminho.is_file():
             raise HTTPException(404, "Esta animação expirou. Gere de novo.")
         return FileResponse(caminho, media_type="video/mp4", headers={"Cache-Control": "private, max-age=3600"})
+
+    @app.get("/api/animacoes/{ident}.png", include_in_schema=False)
+    async def imagem_gerada(ident: str) -> FileResponse:
+        if not re.fullmatch(r"[A-Za-z0-9_-]{8,40}", ident):
+            raise HTTPException(404, "Não encontrado.")
+        caminho = settings.data_dir / "animacoes" / f"{ident}.png"
+        if not caminho.is_file():
+            raise HTTPException(404, "Esta imagem expirou. Gere de novo.")
+        return FileResponse(caminho, media_type="image/png", headers={"Cache-Control": "private, max-age=3600"})
 
     @app.get('/api/animacoes/{ident}.jpg', include_in_schema=False)
     async def poster_visual(ident: str) -> FileResponse:

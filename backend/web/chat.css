@@ -504,6 +504,13 @@ html.letra-grande body { font-size: 17px; }
 .config__equipe { margin: 4px 0 8px; padding-left: 18px; columns: 2; }
 .config__sair { margin: 8px 20px 20px; color: var(--vermelho); }
 
+/* ------------------------------------------------------------------ aviso da disciplina e imagem */
+.aviso-disciplina { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 2px 0 6px; font-size: 13px; color: var(--tinta-3); }
+.aviso-disciplina__botao { border: 0; background: none; padding: 0; color: var(--azul); font-size: 13px; text-decoration: underline; }
+.aviso-disciplina__select { max-width: 320px; padding: 6px 10px; font-size: 13px; }
+.animacao__imagem { display: block; margin-bottom: 8px; }
+.animacao__imagem img { display: block; width: 100%; max-width: 760px; border-radius: 12px; border: 1px solid var(--linha); }
+
 /* ------------------------------------------------------------------ vários anexos e arrastar */
 #foto-confirmada { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 8px; }
 .anexo-chip {

@@ -468,7 +468,8 @@
     ['visual', 'Desenho/esquema']];
   var animacaoDisponivel = null;
   function montarAjudas(lista) {
-    lista = lista.filter(function (a) { return a[0] !== 'animacao'; }).concat([['animacao', 'Só animação']]);
+    lista = lista.filter(function (a) { return a[0] !== 'animacao' && a[0] !== 'imagem'; })
+      .concat([['animacao', 'Só animação'], ['imagem', 'Só imagem']]);
     var box = $('ajudas-opcoes');
     var anterior = document.querySelector('input[name="ajuda"]:checked');
     var escolhida = anterior ? anterior.value : null;
@@ -502,6 +503,9 @@
       animacaoDisponivel = !!dados.animacao;
     } catch (e) { /* servidor antigo: fica a lista padrão */ }
   })();
+  var PEDIDO_IMAGEM = /\b(ger[ea]r?|cri[ea]r?|fa[cç]a|fazer|desenh[ea]r?|mostr[ea]r?|quero|me (?:d[aáê]|mande?))\b[^.?!]{0,30}\b(imagem|figura|desenho|diagrama|ilustra[cç][aã]o)\b|^\s*desenhe\b/i;
+  var PEDIDO_ANIMACAO = /\b(ger[ea]r?|cri[ea]r?|fa[cç]a|fazer|mostr[ea]r?|quero|me (?:d[aáê]|mande?))\b[^.?!]{0,30}\b(anima[cç][aã]o|v[ií]deo|animad[oa])\b|^\s*anime\b/i;
+
   function ajudaEscolhida() {
     var marcado = document.querySelector('input[name="ajuda"]:checked');
     return marcado ? marcado.value : 'auto';
@@ -1030,14 +1034,29 @@
       try {
         var criada = retomarId ? { id: retomarId } : await postJSON('/api/animar', {
           pergunta: pergunta, resposta: resposta || null, disciplina: disciplina || 'auto',
-          contexto: contexto || null, foto: foto || null });
+          contexto: contexto || null, foto: foto || null, formato: opcoes.formato || 'video' });
         id = criada.id;
         if (opcoes.pendente) guardarPendente({ tipo: 'animacao', id: id, pergunta: pergunta,
-          contexto: contexto || '', disciplina: disciplina || 'auto', foto: foto || '' });
+          contexto: contexto || '', disciplina: disciplina || 'auto', foto: foto || '', formato: opcoes.formato || 'video' });
         var t = await acompanhar(id, function (x) {
           if (x.status !== 'pronta' && x.status !== 'erro') setStatus(status, x.mensagem || 'Gerando…', 'busy');
         });
         if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não foi possível gerar a animação.');
+        if (t.imagem) {
+          var figura = el('a', 'animacao__imagem');
+          figura.href = t.imagem;
+          figura.target = '_blank';
+          figura.rel = 'noopener';
+          var img = document.createElement('img');
+          img.src = t.imagem;
+          img.alt = 'Imagem: ' + (t.titulo || 'pista visual');
+          figura.append(img);
+          box.prepend(figura);
+          var m = disciplinas[t.disciplina];
+          setStatus(status, (m ? m.sigla + ' · ' : '') + (t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : ''));
+          if (opcoes.aoConcluir) opcoes.aoConcluir(t);
+          return true;
+        }
         var video = document.createElement('video');
         video.src = t.video;
         video.controls = true;
@@ -1118,6 +1137,41 @@
     });
     consegui.addEventListener('click', function () {
       box.replaceWith(el('p', 'ciclo__ok', 'Boa! Você chegou lá pelo próprio raciocínio. 🎉 Mande a próxima dúvida quando quiser.'));
+    });
+    return box;
+  }
+
+  /* "Identifiquei esta disciplina. Está errada? Corrigir": o voto vai para o banco (feedback tipo
+     disciplina) e a pergunta é respondida de novo com a disciplina certa. */
+  function avisoDisciplina(detectada, registro, refazer) {
+    var nomeDe = function (id) { var m = disciplinas[id]; return m ? m.nome || m.sigla : id; };
+    var box = el('div', 'aviso-disciplina');
+    var texto = el('span', null, detectada === 'geral'
+      ? 'Não identifiquei a disciplina; respondi com conhecimento geral. '
+      : 'Disciplina identificada automaticamente: ' + nomeDe(detectada) + '. ');
+    var corrigir = el('button', 'aviso-disciplina__botao', detectada === 'geral' ? 'Escolher a disciplina' : 'Está errada? Corrigir');
+    corrigir.type = 'button';
+    box.append(texto, corrigir);
+    corrigir.addEventListener('click', function () {
+      corrigir.hidden = true;
+      var sel = el('select', 'campo aviso-disciplina__select');
+      sel.setAttribute('aria-label', 'Disciplina correta');
+      sel.append(new Option('Qual é a disciplina certa?', ''));
+      Object.keys(disciplinas).filter(function (id) { return id !== detectada && id !== 'geral'; })
+        .sort(function (a, b) { return nomeDe(a).localeCompare(nomeDe(b)); })
+        .forEach(function (id) { sel.append(new Option(nomeDe(id), id)); });
+      sel.addEventListener('change', async function () {
+        if (!sel.value) return;
+        sel.disabled = true;
+        try {
+          await postJSON('/api/feedback', { id: (registro.id_resposta || 'sem-' + Date.now().toString(36)) + '-d',
+            tipo: 'disciplina', util: false, comentario: 'detectada=' + detectada + '; correta=' + sel.value });
+        } catch (e) { /* o voto é secundário */ }
+        box.replaceChildren(el('span', null, 'Obrigado! Respondendo de novo em ' + nomeDe(sel.value) + '…'));
+        refazer(sel.value);
+      });
+      box.append(sel);
+      sel.focus();
     });
     return box;
   }
@@ -1204,7 +1258,13 @@
       registro.id_resposta = final.id_resposta;
       v.corpo.append(barraAcoes(final.id_resposta, registro, final.texto));
       if (final.fontes && final.fontes.length) v.corpo.append(fontesDetalhe(final.fontes));
-      v.corpo.append(meta, pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
+      v.corpo.append(meta);
+      if ((disciplina || 'auto') === 'auto' && final.disciplina) {
+        v.corpo.append(avisoDisciplina(final.disciplina, registro, function (correta) {
+          perguntar(pergunta, contexto, null, correta, ajuda, foto, { historico: [], travou: '', anexos: ciclo.anexos });
+        }));
+      }
+      v.corpo.append(pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
       registro.texto = final.texto;
       registro.fontes = final.fontes || [];
       registro.pronta = true;
@@ -1218,14 +1278,15 @@
     return false;
   }
 
-  async function perguntarVisual(pergunta, contexto, disciplina, foto, retomarId) {
+  async function perguntarVisual(pergunta, contexto, disciplina, foto, retomarId, formato) {
+    formato = formato || 'video';
     var conversa = garantirConversa(pergunta);
     var registro = { pergunta: pergunta, texto: '', fontes: [], voto: null, pronta: false, nodo: [] };
     conversa.trocas.push(registro);
-    var aluno = msgAluno(pergunta, '🎬 só animação');
+    var aluno = msgAluno(pergunta, formato === 'imagem' ? '🖼️ só imagem' : '🎬 só animação');
     var v = msgTutor();
     v.estado.remove();
-    var painel = painelAnimacao(pergunta, null, disciplina, contexto, foto, { pendente: true, aoConcluir: function (t) {
+    var painel = painelAnimacao(pergunta, null, disciplina, contexto, foto, { pendente: true, formato: formato, aoConcluir: function (t) {
       registro.texto = 'Sua vez: ' + (t.pergunta_final || 'Tente o próximo passo no papel.');
       registro.pronta = true;
     } });
@@ -1273,7 +1334,10 @@
     ajustarAltura();
     var ajuda = ajudaEscolhida();
     try {
-      var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
+      // "Gere uma imagem…", "desenhe…": no modo automático vira figura; "anime…" vira animação.
+      if (ajuda === 'auto' && PEDIDO_IMAGEM.test(pergunta)) ajuda = 'imagem';
+      else if (ajuda === 'auto' && PEDIDO_ANIMACAO.test(pergunta)) ajuda = 'animacao';
+      var ok = ajuda === 'animacao' || ajuda === 'imagem' ? await perguntarVisual(pergunta, contexto, disciplina, foto, null, ajuda === 'imagem' ? 'imagem' : 'video') :
         await perguntar(pergunta, contexto, null, disciplina, ajuda, foto, { historico: [], travou: '', anexos: lidos });
       if (ok && foto && versaoEnviada === versaoFoto) limparFoto();
       if (!ok && !$('pergunta').value) { $('pergunta').value = pergunta; $('contexto').value = contexto; ajustarAltura(); }
@@ -1291,7 +1355,7 @@
   }
   async function retomarVisual(p) {
     travar(true);
-    try { await perguntarVisual(p.pergunta, p.contexto, p.disciplina, p.foto, p.id); }
+    try { await perguntarVisual(p.pergunta, p.contexto, p.disciplina, p.foto, p.id, p.formato); }
     finally { travar(false); }
   }
 

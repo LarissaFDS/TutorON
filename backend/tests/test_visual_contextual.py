@@ -38,13 +38,12 @@ def test_auto_resolve_acervo_e_permanece_nos_polls(site):  # noqa: F811
     assert all('de PAA' not in f['titulo'] for f in t['fontes'])
 
 
-def test_auto_ambiguo_na_animacao_pede_escolha_sem_chamar_modelo(site):  # noqa: F811
-    # A animação precisa do acervo: sem disciplina identificada, continua pedindo a escolha.
-    # (O modo Tutor responde com conhecimento geral: ver test_versao_final.)
+def test_animacao_sem_disciplina_identificada_usa_conhecimento_geral(site, monkeypatch):  # noqa: F811
+    # Desde 24/11/2026 qualquer assunto pode virar animação/imagem (blocos narrados), mesmo sem acervo.
+    monkeypatch.setattr(animacao, 'disponivel', lambda: True)
     for disciplina in ('auto', 'geral'):
         r = site.post('/api/animar', json={'pergunta': 'Me explique esta tabela', 'disciplina': disciplina})
-        assert r.status_code == 409 and 'Escolha a disciplina' in r.json()['erro']
-    assert not site.llm.chamadas
+        assert r.status_code == 200 and r.json()['disciplina'] == 'geral'
 
 
 def test_animacao_recebe_tentativa_e_foto_em_campos_separados(site, monkeypatch):  # noqa: F811
@@ -54,7 +53,7 @@ def test_animacao_recebe_tentativa_e_foto_em_campos_separados(site, monkeypatch)
         'ligacoes': [['anterior', 'atual']], 'pergunta_final': 'Que informação você usaria aqui?'}
     site.llm.roteiro['g1'] = ('ok', json.dumps(roteiro))
 
-    async def renderizar(r, pasta, qualidade='low_quality'):
+    async def renderizar(r, pasta, qualidade='low_quality', **_):
         assert r['modelo'] == 'esquema'
         return 'videoContextual123'
 
@@ -159,7 +158,7 @@ def test_reformulacao_visual_retoma_enunciado_sem_perder_contexto_na_revisao(sit
         contextos.append(c)
         return {'aprovada': len(contextos) == 2, 'motivo': 'teste'}
 
-    async def renderizar(*args):
+    async def renderizar(*args, **_):
         return 'videoRetomado123'
 
     monkeypatch.setattr(site.llm, 'revisar_ajuda', revisar)
@@ -182,3 +181,14 @@ def test_esquema_lacuna_com_pergunta_guia_e_texto_longo_cortado():
     assert len(v['blocos'][0]['texto']) <= 90 and v['blocos'][0]['texto'].endswith('…')
     assert v['blocos'][1]['texto'] == 'Qual o papel do sensor?'  # pergunta-guia fica
     assert v['blocos'][2]['texto'] == 'Você completa'  # valor pronto nunca aparece
+
+
+def test_rota_de_imagem_recusa_nome_invalido_e_arquivo_ausente(site):
+    assert site.get('/api/animacoes/x.png').status_code == 404
+    assert site.get('/api/animacoes/abcdefghijkl.png').status_code == 404
+
+
+def test_feedback_aceita_correcao_de_disciplina(site):
+    r = site.post('/api/feedback', json={'id': 'abc-d', 'tipo': 'disciplina', 'util': False,
+                                         'comentario': 'detectada=sd; correta=controle'})
+    assert r.status_code == 200

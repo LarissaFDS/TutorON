@@ -301,7 +301,7 @@ def test_rota_animar_tenta_corrigir_roteiro_e_serve_o_video(site, monkeypatch): 
         return original(model, system, prompt)
     site.llm._provider = provedor
 
-    async def renderizar(roteiro, pasta, qualidade="low_quality"):
+    async def renderizar(roteiro, pasta, qualidade="low_quality", **_):
         pasta.mkdir(parents=True, exist_ok=True)
         (pasta / "VIDEOteste123.mp4").write_bytes(b"mp4")
         return "VIDEOteste123"

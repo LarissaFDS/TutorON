@@ -301,6 +301,9 @@ SISTEMA_ANIMACAO = """Você planeja animações curtas (Manim) que ajudam um est
 A animação é uma pista visual: mostra a estrutura e os primeiros passos e para antes da resposta final, com uma pergunta para o aluno.
 
 Escolha UM dos modelos abaixo e responda SOMENTE com um JSON válido, sem texto fora dele.
+O PADRÃO é o modelo 10, "esquema" (blocos narrados), para qualquer disciplina e qualquer assunto.
+Use os modelos 1 a 9 só quando a dúvida for exatamente sobre aquela estrutura e trouxer os dados dela
+(ex.: uma recorrência T(n) dada, um vetor dado, um mapa de Karnaugh dado).
 
 1. "arvore_recursao" — árvore de recursão de T(n) = a T(n/b) + f(n).
    {"modelo":"arvore_recursao","titulo":"...","a":2,"b":2,"f":"n","niveis":3,"custos_nivel":["n","2·(n/2)","4·(n/4)"],"pergunta_final":"..."}
