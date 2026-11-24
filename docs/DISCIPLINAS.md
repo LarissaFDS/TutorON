@@ -866,6 +866,10 @@ O material de ECOM012 Circuitos Digitais continua no acervo `sd`. Entraram 2 blo
 
 Entraram 4 blocos: a prova do módulo 3 de 2016.2 com gabarito (`oac-prova2016-2-q1-cache`, faltas 15/15/14 conferidas por simulador; `oac-prova2016-2-q2-q4-vf`, V/F de cache, memória virtual e RAID) e a lista RISC-V do cap. 2 (`oac-lista-cap2-ex1-ex2` e `oac-lista-cap2-ex4-ex5`, código da equipe simulado em `tests_acervo/test_disciplina_oac.py`). As listas dos cap. 5 e 6 já estavam resolvidas nos blocos u04, u05, s06 e s07 (a lista oficial tem 56 onde u04 tem 58; as faltas não mudam). `riscv_entrega1` (trabalho de aluno) e o Patterson & Hennessy ficaram fora. Revisão humana e do professor pendentes. Situação continua MVP.
 
+## Probabilidade e Estatística: complemento do 4º período de Engenharia de Computação (24/11/2026)
+
+Entraram 6 blocos das listas do Prof. Petrucio A. Medeiros Barros (ECOM020): binomial, Poisson, normal, exponencial e soma/média de normais, com os comandos R da lista (`dbinom`, `ppois`, `pnorm`, `qnorm`, `pexp`) e os valores refeitos com `scipy.stats`; e a lista 2 de probabilidade básica, com duas respostas do arquivo corrigidas (bilhetes; Bayes das vacinas, 28,57%). AB1.1, AB2.1 e AB2.2 dependem da matrícula ou da base de cada aluno e ficaram só como referência. Arquivos com nome de aluno, trabalhos, scripts `.R` e a pasta `Monitoria` (material de SD) ficaram fora. Revisão humana e do professor pendentes. Situação continua MVP.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:

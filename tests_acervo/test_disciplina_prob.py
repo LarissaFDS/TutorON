@@ -96,14 +96,14 @@ def test_topicos_com_anotacoes_tem_bloco_na_busca():
 
 def test_resolucoes_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 23
+    assert len(turma) == 29  # 23 + 6 do 4º período de EC (p01–p06)
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
     corrigidas = {i['id'] for i in turma if i['status_resolucao'] == 'corrigida'}
     assert corrigidas == {'prob-anot-conceitos-probabilidade', 'prob-anot-contagem', 'prob-anot-va-continua',
                           'prob-anot-esperanca-variancia', 'prob-anot-binomial', 'prob-anot-combinacao-linear-normais',
-                          'prob-cc-eventos-defeitos-custo'}
+                          'prob-cc-eventos-defeitos-custo', 'prob-ec4-lista2-basica'}
     assert all('**Correç' in texto(c) for c in corrigidas)
     assert {i['id'] for i in turma if i['status_resolucao'] == 'pendente_professor'} == {'prob-anot-elevador'}
 
@@ -414,3 +414,65 @@ def test_documentacao_lista_fontes_e_blocos():
     curadoria = (ROOT / 'disciplinas/prob/CURADORIA.md').read_text(encoding='utf-8')
     assert [i for i in CATALOGO if f'`{i}`' not in curadoria] == []
     assert [i for i in ITENS if f'`{i}`' not in curadoria] == []
+
+
+# ---------------------------------------------------------------- complemento do 4º período de EC (24/11/2026)
+
+def _tem(ident, *valores):
+    t = texto(ident)
+    for v in valores:
+        assert v in t, (ident, v)
+
+
+def test_petrucio_binomial():
+    B = stats.binom
+    assert [round(B.pmf(k, 3, 0.6), 3) for k in range(4)] == [0.064, 0.288, 0.432, 0.216]
+    n, p = 40, 0.12
+    vals = [B.cdf(5, n, p) - B.cdf(2, n, p), B.sf(1, n, p), B.cdf(3, n, p), B.cdf(1, n, p), 1 - B.pmf(0, n, p)]
+    _tem('prob-petrucio-binomial-r', *(f'{v:.4f}'.replace('.', ',') for v in vals))
+    _tem('prob-petrucio-binomial-r', '11,25', f'{math.sqrt(15 * 0.75 * 0.25):.3f}'.replace('.', ','),
+         f'{B.pmf(15, 15, 0.75):.4f}'.replace('.', ','), f'{B.pmf(10, 15, 0.75):.4f}'.replace('.', ','),
+         f'{B.sf(12, 15, 0.75):.4f}'.replace('.', ','), f'{B.pmf(4, 6, 0.5):.4f}'.replace('.', ','),
+         f'{B.sf(1, 6, 0.5):.4f}'.replace('.', ','), f'{B.cdf(1, 10, 0.15):.4f}'.replace('.', ','),
+         f'{B.pmf(3, 5, 0.7):.4f}'.replace('.', ','))
+
+
+def test_petrucio_poisson():
+    P = stats.poisson
+    vals = [P.pmf(4, 3), P.pmf(0, 3), P.pmf(20, 21), P.pmf(3, 6), P.cdf(3, 6), P.cdf(4, 10), P.sf(2, 5), P.pmf(50, 40)]
+    _tem('prob-petrucio-poisson-r', *(f'{v:.4f}'.replace('.', ',') for v in vals))
+
+
+def test_petrucio_normal_exponencial_e_somas():
+    N, E = stats.norm, stats.expon
+    f = lambda v: f'{v:.4f}'.replace('.', ',')  # noqa: E731
+    pp = N.sf(1002, 1000, 10)
+    _tem('prob-petrucio-normal-r', f(N.cdf(4250, 4000, 200) - N.cdf(3600, 4000, 200)), f(N.cdf(3400, 4000, 200)),
+         f(N.sf(4636, 4000, 200)), f(N.cdf(990, 1000, 10)), f(pp), f(stats.binom.cdf(4, 10, pp)),
+         f(N.sf(50, 45, 20) + N.cdf(30, 45, 20)), f(N.cdf(312, 600, 100)), '5,04', '135.609')
+    assert round(N.ppf(0.05, 8, 1.8), 2) == 5.04 and round(N.ppf(0.002, 150000, 5000)) == 135609
+    assert round(2 * N.cdf(-3) * 100, 2) == 0.27
+    _tem('prob-petrucio-exponencial-r', f(E.sf(5, scale=5)), f(E.cdf(4, scale=5)),
+         f(E.cdf(8, scale=5) - E.cdf(3, scale=5)), f(E.cdf(24000, scale=28500)), f(E.cdf(10, scale=5)),
+         f(E.cdf(10, scale=5) - E.cdf(5, scale=5)), f(E.sf(2000, scale=4000)))
+    assert E.sf(6000, scale=4000) / E.sf(4000, scale=4000) == pytest.approx(E.sf(2000, scale=4000))
+    m, v = 7 * 75 + 3 * 110, 7 * 8**2 + 3 * 5**2
+    _tem('prob-petrucio-soma-media-normais-r', f(N.cdf(105, 100, 10) - N.cdf(95, 100, 10)),
+         f(N.cdf(105, 100, 2.5) - N.cdf(95, 100, 2.5)), f(N.sf(850, m, math.sqrt(v))), f(N.sf(2)),
+         f(N.cdf(100, 129, 14)), '855', '523')
+    assert round(N.ppf(0.95, 129, 14)) == 152
+
+
+def test_lista2_basica_e_correcoes():
+    assert Fr(1, 2) * Fr(3, 8) + Fr(1, 2) * Fr(4, 6) == Fr(25, 48)
+    assert Fr(4, 16) * Fr(4, 15) * Fr(4, 14) * Fr(4, 13) == Fr(8, 1365)
+    assert Fr(30 + 15 - 10, 50) == Fr(7, 10) and Fr(5 + 3 - 1, 15) == Fr(7, 15)
+    assert Fr(comb(4, 2), 16) < Fr(2 * comb(4, 1), 16)
+    defeito = Fr(45, 100) * Fr(15, 1000) + Fr(35, 100) * Fr(2, 100) + Fr(20, 100) * Fr(275, 10000)
+    assert defeito == Fr(1925, 100000)
+    china = Fr(20, 100) * Fr(275, 10000) / defeito
+    assert china == Fr(2, 7) and round(float(china) * 100, 2) == 28.57
+    assert round(0.008 / (0.008 + 0.99 * 0.096), 4) == 0.0776
+    assert Fr(6 * 5 * 4, 6**3) == Fr(5, 9) and Fr(20, 400) == Fr(1, 20)
+    assert Fr(4 + 26 + 24 - 2 - 12, 52) == Fr(10, 13) and Fr(4 + 26 + 12 - 2 - 6, 52) == Fr(17, 26)
+    _tem('prob-ec4-lista2-basica', '**28,57%**', '4/50 = 8%', '17/26', '**Correç')
