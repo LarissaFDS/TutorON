@@ -15,7 +15,7 @@ services:
       - key: TUTORON_COTA_TOKENS
         value: "40000"
       - key: TUTORON_GRATIS_LOCAL_PRIMEIRO
-        value: "1"
+        value: "0"
       - key: TUTORON_URL_PUBLICA
         sync: false
       - key: SUPABASE_URL

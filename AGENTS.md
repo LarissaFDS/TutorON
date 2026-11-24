@@ -8,9 +8,11 @@ Leia antes de mudar código. Vale para Claude, Codex e qualquer pessoa da equipe
   Não crie páginas com o layout antigo (`masthead`, abas no topo).
 
 ## Modelos de IA
-- Ordem: **modelo local do TutorON (PC da equipe, via worker `scripts/worker_pc.py`)** → Groq → Gemini.
-  Hospedagem e worker: `docs/HOSPEDAGEM.md`.
-  O modelo local é o principal e **não deve ser removido**.
+- Ordem (desde 24/11/2026): Groq → Cerebras/OpenRouter (se houver chave) → Gemini →
+  **modelo local do TutorON (PC da equipe, via worker `scripts/worker_pc.py`)**. A nuvem vem primeiro porque
+  responde ~8x mais rápido e acerta mais; o local garante resposta quando a nuvem falha ou fica sem cota.
+  `TUTORON_GRATIS_LOCAL_PRIMEIRO=1` volta a pôr o local em primeiro. Hospedagem e worker: `docs/HOSPEDAGEM.md`.
+  O modelo local **não deve ser removido**.
 - Custo de tokens importa (o professor cobrou isso). Antes de aumentar prompt, contexto do acervo,
   histórico ou número de chamadas por pergunta, leia `docs/CUSTO-POR-PERGUNTA.md` e meça.
 - Não rode treino. Só prepare (`3-Treinar.bat` pronto para um clique).

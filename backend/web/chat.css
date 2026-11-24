@@ -499,5 +499,7 @@ html.letra-grande body { font-size: 17px; }
 }
 .config__opcao input:checked + span { background: var(--azul-suave); border-color: var(--azul); color: var(--azul); font-weight: 600; }
 .config__opcao input:focus-visible + span { outline: 2px solid var(--azul); outline-offset: 2px; }
+.config__nome { margin-top: 6px; }
+.config__nome .campo { flex: 1; min-width: 0; }
 .config__equipe { margin: 4px 0 8px; padding-left: 18px; columns: 2; }
 .config__sair { margin: 8px 20px 20px; color: var(--vermelho); }

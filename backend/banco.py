@@ -110,6 +110,20 @@ class Banco:
         logger.warning("Supabase recusou criar conta: HTTP %s %s", r.status_code, r.text[:200])
         return False, "falha"
 
+    def renomear_usuario(self, ident: str, nome: str) -> bool:
+        """Grava o nome escolhido pelo aluno no Auth (user_metadata.full_name) e em `perfis`."""
+        try:
+            r = self.client.put(f"{self.url}/auth/v1/admin/users/{ident}", headers=self.headers,
+                                json={"user_metadata": {"full_name": nome}}, timeout=15)
+            if r.status_code >= 300:
+                logger.warning("Supabase recusou renomear: HTTP %s %s", r.status_code, r.text[:200])
+                return False
+            self.atualizar("perfis", {"id": "eq." + ident}, {"nome": nome})
+            return True
+        except httpx.HTTPError as exc:
+            logger.warning("Falha ao renomear conta: %s", exc)
+            return False
+
     def usuario_do_token(self, token: str, chave_publica: str) -> dict | None:
         """Confere o token de sessão no próprio Supabase Auth. None se inválido ou expirado."""
         try:

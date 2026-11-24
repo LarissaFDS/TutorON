@@ -93,8 +93,8 @@
     }
     desenharAvatar();
     var info = el('div');
-    info.append(el('strong', null, conta ? (conta.nome || conta.email) : 'Convidado'),
-      el('small', 'dica', conta ? conta.email : 'Sem conta: as conversas não ficam salvas.'));
+    var nomeMostrado = el('strong', null, conta ? (conta.nome || conta.email) : 'Convidado');
+    info.append(nomeMostrado, el('small', 'dica', conta ? conta.email : 'Sem conta: as conversas não ficam salvas.'));
     linha.append(avatar, info);
     var arquivo = el('input'); arquivo.type = 'file'; arquivo.accept = 'image/*'; arquivo.hidden = true;
     var trocar = el('button', 'botao botao--leve', 'Trocar foto');
@@ -111,6 +111,38 @@
     var acoesFoto = el('div', 'config__acoes');
     acoesFoto.append(trocar, remover, arquivo);
     secConta.append(linha, acoesFoto, el('p', 'dica', 'A foto fica só neste aparelho.'));
+    if (conta) {
+      var formNome = el('form', 'config__nome');
+      var rotulo = el('label', 'config__rotulo', 'Nome de usuário');
+      rotulo.htmlFor = 'config-nome';
+      var campo = el('input', 'campo');
+      campo.id = 'config-nome'; campo.maxLength = 40; campo.minLength = 2; campo.value = conta.nome || '';
+      campo.autocomplete = 'nickname';
+      var salvar = el('button', 'botao botao--leve', 'Salvar nome');
+      salvar.type = 'submit';
+      var st = el('span', 'dica');
+      var linhaNome = el('div', 'config__acoes');
+      linhaNome.append(campo, salvar);
+      formNome.append(rotulo, linhaNome, st);
+      formNome.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var novo = campo.value.trim().replace(/\s+/g, ' ');
+        if (novo.length < 2) { st.textContent = 'Use pelo menos 2 letras.'; return; }
+        salvar.disabled = true; st.textContent = 'Salvando…';
+        try {
+          var r = await fetch('/api/conta/nome', { method: 'POST', credentials: 'same-origin',
+            headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nome: novo }) });
+          var j = await r.json().catch(function () { return {}; });
+          if (!r.ok) throw new Error(j.erro || 'Não consegui salvar.');
+          conta.nome = j.nome;
+          nomeMostrado.textContent = j.nome;
+          document.querySelectorAll('.conta-chip [data-nome]').forEach(function (n) { n.textContent = j.nome; });
+          st.textContent = 'Nome salvo.';
+        } catch (erro) { st.textContent = erro.message; }
+        finally { salvar.disabled = false; }
+      });
+      secConta.append(formNome);
+    }
     d.append(secConta);
 
     // Aparência

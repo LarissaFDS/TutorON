@@ -113,7 +113,7 @@ class Settings:
     cota_convidado: int = 6000
     cota_janela_h: float = 24.0
     dev_chave: str = ""
-    gratis_local_primeiro: bool = True
+    gratis_local_primeiro: bool = False
     url_publica: str = ""
 
     @property
@@ -183,6 +183,6 @@ def load_settings() -> Settings:
         cota_convidado=_int("TUTORON_COTA_CONVIDADO", 6000),
         cota_janela_h=_float("TUTORON_COTA_JANELA_H", 24.0),
         dev_chave=_env("TUTORON_DEV_CHAVE"),
-        gratis_local_primeiro=_env("TUTORON_GRATIS_LOCAL_PRIMEIRO", "1") not in ("0", "false", "nao", "não"),
+        gratis_local_primeiro=_env("TUTORON_GRATIS_LOCAL_PRIMEIRO", "0") not in ("0", "false", "nao", "não"),
         url_publica=_env("TUTORON_URL_PUBLICA").rstrip("/"),
     )

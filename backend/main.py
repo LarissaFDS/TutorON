@@ -137,6 +137,10 @@ class FotoPedido(BaseModel):
         return disciplina_cadastrada(valor)
 
 
+class NovoNome(BaseModel):
+    nome: str = Field(..., min_length=2, max_length=40)
+
+
 class TrocaSalva(BaseModel):
     p: str = Field(..., max_length=4000)        # pergunta do aluno
     r: str = Field(default="", max_length=20000)  # resposta do tutor (cortada ao gravar)
@@ -469,6 +473,20 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             codigo, texto = mensagens[erro]
             raise HTTPException(codigo, texto)
         return {"criada": True}
+
+    @app.post("/api/conta/nome")
+    async def trocar_nome(corpo: NovoNome, request: Request) -> dict:
+        c = conta(request)
+        if not c:
+            raise HTTPException(401, "Entre na sua conta para trocar o nome.")
+        limitar_gravacao(request)
+        nome = " ".join(corpo.nome.split())
+        if len(nome) < 2 or "@" in nome:
+            raise HTTPException(400, "Use um nome com pelo menos 2 letras, sem e-mail.")
+        if not await asyncio.to_thread(app.state.banco.renomear_usuario, c["id"], nome):
+            raise HTTPException(502, "Não consegui salvar o nome agora. Tente de novo.")
+        app.state.contas.esquecer(c["id"])
+        return {"nome": nome}
 
     @app.get("/entrar", include_in_schema=False)
     async def pagina_entrar() -> FileResponse:

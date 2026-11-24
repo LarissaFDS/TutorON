@@ -174,3 +174,17 @@ def test_pdf_com_texto_e_lido_na_hora():
         raise AssertionError("deveria recusar")
     except foto.FotoInvalida:
         pass
+
+
+def test_trocar_nome_exige_conta(cliente):
+    r = cliente.post("/api/conta/nome", json={"nome": "Novo Nome"})
+    assert r.status_code == 401
+
+
+def test_contas_esquecer_limpa_cache_da_conta():
+    from backend.contas import Contas
+
+    c = Contas(None, "")
+    c._cache = {"a": (0, {"id": "1"}), "b": (0, {"id": "2"}), "c": (0, None)}
+    c.esquecer("1")
+    assert set(c._cache) == {"b", "c"}

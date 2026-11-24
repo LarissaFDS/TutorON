@@ -6,12 +6,17 @@ O **modelo local continua sendo o principal**: o PC da equipe empresta a GPU enq
 ```
  aluno ──► site hospedado (Render, Docker) ──► Supabase (contas, cota, coleta)
                  │
-                 ├─ 1º modelo local do TutorON ◄── túnel ◄── PC da equipe (7-Ligar-IA-Local.bat)
-                 ├─ 2º Groq (gpt-oss-120b / 20b)        ← quando o PC está desligado ou demora
-                 ├─ 3º Cerebras (gpt-oss-120b)          ← opcional: CEREBRAS_API_KEY
-                 ├─ 4º OpenRouter (modelos :free)        ← opcional: OPENROUTER_API_KEY
-                 └─ 5º Gemini                            ← reserva final
+                 ├─ 1º Groq (gpt-oss-120b / 20b)
+                 ├─ 2º Cerebras (gpt-oss-120b)          ← opcional: CEREBRAS_API_KEY
+                 ├─ 3º OpenRouter (modelos :free)        ← opcional: OPENROUTER_API_KEY
+                 ├─ 4º Gemini
+                 └─ 5º modelo local do TutorON ◄── túnel ◄── PC da equipe (7-Ligar-IA-Local.bat)
+                                                         ← reserva quando a nuvem falha ou fica sem cota
 ```
+
+Ordem decidida em 24/11/2026: a nuvem responde ~8x mais rápido (6–8 s contra 53–59 s nas baterias de
+`eval/results`) e errou menos; o modelo local continua garantindo resposta sem cota.
+`TUTORON_GRATIS_LOCAL_PRIMEIRO=1` volta a pôr o local em primeiro no plano grátis.
 
 - **PC ligado:** o PC abre um túnel e avisa o site a cada minuto (`scripts/worker_pc.py`). O site usa o
   modelo local primeiro (plano grátis). O aviso a cada minuto também impede o Render de "dormir".

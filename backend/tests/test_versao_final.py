@@ -164,7 +164,8 @@ def test_pergunta_do_gratis_registra_o_modo(site):
     assert t["status"] == "pronta"
     import json
     linha = json.loads((site.tmp / "perguntas.jsonl").read_text(encoding="utf-8").splitlines()[-1])
-    assert linha["modo_ia"] == "padrao" and linha["provedor"] == "ollama"
+    # Desde 24/11/2026 a nuvem responde primeiro também no plano grátis (local = reserva).
+    assert linha["modo_ia"] == "padrao" and linha["provedor"] == "gemini"
 
 
 # ------------------------------------------------------------------ página, marca e link
