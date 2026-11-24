@@ -858,6 +858,10 @@ Os 48 códigos C do material do 2º período de EC (sem enunciado, professor nem
 
 A AB2 de 27/06/2022 (Prof. Osvaldo Rosso) repete quatro questões de 2017. Entrou um bloco, `fis1-ab2-2022-variacoes` (`pendente_professor`), com os números refeitos para g = 10 m/s², a bola de 8 kg e o caso $m_1 = 0$ da máquina de Atwood com disco, todos conferidos em `tests_acervo/test_disciplina_fis1.py`. A prova dá a massa do disco em centímetros ("M = 12 cm"), o que fica para o professor confirmar. O Halliday não foi versionado. Situação continua MVP.
 
+## Sistemas Digitais: Circuitos Digitais do 2º período de Engenharia de Computação (23/11/2026)
+
+O material de ECOM012 Circuitos Digitais continua no acervo `sd`. Entraram 2 blocos de provas (`sd-ecom012-ab1-2020-2021` e `sd-ecom012-ab2-memoria-latch-nor`), conferidos em `tests_acervo/test_sd_ecom012.py`, e o cadastro ganhou `nomes_nos_cursos: ["Circuitos Digitais"]`, que liga a disciplina da matriz de EC ao acervo. A PR #104 (listas das aulas 1 a 7) não foi tocada; as listas 8 a 14 ficaram como pendência. Situação continua MVP.
+
 ## Como cadastrar uma nova disciplina
 
 1. Crie `disciplinas/<id>/` com:
@@ -878,7 +882,7 @@ Não coloque material de outra disciplina em `materiais/` na raiz: o pipeline de
 | id | Disciplina | Acervo | Situação |
 |---|---|---|---|
 | `paa` | Projeto e Análise de Algoritmos | pipeline de OCR (`pipeline/02-acervo`, `pipeline/04-rag`) + livro no Supabase | MVP |
-| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (28 blocos, 26 na busca; 3 blocos de provas de ECOM012 Circuitos Digitais entraram em 21/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; listas de ECOM012 pendentes; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
+| `sd` | Sistemas Digitais | Markdown curado em `disciplinas/sd` (30 blocos, 28 na busca; 5 blocos de provas de ECOM012 Circuitos Digitais, 3 em 21/11/2026 e 2 em 23/11/2026; ligada ao nome "Circuitos Digitais" da matriz de EC; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; listas de ECOM012 pendentes; licença dos originais e aprovação do professor/monitor não declaradas; validação técnica completa das respostas da IA pendente: veja [as pendências](../06-avaliacao/correcoes-2026-10-19.md) e a [curadoria](../disciplinas/sd/CURADORIA.md) |
 | `oac` | Organização e Arquitetura de Computadores | Markdown curado em `disciplinas/oac` (34 blocos, 24 na busca; as 10 notas da equipe com IA sem revisão humana saíram da busca em 10/11/2026; 6 blocos de anotações manuscritas de 2025.2 entraram em 18/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana e aprovação do professor pendentes; tópicos 03, 04, 06, 07, 08, 11 e 12 sem bloco na busca; veja a [curadoria](../disciplinas/oac/CURADORIA.md) |
 | `calc3` | Cálculo 3 | Markdown curado em `disciplinas/calc3` (21 blocos, 16 na busca; 5 notas da equipe candidatas; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; sem gabarito oficial (7 resoluções pendentes do professor); tópicos 03 e 09–14 sem bloco na busca; veja a [curadoria](../disciplinas/calc3/CURADORIA.md) |
 | `fis2` | Física 2 | Markdown curado em `disciplinas/fis2` (37 blocos, 33 na busca; complemento da Lista 2 de Gravitação em 21/11/2026; índice híbrido com `bge-m3`) | MVP desde 18/11/2026, sem aviso; revisão humana, aprovação do professor e ementa pendentes; veja a [curadoria](../disciplinas/fis2/CURADORIA.md) |
