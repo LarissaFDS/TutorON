@@ -92,7 +92,11 @@ class Pergunta(BaseModel):
     disciplina: str | None = Field(default=None, max_length=40)
     # Modo Tutor: tipo de ajuda (prompts.AJUDAS) e a leitura da foto já conferida pelo aluno.
     ajuda: str = Field(default="auto", max_length=20)
-    foto: str | None = Field(default=None, max_length=8000)
+    # Leitura dos arquivos anexados (vários: o navegador junta e reparte o espaço entre eles).
+    foto: str | None = Field(default=None, max_length=16000)
+    # Disciplina da resposta anterior desta conversa: perguntas de continuação ("e o sensor?")
+    # não têm sinal próprio e ficavam sem disciplina.
+    disciplina_conversa: str | None = Field(default=None, max_length=40)
     # "Ainda não consegui": ajudas anteriores deste exercício e onde o aluno travou.
     historico: list[AjudaAnterior] = Field(default_factory=list, max_length=8)
     travou: str | None = Field(default=None, max_length=1500)
@@ -100,7 +104,7 @@ class Pergunta(BaseModel):
     curso: str | None = Field(default=None, max_length=20)
     periodo: int | None = Field(default=None, ge=1, le=12)
 
-    @field_validator("disciplina")
+    @field_validator("disciplina", "disciplina_conversa")
     @classmethod
     def disciplina_valida(cls, valor: str | None) -> str | None:
         return disciplina_cadastrada(valor)
@@ -623,7 +627,13 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         limitar(request)
         exigir_cota(request)
         curso = corpo.curso if cursos.valido(corpo.curso, corpo.periodo) else None
-        disciplina = resolver_disciplina(corpo.disciplina, corpo.pergunta, '\n'.join(
+        escolha = corpo.disciplina
+        conversa_d = corpo.disciplina_conversa
+        if escolha in (None, "auto") and conversa_d not in (None, "auto", prompts.GERAL_ID) and not corpo.foto:
+            # Continuação da conversa: só troca de disciplina se a nova dúvida tiver sinal claro de outra.
+            from .disciplina_auto import identificar
+            escolha = identificar(corpo.pergunta) or conversa_d
+        disciplina = resolver_disciplina(escolha, corpo.pergunta, '\n'.join(
             x for x in (corpo.contexto, corpo.foto, corpo.travou) if x), cursos.preferidas(curso, corpo.periodo),
             geral=True)
         cobrar_entrada(request, corpo.pergunta, corpo.contexto, corpo.foto, corpo.travou,

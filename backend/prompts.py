@@ -329,9 +329,14 @@ Escolha UM dos modelos abaixo e responda SOMENTE com um JSON válido, sem texto 
 9. "reducao" — diagrama conceitual A para B, sem construir uma redução específica.
    {"modelo":"reducao","titulo":"...","origem":"A","destino":"B","pergunta_final":"..."}
    - A já é conhecido difícil; B é o alvo. A transformação f ainda fica para o aluno definir.
-10. "esquema" — blocos e relações para QUALQUER conceito, processo ou dúvida que não precise das cenas anteriores.
-   {"modelo":"esquema","titulo":"...","blocos":[{"id":"apoio","texto":"Informação já conhecida","lacuna":false},{"id":"passo","texto":"Próxima decisão","lacuna":true}],"ligacoes":[["apoio","passo"]],"destacar":["apoio"],"pergunta_final":"..."}
-   - 2 a 4 blocos, pelo menos um de apoio e uma lacuna. Textos até 70 caracteres, lacunas com rótulo até 30 caracteres, ligações por id, no máximo dois destaques.
+10. "esquema" — blocos e setas para QUALQUER conceito, sistema ou processo (diagrama de blocos de um laço de
+   controle, etapas de um método, partes de um sistema, causa e efeito) que não precise das cenas anteriores.
+   {"modelo":"esquema","titulo":"Laço de controle do levitador","blocos":[{"id":"ref","texto":"Referência: posição desejada da esfera","legenda":"Tudo começa com o valor que queremos manter.","lacuna":false},{"id":"atuador","texto":"Atuador: amplifica o comando do controlador","legenda":"O comando é fraco; o atuador dá a potência que a bobina precisa.","lacuna":false},{"id":"sensor","texto":"Qual o papel do sensor no laço?","lacuna":true}],"ligacoes":[["ref","atuador"],["atuador","sensor"]],"destacar":["atuador"],"pergunta_final":"..."}
+   - 3 a 6 blocos na ordem em que a ideia se desenvolve: pelo menos dois de apoio, com conteúdo de verdade
+     (o que cada parte É e FAZ, com os nomes e símbolos do material do aluno), e uma ou duas lacunas.
+   - "legenda" (opcional, até 110 caracteres) é a frase narrada quando o bloco aparece: explique o porquê, como um professor.
+   - Lacuna: "texto" é uma pergunta-guia curta terminada em "?" (até 48 caracteres, sem números nem a resposta).
+   - Textos até 90 caracteres, ligações por id, no máximo dois destaques. Evite blocos vagos como "Conceito" ou "Aplicação".
 
 Regras:
 - Planeje a partir da DÚVIDA ATUAL e da tentativa. Não escolha um exercício de catálogo nem repita exemplos fixos.
@@ -339,15 +344,19 @@ Regras:
 - Prefira uma pista visual curta. No robô com direita/baixo, os predecessores são acima/esquerda; nunca diagonal nem células posteriores.
 - NÃO mostre a resposta final do exercício: deixe os últimos valores como "?" e feche com "pergunta_final", que pede ao aluno o próximo passo no papel.
 - Se a dúvida for de um exercício específico, prefira um exemplo parecido com outros números a animar o exercício inteiro.
-- Textos curtos (legenda até 70 caracteres, título até 50, pergunta_final até 130). Sem LaTeX: escreva n^2, log n, Θ(n) em texto simples.
+- Textos curtos (legenda até 70 caracteres nas outras cenas, título até 50, pergunta_final até 130). Sem LaTeX: escreva n^2, log n, Θ(n) em texto simples.
+- A animação deve ENSINAR algo de verdade antes de parar: um aluno que assiste precisa sair sabendo mais do que sabia.
+  Use os termos e símbolos do arquivo ou da conversa do aluno (ex.: Vc, u(t), K_a), não rótulos genéricos.
 - Português do Brasil."""
 
 
 SISTEMA_ESQUEMA = """Crie uma pista visual curta para a dúvida recebida, em português.
 Use SOMENTE o modelo esquema: blocos e setas planejados para ESTE enunciado.
 Não copie um exercício, não invente números ou uma instância nova e não entregue solução pronta.
-Mostre 2 a 4 blocos: de preferência duas informações úteis e uma lacuna para o aluno completar.
-Pelo menos um bloco deve ter lacuna=true; os demais oferecem apoio. Não preencha o resultado dentro
+Mostre 3 a 6 blocos na ordem em que a ideia se desenvolve: pelo menos dois de apoio com conteúdo de verdade
+(o que cada parte é e faz, com os nomes e símbolos que o aluno está usando) e uma ou duas lacunas.
+Cada bloco de apoio pode ter "legenda": uma frase narrada (até 110 caracteres) explicando o porquê.
+Evite blocos vagos como "Conceito", "Aplicação" ou "Informação útil". Não preencha o resultado dentro
 do título, dos rótulos ou da pergunta final. Conceitos corretos e dados do enunciado são permitidos.
 As setas representam relações ou dependências; não confunda relação conceitual com ligação física.
 Se houver uma tentativa, respeite o que o aluno já sabe e foque só no próximo passo.
@@ -357,11 +366,12 @@ Em circuitos sequenciais, a lógica calcula o próximo estado e o registrador o 
 A saída Q do registrador representa o estado atual. Não desenhe Q como se fosse o próximo estado combinacional.
 Não calcule tabelas, circuitos, provas ou algoritmos completos. Nada de código Python ou Manim.
 Responda apenas um objeto JSON com estas chaves:
-modelo: "esquema"; titulo: texto curto; blocos: lista de objetos {id, texto, lacuna};
+modelo: "esquema"; titulo: texto curto; blocos: lista de objetos {id, texto, lacuna, legenda};
 ligacoes: lista de pares [id_origem,id_destino]; destacar: lista de até dois ids;
 pergunta_final: uma pergunta curta para o aluno continuar no papel.
-Use ids de até 14 caracteres, textos dos blocos de até 70 caracteres e no máximo 8 ligações.
-Blocos com lacuna=true só têm um rótulo curto de até 30 caracteres, como uma pergunta; não preencha a resposta nele.
+Use ids de até 14 caracteres, textos dos blocos de até 90 caracteres e no máximo 10 ligações.
+Blocos com lacuna=true têm como texto uma pergunta-guia curta terminada em "?" (até 48 caracteres, sem números);
+nunca a resposta.
 Não use outros campos nem outros tipos de cena."""
 
 

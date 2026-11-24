@@ -191,23 +191,34 @@ def test_url_publica_configurada_vence_o_host(site):
 
 CONTROLE = ("Tenho uma planta G(s) = 1/(s(s+4)) com controlador proporcional K em malha fechada. "
             "Qual a faixa de K para a resposta ao degrau não ter overshoot?")
+# Fenômenos de Transporte ainda não tem acervo (Controle ganhou acervo em nov/2026).
+SEM_ACERVO = "Como calcular a perda de carga numa tubulação com a equação de Darcy-Weisbach?"
 
 
 def test_disciplina_sem_acervo_e_orientada_com_conhecimento_geral(site):
-    t = esperar(site, site.post("/api/perguntar", json={"pergunta": CONTROLE, "disciplina": "auto",
+    t = esperar(site, site.post("/api/perguntar", json={"pergunta": SEM_ACERVO, "disciplina": "auto",
                                                         "curso": "ecom", "periodo": 6}).json())
     assert t["status"] == "pronta" and t["disciplina"] == "geral" and t["fontes"] == []
     sistema = site.llm.chamadas[0][1]
     assert "Disciplina sem material no TutorON" in sistema and "Não entregue o resultado final" in sistema
     # "Ainda não consegui" devolve a disciplina "geral" e continua funcionando.
     t2 = esperar(site, site.post("/api/perguntar", json={
-        "pergunta": CONTROLE, "disciplina": "geral", "travou": "não sei achar o zeta",
+        "pergunta": SEM_ACERVO, "disciplina": "geral", "travou": "não sei qual fator de atrito usar",
         "historico": [{"ajuda": "pista", "texto": t["texto"]}]}).json())
     assert t2["status"] == "pronta" and t2["disciplina"] == "geral"
     # Sinal claro de uma disciplina com acervo continua indo para ela.
     t3 = esperar(site, site.post("/api/perguntar", json={"pergunta": "Como agrupar no Karnaugh?",
                                                          "disciplina": "auto"}).json())
     assert t3["disciplina"] == "sd"
+
+
+def test_controle_identificado_pelo_nome_no_arquivo_e_pelo_vocabulario():
+    from backend.disciplina_auto import identificar
+    slide = "Sistemas de controle 1 · UFAL | Levitador magnético | circuito do sensor óptico"
+    assert identificar("não entendi a parte do atuador e do ganho", slide) == "controle"  # antes: sd
+    assert identificar(CONTROLE, "", ("pcom", "eletronica", "controle", "etica")) == "controle"
+    assert identificar("Como aplicar o critério de Routh?") == "controle"
+    assert identificar("Explique esta tabela") is None
 
 
 def test_prompt_socratico_das_novas_disciplinas_traz_o_rigor_do_cadastro():

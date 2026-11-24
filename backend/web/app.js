@@ -532,8 +532,10 @@
   /* Anexos: imagem, PDF ou texto/código. O arquivo é lido logo ao ser escolhido e vai junto com a
      pergunta, sem etapa de conferência. Na resposta aparece, recolhido, "o que eu li do arquivo",
      com botões para o aluno dizer se a leitura está certa (e corrigir, se não estiver). */
-  var anexo = null;  // { nome, pronto: Promise<string> }
+  var anexos = [];  // [{ id, nome, estado, erro, pronto: Promise<string> }] — quantos o aluno quiser
   var versaoFoto = 0;
+  var proximoAnexo = 0;
+  var LIMITE_LEITURA = 16000;  // caracteres de leitura somando todos os arquivos (o servidor aceita 16 mil)
   var TEXTO_EXT = /\.(txt|md|csv|tsv|json|py|c|h|cpp|hpp|cc|java|js|ts|html|css|sql|m|r|tex|v|vhd|vhdl|asm|s|go|rs|kt|ipynb)$/i;
 
   // Reduz no celular antes de enviar (fotos de 12 MP passam de 5 MB); 2400 px mantém a letra legível.
@@ -616,48 +618,99 @@
 
   function limparFoto() {
     versaoFoto++;
-    anexo = null;
-    $('foto-confirmada').hidden = true;
+    anexos = [];
+    desenharAnexos();
     $('foto-arquivo').value = '';
     setStatus($('foto-status'), '');
   }
 
-  function mostrarAnexo(nome, estado, erro) {
-    var aviso = $('foto-confirmada');
-    aviso.replaceChildren(document.createTextNode('📎 ' + nome + (estado ? ' — ' + estado : '')));
-    var remover = el('button', null, 'Remover');
-    remover.type = 'button';
-    remover.addEventListener('click', limparFoto);
-    aviso.append(remover);
-    aviso.dataset.tone = erro ? 'error' : '';
-    aviso.hidden = false;
+  function desenharAnexos() {
+    var caixa = $('foto-confirmada');
+    caixa.replaceChildren();
+    anexos.forEach(function (a) {
+      var chip = el('span', 'anexo-chip' + (a.erro ? ' anexo-chip--erro' : ''));
+      chip.append(el('span', 'anexo-chip__nome', '📎 ' + a.nome), el('small', null, a.estado));
+      var x = el('button', 'anexo-chip__remover', '✕');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Remover ' + a.nome);
+      x.addEventListener('click', function () {
+        anexos = anexos.filter(function (b) { return b !== a; });
+        desenharAnexos();
+      });
+      chip.append(x);
+      caixa.append(chip);
+    });
+    caixa.hidden = !anexos.length;
   }
 
-  $('foto-arquivo').addEventListener('change', function () {
-    var arquivo = this.files && this.files[0];
-    if (!arquivo) return;
-    limparFoto();
-    var versao = versaoFoto;
-    var nome = arquivo.name || 'arquivo';
-    mostrarAnexo(nome, 'lendo…');
-    var pronto = lerArquivo(arquivo, function (m) { if (versao === versaoFoto) mostrarAnexo(nome, m.toLowerCase()); })
-      .then(function (texto) {
-        texto = (texto || '').trim().slice(0, 8000);
-        if (!texto) throw new Error('Não encontrei texto neste arquivo.');
-        if (versao === versaoFoto) mostrarAnexo(nome, 'lido, vai junto com a sua mensagem');
-        return texto;
-      })
-      .catch(function (e) {
-        if (versao === versaoFoto) mostrarAnexo(nome, e.message, true);
-        throw e;
+  // Lê no máximo 3 arquivos ao mesmo tempo (cada imagem é um pedido à IA de visão).
+  var lendoAgora = 0, filaLeitura = [];
+  function naFila(tarefa) {
+    return new Promise(function (ok, falha) {
+      filaLeitura.push(function () {
+        lendoAgora++;
+        tarefa().then(ok, falha).finally(function () { lendoAgora--; if (filaLeitura.length) filaLeitura.shift()(); });
       });
-    pronto.catch(function () {});
-    anexo = { nome: nome, pronto: pronto };
+      if (lendoAgora < 3) filaLeitura.shift()();
+    });
+  }
+
+  function adicionarArquivos(lista) {
+    Array.prototype.forEach.call(lista || [], function (arquivo) {
+      var versao = versaoFoto;
+      var a = { id: ++proximoAnexo, nome: arquivo.name || ('imagem-' + proximoAnexo + '.png'), estado: 'na fila…', erro: false };
+      function estado(m, erro) { if (versao !== versaoFoto) return; a.estado = m; a.erro = !!erro; desenharAnexos(); }
+      a.pronto = naFila(function () {
+        estado('lendo…');
+        return lerArquivo(arquivo, function (m) { estado(m.toLowerCase()); });
+      }).then(function (texto) {
+        texto = (texto || '').trim();
+        if (!texto) throw new Error('não encontrei texto neste arquivo');
+        estado('lido');
+        return texto;
+      }).catch(function (e) { estado(e.message, true); throw e; });
+      a.pronto.catch(function () {});
+      anexos.push(a);
+    });
+    desenharAnexos();
+    $('foto-arquivo').value = '';
     $('pergunta').focus();
-  });
+  }
+
+  // Junta as leituras num texto só, repartindo o espaço entre os arquivos.
+  function juntarAnexos(lidos) {
+    if (!lidos.length) return '';
+    var cota = Math.floor(LIMITE_LEITURA / lidos.length) - 80;
+    return lidos.map(function (a, i) {
+      var t = a.texto.length > cota ? a.texto.slice(0, cota) + '\n[… arquivo cortado]' : a.texto;
+      return '=== Arquivo ' + (i + 1) + ' de ' + lidos.length + ': ' + a.nome + ' ===\n' + t;
+    }).join('\n\n').slice(0, LIMITE_LEITURA);
+  }
+
+  $('foto-arquivo').addEventListener('change', function () { adicionarArquivos(this.files); });
+
+  // Arrastar e soltar arquivos em qualquer lugar do chat, e colar imagens (Ctrl+V).
+  (function () {
+    var alvo = $('modo-tutor'), contador = 0;
+    function temArquivos(e) { return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], 'Files') >= 0; }
+    alvo.addEventListener('dragenter', function (e) { if (!temArquivos(e)) return; e.preventDefault(); contador++; alvo.classList.add('soltando'); });
+    alvo.addEventListener('dragover', function (e) { if (temArquivos(e)) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } });
+    alvo.addEventListener('dragleave', function () { if (--contador <= 0) { contador = 0; alvo.classList.remove('soltando'); } });
+    alvo.addEventListener('drop', function (e) {
+      if (!temArquivos(e)) return;
+      e.preventDefault();
+      contador = 0;
+      alvo.classList.remove('soltando');
+      adicionarArquivos(e.dataTransfer.files);
+    });
+    $('pergunta').addEventListener('paste', function (e) {
+      var arquivos = Array.prototype.filter.call((e.clipboardData && e.clipboardData.files) || [], function (f) { return f.size; });
+      if (arquivos.length) { e.preventDefault(); adicionarArquivos(arquivos); }
+    });
+  })();
 
   /* "O que eu li do arquivo": recolhido acima da resposta, com voto e correção obrigatória se errado. */
-  function painelLeitura(nome, texto, registro, reenviar) {
+  function painelLeitura(nome, texto, registro, reenviar, numero) {
     var d = el('details', 'fontes leitura-arquivo');
     d.append(el('summary', null, '📎 Li o arquivo “' + nome + '”. Ver o que entendi'));
     var pre = el('pre', 'leitura-arquivo__texto', texto);
@@ -666,7 +719,7 @@
     var certo = el('button', 'botao botao--leve', 'Li certo');
     var errado = el('button', 'botao botao--leve', 'Li errado, vou corrigir');
     certo.type = errado.type = 'button';
-    var idVoto = function () { return (registro.id_resposta || ('sem-' + Date.now().toString(36))) + '-l'; };
+    var idVoto = function () { return (registro.id_resposta || ('sem-' + Date.now().toString(36))) + '-l' + (numero || 1); };
     certo.addEventListener('click', async function () {
       certo.disabled = errado.disabled = true;
       try { await postJSON('/api/feedback', { id: idVoto(), tipo: 'leitura', util: true }); status.textContent = 'Obrigado!'; }
@@ -1069,21 +1122,33 @@
     return box;
   }
 
+  // Disciplina da última resposta desta conversa (perguntas de continuação ficam na mesma matéria).
+  function disciplinaDaConversa(conversa, atual) {
+    var anteriores = conversa.trocas.filter(function (t) { return t !== atual && t.pronta && t.disciplina; });
+    return anteriores.length ? anteriores[anteriores.length - 1].disciplina : null;
+  }
+
   async function perguntar(pergunta, contexto, retomarId, disciplina, ajuda, foto, ciclo) {
     ciclo = ciclo || { historico: [], travou: '' };
     var conversa = garantirConversa(pergunta);
     var registro = { pergunta: pergunta, texto: '', fontes: [], voto: null, pronta: false, nodo: [] };
     conversa.trocas.push(registro);
-    var anexos = [foto ? '📎 ' + (ciclo.anexoNome || 'arquivo') : '', contexto ? '</> código/enunciado' : '',
+    var lidos = ciclo.anexos || (foto ? [{ nome: ciclo.anexoNome || 'arquivo', texto: foto }] : []);
+    var nomesAnexos = lidos.map(function (a) { return a.nome; });
+    var rotuloAnexos = nomesAnexos.length > 2 ? nomesAnexos.length + ' arquivos' : nomesAnexos.join(', ');
+    var anexos = [foto ? '📎 ' + rotuloAnexos : '', contexto ? '</> código/enunciado' : '',
       ciclo.historico.length ? '↻ outra forma de explicar (tentativa ' + (ciclo.historico.length + 1) + ')' : ''].filter(Boolean).join(' · ');
     var textoAluno = ciclo.historico.length ? (ciclo.travou || 'Ainda não consegui. Explica de outro jeito?') : pergunta;
     var aluno = msgAluno(textoAluno, anexos);
     var v = msgTutor();
     registro.nodo = [aluno, v.nodo];
     if (foto && !ciclo.historico.length) {
-      v.resposta.before(painelLeitura(ciclo.anexoNome || 'arquivo', foto, registro, function (corrigido) {
-        perguntar(pergunta, contexto, null, disciplina, ajuda, corrigido, { historico: [], travou: '', anexoNome: ciclo.anexoNome });
-      }));
+      lidos.forEach(function (a, i) {
+        v.resposta.before(painelLeitura(a.nome, a.texto, registro, function (corrigido) {
+          var novos = lidos.map(function (b, j) { return j === i ? { nome: b.nome, texto: corrigido } : b; });
+          perguntar(pergunta, contexto, null, disciplina, ajuda, juntarAnexos(novos), { historico: [], travou: '', anexos: novos });
+        }, i + 1));
+      });
     }
     $('conversa').append(aluno, v.nodo);
     desenharConversas();
@@ -1100,7 +1165,8 @@
       } else {
         try {
           tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contextoEnvio || null,
-            disciplina: disciplina || null, ajuda: ajuda || 'auto', foto: foto || null,
+            disciplina: disciplina || null, disciplina_conversa: disciplinaDaConversa(conversa, registro),
+            ajuda: ajuda || 'auto', foto: foto || null,
             historico: ciclo.historico, travou: ciclo.travou || null,
             curso: perfil ? perfil.curso : null, periodo: perfil ? perfil.periodo : null });
         } catch (e) {
@@ -1142,7 +1208,8 @@
       registro.texto = final.texto;
       registro.fontes = final.fontes || [];
       registro.pronta = true;
-      registro.anexo = foto ? (ciclo.anexoNome || 'arquivo') : '';
+      registro.anexo = nomesAnexos.join(', ');
+      registro.disciplina = final.disciplina || '';
       desenharConversas();
       salvarConversa(conversa);
       return true;
@@ -1174,17 +1241,25 @@
     e.preventDefault();
     if (enviando) return;
     var pergunta = $('pergunta').value.trim();
-    var foto = null, anexoNome = null;
+    var foto = null, lidos = [];
     var versaoEnviada = versaoFoto;
-    if (anexo) {
-      anexoNome = anexo.nome;
-      setStatus($('status-tutor'), 'Terminando de ler o arquivo…', 'busy');
-      try { foto = await anexo.pronto; }
-      catch (e) { setStatus($('status-tutor'), 'Não consegui ler o arquivo: ' + e.message + ' Remova-o ou tente outro.', 'error'); return; }
+    if (anexos.length) {
+      var enviados = anexos.slice();
+      setStatus($('status-tutor'), enviados.length > 1 ? 'Terminando de ler os ' + enviados.length + ' arquivos…' : 'Terminando de ler o arquivo…', 'busy');
+      var resultados = await Promise.allSettled(enviados.map(function (a) { return a.pronto; }));
       if (versaoEnviada !== versaoFoto) return;
+      var falhos = enviados.filter(function (a, i) { return resultados[i].status !== 'fulfilled'; });
+      if (falhos.length) {
+        setStatus($('status-tutor'), 'Não consegui ler: ' + falhos.map(function (a) { return a.nome; }).join(', ') +
+          '. Remova ' + (falhos.length > 1 ? 'esses arquivos' : 'esse arquivo') + ' ou tente de novo.', 'error');
+        return;
+      }
+      lidos = enviados.map(function (a, i) { return { nome: a.nome, texto: resultados[i].value }; });
+      foto = juntarAnexos(lidos);
       setStatus($('status-tutor'), '');
     }
-    if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o que está neste arquivo, sem me dar a resposta.';
+    if (pergunta.length < 3 && foto) pergunta = lidos.length > 1 ? 'Me ajude com o que está nestes arquivos, sem me dar a resposta.'
+      : 'Me ajude com o que está neste arquivo, sem me dar a resposta.';
     if (pergunta.length < 3) { setStatus($('status-tutor'), 'Escreva sua dúvida antes de enviar.', 'error'); $('pergunta').focus(); return; }
     travar(true);
     gerando++;
@@ -1199,7 +1274,7 @@
     var ajuda = ajudaEscolhida();
     try {
       var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
-        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto, { historico: [], travou: '', anexoNome: anexoNome });
+        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto, { historico: [], travou: '', anexos: lidos });
       if (ok && foto && versaoEnviada === versaoFoto) limparFoto();
       if (!ok && !$('pergunta').value) { $('pergunta').value = pergunta; $('contexto').value = contexto; ajustarAltura(); }
     } finally {

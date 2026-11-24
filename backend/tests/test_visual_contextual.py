@@ -171,3 +171,14 @@ def test_reformulacao_visual_retoma_enunciado_sem_perder_contexto_na_revisao(sit
     assert 'AJUDA ANTERIOR INCONSISTENTE' in site.llm.chamadas[0][2]
     assert 'AJUDA ANTERIOR INCONSISTENTE' not in site.llm.chamadas[1][2]
     assert all('AJUDA ANTERIOR INCONSISTENTE' in c for c in contextos)
+
+
+def test_esquema_lacuna_com_pergunta_guia_e_texto_longo_cortado():
+    r = {'modelo': 'esquema', 'blocos': [
+        {'id': 'a', 'texto': 'Atuador: amplifica o comando Vc ' * 4, 'legenda': 'O comando é fraco.'},
+        {'id': 'b', 'texto': 'Qual o papel do sensor?', 'lacuna': True},
+        {'id': 'c', 'texto': 'K_a = 5', 'lacuna': True}], 'ligacoes': [['a', 'b'], ['b', 'a']]}
+    v = animacao.roteiro_valido(r)
+    assert len(v['blocos'][0]['texto']) <= 90 and v['blocos'][0]['texto'].endswith('…')
+    assert v['blocos'][1]['texto'] == 'Qual o papel do sensor?'  # pergunta-guia fica
+    assert v['blocos'][2]['texto'] == 'Você completa'  # valor pronto nunca aparece
