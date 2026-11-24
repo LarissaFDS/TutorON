@@ -219,3 +219,27 @@ def test_arquivos(tmp_path):
     arq.write_text("a\nb\nc\n", encoding="utf-8")
     out, _ = rodar("arquivos", "Linhas", tmp_path, str(arq))
     assert out == ["3", "FileNotFoundException"]
+
+
+# ------------------------------------- complemento do 4º período de EC (padrões de projeto)
+
+
+def test_observer_biblioteca(tmp_path):
+    out, _ = rodar("observer", "Biblioteca", tmp_path)
+    assert out == ["e-mail: Dom Casmurro atrasado 3 dia(s)", "multa: R$ 4.50"]
+
+
+def test_command_desfazer(tmp_path):
+    out, _ = rodar("comando", "Editor", tmp_path)
+    assert out == ["Ola, mundo", "Ola", "[]"]
+
+
+def test_padroes_de_criacao(tmp_path):
+    out, _ = rodar("criacao", "Criacao", tmp_path)
+    assert out == ["poupanca", "Ana, 3 item(ns), presente=true", "Bia, 1 item(ns), presente=false", "pedido invalido", "true"]
+
+
+def test_engenharia_de_software_de_ec_liga_a_projsw():
+    from backend import cursos
+
+    assert "projsw" in cursos.preferidas("ecom", 4)

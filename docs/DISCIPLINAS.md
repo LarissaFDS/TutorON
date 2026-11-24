@@ -717,6 +717,26 @@ IA real: Gemini, 22/11/2026 (`eval/results/bateria-projsw-2026-11-22.json`; `gem
 
 Fica **em validação** porque recursividade (assunto das notas) não tem bloco, sobrecarga de operadores e templates (C++, da ementa) não têm material e a resposta fora do assunto não indicou a outra disciplina.
 
+## Cálculo 4: disciplina nova do 4º período de EC (ECOM023), prova 2 e aula de impulso conferidas com SymPy (24/11/2026)
+
+Cálculo 4 (`calc4`) entrou como **MVP**, sem aviso, com `cursos: {"ecom": 4}`:
+- a entrada em `disciplinas/disciplinas.json` e o id na lista de `backend/tests/test_disciplinas.py`;
+- `disciplinas/calc4/`: `rigor.md`, 5 blocos, `fontes.json`, `CURADORIA.md` e o índice gerado;
+- `tests_acervo/test_disciplina_calc4.py`, que refaz com SymPy o potencial e a integral de linha (171), a área da
+  esfera (4πr²), Stokes no plano (2/√3 vezes a área, testado em três círculos), a divergência na caixa (3a²b²c²/4,
+  também pelas seis faces) e a EDO com impulso;
+- perguntas em `eval/relevancia.py` (5 do assunto e 3 fora). Busca: 701/701.
+
+No mesmo PR, Cálculo 3 ganhou 2 blocos da lista P3C3 do Prof. Gleydson (jacobiana, taxa ao longo de vetor unitário,
+pontos críticos, posto). Pendentes: revisão humana e do professor; ementa de ECOM023. IA real: não rodada.
+
+## Projeto de Software: padrões de projeto do 4º período de EC e ligação com Engenharia de Software (24/11/2026)
+
+"Engenharia de Software" (ECOM021) entrou em `nomes_nos_cursos` de `projsw` (decisão no `CURADORIA.md`). Três blocos
+novos (`projsw-padrao-observer-biblioteca-atraso`, `projsw-padrao-command-desfazer`,
+`projsw-padroes-criacao-factory-builder-singleton`) com código Java próprio em `tests_acervo/projsw_java`. Busca: 691/691.
+Pendente: revisão humana e do professor. IA real: não rodada.
+
 ## Teoria dos Grafos: Prática 1 de ECOM033 (Engenharia de Computação) conferida com NetworkX (24/11/2026)
 
 Três blocos novos (`grafos-pratica1-estacao-central-floyd`, `grafos-pratica1-bellman-ford-regeneracao`,
