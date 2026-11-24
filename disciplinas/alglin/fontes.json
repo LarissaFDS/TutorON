@@ -1,0 +1,79 @@
+{
+ "disciplina": "alglin",
+ "atualizado_em": "2026-11-23",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; referencia = só catálogo",
+  "origem": "\"material de turma\" = material do 2º período de Engenharia de Computação entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-alglin-listas",
+   "nome": "Listas 1 (Espaços Vetoriais) e 2 (Base, Dimensão, Posto, Mudança de Base) de Álgebra Linear e códigos-base em Python da lista 2",
+   "autoria": "UFAL (professor não identificado nas listas)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "2 PDFs de lista e 4 arquivos .py (códigos-base com partes preenchidas por alunos)",
+   "isa": "SI",
+   "topicos": [
+    "alglin-01-espacos-vetoriais-subespacos",
+    "alglin-02-base-dimensao-posto",
+    "alglin-03-mudanca-de-base",
+    "alglin-04-algebra-linear-computacional"
+   ],
+   "licenca": "Não declarada (material da disciplina)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas nos blocos a01 a a05, com resoluções da equipe conferidas com SymPy e NumPy. O código dos alunos não foi copiado; o bloco a05 descreve os erros encontrados e usa código próprio no teste."
+  },
+  {
+   "id": "anton-algebra-linear",
+   "nome": "Álgebra Linear com Aplicações (10ª ed.)",
+   "autoria": "Howard Anton e Chris Rorres (Bookman)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro (PDF na pasta da turma)",
+   "isa": "SI",
+   "topicos": [
+    "alglin-01-espacos-vetoriais-subespacos",
+    "alglin-02-base-dimensao-posto",
+    "alglin-03-mudanca-de-base"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Livro usado na disciplina (o exercício 1 da lista 1 segue o estilo dele); só referência."
+  },
+  {
+   "id": "anton-solucoes",
+   "nome": "Student Solutions Manual de Elementary Linear Algebra (em inglês)",
+   "autoria": "Manual de soluções do livro de Howard Anton",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "formato": "PDF",
+   "isa": "SI",
+   "topicos": [
+    "alglin-01-espacos-vetoriais-subespacos"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido; nenhuma solução foi usada",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Manual protegido: só registro de que existe na pasta."
+  }
+ ]
+}

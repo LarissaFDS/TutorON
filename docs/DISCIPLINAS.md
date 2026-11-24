@@ -962,3 +962,10 @@ Cálculo 2 (ECOM010, 2º período de Engenharia de Computação) entrou como `MV
 final, cadastro em `disciplinas/disciplinas.json` com `cursos: {"ecom": 2}`, `rigor.md`, `fontes.json`,
 `CURADORIA.md` e testes com SymPy em `tests_acervo/test_disciplina_calc2.py`. Livros (Stewart) só no catálogo.
 Detalhes em `docs/relatorio-ec-2o-periodo.md`.
+
+## Álgebra Linear (23/11/2026)
+
+Álgebra Linear (ECOM011; 2º período de Engenharia de Computação e 3º de Ciência da Computação) entrou como `MVP`
+com 5 blocos das listas 1 e 2 e dos códigos-base em Python, `cursos: {"ecom": 2, "cc": 3}` e testes com SymPy e
+NumPy em `tests_acervo/test_disciplina_alglin.py`. Livros (Anton) só no catálogo; áudios fora.
+Detalhes em `docs/relatorio-ec-2o-periodo.md`.
