@@ -127,6 +127,29 @@
    "justificativa": "Quatro questões parafraseadas e resolvidas pela equipe (p12–p15); duas têm dado provavelmente digitado errado (pendente_professor)."
   },
   {
+   "id": "ufal-rosso-ab2-2022",
+   "nome": "Prova AB2 de Física 1 (27 jun 2022)",
+   "autoria": "Prof. Osvaldo A. Rosso (UFAL)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, prova sem resolução",
+   "isa": "SI",
+   "topicos": [
+    "fis1-05-sistemas-particulas-colisoes",
+    "fis1-06-rotacao",
+    "fis1-07-rolamento-momento-angular"
+   ],
+   "licenca": "Não declarada (prova do professor)",
+   "acesso": "Material do 2º período de EC entregue pela equipe; PDF não versionado (traz e-mail do professor, não copiado)",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Repete quatro questões da AB2 e da reavaliação de 2017 com g = 10 m/s², bola de 8 kg e o item novo m1 = 0 na máquina de Atwood com disco; tudo parafraseado no bloco p17 e refeito com fis1_verif.py. A massa do disco aparece como \"M = 12 cm\" (pendente)."
+  },
+  {
    "id": "ufal-rosso-lista-questoes",
    "nome": "Física 1 com Rosso — questões da prova e listas de exercícios (arquivo de texto)",
    "autoria": "Aluno da turma (anônimo)",

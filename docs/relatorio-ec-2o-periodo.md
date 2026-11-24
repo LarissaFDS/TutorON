@@ -7,7 +7,8 @@ como `MVP`, sem aviso. Liberar não é revisar: nenhum bloco está marcado com `
 | # | Item | PR | Merge dev / main | Blocos novos | Testes e bateria de relevância | Pendências |
 |---|---|---|---|---|---|---|
 | 1 | Lógica (`logica`) | [#161](https://github.com/LarissaFDS/TutorON/pull/161) | dev: sim; main: ver PR dev→main | 3 (`logica-evandro-2024-*`) | pytest 2251 ok, ruff ok; relevância 650/650 | revisão humana e do professor dos 3 blocos |
-| 2 | Programação 1 (`prog1`) | ver seção | dev: ver seção; main: ver PR dev→main | 2 (`prog1-ec2-*`) | pytest 2255 ok, ruff ok; relevância 653/653 | revisão humana dos 2 blocos |
+| 2 | Programação 1 (`prog1`) | [#162](https://github.com/LarissaFDS/TutorON/pull/162) | dev: sim; main: ver PR dev→main | 2 (`prog1-ec2-*`) | pytest 2255 ok, ruff ok; relevância 653/653 | revisão humana dos 2 blocos |
+| 3 | Física 1 (`fis1`) | ver seção | dev: ver seção; main: ver PR dev→main | 1 (`fis1-ab2-2022-variacoes`) | pytest 2256 ok, ruff ok; relevância 654/654 | massa do disco "M = 12 cm" (professor) |
 
 ## Item 1: Lógica (`logica`, complemento)
 
@@ -29,7 +30,16 @@ como `MVP`, sem aviso. Liberar não é revisar: nenhum bloco está marcado com `
   estouro de `int`, `return` esquecido, leitura fora do vetor, estouro de pilha). Como a entrada foi genérica,
   alguns podem ser artefato do teste.
 
+## Item 3: Física 1 (`fis1`, complemento)
+
+- **Novo:** AB2 de 27/06/2022 (Prof. Osvaldo Rosso), que repete quatro questões de 2017 com g = 10 m/s², bola de
+  8 kg e o item novo m1 = 0 da máquina de Atwood com disco. Um bloco `pendente_professor`, números refeitos com
+  `tests_acervo/fis1_verif.py` e conferidos no teste.
+- **Pendência:** a prova dá a massa do disco como "M = 12 cm"; o bloco usa M = 500 g (como em 2017) e pede confirmação.
+- **Fora:** Halliday (livro e manual), protegido; o e-mail do professor que está no PDF.
+
 ## Aguardando decisão
 
 - Revisão humana e do professor dos blocos novos (nenhum marcado como revisado).
+- Física 1: massa do disco da AB2 de 2022 ("M = 12 cm").
 - O site não foi atualizado por mim: não há acesso ao Render nem ao PC do servidor.
