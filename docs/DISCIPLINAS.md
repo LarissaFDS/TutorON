@@ -717,6 +717,15 @@ IA real: Gemini, 22/11/2026 (`eval/results/bateria-projsw-2026-11-22.json`; `gem
 
 Fica **em validação** porque recursividade (assunto das notas) não tem bloco, sobrecarga de operadores e templates (C++, da ementa) não têm material e a resposta fora do assunto não indicou a outra disciplina.
 
+## Física 3: disciplina nova do 4º período de EC (ECOM022), prova 1 conferida com SymPy (24/11/2026)
+
+Física 3 (`fis3`) entrou como **MVP**, sem aviso, com `cursos: {"ecom": 4}`, com 2 blocos da prova 1 do Prof.
+Alexandre de Morais Carvalho (Lei de Gauss num cilindro maciço; potencial no eixo de uma coroa, ≈ 103 V), status
+`pendente_professor`. Entrada em `disciplinas/disciplinas.json`, id em `backend/tests/test_disciplinas.py`,
+`disciplinas/fis3/` e `tests_acervo/test_disciplina_fis3.py` (contas com SymPy e quatro perguntas reais que acham o
+bloco certo). Os `.html` da pasta e o Halliday ficaram fora. Acervo pequeno: outros assuntos de Física 3 não têm
+material. Pendentes: revisão humana e do professor; ementa de ECOM022. IA real: não rodada.
+
 ## Cálculo 4: disciplina nova do 4º período de EC (ECOM023), prova 2 e aula de impulso conferidas com SymPy (24/11/2026)
 
 Cálculo 4 (`calc4`) entrou como **MVP**, sem aviso, com `cursos: {"ecom": 4}`:

@@ -161,7 +161,7 @@ def test_mesma_ia_para_as_duas_disciplinas(site):
 def test_api_lista_disciplinas_e_recusa_desconhecida(site):
     dados = site.get("/api/disciplinas").json()
     assert dados["padrao"] == "paa"
-    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd", "prob", "circ", "sinais", "controle", "eletronica", "pcom", "varcomp", "ingles", "prog1", "discreta", "ga", "iec", "logica", "fis1", "so", "lfa", "metodologia", "calc1", "grafos", "projsw", "redes", "clp", "sd_dist", "am", "cd", "compevol", "pln", "seguranca", "ihc", "etica", "direito", "ia", "cg", "compiladores", "calc2", "alglin", "calc4"}
+    assert {d["id"] for d in dados["disciplinas"]} == {"paa", "sd", "oac", "calc3", "fis2", "ed", "bd", "prob", "circ", "sinais", "controle", "eletronica", "pcom", "varcomp", "ingles", "prog1", "discreta", "ga", "iec", "logica", "fis1", "so", "lfa", "metodologia", "calc1", "grafos", "projsw", "redes", "clp", "sd_dist", "am", "cd", "compevol", "pln", "seguranca", "ihc", "etica", "direito", "ia", "cg", "compiladores", "calc2", "alglin", "calc4", "fis3"}
     assert all(d["exemplos"] for d in dados["disciplinas"])
     r = site.post("/api/perguntar", json={"pergunta": "O que é um latch?", "disciplina": "quimica"})
     assert r.status_code == 422 and "erro" in r.json()
