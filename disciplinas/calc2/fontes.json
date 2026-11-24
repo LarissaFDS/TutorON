@@ -1,0 +1,104 @@
+{
+ "disciplina": "calc2",
+ "atualizado_em": "2026-11-23",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; referencia = só catálogo",
+  "origem": "\"material de turma\" = material do 2º período de Engenharia de Computação entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-xu-yang-calc2-listas",
+   "nome": "Listas 4, 7 e 8 e Revisão de Prova 4 de Cálculo 2",
+   "autoria": "Profa. Xu Yang (UFAL)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "2 PDFs (listas 7 e 8) e 2 imagens PNG (lista 4 e revisão da prova 4), sem gabarito",
+   "isa": "SI",
+   "topicos": [
+    "calc2-01-integracao-por-partes",
+    "calc2-02-integrais-trigonometricas",
+    "calc2-03-series-convergencia",
+    "calc2-04-series-de-potencias-taylor"
+   ],
+   "licenca": "Não declarada (material da disciplina)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseadas nos blocos c01 a c06, com resoluções da equipe conferidas com SymPy. Na lista 7, o texto extraído do PDF está truncado em alguns itens; só foram usados os itens com leitura segura."
+  },
+  {
+   "id": "ufal-calc2-prova-final",
+   "nome": "Prova final de Cálculo 2 (foto)",
+   "autoria": "UFAL; professor não identificado na foto",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Foto (JPG), 1 página, sem respostas e sem nome de aluno preenchido",
+   "isa": "SI",
+   "topicos": [
+    "calc2-02-integrais-trigonometricas",
+    "calc2-04-series-de-potencias-taylor",
+    "calc2-05-integral-impropria-aplicacoes"
+   ],
+   "licenca": "Não declarada (prova da disciplina)",
+   "acesso": "Material entregue pela equipe; foto não versionada",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Parafraseada no bloco c07, com resolução da equipe conferida com SymPy."
+  },
+  {
+   "id": "stewart-calculo-vol1",
+   "nome": "Cálculo, volume 1 (7ª ed.) e volume 2",
+   "autoria": "James Stewart (Cengage)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro (PDFs na pasta da turma)",
+   "isa": "SI",
+   "topicos": [
+    "calc2-01-integracao-por-partes",
+    "calc2-02-integrais-trigonometricas",
+    "calc2-03-series-convergencia",
+    "calc2-04-series-de-potencias-taylor",
+    "calc2-05-integral-impropria-aplicacoes"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Livro usado na disciplina (a notação do rigor segue o Stewart); só referência por seção."
+  },
+  {
+   "id": "stewart-solucoes-ingles",
+   "nome": "Exercícios resolvidos do Stewart, capítulos 1 a 11 (7ª ed., em inglês)",
+   "autoria": "Manual de soluções do livro de James Stewart (Cengage)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "en",
+   "formato": "PDF",
+   "isa": "SI",
+   "topicos": [
+    "calc2-03-series-convergencia"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido; nenhuma solução foi usada",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Manual protegido: só registro de que existe na pasta."
+  }
+ ]
+}
