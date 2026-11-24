@@ -1,0 +1,74 @@
+{
+ "disciplina": "fis3",
+ "atualizado_em": "2026-11-24",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; referencia = só catálogo",
+  "origem": "\"material de turma\" = material do 4º período de Engenharia de Computação entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-fis3-prova1-2025",
+   "nome": "Prova 1 de Física 3 (19/08/2025): Lei de Gauss num cilindro maciço e potencial no eixo de uma coroa circular",
+   "autoria": "Prof. Alexandre de Morais Carvalho (Instituto de Física, UFAL)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 1 página, sem gabarito e sem nome de aluno preenchido",
+   "topicos": [
+    "fis3-01-lei-de-gauss",
+    "fis3-02-potencial-eletrico"
+   ],
+   "licenca": "Não declarada (prova da disciplina)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "As duas questões parafraseadas em f01 e f02, com resoluções da equipe conferidas com SymPy (status pendente_professor)."
+  },
+  {
+   "id": "ufal-fis3-resolucao-prova1",
+   "nome": "Resolução manuscrita da prova 1 de Física 3",
+   "autoria": "Autoria não identificada no arquivo",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF de imagem, 1 página longa",
+   "topicos": [
+    "fis3-01-lei-de-gauss",
+    "fis3-02-potencial-eletrico"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Só para conferir: chega aos mesmos resultados da equipe (ρr/2ε₀, ρR²/2ε₀r e cerca de 103 V)."
+  },
+  {
+   "id": "halliday-eletromagnetismo",
+   "nome": "Fundamentos de Física, volume 3: Eletromagnetismo",
+   "autoria": "David Halliday, Robert Resnick e Jearl Walker (LTC)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro",
+   "topicos": [
+    "fis3-01-lei-de-gauss",
+    "fis3-02-potencial-eletrico"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência da equipe",
+   "justificativa": "Livro protegido: só referência por seção (cap. 23 e 24)."
+  }
+ ]
+}

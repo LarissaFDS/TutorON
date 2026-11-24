@@ -1,0 +1,51 @@
+{
+ "disciplina": "fislab3",
+ "atualizado_em": "2026-11-24",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; referencia = só catálogo",
+  "origem": "\"material de turma\" = material do 4º período de Engenharia de Computação entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-fislab3-roteiro-exp2",
+   "nome": "Roteiro de Física Experimental 3, Experimento 2: Campo a partir do potencial",
+   "autoria": "Laboratório de Ensino, Instituto de Física, UFAL",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 6 páginas (introdução, objetivo, material, procedimento e 4 questões)",
+   "topicos": [
+    "fislab3-01-campo-e-potencial"
+   ],
+   "licenca": "Não declarada (roteiro da disciplina)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": "A equação (2) do roteiro escreve E = ∇V, sem o sinal de menos; os blocos usam E = −∇V e explicam a diferença.",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Único material de aula da pasta; parafraseado em l01 a l03 (procedimento e as 4 questões)."
+  },
+  {
+   "id": "halliday-eletromagnetismo",
+   "nome": "Fundamentos de Física, volume 3: Eletromagnetismo",
+   "autoria": "David Halliday, Robert Resnick e Jearl Walker (LTC)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro",
+   "topicos": [
+    "fislab3-01-campo-e-potencial"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência da equipe",
+   "justificativa": "Livro protegido citado na referência do roteiro: só catálogo, por seção (cap. 24, potencial elétrico)."
+  }
+ ]
+}
