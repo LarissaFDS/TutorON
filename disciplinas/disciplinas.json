@@ -596,6 +596,33 @@
       ]
     },
     {
+      "id": "alglin",
+      "nome": "Álgebra Linear",
+      "sigla": "Álgebra Linear",
+      "situacao": "MVP",
+      "itens": "disciplinas/alglin/acervo/itens.json",
+      "indice": "disciplinas/alglin/acervo/indice.json",
+      "materiais": "disciplinas/alglin/materiais",
+      "rigor": "disciplinas/alglin/rigor.md",
+      "livro_supabase": false,
+      "cursos": {
+        "ecom": 2,
+        "cc": 3
+      },
+      "assuntos": [
+        "alglin-01-espacos-vetoriais-subespacos",
+        "alglin-02-base-dimensao-posto",
+        "alglin-03-mudanca-de-base",
+        "alglin-04-algebra-linear-computacional"
+      ],
+      "exemplos": [
+        "Como provar que um conjunto é subespaço vetorial?",
+        "Como saber se três vetores formam uma base de R³?",
+        "Qual a matriz de mudança de base para eixos girados 45°?",
+        "Como testar em Python se um vetor é combinação linear de outros?"
+      ]
+    },
+    {
       "id": "iec",
       "nome": "Introdução à Engenharia de Computação",
       "sigla": "IEC",
