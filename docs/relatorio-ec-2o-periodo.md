@@ -10,8 +10,9 @@ como `MVP`, sem aviso. Liberar não é revisar: nenhum bloco está marcado com `
 | 2 | Programação 1 (`prog1`) | [#162](https://github.com/LarissaFDS/TutorON/pull/162) | dev: sim; main: sim ([#165](https://github.com/LarissaFDS/TutorON/pull/165)) | 2 (`prog1-ec2-*`) | pytest 2255 ok, ruff ok; relevância 653/653 | revisão humana dos 2 blocos |
 | 3 | Física 1 (`fis1`) | [#163](https://github.com/LarissaFDS/TutorON/pull/163) | dev: sim; main: sim ([#165](https://github.com/LarissaFDS/TutorON/pull/165)) | 1 (`fis1-ab2-2022-variacoes`) | pytest 2256 ok, ruff ok; relevância 654/654 | massa do disco "M = 12 cm" (professor) |
 | 4 | Circuitos Digitais (`sd`) | [#164](https://github.com/LarissaFDS/TutorON/pull/164) | dev: sim; main: sim ([#165](https://github.com/LarissaFDS/TutorON/pull/165)) | 2 (`sd-ecom012-ab1-2020-2021`, `sd-ecom012-ab2-memoria-latch-nor`) | pytest 2257 ok (após estender o inventário de ECOM012), ruff ok; relevância 657/657 | releitura de 2 frases do bloco revisado m04; listas 8 a 14; PR #104 |
-| 5 | Cálculo 2 (`calc2`, nova) | [#166](https://github.com/LarissaFDS/TutorON/pull/166) | dev: sim; main: ver PR dev→main | 7 (`calc2-*`) | testes novos com SymPy ok, ruff ok; relevância 665/665 | revisão humana e do professor dos 7 blocos; ementa de ECOM010 não conferida |
-| 6 | Álgebra Linear (`alglin`, nova) | ver PR do item | dev: ver PR; main: ver PR dev→main | 5 (`alglin-*`) | testes novos com SymPy e NumPy ok, ruff ok; relevância 673/673 | revisão humana e do professor dos 5 blocos; ementa de ECOM011 não conferida; lista 2 questão 6 ilegível |
+| 5 | Cálculo 2 (`calc2`, nova) | [#166](https://github.com/LarissaFDS/TutorON/pull/166) | dev: sim; main: PR dev→main dos itens 5 a 7 | 7 (`calc2-*`) | testes novos com SymPy ok, ruff ok; relevância 665/665 | revisão humana e do professor dos 7 blocos; ementa de ECOM010 não conferida |
+| 6 | Álgebra Linear (`alglin`, nova) | [#167](https://github.com/LarissaFDS/TutorON/pull/167) | dev: sim; main: PR dev→main dos itens 5 a 7 | 5 (`alglin-*`) | testes novos com SymPy e NumPy ok, ruff ok; relevância 673/673 | revisão humana e do professor dos 5 blocos; ementa de ECOM011 não conferida; lista 2 questão 6 ilegível |
+| 7 | Desenho (ECOM013) | nenhum (só relatório) | — | nada novo: material insuficiente, disciplina não criada | — | material com enunciados, se a equipe quiser a disciplina |
 
 ## Item 1: Lógica (`logica`, complemento)
 
@@ -90,9 +91,35 @@ como `MVP`, sem aviso. Liberar não é revisar: nenhum bloco está marcado com `
   (vetores da nova base nas colunas; sistema com os vetores nas colunas) sem dar o resultado final.
 - **Ementa não conferida:** o PPC com ECOM011 não está no repositório.
 
+## Item 7: Desenho (ECOM013, não criada)
+
+- **Material:** quatro PDFs de uma página com pranchas desenhadas por aluna (formatos A2 a A4, projeções
+  ortogonais com vistas frontal, lateral e superior, layers e hachura, atividade 5), um modelo do SketchUp (`.skp`)
+  e uma foto de pessoa.
+- **Decisão:** não há enunciados de exercício nem de prova, só os desenhos entregues (com o nome da aluna no
+  carimbo). Não chega às 4 questões reais com bloco certo exigidas, então a disciplina não foi criada.
+- **Não usados:** a foto (pessoa), o `.skp` e o nome no carimbo.
+
+## Disciplinas do 2º período de EC
+
+| Disciplina | Material no TutorON? | Na janela do período? |
+|---|---|---|
+| Lógica Aplicada à Computação (`logica`) | ✓ | ✓ |
+| Estrutura de Dados (`ed`) | ✓ | ✓ |
+| Física 1 (`fis1`) | ✓ | ✓ |
+| Cálculo 2 (`calc2`) | ✓ (nova) | ✓ |
+| Álgebra Linear (`alglin`) | ✓ (nova; também 3º período de CC) | ✓ |
+| Circuitos Digitais (`sd`) | ✓ | ✓ |
+| Desenho | ✗ (material insuficiente) | ✗ |
+
+Conferido com `backend.cursos.preferidas("ecom", 2)`, que devolve `logica, ed, fis1, calc2, alglin, sd`.
+
 ## Aguardando decisão
 
 - Revisão humana e do professor dos blocos novos (nenhum marcado como revisado).
 - Física 1: massa do disco da AB2 de 2022 ("M = 12 cm").
 - Circuitos Digitais: reler as duas frases trocadas no bloco revisado m04; decidir a PR #104 (a mesma troca em m04 deve resolver a pergunta-guarda dela); listas 8 a 14.
 - O site não foi atualizado por mim: não há acesso ao Render nem ao PC do servidor.
+- Cálculo 2 e Álgebra Linear: ementas de ECOM010 e ECOM011 não conferidas (o PPC não está no repositório).
+- Álgebra Linear: questão 6 da lista 2 ficou ilegível na extração; conferir no PDF.
+- Desenho: criar só se houver material com enunciados.
