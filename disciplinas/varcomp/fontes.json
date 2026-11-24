@@ -27,6 +27,24 @@
       "justificativa": "Única evidência direta do que o professor cobra. Sem gabarito: as 13 resoluções ficam pendentes de confirmação do professor."
     },
     {
+      "id": "ufal-varcomp-lista1",
+      "nome": "Lista nº 1 de Variável Complexa (sem gabarito oficial)",
+      "autoria": "Instituto de Computação, UFAL (autor não identificado no arquivo)",
+      "url": null,
+      "arquivo_local": "Lista_1.pdf (2 páginas). A resolução que veio junto (resolução lista 1.pdf, 8 páginas manuscritas) é de aluno e traz o nome dele: usada só para comparar resultados, não está no repositório.",
+      "idioma": "pt-BR",
+      "formato": "PDF de 2 páginas com texto extraível (fórmulas transcritas pela leitura visual da página)",
+      "notacao": "z = x + iy, u(x, y) e v(x, y), conjugado com barra, arg(z)",
+      "topicos": ["varcomp-01-numeros-complexos", "varcomp-02-funcoes-analiticas-cauchy-riemann", "varcomp-03-funcoes-elementares"],
+      "licenca": "Material da disciplina; licença não declarada; publicação da transcrição não autorizada até agora",
+      "acesso": "Lida em 24/11/2026; no acervo, enunciados parafraseados (Q2, Q3, Q6 e Q7) e resoluções da equipe conferidas com SymPy",
+      "notas": {"autoridade": 4, "cobertura": 3, "profundidade": 3, "didatica": 3, "aderencia": 5, "acessibilidade": 4, "reutilizacao": 2, "tutoria": 5},
+      "prioridade": "alta",
+      "uso": "acervo",
+      "origem": "material da disciplina",
+      "justificativa": "Lista da turma do 4º período de EC: primeira evidência de que limites e funções elementares são cobrados. Sem gabarito oficial: as 3 resoluções ficam pendentes de confirmação do professor; conferem com a resolução de aluno."
+    },
+    {
       "id": "ufal-ppc-ecomp-2014",
       "nome": "Projeto Pedagógico do Curso de Engenharia de Computação (UFAL, 2014) — ECOM024 Variáveis Complexas",
       "autoria": "Instituto de Computação, UFAL",

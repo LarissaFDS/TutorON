@@ -160,13 +160,15 @@ def test_topicos_das_provas_tem_bloco_na_busca():
         "varcomp-05-cauchy-goursat-primitivas",
         "varcomp-06-formula-integral-cauchy",
     }
-    assert {ITENS[x]["assunto"] for x in NA_BUSCA} == sim
+    lista1 = {"varcomp-02-funcoes-analiticas-cauchy-riemann", "varcomp-03-funcoes-elementares"}  # 4º período de EC
+    assert {ITENS[x]["assunto"] for x in NA_BUSCA} == sim | lista1
     assert set(CATALOGO["ufal-varcomp-prova1-2021"]["topicos"]) == sim
+    assert set(CATALOGO["ufal-varcomp-lista1"]["topicos"]) == lista1 | {"varcomp-01-numeros-complexos"}
 
 
 def test_resolucoes_sao_pendentes_do_professor_e_dizem_no_texto():
     turma = [x for x in ITENS.values() if x["natureza"] == "material_da_disciplina"]
-    assert len(turma) == 13 and {x["id"] for x in turma} == NA_BUSCA
+    assert len(turma) == 16 and {x["id"] for x in turma} == NA_BUSCA
     for x in turma:
         assert x["status_resolucao"] == "pendente_professor", x["id"]
         assert "Status da resolução: pendente de confirmação do professor" in x["texto"]
@@ -496,7 +498,7 @@ def test_catalogo_completo_e_coerente():
         assert f["prioridade"] in ("alta", "media", "referencia") and f["uso"] in ("acervo", "citada", "referencia")
         assert set(f["topicos"]) <= set(VC.assuntos), f["id"]
     assert {x for i_ in ITENS.values() for x in i_["fontes_catalogo"]} <= set(CATALOGO)
-    assert {k for k, f in CATALOGO.items() if f["uso"] == "acervo"} == {"ufal-varcomp-prova1-2021"}
+    assert {k for k, f in CATALOGO.items() if f["uso"] == "acervo"} == {"ufal-varcomp-prova1-2021", "ufal-varcomp-lista1"}
     for protegido in ("avila-variaveis-complexas", "churchill-variaveis-complexas"):
         assert CATALOGO[protegido]["uso"] == "referencia"
 
@@ -516,3 +518,41 @@ def test_documentacao_lista_fontes_e_blocos():
     curadoria = (ROOT / "disciplinas/varcomp/CURADORIA.md").read_text(encoding="utf-8")
     assert [k for k in CATALOGO if f"`{k}`" not in curadoria] == []
     assert [k for k in ITENS if f"`{k}`" not in curadoria] == []
+
+
+# ---------------------------------------------------------------- lista 1 (4º período de EC, 24/11/2026)
+
+
+def test_lista1_q2_partes_real_e_imaginaria():
+    x, y = sp.symbols("x y", real=True)
+    z, zc = x + I * y, x - I * y
+    casos = [
+        ((z - 4 * I) / (z + 3 * I), (x**2 + y**2 - y - 12) / (x**2 + (y + 3) ** 2), -7 * x / (x**2 + (y + 3) ** 2)),
+        (
+            (z - 3 * I * zc) / (z - I),
+            (x**2 + y**2 - 6 * x * y + 3 * x - y) / (x**2 + (y - 1) ** 2),
+            (-3 * x**2 + x + 3 * y**2 - 3 * y) / (x**2 + (y - 1) ** 2),
+        ),
+        (sp.exp(z) * (z - I), sp.exp(x) * (x * sp.cos(y) - (y - 1) * sp.sin(y)), sp.exp(x) * (x * sp.sin(y) + (y - 1) * sp.cos(y))),
+    ]
+    for w, u, v in casos:
+        w = sp.expand_complex(w)
+        assert sp.simplify(sp.re(w) - u) == 0 and sp.simplify(sp.im(w) - v) == 0
+    assert "-7x" in ITENS["varcomp-lista1-q2-partes-u-v"]["texto"]
+
+
+def test_lista1_q3_limites():
+    z = sp.symbols("z")
+    assert sp.limit((z**3 - 8 * I) / (z + 2 * I), z, -2 * I) == -12
+    assert sp.limit(((1 + z) ** sp.Rational(1, 4) - 1) / z, z, 0) == sp.Rational(1, 4)
+    assert sp.limit(((1 + z) ** sp.Rational(1, 3) - (1 - z) ** sp.Rational(1, 3)) / z, z, 0) == sp.Rational(2, 3)
+    assert sp.expand((z + 2 * I) * (z**2 - 2 * I * z - 4)) == z**3 - 8 * I
+
+
+def test_lista1_q6_q7_exponencial():
+    assert sp.simplify(sp.exp(2 + 3 * sp.pi * I)) == sp.simplify(sp.exp(2 - 3 * sp.pi * I)) == -sp.exp(2)
+    assert sp.simplify(sp.expand_complex(sp.exp((2 + sp.pi * I) / 4)) - sp.sqrt(sp.E) * sp.sqrt(2) / 2 * (1 + I)) == 0
+    for k in range(-3, 4):
+        assert sp.simplify(sp.exp(sp.log(2) + I * (sp.pi + 2 * k * sp.pi))) == -2
+        assert sp.simplify(sp.expand_complex(sp.exp(sp.log(2) + I * (sp.pi / 3 + 2 * k * sp.pi))) - (1 + sp.sqrt(3) * I)) == 0
+        assert sp.simplify(sp.exp(2 * (sp.Rational(1, 2) + k * sp.pi * I) - 1)) == 1
