@@ -90,6 +90,28 @@
       ]
     },
     {
+      "id": "fis3",
+      "nome": "Física 3",
+      "sigla": "Física 3",
+      "situacao": "MVP",
+      "itens": "disciplinas/fis3/acervo/itens.json",
+      "indice": "disciplinas/fis3/acervo/indice.json",
+      "materiais": "disciplinas/fis3/materiais",
+      "rigor": "disciplinas/fis3/rigor.md",
+      "livro_supabase": false,
+      "cursos": {
+        "ecom": 4
+      },
+      "assuntos": [
+        "fis3-01-lei-de-gauss",
+        "fis3-02-potencial-eletrico"
+      ],
+      "exemplos": [
+        "Como usar a Lei de Gauss para o campo de um cilindro carregado?",
+        "Como calcular o potencial no eixo de um disco ou de uma coroa carregada?"
+      ]
+    },
+    {
       "id": "calc4",
       "nome": "Cálculo 4",
       "sigla": "Cálculo 4",
