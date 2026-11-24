@@ -22,6 +22,10 @@ Situação: **em validação**. Revisão humana e do professor: pendentes em tod
 - **Fora do acervo (dados pessoais):** listas resolvidas por alunos, com nomes e matrículas, e uma resolução de 2011 com nome e e-mail de aluno. Nada foi copiado; só serviram para apontar erros comuns.
 - **Livros protegidos:** Bondy e Murty, Goldbarg, Szwarcfiter e Boaventura Netto: só citação.
 
+### Complemento do 4º período de Engenharia de Computação (ECOM033)
+- **Usado (paráfrase, arquivos não versionados):** Prática 1 de caminho mínimo (`ufal-ecom033-pratica1-caminho-minimo`), com os três cenários e seus arquivos de entrada: `grafos-pratica1-estacao-central-floyd` (Floyd-Warshall, estação central 9 com soma 219), `grafos-pratica1-bellman-ford-regeneracao` (pesos negativos, 0 → 3 → 5 → 6 com custo 8) e `grafos-pratica1-robo-grid-dijkstra` (grid 10 × 15, custo 26). Os dados de entrada ficam no teste, para recalcular os números.
+- **Só evidência:** os slides ECOM033 (introdução, representação, árvores, coloração) tratam de assuntos que já têm bloco (g01 a g10); o repositório `Minimum-path-algoritms-scenarios` (soluções de aluno, sem arquivo de licença) e os cadernos e páginas `.html` soltos. Nada deles foi copiado.
+
 ## Resoluções
 Todas as resoluções são da equipe TutorON e foram conferidas por código em `tests_acervo/test_disciplina_grafos.py` (NetworkX 3.7 e força bruta).
 - Não resolvidas: questão 4.4 da lista (mapa do Brasil), porque depende da lista de fronteiras entre estados, que não foi conferida; questões 1, 3 e 6 da prova de 2016.2, que dependem de figuras não reproduzidas.

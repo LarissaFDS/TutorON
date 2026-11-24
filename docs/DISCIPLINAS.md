@@ -717,6 +717,13 @@ IA real: Gemini, 22/11/2026 (`eval/results/bateria-projsw-2026-11-22.json`; `gem
 
 Fica **em validação** porque recursividade (assunto das notas) não tem bloco, sobrecarga de operadores e templates (C++, da ementa) não têm material e a resposta fora do assunto não indicou a outra disciplina.
 
+## Teoria dos Grafos: Prática 1 de ECOM033 (Engenharia de Computação) conferida com NetworkX (24/11/2026)
+
+Três blocos novos (`grafos-pratica1-estacao-central-floyd`, `grafos-pratica1-bellman-ford-regeneracao`,
+`grafos-pratica1-robo-grid-dijkstra`) da Prática 1 de caminho mínimo, com fonte `ufal-ecom033-pratica1-caminho-minimo`
+e os números refeitos em `tests_acervo/test_disciplina_grafos.py`. Busca: 688/688, com 3 perguntas novas.
+Pendente: revisão humana e do professor dos 3 blocos. IA real: não rodada.
+
 ## Teoria dos Grafos: lista e prova da UFAL conferidas com NetworkX (22/11/2026)
 
 Teoria dos Grafos (CCOM030, 30 h, Ciência da Computação) entrou só com cadastro e acervo, com a mesma IA:

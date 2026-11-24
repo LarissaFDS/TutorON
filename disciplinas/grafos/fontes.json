@@ -99,6 +99,26 @@
    "arquivo_local": null,
    "sha256": null,
    "idioma": "pt-BR",
+   "notas": "Enunciado de Engenharia de Computação; o repositório público de um aluno com soluções (sem licença) foi usado só como evidência, não versionado",
+   "id": "ufal-ecom033-pratica1-caminho-minimo",
+   "nome": "Prática 1 - Grafos (caminho mínimo: Floyd-Warshall, Bellman-Ford, Dijkstra em grid), com arquivos de entrada",
+   "autoria": "Disciplina Teoria dos Grafos ECOM033 (IC-UFAL); professor não identificado no arquivo",
+   "url": null,
+   "formato": "PDF e TXT",
+   "topicos": [
+    "grafos-03-percursos-caminhos"
+   ],
+   "licenca": "Não declarada (atividade da disciplina)",
+   "acesso": "Pasta do 4º período de EC; não versionado",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Três cenários usados em g15, g16 e g17, com resultados recalculados em tests_acervo/test_disciplina_grafos.py"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
    "notas": null,
    "id": "ufal-viana-prova2-2016-2",
    "nome": "2ª avaliação de Teoria dos Grafos 2016.2",
