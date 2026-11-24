@@ -384,3 +384,102 @@ def test_agm_e_dijkstra():
     d.add_weighted_edges_from([("A", "B", 2), ("A", "C", 3), ("C", "B", -2)])
     fixado_cedo = 2
     assert nx.bellman_ford_path_length(d, "A", "B") == 1 < fixado_cedo
+
+
+# ------------------------------------------- Prática 1 de ECOM033 (Engenharia de Computação)
+# Entradas dos três cenários (arquivos graph1.txt, graph2.txt e grid_example.txt da prática).
+
+METRO = """1 2 17;1 3 25;1 5 21;2 4 10;2 6 15;3 7 20;4 6 9;4 8 23;5 6 12;5 7 19;6 8 8;6 9 7;7 9 17;
+7 11 12;7 12 22;8 9 10;8 10 13;9 10 12;9 11 15;10 11 14;10 12 21;11 12 10"""
+ENERGIA = """0 1 25;0 2 12;0 3 -8;1 4 -10;1 2 -6;1 5 -4;2 4 7;2 3 -5;2 5 6;3 4 9;3 5 11;4 6 8;
+4 5 2;5 6 5"""
+GRID = """~~~~~~~~.......
+~~####~~~~~~...
+~~#..#.~~~~....
+S.#..#..G......
+..#..####~~....
+..#.........~~.
+..######..~~...
+......#.~~##...
+..##..#..###...
+..............."""
+
+
+def arestas(texto):
+    return [tuple(map(int, a.split())) for a in texto.replace("\n", "").split(";")]
+
+
+def test_pratica1_estacao_central_floyd():
+    g = nx.Graph()
+    g.add_weighted_edges_from(arestas(METRO))
+    assert (g.number_of_nodes(), g.number_of_edges()) == (12, 22)
+    nos = sorted(g)
+    d = {i: {j: 0 if i == j else float("inf") for j in nos} for i in nos}
+    for u, v, w in g.edges(data="weight"):
+        d[u][v] = d[v][u] = w
+    for k in nos:
+        for i in nos:
+            for j in nos:
+                d[i][j] = min(d[i][j], d[i][k] + d[k][j])
+    ref = nx.floyd_warshall(g)
+    assert all(d[i][j] == ref[i][j] for i in nos for j in nos)
+    somas = sorted((sum(d[v].values()), v) for v in nos)
+    assert somas[:2] == [(219, 9), (224, 6)]
+    assert [d[9][v] for v in nos] == [39, 22, 37, 16, 19, 7, 17, 10, 0, 12, 15, 25]
+    assert max(nos, key=lambda v: d[9][v]) == 1
+    exc = nx.eccentricity(g, sp=ref)
+    assert min(exc, key=exc.get) == 9 and exc[9] == 39
+
+
+def test_pratica1_bellman_ford_regeneracao():
+    a = arestas(ENERGIA)
+    g = nx.DiGraph()
+    g.add_weighted_edges_from(a)
+    assert (g.number_of_nodes(), g.number_of_edges()) == (7, 14)
+    assert not nx.negative_edge_cycle(g)
+    dist, pred = dict.fromkeys(range(7), float("inf")), {}
+    dist[0] = 0
+    for _ in range(6):
+        for u, v, w in a:
+            if dist[u] + w < dist[v]:
+                dist[v], pred[v] = dist[u] + w, u
+    assert all(dist[u] + w >= dist[v] for u, v, w in a)  # rodada extra: sem ciclo negativo
+    caminho = [6]
+    while caminho[-1] != 0:
+        caminho.append(pred[caminho[-1]])
+    assert caminho[::-1] == nx.bellman_ford_path(g, 0, 6) == [0, 3, 5, 6] and dist[6] == 8
+    custo = {tuple(p): nx.path_weight(g, p, "weight") for p in nx.all_simple_paths(g, 0, 6)}
+    assert min(custo.values()) == 8
+    assert custo[(0, 1, 4, 6)] == custo[(0, 2, 3, 5, 6)] == 23
+
+
+def test_pratica1_robo_grid_dijkstra():
+    import heapq
+
+    linhas = GRID.splitlines()
+    assert (len(linhas), len(linhas[0])) == (10, 15)
+    custo = {".": 1, "S": 1, "G": 1, "~": 3}
+    pos = {c: (i, j) for i, lin in enumerate(linhas) for j, c in enumerate(lin) if c in "SG"}
+    assert pos == {"S": (3, 0), "G": (3, 8)}
+    g = nx.DiGraph()
+    for i, lin in enumerate(linhas):
+        for j, c in enumerate(lin):
+            if c == "#":
+                continue
+            for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+                a, b = i + di, j + dj
+                if 0 <= a < 10 and 0 <= b < 15 and linhas[a][b] != "#":
+                    g.add_edge((i, j), (a, b), weight=custo[linhas[a][b]])
+    dist, fila = {pos["S"]: 0}, [(0, pos["S"])]
+    while fila:
+        d, u = heapq.heappop(fila)
+        if d > dist[u]:
+            continue
+        for v, w in g[u].items():
+            if d + w["weight"] < dist.get(v, float("inf")):
+                dist[v] = d + w["weight"]
+                heapq.heappush(fila, (dist[v], v))
+    assert dist[pos["G"]] == nx.dijkstra_path_length(g, pos["S"], pos["G"]) == 26
+    caminho = nx.dijkstra_path(g, pos["S"], pos["G"])
+    assert len(caminho) - 1 == 22
+    assert sum(linhas[i][j] == "~" for i, j in caminho) == 2  # 22 movimentos + 2 × 2 extras = 26
