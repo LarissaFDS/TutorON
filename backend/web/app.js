@@ -529,10 +529,12 @@
     }
   });
 
-  /* Foto do papel: a IA transcreve, o aluno CONFERE e corrige, e só então a leitura vai para o tutor. */
-  var fotoConfirmada = null;
+  /* Anexos: imagem, PDF ou texto/código. O arquivo é lido logo ao ser escolhido e vai junto com a
+     pergunta, sem etapa de conferência. Na resposta aparece, recolhido, "o que eu li do arquivo",
+     com botões para o aluno dizer se a leitura está certa (e corrigir, se não estiver). */
+  var anexo = null;  // { nome, pronto: Promise<string> }
   var versaoFoto = 0;
-  var lendoFoto = false;
+  var TEXTO_EXT = /\.(txt|md|csv|tsv|json|py|c|h|cpp|hpp|cc|java|js|ts|html|css|sql|m|r|tex|v|vhd|vhdl|asm|s|go|rs|kt|ipynb)$/i;
 
   // Reduz no celular antes de enviar (fotos de 12 MP passam de 5 MB); 2400 px mantém a letra legível.
   function comprimir(arquivo) {
@@ -551,7 +553,7 @@
           ctx.drawImage(img, 0, 0, c.width, c.height);
           ok(c.toDataURL('image/jpeg', 0.9));
         } catch (e) {
-          falha(new Error('Não consegui preparar esta imagem. Tente outra foto.'));
+          falha(new Error('Não consegui preparar esta imagem. Tente outra.'));
         } finally {
           URL.revokeObjectURL(url);
         }
@@ -560,110 +562,143 @@
       img.src = url;
     });
   }
-
-  function mostrarLeitura(leitura, dataUrl) {
-    $('foto-previa').src = dataUrl;
-    var conf = $('foto-confianca');
-    var nomes = { alta: 'alta', media: 'média', baixa: 'baixa' };
-    conf.textContent = 'Confiança da leitura: ' + (nomes[leitura.confianca] || 'baixa') +
-      (leitura.legivel ? '' : ' — a foto parece ilegível; tente outra com mais luz e o papel inteiro no quadro.');
-    conf.className = 'dica' + (leitura.confianca === 'baixa' ? ' confianca--baixa' : '');
-    $('foto-enunciado').value = leitura.enunciado || '';
-    $('foto-tentativa').value = leitura.tentativa || '';
-    var duvidas = $('foto-duvidas-lista');
-    duvidas.replaceChildren.apply(duvidas, (leitura.duvidas || []).map(function (d) { return el('li', null, d); }));
-    $('foto-duvidas').hidden = !(leitura.duvidas || []).length;
-    var subs = $('foto-subtopicos');
-    subs.replaceChildren();
-    (leitura.subtopicos || []).forEach(function (s, i) {
-      var label = el('label', 'check');
-      var cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.checked = true;
-      cb.value = s;
-      cb.id = 'sub-' + i;
-      label.append(cb, el('span', null, s));
-      subs.append(label);
+  function comoDataUrl(arquivo) {
+    return new Promise(function (ok, falha) {
+      var r = new FileReader();
+      r.onload = function () { ok(r.result); };
+      r.onerror = function () { falha(new Error('Não consegui abrir o arquivo.')); };
+      r.readAsDataURL(arquivo);
     });
-    $('foto-subtopicos-box').hidden = !(leitura.subtopicos || []).length;
-    var reg = $('foto-regioes');
-    reg.replaceChildren.apply(reg, (leitura.regioes || []).map(function (r) {
-      var li = el('li');
-      li.append(el('strong', null, r.onde + ': '), document.createTextNode(r.conteudo));
-      return li;
-    }));
-    $('foto-regioes-box').hidden = !(leitura.regioes || []).length;
-    $('foto-conferir').hidden = false;
-    $('foto-conferir').focus({ preventScroll: true });
   }
 
-  function textoDaFoto() {
-    var subs = Array.prototype.map.call(document.querySelectorAll('#foto-subtopicos input:checked'), function (cb) { return cb.value; });
+  // Leitura da imagem (JSON da visão) -> texto que vai para o tutor.
+  function textoDaLeitura(l) {
     var partes = [];
-    var enunciado = $('foto-enunciado').value.trim();
-    var tentativa = $('foto-tentativa').value.trim();
-    if (enunciado) partes.push('Enunciado (lido da foto e conferido pelo aluno):', enunciado);
-    if (subs.length) partes.push('Subtópicos:', subs.map(function (s) { return '- ' + s; }).join('\n'));
-    if (tentativa) partes.push('Tentativa do aluno no papel:', tentativa);
-    return partes.join('\n').slice(0, 8000);
+    if (l.enunciado) partes.push('Enunciado:', l.enunciado);
+    if ((l.subtopicos || []).length) partes.push('Subtópicos:', l.subtopicos.map(function (x) { return '- ' + x; }).join('\n'));
+    if (l.tentativa) partes.push('Tentativa do aluno:', l.tentativa);
+    if (!partes.length && (l.regioes || []).length) {
+      partes.push(l.regioes.map(function (r) { return r.onde + ': ' + r.conteudo; }).join('\n'));
+    }
+    if ((l.duvidas || []).length) partes.push('Trechos com leitura incerta:', l.duvidas.map(function (x) { return '- ' + x; }).join('\n'));
+    return partes.join('\n');
+  }
+  async function lerImagem(dataUrl, status) {
+    var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
+    return await lerTarefa(criada.id, status);
+  }
+  async function lerTarefa(id, status) {
+    var t = await acompanhar(id, function (x) { if (x.status !== 'pronta' && x.status !== 'erro') status(x.mensagem || 'Lendo…'); });
+    if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler o arquivo.');
+    return textoDaLeitura(t.leitura);
+  }
+  async function lerArquivo(arquivo, status) {
+    var nome = arquivo.name || 'arquivo';
+    if ((arquivo.type || '').startsWith('image/')) {
+      status('Lendo a imagem…');
+      return await lerImagem(await comprimir(arquivo), status);
+    }
+    if (arquivo.type === 'application/pdf' || /\.pdf$/i.test(nome)) {
+      if (arquivo.size > 15 * 1024 * 1024) throw new Error('PDF grande demais (máximo 15 MB).');
+      status('Lendo o PDF…');
+      var dataUrl = (await comoDataUrl(arquivo)).replace(/^data:[^;]*;/, 'data:application/pdf;');
+      var r = await postJSON('/api/anexo', { arquivo: dataUrl, nome: nome, disciplina: $('disciplina').value || null });
+      if (r.status === 'pronta' && r.texto) return r.texto;
+      status('O PDF é escaneado; lendo como imagem…');
+      return await lerTarefa(r.id, status);
+    }
+    if ((arquivo.type || '').startsWith('text/') || TEXTO_EXT.test(nome)) {
+      if (arquivo.size > 1024 * 1024) throw new Error('Arquivo de texto grande demais (máximo 1 MB).');
+      return await arquivo.text();
+    }
+    throw new Error('Ainda não leio este tipo de arquivo. Envie imagem, PDF ou texto/código.');
   }
 
   function limparFoto() {
     versaoFoto++;
-    lendoFoto = false;
-    fotoConfirmada = null;
-    $('foto-conferir').hidden = true;
+    anexo = null;
     $('foto-confirmada').hidden = true;
     $('foto-arquivo').value = '';
     setStatus($('foto-status'), '');
   }
 
-  $('foto-arquivo').addEventListener('change', async function () {
+  function mostrarAnexo(nome, estado, erro) {
+    var aviso = $('foto-confirmada');
+    aviso.replaceChildren(document.createTextNode('📎 ' + nome + (estado ? ' — ' + estado : '')));
+    var remover = el('button', null, 'Remover');
+    remover.type = 'button';
+    remover.addEventListener('click', limparFoto);
+    aviso.append(remover);
+    aviso.dataset.tone = erro ? 'error' : '';
+    aviso.hidden = false;
+  }
+
+  $('foto-arquivo').addEventListener('change', function () {
     var arquivo = this.files && this.files[0];
     if (!arquivo) return;
     limparFoto();
     var versao = versaoFoto;
-    lendoFoto = true;
-    gerando++;
-    setStatus($('foto-status'), 'Preparando a foto…', 'busy');
-    try {
-      var dataUrl = await comprimir(arquivo);
-      if (versao !== versaoFoto) return;
-      var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
-      var t = await acompanhar(criada.id, function (x) {
-        if (versao === versaoFoto && x.status !== 'pronta' && x.status !== 'erro') setStatus($('foto-status'), x.mensagem || 'Lendo a foto…', 'busy');
+    var nome = arquivo.name || 'arquivo';
+    mostrarAnexo(nome, 'lendo…');
+    var pronto = lerArquivo(arquivo, function (m) { if (versao === versaoFoto) mostrarAnexo(nome, m.toLowerCase()); })
+      .then(function (texto) {
+        texto = (texto || '').trim().slice(0, 8000);
+        if (!texto) throw new Error('Não encontrei texto neste arquivo.');
+        if (versao === versaoFoto) mostrarAnexo(nome, 'lido, vai junto com a sua mensagem');
+        return texto;
+      })
+      .catch(function (e) {
+        if (versao === versaoFoto) mostrarAnexo(nome, e.message, true);
+        throw e;
       });
-      if (versao !== versaoFoto) return;
-      if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler a foto.');
-      setStatus($('foto-status'), '');
-      mostrarLeitura(t.leitura, dataUrl);
-    } catch (e) {
-      if (versao === versaoFoto) setStatus($('foto-status'), e.message, 'error');
-    } finally {
-      if (versao === versaoFoto) lendoFoto = false;
-      gerando--;
-    }
-  });
-
-  $('foto-ok').addEventListener('click', function () {
-    var texto = textoDaFoto();
-    if (!texto) { setStatus($('foto-status'), 'A leitura está vazia. Escreva o enunciado ou descarte a foto.', 'error'); return; }
-    fotoConfirmada = texto;
-    $('foto-conferir').hidden = true;
-    var aviso = $('foto-confirmada');
-    aviso.replaceChildren(document.createTextNode('📎 Foto conferida: vai junto com a sua próxima mensagem.'));
-    var editar = el('button', null, 'Rever leitura');
-    editar.type = 'button';
-    editar.addEventListener('click', function () { $('foto-conferir').hidden = false; aviso.hidden = true; fotoConfirmada = null; });
-    var remover = el('button', null, 'Remover');
-    remover.type = 'button';
-    remover.addEventListener('click', limparFoto);
-    aviso.append(editar, remover);
-    aviso.hidden = false;
-    setStatus($('foto-status'), '');
+    pronto.catch(function () {});
+    anexo = { nome: nome, pronto: pronto };
     $('pergunta').focus();
   });
-  $('foto-descartar').addEventListener('click', limparFoto);
+
+  /* "O que eu li do arquivo": recolhido acima da resposta, com voto e correção obrigatória se errado. */
+  function painelLeitura(nome, texto, registro, reenviar) {
+    var d = el('details', 'fontes leitura-arquivo');
+    d.append(el('summary', null, '📎 Li o arquivo “' + nome + '”. Ver o que entendi'));
+    var pre = el('pre', 'leitura-arquivo__texto', texto);
+    var barra = el('div', 'leitura-arquivo__acoes');
+    var status = el('span', 'barra-acoes__status');
+    var certo = el('button', 'botao botao--leve', 'Li certo');
+    var errado = el('button', 'botao botao--leve', 'Li errado, vou corrigir');
+    certo.type = errado.type = 'button';
+    var idVoto = function () { return (registro.id_resposta || ('sem-' + Date.now().toString(36))) + '-l'; };
+    certo.addEventListener('click', async function () {
+      certo.disabled = errado.disabled = true;
+      try { await postJSON('/api/feedback', { id: idVoto(), tipo: 'leitura', util: true }); status.textContent = 'Obrigado!'; }
+      catch (e) { status.textContent = e.message; certo.disabled = errado.disabled = false; }
+    });
+    errado.addEventListener('click', function () {
+      barra.hidden = true;
+      var caixa = el('div', 'leitura-arquivo__corrigir');
+      var campo = el('textarea', 'campo campo--codigo');
+      campo.rows = 6; campo.maxLength = 8000; campo.value = texto;
+      var aviso = el('p', 'dica', 'Corrija o que eu li errado. A correção é obrigatória: eu respondo de novo com o texto certo.');
+      var enviar = el('button', 'botao', 'Enviar correção e responder de novo');
+      enviar.type = 'button';
+      var st = el('span', 'barra-acoes__status');
+      enviar.addEventListener('click', async function () {
+        var novo = campo.value.trim();
+        if (!novo || novo === texto.trim()) { st.textContent = 'Mude o texto onde a leitura errou antes de enviar.'; campo.focus(); return; }
+        enviar.disabled = true;
+        try {
+          await postJSON('/api/feedback', { id: idVoto(), tipo: 'leitura', util: false, comentario: novo.slice(0, 1500) });
+        } catch (e) { /* o voto é secundário: segue com a correção */ }
+        caixa.replaceChildren(el('p', 'dica', 'Correção enviada. Respondendo de novo com o texto corrigido…'));
+        reenviar(novo);
+      });
+      caixa.append(aviso, campo, enviar, st);
+      d.append(caixa);
+      campo.focus();
+    });
+    barra.append(certo, errado, status);
+    d.append(pre, barra);
+    return d;
+  }
 
   /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado. */
   // "geral": dúvida de disciplina sem acervo (ex.: Controle). O servidor orienta com conhecimento geral.
@@ -723,9 +758,11 @@
     fecharMenus();
   });
 
-  // ------------------------------------------------------------------ conversas (só nesta aba)
-  /* As conversas ficam só na memória da página: recarregar ou fechar a aba zera. */
-  var conversas = [];   // { id, titulo, trocas: [{pergunta, texto, ...}], nodo }
+  // ------------------------------------------------------------------ conversas
+  /* Com conta, cada conversa é salva no banco (compactada) e volta na barra lateral ao reabrir o site.
+     Sem conta (convidado), ficam só na memória da página. */
+  var conversas = [];   // { id, titulo, trocas: [{pergunta, texto, ...}], nodo, remota? }
+  var salvarNoBanco = false;
   var conversaAtual = null;
 
   function novaConversa() {
@@ -736,11 +773,16 @@
     abrirLateral(false);
     $('pergunta').focus();
   }
+  if ($('config-botao')) $('config-botao').addEventListener('click', async function () {
+    var eu = null;
+    try { eu = await (await fetch('/api/eu', { cache: 'no-store' })).json(); } catch (e) { /* abre como convidado */ }
+    window.TutorConfig.abrir(eu && eu.logado ? eu.conta : null);
+  });
   $('nova-conversa').addEventListener('click', function () { if (!enviando) novaConversa(); });
 
   function garantirConversa(pergunta) {
     if (conversaAtual) return conversaAtual;
-    conversaAtual = { id: Date.now(), titulo: pergunta.length > 60 ? pergunta.slice(0, 57).trimEnd() + '…' : pergunta, trocas: [] };
+    conversaAtual = { id: 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), titulo: pergunta.length > 60 ? pergunta.slice(0, 57).trimEnd() + '…' : pergunta, trocas: [] };
     conversas.unshift(conversaAtual);
     $('boas-vindas').hidden = true;
     desenharConversas();
@@ -762,7 +804,8 @@
       b.type = 'button';
       b.append(el('span', null, c.titulo));
       if (c === conversaAtual) b.setAttribute('aria-current', 'true');
-      b.append(el('small', null, c.trocas.length + (c.trocas.length === 1 ? ' pergunta' : ' perguntas')));
+      var n = c.remota ? c.total : c.trocas.length;
+      b.append(el('small', null, n + (n === 1 ? ' pergunta' : ' perguntas')));
       b.addEventListener('click', function () { if (!enviando) abrirConversa(c); });
       li.append(b);
       return li;
@@ -771,7 +814,51 @@
     abrirHistorico(conversas.length > 0);
   }
 
-  function abrirConversa(c) {
+  function salvarConversa(c) {
+    if (!salvarNoBanco || !c) return;
+    var trocas = c.trocas.filter(function (t) { return t.pronta; }).map(function (t) {
+      return { p: t.pergunta, r: t.texto, a: t.anexo || '' };
+    });
+    if (!trocas.length) return;
+    fetch('/api/conversas/' + encodeURIComponent(c.id), { method: 'PUT', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ titulo: c.titulo, trocas: trocas }) })
+      .catch(function () { /* sem rede: tenta de novo na próxima pergunta */ });
+  }
+
+  // Desenha uma conversa salva (texto puro + Markdown), sem botões de ação das respostas antigas.
+  function montarTrocaSalva(t) {
+    var aluno = msgAluno(t.p, t.a ? '📎 ' + t.a : '');
+    var v = msgTutor();
+    v.estado.remove();
+    R.render(v.resposta, t.r || '');
+    return { pergunta: t.p, texto: t.r || '', anexo: t.a || '', fontes: [], voto: null, pronta: true, nodo: [aluno, v.nodo] };
+  }
+
+  async function carregarConversasSalvas() {
+    try {
+      var r = await fetch('/api/conversas', { credentials: 'same-origin' });
+      if (!r.ok) return;
+      var j = await r.json();
+      salvarNoBanco = !!j.ativo;
+      (j.conversas || []).forEach(function (c) {
+        if (conversas.some(function (x) { return x.idRemoto === c.id; })) return;
+        conversas.push({ id: c.id.split('-').slice(1).join('-') || c.id, idRemoto: c.id, titulo: c.titulo || 'Conversa',
+          trocas: [], remota: true, total: c.n || 0 });
+      });
+      desenharConversas();
+    } catch (e) { /* offline ou sem conta: segue só na memória */ }
+  }
+
+  async function abrirConversa(c) {
+    if (c.remota) {
+      try {
+        var r = await fetch('/api/conversas/' + encodeURIComponent(c.idRemoto), { credentials: 'same-origin' });
+        if (!r.ok) throw new Error();
+        var j = await r.json();
+        c.trocas = ((j.dados || {}).trocas || []).map(montarTrocaSalva);
+        c.remota = false;
+      } catch (e) { setStatus($('status-tutor'), 'Não consegui abrir esta conversa agora.', 'error'); return; }
+    }
     conversaAtual = c;
     $('boas-vindas').hidden = true;
     $('conversa').replaceChildren.apply($('conversa'), c.trocas.map(function (t) { return t.nodo; }).filter(Boolean)
@@ -987,12 +1074,17 @@
     var conversa = garantirConversa(pergunta);
     var registro = { pergunta: pergunta, texto: '', fontes: [], voto: null, pronta: false, nodo: [] };
     conversa.trocas.push(registro);
-    var anexos = [foto ? '📎 foto conferida' : '', contexto ? '</> código/enunciado' : '',
+    var anexos = [foto ? '📎 ' + (ciclo.anexoNome || 'arquivo') : '', contexto ? '</> código/enunciado' : '',
       ciclo.historico.length ? '↻ outra forma de explicar (tentativa ' + (ciclo.historico.length + 1) + ')' : ''].filter(Boolean).join(' · ');
     var textoAluno = ciclo.historico.length ? (ciclo.travou || 'Ainda não consegui. Explica de outro jeito?') : pergunta;
     var aluno = msgAluno(textoAluno, anexos);
     var v = msgTutor();
     registro.nodo = [aluno, v.nodo];
+    if (foto && !ciclo.historico.length) {
+      v.resposta.before(painelLeitura(ciclo.anexoNome || 'arquivo', foto, registro, function (corrigido) {
+        perguntar(pergunta, contexto, null, disciplina, ajuda, corrigido, { historico: [], travou: '', anexoNome: ciclo.anexoNome });
+      }));
+    }
     $('conversa').append(aluno, v.nodo);
     desenharConversas();
     rolarFim();
@@ -1043,13 +1135,16 @@
       // Mantém só as últimas ajudas (o servidor aceita até 8) para o prompt não crescer sem limite.
       var historicoNovo = ciclo.historico.concat([{ ajuda: final.ajuda || ajuda || 'auto', texto: final.texto.slice(0, 6000) }]).slice(-6);
       var disciplinaDaPergunta = final.disciplina || disciplina;
+      registro.id_resposta = final.id_resposta;
       v.corpo.append(barraAcoes(final.id_resposta, registro, final.texto));
       if (final.fontes && final.fontes.length) v.corpo.append(fontesDetalhe(final.fontes));
       v.corpo.append(meta, pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
       registro.texto = final.texto;
       registro.fontes = final.fontes || [];
       registro.pronta = true;
+      registro.anexo = foto ? (ciclo.anexoNome || 'arquivo') : '';
       desenharConversas();
+      salvarConversa(conversa);
       return true;
     }
     estadoErro(v, final.mensagem || 'Não foi possível gerar a resposta. Tente de novo.');
@@ -1078,16 +1173,18 @@
   $('form-tutor').addEventListener('submit', async function (e) {
     e.preventDefault();
     if (enviando) return;
-    if (lendoFoto) { setStatus($('status-tutor'), 'Aguarde a leitura da foto terminar e confira o texto antes de enviar.', 'error'); return; }
     var pergunta = $('pergunta').value.trim();
-    var foto = fotoConfirmada;
+    var foto = null, anexoNome = null;
     var versaoEnviada = versaoFoto;
-    if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o exercício da foto, sem me dar a resposta.';
-    if (!foto && !$('foto-conferir').hidden) {
-      setStatus($('status-tutor'), 'Confira a leitura da foto (botão “Está certo”) ou descarte-a antes de enviar.', 'error');
-      $('foto-conferir').focus();
-      return;
+    if (anexo) {
+      anexoNome = anexo.nome;
+      setStatus($('status-tutor'), 'Terminando de ler o arquivo…', 'busy');
+      try { foto = await anexo.pronto; }
+      catch (e) { setStatus($('status-tutor'), 'Não consegui ler o arquivo: ' + e.message + ' Remova-o ou tente outro.', 'error'); return; }
+      if (versaoEnviada !== versaoFoto) return;
+      setStatus($('status-tutor'), '');
     }
+    if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o que está neste arquivo, sem me dar a resposta.';
     if (pergunta.length < 3) { setStatus($('status-tutor'), 'Escreva sua dúvida antes de enviar.', 'error'); $('pergunta').focus(); return; }
     travar(true);
     gerando++;
@@ -1102,7 +1199,7 @@
     var ajuda = ajudaEscolhida();
     try {
       var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
-        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
+        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto, { historico: [], travou: '', anexoNome: anexoNome });
       if (ok && foto && versaoEnviada === versaoFoto) limparFoto();
       if (!ok && !$('pergunta').value) { $('pergunta').value = pergunta; $('contexto').value = contexto; ajustarAltura(); }
     } finally {
@@ -1316,4 +1413,5 @@
     }
   }
   if (!pendente) $('pergunta').focus({ preventScroll: true });
+  carregarConversasSalvas();
 })();

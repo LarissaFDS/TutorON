@@ -155,3 +155,51 @@ def texto_confirmado(enunciado: str, tentativa: str, subtopicos: list[str]) -> s
     if tentativa.strip():
         partes += ["Tentativa do aluno no papel:", tentativa.strip()]
     return "\n".join(partes)[:8000]
+
+
+# ---------------------------------------------------------------- anexos (PDF)
+MAX_PDF = 15 * 1024 * 1024
+
+
+def decodificar_pdf(data_url: str) -> bytes:
+    m = re.match(r"^data:application/pdf;base64,(.+)$", data_url.strip(), re.S | re.I)
+    if not m:
+        raise FotoInvalida("Envie um PDF, uma imagem ou um arquivo de texto.")
+    try:
+        dados = base64.b64decode(m.group(1), validate=False)
+    except (binascii.Error, ValueError):
+        raise FotoInvalida("PDF corrompido.") from None
+    if len(dados) > MAX_PDF:
+        raise FotoInvalida("PDF grande demais (máximo 15 MB).")
+    return dados
+
+
+def ler_pdf(dados: bytes, max_paginas: int = 15, max_chars: int = 8000) -> tuple[str, bytes | None]:
+    """(texto das primeiras páginas, maior imagem da 1ª página). PDF escaneado não tem texto:
+    nesse caso a imagem vai para a leitura de foto (visão)."""
+    from pypdf import PdfReader
+
+    try:
+        leitor = PdfReader(io.BytesIO(dados))
+        paginas = leitor.pages[:max_paginas]
+    except Exception:  # noqa: BLE001 - pypdf lança vários tipos
+        raise FotoInvalida("Não consegui abrir este PDF.") from None
+    partes = []
+    for i, pagina in enumerate(paginas, 1):
+        try:
+            texto = (pagina.extract_text() or "").strip()
+        except Exception:  # noqa: BLE001
+            texto = ""
+        if texto:
+            partes.append(f"[página {i}]\n{texto}")
+        if sum(len(x) for x in partes) > max_chars:
+            break
+    texto = "\n\n".join(partes)[:max_chars]
+    imagem = None
+    if len(texto) < 80 and paginas:
+        try:
+            imagens = sorted(paginas[0].images, key=lambda im: len(im.data), reverse=True)
+            imagem = imagens[0].data if imagens else None
+        except Exception:  # noqa: BLE001
+            imagem = None
+    return texto, imagem

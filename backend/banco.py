@@ -90,6 +90,26 @@ class Banco:
         r.raise_for_status()
 
     # ------------------------------------------------------------------ autenticação
+    def criar_usuario(self, email: str, senha: str) -> tuple[bool, str]:
+        """Cria a conta já confirmada (API admin do Auth). Não envia e-mail, então não esbarra no
+        limite de e-mails do plano grátis (2 por hora), que era o "Muitas tentativas" ao criar conta.
+        Devolve (criada?, código do erro: '' | 'existe' | 'senha' | 'falha')."""
+        try:
+            r = self.client.post(self.url + "/auth/v1/admin/users", headers=self.headers,
+                                 json={"email": email, "password": senha, "email_confirm": True}, timeout=15)
+        except httpx.HTTPError as exc:
+            logger.warning("Falha ao criar conta: %s", exc)
+            return False, "falha"
+        if r.status_code < 300:
+            return True, ""
+        texto = r.text.lower()
+        if "already" in texto or "exists" in texto:
+            return False, "existe"
+        if "password" in texto:
+            return False, "senha"
+        logger.warning("Supabase recusou criar conta: HTTP %s %s", r.status_code, r.text[:200])
+        return False, "falha"
+
     def usuario_do_token(self, token: str, chave_publica: str) -> dict | None:
         """Confere o token de sessão no próprio Supabase Auth. None se inválido ou expirado."""
         try:

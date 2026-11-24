@@ -33,8 +33,9 @@
   color-scheme: light;
 }
 
+/* Tema: segue o sistema, a menos que o aluno escolha em Configurações (data-theme no <html>). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg: #17181c;
     --bg-lateral: #1e2026;
     --bg-suave: #24262d;
@@ -54,6 +55,26 @@
     --sombra: 0 6px 24px rgba(0, 0, 0, .35);
     color-scheme: dark;
   }
+}
+:root[data-theme="dark"] {
+  --bg: #17181c;
+  --bg-lateral: #1e2026;
+  --bg-suave: #24262d;
+  --bg-hover: #2c2f37;
+  --bg-aluno: #2a2f45;
+  --tinta: #eceef4;
+  --tinta-2: #b4b9c6;
+  --tinta-3: #8a90a0;
+  --linha: #30333c;
+  --linha-forte: #464a55;
+  --azul: #6f88ff;
+  --azul-suave: #283058;
+  --vermelho-suave: #3b1f22;
+  --amarelo-suave: #3a3220;
+  --amarelo-tinta: #f1d58a;
+  --verde-tinta: #4ade80;
+  --sombra: 0 6px 24px rgba(0, 0, 0, .35);
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -436,3 +457,47 @@ a.perfil, a.nova, a.lateral__item { text-decoration: none; color: inherit; }
 /* convite para criar conta (convidado) */
 .aviso-conta { margin: 0 auto 8px; width: min(var(--largura-chat), 100%); padding: 10px 14px; border-radius: var(--raio); background: var(--azul-suave); color: var(--tinta); font-size: 14px; }
 .aviso-conta a { color: var(--azul); font-weight: 600; }
+
+/* ------------------------------------------------------------------ leitura de arquivo anexado */
+.leitura-arquivo summary { color: var(--tinta-2); font-size: 13px; }
+.leitura-arquivo__texto {
+  white-space: pre-wrap; word-break: break-word; max-height: 260px; overflow: auto; margin: 8px 0;
+  padding: 10px 12px; background: var(--bg-suave); border: 1px solid var(--linha); border-radius: 10px;
+  font: 12.5px/1.5 var(--fonte-codigo); color: var(--tinta-2);
+}
+.leitura-arquivo__acoes, .leitura-arquivo__corrigir { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.leitura-arquivo__corrigir { flex-direction: column; align-items: stretch; margin-top: 8px; }
+.leitura-arquivo__corrigir .botao { align-self: flex-start; }
+#foto-confirmada[data-tone="error"] { color: var(--vermelho); }
+
+/* ------------------------------------------------------------------ configurações */
+html.letra-grande body { font-size: 17px; }
+.perfil__avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.config {
+  width: min(480px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); overflow: auto;
+  border: 1px solid var(--linha); border-radius: var(--raio-grande); padding: 0;
+  background: var(--bg); color: var(--tinta); box-shadow: var(--sombra-forte);
+}
+.config::backdrop { background: rgba(10, 12, 20, .45); }
+.config__topo { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px 6px; }
+.config__topo h2 { margin: 0; font-size: 19px; }
+.config__secao { padding: 12px 20px; border-top: 1px solid var(--linha); }
+.config__secao:first-of-type { border-top: 0; }
+.config__secao h3 { margin: 0 0 10px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--tinta-3); }
+.config__secao p { margin: 6px 0; }
+.config__perfil { display: flex; gap: 12px; align-items: center; }
+.config__perfil small { display: block; }
+.config__avatar { width: 52px; height: 52px; font-size: 24px; }
+.config__acoes { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+.config__rotulo { font-weight: 600; font-size: 14px; margin-top: 12px !important; }
+.config__opcoes { display: flex; gap: 6px; flex-wrap: wrap; }
+.config__opcao { position: relative; }
+.config__opcao input { position: absolute; opacity: 0; }
+.config__opcao span {
+  display: inline-block; padding: 7px 14px; border: 1px solid var(--linha-forte); border-radius: 999px;
+  font-size: 14px; cursor: pointer; background: var(--bg);
+}
+.config__opcao input:checked + span { background: var(--azul-suave); border-color: var(--azul); color: var(--azul); font-weight: 600; }
+.config__opcao input:focus-visible + span { outline: 2px solid var(--azul); outline-offset: 2px; }
+.config__equipe { margin: 4px 0 8px; padding-left: 18px; columns: 2; }
+.config__sair { margin: 8px 20px 20px; color: var(--vermelho); }

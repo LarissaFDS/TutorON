@@ -111,7 +111,7 @@ def test_tipo_de_ajuda_e_foto_confirmada_chegam_a_ia(site):  # noqa: F811
     _, sistema, prompt = site.llm.chamadas[-1]
     assert "NUNCA entregue" in sistema
     assert prompts.AJUDAS["conferir"][1] in prompt and "a=3, b=4, caso 1" in prompt
-    assert "FOTO DO PAPEL DO ALUNO, JÁ CONFIRMADA" in prompt
+    assert "ARQUIVO ENVIADO PELO ALUNO" in prompt
     linha = ultima(site)
     assert linha["ajuda"] == "conferir" and "caso 1" in linha["leitura_foto"]
 
@@ -332,3 +332,12 @@ def test_render_real_de_uma_tabela(tmp_path):
     ident = asyncio.run(animacao.renderizar(roteiro, tmp_path))
     video = tmp_path / f"{ident}.mp4"
     assert video.stat().st_size > 5000 and not (tmp_path / "tmp" / ident).exists()
+
+
+def test_pedido_de_questoes_vira_ajuda_de_questoes():
+    assert prompts.pedido_de_questoes("Faça uma lista de 5 questões para eu responder")
+    assert prompts.pedido_de_questoes("me fale questões possíveis para minha prova 3 de paa")
+    assert prompts.pedido_de_questoes("me dá exercícios de grafos")
+    assert not prompts.pedido_de_questoes("como resolvo essa questão?")
+    assert not prompts.pedido_de_questoes("Resolva T(n) = 2T(n/2) + n")
+    assert "NÃO escreva respostas" in prompts.AJUDAS["questoes"][1]

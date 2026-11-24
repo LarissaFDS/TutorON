@@ -39,7 +39,8 @@ from pydantic import BaseModel, Field, field_validator
 
 from acervo import disciplinas
 
-from . import animacao, banco as banco_mod, cursos, foto, prompts
+from . import animacao, cursos, foto, prompts
+from . import banco as banco_mod
 from .config import Settings, load_settings
 from .contas import Contas, token_da_requisicao
 from .cota import PLANOS, Cota, estimar_tokens
@@ -55,7 +56,7 @@ WEB = Path(__file__).resolve().parent / "web"
 class AppStaticFiles(StaticFiles):
     async def get_response(self, path, scope):
         resposta = await super().get_response(path, scope)
-        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css', 'shell.js', 'chat.css', 'conta.js', 'entrar.js', 'admin.js'):
+        if path in ('app.js', 'app.css', 'render.js', 'visuais.js', 'visuais.css', 'shell.js', 'chat.css', 'conta.js', 'entrar.js', 'admin.js', 'config.js'):
             resposta.headers['Cache-Control'] = 'no-cache'
         return resposta
 
@@ -136,6 +137,23 @@ class FotoPedido(BaseModel):
         return disciplina_cadastrada(valor)
 
 
+class TrocaSalva(BaseModel):
+    p: str = Field(..., max_length=4000)        # pergunta do aluno
+    r: str = Field(default="", max_length=20000)  # resposta do tutor (cortada ao gravar)
+    a: str = Field(default="", max_length=200)   # nome do arquivo anexado, se houver
+
+
+class ConversaSalva(BaseModel):
+    titulo: str = Field(default="", max_length=120)
+    trocas: list[TrocaSalva] = Field(default_factory=list, max_length=200)
+
+
+class AnexoPedido(BaseModel):
+    arquivo: str = Field(..., min_length=30, max_length=21_000_000)  # data URL de PDF (base64)
+    nome: str = Field(default="", max_length=200)
+    disciplina: str | None = Field(default=None, max_length=40)
+
+
 class AnimarPedido(BaseModel):
     pergunta: str = Field(..., min_length=3, max_length=4000)
     resposta: str | None = Field(default=None, max_length=12000)
@@ -149,11 +167,17 @@ class AnimarPedido(BaseModel):
         return disciplina_cadastrada(valor)
 
 
+class NovaConta(BaseModel):
+    email: str = Field(..., max_length=254, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+    senha: str = Field(..., min_length=8, max_length=72)
+
+
 class Feedback(BaseModel):
     id: str = Field(..., max_length=40)
     util: bool | None = None
     erro_matematico: bool = False
     comentario: str = Field(default="", max_length=1500)
+    tipo: str = Field(default="resposta", pattern=r"^(resposta|leitura)$")
 
 
 Nota = Field(..., ge=1, le=5)
@@ -237,6 +261,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.registro = Registro(settings.data_dir, app.state.banco)
         app.state.limitador = Limitador(settings.rate_limit_per_10min)
         app.state.limitador_gravacao = Limitador(max(600, 2 * settings.rate_limit_per_10min))
+        # Uma rede de faculdade tem muitos alunos no mesmo IP: o limite só barra robôs.
+        app.state.limitador_contas = Limitador(60)
         app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
                               settings.cota_janela_h, settings.dev_chave, app.state.banco,
                               settings.cota_convidado if app.state.contas.ativas else None)
@@ -427,6 +453,23 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         return {"logado": bool(c), "conta": c and {k: c[k] for k in ("email", "nome", "foto")},
                 "admin": dev, "cota": app.state.cota.situacao(quem, dev)}
 
+    @app.post("/api/conta/criar")
+    async def criar_conta(corpo: NovaConta, request: Request) -> dict:
+        """Cria a conta pelo servidor, já confirmada: sem e-mail de confirmação e sem o limite de
+        e-mails do Supabase. O navegador entra em seguida com e-mail e senha."""
+        if not app.state.contas.ativas:
+            raise HTTPException(503, "Contas desligadas neste servidor.")
+        if not app.state.limitador_contas.permitir(cliente(request)):
+            raise HTTPException(429, "Muitas contas criadas desta rede agora. Aguarde alguns minutos.")
+        criada, erro = await asyncio.to_thread(app.state.banco.criar_usuario, corpo.email.strip().lower(), corpo.senha)
+        if not criada:
+            mensagens = {"existe": (409, 'Esse e-mail já tem conta. Use "Entrar".'),
+                         "senha": (400, "Senha fraca: use pelo menos 8 caracteres, com letras e números."),
+                         "falha": (502, "Não consegui criar a conta agora. Tente de novo em instantes.")}
+            codigo, texto = mensagens[erro]
+            raise HTTPException(codigo, texto)
+        return {"criada": True}
+
     @app.get("/entrar", include_in_schema=False)
     async def pagina_entrar() -> FileResponse:
         return FileResponse(WEB / "entrar.html", headers={"Cache-Control": "no-cache"})
@@ -592,6 +635,76 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         try:
             imagem = foto.decodificar(corpo.imagem)
             return app.state.tarefas.ler_foto(imagem, disciplina, corpo.observacao).publico()
+        except foto.FotoInvalida as exc:
+            raise HTTPException(400, str(exc)) from None
+
+    # ------------------------------------------------------------------ conversas salvas (contas)
+    # Compactadas: só as últimas 40 trocas, pergunta até 800 e resposta até 2.500 caracteres
+    # (~1 a 60 KB por conversa). O texto completo de cada resposta já fica em `perguntas`.
+    def dono_conversa(request: Request) -> str:
+        c = conta(request)
+        if not c or not app.state.banco:
+            raise HTTPException(401, "Entre na sua conta para salvar as conversas.")
+        return "u:" + c["id"]
+
+    @app.get("/api/conversas")
+    async def listar_conversas(request: Request) -> dict:
+        quem = dono_conversa(request)
+        try:
+            linhas = await asyncio.to_thread(app.state.banco.selecionar, "conversas", {
+                "usuario": "eq." + quem, "select": "id,titulo,atualizado_em,n:dados->n",
+                "order": "atualizado_em.desc", "limit": "60"})
+        except Exception:  # noqa: BLE001 - tabela ainda não criada: o site segue sem histórico
+            return {"conversas": [], "ativo": False}
+        return {"conversas": linhas, "ativo": True}
+
+    @app.get("/api/conversas/{ident}")
+    async def abrir_conversa(ident: str, request: Request) -> dict:
+        quem = dono_conversa(request)
+        linhas = await asyncio.to_thread(app.state.banco.selecionar, "conversas", {
+            "id": "eq." + ident[:40], "usuario": "eq." + quem, "select": "id,titulo,dados"})
+        if not linhas:
+            raise HTTPException(404, "Conversa não encontrada.")
+        return linhas[0]
+
+    @app.put("/api/conversas/{ident}")
+    async def salvar_conversa(ident: str, corpo: ConversaSalva, request: Request) -> dict:
+        quem = dono_conversa(request)
+        limitar_gravacao(request)
+        if not re.fullmatch(r"[A-Za-z0-9_-]{4,40}", ident):
+            raise HTTPException(400, "Identificador inválido.")
+        trocas = [{"p": t.p[:800], "r": t.r[:2500], **({"a": t.a} if t.a else {})} for t in corpo.trocas[-40:]]
+        # Upsert filtrado pelo dono: a chave inclui o usuário, então ninguém sobrescreve conversa alheia.
+        app.state.banco.inserir("conversas", {"id": quem[2:10] + "-" + ident, "usuario": quem,
+                                              "titulo": corpo.titulo[:120], "atualizado_em": agora(),
+                                              "dados": {"n": len(trocas), "trocas": trocas}}, upsert="id")
+        return {"salvo": True}
+
+    @app.delete("/api/conversas/{ident}")
+    async def apagar_conversa(ident: str, request: Request) -> dict:
+        quem = dono_conversa(request)
+        await asyncio.to_thread(app.state.banco.apagar, "conversas", {"id": "eq." + ident[:60], "usuario": "eq." + quem})
+        return {"apagado": True}
+
+    @app.post("/api/anexo")
+    async def ler_anexo(corpo: AnexoPedido, request: Request) -> dict:
+        """PDF: devolve o texto na hora; PDF escaneado (sem texto) vira leitura de imagem (tarefa)."""
+        limitar(request)
+        exigir_cota(request)
+        try:
+            dados = foto.decodificar_pdf(corpo.arquivo)
+            texto, imagem = await asyncio.to_thread(foto.ler_pdf, dados)
+        except foto.FotoInvalida as exc:
+            raise HTTPException(400, str(exc)) from None
+        if texto.strip():
+            return {"status": "pronta", "texto": texto, "paginas_lidas": texto.count("[página ")}
+        if not imagem:
+            raise HTTPException(400, "Este PDF não tem texto nem imagem que eu consiga ler.")
+        quem, dev = usuario(request)
+        app.state.cota.cobrar(quem, 1500, dev, "foto")
+        disciplina = None if corpo.disciplina in ("auto", prompts.GERAL_ID) else corpo.disciplina
+        try:
+            return app.state.tarefas.ler_foto(imagem, disciplina).publico()
         except foto.FotoInvalida as exc:
             raise HTTPException(400, str(exc)) from None
 

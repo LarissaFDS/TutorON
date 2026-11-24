@@ -59,7 +59,7 @@
     $('ciclo-foto').src = arquivo(ciclo.foto);
     var l = ciclo.leitura;
     var leitura = $('ciclo-leitura');
-    leitura.append(el('h3', 'foto__titulo', 'O que o TutorON leu (o aluno confere e confirma)'),
+    leitura.append(el('h3', 'foto__titulo', 'O que o TutorON leu da foto'),
       el('p', 'caption', 'Confiança da leitura: ' + l.confianca + ' · tipo: ' + l.tipo.replace(/_/g, ' ')));
     var enun = el('details', 'disclosure');
     enun.append(el('summary', null, 'Enunciado lido (inclui a resolução impressa na folha)'), resposta(l.enunciado));
@@ -77,7 +77,7 @@
       proxima++;
       if (proxima >= ciclo.rodadas.length) {
         $('ciclo-proximo').hidden = true;
-        conversa.append(el('p', 'caption', 'Três rodadas, três formas diferentes de explicar, e nenhuma escreveu a fórmula final. No site, o ciclo continua enquanto o aluno precisar.'));
+        conversa.append(el('p', 'caption', 'Foram três tentativas, cada uma explicando de um jeito, e em nenhuma ele escreveu a fórmula pronta. Isso continua enquanto o aluno precisar.'));
       }
       if (proxima > 1) item.scrollIntoView({ block: 'start', behavior: 'smooth' });
     }

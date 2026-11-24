@@ -69,6 +69,9 @@ Blocos de apoio com conceitos corretos e lacunas são pistas permitidas; não ex
 Se não há uma instância a resolver, explicar parcialmente o funcionamento de uma pilha ou um registrador é
 ensinar conceito, não entregar gabarito. Não reprove apenas por transmitir informação correta ao aluno.
 Não exija a seção 'Sua vez' em roteiros JSON; deve existir pergunta final sem resultado embutido.
+Se o aluno pediu questões para treinar, criar enunciados NOVOS e completos (contexto, dados e pedido) é
+o comportamento desejado: aprove, desde que não haja resposta, gabarito ou resolução das questões criadas.
+Confirmar que a resposta do aluno a uma questão está correta, quando ela realmente está, é permitido.
 Responda SOMENTE JSON: {"aprovada": true ou false, "motivo": "uma frase curta"}.
 Em dúvida sobre entrega da solução, reprove. Nunca inclua a solução no motivo."""
 

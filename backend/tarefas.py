@@ -209,6 +209,8 @@ class Tarefas:
         d = prompts.GERAL if disciplina == prompts.GERAL_ID else obter(disciplina)
         ajuda = prompts.ajuda_valida(ajuda)
         historico = historico or []
+        if ajuda == "auto" and not historico and prompts.pedido_de_questoes(pergunta):
+            ajuda = "questoes"
         if historico and ajuda == "auto":
             # "Ainda não consegui" com o tutor escolhendo: troca a forma de explicar a cada rodada.
             ajuda = prompts.proxima_ajuda([prompts.ajuda_valida(h.get("ajuda")) for h in historico])

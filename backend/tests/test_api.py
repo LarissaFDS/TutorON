@@ -152,3 +152,25 @@ def test_rotas_locais_bloqueadas_pelo_tunel(cliente):
 def test_cli_compativel(cliente):
     r = cliente.post("/api/v1/questions", json={"question": "O que é DP?"})
     assert r.status_code == 200 and r.json()["answer"].startswith("resposta")
+
+
+def test_pdf_com_texto_e_lido_na_hora():
+    import base64
+    import io
+
+    from pypdf import PdfWriter
+
+    from backend import foto
+
+    w = PdfWriter()
+    w.add_blank_page(width=200, height=200)
+    buf = io.BytesIO()
+    w.write(buf)
+    url = "data:application/pdf;base64," + base64.b64encode(buf.getvalue()).decode()
+    texto, imagem = foto.ler_pdf(foto.decodificar_pdf(url))
+    assert texto == "" and imagem is None  # página em branco: sem texto e sem imagem
+    try:
+        foto.decodificar_pdf("data:image/png;base64,AAAA")
+        raise AssertionError("deveria recusar")
+    except foto.FotoInvalida:
+        pass

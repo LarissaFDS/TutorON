@@ -83,13 +83,11 @@
     var nome = chip.querySelector('[data-nome]'), sub = chip.querySelector('[data-sub]');
     if (eu.logado) {
       nome.textContent = eu.conta.nome || eu.conta.email;
-      sub.textContent = eu.admin ? 'Administrador · sair' : 'Sair da conta';
-      chip.href = '#sair';
-      chip.onclick = async function (e) {
+      sub.textContent = eu.admin ? 'Administrador · configurações' : 'Configurações e conta';
+      chip.href = '#configuracoes';
+      chip.onclick = function (e) {
         e.preventDefault();
-        if (!(await confirmarSaida())) return;
-        await window.TutorConta.sair();
-        location.reload();
+        if (window.TutorConfig) window.TutorConfig.abrir(eu.conta);
       };
       if ($('admin-link')) $('admin-link').hidden = !eu.admin;
     } else {
@@ -110,6 +108,7 @@
       chip.href = '/entrar?voltar=' + encodeURIComponent(location.pathname + location.search);
       chip.onclick = null;
     }
+    if (window.TutorConfig) window.TutorConfig.aplicarFoto();
     if (window.TutorShell) window.TutorShell.atualizarCota();
   }
 
@@ -118,6 +117,7 @@
 
   window.TutorConta = {
     pronto: pronto,
+    confirmarSaida: confirmarSaida,
     sair: async function () {
       var p = await pronto;
       if (p.cliente) await p.cliente.auth.signOut();
