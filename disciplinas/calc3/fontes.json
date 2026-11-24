@@ -29,6 +29,25 @@
       "justificativa": "Única evidência direta do que o professor cobra (datas 23/08, 22/11 e 26/11/2024). Não há gabarito: toda resolução fica pendente de confirmação do professor."
     },
     {
+      "id": "ufal-calc3-lista-gleydson-p3",
+      "nome": "Lista de Cálculo III (4 questões: jacobiana, derivada direcional, pontos críticos, posto), atividade para nota extra (arquivo P3C3)",
+      "autoria": "Prof. Gleydson Santos da Silva, IC/UFAL (ECOM017)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF, 1 página, sem gabarito; veio na pasta de Cálculo 4 do material do 4º período de EC",
+      "notacao": "Stewart, com f: R^n -> R^m e matriz jacobiana",
+      "topicos": ["calc3-09-derivada-direcional-gradiente", "calc3-11-maximos-minimos-lagrange"],
+      "licenca": "Não declarada (lista da disciplina)",
+      "acesso": "Material entregue pela equipe; PDF não versionado; enunciados parafraseados",
+      "notas": null,
+      "prioridade": "alta",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Primeira evidência da turma para derivada direcional e pontos críticos (via jacobiana); resolução da equipe conferida com SymPy. A correção manuscrita que veio junto é de aluno e serviu só para conferir."
+    },
+    {
       "id": "ufal-calc3-notion-resolucoes",
       "nome": "Exercícios resolvidos de limites e derivadas parciais (manuscrito)",
       "autoria": "Autoria não identificada no arquivo (anexo do Notion da turma)",

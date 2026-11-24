@@ -90,6 +90,32 @@
       ]
     },
     {
+      "id": "calc4",
+      "nome": "Cálculo 4",
+      "sigla": "Cálculo 4",
+      "situacao": "MVP",
+      "itens": "disciplinas/calc4/acervo/itens.json",
+      "indice": "disciplinas/calc4/acervo/indice.json",
+      "materiais": "disciplinas/calc4/materiais",
+      "rigor": "disciplinas/calc4/rigor.md",
+      "livro_supabase": false,
+      "cursos": {
+        "ecom": 4
+      },
+      "assuntos": [
+        "calc4-01-campos-conservativos-integrais-de-linha",
+        "calc4-02-integrais-de-superficie",
+        "calc4-03-teoremas-stokes-divergencia",
+        "calc4-04-laplace-impulso"
+      ],
+      "exemplos": [
+        "Como sei se um campo vetorial é conservativo e acho a função potencial?",
+        "Como calcular a área da esfera com integral de superfície?",
+        "Quando uso o teorema de Stokes numa integral de linha?",
+        "Qual a transformada de Laplace do delta de Dirac?"
+      ]
+    },
+    {
       "id": "calc2",
       "nome": "Cálculo 2",
       "sigla": "Cálculo 2",

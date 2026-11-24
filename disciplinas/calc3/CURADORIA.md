@@ -40,14 +40,17 @@ Classificação: **confirmado** = aparece em prova, lista ou resumo da turma; **
 | `calc3-06-curvatura-movimento` | Confirmado (só anotações dos alunos) | Anotações "Curvatura e movimento"; resumo da ementa | 13.3, 13.4 | s02, n01 |
 | `calc3-07-funcoes-varias-variaveis` | Confirmado (só anotações dos alunos) | Anotações "Funções de várias variáveis" | 14.1 | s03 |
 | `calc3-08-limites-derivadas-parciais` | Confirmado | AB2 e reavaliação inteiras; exercícios resolvidos | 14.2, 14.3 | t04–t09, s04, n03 |
-| `calc3-09-derivada-direcional-gradiente` | Fundamental, não confirmado | Página do Notion com o título, **vazia**; resumo da ementa | 14.6 | n02 |
+| `calc3-09-derivada-direcional-gradiente` | Confirmado (lista do Prof. Gleydson) | Página do Notion com o título, **vazia**; resumo da ementa; lista P3C3, Q2 | 14.6 | t10, n02 |
 | `calc3-10-plano-tangente-regra-da-cadeia` | Fundamental, não confirmado | Resumo da ementa | 14.4, 14.5 | nenhum |
-| `calc3-11-maximos-minimos-lagrange` | Fundamental, não confirmado | Resumo da ementa | 14.7, 14.8 | nenhum |
+| `calc3-11-maximos-minimos-lagrange` | Pontos críticos confirmados (lista do Prof. Gleydson); Lagrange não confirmado | Resumo da ementa; lista P3C3, Q3 e Q4 | 14.7, 14.8 | t11 |
 | `calc3-12-integrais-multiplas` | Complementar (provável Cálculo 4) | Fora do resumo da ementa | 15 | nenhum |
 | `calc3-13-campos-integrais-de-linha-green` | Complementar (provável Cálculo 4) | Fora do resumo da ementa; a "Lista Cálculo Vetorial" é de funções vetoriais | 16.1–16.4 | nenhum |
 | `calc3-14-stokes-gauss` | Complementar (provável Cálculo 4) | Fora do resumo da ementa | 16.5–16.9 | nenhum |
 
-Lacunas: plano tangente, regra da cadeia, funções implícitas, máximos e mínimos e Lagrange não têm bloco. A busca devolve vazio nesses temas, e o tutor responde só com o rigor e o conhecimento do modelo, sem fingir que há material da turma.
+Lacunas: plano tangente, regra da cadeia, funções implícitas, classificação de máximos e mínimos e Lagrange não têm bloco. A busca devolve vazio nesses temas, e o tutor responde só com o rigor e o conhecimento do modelo, sem fingir que há material da turma.
+
+### Complemento do 4º período de EC (24/11/2026)
+A pasta de Cálculo 4 do material do 4º período trouxe a lista de Cálculo III do Prof. Gleydson Santos da Silva (`ufal-calc3-lista-gleydson-p3`, arquivo P3C3), parafraseada em `calc3-lista-gleydson-q1q2-jacobiana-direcional` (jacobiana e derivada direcional de função vetorial) e `calc3-lista-gleydson-q3q4-pontos-criticos-posto` (pontos críticos pelo determinante e pelo posto da jacobiana), ambos `validada` e conferidos com SymPy. A prova 2 de Cálculo 4 do mesmo professor (integrais de linha e de superfície, Stokes, divergência) confirma que `calc3-12` a `calc3-14` são assuntos de Cálculo 4: esses tópicos ficam aqui só para classificação, e os blocos estão em `calc4`. Ficaram fora: a correção manuscrita da prova 3 (de aluno; só conferiu os resultados) e um documento com notas e matrículas de alunos (não lido além do necessário, não citado).
 
 ## 2. Fronteira com os pré-requisitos
 

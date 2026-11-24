@@ -1,0 +1,120 @@
+{
+ "disciplina": "calc4",
+ "atualizado_em": "2026-11-24",
+ "legenda": {
+  "prioridade": "alta = compõe o acervo; referencia = consulta, não ingerida",
+  "uso": "acervo = parafraseado em materiais; referencia = só catálogo",
+  "origem": "\"material de turma\" = material do 4º período de Engenharia de Computação entregue pela equipe; os originais ficam fora do repositório"
+ },
+ "fontes": [
+  {
+   "id": "ufal-calc4-p2-gleydson",
+   "nome": "Prova 2 de Cálculo IV (4 questões de cálculo vetorial)",
+   "autoria": "Prof. Gleydson Santos da Silva (Instituto de Computação, UFAL)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 1 página, sem gabarito e sem nome de aluno preenchido",
+   "isa": "SI",
+   "topicos": [
+    "calc4-01-campos-conservativos-integrais-de-linha",
+    "calc4-02-integrais-de-superficie",
+    "calc4-03-teoremas-stokes-divergencia"
+   ],
+   "licenca": "Não declarada (prova da disciplina)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "As quatro questões parafraseadas em k01 a k04, com resoluções da equipe conferidas com SymPy (status pendente_professor)."
+  },
+  {
+   "id": "ufal-calc4-anotacoes-impulso",
+   "nome": "Anotações manuscritas da aula de função impulso (delta de Dirac)",
+   "autoria": "Anotações de aula de Cálculo 4 (autoria não identificada no arquivo)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF de imagem, 1 página longa",
+   "isa": "SI",
+   "topicos": [
+    "calc4-04-laplace-impulso"
+   ],
+   "licenca": "Não declarada (anotações de turma)",
+   "acesso": "Material entregue pela equipe; não versionado",
+   "notas": null,
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Definição por pulsos, peneiração, transformada e a EDO da aula, parafraseadas em k05 e conferidas com SymPy."
+  },
+  {
+   "id": "ufal-calc4-resumo-impulso",
+   "nome": "Resumo - Função Impulso (Delta de Dirac): material de estudo para apresentação",
+   "autoria": "Autoria não identificada (parece material de apresentação de aluno)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 4 páginas",
+   "isa": "SI",
+   "topicos": [
+    "calc4-04-laplace-impulso"
+   ],
+   "licenca": "Não declarada",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "material de turma",
+   "justificativa": "Só evidência do tópico: autoria incerta; os exemplos que coincidem com a aula vêm das anotações."
+  },
+  {
+   "id": "stewart-calculo-vol2",
+   "nome": "Cálculo, volume 2 (cap. 16, cálculo vetorial)",
+   "autoria": "James Stewart (Cengage)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro",
+   "isa": "SI",
+   "topicos": [
+    "calc4-01-campos-conservativos-integrais-de-linha",
+    "calc4-02-integrais-de-superficie",
+    "calc4-03-teoremas-stokes-divergencia"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência da equipe",
+   "justificativa": "Notação do rigor; só referência por seção."
+  },
+  {
+   "id": "boyce-diprima-edo",
+   "nome": "Equações Diferenciais Elementares e Problemas de Valores de Contorno (cap. 6, transformada de Laplace)",
+   "autoria": "William E. Boyce e Richard C. DiPrima (LTC)",
+   "url": null,
+   "arquivo_local": null,
+   "sha256": null,
+   "idioma": "pt-BR",
+   "formato": "Livro",
+   "isa": "SI",
+   "topicos": [
+    "calc4-04-laplace-impulso"
+   ],
+   "licenca": "Protegido por direitos autorais",
+   "acesso": "Não versionado nem ingerido",
+   "notas": null,
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "origem": "referência da equipe",
+   "justificativa": "Livro protegido: só referência por seção (funções impulso, seção 6.5)."
+  }
+ ]
+}
