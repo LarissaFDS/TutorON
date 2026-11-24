@@ -955,3 +955,10 @@ período com nome diferente, use `nomes_nos_cursos`. Se é eletiva ou de ênfase
 `"cursos": {"<curso>": "eletiva"}`; use um número só quando o PPC ou o material indicar o período
 (não invente). Disciplinas "em validação" não aparecem em lugar nenhum. O teste
 `backend/tests/test_cursos_eletivas.py` falha se alguma disciplina disponível sumir da janela.
+
+## Cálculo 2 (23/11/2026)
+
+Cálculo 2 (ECOM010, 2º período de Engenharia de Computação) entrou como `MVP` com 7 blocos das listas e da prova
+final, cadastro em `disciplinas/disciplinas.json` com `cursos: {"ecom": 2}`, `rigor.md`, `fontes.json`,
+`CURADORIA.md` e testes com SymPy em `tests_acervo/test_disciplina_calc2.py`. Livros (Stewart) só no catálogo.
+Detalhes em `docs/relatorio-ec-2o-periodo.md`.

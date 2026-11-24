@@ -90,6 +90,34 @@
       ]
     },
     {
+      "id": "calc2",
+      "nome": "Cálculo 2",
+      "sigla": "Cálculo 2",
+      "situacao": "MVP",
+      "itens": "disciplinas/calc2/acervo/itens.json",
+      "indice": "disciplinas/calc2/acervo/indice.json",
+      "materiais": "disciplinas/calc2/materiais",
+      "rigor": "disciplinas/calc2/rigor.md",
+      "livro_supabase": false,
+      "cursos": {
+        "ecom": 2
+      },
+      "assuntos": [
+        "calc2-01-integracao-por-partes",
+        "calc2-02-integrais-trigonometricas",
+        "calc2-03-series-convergencia",
+        "calc2-04-series-de-potencias-taylor",
+        "calc2-05-integral-impropria-aplicacoes"
+      ],
+      "exemplos": [
+        "Como resolvo ∫ x sen x dx por partes?",
+        "Como integrar sen³x cos²x?",
+        "A série de 1/(n ln n) converge?",
+        "Qual o raio de convergência da série de ln(5 − x)?",
+        "Quando a integral de x^a/(1 + x^b) de 0 a ∞ converge?"
+      ]
+    },
+    {
       "id": "calc3",
       "nome": "Cálculo 3",
       "sigla": "Cálculo 3",
