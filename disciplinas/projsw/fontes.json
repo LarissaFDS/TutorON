@@ -60,6 +60,26 @@
   {
    "arquivo_local": null,
    "sha256": null,
+   "idioma": "en",
+   "notas": "Os repositórios de alunos do mesmo período (CRM em Python, licença MIT; biblioteca em Python, sem licença) e um repositório de estudo de padrões (Apache 2.0) serviram só como evidência dos padrões usados; nenhum trecho foi copiado",
+   "id": "ufal-ecom-lista-projetos-oo",
+   "nome": "Software Projects: 30 ideias de sistemas orientados a objetos com requisitos funcionais (Software_Projects.pdf)",
+   "autoria": "Disciplina de Projeto/Engenharia de Software do 4º período de Engenharia de Computação (IC-UFAL); autor não identificado no arquivo",
+   "url": null,
+   "formato": "PDF",
+   "topicos": [
+    "projsw-05-regras-de-projeto"
+   ],
+   "licenca": "Não declarada (lista da disciplina)",
+   "acesso": "Pasta do 4º período de EC; não versionado",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "origem": "material de turma",
+   "justificativa": "Projetos 2 e 5 e os de edição com histórico dão o contexto de p13–p15 (Observer, Command, padrões de criação); código da equipe compilado nos testes"
+  },
+  {
+   "arquivo_local": null,
+   "sha256": null,
    "idioma": "pt-BR",
    "notas": null,
    "id": "fowler-refactoring",
