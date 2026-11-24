@@ -16,7 +16,8 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 | 4 | Teoria dos Grafos (`grafos`) | [#174](https://github.com/LarissaFDS/TutorON/pull/174) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
 | 5 | Projeto de Software (`projsw`) | [#176](https://github.com/LarissaFDS/TutorON/pull/176) | dev: sim; main: sim ([#178](https://github.com/LarissaFDS/TutorON/pull/178)) | 3 (`projsw-padrao-observer-*`, `-command-*`, `-criacao-*`) | pytest 2282 ok (30 pulados: Docker), ruff ok; relevância 691/691 | revisão humana e do professor; confirmar a ligação com Engenharia de Software (ECOM021) |
 | 6 | Cálculo 4 (`calc4`, nova) e complemento de Cálculo 3 (`calc3`) | [#177](https://github.com/LarissaFDS/TutorON/pull/177) | dev: sim; main: sim ([#178](https://github.com/LarissaFDS/TutorON/pull/178)) | calc4: 5 (`calc4-p2-*`, `calc4-impulso-*`); calc3: 2 (`calc3-lista-gleydson-*`) | pytest 2298 ok (30 pulados: Docker), ruff ok; relevância 701/701 | revisão humana e do professor; ementa de ECOM023 não conferida |
-| 7 | Física 3 (`fis3`, nova) | PR deste item | — | 2 (`fis3-prova1-*`) | pytest 2312 ok, ruff ok; relevância 706/706 | revisão humana e do professor; acervo pequeno (só a prova 1); ementa de ECOM022 não conferida |
+| 7 | Física 3 (`fis3`, nova) | [#179](https://github.com/LarissaFDS/TutorON/pull/179) | dev: sim; main: no PR dev → main do item 8 | 2 (`fis3-prova1-*`) | pytest 2312 ok, ruff ok; relevância 706/706 | revisão humana e do professor; acervo pequeno (só a prova 1); ementa de ECOM022 não conferida |
+| 8 | Física Experimental 3 (`fislab3`, nova) | PR deste item | — | 3 (`fislab3-exp2-*`) | pytest 2328 ok (30 pulados: Docker), ruff ok; relevância 712/712 | revisão humana e do professor; só o roteiro do Experimento 2; ementa de ECOM026 não conferida |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -105,14 +106,26 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
   impressas, e uma resolução manuscrita. Conferi que quatro perguntas reais acham o bloco certo (teste
   `test_quatro_perguntas_reais_acham_o_bloco_certo`: campo dentro e fora do cilindro; potencial na coroa e a
   soma de anéis), então a disciplina foi criada, `MVP`, sem aviso, `cursos: {"ecom": 4}`.
-- **Novo:** 2 blocos (`pendente_professor`): Lei de Gauss no cilindro maciço ($
-ho r/2arepsilon_0$ dentro,
-  $
-ho R^2/2arepsilon_0 r$ fora) e potencial no eixo da coroa (≈ 103 V), conferidos com SymPy. A resolução
+- **Novo:** 2 blocos (`pendente_professor`): Lei de Gauss no cilindro maciço (ρr/2ε₀ dentro,
+  ρR²/(2ε₀r) fora) e potencial no eixo da coroa (≈ 103 V), conferidos com SymPy. A resolução
   manuscrita (autoria não identificada) chega aos mesmos valores e ficou só como referência.
 - **Fora:** `eletromagnetismo.html` e `guia_magnetismo.html` (parecem gerados por IA; só evidência); Halliday
   (protegido, só catálogo).
 - **Limite:** capacitores, corrente, magnetismo e indução não têm material; a busca devolve vazio nesses temas.
+- IA real: não rodada.
+
+## Item 8: Física Experimental 3 (`fislab3`, disciplina nova)
+
+- **Critério:** o único material de aula da pasta `Lab de Fisica 3` é o roteiro do Experimento 2, "Campo a
+  partir do potencial" (Laboratório de Ensino do IF-UFAL), com procedimento e quatro questões impressas. Isso
+  basta para mais de quatro perguntas reais (teste `test_perguntas_reais_acham_o_bloco_certo`, cinco perguntas),
+  então a disciplina foi criada, `MVP`, sem aviso, `cursos: {"ecom": 4}`.
+- **Novo:** 3 blocos (`pendente_professor`): equipotenciais na cuba e linhas de campo; questão 3 (anel como
+  blindagem); questões 1, 2 e 4. Conferidos com SymPy (−∇V perpendicular às equipotenciais, Laplace, anel
+  condutor num campo uniforme). O roteiro escreve E = ∇V sem o sinal de menos; os blocos usam E = −∇V e dizem isso.
+- **Fora:** relatórios 1 a 6 e `fisica.ggb` (trabalhos de alunos, só evidência; não lidos além da identificação);
+  `Exemplo de relatório.pdf` (não é modelo do professor: é um relatório de alunos de outra instituição, de química);
+  `Figure_*.png`; Halliday (protegido, só catálogo).
 - IA real: não rodada.
 
 ## Aguardando decisão
@@ -121,3 +134,4 @@ ho R^2/2arepsilon_0 r$ fora) e potencial no eixo da coroa (≈ 103 V), conferid
 - Confirmar que Engenharia de Software (ECOM021) deve mesmo abrir o acervo de Projeto de Software (`nomes_nos_cursos`).
 - Conferir a ementa oficial de Cálculo 4 (ECOM023); os assuntos vieram só da prova 2 e da aula de impulso.
 - Física 3 entrou com só 2 blocos (a prova 1); decidir se fica assim até chegar mais material da turma, e conferir a ementa de ECOM022.
+- Física Experimental 3 entrou só com o roteiro do Experimento 2; faltam os roteiros dos outros experimentos e a ementa de ECOM026.

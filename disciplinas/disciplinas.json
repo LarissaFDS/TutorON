@@ -112,6 +112,27 @@
       ]
     },
     {
+      "id": "fislab3",
+      "nome": "Física Experimental 3",
+      "sigla": "Física Exp. 3",
+      "situacao": "MVP",
+      "itens": "disciplinas/fislab3/acervo/itens.json",
+      "indice": "disciplinas/fislab3/acervo/indice.json",
+      "materiais": "disciplinas/fislab3/materiais",
+      "rigor": "disciplinas/fislab3/rigor.md",
+      "livro_supabase": false,
+      "cursos": {
+        "ecom": 4
+      },
+      "assuntos": [
+        "fislab3-01-campo-e-potencial"
+      ],
+      "exemplos": [
+        "Como mapear linhas equipotenciais na cuba eletrolítica?",
+        "O anel de latão na cuba é uma blindagem eletrostática perfeita?"
+      ]
+    },
+    {
       "id": "calc4",
       "nome": "Cálculo 4",
       "sigla": "Cálculo 4",
