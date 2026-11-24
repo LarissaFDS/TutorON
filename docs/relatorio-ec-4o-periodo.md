@@ -10,7 +10,8 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 
 | # | Item | PR | Merge dev / main | Blocos novos | Testes e bateria de relevância | Pendências |
 |---|---|---|---|---|---|---|
-| 1 | OAC (`oac`) | PR deste item | — | 4 (`oac-prova2016-2-*`, `oac-lista-cap2-*`) | pytest 2290 ok, ruff ok; relevância 677/677 | revisão humana e do professor dos 4 blocos; Ex. 3 e 6 da lista do cap. 2 sem resolução |
+| 1 | OAC (`oac`) | [#170](https://github.com/LarissaFDS/TutorON/pull/170) | dev: sim; main: PR dev→main dos itens 1 e 2 | 4 (`oac-prova2016-2-*`, `oac-lista-cap2-*`) | pytest 2290 ok, ruff ok; relevância 677/677 | revisão humana e do professor dos 4 blocos; Ex. 3 e 6 da lista do cap. 2 sem resolução |
+| 2 | Probabilidade e Estatística (`prob`) | PR deste item | — | 6 (`prob-petrucio-*`, `prob-ec4-lista2-basica`) | pytest 2272 ok (30 pulados sem Docker local), ruff ok; relevância 682/682 | revisão humana e do professor dos 6 blocos |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -25,6 +26,22 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
   anotações manuscritas `OAC - Cap 5.pdf` e `Exercícios Cap 1 - Resposta.pdf`, `animated_pipeline.html`.
 - **Teste estendido:** a contagem de blocos da turma em `test_resolucoes_da_turma_tem_status_e_dizem_no_texto`
   passou de 27 para 31, sem afrouxar nenhuma condição.
+
+## Item 2: Probabilidade e Estatística (`prob`, complemento)
+
+- **Novo:** listas do Prof. Petrucio de VA discretas e de distribuições contínuas (só enunciados e dicas de R):
+  5 blocos com os valores refeitos com `scipy.stats` (binomial, Poisson, normal, exponencial, soma e média de
+  normais). Lista 2 de probabilidade básica, com respostas: um bloco `corrigida` (bilhetes: o arquivo só dá a chance
+  de perder; vacina chinesa: 28,57%, não 28,75%; cartas "maiores que 7" dependem de convenção).
+- **Só referência:** AB1.1, AB2.1 (2024.2) e AB2.2 (2025.2): dependem da matrícula ou da base de dados de cada
+  aluno, sem resposta única.
+- **Fora:** arquivos com nome de aluno (`AB2_*`, `02_PE_*`, a AB2.1 entregue), trabalhos, scripts `.R` (preparação
+  de dados e estudo, sem procedimento que falte), a lista 1 (mesmos assuntos de a01 a a04) e a pasta `Monitoria`
+  (Sistemas Digitais; não usada, para não sobrepor a PR #104). A cópia de `C4` dentro de `ab2.1` vai com Cálculo 4.
+- **Busca:** a pergunta de exemplo "P(X > 2) numa Poisson com média 3" passou a trazer o bloco novo antes de
+  `prob-anot-poisson`; ajustei a redação do bloco novo (sem mexer no teste nem nos limiares).
+- **Teste estendido:** a contagem de blocos da turma passou de 23 para 29 e o conjunto de corrigidas ganhou o novo
+  bloco; nenhuma condição foi afrouxada.
 
 ## Aguardando decisão
 

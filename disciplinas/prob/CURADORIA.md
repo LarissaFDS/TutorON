@@ -115,6 +115,25 @@ A folha de respostas de 16/10/2013 tem três erros (o complementar de "todos oco
 
 Fora do acervo: a atividade AT1 (trabalho de alunos identificados pelo nome), o arquivo de dados de idades que a acompanha, o livro OpenIntro, as soluções do OpenIntro e os slides (já cobertos por `openintro-statistics`), e as outras provas (AB2, LE, reavaliações), que ficam como evidência dos tópicos. Estatística descritiva e inferência continuam sem bloco na busca.
 
+## Complemento do 4º período de Engenharia de Computação (24/11/2026)
+
+Material bruto do 4º período de EC (ECOM020, Prof. Petrucio A. Medeiros Barros), comparado com o catálogo e os blocos.
+
+Fontes usadas: `ufal-prob-petrucio-listas-r` (listas de VA discretas e de distribuições contínuas, com dicas de R) e `ufal-prob-ec4-lista2-basica` (lista 2 de probabilidade básica com respostas). Entraram 6 blocos, com `curso:` no cabeçalho; os valores foram refeitos com `scipy.stats` e frações exatas em `tests_acervo/test_disciplina_prob.py`:
+
+| Bloco | Assunto | Status |
+|---|---|---|
+| `prob-petrucio-binomial-r` | prob-05-distribuicoes-discretas | validada |
+| `prob-petrucio-poisson-r` | prob-05-distribuicoes-discretas | validada |
+| `prob-petrucio-normal-r` | prob-06-uniforme-normal | validada |
+| `prob-petrucio-exponencial-r` | prob-07-exponencial | validada |
+| `prob-petrucio-soma-media-normais-r` | prob-08-combinacao-linear | validada |
+| `prob-ec4-lista2-basica` | prob-01-probabilidade-basica | corrigida |
+
+Na lista 2, duas respostas do arquivo foram corrigidas (bilhetes: só a chance de perder; vacina chinesa: 28,57%, não 28,75%) e uma depende de convenção (cartas "maiores que 7").
+
+Só referência (`ufal-prob-avaliacoes-petrucio-r`): AB1.1, AB2.1 e AB2.2 dependem da matrícula ou da base de dados de cada aluno, sem resposta única. Fora do acervo, sem citação: a lista 1 de questões e a lista 1 resolvida (mesmos assuntos de a01 a a04), os arquivos com nome de aluno (`AB2_*`, `02_PE_*`, a AB2.1 entregue), os trabalhos, os scripts `.R` (preparação de uma base de dados e estudo, sem procedimento que falte no acervo) e a pasta `Monitoria` (material de Sistemas Digitais, que não é desta disciplina; não foi usado para não sobrepor a PR #104). A pasta `C4` dentro de `ab2.1` é cópia do material de Cálculo 4 e foi tratada naquela disciplina.
+
 ## 7. Pendências
 
 - Autorização do autor das anotações para publicar a transcrição. Até lá, ficam só paráfrases.

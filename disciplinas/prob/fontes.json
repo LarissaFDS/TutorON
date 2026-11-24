@@ -379,6 +379,64 @@
    "prioridade": "referencia",
    "uso": "citada",
    "justificativa": "Ementa de CCOM022, usada só para comparar com a disciplina prob."
+  },
+  {
+   "id": "ufal-prob-petrucio-listas-r",
+   "nome": "Listas \"Variáveis Aleatórias Discretas\" e \"Distribuições Contínuas – Normal e Exponencial\" com dicas de comandos R",
+   "autoria": "Prof. Petrucio A. Medeiros Barros, UFAL (com colaboração de monitor)",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 7 e 9 páginas, enunciados com dicas de R, sem respostas numéricas",
+   "notacao": "X ~ Bin(n, p), Poisson(λ), N(μ, σ), comandos dbinom/pbinom/dpois/ppois/pnorm/qnorm/pexp",
+   "topicos": [
+    "prob-05-distribuicoes-discretas",
+    "prob-06-uniforme-normal",
+    "prob-07-exponencial",
+    "prob-08-combinacao-linear"
+   ],
+   "licenca": "Não declarada (material da disciplina)",
+   "acesso": "PDFs do material do 4º período de EC entregue pela equipe; não versionados",
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Listas do professor da turma de EC, com o procedimento em R que a avaliação cobra. Respostas calculadas pela equipe e conferidas com scipy.stats (p01–p05)."
+  },
+  {
+   "id": "ufal-prob-ec4-lista2-basica",
+   "nome": "Lista 2 de exercícios de probabilidade com respostas",
+   "autoria": "Material da turma; autor não identificado no arquivo",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, 3 páginas, com respostas curtas",
+   "notacao": "P(A | B)",
+   "topicos": [
+    "prob-01-probabilidade-basica",
+    "prob-02-bayes"
+   ],
+   "licenca": "Não declarada (material da disciplina)",
+   "acesso": "PDF do material do 4º período de EC entregue pela equipe; não versionado",
+   "prioridade": "media",
+   "uso": "acervo",
+   "justificativa": "Respostas conferidas com frações exatas: duas corrigidas (bilhetes só com a chance de perder; Bayes 28,75% em vez de 28,57%) e uma dependente de convenção (cartas maiores que 7)."
+  },
+  {
+   "id": "ufal-prob-avaliacoes-petrucio-r",
+   "nome": "Avaliações AB2.1 (2024.2) e AB2.2 (2025.2) e atividade AB1.1, feitas no R",
+   "autoria": "Prof. Petrucio A. Medeiros Barros, UFAL",
+   "url": null,
+   "idioma": "pt-BR",
+   "formato": "PDF, enunciados parametrizados pela matrícula ou pela base de dados do aluno",
+   "notacao": "comandos R",
+   "topicos": [
+    "prob-06-uniforme-normal",
+    "prob-11-estimacao",
+    "prob-12-testes-hipoteses",
+    "prob-13-conjuntas-regressao"
+   ],
+   "licenca": "Não declarada (material da disciplina)",
+   "acesso": "PDFs não versionados",
+   "prioridade": "referencia",
+   "uso": "referencia",
+   "justificativa": "As questões dependem do número de matrícula (AB2.1) ou da base de dados escolhida por cada aluno (AB1.1, AB2.2): não há resposta única para conferir. Os assuntos já estão nas listas e nos blocos existentes."
   }
  ]
 }
