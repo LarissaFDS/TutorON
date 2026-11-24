@@ -135,7 +135,7 @@ def test_pergunta_fora_do_acervo_nao_inventa_material(pergunta):
 
 def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 16
+    assert len(turma) == 18
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert f"Status da resolução: {rotulo[i['status_resolucao']]}" in i['texto'], i['id']
@@ -308,3 +308,30 @@ def test_documentacao_lista_todas_as_fontes():
     curadoria = (ROOT / 'disciplinas/calc3/CURADORIA.md').read_text(encoding='utf-8')
     assert [i for i in CATALOGO if f'`{i}`' not in curadoria] == []
     assert [i for i in ITENS if f'`{i}`' not in curadoria] == []
+
+
+# ---------------------------------------------------------------- lista do Prof. Gleydson (P3C3)
+
+def test_lista_gleydson_q1q2():
+    z = sp.symbols('z', positive=True)
+    f = sp.Matrix([sp.sin(x * y * z), z**(x + y)])
+    J = f.jacobian([x, y, z])
+    esperado = sp.Matrix([[y * z * sp.cos(x * y * z), x * z * sp.cos(x * y * z), x * y * sp.cos(x * y * z)],
+                          [z**(x + y) * sp.log(z), z**(x + y) * sp.log(z), (x + y) * z**(x + y - 1)]])
+    assert sp.simplify(J - esperado) == sp.zeros(2, 3)
+    g = sp.Matrix([sp.tan(x), sp.sec(y), sp.atan(z)])
+    Jg = g.jacobian([x, y, z]).subs({x: sp.pi / 4, y: sp.pi / 4, z: 0})
+    assert sp.simplify(Jg - sp.diag(2, sp.sqrt(2), 1)) == sp.zeros(3, 3)
+    u = sp.Matrix([-1, 4, 0]) / sp.sqrt(17)
+    assert sp.simplify(Jg * u - sp.Matrix([-2, 4 * sp.sqrt(2), 0]) / sp.sqrt(17)) == sp.zeros(3, 1)
+
+
+def test_lista_gleydson_q3q4():
+    f = sp.Matrix([x**2, y**3 + x * y**2])
+    det = f.jacobian([x, y]).det()
+    assert sp.expand(det - 2 * x * y * (3 * y + 2 * x)) == 0
+    for reta in ({x: 0}, {y: 0}, {y: -2 * x / 3}):
+        assert sp.simplify(det.subs(reta)) == 0
+    assert det.subs({x: 1, y: 1}) != 0
+    J = sp.Matrix([[1, 2], [-3, 5], [5, -1]])
+    assert J.rank() == 2 and J[:2, :].det() == 11

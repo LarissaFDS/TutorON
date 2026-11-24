@@ -14,7 +14,8 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 | 2 | Probabilidade e Estatística (`prob`) | [#171](https://github.com/LarissaFDS/TutorON/pull/171) | dev: sim; main: sim ([#172](https://github.com/LarissaFDS/TutorON/pull/172)) | 6 (`prob-petrucio-*`, `prob-ec4-lista2-basica`) | pytest 2272 ok (30 pulados sem Docker local), ruff ok; relevância 682/682 | revisão humana e do professor dos 6 blocos |
 | 3 | Variáveis Complexas (`varcomp`) | [#173](https://github.com/LarissaFDS/TutorON/pull/173) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`varcomp-lista1-*`) | pytest 2275 ok (30 pulados: Docker), ruff ok; relevância 685/685 | revisão humana e do professor; Q5c do arquivo sem o $i$ |
 | 4 | Teoria dos Grafos (`grafos`) | [#174](https://github.com/LarissaFDS/TutorON/pull/174) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
-| 5 | Projeto de Software (`projsw`) | PR deste item | — | 3 (`projsw-padrao-observer-*`, `-command-*`, `-criacao-*`) | pytest 2282 ok (30 pulados: Docker), ruff ok; relevância 691/691 | revisão humana e do professor; confirmar a ligação com Engenharia de Software (ECOM021) |
+| 5 | Projeto de Software (`projsw`) | [#176](https://github.com/LarissaFDS/TutorON/pull/176) | dev: sim; main: pendente | 3 (`projsw-padrao-observer-*`, `-command-*`, `-criacao-*`) | pytest 2282 ok (30 pulados: Docker), ruff ok; relevância 691/691 | revisão humana e do professor; confirmar a ligação com Engenharia de Software (ECOM021) |
+| 6 | Cálculo 4 (`calc4`, nova) e complemento de Cálculo 3 (`calc3`) | PR deste item | — | calc4: 5 (`calc4-p2-*`, `calc4-impulso-*`); calc3: 2 (`calc3-lista-gleydson-*`) | pytest 2298 ok (30 pulados: Docker), ruff ok; relevância 701/701 | revisão humana e do professor; ementa de ECOM023 não conferida |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -78,7 +79,27 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 - **Só evidência:** `crm-tool-PS-OO` (MIT), `design-patterns-python` (Apache 2.0) e `Biblioteca` (sem licença), todos
   de alunos ou de terceiros; nada copiado.
 
+## Item 6: Cálculo 4 (`calc4`, disciplina nova) e complemento de Cálculo 3
+
+- **Cálculo 4, nova:** `situacao: MVP`, sem aviso, `cursos: {"ecom": 4}`; entrou em `preferidas("ecom", 4)`.
+  Quatro blocos da prova 2 do Prof. Gleydson Santos da Silva (campo conservativo e potencial, área da esfera por
+  integral de superfície, Stokes no plano $x + y + z = 1$, divergência na caixa), status `pendente_professor`, e um
+  bloco das anotações da aula de função impulso (peneiração, $\mathcal L\{\delta(t-a)\} = e^{-as}$, EDO
+  $y'' + 4y = \delta(t-\pi) - \delta(t-2\pi)$), todos conferidos com SymPy.
+- **Ementa de ECOM023 não conferida:** os assuntos saíram da prova e da aula. A prova confirma que integrais de
+  linha, Stokes e Gauss são de Cálculo 4, como o `CURADORIA.md` de Cálculo 3 supunha.
+- **Só referência:** o resumo de função impulso (material de apresentação, autoria incerta), `impulse_function.html`,
+  Stewart e Boyce & DiPrima (protegidos, só catálogo).
+- **Cálculo 3 (complemento no mesmo PR):** a lista P3C3 do Prof. Gleydson virou 2 blocos (jacobiana e taxa ao longo
+  de vetor unitário; pontos críticos e posto). A correção manuscrita da prova 3 é de aluno (só evidência).
+  `C3.docx` é uma lista de frequência com notas e matrículas: fora, sem citação.
+- **Busca:** uma pergunta antiga de Cálculo 3 marcada "fora" (derivada direcional de $x^2y$) passou a trazer o bloco
+  novo; reescrevi o bloco novo (sem mexer na pergunta nem nos limiares) e a bateria voltou a 701/701.
+- **Teste estendido:** a contagem de blocos da turma de Cálculo 3 passou de 16 para 18; nenhuma condição afrouxada.
+- IA real: não rodada.
+
 ## Aguardando decisão
 
 - Revisão humana e do professor dos blocos novos (nenhum marcado como revisado).
 - Confirmar que Engenharia de Software (ECOM021) deve mesmo abrir o acervo de Projeto de Software (`nomes_nos_cursos`).
+- Conferir a ementa oficial de Cálculo 4 (ECOM023); os assuntos vieram só da prova 2 e da aula de impulso.
