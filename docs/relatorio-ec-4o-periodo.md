@@ -16,8 +16,8 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
 | 4 | Teoria dos Grafos (`grafos`) | [#174](https://github.com/LarissaFDS/TutorON/pull/174) | dev: sim; main: sim ([#175](https://github.com/LarissaFDS/TutorON/pull/175)) | 3 (`grafos-pratica1-*`) | pytest 2278 ok (30 pulados: Docker), ruff ok; relevância 688/688 | revisão humana e do professor dos 3 blocos |
 | 5 | Projeto de Software (`projsw`) | [#176](https://github.com/LarissaFDS/TutorON/pull/176) | dev: sim; main: sim ([#178](https://github.com/LarissaFDS/TutorON/pull/178)) | 3 (`projsw-padrao-observer-*`, `-command-*`, `-criacao-*`) | pytest 2282 ok (30 pulados: Docker), ruff ok; relevância 691/691 | revisão humana e do professor; confirmar a ligação com Engenharia de Software (ECOM021) |
 | 6 | Cálculo 4 (`calc4`, nova) e complemento de Cálculo 3 (`calc3`) | [#177](https://github.com/LarissaFDS/TutorON/pull/177) | dev: sim; main: sim ([#178](https://github.com/LarissaFDS/TutorON/pull/178)) | calc4: 5 (`calc4-p2-*`, `calc4-impulso-*`); calc3: 2 (`calc3-lista-gleydson-*`) | pytest 2298 ok (30 pulados: Docker), ruff ok; relevância 701/701 | revisão humana e do professor; ementa de ECOM023 não conferida |
-| 7 | Física 3 (`fis3`, nova) | [#179](https://github.com/LarissaFDS/TutorON/pull/179) | dev: sim; main: no PR dev → main do item 8 | 2 (`fis3-prova1-*`) | pytest 2312 ok, ruff ok; relevância 706/706 | revisão humana e do professor; acervo pequeno (só a prova 1); ementa de ECOM022 não conferida |
-| 8 | Física Experimental 3 (`fislab3`, nova) | PR deste item | — | 3 (`fislab3-exp2-*`) | pytest 2328 ok (30 pulados: Docker), ruff ok; relevância 712/712 | revisão humana e do professor; só o roteiro do Experimento 2; ementa de ECOM026 não conferida |
+| 7 | Física 3 (`fis3`, nova) | [#179](https://github.com/LarissaFDS/TutorON/pull/179) | dev: sim; main: no PR dev → main final | 2 (`fis3-prova1-*`) | pytest 2312 ok, ruff ok; relevância 706/706 | revisão humana e do professor; acervo pequeno (só a prova 1); ementa de ECOM022 não conferida |
+| 8 | Física Experimental 3 (`fislab3`, nova) | [#180](https://github.com/LarissaFDS/TutorON/pull/180) | dev: sim (merge feito antes de o CI da PR terminar; o CI da PR e o de `dev` passaram depois); main: no PR dev → main final | 3 (`fislab3-exp2-*`) | pytest 2328 ok (30 pulados: Docker), ruff ok; relevância 712/712 | revisão humana e do professor; só o roteiro do Experimento 2; ementa de ECOM026 não conferida |
 
 ## Item 1: OAC (`oac`, complemento)
 
@@ -127,6 +127,22 @@ Boyce & DiPrima e Patterson & Hennessy (protegidos); `.git`, `__pycache__`, `.vs
   `Exemplo de relatório.pdf` (não é modelo do professor: é um relatório de alunos de outra instituição, de química);
   `Figure_*.png`; Halliday (protegido, só catálogo).
 - IA real: não rodada.
+
+## Quadro final: disciplinas do 4º período de EC
+
+`backend.cursos.preferidas("ecom", 4)` = `('prob', 'projsw', 'fis3', 'calc4', 'varcomp', 'oac', 'fislab3')`.
+
+| Disciplina (ECOM) | Acervo | Material no TutorON? | ✓ na janela de períodos |
+|---|---|---|---|
+| Probabilidade e Estatística (ECOM020) | `prob` | sim (complemento) | sim |
+| Engenharia de Software (ECOM021) | `projsw` | sim (via Projeto de Software; ligação a confirmar) | sim |
+| Física 3 (ECOM022) | `fis3` | sim (nova; só a prova 1) | sim |
+| Cálculo 4 (ECOM023) | `calc4` | sim (nova) | sim |
+| Variáveis Complexas (ECOM024) | `varcomp` | sim (complemento) | sim |
+| Organização e Arquitetura de Computadores (ECOM025) | `oac` | sim (complemento) | sim |
+| Física Experimental 3 (ECOM026) | `fislab3` | sim (nova; só o roteiro do Experimento 2) | sim |
+
+O site no Render não foi atualizado por mim (sem acesso); a atualização depende do deploy da `main`.
 
 ## Aguardando decisão
 
