@@ -461,6 +461,7 @@ PERGUNTAS = [
     ("fis1", "assunto", "Como calcular a velocidade de uma bola que rola sem deslizar numa rampa?", ["fis1-ab2-q4-bola-rampa-rolamento", "fis1-reav-ab2-q3-cilindro-telhado"]),
     ("fis1", "assunto", "Como achar a aceleração a partir de v(t) = (6t − 4t²) i + 8 j?", ["fis1-ab1-q1-velocidade-vetorial"]),
     ("fis1", "fora", "Como calcular uma integral dupla em coordenadas polares?", []),
+    ("fis1", "assunto", "Na máquina de Atwood com polia de massa, o que acontece se m1 = 0?", ["fis1-ab2-2022-variacoes", "fis1-reav-ab2-q2-atwood-disco"]),
     ("fis1", "fora", "Me conte uma piada", []),
     ("fis1", "fora", "Por que um bloco de madeira flutua e uma pedra do mesmo volume afunda?", []),
     ("fis2", "fora", "Como resolver uma colisão perfeitamente inelástica?", []),

@@ -96,6 +96,7 @@ def test_resolucoes_tem_status_e_dizem_no_texto():
         "fis1-ab2-q4-bola-rampa-rolamento",
         "fis1-reav-ab2-q1-pendulo-balistico",
         "fis1-reav-ab2-q2-atwood-disco",
+        "fis1-ab2-2022-variacoes",
     }
     assert {i for i, s in status.items() if s == "corrigida"} == {
         "fis1-ab1-q2-projetil-rochedo",
@@ -379,3 +380,16 @@ def test_documentacao_lista_todas_as_fontes_e_blocos():
     assert [i for i in CATALOGO if f"`{i}`" not in curadoria] == []
     assert [i for i in TODOS if f"`{i}`" not in curadoria] == []
     assert "`fis1`" in (ROOT / "docs/DISCIPLINAS.md").read_text(encoding="utf-8")
+
+
+def test_ab2_2022_variacoes_com_g_10():
+    c = fv.colisao_elastica(g=10)
+    assert c["p_depois"] == pytest.approx(c["p_antes"]) and c["K_depois"] == pytest.approx(c["K_antes"])
+    esf, dis = fv.rolamento_rampa(2 / 5, M=8, g=10), fv.rolamento_rampa(1 / 2, M=8, g=10)
+    at, sem_m1 = fv.atwood_disco(0.5, g=10), fv.atwood_disco(0.5, m1=0, g=10)
+    assert at["torque"] == pytest.approx(at["I_alpha"]) and sem_m1["torque"] == pytest.approx(sem_m1["I_alpha"])
+    assert sem_m1["a"] == pytest.approx(0.6 * 10 / (0.6 + 0.25)) and fv.atwood_disco(0, m1=0, g=10)["a"] == pytest.approx(10)
+    tem("fis1-ab2-2022-variacoes", fmt(c["v1i"], 2), fmt(c["v1f"], 2), fmt(c["v2f"], 2), fmt(c["h2"], 3),
+        fmt(esf["a"], 2), fmt(esf["f"], 2), fmt(esf["v"], 2), fmt(dis["a"], 2), fmt(dis["f"], 2), fmt(dis["v"], 2),
+        fmt(at["a"], 2), fmt(at["T1"], 2), fmt(at["T2"], 2), fmt(sem_m1["a"], 2), fmt(sem_m1["T2"], 2),
+        "1,37 rad/s", "M = 12 cm", "g = 10")  # fmt: skip
