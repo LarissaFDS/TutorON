@@ -22,6 +22,9 @@
       "id": "sd",
       "nome": "Sistemas Digitais",
       "sigla": "SD",
+      "nomes_nos_cursos": [
+        "Circuitos Digitais"
+      ],
       "situacao": "MVP",
       "itens": "disciplinas/sd/acervo/itens.json",
       "indice": "disciplinas/sd/acervo/indice.json",
