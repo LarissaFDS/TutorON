@@ -4,7 +4,7 @@ Situação: **em validação** desde 27/10/2026. A disciplina está cadastrada, 
 
 | Item | Estado em 27/10/2026 |
 |---|---|
-| Cadastro, acervo (34 blocos desde 18/11/2026; eram 28) e índice híbrido (`bge-m3`) | **Feitos** |
+| Cadastro, acervo (41 blocos desde 23/11/2026; eram 37) e índice híbrido (`bge-m3`) | **Feitos** |
 | Contas, codificações e código RISC-V das resoluções | **Conferidos por código** (`tests_acervo/test_disciplina_oac.py`) |
 | Revisão humana interna dos 28 blocos | **Pendente** (`revisao_humana: pendente` em todos) |
 | Autorização para publicar transcrições literais da prova e da lista | **Não dada**: os blocos trazem enunciados parafraseados e os dados, não a transcrição |
@@ -89,6 +89,9 @@ Mesma escala de SD: notas de 1 a 5 em **autoridade**, **cobertura**, **profundid
 | `ufal-ppc-ecomp-2011-oac` Ementa ECOM025 | — | 5 | 3 | 1 | 1 | 3 | 5 | 3 | 1 | referência | ementa |
 | `ufal-oac-notion` Notion da turma | RISC-V | 4 | 3 | 3 | 3 | 4 | 4 | 1 | 2 | referência | resumida (s01–s07) |
 | `ufal-oac-anotacoes-otavio-2025-2` Anotações manuscritas de aluno (2025.2) | RISC-V | 2 | 3 | 3 | 4 | 5 | 3 | 1 | 4 | média | resumida (u01–u06) |
+| `ufal-oac-prova-2016-2` Prova do módulo 3 (2016.2) com gabarito | genérica | 5 | 3 | 3 | 4 | 4 | 4 | 2 | 5 | alta | no acervo (t12, t13) |
+| `ufal-oac-lista-cap2` Lista RISC-V do cap. 2 | RISC-V | 4 | 3 | 3 | 3 | 5 | 5 | 2 | 5 | alta | no acervo (t14, t15) |
+| `ufal-oac-listas-cap5-cap6` Listas dos cap. 5 e 6 | genérica | 4 | 3 | 3 | 3 | 5 | 5 | 2 | 4 | média | referência (já resolvidas em u04, u05, s06, s07) |
 
 ### Por que esta seleção
 
@@ -159,6 +162,15 @@ As provas do Prof. Erick de Andrade Barboza são comuns às turmas de Engenharia
 
 Entraram 3 blocos de `ufal-cc-oac-provas-erick-2017`, todos `validada` e com `curso:` no cabeçalho: `oac-cc-desempenho-compiladores`, `oac-cc-cache-tres-mapeamentos`, `oac-cc-pipeline-reordenar-ciclo`. O item b da Q2 da prova 1 foi anulado no gabarito; o bloco mostra a conta (clock de A cerca de 27% mais lento). Fora do repositório: as provas de 2016.2 e a reavaliação de 2017.1 (mesmos tópicos) e os arquivos do MARS.
 
+## 4.4 Complemento do 4º período de Engenharia de Computação (23/11/2026)
+
+Material bruto do 4º período de EC, comparado arquivo a arquivo com este catálogo e com os blocos.
+
+- **Novo no acervo:** prova do módulo 3 de 2016.2 com gabarito (t12: cache de 8 blocos, 15/15/14 faltas conferidas por simulador; t13: V/F de cache, memória virtual e RAID; a Q5 depende de um diagrama que não está no arquivo) e a lista RISC-V do cap. 2 (t14: Ex. 1 e 2; t15: Ex. 4 e 5, código da equipe simulado no teste). Os Ex. 3 e 6 ficaram sem resolução.
+- **Já coberto:** a lista do cap. 1 e a Prova 1 de 2025.1 (mesmo arquivo, `ufal-oac-prova1-2025-1` e `ufal-oac-lista-cap1`); as listas dos cap. 5 e 6 (`ufal-oac-listas-cap5-cap6`), que u04, u05, s06 e s07 já resolvem. A lista oficial do cap. 5 traz o endereço 56 onde u04 tem 58; refeita a simulação, as faltas são as mesmas (13, 12, 12), então u04 não foi mudado.
+- **Só evidência, fora do repositório:** `OAC - Cap 5.pdf` e `Exercícios Cap 1 - Resposta.pdf` (anotações manuscritas de aluno sobre as mesmas listas); `riscv_entrega1` (`.sv`, `.s`, trabalho de aluno: confirma o datapath single-cycle já tratado em u01 e s04; nenhum bloco a partir da solução); `animated_pipeline.html` (parece gerado por IA).
+- **Protegido:** `Computer Organization and D_ .pdf` (Patterson & Hennessy), não versionado (`pattersonhennessy-cod-riscv`, só referência).
+
 ## 5. Blocos do acervo
 
 Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum bloco tem confiabilidade alta.
@@ -180,6 +192,8 @@ Todos com `curadoria: aprovado` e confiabilidade **média**, como em SD. Nenhum 
 | s01, s02, s04–s07 | anotações do Notion (seção 4.1) | material da disciplina | exemplos conferidos (contas e afirmações) |
 | s03 | `oac-notion-cap2-procedimentos` | material da disciplina | conferida por código (fatorial e laço simulados) |
 | u01–u06 | anotações manuscritas de aluno, 2025.2 (seção 4.2) | material da disciplina | u04 e u05 conferidos por simulador e contas; u02 por diagrama ciclo a ciclo; u01, u03 e u06 conceituais |
+| t12, t13 | `oac-prova2016-2-q1-cache`, `oac-prova2016-2-q2-q4-vf` | material da disciplina | t12 conferida por simulador; t13 não verificada (V/F conceitual, gabarito do professor) |
+| t14, t15 | `oac-lista-cap2-ex1-ex2`, `oac-lista-cap2-ex4-ex5` | material da disciplina | conferida por código (simulados) |
 
 **Código assembly e fórmulas.** Cada bloco cabe inteiro num trecho (menos de 2.000 caracteres; `backend/rag.py` corta acima de 2.200), então nenhum bloco de código é partido na indexação. O teste confere que os blocos ```` ``` ```` estão fechados. Fórmulas estão em texto legível (o tutor responde em Markdown com LaTeX). O datapath do cap. 4 foi transcrito em texto: componentes, campos da instrução usados e tabela de sinais (n07).
 

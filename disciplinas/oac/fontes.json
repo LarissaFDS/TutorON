@@ -1,6 +1,6 @@
 {
  "disciplina": "oac",
- "atualizado_em": "2026-11-18",
+ "atualizado_em": "2026-11-23",
  "legenda": {
   "prioridade": "alta = compõe o acervo inicial; media = complementa ou preenche lacunas; referencia = consulta e comparação, não é ingerida",
   "uso": "acervo = resumido ou parafraseado em disciplinas/oac/materiais; citada = indicada como leitura nas notas da equipe; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -635,6 +635,104 @@
    "prioridade": "referencia",
    "uso": "citada",
    "justificativa": "Ementa de OAC no PPC de CC, usada só para comparar com a disciplina oac"
+  },
+  {
+   "url": null,
+   "idioma": "pt-BR",
+   "origem": "material de turma",
+   "licenca": "Material de turma; licença não declarada",
+   "id": "ufal-oac-prova-2016-2",
+   "nome": "Prova do módulo 3 de OAC, 2016.2, com gabarito (cache, memória virtual, RAID, barramento)",
+   "autoria": "Prof. Erick de Andrade Barboza, IC/UFAL",
+   "arquivo_local": "prova2016.2-GABARITO.pdf",
+   "sha256": "625472831b22fab85f6e5271969d8cc02221ae3ebd9f51745aec714e97c3a633",
+   "formato": "PDF, 2 páginas, com gabarito e justificativas",
+   "isa": "genérica",
+   "topicos": [
+    "oac-15-hierarquia-memoria"
+   ],
+   "acesso": "Fornecido pelos alunos; PDF fora do repositório; enunciados parafraseados no acervo",
+   "notas": {
+    "autoridade": 5,
+    "cobertura": 3,
+    "profundidade": 3,
+    "didatica": 4,
+    "aderencia": 4,
+    "acessibilidade": 4,
+    "reutilizacao": 2,
+    "tutoria": 5
+   },
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Única prova com gabarito do módulo de memória com RAID e memória virtual em V/F. Faltas da Q1 (15, 15, 14) conferidas por simulador; Q5 sem o diagrama."
+  },
+  {
+   "url": null,
+   "idioma": "pt-BR",
+   "origem": "material de turma",
+   "licenca": "Material de turma; licença não declarada",
+   "id": "ufal-oac-lista-cap2",
+   "nome": "OAC — RISC-V — Exercícios 2 (capítulo 2)",
+   "autoria": "Lista da turma; autor não identificado no arquivo",
+   "arquivo_local": "OAC - RISC-V - Exercícios 2.pdf",
+   "sha256": "b4d4aa3eeaf4c2d6b6574d7b65a2a182d15487d92d166bd07149b256e5ac0bed",
+   "formato": "PDF, 2 páginas, só enunciados",
+   "isa": "RISC-V",
+   "topicos": [
+    "oac-09-desvios-lacos-vetores",
+    "oac-10-procedimentos"
+   ],
+   "acesso": "Fornecido pelos alunos; PDF fora do repositório; enunciados parafraseados no acervo",
+   "notas": {
+    "autoridade": 4,
+    "cobertura": 3,
+    "profundidade": 3,
+    "didatica": 3,
+    "aderencia": 5,
+    "acessibilidade": 5,
+    "reutilizacao": 2,
+    "tutoria": 5
+   },
+   "prioridade": "alta",
+   "uso": "acervo",
+   "justificativa": "Exercícios de programação RISC-V da turma atual; Ex. 1, 2, 4 e 5 resolvidos pela equipe e simulados; Ex. 3 e 6 sem resolução."
+  },
+  {
+   "url": null,
+   "idioma": "pt-BR",
+   "origem": "material de turma",
+   "licenca": "Material de turma; licença não declarada",
+   "id": "ufal-oac-listas-cap5-cap6",
+   "nome": "OAC — RISC-V — Exercícios 5 (cap. 5, memória) e Exercícios 6 (cap. 6, paralelismo)",
+   "autoria": "Listas da turma; autor não identificado no arquivo",
+   "arquivo_local": [
+    "OAC - RISC-V - Exercícios 5.pdf",
+    "OAC - RISC-V - Exercícios6.pdf"
+   ],
+   "sha256": {
+    "cap5": "c3b2c9eda8fed4a986586896438743c2b659461340d73057fb6bd7bb3e0e6277",
+    "cap6": "808a58d16539a896b8dee05ff1fe68c575a4adc6421f2c39bd5e4be7ecb254f3"
+   },
+   "formato": "PDF, 2 e 3 páginas, só enunciados",
+   "isa": "genérica",
+   "topicos": [
+    "oac-15-hierarquia-memoria",
+    "oac-16-paralelismo"
+   ],
+   "acesso": "Fornecido pelos alunos; PDF fora do repositório; não ingerido",
+   "notas": {
+    "autoridade": 4,
+    "cobertura": 3,
+    "profundidade": 3,
+    "didatica": 3,
+    "aderencia": 5,
+    "acessibilidade": 5,
+    "reutilizacao": 2,
+    "tutoria": 4
+   },
+   "prioridade": "media",
+   "uso": "referencia",
+   "justificativa": "São as listas que u04, u05, s06 e s07 já resolvem; nada novo. A lista oficial do cap. 5 traz 56 no 8º endereço (u04 usa 58); as faltas não mudam (13, 12, 12)."
   }
  ]
 }
