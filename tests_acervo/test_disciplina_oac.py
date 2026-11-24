@@ -114,7 +114,7 @@ def test_pergunta_fora_do_acervo_nao_inventa_material():
 
 def test_resolucoes_da_turma_tem_status_e_dizem_no_texto():
     turma = [i for i in ITENS.values() if i['natureza'] == 'material_da_disciplina']
-    assert len(turma) == 27  # 11 da prova, lista e aula + 7 do Notion + 6 das anotações manuscritas (u*) + 3 de CC (v*)
+    assert len(turma) == 31  # 11 da prova, lista e aula + 7 do Notion + 6 das anotações manuscritas (u*) + 3 de CC (v*) + 4 do 4º período de EC (t12–t15)
     rotulo = {'validada': 'validada', 'corrigida': 'corrigida', 'pendente_professor': 'pendente de confirmação do professor'}
     for i in turma:
         assert i.get('status_resolucao') in rotulo, i['id']
@@ -484,3 +484,39 @@ def test_documentacao_lista_todas_as_fontes():
     curadoria = (ROOT / 'disciplinas/oac/CURADORIA.md').read_text(encoding='utf-8')
     assert [i for i in CATALOGO if f'`{i}`' not in curadoria] == []
     assert [i for i in ITENS if f'`{i}`' not in curadoria] == []
+
+
+# ---------------------------------------------------------------- complemento do 4º período de EC (23/11/2026)
+
+PROVA_2016_Q1 = [1, 4, 8, 5, 20, 11, 4, 43, 5, 6, 9, 14, 1, 8, 11, 22, 6]
+
+
+def test_prova_2016_2_q1_confere_gabarito():
+    texto = ITENS['oac-prova2016-2-q1-cache']['texto']
+    direto, duas, total = (simular_cache(PROVA_2016_Q1, 8, v) for v in (1, 2, 8))
+    assert (faltas(direto), faltas(duas), faltas(total)) == (15, 15, 14)
+    assert len(set(PROVA_2016_Q1)) == 11 and direto.count('compulsoria') == 11
+    assert (direto.count('conflito'), duas.count('conflito'), total.count('conflito')) == (4, 4, 3)
+    assert texto.count('**15 faltas**') == 2 and '**14 faltas**' in texto
+
+
+def test_lista_cap5_oficial_tem_56_e_mesmas_faltas_que_u04():
+    oficial = [56 if e == 58 else e for e in AB2_Q1]
+    assert [faltas(simular_cache(oficial, 16, v)) for v in (1, 2, 16)] == [13, 12, 12]
+
+
+def test_lista_cap2_ex1_ex2():
+    asm1, asm2 = re.findall(r'```asm\n(.*?)```', ITENS['oac-lista-cap2-ex1-ex2']['texto'], re.S)
+    assert executar(asm1)[0][7] == 1
+    for a, b, esperado in ((1, 5, 1), (-1, -4, 2), (5, 1, 3), (-3, 2, 3), (0, 0, 3), (-2, -2, 3)):
+        caso = 1 if 0 <= a < b else 2 if a < 0 and a > b else 3
+        assert executar(asm2, {11: a, 12: b})[0][10] == esperado == caso
+
+
+def test_lista_cap2_ex4_ex5():
+    asm4, asm5 = re.findall(r'```asm\n(.*?)```', ITENS['oac-lista-cap2-ex4-ex5']['texto'], re.S)
+    for a, b in ((3, 6), (1, 1), (-2, 4), (5, 5)):
+        assert executar(asm4, {10: a, 11: b})[0][10] == sum(range(a, b + 1))
+    assert executar(asm4, {10: 4, 11: 2})[0][10] == 1
+    for a, b in ((7, -3), (-4, -5), (6, 0), (0, -9), (-8, 3)):
+        assert executar(asm5, mem={0: a, 4: b})[1][8] == a * b
