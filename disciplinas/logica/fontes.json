@@ -487,6 +487,27 @@
       "prioridade": "referencia",
       "uso": "referencia",
       "justificativa": "Ficam fora do acervo por direito autoral; CLRS nem é de lógica."
+    },
+    {
+      "id": "ufal-evandro-2024-lista-prova",
+      "nome": "Slides de Lógica Proposicional (Parte 1), Lista 1 e questões da prova 1 de Lógica Aplicada à Computação, 2024.1",
+      "autoria": "Prof. Evandro Costa (IC-UFAL)",
+      "url": null,
+      "arquivo_local": null,
+      "sha256": null,
+      "idioma": "pt-BR",
+      "formato": "PDF (slides) e imagens (lista e fotos da prova)",
+      "isa": "não se aplica",
+      "topicos": [
+        "logica-02-proposicional-sintaxe-semantica",
+        "logica-03-consequencia-equivalencia"
+      ],
+      "licenca": "Não declarada (material do professor)",
+      "acesso": "Recebido no material do 2º período de Engenharia de Computação em 2026-11-23; slides, imagens e fotos não versionados",
+      "notas": 3,
+      "prioridade": "media",
+      "uso": "acervo",
+      "justificativa": "Questões novas de consequência (técnico culpado; governo, desemprego e inflação nas versões da lista e da prova) e de valoração e classificação. Os slides de 2024.1 repetem o que já está nos blocos l01 a l07 e não geraram bloco. As fotos da prova têm respostas manuscritas de um aluno, que não foram usadas."
     }
   ]
 }

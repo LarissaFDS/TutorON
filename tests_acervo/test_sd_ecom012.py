@@ -96,3 +96,36 @@ def test_m16_hexadecimal_contagem_e_identidade():
     for r, k in [(2, 3), (8, 2), (10, 3), (16, 2)]:
         assert len(range(1, r**k)) == r**k - 1
     assert all(((x & y) | (x & (1 - y))) == x for x, y in product((0, 1), repeat=2))
+
+
+# ---------------------------------------------------------------- m20 e m21 (provas de 2020–2022)
+
+
+def test_m20_prioridade_decodificador_e_karnaugh():
+    for a, b, c in product((0, 1), repeat=3):
+        sa, sb, sc = a, (1 - a) & b, (1 - a) & (1 - b) & c
+        assert sa + sb + sc <= 1 and (sa | sb | sc) == (a | b | c)
+    for a, b in product((0, 1), repeat=2):
+        y = [a | b, a | (1 - b), (1 - a) | b, (1 - a) | (1 - b)]
+        assert y.count(0) == 1 and y[2 * a + b] == 0
+    assert [2 ** 2**n for n in (1, 2, 3)] == [4, 16, 256]
+    mapa = [[0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 1], [0, 1, 1, 0]]  # linhas gh, colunas ij (Gray)
+    for r, gh in enumerate(GRAY):
+        for k, ij in enumerate(GRAY):
+            assert mapa[r][k] == (gh & 1) | (ij & 1)
+
+
+def test_m21_memoria_e_latch_nor():
+    def ands(w, b):
+        return 2 * w + w * b + 2
+
+    assert ands(4, 3) == 22 and ands(512, 8) == 5122 and 2**9 == 512
+
+    def latch(x, y, q):
+        for _ in range(4):
+            q = nor(x, nor(y, q))
+        return q, nor(y, q)
+
+    assert latch(0, 0, 0)[0] == 0 and latch(0, 0, 1)[0] == 1  # guarda
+    assert latch(0, 1, 0)[0] == 1 and latch(1, 0, 1)[0] == 0  # Y = S, X = R
+    assert latch(1, 1, 0) == (0, 0) and latch(1, 1, 1) == (0, 0)  # proibida

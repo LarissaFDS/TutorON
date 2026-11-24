@@ -598,3 +598,38 @@ def test_prova2_da_roberta_modelo_finito():
     f3 = (not all(any(mais(s["x"], y) == z for z in D) for y in D)) or s["x"] == 3
     assert (f1, f2, f3) == (False, True, False)
     assert sorted({vezes(x, x) for x in D}) == [1, 3]
+
+
+# ---------------------------------------------------------------- complemento de EC, 2º período (Evandro, 2024.1)
+
+
+def test_evandro_2024_tecnico_culpado():
+    premissas = [r"J\to G", r"\neg J\to T", r"G\to C", r"\neg C"]
+    assert lv.consequencia(premissas, "T")
+    assert "modus tollens" in texto("logica-evandro-2024-tecnico-culpado")
+
+
+def test_evandro_2024_governo_inflacao_duas_versoes():
+    base = [r"G\to\neg D", r"\neg D\to\neg I"]
+    alternativas = [r"\neg G\land D", r"G\land D", r"G\land\neg D"]
+    assert [lv.consequencia(base + ["I"], c) for c in alternativas] == [True, False, False]
+    assert [lv.consequencia(base + [r"\neg I"], c) for c in alternativas] == [False, False, False]
+    assert "afirmação do consequente" in texto("logica-evandro-2024-governo-inflacao")
+
+
+def test_evandro_2024_valoracao_e_classificacao():
+    f = lv.parse(r"(p\land(\neg q\to p))\land\neg((p\leftrightarrow\neg q)\to(q\lor\neg p))")
+    assert lv.valor(f, dict(p=True, q=False)) and not lv.valor(f, dict(p=False, q=False))
+    tipos = {
+        r"(P\to Q)\land(\neg P\to R)": "contingência",
+        r"P\land\neg P\land Q": "contradição",
+        r"(\neg(P\lor Q)\lor\neg P)\land P": "contradição",
+        r"Q\to(P\land\neg Q)": "contingência",
+        r"(P\land Q)\leftrightarrow(\neg P\lor Q)": "contingência",
+    }
+    for s, tipo in tipos.items():
+        vals = [b for _, b in lv.tabela(s)]
+        assert ("tautologia" if all(vals) else "contradição" if not any(vals) else "contingência") == tipo, s
+    assert lv.equivalentes(r"P\leftrightarrow Q", r"(P\to Q)\land(\neg P\to\neg Q)")
+    alternativas = [r"B\to\neg J", r"J\to B", r"\neg B\to J", r"B\to J", r"\neg B\to\neg J"]
+    assert [lv.equivalentes(r"\neg B\lor J", c) for c in alternativas] == [False, False, False, True, False]

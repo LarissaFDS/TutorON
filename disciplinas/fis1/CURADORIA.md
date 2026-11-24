@@ -46,6 +46,7 @@ Energia aparece nas duas físicas: em Física 1, conservação da energia mecân
 | `ufal-rosso-reav-ab1` | acervo | Páginas de livro protegido; só paráfrase |
 | `ufal-rosso-ab2-2017` | acervo | Não declarada (prova); páginas do livro protegidas |
 | `ufal-rosso-reav-ab2-2017` | acervo | Não declarada (prova) |
+| `ufal-rosso-ab2-2022` | acervo | Não declarada (prova); PDF não versionado |
 | `ufal-rosso-lista-questoes` | acervo | Não declarada (anotação de aluno) |
 | `halliday-fundamentos-vol1` | referencia | Protegido; não incluído |
 | `halliday-resolucoes-10ed` | referencia | Manual protegido; não incluído |
@@ -77,6 +78,7 @@ Na busca (material da turma, parafraseado, resolução da equipe, `aprovado`):
 | `fis1-reav-ab2-q2-atwood-disco` | pendente_professor | disco de 500 kg (provavelmente g) |
 | `fis1-reav-ab2-q3-cilindro-telhado` | validada | |
 | `fis1-reav-ab2-q4-barata-disco` | validada | |
+| `fis1-ab2-2022-variacoes` | pendente_professor | AB2 de 2022: g = 10, bola de 8 kg, item m1 = 0; massa do disco dada como "M = 12 cm" |
 | `fis1-mapa-provas-listas` | — | mapa das avaliações e listas, sem enunciados |
 
 Fora da busca (`nota_da_equipe_ia`, `candidato`, revisão humana pendente): `fis1-nota-vetores-componentes`, `fis1-nota-movimento-circular`, `fis1-nota-trabalho-potencia`.
@@ -88,3 +90,9 @@ Não cobertos: a questão 1 da final (exemplo 4.04 da 10ª ed.) não foi fotogra
 Todas as resoluções são da equipe TutorON, **não gabarito do professor**, e o texto de cada bloco diz isso. "validada" quer dizer que a resolução foi refeita por código e, quando a turma tinha a página do exemplo do livro fotografada (AB2 Q1, Q2 e Q3), coincide com o resultado impresso. `tests_acervo/fis1_verif.py` refaz cada questão a partir dos dados do enunciado parafraseado e confere as expressões finais por análise dimensional com SymPy; `tests_acervo/test_disciplina_fis1.py` compara cada número com o texto do bloco, inclusive as leituras alternativas dos dados pendentes e os erros comuns citados.
 
 Revisão humana e do professor: **pendentes** em todos os blocos.
+
+## Material do 2º período de Engenharia de Computação (23/11/2026)
+
+- **AB2 de 27/06/2022** (`ufal-rosso-ab2-2022`): repete quatro questões de 2017. Entrou um bloco, `fis1-ab2-2022-variacoes`, com os números refeitos para g = 10 m/s², a bola de 8 kg e o item novo da máquina de Atwood com $m_1 = 0$. A prova dá a massa do disco como "M = 12 cm": fica `pendente_professor`, com a leitura M = 500 g. O e-mail do professor que está no PDF não foi copiado.
+- **Halliday** (livro e manual de soluções): protegidos, não versionados, só referência (já catalogados).
+- O resto do material repete o que já está no acervo.

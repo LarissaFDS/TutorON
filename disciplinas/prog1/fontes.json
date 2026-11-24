@@ -1,6 +1,6 @@
 {
   "disciplina": "prog1",
-  "atualizado_em": "2026-11-21",
+  "atualizado_em": "2026-11-23",
   "legenda": {
     "prioridade": "alta = compõe o acervo inicial; media = complementa; referencia = consulta, não ingerida",
     "uso": "acervo = parafraseado em disciplinas/prog1/materiais; citada = indicada nas notas ou na curadoria; referencia = só catálogo; candidato = aguarda conferência; indisponivel = não acessado",
@@ -353,6 +353,27 @@
       "uso": "citada",
       "origem": "documento institucional",
       "justificativa": "Ementa de COMP002 Programação 1 (80 h: 60 teóricas e 20 práticas, 1º período), p. 20: texto idêntico ao de ECOM002 no PPC de Engenharia de Computação de 2014. O código COMP359 da pasta não aparece nesse PPC; não encontramos PPC mais novo."
+    },
+    {
+      "url": null,
+      "arquivo_local": null,
+      "idioma": "pt-BR",
+      "isa": "não se aplica",
+      "id": "ufal-ec2-prog1-codigos-c",
+      "nome": "Códigos C de exercícios de Programação, material do 2º período de Engenharia de Computação",
+      "autoria": "Aluno(s) de Engenharia de Computação da UFAL, não identificados; sem enunciados, professor nem semestre",
+      "sha256": null,
+      "formato": "48 arquivos .c (vetores, ordenação, funções, recursão, structs, projeto de primos de Discreta) e executáveis .exe",
+      "topicos": [
+        "prog1-07-vetores",
+        "prog1-12-recursao"
+      ],
+      "licenca": "Não declarada; trabalho de aluno",
+      "acesso": "Arquivos entregues pela equipe; não versionados",
+      "prioridade": "media",
+      "uso": "acervo",
+      "origem": "material de turma",
+      "justificativa": "Evidência de dois tópicos que o acervo não tinha: ordenação de vetor (um arquivo chama de bubblesort uma ordenação por trocas) e recursão com acumulador (com o return esquecido na chamada recursiva). Os blocos s24 e s25 usam código próprio, testado em tests_acervo/c_prog1/ec2_ordenacao_acumulador.c. Nenhum código, executável ou nome de pasta com nome de pessoa entrou."
     }
   ]
 }
