@@ -341,3 +341,22 @@ def test_pedido_de_questoes_vira_ajuda_de_questoes():
     assert not prompts.pedido_de_questoes("como resolvo essa questão?")
     assert not prompts.pedido_de_questoes("Resolva T(n) = 2T(n/2) + n")
     assert "NÃO escreva respostas" in prompts.AJUDAS["questoes"][1]
+
+
+@pytest.mark.parametrize("pedido,ferramenta", [
+    ("faz um mapa mental de grafos", "mapa"), ("me faz um resumo de árvores AVL", "resumo"),
+    ("quero um formulário com as fórmulas para a prova de cálculo", "formulario"),
+    ("cria flashcards de sistemas operacionais", "flashcards"), ("monta um plano de estudo para P2", "plano"),
+    ("Como funciona o bubble sort?", None)])
+def test_ferramenta_de_estudo_pedida_em_texto(pedido, ferramenta):
+    assert prompts.ferramenta_pedida(pedido) == ferramenta
+
+
+@pytest.mark.parametrize("duvida,cena", [
+    ("Como funciona o bubble sort?", "vetor"), ("BFS no grafo da lista", "grafo"),
+    ("resolver T(n) = 2T(n/2) + n", "arvore_recursao"), ("simplificar com mapa de Karnaugh", "karnaugh"),
+    ("o que é um processo no SO?", None)])
+def test_cena_sugerida_para_a_animacao(duvida, cena):
+    assert prompts.cena_sugerida(duvida) == cena
+    if cena:
+        assert f'CENA SUGERIDA PARA ESTA DÚVIDA: "{cena}"' in prompts.prompt_animacao(duvida, None, prompts.GERAL)

@@ -222,12 +222,12 @@ def pedido_de_questoes(pergunta: str) -> bool:
 FERRAMENTAS_ESTUDO = ("formulario", "resumo", "mapa", "flashcards", "plano", "feynman")
 
 _PEDIDO_FERRAMENTA = (
-    ("formulario", re.compile(r"(formul[aá]rio|folha de f[oó]rmulas|cola de f[oó]rmulas|f[oó]rmulas (?:mais )?importantes|f[oó]rmulas (?:para|pra) (?:a )?prova)", re.I)),
-    ("mapa", re.compile(r"mapas? menta(?:l|is)|mapa conceitual", re.I)),
-    ("flashcards", re.compile(r"(flash ?cards?|cart(?:õ|o)es de (?:revis[aã]o|estudo|mem[oó]ria)|anki)", re.I)),
-    ("plano", re.compile(r"(plano|cronograma|roteiro) de estudos?", re.I)),
-    ("feynman", re.compile(r"(feynman|vou (?:te )?explicar (?:com|nas) minhas palavras)", re.I)),
-    ("resumo", re.compile(r"(resum[aoe]|resumir|s[ií]ntese|revis[aã]o geral) (?:d[aoe]s?|sobre|de|o|a|esse|essa|este|esta|tudo)|fa[cç]a um resumo|me (?:d[aáê]|passa) um resumo", re.I)),
+    ("formulario", re.compile(r"\b(formul[aá]rio|folha de f[oó]rmulas|cola de f[oó]rmulas|f[oó]rmulas (?:mais )?importantes|f[oó]rmulas (?:para|pra) (?:a )?prova)", re.I)),
+    ("mapa", re.compile(r"\bmapas? menta(?:l|is)|\bmapa conceitual", re.I)),
+    ("flashcards", re.compile(r"\b(flash ?cards?|cart(?:õ|o)es de (?:revis[aã]o|estudo|mem[oó]ria)|anki)\b", re.I)),
+    ("plano", re.compile(r"\b(plano|cronograma|roteiro) de estudos?\b", re.I)),
+    ("feynman", re.compile(r"\b(feynman|vou (?:te )?explicar (?:com|nas) minhas palavras)", re.I)),
+    ("resumo", re.compile(r"\b(resum[aoe]|resumir|s[ií]ntese|revis[aã]o geral) (?:d[aoe]s?|sobre|de|o|a|esse|essa|este|esta|tudo)\b|\bfa[cç]a um resumo|\bme (?:d[aáê]|passa|faz) um resumo|\bfaz um resumo", re.I)),
 )
 
 
@@ -329,9 +329,11 @@ SISTEMA_ANIMACAO = """Você planeja animações curtas (Manim) que ajudam um est
 A animação é uma pista visual: mostra a estrutura e os primeiros passos e para antes da resposta final, com uma pergunta para o aluno.
 
 Escolha UM dos modelos abaixo e responda SOMENTE com um JSON válido, sem texto fora dele.
-O PADRÃO é o modelo 10, "esquema" (blocos narrados), para qualquer disciplina e qualquer assunto.
-Use os modelos 1 a 9 só quando a dúvida for exatamente sobre aquela estrutura e trouxer os dados dela
-(ex.: uma recorrência T(n) dada, um vetor dado, um mapa de Karnaugh dado).
+Escolha a cena que MOSTRA a estrutura da dúvida: recorrência -> 1, ordenação/busca em vetor -> 2, grafo ou autômato -> 3,
+tabela verdade/DP -> 4 ou 5, fluxo -> 6, Karnaugh -> 7, portas lógicas -> 8, redução -> 9.
+Os dados podem vir da dúvida, da tentativa do aluno ou do EXEMPLO PARECIDO que o tutor já usou na ajuda (prefira o exemplo
+do tutor a inventar números). Use o modelo 10, "esquema", só quando nenhuma cena específica servir (conceitos, sistemas,
+processos) e, nesse caso, com os termos, nomes e valores desta dúvida, nunca blocos genéricos.
 
 1. "arvore_recursao" — árvore de recursão de T(n) = a T(n/b) + f(n).
    {"modelo":"arvore_recursao","titulo":"...","a":2,"b":2,"f":"n","niveis":3,"custos_nivel":["n","2·(n/2)","4·(n/4)"],"pergunta_final":"..."}
@@ -406,6 +408,27 @@ nunca a resposta.
 Não use outros campos nem outros tipos de cena."""
 
 
+# Palavras da dúvida -> cena que mostra a estrutura dela (dica para a IA; o roteiro continua validado).
+_CENAS = (
+    ("arvore_recursao", r"recorr[eê]ncia|t\s*\(\s*n\s*\)|teorema mestre|[aá]rvore de recurs"),
+    ("karnaugh", r"karnaugh|\bmapa k\b"),
+    ("circuito", r"\bportas? l[oó]gicas?|\b(and|or|xor|nand|nor)\b.*\b(porta|circuito)|circuito combinacional"),
+    ("fluxo", r"fluxo m[aá]ximo|ford.?fulkerson|edmonds|rede de fluxo"),
+    ("grade_dp", r"\bgrade\b.*(direita|baixo)|caminho m[ií]nimo (na|em uma) grade|\brob[oô]"),
+    ("reducao", r"np.?complet|np.?dif[ií]cil|redu[cç][aã]o polinomial"),
+    ("grafo", r"\b(bfs|dfs|dijkstra|kruskal|prim|bellman|grafo|aut[oô]mato|afd|afn|m[aá]quina de estados|busca em (largura|profundidade))"),
+    ("vetor", r"ordena|\bsort\b|busca bin[aá]ria|parti[cç][aã]o|quicksort|merge ?sort|\bheap|\bvetor|\barray|dois ponteiros"),
+    ("tabela", r"tabela.?verdade|programa[cç][aã]o din[aâ]mica|\bdp\b|mochila|\blcs\b|subsequ[eê]ncia"),
+)
+
+
+def cena_sugerida(texto: str) -> str | None:
+    for cena, padrao in _CENAS:
+        if re.search(padrao, texto or "", re.I):
+            return cena
+    return None
+
+
 def prompt_animacao(pergunta: str, resposta_tutor: str | None, disciplina: Disciplina,
                     contexto_aluno: str | None = None, leitura_foto: str | None = None) -> str:
     partes = [f"Disciplina: {disciplina.nome} ({disciplina.sigla}).", "DÚVIDA DO ALUNO (dados):", "<<<", pergunta.strip()[:2000], ">>>"]
@@ -415,6 +438,10 @@ def prompt_animacao(pergunta: str, resposta_tutor: str | None, disciplina: Disci
         partes += ['TENTATIVA OU CÓDIGO DO ALUNO (dados):', '<<<', contexto_aluno.strip()[:2000], '>>>']
     if leitura_foto:
         partes += ['ARQUIVO ENVIADO PELO ALUNO, LIDO AUTOMATICAMENTE (dados):', '<<<', leitura_foto.strip()[:3000], '>>>']
+    cena = cena_sugerida(pergunta + " " + (contexto_aluno or "") + " " + (leitura_foto or ""))
+    if cena:
+        partes.append(f'CENA SUGERIDA PARA ESTA DÚVIDA: "{cena}" (use-a com os dados da dúvida ou do exemplo do tutor; '
+                      'se não houver dados suficientes, use "esquema" com os termos desta dúvida).')
     partes.append("Devolva só o JSON do roteiro.")
     return "\n".join(partes)
 
