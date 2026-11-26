@@ -90,13 +90,14 @@ class Banco:
         r.raise_for_status()
 
     # ------------------------------------------------------------------ autenticação
-    def criar_usuario(self, email: str, senha: str) -> tuple[bool, str]:
+    def criar_usuario(self, email: str, senha: str, nome: str = "") -> tuple[bool, str]:
         """Cria a conta já confirmada (API admin do Auth). Não envia e-mail, então não esbarra no
         limite de e-mails do plano grátis (2 por hora), que era o "Muitas tentativas" ao criar conta.
         Devolve (criada?, código do erro: '' | 'existe' | 'senha' | 'falha')."""
         try:
             r = self.client.post(self.url + "/auth/v1/admin/users", headers=self.headers,
-                                 json={"email": email, "password": senha, "email_confirm": True}, timeout=15)
+                                 json={"email": email, "password": senha, "email_confirm": True,
+                                       **({"user_metadata": {"full_name": nome}} if nome else {})}, timeout=15)
         except httpx.HTTPError as exc:
             logger.warning("Falha ao criar conta: %s", exc)
             return False, "falha"

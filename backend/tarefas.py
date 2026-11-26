@@ -23,9 +23,9 @@ from dataclasses import dataclass, field
 from acervo.disciplinas import obter
 
 from . import animacao, foto, prompts, seguranca, tutoria
-from .dados import Registro, agora, novo_id
-from .llm import LLM, SEM_RACIOCINIO, PLANEJAMENTO_JSON, PREFERIR_LOCAL, AllUnavailable, Model, Result, degradado
 from .animacao.roteiro import extrair_json
+from .dados import Registro, agora, novo_id
+from .llm import LLM, PLANEJAMENTO_JSON, PREFERIR_LOCAL, SEM_RACIOCINIO, AllUnavailable, Model, Result, degradado
 from .rag import contexto, recuperar
 
 logger = logging.getLogger("tutoron.tarefas")
@@ -159,8 +159,11 @@ class Tarefas:
                 SEM_RACIOCINIO.reset(marca)
         raise AllUnavailable(tentativas)
 
-    async def _orientar(self, sistema, prompt, pergunta, d, trechos, t, *, raciocinio=True):
-        """Só publica texto completo e revisado. No máximo uma reformulação."""
+    async def _orientar(self, sistema, prompt, pergunta, d, trechos, t, *, raciocinio=True, material=False):
+        """Só publica texto completo e revisado. No máximo uma reformulação.
+
+        `material`: ferramenta de estudo (formulário, resumo, mapa...). Fórmulas e "=" são o conteúdo pedido,
+        então o revisor por IA não roda (economiza uma chamada); o filtro de gabarito continua valendo."""
         atomica = tutoria.ajuda_atomica(pergunta, d.id)
         if atomica:
             r = Result(text=atomica, model=Model("codigo", "orientacao-atomica"), seconds=0, attempts=[])
@@ -175,7 +178,7 @@ class Tarefas:
                 return texto, r, ajustes, bloqueada, pareceres
             if seguranca.entrega_resposta(texto):
                 parecer = {"aprovada": False, "motivo": "entregou_resposta"}
-            elif not seguranca.precisa_revisor(texto):
+            elif material or not seguranca.precisa_revisor(texto):
                 parecer = {"aprovada": True, "motivo": "sem_sinal_de_solucao", "modelo": "codigo"}
             else:
                 t.mensagem = "Revisando a ajuda antes de mostrar…"
@@ -211,6 +214,8 @@ class Tarefas:
         historico = historico or []
         if ajuda == "auto" and not historico and prompts.pedido_de_questoes(pergunta):
             ajuda = "questoes"
+        if ajuda == "auto" and not historico:
+            ajuda = prompts.ferramenta_pedida(pergunta) or "auto"
         if historico and ajuda == "auto":
             # "Ainda não consegui" com o tutor escolhendo: troca a forma de explicar a cada rodada.
             ajuda = prompts.proxima_ajuda([prompts.ajuda_valida(h.get("ajuda")) for h in historico])
@@ -250,7 +255,7 @@ class Tarefas:
             sistema = prompts.sistema_socratico(d)
             try:
                 texto, r, ajustes, bloqueada, pareceres = await self._orientar(
-                    sistema, prompt, pergunta, d, trechos, t)
+                    sistema, prompt, pergunta, d, trechos, t, material=ajuda in prompts.FERRAMENTAS_ESTUDO)
             except AllUnavailable as exc:
                 self.registro.anexar("perguntas.jsonl", {"id": ident, "data": agora(), "disciplina": d.id,
                                                          "pergunta": pergunta, "erro": "nenhum_modelo",

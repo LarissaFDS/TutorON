@@ -94,6 +94,7 @@ class Settings:
     supabase_anon_key: str = ""
     exigir_login: bool = False
     admins: tuple[str, ...] = ()  # e-mails com acesso de administrador
+    dominios_ic: tuple[str, ...] = ("ic.ufal.br",)  # e-mail institucional do IC (peso maior no painel)
     # Piso absoluto do acervo local (cosseno bge-m3, já descontado o "hub"). Quem separa pergunta
     # fora do tema é o destaque sobre a mediana (acervo/retrieval.py); o piso de 0,45 só descarta o
     # que é distante de tudo. Com 0,5, perguntas legítimas de SD (Moore/Mealy, 0,50) e de PAA (PD)
@@ -173,6 +174,7 @@ def load_settings() -> Settings:
         supabase_anon_key=_env("SUPABASE_ANON_KEY"),
         exigir_login=_env("TUTORON_EXIGIR_LOGIN", "0") not in ("0", "false", "nao", "não"),
         admins=tuple(e.lower() for e in _list("TUTORON_ADMINS", "")),
+        dominios_ic=tuple(e.lower().lstrip("@") for e in _list("TUTORON_DOMINIOS_IC", "ic.ufal.br")),
         acervo_min_similarity=_float("ACERVO_SIMILARIDADE_MINIMA", 0.45),
         disciplinas_em_validacao_liberadas=tuple(
             i.strip().lower() for i in _env("TUTORON_LIBERAR_EM_VALIDACAO").split(",") if i.strip()),

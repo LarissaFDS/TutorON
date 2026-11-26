@@ -6,7 +6,6 @@ preenche o nome e as regras de rigor da área (disciplinas/<id>/rigor.md).
 from __future__ import annotations
 
 import re
-
 from dataclasses import replace
 from pathlib import Path
 
@@ -113,6 +112,13 @@ AJUDAS: dict[str, tuple[str, str]] = {
     "conferir": ("Conferir meu raciocínio", "O aluno quer que você CONFIRA O RACIOCÍNIO dele (no contexto ou na foto). Diga o que está certo, aponte o primeiro passo errado sem corrigi-lo por ele, e faça uma pergunta que o leve a achar o erro. Se não houver tentativa do aluno, peça que ele tente primeiro e mande a tentativa."),
     "questoes": ("Criar questões para treinar", "O aluno pediu QUESTÕES PARA TREINAR. Crie as questões pedidas (padrão: 3; máximo 6), no estilo das provas e listas do material, numeradas, cada uma com um enunciado completo e autocontido: o contexto, os dados e o que se pede. Varie a dificuldade da mais simples para a mais difícil. NÃO escreva respostas, gabarito, dicas de resolução nem o caso do Teorema Mestre de nenhuma delas: você sabe as respostas, mas guarda para conferir depois. Em \"### Sua vez\", peça que o aluno resolva uma de cada vez e mande a resposta ou a foto do papel, dizendo que você confere e ajuda se ele travar. Para esta ajuda o limite é de cerca de 450 palavras."),
     "visual": ("Desenho/esquema", "O aluno pediu uma explicação VISUAL. Esboce a estrutura de uma árvore, tabela, grafo, diagrama ou linha do tempo com campos em branco. Deixe os valores e os passos para o aluno preencher. Não execute várias etapas do exercício nem preencha a tabela ou o desenho até a resposta."),
+    # Ferramentas de estudo (26/11/2026): material para estudar o CONTEÚDO, não a resolução de um exercício.
+    "formulario": ("Formulário para a prova", "O aluno pediu um FORMULÁRIO (folha de fórmulas para levar à prova). Monte uma folha curta e organizada por tópico do assunto pedido: cada fórmula em $...$ ou $$...$$, o significado de cada símbolo em poucas palavras e QUANDO usar (condição de uso, armadilha comum). Priorize as fórmulas que mais caem em prova; nada de deduções longas. Não resolva nenhum exercício do aluno com elas. Em \"### Sua vez\", sugira um exercício curto para ele praticar usando uma das fórmulas. Limite: cerca de 450 palavras."),
+    "resumo": ("Resumo do conteúdo", "O aluno pediu um RESUMO do conteúdo. Escreva um resumo de revisão: ideia central em uma frase, depois os conceitos-chave em tópicos curtos (definição, intuição, exemplo mínimo), as relações entre eles e uma seção \"Erros comuns\". Use o material da disciplina quando houver e cite os rótulos. Em \"### Sua vez\", faça 2 perguntas de recordação ativa (sem respostas) para ele testar se entendeu. Limite: cerca de 450 palavras."),
+    "mapa": ("Mapa mental", "O aluno pediu um MAPA MENTAL. Responda com uma frase de abertura e depois um bloco de código com a linguagem `mapa`: a primeira linha é o tema central e cada linha seguinte é um ramo, com 2 espaços de recuo por nível (até 3 níveis, 4 a 7 ramos principais, rótulos de no máximo 6 palavras; fórmulas curtas em $...$ são permitidas). Depois do bloco, explique em 2 ou 3 frases como os ramos se ligam. Em \"### Sua vez\", peça que ele acrescente um ramo ou exemplo de memória."),
+    "flashcards": ("Flashcards", "O aluno pediu FLASHCARDS para revisão espaçada. Crie de 6 a 10 cartões no formato `**P:** pergunta` em uma linha e `**R:** resposta curta` na linha seguinte, separados por linha em branco, do básico ao mais difícil, cobrindo definições, fórmulas e armadilhas do assunto. Os cartões são sobre o CONTEÚDO, nunca a resposta do exercício do aluno. Em \"### Sua vez\", oriente a tentar responder cobrindo a resposta e revisar os que errar amanhã."),
+    "plano": ("Plano de estudo", "O aluno pediu um PLANO DE ESTUDO. Monte um roteiro por dias ou sessões (pergunte o prazo se ele não disse; padrão: 5 sessões de 50 minutos) com: tópico, técnica (leitura ativa, exercícios, recordação ativa, revisão espaçada, simulado), meta concreta de cada sessão e uma revisão final. Ordene do pré-requisito para o mais avançado. Em \"### Sua vez\", peça que ele diga o que já domina para ajustar o plano. Limite: cerca de 400 palavras."),
+    "feynman": ("Explicar com minhas palavras", "O aluno quer usar a TÉCNICA FEYNMAN. Se ele ainda não explicou o conceito, peça que explique com as palavras dele, como para um colega do primeiro período, e dê 3 pontos que a explicação deve cobrir. Se já explicou (na pergunta, no contexto ou na conversa), avalie: o que ficou claro, a lacuna ou o erro conceitual mais importante e uma pergunta que o faça preencher a lacuna. Não reescreva a explicação inteira por ele."),
 }
 
 
@@ -209,6 +215,28 @@ _PEDIDO_QUESTOES = re.compile(
 def pedido_de_questoes(pergunta: str) -> bool:
     """O aluno quer questões para treinar (ex.: "faça uma lista de 5 questões", "questões para a prova")."""
     return bool(_PEDIDO_QUESTOES.search(pergunta or ""))
+
+
+# Ferramentas de estudo: geram material sobre o conteúdo (não resolvem exercício). Têm resposta mais longa e,
+# por terem fórmulas e "=" de propósito, não passam pelo revisor por IA (só pelo filtro de gabarito).
+FERRAMENTAS_ESTUDO = ("formulario", "resumo", "mapa", "flashcards", "plano", "feynman")
+
+_PEDIDO_FERRAMENTA = (
+    ("formulario", re.compile(r"(formul[aá]rio|folha de f[oó]rmulas|cola de f[oó]rmulas|f[oó]rmulas (?:mais )?importantes|f[oó]rmulas (?:para|pra) (?:a )?prova)", re.I)),
+    ("mapa", re.compile(r"mapas? menta(?:l|is)|mapa conceitual", re.I)),
+    ("flashcards", re.compile(r"(flash ?cards?|cart(?:õ|o)es de (?:revis[aã]o|estudo|mem[oó]ria)|anki)", re.I)),
+    ("plano", re.compile(r"(plano|cronograma|roteiro) de estudos?", re.I)),
+    ("feynman", re.compile(r"(feynman|vou (?:te )?explicar (?:com|nas) minhas palavras)", re.I)),
+    ("resumo", re.compile(r"(resum[aoe]|resumir|s[ií]ntese|revis[aã]o geral) (?:d[aoe]s?|sobre|de|o|a|esse|essa|este|esta|tudo)|fa[cç]a um resumo|me (?:d[aáê]|passa) um resumo", re.I)),
+)
+
+
+def ferramenta_pedida(pergunta: str) -> str | None:
+    """O aluno pediu, em texto livre, uma ferramenta de estudo (ex.: "faz um mapa mental de grafos")."""
+    for ident, padrao in _PEDIDO_FERRAMENTA:
+        if padrao.search(pergunta or ""):
+            return ident
+    return None
 
 
 def ajuda_valida(ajuda: str | None) -> str:

@@ -179,6 +179,7 @@ class AnimarPedido(BaseModel):
 class NovaConta(BaseModel):
     email: str = Field(..., max_length=254, pattern=r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
     senha: str = Field(..., min_length=8, max_length=72)
+    nome: str = Field(..., min_length=2, max_length=60)  # nome de usuário obrigatório (26/11/2026)
 
 
 class Feedback(BaseModel):
@@ -186,7 +187,15 @@ class Feedback(BaseModel):
     util: bool | None = None
     erro_matematico: bool = False
     comentario: str = Field(default="", max_length=1500)
-    tipo: str = Field(default="resposta", pattern=r"^(resposta|leitura|disciplina)$")
+    tipo: str = Field(default="resposta", pattern=r"^(resposta|leitura|disciplina|conversa)$")
+    # Feedback escrito (botão "Deixar feedback" no chat, 26/11/2026). Poucos bytes por linha.
+    nota: int | None = Field(default=None, ge=1, le=5)
+    disciplina: str = Field(default="", max_length=80)
+    ajudou_em: str = Field(default="", max_length=1500)
+    sugestao: str = Field(default="", max_length=1500)
+    aluno_ic: bool | None = None  # declarado pelo aluno (pode usar e-mail pessoal)
+    pergunta: str = Field(default="", max_length=600)  # dúvida da conversa, para o ADM ver sem cruzar tabelas
+    rodadas: int | None = Field(default=None, ge=0, le=200)  # "ainda não consegui" antes do feedback
 
 
 Nota = Field(..., ge=1, le=5)
@@ -470,7 +479,11 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             raise HTTPException(503, "Contas desligadas neste servidor.")
         if not app.state.limitador_contas.permitir(cliente(request)):
             raise HTTPException(429, "Muitas contas criadas desta rede agora. Aguarde alguns minutos.")
-        criada, erro = await asyncio.to_thread(app.state.banco.criar_usuario, corpo.email.strip().lower(), corpo.senha)
+        nome = " ".join(corpo.nome.split())
+        if len(nome) < 2 or "@" in nome:
+            raise HTTPException(400, "Digite seu nome de usuário (pelo menos 2 letras, sem e-mail).")
+        criada, erro = await asyncio.to_thread(app.state.banco.criar_usuario, corpo.email.strip().lower(),
+                                               corpo.senha, nome)
         if not criada:
             mensagens = {"existe": (409, 'Esse e-mail já tem conta. Use "Entrar".'),
                          "senha": (400, "Senha fraca: use pelo menos 8 caracteres, com letras e números."),
@@ -523,6 +536,14 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
                            "tokens_total": u.get("tokens", 0), "perguntas": u.get("perguntas", 0),
                            "ultimo": u.get("ultimo")})
         return {"limite_padrao": settings.cota_tokens, "banco": bool(app.state.banco), "usuarios": linhas}
+
+    @app.get("/api/admin/coleta")
+    async def admin_coleta(request: Request, limite: int = 400) -> dict:
+        """Tudo que os alunos deixaram (feedbacks, erros, perguntas e respostas, conversas) para o painel /admin."""
+        exigir_admin(request)
+        from . import painel
+        return await asyncio.to_thread(painel.coletar, app.state.banco, app.state.registro,
+                                       settings.dominios_ic, max(20, min(limite, 1000)))
 
     @app.post("/api/admin/usuarios/{quem}/limite")
     async def admin_limite(quem: str, corpo: LimiteConta, request: Request) -> dict:
