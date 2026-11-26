@@ -7,17 +7,31 @@
 <meta name="theme-color" content="#4D6BFE">
 <link rel="icon" href="/static/marca/logo.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/static/chat.css?v=final-1">
-<link rel="stylesheet" href="/static/entrar.css?v=1">
+<link rel="stylesheet" href="/static/entrar.css?v=2">
+<script src="/static/config.js?v=1"></script>
 </head>
 <body class="pagina-entrar">
 <main class="entrar">
-  <a class="marca entrar__marca" href="/" aria-label="TutorON, início">
-    <img src="/static/marca/logo.svg" alt="" width="40" height="40">
-    <span class="marca__nome">Tutor<b>ON</b></span>
-  </a>
+  <section class="entrar__lado" aria-hidden="true">
+    <a class="marca entrar__marca" href="/" tabindex="-1">
+      <img src="/static/marca/logo.svg" alt="" width="40" height="40">
+      <span class="marca__nome">Tutor<b>ON</b></span>
+    </a>
+    <p class="entrar__frase">Estude com um tutor que pergunta antes de responder.</p>
+    <ul class="entrar__pontos">
+      <li>Mande a dúvida, a foto do caderno ou o PDF da lista.</li>
+      <li>Ele dá pistas e cria exercícios, sem entregar o gabarito.</li>
+      <li>Com conta, suas conversas ficam salvas.</li>
+    </ul>
+  </section>
+
   <section class="entrar__cartao" aria-labelledby="entrar-titulo">
-    <h1 id="entrar-titulo">Entre para usar o TutorON</h1>
-    <p class="dica">Cada conta tem o seu limite diário. Não pedimos matrícula nem dados da faculdade.</p>
+    <a class="marca entrar__marca entrar__marca--celular" href="/" aria-label="TutorON, início">
+      <img src="/static/marca/logo.svg" alt="" width="34" height="34">
+      <span class="marca__nome">Tutor<b>ON</b></span>
+    </a>
+    <h1 id="entrar-titulo">Bem-vindo de volta</h1>
+    <p class="dica">Só e-mail e senha. Não pedimos matrícula nem dados da faculdade.</p>
 
     <p class="status" id="entrar-indisponivel" role="status" hidden>O login ainda não foi configurado neste servidor. Você pode usar o TutorON como convidado.</p>
 
@@ -28,21 +42,19 @@
           <button type="button" role="tab" id="aba-criar" aria-selected="false">Criar conta</button>
         </div>
         <label class="rotulo" for="email">E-mail</label>
-        <input class="campo" id="email" type="email" autocomplete="email" required maxlength="200">
+        <input class="campo" id="email" type="email" autocomplete="email" required maxlength="200" placeholder="voce@exemplo.com">
         <label class="rotulo" for="senha">Senha</label>
-        <input class="campo" id="senha" type="password" autocomplete="current-password" required minlength="8" maxlength="200">
+        <input class="campo" id="senha" type="password" autocomplete="current-password" required minlength="8" maxlength="72">
         <p class="dica" id="senha-dica" hidden>Use pelo menos 8 caracteres.</p>
-        <div class="acoes">
-          <button class="botao" id="enviar-email" type="submit">Entrar</button>
-          <button class="botao botao--leve" id="esqueci" type="button">Esqueci a senha</button>
-        </div>
+        <button class="botao entrar__enviar" id="enviar-email" type="submit">Entrar</button>
+        <button class="entrar__link" id="esqueci" type="button">Esqueci a senha</button>
       </form>
     </div>
     <p class="status" id="entrar-status" role="status" aria-live="polite"></p>
-    <p class="dica"><a href="/">Voltar ao TutorON</a></p>
+    <a class="entrar__voltar" href="/">← Voltar ao TutorON</a>
   </section>
 </main>
 <script src="/static/conta.js?v=1"></script>
-<script src="/static/entrar.js?v=1"></script>
+<script src="/static/entrar.js?v=2"></script>
 </body>
 </html>

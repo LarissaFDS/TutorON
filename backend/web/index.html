@@ -27,7 +27,8 @@
 <link rel="apple-touch-icon" href="/static/marca/apple-touch-icon.png">
 <link rel="manifest" href="/manifest.webmanifest">
 <link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="/static/chat.css?v=eletivas-1">
+<link rel="stylesheet" href="/static/chat.css?v=config-1">
+<script src="/static/config.js?v=1"></script>
 </head>
 <body>
 <div class="app" id="app">
@@ -62,6 +63,9 @@
       <a class="lateral__item" href="/demo">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Ver exemplos de como funciona
       </a>
+      <button class="lateral__item" type="button" id="config-botao">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Configurações e sobre
+      </button>
       <a class="lateral__item" href="/admin" id="admin-link" hidden>
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Contas e limites
       </a>
@@ -69,8 +73,8 @@
 
     <section class="conversas" aria-labelledby="historico-botao">
       <button class="conversas__titulo" id="historico-botao" type="button" aria-controls="historico" aria-expanded="false">Conversas (0)</button>
-      <ol class="conversas__lista" id="historico" aria-label="Conversas desta aba (somem ao fechar a aba)" hidden></ol>
-      <p class="conversas__vazio" id="historico-vazio">Suas conversas aparecem aqui. Elas ficam só nesta aba.</p>
+      <ol class="conversas__lista" id="historico" aria-label="Suas conversas" hidden></ol>
+      <p class="conversas__vazio" id="historico-vazio">Suas conversas aparecem aqui. Com conta, elas ficam salvas.</p>
     </section>
 
     <div class="lateral__base">
@@ -122,37 +126,6 @@
         </div>
 
         <form id="form-tutor" class="compositor" novalidate>
-          <!-- Foto do papel: a IA lê, o aluno confere, e só então a leitura vai com a dúvida. -->
-          <section class="foto-cartao" id="foto-conferir" hidden aria-labelledby="foto-conferir-titulo" tabindex="-1">
-            <div class="foto-cartao__topo">
-              <img id="foto-previa" alt="Sua foto">
-              <div>
-                <h3 id="foto-conferir-titulo">Confira o que eu li da sua foto</h3>
-                <p class="dica" id="foto-confianca"></p>
-              </div>
-            </div>
-            <div class="foto-cartao__duvidas" id="foto-duvidas" hidden>
-              <p>Não tenho certeza destes trechos. Corrija abaixo se estiver errado:</p>
-              <ul id="foto-duvidas-lista"></ul>
-            </div>
-            <label class="rotulo" for="foto-enunciado">Enunciado lido</label>
-            <textarea class="campo campo--codigo" id="foto-enunciado" rows="4" maxlength="6000"></textarea>
-            <fieldset class="foto-cartao__subs" id="foto-subtopicos-box" hidden>
-              <legend class="rotulo">Subtópicos encontrados (desmarque os que não são do exercício)</legend>
-              <div id="foto-subtopicos"></div>
-            </fieldset>
-            <label class="rotulo" for="foto-tentativa">Sua tentativa lida <span class="dica">(vazio se não houver)</span></label>
-            <textarea class="campo campo--codigo" id="foto-tentativa" rows="3" maxlength="6000"></textarea>
-            <details class="detalhe" id="foto-regioes-box" hidden>
-              <summary>O que foi visto em cada parte da folha</summary>
-              <ul class="fontes__lista" id="foto-regioes"></ul>
-            </details>
-            <div class="acoes">
-              <button class="botao" id="foto-ok" type="button">Está certo, usar esta leitura</button>
-              <button class="botao botao--leve" id="foto-descartar" type="button">Descartar foto</button>
-            </div>
-          </section>
-
           <div class="anexos" id="anexos">
             <p class="anexo" id="foto-confirmada" hidden></p>
             <p class="status" id="foto-status" role="status" aria-live="polite"></p>
@@ -202,10 +175,10 @@
                 </button>
               </div>
               <div class="caixa__direita">
-                <label class="icone-btn" for="foto-arquivo" title="Enviar foto do papel" aria-label="Enviar foto do papel">
+                <label class="icone-btn" for="foto-arquivo" title="Anexar arquivos (imagens, PDFs, texto). Também dá para arrastar ou colar." aria-label="Anexar arquivos">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.5l-8.4 8.4a5 5 0 0 1-7.1-7.1l8.5-8.5a3.3 3.3 0 0 1 4.7 4.7l-8.5 8.5a1.7 1.7 0 0 1-2.4-2.4l7.8-7.8"/></svg>
                 </label>
-                <input class="visually-hidden" type="file" id="foto-arquivo" accept="image/*">
+                <input class="visually-hidden" type="file" id="foto-arquivo" multiple accept="image/*,application/pdf,.pdf,text/*,.txt,.md,.csv,.json,.py,.c,.h,.cpp,.java,.js,.ts,.sql,.m,.tex,.v,.vhd,.asm">
                 <button class="enviar" id="enviar" type="submit" aria-label="Enviar">
                   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
                 </button>

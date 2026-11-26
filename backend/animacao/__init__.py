@@ -38,8 +38,9 @@ def roteiro_valido(texto_ou_dados) -> dict:
         raise FalhaAnimacao(f"roteiro inválido: {detalhe[:200]}") from exc
 
 
-async def renderizar(roteiro: dict, pasta: Path, qualidade: str = "low_quality") -> str:
-    """Desenha o roteiro e devolve o id do vídeo (dados/animacoes/<id>.mp4)."""
+async def renderizar(roteiro: dict, pasta: Path, qualidade: str = "low_quality", imagem: bool = False) -> str:
+    """Desenha o roteiro e devolve o id do vídeo (dados/animacoes/<id>.mp4) ou, com `imagem=True`,
+    da figura final (dados/animacoes/<id>.png)."""
     ident = secrets.token_urlsafe(12)
     trabalho = pasta / "tmp" / ident
     trabalho.mkdir(parents=True, exist_ok=True)
@@ -50,6 +51,7 @@ async def renderizar(roteiro: dict, pasta: Path, qualidade: str = "low_quality")
         async with _fila:
             proc = await asyncio.create_subprocess_exec(
                 sys.executable, "-W", "ignore", "-m", "backend.animacao.cena", str(arquivo), str(trabalho), qualidade,
+                "imagem" if imagem else "video",
                 cwd=str(raiz), stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE)
             try:
                 saida, erro = await asyncio.wait_for(proc.communicate(), TEMPO_LIMITE_S)
@@ -61,7 +63,7 @@ async def renderizar(roteiro: dict, pasta: Path, qualidade: str = "low_quality")
             raise FalhaAnimacao("render falhou: " + erro.decode("utf-8", "replace").strip().splitlines()[-1:][0][:200]
                                 if erro.strip() else "render falhou")
         video = Path(json.loads(saida.decode("utf-8").strip().splitlines()[-1])["video"])
-        destino = pasta / f"{ident}.mp4"
+        destino = pasta / f"{ident}.{'png' if imagem else 'mp4'}"
         shutil.move(str(video), destino)
         return ident
     finally:

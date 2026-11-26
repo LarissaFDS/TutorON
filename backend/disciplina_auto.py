@@ -50,9 +50,24 @@ def identificar(pergunta: str, contexto: str = '', preferidas: tuple[str, ...] |
             candidatas = [d for d in candidatas if d in preferidas] or candidatas
         return candidatas[0] if len(candidatas) == 1 else None
 
+    from .disciplina_lexico import identificar_lexico, nome_citado
+
+    # 1. Nome da disciplina citado na dúvida ("em Sistemas de Controle…") decide.
+    citada = nome_citado(pergunta)
+    if citada:
+        return citada
+    # 2. Dúvida sem sinal próprio: o nome no arquivo/contexto (ex.: capa do slide) vem antes das regras,
+    #    que confundiam palavras soltas do arquivo ("circuito" de um slide de Controle virava SD).
+    if not _tem_sinal(pergunta):
+        citada = nome_citado(contexto)
+        if citada:
+            return citada
     escolhida = _identificar(avaliar, pergunta, contexto)
     if escolhida is None and len(preferidas) == 1 and not _tem_sinal(pergunta) and not _tem_sinal(contexto):
         return preferidas[0]
+    # 3. As regras só cobrem algumas disciplinas: sem decisão, o vocabulário do acervo de todas.
+    if escolhida is None:
+        escolhida = identificar_lexico(pergunta, contexto, preferidas)
     return escolhida
 
 

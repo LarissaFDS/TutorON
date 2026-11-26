@@ -58,6 +58,12 @@ class Contas:
             self._cache[chave] = (agora, conta)
         return conta
 
+    def esquecer(self, ident: str) -> None:
+        """Tira do cache as sessões desta conta (ex.: depois de trocar o nome)."""
+        with self._trava:
+            for chave in [k for k, (_, c) in self._cache.items() if c and c["id"] == ident]:
+                del self._cache[chave]
+
     def _garantir_perfil(self, conta: dict) -> None:
         """Cria a linha em `perfis` no primeiro acesso (sem mexer em limite já definido pelo admin)."""
         if conta["id"] in self._perfis_vistos:

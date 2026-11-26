@@ -86,7 +86,7 @@ def test_grafo_recusa_posicoes_ausentes_ou_nao_finitas():
 def test_cache_coalesce_pedidos_iguais_sem_chamar_ia(tmp_path, monkeypatch):
     chamadas = []
 
-    async def renderizar(roteiro, pasta):
+    async def renderizar(roteiro, pasta, **_):
         chamadas.append(roteiro)
         await asyncio.sleep(.01)
         pasta.mkdir(exist_ok=True)
@@ -106,7 +106,7 @@ def test_cache_coalesce_pedidos_iguais_sem_chamar_ia(tmp_path, monkeypatch):
 
 
 def test_fluxo_da_galeria_serve_video_e_poster_sem_modelo(site, monkeypatch):  # noqa: F811
-    async def renderizar(roteiro, pasta):
+    async def renderizar(roteiro, pasta, **_):
         pasta.mkdir(exist_ok=True)
         (pasta / 'video12345.mp4').write_bytes(b'video mp4 de teste')
         return 'video12345'

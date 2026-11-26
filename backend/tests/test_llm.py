@@ -252,3 +252,36 @@ def test_detalhe_estranho_no_429_nao_apaga_o_resto():
         assert "retry_delay_s" not in detalhes_429(corpo({**retry, "retryDelay": ruim}))
     info = detalhes_429(corpo({"violations": "x"}, {"violations": [{"quotaId": "PerDayX"}]}))
     assert info == {"quota_ids": ["PerDayX"], "cota": "por_dia"}
+
+
+def test_cerebras_e_openrouter_entram_depois_do_groq_e_antes_do_gemini():
+    s = settings(groq_api_key="k", groq_models=("openai/gpt-oss-120b",), cerebras_api_key="c",
+                 cerebras_models=("gpt-oss-120b",), openrouter_api_key="o",
+                 openrouter_models=("openai/gpt-oss-120b:free",))
+    provedores = [m.provider for m in LLM(s).cascade() if m.provider != "ollama"]
+    assert provedores == ["groq", "cerebras", "openrouter", "gemini", "gemini", "gemini"]
+    assert Model("openrouter", "openai/gpt-oss-120b:free").label == "gpt-oss-120b (OpenRouter)"
+    assert [m.provider for m in LLM(settings()).cascade()].count("cerebras") == 0  # sem chave, fora
+
+
+def test_openrouter_recebe_url_chave_e_campos_proprios():
+    pedidos = []
+
+    def responder(request: httpx.Request) -> httpx.Response:
+        pedidos.append(request)
+        corpo = 'data: {"choices":[{"delta":{"content":"oi"}}]}\n\ndata: [DONE]\n\n'
+        return httpx.Response(200, text=corpo, headers={"content-type": "text/event-stream"})
+
+    async def chamada(modelo):
+        async with httpx.AsyncClient(transport=httpx.MockTransport(responder)) as c:
+            llm = LLM(settings(cerebras_api_key="c", openrouter_api_key="o"), client=c)
+            return "".join([x async for x in llm._groq(modelo, "s", "p")])
+
+    assert asyncio.run(chamada(Model("openrouter", "openai/gpt-oss-120b:free"))) == "oi"
+    assert asyncio.run(chamada(Model("cerebras", "gpt-oss-120b"))) == "oi"
+    r_or, r_cb = pedidos
+    assert r_or.url.host == "openrouter.ai" and r_or.headers["authorization"] == "Bearer o"
+    corpo = json.loads(r_or.content)
+    assert "max_tokens" in corpo and "reasoning" in corpo and "reasoning_effort" not in corpo
+    assert r_cb.url.host == "api.cerebras.ai" and r_cb.headers["authorization"] == "Bearer c"
+    assert json.loads(r_cb.content)["reasoning_effort"] == "low"

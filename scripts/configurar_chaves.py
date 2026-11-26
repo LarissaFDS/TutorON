@@ -22,6 +22,8 @@ CAMPOS = [  # (variável, pergunta, secreta?)
     ("SUPABASE_ANON_KEY", "Publishable key do Supabase (sb_publishable_...)", True),
     ("SUPABASE_SERVICE_KEY", "Secret key do Supabase (sb_secret_...)", True),
     ("GROQ_API_KEY", "Chave do Groq (gsk_...)", True),
+    ("CEREBRAS_API_KEY", "Chave da Cerebras (csk-..., vazio se não tiver)", True),
+    ("OPENROUTER_API_KEY", "Chave do OpenRouter (sk-or-..., vazio se não tiver)", True),
     ("TUTORON_ADMINS", "E-mails de administrador, separados por vírgula", False),
     ("TUTORON_SERVIDOR_URL", "Endereço do site hospedado (vazio se ainda não tem)", False),
 ]

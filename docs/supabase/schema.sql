@@ -94,3 +94,16 @@ alter view public.uso_por_usuario set (security_invoker = true);
 grant usage on schema public to service_role;
 grant select, insert, update, delete on all tables in schema public to service_role;
 grant usage, select on all sequences in schema public to service_role;
+
+-- ------------------------------------------------------------------ conversas salvas (24/11/2026)
+-- Histórico do chat por conta, compactado: até 40 trocas, pergunta até 800 e resposta até 2.500 caracteres.
+create table if not exists public.conversas (
+    id            text primary key,          -- "<8 primeiros do usuário>-<id da conversa no navegador>"
+    usuario       text not null,
+    titulo        text not null default '',
+    atualizado_em timestamptz not null default now(),
+    dados         jsonb not null              -- {"n": 3, "trocas": [{"p": ..., "r": ..., "a": ...}]}
+);
+create index if not exists conversas_usuario on public.conversas (usuario, atualizado_em desc);
+alter table public.conversas enable row level security;
+grant select, insert, update, delete on public.conversas to service_role;

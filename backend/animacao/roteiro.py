@@ -296,28 +296,47 @@ class Reducao(_Parcial):
     destino: Curto = 'Problema B'
 
 
+# Pergunta-guia permitida numa lacuna: curta, termina com "?" e não traz conta nem valor pronto.
+_PERGUNTA_LACUNA = re.compile(r"^[^=≈→⇒0-9]{4,48}\?$")
+
+
+def _cortar(valor, limite: int) -> str:
+    texto = _limpar(str(valor or ''))
+    return texto if len(texto) <= limite else texto[:limite - 1].rstrip() + '…'
+
+
 class BlocoEsquema(BaseModel):
     model_config = ConfigDict(extra='forbid')
     id: Curto
-    texto: Annotated[str, Field(min_length=1, max_length=70)]
+    texto: Annotated[str, Field(min_length=1, max_length=90)]
     lacuna: bool = False
+    # Uma frase dita quando o bloco aparece (narração da animação), opcional.
+    legenda: Annotated[str, Field(max_length=110)] = ''
 
     @field_validator('texto', mode='before')
     @classmethod
     def limpar(cls, valor):
-        return _limpar(str(valor or ''))
+        return _cortar(valor, 90)  # texto longo é cortado, não reprova a animação inteira
+
+    @field_validator('legenda', mode='before')
+    @classmethod
+    def limpar_legenda(cls, valor):
+        return _cortar(valor, 110)
 
     @model_validator(mode='after')
     def deixar_em_branco(self):
+        # A lacuna nunca traz a resposta: fica só uma pergunta-guia curta ("Qual o papel do ganho?")
+        # ou, se a IA escreveu outra coisa, o aviso genérico.
         if self.lacuna:
-            self.texto = 'Você completa'
+            self.texto = self.texto if _PERGUNTA_LACUNA.match(self.texto) else 'Você completa'
+            self.legenda = ''
         return self
 
 
 class Esquema(_Parcial):
     modelo: Literal['esquema']
-    blocos: list[BlocoEsquema] = Field(min_length=2, max_length=4)
-    ligacoes: list[list[Curto]] = Field(default_factory=list, max_length=8)
+    blocos: list[BlocoEsquema] = Field(min_length=2, max_length=6)
+    ligacoes: list[list[Curto]] = Field(default_factory=list, max_length=10)
     destacar: list[Curto] = Field(default_factory=list, max_length=2)
 
     @model_validator(mode='after')

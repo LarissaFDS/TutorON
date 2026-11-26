@@ -15,7 +15,7 @@ services:
       - key: TUTORON_COTA_TOKENS
         value: "40000"
       - key: TUTORON_GRATIS_LOCAL_PRIMEIRO
-        value: "1"
+        value: "0"
       - key: TUTORON_URL_PUBLICA
         sync: false
       - key: SUPABASE_URL
@@ -27,6 +27,10 @@ services:
       - key: TUTORON_ADMINS
         sync: false
       - key: GROQ_API_KEY
+        sync: false
+      - key: CEREBRAS_API_KEY
+        sync: false
+      - key: OPENROUTER_API_KEY
         sync: false
       - key: GEMINI_API_KEY
         sync: false

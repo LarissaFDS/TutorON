@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import math
 
-from manim import (DOWN, LEFT, RIGHT, UP, Arrow, Circle, Create, FadeIn, Indicate, Line,
+from manim import (DOWN, LEFT, RIGHT, UP, Arrow, Circle, Create, DashedVMobject, FadeIn, Indicate, Line,
                    Rectangle, SurroundingRectangle, Text, VGroup, config)
 
 from .roteiro import Circuito, Esquema, Fluxo, GradeDP, Karnaugh, Reducao
@@ -224,24 +224,38 @@ def esquema(cena, r: Esquema):
             graus[destino] -= 1
             if graus[destino] == 0:
                 fila.append(destino)
-    if processados != n:
-        nivel = {b.id: i % 2 for i, b in enumerate(r.blocos)}
-    colunas = max(nivel.values()) + 1
+    # Laço (realimentação, ex.: sensor -> controlador) ou cadeia longa: anel em duas fileiras,
+    # a de cima da esquerda para a direita e a de baixo voltando, como num diagrama de controle.
+    anel = processados != n or max(nivel.values()) + 1 > 4
+    if anel:
+        ordem_anel = [b.id for b in r.blocos] if processados != n else sorted(
+            (b.id for b in r.blocos), key=lambda i: (nivel[i], [b.id for b in r.blocos].index(i)))
+        cima = ordem_anel[:math.ceil(n / 2)]
+        baixo = list(reversed(ordem_anel[len(cima):]))
+        colunas = len(cima)
+        nivel = {i: k for k, i in enumerate(cima)}
+        nivel.update({i: k + (colunas - len(baixo)) / 2 for k, i in enumerate(baixo)})
+    else:
+        colunas = max(nivel.values()) + 1
     largura_caixa = min(3.25, (config.frame_width - 1.2) / colunas - .3)
     distancia = min(4.1, largura_caixa + .65)
     posicoes = {}
-    objetos, caixas = {}, {}
+    objetos, caixas, setas = {}, {}, {}
     for i, b in enumerate(r.blocos):
         coluna = nivel[b.id]
-        colegas = [bloco.id for bloco in r.blocos if nivel[bloco.id] == coluna]
-        linha = colegas.index(b.id)
         x = (coluna - (colunas - 1) / 2) * distancia
-        y = ((len(colegas) - 1) / 2 - linha) * 1.6
+        if anel:
+            y = 1.15 if b.id in cima else -1.0
+        else:
+            colegas = [bloco.id for bloco in r.blocos if nivel[bloco.id] == coluna]
+            y = ((len(colegas) - 1) / 2 - colegas.index(b.id)) * 1.55 + .25
         posicoes[b.id] = [x, y, 0]
-        caixa = Rectangle(width=largura_caixa, height=1.25, color=AZUL,
+        caixa = Rectangle(width=largura_caixa, height=1.25, color=AMARELO if b.lacuna else AZUL,
                           fill_color=FUNDO, fill_opacity=1).move_to(posicoes[b.id])
-        conteudo = '\n'.join(textwrap.wrap(b.texto, width=23))
         if b.lacuna:
+            caixa = DashedVMobject(caixa, num_dashes=28)
+        conteudo = '\n'.join(textwrap.wrap(b.texto, width=23))
+        if b.lacuna and not b.texto.endswith('?'):
             conteudo += '\n?'
         rotulo = txt(conteudo, 23, AZUL if b.lacuna else TINTA, largura=largura_caixa - .3)
         if rotulo.height > 1.05:
@@ -256,13 +270,20 @@ def esquema(cena, r: Esquema):
         else:
             inicio = caixas[a].get_top() if dy > 0 else caixas[a].get_bottom()
             fim = caixas[b].get_bottom() if dy > 0 else caixas[b].get_top()
-        seta = Arrow(inicio, fim, color=CINZA, buff=.08, stroke_width=2.5,
-                     max_tip_length_to_length_ratio=.2)
-        cena.play(Create(seta), run_time=.35)
-    cena.play(*[FadeIn(o) for o in objetos.values()], run_time=1)
-    cena.legendar('Observe como as partes se relacionam. O bloco com ? fica para você completar.')
-    for ident in r.destacar:
-        cena.play(Indicate(caixas[ident], color=AMARELO), run_time=.7)
+        setas.setdefault(b, []).append(Arrow(inicio, fim, color=CINZA, buff=.08, stroke_width=2.5,
+                                             max_tip_length_to_length_ratio=.2))
+    # Conta a história em ordem: cada bloco entra com as setas que chegam nele e uma frase curta.
+    ordem = sorted(r.blocos, key=lambda b: (nivel[b.id], [x.id for x in r.blocos].index(b.id)))
+    for b in ordem:
+        cena.play(*[Create(s) for s in setas.get(b.id, [])], FadeIn(objetos[b.id], shift=RIGHT * .2), run_time=.7)
+        if b.lacuna:
+            cena.legendar('Este bloco fica com você: ' + (b.texto if b.texto.endswith('?') else 'o que entra aqui?'), AMARELO)
+            cena.play(Indicate(caixas[b.id], color=AMARELO), run_time=.7)
+        elif b.legenda:
+            cena.legendar(b.legenda)
+        if b.id in r.destacar and not b.lacuna:
+            cena.play(Indicate(caixas[b.id], color=AMARELO), run_time=.6)
+        cena.wait(1.1 if (b.legenda or b.lacuna) else .4)
     cena.wait(1.2)
 
 

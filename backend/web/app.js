@@ -468,7 +468,8 @@
     ['visual', 'Desenho/esquema']];
   var animacaoDisponivel = null;
   function montarAjudas(lista) {
-    lista = lista.filter(function (a) { return a[0] !== 'animacao'; }).concat([['animacao', 'Só animação']]);
+    lista = lista.filter(function (a) { return a[0] !== 'animacao' && a[0] !== 'imagem'; })
+      .concat([['animacao', 'Só animação'], ['imagem', 'Só imagem']]);
     var box = $('ajudas-opcoes');
     var anterior = document.querySelector('input[name="ajuda"]:checked');
     var escolhida = anterior ? anterior.value : null;
@@ -502,6 +503,9 @@
       animacaoDisponivel = !!dados.animacao;
     } catch (e) { /* servidor antigo: fica a lista padrão */ }
   })();
+  var PEDIDO_IMAGEM = /\b(ger[ea]r?|cri[ea]r?|fa[cç]a|fazer|desenh[ea]r?|mostr[ea]r?|quero|me (?:d[aáê]|mande?))\b[^.?!]{0,30}\b(imagem|figura|desenho|diagrama|ilustra[cç][aã]o)\b|^\s*desenhe\b/i;
+  var PEDIDO_ANIMACAO = /\b(ger[ea]r?|cri[ea]r?|fa[cç]a|fazer|mostr[ea]r?|quero|me (?:d[aáê]|mande?))\b[^.?!]{0,30}\b(anima[cç][aã]o|v[ií]deo|animad[oa])\b|^\s*anime\b/i;
+
   function ajudaEscolhida() {
     var marcado = document.querySelector('input[name="ajuda"]:checked');
     return marcado ? marcado.value : 'auto';
@@ -529,10 +533,14 @@
     }
   });
 
-  /* Foto do papel: a IA transcreve, o aluno CONFERE e corrige, e só então a leitura vai para o tutor. */
-  var fotoConfirmada = null;
+  /* Anexos: imagem, PDF ou texto/código. O arquivo é lido logo ao ser escolhido e vai junto com a
+     pergunta, sem etapa de conferência. Na resposta aparece, recolhido, "o que eu li do arquivo",
+     com botões para o aluno dizer se a leitura está certa (e corrigir, se não estiver). */
+  var anexos = [];  // [{ id, nome, estado, erro, pronto: Promise<string> }] — quantos o aluno quiser
   var versaoFoto = 0;
-  var lendoFoto = false;
+  var proximoAnexo = 0;
+  var LIMITE_LEITURA = 16000;  // caracteres de leitura somando todos os arquivos (o servidor aceita 16 mil)
+  var TEXTO_EXT = /\.(txt|md|csv|tsv|json|py|c|h|cpp|hpp|cc|java|js|ts|html|css|sql|m|r|tex|v|vhd|vhdl|asm|s|go|rs|kt|ipynb)$/i;
 
   // Reduz no celular antes de enviar (fotos de 12 MP passam de 5 MB); 2400 px mantém a letra legível.
   function comprimir(arquivo) {
@@ -551,7 +559,7 @@
           ctx.drawImage(img, 0, 0, c.width, c.height);
           ok(c.toDataURL('image/jpeg', 0.9));
         } catch (e) {
-          falha(new Error('Não consegui preparar esta imagem. Tente outra foto.'));
+          falha(new Error('Não consegui preparar esta imagem. Tente outra.'));
         } finally {
           URL.revokeObjectURL(url);
         }
@@ -560,110 +568,194 @@
       img.src = url;
     });
   }
-
-  function mostrarLeitura(leitura, dataUrl) {
-    $('foto-previa').src = dataUrl;
-    var conf = $('foto-confianca');
-    var nomes = { alta: 'alta', media: 'média', baixa: 'baixa' };
-    conf.textContent = 'Confiança da leitura: ' + (nomes[leitura.confianca] || 'baixa') +
-      (leitura.legivel ? '' : ' — a foto parece ilegível; tente outra com mais luz e o papel inteiro no quadro.');
-    conf.className = 'dica' + (leitura.confianca === 'baixa' ? ' confianca--baixa' : '');
-    $('foto-enunciado').value = leitura.enunciado || '';
-    $('foto-tentativa').value = leitura.tentativa || '';
-    var duvidas = $('foto-duvidas-lista');
-    duvidas.replaceChildren.apply(duvidas, (leitura.duvidas || []).map(function (d) { return el('li', null, d); }));
-    $('foto-duvidas').hidden = !(leitura.duvidas || []).length;
-    var subs = $('foto-subtopicos');
-    subs.replaceChildren();
-    (leitura.subtopicos || []).forEach(function (s, i) {
-      var label = el('label', 'check');
-      var cb = document.createElement('input');
-      cb.type = 'checkbox';
-      cb.checked = true;
-      cb.value = s;
-      cb.id = 'sub-' + i;
-      label.append(cb, el('span', null, s));
-      subs.append(label);
+  function comoDataUrl(arquivo) {
+    return new Promise(function (ok, falha) {
+      var r = new FileReader();
+      r.onload = function () { ok(r.result); };
+      r.onerror = function () { falha(new Error('Não consegui abrir o arquivo.')); };
+      r.readAsDataURL(arquivo);
     });
-    $('foto-subtopicos-box').hidden = !(leitura.subtopicos || []).length;
-    var reg = $('foto-regioes');
-    reg.replaceChildren.apply(reg, (leitura.regioes || []).map(function (r) {
-      var li = el('li');
-      li.append(el('strong', null, r.onde + ': '), document.createTextNode(r.conteudo));
-      return li;
-    }));
-    $('foto-regioes-box').hidden = !(leitura.regioes || []).length;
-    $('foto-conferir').hidden = false;
-    $('foto-conferir').focus({ preventScroll: true });
   }
 
-  function textoDaFoto() {
-    var subs = Array.prototype.map.call(document.querySelectorAll('#foto-subtopicos input:checked'), function (cb) { return cb.value; });
+  // Leitura da imagem (JSON da visão) -> texto que vai para o tutor.
+  function textoDaLeitura(l) {
     var partes = [];
-    var enunciado = $('foto-enunciado').value.trim();
-    var tentativa = $('foto-tentativa').value.trim();
-    if (enunciado) partes.push('Enunciado (lido da foto e conferido pelo aluno):', enunciado);
-    if (subs.length) partes.push('Subtópicos:', subs.map(function (s) { return '- ' + s; }).join('\n'));
-    if (tentativa) partes.push('Tentativa do aluno no papel:', tentativa);
-    return partes.join('\n').slice(0, 8000);
+    if (l.enunciado) partes.push('Enunciado:', l.enunciado);
+    if ((l.subtopicos || []).length) partes.push('Subtópicos:', l.subtopicos.map(function (x) { return '- ' + x; }).join('\n'));
+    if (l.tentativa) partes.push('Tentativa do aluno:', l.tentativa);
+    if (!partes.length && (l.regioes || []).length) {
+      partes.push(l.regioes.map(function (r) { return r.onde + ': ' + r.conteudo; }).join('\n'));
+    }
+    if ((l.duvidas || []).length) partes.push('Trechos com leitura incerta:', l.duvidas.map(function (x) { return '- ' + x; }).join('\n'));
+    return partes.join('\n');
+  }
+  async function lerImagem(dataUrl, status) {
+    var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
+    return await lerTarefa(criada.id, status);
+  }
+  async function lerTarefa(id, status) {
+    var t = await acompanhar(id, function (x) { if (x.status !== 'pronta' && x.status !== 'erro') status(x.mensagem || 'Lendo…'); });
+    if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler o arquivo.');
+    return textoDaLeitura(t.leitura);
+  }
+  async function lerArquivo(arquivo, status) {
+    var nome = arquivo.name || 'arquivo';
+    if ((arquivo.type || '').startsWith('image/')) {
+      status('Lendo a imagem…');
+      return await lerImagem(await comprimir(arquivo), status);
+    }
+    if (arquivo.type === 'application/pdf' || /\.pdf$/i.test(nome)) {
+      if (arquivo.size > 15 * 1024 * 1024) throw new Error('PDF grande demais (máximo 15 MB).');
+      status('Lendo o PDF…');
+      var dataUrl = (await comoDataUrl(arquivo)).replace(/^data:[^;]*;/, 'data:application/pdf;');
+      var r = await postJSON('/api/anexo', { arquivo: dataUrl, nome: nome, disciplina: $('disciplina').value || null });
+      if (r.status === 'pronta' && r.texto) return r.texto;
+      status('O PDF é escaneado; lendo como imagem…');
+      return await lerTarefa(r.id, status);
+    }
+    if ((arquivo.type || '').startsWith('text/') || TEXTO_EXT.test(nome)) {
+      if (arquivo.size > 1024 * 1024) throw new Error('Arquivo de texto grande demais (máximo 1 MB).');
+      return await arquivo.text();
+    }
+    throw new Error('Ainda não leio este tipo de arquivo. Envie imagem, PDF ou texto/código.');
   }
 
   function limparFoto() {
     versaoFoto++;
-    lendoFoto = false;
-    fotoConfirmada = null;
-    $('foto-conferir').hidden = true;
-    $('foto-confirmada').hidden = true;
+    anexos = [];
+    desenharAnexos();
     $('foto-arquivo').value = '';
     setStatus($('foto-status'), '');
   }
 
-  $('foto-arquivo').addEventListener('change', async function () {
-    var arquivo = this.files && this.files[0];
-    if (!arquivo) return;
-    limparFoto();
-    var versao = versaoFoto;
-    lendoFoto = true;
-    gerando++;
-    setStatus($('foto-status'), 'Preparando a foto…', 'busy');
-    try {
-      var dataUrl = await comprimir(arquivo);
-      if (versao !== versaoFoto) return;
-      var criada = await postJSON('/api/foto', { imagem: dataUrl, disciplina: $('disciplina').value || null });
-      var t = await acompanhar(criada.id, function (x) {
-        if (versao === versaoFoto && x.status !== 'pronta' && x.status !== 'erro') setStatus($('foto-status'), x.mensagem || 'Lendo a foto…', 'busy');
+  function desenharAnexos() {
+    var caixa = $('foto-confirmada');
+    caixa.replaceChildren();
+    anexos.forEach(function (a) {
+      var chip = el('span', 'anexo-chip' + (a.erro ? ' anexo-chip--erro' : ''));
+      chip.append(el('span', 'anexo-chip__nome', '📎 ' + a.nome), el('small', null, a.estado));
+      var x = el('button', 'anexo-chip__remover', '✕');
+      x.type = 'button';
+      x.setAttribute('aria-label', 'Remover ' + a.nome);
+      x.addEventListener('click', function () {
+        anexos = anexos.filter(function (b) { return b !== a; });
+        desenharAnexos();
       });
-      if (versao !== versaoFoto) return;
-      if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não consegui ler a foto.');
-      setStatus($('foto-status'), '');
-      mostrarLeitura(t.leitura, dataUrl);
-    } catch (e) {
-      if (versao === versaoFoto) setStatus($('foto-status'), e.message, 'error');
-    } finally {
-      if (versao === versaoFoto) lendoFoto = false;
-      gerando--;
-    }
-  });
+      chip.append(x);
+      caixa.append(chip);
+    });
+    caixa.hidden = !anexos.length;
+  }
 
-  $('foto-ok').addEventListener('click', function () {
-    var texto = textoDaFoto();
-    if (!texto) { setStatus($('foto-status'), 'A leitura está vazia. Escreva o enunciado ou descarte a foto.', 'error'); return; }
-    fotoConfirmada = texto;
-    $('foto-conferir').hidden = true;
-    var aviso = $('foto-confirmada');
-    aviso.replaceChildren(document.createTextNode('📎 Foto conferida: vai junto com a sua próxima mensagem.'));
-    var editar = el('button', null, 'Rever leitura');
-    editar.type = 'button';
-    editar.addEventListener('click', function () { $('foto-conferir').hidden = false; aviso.hidden = true; fotoConfirmada = null; });
-    var remover = el('button', null, 'Remover');
-    remover.type = 'button';
-    remover.addEventListener('click', limparFoto);
-    aviso.append(editar, remover);
-    aviso.hidden = false;
-    setStatus($('foto-status'), '');
+  // Lê no máximo 3 arquivos ao mesmo tempo (cada imagem é um pedido à IA de visão).
+  var lendoAgora = 0, filaLeitura = [];
+  function naFila(tarefa) {
+    return new Promise(function (ok, falha) {
+      filaLeitura.push(function () {
+        lendoAgora++;
+        tarefa().then(ok, falha).finally(function () { lendoAgora--; if (filaLeitura.length) filaLeitura.shift()(); });
+      });
+      if (lendoAgora < 3) filaLeitura.shift()();
+    });
+  }
+
+  function adicionarArquivos(lista) {
+    Array.prototype.forEach.call(lista || [], function (arquivo) {
+      var versao = versaoFoto;
+      var a = { id: ++proximoAnexo, nome: arquivo.name || ('imagem-' + proximoAnexo + '.png'), estado: 'na fila…', erro: false };
+      function estado(m, erro) { if (versao !== versaoFoto) return; a.estado = m; a.erro = !!erro; desenharAnexos(); }
+      a.pronto = naFila(function () {
+        estado('lendo…');
+        return lerArquivo(arquivo, function (m) { estado(m.toLowerCase()); });
+      }).then(function (texto) {
+        texto = (texto || '').trim();
+        if (!texto) throw new Error('não encontrei texto neste arquivo');
+        estado('lido');
+        return texto;
+      }).catch(function (e) { estado(e.message, true); throw e; });
+      a.pronto.catch(function () {});
+      anexos.push(a);
+    });
+    desenharAnexos();
+    $('foto-arquivo').value = '';
     $('pergunta').focus();
-  });
-  $('foto-descartar').addEventListener('click', limparFoto);
+  }
+
+  // Junta as leituras num texto só, repartindo o espaço entre os arquivos.
+  function juntarAnexos(lidos) {
+    if (!lidos.length) return '';
+    var cota = Math.floor(LIMITE_LEITURA / lidos.length) - 80;
+    return lidos.map(function (a, i) {
+      var t = a.texto.length > cota ? a.texto.slice(0, cota) + '\n[… arquivo cortado]' : a.texto;
+      return '=== Arquivo ' + (i + 1) + ' de ' + lidos.length + ': ' + a.nome + ' ===\n' + t;
+    }).join('\n\n').slice(0, LIMITE_LEITURA);
+  }
+
+  $('foto-arquivo').addEventListener('change', function () { adicionarArquivos(this.files); });
+
+  // Arrastar e soltar arquivos em qualquer lugar do chat, e colar imagens (Ctrl+V).
+  (function () {
+    var alvo = $('modo-tutor'), contador = 0;
+    function temArquivos(e) { return e.dataTransfer && Array.prototype.indexOf.call(e.dataTransfer.types || [], 'Files') >= 0; }
+    alvo.addEventListener('dragenter', function (e) { if (!temArquivos(e)) return; e.preventDefault(); contador++; alvo.classList.add('soltando'); });
+    alvo.addEventListener('dragover', function (e) { if (temArquivos(e)) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } });
+    alvo.addEventListener('dragleave', function () { if (--contador <= 0) { contador = 0; alvo.classList.remove('soltando'); } });
+    alvo.addEventListener('drop', function (e) {
+      if (!temArquivos(e)) return;
+      e.preventDefault();
+      contador = 0;
+      alvo.classList.remove('soltando');
+      adicionarArquivos(e.dataTransfer.files);
+    });
+    $('pergunta').addEventListener('paste', function (e) {
+      var arquivos = Array.prototype.filter.call((e.clipboardData && e.clipboardData.files) || [], function (f) { return f.size; });
+      if (arquivos.length) { e.preventDefault(); adicionarArquivos(arquivos); }
+    });
+  })();
+
+  /* "O que eu li do arquivo": recolhido acima da resposta, com voto e correção obrigatória se errado. */
+  function painelLeitura(nome, texto, registro, reenviar, numero) {
+    var d = el('details', 'fontes leitura-arquivo');
+    d.append(el('summary', null, '📎 Li o arquivo “' + nome + '”. Ver o que entendi'));
+    var pre = el('pre', 'leitura-arquivo__texto', texto);
+    var barra = el('div', 'leitura-arquivo__acoes');
+    var status = el('span', 'barra-acoes__status');
+    var certo = el('button', 'botao botao--leve', 'Li certo');
+    var errado = el('button', 'botao botao--leve', 'Li errado, vou corrigir');
+    certo.type = errado.type = 'button';
+    var idVoto = function () { return (registro.id_resposta || ('sem-' + Date.now().toString(36))) + '-l' + (numero || 1); };
+    certo.addEventListener('click', async function () {
+      certo.disabled = errado.disabled = true;
+      try { await postJSON('/api/feedback', { id: idVoto(), tipo: 'leitura', util: true }); status.textContent = 'Obrigado!'; }
+      catch (e) { status.textContent = e.message; certo.disabled = errado.disabled = false; }
+    });
+    errado.addEventListener('click', function () {
+      barra.hidden = true;
+      var caixa = el('div', 'leitura-arquivo__corrigir');
+      var campo = el('textarea', 'campo campo--codigo');
+      campo.rows = 6; campo.maxLength = 8000; campo.value = texto;
+      var aviso = el('p', 'dica', 'Corrija o que eu li errado. A correção é obrigatória: eu respondo de novo com o texto certo.');
+      var enviar = el('button', 'botao', 'Enviar correção e responder de novo');
+      enviar.type = 'button';
+      var st = el('span', 'barra-acoes__status');
+      enviar.addEventListener('click', async function () {
+        var novo = campo.value.trim();
+        if (!novo || novo === texto.trim()) { st.textContent = 'Mude o texto onde a leitura errou antes de enviar.'; campo.focus(); return; }
+        enviar.disabled = true;
+        try {
+          await postJSON('/api/feedback', { id: idVoto(), tipo: 'leitura', util: false, comentario: novo.slice(0, 1500) });
+        } catch (e) { /* o voto é secundário: segue com a correção */ }
+        caixa.replaceChildren(el('p', 'dica', 'Correção enviada. Respondendo de novo com o texto corrigido…'));
+        reenviar(novo);
+      });
+      caixa.append(aviso, campo, enviar, st);
+      d.append(caixa);
+      campo.focus();
+    });
+    barra.append(certo, errado, status);
+    d.append(pre, barra);
+    return d;
+  }
 
   /* Disciplinas: a mesma IA atende todas; a escolha só decide qual acervo é consultado. */
   // "geral": dúvida de disciplina sem acervo (ex.: Controle). O servidor orienta com conhecimento geral.
@@ -723,9 +815,11 @@
     fecharMenus();
   });
 
-  // ------------------------------------------------------------------ conversas (só nesta aba)
-  /* As conversas ficam só na memória da página: recarregar ou fechar a aba zera. */
-  var conversas = [];   // { id, titulo, trocas: [{pergunta, texto, ...}], nodo }
+  // ------------------------------------------------------------------ conversas
+  /* Com conta, cada conversa é salva no banco (compactada) e volta na barra lateral ao reabrir o site.
+     Sem conta (convidado), ficam só na memória da página. */
+  var conversas = [];   // { id, titulo, trocas: [{pergunta, texto, ...}], nodo, remota? }
+  var salvarNoBanco = false;
   var conversaAtual = null;
 
   function novaConversa() {
@@ -736,11 +830,16 @@
     abrirLateral(false);
     $('pergunta').focus();
   }
+  if ($('config-botao')) $('config-botao').addEventListener('click', async function () {
+    var eu = null;
+    try { eu = await (await fetch('/api/eu', { cache: 'no-store' })).json(); } catch (e) { /* abre como convidado */ }
+    window.TutorConfig.abrir(eu && eu.logado ? eu.conta : null);
+  });
   $('nova-conversa').addEventListener('click', function () { if (!enviando) novaConversa(); });
 
   function garantirConversa(pergunta) {
     if (conversaAtual) return conversaAtual;
-    conversaAtual = { id: Date.now(), titulo: pergunta.length > 60 ? pergunta.slice(0, 57).trimEnd() + '…' : pergunta, trocas: [] };
+    conversaAtual = { id: 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), titulo: pergunta.length > 60 ? pergunta.slice(0, 57).trimEnd() + '…' : pergunta, trocas: [] };
     conversas.unshift(conversaAtual);
     $('boas-vindas').hidden = true;
     desenharConversas();
@@ -762,7 +861,8 @@
       b.type = 'button';
       b.append(el('span', null, c.titulo));
       if (c === conversaAtual) b.setAttribute('aria-current', 'true');
-      b.append(el('small', null, c.trocas.length + (c.trocas.length === 1 ? ' pergunta' : ' perguntas')));
+      var n = c.remota ? c.total : c.trocas.length;
+      b.append(el('small', null, n + (n === 1 ? ' pergunta' : ' perguntas')));
       b.addEventListener('click', function () { if (!enviando) abrirConversa(c); });
       li.append(b);
       return li;
@@ -771,7 +871,51 @@
     abrirHistorico(conversas.length > 0);
   }
 
-  function abrirConversa(c) {
+  function salvarConversa(c) {
+    if (!salvarNoBanco || !c) return;
+    var trocas = c.trocas.filter(function (t) { return t.pronta; }).map(function (t) {
+      return { p: t.pergunta, r: t.texto, a: t.anexo || '' };
+    });
+    if (!trocas.length) return;
+    fetch('/api/conversas/' + encodeURIComponent(c.id), { method: 'PUT', credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ titulo: c.titulo, trocas: trocas }) })
+      .catch(function () { /* sem rede: tenta de novo na próxima pergunta */ });
+  }
+
+  // Desenha uma conversa salva (texto puro + Markdown), sem botões de ação das respostas antigas.
+  function montarTrocaSalva(t) {
+    var aluno = msgAluno(t.p, t.a ? '📎 ' + t.a : '');
+    var v = msgTutor();
+    v.estado.remove();
+    R.render(v.resposta, t.r || '');
+    return { pergunta: t.p, texto: t.r || '', anexo: t.a || '', fontes: [], voto: null, pronta: true, nodo: [aluno, v.nodo] };
+  }
+
+  async function carregarConversasSalvas() {
+    try {
+      var r = await fetch('/api/conversas', { credentials: 'same-origin' });
+      if (!r.ok) return;
+      var j = await r.json();
+      salvarNoBanco = !!j.ativo;
+      (j.conversas || []).forEach(function (c) {
+        if (conversas.some(function (x) { return x.idRemoto === c.id; })) return;
+        conversas.push({ id: c.id.split('-').slice(1).join('-') || c.id, idRemoto: c.id, titulo: c.titulo || 'Conversa',
+          trocas: [], remota: true, total: c.n || 0 });
+      });
+      desenharConversas();
+    } catch (e) { /* offline ou sem conta: segue só na memória */ }
+  }
+
+  async function abrirConversa(c) {
+    if (c.remota) {
+      try {
+        var r = await fetch('/api/conversas/' + encodeURIComponent(c.idRemoto), { credentials: 'same-origin' });
+        if (!r.ok) throw new Error();
+        var j = await r.json();
+        c.trocas = ((j.dados || {}).trocas || []).map(montarTrocaSalva);
+        c.remota = false;
+      } catch (e) { setStatus($('status-tutor'), 'Não consegui abrir esta conversa agora.', 'error'); return; }
+    }
     conversaAtual = c;
     $('boas-vindas').hidden = true;
     $('conversa').replaceChildren.apply($('conversa'), c.trocas.map(function (t) { return t.nodo; }).filter(Boolean)
@@ -890,14 +1034,29 @@
       try {
         var criada = retomarId ? { id: retomarId } : await postJSON('/api/animar', {
           pergunta: pergunta, resposta: resposta || null, disciplina: disciplina || 'auto',
-          contexto: contexto || null, foto: foto || null });
+          contexto: contexto || null, foto: foto || null, formato: opcoes.formato || 'video' });
         id = criada.id;
         if (opcoes.pendente) guardarPendente({ tipo: 'animacao', id: id, pergunta: pergunta,
-          contexto: contexto || '', disciplina: disciplina || 'auto', foto: foto || '' });
+          contexto: contexto || '', disciplina: disciplina || 'auto', foto: foto || '', formato: opcoes.formato || 'video' });
         var t = await acompanhar(id, function (x) {
           if (x.status !== 'pronta' && x.status !== 'erro') setStatus(status, x.mensagem || 'Gerando…', 'busy');
         });
         if (t.status !== 'pronta') throw new Error(t.mensagem || 'Não foi possível gerar a animação.');
+        if (t.imagem) {
+          var figura = el('a', 'animacao__imagem');
+          figura.href = t.imagem;
+          figura.target = '_blank';
+          figura.rel = 'noopener';
+          var img = document.createElement('img');
+          img.src = t.imagem;
+          img.alt = 'Imagem: ' + (t.titulo || 'pista visual');
+          figura.append(img);
+          box.prepend(figura);
+          var m = disciplinas[t.disciplina];
+          setStatus(status, (m ? m.sigla + ' · ' : '') + (t.pergunta_final ? 'Sua vez: ' + t.pergunta_final : ''));
+          if (opcoes.aoConcluir) opcoes.aoConcluir(t);
+          return true;
+        }
         var video = document.createElement('video');
         video.src = t.video;
         video.controls = true;
@@ -982,17 +1141,69 @@
     return box;
   }
 
+  /* "Identifiquei esta disciplina. Está errada? Corrigir": o voto vai para o banco (feedback tipo
+     disciplina) e a pergunta é respondida de novo com a disciplina certa. */
+  function avisoDisciplina(detectada, registro, refazer) {
+    var nomeDe = function (id) { var m = disciplinas[id]; return m ? m.nome || m.sigla : id; };
+    var box = el('div', 'aviso-disciplina');
+    var texto = el('span', null, detectada === 'geral'
+      ? 'Não identifiquei a disciplina; respondi com conhecimento geral. '
+      : 'Disciplina identificada automaticamente: ' + nomeDe(detectada) + '. ');
+    var corrigir = el('button', 'aviso-disciplina__botao', detectada === 'geral' ? 'Escolher a disciplina' : 'Está errada? Corrigir');
+    corrigir.type = 'button';
+    box.append(texto, corrigir);
+    corrigir.addEventListener('click', function () {
+      corrigir.hidden = true;
+      var sel = el('select', 'campo aviso-disciplina__select');
+      sel.setAttribute('aria-label', 'Disciplina correta');
+      sel.append(new Option('Qual é a disciplina certa?', ''));
+      Object.keys(disciplinas).filter(function (id) { return id !== detectada && id !== 'geral'; })
+        .sort(function (a, b) { return nomeDe(a).localeCompare(nomeDe(b)); })
+        .forEach(function (id) { sel.append(new Option(nomeDe(id), id)); });
+      sel.addEventListener('change', async function () {
+        if (!sel.value) return;
+        sel.disabled = true;
+        try {
+          await postJSON('/api/feedback', { id: (registro.id_resposta || 'sem-' + Date.now().toString(36)) + '-d',
+            tipo: 'disciplina', util: false, comentario: 'detectada=' + detectada + '; correta=' + sel.value });
+        } catch (e) { /* o voto é secundário */ }
+        box.replaceChildren(el('span', null, 'Obrigado! Respondendo de novo em ' + nomeDe(sel.value) + '…'));
+        refazer(sel.value);
+      });
+      box.append(sel);
+      sel.focus();
+    });
+    return box;
+  }
+
+  // Disciplina da última resposta desta conversa (perguntas de continuação ficam na mesma matéria).
+  function disciplinaDaConversa(conversa, atual) {
+    var anteriores = conversa.trocas.filter(function (t) { return t !== atual && t.pronta && t.disciplina; });
+    return anteriores.length ? anteriores[anteriores.length - 1].disciplina : null;
+  }
+
   async function perguntar(pergunta, contexto, retomarId, disciplina, ajuda, foto, ciclo) {
     ciclo = ciclo || { historico: [], travou: '' };
     var conversa = garantirConversa(pergunta);
     var registro = { pergunta: pergunta, texto: '', fontes: [], voto: null, pronta: false, nodo: [] };
     conversa.trocas.push(registro);
-    var anexos = [foto ? '📎 foto conferida' : '', contexto ? '</> código/enunciado' : '',
+    var lidos = ciclo.anexos || (foto ? [{ nome: ciclo.anexoNome || 'arquivo', texto: foto }] : []);
+    var nomesAnexos = lidos.map(function (a) { return a.nome; });
+    var rotuloAnexos = nomesAnexos.length > 2 ? nomesAnexos.length + ' arquivos' : nomesAnexos.join(', ');
+    var anexos = [foto ? '📎 ' + rotuloAnexos : '', contexto ? '</> código/enunciado' : '',
       ciclo.historico.length ? '↻ outra forma de explicar (tentativa ' + (ciclo.historico.length + 1) + ')' : ''].filter(Boolean).join(' · ');
     var textoAluno = ciclo.historico.length ? (ciclo.travou || 'Ainda não consegui. Explica de outro jeito?') : pergunta;
     var aluno = msgAluno(textoAluno, anexos);
     var v = msgTutor();
     registro.nodo = [aluno, v.nodo];
+    if (foto && !ciclo.historico.length) {
+      lidos.forEach(function (a, i) {
+        v.resposta.before(painelLeitura(a.nome, a.texto, registro, function (corrigido) {
+          var novos = lidos.map(function (b, j) { return j === i ? { nome: b.nome, texto: corrigido } : b; });
+          perguntar(pergunta, contexto, null, disciplina, ajuda, juntarAnexos(novos), { historico: [], travou: '', anexos: novos });
+        }, i + 1));
+      });
+    }
     $('conversa').append(aluno, v.nodo);
     desenharConversas();
     rolarFim();
@@ -1008,7 +1219,8 @@
       } else {
         try {
           tarefa = await postJSON('/api/perguntar', { pergunta: pergunta, contexto: contextoEnvio || null,
-            disciplina: disciplina || null, ajuda: ajuda || 'auto', foto: foto || null,
+            disciplina: disciplina || null, disciplina_conversa: disciplinaDaConversa(conversa, registro),
+            ajuda: ajuda || 'auto', foto: foto || null,
             historico: ciclo.historico, travou: ciclo.travou || null,
             curso: perfil ? perfil.curso : null, periodo: perfil ? perfil.periodo : null });
         } catch (e) {
@@ -1043,27 +1255,38 @@
       // Mantém só as últimas ajudas (o servidor aceita até 8) para o prompt não crescer sem limite.
       var historicoNovo = ciclo.historico.concat([{ ajuda: final.ajuda || ajuda || 'auto', texto: final.texto.slice(0, 6000) }]).slice(-6);
       var disciplinaDaPergunta = final.disciplina || disciplina;
+      registro.id_resposta = final.id_resposta;
       v.corpo.append(barraAcoes(final.id_resposta, registro, final.texto));
       if (final.fontes && final.fontes.length) v.corpo.append(fontesDetalhe(final.fontes));
-      v.corpo.append(meta, pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
+      v.corpo.append(meta);
+      if ((disciplina || 'auto') === 'auto' && final.disciplina) {
+        v.corpo.append(avisoDisciplina(final.disciplina, registro, function (correta) {
+          perguntar(pergunta, contexto, null, correta, ajuda, foto, { historico: [], travou: '', anexos: ciclo.anexos });
+        }));
+      }
+      v.corpo.append(pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
       registro.texto = final.texto;
       registro.fontes = final.fontes || [];
       registro.pronta = true;
+      registro.anexo = nomesAnexos.join(', ');
+      registro.disciplina = final.disciplina || '';
       desenharConversas();
+      salvarConversa(conversa);
       return true;
     }
     estadoErro(v, final.mensagem || 'Não foi possível gerar a resposta. Tente de novo.');
     return false;
   }
 
-  async function perguntarVisual(pergunta, contexto, disciplina, foto, retomarId) {
+  async function perguntarVisual(pergunta, contexto, disciplina, foto, retomarId, formato) {
+    formato = formato || 'video';
     var conversa = garantirConversa(pergunta);
     var registro = { pergunta: pergunta, texto: '', fontes: [], voto: null, pronta: false, nodo: [] };
     conversa.trocas.push(registro);
-    var aluno = msgAluno(pergunta, '🎬 só animação');
+    var aluno = msgAluno(pergunta, formato === 'imagem' ? '🖼️ só imagem' : '🎬 só animação');
     var v = msgTutor();
     v.estado.remove();
-    var painel = painelAnimacao(pergunta, null, disciplina, contexto, foto, { pendente: true, aoConcluir: function (t) {
+    var painel = painelAnimacao(pergunta, null, disciplina, contexto, foto, { pendente: true, formato: formato, aoConcluir: function (t) {
       registro.texto = 'Sua vez: ' + (t.pergunta_final || 'Tente o próximo passo no papel.');
       registro.pronta = true;
     } });
@@ -1078,16 +1301,26 @@
   $('form-tutor').addEventListener('submit', async function (e) {
     e.preventDefault();
     if (enviando) return;
-    if (lendoFoto) { setStatus($('status-tutor'), 'Aguarde a leitura da foto terminar e confira o texto antes de enviar.', 'error'); return; }
     var pergunta = $('pergunta').value.trim();
-    var foto = fotoConfirmada;
+    var foto = null, lidos = [];
     var versaoEnviada = versaoFoto;
-    if (pergunta.length < 3 && foto) pergunta = 'Me ajude com o exercício da foto, sem me dar a resposta.';
-    if (!foto && !$('foto-conferir').hidden) {
-      setStatus($('status-tutor'), 'Confira a leitura da foto (botão “Está certo”) ou descarte-a antes de enviar.', 'error');
-      $('foto-conferir').focus();
-      return;
+    if (anexos.length) {
+      var enviados = anexos.slice();
+      setStatus($('status-tutor'), enviados.length > 1 ? 'Terminando de ler os ' + enviados.length + ' arquivos…' : 'Terminando de ler o arquivo…', 'busy');
+      var resultados = await Promise.allSettled(enviados.map(function (a) { return a.pronto; }));
+      if (versaoEnviada !== versaoFoto) return;
+      var falhos = enviados.filter(function (a, i) { return resultados[i].status !== 'fulfilled'; });
+      if (falhos.length) {
+        setStatus($('status-tutor'), 'Não consegui ler: ' + falhos.map(function (a) { return a.nome; }).join(', ') +
+          '. Remova ' + (falhos.length > 1 ? 'esses arquivos' : 'esse arquivo') + ' ou tente de novo.', 'error');
+        return;
+      }
+      lidos = enviados.map(function (a, i) { return { nome: a.nome, texto: resultados[i].value }; });
+      foto = juntarAnexos(lidos);
+      setStatus($('status-tutor'), '');
     }
+    if (pergunta.length < 3 && foto) pergunta = lidos.length > 1 ? 'Me ajude com o que está nestes arquivos, sem me dar a resposta.'
+      : 'Me ajude com o que está neste arquivo, sem me dar a resposta.';
     if (pergunta.length < 3) { setStatus($('status-tutor'), 'Escreva sua dúvida antes de enviar.', 'error'); $('pergunta').focus(); return; }
     travar(true);
     gerando++;
@@ -1101,8 +1334,11 @@
     ajustarAltura();
     var ajuda = ajudaEscolhida();
     try {
-      var ok = ajuda === 'animacao' ? await perguntarVisual(pergunta, contexto, disciplina, foto) :
-        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto);
+      // "Gere uma imagem…", "desenhe…": no modo automático vira figura; "anime…" vira animação.
+      if (ajuda === 'auto' && PEDIDO_IMAGEM.test(pergunta)) ajuda = 'imagem';
+      else if (ajuda === 'auto' && PEDIDO_ANIMACAO.test(pergunta)) ajuda = 'animacao';
+      var ok = ajuda === 'animacao' || ajuda === 'imagem' ? await perguntarVisual(pergunta, contexto, disciplina, foto, null, ajuda === 'imagem' ? 'imagem' : 'video') :
+        await perguntar(pergunta, contexto, null, disciplina, ajuda, foto, { historico: [], travou: '', anexos: lidos });
       if (ok && foto && versaoEnviada === versaoFoto) limparFoto();
       if (!ok && !$('pergunta').value) { $('pergunta').value = pergunta; $('contexto').value = contexto; ajustarAltura(); }
     } finally {
@@ -1119,7 +1355,7 @@
   }
   async function retomarVisual(p) {
     travar(true);
-    try { await perguntarVisual(p.pergunta, p.contexto, p.disciplina, p.foto, p.id); }
+    try { await perguntarVisual(p.pergunta, p.contexto, p.disciplina, p.foto, p.id, p.formato); }
     finally { travar(false); }
   }
 
@@ -1316,4 +1552,5 @@
     }
   }
   if (!pendente) $('pergunta').focus({ preventScroll: true });
+  carregarConversasSalvas();
 })();

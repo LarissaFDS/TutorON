@@ -26,6 +26,7 @@
     $('senha').autocomplete = criar ? 'new-password' : 'current-password';
     $('senha-dica').hidden = !criar;
     $('esqueci').hidden = criar;
+    $('entrar-titulo').textContent = criar ? 'Crie sua conta grátis' : 'Bem-vindo de volta';
     status('');
   }
   $('aba-entrar').addEventListener('click', function () { modo(false); });
@@ -59,11 +60,15 @@
       $('enviar-email').disabled = true;
       status(criando ? 'Criando sua conta…' : 'Entrando…');
       try {
-        var r = criando
-          ? await auth.signUp({ email: email, password: senha, options: { emailRedirectTo: location.origin + '/entrar' } })
-          : await auth.signInWithPassword({ email: email, password: senha });
+        if (criando) {
+          // A conta é criada pelo servidor, já confirmada (sem e-mail e sem o limite de envios do Supabase).
+          var c = await fetch('/api/conta/criar', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, senha: senha }) });
+          if (!c.ok) { var j = await c.json().catch(function () { return {}; }); throw new Error(j.erro || 'Não foi possível criar a conta.'); }
+          status('Conta criada. Entrando…');
+        }
+        var r = await auth.signInWithPassword({ email: email, password: senha });
         if (r.error) throw r.error;
-        if (criando && !r.data.session) status('Conta criada. Abra o link que enviamos para ' + email + ' para confirmar.');
       } catch (erro) { status(traduzir(erro.message), true); }
       finally { $('enviar-email').disabled = false; }
     });

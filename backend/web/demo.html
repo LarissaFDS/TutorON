@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="/static/chat.css?v=final-1">
 <link rel="stylesheet" href="/static/visuais.css?v=chat-1">
 <link rel="stylesheet" href="/static/demo.css?v=chat-1">
+<script src="/static/config.js?v=1"></script>
 </head>
 <body>
 <div class="app" id="app">
@@ -74,22 +75,22 @@
         <div class="visual-coluna">
           <section class="boas-vindas visual-intro">
             <img class="boas-vindas__logo" src="/static/marca/logo.svg" alt="" width="56" height="56">
-            <h1>O TutorON não dá a resposta: <b>ajuda você a chegar nela</b></h1>
-            <p>O aluno resolve no papel e pede só ideias: uma pista, perguntas-guia, o conceito, um exemplo parecido, a conferência do raciocínio ou um desenho. Se não conseguir, o tutor explica de outro jeito.</p>
+            <h1>Veja o TutorON <b>funcionando</b></h1>
+            <p>Funciona como um monitor paciente: você mostra onde parou e ele puxa o próximo passo com você. Em vez de mandar o gabarito, ele pergunta, dá uma dica ou mostra um caso parecido. Se ainda não fizer sentido, ele tenta de outro jeito.</p>
             <p class="dica" id="sobre"></p>
           </section>
 
 
   <section class="visual-cartao demo__secao" aria-labelledby="s1">
-    <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="s1">Formas de ajudar sem entregar a resposta</h2></div>
-    <p class="step__lede">Escolha um exemplo. Todas as ajudas terminam com “Sua vez”: uma tarefa para o aluno fazer no papel.</p>
+    <div class="step__head"><span class="step__number" aria-hidden="true">1</span><h2 class="step__title" id="s1">Que tipo de ajuda você pode pedir</h2></div>
+    <p class="step__lede">Clique num exemplo para ver a conversa. No fim de cada resposta vem um “Sua vez”, com a próxima coisa para você tentar no papel.</p>
     <div class="ajudas__opcoes demo__escolha" id="demo-escolha" role="radiogroup" aria-label="Exemplos de ajuda"></div>
     <article class="troca demo__card" id="demo-card" aria-live="polite"></article>
   </section>
 
   <section class="visual-cartao demo__secao" aria-labelledby="s2">
-    <div class="step__head"><span class="step__number" aria-hidden="true">2</span><h2 class="step__title" id="s2">Do papel ao raciocínio: foto, conferência e “ainda não consegui”</h2></div>
-    <p class="step__lede">O aluno fotografa a folha com a tentativa dele. O TutorON lê a foto, o aluno confere a leitura e pede para o tutor conferir o raciocínio.</p>
+    <div class="step__head"><span class="step__number" aria-hidden="true">2</span><h2 class="step__title" id="s2">Mandando a foto do caderno</h2></div>
+    <p class="step__lede">Aqui um aluno tirou foto da lista com a tentativa dele escrita à mão. O TutorON lê a folha, mostra o que entendeu (dá para conferir e corrigir) e comenta o raciocínio. Quando o aluno diz que ainda não entendeu, a explicação muda.</p>
     <div class="demo__foto">
       <img id="ciclo-foto" alt="Foto de celular de uma lista de PAA com a tentativa do aluno escrita à mão no rodapé">
       <div class="foto__conferir" id="ciclo-leitura"></div>
@@ -99,12 +100,12 @@
   </section>
 
   <section class="visual-cartao demo__secao" aria-labelledby="s3">
-    <div class="step__head"><span class="step__number" aria-hidden="true">3</span><h2 class="step__title" id="s3">Animações (beta)</h2></div>
-    <p class="step__lede">A IA escolhe um modelo de cena e preenche um roteiro; o TutorON desenha com Manim. A animação mostra a estrutura e para antes da resposta.</p>
+    <div class="step__head"><span class="step__number" aria-hidden="true">3</span><h2 class="step__title" id="s3">Animações (em teste)</h2></div>
+    <p class="step__lede">Para alguns assuntos dá para ver o problema se mexendo: uma árvore de recursão crescendo, um mapa de Karnaugh sendo preenchido. O vídeo para um pouco antes da resposta, para você terminar.</p>
     <div class="demo__videos" id="demo-videos"></div>
   </section>
 
-  <p class="dica">Demonstração com respostas reais gravadas; esta página não chama nenhuma IA. <a href="/">Ir para o TutorON</a></p>
+  <p class="dica">As conversas desta página são reais e foram gravadas em outubro de 2026. <a href="/">Abrir o TutorON</a></p>
         </div>
       </div>
     </main>
