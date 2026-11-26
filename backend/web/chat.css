@@ -529,3 +529,29 @@ html.letra-grande body { font-size: 17px; }
   border: 2px dashed var(--azul); border-radius: var(--raio-grande); background: color-mix(in srgb, var(--bg) 85%, transparent);
   color: var(--azul); font-size: 18px; font-weight: 600; pointer-events: none;
 }
+
+/* Feedback escrito (26/11/2026) */
+.feedback-convite { margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-size: 14px; color: var(--tinta-2); }
+.feedback-convite p { margin: 0; }
+.feedback-convite--tutor { padding: 12px 14px; border-radius: var(--raio); background: var(--azul-suave); color: var(--tinta); }
+.feedback-convite--tutor p { font-weight: 600; flex: 1 1 260px; }
+.feedback-form { margin-top: 10px; padding: 14px; border: 1px solid var(--linha-forte); border-radius: var(--raio); display: grid; gap: 10px; background: var(--bg); }
+.feedback-form__titulo { margin: 0; font-weight: 600; }
+.feedback-form__campo { display: grid; gap: 4px; font-size: 14px; }
+.feedback-form__campo > span { color: var(--tinta-2); }
+.feedback-form__campo .campo { width: 100%; box-sizing: border-box; font: inherit; }
+.feedback-form__notas { display: flex; flex-wrap: wrap; gap: 6px; }
+.feedback-form__notas label { display: inline-flex; gap: 4px; align-items: center; border: 1px solid var(--linha-forte); border-radius: 99px; padding: 4px 10px; font-size: 13px; cursor: pointer; }
+.feedback-form__notas label:has(input:checked) { border-color: var(--azul); background: var(--azul-suave); color: var(--azul); }
+.feedback-form__notas input { margin: 0; }
+.feedback-form__check { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+.feedback-form__acoes { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+/* Mapa mental (```mapa) */
+.mapa-mental { margin: 10px 0; padding: 12px; border: 1px solid var(--linha); border-radius: var(--raio); background: var(--bg-suave); overflow-x: auto; }
+.mapa-mental ul { list-style: none; margin: 0; padding-left: 22px; position: relative; }
+.mapa-mental > ul { padding-left: 0; }
+.mapa-mental li { position: relative; margin: 6px 0; }
+.mapa-mental ul ul li::before { content: ""; position: absolute; left: -14px; top: -6px; bottom: 50%; width: 12px; border-left: 2px solid var(--linha-forte); border-bottom: 2px solid var(--linha-forte); border-bottom-left-radius: 6px; }
+.mapa-mental span { display: inline-block; padding: 4px 10px; border-radius: 10px; background: var(--bg); border: 1px solid var(--linha-forte); font-size: 14px; }
+.mapa-mental > ul > li > span { background: var(--azul); color: #fff; border-color: var(--azul); font-weight: 600; font-size: 15px; }
+.mapa-mental > ul > li > ul > li > span { border-color: var(--azul); color: var(--azul); font-weight: 600; }

@@ -36,7 +36,8 @@
     erro: 'M12 3l10 18H2zM12 10v4M12 17.5v.5',
     olho: 'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12zM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
     outra: 'M4 4v6h6M20 20v-6h-6M5.5 15a7 7 0 0 0 12.2 2M18.5 9A7 7 0 0 0 6.3 7',
-    feito: 'M5 12l4 4 10-10'
+    feito: 'M5 12l4 4 10-10',
+    fala: 'M4 5h16v11H9l-5 4zM8 9h8M8 12h5'
   };
 
   // Navegador → servidor. Erro 402 = limite do dia acabou: abre os planos.
@@ -1022,6 +1023,95 @@
     return box;
   }
 
+  /* Feedback escrito (26/11/2026): convite fixo no fim de cada resposta e, de tempos em tempos (ou quando o
+   * aluno trava várias vezes), o próprio tutor pergunta "como estou me saindo?". Vai para /api/feedback. */
+  var respostasSemConvite = 0;
+  function lerIC() { try { return localStorage.getItem('tutoron_ic') === '1'; } catch (e) { return false; } }
+  function gravarIC(v) { try { localStorage.setItem('tutoron_ic', v ? '1' : '0'); } catch (e) { /* sem storage */ } }
+
+  function formularioFeedback(info) {
+    var form = el('form', 'feedback-form');
+    form.append(el('p', 'feedback-form__titulo', 'Seu feedback honesto ajuda o TutorON a melhorar'));
+    function campo(rotulo, no) { var l = el('label', 'feedback-form__campo'); l.append(el('span', null, rotulo), no); form.append(l); return no; }
+    var disc = el('input', 'campo'); disc.maxLength = 80; disc.value = info.disciplinaNome || '';
+    disc.placeholder = 'Ex.: Cálculo 1, Estruturas de Dados';
+    campo('Disciplina em que você estava tirando dúvida', disc);
+    var notas = el('div', 'feedback-form__notas');
+    notas.setAttribute('role', 'radiogroup');
+    var nomes = ['Não ajudou', 'Pouco', 'Mais ou menos', 'Ajudou', 'Me destravou'];
+    nomes.forEach(function (n, i) {
+      var l = el('label'), r = el('input'); r.type = 'radio'; r.name = 'nota'; r.value = String(i + 1);
+      l.append(r, el('span', null, (i + 1) + ' · ' + n)); notas.append(l);
+    });
+    var g = el('div', 'feedback-form__campo'); g.append(el('span', null, 'O tutor está te ajudando no ponto em que você travou?'), notas); form.append(g);
+    var bom = el('textarea', 'campo'); bom.rows = 2; bom.maxLength = 1500;
+    bom.placeholder = 'Ex.: a pista sobre o caso base me fez enxergar a recorrência…';
+    campo('No que ele foi bom (ou não) para chegar à solução?', bom);
+    var sug = el('textarea', 'campo'); sug.rows = 2; sug.maxLength = 1500;
+    sug.placeholder = 'Ex.: explicar com um exemplo numérico antes, resposta mais curta…';
+    campo('O que você sugere para melhorar a resposta?', sug);
+    var lErro = el('label', 'feedback-form__check'), erro = el('input'); erro.type = 'checkbox';
+    lErro.append(erro, el('span', null, 'A resposta tem erro de cálculo ou de conteúdo'));
+    var lIc = el('label', 'feedback-form__check'), ic = el('input'); ic.type = 'checkbox'; ic.checked = lerIC();
+    lIc.append(ic, el('span', null, 'Sou aluno(a) do IC/UFAL'));
+    form.append(lErro, lIc);
+    var linha = el('div', 'feedback-form__acoes'), status = el('span', 'barra-acoes__status');
+    var enviar = el('button', 'pilula-acao pilula-acao--forte', 'Enviar feedback'); enviar.type = 'submit';
+    var cancelar = el('button', 'pilula-acao', 'Agora não'); cancelar.type = 'button';
+    cancelar.addEventListener('click', function () { form.remove(); if (info.aoFechar) info.aoFechar(false); });
+    linha.append(enviar, cancelar, status); form.append(linha);
+    form.addEventListener('submit', async function (ev) {
+      ev.preventDefault();
+      var nota = form.querySelector('input[name="nota"]:checked');
+      if (!nota && !bom.value.trim() && !sug.value.trim() && !erro.checked) { status.textContent = 'Escolha uma nota ou escreva algo.'; return; }
+      enviar.disabled = true; gravarIC(ic.checked);
+      try {
+        await postJSON('/api/feedback', {
+          id: ((info.id || 'conv') + '-f' + Date.now().toString(36)).slice(0, 40), tipo: 'conversa',
+          nota: nota ? Number(nota.value) : null, util: nota ? Number(nota.value) >= 4 : null,
+          erro_matematico: erro.checked, disciplina: disc.value.trim(), ajudou_em: bom.value.trim(),
+          sugestao: sug.value.trim(), aluno_ic: ic.checked, pergunta: (info.pergunta || '').slice(0, 600),
+          rodadas: info.rodadas || 0 });
+        respostasSemConvite = 0;
+        var ok = el('p', 'ciclo__ok', 'Obrigado! Seu feedback foi enviado para a equipe do TutorON.');
+        form.replaceWith(ok);
+        if (info.aoFechar) info.aoFechar(true);
+      } catch (e) { status.textContent = e.message; enviar.disabled = false; }
+    });
+    return form;
+  }
+
+  // Linha fixa no fim de cada resposta: "Deixe seu feedback..." + botão com ícone.
+  function conviteFeedback(info, proativo) {
+    var box = el('div', 'feedback-convite' + (proativo ? ' feedback-convite--tutor' : ''));
+    var frase = proativo
+      ? (info.rodadas >= 2
+        ? 'Percebi que você ainda está travado(a) nesta questão. Como estou me saindo? Estou conseguindo te ajudar no ponto em que você trava?'
+        : 'Como estou me saindo? Estou conseguindo te ajudar no que você está travando? Seu feedback me ajuda a melhorar.')
+      : 'Deixe seu feedback para ajudar o tutor a melhorar.';
+    box.append(el('p', null, frase));
+    var b = el('button', 'pilula-acao' + (proativo ? ' pilula-acao--forte' : ''));
+    b.type = 'button';
+    b.append(svg(ICONES.fala), document.createTextNode('Dar feedback'));
+    b.addEventListener('click', function () {
+      b.disabled = true;
+      box.after(formularioFeedback(Object.assign({}, info, { aoFechar: function (enviado) { if (!enviado) b.disabled = false; } })));
+    });
+    box.append(b);
+    return box;
+  }
+
+  // O tutor pede feedback sozinho: na 3ª resposta, depois a cada 6, ou quando o aluno já pediu
+  // "ainda não consegui" duas vezes no mesmo exercício.
+  function deveConvidar(rodadas) {
+    respostasSemConvite++;
+    if (rodadas === 2 || respostasSemConvite === 3 || respostasSemConvite >= 9) {
+      respostasSemConvite = respostasSemConvite >= 9 ? 3 : respostasSemConvite;
+      return true;
+    }
+    return false;
+  }
+
   /* Animação (Manim): pista visual da dúvida, gerada sob demanda. */
   function painelAnimacao(pergunta, resposta, disciplina, contexto, foto, opcoes) {
     opcoes = opcoes || {};
@@ -1265,6 +1355,9 @@
         }));
       }
       v.corpo.append(pilulasDepois(registro, pergunta, contexto, disciplinaDaPergunta, foto, historicoNovo, final, v.corpo));
+      var infoFb = { id: final.id_resposta, pergunta: pergunta, rodadas: ciclo.historico.length,
+        disciplinaNome: (disciplinas[disciplinaDaPergunta] || {}).nome || '' };
+      v.corpo.append(conviteFeedback(infoFb, deveConvidar(ciclo.historico.length)));
       registro.texto = final.texto;
       registro.fontes = final.fontes || [];
       registro.pronta = true;

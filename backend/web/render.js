@@ -86,6 +86,7 @@
     try {
       el.innerHTML = toHtml(text);
       el.classList.remove('is-plain');
+      mapas(el);
       // Links das respostas abrem fora do site.
       el.querySelectorAll('a[href]').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener noreferrer'; });
     } catch (err) {
@@ -93,6 +94,33 @@
       el.classList.add('is-plain');
       if (global.console) console.warn('TutorON: renderização caiu para texto puro.', err);
     }
+  }
+
+  // ```mapa (ferramenta "Mapa mental"): linhas com 2 espaços de recuo por nível viram uma árvore visual.
+  function mapas(el) {
+    el.querySelectorAll('pre > code.language-mapa').forEach(function (code) {
+      var linhas = code.textContent.split(/\r?\n/).filter(function (l) { return l.trim(); });
+      if (!linhas.length) return;
+      var raiz = document.createElement('div');
+      raiz.className = 'mapa-mental';
+      var pilha = [{ nivel: -1, ul: document.createElement('ul') }];
+      raiz.append(pilha[0].ul);
+      linhas.forEach(function (l) {
+        var nivel = Math.floor((l.match(/^\s*/)[0].replace(/	/g, '  ').length) / 2);
+        var rotulo = l.trim().replace(/^[-*•]\s*/, '');
+        while (pilha.length > 1 && pilha[pilha.length - 1].nivel >= nivel) pilha.pop();
+        var topo = pilha[pilha.length - 1];
+        var li = document.createElement('li'), span = document.createElement('span');
+        span.innerHTML = toHtml(rotulo).replace(/^<p>|<\/p>\s*$/g, '');
+        li.append(span);
+        topo.ul.append(li);
+        var filhos = document.createElement('ul');
+        li.append(filhos);
+        pilha.push({ nivel: nivel, ul: filhos });
+      });
+      raiz.querySelectorAll('ul').forEach(function (u) { if (!u.children.length) u.remove(); });
+      code.parentNode.replaceWith(raiz);
+    });
   }
 
   // Enunciado do aluno: só texto, preservando quebras de linha.

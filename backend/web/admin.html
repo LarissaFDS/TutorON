@@ -3,12 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>TutorON · Contas e limites</title>
+<title>TutorON · Painel ADM</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/static/marca/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/static/vendor/katex/katex.min.css">
 <link rel="stylesheet" href="/static/chat.css?v=final-1">
 <link rel="stylesheet" href="/static/visuais.css?v=chat-1">
-<link rel="stylesheet" href="/static/admin.css?v=1">
+<link rel="stylesheet" href="/static/admin.css?v=2">
 <script src="/static/config.js?v=1"></script>
 </head>
 <body>
@@ -26,7 +27,7 @@
     <nav class="lateral__nav" aria-label="Seções">
       <a class="lateral__item" href="/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg>Tirar dúvida</a>
       <a class="lateral__item" href="/visuais"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18l5-6 4 4 3-3 4 5M4 5h16v14H4z"/></svg>Aprender com desenhos</a>
-      <a class="lateral__item" href="/admin" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Contas e limites</a>
+      <a class="lateral__item" href="/admin" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/></svg>Painel ADM</a>
     </nav>
     <div class="lateral__base">
       <a class="perfil conta-chip" id="conta-chip" href="/entrar" hidden>
@@ -42,20 +43,45 @@
       <button class="icone-btn so-celular" id="abrir-lateral" type="button" aria-label="Abrir menu" aria-controls="lateral">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
-      <div class="topo__centro"><span class="seletor seletor--fixo"><span class="ponto-on" aria-hidden="true"></span>Contas e limites</span></div>
+      <div class="topo__centro"><span class="seletor seletor--fixo"><span class="ponto-on" aria-hidden="true"></span>Painel ADM</span></div>
     </header>
     <main class="palco">
       <div class="rolagem">
         <div class="admin">
           <p class="status" id="admin-status" role="status">Carregando…</p>
-          <div class="admin__resumo" id="admin-resumo"></div>
-          <div class="admin__tabela" id="admin-tabela-box" hidden>
-            <table>
-              <thead><tr><th>Conta</th><th>Hoje</th><th>Limite/dia</th><th>Total</th><th>Perguntas</th><th>Último uso</th><th></th></tr></thead>
-              <tbody id="admin-linhas"></tbody>
-            </table>
+          <nav class="admin__abas" role="tablist" aria-label="Seções do painel" id="admin-abas">
+            <button type="button" role="tab" data-aba="geral" aria-selected="true">Visão geral</button>
+            <button type="button" role="tab" data-aba="feedbacks">Feedbacks <b data-n="feedbacks"></b></button>
+            <button type="button" role="tab" data-aba="erros">Erros reportados <b data-n="erros"></b></button>
+            <button type="button" role="tab" data-aba="perguntas">Perguntas e respostas <b data-n="perguntas"></b></button>
+            <button type="button" role="tab" data-aba="conversas">Conversas <b data-n="conversas"></b></button>
+            <button type="button" role="tab" data-aba="contas">Contas e limites</button>
+          </nav>
+          <div class="admin__filtros" id="admin-filtros">
+            <input class="campo" id="f-busca" type="search" placeholder="Buscar texto, e-mail, disciplina…" aria-label="Buscar">
+            <select class="campo" id="f-disciplina" aria-label="Disciplina"><option value="">Todas as disciplinas</option></select>
+            <select class="campo" id="f-ic" aria-label="Quem">
+              <option value="">Todos</option><option value="ic">Só IC (e-mail ou declarado)</option>
+              <option value="email">Só e-mail @ic.ufal.br</option><option value="fora">Fora do IC / sem conta</option>
+            </select>
+            <label class="admin__check"><input type="checkbox" id="f-testes"> mostrar testes</label>
+            <button class="botao botao--leve" type="button" id="exportar">Exportar CSV</button>
           </div>
-          <p class="dica">Limite vazio = o limite padrão do plano. Mudanças valem na hora. "Zerar" devolve o limite de hoje (para testar).</p>
+          <section data-painel="geral" id="p-geral"></section>
+          <section data-painel="feedbacks" id="p-feedbacks" hidden></section>
+          <section data-painel="erros" id="p-erros" hidden></section>
+          <section data-painel="perguntas" id="p-perguntas" hidden></section>
+          <section data-painel="conversas" id="p-conversas" hidden></section>
+          <section data-painel="contas" hidden>
+            <div class="admin__resumo" id="admin-resumo"></div>
+            <div class="admin__tabela" id="admin-tabela-box" hidden>
+              <table>
+                <thead><tr><th>Conta</th><th>Hoje</th><th>Limite/dia</th><th>Total</th><th>Perguntas</th><th>Último uso</th><th></th></tr></thead>
+                <tbody id="admin-linhas"></tbody>
+              </table>
+            </div>
+            <p class="dica">Limite vazio = o limite padrão do plano. Mudanças valem na hora. "Zerar" devolve o limite de hoje (para testar).</p>
+          </section>
         </div>
       </div>
     </main>
@@ -63,6 +89,10 @@
 </div>
 <script src="/static/shell.js?v=1"></script>
 <script src="/static/conta.js?v=1"></script>
-<script src="/static/admin.js?v=1"></script>
+<script src="/static/vendor/marked.min.js"></script>
+<script src="/static/vendor/purify.min.js"></script>
+<script src="/static/vendor/katex/katex.min.js"></script>
+<script src="/static/render.js"></script>
+<script src="/static/admin.js?v=2"></script>
 </body>
 </html>
