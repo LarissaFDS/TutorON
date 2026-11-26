@@ -411,7 +411,10 @@ class Tarefas:
             prompt = prompts.prompt_animacao(pergunta, resposta_tutor, d, contexto_aluno, leitura_foto)
             roteiro, erro, r = None, "", None
             tentativas_roteiro = []
-            dados_numericos = bool(re.search(r'\d', pergunta + (contexto_aluno or '') + (leitura_foto or '')))
+            texto_aluno = pergunta + (contexto_aluno or '') + (leitura_foto or '')
+            # Cena específica (vetor, grafo, árvore...) quando há dados: do aluno ou do exemplo que o tutor já deu.
+            dados_numericos = bool(re.search(r'\d', texto_aluno)) or bool(
+                prompts.cena_sugerida(texto_aluno) and re.search(r'\d', resposta_tutor or ''))
             for rodada in range(2):  # a segunda tentativa simplifica a forma, preservando a dúvida
                 formato = PLANEJAMENTO_JSON.set(True)
                 try:
