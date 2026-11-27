@@ -50,8 +50,20 @@
       catch (e) { $('admin-status').textContent = e.message; }
     });
     var acao = el('td'); acao.append(zerar);
+    var fb = el('td'), rot = el('label'), caixa = el('input');
+    caixa.type = 'checkbox'; caixa.checked = !!u.feedback;
+    caixa.setAttribute('aria-label', 'Deu feedback: ' + (u.nome || u.email || u.quem));
+    var info = el('small', null, u.feedback ? (u.feedback.por + ' · ' + new Date(u.feedback.em).toLocaleDateString('pt-BR')) : 'falta');
+    caixa.addEventListener('change', async function () {
+      caixa.disabled = true;
+      try {
+        await postar('/api/admin/usuarios/' + encodeURIComponent(u.quem) + '/feedback', { feito: caixa.checked });
+        carregar(caixa.checked ? 'Marcado: deu feedback.' : 'Desmarcado.');
+      } catch (e) { caixa.checked = !caixa.checked; caixa.disabled = false; $('admin-status').textContent = e.message; }
+    });
+    rot.append(caixa, info); fb.append(rot);
     tr.append(conta, hoje, lim, el('td', 'n', fmt(u.tokens_total)), el('td', 'n', fmt(u.perguntas)),
-      el('td', null, u.ultimo ? new Date(u.ultimo).toLocaleString('pt-BR') : '—'), acao);
+      el('td', null, u.ultimo ? new Date(u.ultimo).toLocaleString('pt-BR') : '—'), fb, acao);
     return tr;
   }
 
@@ -67,7 +79,9 @@
     resumo.replaceChildren();
     [[contas.length, 'contas'], [d.usuarios.length - contas.length, 'convidados'],
      [d.usuarios.reduce(function (s, u) { return s + (u.tokens_total || 0); }, 0), 'tokens no total'],
-     [d.limite_padrao, 'limite padrão/dia']].forEach(function (x) {
+     [d.limite_padrao, 'limite padrão/dia'],
+     [d.usuarios.filter(function (u) { return u.feedback; }).length, 'deram feedback'],
+     [d.usuarios.filter(function (u) { return !u.feedback && u.perguntas; }).length, 'usaram e falta feedback']].forEach(function (x) {
       var c = el('div'); c.append(el('strong', null, fmt(x[0])), el('span', null, x[1])); resumo.append(c);
     });
     $('admin-linhas').replaceChildren.apply($('admin-linhas'), d.usuarios.map(linha));

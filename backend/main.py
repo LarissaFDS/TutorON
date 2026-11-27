@@ -284,6 +284,8 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
         app.state.cota = Cota(settings.data_dir / "cota.json", settings.cota_tokens,
                               settings.cota_janela_h, settings.dev_chave, app.state.banco,
                               settings.cota_convidado if app.state.contas.ativas else None)
+        from .contatos import Contatos
+        app.state.contatos = Contatos(settings.data_dir / "feedback-contatos.json")
         app.state.tarefas = Tarefas(app.state.llm, settings, app.state.registro)
         aquecimento = asyncio.create_task(app.state.llm.warm_up()) if warm_up else None
         yield
@@ -526,6 +528,7 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Perfis não lidos: %s", exc)
         uso = {r["quem"]: r for r in app.state.cota.relatorio()}
+        contatos = app.state.contatos.todos()
         linhas = []
         for quem in list(perfis) + [q for q in uso if q not in perfis]:
             p, u = perfis.get(quem, {}), uso.get(quem, {})
@@ -534,8 +537,16 @@ def create_app(settings: Settings | None = None, llm: LLM | None = None, warm_up
                            "limite_proprio": p.get("limite_tokens"), "limite": s.get("limite"),
                            "usados_hoje": s.get("usados"), "plano": s["plano"], "criado_em": p.get("criado_em"),
                            "tokens_total": u.get("tokens", 0), "perguntas": u.get("perguntas", 0),
-                           "ultimo": u.get("ultimo")})
+                           "ultimo": u.get("ultimo"), "feedback": contatos.get(quem)})
         return {"limite_padrao": settings.cota_tokens, "banco": bool(app.state.banco), "usuarios": linhas}
+
+    @app.post("/api/admin/usuarios/{quem}/feedback")
+    async def admin_feedback(quem: str, corpo: dict, request: Request) -> dict:
+        """Caixinha "deu feedback": marcação compartilhada entre todos os administradores."""
+        exigir_admin(request)
+        c = conta(request)
+        por = (c.get("email") if c else None) or "administrador"
+        return {"feedback": app.state.contatos.marcar(quem[:80], bool(corpo.get("feito")), por)}
 
     @app.get("/api/admin/coleta")
     async def admin_coleta(request: Request, limite: int = 400) -> dict:

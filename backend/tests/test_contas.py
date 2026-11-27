@@ -134,6 +134,19 @@ def test_admin_define_limite_por_conta_e_zera(site):
     assert site.post(f"/api/admin/usuarios/{ana}/limite", json={"limite": None}, headers=ALUNO).json()["limite"] == 500
 
 
+def test_admin_marca_quem_deu_feedback(site):
+    site.cookies.set("tutoron_sessao", "tok-ana")
+    ana = "u:11111111-1111-1111-1111-111111111111"
+    assert site.post(f"/api/admin/usuarios/{ana}/feedback", json={"feito": True}, headers=ALUNO).status_code == 403
+    site.post("/api/perguntar", json={"pergunta": "Teorema Mestre"}, headers=ALUNO)
+    site.cookies.set("tutoron_sessao", "tok-adm")
+    r = site.post(f"/api/admin/usuarios/{ana}/feedback", json={"feito": True}, headers=ALUNO).json()
+    assert r["feedback"]["em"]
+    lista = site.get("/api/admin/usuarios", headers=ALUNO).json()["usuarios"]
+    assert any(u["quem"] == ana and u["feedback"] for u in lista)
+    assert site.post(f"/api/admin/usuarios/{ana}/feedback", json={"feito": False}, headers=ALUNO).json()["feedback"] is None
+
+
 def test_cota_le_uso_do_dia_do_banco(tmp_path):
     banco = BancoFalso()
     Cota(tmp_path / "a.json", 100, 24, banco=banco).cobrar("u:x", 70)
